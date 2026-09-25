@@ -30,6 +30,19 @@ async function privateDetail(v){
 }
 function fdate(v){if(!v)return "—";const d=new Date(String(v).length===10?String(v)+"T12:00:00Z":v);return Number.isNaN(d.getTime())?txt(v):d.toLocaleDateString("fr-FR")}
 function contactLine(x){return [x.email,x.phone].filter(Boolean).map(txt).join(" · ")||"Aucun contact"}
+async function controlAction(payload){
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session) throw new Error("LOGIN_REQUIRED");
+ const r=await fetch("https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-control-action",{
+  method:"POST",
+  headers:{"Content-Type":"application/json","Authorization":"Bearer "+session.access_token},
+  body:JSON.stringify(payload)
+ });
+ const d=await r.json();
+ if(!r.ok) throw new Error(d.error||"Erreur");
+ return d;
+}
+
 
 document.querySelectorAll("[data-open]").forEach(el=>el.addEventListener("click",()=>document.querySelector('[data-view="'+el.dataset.open+'"]')?.click()));
 document.querySelectorAll("[data-view]").forEach(a=>a.addEventListener("click",async e=>{e.preventDefault();const v=a.dataset.view;drawer.style.display="block";title.textContent=labels[v];body.innerHTML="Chargement…";
@@ -45,7 +58,12 @@ if(v==="tasks"){
  body.innerHTML="Chargement des actions…";
  try{
   const d=await privateDetail("tasks");
-  body.innerHTML='<div class="panel"><h3>À FAIRE</h3>'+(d.filter(x=>x.status==="open"||x.status==="doing").map(x=>'<div class="item"><div class="grow"><b>'+txt(x.title)+'</b><div class="muted">'+fdate(x.due_date)+' · '+txt(x.description||"")+'</div></div><span class="pill">'+txt(x.priority||"normal")+'</span></div>').join("")||'<div class="muted">Aucune action ouverte.</div>')+'</div>';
+  body.innerHTML='<div class="panel"><h3>À FAIRE</h3>'+(d.filter(x=>x.status==="open"||x.status==="doing").map(x=>'<div class="item"><div class="grow"><b>'+txt(x.title)+'</b><div class="muted">'+fdate(x.due_date)+' · '+txt(x.description||"")+'</div></div><span class="pill">'+txt(x.priority||"normal")+'</span><button class="actionbtn" style="width:auto;margin:0 0 0 8px;padding:8px 12px" data-taskdone="'+txt(x.id)+'">FAIT ✓</button></div>').join("")||'<div class="muted">Aucune action ouverte.</div>')+'</div>';
+  document.querySelectorAll("[data-taskdone]").forEach(btn=>btn.onclick=async()=>{
+   btn.disabled=true;btn.textContent="…";
+   try{await controlAction({action:"complete_task",id:btn.dataset.taskdone});document.querySelector('[data-view="tasks"]').click();loadPrivateHome()}
+   catch(e){btn.disabled=false;btn.textContent="FAIT ✓";alert(e.message)}
+  });
  }catch(e){body.innerHTML=e.message==="LOGIN_REQUIRED"?"<b>Connecte-toi avec ESPACE SONIA pour voir les tâches.</b>":"Erreur de chargement."}
  return
 }
@@ -61,7 +79,12 @@ if(v==="trials"){
   const s=await(await fetch("https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-trial-summary",{cache:"no-store"})).json();
   document.getElementById("trialStats").innerHTML='<div class="cards" style="grid-template-columns:repeat(4,1fr)"><div class="card"><div class="num">'+(s.planned||0)+'</div><b>À venir</b></div><div class="card"><div class="num">'+(s.attended||0)+'</div><b>Venus</b></div><div class="card"><div class="num">'+(s.interested||0)+'</div><b>Intéressés</b></div><div class="card"><div class="num">'+(s.converted||0)+'</div><b>Convertis</b></div></div>';
   const d=await privateDetail("trials");
-  document.getElementById("trialPeople").innerHTML='<h3>PERSONNES EN ESSAI</h3>'+(d.map(x=>'<div class="item"><div class="grow"><b>'+txt(x.first_name)+' '+txt(x.last_name)+'</b><div class="muted">'+txt(x.group_code||"—")+' · '+fdate(x.planned_date)+'</div></div><span class="pill">'+txt(x.trial_status||"—")+'</span></div>').join("")||'<div class="muted">Aucun essai.</div>');
+  document.getElementById("trialPeople").innerHTML='<h3>PERSONNES EN ESSAI</h3>'+(d.map(x=>'<div class="item" style="align-items:flex-start;flex-wrap:wrap"><div class="grow"><b>'+txt(x.first_name)+' '+txt(x.last_name)+'</b><div class="muted">'+txt(x.group_code||"—")+' · '+fdate(x.planned_date)+'</div><div style="margin-top:8px;display:flex;gap:6px;flex-wrap:wrap"><button class="actionbtn" style="width:auto;margin:0;padding:7px 10px" data-trial="'+txt(x.id)+'" data-status="attended">PRÉSENT</button><button class="actionbtn" style="width:auto;margin:0;padding:7px 10px;background:#444;color:#fff" data-trial="'+txt(x.id)+'" data-status="absent">ABSENT</button><button class="actionbtn" style="width:auto;margin:0;padding:7px 10px;background:#c7a66a" data-trial="'+txt(x.id)+'" data-status="interested">INTÉRESSÉ</button><button class="actionbtn" style="width:auto;margin:0;padding:7px 10px;background:#5bd29a" data-trial="'+txt(x.id)+'" data-status="converted">CONVERTI ✓</button></div></div><span class="pill">'+txt(x.trial_status||"—")+'</span></div>').join("")||'<div class="muted">Aucun essai.</div>');
+  document.querySelectorAll("[data-trial]").forEach(btn=>btn.onclick=async()=>{
+   btn.disabled=true;
+   try{await controlAction({action:"update_trial",id:btn.dataset.trial,status:btn.dataset.status});document.querySelector('[data-view="trials"]').click();loadPrivateHome()}
+   catch(e){btn.disabled=false;alert(e.message)}
+  });
  }catch(e){document.getElementById("trialPeople").innerHTML=e.message==="LOGIN_REQUIRED"?"<b>Connecte-toi avec ESPACE SONIA pour voir les noms des essais.</b>":"Erreur de chargement."}
  return
 }
