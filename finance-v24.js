@@ -68,7 +68,7 @@ function facts(){
  const members=state.members.filter(x=>x.season===undefined||x.season===ss().season);
  const unpaid=members.reduce((a,m)=>a+(m.amount_expected==null?0:Math.max(0,toNum(m.amount_expected)-toNum(m.amount_paid))),0);
  const missingDue=members.filter(m=>m.amount_expected==null);
- const evidence=manual.filter(x=>x.kind==="expense"&&x.receipt_status!=="received"&&x.receipt_status!=="not_required");
+ const evidence=manual.filter(x=>x.receipt_status!=="received"&&x.receipt_status!=="not_required");
  const latest=state.eventRegistrations.filter(x=>x.status==="paid"&&amountInPeriod(x.created_at));
  const ticketDeclared=latest.reduce((a,x)=>a+toNum(x.amount_paid),0);
  const ticketVerified=latest.reduce((a,x)=>a+toNum(x.verified_ticket_amount),0);
@@ -228,7 +228,7 @@ function renderEditable(type,kind){
   display=rows.map(r=>[txt(r.kind==="income"?"Recette":"Dépense"),txt(r.category),val(r.planned_amount),txt(r.note),actionButtons(type,r.id)]);
  }else{
   header=["Organisme","Objet","Demandé","Obtenu","Déclaré reçu","État","Actions"];
-  display=rows.map(r=>[txt(r.funding_body),txt(r.purpose),val(r.requested_amount),val(r.awarded_amount),val(r.received_amount),txt(r.status),actionButtons(type,r.id)]);
+  display=rows.map(r=>[txt(r.funding_body),txt(r.purpose),val(r.requested_amount),val(r.awarded_amount),val(r.received_amount),txt(({draft:"Brouillon",submitted:"Demandée",awarded:"Accordée",rejected:"Refusée",closed:"Clôturée"})[r.status]||r.status),actionButtons(type,r.id)]);
  }
  return wrap(head,'<div class="c24-actions"><button class="c24-primary" data-add="'+type+'" data-kind="'+(kind||"")+'">＋ Ajouter une ligne</button>'+
  count+'<input class="c24-search" type="search" data-filter placeholder="Rechercher dans ce tableau…" aria-label="Rechercher les écritures"></div>'+
@@ -240,7 +240,7 @@ function incomePage(f){
  const all=[...rows,...manual].sort((a,b)=>b.date.localeCompare(a.date));
  return '<div class="c24-stats">'+card("Recettes prises en compte",money(f.income))+card("HelloAsso vérifié",money(f.imported))+card("Recettes manuelles confirmées",money(f.manualIncome))+card("Recettes manuelles en attente",money(f.pendingIncome))+'</div>'+
  renderEditable("entries","income")+
- wrap("Journal des recettes · vue globale",table(["Date","Catégorie","Désignation","Mode","Montant","Justificatif","Source"],all.map(r=>[txt(r.date),txt(r.category),txt(r.label),txt(r.method),val(r.amount),txt(r.justificatif),txt(r.source)])), "Les paiements HelloAsso vérifiés apparaissent en lecture seule ; ne les ressaisis pas.")+
+ wrap("Journal des recettes · vue globale",table(["Date","Catégorie","Désignation","Mode","Montant","Justificatif","Source"],all.map(r=>[txt(r.date),txt(r.category),txt(r.label),txt(({transfer:"Virement",card:"Carte",cash:"Espèces",check:"Chèque",other:"Autre"})[r.method]||r.method),val(r.amount),txt(r.justificatif),txt(r.source)])), "Les paiements HelloAsso vérifiés apparaissent en lecture seule ; ne les ressaisis pas.")+
  '<div class="c24-two">'+wrap("Recettes par catégorie",categoryBars(f.category("income")))+wrap("Rappel de méthode",'<div class="c24-notice">Une vente de billets répartie entre plusieurs personnes ne doit pas être additionnée une seconde fois à sa commande HelloAsso. Les subventions demandées ne sont pas des recettes encaissées.</div>')+'</div>';
 }
 function expensesPage(f){
@@ -417,6 +417,13 @@ document.addEventListener("click",async e=>{
  arch.disabled=true;
  try{await request({action:"archive",type,id,confirm_archive:true});await pull();render();}catch(err){alert(err.message);arch.disabled=false;}return;}
 },true);
+document.addEventListener("input",e=>{
+ const field=e.target.closest("[data-filter]");
+ if(!field||!pane()?.contains(field))return;
+ const term=norm(field.value);
+ const rows=pane().querySelectorAll(".c24-entrylist .c24-table tbody tr");
+ rows.forEach(row=>{row.hidden=!!term&&!norm(row.textContent).includes(term);});
+});
 document.addEventListener("submit",e=>{
  const form=e.target.closest("#c24-settings-form,[data-save]");
  if(!form||!pane()?.contains(form))return;
