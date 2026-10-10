@@ -266,4 +266,38 @@ root.addEventListener('click',e=>{
  });
 });
 })();
+</script><style id="crew-membership-edit-style">.crew-membership-form{margin:16px 0;padding:16px;border:1px solid #9b8144;border-radius:12px;background:#191919}.crew-membership-form label{display:grid;gap:5px;margin:10px 0;color:#e2d0ac}.crew-membership-form input,.crew-membership-form select{width:100%;background:#282828;color:#fff;border:1px solid #665b42;border-radius:8px;padding:11px;font-size:16px}.crew-membership-form button{background:#d8b45a;color:#111;font-weight:800;border:0;border-radius:8px;padding:12px}.crew-membership-form p{color:#e8d2a1}</style><script id="crew-membership-edit-script">
+(function(){
+const root=document.getElementById('drawerBody');if(!root)return;
+root.addEventListener('click',e=>{
+ const row=e.target.closest('[data-member-index]');if(!row)return;
+ const member=window.crewMemberRows?.[Number(row.dataset.memberIndex)];if(!member?.id)return;
+ requestAnimationFrame(()=>{
+ const card=root.querySelector('#crew-member-card');if(!card||card.querySelector('#crew-membership-edit'))return;
+ const btn=document.createElement('button');btn.id='crew-membership-edit';btn.className='crew-entry-btn';btn.textContent='✎ Modifier groupe, formule et cotisation';
+ card.prepend(btn);
+ btn.onclick=()=>{
+ card.querySelector('.crew-membership-form')?.remove();
+ const form=document.createElement('form');form.className='crew-membership-form';
+ form.innerHTML='<h3>Inscription 2026–2027</h3>'+
+ '<label>Groupe<select name="group_code"><option value="">Non renseigné</option><option value="KIDS">Kids</option><option value="ADOS_ADULTES">Ados et adultes</option></select></label>'+
+ '<label>Formule<select name="plan"><option value="">Non renseignée</option><option value="KIDS">Enfant</option><option value="ADOS_ADULTES">Ado / Adulte</option><option value="DUO">Duo / Couple</option><option value="FAMILLE">Famille</option><option value="AUTRE">Autre</option></select></label>'+
+ '<label>Cotisation attendue (€)<input name="amount_expected" type="number" min="0" step="0.01" placeholder="À définir"></label>'+
+ '<label>Statut adhésion<select name="member_status"><option value="pending">En attente</option><option value="active">Actif</option><option value="inactive">Inactif</option></select></label>'+
+ '<label>Dossier inscription<select name="registration_status"><option value="pending">À finaliser</option><option value="complete">Complet</option><option value="cancelled">Annulé</option></select></label>'+
+ '<button type="submit">Enregistrer les changements</button><p role="status"></p>';
+ form.elements.group_code.value=member.group_code||'';
+ form.elements.plan.value=member.plan||'';
+ form.elements.amount_expected.value=member.amount_expected??'';
+ form.elements.member_status.value=member.member_status||'pending';
+ form.elements.registration_status.value=member.registration_status||'pending';
+ card.appendChild(form);
+ form.onsubmit=async ev=>{
+ ev.preventDefault();const msg=form.querySelector('[role=status]'),submit=form.querySelector('[type=submit]');submit.disabled=true;msg.textContent='Enregistrement…';
+ try{const {data:{session}}=await sb.auth.getSession();if(!session)throw Error('Connexion nécessaire');const data=Object.fromEntries(new FormData(form).entries());const response=await fetch('https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-member-edit',{method:'POST',headers:{'Authorization':'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({action:'update_membership',id:member.id,...data})});const result=await response.json();if(!response.ok)throw Error(result.error||'Erreur');msg.textContent='Modifications enregistrées ✓';setTimeout(()=>document.querySelector('.nav [data-view="members"]')?.click(),500)}catch(err){msg.textContent=err.message;submit.disabled=false}
+ };
+ };
+ });
+});
+})();
 </script></body></html>
