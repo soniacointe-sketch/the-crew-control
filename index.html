@@ -694,4 +694,159 @@ paint();
 }
 document.addEventListener('click',e=>{if(!e.target.closest('[data-view="payments"],[data-cp-view="payments"]'))return;e.preventDefault();e.stopImmediatePropagation();open()},true);
 })();
+</script><style id="crew-finance-entry-v23-css">
+.cf-editbox{margin:18px 0 23px;padding:18px;border:1px solid #80673b;border-radius:14px;background:linear-gradient(130deg,#171612,#101110)}
+.cf-editbox h3{margin:0 0 9px;color:#e9ca82;font-size:20px}
+.cf-input-actions{display:flex;flex-wrap:wrap;gap:9px;margin:14px 0}
+.cf-input-actions button{padding:11px 14px;border-radius:9px;border:1px solid #75613b;color:#f1d493;background:#201e18;cursor:pointer}
+.cf-input-actions button[aria-pressed="true"]{background:#d8b45a;color:#141414;font-weight:800}
+.cf-input-status{color:#e8d6ae;font-size:13px;margin:7px 0}
+.cf-input-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:13px 0}
+.cf-input-summary div{background:#22211c;border:1px solid #4c422e;border-radius:10px;padding:13px}
+.cf-input-summary small{display:block;color:#ada89a;font-size:11px}.cf-input-summary strong{font-size:20px;color:#e9cc8a;display:block;margin-top:6px}
+.cf-input-form{padding:17px;background:#242017;border:1px solid #5c4b2e;border-radius:11px;margin:12px 0}
+.cf-input-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+.cf-input-grid label{display:grid;gap:6px;color:#eee0c0;font-size:13px}
+.cf-input-grid input,.cf-input-grid select,.cf-input-grid textarea{min-width:0;width:100%;background:#121311;border:1px solid #62553a;border-radius:8px;padding:11px;color:#fff;font-size:16px}
+.cf-input-grid .cf-wide{grid-column:1/-1}
+.cf-input-confirm{display:flex;gap:8px;align-items:center;margin:14px 0;font-size:13px;color:#f0dfb8}
+.cf-input-form button[type=submit]{padding:12px 18px;background:#d8b45a;border:0;border-radius:8px;font-weight:800;color:#111;cursor:pointer}
+.cf-input-form button[type=submit]:disabled{opacity:.6}
+.cf-input-list{display:grid;gap:7px;max-height:380px;overflow:auto;margin:10px 0}
+.cf-input-row{display:flex;align-items:center;gap:10px;justify-content:space-between;padding:12px 11px;border:1px solid #423a2c;background:#141513;border-radius:10px;flex-wrap:wrap}
+.cf-input-row strong{font-size:14px;color:#fff}.cf-input-row small{display:block;color:#aca69d;margin-top:4px;font-size:12px}
+.cf-input-buttons{display:flex;gap:7px}.cf-input-buttons button{background:#27231d;border:1px solid #79633a;color:#e7d29d;padding:8px 10px;border-radius:7px;cursor:pointer}
+.cf-input-buttons button[data-archive]{border-color:#755450;color:#e6b3aa}
+.cf-explainer{font-size:12px;color:#aea79a;line-height:1.5}
+@media(max-width:650px){.cf-input-summary{grid-template-columns:1fr 1fr}.cf-input-grid{grid-template-columns:1fr}.cf-input-grid .cf-wide{grid-column:auto}.cf-editbox{padding:12px}}
+</style>
+<script id="crew-finance-entry-v23-js">
+(function(){
+const endpoint='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-finance-input';
+const root=document.getElementById('drawerBody');if(!root)return;
+const safe=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const euro=x=>Number(x||0).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+const labels={entries:'Dépenses et recettes',bank:'Mouvements bancaires',budget:'Budget prévisionnel'};
+const types=['entries','bank','budget'];
+let store={entries:[],bank:[],budget:[]},kind='entries',selected=null,box=null;
+async function api(o){
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session)throw Error('Connexion nécessaire. Ouvre Espace Sonia.');
+ const res=await fetch(endpoint,{method:'POST',headers:{Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify(o)});
+ const data=await res.json();if(!res.ok)throw Error(data.error||'Erreur de sauvegarde');
+ return data;
+}
+const field=(name,label,type,required,extra)=>'<label>'+label+'<input name="'+name+'" type="'+type+'" '+(required?'required ':'')+(extra||'')+'></label>';
+const select=(name,label,options)=>'<label>'+label+'<select name="'+name+'">'+options.map(x=>'<option value="'+x[0]+'">'+x[1]+'</option>').join('')+'</select></label>';
+function formHtml(t){
+ let html='<form id="cf-entry-form" class="cf-input-form"><input type="hidden" name="id"><div class="cf-input-grid">';
+ if(t==='entries'){
+ html+=field('entry_date','Date de l’opération','date',true)
+ +select('kind','Nature',[['expense','Dépense'],['income','Recette manuelle (hors HelloAsso)']])
+ +field('category','Catégorie','text',true,'placeholder="Salle, transport, matériel…" maxlength="90" list="cf-categories"')
+ +field('description','Description / objet','text',true,'maxlength="350"')
+ +field('counterparty','Fournisseur / payeur','text',false,'maxlength="160"')
+ +field('amount','Montant (€)','number',true,'min="0.01" max="1000000" step="0.01"')
+ +select('payment_method','Mode de paiement',[['transfer','Virement'],['card','Carte'],['cash','Espèces'],['check','Chèque'],['other','Autre']])
+ +select('status','État',[['pending','À vérifier / prévu'],['recorded','Règlement réellement reçu / payé']])
+ +field('evidence_ref','Réf. justificatif / facture','text',false,'maxlength="100"')
+ +'<label class="cf-wide">Notes internes<textarea name="notes" rows="2" maxlength="1000"></textarea></label>'
+ +'<datalist id="cf-categories"><option value="Location de salle"><option value="Matériel de danse"><option value="Transport"><option value="Formation"><option value="Assurance"><option value="Communication"><option value="Ateliers"><option value="Cotisation manuelle"><option value="Subvention"><option value="Autre"></datalist>';
+ }else if(t==='bank'){
+ html+=field('movement_date','Date sur relevé','date',true)
+ +select('direction','Sens du mouvement',[['debit','Débit / sortie du compte'],['credit','Crédit / entrée sur compte']])
+ +field('amount','Montant (€)','number',true,'min="0.01" step="0.01" max="1000000"')
+ +field('description','Libellé du mouvement','text',true,'maxlength="350"')
+ +field('bank_ref','Référence bancaire','text',false,'maxlength="100"')
+ +field('related_payment_ref','Référence HelloAsso ou facture liée','text',false,'maxlength="100"')
+ +'<label class="cf-wide">Notes<textarea name="note" rows="2" maxlength="1000"></textarea></label>';
+ }else{
+ html+=field('season','Saison','text',true,'pattern="[0-9]{4}-[0-9]{4}" maxlength="9"')
+ +select('kind','Budget pour',[['expense','Dépenses'],['income','Recettes']])
+ +field('category','Poste budgétaire','text',true,'maxlength="90" placeholder="Matériel, ateliers, subvention…"')
+ +field('planned_amount','Montant prévu (€)','number',true,'min="0" step="0.01" max="1000000"')
+ +'<label class="cf-wide">Hypothèses / commentaires<textarea name="note" rows="2" maxlength="1000"></textarea></label>';
+ }
+ html+='</div>'+(t==='entries'?'<label class="cf-input-confirm"><input type="checkbox" name="confirm_recorded"> Je confirme le règlement réellement reçu ou payé si le statut est « enregistré »</label>':'')+
+ '<p class="cf-explainer">'+(t==='bank'?'Cette ligne correspond à une transcription manuelle de ton relevé bancaire, non à une preuve bancaire automatiquement vérifiée.':'Aucun paiement HelloAsso ne sera modifié. Tu peux corriger ou archiver cette ligne plus tard.')+'</p>'+
+ '<button type="submit">Enregistrer la ligne</button> <button type="button" id="cf-form-cancel" class="cf-input-actions-button">Annuler</button><p class="cf-input-status" id="cf-form-msg" role="status"></p></form>';
+ return html;
+}
+function showForm(row){
+ selected=row||null;
+ const area=box.querySelector('#cf-form-area');area.innerHTML=formHtml(kind);
+ const f=area.querySelector('form');f.elements.id.value=row?.id||'';
+ if(row){Array.from(f.elements).forEach(el=>{if(el.name&&el.name!=='confirm_recorded'&&Object.prototype.hasOwnProperty.call(row,el.name)&&row[el.name]!=null)el.value=row[el.name]});}
+ else{const d=new Date().toLocaleDateString('en-CA');if(kind==='entries')f.elements.entry_date.value=d;if(kind==='bank')f.elements.movement_date.value=d;if(kind==='budget')f.elements.season.value='2026-2027';}
+ if(kind==='entries'&&row?.status==='recorded')f.elements.confirm_recorded.checked=true;
+ area.querySelector('#cf-form-cancel').onclick=()=>{area.replaceChildren();selected=null;};
+ f.onsubmit=async e=>{
+  e.preventDefault();
+  const btn=f.querySelector('button[type="submit"]'),msg=f.querySelector('#cf-form-msg');btn.disabled=true;msg.textContent='Enregistrement en cours…';
+  try{
+   const data=Object.fromEntries(new FormData(f).entries());data.confirm_recorded=!!f.elements.confirm_recorded?.checked;
+   if(!data.id)delete data.id;
+   const res=await api({action:'save',type:kind,...data});
+   msg.textContent='Enregistré ✓'+(res.warning?' '+res.warning:'');
+   await reload();
+   area.replaceChildren();selected=null;
+  }catch(err){msg.textContent=err.message||'Enregistrement impossible.'}finally{btn.disabled=false}
+ };
+ f.scrollIntoView({block:'nearest',behavior:'smooth'});
+}
+function summary(){
+ const confirmed=store.entries.filter(x=>x.status==='recorded');
+ const income=confirmed.filter(x=>x.kind==='income').reduce((a,x)=>a+Number(x.amount||0),0);
+ const expense=confirmed.filter(x=>x.kind==='expense').reduce((a,x)=>a+Number(x.amount||0),0);
+ const bank=store.bank.reduce((a,x)=>a+(x.direction==='credit'?Number(x.amount||0):-Number(x.amount||0)),0);
+ box.querySelector('#cf-input-summary').innerHTML=
+ '<div><small>Recettes manuelles déclarées</small><strong>'+euro(income)+'</strong></div>'+
+ '<div><small>Dépenses manuelles déclarées</small><strong>'+euro(expense)+'</strong></div>'+
+ '<div><small>Flux net bancaire saisi*</small><strong>'+euro(bank)+'</strong></div>';
+}
+function list(){
+ const area=box.querySelector('#cf-input-list');const rows=store[kind]||[];
+ const description=row=>kind==='entries'?row.description:kind==='bank'?row.description:row.category;
+ const amount=row=>kind==='budget'?row.planned_amount:row.amount;
+ area.innerHTML=rows.map(row=>'<div class="cf-input-row"><div><strong>'+safe(description(row))+' · '+euro(amount(row))+'</strong><small>'+
+ safe(kind==='entries'?row.entry_date+' · '+(row.kind==='expense'?'Dépense':'Recette')+' · '+(row.status==='recorded'?'Règlement déclaré':'À vérifier'):kind==='bank'?row.movement_date+' · '+(row.direction==='credit'?'Crédit':'Débit')+' · Réf. '+(row.bank_ref||'—'):row.season+' · '+(row.kind==='expense'?'Dépense prévue':'Recette prévue'))+
+ '</small></div><div class="cf-input-buttons"><button type="button" data-edit="'+safe(row.id)+'">Modifier</button><button type="button" data-archive="'+safe(row.id)+'">Archiver</button></div></div>').join('')||'<p class="cf-explainer">Aucune ligne saisie dans cette rubrique.</p>';
+ box.querySelector('#cf-input-count').textContent=rows.length+' ligne(s) enregistrée(s) · saisie privée Sonia';
+}
+async function reload(){
+ box.querySelector('#cf-input-count').textContent='Actualisation…';
+ try{const r=await api({action:'list'});store={entries:r.entries||[],bank:r.bank||[],budget:r.budget||[]};summary();list();}
+ catch(e){box.querySelector('#cf-input-count').textContent=e.message;}
+}
+function init(){
+ const sheet=root.querySelector('.crew-finance-v22');if(!sheet||sheet.querySelector('#cf-edit-container'))return;
+ box=document.createElement('section');box.className='cf-editbox';box.id='cf-edit-container';
+ box.innerHTML='<h3>✎ Saisie financière</h3><p class="cf-explainer">Ajoute et corrige les écritures toi-même. Chaque changement est conservé dans un journal. Les reçus HelloAsso restent séparés.</p>'+
+ '<div class="cf-input-summary" id="cf-input-summary"></div>'+
+ '<div class="cf-input-actions" id="cf-input-tabs"></div><button type="button" id="cf-new-line" class="cf-input-actions-button">＋ Ajouter une ligne</button>'+
+ '<p class="cf-input-status" id="cf-input-count" role="status">Chargement…</p>'+
+ '<div id="cf-form-area"></div><div class="cf-input-list" id="cf-input-list"></div>'+
+ '<p class="cf-explainer">* Flux net bancaire saisi = crédits saisis − débits saisis. Ce n’est pas un solde officiel ni une preuve de rapprochement.</p>';
+ const before=sheet.querySelector('.cf-tabs');before?before.before(box):sheet.appendChild(box);
+ const tabs=box.querySelector('#cf-input-tabs');
+ tabs.innerHTML=types.map(t=>'<button type="button" data-kind="'+t+'" aria-pressed="'+String(t===kind)+'">'+labels[t]+'</button>').join('');
+ tabs.onclick=e=>{const b=e.target.closest('[data-kind]');if(!b)return;kind=b.dataset.kind;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));box.querySelector('#cf-form-area').replaceChildren();list();};
+ box.querySelector('#cf-new-line').onclick=()=>showForm(null);
+ box.querySelector('#cf-input-list').onclick=async e=>{
+  const edit=e.target.closest('[data-edit]'),archive=e.target.closest('[data-archive]');
+  if(edit){const row=store[kind].find(x=>x.id===edit.dataset.edit);if(row)showForm(row);}
+  if(archive){
+   const row=store[kind].find(x=>x.id===archive.dataset.archive);if(!row)return;
+   if(!confirm('Archiver cette ligne financière ? Son historique sera conservé et elle ne figurera plus dans les totaux.'))return;
+   archive.disabled=true;
+   try{const r=await api({action:'archive',type:kind,id:row.id,confirm_archive:true});await reload();if(r.warning)alert(r.warning);}
+   catch(err){alert(err.message||'Archivage impossible.');archive.disabled=false;}
+  }
+ };
+ reload();
+}
+const observer=new MutationObserver(()=>{if(root.querySelector('.crew-finance-v22')&&!root.querySelector('#cf-edit-container'))init()});
+observer.observe(root,{childList:true,subtree:true});
+if(root.querySelector('.crew-finance-v22'))init();
+})();
 </script></body></html>
