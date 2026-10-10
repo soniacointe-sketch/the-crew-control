@@ -823,7 +823,7 @@ function init(){
  box=document.createElement('section');box.className='cf-editbox';box.id='cf-edit-container';
  box.innerHTML='<h3>✎ Saisie financière</h3><p class="cf-explainer">Ajoute et corrige les écritures toi-même. Chaque changement est conservé dans un journal. Les reçus HelloAsso restent séparés.</p>'+
  '<div class="cf-input-summary" id="cf-input-summary"></div>'+
- '<div class="cf-input-actions" id="cf-input-tabs"></div><button type="button" id="cf-new-line" class="cf-input-actions-button">＋ Ajouter une ligne</button>'+
+ '<div class="cf-input-actions" id="cf-input-tabs"></div><button type="button" id="cf-new-line" class="cf-input-actions-button">＋ Ajouter une ligne</button> <button type="button" id="cf-export-manual" class="cf-input-actions-button">↓ Exporter les saisies CSV</button>'+
  '<p class="cf-input-status" id="cf-input-count" role="status">Chargement…</p>'+
  '<div id="cf-form-area"></div><div class="cf-input-list" id="cf-input-list"></div>'+
  '<p class="cf-explainer">* Flux net bancaire saisi = crédits saisis − débits saisis. Ce n’est pas un solde officiel ni une preuve de rapprochement.</p>';
@@ -832,6 +832,11 @@ function init(){
  tabs.innerHTML=types.map(t=>'<button type="button" data-kind="'+t+'" aria-pressed="'+String(t===kind)+'">'+labels[t]+'</button>').join('');
  tabs.onclick=e=>{const b=e.target.closest('[data-kind]');if(!b)return;kind=b.dataset.kind;tabs.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));box.querySelector('#cf-form-area').replaceChildren();list();};
  box.querySelector('#cf-new-line').onclick=()=>showForm(null);
+box.querySelector('#cf-export-manual').onclick=()=>{
+ const rows=store[kind]||[];const keys=kind==='entries'?['entry_date','kind','category','description','counterparty','amount','payment_method','status','evidence_ref','notes']:kind==='bank'?['movement_date','direction','amount','description','bank_ref','related_payment_ref','note']:['season','kind','category','planned_amount','note'];
+ const content='\uFEFF'+[keys,...rows.map(r=>keys.map(k=>r[k]??''))].map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(';')).join('\r\n');
+ const link=document.createElement('a'),file=new Blob([content],{type:'text/csv;charset=utf-8;'}),uri=URL.createObjectURL(file);link.href=uri;link.download='The_Crew_Saisie_'+kind+'.csv';link.click();setTimeout(()=>URL.revokeObjectURL(uri),1000);
+};
  box.querySelector('#cf-input-list').onclick=async e=>{
   const edit=e.target.closest('[data-edit]'),archive=e.target.closest('[data-archive]');
   if(edit){const row=store[kind].find(x=>x.id===edit.dataset.edit);if(row)showForm(row);}
