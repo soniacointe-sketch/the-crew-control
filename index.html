@@ -568,7 +568,13 @@ node.innerHTML='<section class="cp-welcome"><div><div class="cp-eyebrow">SONIA O
 '<section class="cp-grid"><div class="cp-panel"><div class="cp-headline"><h2>✓ Présences & participants</h2><span class="cp-muted">Gestion des cours</span></div><div class="cp-simple-list"><div class="cp-simple-row"><div><b>Présences du samedi</b><small>Pointage par séance Kids et Ados / Adultes</small></div><button data-cp-view="attendance">Pointer →</button></div><div class="cp-simple-row"><div><b>Participants aux ateliers</b><small>Contacts, billets et fiches individuelles</small></div><button data-cp-view="clients">Consulter →</button></div></div></div>'+
 '<div class="cp-panel"><div class="cp-headline"><h2>◇ Actions prioritaires</h2><span class="cp-muted">À suivre</span></div><div class="cp-simple-list" id="cp-priorities"><p class="cp-muted">Chargement des actions disponibles…</p></div><button class="cp-open-tasks" style="margin-top:12px;background:#d8b45a;color:#111;border:0;border-radius:9px;padding:11px 18px;font-weight:800;cursor:pointer">Gérer les tâches →</button></div></section><p class="cp-footer">THE CREW ORCHIES · Les données sont chargées uniquement dans l’espace Sonia sécurisé.</p>';
 header.after(node);
-function go(v){const el=v==='families'?document.querySelector('[data-family-register]'):v==='clients'?document.querySelector('[data-event-clients], [data-eventClients], [data-eventclients]'):document.querySelector('.nav [data-view="'+v+'"]');if(el)el.click();else if(v==='clients'){document.querySelector('[data-event-clients], [data-eventClients], [data-eventclients]')?.click()}}
+function go(v){
+const selector=v==='families'?'[data-family-register]':v==='clients'?'[data-event-clients]':'.nav [data-view="'+v+'"]';
+const link=document.querySelector(selector);
+if(link){link.click();return;}
+const drawer=document.getElementById('drawer'),title=document.getElementById('drawerTitle'),body=document.getElementById('drawerBody');
+if(drawer&&title&&body){drawer.style.display='block';title.textContent=v==='clients'?'PARTICIPANTS AUX ATELIERS':'PRÉSENCES';body.textContent='La rubrique est indisponible. Actualise la page pour réessayer.'}
+}
 node.addEventListener('click',e=>{const el=e.target.closest('[data-cp-view]');if(el)go(el.dataset.cpView);else if(e.target.closest('.cp-open-events'))go('events');else if(e.target.closest('.cp-open-tasks'))go('tasks')});
 async function refresh(){try{const members=await privateDetail('members');node.querySelector('#cp-members').textContent=members.filter(x=>x.member_status!=='inactive').length}catch(e){}
 try{const p=await privateDetail('preregistrations');node.querySelector('#cp-preregs').textContent=p.filter(x=>x.status!=='converted').length}catch(e){}
@@ -576,5 +582,15 @@ try{const {data:{session}}=await sb.auth.getSession();if(session){const res=awai
 try{const r=await privateDetail('tasks');const open=r.filter(x=>x.status==='open'||x.status==='doing').slice(0,3);node.querySelector('#cp-priorities').innerHTML=open.map(t=>'<div class="cp-simple-row"><div><b>'+String(t.title||'Action').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))+'</b><small>'+String(t.priority||'À traiter')+'</small></div><button data-cp-view="tasks">Voir →</button></div>').join('')||'<p class="cp-muted">Aucune tâche ouverte.</p>'}catch(e){node.querySelector('#cp-priorities').textContent='Connecte-toi pour voir les tâches.'}}
 refresh();try{sb.auth.onAuthStateChange((ev,s)=>{if(ev==='SIGNED_IN'&&s)refresh()})}catch(e){}
 const pay=document.getElementById('pay');if(pay){const update=()=>{if(/^\d+$/.test(pay.textContent.trim()))node.querySelector('#cp-payments').textContent=pay.textContent.trim()};new MutationObserver(update).observe(pay,{childList:true,subtree:true});update()}
+})();
+</script><style id="crew-premium-v20-panels-style">
+.cp-simple-row button{min-height:42px;transition:background .15s,border-color .15s}
+.cp-simple-row button:hover,.cp-simple-row button:focus-visible{background:#d8b45a;color:#111;border-color:#d8b45a}
+#drawer{z-index:50!important}
+#drawerBody .cec-row .cep-open{flex-shrink:0}
+</style><script id="crew-premium-v20-shortcuts">
+(function(){
+const root=document.querySelector('.crew-premium');if(!root)return;
+root.querySelectorAll('.cp-simple-row button[data-cp-view]').forEach(b=>{b.setAttribute('aria-label',b.dataset.cpView==='attendance'?'Ouvrir le pointage des présences':'Consulter les fiches des participants aux ateliers');});
 })();
 </script></body></html>
