@@ -339,4 +339,36 @@ panel.innerHTML='<h4>Historique des présences</h4><p>'+present+' présent(s) ·
 });
 });
 })();
+</script><style id="crew-families-style">.crew-family-card{background:#151515;border:1px solid #4d412b;border-radius:12px;padding:16px;margin:12px 0}.crew-family-card h3{color:#e4c474;margin:0 0 8px}.crew-family-person{display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-top:1px solid #333}.crew-family-tag{font-size:12px;color:#e6cb89}.crew-family-search{width:100%;background:#222;border:1px solid #6d5a30;border-radius:9px;color:white;padding:13px;font-size:16px}.crew-family-note{color:#bdb5a8;font-size:13px}.crew-family-phone{color:#e6ca86}</style><script id="crew-families-script">
+(function(){
+const nav=document.querySelector('.nav'),drawer=document.getElementById('drawer'),body=document.getElementById('drawerBody'),title=document.getElementById('drawerTitle');if(!nav||!drawer||!body)return;
+const link=document.createElement('a');link.href='#';link.textContent='♧ FAMILLES';link.dataset.familyRegister='true';
+const member=nav.querySelector('[data-view="members"]');if(member)member.after(link);else nav.appendChild(link);
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const normalize=v=>String(v||'').trim().toLowerCase().replace(/\s+/g,'');
+link.addEventListener('click',async e=>{
+e.preventDefault();drawer.style.display='block';title.textContent='FAMILLES';body.innerHTML='<p>Chargement du registre familial…</p>';
+try{
+const all=await privateDetail('members');
+const families=new Map();
+for(const person of all){
+const contact=normalize(person.guardian_email)||normalize(person.guardian_phone)||'';
+const key=contact?'contact:'+contact:'person:'+person.id;
+if(!families.has(key))families.set(key,[]);
+families.get(key).push(person);
+}
+const groups=[...families.entries()].sort((a,b)=>b[1].length-a[1].length);
+body.innerHTML='<p class="crew-family-note">Les regroupements sont des propositions basées sur un contact responsable identique. Vérifie chaque foyer : aucune fusion automatique ni modification de cotisation.</p><input class="crew-family-search" placeholder="Rechercher une famille ou un adhérent" aria-label="Rechercher une famille"><div id="crew-family-list"></div>';
+const area=body.querySelector('#crew-family-list'),search=body.querySelector('.crew-family-search');
+function render(){const q=normalize(search.value);area.innerHTML=groups.filter(([key,people])=>!q||normalize(people.map(p=>[p.first_name,p.last_name,p.guardian_name,p.email,p.phone].join(' ')).join(' ')).includes(q)).map(([key,people])=>{
+const guardian=people.find(p=>p.guardian_name)?.guardian_name||'Responsable non renseigné';
+const suggested=people.length>1&&key.startsWith('contact:');
+const tel=people.find(p=>p.guardian_phone)?.guardian_phone||people.find(p=>p.phone)?.phone||'';
+const mail=people.find(p=>p.guardian_email)?.guardian_email||'';
+const rows=people.map(p=>'<div class="crew-family-person"><span>'+esc([p.first_name,p.last_name].filter(Boolean).join(' '))+'<small style="display:block;color:#aaa">'+esc(p.group_code||'Groupe non renseigné')+'</small></span><span>'+esc(p.plan||'Formule non renseignée')+'</span></div>').join('');
+return '<section class="crew-family-card"><h3>'+esc(guardian)+'</h3><p class="crew-family-tag">'+(suggested?'Foyer possible — à confirmer':'Fiche individuelle / foyer non associé')+' · '+people.length+' adhérent(s)</p>'+(tel?'<p>Téléphone : <a class="crew-family-phone" href="tel:'+esc(tel.replace(/[^+0-9]/g,''))+'">'+esc(tel)+'</a></p>':'')+(mail?'<p>E-mail : '+esc(mail)+'</p>':'')+rows+'<p class="crew-family-note">Cotisations individuelles à consulter dans chaque fiche. Ne pas additionner automatiquement une formule Duo ou Famille.</p></section>'}).join('')||'<p>Aucun résultat.</p>'}
+search.addEventListener('input',render);render();
+}catch(err){body.textContent='Impossible de charger les familles : '+(err?.message||'erreur')}
+});
+})();
 </script></body></html>
