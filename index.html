@@ -238,4 +238,32 @@ const observer=new MutationObserver(()=>{const drawer=document.getElementById('d
 observer.observe(body,{childList:true,subtree:true});
 body.addEventListener('click',e=>{const back=e.target.closest('#crew-member-back');if(back)return;const btn=e.target.closest('[data-member-index]');if(!btn)return;const current=window.crewMemberRows?.[Number(btn.dataset.memberIndex)];if(!current?.id)return;requestAnimationFrame(()=>{const card=body.querySelector('#crew-member-card');if(!card||card.querySelector('#crew-edit-member'))return;const edit=document.createElement('button');edit.id='crew-edit-member';edit.className='crew-entry-btn';edit.textContent='✎ Modifier les informations';edit.onclick=()=>{card.querySelector('.crew-entry-form')?.remove();card.appendChild(editor(current,'update_member'))};card.prepend(edit)})});
 })();
+</script><style id="crew-manual-pay-style">.crew-pay-card{margin:16px 0;border:1px solid #746032;border-radius:12px;padding:15px;background:#171717}.crew-pay-card label{display:block;margin:9px 0;color:#d7c69a}.crew-pay-card input,.crew-pay-card select{width:100%;padding:11px;background:#242424;border:1px solid #666;color:white;border-radius:8px;font-size:16px}.crew-pay-card button{margin-top:12px;padding:12px 16px;background:#d8b45a;color:#111;border:0;border-radius:8px;font-weight:bold}.crew-pay-card p{color:#e3cc92}</style>
+<script id="crew-manual-pay-script">
+(function(){
+const root=document.getElementById('drawerBody');if(!root)return;
+root.addEventListener('click',e=>{
+ const btn=e.target.closest('[data-member-index]');if(!btn)return;
+ const member=window.crewMemberRows?.[Number(btn.dataset.memberIndex)];if(!member)return;
+ requestAnimationFrame(()=>{
+ const card=root.querySelector('#crew-member-card');if(!card||card.querySelector('#crew-payment-add'))return;
+ const summary=document.createElement('div');summary.className='crew-pay-card';
+ const eur=n=>Number(n).toLocaleString('fr-FR',{style:'currency',currency:'EUR'});
+ const expected=member.amount_expected==null?'À définir':eur(member.amount_expected);
+ const paid=eur(member.amount_paid||0);
+ const remaining=member.remaining==null?'À définir':eur(member.remaining);
+ summary.innerHTML='<h3>Cotisation 2026–2027</h3><div class="crew-fields"><div class="crew-field"><small>Attendu</small>'+expected+'</div><div class="crew-field"><small>Encaissé et vérifié</small>'+paid+'</div><div class="crew-field"><small>Reste à régler</small>'+remaining+'</div></div>';
+ if(member.registration_id){
+ const b=document.createElement('button');b.id='crew-payment-add';b.textContent='+ Enregistrer un règlement';summary.appendChild(b);
+ b.onclick=()=>{
+ if(summary.querySelector('form'))return;
+ const form=document.createElement('form');form.className='crew-pay-card';form.innerHTML='<h4>Règlement manuel reçu</h4><label>Montant (€)<input name="amount" required type="number" min="0.01" step="0.01"></label><label>Mode<select name="method"><option value="cash">Espèces</option><option value="check">Chèque</option><option value="bank_transfer">Virement</option></select></label><label>Date du règlement<input type="date" name="paid_on" required></label><label><input type="checkbox" name="confirm_received" required style="width:auto"> Je confirme avoir réellement reçu ce paiement</label><button type="submit">Enregistrer le règlement</button><p role="status"></p>';form.elements.paid_on.value=new Date().toLocaleDateString('en-CA');summary.appendChild(form);
+ form.onsubmit=async ev=>{ev.preventDefault();const d=Object.fromEntries(new FormData(form).entries());const msg=form.querySelector('[role=status]');const save=form.querySelector('[type=submit]');save.disabled=true;msg.textContent='Enregistrement…';
+ try{const {data:{session}}=await sb.auth.getSession();if(!session)throw Error('Connexion requise');const res=await fetch('https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-manual-payment',{method:'POST',headers:{'Authorization':'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({registration_id:member.registration_id,amount:Number(d.amount),method:d.method,paid_on:d.paid_on,confirm_received:d.confirm_received==='on'})});const out=await res.json();if(!res.ok)throw Error(out.error||'Erreur');msg.textContent='Paiement enregistré ✓';setTimeout(()=>document.querySelector('.nav [data-view="members"]')?.click(),700)}catch(err){msg.textContent=err.message;save.disabled=false}};
+ };
+ }else{const p=document.createElement('p');p.textContent='Inscription annuelle non renseignée : aucun paiement ne peut encore être saisi.';summary.appendChild(p)}
+ card.appendChild(summary);
+ });
+});
+})();
 </script></body></html>
