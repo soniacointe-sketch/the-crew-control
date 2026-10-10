@@ -300,4 +300,24 @@ root.addEventListener('click',e=>{
  });
 });
 })();
+</script><style id="crew-pointage-style">
+#crew-attendance-app{padding:8px}.crew-attendance-select{padding:12px;width:100%;background:#202020;border:1px solid #9a7c36;color:white;border-radius:9px;font-size:16px;margin:10px 0}.crew-attendance-person{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #3a3426;padding:13px 0}.crew-attendance-choices{display:flex;gap:6px;flex-wrap:wrap}.crew-attendance-choices button{background:#252525;color:#eee;border:1px solid #6c5c36;border-radius:9px;padding:11px;cursor:pointer}.crew-attendance-choices button.selected{background:#d8b45a;color:#111;font-weight:bold}.crew-attendance-choices button:disabled{opacity:.5}.crew-attendance-msg{color:#e6c77b}@media(max-width:560px){.crew-attendance-person{align-items:stretch;flex-direction:column}.crew-attendance-choices button{flex:1}}
+</style><script id="crew-pointage-script">
+(function(){
+const root=document.getElementById('drawerBody');if(!root)return;
+const url='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-attendance-control';
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function call(b){const {data:{session}}=await sb.auth.getSession();if(!session)throw Error('Connexion requise');const r=await fetch(url,{method:'POST',headers:{Authorization:'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify(b)});const d=await r.json();if(!r.ok)throw Error(d.error||'Erreur');return d}
+async function setup(){
+root.innerHTML='<div id="crew-attendance-app"><h3>Présences aux cours</h3><p class="muted">Choisis une séance, puis coche les membres. Chaque choix est enregistré immédiatement.</p><select class="crew-attendance-select" id="crew-attendance-session"><option>Chargement des séances…</option></select><div id="crew-attendance-roster" role="status"></div></div>';
+const select=root.querySelector('#crew-attendance-session'),roster=root.querySelector('#crew-attendance-roster');
+try{const result=await call({action:'list'});const sessions=(result.sessions||[]);select.innerHTML='<option value="">Sélectionner une séance</option>'+sessions.map(x=>'<option value="'+esc(x.id)+'">'+esc(x.session_date+' — '+(x.group_code||'Groupe')+' — '+(x.title||'Cours')+(x.status==='cancelled'?' (annulé)':''))+'</option>').join('');if(!sessions.length)roster.textContent='Aucune séance enregistrée. Crée d’abord les cours dans le planning.';}
+catch(e){select.innerHTML='<option>Indisponible</option>';roster.textContent=e.message;}
+select.onchange=async()=>{const id=select.value;roster.textContent='Chargement…';if(!id){roster.textContent='';return}try{const data=await call({action:'roster',session_id:id});const marks=new Map((data.marks||[]).map(x=>[x.member_id,x.status]));const members=data.members||[];
+roster.innerHTML=members.length?'<p class="muted">'+members.length+' personne(s) inscrite(s) — non cochée = non pointée</p>'+members.map(m=>'<div class="crew-attendance-person" data-id="'+esc(m.id)+'"><strong>'+esc(m.first_name+' '+m.last_name)+'</strong><div class="crew-attendance-choices"><button type="button" data-status="present" class="'+(marks.get(m.id)==='present'?'selected':'')+'">✓ Présent</button><button type="button" data-status="absent" class="'+(marks.get(m.id)==='absent'?'selected':'')+'">Absent</button></div></div>').join('')+'<p class="crew-attendance-msg" role="status"></p>':'Aucun adhérent inscrit dans ce groupe.';
+roster.querySelectorAll('[data-status]').forEach(b=>b.onclick=async()=>{const row=b.closest('[data-id]'),buttons=[...row.querySelectorAll('button')],msg=roster.querySelector('.crew-attendance-msg');buttons.forEach(x=>x.disabled=true);try{await call({action:'mark',session_id:id,member_id:row.dataset.id,status:b.dataset.status});buttons.forEach(x=>x.classList.toggle('selected',x===b));msg.textContent='Présence enregistrée ✓'}catch(err){msg.textContent=err.message}finally{buttons.forEach(x=>x.disabled=false)}});
+}catch(e){roster.textContent=e.message}};
+}
+document.addEventListener('click',e=>{const a=e.target.closest('[data-view="attendance"]');if(!a)return;setTimeout(setup,0)},true);
+})();
 </script></body></html>
