@@ -8,13 +8,18 @@
 <label>Communauté WhatsApp The Crew (lien commun aux deux groupes si aucun lien spécifique)<input id="community" placeholder="https://chat.whatsapp.com/..."></label>
 <div class="grid"><label>Groupe KIDS<input id="kids" placeholder="https://chat.whatsapp.com/..."></label><label>Groupe ADOS / ADULTES<input id="adults" placeholder="https://chat.whatsapp.com/..."></label></div><button class="btn secondary" id="save">Enregistrer mes liens</button><p class="muted">Stockage local et synchronisation privée Supabase sur le compte connecté. Aucun lien d'invitation n'est publié dans le code public du site.</p></div>
 <div class="panel"><h2>2. Préparer un message</h2><div class="grid"><label>Prénom du destinataire<input id="first" placeholder="Ex. Julie"></label><label>Téléphone mobile<input id="phone" placeholder="Ex. 06 12 34 56 78"></label><label>Groupe<select id="group"><option value="kids">KIDS · 18h30–19h30</option><option value="adults">ADOS / ADULTES · 19h30–20h30</option></select></label><label>Autorisation de contact<select id="consent"><option value="no">Non vérifiée</option><option value="yes">Oui, accord confirmé</option></select></label></div>
-<label>Message prérempli<textarea id="message"></textarea></label><button class="btn secondary" id="generate">Préparer le texte</button><button class="btn" id="send">Ouvrir dans WhatsApp</button><button class="btn secondary" id="copy">Copier le message</button><p class="muted" id="status"></p></div>
-<div class="panel"><h2>3. Suivi manuel</h2><p class="muted">Un clic sur WhatsApp ne prouve pas que le message a été envoyé. Confirme l'envoi après l'avoir réalisé.</p><button class="btn secondary" id="mark">Marquer « envoyé manuellement »</button><button class="btn secondary" id="export">Exporter le suivi CSV</button><div id="history" class="muted"></div></div>
+<label>Message prérempli<textarea id="message"></textarea></label><button class="btn secondary" id="generate">Préparer le texte</button><button class="btn" id="send">Ouvrir dans WhatsApp</button><button class="btn secondary" id="sms">Préparer un SMS</button><button class="btn secondary" id="copy">Copier le message</button><p class="muted" id="status"></p></div>
+<div class="panel"><h2>3. Préinscriptions à inviter</h2>
+<p class="muted">Les contacts viennent du registre privé The Crew. Ils sont lus uniquement à ta demande et ne sont pas copiés dans le stockage local. Aucun envoi n'est automatique.</p>
+<button class="btn secondary" id="loadQueue">Charger les préinscriptions</button>
+<label>Rechercher une inscription<input id="queueSearch" placeholder="Prénom, nom ou groupe" autocomplete="off"></label>
+<div id="queue" aria-live="polite"></div><p class="muted" id="queueStatus"></p></div>
+<div class="panel"><h2>4. Suivi manuel</h2><p class="muted">Un clic sur WhatsApp ne prouve pas que le message a été envoyé. Confirme l'envoi après l'avoir réalisé.</p><button class="btn secondary" id="mark">Marquer « envoyé manuellement »</button><button class="btn secondary" id="export">Exporter le suivi CSV</button><div id="history" class="muted"></div></div>
 <button class="btn secondary" id="logout">Se déconnecter</button></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 (()=>{"use strict";
 const sb=window.supabase.createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy");
-const $=x=>document.getElementById(x);let user=null,root="";
+const $=x=>document.getElementById(x);let user=null,root="",prereg=[];
 const urlParams=new URLSearchParams(location.hash.slice(1));
 let pendingLink=urlParams.get("invite")||"";
 if(location.hash)history.replaceState(null,"",location.pathname+location.search);
@@ -23,6 +28,50 @@ function validLink(x){try{const u=new URL(x);return u.protocol==="https:"&&u.hos
 function normalizePhone(s){let x=s.replace(/[\s.()\-]/g,"");if(x.startsWith("00"))x="+"+x.slice(2);if(/^0[67]\d{8}$/.test(x))x="+33"+x.slice(1);return /^\+[1-9]\d{7,14}$/.test(x)?x:null}
 function link(){const selected=$('group').value==="kids"?$('kids').value.trim():$('adults').value.trim();return selected||$('community').value.trim()}
 function compose(){let group=$('group').value==="kids"?"KIDS (18h30–19h30)":"ADOS/ADULTES (19h30–20h30)";let first=$('first').value.trim();let isShared=!($('group').value==="kids"?$('kids').value.trim():$('adults').value.trim());return "Bonjour"+(first?" "+first:"")+" 😊\nBienvenue chez The Crew Orchies ! Voici le lien pour rejoindre "+(isShared?"notre communauté WhatsApp The Crew Orchies":"le groupe WhatsApp "+group)+" :\n"+link()+"\nLes cours "+group+" se déroulent le samedi à l’Espace Marypomme. Tu peux rejoindre le groupe si tu le souhaites. À bientôt !"}
+
+function obscurePhone(value){const n=String(value||"").replace(/\D/g,"");return n.length>=6?n.slice(0,2)+"••••"+n.slice(-2):"Non renseigné"}
+function rowGroup(row){return row.group_code==="KIDS"?"kids":"adults"}
+function renderQueue(){
+ const q=$('queueSearch').value.trim().toLocaleLowerCase("fr");
+ const list=$('queue');list.replaceChildren();
+ const filtered=prereg.filter(row=>[row.first_name,row.last_name,row.group_code,row.guardian_name].some(x=>String(x||"").toLocaleLowerCase("fr").includes(q)));
+ if(!filtered.length){list.textContent=prereg.length?"Aucun résultat.":"Aucune préinscription chargée.";return}
+ for(const row of filtered){
+  const wrap=document.createElement("div");wrap.style.cssText="border-top:1px solid #49412d;padding:13px 0;display:flex;gap:12px;align-items:center;justify-content:space-between;flex-wrap:wrap";
+  const details=document.createElement("div");
+  const name=document.createElement("strong");name.textContent=[row.first_name,row.last_name].filter(Boolean).join(" ")||"Inscription";
+  const meta=document.createElement("div");meta.className="muted";
+  meta.textContent=(row.group_code||"Groupe à vérifier")+" · "+obscurePhone(row.phone)+" · "+(row.status||"Statut à vérifier");
+  details.append(name,meta);
+  const btn=document.createElement("button");btn.className="btn secondary";btn.textContent="Préparer une invitation";
+  btn.disabled=!normalizePhone(String(row.phone||""));
+  btn.title=btn.disabled?"Téléphone absent ou invalide":"Remplir le message, sans envoi";
+  btn.addEventListener("click",()=>{
+   $('first').value=(row.guardian_name||row.first_name||"").trim();
+   $('phone').value=row.phone||"";
+   $('group').value=rowGroup(row);
+   $('consent').value="no";
+   $('message').value=compose();
+   $('status').textContent="Contact sélectionné. Vérifie l'autorisation du destinataire avant l'envoi.";
+   $('first').scrollIntoView({behavior:"smooth",block:"center"});
+  });
+  wrap.append(details,btn);list.append(wrap);
+ }
+}
+async function loadQueue(){
+ if(!user)throw Error("Connexion requise");
+ const {data:{session}}=await sb.auth.getSession();
+ if(!session)throw Error("Session expirée. Reconnecte-toi.");
+ const r=await fetch("https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-dashboard-details?view=preregistrations",{
+  cache:"no-store",headers:{"Authorization":"Bearer "+session.access_token}
+ });
+ const result=await r.json().catch(()=>({}));
+ if(!r.ok)throw Error(result.error||"Accès aux inscriptions indisponible");
+ if(!Array.isArray(result))throw Error("Format des données inattendu");
+ prereg=result.slice(0,100);
+ renderQueue();
+ $('queueStatus').textContent=prereg.length+" préinscription(s) chargée(s) depuis The Crew Control. Accès administrateur requis.";
+}
 function show(){const raw=JSON.parse(data("history")||"[]");$('history').textContent=raw.length?raw.slice(-8).reverse().map(x=>x.when+" · "+x.group+" · "+x.phone+" · "+x.state).join("\n"):"Aucun envoi confirmé";$('history').style.whiteSpace="pre-line"}
 async function saveLinks(){
  const values=Object.fromEntries(["community","kids","adults"].map(k=>[k,$(k).value.trim()]));
@@ -39,6 +88,7 @@ async function enter(){
  const {data:{user:u}}=await sb.auth.getUser();user=u;
  if(!user){$('gate').style.display="block";$('content').style.display="none";return}
  root="crew_whatsapp_invites_v1_"+user.id+"_";
+ prereg=[];renderQueue();$('queueStatus').textContent="Clique sur Charger les préinscriptions pour afficher les contacts autorisés.";
  $('gate').style.display="none";$('content').style.display="block";
  for(const k of ["community","kids","adults"])$(k).value=data(k);
  const {data:remote,error}=await sb.from("crew_invitation_settings").select("community_url,kids_url,adults_url").eq("user_id",user.id).maybeSingle();
@@ -60,11 +110,22 @@ async function enter(){
 $('login').onclick=async()=>{const {error}=await sb.auth.signInWithPassword({email:$('email').value,password:$('password').value});$('loginStatus').textContent=error?error.message:"";if(!error)enter()};
 $('save').onclick=async()=>{try{$('status').textContent=await saveLinks()}catch(e){$('status').textContent=e.message}};
 $('generate').onclick=()=>{$('message').value=compose()};
+$('loadQueue').onclick=async()=>{$('queueStatus').textContent="Chargement des préinscriptions...";try{await loadQueue()}catch(e){prereg=[];renderQueue();$('queueStatus').textContent=e.message}};
+$('queueSearch').addEventListener("input",renderQueue);
+$('sms').onclick=()=>{
+ const p=normalizePhone($('phone').value),l=link();
+ if($('consent').value!=="yes"){$('status').textContent="Vérifie et confirme l'accord de contact.";return}
+ if(!p){$('status').textContent="Numéro mobile invalide.";return}
+ if(!validLink(l)){$('status').textContent="Lien d'invitation manquant ou invalide.";return}
+ const message=$('message').value||compose();
+ location.href="sms:"+p+"?body="+encodeURIComponent(message);
+ $('status').textContent="Application SMS ouverte si ton appareil le permet. Aucun SMS n'est envoyé par le site ; les tarifs de ton opérateur peuvent s'appliquer.";
+};
 $('copy').onclick=async()=>{if(!validLink(link())){$('status').textContent="Ajoute d'abord le lien WhatsApp du groupe.";return}await navigator.clipboard.writeText($('message').value||compose());$('status').textContent="Message copié."};
 $('send').onclick=()=>{const p=normalizePhone($('phone').value),l=link();if($('consent').value!=="yes"){$('status').textContent="Accord de contact non confirmé.";return}if(!p){$('status').textContent="Numéro mobile invalide.";return}if(!validLink(l)){$('status').textContent="Lien d'invitation manquant ou invalide.";return}const msg=$('message').value||compose();window.open("https://wa.me/"+p.slice(1)+"?text="+encodeURIComponent(msg),"_blank","noopener,noreferrer");$('status').textContent="WhatsApp ouvert. Vérifie puis envoie le message manuellement."};
 $('mark').onclick=()=>{const p=normalizePhone($('phone').value);if(!p||$('consent').value!=="yes"){$('status').textContent="Contact et accord obligatoires.";return}if(!confirm("Confirmer que tu as réellement envoyé ce message ?"))return;const hist=JSON.parse(data("history")||"[]");hist.push({when:new Date().toLocaleString("fr-FR"),phone:p.slice(0,5)+"****"+p.slice(-2),group:$('group').value,state:"envoyé manuellement"});write("history",JSON.stringify(hist));show()};
 $('export').onclick=()=>{const hist=JSON.parse(data("history")||"[]");const csv="Date;Téléphone masqué;Groupe;Statut\n"+hist.map(x=>[x.when,x.phone,x.group,x.state].map(v=>'"'+String(v).replaceAll('"','""')+'"').join(";")).join("\n");const u=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=u;a.download="crew-suivi-whatsapp.csv";a.click();URL.revokeObjectURL(u)};
-$('logout').onclick=async()=>{await sb.auth.signOut();user=null;enter()};
+$('logout').onclick=async()=>{await sb.auth.signOut();user=null;prereg=[];renderQueue();$('first').value="";$('phone').value="";$('message').value="";enter()};
 enter().catch(e=>{$('loginStatus').textContent=e.message});
 })();
 </script></body></html>
