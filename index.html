@@ -593,4 +593,9 @@ const pay=document.getElementById('pay');if(pay){const update=()=>{if(/^\d+$/.te
 const root=document.querySelector('.crew-premium');if(!root)return;
 root.querySelectorAll('.cp-simple-row button[data-cp-view]').forEach(b=>{b.setAttribute('aria-label',b.dataset.cpView==='attendance'?'Ouvrir le pointage des présences':'Consulter les fiches des participants aux ateliers');});
 })();
+</script><script id="crew-v20-attendance-link">
+(function(){
+const nav=document.querySelector('.nav');if(!nav)return;
+if(!nav.querySelector('[data-view="attendance"]')){const a=document.createElement('a');a.href='#';a.dataset.view='attendance';a.textContent='✓ PRÉSENCES';const members=nav.querySelector('[data-view="members"]');if(members)members.after(a);else nav.appendChild(a);}
+})();
 </script></body></html>
