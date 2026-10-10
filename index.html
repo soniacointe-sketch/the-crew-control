@@ -495,4 +495,28 @@ const panel=document.querySelector('#authBox .panel');if(panel&&!panel.querySele
  const img=document.createElement('img');img.src=src;img.alt='Logo The Crew Orchies';img.className='crew-login-logo';panel.prepend(img);
 }
 })();
+</script><style id="crew-workshops-cards-style">
+.crew-workshops{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.crew-workshop{border:1px solid #6f5930;background:#151515;border-radius:16px;overflow:hidden}.crew-workshop img{width:100%;aspect-ratio:4/5;object-fit:contain;background:#070707;display:block}.crew-workshop .workshop-content{padding:18px}.crew-workshop h3{font:23px Georgia,serif;color:#e6c778;margin:0 0 10px}.crew-workshop p{line-height:1.5;color:#ddd}.crew-workshop .workshop-meta{font-size:13px;color:#e2d1ae}.crew-workshop a{display:inline-block;text-decoration:none;padding:12px 16px;border-radius:9px;background:#d8b45a;color:#111;font-weight:bold;margin:8px 8px 0 0}.crew-workshop .workshop-site{background:transparent;color:#f1d38e;border:1px solid #80693c}.crew-workshop-full{grid-column:1/-1}.crew-workshop-full .workshop-content{padding:20px}.crew-workshop-info{color:#aaa;font-size:13px}.crew-workshop-more{margin:18px 0;padding:12px 15px;color:#e8c778;border:1px solid #755d30;background:#191919;border-radius:10px;cursor:pointer}@media(max-width:660px){.crew-workshops{grid-template-columns:1fr}}
+</style>
+<script id="crew-workshops-cards-script">
+(function(){
+const drawer=document.getElementById('drawer'),body=document.getElementById('drawerBody'),title=document.getElementById('drawerTitle');if(!drawer||!body)return;
+let passthrough=false;
+const workshops=[
+{title:'DANCE PARTY LATINO',date:'17 octobre 2026',hours:'18h30–20h30',audience:'Ados & adultes',price:'8 €',image:'https://thecreworchies.blog/wp-content/uploads/2026/10/Soiree-latino-noire-et-doree1.png',url:'https://www.helloasso.com/associations/the-crew-orchies/evenements/dance-party-latino-the-crew-orchies'},
+{title:'FLASHBACK PARTY · ANNÉES 80',date:'24 octobre 2026',hours:'18h30–20h30',audience:'Dès 12 ans',price:'8 €',image:'https://thecreworchies.blog/wp-content/uploads/2026/10/Soiree-Flashback-Annees-80-en-Or-et-Noir1.png',url:'https://www.helloasso.com/associations/the-crew-orchies/evenements/flashback-party-annees-80-the-crew-orchies'}];
+function openWorkshops(){
+drawer.style.display='block';title.textContent='ATELIERS & ÉVÉNEMENTS';
+body.innerHTML='<p class="muted">Les mêmes affiches que sur ton site The Crew Orchies. Les réservations restent gérées par HelloAsso.</p><div class="crew-workshops">'+
+workshops.map(w=>'<article class="crew-workshop"><img src="'+w.image+'" alt="Affiche '+w.title+'" loading="lazy"><div class="workshop-content"><h3>'+w.title+'</h3><p class="workshop-meta">'+w.date+' · '+w.hours+'<br>'+w.audience+' · '+w.price+'</p><a href="'+w.url+'" target="_blank" rel="noopener noreferrer">Billetterie HelloAsso ↗</a></div></article>').join('')+
+'<article class="crew-workshop crew-workshop-full"><div class="workshop-content"><h3>K-POP HUNTERS</h3><p class="workshop-meta">7 novembre 2026 · 18h30–19h30 · Enfants du groupe The Crew</p><p>Atelier avec les enfants du Crew. Aucune affiche n’est actuellement intégrée à la page des événements du site.</p><a class="workshop-site" href="https://thecreworchies.blog/ateliers-evenements/" target="_blank" rel="noopener noreferrer">Voir sur le site ↗</a></div></article></div>'+
+'<p class="crew-workshop-info">Images reprises directement du site WordPress. Les places et ventes en temps réel restent consultables dans HelloAsso.</p><button type="button" id="crew-workshop-legacy" class="crew-workshop-more">Gestion détaillée des événements →</button>';
+document.getElementById('crew-workshop-legacy').onclick=()=>{const link=document.querySelector('.nav [data-view="events"]');if(link){passthrough=true;link.click();passthrough=false}};
+}
+document.addEventListener('click',e=>{
+if(passthrough)return;
+const link=e.target.closest('[data-view="events"],[data-crew-go="events"]');
+if(!link)return;e.preventDefault();e.stopImmediatePropagation();openWorkshops();
+},true);
+})();
 </script></body></html>
