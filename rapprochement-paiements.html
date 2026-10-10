@@ -31,6 +31,9 @@ table{width:100%;border-collapse:collapse;min-width:900px}th,td{text-align:left;
 <div class="metric"><span class="muted">Versements à rapprocher</span><strong id="attention">—</strong><small class="muted">Statuts non suivis ou à vérifier</small></div>
 </div>
 <div class="panel"><div class="inline"><h2>Registre des paiements</h2><label style="min-width:230px">Filtrer<input id="filter" placeholder="Nom, référence, statut"></label></div><div class="scroll"><table><thead><tr><th>Personne inscrite</th><th>Payeur</th><th>Paiement</th><th>Versement</th><th>Preuves</th><th>Actions bancaires</th></tr></thead><tbody id="rows"><tr><td colspan="6" class="muted">Connecte-toi pour charger le registre.</td></tr></tbody></table></div></div>
+<div class="panel"><h2>Flux HelloAsso à rapprocher <span class="pill" id="queueCount">—</span></h2>
+<p class="muted">Ces événements techniques n'ont pas encore de lien direct vers une inscription. Certains paiements peuvent déjà être affectés dans les cotisations : ne les comptabilise pas une seconde fois.</p>
+<div id="queue" class="scroll"></div></div>
 <p class="muted" id="message" aria-live="polite"></p>
 </section></main>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
@@ -38,11 +41,31 @@ table{width:100%;border-collapse:collapse;min-width:900px}th,td{text-align:left;
 const $=id=>document.getElementById(id);
 const sb=window.supabase?.createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy");
 const base="https://voytsqyorhoveurnguxn.supabase.co/functions/v1/";
-let allRows=[],currentUser=null;
+let allRows=[],pendingEvents=[],currentUser=null;
 const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const eur=v=>(Number(v)||0).toLocaleString("fr-FR",{style:"currency",currency:"EUR"});
 const date=x=>x?new Date(x).toLocaleDateString("fr-FR"):"—";
 function receiptUrl(v){try{const u=new URL(v);return u.protocol==="https:"&&u.hostname==="www.helloasso.com"?u.href:null}catch{return null}}
+
+function showPending(){
+ const zone=$('queue');zone.replaceChildren();
+ if(!pendingEvents.length){zone.textContent="Aucun événement en attente signalé.";return}
+ const table=document.createElement("table");
+ const head=document.createElement("thead");const tr=document.createElement("tr");
+ for(const label of ["Référence","Payeur","Montant","État HelloAsso","Situation du rapprochement"]){
+ const th=document.createElement("th");th.textContent=label;tr.append(th)
+ }
+ head.append(tr);table.append(head);
+ const body=document.createElement("tbody");
+ for(const row of pendingEvents){
+  const tr=document.createElement("tr");
+  const vals=[row.reference,row.payer_name||"—",eur(row.amount),row.provider_state||"À vérifier",
+  row.already_allocated?"Cotisation déjà enregistrée : vérifier le lien":"Aucun paiement affecté : examiner le dossier"];
+  for(const value of vals){const cell=document.createElement("td");cell.textContent=String(value||"—");tr.append(cell)}
+  body.append(tr);
+ }
+ table.append(body);zone.append(table)
+}
 function showRows(){
  const term=$('filter').value.toLocaleLowerCase("fr").trim();
  const rows=allRows.filter(p=>[p.member_name,p.payer_name,p.external_ref,p.payout_status,p.provider].some(x=>String(x||"").toLocaleLowerCase("fr").includes(term)));
@@ -92,19 +115,19 @@ async function load(){
  $('message').textContent="Lecture du registre…";
  try{const d=await protectedCall(base+"crew-dashboard-details?view=payments_audit");
    if(!Array.isArray(d.rows))throw Error("Format de registre inattendu");
-   allRows=d.rows;
+   allRows=d.rows;pendingEvents=Array.isArray(d.awaiting)?d.awaiting:[];$('queueCount').textContent=d.queue_unavailable?'Indisponible':pendingEvents.length+' événement(s)';
    $('sum').textContent=eur(allRows.filter(p=>p.status==="paid").reduce((n,p)=>n+Number(p.amount||0),0));
    $('count').textContent=String(allRows.length);
    $('attention').textContent=String(allRows.filter(p=>p.provider==="helloasso"&&p.payout_status!=="verse").length);
    $('stamp').textContent="Actualisé : "+new Date().toLocaleString("fr-FR");
    $('message').textContent="Paiements de cotisation rattachés aux adhésions. Aucun virement ajouté au chiffre d'affaires.";
-   showRows();
+   showRows();showPending();
  }catch(e){$('message').textContent="Impossible de charger les paiements : "+e.message;}
 }
 async function enter(){
  const {data:{user}}=await sb.auth.getUser();currentUser=user;
  $('authBox').style.display=user?"none":"block";$('dashboard').style.display=user?"block":"none";
- if(user)await load();else{allRows=[];$('rows').replaceChildren()}
+ if(user)await load();else{allRows=[];pendingEvents=[];$('rows').replaceChildren();$('queue').replaceChildren()}
 }
 if(!sb){$('authMsg').textContent="Chargement de la connexion impossible.";return}
 $('login').onclick=async()=>{const {error}=await sb.auth.signInWithPassword({email:$('email').value,password:$('password').value});$('authMsg').textContent=error?error.message:"";if(!error)await enter()};
