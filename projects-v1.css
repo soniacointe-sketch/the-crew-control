@@ -1,0 +1,57 @@
+/* THE CREW CONTROL — CREATION & PROJETS */
+.crew-projects-home{border:1px solid #5c4928;border-radius:16px;background:linear-gradient(145deg,#14130f,#090909);padding:19px;margin:16px 0;max-width:1600px}
+.crew-projects-header{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}
+.crew-projects-header h2{color:#f4ead3;font-size:21px;margin:0}.crew-projects-header p{color:#a9a49c;font-size:12px;margin:6px 0 0}
+.crew-projects-btn{padding:11px 15px;border-radius:10px;background:#d8b45a;color:#111;border:0;font-weight:800;cursor:pointer}
+.crew-projects-btn:hover,.crew-projects-btn:focus-visible{background:#f3d48e}
+.crew-projects-btn-secondary{padding:11px 15px;border-radius:10px;border:1px solid #8d7441;background:#241e14;color:#f1d38b;cursor:pointer}
+.crew-projects-cover-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.crew-projects-cover-card{background:#121212;border:1px solid #4c402c;border-radius:14px;overflow:hidden;min-width:0}
+.crew-projects-cover-card img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#262117}
+.crew-projects-cover-body{padding:14px}
+.crew-projects-cover-card h3{color:#fff;font-size:16px;margin:5px 0 8px}
+.crew-projects-cover-card p{color:#b7b3aa;font-size:12px;line-height:1.5;margin:7px 0}
+.crew-projects-cover-card button{font-size:12px;width:100%;padding:10px 12px;border-radius:8px;border:1px solid #8c7342;background:#292217;color:#f5d992;cursor:pointer;font-weight:bold}
+.crew-proj-dashboard{color:#f5eee0;max-width:1240px;margin:auto}
+.crew-proj-banner{display:flex;align-items:center;gap:12px;justify-content:space-between;flex-wrap:wrap;margin:0 0 18px}
+.crew-proj-banner h3{font:28px Georgia,serif;color:#f3d18a;margin:0 0 4px}
+.crew-proj-banner p{color:#aaa;font-size:13px;margin:0}
+.crew-proj-filters{display:flex;gap:7px;flex-wrap:wrap;margin:15px 0}
+.crew-proj-filters button{padding:10px 12px;background:#171715;border:1px solid #51452e;border-radius:30px;color:#dbceae;cursor:pointer}
+.crew-proj-filters button.active{background:#d8b45a;color:#111;border-color:#d8b45a;font-weight:800}
+.crew-proj-toolbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.crew-proj-search{flex:1;min-width:200px;border:1px solid #5a4b31;background:#191919;color:#fff;border-radius:10px;padding:13px;font-size:16px}
+.crew-proj-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.crew-proj-card{border:1px solid #56472f;border-radius:15px;overflow:hidden;background:#111;display:grid;grid-template-columns:36% 1fr;min-width:0}
+.crew-proj-card img{width:100%;height:100%;object-fit:cover;background:#251f17;min-height:225px}
+.crew-proj-card-content{padding:16px;min-width:0}
+.crew-proj-card h4{color:#faf5ea;margin:9px 0 7px;font-size:19px}
+.crew-proj-card p{color:#bcb6a9;font-size:13px;line-height:1.5;margin:8px 0}
+.crew-proj-meta{display:flex;flex-wrap:wrap;gap:7px}
+.crew-proj-badge{border:1px solid #554629;background:#272118;color:#e4c57e;padding:4px 8px;border-radius:22px;font-size:11px}
+.crew-proj-badge.priority-high{border-color:#a45945;color:#ffc3a3}
+.crew-proj-bar{height:8px;background:#34322c;border-radius:30px;overflow:hidden;margin:11px 0}
+.crew-proj-bar b{display:block;background:linear-gradient(90deg,#bd8f36,#f5d482);height:100%}
+.crew-proj-card button{border:0;background:#d8b45a;color:#111;font-weight:800;padding:10px 14px;border-radius:9px;cursor:pointer}
+.crew-proj-note{font-size:12px;color:#bcb5a5;margin:12px 0}
+.crew-proj-detail{max-width:900px;margin:0 auto;color:#f6f0e7}
+.crew-proj-detail-hero{width:100%;max-height:275px;object-fit:cover;border-radius:14px;border:1px solid #65502d;margin:10px 0 17px}
+.crew-proj-detail h3{font:28px Georgia,serif;color:#f5d58c;margin:12px 0}
+.crew-proj-detail p{color:#bcb5a5;line-height:1.6}
+.crew-proj-detail-panel{background:#171715;border:1px solid #50432e;border-radius:14px;padding:18px;margin:14px 0}
+.crew-proj-detail-panel h4{font-size:18px;margin:0 0 12px;color:#f4deb2}
+.crew-proj-step{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #34312d}
+.crew-proj-step:last-child{border-bottom:0}.crew-proj-step input{width:19px;height:19px;accent-color:#d8b45a;cursor:pointer}
+.crew-proj-step span{flex:1}.crew-proj-step .done{text-decoration:line-through;color:#96928a}
+.crew-proj-form{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.crew-proj-form label{display:grid;gap:6px;color:#e8d9b7;font-size:12px}
+.crew-proj-form input,.crew-proj-form select,.crew-proj-form textarea{background:#121210;border:1px solid #685737;color:#faf8f2;border-radius:9px;padding:12px;min-width:0;width:100%;font-size:15px}
+.crew-proj-form .full{grid-column:1/-1}
+.crew-proj-form textarea{min-height:86px}
+.crew-proj-step-form{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0 0}
+.crew-proj-step-form input{flex:1;min-width:220px;background:#121210;border:1px solid #635130;border-radius:9px;padding:12px;color:#fff;font-size:15px}
+.crew-proj-actions{display:flex;gap:9px;flex-wrap:wrap;margin:15px 0}
+.crew-proj-message{color:#e6c782;font-size:13px;min-height:20px;margin-top:8px}
+@media(max-width:960px){.crew-proj-grid{grid-template-columns:1fr}}
+@media(max-width:650px){.crew-projects-cover-grid{grid-template-columns:1fr 1fr}.crew-projects-home{padding:12px}.crew-proj-card{grid-template-columns:1fr}.crew-proj-card img{height:155px;min-height:0}.crew-proj-form{grid-template-columns:1fr}.crew-proj-form .full{grid-column:1}.crew-proj-detail-panel{padding:13px}}
+@media(max-width:430px){.crew-projects-cover-grid{grid-template-columns:1fr}.crew-projects-cover-card img{max-height:170px}.crew-proj-card-content{padding:12px}}
