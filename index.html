@@ -200,12 +200,12 @@ field('Responsable légal',x.guardian_name||x.parent_name||x.legal_guardian_name
 field('Téléphone',phone,phone?'tel:'+safeTel(phone):null)+
 field('E-mail',mail,mail&&/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail)?'mailto:'+encodeURIComponent(mail):null)+
 field('Statut adhésion',x.registration_status||x.membership_status||x.status)+
-field('Cotisation',x.membership_fee??x.fee_amount??x.fee)+
+field('Cotisation attendue (€)',x.amount_expected??x.membership_fee??x.fee_amount??x.fee)+field('Paiements vérifiés (€)',x.amount_paid??x.verified_paid)+field('Reste à régler (€)',((x.amount_expected??x.membership_fee??x.fee_amount??x.fee)!=null&&(x.amount_paid??x.verified_paid)!=null)?Math.max(0,Number(x.amount_expected??x.membership_fee??x.fee_amount??x.fee)-Number(x.amount_paid??x.verified_paid)).toFixed(2):null)+
 field('Paiement',status)+
 field('Présences',attendance)+
 field('Date inscription',x.submitted_at?new Date(x.submitted_at).toLocaleDateString('fr-FR'):x.registration_date)+
 field('Formule',x.membership_type||x.price_type)+
-'</div><p class="muted" style="margin-top:14px">Les champs sans données vérifiées restent « Non renseigné ». Aucun paiement ni pointage n’est modifié depuis cette fiche.</p>';
+'</div><p class="muted" style="margin-top:14px">Les champs sans données vérifiées restent « Non renseigné ». Les montants ne sont affichés que si le suivi les fournit. Aucun paiement ni pointage n’est modifié depuis cette fiche.</p>';
 card.hidden=false;root.querySelectorAll('.crew-member-row').forEach(a=>a.hidden=true);const intro=root.querySelector('.crew-member-intro');if(intro)intro.hidden=true;
 card.querySelector('#crew-member-back').onclick=()=>{card.hidden=true;root.querySelectorAll('.crew-member-row').forEach(a=>a.hidden=false);if(intro)intro.hidden=false};
 card.scrollIntoView({block:'start',behavior:'smooth'});
