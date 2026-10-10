@@ -70,7 +70,7 @@ document.querySelectorAll("[data-view]").forEach(a=>a.addEventListener("click",a
 if(v==="preregistrations"){
  body.innerHTML="Chargement des préinscriptions…";
  try{
-  const d=await privateDetail("preregistrations");
+  const d=await privateDetail("preregistrations");window.crewPreregRows=d;
   body.innerHTML='<div class="panel"><h3>PERSONNES PRÉINSCRITES</h3>'+(d.map(x=>'<div class="item" style="align-items:flex-start"><div class="grow"><b>'+txt(x.first_name)+' '+txt(x.last_name)+'</b><div class="muted">'+txt(x.group_code||"—")+' · '+fdate(x.submitted_at)+'</div><div style="margin-top:5px">'+contactLine(x)+'</div>'+(x.guardian_name?'<div class="muted">Responsable : '+txt(x.guardian_name)+'</div>':'')+'</div><span class="pill">'+txt(x.status||"—")+'</span></div>').join("")||'<div class="muted">Aucune préinscription.</div>')+'</div>';
  }catch(e){body.innerHTML=e.message==="LOGIN_REQUIRED"?"<b>Connecte-toi avec ESPACE SONIA pour voir les noms, téléphones et e-mails.</b>":"Erreur de chargement."}
  return
@@ -210,5 +210,32 @@ card.hidden=false;root.querySelectorAll('.crew-member-row').forEach(a=>a.hidden=
 card.querySelector('#crew-member-back').onclick=()=>{card.hidden=true;root.querySelectorAll('.crew-member-row').forEach(a=>a.hidden=false);if(intro)intro.hidden=false};
 card.scrollIntoView({block:'start',behavior:'smooth'});
 });
+})();
+</script><style id="crew-entry-style">.crew-entry-btn{background:#d8b45a;border:0;color:#111;font-weight:800;padding:12px 16px;border-radius:9px;cursor:pointer;margin:8px 8px 8px 0}.crew-entry-form{margin:15px 0;padding:17px;border:1px solid #66552e;border-radius:12px;background:#141414}.crew-entry-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.crew-entry-fields label{display:grid;gap:5px;color:#d9c9a5;font-size:13px}.crew-entry-fields input{background:#222;border:1px solid #555;border-radius:8px;color:white;padding:11px;min-width:0;font-size:16px}.crew-entry-msg{color:#f3d98a;margin:9px 0}@media(max-width:600px){.crew-entry-fields{grid-template-columns:1fr}}</style>
+<script id="crew-entry-script">
+(function(){
+const body=document.getElementById('drawerBody');if(!body)return;
+const endpoint='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-member-edit';
+const fields=[['first_name','Prénom'],['last_name','Nom'],['birth_date','Date de naissance'],['phone','Téléphone'],['email','E-mail'],['guardian_name','Responsable légal'],['guardian_phone','Téléphone responsable'],['guardian_email','E-mail responsable']];
+const esc=v=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','&#39;':'&#39;'}[c]));
+async function send(data){const {data:{session}}=await sb.auth.getSession();if(!session)throw Error('Connecte-toi pour enregistrer.');const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+session.access_token},body:JSON.stringify(data)});const d=await r.json();if(!r.ok)throw Error(d.error||'Enregistrement impossible');return d}
+function editor(current={},action='create_member'){
+ const form=document.createElement('form');form.className='crew-entry-form';
+ form.innerHTML='<h3>'+(action==='create_member'?'Nouvel adhérent':'Modifier la fiche')+'</h3><div class="crew-entry-fields">'+fields.map(([k,label])=>'<label>'+label+'<input name="'+k+'" type="'+(k==='birth_date'?'date':k.includes('email')?'email':'text')+'" value="'+esc(current[k]||'')+'"></label>').join('')+'</div><button class="crew-entry-btn" type="submit">Enregistrer</button><button class="crew-entry-btn" type="button" data-cancel>Annuler</button><p class="crew-entry-msg" role="status"></p>';
+ form.querySelector('[data-cancel]').onclick=()=>form.remove();
+ form.onsubmit=async e=>{e.preventDefault();const button=form.querySelector('[type=submit]'),msg=form.querySelector('.crew-entry-msg');button.disabled=true;msg.textContent='Enregistrement…';try{const values=Object.fromEntries(new FormData(form).entries());await send({action,...values,...(action==='update_member'?{id:current.id}:{})});msg.textContent='Enregistré ✓';setTimeout(()=>document.querySelector('.nav [data-view="members"]')?.click(),400)}catch(err){msg.textContent=err.message;button.disabled=false}};
+ return form;
+}
+const observer=new MutationObserver(()=>{const drawer=document.getElementById('drawer');if(drawer?.style.display==='none')return;
+ const title=document.getElementById('drawerTitle')?.textContent||'';
+ if(title==='ADHÉRENTS'&&body.querySelector('.crew-member-intro')&&!body.querySelector('#crew-add-member')){
+ const btn=document.createElement('button');btn.id='crew-add-member';btn.className='crew-entry-btn';btn.textContent='+ Ajouter un adhérent';btn.onclick=()=>{body.querySelector('#crew-new-member-form')?.remove();const wrap=document.createElement('div');wrap.id='crew-new-member-form';wrap.appendChild(editor());btn.after(wrap)};body.prepend(btn);
+ }
+ if(title==='PRÉINSCRIPTIONS'&&!body.querySelector('.crew-convert')){
+ const items=[...body.querySelectorAll('.panel .item')];items.forEach((el,i)=>{const data=window.crewPreregRows?.[i];if(!data?.id)return;const btn=document.createElement('button');btn.className='crew-entry-btn crew-convert';btn.textContent='→ Passer en adhérent';btn.onclick=async()=>{if(!confirm('Créer une fiche adhérent en attente de finalisation ? Aucun paiement ne sera ajouté.'))return;btn.disabled=true;try{await send({action:'convert_preregistration',id:data.id});alert('Fiche adhérent créée ✓');document.querySelector('.nav [data-view="members"]')?.click()}catch(err){alert(err.message);btn.disabled=false}};el.appendChild(btn)});
+ }
+});
+observer.observe(body,{childList:true,subtree:true});
+body.addEventListener('click',e=>{const back=e.target.closest('#crew-member-back');if(back)return;const btn=e.target.closest('[data-member-index]');if(!btn)return;const current=window.crewMemberRows?.[Number(btn.dataset.memberIndex)];if(!current?.id)return;requestAnimationFrame(()=>{const card=body.querySelector('#crew-member-card');if(!card||card.querySelector('#crew-edit-member'))return;const edit=document.createElement('button');edit.id='crew-edit-member';edit.className='crew-entry-btn';edit.textContent='✎ Modifier les informations';edit.onclick=()=>{card.querySelector('.crew-entry-form')?.remove();card.appendChild(editor(current,'update_member'))};card.prepend(edit)})});
 })();
 </script></body></html>
