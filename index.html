@@ -431,4 +431,11 @@ const observer=new MutationObserver(updateMetrics);const read=document.getElemen
 updateMetrics();loadMembers();
 sb.auth.onAuthStateChange((event,session)=>{if(session&&event==='SIGNED_IN')loadMembers()});
 })();
+</script><script id="crew-clean-home-v13-fix">
+(function(){
+const old=document.querySelector('.crew-advanced'),main=document.querySelector('.main');
+if(old&&main){
+for(const id of ['authBox','drawer']){const node=document.getElementById(id);if(node&&old.contains(node))main.appendChild(node);}
+}
+})();
 </script></body></html>
