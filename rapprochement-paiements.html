@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#090909"><title>The Crew Control · Rapprochement des paiements</title>
+<style>
+:root{--gold:#e1bf69;--bg:#08090a;--panel:#121417;--line:#363330;--muted:#b3b1ad;--green:#8de0b3;--red:#ed9999}*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:#f8f5f0;font:14px/1.55 system-ui,Arial,sans-serif}
+main{max-width:1200px;margin:auto;padding:24px}a{color:var(--gold)}h1{font:clamp(29px,5vw,42px) Georgia,serif;color:var(--gold);margin:4px 0}h2{font:22px Georgia,serif;color:var(--gold)}
+.brand{font:12px Georgia;letter-spacing:.28em;color:var(--muted)}.panel{border:1px solid var(--line);background:var(--panel);border-radius:13px;padding:20px;margin-top:16px}
+.btn{background:var(--gold);color:#151515;border:0;border-radius:8px;padding:11px 15px;font-weight:800;cursor:pointer}
+.btn.alt{color:white;background:#2b2d30;border:1px solid #54514a}.btn:disabled{opacity:.55;cursor:default}
+input,select{border:1px solid #56514a;border-radius:8px;padding:10px;background:#0c0e10;color:#fff;width:100%;font:inherit}
+label{font-size:12px;display:block;color:#d4ccc0}label>input,label>select{margin-top:5px}
+.inline{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.metric{border:1px solid var(--line);border-radius:10px;padding:15px;background:#0b0d10}.metric strong{display:block;font-size:28px;color:var(--gold)}
+.muted{color:var(--muted)}.pill{display:inline-block;font-size:12px;border:1px solid #676051;border-radius:30px;padding:4px 9px}
+.green{color:var(--green)}.alert{color:#f2c17c}.notice{padding:12px 15px;border-left:3px solid var(--gold);background:#272218;margin:16px 0}
+table{width:100%;border-collapse:collapse;min-width:900px}th,td{text-align:left;padding:12px;border-bottom:1px solid #303137;vertical-align:top}th{font-size:12px;color:var(--muted)}
+.scroll{overflow-x:auto}.actions{display:grid;grid-template-columns:180px 160px 1fr;gap:8px;align-items:end}.actions button{grid-column:1/-1}
+#dashboard{display:none}#authBox{max-width:460px;margin:40px auto}.flag{border-left:3px solid #e1aa64;padding:8px;background:#292315;margin:8px 0;font-size:12px}
+@media(max-width:670px){main{padding:14px}.grid{grid-template-columns:1fr}.actions{grid-template-columns:1fr}table{min-width:780px}}
+</style></head><body><main>
+<a href="./">← The Crew Control</a><div class="brand" style="margin-top:22px">THE CREW ORCHIES · SONIA OS</div>
+<div class="inline"><div><h1>Paiements & rapprochements</h1><p class="muted">HelloAsso · Cotisations · Versements bancaires · Attestations</p></div><a href="sonia-os.html">SONIA OS Command Center</a></div>
+<div class="notice">Un paiement peut être <b>payé par l'adhérent</b> mais <b>non rapproché sur le compte bancaire</b>. Les virements ne créent jamais de nouvelle vente. Les données sont affichées uniquement après identification administrateur.</div>
+<section id="authBox" class="panel"><h2>Espace privé</h2><p>Identifiants habituels The Crew Control</p><label>E-mail<input type="email" id="email" autocomplete="username"></label><label style="margin-top:12px">Mot de passe<input id="password" type="password" autocomplete="current-password"></label><button class="btn" id="login" style="margin-top:14px">Se connecter</button><p id="authMsg" class="muted"></p></section>
+<section id="dashboard">
+<div class="inline" style="margin:15px 0"><div><button class="btn" id="reload">Actualiser les paiements</button> <span class="muted" id="stamp"></span></div><button class="btn alt" id="logout">Déconnexion</button></div>
+<div class="grid">
+<div class="metric"><span class="muted">Cotisations enregistrées comme payées</span><strong id="sum">—</strong><small class="muted">Somme des affectations par adhésion, pas des virements</small></div>
+<div class="metric"><span class="muted">Lignes de paiement</span><strong id="count">—</strong><small class="muted">Sans création de doublon HelloAsso</small></div>
+<div class="metric"><span class="muted">Versements à rapprocher</span><strong id="attention">—</strong><small class="muted">Statuts non suivis ou à vérifier</small></div>
+</div>
+<div class="panel"><div class="inline"><h2>Registre des paiements</h2><label style="min-width:230px">Filtrer<input id="filter" placeholder="Nom, référence, statut"></label></div><div class="scroll"><table><thead><tr><th>Personne inscrite</th><th>Payeur</th><th>Paiement</th><th>Versement</th><th>Preuves</th><th>Actions bancaires</th></tr></thead><tbody id="rows"><tr><td colspan="6" class="muted">Connecte-toi pour charger le registre.</td></tr></tbody></table></div></div>
+<p class="muted" id="message" aria-live="polite"></p>
+</section></main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
+(()=>{"use strict";
+const $=id=>document.getElementById(id);
+const sb=window.supabase?.createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy");
+const base="https://voytsqyorhoveurnguxn.supabase.co/functions/v1/";
+let allRows=[],currentUser=null;
+const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const eur=v=>(Number(v)||0).toLocaleString("fr-FR",{style:"currency",currency:"EUR"});
+const date=x=>x?new Date(x).toLocaleDateString("fr-FR"):"—";
+function receiptUrl(v){try{const u=new URL(v);return u.protocol==="https:"&&u.hostname==="www.helloasso.com"?u.href:null}catch{return null}}
+function showRows(){
+ const term=$('filter').value.toLocaleLowerCase("fr").trim();
+ const rows=allRows.filter(p=>[p.member_name,p.payer_name,p.external_ref,p.payout_status,p.provider].some(x=>String(x||"").toLocaleLowerCase("fr").includes(term)));
+ const body=$('rows');body.replaceChildren();
+ if(!rows.length){const tr=document.createElement("tr"),td=document.createElement("td");td.colSpan=6;td.textContent="Aucun paiement correspondant.";tr.append(td);body.append(tr);return}
+ for(const p of rows){
+  const tr=document.createElement("tr");
+  const person=document.createElement("td");person.innerHTML="<b>"+esc(p.member_name||"À rapprocher")+"</b><div class='muted'>"+esc(p.plan||"")+" · "+esc(p.season||"")+"</div>";
+  const payer=document.createElement("td");payer.textContent=p.payer_name||p.guardian_name||"Non renseigné";
+  const payment=document.createElement("td");payment.innerHTML="<strong>"+eur(p.amount)+"</strong><div class='green'>"+(p.status==="paid"?"Payé":esc(p.status||"—"))+"</div><div class='muted'>"+date(p.paid_at)+"</div><div class='muted'>"+esc(p.provider||"")+" n° "+esc(p.external_ref||"—")+"</div>";
+  const payout=document.createElement("td");
+  payout.innerHTML="<span class='pill "+(p.payout_status==="verse"?"green":"alert")+"'>"+esc(p.payout_status==="verse"?"Versé et confirmé":p.payout_status==="non_verse"?"Non versé confirmé":p.payout_status==="a_verifier"?"À vérifier":"Non suivi")+"</span>";
+  if(p.cashout_provider&&p.cashout_manual&&p.cashout_provider.toLowerCase().includes("trans")&&p.cashout_manual.toLowerCase().includes("non vers")){
+   const warn=document.createElement("div");warn.className="flag";warn.textContent="Écart de statut : webhook « "+p.cashout_provider+" », fiche consultée « "+p.cashout_manual+" ». Vérifier le relevé bancaire.";payout.append(warn);
+  }
+  if(p.bank_received_at){const d=document.createElement("div");d.className="muted";d.textContent="Banque : "+date(p.bank_received_at);payout.append(d)}
+  const proof=document.createElement("td");const url=receiptUrl(p.receipt_url);
+  if(url){const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";a.textContent="Attestation HelloAsso";proof.append(a)}else proof.textContent="Non disponible";
+  if(p.order_ref){proof.append(document.createElement("div"));const x=document.createElement("small");x.textContent="Commande "+p.order_ref;proof.append(x)}
+  const actions=document.createElement("td");
+  if(p.provider==="helloasso"&&/^\d{6,14}$/.test(p.external_ref||"")){
+   const form=document.createElement("div");form.className="actions";
+   const sel=document.createElement("select");for(const [v,l] of [["a_verifier","À vérifier"],["non_verse","Non versé confirmé"],["verse","Versé (banque)"]]){let o=document.createElement("option");o.value=v;o.textContent=l;sel.append(o)}sel.value=["a_verifier","non_verse","verse"].includes(p.payout_status)?p.payout_status:"a_verifier";
+   const bankDate=document.createElement("input");bankDate.type="date";bankDate.value=p.bank_received_at?String(p.bank_received_at).slice(0,10):"";
+   const reference=document.createElement("input");reference.type="text";reference.placeholder="Référence bancaire";reference.maxLength=120;reference.value=p.bank_reference||"";
+   const confirmBox=document.createElement("label");confirmBox.style.cssText="grid-column:1/-1;display:flex;gap:8px;align-items:center";const check=document.createElement("input");check.type="checkbox";check.style.width="auto";confirmBox.append(check,document.createTextNode("Je confirme avoir vérifié le relevé bancaire (obligatoire pour « Versé »)"));
+   const button=document.createElement("button");button.className="btn alt";button.textContent="Enregistrer le rapprochement";
+   button.onclick=async()=>{const status=sel.value;if(status==="verse"&&(!bankDate.value||!check.checked)){alert("Pour confirmer le versement, indique la date bancaire et coche la confirmation.");return}
+    if(!confirm("Enregistrer ce statut bancaire pour le paiement n° "+p.external_ref+" ?"))return;
+    button.disabled=true;
+    try{const out=await protectedCall(base+"crew-control-action",{method:"POST",body:JSON.stringify({action:"set_payout_status",payment_ref:p.external_ref,status,bank_received_on:bankDate.value,bank_reference:reference.value,bank_receipt_confirmed:check.checked})});$('message').textContent="Rapprochement enregistré : "+out.status+". Il ne modifie pas le montant de la vente.";await load()}catch(e){$('message').textContent="Erreur : "+e.message;button.disabled=false}
+   };
+   form.append(sel,bankDate,reference,confirmBox,button);actions.append(form);
+  }else actions.textContent="Sans action bancaire";
+  tr.append(person,payer,payment,payout,proof,actions);body.append(tr);
+ }
+}
+async function protectedCall(url,opts={}){
+ const {data:{session}}=await sb.auth.getSession();if(!session)throw Error("Session expirée");
+ const headers={"Authorization":"Bearer "+session.access_token,...(opts.method==="POST"?{"Content-Type":"application/json"}:{})};
+ const response=await fetch(url,{...opts,cache:"no-store",headers});
+ const json=await response.json().catch(()=>({}));
+ if(!response.ok)throw Error(json.error||"Accès refusé");
+ return json;
+}
+async function load(){
+ $('message').textContent="Lecture du registre…";
+ try{const d=await protectedCall(base+"crew-dashboard-details?view=payments_audit");
+   if(!Array.isArray(d.rows))throw Error("Format de registre inattendu");
+   allRows=d.rows;
+   $('sum').textContent=eur(allRows.filter(p=>p.status==="paid").reduce((n,p)=>n+Number(p.amount||0),0));
+   $('count').textContent=String(allRows.length);
+   $('attention').textContent=String(allRows.filter(p=>p.provider==="helloasso"&&p.payout_status!=="verse").length);
+   $('stamp').textContent="Actualisé : "+new Date().toLocaleString("fr-FR");
+   $('message').textContent="Paiements de cotisation rattachés aux adhésions. Aucun virement ajouté au chiffre d'affaires.";
+   showRows();
+ }catch(e){$('message').textContent="Impossible de charger les paiements : "+e.message;}
+}
+async function enter(){
+ const {data:{user}}=await sb.auth.getUser();currentUser=user;
+ $('authBox').style.display=user?"none":"block";$('dashboard').style.display=user?"block":"none";
+ if(user)await load();else{allRows=[];$('rows').replaceChildren()}
+}
+if(!sb){$('authMsg').textContent="Chargement de la connexion impossible.";return}
+$('login').onclick=async()=>{const {error}=await sb.auth.signInWithPassword({email:$('email').value,password:$('password').value});$('authMsg').textContent=error?error.message:"";if(!error)await enter()};
+$('reload').onclick=load;$('filter').oninput=showRows;
+$('logout').onclick=async()=>{await sb.auth.signOut();currentUser=null;await enter()};
+enter().catch(e=>{$('authMsg').textContent=e.message});
+})();
+</script></body></html>
