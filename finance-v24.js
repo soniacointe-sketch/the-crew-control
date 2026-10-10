@@ -84,9 +84,12 @@ function facts(){
  const budgets=state.budget.filter(x=>x.season===ss().season);
  const overBudget=budgets.filter(b=>b.kind==="expense"&&realIncome.filter(x=>x.kind==="expense"&&norm(x.category)===norm(b.category)).reduce((a,x)=>a+x.amount,0)>toNum(b.planned_amount));
  const opening=ss().opening_balance==null?null:Number(ss().opening_balance);
+ const openOn=date(ss().opening_date);
+ const afterOpening=openOn?realIncome.filter(x=>date(x.day)>=openOn):[];
+ const changeSinceOpening=afterOpening.reduce((a,x)=>a+(x.kind==="income"?x.amount:-x.amount),0);
  const bankNet=state.bank.filter(x=>amountInPeriod(x.movement_date)).reduce((a,x)=>a+(x.direction==="credit"?toNum(x.amount):-toNum(x.amount)),0);
  return {done,adhesions,ateliers,imported,manualIncome,spent,income,result,unpaid,missingDue,evidence,ticketToCheck,
- pendingIncome,pendingExpense,realIncome,category,budgets,overBudget,opening,closing:opening===null?null:opening+result,bankNet};
+ pendingIncome,pendingExpense,realIncome,category,budgets,overBudget,opening,closing:opening===null||!openOn?null:opening+changeSinceOpening,bankNet};
 }
 const card=(label,val,note="")=>'<div class="c24-stat"><small>'+E(label)+'</small><strong>'+E(val)+'</strong>'+(note?'<em>'+E(note)+'</em>':"")+'</div>';
 const wrap=(title,html,sub="")=>'<section class="c24-panel"><div class="c24-sectionhead"><div><h3>'+E(title)+'</h3>'+(sub?'<p>'+E(sub)+'</p>':"")+'</div></div>'+html+'</section>';
@@ -100,6 +103,7 @@ const actionButtons=(type,id)=>'<button type="button" data-edit="'+E(type)+'|'+E
 function alerts(f){
  const arr=[];
  if(f.opening===null)arr.push(["Solde initial absent","Renseigne le solde d'ouverture dans Paramètres."]);
+ if(f.opening!==null&&!ss().opening_date)arr.push(["Date du solde initial absente","Indique la date réelle du relevé d'ouverture."]);
  if(f.evidence.length)arr.push([f.evidence.length+" justificatif(s) à conserver","Vérifie les factures et reçus des dépenses."]);
  const still=state.members.filter(m=>m.amount_expected!=null&&toNum(m.amount_paid)+0.001<toNum(m.amount_expected));
  if(still.length)arr.push([still.length+" cotisation(s) en attente ou partielles",money(f.unpaid)+" restant à régler selon les fiches."]);
@@ -137,7 +141,7 @@ function settingsPage(f){
  textarea("note","Notes de trésorerie",p.note||"")+
  '</div><div class="c24-form-actions"><button class="c24-primary" type="submit">Enregistrer les paramètres</button></div><div class="c24-formmsg" aria-live="polite"></div></form>';
  return wrap("Paramètres de trésorerie",form,"Tout reste modifiable depuis le tableau de bord.")+
- '<div class="c24-notice">Le solde initial reste vide tant que tu ne l’as pas saisi. Le solde estimé ne remplace pas un relevé bancaire officiel.</div>';
+ '<div class="c24-notice">Le solde final estimé part du solde initial à la date indiquée et ajoute uniquement les écritures documentées depuis cette date. Il ne remplace pas un relevé bancaire officiel.</div>';
 }
 function input(name,label,type,value="",attrs=""){
  return '<label>'+E(label)+'<input name="'+E(name)+'" type="'+type+'" value="'+E(value)+'" '+attrs+'></label>';
@@ -281,7 +285,7 @@ function dashPage(f){
  const all=f.category("income"),exp=f.category("expense");
  return '<div class="c24-stats">'+card("Recettes",money(f.income))+card("Dépenses",money(f.spent))+card("Résultat",money(f.result))+card("Cotisations à recevoir",money(f.unpaid))+'</div>'+
  '<div class="c24-two">'+wrap("Répartition des recettes",categoryBars(all))+wrap("Répartition des dépenses",categoryBars(exp))+'</div>'+
- '<div class="c24-two">'+wrap("Alertes",reportAlerts(f))+wrap("Trésorerie",'<div class="c24-stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">'+card("Solde initial",f.opening===null?"À renseigner":money(f.opening))+card("Solde final estimé",f.closing===null?"À renseigner":money(f.closing))+'</div><p class="c24-muted">Les mouvements saisis du compte sont réservés au rapprochement et ne sont pas additionnés une seconde fois aux recettes.</p><button class="c24-secondary" data-open-bank>Voir les mouvements bancaires</button>')+'</div>';
+ '<div class="c24-two">'+wrap("Alertes",reportAlerts(f))+wrap("Trésorerie",'<div class="c24-stats" style="grid-template-columns:repeat(2,minmax(0,1fr))">'+card("Solde initial",f.opening===null?"À renseigner":money(f.opening))+card("Solde final estimé",f.closing===null?"À renseigner":money(f.closing))+'</div><p class="c24-muted">Le solde final prend en compte les écritures documentées depuis la date du solde initial. Les mouvements bancaires saisis servent uniquement au rapprochement et ne sont pas additionnés aux recettes.</p><button class="c24-secondary" data-open-bank>Voir les mouvements bancaires</button>')+'</div>';
 }
 function summaryPage(f){
  const season=ss().season,start=Number(season.slice(0,4))||2026;
@@ -336,7 +340,7 @@ function render(){
  const f=facts(),tab=state.active;
  const tabName=TABS.find(x=>x[0]===tab)?.[1]||(tab==="bank"?"Mouvements bancaires":"Accueil");
  root.innerHTML='<div class="c24-top"><div><div class="c24-overline">THE CREW · GESTION ASSOCIATIVE</div><h2>Argent · '+E(tabName)+'</h2><p>Suivi financier '+E(ss().season)+' — saisie directe, contrôle des documents et calculs automatiques</p></div>'+
- '<button data-reload type="button">↻ Actualiser</button></div>'+
+ '<div class="c24-form-actions"><button class="c24-secondary" data-csv type="button">↓ Export CSV</button><button data-reload type="button">↻ Actualiser</button></div></div>'+
  '<nav class="c24-nav" aria-label="Rubriques financières" role="tablist">'+TABS.map(([k,label])=>'<button type="button" role="tab" data-tab="'+k+'" aria-selected="'+String(k===tab)+'">'+E(label)+'</button>').join("")+'</nav>'+
  (state.errors.length?'<div class="c24-notice" role="alert">Certains services sont indisponibles : '+state.errors.map(E).join(" · ")+'</div>':"")+
  '<div class="c24-content">'+sectionFor(tab,f)+'</div>'+
