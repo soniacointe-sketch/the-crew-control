@@ -131,7 +131,7 @@ if(v==="funnel"){body.innerHTML="Chargement…";try{const d=await(await authFetc
 if(v==="planning"){body.innerHTML='<div class="panel"><h3>📅 Planning The Crew</h3><div class="item"><div class="grow"><b>Chaque samedi · KIDS</b><div class="muted">18h30–19h30 · Espace Marypomme</div></div><span class="pill">COURS</span></div><div class="item"><div class="grow"><b>Chaque samedi · ADOS & ADULTES</b><div class="muted">19h30–20h30 · Espace Marypomme</div></div><span class="pill">COURS</span></div><div class="item"><div class="grow"><b>17 octobre · Dance Party Latino</b><div class="muted">18h30–20h30 · 20 places · 8 €</div></div><span class="pill">ATELIER</span></div><div class="item"><div class="grow"><b>24 octobre · Flashback Party Années 80</b><div class="muted">18h30–20h30 · 20 places · 8 €</div></div><span class="pill">ATELIER</span></div><div class="item"><div class="grow"><b>31 octobre · Halloween</b><div class="muted">Thème / organisation à finaliser</div></div><span class="pill">À PRÉPARER</span></div></div>';return}if(v==="communication"){body.innerHTML='<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px"><a href="https://www.facebook.com/profile.php?id=61579960678499" target="_blank" rel="noopener" class="panel" style="text-decoration:none;color:white"><h3>ⓕ Facebook</h3><p class="muted">Page officielle The Crew Orchies</p></a><a href="https://wa.me/message/XKZXDT3PRWGQF1" target="_blank" rel="noopener" class="panel" style="text-decoration:none;color:white"><h3 style="color:#25D366">◉ WhatsApp</h3><p class="muted">Messagerie officielle</p></a><a href="https://whatsapp.com/channel/0029VbDPU2G9Gv7LVNGeEW3z" target="_blank" rel="noopener" class="panel" style="text-decoration:none;color:white"><h3>📣 Chaîne</h3><p class="muted">Annonces The Crew</p></a><a href="https://thecreworchies.blog" target="_blank" rel="noopener" class="panel" style="text-decoration:none;color:white"><h3 class="gold">⌂ Site</h3><p class="muted">thecreworchies.blog</p></a><a href="https://www.helloasso.com/associations/the-crew-orchies" target="_blank" rel="noopener" class="panel" style="text-decoration:none;color:white"><h3 class="gold">♥ HelloAsso</h3><p class="muted">Adhésions et événements</p></a><a href="https://www.instagram.com/thecreworchies/" target="_blank" rel="noopener" class="panel" style="text-decoration:none;color:white"><h3>◎ Instagram</h3><p class="muted">@thecreworchies · compte officiel</p></a></div>';return}if(v==="facebook"){body.innerHTML='<div style="display:grid;gap:14px"><div class="panel"><h3>ⓕ Facebook The Crew Orchies</h3><p class="muted">Ouvrir et gérer la page Facebook officielle.</p><a href="https://www.facebook.com/profile.php?id=61579960678499" target="_blank" rel="noopener" style="display:inline-block;background:#1877F2;color:white;text-decoration:none;font-weight:900;padding:13px 18px;border-radius:9px">OUVRIR FACEBOOK</a></div><div class="panel"><h3>📣 Communication</h3><p class="muted">Publications · événements · visibilité locale · messages.</p><span class="pill">THE CREW ORCHIES</span></div></div>';return}if(v==="whatsapp"){body.innerHTML='<div style="display:grid;gap:14px"><div class="panel"><h3>💬 Messagerie The Crew</h3><p class="muted">Ouvrir la conversation WhatsApp Business officielle.</p><a href="https://wa.me/message/XKZXDT3PRWGQF1" target="_blank" rel="noopener" style="display:inline-block;background:#25D366;color:#07150c;text-decoration:none;font-weight:900;padding:13px 18px;border-radius:9px">OUVRIR WHATSAPP</a></div><div class="panel"><h3>📣 Chaîne The Crew Orchies</h3><p class="muted">Actualités et annonces publiques.</p><a href="https://whatsapp.com/channel/0029VbDPU2G9Gv7LVNGeEW3z" target="_blank" rel="noopener" style="display:inline-block;border:1px solid #25D366;color:#25D366;text-decoration:none;font-weight:800;padding:12px 18px;border-radius:9px">OUVRIR LA CHAÎNE</a></div><div class="panel"><h3>⚙ API WhatsApp</h3><p><span class="warn">●</span> Connexion Meta à terminer</p><p class="muted">Les relances restent suivies dans Sonia OS.</p></div></div>';return}if(v==="system"){body.innerHTML='<div class="item"><b class="ok">● Supabase connecté</b></div><div class="item"><b class="ok">● HelloAsso import actif</b></div><div class="item"><b class="warn">● WhatsApp API à terminer</b></div>';return}
 try{const d=await privateDetail(v);
 if(v==="members"){
- const people=Array.isArray(d)?d:[];window.crewMemberRows=people;
+ const people=(Array.isArray(d)?d:[]).filter(x=>x.member_status!=="inactive");window.crewMemberRows=people;
  body.innerHTML='<div class="crew-member-intro">Sélectionne une personne pour voir sa fiche. Seules les informations enregistrées sont affichées.</div>'+
  (people.map((x,i)=>{const fullname=[x.first_name,x.last_name].filter(Boolean).join(' ')||x.name||'Adhérent';const group=x.group_code||x.group_name||'Groupe non renseigné';return '<button type="button" class="crew-member-row" data-member-index="'+i+'"><span><strong>'+txt(fullname)+'</strong><small>'+txt(group)+'</small></span><span aria-hidden="true">Voir la fiche →</span></button>'}).join('')||'<p class="muted">Aucun adhérent disponible.</p>')+
  '<section id="crew-member-card" hidden aria-live="polite"></section>';return;
@@ -437,5 +437,33 @@ const old=document.querySelector('.crew-advanced'),main=document.querySelector('
 if(old&&main){
 for(const id of ['authBox','drawer']){const node=document.getElementById(id);if(node&&old.contains(node))main.appendChild(node);}
 }
+})();
+</script><style id="crew-remove-style">.crew-remove-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid #51452a}.crew-remove-actions button{padding:12px;border-radius:9px;cursor:pointer;font-size:13px}.crew-remove-archive{border:1px solid #a27654!important;background:#221913!important;color:#f4c7a9!important}.crew-remove-back{background:#d8b45a!important;color:#111!important;font-weight:800}</style>
+<script id="crew-remove-script">
+(function(){
+const root=document.getElementById('drawerBody');if(!root)return;
+root.addEventListener('click',e=>{
+const el=e.target.closest('[data-member-index]');if(!el)return;
+const m=window.crewMemberRows?.[Number(el.dataset.memberIndex)];if(!m?.id)return;
+requestAnimationFrame(()=>{
+const card=root.querySelector('#crew-member-card');if(!card||card.querySelector('.crew-remove-actions'))return;
+const bar=document.createElement('div');bar.className='crew-remove-actions';
+const back=document.createElement('button');back.type='button';back.className='crew-remove-back';back.textContent='↩ Remettre en préinscription';
+const archive=document.createElement('button');archive.type='button';archive.className='crew-remove-archive';archive.textContent='Retirer des adhérents';
+bar.append(back,archive);card.appendChild(bar);
+async function submit(action,button){
+const name=[m.first_name,m.last_name].filter(Boolean).join(' ');
+const question=action==='archive'?'Retirer '+name+' de la liste des adhérents ? Sa fiche, ses paiements et son historique seront conservés.':'Remettre '+name+' dans les préinscriptions ? L’adhésion sera archivée et aucun paiement supprimé. Cette opération sera refusée si un paiement est lié.';
+if(!confirm(question))return;
+back.disabled=archive.disabled=true;const initial=button.textContent;button.textContent='Enregistrement…';
+try{const {data:{session}}=await sb.auth.getSession();if(!session)throw Error('Connexion requise');
+const r=await fetch('https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-member-remove',{method:'POST',headers:{'Authorization':'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify({action,id:m.id})});
+const d=await r.json();if(!r.ok)throw Error(d.error||'Opération impossible');alert(action==='archive'?'Adhérent retiré de la liste ✓':'Adhérent remis en préinscription ✓');
+document.querySelector('.nav [data-view="'+(action==='archive'?'members':'preregistrations')+'"]')?.click();
+}catch(err){alert(err.message);back.disabled=archive.disabled=false;button.textContent=initial;}
+}
+archive.onclick=()=>submit('archive',archive);back.onclick=()=>submit('return_prereg',back);
+});
+});
 })();
 </script></body></html>
