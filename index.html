@@ -318,6 +318,6 @@ roster.innerHTML=members.length?'<p class="muted">'+members.length+' personne(s)
 roster.querySelectorAll('[data-status]').forEach(b=>b.onclick=async()=>{const row=b.closest('[data-id]'),buttons=[...row.querySelectorAll('button')],msg=roster.querySelector('.crew-attendance-msg');buttons.forEach(x=>x.disabled=true);try{await call({action:'mark',session_id:id,member_id:row.dataset.id,status:b.dataset.status});buttons.forEach(x=>x.classList.toggle('selected',x===b));msg.textContent='Présence enregistrée ✓'}catch(err){msg.textContent=err.message}finally{buttons.forEach(x=>x.disabled=false)}});
 }catch(e){roster.textContent=e.message}};
 }
-document.addEventListener('click',e=>{const a=e.target.closest('[data-view="attendance"]');if(!a)return;setTimeout(setup,0)},true);
+document.addEventListener('click',e=>{const a=e.target.closest('[data-view="attendance"]');if(!a)return;e.preventDefault();e.stopImmediatePropagation();document.getElementById('drawer').style.display='block';document.getElementById('drawerTitle').textContent='PRÉSENCES';setup()},true);
 })();
 </script></body></html>
