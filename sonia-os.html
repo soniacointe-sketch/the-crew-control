@@ -44,29 +44,29 @@ document.getElementById("recordForm").onsubmit=e=>{e.preventDefault();const data
 document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;render()};
 async function cloudPull(){
  if(!currentUser)throw Error("Connexion requise");
- const {data,error}=await sb.from("sonia_command_records").select("id,module,payload").eq("owner_id",currentUser.id).limit(1000);
+ const {data,error}=await sb.from("sonia_command_records").select("id,module,payload,updated_at").eq("owner_id",currentUser.id).limit(1000);
  if(error)throw error;
  const next=Object.fromEntries(stores.map(n=>[n,[]]));
- for(const row of data||[]){if(next[row.module])next[row.module].push({...row.payload,id:row.id})}
+ for(const row of data||[]){if(next[row.module])next[row.module].push({...row.payload,id:row.id,_cloud_synced_at:row.updated_at})}
  if(!confirm("Charger "+(data||[]).length+" enregistrements depuis le cloud ? Cela remplacera les données locales de cet espace. Sauvegarde JSON conseillée avant."))return;
  for(const n of stores){db[n]=next[n];save(n)}render();alert("Données cloud chargées.");
 }
 async function cloudPush(){
  if(!currentUser)throw Error("Connexion requise");
- const {data:existing,error:err}=await sb.from("sonia_command_records").select("id,module").eq("owner_id",currentUser.id).limit(1000);
+ const {data:existing,error:err}=await sb.from("sonia_command_records").select("id,module,updated_at").eq("owner_id",currentUser.id).limit(1000);
  if(err)throw err;
  const count=stores.reduce((n,k)=>n+db[k].length,0);
  if(!confirm("Envoyer "+count+" enregistrements locaux au cloud ? Les éléments portant le même identifiant seront mis à jour. Les autres données cloud ne seront pas effacées."))return;
- const existingIds=new Set((existing||[]).map(x=>x.id));
+ const remoteMap=new Map((existing||[]).map(x=>[x.id,x])); const existingIds=new Set(remoteMap.keys());
  const updates=[],inserts=[];
  for(const mod of stores)for(const item of db[mod]){
  const id=/^[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(item.id||"")?item.id:crypto.randomUUID();
  item.id=id; const record={id,owner_id:currentUser.id,module:mod,payload:{...item,id},updated_at:new Date().toISOString()};
- (existingIds.has(id)?updates:inserts).push(record);
+ if(existingIds.has(id)){ const remote=remoteMap.get(id); if(item._cloud_synced_at && remote.updated_at && new Date(remote.updated_at).getTime()>new Date(item._cloud_synced_at).getTime()+1000){alert("Conflit de synchronisation : une version plus récente existe dans le cloud pour "+(item.name||item.label||id)+". Charge le cloud après avoir exporté une sauvegarde JSON.");return;} updates.push(record) }else inserts.push(record);
  }
  for(const rec of updates){const {error}=await sb.from("sonia_command_records").update({payload:rec.payload,updated_at:rec.updated_at}).eq("id",rec.id).eq("owner_id",currentUser.id);if(error)throw error;}
  for(let i=0;i<inserts.length;i+=100){const {error}=await sb.from("sonia_command_records").insert(inserts.slice(i,i+100));if(error)throw error;}
- for(const mod of stores)save(mod);alert("Synchronisation terminée : "+(updates.length+inserts.length)+" enregistrements envoyés.");
+ for(const mod of stores){for(const item of db[mod])item._cloud_synced_at=new Date().toISOString();save(mod)}alert("Synchronisation terminée : "+(updates.length+inserts.length)+" enregistrements envoyés.");
 }
 document.getElementById("cloudPull").onclick=async()=>{try{await cloudPull()}catch(e){alert("Chargement impossible : "+e.message)}};
 document.getElementById("cloudPush").onclick=async()=>{try{await cloudPush()}catch(e){alert("Envoi impossible : "+e.message)}};
