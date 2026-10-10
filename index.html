@@ -320,4 +320,23 @@ roster.querySelectorAll('[data-status]').forEach(b=>b.onclick=async()=>{const ro
 }
 document.addEventListener('click',e=>{const a=e.target.closest('[data-view="attendance"]');if(!a)return;e.preventDefault();e.stopImmediatePropagation();document.getElementById('drawer').style.display='block';document.getElementById('drawerTitle').textContent='PRÉSENCES';setup()},true);
 })();
+</script><style id="crew-member-history-style">.crew-history{margin-top:18px;padding:14px;background:#161616;border:1px solid #66532e;border-radius:12px}.crew-history h4{color:#e4c577;margin:0 0 12px}.crew-history-item{display:flex;justify-content:space-between;gap:10px;border-top:1px solid #38322a;padding:10px 0}.crew-history-meta{color:#aaa;font-size:12px}.crew-history-status{font-weight:bold}.crew-history-status.present{color:#78d4a1}.crew-history-status.absent{color:#ff9d87}</style>
+<script id="crew-member-history-script">
+(function(){
+const root=document.getElementById('drawerBody');if(!root)return;
+const endpoint='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-attendance-control';
+const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+async function api(b){const {data:{session}}=await sb.auth.getSession();if(!session)throw Error('Connexion requise');const r=await fetch(endpoint,{method:'POST',headers:{'Authorization':'Bearer '+session.access_token,'Content-Type':'application/json'},body:JSON.stringify(b)});const x=await r.json();if(!r.ok)throw Error(x.error||'Impossible de charger');return x}
+root.addEventListener('click',e=>{const row=e.target.closest('[data-member-index]');if(!row)return;const person=window.crewMemberRows?.[Number(row.dataset.memberIndex)];if(!person?.id)return;
+requestAnimationFrame(async()=>{
+const card=root.querySelector('#crew-member-card');if(!card||card.querySelector('.crew-history'))return;
+const panel=document.createElement('section');panel.className='crew-history';panel.innerHTML='<h4>Historique des présences</h4><p class="crew-history-msg">Recherche des séances…</p>';card.appendChild(panel);
+try{const sessions=(await api({action:'list'})).sessions||[];const rows=[];
+for(let i=0;i<sessions.length;i+=5){const batch=await Promise.allSettled(sessions.slice(i,i+5).map(async x=>({session:x,data:await api({action:'roster',session_id:x.id})})));for(const t of batch){if(t.status!=='fulfilled')continue;const match=(t.value.data.marks||[]).find(m=>m.member_id===person.id);if(match)rows.push({date:t.value.session.session_date,title:t.value.session.title||'Cours',status:match.status})}}
+rows.sort((a,b)=>String(b.date).localeCompare(String(a.date)));const present=rows.filter(x=>x.status==='present').length,absent=rows.filter(x=>x.status==='absent').length;
+panel.innerHTML='<h4>Historique des présences</h4><p>'+present+' présent(s) · '+absent+' absent(s) · '+rows.length+' séance(s) pointée(s)</p>'+(rows.map(x=>'<div class="crew-history-item"><span><strong>'+esc(x.title)+'</strong><div class="crew-history-meta">'+esc(x.date)+'</div></span><span class="crew-history-status '+(x.status==='present'?'present':'absent')+'">'+esc(x.status==='present'?'Présent':x.status==='absent'?'Absent':x.status)+'</span></div>').join('')||'<p class="muted">Aucune présence ou absence enregistrée pour les séances accessibles.</p>')+'<p class="crew-history-meta">Une séance non pointée n’est pas comptée comme une absence.</p>';
+}catch(err){panel.innerHTML='<h4>Historique des présences</h4><p>'+esc(err.message)+'</p>';}
+});
+});
+})();
 </script></body></html>
