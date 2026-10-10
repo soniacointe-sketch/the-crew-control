@@ -465,8 +465,8 @@ sb.auth.onAuthStateChange((event,session)=>{if(session&&event==='SIGNED_IN')load
 </script><script id="crew-clean-home-v13-fix">
 (function(){
 const old=document.querySelector('.crew-advanced'),main=document.querySelector('.main');
-if(old&&main){
-for(const id of ['authBox','drawer']){const node=document.getElementById(id);if(node&&old.contains(node))main.appendChild(node);}
+if(main){
+for(const id of ['authBox','drawer']){const node=document.getElementById(id);if(node){if(id==='authBox'&&node.parentElement!==document.body)document.body.appendChild(node);else if(id==='drawer'&&old?.contains(node))main.appendChild(node);}}
 }
 })();
 </script><style id="crew-remove-style">.crew-remove-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px;padding-top:16px;border-top:1px solid #51452a}.crew-remove-actions button{padding:12px;border-radius:9px;cursor:pointer;font-size:13px}.crew-remove-archive{border:1px solid #a27654!important;background:#221913!important;color:#f4c7a9!important}.crew-remove-back{background:#d8b45a!important;color:#111!important;font-weight:800}</style>
