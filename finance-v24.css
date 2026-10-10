@@ -1,0 +1,64 @@
+
+/* THE CREW / COMPTABILITE V24 — onglets financiers dans le dashboard */
+#crew-finance-workspace{color:#f4f0e8;font:14px/1.45 Inter,Arial,sans-serif;max-width:1440px;margin:auto}
+#crew-finance-workspace *{box-sizing:border-box}
+#crew-finance-workspace button,#crew-finance-workspace input,#crew-finance-workspace select,#crew-finance-workspace textarea{font:inherit}
+#crew-finance-workspace button{cursor:pointer}
+.c24-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:14px;border-bottom:1px solid #403624;padding-bottom:18px;margin:0 0 16px}
+.c24-overline{letter-spacing:.18em;font-size:11px;text-transform:uppercase;color:#e0bc67;font-weight:800}
+.c24-top h2{font:34px Georgia,serif;color:#f2dfab;margin:4px 0}
+.c24-top p{margin:0;color:#b8b3a7;max-width:620px}
+.c24-top button,.c24-primary{padding:11px 16px;border-radius:10px;border:1px solid #c29f56;background:#d8b45a;color:#12120f;font-weight:800}
+.c24-secondary{padding:9px 13px;border-radius:9px;background:#27241f;color:#eddbb7;border:1px solid #71603f}
+.c24-nav{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:20px}
+.c24-nav button{color:#dfd2b8;border:1px solid #453f33;background:#171817;padding:10px 12px;border-radius:9px;font-size:13px}
+.c24-nav button[aria-selected="true"]{background:#d8b45a;color:#15140e;border-color:#d8b45a;font-weight:800}
+.c24-panel{background:linear-gradient(135deg,#171714,#10110f);border:1px solid #514329;border-radius:15px;padding:19px;margin:12px 0}
+.c24-sectionhead{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:11px;margin-bottom:14px}
+.c24-sectionhead h3,.c24-panel h3{margin:0;font-size:20px;color:#f2e6c9}
+.c24-sectionhead p{margin:4px 0 0;color:#aaa69a;font-size:12px}
+.c24-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:15px 0}
+.c24-stat{background:#1c1c19;border:1px solid #655331;border-radius:13px;padding:16px;min-width:0}
+.c24-stat small{display:block;color:#c0b7a6;font-size:11px}
+.c24-stat strong{display:block;font-size:27px;margin-top:7px;color:#e9c777;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.c24-stat em{display:block;color:#bcb6a7;font-style:normal;font-size:11px;margin-top:4px}
+.c24-notice{border-left:3px solid #d8b45a;background:#242017;color:#eddeb8;border-radius:6px;padding:12px 15px;line-height:1.5;margin:12px 0}
+.c24-muted{color:#b5ad9d;font-size:12px;line-height:1.5}
+.c24-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.c24-homegrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:9px}
+.c24-tile{padding:16px;text-align:left;background:#22201c;border:1px solid #5c4c2f;border-radius:12px;color:#f0dfba;font-weight:800;min-height:88px}
+.c24-tile:hover{background:#30271c;border-color:#d8b45a}
+.c24-tile small{font-weight:400;display:block;margin-top:7px;color:#bbb1a0;font-size:11px}
+.c24-form{background:#1e1d18;border:1px solid #826b3e;padding:17px;border-radius:13px;margin:15px 0}
+.c24-formgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.c24-formgrid label{display:grid;gap:5px;font-size:12px;color:#e5d6b6}
+.c24-formgrid input,.c24-formgrid select,.c24-formgrid textarea,.c24-search{background:#10110f;color:#f8f4ed;border:1px solid #69593a;border-radius:8px;padding:11px;width:100%;min-width:0;font-size:15px}
+.c24-formgrid label.c24-span{grid-column:span 3}
+.c24-checkbox{display:flex!important;gap:10px!important;align-items:center;color:#e7d9bb;margin:13px 0}
+.c24-checkbox input{width:auto!important}
+.c24-form-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px;align-items:center}
+.c24-formmsg{color:#e7c676;margin-top:9px;font-size:13px;min-height:14px}
+.c24-tablewrap{border:1px solid #51432b;border-radius:12px;overflow:auto;max-height:62vh;background:#10110f}
+.c24-table{width:100%;border-collapse:collapse;white-space:nowrap;font-size:12px}
+.c24-table th{background:#30291c;position:sticky;top:0;text-align:left;color:#f1d89d;padding:11px;border-bottom:1px solid #75603b;z-index:1}
+.c24-table td{padding:11px;border-bottom:1px solid #302e27;color:#e9e4d9;vertical-align:top}
+.c24-table tr:hover td{background:#232018}
+.c24-table td button{padding:7px 9px;border-radius:7px;border:1px solid #71603c;color:#f4dc9e;background:#26231d;margin-right:4px}
+.c24-table td button.c24-danger{border-color:#825349;color:#efbbae}
+.c24-actions{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.c24-actions .c24-search{flex:1;min-width:200px}
+.c24-tag{display:inline-block;padding:4px 9px;border-radius:20px;background:#343023;color:#e7cd84;font-size:11px;white-space:nowrap}
+.c24-tag.good{background:#1b382b;color:#87deb3}
+.c24-tag.bad{background:#452823;color:#ffb4a6}
+.c24-bar{width:100%;height:9px;background:#363229;border-radius:8px;overflow:hidden;margin:7px 0}
+.c24-bar b{display:block;height:100%;background:linear-gradient(90deg,#a78741,#efd08b)}
+.c24-baritem{margin:14px 0}
+.c24-baritem .c24-barline{display:flex;justify-content:space-between;gap:12px}
+.c24-alert{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #373229;padding:12px 2px}
+.c24-alert:last-child{border-bottom:0}
+.c24-empty{text-align:center;padding:24px;color:#bab2a1}
+.c24-scroll{max-height:280px;overflow:auto}
+.c24-mini{font-size:12px;color:#b3aa96}
+.c24-footer{color:#a9a292;font-size:12px;margin-top:18px;line-height:1.55}
+@media(max-width:1100px){.c24-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.c24-homegrid{grid-template-columns:repeat(3,minmax(0,1fr))}.c24-formgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.c24-formgrid label.c24-span{grid-column:span 2}}
+@media(max-width:700px){.c24-top h2{font-size:26px}.c24-nav{display:flex;flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px}.c24-nav button{flex:0 0 auto}.c24-two{grid-template-columns:1fr}.c24-homegrid{grid-template-columns:repeat(2,minmax(0,1fr))}.c24-formgrid{grid-template-columns:1fr}.c24-formgrid label.c24-span{grid-column:1}.c24-stats{gap:7px}.c24-stat{padding:11px}.c24-stat strong{font-size:22px}.c24-panel{padding:13px}}
