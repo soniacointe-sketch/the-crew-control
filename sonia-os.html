@@ -61,12 +61,12 @@ async function cloudPush(){
  const updates=[],inserts=[];
  for(const mod of stores)for(const item of db[mod]){
  const id=/^[0-9a-f]{8}-[0-9a-f-]{27,}$/i.test(item.id||"")?item.id:crypto.randomUUID();
- const record={id,owner_id:currentUser.id,module:mod,payload:{...item,id},updated_at:new Date().toISOString()};
+ item.id=id; const record={id,owner_id:currentUser.id,module:mod,payload:{...item,id},updated_at:new Date().toISOString()};
  (existingIds.has(id)?updates:inserts).push(record);
  }
  for(const rec of updates){const {error}=await sb.from("sonia_command_records").update({payload:rec.payload,updated_at:rec.updated_at}).eq("id",rec.id).eq("owner_id",currentUser.id);if(error)throw error;}
  for(let i=0;i<inserts.length;i+=100){const {error}=await sb.from("sonia_command_records").insert(inserts.slice(i,i+100));if(error)throw error;}
- alert("Synchronisation terminée : "+(updates.length+inserts.length)+" enregistrements envoyés. Recharge le cloud pour récupérer les identifiants des nouveaux enregistrements.");
+ for(const mod of stores)save(mod);alert("Synchronisation terminée : "+(updates.length+inserts.length)+" enregistrements envoyés.");
 }
 document.getElementById("cloudPull").onclick=async()=>{try{await cloudPull()}catch(e){alert("Chargement impossible : "+e.message)}};
 document.getElementById("cloudPush").onclick=async()=>{try{await cloudPush()}catch(e){alert("Envoi impossible : "+e.message)}};
