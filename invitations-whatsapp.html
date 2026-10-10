@@ -4,7 +4,9 @@
 <div class="panel" id="gate"><h2>Accès privé</h2><p class="muted">Connexion avec ton compte The Crew Control.</p><label>E-mail<input type="email" id="email" autocomplete="username"></label><label>Mot de passe<input type="password" id="password" autocomplete="current-password"></label><button class="btn" id="login">Se connecter</button><p id="loginStatus"></p></div>
 <div id="content">
 <div class="warning">Ce module ouvre WhatsApp avec un message préparé. <strong>Aucun message n'est envoyé sans ton action.</strong> L'inscription à un groupe reste volontaire. Utilise le numéro du responsable légal pour les enfants et vérifie son accord pour ce contact.</div>
-<div class="panel"><h2>1. Liens d'invitation</h2><div class="grid"><label>Groupe KIDS<input id="kids" placeholder="https://chat.whatsapp.com/..."></label><label>Groupe ADOS / ADULTES<input id="adults" placeholder="https://chat.whatsapp.com/..."></label></div><button class="btn secondary" id="save">Enregistrer sur cet appareil</button><p class="muted">Les liens restent stockés localement, dans ce navigateur et pour ce compte.</p></div>
+<div class="panel"><h2>1. Liens d'invitation</h2>
+<label>Communauté WhatsApp The Crew (lien commun aux deux groupes si aucun lien spécifique)<input id="community" placeholder="https://chat.whatsapp.com/..."></label>
+<div class="grid"><label>Groupe KIDS<input id="kids" placeholder="https://chat.whatsapp.com/..."></label><label>Groupe ADOS / ADULTES<input id="adults" placeholder="https://chat.whatsapp.com/..."></label></div><button class="btn secondary" id="save">Enregistrer mes liens</button><p class="muted">Stockage local et synchronisation privée Supabase sur le compte connecté. Aucun lien d'invitation n'est publié dans le code public du site.</p></div>
 <div class="panel"><h2>2. Préparer un message</h2><div class="grid"><label>Prénom du destinataire<input id="first" placeholder="Ex. Julie"></label><label>Téléphone mobile<input id="phone" placeholder="Ex. 06 12 34 56 78"></label><label>Groupe<select id="group"><option value="kids">KIDS · 18h30–19h30</option><option value="adults">ADOS / ADULTES · 19h30–20h30</option></select></label><label>Autorisation de contact<select id="consent"><option value="no">Non vérifiée</option><option value="yes">Oui, accord confirmé</option></select></label></div>
 <label>Message prérempli<textarea id="message"></textarea></label><button class="btn secondary" id="generate">Préparer le texte</button><button class="btn" id="send">Ouvrir dans WhatsApp</button><button class="btn secondary" id="copy">Copier le message</button><p class="muted" id="status"></p></div>
 <div class="panel"><h2>3. Suivi manuel</h2><p class="muted">Un clic sur WhatsApp ne prouve pas que le message a été envoyé. Confirme l'envoi après l'avoir réalisé.</p><button class="btn secondary" id="mark">Marquer « envoyé manuellement »</button><button class="btn secondary" id="export">Exporter le suivi CSV</button><div id="history" class="muted"></div></div>
@@ -13,15 +15,50 @@
 (()=>{"use strict";
 const sb=window.supabase.createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy");
 const $=x=>document.getElementById(x);let user=null,root="";
+const urlParams=new URLSearchParams(location.hash.slice(1));
+let pendingLink=urlParams.get("invite")||"";
+if(location.hash)history.replaceState(null,"",location.pathname+location.search);
 function data(k){return localStorage.getItem(root+k)||""}function write(k,v){localStorage.setItem(root+k,v)}
 function validLink(x){try{const u=new URL(x);return u.protocol==="https:"&&u.hostname==="chat.whatsapp.com"&&u.pathname.length>5}catch{return false}}
 function normalizePhone(s){let x=s.replace(/[\s.()\-]/g,"");if(x.startsWith("00"))x="+"+x.slice(2);if(/^0[67]\d{8}$/.test(x))x="+33"+x.slice(1);return /^\+[1-9]\d{7,14}$/.test(x)?x:null}
-function link(){return $('group').value==="kids"?$('kids').value.trim():$('adults').value.trim()}
-function compose(){let group=$('group').value==="kids"?"KIDS (18h30–19h30)":"ADOS/ADULTES (19h30–20h30)";let first=$('first').value.trim();return "Bonjour"+(first?" "+first:"")+" 😊\nBienvenue chez The Crew Orchies ! Voici le lien pour rejoindre notre groupe WhatsApp "+group+" :\n"+link()+"\nNos cours ont lieu le samedi à l’Espace Marypomme. Tu peux rejoindre le groupe quand tu le souhaites. À bientôt !"}
+function link(){const selected=$('group').value==="kids"?$('kids').value.trim():$('adults').value.trim();return selected||$('community').value.trim()}
+function compose(){let group=$('group').value==="kids"?"KIDS (18h30–19h30)":"ADOS/ADULTES (19h30–20h30)";let first=$('first').value.trim();let isShared=!($('group').value==="kids"?$('kids').value.trim():$('adults').value.trim());return "Bonjour"+(first?" "+first:"")+" 😊\\nBienvenue chez The Crew Orchies ! Voici le lien pour rejoindre "+(isShared?"notre communauté WhatsApp The Crew Orchies":"le groupe WhatsApp "+group)+" :\\n"+link()+"\\nLes cours "+group+" se déroulent le samedi à l’Espace Marypomme. Tu peux rejoindre le groupe si tu le souhaites. À bientôt !"}
 function show(){const raw=JSON.parse(data("history")||"[]");$('history').textContent=raw.length?raw.slice(-8).reverse().map(x=>x.when+" · "+x.group+" · "+x.phone+" · "+x.state).join("\n"):"Aucun envoi confirmé";$('history').style.whiteSpace="pre-line"}
-async function enter(){const {data:{user:u}}=await sb.auth.getUser();user=u;if(!user){$('gate').style.display="block";$('content').style.display="none";return}root="crew_whatsapp_invites_v1_"+user.id+"_";$('gate').style.display="none";$('content').style.display="block";$('kids').value=data("kids");$('adults').value=data("adults");show()}
+async function saveLinks(){
+ const values=Object.fromEntries(["community","kids","adults"].map(k=>[k,$(k).value.trim()]));
+ for(const [k,v] of Object.entries(values))if(v&&!validLink(v)){throw Error("Lien "+k+" invalide.")}
+ for(const [k,v] of Object.entries(values))write(k,v);
+ const {error}=await sb.from("crew_invitation_settings").upsert({
+  user_id:user.id,community_url:values.community||null,kids_url:values.kids||null,adults_url:values.adults||null,
+  updated_at:new Date().toISOString()
+ },{onConflict:"user_id"});
+ if(error)throw Error("Sauvegardé localement, mais le cloud n'a pas accepté la mise à jour : "+error.message);
+ return "Liens enregistrés sur cet appareil et dans ton espace privé.";
+}
+async function enter(){
+ const {data:{user:u}}=await sb.auth.getUser();user=u;
+ if(!user){$('gate').style.display="block";$('content').style.display="none";return}
+ root="crew_whatsapp_invites_v1_"+user.id+"_";
+ $('gate').style.display="none";$('content').style.display="block";
+ for(const k of ["community","kids","adults"])$(k).value=data(k);
+ const {data:remote,error}=await sb.from("crew_invitation_settings").select("community_url,kids_url,adults_url").eq("user_id",user.id).maybeSingle();
+ if(!error&&remote){
+  for(const [k,field] of [["community","community_url"],["kids","kids_url"],["adults","adults_url"]]){$(k).value=remote[field]||"";write(k,$(k).value)}
+ }else if(error){$('status').textContent="Cloud indisponible : liens locaux utilisables. "+error.message}
+ if(pendingLink){
+  if(validLink(pendingLink)){
+   const current=$('community').value.trim();
+   if(!current||current===pendingLink||confirm("Remplacer le lien de communauté déjà enregistré ?")){
+    $('community').value=pendingLink;
+    try{$('status').textContent=await saveLinks()}catch(e){$('status').textContent=e.message}
+   }
+  }else $('status').textContent="Le lien transmis n'est pas valide.";
+  pendingLink="";
+ }
+ show();
+}
 $('login').onclick=async()=>{const {error}=await sb.auth.signInWithPassword({email:$('email').value,password:$('password').value});$('loginStatus').textContent=error?error.message:"";if(!error)enter()};
-$('save').onclick=()=>{for(const k of ["kids","adults"]){const v=$(k).value.trim();if(v&&!validLink(v)){$('status').textContent="Lien "+k+" invalide : utilise une adresse chat.whatsapp.com.";return}write(k,v)}$('status').textContent="Liens enregistrés localement."};
+$('save').onclick=async()=>{try{$('status').textContent=await saveLinks()}catch(e){$('status').textContent=e.message}};
 $('generate').onclick=()=>{$('message').value=compose()};
 $('copy').onclick=async()=>{if(!validLink(link())){$('status').textContent="Ajoute d'abord le lien WhatsApp du groupe.";return}await navigator.clipboard.writeText($('message').value||compose());$('status').textContent="Message copié."};
 $('send').onclick=()=>{const p=normalizePhone($('phone').value),l=link();if($('consent').value!=="yes"){$('status').textContent="Accord de contact non confirmé.";return}if(!p){$('status').textContent="Numéro mobile invalide.";return}if(!validLink(l)){$('status').textContent="Lien d'invitation manquant ou invalide.";return}const msg=$('message').value||compose();window.open("https://wa.me/"+p.slice(1)+"?text="+encodeURIComponent(msg),"_blank","noopener,noreferrer");$('status').textContent="WhatsApp ouvert. Vérifie puis envoie le message manuellement."};
