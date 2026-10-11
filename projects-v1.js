@@ -1,9 +1,9 @@
 (function(){
 "use strict";
 const API="https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-projects-manage";
-const ST=[["active","En cours"],["planned","À lancer"],["approved","Validé"],["paused","En pause"],["completed","Terminé"],["idea","Idée"]];
+const ST=[["active","En cours"],["planned","À lancer"],["approved","Validé"],["paused","En pause"],["completed","Terminé"],["idea","À étudier"]];
 const PR=[["high","Haute"],["normal","Normale"],["low","Basse"]];
-let projects=[],current=null,filter="all",query="",busy=false;
+let projects=[],current=null,filter="all",category="all",query="",busy=false;
 const esc=x=>String(x??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const name=(x,choices)=>choices.find(v=>v[0]===x)?.[1]||x;
 const img=p=>(/^project-covers\/[a-z0-9-]+\.svg$|^https:\/\//i).test(p?.cover_url||"")?p.cover_url:"project-covers/univers.svg";
@@ -31,19 +31,21 @@ function miniPaint(){
 mini();const target=document.getElementById("crew-projects-mini");if(!target)return;
 const select=["livre-coloriage","cahier-vacances","mascottes","groupes-identite"].map(x=>projects.find(p=>p.slug===x)).filter(Boolean);
 if(!select.length)select.push(...projects.slice(0,3));
-target.innerHTML='<div class="crew-projects-cover-grid">'+select.map(p=>'<article class="crew-projects-cover-card"><img src="'+esc(img(p))+'" alt="Visuel du projet '+esc(p.title)+'" loading="lazy"><div class="crew-projects-cover-body">'+badge(p)+'<h3>'+esc(p.title)+'</h3><p>'+esc(p.next_action||"Prochaine étape à définir")+'</p>'+prog(p)+'<button type="button" data-project-open="'+esc(p.id)+'">Ouvrir / continuer →</button></div></article>').join("")+'</div>';
+const ideas=projects.filter(p=>p.slug.startsWith("idee-"));
+target.innerHTML=(ideas.length?'<div class="crew-proj-ideas-cta"><div><strong>'+ideas.length+' nouvelles idées à étudier</strong><p>Livres, goodies, ateliers, numérique et événements : toutes classées dans ton suivi.</p></div><button type="button" class="crew-projects-btn" data-project-ideas>Explorer les idées →</button></div>':"")+'<div class="crew-projects-cover-grid">'+select.map(p=>'<article class="crew-projects-cover-card"><img src="'+esc(img(p))+'" alt="Visuel du projet '+esc(p.title)+'" loading="lazy"><div class="crew-projects-cover-body">'+badge(p)+'<h3>'+esc(p.title)+'</h3><p>'+esc(p.next_action||"Prochaine étape à définir")+'</p>'+prog(p)+'<button type="button" data-project-open="'+esc(p.id)+'">Ouvrir / continuer →</button></div></article>').join("")+'</div>';
 }
 function page(html){const d=document.getElementById("drawer"),b=body(),t=document.getElementById("drawerTitle");if(!d||!b||!t)return;d.style.display="block";t.textContent="CRÉATION / PROJETS";b.innerHTML='<section class="crew-proj-dashboard">'+html+'</section>';}
 function card(p){return '<article class="crew-proj-card"><img src="'+esc(img(p))+'" alt="Visuel du projet '+esc(p.title)+'" loading="lazy"><div class="crew-proj-card-content">'+badge(p)+'<h4>'+esc(p.title)+'</h4><p>'+esc(p.category)+'</p>'+prog(p)+'<p><strong>À faire :</strong> '+esc(p.next_action||"À définir")+'</p><button type="button" data-project-open="'+esc(p.id)+'">Ouvrir le projet →</button></div></article>';}
-const filters=[["all","Tous"],["active","En cours"],["planned","À lancer"],["approved","Validés"],["completed","Terminés"],["idea","Idées"],["paused","En pause"]];
+const filters=[["all","Tous"],["active","En cours"],["planned","À lancer"],["approved","Validés"],["completed","Terminés"],["idea","Idées à étudier"],["paused","En pause"]];
 function list(){
 current=null;
-page('<header class="crew-proj-banner"><div><h3>Création · Projets</h3><p>Construire, suivre, valider et terminer les créations The Crew.</p></div><button type="button" class="crew-projects-btn" data-project-new>＋ Nouveau projet</button></header><div class="crew-proj-toolbar"><input id="crew-project-search" class="crew-proj-search" type="search" placeholder="Rechercher un projet..." value="'+esc(query)+'"><span class="crew-proj-badge">'+projects.length+' projets suivis</span></div><nav class="crew-proj-filters">'+filters.map(([k,t])=>'<button type="button" data-project-filter="'+k+'" class="'+(filter===k?"active":"")+'">'+t+'</button>').join("")+'</nav><div id="crew-project-list" class="crew-proj-grid"></div><p class="crew-proj-note">L’avancement est calculé uniquement à partir des étapes cochées.</p>');
+page('<header class="crew-proj-banner"><div><h3>Création · Projets</h3><p>Construire, suivre, valider et terminer les créations The Crew.</p></div><button type="button" class="crew-projects-btn" data-project-new>＋ Nouveau projet</button></header><div class="crew-proj-toolbar"><input id="crew-project-search" class="crew-proj-search" type="search" placeholder="Rechercher un projet..." value="'+esc(query)+'"><span class="crew-proj-badge">'+projects.length+' projets · '+projects.filter(p=>p.slug.startsWith("idee-")).length+' idées nouvelles</span></div>'+
+'<div class="crew-proj-categorybar"><label for="crew-project-category">Univers :</label><select id="crew-project-category"><option value="all">Toutes les catégories</option>'+[...new Set(projects.map(p=>p.category))].sort().map(c=>'<option value="'+esc(c)+'"'+(category===c?" selected":"")+'>'+esc(c)+'</option>').join("")+'</select></div><nav class="crew-proj-filters">'+filters.map(([k,t])=>'<button type="button" data-project-filter="'+k+'" class="'+(filter===k?"active":"")+'">'+t+'</button>').join("")+'</nav><div id="crew-project-list" class="crew-proj-grid"></div><p class="crew-proj-note">L’avancement est calculé uniquement à partir des étapes cochées.</p>');
 listPaint();
 }
 function listPaint(){
 const holder=body()?.querySelector("#crew-project-list");if(!holder)return;
-const matches=projects.filter(p=>(filter==="all"||p.status===filter)&&[p.title,p.category,p.description,p.next_action].join(" ").toLowerCase().includes(query.toLowerCase()));
+const matches=projects.filter(p=>(filter==="all"||p.status===filter)&&(category==="all"||p.category===category)&&[p.title,p.category,p.description,p.next_action].join(" ").toLowerCase().includes(query.toLowerCase()));
 holder.innerHTML=matches.map(card).join("")||'<p class="crew-proj-note">Aucun projet dans cette catégorie.</p>';
 }
 function detail(id){
@@ -60,9 +62,10 @@ page('<p class="crew-proj-note">Chargement…</p>');
 try{await reload();list();}catch(err){page('<p class="crew-proj-note">'+esc(err.message)+'</p>');}
 }
 document.addEventListener("click",async e=>{
-const t=e.target.closest("[data-projects-trigger],[data-project-open],[data-project-filter],[data-project-back],[data-project-new],[data-project-edit],[data-project-archive]");
+const t=e.target.closest("[data-projects-trigger],[data-project-ideas],[data-project-open],[data-project-filter],[data-project-back],[data-project-new],[data-project-edit],[data-project-archive]");
 if(!t)return;e.preventDefault();e.stopImmediatePropagation();
 if(t.hasAttribute("data-projects-trigger")){open();return;}
+if(t.hasAttribute("data-project-ideas")){filter="idea";category="all";open();return;}
 if(t.hasAttribute("data-project-open")){if(!projects.length)await reload();detail(t.dataset.projectOpen);return;}
 if(t.hasAttribute("data-project-filter")){filter=t.dataset.projectFilter;list();return;}
 if(t.hasAttribute("data-project-back")){list();return;}
@@ -74,6 +77,7 @@ t.disabled=true;try{await api({action:"archive_project",id:current.id,confirm:tr
 }
 },true);
 document.addEventListener("input",e=>{if(e.target.id==="crew-project-search"){query=e.target.value;listPaint();}});
+document.addEventListener("change",e=>{if(e.target.id==="crew-project-category"){category=e.target.value;listPaint();}});
 document.addEventListener("change",async e=>{
 const el=e.target.closest("[data-step-id]");if(!el||!current||busy)return;
 busy=true;el.disabled=true;
