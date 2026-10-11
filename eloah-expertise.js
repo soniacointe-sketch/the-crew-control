@@ -69,3 +69,17 @@ $('copy-expertise-brief').onclick=async()=>{try{await navigator.clipboard.writeT
 window.open(url,'_blank','noopener,noreferrer');
 notify('Base créée. Continue dans ChatGPT ; si rien ne s’ouvre, utilise le bouton.');
 }
+
+async function loadCrewReference(){
+const id='crew-reference-officielle-2026-10-11';
+try{
+ if(!bases.some(b=>b.id===id)){
+  const response=await fetch('crew-expertise-reference.json?v=1');if(!response.ok)throw new Error('Chargement indisponible');
+  const reference=await response.json();if(reference.id!==id||!Array.isArray(reference.sources))throw new Error('Format incorrect');
+  bases.push(reference);if(!saveBases()){bases.pop();return}
+ }
+ if(new URLSearchParams(location.search).get('base')==='crew'){openedBase=id;showTab('Bases d’Expertise')}
+ else if(tab==='Bases d’Expertise'&&!document.getElementById('expert-builder')?.open)expertiseHome();
+}catch(error){if(new URLSearchParams(location.search).get('base')==='crew')notify('La base The Crew n’a pas pu être chargée. Réessaie en actualisant la page.')}
+}
+loadCrewReference();
