@@ -62,4 +62,4 @@ if($("export"))$("export").onclick=()=>{const u=URL.createObjectURL(new Blob([JS
 if($("import"))$("import").onclick=()=>$("importFile").click();if($("importFile"))$("importFile").onchange=async e=>{try{const p=JSON.parse(await e.target.files[0].text());if(p.format!=="sonia-maia-v1"||!Array.isArray(p.items))throw Error("Fichier incompatible");if(confirm("Remplacer les fiches MAIA locales ?")){items=p.items;if(p.modules&&["rooms","stocks","repairs"].every(k=>Array.isArray(p.modules[k]))){modules=p.modules;localStorage.setItem(extensionKey,JSON.stringify(modules))}save()}}catch(err){alert(err.message)}};
 }
 $("newTask").onclick=()=>edit(null,"Aujourd’hui");$("cancel").onclick=()=>$("editor").close();$("form").onsubmit=e=>{e.preventDefault();const x=Object.fromEntries(new FormData(e.target)),old=items.find(a=>a.id===editing);if(old)Object.assign(old,x);else items.unshift({...x,id:crypto.randomUUID(),done:false});$("editor").close();save()};render()})();
-</script></body></html>
+</script><script src="eloah-navigation.js?v=6"></script></body></html>
