@@ -43,3 +43,34 @@ review.showModal();
 renderChat();
 if(params.get('conversation')==='nouvelle')launch();
 })();
+
+/* Local prompt builder: structured templates, no model called. */
+(()=>{
+function promptFromIdea(idea){
+const subject=idea.trim()||'Faire le point sur le projet et choisir la prochaine action utile';
+const lower=subject.toLocaleLowerCase('fr');
+let deliverable='Un résultat directement utilisable qui répond à la demande, suivi de la prochaine étape concrète.';
+if(/article|blog/.test(lower))deliverable='Un article complet : titre, introduction, sections structurées, conclusion et appel à l’action adapté. Marque les informations pratiques manquantes.';
+else if(/affiche|visuel|image|couverture/.test(lower))deliverable='Un brief visuel précis, le texte exact à intégrer, la composition, les formats proposés et un prompt de création d’image. Si un outil de création est disponible et la demande le justifie, produis aussi le visuel.';
+else if(/story|stories|carrousel|post|réseau/.test(lower))deliverable='Le contenu complet pour le format demandé : texte de chaque écran ou publication, légende et appel à l’action. Propose le format le plus adapté si aucun n’est indiqué.';
+else if(/planning|calendrier|programme/.test(lower))deliverable='Un programme structuré avec étapes, livrables, dépendances et priorités. Propose les dates seulement comme hypothèses de planning si elles ne sont pas confirmées.';
+else if(/mail|message|réponse/.test(lower))deliverable='Un message prêt à relire, avec objet si nécessaire, texte naturel et suite claire. Prépare le brouillon sans l’envoyer.';
+else if(/site|page|interface|application/.test(lower))deliverable='Une proposition précise de structure, textes et interactions, puis une réalisation si les fichiers et outils nécessaires sont disponibles et que la demande l’autorise. Distingue proposition et modification réellement effectuée.';
+else if(/analyse|audit|vérif/.test(lower))deliverable='Une analyse avec observations vérifiables, limites, problèmes prioritaires et actions correctives. Distingue les vérifications exécutées des points non testés.';
+const projectName=typeof settingsName==='function'?settingsName():project;
+return 'MISSION — '+projectName+'\n\nIDÉE DE SONIA\n'+subject+'\n\nTRAVAIL ATTENDU\nTransforme cette idée en résultat concret et réalise le travail possible maintenant, sans te limiter à expliquer comment faire.\n\nLIVRABLE\n'+deliverable+'\n\nCONTEXTE\nUtilise les informations du projet transmises avec cette demande. Respecte sa voix, ses choix et ses contraintes. Si le contexte est insuffisant, avance sur les parties possibles et indique précisément ce qui manque.\n\nRÈGLES\nN’invente aucun fait, tarif, date, résultat, fichier consulté ou connexion. Les documents cités mais non joints ne sont pas réputés lus. Vérifie les informations actuelles lorsque les outils le permettent. N’effectue aucun envoi ou publication sans demande explicite.\n\nFORMAT DE RÉPONSE\nPrésente d’abord le livrable. Termine par les points à valider et une prochaine action. Pour un bilan de projet, propose trois actions concrètes.';
+}
+const input=$('message-input'),form=$('compose');
+const toolsBar=document.querySelector('.composer .tools');
+if(toolsBar&&!$('auto-prompt')){
+const button=document.createElement('button');button.type='button';button.id='auto-prompt';button.className='accent';button.textContent='Préparer mon prompt';
+button.onclick=()=>{const value=input.value.trim();if(value.startsWith('MISSION — ')){notify('Ton prompt est déjà préparé. Tu peux le modifier ou ouvrir ChatGPT.');return}input.value=promptFromIdea(value);input.focus();notify('Prompt préparé à partir de ton idée et du projet. Tu peux le relire avant de poursuivre.')};toolsBar.prepend(button);
+const suggestions=document.createElement('div');suggestions.className='launch-actions';suggestions.style.padding='8px 0';
+const ideas=[['Faire le point','Faire le point sur le projet et proposer les trois prochaines actions utiles.'],['Créer un contenu','Préparer un contenu utile au projet à partir des informations disponibles. Choisir un sujet pertinent et produire une première version.'],['Débloquer la suite','Repérer la question ouverte la plus importante et préparer une solution concrète.']];
+for(const [label,idea] of ideas){const b=document.createElement('button');b.type='button';b.textContent=label;b.onclick=()=>{input.value=promptFromIdea(idea);input.focus();notify('Prompt préparé. Le contexte du projet sera ajouté avant ouverture de ChatGPT.')};suggestions.appendChild(b)}
+form.before(suggestions);
+}
+input.placeholder='Écris ton idée en quelques mots : article inscriptions, préparer un atelier, faire le point…';
+const priorSubmit=form.onsubmit;
+form.onsubmit=function(e){const value=input.value.trim();if(value&&!value.startsWith('MISSION — ')&&!value.includes('BASE D’EXPERTISE :')&&!value.includes('MA DEMANDE :'))input.value=promptFromIdea(value);return priorSubmit.call(this,e)};
+})();
