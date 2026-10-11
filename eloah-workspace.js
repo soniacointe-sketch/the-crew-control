@@ -104,6 +104,21 @@ const oldSettings=renderSettings;renderSettings=function(){oldSettings();const c
 if(!tabs.includes('Planning'))tabs.splice(2,0,'Planning');if(!tabs.includes('Documents'))tabs.splice(3,0,'Documents');
 const oldTab=showTab;showTab=function(name){oldTab(name);if(name==='Équipe')team();if(name==='Facturation')finance();if(name==='Analytics')analytics();if(name==='Meta Projets Memory')enrichMeta();if(name==='Planning'){calendarFilter=project;setPanel('Planning du projet','<div id="ops-calendar"></div>');renderCalendar()}if(name==='Documents')renderWriting();if(name==='Fichiers'&&!$('ops-organize'))folders()};
 const picker=document.querySelector('.eloah-project-picker');if(picker){const selected=picker.value;for(const n of names())if(![...picker.options].some(o=>o.value===n))picker.add(new Option(n,n));picker.value=selected}
-if(!params.has('retour'))$('manage').href='mes-univers.html#maisons';
+// One destination per known universe, including when the picker drops the return query.
+const managementRoutes={"The Crew Orchies":"eloah-the-crew.html","Power & Glam":"power-glam-control.html","SONIA OS":"sonia-os.html","Sonia Velka":"sonia-velka-control.html","Le Lion Blanc":"lion-blanc-control.html","PARISIS Engine":"parisis-control.html","ELOAH P&G":"eloah-control.html","Dark Energy":"dark-energy-control.html","MAIA":"eloah-maia.html","Etsy Factory":"etsy-factory-control.html","Musique & identité artistique":"musique-control.html","SMITH Studio":"smith-control.html","SONIA HUMAN VOICE ENGINE":"human-voice-control.html","AUDIO-FIRST EXPERIENCE ENGINE":"audio-first-control.html","BUZZ AGENT":"buzz-control.html","SONIA ALERT / OSINT":"sonia-alert-control.html","Foi & spiritualité":"foi-control.html","SONIA FUTURES INTELLIGENCE":"futures-control.html","SYMBOL ATLAS":"symbol-atlas-control.html","SONIA Labs":"sonia-labs-control.html","LE SIÈGE":"le-siege-control.html","AION OS V2 / V3":"aion-control.html","ELOAH":"eloah-partenaire.html?rubrique=Mon%20Espace","Agent Authority Fabric":"aaf-control.html"};
+$('manage').href=Object.prototype.hasOwnProperty.call(managementRoutes,project)?managementRoutes[project]:'eloah-projet.html?projet='+encodeURIComponent(project)+'&onglet=parametres';
+const composer=document.querySelector('.composer');
+if(composer&&!document.getElementById('eloah-chat-options')){
+ const options=document.createElement('details');options.id='eloah-chat-options';
+ const label=document.createElement('summary');label.textContent='Outils et idées de prompts';
+ options.append(label);
+ const toolbar=composer.querySelector('.tools');if(toolbar){toolbar.before(options);options.append(toolbar)}
+ const ideas=composer.querySelector('.launch-actions');if(ideas)options.append(ideas);
+ const notes=composer.querySelectorAll(':scope > .notice');if(notes.length>1)options.append(notes[notes.length-1]);
+ const compact=matchMedia('(max-width:740px)');options.open=!compact.matches;
+ compact.addEventListener('change',e=>{options.open=!e.matches});
+ const style=document.createElement('style');style.textContent='#eloah-chat-options{border:0;padding:0;margin:0 0 10px}#eloah-chat-options>summary{display:none}@media(max-width:740px){#eloah-chat-options{border:1px solid var(--line);border-radius:9px;background:var(--panel);padding:0 10px}#eloah-chat-options>summary{display:flex;align-items:center;justify-content:space-between;min-height:44px;cursor:pointer;font-size:13px;list-style:none}#eloah-chat-options>summary::after{content:"⌄"}#eloah-chat-options .tools{flex-wrap:wrap;overflow:visible;padding:8px 0}#eloah-chat-options .launch-actions{display:flex;flex-wrap:wrap;gap:6px}#eloah-chat-options button{white-space:normal;text-align:left}#eloah-chat-options .notice{padding:8px 0}.composer .compose-box textarea{min-height:110px}}';
+ document.head.append(style);
+}
 const desired={planning:'Planning',documents:'Documents',equipe:'Équipe',facturation:'Facturation',analytics:'Analytics',meta:'Meta Projets Memory'}[params.get('onglet')];showTab(desired||tab);
 })();
