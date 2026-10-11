@@ -1058,3 +1058,319 @@ localStorage.setItem(marker,'installed');
 if(missing.length)$('#status').textContent=missing.length+' nouvelles fiches ajoutées : la collection Mon Espace comprend désormais 100 propositions modifiables.';
 }catch(e){$('#status').textContent='Ajout des nouvelles fiches impossible : vérifie le stockage de ce navigateur.';}
 })();
+
+// Seed Studio briefs once without replacing personal records.
+(function prepareStudio(){
+if(!storageReadable||cfg.id!=='itriia'||!cfg.modules.includes('ELOAH Studio'))return;
+const marker=key+'-studio-seed-v1';
+try{
+if(localStorage.getItem(marker))return;
+const seed=[
+  {
+    "id": "eloah-studio-v1-01",
+    "title": "01 · Accueil ELOAH — maquette principale",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette d’accueil ordinateur et mobile.\n\nBRIEF DE CRÉATION\nHiérarchiser Mes univers, Reprendre mon travail, projets récents et prochaines actions. Utiliser une base crème, des textes foncés et des boutons clairement identifiables.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Accueil ELOAH — maquette principale. Produis maintenant : Une maquette d’accueil ordinateur et mobile. Consignes : Hiérarchiser Mes univers, Reprendre mon travail, projets récents et prochaines actions. Utiliser une base crème, des textes foncés et des boutons clairement identifiables. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLe premier écran permet de choisir un projet et de reprendre une action.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-02",
+    "title": "02 · Tableau de bord projet — écran de référence",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette détaillée du tableau de bord The Crew Orchies.\n\nBRIEF DE CRÉATION\nReprendre la structure demandée : titre du projet, onglets, conversations au centre et panneau de fichiers à droite. Adapter la présentation à ELOAH.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Tableau de bord projet — écran de référence. Produis maintenant : Une maquette détaillée du tableau de bord The Crew Orchies. Consignes : Reprendre la structure demandée : titre du projet, onglets, conversations au centre et panneau de fichiers à droite. Adapter la présentation à ELOAH. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nChaque zone a une fonction explicite ; les données fictives sont signalées comme exemples.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-03",
+    "title": "03 · Chat projet — état initial",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nLe texte d’accueil et trois suggestions de première conversation.\n\nBRIEF DE CRÉATION\nProposer Programme et prochaines étapes, État du projet et Préparer un document. Expliquer le passage vers ChatGPT lorsqu’il est nécessaire.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Chat projet — état initial. Produis maintenant : Le texte d’accueil et trois suggestions de première conversation. Consignes : Proposer Programme et prochaines étapes, État du projet et Préparer un document. Expliquer le passage vers ChatGPT lorsqu’il est nécessaire. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes suggestions contiennent une mission exploitable et ne simulent pas une réponse IA.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-04",
+    "title": "04 · Conversations — panneau de navigation",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette de liste de conversations et ses libellés.\n\nBRIEF DE CRÉATION\nPrévoir titre, dernière activité, création, recherche et indication hors mémoire. Différencier la conversation sélectionnée.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Conversations — panneau de navigation. Produis maintenant : Une maquette de liste de conversations et ses libellés. Consignes : Prévoir titre, dernière activité, création, recherche et indication hors mémoire. Différencier la conversation sélectionnée. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nUn titre long reste lisible et le changement de conversation est compréhensible.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-05",
+    "title": "05 · Fichiers projet — panneau latéral",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette avec liste de fichiers et zone de dépôt.\n\nBRIEF DE CRÉATION\nPrévoir nom, format, taille, recherche et actions disponibles. Montrer aussi les états vide, chargement et échec.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Fichiers projet — panneau latéral. Produis maintenant : Une maquette avec liste de fichiers et zone de dépôt. Consignes : Prévoir nom, format, taille, recherche et actions disponibles. Montrer aussi les états vide, chargement et échec. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes boutons décrivent des actions réelles et les erreurs indiquent quoi faire.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-06",
+    "title": "06 · Bases d’expertise — écran vide",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne composition avec titre, texte explicatif et bouton principal.\n\nBRIEF DE CRÉATION\nUtiliser « Aucune base d’expertise » et « Construire ma première base ». Expliquer les sources, leur organisation et leur utilisation dans les projets.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Bases d’expertise — écran vide. Produis maintenant : Une composition avec titre, texte explicatif et bouton principal. Consignes : Utiliser « Aucune base d’expertise » et « Construire ma première base ». Expliquer les sources, leur organisation et leur utilisation dans les projets. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLa promesse de traitement correspond aux capacités réellement disponibles.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-07",
+    "title": "07 · Construction d’une base — fenêtre complète",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette du formulaire en deux vues : haut et bas.\n\nBRIEF DE CRÉATION\nPrévoir introduction, cinq types, nom, slug, description, catégorie et synthèse. Afficher compteurs et budgets uniquement lorsque les données existent.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Construction d’une base — fenêtre complète. Produis maintenant : Une maquette du formulaire en deux vues : haut et bas. Consignes : Prévoir introduction, cinq types, nom, slug, description, catégorie et synthèse. Afficher compteurs et budgets uniquement lorsque les données existent. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLe formulaire reste utilisable sur petit écran sans masquer le bouton final.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-08",
+    "title": "08 · Types de bases — cinq cartes",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nLes textes courts et la disposition de cinq cartes de choix.\n\nBRIEF DE CRÉATION\nPrésenter Base Libre, Thématique Spécialisée, Méthodologique Long, Scientifique et Conceptuelle Structurante. Pour chaque type : usage, exemple et limite.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Types de bases — cinq cartes. Produis maintenant : Les textes courts et la disposition de cinq cartes de choix. Consignes : Présenter Base Libre, Thématique Spécialisée, Méthodologique Long, Scientifique et Conceptuelle Structurante. Pour chaque type : usage, exemple et limite. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nUne personne sait quel type choisir sans vocabulaire technique inutile.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-09",
+    "title": "09 · Base d’expertise — fiche détaillée",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette de consultation d’une base.\n\nBRIEF DE CRÉATION\nOrganiser résumé, sources, extraits, recherche, projets attachés et date de mise à jour. Afficher la provenance au plus près des extraits.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Base d’expertise — fiche détaillée. Produis maintenant : Une maquette de consultation d’une base. Consignes : Organiser résumé, sources, extraits, recherche, projets attachés et date de mise à jour. Afficher la provenance au plus près des extraits. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes informations sourcées se distinguent des notes personnelles.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-10",
+    "title": "10 · Sources documentaires — fiche source",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn modèle de fiche source réutilisable.\n\nBRIEF DE CRÉATION\nInclure titre, origine, auteur si connu, date, version, format, résumé descriptif et points à vérifier. Ne pas compléter les champs inconnus par invention.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Sources documentaires — fiche source. Produis maintenant : Un modèle de fiche source réutilisable. Consignes : Inclure titre, origine, auteur si connu, date, version, format, résumé descriptif et points à vérifier. Ne pas compléter les champs inconnus par invention. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLa source peut être retrouvée et sa fiabilité examinée.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-11",
+    "title": "11 · Attacher une base — parcours guidé",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette de sélection d’une base et de son mode d’utilisation.\n\nBRIEF DE CRÉATION\nPrésenter les modes réellement implémentés, expliquer leur effet et montrer un aperçu du contexte préparé.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Attacher une base — parcours guidé. Produis maintenant : Une maquette de sélection d’une base et de son mode d’utilisation. Consignes : Présenter les modes réellement implémentés, expliquer leur effet et montrer un aperçu du contexte préparé. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLe choix est compréhensible et son enregistrement clairement confirmé.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-12",
+    "title": "12 · Paramètres — identité du projet",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette de formulaire et ses textes d’aide.\n\nBRIEF DE CRÉATION\nInclure nom, description, type, échéance facultative et tags séparés par des virgules. Prévoir confirmation de sauvegarde et erreurs de validation.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Paramètres — identité du projet. Produis maintenant : Une maquette de formulaire et ses textes d’aide. Consignes : Inclure nom, description, type, échéance facultative et tags séparés par des virgules. Prévoir confirmation de sauvegarde et erreurs de validation. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes champs requis sont identifiés et une échéance vide est autorisée.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-13",
+    "title": "13 · Paramètres — mémoire persistante",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette du bloc mémoire et du résumé complet.\n\nBRIEF DE CRÉATION\nPrévoir conversations, thèmes, décisions, questions ouvertes et profondeur mémoire. Utiliser des emplacements vides tant que les chiffres ne sont pas calculés.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Paramètres — mémoire persistante. Produis maintenant : Une maquette du bloc mémoire et du résumé complet. Consignes : Prévoir conversations, thèmes, décisions, questions ouvertes et profondeur mémoire. Utiliser des emplacements vides tant que les chiffres ne sont pas calculés. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nAucun nombre de la capture de référence n’est présenté comme donnée réelle.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-14",
+    "title": "14 · Paramètres — budget et coûts",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette de budget prévisionnel et de suivi.\n\nBRIEF DE CRÉATION\nPrévoir budget maximal, devise, seuil, période et statut de connexion des dépenses. Distinguer configuration locale et limite réellement appliquée.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Paramètres — budget et coûts. Produis maintenant : Une maquette de budget prévisionnel et de suivi. Consignes : Prévoir budget maximal, devise, seuil, période et statut de connexion des dépenses. Distinguer configuration locale et limite réellement appliquée. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes montants d’exemple sont signalés et aucune dépense n’est inventée.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-15",
+    "title": "15 · Paramètres — consolidation",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette avec historique, préférences et action manuelle.\n\nBRIEF DE CRÉATION\nExpliquer la synthèse d’une conversation, les seuils suggérés et la récupération des originaux. Vérifier toute durée annoncée.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Paramètres — consolidation. Produis maintenant : Une maquette avec historique, préférences et action manuelle. Consignes : Expliquer la synthèse d’une conversation, les seuils suggérés et la récupération des originaux. Vérifier toute durée annoncée. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLe texte indique que Sonia conserve la décision de consolider.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-16",
+    "title": "16 · Paramètres — archivage et suppression",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nLes textes et états des confirmations sensibles.\n\nBRIEF DE CRÉATION\nDistinguer archivage réversible et suppression. Décrire précisément le périmètre concerné et demander le nom du projet pour une suppression définitive.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Paramètres — archivage et suppression. Produis maintenant : Les textes et états des confirmations sensibles. Consignes : Distinguer archivage réversible et suppression. Décrire précisément le périmètre concerné et demander le nom du projet pour une suppression définitive. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLa maquette permet de comprendre les conséquences avant confirmation.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-17",
+    "title": "17 · Atelier d’écriture — choix du document",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette de démarrage et six fiches de format.\n\nBRIEF DE CRÉATION\nProposer livre, thèse, rapport, article, document technique et guide pratique. Demander lecteur, objectif, longueur souhaitée et sources disponibles.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Atelier d’écriture — choix du document. Produis maintenant : Une maquette de démarrage et six fiches de format. Consignes : Proposer livre, thèse, rapport, article, document technique et guide pratique. Demander lecteur, objectif, longueur souhaitée et sources disponibles. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nChaque format mène à un plan adapté sans lancer de production fictive.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-18",
+    "title": "18 · Atelier d’écriture — éditeur de chapitre",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette avec plan, texte et historique des versions.\n\nBRIEF DE CRÉATION\nPrévoir navigation entre chapitres, titre, statut, version actuelle et consigne de révision. Garder l’espace de rédaction prioritaire.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Atelier d’écriture — éditeur de chapitre. Produis maintenant : Une maquette avec plan, texte et historique des versions. Consignes : Prévoir navigation entre chapitres, titre, statut, version actuelle et consigne de révision. Garder l’espace de rédaction prioritaire. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nL’utilisateur voit quel chapitre et quelle version il modifie.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-19",
+    "title": "19 · Atelier d’écriture — comparer deux versions",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne maquette de comparaison et les libellés des actions.\n\nBRIEF DE CRÉATION\nDistinguer ajouts, retraits et modifications. Prévoir conserver la version actuelle, reprendre une ancienne version et relire avant validation.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Atelier d’écriture — comparer deux versions. Produis maintenant : Une maquette de comparaison et les libellés des actions. Consignes : Distinguer ajouts, retraits et modifications. Prévoir conserver la version actuelle, reprendre une ancienne version et relire avant validation. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes différences de sens restent visibles, sans dépendre uniquement des couleurs.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-20",
+    "title": "20 · Notes & préparation — carte de brief",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn modèle de carte compact pour les briefs du Studio.\n\nBRIEF DE CRÉATION\nAfficher titre, type de livrable, prochaine action, statut et lien éventuel. Prévoir un accès au brief complet et aux consignes.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Notes & préparation — carte de brief. Produis maintenant : Un modèle de carte compact pour les briefs du Studio. Consignes : Afficher titre, type de livrable, prochaine action, statut et lien éventuel. Prévoir un accès au brief complet et aux consignes. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLa carte se parcourt rapidement sans perdre les informations détaillées.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-21",
+    "title": "21 · Studio — fiche de création visuelle",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn brief visuel réutilisable à compléter.\n\nBRIEF DE CRÉATION\nPrévoir sujet, usage, format, dimensions, texte exact, palette, références autorisées et éléments à éviter. Séparer demande d’image et résultat livré.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — fiche de création visuelle. Produis maintenant : Un brief visuel réutilisable à compléter. Consignes : Prévoir sujet, usage, format, dimensions, texte exact, palette, références autorisées et éléments à éviter. Séparer demande d’image et résultat livré. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLe brief permet de lancer une création sans supposer qu’un générateur est connecté.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-22",
+    "title": "22 · Studio — bibliothèque de composants",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn inventaire visuel des composants réutilisables d’ELOAH.\n\nBRIEF DE CRÉATION\nDocumenter boutons, champs, cartes, onglets, badges, fenêtres, messages d’erreur et confirmations avec leurs états.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — bibliothèque de composants. Produis maintenant : Un inventaire visuel des composants réutilisables d’ELOAH. Consignes : Documenter boutons, champs, cartes, onglets, badges, fenêtres, messages d’erreur et confirmations avec leurs états. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nChaque composant a un usage clair et un comportement mobile prévu.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-23",
+    "title": "23 · Studio — pictogrammes cohérents",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne planche de pictogrammes pour les rubriques ELOAH.\n\nBRIEF DE CRÉATION\nPrévoir accueil, projets, chat, fichiers, bases, équipe, budget, paramètres et sauvegardes. Utiliser un style simple et des libellés textuels.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — pictogrammes cohérents. Produis maintenant : Une planche de pictogrammes pour les rubriques ELOAH. Consignes : Prévoir accueil, projets, chat, fichiers, bases, équipe, budget, paramètres et sauvegardes. Utiliser un style simple et des libellés textuels. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes icônes restent lisibles à petite taille et ne remplacent pas seules les noms.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-24",
+    "title": "24 · Studio — guide de rédaction des interfaces",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn guide court avec exemples de titres, boutons et messages.\n\nBRIEF DE CRÉATION\nÉcrire en français simple, avec une action par bouton. Préférer « Enregistrer » et « Ouvrir » aux formulations vagues. Décrire les états réels.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — guide de rédaction des interfaces. Produis maintenant : Un guide court avec exemples de titres, boutons et messages. Consignes : Écrire en français simple, avec une action par bouton. Préférer « Enregistrer » et « Ouvrir » aux formulations vagues. Décrire les états réels. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLes messages sont compréhensibles sans connaître le fonctionnement technique.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-25",
+    "title": "25 · Studio — adaptation mobile",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne série de vues mobiles des écrans essentiels.\n\nBRIEF DE CRÉATION\nAdapter accueil, chat, base, paramètres et notes. Replier les panneaux secondaires et conserver les actions principales accessibles.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — adaptation mobile. Produis maintenant : Une série de vues mobiles des écrans essentiels. Consignes : Adapter accueil, chat, base, paramètres et notes. Replier les panneaux secondaires et conserver les actions principales accessibles. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nAucune action essentielle n’exige de défilement horizontal.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-26",
+    "title": "26 · Studio — parcours au clavier",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn scénario de navigation accessible et ses corrections proposées.\n\nBRIEF DE CRÉATION\nDécrire ordre du focus, ouverture et fermeture des fenêtres, libellés de champs et retour du focus. Prévoir des contrastes lisibles.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — parcours au clavier. Produis maintenant : Un scénario de navigation accessible et ses corrections proposées. Consignes : Décrire ordre du focus, ouverture et fermeture des fenêtres, libellés de champs et retour du focus. Prévoir des contrastes lisibles. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLe scénario peut être exécuté sans souris et ses résultats sont notés.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-27",
+    "title": "27 · Studio — tutoriel de démarrage",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn tutoriel de cinq étapes avec textes courts.\n\nBRIEF DE CRÉATION\nGuider le choix d’un projet, la première note, l’ajout d’une source, la préparation d’un échange et l’export d’une sauvegarde.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — tutoriel de démarrage. Produis maintenant : Un tutoriel de cinq étapes avec textes courts. Consignes : Guider le choix d’un projet, la première note, l’ajout d’une source, la préparation d’un échange et l’export d’une sauvegarde. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nChaque étape indique où cliquer et ce que l’utilisateur doit observer.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-28",
+    "title": "28 · Studio — dossier de recette",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUne grille de validation réutilisable avant livraison.\n\nBRIEF DE CRÉATION\nPrévoir écran, action testée, résultat attendu, résultat observé, preuve, anomalie et décision. Séparer tests effectués et tests à faire.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — dossier de recette. Produis maintenant : Une grille de validation réutilisable avant livraison. Consignes : Prévoir écran, action testée, résultat attendu, résultat observé, preuve, anomalie et décision. Séparer tests effectués et tests à faire. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nAucune fonctionnalité n’est déclarée validée sans observation.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-29",
+    "title": "29 · Studio — présentation du service",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn texte de présentation d’ELOAH en une page.\n\nBRIEF DE CRÉATION\nExpliquer à quoi servent projets, notes, fichiers, mémoire et bases. Préciser ce qui fonctionne localement et ce qui nécessite une connexion externe.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — présentation du service. Produis maintenant : Un texte de présentation d’ELOAH en une page. Consignes : Expliquer à quoi servent projets, notes, fichiers, mémoire et bases. Préciser ce qui fonctionne localement et ce qui nécessite une connexion externe. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nLe texte décrit une utilité concrète sans promettre des automatisations inexistantes.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-studio-v1-30",
+    "title": "30 · Studio — dossier de transmission",
+    "module": "ELOAH Studio",
+    "state": "À faire",
+    "date": "",
+    "note": "LIVRABLE ATTENDU\nUn modèle de dossier pour reprendre une création ou un développement.\n\nBRIEF DE CRÉATION\nInclure objectif, version, éléments livrés, décisions validées, liens, vérifications réalisées, limites et prochaine action.\n\nCONSIGNE À UTILISER DANS CHATGPT\n« Travaille sur ELOAH, l’espace de pilotage de Sonia. Sujet : Studio — dossier de transmission. Produis maintenant : Un modèle de dossier pour reprendre une création ou un développement. Consignes : Inclure objectif, version, éléments livrés, décisions validées, liens, vérifications réalisées, limites et prochaine action. Présente une proposition prête à relire. Signale les informations manquantes et distingue la conception proposée des fonctions réellement testées. »\n\nVALIDATION\nUne autre personne peut reprendre le travail sans deviner ce qui a été fait.\n\nPROCHAINE ÉTAPE\nUtiliser cette consigne pour produire une première version, puis conserver ici le lien du livrable et les corrections souhaitées.",
+    "url": "",
+    "archived": false
+  }
+];
+const ids=new Set(rows.map(r=>r.id));
+const missing=seed.filter(r=>!ids.has(r.id));
+if(missing.length&&!save([...rows,...missing]))return;
+localStorage.setItem(marker,'installed');
+if(missing.length)$('#status').textContent=missing.length+' briefs de création ajoutés à ELOAH Studio. Chaque fiche contient ses consignes et le résultat attendu.';
+}catch(e){$('#status').textContent='Les briefs du Studio n’ont pas pu être enregistrés sur ce navigateur.';}
+})();
