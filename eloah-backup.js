@@ -5,7 +5,7 @@ const allowed=k=>typeof k==='string'&&(k.startsWith('eloah-project-v1:')||k.star
 function validate(p){
  if(!p||p.format!=='eloah-portable'||p.version!==1||!Array.isArray(p.entries)||!Array.isArray(p.files))throw Error('Format de sauvegarde incompatible.');
  const keys=new Set(),ids=new Set();
- for(const e of p.entries){if(!e||!allowed(e.key)||keys.has(e.key)||typeof e.value!=='string')throw Error('Clé inconnue ou répétée.');keys.add(e.key);const v=JSON.parse(e.value);if(e.key.startsWith('eloah-project-v1:')){if(!v||!Array.isArray(v.threads))throw Error('Projet invalide.');}else if(!Array.isArray(v))throw Error('Liste de données invalide.');}
+ for(const e of p.entries){if(!e||!allowed(e.key)||keys.has(e.key)||typeof e.value!=='string')throw Error('Clé inconnue ou répétée.');keys.add(e.key);if(e.key.startsWith('sonia-universe-v1-')&&e.value==='installed')continue;const v=JSON.parse(e.value);if(e.key.startsWith('eloah-project-v1:')){if(!v||!Array.isArray(v.threads))throw Error('Projet invalide.');}else if(!Array.isArray(v))throw Error('Liste de données invalide.');}
  let bytes=0;
  for(const f of p.files){if(!f||typeof f.id!=='string'||!f.id||ids.has(f.id)||typeof f.project!=='string'||typeof f.name!=='string'||typeof f.type!=='string'||!Number.isSafeInteger(f.size)||f.size<0||typeof f.data!=='string'||!/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(f.data))throw Error('Fichier invalide.');ids.add(f.id);const n=f.data.length/4*3-(f.data.endsWith('==')?2:f.data.endsWith('=')?1:0);if(n!==f.size)throw Error('Fichier incomplet : '+f.name);bytes+=n;}
  if(bytes>100*1024*1024)throw Error('Cette version dépasse 100 Mo de pièces jointes.');
