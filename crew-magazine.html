@@ -107,6 +107,17 @@ main{padding:35px 0 90px}
 @media(max-width:1020px){.mag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.masthead-inner{grid-template-columns:1fr}.hero-aside{min-height:auto}}
 @media(max-width:680px){.wrap{width:min(100% - 28px,1250px)}.header-inner{align-items:flex-start}.header-links{justify-content:flex-end}.header-links a{font-size:11px;padding:8px}.brand-icon{width:39px;height:39px}.brand-title{font-size:15px}.masthead-inner{min-height:0;padding:48px 0}.masthead h1{font-size:clamp(55px,14vw,79px)}.section-top h2{font-size:30px}.mag-grid{grid-template-columns:1fr}.article-visual{height:210px}.story-intro{font-size:18px}.story-content{font-size:16px}.related{grid-template-columns:1fr}.mag-toolbar{align-items:stretch}.mag-search{width:100%}.filters{gap:6px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.article-card{transition:none}}
+
+/* Images du Crew Magazine : illustrations créées, non photographies de séances */
+.article-visual img{transition:transform .35s ease;object-position:center}
+.article-card:hover .article-visual img{transform:scale(1.04)}
+.article-visual .illustration-label{position:absolute;bottom:11px;left:12px;background:#0c0b0be6;border:1px solid #9a7945;border-radius:30px;color:#f1d8a0;letter-spacing:.09em;font:700 10px Arial,sans-serif;padding:6px 10px;text-transform:uppercase}
+.mag-caption{margin:1px 0 19px;color:#a9a197;font:12px/1.5 Arial,sans-serif;text-align:center}
+.story-content p,.story-content li{max-width:100%}
+.mag-heading{display:flex;gap:10px;align-items:center;color:#f1d4a0}
+.mag-heading img{height:35px;width:35px;object-fit:contain}
+.mag-card-image{background:#14110b}
+@media(prefers-reduced-motion:reduce){.article-visual img{transition:none}}
 </style>
 </head>
 <body>
@@ -142,7 +153,7 @@ main{padding:35px 0 90px}
 </header>
 <main class="wrap">
  <section class="listing" id="listing">
-  <div class="newsletter"><strong>Notre journal grandira avec le Crew.</strong> Des histoires vraies, des projets que l’on construit et des souvenirs partagés. Les photos de mineurs ne seront publiées qu’avec les autorisations nécessaires.</div>
+  <div class="newsletter"><strong>Notre journal grandira avec le Crew.</strong> Des histoires vraies, des projets que l’on construit et des souvenirs partagés. Les images d’ambiance sont des créations illustratives, pas des photos d’adhérents. Les photos de mineurs ne seront publiées qu’avec les autorisations nécessaires.</div>
   <div class="section-top">
    <h2>À lire dans le Crew</h2>
    <span class="count" id="article-count" aria-live="polite"></span>
@@ -221,6 +232,24 @@ main{padding:35px 0 90px}
  <p><a href="https://thecreworchies.blog/2026/09/09/avant-tiktok-on-savait-deja-danser/" target="_blank" rel="noopener">Lire l’article complet sur le site The Crew →</a></p>
 </template>
 
+
+<template id="body-souvenirs-du-crew">
+ <p>Il y a des souvenirs qu’on ne programme pas : une chanson que tout le groupe reconnaît, un rire pendant une répétition, une danse improvisée au dernier moment.</p>
+ <p>Le Crew Magazine veut garder une place pour ces instants. Pas forcément les plus spectaculaires, mais ceux qui racontent ce que l’on vit ensemble.</p>
+ <h2>Les petits moments ont leur place</h2>
+ <p>Un futur album du Crew pourra rassembler des dessins, des mots de parents, des photos autorisées et des récits de journées qui ont marqué l’association. Chaque famille gardera le choix de partager, ou non, son histoire et ses images.</p>
+ <blockquote>On vient pour danser. On reste pour les souvenirs.</blockquote>
+ <p>Le visuel de cet article est une illustration de notre univers, pas une photographie d’un véritable événement. Les albums personnels et les photos des enfants resteront soumis aux autorisations et aux accès appropriés.</p>
+</template>
+<template id="body-danse-inspiration">
+ <p>Pourquoi la danse nous fait-elle autant de bien ? Parce qu’elle offre parfois un endroit où l’on peut oublier une mauvaise journée et repartir avec un peu plus d’énergie.</p>
+ <h2>Il n’y a pas besoin d’être parfait</h2>
+ <p>On peut arriver avec deux pieds gauches, ne pas connaître la chanson et hésiter sur les huit premiers temps. Ce n’est pas grave. Une chorégraphie s’apprend en essayant, en recommençant et en prenant confiance.</p>
+ <p>Au Crew, la danse a plusieurs visages. Il y a les enfants qui découvrent, les ados qui cherchent leur style, les adultes qui se donnent un moment à eux et les familles qui se retrouvent sur la piste.</p>
+ <blockquote>Une équipe. Une énergie. Ta place.</blockquote>
+ <p>L’illustration de cet article évoque cette liberté de mouvement ; elle ne représente pas une séance photographiée de l’association.</p>
+</template>
+
 <template id="body-michael-jackson">
  <p>Un pas. Une silhouette. Tout le monde reconnaît. Des Jackson 5 à <em>Thriller</em>, Michael Jackson a transformé la chanson en spectacle et la chorégraphie en langage universel.</p>
  <p>Notre article déjà publié sur le site officiel s'intéresse à un artiste dont l'influence traverse les générations et continue de parler aux danseurs.</p>
@@ -230,11 +259,14 @@ main{padding:35px 0 90px}
 (function(){
  "use strict";
  const entries=[
- {slug:"bienvenue-au-crew",title:"Bienvenue dans le Crew Magazine",category:"Vie du Crew",date:"Édition 01 · Automne 2026",excerpt:"Un premier pas, une choré qu’on retient, un parent qui rejoint la danse : chaque petit moment compte.",intro:"On vient pour danser. On reste pour le Crew. Le premier édito d’un journal qui grandira avec nos histoires et nos souvenirs.",art:"Une équipe.\nUne énergie.",tone:"base",featured:true,read:"3 min"},
- {slug:"nos-petites-stars",title:"Nos petites stars : les premiers pas comptent",category:"Vie du Crew",date:"Édition 01 · Automne 2026",excerpt:"Un cours, une chanson, un peu d’hésitation puis beaucoup de fierté : la danse vue à hauteur d’enfant.",intro:"Parce que grandir dans la danse, c’est aussi apprendre à oser, écouter et faire une place aux autres.",art:"Nos petites\nstars",tone:"rose",read:"2 min"},
- {slug:"parents-dans-la-danse",title:"Quand les parents entrent dans la danse",category:"Familles",date:"Édition 01 · Automne 2026",excerpt:"La choré n’a pas besoin d’être parfaite pour que le moment soit inoubliable.",intro:"Et si les plus beaux souvenirs naissaient lorsque toutes les générations osent danser ensemble ?",art:"Ensemble,\non danse.",tone:"base",read:"2 min"},
- {slug:"nos-creations",title:"Du journal au passeport : les créations du Crew",category:"Créations",date:"Édition 01 · Automne 2026",excerpt:"Le journal du petit danseur, le passeport, les mascottes : dans les coulisses de nos projets.",intro:"L’univers The Crew prend aussi vie sur le papier, dans des souvenirs à personnaliser et dans de nouveaux personnages.",image:"project-covers/journal-petit-danseur.svg",read:"3 min"},
- {slug:"nos-rendez-vous",title:"Ateliers et rendez-vous : la saison se construit",category:"Agenda",date:"Édition 01 · Automne 2026",excerpt:"Des moments pour essayer, danser en famille et vivre d’autres ambiances musicales.",intro:"Des cours aux ateliers thématiques, le Crew se retrouve autour de nouvelles envies.",art:"À vivre\nensemble",tone:"rose",read:"2 min"},
+ {slug:"bienvenue-au-crew",title:"Bienvenue dans le Crew Magazine",category:"Vie du Crew",date:"Édition 01 · Automne 2026",excerpt:"Un premier pas, une choré qu’on retient, un parent qui rejoint la danse : chaque petit moment compte.",intro:"On vient pour danser. On reste pour le Crew. Le premier édito d’un journal qui grandira avec nos histoires et nos souvenirs.",art:"Une équipe.\nUne énergie.",tone:"base",featured:true,image:"https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-edito.png",read:"3 min"},
+ {slug:"nos-petites-stars",title:"Nos petites stars : les premiers pas comptent",category:"Vie du Crew",date:"Édition 01 · Automne 2026",excerpt:"Un cours, une chanson, un peu d’hésitation puis beaucoup de fierté : la danse vue à hauteur d’enfant.",intro:"Parce que grandir dans la danse, c’est aussi apprendre à oser, écouter et faire une place aux autres.",art:"Nos petites\nstars",tone:"rose",image:"https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-petites-stars.png",read:"2 min"},
+ {slug:"parents-dans-la-danse",title:"Quand les parents entrent dans la danse",category:"Familles",date:"Édition 01 · Automne 2026",excerpt:"La choré n’a pas besoin d’être parfaite pour que le moment soit inoubliable.",intro:"Et si les plus beaux souvenirs naissaient lorsque toutes les générations osent danser ensemble ?",art:"Ensemble,\non danse.",tone:"base",image:"https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-danse-en-famille.png",read:"2 min"},
+ {slug:"nos-creations",title:"Du journal au passeport : les créations du Crew",category:"Créations",date:"Édition 01 · Automne 2026",excerpt:"Le journal du petit danseur, le passeport, les mascottes : dans les coulisses de nos projets.",intro:"L’univers The Crew prend aussi vie sur le papier, dans des souvenirs à personnaliser et dans de nouveaux personnages.",image:"https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-creations.png",read:"3 min"},
+ {slug:"nos-rendez-vous",title:"Ateliers et rendez-vous : la saison se construit",category:"Agenda",date:"Édition 01 · Automne 2026",excerpt:"Des moments pour essayer, danser en famille et vivre d’autres ambiances musicales.",intro:"Des cours aux ateliers thématiques, le Crew se retrouve autour de nouvelles envies.",art:"À vivre\nensemble",tone:"rose",image:"https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-evenements.png",read:"2 min"},
+
+ {slug:"souvenirs-du-crew",title:"Les souvenirs qui nous rapprochent",category:"Vie du Crew",date:"Édition 01 · Automne 2026",excerpt:"Des moments qu’on partage et qu’on aura plaisir à retrouver, en gardant chacun le choix de participer.",intro:"Un jour, un rire, une chanson : ces petits moments font les grandes histoires du Crew.",image:"https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-souvenirs.png",read:"3 min"},
+ {slug:"danse-inspiration",title:"Danser à son rythme, avancer ensemble",category:"Familles",date:"Édition 01 · Automne 2026",excerpt:"Pas besoin de connaître les pas pour commencer : ce qui compte, c’est d’oser et de profiter du mouvement.",intro:"Danser, essayer, recommencer : la progression n’appartient pas qu’aux plus expérimentés.",image:"https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-inspiration.png",read:"2 min"},
  {slug:"avant-tiktok",title:"Avant TikTok, on savait déjà danser !",category:"Culture",date:"Publié le 9 sept. 2026",excerpt:"Rock, twist, madison, disco : chaque génération avait déjà sa manière d’envahir la piste.",intro:"Un article publié dans le Journal du Crew sur le site officiel.",art:"FLASHBACK\nDANCE",tone:"base",read:"Article original ↗",original:"https://thecreworchies.blog/2026/09/09/avant-tiktok-on-savait-deja-danser/"},
  {slug:"michael-jackson",title:"Michael Jackson : l’artiste qui a réuni toutes les générations",category:"Culture",date:"Publié le 11 sept. 2026",excerpt:"Un pas, une silhouette, des chansons et des chorégraphies qui parlent à toutes les générations.",intro:"Un article publié dans le Journal du Crew sur le site officiel.",art:"ICÔNES\nEN MOUVEMENT",tone:"white",read:"Article original ↗",original:"https://thecreworchies.blog/2026/09/11/michael-jackson-lartiste-qui-a-reuni-toutes-les-generations/"}
  ];
@@ -244,7 +276,7 @@ main{padding:35px 0 90px}
  const normalize=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
  const listing=document.querySelector("#listing"),articleView=document.querySelector("#article-view"),grid=document.querySelector("#article-list"),count=document.querySelector("#article-count");
  function picture(entry){
-  return entry.image?'<div class="article-visual"><img src="'+escapeHTML(entry.image)+'" alt="Illustration : '+escapeHTML(entry.title)+'" loading="lazy"></div>':
+  return entry.image?'<div class="article-visual mag-card-image"><img src="'+escapeHTML(entry.image)+'" alt="Illustration créée pour l’article : '+escapeHTML(entry.title)+'" loading="lazy" decoding="async"><span class="illustration-label">Illustration créée</span></div>':
    '<div class="article-visual noimage '+escapeHTML(entry.tone||"")+'"><span>'+escapeHTML(entry.art||"The Crew").replace(/\n/g,"<br>")+'</span></div>';
  }
  function card(entry){
@@ -266,7 +298,7 @@ main{padding:35px 0 90px}
  function renderStory(entry){
   const content=document.querySelector("#body-"+entry.slug);
   const related=entries.filter(e=>e.slug!==entry.slug&&(e.category===entry.category||e.featured)).slice(0,2);
-  const hero=entry.image?'<img class="story-image" src="'+escapeHTML(entry.image)+'" alt="Illustration de l’article">':'';
+  const hero=entry.image?'<img class="story-image" src="'+escapeHTML(entry.image)+'" alt="Illustration créée pour l’article : '+escapeHTML(entry.title)+'" decoding="async"><p class="mag-caption">Illustration créée pour Le Crew Magazine · Ne représente pas une photographie des adhérents ou d’un événement réel.</p>':'';
   articleView.innerHTML='<a class="back-link" href="crew-magazine.html">← Tous les articles</a>'+
   '<article><header class="story-header"><div class="kicker">'+escapeHTML(entry.category)+' · LE CREW MAGAZINE</div>'+
   '<h1>'+escapeHTML(entry.title)+'</h1><p class="story-intro">'+escapeHTML(entry.intro||entry.excerpt)+'</p>'+
