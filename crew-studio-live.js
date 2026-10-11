@@ -1,0 +1,27 @@
+/* CREW DIGITAL STUDIO — live secured layer */
+(async function(){
+const URL='https://voytsqyorhoveurnguxn.supabase.co';
+const KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
+const host=document.querySelector('main');if(!host)return;
+const section=document.createElement('section');section.className='panel active';section.style.display='block';section.innerHTML='<h2>📡 Studio connecté</h2><p id="cs-state">Connexion aux contenus...</p><div class="bar"><input type="email" id="cs-email" placeholder="Adresse e-mail" aria-label="Adresse e-mail"><button class="btn" id="cs-login">Recevoir un lien de connexion</button><button class="btn secondary" id="cs-logout" hidden>Se déconnecter</button></div><div id="cs-identity" class="muted"></div><h2>Contenus du Crew</h2><div id="cs-feed" class="grid"></div><div id="cs-admin" hidden><h2>Administration des contenus</h2><p>Crée ou publie une fiche. Les photos et vidéos de mineurs ne doivent pas être intégrées sans consentement et contrôle des accès.</p><form id="cs-form"><select name="module" required><option value="mag">Magazine</option><option value="series">Web-série</option><option value="chore">Chorégraphies</option><option value="cal">Calendrier</option><option value="photos">Souvenirs</option><option value="wheel">Défis</option><option value="cards">Cartes</option><option value="radio">Crew Radio</option><option value="year">Mon année</option><option value="mia">Mia</option></select><input name="title" placeholder="Titre" maxlength="160" required><textarea name="description" placeholder="Description" maxlength="2000"></textarea><input name="url" placeholder="Lien HTTPS facultatif" type="url"><input name="event_date" type="date"><select name="audience"><option value="public">Public</option><option value="member">Adhérents autorisés</option><option value="admin">Administration</option></select><select name="status"><option value="draft">Brouillon</option><option value="published">Publié</option></select><button class="btn">Enregistrer</button></form><p id="cs-admin-state"></p></div>';
+host.insertBefore(section,host.firstChild);
+const q=s=>section.querySelector(s),status=q('#cs-state'),feed=q('#cs-feed'),identity=q('#cs-identity');
+let client;
+try{const {createClient}=await import('https://esm.sh/@supabase/supabase-js@2.75.1');client=createClient(URL,KEY)}catch(e){status.textContent='Connexion momentanément indisponible.';return;}
+function el(tag,cls,txt){const e=document.createElement(tag);if(cls)e.className=cls;if(txt!=null)e.textContent=txt;return e}
+async function refresh(){
+ const {data:{user}}=await client.auth.getUser();
+ let role=null;if(user){const {data}=await client.from('crew_studio_access').select('role,enabled').eq('user_id',user.id).maybeSingle();if(data?.enabled)role=data.role}
+ identity.textContent=user?'Connecté : '+user.email+' · '+(role==='admin'?'Administrateur':role==='member'?'Adhérent autorisé':'Accès public uniquement'):'Consultation publique · connexion réservée aux comptes autorisés';
+ q('#cs-logout').hidden=!user;q('#cs-login').hidden=!!user;q('#cs-email').hidden=!!user;q('#cs-admin').hidden=role!=='admin';
+ const {data,error}=await client.from('crew_studio_content').select('id,module,title,description,url,audience,status,event_date').order('created_at',{ascending:false}).limit(100);
+ feed.replaceChildren();
+ if(error){status.textContent='Erreur de chargement : '+error.message;return}
+ status.textContent=(data?.length||0)+' contenus accessibles à ce compte';
+ for(const item of data||[]){const c=el('article','card');c.style.cursor='default';c.append(el('div','num',item.module.toUpperCase()+' · '+item.audience+(item.status==='draft'?' · Brouillon':'')),el('strong','',item.title),el('p','',item.description));if(item.event_date)c.append(el('p','',item.event_date));if(item.url){const a=el('a','', 'Ouvrir le contenu ↗');a.href=item.url;a.target='_blank';a.rel='noopener noreferrer';c.append(a)}if(role==='admin'){const b=el('button','btn secondary','Supprimer');b.type='button';b.addEventListener('click',async()=>{if(!confirm('Supprimer définitivement ce contenu ?'))return;const {error}=await client.from('crew_studio_content').delete().eq('id',item.id);if(error)alert(error.message);else refresh()});c.append(b)}feed.append(c)}
+}
+q('#cs-login').addEventListener('click',async()=>{const email=q('#cs-email').value.trim();if(!email)return;status.textContent='Demande en cours...';const {error}=await client.auth.signInWithOtp({email,options:{shouldCreateUser:false,emailRedirectTo:location.origin+location.pathname}});status.textContent=error?'Connexion impossible : '+error.message:'Si ce compte existe, un lien de connexion a été envoyé.'});
+q('#cs-logout').addEventListener('click',async()=>{await client.auth.signOut();refresh()});
+q('#cs-form').addEventListener('submit',async e=>{e.preventDefault();const form=new FormData(e.target);const item=Object.fromEntries(form.entries());item.url=item.url||null;item.event_date=item.event_date||null;const note=q('#cs-admin-state');const {error}=await client.from('crew_studio_content').insert(item);note.textContent=error?'Échec : '+error.message:'Contenu enregistré.';if(!error){e.target.reset();refresh()}});
+client.auth.onAuthStateChange(()=>setTimeout(refresh,0));await refresh();
+})();
