@@ -50,7 +50,8 @@ if(page==='eloah-projet.html'){
     picker.value=current;
   }
   try{
-    const pending=JSON.parse(sessionStorage.getItem('eloah-assistant-prefill-v2')||'null');
+    const saved=JSON.parse(sessionStorage.getItem('eloah-assistant-prefill-v2')||'null');
+    const pending=saved||((query.has('demande')&&query.get('demande'))?{project:query.get('projet')||'The Crew Orchies',prompt:query.get('demande'),at:Date.now()}:null);
     const selected=query.get('projet')||'The Crew Orchies';
     if(pending?.project===selected&&typeof pending.prompt==='string'&&pending.prompt.trim()&&Date.now()-pending.at<1800000){
       sessionStorage.removeItem('eloah-assistant-prefill-v2');
