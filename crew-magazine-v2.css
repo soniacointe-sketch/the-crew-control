@@ -96,3 +96,12 @@ main{padding:30px 0 58px}
 @media(max-width:1140px){.mag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.magazine-columns{grid-template-columns:minmax(0,2.2fr) minmax(250px,.95fr)}.masthead-inner{grid-template-columns:.85fr 1.2fr}.hero-aside{grid-column:1/-1;min-height:auto;text-align:center;padding:20px}.hero-aside .hero-cta{margin:auto}.hero-image{min-height:345px}.header-links{gap:0}}
 @media(max-width:870px){.header-inner{flex-wrap:wrap}.header-links{order:3;flex-basis:100%;justify-content:space-between;overflow-x:auto}.header-links a{padding:11px 7px;font-size:10px}.header-links a.current:after{bottom:5px}.header-actions{margin-left:auto}.magazine-columns{grid-template-columns:1fr}.magazine-sidebar{grid-template-columns:repeat(2,minmax(0,1fr))}.mag-sidebar-search-block{grid-column:1/-1}}
 @media(max-width:600px){.wrap{width:calc(100% - 28px)}.header-inner{min-height:0;padding:9px 0}.brand-title{font-size:15px}.brand-icon{width:42px;height:42px}.header-actions .icon-button{width:34px;height:34px}.header-links{display:flex;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:thin}.header-links a{flex:0 0 auto;font-size:10px}.masthead-inner{display:flex;flex-direction:column}.hero-intro{padding:29px 19px;text-align:center;width:100%}.hero-intro h1{font-size:clamp(46px,13vw,73px)}.hero-image{width:100%;min-height:220px;max-height:270px}.hero-aside{width:100%;padding:24px}.mag-grid{grid-template-columns:1fr}.article-visual{height:210px}.article-body{min-height:unset}.magazine-sidebar{grid-template-columns:1fr}.section-top h2{font-size:16px}.footer-columns{align-items:flex-start}.footer-columns>div{width:100%}}
+
+/* Lecture sans bandeau, ancrages non masqués par le menu fixe */
+body.mag-reading .masthead{display:none}
+#articles{scroll-margin-top:105px}
+.article-view .story-header{padding-top:4px}
+.header-links a[href^="#rubrique="][aria-current="page"]{color:#f0c879}
+.article-card:focus-within{border-color:#efd28e;box-shadow:0 0 0 2px #edc57a55}
+@media(max-width:870px){#articles{scroll-margin-top:155px}}
+@media(max-width:600px){#articles{scroll-margin-top:118px}}
