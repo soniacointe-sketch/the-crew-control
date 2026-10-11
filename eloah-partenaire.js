@@ -182,3 +182,879 @@ localStorage.setItem(marker,'installed');
 if(missing.length)$('#status').textContent=missing.length+' fiches de préparation ajoutées à Mon Espace. Personnalise-les avec Modifier.';
 }catch(e){$('#status').textContent='Les fiches de préparation n’ont pas pu être enregistrées sur ce navigateur.';}
 })();
+
+// Extend the initial 14 preparation cards once, preserving user changes.
+(function completeMySpace(){
+if(!storageReadable||cfg.id!=='itriia'||!cfg.modules.includes('Mon Espace'))return;
+const marker=key+'-mon-espace-seed-v2-100';
+try{
+if(localStorage.getItem(marker))return;
+const seed=[
+  {
+    "id": "eloah-mon-espace-v2-15",
+    "title": "15 · Accueil général",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Vérifier que le logo ELOAH et le bouton Accueil reviennent à Mes univers depuis chaque page.\nRÉSULTAT À VÉRIFIER : Un seul point de retour identifiable sur chaque écran.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-16",
+    "title": "16 · Entrée Tableau de bord",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Comparer le clic Tableau de bord au parcours demandé : ouverture du projet, titre visible et onglets accessibles.\nRÉSULTAT À VÉRIFIER : Le bouton mène au bon espace et ne ressemble pas à une simple liste de notes.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-17",
+    "title": "17 · Choix du projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Ouvrir The Crew Orchies, passer à un autre projet puis revenir et comparer titres et contenus.\nRÉSULTAT À VÉRIFIER : Les conversations, fichiers et paramètres ne se mélangent pas.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-18",
+    "title": "18 · Onglets du projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Contrôler Chat Projet, Fichiers, Facturation, Bases d’expertise, Équipe, Meta Projets Memory, Analytics et Paramètres.\nRÉSULTAT À VÉRIFIER : Chaque onglet indique clairement son contenu réel ou son état non connecté.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-19",
+    "title": "19 · Navigation mobile",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Parcourir l’accueil et un projet sur un écran étroit ; vérifier menus, titres et boutons.\nRÉSULTAT À VÉRIFIER : Aucun bouton indispensable hors écran et aucun texte coupé.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-20",
+    "title": "20 · Retour au bon univers",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Depuis un projet ouvert par un univers, essayer Retour et Changer d’univers.\nRÉSULTAT À VÉRIFIER : Le retour conserve un chemin compréhensible vers l’univers d’origine.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-21",
+    "title": "21 · Reprendre mon travail",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Choisir un projet déjà utilisé et vérifier son accès depuis la zone de reprise.\nRÉSULTAT À VÉRIFIER : Le raccourci ouvre le projet attendu sans recréer un doublon.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-22",
+    "title": "22 · Libellés ELOAH",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Relire les titres, boutons et descriptions visibles pour repérer les anciens noms ITRIIA.\nRÉSULTAT À VÉRIFIER : La marque affichée est cohérente sans casser les anciennes données.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-23",
+    "title": "23 · Écrans vides",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Examiner un projet sans conversation, fichier ou base ; relever les messages et boutons proposés.\nRÉSULTAT À VÉRIFIER : Chaque écran vide explique la première action possible.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-24",
+    "title": "24 · Liens utiles des notes",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Navigation & tableau de bord\nACTION PRÉCISE : Ouvrir les ressources des fiches et vérifier leur destination avec le titre de la fiche.\nRÉSULTAT À VÉRIFIER : Chaque lien mène au bon écran, les liens inutiles sont retirés.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-25",
+    "title": "25 · Première conversation",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Préparer une conversation « Programme et prochaines étapes » dans The Crew Orchies.\nRÉSULTAT À VÉRIFIER : Le contexte, le résultat attendu et les questions ouvertes sont explicites.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-26",
+    "title": "26 · Noms des conversations",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Définir des titres comme « Inscriptions — suivi », « Atelier — préparation » et « Site — corrections ».\nRÉSULTAT À VÉRIFIER : Chaque titre permet de retrouver son sujet sans ouvrir tous les échanges.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-27",
+    "title": "27 · Message de cadrage",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Rédiger un message avec projet, mission, informations disponibles, contraintes et livrable attendu.\nRÉSULTAT À VÉRIFIER : Le message peut être réutilisé sans inventer de contexte.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-28",
+    "title": "28 · Passage vers ChatGPT",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Tester la préparation du contexte et l’ouverture de ChatGPT depuis une conversation.\nRÉSULTAT À VÉRIFIER : Le texte transmis correspond au projet ; aucune réponse automatique n’est annoncée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-29",
+    "title": "29 · Retour de réponse",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Définir comment reprendre une réponse obtenue dans ChatGPT et la conserver dans le projet.\nRÉSULTAT À VÉRIFIER : La réponse reste attribuée et datée, sans être présentée comme un échange synchronisé.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-30",
+    "title": "30 · Décisions prises",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Créer une structure de décision : question, choix de Sonia, motif, conséquence et prochaine action.\nRÉSULTAT À VÉRIFIER : Une décision proposée se distingue d’une décision réellement validée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-31",
+    "title": "31 · Questions ouvertes",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Lister les questions qui empêchent une action et préciser qui peut répondre à chacune.\nRÉSULTAT À VÉRIFIER : Chaque question contient l’information manquante et l’action débloquée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-32",
+    "title": "32 · Thèmes de mémoire",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Proposer les thèmes organisation, contenu, développement, documents et événements.\nRÉSULTAT À VÉRIFIER : Les thèmes rassemblent des échanges utiles sans compter de faux éléments.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-33",
+    "title": "33 · Exclusion par cadenas",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Sur une conversation de test, vérifier le passage hors mémoire puis sa réactivation.\nRÉSULTAT À VÉRIFIER : La conversation reste accessible mais son contenu est exclu du contexte préparé.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-34",
+    "title": "34 · Consolidation manuelle",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Chat & mémoire\nACTION PRÉCISE : Choisir un échange de test et préparer une synthèse avec faits, décisions, questions et actions.\nRÉSULTAT À VÉRIFIER : La consolidation demande une action explicite et ne transforme pas une hypothèse en fait.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-35",
+    "title": "35 · État sans base",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Comparer l’écran vide à ton texte « Aucune base d’expertise » et au bouton de construction.\nRÉSULTAT À VÉRIFIER : Le texte explique l’utilité de la base et le bouton ouvre le formulaire.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-36",
+    "title": "36 · Fenêtre de construction",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Comparer le formulaire aux captures : titre, introduction, types de contenu et champs.\nRÉSULTAT À VÉRIFIER : La fenêtre est lisible, défilable et refermable sur ordinateur comme sur mobile.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-37",
+    "title": "37 · Base Libre",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Préparer une courte note de référence pour essayer le type Base Libre.\nRÉSULTAT À VÉRIFIER : Le type choisi et la source importée sont identifiables dans la base.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-38",
+    "title": "38 · Base Thématique Spécialisée",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Préparer trois textes courts sur un seul sujet et préciser leur point commun.\nRÉSULTAT À VÉRIFIER : Les sources restent distinctes dans une base au périmètre clair.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-39",
+    "title": "39 · Corpus Méthodologique Long",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Préparer le plan d’un manuel avec chapitres et sections avant tout import.\nRÉSULTAT À VÉRIFIER : La structure attendue est documentée ; les capacités réellement disponibles sont vérifiées.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-40",
+    "title": "40 · Corpus Scientifique",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Définir les champs à conserver : titre, auteurs, date, références et identifiant DOI si présent.\nRÉSULTAT À VÉRIFIER : Les références proviennent des documents et aucun DOI n’est inventé.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-41",
+    "title": "41 · Base Conceptuelle Structurante",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Choisir un cadre conceptuel et lister définitions, principes, limites et sources.\nRÉSULTAT À VÉRIFIER : Les interprétations personnelles sont séparées des affirmations sourcées.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-42",
+    "title": "42 · Nom et slug",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Choisir un nom lisible puis vérifier le slug automatique et les collisions de noms.\nRÉSULTAT À VÉRIFIER : Deux bases distinctes ne se remplacent pas à cause d’un nom similaire.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-43",
+    "title": "43 · Description et catégorie",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Décrire ce que la base couvre, ce qu’elle ne couvre pas et ses usages attendus.\nRÉSULTAT À VÉRIFIER : La description permet de décider rapidement s’il faut l’attacher à un projet.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-44",
+    "title": "44 · Modèle de synthèse",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Examiner les choix réellement proposés et documenter leur effet sur le résultat.\nRÉSULTAT À VÉRIFIER : Une option sans moteur connecté n’est pas présentée comme une analyse exécutée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-45",
+    "title": "45 · Première source importée",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Importer un petit document de test dans un format accepté et contrôler titre et texte.\nRÉSULTAT À VÉRIFIER : Le texte est lisible et rattaché à la bonne base.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-46",
+    "title": "46 · Découpage des sources",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Comparer les extraits générés au document de départ, notamment titres et paragraphes.\nRÉSULTAT À VÉRIFIER : Les extraits ne perdent pas le sens ni leur référence de source.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-47",
+    "title": "47 · Recherche dans une base",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Chercher une expression présente puis une expression absente et comparer les résultats.\nRÉSULTAT À VÉRIFIER : Le moteur retourne des extraits pertinents et sait indiquer une absence de résultat.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-48",
+    "title": "48 · Attachement au projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Attacher une base de test, vérifier son mode d’utilisation puis préparer un contexte.\nRÉSULTAT À VÉRIFIER : La base apparaît dans le bon projet et les extraits injectés sont identifiables.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-49",
+    "title": "49 · Mise à jour documentaire",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Bases d’expertise\nACTION PRÉCISE : Choisir une source modifiée et définir comment conserver date, version et provenance.\nRÉSULTAT À VÉRIFIER : Le lecteur peut distinguer la référence actuelle d’une ancienne version.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-50",
+    "title": "50 · Identité Projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Compléter nom, description et type pour The Crew Orchies à partir des informations validées.\nRÉSULTAT À VÉRIFIER : L’identité est sauvegardée et réapparaît après actualisation.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-51",
+    "title": "51 · Échéance du projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Choisir une date seulement si elle correspond à une décision réelle ; vérifier sa présentation française.\nRÉSULTAT À VÉRIFIER : Une date vide reste possible et aucune échéance arbitraire n’est ajoutée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-52",
+    "title": "52 · Tags du projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Préparer quelques tags utiles, puis essayer une saisie séparée par des virgules.\nRÉSULTAT À VÉRIFIER : Les tags sont lisibles, sans doublons et utiles pour retrouver le projet.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-53",
+    "title": "53 · Compteurs de mémoire",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Comparer conversations, thèmes, décisions et profondeur mémoire aux données présentes.\nRÉSULTAT À VÉRIFIER : Les chiffres proviennent des données réelles, pas des valeurs de la capture.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-54",
+    "title": "54 · Résumé complet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Ouvrir le résumé et comparer ses décisions et questions à celles enregistrées.\nRÉSULTAT À VÉRIFIER : Le résumé correspond au projet affiché et signale les informations manquantes.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-55",
+    "title": "55 · Sessions hors mémoire",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Vérifier la liste après exclusion d’une conversation puis après sa réactivation.\nRÉSULTAT À VÉRIFIER : La liste reflète l’état réel du cadenas.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-56",
+    "title": "56 · Stockage et quota",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Comparer nombre de fichiers et volume avec les fichiers réellement enregistrés.\nRÉSULTAT À VÉRIFIER : Le quota affiché indique sa portée et ne promet pas un stockage distant inexistant.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-57",
+    "title": "57 · Équipe Projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Définir les rôles nécessaires et vérifier les fonctions réellement disponibles pour les membres.\nRÉSULTAT À VÉRIFIER : Sonia reste identifiable comme créatrice ; aucune invitation fictive n’est affichée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-58",
+    "title": "58 · Budget maximum",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Préparer un budget de travail et vérifier la différence entre prévision locale et limite réellement appliquée.\nRÉSULTAT À VÉRIFIER : La page ne prétend pas bloquer des coûts externes si aucun contrôle n’est connecté.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-59",
+    "title": "59 · Seuil et période budgétaires",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Essayer un seuil d’alerte et une période mensuelle ; vérifier leur sauvegarde.\nRÉSULTAT À VÉRIFIER : Les préférences persistent et le fonctionnement des alertes est décrit honnêtement.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-60",
+    "title": "60 · Préférences de consolidation",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Vérifier les champs messages, inactivité et coût ainsi que le bouton Enregistrer.\nRÉSULTAT À VÉRIFIER : Les seuils sont conservés sans déclencher une consolidation automatique.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-61",
+    "title": "61 · Historique des consolidations",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Examiner les informations conservées pour une consolidation : origine, synthèse et date.\nRÉSULTAT À VÉRIFIER : Les messages d’origine restent récupérables selon le fonctionnement effectivement implémenté.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-62",
+    "title": "62 · Bases attachées dans Paramètres",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Comparer la liste des bases attachées à celle de l’onglet Bases d’expertise.\nRÉSULTAT À VÉRIFIER : Les deux écrans montrent les mêmes rattachements et modes.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-63",
+    "title": "63 · Archivage du projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Définir puis vérifier sur un projet de test comment archiver et retrouver un projet.\nRÉSULTAT À VÉRIFIER : L’archive est réversible et son contenu reste disponible.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-64",
+    "title": "64 · Suppression du projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Paramètres du projet\nACTION PRÉCISE : Préparer un scénario de vérification sans supprimer de données réelles : saisie du nom et périmètre annoncé.\nRÉSULTAT À VÉRIFIER : La confirmation précise ce qui serait supprimé localement ou à distance.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-65",
+    "title": "65 · Import de fichiers",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Essayer un petit document non sensible et vérifier son nom, sa taille et son projet.\nRÉSULTAT À VÉRIFIER : Le fichier reste accessible après actualisation.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-66",
+    "title": "66 · Téléchargement de contrôle",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Télécharger un fichier de test déjà ajouté et comparer son contenu à l’original.\nRÉSULTAT À VÉRIFIER : Le téléchargement restitue le bon fichier sans corruption.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-67",
+    "title": "67 · Recherche de documents",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Chercher un fichier par son nom puis filtrer par projet dans la bibliothèque.\nRÉSULTAT À VÉRIFIER : Le résultat permet d’identifier son projet avant ouverture.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-68",
+    "title": "68 · Classement par projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Définir les dossiers ou catégories nécessaires avant de déplacer des documents.\nRÉSULTAT À VÉRIFIER : Chaque document possède une destination claire sans duplication inutile.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-69",
+    "title": "69 · Organisation IA proposée",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Rédiger les règles souhaitées de classement : types de fichiers, noms et exceptions.\nRÉSULTAT À VÉRIFIER : Le plan est relu avant toute application et ne prétend pas qu’une IA a déjà classé les fichiers.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-70",
+    "title": "70 · Journal et annulation",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Décrire les informations nécessaires au journal d’organisation et au retour à l’emplacement initial.\nRÉSULTAT À VÉRIFIER : La possibilité d’annuler pendant 72 h est vérifiée avant d’être annoncée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-71",
+    "title": "71 · Plan d’un document",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Préparer un plan de rapport avec contexte, objectifs, actions, résultats et annexes.\nRÉSULTAT À VÉRIFIER : Chaque chapitre a une fonction et les sources nécessaires sont listées.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-72",
+    "title": "72 · Versions de chapitre",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Créer deux versions de test d’un paragraphe et vérifier leur conservation.\nRÉSULTAT À VÉRIFIER : La version retenue est identifiable et l’ancienne reste consultable.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-73",
+    "title": "73 · Comparaison de versions",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Comparer deux versions en distinguant corrections, ajouts et changements de sens.\nRÉSULTAT À VÉRIFIER : Les différences sont lisibles avant validation d’une nouvelle version.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-74",
+    "title": "74 · Brief de révision IA",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Documents & écriture\nACTION PRÉCISE : Préparer une consigne de révision indiquant lecteur, ton, longueur et éléments intouchables.\nRÉSULTAT À VÉRIFIER : Le texte révisé conserve les faits et les changements sont soumis à relecture.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-75",
+    "title": "75 · Export de Mon Espace",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Exporter les notes puis contrôler que titres, statuts, dates, liens et archives sont inclus.\nRÉSULTAT À VÉRIFIER : Le fichier contient les données nécessaires à une restauration.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-76",
+    "title": "76 · Restauration isolée",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Préparer un test de restauration dans un profil de test avec une copie de sauvegarde.\nRÉSULTAT À VÉRIFIER : Le remplacement est annoncé et aucune donnée de travail n’est écrasée pour le test.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-77",
+    "title": "77 · Persistance des notes",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Modifier une fiche de test, actualiser la page puis la retrouver par recherche.\nRÉSULTAT À VÉRIFIER : La modification est conservée sans ajout de doublon.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-78",
+    "title": "78 · Archives des notes",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Archiver une fiche de test, la retrouver dans Archives puis la restaurer.\nRÉSULTAT À VÉRIFIER : Le titre, la note et le statut restent identiques après restauration.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-79",
+    "title": "79 · Sauvegarde privée de projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Préparer une première sauvegarde après connexion personnelle, puis vérifier sa présence et son horodatage.\nRÉSULTAT À VÉRIFIER : Le succès est confirmé par une version réellement disponible.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-80",
+    "title": "80 · Périmètre des sauvegardes",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Lister séparément notes, conversations, fichiers et bases, avec leur méthode de sauvegarde.\nRÉSULTAT À VÉRIFIER : Aucune rubrique n’est supposée protégée par une sauvegarde qui ne la contient pas.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-81",
+    "title": "81 · Erreurs de stockage",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Prévoir le message et la marche à suivre quand le navigateur refuse un enregistrement.\nRÉSULTAT À VÉRIFIER : L’utilisateur sait que la saisie n’est pas sauvegardée et peut exporter ce qui reste accessible.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-82",
+    "title": "82 · Liens et erreurs de navigation",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Recenser les liens cassés rencontrés avec page de départ, cible et résultat attendu.\nRÉSULTAT À VÉRIFIER : Chaque anomalie possède une reproduction claire et une correction à vérifier.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-83",
+    "title": "83 · Accessibilité des formulaires",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Parcourir les champs au clavier et vérifier intitulés, focus et fermeture des fenêtres.\nRÉSULTAT À VÉRIFIER : Les actions essentielles sont utilisables sans souris.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-84",
+    "title": "84 · Recette avant mise en service",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Sauvegarde & validation\nACTION PRÉCISE : Regrouper les contrôles indispensables : navigation, saisie, persistance, recherche, export et restauration.\nRÉSULTAT À VÉRIFIER : Chaque contrôle porte une preuve ou la mention non testé.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-85",
+    "title": "85 · The Crew — programme du projet",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Préparer une demande ChatGPT sur le programme de The Crew, ses objectifs et ses trois prochaines étapes.\nRÉSULTAT À VÉRIFIER : Le programme distingue informations vérifiées, questions et actions proposées.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-86",
+    "title": "86 · The Crew — préparation des séances",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Préparer un brief de séance avec groupe, durée, objectif, matériel et progression.\nRÉSULTAT À VÉRIFIER : Le brief peut être relu dans THE CREW ACADEMY avant utilisation.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-87",
+    "title": "87 · The Crew — préparation d’un atelier",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Rassembler titre, public, déroulé, lieu, tarif et lien d’inscription à confirmer.\nRÉSULTAT À VÉRIFIER : La fiche événement ne publie aucune date ou disponibilité non vérifiée.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-88",
+    "title": "88 · The Crew — journal en ligne",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Préparer la vérification de la une, des neuf articles et des sept images déjà demandés.\nRÉSULTAT À VÉRIFIER : Les articles s’ouvrent et les visuels restent associés au bon contenu.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-89",
+    "title": "89 · Power & Glam — calendrier de travail",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Préparer le lien entre un sujet, son univers, sa date envisagée et ses déclinaisons.\nRÉSULTAT À VÉRIFIER : Chaque entrée indique le livrable à produire et son état réel.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-90",
+    "title": "90 · Power & Glam — brief de contenu",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Structurer un brief avec sujet, Amour/Beauté/Argent/Vie/Désir, audience, format et intention.\nRÉSULTAT À VÉRIFIER : Le brief est assez précis pour créer un contenu sans réinventer la demande.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-91",
+    "title": "91 · Power & Glam — prompts de production",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Définir les champs d’un prompt réutilisable : mission, contexte, contraintes, sources et sortie attendue.\nRÉSULTAT À VÉRIFIER : Le prompt reprend les informations de la fiche concernée sans ajouter de faits.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-92",
+    "title": "92 · SONIA OS — fiche de mission",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Préparer une mission avec agent demandé, objectif, périmètre, autorité et preuve attendue.\nRÉSULTAT À VÉRIFIER : La fiche distingue une consigne de travail d’une intégration technique réelle.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-93",
+    "title": "93 · SONIA OS — ROUTER",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Rassembler les preuves à chercher sur l’orientation des missions et les destinations possibles.\nRÉSULTAT À VÉRIFIER : Une liaison est marquée vérifiée seulement avec une observation reproductible.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-94",
+    "title": "94 · SONIA OS — LE SIÈGE",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Préparer le dossier de délibération : question, options, critères, objections et décision réservée à Sonia.\nRÉSULTAT À VÉRIFIER : Les analyses simulées restent distinctes des réponses réelles des outils.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-95",
+    "title": "95 · Meta Projets Memory — liens utiles",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Connexions et pilotage\nACTION PRÉCISE : Identifier les projets qui doivent partager des références et préciser la raison de chaque lien.\nRÉSULTAT À VÉRIFIER : La liste distingue un lien souhaité d’un rattachement techniquement disponible.\nREPÈRE : proposition issue de nos échanges ; disponibilité technique à vérifier.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-96",
+    "title": "96 · Meta Projets Memory — insights",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Connexions et pilotage\nACTION PRÉCISE : Définir un insight avec projets sources, observation, utilité et proposition d’action.\nRÉSULTAT À VÉRIFIER : Chaque rapprochement est traçable et ne mélange pas des données sans rapport.\nREPÈRE : proposition issue de nos échanges ; disponibilité technique à vérifier.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-97",
+    "title": "97 · Facturation — périmètre réel",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Connexions et pilotage\nACTION PRÉCISE : Lister les informations souhaitées : dépenses, fournisseur, période et justificatif ; vérifier les données accessibles.\nRÉSULTAT À VÉRIFIER : Aucun montant fictif ni paiement non connecté ne figure comme transaction réelle.\nREPÈRE : proposition issue de nos échanges ; disponibilité technique à vérifier.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-98",
+    "title": "98 · Analytics — indicateurs utiles",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Connexions et pilotage\nACTION PRÉCISE : Choisir trois indicateurs locaux utiles, par exemple actions terminées, questions ouvertes et fichiers par projet.\nRÉSULTAT À VÉRIFIER : Chaque indicateur indique sa source et sa période, sans confusion avec les statistiques des sites.\nREPÈRE : proposition issue de nos échanges ; disponibilité technique à vérifier.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-99",
+    "title": "99 · Transmission vers ChatGPT — contexte maîtrisé",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Connexions et pilotage\nACTION PRÉCISE : Relire le texte préparé avant ouverture : projet, fiche sélectionnée, mission et résultat attendu.\nRÉSULTAT À VÉRIFIER : Seules les informations utiles sont transmises ; le retour dans ELOAH reste expliqué.\nREPÈRE : proposition issue de nos échanges ; disponibilité technique à vérifier.",
+    "url": "",
+    "archived": false
+  },
+  {
+    "id": "eloah-mon-espace-v2-100",
+    "title": "100 · ELOAH — revue des 100 fiches",
+    "module": "Mon Espace",
+    "state": "À faire",
+    "date": "",
+    "note": "CHANTIER : Univers & missions\nACTION PRÉCISE : Rechercher les doublons, choisir dix priorités et préciser la prochaine action de chacune.\nRÉSULTAT À VÉRIFIER : Un ordre de travail court se dégage ; les autres fiches restent disponibles sans fausse échéance.\nREPÈRE : fiche de travail proposée à partir de nos échanges ; réalisation et validation à confirmer.",
+    "url": "",
+    "archived": false
+  }
+];
+const ids=new Set(rows.map(r=>r.id));
+const missing=seed.filter(r=>!ids.has(r.id));
+if(missing.length&&!save([...rows,...missing]))return;
+localStorage.setItem(marker,'installed');
+if(missing.length)$('#status').textContent=missing.length+' nouvelles fiches ajoutées : la collection Mon Espace comprend désormais 100 propositions modifiables.';
+}catch(e){$('#status').textContent='Ajout des nouvelles fiches impossible : vérifie le stockage de ce navigateur.';}
+})();
