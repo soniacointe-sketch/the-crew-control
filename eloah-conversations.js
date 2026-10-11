@@ -161,6 +161,7 @@ for(const t of remembered().filter(t=>t.id===active).concat(remembered().filter(
 let text=parts.join('\n\n');if(text.length>11000){text=text.slice(0,11000);cut=true}
 return responseGuide+'\n\n'+eloahUniverseContext()+'\n\nCONTEXTE DU PROJET\n'+text+(cut?'\n[Une partie du contexte a été abrégée.]':'')+'\n\nDEMANDE ACTUELLE :\n'+question;
 }
+window.eloahBuildContext=buildContext;
 $('compose').onsubmit=e=>{
 e.preventDefault();const question=$('message-input').value.trim();if(!question)return;
 let review=$('conversation-review');if(!review){review=document.createElement('dialog');review.id='conversation-review';document.body.appendChild(review)}
