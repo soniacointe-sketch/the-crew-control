@@ -37,7 +37,7 @@ const harmony=document.createElement('style');harmony.textContent=`
 .eloah-menu[open] summary{background:#eee8f7}
 .eloah-menu-links{position:absolute;right:0;top:calc(100% + 8px);width:min(285px,calc(100vw - 24px));max-height:calc(100dvh - 76px);overflow:auto;border:1px solid #d7d9d1;padding:8px;background:#fff;border-radius:12px;box-shadow:0 14px 35px #1c25252b;white-space:normal}
 .eloah-menu-links a{border-radius:6px}
-.eloah-screen :where(main,.panel,.panel-card,.split>*,.grid>*){min-width:0}
+.eloah-screen :where(main,aside,.layout>*,.panel,.panel-card,.split>*,.grid>*){min-width:0}
 .eloah-screen :where(button,a,input,select,textarea,summary):focus-visible{outline:2px solid #7762af;outline-offset:3px}
 .eloah-screen :where(dialog){max-width:calc(100vw - 24px);max-height:90dvh;box-sizing:border-box}
 .eloah-screen .ops-actions{align-items:end}
@@ -65,6 +65,7 @@ const harmony=document.createElement('style');harmony.textContent=`
 .eloah-screen .ops-grid{grid-template-columns:minmax(0,1fr)}
 .eloah-screen .ops-actions>*{max-width:100%}
 }
+@media(max-width:360px){.eloah-global-nav a,.eloah-global-nav summary{font-size:11px;padding:6px}.eloah-global-nav{gap:2px}.eloah-global-nav .eloah-wordmark{margin:0}}
 @media(prefers-reduced-motion:reduce){.eloah-screen *{scroll-behavior:auto!important;animation:none!important}}
 `;document.head.appendChild(harmony);
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -82,7 +83,7 @@ if(page==='eloah-projet.html'){
  const view=query.get('onglet');if(view==='fichiers')showTab('Fichiers');if(view==='bases'){openedBase=query.get('baseId')||null;showTab('Bases d’Expertise');if(query.get('construire')==='1')buildBase()}
  if(query.get('compte')==='1')document.getElementById('cloud-entry')?.click();
 }
-if(page==='eloah-partenaire.html'||page==='eloah-control.html'){
+if(page==='eloah-partenaire.html'||document.getElementById('config')){
 const theme=document.createElement('style');theme.textContent='body{background:#f6f5f0!important;color:#303530!important;--bg:#f6f5f0;--text:#303530;--muted:#6d746b;--line:#dedfd7;--accent:#7762af}aside{background:#f0f0eb!important;border-color:#dedfd7!important}aside .brand,main h1,main h2,main h3{color:#303530!important}.panel,.hero,.row,dialog,.metrics>div{background:#fff!important;border-color:#dedfd7!important;color:#303530!important}input,select,textarea{background:#fff!important;color:#303530!important;border-color:#d9dcd4!important}button,.button{background:#fff!important;color:#4f5750!important;border-color:#d9dcd4}.eyebrow{color:#737969!important}.metrics strong{color:#7762af!important}button.primary{background:#7762af!important;color:white!important}#moduleHelp{border-color:#d9dcd4!important;color:#687164!important}aside a,aside button{color:#626b60!important}aside button.active{background:#e9e4f2!important;color:#715c9c!important}';document.head.appendChild(theme);
 if(page==='eloah-partenaire.html'){
  document.querySelector('h1').textContent='Notes & préparation';document.querySelector('.hero h2').textContent='Tes idées, briefs et prochaines étapes.';
