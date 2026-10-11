@@ -316,7 +316,8 @@ main{padding:35px 0 90px}
  {slug:"michael-jackson",title:"Michael Jackson : l’artiste qui a réuni toutes les générations",category:"Culture",date:"Publié le 11 sept. 2026",excerpt:"Un pas, une silhouette, des chansons et des chorégraphies qui parlent à toutes les générations.",intro:"Un article publié dans le Journal du Crew sur le site officiel.",art:"ICÔNES\nEN MOUVEMENT",tone:"white",read:"Article original ↗",original:"https://thecreworchies.blog/2026/09/11/michael-jackson-lartiste-qui-a-reuni-toutes-les-generations/"}
  ];
  let chosen="Tout voir",search="";
- const categories=["Tout voir","Vie du Crew","Familles","Créations","Agenda","Culture"];
+ const categories=["Tout voir","Édito","Vie du Crew","Familles","Agenda","Créations","Culture"];
+ const icons={"Tout voir":"▦","Édito":"✎","Vie du Crew":"♛","Familles":"♡","Agenda":"▣","Créations":"✧","Culture":"✦"};
  const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
  const normalize=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
  const listing=document.querySelector("#listing"),articleView=document.querySelector("#article-view"),grid=document.querySelector("#article-list"),count=document.querySelector("#article-count");
@@ -331,10 +332,13 @@ main{padding:35px 0 90px}
   '<a class="read-link" href="#article='+encodeURIComponent(entry.slug)+'" aria-label="Lire : '+escapeHTML(entry.title)+'"><span>Lire l’article</span><span class="arrow" aria-hidden="true">↗</span></a></div></article>';
  }
  function filters(){
-  document.querySelector("#article-filters").innerHTML=categories.map(c=>'<button type="button" data-category="'+escapeHTML(c)+'" aria-pressed="'+String(c===chosen)+'">'+escapeHTML(c)+'</button>').join("");
+  document.querySelector("#article-filters").innerHTML=categories.map(c=>{
+   const n=entries.filter(e=>c==="Tout voir"||(c==="Édito"?e.featured:e.category===c)).length;
+   return '<button type="button" data-category="'+escapeHTML(c)+'" aria-pressed="'+String(c===chosen)+'"><span class="filter-name"><span class="filter-icon" aria-hidden="true">'+escapeHTML(icons[c]||"✦")+'</span>'+escapeHTML(c)+'</span><span class="filter-count">'+n+' ›</span></button>';
+  }).join("");
  }
  function renderList(){
-  const matches=entries.filter(e=>(chosen==="Tout voir"||e.category===chosen)&&normalize(e.title+" "+e.excerpt+" "+e.category).includes(normalize(search)));
+  const matches=entries.filter(e=>(chosen==="Tout voir"||(chosen==="Édito"?e.featured:e.category===chosen))&&normalize(e.title+" "+e.excerpt+" "+e.category).includes(normalize(search)));
   grid.innerHTML=matches.map(card).join("");
   count.textContent=matches.length+" article"+(matches.length>1?"s":"");
   document.querySelector("#nothing-found").hidden=matches.length!==0;
@@ -361,19 +365,52 @@ main{padding:35px 0 90px}
  }
  function route(){
   const match=location.hash.match(/^#article=([^&]+)/);
-  const slug=match?decodeURIComponent(match[1]):"";
+  let slug="";
+  try{slug=match?decodeURIComponent(match[1]):"";}catch(err){slug="";}
   const entry=entries.find(e=>e.slug===slug);
   const inStory=Boolean(entry);
+  const group=location.hash.match(/^#rubrique=([^&]+)/);
+  if(!inStory){
+   if(group){
+    let c="";try{c=decodeURIComponent(group[1]);}catch(err){}
+    chosen=categories.includes(c)?c:"Tout voir";
+   } else if(location.hash==="#articles"||location.hash===""||location.hash==="#accueil"){
+    chosen="Tout voir";
+   }
+  }
   listing.hidden=inStory;articleView.hidden=!inStory;
+  document.body.classList.toggle("mag-reading",inStory);
   if(inStory){renderStory(entry);document.title=entry.title+" — Le Crew Magazine";}
   else{document.title="Le Crew Magazine — The Crew Orchies";renderList();}
-  window.scrollTo({top:0,behavior:"instant"});
+  if(inStory){
+   window.scrollTo({top:0,behavior:"instant"});
+  }else if(group||location.hash==="#articles"){
+   requestAnimationFrame(()=>document.querySelector("#articles")?.scrollIntoView({behavior:"instant",block:"start"}));
+  }else{
+   window.scrollTo({top:0,behavior:"instant"});
+  }
  }
  document.querySelector("#article-filters").addEventListener("click",event=>{
   const b=event.target.closest("[data-category]");if(!b)return;
-  chosen=b.dataset.category;renderList();
+  const selected=b.dataset.category;
+  if(!categories.includes(selected))return;
+  chosen=selected;
+  const desired=selected==="Tout voir"?"#articles":"#rubrique="+encodeURIComponent(selected);
+  if(location.hash===desired){renderList();document.querySelector("#articles")?.scrollIntoView({block:"start"});}
+  else location.hash=desired;
  });
- document.querySelector("#article-search").addEventListener("input",event=>{search=event.target.value;renderList();});
+ const searchInput=document.querySelector("#article-search");
+ document.querySelector("#article-search-form").addEventListener("submit",event=>{
+  event.preventDefault();
+  if(location.hash.startsWith("#article=")){location.hash="#articles";}
+  else {renderList();document.querySelector("#articles")?.scrollIntoView({block:"start"});}
+ });
+ searchInput.addEventListener("input",event=>{search=event.target.value;renderList();});
+ document.querySelector("#search-trigger").addEventListener("click",()=>{
+  if(location.hash.startsWith("#article="))location.hash="#articles";
+  else document.querySelector("#articles")?.scrollIntoView({block:"start"});
+  requestAnimationFrame(()=>searchInput.focus({preventScroll:true}));
+ });
  window.addEventListener("hashchange",route);
  route();
 })();
