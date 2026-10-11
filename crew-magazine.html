@@ -1,0 +1,305 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#100f0d">
+<meta name="description" content="Le Crew Magazine : le journal en ligne de The Crew Orchies. Histoires, coulisses, danse en famille, créations et rendez-vous.">
+<title>Le Crew Magazine — The Crew Orchies</title>
+<link rel="icon" href="crew-icon.svg" type="image/svg+xml">
+<style>
+:root{color-scheme:dark;--bg:#0a0a09;--panel:#161512;--ivory:#f7f0e4;--gold:#ddba72;--gold2:#a27c3d;--pink:#dd5988;--muted:#b6ad9f;--line:#50442f}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ivory);font:16px/1.6 "Trebuchet MS",Arial,sans-serif}
+a{color:inherit}
+button,input{font:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--gold);outline-offset:4px}
+.wrap{width:min(1250px,calc(100% - 44px));margin:0 auto}
+.topline{height:5px;background:linear-gradient(90deg,#a27635,#f4d993,#dc5886,#e3be77)}
+.header{position:sticky;top:0;z-index:20;background:#0b0a09eb;backdrop-filter:blur(15px);border-bottom:1px solid #483723}
+.header-inner{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:12px 0}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;flex:0 1 auto}
+.brand-icon{width:51px;height:51px;object-fit:contain}
+.brand-title{font:800 19px/1.05 Georgia,serif;letter-spacing:.06em;color:#f4e6c5}
+.brand-title span{display:block;font:700 9px Arial,sans-serif;letter-spacing:.30em;color:var(--gold);margin-top:6px}
+.header-links{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.header-links a,.action{display:inline-flex;align-items:center;justify-content:center;padding:9px 13px;border-radius:9px;text-decoration:none;border:1px solid #655234;color:#ead9b5;font-size:12px;font-weight:700;letter-spacing:.02em;background:#18150f}
+.header-links a:hover,.action:hover{border-color:var(--gold);background:#312719}
+.header-links .home-link{color:#17120c;background:var(--gold);border-color:var(--gold)}
+.masthead{position:relative;isolation:isolate;overflow:hidden;background:radial-gradient(circle at 80% 31%,#5b402257,transparent 36%),radial-gradient(circle at 10% 100%,#67334a44,transparent 36%),#0b0b0a;border-bottom:1px solid #594528}
+.masthead:before{content:"";position:absolute;inset:0;z-index:-1;opacity:.16;background-image:radial-gradient(#ffe1a2 1px, transparent 1px);background-size:29px 29px;mask-image:linear-gradient(90deg,transparent 20%,#000)}
+.masthead:after{content:"✦";position:absolute;z-index:-1;right:-15px;bottom:-90px;font:350px Georgia,serif;color:#e5b96912}
+.masthead-inner{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(230px,.6fr);align-items:center;gap:30px;min-height:360px;padding:56px 0 62px}
+.kicker{color:var(--gold);font:800 11px Arial,sans-serif;letter-spacing:.27em;text-transform:uppercase}
+.masthead h1{font:clamp(55px,9.5vw,120px)/.91 Georgia,serif;letter-spacing:-.065em;margin:13px 0 20px}
+.masthead h1 em{color:var(--gold);font-weight:400}
+.masthead .lead{color:#f2e5d0;max-width:640px;font-size:clamp(16px,1.6vw,21px);line-height:1.55}
+.masthead .signature{font:italic 24px Georgia,serif;color:var(--gold);line-height:1.2;margin:20px 0 0}
+.hero-aside{border:1px solid #796035;border-radius:16px;padding:25px;min-height:220px;background:linear-gradient(155deg,#21190f,#100e0b);position:relative;box-shadow:0 15px 60px #0006}
+.hero-aside:before{content:"✦";position:absolute;right:17px;top:9px;color:#d9aa5a55;font-size:80px}
+.hero-aside .no{font-size:11px;letter-spacing:.19em;color:var(--gold)}
+.hero-aside strong{display:block;font:32px Georgia,serif;margin:21px 0 10px}
+.hero-aside p{font-size:14px;color:#c7bbab;margin:0 0 18px}
+.hero-aside a{font-weight:800;color:var(--gold);font-size:13px;text-decoration:none}
+main{padding:35px 0 90px}
+.section-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin:0 0 18px}
+.section-top h2{font:36px Georgia,serif;margin:0}
+.section-top .count{color:var(--muted);font-size:13px}
+.newsletter{border-left:3px solid var(--gold);padding:13px 20px;margin:0 0 30px;background:linear-gradient(90deg,#2a2115,#11100e);color:#e1d7c7;font-size:15px}
+.newsletter strong{color:#f7e1aa}
+.mag-toolbar{display:flex;align-items:center;gap:13px;flex-wrap:wrap;margin:23px 0}
+.mag-search{min-width:220px;flex:1;background:#171611;border:1px solid #77603a;border-radius:11px;color:#f4efe6;padding:13px 15px}
+.filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.filters button{border:1px solid #5f5036;background:#15130f;border-radius:100px;color:#d7c9af;padding:10px 13px;font-size:12px}
+.filters button[aria-pressed=true]{color:#19130b;background:var(--gold);border-color:var(--gold);font-weight:800}
+.mag-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.article-card{overflow:hidden;background:linear-gradient(150deg,#1d1a15,#11110f);border:1px solid #51432f;border-radius:16px;display:flex;flex-direction:column;min-width:0;transition:transform .2s,border-color .2s}
+.article-card:hover{transform:translateY(-3px);border-color:#c29a53}
+.article-card[hidden]{display:none}
+.article-visual{position:relative;display:block;height:185px;background:#35271a;overflow:hidden}
+.article-visual img{display:block;width:100%;height:100%;object-fit:cover}
+.article-visual.noimage{display:grid;place-items:center;background:radial-gradient(circle at 65% 35%,#684d27,#241c16 52%,#0d0c0b)}
+.article-visual.noimage:before{content:"";position:absolute;inset:0;background:radial-gradient(#f5ce7c 1px,transparent 1px);background-size:24px 24px;opacity:.15}
+.article-visual.noimage span{font:clamp(28px,3.7vw,56px) Georgia,serif;text-align:center;line-height:1.05;color:#f0d29c;letter-spacing:-.04em;padding:10px;z-index:1}
+.article-visual.rose{background:radial-gradient(circle at 70% 20%,#a74864,#341927 57%,#110e11)}
+.article-visual.rose span{color:#f6d7e1}
+.article-visual.white{background:linear-gradient(125deg,#e9dfcf,#fef9f0);color:#21160b}
+.article-visual.white span{color:#2c241b}
+.article-visual span.pill{font:700 10px Arial,sans-serif;position:absolute;bottom:12px;left:13px;padding:6px 9px;background:#0c0c0bcc;color:#f2dcb2;border:1px solid #a3834a;border-radius:20px;letter-spacing:.1em;text-transform:uppercase}
+.article-body{padding:19px;display:flex;flex-direction:column;flex:1}
+.meta{font:700 11px Arial,sans-serif;letter-spacing:.11em;color:var(--gold);text-transform:uppercase}
+.article-body h3{font:27px/1.16 Georgia,serif;margin:10px 0 9px;letter-spacing:-.02em}
+.article-body p{font-size:13.5px;color:#c6beaf;line-height:1.6;margin:0 0 18px}
+.read-link{margin-top:auto;display:flex;justify-content:space-between;align-items:center;text-decoration:none;border-top:1px solid #463b2a;padding-top:12px;color:#e5bc6f;font-weight:800;font-size:13px}
+.read-link .arrow{font-size:21px}
+.empty{padding:40px;text-align:center;border:1px dashed #705c36;border-radius:12px;color:#cabda8}
+.article-view[hidden],.listing[hidden]{display:none}
+.article-view{max-width:1100px;margin:0 auto}
+.back-link{display:inline-flex;align-items:center;color:var(--gold);text-decoration:none;font-size:13px;font-weight:800;margin:3px 0 25px}
+.story-header{padding:20px 0 25px;border-bottom:1px solid #4f422e}
+.story-header h1{font:clamp(38px,6.2vw,74px)/1.08 Georgia,serif;letter-spacing:-.05em;max-width:850px;margin:15px 0}
+.story-intro{max-width:850px;font:20px/1.6 Georgia,serif;color:#e6d8c1}
+.story-meta{margin-top:19px;display:flex;gap:12px;color:#bea875;font-size:12px;flex-wrap:wrap}
+.story-image{width:100%;max-height:410px;object-fit:cover;border-radius:15px;margin:30px 0 10px;border:1px solid #6b522b}
+.story-content{max-width:765px;margin:22px auto 45px;font-size:17px;color:#efe6d5;line-height:1.85}
+.story-content p{margin:0 0 21px}
+.story-content h2{color:#e7c582;font:33px/1.2 Georgia,serif;margin:35px 0 16px}
+.story-content blockquote{margin:24px 0;padding:10px 0 10px 22px;border-left:3px solid var(--gold);font:italic 27px/1.45 Georgia,serif;color:#eecf90}
+.story-content ul{padding-left:24px;margin-bottom:20px}
+.story-content li{margin:8px 0}
+.story-content a{color:#e6c17e;text-decoration:underline;text-underline-offset:4px}
+.story-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding-top:21px;border-top:1px solid #5d4a2a}
+.story-actions button{border:1px solid #6a5632;border-radius:9px;background:#1b160f;color:#e8d1a3;padding:10px 13px}
+.story-end{background:#1a1711;border:1px solid #53432c;padding:21px;border-radius:13px;margin:36px 0;text-align:center}
+.story-end h3{font:26px Georgia,serif;color:#f2d79e}
+.related-title{font:28px Georgia,serif;margin:37px 0 19px;color:var(--gold)}
+.related{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.related a{display:block;background:#171510;border:1px solid #4d402c;border-radius:12px;padding:18px;text-decoration:none}
+.related a:hover{border-color:var(--gold)}
+.related b{display:block;font:23px Georgia,serif;margin:8px 0}
+.related small{color:var(--gold)}
+.footer{border-top:1px solid #403520;text-align:center;padding:35px 20px 42px;background:#100e0a}
+.footer strong{font:27px Georgia,serif;color:#e8cc95}
+.footer p{font-size:12px;color:#afa495}
+.footer a{color:var(--gold)}
+@media(max-width:1020px){.mag-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.masthead-inner{grid-template-columns:1fr}.hero-aside{min-height:auto}}
+@media(max-width:680px){.wrap{width:min(100% - 28px,1250px)}.header-inner{align-items:flex-start}.header-links{justify-content:flex-end}.header-links a{font-size:11px;padding:8px}.brand-icon{width:39px;height:39px}.brand-title{font-size:15px}.masthead-inner{min-height:0;padding:48px 0}.masthead h1{font-size:clamp(55px,14vw,79px)}.section-top h2{font-size:30px}.mag-grid{grid-template-columns:1fr}.article-visual{height:210px}.story-intro{font-size:18px}.story-content{font-size:16px}.related{grid-template-columns:1fr}.mag-toolbar{align-items:stretch}.mag-search{width:100%}.filters{gap:6px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.article-card{transition:none}}
+</style>
+</head>
+<body>
+<div class="topline"></div>
+<div class="header">
+ <div class="wrap header-inner">
+  <a class="brand" href="crew-magazine.html" aria-label="Le Crew Magazine - accueil">
+   <img class="brand-icon" src="crew-icon.svg" alt="">
+   <span class="brand-title">LE CREW MAGAZINE<span>THE CREW ORCHIES</span></span>
+  </a>
+  <nav class="header-links" aria-label="Navigation">
+   <a href="crew-digital-studio.html">← Digital Studio</a>
+   <a href="https://thecreworchies.blog/" target="_blank" rel="noopener">Site The Crew ↗</a>
+   <a class="home-link" href="crew-magazine.html">Le journal</a>
+  </nav>
+ </div>
+</div>
+<header class="masthead">
+ <div class="wrap masthead-inner">
+  <div>
+   <div class="kicker">LE JOURNAL DU COLLECTIF · ÉDITION D'AUTOMNE 2026</div>
+   <h1>Le Crew<br><em>Magazine.</em></h1>
+   <p class="lead">Bienvenue dans le journal du Crew. Ici, on partage la vie de l’association, les prochains rendez-vous et des idées pour continuer à danser ensemble.</p>
+   <p class="signature">On vient pour danser. On reste pour le Crew.</p>
+  </div>
+  <aside class="hero-aside">
+   <div class="no">ÉDITO · PREMIER NUMÉRO</div>
+   <strong>Une équipe.<br>Une énergie.<br>Des histoires.</strong>
+   <p>Un premier pas, une choré qu’on retient, un parent qui rejoint la danse : chaque petit moment compte.</p>
+   <a href="#article=bienvenue-au-crew">Lire notre édito →</a>
+  </aside>
+ </div>
+</header>
+<main class="wrap">
+ <section class="listing" id="listing">
+  <div class="newsletter"><strong>Notre journal grandira avec le Crew.</strong> Des histoires vraies, des projets que l’on construit et des souvenirs partagés. Les photos de mineurs ne seront publiées qu’avec les autorisations nécessaires.</div>
+  <div class="section-top">
+   <h2>À lire dans le Crew</h2>
+   <span class="count" id="article-count" aria-live="polite"></span>
+  </div>
+  <div class="mag-toolbar">
+   <input type="search" id="article-search" class="mag-search" placeholder="Chercher un article, un thème..." aria-label="Rechercher dans les articles">
+   <div class="filters" id="article-filters" aria-label="Filtrer les articles"></div>
+  </div>
+  <div id="article-list" class="mag-grid"></div>
+  <p id="nothing-found" class="empty" hidden>Aucun article ne correspond à cette recherche.</p>
+ </section>
+ <section class="article-view" id="article-view" hidden aria-live="polite"></section>
+</main>
+<footer class="footer">
+ <strong>UNE ÉQUIPE. UNE ÉNERGIE. TA PLACE.</strong>
+ <p>Le Crew Magazine · The Crew Orchies · Un journal ouvert à toutes les générations.</p>
+ <p><a href="https://thecreworchies.blog/ateliers-evenements/" target="_blank" rel="noopener">Les ateliers et événements ↗</a> · <a href="crew-digital-studio.html">Crew Digital Studio</a></p>
+</footer>
+
+<template id="body-bienvenue-au-crew">
+ <p>Bienvenue dans le journal du Crew ! Ici, on partage la vie de l’association, les prochains rendez-vous et des idées pour continuer à danser ensemble.</p>
+ <p>Un premier pas, une choré qu’on retient, un parent qui rejoint la danse : chaque petit moment compte. Cet espace grandira avec nos histoires et nos souvenirs.</p>
+ <h2>On vient pour danser. On reste pour le Crew.</h2>
+ <p>Au départ, il y a une chanson, un peu d’appréhension, parfois beaucoup d’énergie. Puis il y a les autres. Ceux qui te font une place, t’encouragent quand tu hésites et applaudissent même les plus petits progrès.</p>
+ <p>The Crew Orchies, c’est une association de danse, mais c’est aussi un endroit pour essayer, apprendre et se retrouver. Enfants, ados, adultes : on avance chacun à son rythme, avec la même envie de partager un moment.</p>
+ <blockquote>Il n’y a pas besoin d’être parfait pour avoir sa place.</blockquote>
+ <p>Dans ce journal, tu retrouveras nos ateliers, les projets qui prennent forme, des idées à essayer et, avec les autorisations nécessaires, quelques souvenirs de la vie du collectif.</p>
+ <p>Bienvenue chez nous. Et surtout, bienvenue dans le Crew.</p>
+</template>
+
+<template id="body-nos-petites-stars">
+ <p>Chez les plus jeunes, il suffit parfois de quelques minutes pour que la salle change d’ambiance : une musique démarre, les premiers mouvements apparaissent, puis les sourires arrivent.</p>
+ <h2>Chaque petit pas compte</h2>
+ <p>Les enfants ne viennent pas tous avec la même assurance. Certains se lancent immédiatement, d’autres ont besoin de regarder avant d’essayer. L’essentiel, c’est que chacun puisse progresser à son rythme.</p>
+ <p>On travaille la coordination, la mémoire des chorégraphies, l’écoute et l’esprit d’équipe. Et on laisse aussi de la place aux idées des enfants, à leurs gestes préférés et à leur créativité.</p>
+ <p>Ce qu’on veut retenir ? Pas seulement une chorégraphie réussie. Aussi le moment où un enfant ose essayer, encourage un camarade ou prend plaisir à danser avec le groupe.</p>
+ <blockquote>Petits pas, grands souvenirs.</blockquote>
+ <p>Ce sont ces moments-là que nous voulons raconter dans Le Crew Magazine, avec respect et sans exposer les enfants inutilement.</p>
+</template>
+
+<template id="body-parents-dans-la-danse">
+ <p>Les cours de danse sont souvent un rendez-vous que l’on organise autour des enfants. Et puis, parfois, les parents se retrouvent eux aussi sur la piste.</p>
+ <h2>Quand tout le monde se retrouve</h2>
+ <p>Danser ensemble, ce n’est pas forcément suivre parfaitement la chorégraphie. C’est essayer, rire, regarder l’autre, recommencer et partager un moment qu’on n’aurait peut-être pas vécu autrement.</p>
+ <p>Les parents qui participent apportent autre chose au groupe : le plaisir de voir les générations se rejoindre sans avoir à être de grands danseurs.</p>
+ <p>Au Crew, nous aimons cette idée d’un espace où les enfants peuvent montrer ce qu’ils apprennent, où les adultes osent se lancer et où personne ne doit prouver son niveau pour participer.</p>
+ <blockquote>Une équipe. Une énergie. Une famille.</blockquote>
+ <p>Ce sera aussi l’esprit de nos ateliers pensés pour danser en duo, en famille ou avec toute sa tribu : un moment simple, accessible, et surtout partagé.</p>
+</template>
+
+<template id="body-nos-creations">
+ <p>À The Crew, l’envie de créer ne s’arrête pas à la fin du cours. Les dessins, les mascottes, les souvenirs et les idées de livres font aussi partie de l’aventure.</p>
+ <h2>Le journal du petit danseur</h2>
+ <p>Un premier prototype illustré de douze pages a été préparé : les enfants peuvent y raconter leurs séances, leurs émotions, les défis relevés et leurs souvenirs de danse. Il s’agit encore d’une maquette à tester et à améliorer avant impression.</p>
+ <h2>Le passeport de danse</h2>
+ <p>Un second prototype au format A6, de seize pages, propose des emplacements pour les tampons des cours et des missions autour du rythme, de l’entraide et de la créativité. L’idée n’est pas de se comparer aux autres, mais de garder une trace de son propre chemin.</p>
+ <h2>Et les mascottes ?</h2>
+ <p>Mia, Crewy et Panda accompagnent l’univers graphique du Crew. Les personnages, leurs déclinaisons et les futures collections continuent d’être développés.</p>
+ <p>Ces créations sont des projets en préparation. Les versions finales, les modalités de distribution et les éventuels tarifs ne sont pas encore arrêtés.</p>
+ <blockquote>Créer des souvenirs qu’on aura plaisir à retrouver.</blockquote>
+</template>
+
+<template id="body-nos-rendez-vous">
+ <p>Au Crew, il y a les cours réguliers. Et puis il y a les ateliers qui permettent de découvrir un autre univers : une époque musicale, une chorégraphie à plusieurs, une soirée où l’on danse autrement.</p>
+ <h2>Les idées ne manquent pas</h2>
+ <p>Danse en famille, ambiances rétro, danse latino ou chorégraphies collectives : nous préparons et partageons ces moments au fil de la saison.</p>
+ <p>Chaque atelier a son propre programme. Les places, les dates et les conditions d’inscription doivent être vérifiées sur la page officielle avant de réserver.</p>
+ <p><a href="https://thecreworchies.blog/ateliers-evenements/" target="_blank" rel="noopener">Voir les ateliers et événements annoncés →</a></p>
+ <blockquote>Tu essaies d’abord. Tu choisis ensuite.</blockquote>
+ <p>Le magazine reviendra sur les projets, les préparatifs et les temps forts. Et il continuera surtout à raconter cette énergie qu’on partage, une rencontre après l’autre.</p>
+</template>
+
+<template id="body-avant-tiktok">
+ <p>Les époques changent. Les pas évoluent. Rock, twist, madison, disco… Bien avant les challenges et les chorégraphies virales, chaque génération avait déjà ses chansons et sa manière d’envahir la piste.</p>
+ <p>Cet article culturel, déjà publié dans <em>Le Journal du Crew</em> sur notre site officiel, revient sur les danses qui ont traversé les générations.</p>
+ <p><a href="https://thecreworchies.blog/2026/09/09/avant-tiktok-on-savait-deja-danser/" target="_blank" rel="noopener">Lire l’article complet sur le site The Crew →</a></p>
+</template>
+
+<template id="body-michael-jackson">
+ <p>Un pas. Une silhouette. Tout le monde reconnaît. Des Jackson 5 à <em>Thriller</em>, Michael Jackson a transformé la chanson en spectacle et la chorégraphie en langage universel.</p>
+ <p>Notre article déjà publié sur le site officiel s'intéresse à un artiste dont l'influence traverse les générations et continue de parler aux danseurs.</p>
+ <p><a href="https://thecreworchies.blog/2026/09/11/michael-jackson-lartiste-qui-a-reuni-toutes-les-generations/" target="_blank" rel="noopener">Lire l’article complet sur le site The Crew →</a></p>
+</template>
+<script>
+(function(){
+ "use strict";
+ const entries=[
+ {slug:"bienvenue-au-crew",title:"Bienvenue dans le Crew Magazine",category:"Vie du Crew",date:"Édition 01 · Automne 2026",excerpt:"Un premier pas, une choré qu’on retient, un parent qui rejoint la danse : chaque petit moment compte.",intro:"On vient pour danser. On reste pour le Crew. Le premier édito d’un journal qui grandira avec nos histoires et nos souvenirs.",art:"Une équipe.\nUne énergie.",tone:"base",featured:true,read:"3 min"},
+ {slug:"nos-petites-stars",title:"Nos petites stars : les premiers pas comptent",category:"Vie du Crew",date:"Édition 01 · Automne 2026",excerpt:"Un cours, une chanson, un peu d’hésitation puis beaucoup de fierté : la danse vue à hauteur d’enfant.",intro:"Parce que grandir dans la danse, c’est aussi apprendre à oser, écouter et faire une place aux autres.",art:"Nos petites\nstars",tone:"rose",read:"2 min"},
+ {slug:"parents-dans-la-danse",title:"Quand les parents entrent dans la danse",category:"Familles",date:"Édition 01 · Automne 2026",excerpt:"La choré n’a pas besoin d’être parfaite pour que le moment soit inoubliable.",intro:"Et si les plus beaux souvenirs naissaient lorsque toutes les générations osent danser ensemble ?",art:"Ensemble,\non danse.",tone:"base",read:"2 min"},
+ {slug:"nos-creations",title:"Du journal au passeport : les créations du Crew",category:"Créations",date:"Édition 01 · Automne 2026",excerpt:"Le journal du petit danseur, le passeport, les mascottes : dans les coulisses de nos projets.",intro:"L’univers The Crew prend aussi vie sur le papier, dans des souvenirs à personnaliser et dans de nouveaux personnages.",image:"project-covers/journal-petit-danseur.svg",read:"3 min"},
+ {slug:"nos-rendez-vous",title:"Ateliers et rendez-vous : la saison se construit",category:"Agenda",date:"Édition 01 · Automne 2026",excerpt:"Des moments pour essayer, danser en famille et vivre d’autres ambiances musicales.",intro:"Des cours aux ateliers thématiques, le Crew se retrouve autour de nouvelles envies.",art:"À vivre\nensemble",tone:"rose",read:"2 min"},
+ {slug:"avant-tiktok",title:"Avant TikTok, on savait déjà danser !",category:"Culture",date:"Publié le 9 sept. 2026",excerpt:"Rock, twist, madison, disco : chaque génération avait déjà sa manière d’envahir la piste.",intro:"Un article publié dans le Journal du Crew sur le site officiel.",art:"FLASHBACK\nDANCE",tone:"base",read:"Article original ↗",original:"https://thecreworchies.blog/2026/09/09/avant-tiktok-on-savait-deja-danser/"},
+ {slug:"michael-jackson",title:"Michael Jackson : l’artiste qui a réuni toutes les générations",category:"Culture",date:"Publié le 11 sept. 2026",excerpt:"Un pas, une silhouette, des chansons et des chorégraphies qui parlent à toutes les générations.",intro:"Un article publié dans le Journal du Crew sur le site officiel.",art:"ICÔNES\nEN MOUVEMENT",tone:"white",read:"Article original ↗",original:"https://thecreworchies.blog/2026/09/11/michael-jackson-lartiste-qui-a-reuni-toutes-les-generations/"}
+ ];
+ let chosen="Tout voir",search="";
+ const categories=["Tout voir","Vie du Crew","Familles","Créations","Agenda","Culture"];
+ const escapeHTML=s=>String(s??"").replace(/[&<>"']/g,ch=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]));
+ const normalize=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+ const listing=document.querySelector("#listing"),articleView=document.querySelector("#article-view"),grid=document.querySelector("#article-list"),count=document.querySelector("#article-count");
+ function picture(entry){
+  return entry.image?'<div class="article-visual"><img src="'+escapeHTML(entry.image)+'" alt="Illustration : '+escapeHTML(entry.title)+'" loading="lazy"></div>':
+   '<div class="article-visual noimage '+escapeHTML(entry.tone||"")+'"><span>'+escapeHTML(entry.art||"The Crew").replace(/\n/g,"<br>")+'</span></div>';
+ }
+ function card(entry){
+  return '<article class="article-card">'+picture(entry)+
+  '<div class="article-body"><span class="meta">'+escapeHTML(entry.category)+' · '+escapeHTML(entry.date)+'</span>'+
+  '<h3>'+escapeHTML(entry.title)+'</h3><p>'+escapeHTML(entry.excerpt)+'</p>'+
+  '<a class="read-link" href="#article='+encodeURIComponent(entry.slug)+'" aria-label="Lire : '+escapeHTML(entry.title)+'"><span>Lire l’article</span><span class="arrow" aria-hidden="true">↗</span></a></div></article>';
+ }
+ function filters(){
+  document.querySelector("#article-filters").innerHTML=categories.map(c=>'<button type="button" data-category="'+escapeHTML(c)+'" aria-pressed="'+String(c===chosen)+'">'+escapeHTML(c)+'</button>').join("");
+ }
+ function renderList(){
+  const matches=entries.filter(e=>(chosen==="Tout voir"||e.category===chosen)&&normalize(e.title+" "+e.excerpt+" "+e.category).includes(normalize(search)));
+  grid.innerHTML=matches.map(card).join("");
+  count.textContent=matches.length+" article"+(matches.length>1?"s":"");
+  document.querySelector("#nothing-found").hidden=matches.length!==0;
+  filters();
+ }
+ function renderStory(entry){
+  const content=document.querySelector("#body-"+entry.slug);
+  const related=entries.filter(e=>e.slug!==entry.slug&&(e.category===entry.category||e.featured)).slice(0,2);
+  const hero=entry.image?'<img class="story-image" src="'+escapeHTML(entry.image)+'" alt="Illustration de l’article">':'';
+  articleView.innerHTML='<a class="back-link" href="crew-magazine.html">← Tous les articles</a>'+
+  '<article><header class="story-header"><div class="kicker">'+escapeHTML(entry.category)+' · LE CREW MAGAZINE</div>'+
+  '<h1>'+escapeHTML(entry.title)+'</h1><p class="story-intro">'+escapeHTML(entry.intro||entry.excerpt)+'</p>'+
+  '<div class="story-meta"><span>'+escapeHTML(entry.date)+'</span><span>·</span><span>'+escapeHTML(entry.read)+'</span></div></header>'+
+  hero+'<div class="story-content">'+(content?.innerHTML||"")+'</div></article>'+
+  '<div class="story-actions"><a class="action" href="crew-magazine.html">← Retour au journal</a><button type="button" id="copy-link">Copier le lien de cet article</button>'+
+  (entry.original?'<a class="action" href="'+escapeHTML(entry.original)+'" target="_blank" rel="noopener">Lire l’original ↗</a>':"")+'</div>'+
+  '<div class="story-end"><h3>On vient pour danser.<br>On reste pour le Crew.</h3><p>Une équipe. Une énergie. Ta place.</p></div>'+
+  '<h2 class="related-title">À découvrir aussi</h2><div class="related">'+related.map(e=>'<a href="#article='+encodeURIComponent(e.slug)+'"><small>'+escapeHTML(e.category)+'</small><b>'+escapeHTML(e.title)+'</b><span>Lire l’article →</span></a>').join("")+'</div>';
+  const copy=articleView.querySelector("#copy-link");
+  copy.addEventListener("click",()=>{
+   if(navigator.clipboard?.writeText){navigator.clipboard.writeText(location.href).then(()=>{copy.textContent="Lien copié ✓";}).catch(()=>{copy.textContent="Copie indisponible";});}
+   else{copy.textContent="Copie indisponible";}
+  });
+ }
+ function route(){
+  const match=location.hash.match(/^#article=([^&]+)/);
+  const slug=match?decodeURIComponent(match[1]):"";
+  const entry=entries.find(e=>e.slug===slug);
+  const inStory=Boolean(entry);
+  listing.hidden=inStory;articleView.hidden=!inStory;
+  if(inStory){renderStory(entry);document.title=entry.title+" — Le Crew Magazine";}
+  else{document.title="Le Crew Magazine — The Crew Orchies";renderList();}
+  window.scrollTo({top:0,behavior:"instant"});
+ }
+ document.querySelector("#article-filters").addEventListener("click",event=>{
+  const b=event.target.closest("[data-category]");if(!b)return;
+  chosen=b.dataset.category;renderList();
+ });
+ document.querySelector("#article-search").addEventListener("input",event=>{search=event.target.value;renderList();});
+ window.addEventListener("hashchange",route);
+ route();
+})();
+</script>
+</body>
+</html>
