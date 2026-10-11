@@ -1,15 +1,21 @@
 /* Portable local backup. No network transmission; authentication is excluded. */
 (()=>{
 'use strict';
-const allowed=k=>typeof k==='string'&&(k.startsWith('eloah-project-v1:')||k.startsWith('sonia-universe-v1-')||['eloah-expertise-v1','eloah-planning-v1'].includes(k));
+const arrays=new Set(['eloah-sonia-maia-v1','eloah-sonia-velka-v1','eloah-sosso-notes-v1']);
+const objects=new Set(['eloah-crew-dedicated-v1','eloah-sonia-maia-modules-v1','eloah-maia-concrete-v1','eloah-maia-week-v1','eloah-velka-studio-v1','pg-control-v1','pg-atelier-choices-v1']);
+const markers=new Set(['eloah-crew-dedicated-v1-reference-v1','eloah-crew-dedicated-v1-editorial-ideas-v1','eloah-sonia-maia-v1-initialised','eloah-sonia-maia-history-v1','eloah-sonia-maia-v1-checklists-v1','eloah-sonia-maia-modules-v1-lists-v1','eloah-sonia-velka-v1-seed-v1','eloah-sonia-velka-v1-curated-202610','eloah-sosso-notes-v1-reference-202610-v1']);
+const osKey=k=>/^sonia_os_command_center_v2_(?:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}|unset)_(transactions|contacts|members|events|products|tasks|agents|decisions|knowledge|workflows|audits|seats|expanded_agents_20261011_v1|le_siege_v1|starter_20261011_v1)$/i.exec(k);
+const isMarker=k=>markers.has(k)||!!osKey(k)?.[1].match(/^(expanded_agents_20261011_v1|le_siege_v1|starter_20261011_v1)$/);
+const allowed=k=>typeof k==='string'&&(k.startsWith('eloah-project-v1:')||k.startsWith('sonia-universe-v1-')||['eloah-expertise-v1','eloah-planning-v1'].includes(k)||arrays.has(k)||objects.has(k)||markers.has(k)||!!osKey(k));
+function area(k){if(osKey(k))return 'SONIA OS';if(k.startsWith('pg-'))return 'Power & Glam';if(k.includes('maia'))return 'MAIA';if(k.includes('velka')||k.includes('sosso'))return 'Sonia Velka & SOSSO';if(k.includes('crew-dedicated'))return 'The Crew';return 'ELOAH & notes des univers'}
 function validate(p){
- if(!p||p.format!=='eloah-portable'||p.version!==1||!Array.isArray(p.entries)||!Array.isArray(p.files))throw Error('Format de sauvegarde incompatible.');
+ if(!p||p.format!=='eloah-portable'||![1,2].includes(p.version)||!Array.isArray(p.entries)||!Array.isArray(p.files))throw Error('Format de sauvegarde incompatible.');
  const keys=new Set(),ids=new Set();
- for(const e of p.entries){if(!e||!allowed(e.key)||keys.has(e.key)||typeof e.value!=='string')throw Error('Clé inconnue ou répétée.');keys.add(e.key);if(e.key.startsWith('sonia-universe-v1-')&&e.value==='installed')continue;const v=JSON.parse(e.value);if(e.key.startsWith('eloah-project-v1:')){if(!v||!Array.isArray(v.threads))throw Error('Projet invalide.');}else if(!Array.isArray(v))throw Error('Liste de données invalide.');}
+ for(const e of p.entries){if(!e||!allowed(e.key)||keys.has(e.key)||typeof e.value!=='string')throw Error('Clé inconnue ou répétée.');keys.add(e.key);if(isMarker(e.key)){if(!['1','ok','installed'].includes(e.value))throw Error('Marqueur invalide.');continue}if(e.key.startsWith('sonia-universe-v1-')&&e.value==='installed')continue;const v=JSON.parse(e.value);if(e.key.startsWith('eloah-project-v1:')){if(!v||!Array.isArray(v.threads))throw Error('Projet invalide.');}else if(objects.has(e.key)){if(!v||typeof v!=='object'||Array.isArray(v))throw Error('Tableau de bord invalide.');const required={'eloah-crew-dedicated-v1':['Conversations','Planning','Idées','Mémoire'],'eloah-sonia-maia-modules-v1':['rooms','stocks','repairs'],'eloah-velka-studio-v1':['calendar','media'],'pg-control-v1':['tasks','contents','offers','finance']}[e.key]||[];if(required.some(k=>!Array.isArray(v[k])))throw Error('Rubrique de tableau de bord invalide.');}else if(!Array.isArray(v))throw Error('Liste de données invalide.');}
  let bytes=0;
  for(const f of p.files){if(!f||typeof f.id!=='string'||!f.id||ids.has(f.id)||typeof f.project!=='string'||typeof f.name!=='string'||typeof f.type!=='string'||!Number.isSafeInteger(f.size)||f.size<0||typeof f.data!=='string'||!/^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$/.test(f.data))throw Error('Fichier invalide.');ids.add(f.id);const n=f.data.length/4*3-(f.data.endsWith('==')?2:f.data.endsWith('=')?1:0);if(n!==f.size)throw Error('Fichier incomplet : '+f.name);bytes+=n;}
  if(bytes>100*1024*1024)throw Error('Cette version dépasse 100 Mo de pièces jointes.');
- return {entries:p.entries.length,files:p.files.length,bytes,projects:p.entries.filter(e=>e.key.startsWith('eloah-project-v1:')).length};
+ return {areas:[...new Set(p.entries.map(e=>area(e.key)))],entries:p.entries.length,files:p.files.length,bytes,projects:p.entries.filter(e=>e.key.startsWith('eloah-project-v1:')).length};
 }
 if(typeof module!=='undefined'&&module.exports){module.exports={validate,allowed};return}
 const $=id=>document.getElementById(id);let pending=null,db;
@@ -22,7 +28,7 @@ async function snapshot(){
  const entries=Object.keys(localStorage).filter(allowed).sort().map(key=>({key,value:localStorage.getItem(key)}));
  const raw=await allFiles();if(raw.reduce((n,f)=>n+f.blob.size,0)>104857600)throw Error('Plus de 100 Mo de pièces jointes : utilise les sauvegardes par projet.');
  const files=[];for(const f of raw){status('Lecture du fichier '+(files.length+1)+' / '+raw.length+'…');files.push({id:f.id,project:f.project,name:f.name,type:f.blob.type||'',size:f.blob.size,date:f.date||'',folder:f.folder||'',data:await to64(f.blob)})}
- const p={format:'eloah-portable',version:1,createdAt:new Date().toISOString(),entries,files};validate(p);return p;
+ const p={format:'eloah-portable',version:2,createdAt:new Date().toISOString(),entries,files};validate(p);return p;
 }
 async function run(fn){document.querySelectorAll('button,input').forEach(e=>e.disabled=true);try{await fn()}catch(e){status('Opération interrompue : '+e.message)}finally{document.querySelectorAll('button,input').forEach(e=>e.disabled=false);$('apply').disabled=!pending||!$('consent').checked}}
 $('export-all').onclick=()=>run(async()=>{const p=await snapshot();download(p,'ELOAH-sauvegarde');const n=validate(p);status('Fichier préparé : '+n.projects+' projets, '+n.entries+' ensembles de données et '+n.files+' pièces jointes. Vérifie sa présence dans tes téléchargements.');});
@@ -32,7 +38,7 @@ $('import-file').onchange=e=>run(async()=>{
  const p=JSON.parse(await file.text()),n=validate(p);
  const conflicts=p.entries.filter(e=>localStorage.getItem(e.key)!==null).length;
  const files=await allFiles(),existing=new Set(files.map(f=>f.id));const fileConflicts=p.files.filter(f=>existing.has(f.id)).length;
- $('summary').textContent=n.projects+' projets · '+n.entries+' ensembles de données · '+n.files+' fichiers ('+(n.bytes/1048576).toFixed(1)+' Mo). '+conflicts+' ensembles et '+fileConflicts+' fichiers existent déjà ici et seront remplacés. Les autres données seront conservées.';
+ $('summary').textContent='Espaces inclus : '+n.areas.join(', ')+'. '+n.projects+' projets · '+n.entries+' ensembles de données · '+n.files+' fichiers ('+(n.bytes/1048576).toFixed(1)+' Mo). '+conflicts+' ensembles et '+fileConflicts+' fichiers existent déjà ici et seront remplacés. Les autres données seront conservées.';
  pending=p;$('consent').checked=false;$('preview').hidden=false;status('Structure du fichier vérifiée. Aucune donnée restaurée pour le moment.');
 });
 $('consent').onchange=()=>{$('apply').disabled=!pending||!$('consent').checked};
