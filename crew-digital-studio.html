@@ -37,4 +37,4 @@ if(id==='cal'){const render=()=>{document.getElementById('event-list').innerHTML
 if(id==='mia'){let seq=[],cursor=0;document.getElementById('newgame').onclick=()=>{seq=Array.from({length:3},()=>Math.floor(Math.random()*4));cursor=0;document.getElementById('pattern').textContent=seq.map(x=>['👏','🦶','💃','⭐'][x]).join('  ');document.getElementById('game-message').textContent='Reproduis la séquence !'};document.getElementById('pads').onclick=e=>{const pad=e.target.closest('[data-pad]');if(!pad||!seq.length)return;const n=Number(pad.dataset.pad);if(n!==seq[cursor]){document.getElementById('game-message').textContent='Essaie encore ! Lance une nouvelle partie.';seq=[];return}cursor++;if(cursor===seq.length){score++;document.getElementById('game-message').textContent='Bravo ! Séquence réussie ! Victoires : '+score;seq=[]}}}
 }
 document.getElementById('cards').addEventListener('click',e=>{const b=e.target.closest('[data-id]');if(b)openModule(b.dataset.id)});
-</script></body></html>
+</script><script src="crew-studio-live.js?v=1" defer></script></body></html>
