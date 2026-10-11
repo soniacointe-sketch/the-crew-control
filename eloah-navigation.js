@@ -9,7 +9,7 @@ if(['eloah-the-crew.html','eloah-academy.html','eloah-import.html','index.html']
 if(page==='sonia-os.html')universe='SONIA OS';
 const assistant=routes.find(r=>r[0]==='Assistant IA');assistant[1]='eloah-projet.html?projet='+encodeURIComponent(universe||'ELOAH');
 const nav=document.createElement('nav');nav.className='eloah-global-nav';nav.setAttribute('aria-label','Navigation commune ELOAH');
-function navLink(label,href,cls=''){const current=href.split('?')[0].split('#')[0]===page&&(!href.includes('?type=')||href.endsWith('type='+query.get('type')));return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
+function navLink(label,href,cls=''){const target=new URL(href,location.href);const current=target.pathname.split('/').pop()===page&&[...target.searchParams].every(([key,value])=>query.get(key)===value);return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
 nav.innerHTML=navLink('ELOAH · Accueil','mes-univers.html','eloah-wordmark')+navLink('Changer d’univers','mes-univers.html#maisons','eloah-switch')+'<div class="eloah-nav-shortcuts">'+[['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Notes & préparation','eloah-partenaire.html']].map(r=>navLink(...r)).join('')+'</div><details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>!['Accueil','Projets'].includes(r[0])).map(r=>navLink(...r)).join('')+'</div></details>';
 document.body.prepend(nav);
 document.body.classList.add('eloah-screen');
@@ -54,7 +54,11 @@ const harmony=document.createElement('style');harmony.textContent=`
 .eloah-screen .project-head{flex-wrap:wrap;padding:10px 12px;gap:8px}
 .eloah-screen .project-head h1{flex:1;min-width:110px;overflow-wrap:anywhere}
 .eloah-screen .project-head .eloah-project-picker{max-width:100%;width:100%;order:5}
-.eloah-screen[data-eloah-page="eloah-projet.html"] .shell{height:calc(100dvh - 109px)}
+.eloah-screen[data-eloah-page="eloah-projet.html"] .shell{height:auto;min-height:calc(100dvh - 109px)}
+.eloah-screen[data-eloah-page="eloah-projet.html"] #messages{flex:none;overflow:visible;min-height:180px}
+.eloah-screen[data-eloah-page="eloah-projet.html"] #panel{overflow:visible}
+.eloah-screen .tools{align-items:center}
+.eloah-screen .tools>*{flex-shrink:0}
 .eloah-screen[data-eloah-page="eloah-projet.html"] .files-side.open{top:109px}
 .eloah-screen .compose-bottom{flex-wrap:wrap}.eloah-screen .compose-bottom>div{display:flex;flex-wrap:wrap;gap:6px}
 .eloah-screen .expert-grid{grid-template-columns:minmax(0,1fr)}
