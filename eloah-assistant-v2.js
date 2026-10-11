@@ -15,7 +15,7 @@ document.head.appendChild(style);
 function drawStatus(){
  const p=ensure(),n=p.facts.length,output=Object.keys(p.outputs).length;
  let el=$id('eloah-v2-status');if(!el){el=document.createElement('div');el.id='eloah-v2-status';$id('conversation-memory-status')?.after(el)}
- if(el)el.textContent='Pilotage ELOAH · '+n+' repère'+(n!==1?'s':'')+' documenté'+(n!==1?'s':'')+' · '+output+' livrable'+(output!==1?'s':'')+' suivi'+(output!==1?'s':'')+' · données locales · IA externe non vérifiée';
+ if(el)el.textContent='Pilotage ELOAH · '+n+' repère'+(n!==1?'s':'')+' documenté'+(n!==1?'s':'')+' · '+output+' livrable'+(output!==1?'s':'')+' suivi'+(output!==1?'s':'')+' · données locales · IA intégrée conditionnelle · sources locales';
 }
 function renderPilot(){
  const p=ensure(),d=newDialog('eloah-pilot');
@@ -71,7 +71,7 @@ function renderReview(question){
  +(other.length?'<details><summary>Inclure explicitement d’autres projets (travail transversal)</summary>'+other.map(n=>'<label class="eloah-v2-check"><input type="checkbox" data-universe="'+safe(n)+'"> '+safe(n)+'</label>').join('')+'</details>':'')
  +'<label class="eloah-v2-field">Contexte transmis à ChatGPT<textarea id="eloah-preview" spellcheck="false"></textarea></label>'
  +'<p id="eloah-v2-progress" role="status"></p>'
- +'<div class="eloah-v2-actions"><button class="primary" id="er-open">Ouvrir dans ChatGPT</button><button id="er-copy">Copier le contexte</button><button id="er-refresh">Actualiser les sources</button></div>'
+ +'<div class="eloah-v2-actions"><button class="primary" id="er-direct">Répondre dans ELOAH (IA)</button><button id="er-open">Ouvrir dans ChatGPT</button><button id="er-copy">Copier le contexte</button><button id="er-refresh">Actualiser les sources</button></div>'
  +'<p class="eloah-v2-muted">Les documents PDF, DOCX, images et vidéos ne sont pas lus automatiquement ici. Pour les utiliser, joins-les dans ChatGPT. Les demandes longues peuvent nécessiter un collage manuel.</p>';
  $id('er-close').onclick=()=>d.close();
  const preview=$id('eloah-preview'),progress=$id('eloah-v2-progress');
@@ -86,8 +86,33 @@ function renderReview(question){
  $id('er-refresh').onclick=refresh;
  d.querySelectorAll('[data-file],[data-universe]').forEach(b=>b.onchange=refresh);
  $id('er-copy').onclick=async()=>{try{await navigator.clipboard.writeText(preview.value);progress.textContent='Contexte copié.'}catch{preview.select();progress.textContent='Copie manuellement le texte sélectionné.'}};
+ $id('er-direct').onclick=async()=>{
+  const prepared=preview.value.trim();if(!prepared){progress.textContent='Prépare le contexte avant de continuer.';return}
+  if(prepared.length>24000){progress.textContent='Le contexte dépasse 24 000 caractères. Réduis-le dans la zone de texte ou ouvre ChatGPT.';return}
+  if(!window.supabase){progress.textContent='Connexion Supabase indisponible. Utilise ChatGPT.';return}
+  if(!window.confirm('Lancer une réponse IA dans ELOAH ? Cette action transmet le texte affiché au service IA et peut consommer des crédits API. Aucun fichier non sélectionné ni action de publication ne sera envoyé.'))return;
+  const btn=$id('er-direct');btn.disabled=true;progress.textContent='Connexion au compte ELOAH…';
+  try{
+    const endpoint='https://voytsqyorhoveurnguxn.supabase.co',publishable='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
+    const client=window.supabase.createClient(endpoint,publishable,{auth:{storageKey:'eloah-cloud-auth-v1',persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+    const {data,error}=await client.auth.getSession();
+    if(error||!data?.session?.access_token)throw Error('Connecte-toi dans « Compte & sauvegardes » pour utiliser l’IA intégrée.');
+    progress.textContent='Rédaction de la réponse dans ELOAH…';
+    const res=await fetch(endpoint+'/functions/v1/eloah-assistant',{method:'POST',headers:{authorization:'Bearer '+data.session.access_token,apikey:publishable,'content-type':'application/json'},body:JSON.stringify({project,context:prepared})});
+    const payload=await res.json().catch(()=>({}));
+    if(!res.ok||!payload.ok||!payload.answer)throw Error(payload.error||'Le service n’a pas renvoyé de réponse vérifiable.');
+    addMessage('user',question);
+    addMessage('response',String(payload.answer));
+    const t=current(),p=ensure(),id=t.id+':'+(t.messages.length-1);
+    p.outputs[id]={title:t.title,status:'Brouillon',at:stamp()};
+    savePilot();
+    $id('message-input').value='';d.close();renderChat();
+    notify('Réponse IA ajoutée au projet comme brouillon, sans publication.');
+  }catch(err){progress.textContent=err?.message||'Erreur de connexion. Tu peux ouvrir ChatGPT.'}
+  finally{btn.disabled=false}
+ };
  $id('er-open').onclick=async()=>{const prepared=preview.value.trim();if(!prepared)return;let ok=false;
-  if(encodeURIComponent(prepared).length>15000){try{await navigator.clipboard.writeText(prepared);progress.textContent='Contexte copié. Colle-le dans la nouvelle conversation ChatGPT.';ok=true}catch{preview.select();progress.textContent='Contexte trop long : copie le texte sélectionné puis ouvre ChatGPT.'}}
+  if(encodeURIComponent(prepared).length>15000){try{await navigator.clipboard.writeText(prepared);progress.textContent='Contexte copié. Colle-le dans la nouvelle conversation ChatGPT.';ok=true}catch{preview.select();progress.textContent='Contexte trop long : copie le texte sélectionné puis réessaie après l’avoir copié.';return}}
   const u=ok||encodeURIComponent(prepared).length>15000?'https://chatgpt.com/':'https://chatgpt.com/?q='+encodeURIComponent(prepared);
   const w=window.open(u,'_blank','noopener,noreferrer');
   // Avec noopener, certains navigateurs renvoient null malgré une ouverture réussie.
