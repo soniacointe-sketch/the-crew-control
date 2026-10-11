@@ -2,7 +2,7 @@
 (()=>{'use strict';
 if(document.querySelector('.eloah-global-nav'))return;
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
-const routes=[['Accueil','mes-univers.html'],['Assistant IA','eloah-projet.html?projet='+encodeURIComponent(page==='eloah-projet.html'?(query.get('projet')||'ELOAH'):'ELOAH')],['Projets','mes-univers.html#maisons'],['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Bases d’expertise','eloah-bibliotheque.html?type=bases'],['Notes & préparation','eloah-partenaire.html'],['Compte & sauvegardes','eloah-projet.html?projet=ELOAH&onglet=parametres&compte=1']];
+const routes=[['Accueil','mes-univers.html'],['Mon Espace','eloah-partenaire.html?rubrique=Mon%20Espace'],['Assistant IA','eloah-projet.html?projet='+encodeURIComponent(page==='eloah-projet.html'?(query.get('projet')||'ELOAH'):'ELOAH')],['Projets','mes-univers.html#maisons'],['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Bases d’expertise','eloah-bibliotheque.html?type=bases'],['Notes & préparation','eloah-partenaire.html'],['Compte & sauvegardes','eloah-projet.html?projet=ELOAH&onglet=parametres&compte=1']];
 let universe=query.get('projet')||'';
 try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
 if(['eloah-the-crew.html','eloah-academy.html','eloah-import.html','index.html'].includes(page))universe='The Crew Orchies';
