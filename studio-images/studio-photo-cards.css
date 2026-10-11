@@ -1,0 +1,11 @@
+/* Photos par carte, en conservant le dessin SVG de secours */
+main>.grid .card:nth-child(1) h2{background-image:url("studio-images/mag.webp"),url("studio-images/mag.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(2) h2{background-image:url("studio-images/series.webp"),url("studio-images/series.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(3) h2{background-image:url("studio-images/chore.webp"),url("studio-images/chore.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(4) h2{background-image:url("studio-images/cal.webp"),url("studio-images/cal.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(5) h2{background-image:url("studio-images/photos.webp"),url("studio-images/photos.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(6) h2{background-image:url("studio-images/wheel.webp"),url("studio-images/wheel.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(7) h2{background-image:url("studio-images/cards.webp"),url("studio-images/cards.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(8) h2{background-image:url("studio-images/radio.webp"),url("studio-images/radio.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(9) h2{background-image:url("studio-images/year.webp"),url("studio-images/year.svg")!important;background-position:center!important;background-size:cover!important}
+main>.grid .card:nth-child(10) h2{background-image:url("studio-images/mia.webp"),url("studio-images/mia.svg")!important;background-position:center!important;background-size:cover!important}
