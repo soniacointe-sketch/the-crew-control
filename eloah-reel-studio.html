@@ -22,17 +22,20 @@ rec.start();begun=true;frame();await v.play();status.textContent='Export en cour
 (()=>{'use strict';
 const tools=[
 ['✂','Découpage automatique',null],['▣','Outils marketing','lines'],['✦','Créateur de clips IA',null],
-['▧',"Prise d'images",null],['◈','Retouche','effect'],['✧','Générateur IA',null],
-['▧','Outils photo',null],['☀','Éclairage intelligent','effect'],['✦','Amélioration automatique','effect'],
+['▧',"Prise d'images",'capture'],['◈','Retouche','effect'],['✧','Générateur IA',null],
+['▧','Outils photo','capture'],['☀','Éclairage intelligent','effect'],['✦','Amélioration automatique','effect'],
 ['▤','Affiche IA',null],['CC','Légendes automatiques',null],['◌',"Supprimer l'arrière-plan",null],
-['▧','Éditeur de photos IA',null],['◷','Ajuster la vitesse',null],['♩','Enregistrer',null],
+['▧','Éditeur de photos IA',null],['◷','Ajuster la vitesse','speed'],['♩','Enregistrer',null],
 ['◉','Outils avatar',null],['▣','Générer un fichier','export'],['⊞','Tous les outils', 'all']
 ];
 const grid=document.getElementById('toolGrid'),message=document.getElementById('toolMessage');
 for(const [glyph,label,target] of tools){const b=document.createElement('button');b.type='button';b.className='tool-tile';b.innerHTML='<span class="glyph" aria-hidden="true">'+glyph+'</span><span></span>'+(target?'<small>Disponible</small>':'<small>À développer</small>');b.querySelector('span:nth-child(2)').textContent=label;
 if(!target)b.disabled=true;
-else b.onclick=()=>{if(target==='all'){message.textContent='Outils disponibles : textes, effets, éclairage, amélioration et export WebM. Les autres modules sont prévus pour une prochaine version.';return}
+else b.onclick=()=>{if(target==='capture'){const video=document.getElementById('video');if(!video.videoWidth){message.textContent='Importe une vidéo avant de capturer une image.';return}const canvas=document.createElement('canvas');canvas.width=video.videoWidth;canvas.height=video.videoHeight;const ctx=canvas.getContext('2d');ctx.filter=video.style.filter||'none';ctx.drawImage(video,0,0);canvas.toBlob(blob=>{if(!blob){message.textContent='Capture impossible.';return}const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='eloah-capture-'+Math.round(video.currentTime*10)/10+'.png';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);message.textContent='Image capturée en PNG au temps '+video.currentTime.toFixed(1)+' s.'},'image/png');return}
+if(target==='speed'){const control=document.getElementById('speedControl');control.hidden=false;control.scrollIntoView({behavior:'smooth',block:'center'});message.textContent='Vitesse de lecture ouverte. Elle agit sur l’aperçu uniquement.';return}
+if(target==='all'){message.textContent='Outils disponibles : textes, effets, éclairage, amélioration et export WebM. Les autres modules sont prévus pour une prochaine version.';return}
 const el=document.getElementById(target);if(!el)return;el.scrollIntoView({behavior:'smooth',block:'center'});el.focus();message.textContent=label+' : réglage ouvert dans le studio.'};grid.append(b)}
+const speed=document.createElement('div');speed.id='speedControl';speed.hidden=true;speed.className='field';speed.innerHTML='<label for="speedSelect">Vitesse de lecture (aperçu uniquement)</label><select id="speedSelect"><option value="0.5">0,5× ralenti</option><option value="0.75">0,75×</option><option value="1" selected>1× normale</option><option value="1.25">1,25×</option><option value="1.5">1,5×</option><option value="2">2× rapide</option></select><p class="muted">L’export WebM ne modifie pas encore la vitesse. Cette option sert à prévisualiser les mouvements.</p>';grid.after(speed);document.getElementById('speedSelect').onchange=e=>document.getElementById('video').playbackRate=Number(e.target.value);
 const file=document.getElementById('file');for(const id of ['quickImport','quickMedia'])document.getElementById(id).onclick=()=>file.click();
 })();
 </script></body></html>
