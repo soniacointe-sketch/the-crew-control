@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="t d">
+<title id="t">Cahier de vacances The Crew Orchies</title><desc id="d">Vignette projet aux couleurs noir, or et rose, avec un cahier, un soleil et des étoiles.</desc>
+<defs><linearGradient id="bg" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#101010"/><stop offset="1" stop-color="#2b171c"/></linearGradient><radialGradient id="gl"><stop stop-color="#d4af37" stop-opacity=".28"/><stop offset="1" stop-color="#d4af37" stop-opacity="0"/></radialGradient></defs>
+<rect width="800" height="500" fill="url(#bg)"/><circle cx="630" cy="130" r="235" fill="url(#gl)"/>
+<circle cx="639" cy="159" r="79" fill="none" stroke="#D4AF37" stroke-width="8" opacity=".7"/><g stroke="#D4AF37" stroke-width="7" stroke-linecap="round" opacity=".75"><path d="M639 52V28 M639 264v23 M535 159h-23 M742 159h24 M566 86l-19-19 M712 232l19 19 M713 86l19-19 M566 232l-19 19"/></g>
+<path d="M555 332q70-30 140 0v108q-70-28-140 0Z" fill="#f8f4ee" stroke="#D4AF37" stroke-width="7"/><path d="M555 332q-70-30-140 0v108q70-28 140 0Z" fill="#e8dccf" stroke="#D4AF37" stroke-width="7"/><path d="M555 331v109" stroke="#111" stroke-width="3"/><g stroke="#c8a46a" stroke-width="3"><path d="M440 358q42-10 90 2M440 378q42-10 90 2M580 360q42-12 90 0M580 381q42-12 90 0"/></g>
+<path d="M84 378l16-43 13 43 44-5-32 32 20 38-45-19-39 25 8-46-36-26Z" fill="#ea2a79" opacity=".85"/>
+<text x="52" y="61" fill="#e8c875" font-family="Arial,sans-serif" font-weight="bold" letter-spacing="6" font-size="18">THE CREW ORCHIES</text>
+<text x="46" y="179" fill="#ffffff" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="64">CAHIER DE</text>
+<text x="46" y="263" fill="#D4AF37" font-family="Arial Black,Arial,sans-serif" font-weight="900" font-size="73">VACANCES</text>
+<text x="51" y="309" fill="#f7f0e4" font-family="Arial,sans-serif" font-weight="bold" font-size="19" letter-spacing="2">JEUX · DANSE · CRÉATIVITÉ</text>
+<rect x="0" y="467" width="800" height="33" fill="#ea2a79"/><text x="46" y="490" fill="#ffffff" font-family="Arial,sans-serif" font-size="14" font-weight="bold" letter-spacing="3">PROJET EN PRÉPARATION · UNE ÉQUIPE. UNE ÉNERGIE. TA PLACE.</text>
+<rect x="2" y="2" width="796" height="496" rx="9" fill="none" stroke="#d4af37" stroke-opacity=".5" stroke-width="3"/>
+</svg>
