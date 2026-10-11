@@ -45,7 +45,7 @@ $('apply').onclick=()=>run(async()=>{
   touched=true;for(const e of p.entries)localStorage.setItem(e.key,e.value);
   const d=await database();await new Promise((resolve,reject)=>{const tx=d.transaction('files','readwrite');tx.oncomplete=resolve;tx.onabort=()=>reject(tx.error||Error('Transaction annulée'));tx.onerror=()=>reject(tx.error);try{for(const f of decoded)tx.objectStore('files').put(f)}catch(e){tx.abort();reject(e)}});
  }catch(e){
-  if(touched){try{for(const [k,v] of original){if(v===null)localStorage.removeItem(k);else localStorage.setItem(k,v)}}catch{throw Error('Restauration interrompue et retour local incomplet. Utilise le fichier ELOAH-avant-restauration téléchargé.');}}
+  if(touched){try{for(const k of original.keys())localStorage.removeItem(k);for(const [k,v] of original){if(v!==null)localStorage.setItem(k,v)}}catch{throw Error('Restauration interrompue et retour local incomplet. Utilise le fichier ELOAH-avant-restauration téléchargé.');}}
   throw e;
  }
  pending=null;$('preview').hidden=true;$('import-file').value='';status('Restauration terminée. Recharge tes autres onglets ELOAH avant de travailler. La copie précédente a été proposée au téléchargement.');$('back-home').hidden=false;
