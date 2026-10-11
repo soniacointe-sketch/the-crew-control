@@ -29,7 +29,7 @@ const first=p.querySelector(".cp-grid");first?first.before(node):p.append(node);
 }
 function miniPaint(){
 mini();const target=document.getElementById("crew-projects-mini");if(!target)return;
-const select=["livre-coloriage","mascottes","groupes-identite"].map(x=>projects.find(p=>p.slug===x)).filter(Boolean);
+const select=["livre-coloriage","cahier-vacances","mascottes","groupes-identite"].map(x=>projects.find(p=>p.slug===x)).filter(Boolean);
 if(!select.length)select.push(...projects.slice(0,3));
 target.innerHTML='<div class="crew-projects-cover-grid">'+select.map(p=>'<article class="crew-projects-cover-card"><img src="'+esc(img(p))+'" alt="Visuel du projet '+esc(p.title)+'" loading="lazy"><div class="crew-projects-cover-body">'+badge(p)+'<h3>'+esc(p.title)+'</h3><p>'+esc(p.next_action||"Prochaine étape à définir")+'</p>'+prog(p)+'<button type="button" data-project-open="'+esc(p.id)+'">Ouvrir / continuer →</button></div></article>').join("")+'</div>';
 }
