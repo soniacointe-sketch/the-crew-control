@@ -119,58 +119,103 @@ main{padding:35px 0 90px}
 .mag-card-image{background:#14110b}
 @media(prefers-reduced-motion:reduce){.article-visual img{transition:none}}
 </style>
+<link rel="stylesheet" href="crew-magazine-v2.css?v=1">
 </head>
 <body>
 <div class="topline"></div>
 <div class="header">
- <div class="wrap header-inner">
-  <a class="brand" href="crew-magazine.html" aria-label="Le Crew Magazine - accueil">
-   <img class="brand-icon" src="crew-icon.svg" alt="">
-   <span class="brand-title">LE CREW MAGAZINE<span>THE CREW ORCHIES</span></span>
-  </a>
-  <nav class="header-links" aria-label="Navigation">
-   <a href="crew-digital-studio.html">← Digital Studio</a>
-   <a href="https://thecreworchies.blog/" target="_blank" rel="noopener">Site The Crew ↗</a>
-   <a class="home-link" href="crew-magazine.html">Le journal</a>
-  </nav>
- </div>
+  <div class="wrap header-inner">
+    <a class="brand" href="crew-magazine.html" aria-label="Le Crew Magazine — accueil">
+      <img class="brand-icon" src="crew-icon.svg" alt="">
+      <span class="brand-title">THE CREW<span>ORCHIES · MAGAZINE</span></span>
+    </a>
+    <nav class="header-links" aria-label="Navigation principale">
+      <a class="current" href="crew-magazine.html">ACCUEIL</a>
+      <a href="#articles">LE MAGAZINE</a>
+      <a href="#rubrique=Vie%20du%20Crew">LA VIE DU CREW</a>
+      <a href="#rubrique=Agenda">NOS ÉVÉNEMENTS</a>
+      <a href="https://thecreworchies.blog/galerie/" target="_blank" rel="noopener">GALERIE ↗</a>
+      <a href="#article=nos-creations">BOUTIQUE · PROJETS</a>
+    </nav>
+    <div class="header-actions">
+      <button class="icon-button" id="search-trigger" type="button" aria-label="Rechercher un article" title="Rechercher dans le magazine">⌕</button>
+      <a class="icon-button" href="crew-digital-studio.html#studio-account" title="Espace Crew" aria-label="Mon espace Crew">♙</a>
+    </div>
+    <div class="header-tagline">On vient pour danser,<br>on reste pour le Crew. ♡</div>
+  </div>
 </div>
 <header class="masthead">
  <div class="wrap masthead-inner">
-  <div>
-   <div class="kicker">LE JOURNAL DU COLLECTIF · ÉDITION D'AUTOMNE 2026</div>
-   <h1>Le Crew<br><em>Magazine.</em></h1>
-   <p class="lead">Bienvenue dans le journal du Crew. Ici, on partage la vie de l’association, les prochains rendez-vous et des idées pour continuer à danser ensemble.</p>
-   <p class="signature">On vient pour danser. On reste pour le Crew.</p>
+  <div class="hero-intro">
+    <div class="hero-kicker">♛ &nbsp; LE CREW MAGAZINE<small>LE JOURNAL DE L’ASSOCIATION</small></div>
+    <div class="hero-edition">ÉDITION N° 1 — AUTOMNE 2026</div>
+    <h1>Bienvenue<br>dans <em>le Crew !</em></h1>
+  </div>
+  <div class="hero-image">
+   <img src="https://thecreworchies.blog/wp-content/uploads/2026/10/crew-magazine-edito.png" alt="Illustration créée : une personne en sweat The Crew forme un cœur avec ses mains sous les lumières d’une scène" fetchpriority="high" width="1448" height="1086">
+   <span class="illustration-label">Illustration créée · Univers The Crew</span>
   </div>
   <aside class="hero-aside">
-   <div class="no">ÉDITO · PREMIER NUMÉRO</div>
-   <strong>Une équipe.<br>Une énergie.<br>Des histoires.</strong>
-   <p>Un premier pas, une choré qu’on retient, un parent qui rejoint la danse : chaque petit moment compte.</p>
-   <a href="#article=bienvenue-au-crew">Lire notre édito →</a>
+   <p>Bienvenue dans le journal du Crew. Ici, on partage la vie de l’association, les prochains rendez-vous et des idées pour continuer à danser ensemble.</p>
+   <p class="signature">On vient pour danser.<br>On reste pour le Crew. ♡</p>
+   <a class="hero-cta" href="#article=bienvenue-au-crew">LIRE L’ÉDITO <span aria-hidden="true">→</span></a>
   </aside>
  </div>
 </header>
 <main class="wrap">
  <section class="listing" id="listing">
-  <div class="newsletter"><strong>Notre journal grandira avec le Crew.</strong> Des histoires vraies, des projets que l’on construit et des souvenirs partagés. Les images d’ambiance sont des créations illustratives, pas des photos d’adhérents. Les photos de mineurs ne seront publiées qu’avec les autorisations nécessaires.</div>
-  <div class="section-top">
-   <h2>À lire dans le Crew</h2>
-   <span class="count" id="article-count" aria-live="polite"></span>
+  <div class="newsletter"><strong>UNE ÉQUIPE. UNE ÉNERGIE. TA PLACE.</strong> Le journal grandit au rythme de nos cours, créations et rendez-vous. Les images d’ambiance sont des illustrations, pas des photographies des adhérents.</div>
+  <div class="section-top" id="articles">
+    <h2>NOS DERNIERS ARTICLES</h2>
+    <span class="count" id="article-count" aria-live="polite"></span>
   </div>
-  <div class="mag-toolbar">
-   <input type="search" id="article-search" class="mag-search" placeholder="Chercher un article, un thème..." aria-label="Rechercher dans les articles">
-   <div class="filters" id="article-filters" aria-label="Filtrer les articles"></div>
+  <div class="magazine-columns">
+    <div class="magazine-content">
+      <div id="article-list" class="mag-grid"></div>
+      <p id="nothing-found" class="empty" hidden>Aucun article trouvé. Essaie un autre mot ou une autre rubrique.</p>
+    </div>
+    <aside class="magazine-sidebar" aria-label="Navigation et actualités du Crew">
+      <div class="mag-sidebar-block mag-sidebar-search-block">
+        <form class="mag-sidebar-search" id="article-search-form" role="search">
+          <input type="search" id="article-search" class="mag-search" placeholder="Rechercher un article…" aria-label="Rechercher dans les articles du Crew">
+          <button type="submit" aria-label="Lancer la recherche">→</button>
+        </form>
+        <div style="margin-top:18px">
+          <h3>Filtrer par rubrique</h3>
+          <div class="filters" id="article-filters" aria-label="Rubriques du magazine"></div>
+        </div>
+      </div>
+      <div class="mag-sidebar-visual">
+        <b>Rejoindre<br>le Crew</b>
+        <a class="mag-action" href="https://thecreworchies.blog/inscription/" target="_blank" rel="noopener">COURS D’ESSAI →</a>
+      </div>
+      <div class="mag-sidebar-block">
+        <h3>✉ &nbsp; Recevoir les actualités</h3>
+        <p>Retrouve les annonces de The Crew Orchies sur son canal WhatsApp. Aucun abonnement e-mail n’est nécessaire.</p>
+        <a class="mag-channel-link" href="https://whatsapp.com/channel/0029VbDPU2G9Gv7LVNGeEW3z" target="_blank" rel="noopener">SUIVRE LE CANAL →</a>
+      </div>
+      <div class="mag-sidebar-block">
+        <h3>À retrouver aussi</h3>
+        <div class="mag-quick-links">
+          <a href="https://thecreworchies.blog/ateliers-evenements/" target="_blank" rel="noopener">Les ateliers et réservations ↗</a>
+          <a href="https://thecreworchies.blog/galerie/" target="_blank" rel="noopener">La galerie officielle ↗</a>
+          <a href="https://thecreworchies.blog/contact/" target="_blank" rel="noopener">Nous contacter ↗</a>
+        </div>
+      </div>
+      <p class="mag-sidebar-note">Les visuels générés illustrent l’univers The Crew ; ils ne documentent pas des séances ou événements réels.</p>
+    </aside>
   </div>
-  <div id="article-list" class="mag-grid"></div>
-  <p id="nothing-found" class="empty" hidden>Aucun article ne correspond à cette recherche.</p>
- </section>
- <section class="article-view" id="article-view" hidden aria-live="polite"></section>
+</section>
+<section class="article-view" id="article-view" hidden aria-live="polite"></section>
 </main>
 <footer class="footer">
- <strong>UNE ÉQUIPE. UNE ÉNERGIE. TA PLACE.</strong>
- <p>Le Crew Magazine · The Crew Orchies · Un journal ouvert à toutes les générations.</p>
- <p><a href="https://thecreworchies.blog/ateliers-evenements/" target="_blank" rel="noopener">Les ateliers et événements ↗</a> · <a href="crew-digital-studio.html">Crew Digital Studio</a></p>
+  <div class="wrap footer-columns">
+    <div><span style="font-size:25px;color:#e3b766">▦</span><span><b>Prochains événements</b><br><a href="https://thecreworchies.blog/ateliers-evenements/" target="_blank" rel="noopener">Voir l’agenda officiel ↗</a></span></div>
+    <div><span style="font-size:25px;color:#e3b766">⌖</span><span><b>Espace Marypomme</b><br>Orchies</span></div>
+    <div><span style="font-size:25px;color:#e3b766">♡</span><span><b>Notre communauté</b><br>Une association. Un collectif.</span></div>
+    <div><span style="font:italic 23px Georgia,serif;color:#e8c17e">The Crew Orchies ♡</span></div>
+  </div>
+  <p class="footer-note wrap">Magazine de The Crew Orchies · <a href="crew-digital-studio.html">Crew Digital Studio</a> · <a href="https://thecreworchies.blog/mentions-legales/" target="_blank" rel="noopener">Mentions légales ↗</a></p>
 </footer>
 
 <template id="body-bienvenue-au-crew">
