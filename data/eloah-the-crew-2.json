@@ -1,0 +1,233 @@
+{
+  "id": "the-crew-2",
+  "name": "the crew",
+  "version": "0.3-public",
+  "updated": "2026-10-11",
+  "state": "Référentiel documentaire public — non scientifique à ce stade",
+  "sources": [
+    {
+      "id": "SRC-001",
+      "name": "Pack administratif The Crew Orchies 2026–2027",
+      "kind": "Document interne",
+      "loc": "pages 1–28",
+      "note": "Modèles et formulaires ; ne pas exposer les données personnelles"
+    },
+    {
+      "id": "SRC-002",
+      "name": "Planning annuel 2026–2027",
+      "kind": "Tableur prévisionnel",
+      "loc": "onglets Vue annuelle, Calendrier, Séances Kids",
+      "note": "Une date prévisionnelle n’est pas une séance confirmée"
+    },
+    {
+      "id": "SRC-003",
+      "name": "Grand Livre The Crew Orchies",
+      "kind": "Compilation de projet",
+      "loc": "sections 1–10",
+      "note": "Distinguer idées proposées et dispositifs effectivement mis en œuvre"
+    },
+    {
+      "id": "SRC-004",
+      "name": "Registre de gestion 2026–2027",
+      "kind": "Outil interne",
+      "loc": "six onglets",
+      "note": "Ne pas publier d’identités, coordonnées, informations sanitaires"
+    }
+  ],
+  "cards": [
+    {
+      "id": "TC-IDENT-001",
+      "theme": "Identité",
+      "title": "Mission et valeurs",
+      "source": "SRC-003",
+      "loc": "§1",
+      "keywords": [
+        "danse",
+        "collectif",
+        "inclusion"
+      ],
+      "fact": "Le document présente une association de danse et pompom destinée aux enfants, adolescents, adultes et familles.",
+      "limit": "Déclaration de mission, non preuve d’impact."
+    },
+    {
+      "id": "TC-OFFRE-001",
+      "theme": "Activités",
+      "title": "Formats d’activités possibles",
+      "source": "SRC-003",
+      "loc": "§2",
+      "keywords": [
+        "cours",
+        "ateliers",
+        "flashmobs"
+      ],
+      "fact": "Le Grand Livre propose cours, ateliers, stages et événements.",
+      "limit": "Les formats listés ne sont pas tous confirmés."
+    },
+    {
+      "id": "TC-TARIF-001",
+      "theme": "Gestion",
+      "title": "Tarifs consignés",
+      "source": "SRC-003",
+      "loc": "§3",
+      "keywords": [
+        "cotisation",
+        "duo"
+      ],
+      "fact": "Le Grand Livre inscrit enfants 70 €, adultes 85 €, duo 140 €, famille 220 €.",
+      "limit": "Le tarif duo de 140 € diverge d’une grille de projet plus récente évoquant 110 € ; confirmer le tarif officiel."
+    },
+    {
+      "id": "TC-ADMIN-001",
+      "theme": "Gestion",
+      "title": "Dossier administratif",
+      "source": "SRC-001",
+      "loc": "pages 1–2",
+      "keywords": [
+        "inscription",
+        "documents"
+      ],
+      "fact": "Le pack regroupe des modèles pour inscriptions, mineurs, paiements, événements et bénévoles.",
+      "limit": "Ne constitue pas une attestation de complétude juridique."
+    },
+    {
+      "id": "TC-ADH-001",
+      "theme": "Gestion",
+      "title": "Fiche d’inscription",
+      "source": "SRC-001",
+      "loc": "page 3",
+      "keywords": [
+        "adhésion",
+        "formulaire"
+      ],
+      "fact": "Le modèle demande identité, groupe et modalités de contact.",
+      "limit": "Aucune fiche remplie n’est publiée."
+    },
+    {
+      "id": "TC-SECU-001",
+      "theme": "Sécurité",
+      "title": "Autorisations et urgences",
+      "source": "SRC-001",
+      "loc": "pages 4–7",
+      "keywords": [
+        "mineurs",
+        "sécurité",
+        "image"
+      ],
+      "fact": "Le pack prévoit responsables légaux, données de sécurité utiles, droit à l’image et sorties.",
+      "limit": "Contrôler la conformité et limiter les accès."
+    },
+    {
+      "id": "TC-PLAN-001",
+      "theme": "Planning",
+      "title": "Calendrier annuel",
+      "source": "SRC-002",
+      "loc": "onglet Calendrier",
+      "keywords": [
+        "samedis",
+        "saison"
+      ],
+      "fact": "Le planning recense 43 samedis, du 5 septembre 2026 au 26 juin 2027.",
+      "limit": "Les séances indiquées à planifier ne sont pas des séances réalisées."
+    },
+    {
+      "id": "TC-PEDA-001",
+      "theme": "Pédagogie",
+      "title": "Préparation Kids",
+      "source": "SRC-002",
+      "loc": "onglet Séances Kids",
+      "keywords": [
+        "4–11 ans",
+        "chorégraphie"
+      ],
+      "fact": "La grille prévoit objectif, accueil, technique, chorégraphie et retour au calme.",
+      "limit": "Grille de préparation, pas bilan pédagogique mesuré."
+    },
+    {
+      "id": "TC-GEST-001",
+      "theme": "Gestion",
+      "title": "Registre de suivi",
+      "source": "SRC-004",
+      "loc": "onglets Tableau de bord, Adhérents, Paiements, Présences",
+      "keywords": [
+        "paiements",
+        "présences"
+      ],
+      "fact": "Le fichier contient des tableaux de suivi et des compteurs initiaux à zéro.",
+      "limit": "Ces compteurs n’établissent pas les effectifs réels."
+    },
+    {
+      "id": "TC-CONF-001",
+      "theme": "Sécurité",
+      "title": "Confidentialité des urgences",
+      "source": "SRC-004",
+      "loc": "onglet Urgences",
+      "keywords": [
+        "confidentialité",
+        "minimisation"
+      ],
+      "fact": "La feuille demande de ne conserver que les informations utiles à la sécurité.",
+      "limit": "Les informations nominatives ne doivent pas apparaître sur la page publique."
+    },
+    {
+      "id": "TC-COM-001",
+      "theme": "Communauté",
+      "title": "Communauté et rôles",
+      "source": "SRC-003",
+      "loc": "§5",
+      "keywords": [
+        "bénévoles",
+        "parents",
+        "ados"
+      ],
+      "fact": "Le Grand Livre décrit groupes de communication, bénévoles, parents volontaires et ambassadeurs ados.",
+      "limit": "Organisation proposée ; activation effective à confirmer."
+    },
+    {
+      "id": "TC-PEDA-002",
+      "theme": "Pédagogie",
+      "title": "Carnet de progression",
+      "source": "SRC-003",
+      "loc": "§5",
+      "keywords": [
+        "progression",
+        "kids"
+      ],
+      "fact": "Un carnet Kids est envisagé pour suivre participation, rythme, esprit d’équipe et progrès.",
+      "limit": "Ne pas en déduire un outil d’évaluation scientifique validé."
+    },
+    {
+      "id": "TC-EVENT-001",
+      "theme": "Activités",
+      "title": "Préparer un événement",
+      "source": "SRC-003",
+      "loc": "§7",
+      "keywords": [
+        "événement",
+        "matériel"
+      ],
+      "fact": "La méthode proposée associe objectif, public, programme, matériel, rôles, communication et bilan.",
+      "limit": "Procédure organisationnelle proposée."
+    },
+    {
+      "id": "TC-RI-001",
+      "theme": "Sécurité",
+      "title": "Règlement intérieur",
+      "source": "SRC-001",
+      "loc": "pages 11–12",
+      "keywords": [
+        "respect",
+        "règlement"
+      ],
+      "fact": "Le modèle prévoit ponctualité, respect, sécurité, gestion des images et mesures internes.",
+      "limit": "Document explicitement présenté comme modèle à personnaliser."
+    }
+  ],
+  "checks": [
+    "Faire confirmer la grille de tarifs en vigueur.",
+    "Réconcilier le planning prévisionnel avec les séances réalisées.",
+    "Ajouter des publications scientifiques avec titres, auteurs, dates et DOI réellement vérifiés.",
+    "Limiter les informations publiques aux sources non nominatives.",
+    "Confirmer les versions et dates de création des documents internes."
+  ],
+  "scientific_status": "Aucune publication scientifique n’est incluse dans cet export public : références à vérifier avant intégration."
+}
