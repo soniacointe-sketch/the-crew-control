@@ -7,6 +7,7 @@ let universe=query.get('projet')||'';
 try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
 if(['eloah-the-crew.html','eloah-academy.html','eloah-import.html','index.html'].includes(page))universe='The Crew Orchies';
 if(page==='sonia-os.html')universe='SONIA OS';
+if(page==='eloah-maia.html')universe='MAIA';
 const assistant=routes.find(r=>r[0]==='Assistant IA');assistant[1]='eloah-projet.html?projet='+encodeURIComponent(universe||'ELOAH');
 const nav=document.createElement('nav');nav.className='eloah-global-nav';nav.setAttribute('aria-label','Navigation commune ELOAH');
 function navLink(label,href,cls=''){const target=new URL(href,location.href);const current=target.pathname.split('/').pop()===page&&[...target.searchParams].every(([key,value])=>query.get(key)===value);return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
@@ -23,8 +24,8 @@ document.querySelectorAll('a[href="mes-univers.html"],a[href="mes-univers.html#m
  if(['Mes univers','Retour','Accueil','Accueil général','ELOAH / Espaces dédiés'].includes(label.replace(/^[←⌂▦]\s*/,''))){a.textContent='← Accueil ELOAH';a.href='mes-univers.html'}
  if(/^(Changer|Choisir|Parcourir) (d’univers|un univers|mes univers)/.test(label)){a.textContent='Changer d’univers';a.href='mes-univers.html#maisons'}
 });
-const localAside=document.querySelector('.layout>aside');
-if(localAside&&(document.getElementById('config')||page==='eloah-the-crew.html')){
+const localAside=document.querySelector('.layout>aside,.shell>aside.side');
+if(localAside&&(document.getElementById('config')||['eloah-the-crew.html','eloah-maia.html'].includes(page))){
  const sections=document.createElement('details');sections.className='eloah-local-menu';
  const summary=document.createElement('summary');summary.textContent='Rubriques'+(universe?' · '+universe:'');
  const content=document.createElement('div');content.className='eloah-local-content';
@@ -32,8 +33,9 @@ if(localAside&&(document.getElementById('config')||page==='eloah-the-crew.html')
  sections.append(summary,content);localAside.append(sections);
  const mobile=matchMedia('(max-width:1000px)');sections.open=!mobile.matches;mobile.addEventListener('change',e=>{sections.open=!e.matches});
 }
+document.querySelectorAll('a').forEach(a=>{if(['Accueil ELOAH','← Retour à ELOAH'].includes(a.textContent.trim())){a.href='mes-univers.html';a.textContent='← Accueil ELOAH'}});
 const heading=document.querySelector('h1');
-if(document.getElementById('config')&&heading&&universe){heading.textContent=universe;document.title=universe+' · ELOAH'}
+if(document.getElementById('config')&&heading&&universe){heading.textContent=universe;document.title=(page==='eloah-partenaire.html'?'Notes & préparation':universe)+' · ELOAH'}
 const style=document.createElement('style');style.textContent='.eloah-global-nav{display:flex;align-items:center;gap:6px;padding:10px 20px;background:#f4f3ee;border-bottom:1px solid #dddfd7;color:#303530;overflow-x:auto;white-space:nowrap;font:12px/1.5 system-ui;min-height:52px}.eloah-global-nav a{display:block;padding:7px 11px;text-decoration:none;color:inherit;border-radius:5px}.eloah-global-nav a:hover,.eloah-global-nav a[aria-current]{background:#eae6f2;color:#695597}.eloah-global-nav .eloah-wordmark{letter-spacing:.2em;font-weight:750;margin-right:14px}.eloah-global-nav a:focus-visible{outline:2px solid #7762af}.eloah-project-picker{font:12px system-ui;max-width:190px;background:var(--panel,#fff);padding:8px;border:1px solid #ddd;border-radius:5px}.eloah-recent{margin:25px 0;padding:24px;border:1px solid #dedfd7;border-radius:12px;background:#fff}.eloah-recent h2{font:26px Georgia;margin:0 0 15px}.eloah-recent-grid{display:flex;gap:10px;flex-wrap:wrap}.eloah-recent-grid a{padding:12px 16px;border:1px solid #dedfd7;border-radius:8px;text-decoration:none;color:#333}.eloah-recent p{font:13px/1.7 system-ui;color:#6d7269}@media(max-width:740px){.eloah-global-nav{padding:8px;min-height:48px}.eloah-global-nav a{padding:6px 9px}.eloah-project-picker{max-width:130px}}';document.head.appendChild(style);
 const harmony=document.createElement('style');harmony.textContent=`
 .eloah-global-nav{position:relative;z-index:20;box-sizing:border-box;height:52px;min-height:52px;overflow:visible;flex-wrap:nowrap;padding:4px 16px;gap:6px;flex-shrink:0}
@@ -51,7 +53,7 @@ const harmony=document.createElement('style');harmony.textContent=`
 .eloah-screen :where(dialog){max-width:calc(100vw - 24px);max-height:90dvh;box-sizing:border-box}
 .eloah-screen .ops-actions{align-items:end}
 .eloah-local-menu>summary{display:none}.eloah-local-menu{margin:0;border:0;padding:0}.eloah-local-content{min-width:0}
-@media(max-width:1000px){.eloah-screen .layout:has(.eloah-local-menu){grid-template-columns:minmax(0,1fr)}.eloah-screen .layout>aside:has(.eloah-local-menu){display:block;padding:8px 16px}.eloah-local-menu>summary{display:flex;align-items:center;min-height:44px;cursor:pointer;list-style:none;font:13px system-ui;gap:10px}.eloah-local-menu>summary::after{content:'⌄';margin-left:auto}.eloah-local-content{padding:12px 0}.eloah-local-content nav{display:flex;flex-wrap:wrap;overflow:visible}.eloah-local-content .brand{display:none}.eloah-local-content>p{display:none}.eloah-local-content .side-link{display:block}}
+@media(max-width:1000px){.eloah-screen :is(.layout,.shell):has(.eloah-local-menu){grid-template-columns:minmax(0,1fr)}.eloah-screen :is(.layout,.shell)>aside:has(.eloah-local-menu){display:block;padding:8px 16px}.eloah-local-menu>summary{display:flex;align-items:center;min-height:44px;cursor:pointer;list-style:none;font:13px system-ui;gap:10px}.eloah-local-menu>summary::after{content:'⌄';margin-left:auto}.eloah-local-content{padding:12px 0}.eloah-local-content nav{display:flex;flex-wrap:wrap;overflow:visible}.eloah-local-content .brand{display:none}.eloah-local-content>p{display:none}.eloah-local-content .side-link{display:block}}
 @media(max-width:900px){.eloah-nav-shortcuts{display:none}.eloah-global-nav .eloah-switch{margin-left:auto}.eloah-global-nav .eloah-menu{margin-left:0}}
 @media(max-width:740px){
 .eloah-global-nav{height:52px;min-height:52px;padding:4px 8px;gap:3px}
