@@ -1,7 +1,7 @@
 /* Canonical ELOAH navigation. Existing storage remains untouched. */
 (()=>{'use strict';
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
-const routes=[['Accueil','mes-univers.html'],['Projets','mes-univers.html#maisons'],['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Bases d’expertise','eloah-bibliotheque.html?type=bases'],['Notes & préparation','eloah-partenaire.html'],['Compte & sauvegardes','eloah-projet.html?projet=ELOAH&onglet=parametres&compte=1']];
+const routes=[['Accueil','mes-univers.html'],['Assistant IA','eloah-projet.html?projet='+encodeURIComponent(page==='eloah-projet.html'?(query.get('projet')||'ELOAH'):'ELOAH')],['Projets','mes-univers.html#maisons'],['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Bases d’expertise','eloah-bibliotheque.html?type=bases'],['Notes & préparation','eloah-partenaire.html'],['Compte & sauvegardes','eloah-projet.html?projet=ELOAH&onglet=parametres&compte=1']];
 const nav=document.createElement('nav');nav.className='eloah-global-nav';nav.setAttribute('aria-label','Navigation commune ELOAH');
 nav.innerHTML='<a class="eloah-wordmark" href="mes-univers.html">ELOAH</a>'+routes.map(([label,href])=>'<a href="'+href+'" '+((label==='Accueil'&&page==='mes-univers.html')||(label==='Documents'&&page==='eloah-bibliotheque.html'&&query.get('type')!=='bases')||(label==='Bases d’expertise'&&page==='eloah-bibliotheque.html'&&query.get('type')==='bases')?'aria-current="page"':'')+'>'+label+'</a>').join('');document.body.prepend(nav);
 const style=document.createElement('style');style.textContent='.eloah-global-nav{display:flex;align-items:center;gap:6px;padding:10px 20px;background:#f4f3ee;border-bottom:1px solid #dddfd7;color:#303530;overflow-x:auto;white-space:nowrap;font:12px/1.5 system-ui;min-height:52px}.eloah-global-nav a{display:block;padding:7px 11px;text-decoration:none;color:inherit;border-radius:5px}.eloah-global-nav a:hover,.eloah-global-nav a[aria-current]{background:#eae6f2;color:#695597}.eloah-global-nav .eloah-wordmark{letter-spacing:.2em;font-weight:750;margin-right:14px}.eloah-global-nav a:focus-visible{outline:2px solid #7762af}.eloah-project-picker{font:12px system-ui;max-width:190px;background:var(--panel,#fff);padding:8px;border:1px solid #ddd;border-radius:5px}.eloah-recent{margin:25px 0;padding:24px;border:1px solid #dedfd7;border-radius:12px;background:#fff}.eloah-recent h2{font:26px Georgia;margin:0 0 15px}.eloah-recent-grid{display:flex;gap:10px;flex-wrap:wrap}.eloah-recent-grid a{padding:12px 16px;border:1px solid #dedfd7;border-radius:8px;text-decoration:none;color:#333}.eloah-recent p{font:13px/1.7 system-ui;color:#6d7269}@media(max-width:740px){.eloah-global-nav{padding:8px;min-height:48px}.eloah-global-nav a{padding:6px 9px}.eloah-project-picker{max-width:130px}}';document.head.appendChild(style);
@@ -27,5 +27,57 @@ if(page==='eloah-partenaire.html'){
  document.addEventListener('click',e=>{const b=e.target.closest('[data-view]');if(!b)return;const destinations={'Projets':'mes-univers.html#maisons','Documents':'eloah-bibliotheque.html?type=fichiers','Bases d’Expertise':'eloah-bibliotheque.html?type=bases','Mon profil':routes[5][1]};if(destinations[b.dataset.view]){e.preventDefault();e.stopImmediatePropagation();location.href=destinations[b.dataset.view]}},true);
  const initial=query.get('rubrique');const redirects={'Projets':'mes-univers.html#maisons','Documents':'eloah-bibliotheque.html?type=fichiers','Bases d’Expertise':'eloah-bibliotheque.html?type=bases'};if(redirects[initial]&&!query.has('archives'))location.replace(redirects[initial]);
 }
+}
+})();
+
+
+/* Catalogue d'accès commun : les pages d'univers pointent vers le même assistant, mais chaque projet conserve ses propres données locales. */
+(()=>{
+'use strict';
+const universeNames=["The Crew Orchies","Power & Glam","SONIA OS","Sonia Velka","Le Lion Blanc","PARISIS Engine","ELOAH P&G","Dark Energy","MAIA","Etsy Factory","Musique & identité artistique","SMITH Studio","SONIA HUMAN VOICE ENGINE","AUDIO-FIRST EXPERIENCE ENGINE","BUZZ AGENT","SONIA ALERT / OSINT","Foi & spiritualité","SONIA FUTURES INTELLIGENCE","SYMBOL ATLAS","SONIA Labs","LE SIÈGE","AION OS V2 / V3","ELOAH","Agent Authority Fabric"];
+window.ELOAHUniverseRegistry=universeNames.slice();
+const query=new URLSearchParams(location.search);
+const page=location.pathname.split('/').pop();
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function localProjects(){const list=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.startsWith('eloah-project-v1:')){const n=k.slice('eloah-project-v1:'.length);if(n&&!list.includes(n))list.push(n)}}}catch{}return list}
+if(page==='eloah-projet.html'){
+  const picker=document.querySelector('.eloah-project-picker');
+  if(picker){
+    const current=picker.value;
+    for(const name of [...new Set([...universeNames,...localProjects()])]){
+      if(![...picker.options].some(opt=>opt.value===name))picker.add(new Option(name,name));
+    }
+    picker.value=current;
+  }
+  try{
+    const pending=JSON.parse(sessionStorage.getItem('eloah-assistant-prefill-v2')||'null');
+    const selected=query.get('projet')||'The Crew Orchies';
+    if(pending?.project===selected&&typeof pending.prompt==='string'&&pending.prompt.trim()&&Date.now()-pending.at<1800000){
+      sessionStorage.removeItem('eloah-assistant-prefill-v2');
+      if(typeof newThread==='function')newThread();
+      const textarea=document.getElementById('message-input');
+      if(textarea){textarea.value=pending.prompt.slice(0,12000);textarea.focus()}
+      if(typeof notify==='function')notify('Demande préparée pour '+selected+'. Relis-la puis choisis « Répondre dans ELOAH (IA) » ou ChatGPT.');
+    }
+  }catch{}
+}
+if(page==='mes-univers.html'){
+  const form=document.getElementById('guided-form');
+  if(form){
+    const known=[...new Set([...universeNames,...localProjects()])];
+    const hub=document.createElement('section');
+    hub.className='eloah-assistant-universe-hub';
+    hub.innerHTML='<div class="eloah-hub-head"><div><span class="eloah-hub-overline">ASSISTANT DE PROJET — ELOAH V2</span><h2>Un assistant pour tous tes univers</h2><p>Choisis ton projet, décris ton travail et retrouve son contexte, ses sources et ses livrables. Chaque univers conserve ses données séparément.</p></div><span class="eloah-hub-count">'+universeNames.length+' espaces référencés</span></div><label for="eloah-home-universe">Univers actif <select id="eloah-home-universe" required><option value="">Choisir un univers…</option><option value="__cross__">Mission transversale — plusieurs univers</option>'+known.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join('')+'</select></label><p class="eloah-hub-small">En mode transversal, tu choisis les autres projets et sources à inclure avant toute demande IA. Rien n’est fusionné automatiquement.</p>';
+    form.before(hub);
+    const submit=form.querySelector('button[type="submit"]');
+    if(submit)submit.textContent="Préparer dans ELOAH →";
+    form.querySelector('textarea')?.setAttribute('placeholder','Ex. prépare le prochain post, crée un dossier sourcé ou poursuis mon projet…');
+    const note=form.nextElementSibling;
+    if(note?.classList.contains('notice'))note.textContent='La demande ouvre le projet ELOAH choisi et préremplit son assistant. Elle n’est ni transmise à une IA ni publiée sans ton clic explicite.';
+    const style=document.createElement('style');
+    style.textContent='.eloah-assistant-universe-hub{padding:24px;margin:22px 0 0;background:#fdfbf7;border:1px solid #d9d6cd}.eloah-hub-head{display:flex;justify-content:space-between;gap:15px;align-items:start;flex-wrap:wrap}.eloah-hub-head h2{font:30px Georgia,serif;margin:8px 0}.eloah-hub-head p{font:13px/1.65 system-ui;color:#6b6e66;max-width:760px}.eloah-hub-overline{font:10px system-ui;letter-spacing:.13em;color:#75766c}.eloah-hub-count{padding:6px 11px;border:1px solid #ded6bf;color:#655b42;font:11px system-ui}.eloah-assistant-universe-hub label{display:block;font:12px system-ui;color:#555e56;margin-top:16px}.eloah-assistant-universe-hub select{display:block;width:100%;max-width:530px;padding:13px;margin:8px 0;font:14px system-ui;border:1px solid #c5c7c0;background:#fff;color:#242824}.eloah-hub-small{font:11px/1.5 system-ui;color:#747872;margin:10px 0 0}.guided{margin-top:0!important}.eloah-hub-error{font:12px system-ui;color:#a03e3e;margin:5px 0}@media(max-width:700px){.eloah-assistant-universe-hub{padding:16px}.eloah-hub-head h2{font-size:25px}}';
+    document.head.appendChild(style);
+    document.querySelectorAll('#maisons ~ section a[href^="eloah-projet.html?projet="] .open').forEach(el=>{el.textContent='Ouvrir projet & assistant IA ↗'});
+  }
 }
 })();
