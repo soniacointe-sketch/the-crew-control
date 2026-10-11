@@ -79,6 +79,18 @@ main>.grid .card:nth-child(10) h2{background-image:url("studio-images/mia.webp")
 .studio-toolbar{display:flex;align-items:center;gap:10px;margin:0 0 20px;padding:10px 14px;border:1px solid #785a2f;background:linear-gradient(120deg,#17130d,#090909);border-radius:12px}
 .studio-search-label{font-size:25px;color:#e7bb64}.studio-toolbar input{flex:1;min-width:0;margin:0;background:transparent;border:none;outline-offset:3px;font-size:14px;padding:10px;color:#fff}.studio-toolbar input::placeholder{color:#a89a82}.studio-toolbar button{padding:9px 12px}.studio-toolbar span{white-space:nowrap;color:#e7bb64;font-size:12px}main>.grid .card[hidden]{display:none!important}.studio-sidebar a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #f4d187;outline-offset:3px}html{scroll-behavior:smooth}#cs-admin,#cs-feed,#cards,#content{scroll-margin-top:25px}
 @media(max-width:600px){.studio-toolbar{gap:5px;padding:7px}.studio-toolbar span{display:none}.studio-toolbar button{font-size:11px}}
+
+/* Golden dance studio background */
+body{background:#090806;isolation:isolate}
+body::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(90deg,rgba(5,5,5,.48),rgba(5,5,5,.12)),url("studio-images/studio-background.webp") center center/cover no-repeat}
+.studio-main{background:rgba(5,5,5,.12)}
+header{background:linear-gradient(90deg,rgba(8,7,5,.80),rgba(8,7,5,.30));min-height:280px;display:flex;flex-direction:column;justify-content:center}
+header p{color:#fff5e2;text-shadow:0 2px 8px #000}
+.studio-sidebar{background:linear-gradient(170deg,rgba(20,16,11,.94),rgba(5,5,5,.91))}
+footer{background:rgba(5,5,5,.75)}
+@media(max-width:850px){body::before{background-position:70% center}header{min-height:245px;background:rgba(8,7,5,.65)}}
+@media print{body::before{display:none}}
+
 </style></head><body><div class="studio-layout"><aside class="studio-sidebar" aria-label="Navigation"><div class="studio-logo">THE CREW<small>ORCHIES</small></div><a href="./">⌂ &nbsp; Accueil</a><a href="crew-digital-studio.html" class="current">✦ &nbsp; Crew Digital Studio</a><a href="#cs-feed">▣ &nbsp; Mes contenus</a><a href="#cs-email">♙ &nbsp; Mon profil</a><a href="#content">☆ &nbsp; Activités</a><a href="#cs-admin">⚙ &nbsp; Administration</a><div class="slogan">La danse continue…<br>même en ligne ♡</div></aside><div class="studio-main">
 <header><div class="bar"><a href="./">← TABLEAU DE BORD THE CREW</a><span class="tag">VERSION PILOTE · OCTOBRE 2026</span></div><div class="ey" style="margin-top:25px">THE CREW ORCHIES</div><h1>CREW DIGITAL STUDIO</h1><p>Un espace pour danser, apprendre, jouer et créer nos souvenirs. 10 projets réunis au même endroit.</p></header>
 <main><div class="studio-toolbar"><label class="studio-search-label" for="studio-search">⌕</label><input id="studio-search" type="search" placeholder="Rechercher un magazine, une chorégraphie, un jeu..." autocomplete="off" aria-label="Rechercher parmi les projets du studio"><button class="btn secondary" id="studio-search-clear" type="button">Effacer</button><span id="studio-search-count" aria-live="polite">10 projets</span></div><div class="grid" id="cards"></div><p id="studio-empty" class="muted" hidden>Aucun projet trouvé. Essaie un autre mot.</p><section id="content" class="panel" aria-live="polite"></section><p class="muted">Les contenus personnels et photographies d'enfants ne doivent pas être publiés ici : ce site GitHub Pages est public. Un espace authentifié sera nécessaire pour les galeries privées et albums individuels.</p></main><footer>THE CREW ORCHIES · Création originale · Noir & Or</footer></div></div>
