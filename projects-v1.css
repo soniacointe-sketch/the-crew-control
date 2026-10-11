@@ -5,7 +5,7 @@
 .crew-projects-btn{padding:11px 15px;border-radius:10px;background:#d8b45a;color:#111;border:0;font-weight:800;cursor:pointer}
 .crew-projects-btn:hover,.crew-projects-btn:focus-visible{background:#f3d48e}
 .crew-projects-btn-secondary{padding:11px 15px;border-radius:10px;border:1px solid #8d7441;background:#241e14;color:#f1d38b;cursor:pointer}
-.crew-projects-cover-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
+.crew-projects-cover-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
 .crew-projects-cover-card{background:#121212;border:1px solid #4c402c;border-radius:14px;overflow:hidden;min-width:0}
 .crew-projects-cover-card img{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#262117}
 .crew-projects-cover-body{padding:14px}
@@ -55,3 +55,6 @@
 @media(max-width:960px){.crew-proj-grid{grid-template-columns:1fr}}
 @media(max-width:650px){.crew-projects-cover-grid{grid-template-columns:1fr 1fr}.crew-projects-home{padding:12px}.crew-proj-card{grid-template-columns:1fr}.crew-proj-card img{height:155px;min-height:0}.crew-proj-form{grid-template-columns:1fr}.crew-proj-form .full{grid-column:1}.crew-proj-detail-panel{padding:13px}}
 @media(max-width:430px){.crew-projects-cover-grid{grid-template-columns:1fr}.crew-projects-cover-card img{max-height:170px}.crew-proj-card-content{padding:12px}}
+
+@media(max-width:1080px){.crew-projects-cover-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:430px){.crew-projects-cover-grid{grid-template-columns:1fr}}
