@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-labelledby="title">
+<title id="title">Mon journal de danse, The Crew Orchies</title>
+<defs><linearGradient id="shade" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#181818"/><stop offset="1" stop-color="#060606"/></linearGradient></defs>
+<rect width="800" height="500" fill="url(#shade)"/><rect x="7" y="7" width="786" height="486" rx="14" fill="none" stroke="#D4AF37" stroke-width="3"/>
+<circle cx="595" cy="240" r="170" fill="none" stroke="#D4AF37" stroke-width="12"/><circle cx="595" cy="240" r="155" fill="none" stroke="#C8A46A" stroke-width="2"/>
+<circle cx="607" cy="178" r="37" fill="#D9A5A5"/>
+<g stroke="#F8F4EE" stroke-width="17" stroke-linecap="round" fill="none"><path d="M593 230 L570 304 L524 356"/><path d="M574 297 L649 362"/><path d="M587 251 L501 205"/><path d="M589 250 L668 235"/></g>
+<g fill="#D4AF37"><path d="M436 130l6 18 19 0-15 11 5 18-15-10-15 10 6-18-15-11 19 0Z"/><path d="M694 380l6 18 19 0-15 11 5 18-15-10-15 10 6-18-15-11 19 0Z"/></g>
+<text x="47" y="68" fill="#D4AF37" font-family="Arial,sans-serif" font-weight="bold" font-size="22" letter-spacing="5">THE CREW ORCHIES</text>
+<text x="45" y="199" fill="#F8F4EE" font-family="Arial Black,Arial,sans-serif" font-size="60" font-weight="900">MON JOURNAL</text>
+<text x="45" y="278" fill="#D4AF37" font-family="Arial Black,Arial,sans-serif" font-size="65" font-weight="900">DE DANSE</text>
+<text x="50" y="331" fill="#E8DCCF" font-family="Arial,sans-serif" font-size="17" letter-spacing="2">MES COURS · MES IDÉES · MES SOUVENIRS</text>
+<path d="M0 430L800 395" stroke="#D9A5A5" stroke-width="24" opacity=".8"/>
+<text x="48" y="476" fill="#F8F4EE" font-family="Arial,sans-serif" font-size="16" letter-spacing="3" font-weight="bold">PROTOTYPE 01 · ÉDITION &amp; JEUNESSE</text>
+</svg>
