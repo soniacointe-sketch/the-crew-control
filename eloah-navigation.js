@@ -1,10 +1,68 @@
 /* Canonical ELOAH navigation. Existing storage remains untouched. */
 (()=>{'use strict';
+if(document.querySelector('.eloah-global-nav'))return;
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
 const routes=[['Accueil','mes-univers.html'],['Assistant IA','eloah-projet.html?projet='+encodeURIComponent(page==='eloah-projet.html'?(query.get('projet')||'ELOAH'):'ELOAH')],['Projets','mes-univers.html#maisons'],['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Bases d’expertise','eloah-bibliotheque.html?type=bases'],['Notes & préparation','eloah-partenaire.html'],['Compte & sauvegardes','eloah-projet.html?projet=ELOAH&onglet=parametres&compte=1']];
+let universe=query.get('projet')||'';
+try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
+if(['eloah-the-crew.html','eloah-academy.html','eloah-import.html','index.html'].includes(page))universe='The Crew Orchies';
+if(page==='sonia-os.html')universe='SONIA OS';
+const assistant=routes.find(r=>r[0]==='Assistant IA');assistant[1]='eloah-projet.html?projet='+encodeURIComponent(universe||'ELOAH');
 const nav=document.createElement('nav');nav.className='eloah-global-nav';nav.setAttribute('aria-label','Navigation commune ELOAH');
-nav.innerHTML='<a class="eloah-wordmark" href="mes-univers.html">ELOAH</a>'+routes.map(([label,href])=>'<a href="'+href+'" '+((label==='Accueil'&&page==='mes-univers.html')||(label==='Documents'&&page==='eloah-bibliotheque.html'&&query.get('type')!=='bases')||(label==='Bases d’expertise'&&page==='eloah-bibliotheque.html'&&query.get('type')==='bases')?'aria-current="page"':'')+'>'+label+'</a>').join('');document.body.prepend(nav);
+function navLink(label,href,cls=''){const current=href.split('?')[0].split('#')[0]===page&&(!href.includes('?type=')||href.endsWith('type='+query.get('type')));return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
+nav.innerHTML=navLink('ELOAH · Accueil','mes-univers.html','eloah-wordmark')+navLink('Changer d’univers','mes-univers.html#maisons','eloah-switch')+'<div class="eloah-nav-shortcuts">'+[['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Notes & préparation','eloah-partenaire.html']].map(r=>navLink(...r)).join('')+'</div><details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>!['Accueil','Projets'].includes(r[0])).map(r=>navLink(...r)).join('')+'</div></details>';
+document.body.prepend(nav);
+document.body.classList.add('eloah-screen');
+document.body.dataset.eloahPage=page;
+const menu=nav.querySelector('details');
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open){menu.open=false;menu.querySelector('summary').focus()}});
+document.addEventListener('click',e=>{if(menu.open&&!menu.contains(e.target))menu.open=false});
+document.querySelectorAll('a[href="mes-univers.html"],a[href="mes-univers.html#maisons"]').forEach(a=>{
+ if(nav.contains(a)||a.children.length)return;
+ const label=a.textContent.trim();
+ if(/^(←\s*)?(Mes univers|Retour|Accueil|Accueil général)$/.test(label)){a.textContent='← Accueil ELOAH';a.href='mes-univers.html'}
+ if(/^(Changer|Choisir|Parcourir) (d’univers|un univers|mes univers)/.test(label)){a.textContent='Changer d’univers';a.href='mes-univers.html#maisons'}
+});
+const heading=document.querySelector('h1');
+if(document.getElementById('config')&&heading&&universe){heading.textContent=universe;document.title=universe+' · ELOAH'}
 const style=document.createElement('style');style.textContent='.eloah-global-nav{display:flex;align-items:center;gap:6px;padding:10px 20px;background:#f4f3ee;border-bottom:1px solid #dddfd7;color:#303530;overflow-x:auto;white-space:nowrap;font:12px/1.5 system-ui;min-height:52px}.eloah-global-nav a{display:block;padding:7px 11px;text-decoration:none;color:inherit;border-radius:5px}.eloah-global-nav a:hover,.eloah-global-nav a[aria-current]{background:#eae6f2;color:#695597}.eloah-global-nav .eloah-wordmark{letter-spacing:.2em;font-weight:750;margin-right:14px}.eloah-global-nav a:focus-visible{outline:2px solid #7762af}.eloah-project-picker{font:12px system-ui;max-width:190px;background:var(--panel,#fff);padding:8px;border:1px solid #ddd;border-radius:5px}.eloah-recent{margin:25px 0;padding:24px;border:1px solid #dedfd7;border-radius:12px;background:#fff}.eloah-recent h2{font:26px Georgia;margin:0 0 15px}.eloah-recent-grid{display:flex;gap:10px;flex-wrap:wrap}.eloah-recent-grid a{padding:12px 16px;border:1px solid #dedfd7;border-radius:8px;text-decoration:none;color:#333}.eloah-recent p{font:13px/1.7 system-ui;color:#6d7269}@media(max-width:740px){.eloah-global-nav{padding:8px;min-height:48px}.eloah-global-nav a{padding:6px 9px}.eloah-project-picker{max-width:130px}}';document.head.appendChild(style);
+const harmony=document.createElement('style');harmony.textContent=`
+.eloah-global-nav{position:relative;z-index:20;box-sizing:border-box;height:52px;min-height:52px;overflow:visible;flex-wrap:nowrap;padding:4px 16px;gap:6px;flex-shrink:0}
+.eloah-global-nav a,.eloah-global-nav summary{box-sizing:border-box;min-height:44px;display:flex;align-items:center;padding:8px 12px;font:13px/1.3 system-ui;color:#303530}
+.eloah-global-nav .eloah-wordmark{letter-spacing:.07em;margin-right:0;font-weight:750;white-space:nowrap}
+.eloah-nav-shortcuts{display:flex;margin-left:auto;gap:3px}
+.eloah-global-nav .eloah-menu{position:relative;margin:0 0 0 auto;padding:0;border:0;background:transparent;color:#303530;flex-shrink:0}
+.eloah-menu summary{cursor:pointer;list-style:none;gap:8px;border:1px solid #d7d9d1;border-radius:7px;background:#fff}
+.eloah-menu summary::after{content:'⌄'}.eloah-menu summary::-webkit-details-marker{display:none}
+.eloah-menu[open] summary{background:#eee8f7}
+.eloah-menu-links{position:absolute;right:0;top:calc(100% + 8px);width:min(285px,calc(100vw - 24px));max-height:calc(100dvh - 76px);overflow:auto;border:1px solid #d7d9d1;padding:8px;background:#fff;border-radius:12px;box-shadow:0 14px 35px #1c25252b;white-space:normal}
+.eloah-menu-links a{border-radius:6px}
+.eloah-screen :where(main,.panel,.panel-card,.split>*,.grid>*){min-width:0}
+.eloah-screen :where(button,a,input,select,textarea,summary):focus-visible{outline:2px solid #7762af;outline-offset:3px}
+.eloah-screen :where(dialog){max-width:calc(100vw - 24px);max-height:90dvh;box-sizing:border-box}
+.eloah-screen .ops-actions{align-items:end}
+@media(max-width:900px){.eloah-nav-shortcuts{display:none}.eloah-global-nav .eloah-switch{margin-left:auto}.eloah-global-nav .eloah-menu{margin-left:0}}
+@media(max-width:740px){
+.eloah-global-nav{height:52px;min-height:52px;padding:4px 8px;gap:3px}
+.eloah-global-nav a,.eloah-global-nav summary{font-size:12px;padding:8px}
+.eloah-global-nav .eloah-wordmark{letter-spacing:0}
+.eloah-screen :where(button,.btn,.button,summary){min-height:44px}
+.eloah-screen :where(input:not([type=checkbox]):not([type=radio]),textarea,select){font-size:16px}
+.eloah-screen :where(.toolbar,.expert-head,.bar,.ops-actions){flex-wrap:wrap}
+.eloah-screen :where(.toolbar input,.toolbar select){min-width:0;max-width:100%}
+.eloah-screen :where(.row,.panel,.panel-card){overflow-wrap:anywhere}
+.eloah-screen .project-head{flex-wrap:wrap;padding:10px 12px;gap:8px}
+.eloah-screen .project-head h1{flex:1;min-width:110px;overflow-wrap:anywhere}
+.eloah-screen .project-head .eloah-project-picker{max-width:100%;width:100%;order:5}
+.eloah-screen[data-eloah-page="eloah-projet.html"] .shell{height:calc(100dvh - 109px)}
+.eloah-screen[data-eloah-page="eloah-projet.html"] .files-side.open{top:109px}
+.eloah-screen .compose-bottom{flex-wrap:wrap}.eloah-screen .compose-bottom>div{display:flex;flex-wrap:wrap;gap:6px}
+.eloah-screen .expert-grid{grid-template-columns:minmax(0,1fr)}
+.eloah-screen .ops-grid{grid-template-columns:minmax(0,1fr)}
+.eloah-screen .ops-actions>*{max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){.eloah-screen *{scroll-behavior:auto!important;animation:none!important}}
+`;document.head.appendChild(harmony);
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function projects(){const out=[];try{for(const k of Object.keys(localStorage).filter(k=>k.startsWith('eloah-project-v1:'))){try{const s=JSON.parse(localStorage.getItem(k));if(Array.isArray(s?.threads))out.push({key:k.slice(17),name:s.settings?.name||k.slice(17),updated:s.updated,deadline:s.settings?.deadline,archived:s.settings?.archived})}catch{}}}catch{}return out.sort((a,b)=>(b.updated||'').localeCompare(a.updated||''))}
 if(page==='mes-univers.html'){
@@ -16,7 +74,7 @@ if(page==='mes-univers.html'){
  document.querySelector('main .cockpit-grid,main [aria-label="Cockpit partenaire"]')?.before(section);
 }
 if(page==='eloah-projet.html'){
- const layoutStyle=document.createElement('style');layoutStyle.textContent='.shell{height:calc(100dvh - 109px)}@media(max-width:740px){.shell{height:calc(100dvh - 105px)}.files-side.open{top:105px}}';document.head.appendChild(layoutStyle);const projectName=query.get('projet')||'The Crew Orchies';const picker=document.createElement('select');picker.className='eloah-project-picker';picker.setAttribute('aria-label','Changer de projet');const map=new Map([['The Crew Orchies','The Crew Orchies'],['Power & Glam','Power & Glam'],['SONIA OS','SONIA OS'],['ELOAH','ELOAH'],...projects().map(p=>[p.key,p.name])]);if(!map.has(projectName))map.set(projectName,projectName);picker.innerHTML=[...map].map(([k,v])=>'<option value="'+escape(k)+'" '+(k===projectName?'selected':'')+'>'+escape(v)+'</option>').join('');picker.onchange=()=>location.href='eloah-projet.html?projet='+encodeURIComponent(picker.value);document.querySelector('.project-head').append(picker);
+ const layoutStyle=document.createElement('style');layoutStyle.textContent='.shell{height:calc(100dvh - 109px)}@media(max-width:740px){.shell{height:calc(100dvh - 109px)}.files-side.open{top:109px}}';document.head.appendChild(layoutStyle);const projectName=query.get('projet')||'The Crew Orchies';const picker=document.createElement('select');picker.className='eloah-project-picker';picker.setAttribute('aria-label','Changer de projet');const map=new Map([['The Crew Orchies','The Crew Orchies'],['Power & Glam','Power & Glam'],['SONIA OS','SONIA OS'],['ELOAH','ELOAH'],...projects().map(p=>[p.key,p.name])]);if(!map.has(projectName))map.set(projectName,projectName);picker.innerHTML=[...map].map(([k,v])=>'<option value="'+escape(k)+'" '+(k===projectName?'selected':'')+'>'+escape(v)+'</option>').join('');picker.onchange=()=>location.href='eloah-projet.html?projet='+encodeURIComponent(picker.value);document.querySelector('.project-head').append(picker);
  const view=query.get('onglet');if(view==='fichiers')showTab('Fichiers');if(view==='bases'){openedBase=query.get('baseId')||null;showTab('Bases d’Expertise');if(query.get('construire')==='1')buildBase()}
  if(query.get('compte')==='1')document.getElementById('cloud-entry')?.click();
 }
