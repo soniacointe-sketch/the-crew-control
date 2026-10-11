@@ -20,6 +20,7 @@ function records(){
  return [...planning,...localNotes];
 }
 const universeLinks=[...main.querySelectorAll('a.card[href^="eloah-projet.html?projet="]')].map(a=>({title:a.querySelector('h2')?.textContent||'',note:a.querySelector('p')?.textContent||'',href:a.getAttribute('href'),type:'Univers',universe:''}));
+const backupLink=document.createElement('a');backupLink.href='eloah-sauvegardes.html';backupLink.innerHTML='<strong>Sauvegardes</strong><span>Transférer et restaurer mes données locales.</span>';main.querySelector('.home-useful>div')?.append(backupLink);
 const finder=document.createElement('section');finder.className='home-finder';finder.setAttribute('aria-label','Recherche dans ELOAH');
 finder.innerHTML='<label for="home-find">Retrouver un univers, une action ou une note</label><input id="home-find" type="search" placeholder="Ex. : The Crew, article, planning…" autocomplete="off" aria-controls="home-find-results" aria-describedby="home-find-help"><p id="home-find-help">Univers, planning et notes de Mon Espace enregistrés sur cet appareil.</p><p id="home-find-count" role="status" aria-live="polite"></p><div id="home-find-results" hidden></div>';
 personal.before(finder);
