@@ -50,6 +50,24 @@ async function loadEvents(){
    const desc=document.createElement('div');desc.className='event-desc';desc.textContent=event.location||'Google Agenda · lecture seule';
    card.append(date,title,desc);
    if(event.htmlLink&&event.htmlLink.startsWith('https://')){const a=document.createElement('a');a.className='back';a.href=event.htmlLink;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Voir dans Google Agenda ↗';card.append(a)}
+   const add=document.createElement('button');add.type='button';add.textContent='Ajouter une tâche de préparation';
+   add.onclick=()=>{
+     const key='eloah-action-tasks-v1';
+     const day=(event.start?.dateTime||event.start?.date||'').slice(0,10);
+     const titleText=('Préparer : '+(event.summary||'Rendez-vous')).slice(0,180);
+     const seedId='google:'+String(event.id||'').slice(0,150);
+     try{
+       let tasks=JSON.parse(localStorage.getItem(key)||'[]');
+       if(!Array.isArray(tasks))throw Error('Format des tâches inattendu');
+       if(tasks.some(t=>t.seedId===seedId)){show('Cette tâche a déjà été ajoutée.');return}
+       if(!confirm('Créer la tâche « '+titleText+' » pour le '+day+' ?'))return;
+       tasks.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),seedId,title:titleText,date:day,project:'ELOAH',priority:'normale',done:false});
+       localStorage.setItem(key,JSON.stringify(tasks));
+       show('Tâche ajoutée. Recharge le tableau pour actualiser les compteurs.');
+       add.disabled=true;add.textContent='Tâche ajoutée ✓';
+     }catch(e){show('Impossible de sauvegarder la tâche localement : '+e.message)}
+   };
+   card.append(add);
    list.append(card);
   }
   show(events.length+' événement(s) lus depuis le calendrier principal du compte autorisé · 30 jours. Aucune donnée publiée.');
