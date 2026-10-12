@@ -35,10 +35,43 @@ dialog::backdrop{background:rgba(30,23,17,.45)}
 .universe-card:hover{background:#F1E4D1!important;transform:translateY(-1px)}
 a{color:#805B2C}
 @media(max-width:900px){.side{background:#EEE5D9}.nav{background:transparent}}
-.nav-group{margin:12px 0 20px}.nav-group h3{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#786548;margin:15px 12px 8px}.nav-group button{font-size:13px}@media(max-width:900px){.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.nav-group{margin:0}.nav-group button{font-size:12px}}@media(max-width:550px){.nav{grid-template-columns:repeat(2,minmax(0,1fr))}}.result-link{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;margin:8px 0;padding:13px 15px;border:1px solid #D5C4A9;border-radius:10px;background:#FFFCF7;text-align:left;color:#28231D;cursor:pointer}.result-link:hover{background:#F1E4D1}.result-link span{font-size:12px;color:#675D53}@media(max-width:650px){.result-link{align-items:flex-start;flex-direction:column}}</style></head><body>
+.nav-group{margin:12px 0 20px}.nav-group h3{font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:#786548;margin:15px 12px 8px}.nav-group button{font-size:13px}@media(max-width:900px){.nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.nav-group{margin:0}.nav-group button{font-size:12px}}@media(max-width:550px){.nav{grid-template-columns:repeat(2,minmax(0,1fr))}}.result-link{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%;margin:8px 0;padding:13px 15px;border:1px solid #D5C4A9;border-radius:10px;background:#FFFCF7;text-align:left;color:#28231D;cursor:pointer}.result-link:hover{background:#F1E4D1}.result-link span{font-size:12px;color:#675D53}@media(max-width:650px){.result-link{align-items:flex-start;flex-direction:column}}
+.chat-entry{background:#9D743B;color:#fff;border:1px solid #825624;box-shadow:0 3px 12px rgba(108,73,30,.12)}
+.chat-prompt-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+#chatPromptDialog{width:min(760px,96vw);padding:24px}
+#chatPromptDialog h2{font:29px Georgia,serif;color:#805D2C;margin:18px 0 8px}
+.chat-prompt-label{display:block;font-size:13px;font-weight:700;color:#5E4E3C;margin:17px 0 7px}
+.chat-prompt-text{width:100%;min-height:220px;resize:vertical;line-height:1.55;font-size:14px}
+.chat-prompt-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}
+.chat-prompt-existing{border-top:1px solid #D5C4A9;margin-top:20px;padding-top:14px}
+.chat-prompt-existing summary{cursor:pointer;color:#805D2C;font-weight:650}
+#chatPromptInfo{min-height:1.5em}
+@media(max-width:550px){#chatPromptDialog{padding:15px}#chatPromptDialog h2{font-size:23px}.chat-prompt-actions .btn{flex:1 1 100%}.chat-prompt-text{min-height:200px}}
+</style></head><body>
 <div id="authScreen"><div class="panel"><div class="brand">SONIA OS</div><h2>Accès privé</h2><p class="muted">Connecte-toi avec le même compte que The Crew Control.</p><input class="field" id="email" type="email" autocomplete="username" placeholder="Adresse e-mail"><input class="field" id="password" type="password" autocomplete="current-password" placeholder="Mot de passe" style="margin-top:10px"><button class="btn" id="login" style="margin-top:12px;width:100%">Connexion</button><p id="authInfo" class="muted"></p><a href="./">← Retour à The Crew Control</a></div></div>
-<div id="app" class="layout"><aside class="side"><div class="brand">SONIA OS</div><div class="sub">COMMAND CENTER · ÉDITION PRIVÉE</div><nav class="nav" id="nav"></nav><p class="muted" style="font-size:12px">Données des nouveaux modules enregistrées uniquement dans ce navigateur. Export régulier conseillé.</p><a href="./">← The Crew Control</a></aside><main class="main"><div class="top"><div><h1 id="pageTitle">Vue d'ensemble</h1><p class="muted" id="pageSub">Piloter les deux marques sans double comptage</p></div><button class="btn secondary" id="logout">Déconnexion</button></div><div class="toolbar"><select class="field" style="max-width:240px" id="scope"><option value="all">Tous les univers</option><option value="crew">The Crew Orchies</option><option value="pg">Power & Glam</option><option value="os">SONIA OS</option><option value="velka">Sonia Velka</option><option value="eloah">ELOAH</option><option value="parisis">PARISIS ENGINE</option><option value="lion">Le Lion Blanc</option></select><button class="btn" id="newRecord">+ Nouvel élément</button><button class="btn secondary" id="globalSearch">⌕ Rechercher partout</button><button class="btn secondary" id="openChatGPT">↗ Ouvrir dans ChatGPT</button><button class="btn secondary" id="cloudPull">↓ Charger le cloud</button><button class="btn secondary" id="cloudPush">↑ Envoyer au cloud</button><button class="btn secondary" id="export">Sauvegarder JSON</button><button class="btn secondary" id="import">Restaurer JSON</button><input id="importFile" type="file" accept=".json,application/json" hidden></div><div id="view"></div></main></div>
+<div id="app" class="layout"><aside class="side"><div class="brand">SONIA OS</div><div class="sub">COMMAND CENTER · ÉDITION PRIVÉE</div><nav class="nav" id="nav"></nav><p class="muted" style="font-size:12px">Données des nouveaux modules enregistrées uniquement dans ce navigateur. Export régulier conseillé.</p><a href="./">← The Crew Control</a></aside><main class="main"><div class="top"><div><h1 id="pageTitle">Vue d'ensemble</h1><p class="muted" id="pageSub">Piloter les deux marques sans double comptage</p></div><button class="btn secondary" id="logout">Déconnexion</button></div><div class="toolbar"><select class="field" style="max-width:240px" id="scope"><option value="all">Tous les univers</option><option value="crew">The Crew Orchies</option><option value="pg">Power & Glam</option><option value="os">SONIA OS</option><option value="velka">Sonia Velka</option><option value="eloah">ELOAH</option><option value="parisis">PARISIS ENGINE</option><option value="lion">Le Lion Blanc</option></select><button class="btn" id="newRecord">+ Nouvel élément</button><button class="btn secondary" id="globalSearch">⌕ Rechercher partout</button><button class="btn chat-entry" id="openChatGPT">↗ Continuer ici avec ChatGPT</button><button class="btn secondary" id="cloudPull">↓ Charger le cloud</button><button class="btn secondary" id="cloudPush">↑ Envoyer au cloud</button><button class="btn secondary" id="export">Sauvegarder JSON</button><button class="btn secondary" id="import">Restaurer JSON</button><input id="importFile" type="file" accept=".json,application/json" hidden></div><div id="view"></div></main></div>
 <dialog id="editor"><form id="recordForm"><h2 id="editTitle">Nouvel élément</h2><div class="form" id="fields"></div><div class="toolbar"><button class="btn" type="submit">Enregistrer</button><button class="btn secondary" type="button" id="cancel">Annuler</button></div></form></dialog>
+<dialog id="chatPromptDialog" aria-labelledby="chatPromptTitle">
+ <div class="chat-prompt-head"><span class="pill">SONIA OS → CHATGPT</span><button class="btn secondary" type="button" id="chatPromptCloseTop" aria-label="Fermer">✕</button></div>
+ <h2 id="chatPromptTitle">Continuer mon travail avec ChatGPT</h2>
+ <p class="muted">Le prompt est prêt pour le module ouvert. Tu peux le modifier avant de l’utiliser. Aucune donnée privée de tes fiches n’est ajoutée automatiquement.</p>
+ <label for="chatPromptType" class="chat-prompt-label">Que veux-tu faire ?</label>
+ <select class="field" id="chatPromptType"><option value="continue">Poursuivre le développement</option><option value="audit">Auditer et corriger</option><option value="mission">Construire une mission</option><option value="architecture">Faire évoluer toute l’architecture</option></select>
+ <label for="chatPromptText" class="chat-prompt-label">Prompt à transmettre</label>
+ <textarea class="field chat-prompt-text" id="chatPromptText" rows="11" spellcheck="true"></textarea>
+ <div class="chat-prompt-actions">
+  <button type="button" class="btn" id="chatPromptOpen">↗ Ouvrir dans ChatGPT</button>
+  <button type="button" class="btn secondary" id="chatPromptCopy">Copier le prompt</button>
+  <button type="button" class="btn secondary" id="chatPromptClose">Annuler</button>
+ </div>
+ <details class="chat-prompt-existing"><summary>Revenir à notre conversation actuelle</summary>
+  <p class="muted">Si tu copies l’adresse de cette conversation ChatGPT, colle-la ici. Le bouton copiera le prompt et ouvrira ce fil, dans lequel tu pourras le coller. Sans lien, le bouton principal ouvre ChatGPT avec le prompt prérempli, généralement dans une nouvelle conversation.</p>
+  <label for="chatConversationUrl" class="chat-prompt-label">Lien de conversation ChatGPT (facultatif)</label>
+  <input type="url" class="field" id="chatConversationUrl" placeholder="https://chatgpt.com/c/…">
+  <button type="button" class="btn secondary" id="chatOpenExisting" style="margin-top:10px">Copier et retourner à ce fil</button>
+ </details>
+ <p class="muted" id="chatPromptInfo" role="status" aria-live="polite"></p>
+</dialog>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script><script>
 (function(){
 "use strict";
@@ -205,7 +238,77 @@ function runGlobalSearch(term){
  box.querySelectorAll("[data-search-mod]").forEach(b=>b.onclick=()=>{view=b.dataset.searchMod;render();openEditor(b.dataset.searchId)});
 }
 document.getElementById("globalSearch").onclick=()=>{view="search";render();const input=document.getElementById("osSearchInput");if(input){input.oninput=()=>runGlobalSearch(input.value);input.focus();runGlobalSearch("")}};
-document.getElementById("openChatGPT").onclick=()=>openInChatGPT(view,null);document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;render()};
+
+const chatComposer=document.getElementById("chatPromptDialog");
+const chatMode=document.getElementById("chatPromptType");
+const chatText=document.getElementById("chatPromptText");
+const chatInfo=document.getElementById("chatPromptInfo");
+const chatConversation=document.getElementById("chatConversationUrl");
+let chatContextView="overview";
+let chatContextScope="all";
+const promptObjectives={
+ continue:"Poursuis la construction concrète du module et propose, puis réalise, la prochaine amélioration vérifiable si les outils GitHub/Supabase sont disponibles. Préserve toutes les données et fonctionnalités existantes.",
+ audit:"Audite le module : expérience mobile, données, sécurité, liens, permissions AAF et tests. Distingue erreurs démontrées, risques et hypothèses. Corrige les défauts vérifiés sans interrompre les fonctions existantes.",
+ mission:"Transforme mon besoin en mission exécutable : objectif, périmètre, agent compétent, étapes, contrôles AAF A0–A3, livrables et critères de validation. Ne déclenche aucune action externe sans mon autorisation.",
+ architecture:"Poursuis l’architecture globale SONIA OS / ELOAH. Cartographie les modules existants et les dépendances, évite les doublons, propose les raccordements techniques sûrs et implémente les éléments que tu peux vérifier."
+};
+function buildChatPrompt(mode){
+ const universe=universes.find(u=>u[0]===chatContextScope)?.[1]||"Tous les univers";
+ const moduleName=labels[chatContextView]||chatContextView;
+ return [
+  "SONIA OS — REPRENDRE LE TRAVAIL DANS CHATGPT",
+  "",
+  "Site : https://soniacointe-sketch.github.io/the-crew-control/sonia-os.html",
+  "Dépôt GitHub : soniacointe-sketch/the-crew-control",
+  "Page : sonia-os.html",
+  "Module sélectionné : "+moduleName,
+  "Univers sélectionné : "+universe,
+  "",
+  "Contexte : SONIA OS est ma maison numérique personnelle, avec The Crew Orchies, Power & Glam, Sonia Velka, ELOAH, PARISIS ENGINE, Le Lion Blanc et SONIA OS. Le style visuel est crème et or. Les missions, agents, décisions AAF, audits, bibliothèque, journal, contrôles et sauvegardes doivent être distingués des fonctions serveur réellement exécutables.",
+  "Gouvernance : je conserve l’autorité finale. Les niveaux A0 observer / A1 analyser / A2 préparer / A3 exécuter nécessitent un mandat réel pour les actions sensibles. Respecter le refus par défaut et vérifier les accès Supabase côté serveur.",
+  "",
+  "DEMANDE : "+(promptObjectives[mode]||promptObjectives.continue),
+  "",
+  "Vérifie l’état réel du code et des services avant toute déclaration de réussite. Signale clairement ce qui a été testé, modifié, déployé ou reste à faire. Ne prétends pas avoir accès aux données privées de mon navigateur. Ne me fais pas recommencer le travail déjà fait."
+ ].join("\n");
+}
+function openChatComposer(){
+ chatContextView=view;chatContextScope=scope;chatMode.value="continue";
+ chatText.value=buildChatPrompt(chatMode.value);
+ chatInfo.textContent="";
+ chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
+ chatComposer.showModal();
+}
+chatMode.onchange=()=>{chatText.value=buildChatPrompt(chatMode.value);chatInfo.textContent="Prompt actualisé : relis-le avant de l’envoyer."};
+function validChatLink(value){
+ try{const u=new URL(value);return u.protocol==="https:"&&(["chatgpt.com","www.chatgpt.com"].includes(u.hostname))&&/^\/c\/[a-zA-Z0-9_-]+\/?$/.test(u.pathname)?u.toString():null}catch{return null}
+}
+function openChatUrl(url){
+ const a=document.createElement("a");a.href=url;a.target="_blank";a.rel="noopener noreferrer";document.body.appendChild(a);a.click();a.remove();
+}
+document.getElementById("chatPromptOpen").onclick=()=>{
+ const value=chatText.value.trim();if(!value){chatInfo.textContent="Le prompt ne peut pas être vide.";return}
+ if(value.length>6000){chatInfo.textContent="Prompt trop long pour un lien : utilise « Copier le prompt ».";return}
+ openChatUrl("https://chatgpt.com/?q="+encodeURIComponent(value));
+ chatInfo.textContent="ChatGPT ouvert avec le prompt. Vérifie le texte avant de l’envoyer.";
+};
+document.getElementById("chatPromptCopy").onclick=async()=>{
+ try{await navigator.clipboard.writeText(chatText.value);chatInfo.textContent="Prompt copié. Tu peux le coller dans la conversation de ton choix."}
+ catch{chatText.focus();chatText.select();chatInfo.textContent="Sélection effectuée : utilise Copier sur ton appareil."}
+};
+document.getElementById("chatOpenExisting").onclick=async()=>{
+ const url=validChatLink(chatConversation.value.trim());
+ if(!url){chatInfo.textContent="Ajoute un lien valide de conversation ChatGPT (https://chatgpt.com/c/...).";return}
+ const prompt=chatText.value.trim();if(!prompt){chatInfo.textContent="Écris d’abord ton prompt.";return}
+ try{await navigator.clipboard.writeText(prompt)}
+ catch{chatText.focus();chatText.select();chatInfo.textContent="Sélectionne et copie ce texte, puis rouvre le fil.";return}
+ localStorage.setItem(prefix+"chat_thread_url",url);
+ openChatUrl(url);chatInfo.textContent="Fil rouvert : colle ton prompt dans le champ de message.";
+};
+document.getElementById("chatPromptClose").onclick=()=>chatComposer.close();
+document.getElementById("chatPromptCloseTop").onclick=()=>chatComposer.close();
+
+document.getElementById("openChatGPT").onclick=openChatComposer;document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;render()};
 
 async function readCloud(){const all=[];for(let i=0;;i+=500){const {data,error}=await sb.from("sonia_command_records").select("id,module,payload,updated_at").eq("owner_id",currentUser.id).range(i,i+499);if(error)throw error;all.push(...(data||[]));if(!data||data.length<500)break;}return all}
 async function cloudPull(){
