@@ -109,3 +109,36 @@ footer{border-top:1px solid var(--line);font-size:11px;color:var(--muted);paddin
 @media(max-width:600px){.grid-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.two-col,.proof-grid,.method-list,.catalog-grid,.geom-fields,.pair,.field-grid{grid-template-columns:1fr}.toolbar .searchbox{max-width:none;width:100%;flex-basis:100%}.top h1{font-size:38px}.record .record-top{flex-direction:column}.field-grid label.wide{grid-column:auto}}
 
 .page-relations{margin:13px 0;padding:12px;border:1px solid #e9dfd0;background:#faf5ec;border-radius:9px}.page-relations>strong{font-size:12px}.page-relations .record-controls button{font-size:11px;padding:7px 10px}.related-focus{outline:2px solid #c29a57;outline-offset:3px}
+
+/* PARISIS mission home 2026-10 */
+.mission-lead{background:#fffaf1;border:1px solid #dccab1;border-radius:15px;padding:clamp(20px,3vw,33px);margin:0 0 23px}
+.mission-lead h2{font:clamp(27px,3vw,38px)/1.16 Georgia,serif;margin:9px 0 13px}
+.mission-lead p{font-size:15px;max-width:850px;line-height:1.7}
+.mission-lead .micro{font-size:12px;color:#777066;margin:14px 0 0}
+.mission-steps{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}
+.mission-steps span{display:block;padding:9px 13px;border:1px solid #dfd1bb;border-radius:30px;background:#f5ebdc;color:#574830;font-weight:650;font-size:12px}
+.mission-collection{margin:0 0 22px}
+.mission-title{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:9px;margin:0 0 14px}
+.mission-title h2{margin:5px 0 0;font:29px Georgia,serif}
+.mission-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.mission-card{background:#fffdf9;border:1px solid #e1d6c6;border-radius:13px;padding:clamp(17px,2vw,22px);box-shadow:0 4px 13px #51402b0a;min-width:0;display:flex;flex-direction:column}
+.mission-kicker{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;color:#87765b;font-size:10px;font-weight:750;letter-spacing:.08em}
+.mission-status{color:#4d6855;background:#eaf0e8;border-radius:5px;padding:5px 8px;font-size:9px;letter-spacing:.04em;text-align:right}
+.mission-status.open{color:#79654b;background:#f5eadd}
+.mission-card h3{font:23px Georgia,serif;margin:0 0 7px;line-height:1.2}
+.mission-question{color:#594e40;font-weight:600;line-height:1.5;margin:4px 0 15px}
+.mission-card dl{margin:0 0 18px}
+.mission-card dt{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:#7b6750;font-weight:800;margin:13px 0 3px}
+.mission-card dd{font-size:13px;line-height:1.65;color:#43423d;margin:0}
+.mission-links{display:flex;gap:9px;flex-wrap:wrap;align-items:center;margin-top:auto}
+.mission-links a{text-decoration:none;display:inline-flex;padding:9px 11px;border:1px solid #d9cbb9;border-radius:8px;font-size:12px;line-height:1.4}
+.mission-primary{background:#355b50;color:white!important;border-color:#355b50!important;font-weight:700}
+.mission-secondary{background:#fffdfa;color:#5f5242!important}
+.mission-toolgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.mission-toolgrid a,.mission-toolgrid button{display:block;width:100%;text-align:left;border:1px solid #e2d8cd;background:#fcf9f4;border-radius:8px;padding:11px 13px;color:#4d493f;font-size:13px;line-height:1.4}
+.mission-toolgrid a:hover,.mission-toolgrid button:hover{background:#f0e9df;border-color:#bca78c}
+.mission-next{background:#f3f7f1;border-color:#d2dfd3}
+.mission-next p{line-height:1.75;font-size:14px;max-width:840px;margin-bottom:18px}
+.mission-details>summary{font-weight:650;cursor:pointer}
+.mission-details p{margin:12px 0}
+@media(max-width:760px){.mission-grid{grid-template-columns:1fr}.mission-title h2{font-size:26px}.mission-toolgrid{grid-template-columns:1fr}.mission-lead h2{font-size:29px}}
