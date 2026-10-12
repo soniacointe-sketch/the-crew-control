@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4efe7">
+<title>ELOAH · PARISIS ENGINE</title>
+<link rel="stylesheet" href="eloah-parisis.css?v=1">
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+<a class="wordmark" href="eloah-partenaire.html?rubrique=Mon%20Espace">ELOAH</a>
+<div class="brand-sub">ESPACE DE RECHERCHE</div>
+<a class="parent-link" href="mes-univers.html">← Mes univers</a>
+<div class="side-heading">PARISIS ENGINE</div>
+<nav id="nav" aria-label="Modules de PARISIS ENGINE"></nav>
+<div class="side-bottom"><span class="small-chip">HUMANITIES LAB · HUM-002</span><p>Hypothèse ≠ preuve.<br>Alignement ≠ intention.</p></div>
+</aside>
+<main class="main">
+<header class="top">
+<div><div class="eyebrow">ELOAH / Recherche historique & symbolique</div><h1>PARISIS <em>ENGINE</em></h1><p class="sub">Explorer. Mesurer. Confronter. Vérifier.</p></div>
+<div class="top-actions"><button id="askChat" class="primary" type="button">Travailler dans ChatGPT ↗</button><a class="button-light" href="eloah-projet.html?projet=PARISIS%20ENGINE">Espace projet ELOAH ↗</a></div>
+</header>
+<section class="research-principle"><strong>Une piste n'est pas un résultat.</strong> La ressemblance d'un symbole, un tracé géométrique ou une date commune ne suffisent jamais à démontrer une intention historique. Les éléments préremplis sont des pistes d'étude, pas des découvertes validées.</section>
+<div class="toolbar">
+<div class="searchbox"><span aria-hidden="true">⌕</span><input id="globalSearch" type="search" placeholder="Rechercher une fiche, un lieu, une source…" aria-label="Rechercher dans le module"></div>
+<button id="newRecord" class="primary" type="button">+ Nouvelle fiche</button>
+<button id="export" type="button">Exporter JSON</button>
+<button id="import" type="button">Restaurer JSON</button>
+<input id="importFile" type="file" accept=".json,application/json" hidden>
+</div>
+<div class="content-grid"><div id="view" aria-live="polite"></div>
+<aside class="inspector">
+<div class="inspector-card"><div class="eyebrow">MÉTHODE DE PREUVE</div><h2>Du constat à la preuve</h2>
+<div class="proof-step"><b>F0</b><span>Lieu, date ou document attesté</span></div>
+<div class="proof-step"><b>F1</b><span>Sens du symbole documenté dans son contexte</span></div>
+<div class="proof-step"><b>F2</b><span>Forme ou relation spatiale mesurée, reproductible</span></div>
+<div class="proof-step"><b>H</b><span>Interprétation : hypothèse, jamais preuve automatique</span></div>
+</div>
+<div class="inspector-card"><div class="eyebrow">BIBLIOTHÈQUE DE MÉTHODES</div><h2>10 modules</h2><p>CLEFS · ALIGN · TOPONYM · BIOGRAPH · SYMBOL · CHRONOS · GEOMETRY · SOLAR · HISTORIA · AUDIT.</p></div>
+<div class="inspector-card"><div class="eyebrow">À CONTRÔLER</div><p>Coordonnées exactes, époque du plan, source primaire, contre-exemples, sélection préalable des points et degré d'incertitude.</p></div>
+</aside></div>
+<footer>PARISIS ENGINE · ELOAH · Sonia conserve l'autorité finale · Travail enregistré uniquement dans ce navigateur.</footer>
+</main>
+</div>
+<dialog id="editor"><form id="editForm">
+<div class="dialog-top"><div><div class="eyebrow">FICHE DE RECHERCHE</div><h2 id="editorTitle">Nouvelle fiche</h2></div><button type="button" id="closeEditor" class="icon-btn" aria-label="Fermer">×</button></div>
+<div id="formFields" class="field-grid"></div>
+<div class="dialog-actions"><button type="button" id="cancelEditor">Annuler</button><button type="submit" class="primary">Enregistrer</button></div>
+</form></dialog>
+<script src="eloah-parisis.js?v=1" defer></script>
+</body></html>
