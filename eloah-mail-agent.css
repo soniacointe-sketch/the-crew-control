@@ -35,3 +35,19 @@ details.panel summary::marker{color:#b78d5d}
 .triage-stats+.small{margin-top:15px}
 .panel-header .actions{margin-top:0}
 @media(max-width:650px){.triage-stats{grid-template-columns:1fr 1fr}.triage-stats>div:last-child{grid-column:1/-1}}
+
+/* Module PDF - bilan complet des courriels, dates et actions */
+.pdf-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:18px 0}
+.pdf-stats>div{display:flex;flex-direction:column;gap:4px;padding:12px;background:#faf4ea;border:1px solid #e7d9c7;border-radius:10px}
+.pdf-stats strong{font:26px Georgia,serif;color:#242321}
+.pdf-stats small{font-size:11px;color:#796e60}
+.pdf-config{display:grid;grid-template-columns:minmax(240px,1fr) minmax(200px,1fr);gap:12px;margin:18px 0}
+.pdf-config>label:first-child{grid-row:span 2;display:grid;gap:6px;align-content:start;font-size:12px;font-weight:600;color:#594e42}
+.pdf-check{display:flex;align-items:center;gap:9px;padding:10px 12px;background:#fffcf7;border:1px solid #e8dcd0;border-radius:8px;font-size:12px;color:#554b44}
+.pdf-check input{width:16px;height:16px;accent-color:#a8815a}
+.pdf-example{padding:15px 0;border-bottom:1px solid #e9e0d4}
+.pdf-example:last-child{border-bottom:none}
+.pdf-example strong{display:block;margin:9px 0;font-size:14px}
+.pdf-example p{font-size:12px;color:#655b52;margin:5px 0}
+.pdf-example .mini{gap:5px}
+@media(max-width:640px){.pdf-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.pdf-config{grid-template-columns:1fr}.pdf-config>label:first-child{grid-row:auto}}
