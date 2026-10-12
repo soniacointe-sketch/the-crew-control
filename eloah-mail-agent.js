@@ -21,7 +21,9 @@ function renderCounts(){
  ["Courriels en boîte",state.counts.inbox==null?"—":Number(state.counts.inbox).toLocaleString("fr-FR")],
  ["Non lus",state.counts.unread==null?"—":Number(state.counts.unread).toLocaleString("fr-FR")],
  ["Actions à suivre",count.length],
- ["Priorités P1",count.filter(x=>x.priority==="P1").length]
+ ["Priorités P1",count.filter(x=>x.priority==="P1").length],
+ ["Indexés",state.items.length?state.items.length.toLocaleString("fr-FR"):"—"],
+ ["À trier",state.items.filter(x=>x.status==="À trier").length.toLocaleString("fr-FR")]
  ];
  $("metrics").innerHTML=metrics.map(x=>'<article class="metric"><label>'+x[0]+'</label><strong>'+x[1]+'</strong></article>').join("");
  const time=state.generated_at?safeDate(state.generated_at):"aucune date";$("syncStatus").textContent=state.items.length?state.items.length+" entrées importées · "+Number(state.scanned||0)+" messages examinés dans le rapport · "+time:"Aucun rapport importé. Clique sur « Importer un rapport privé ».";
