@@ -2295,5 +2295,905 @@
     "Refuser manipulation, harcèlement, contrôle d'autrui et non-respect du consentement.",
     "Respecter les œuvres et formations protégées; analyser structures et méthodes générales.",
     "Marquer les thèmes non encore vérifiés comme pistes, pas comme données scientifiques."
-  ]
+  ],
+  "socialResearch": {
+    "scope": "Comptes, podcasts, pages et écosystèmes publics : repérage non exhaustif au 12 octobre 2026",
+    "profiles": [
+      {
+        "id": "social-01",
+        "name": "Juliette Swann / Femme Fatale Obsession",
+        "field": "coaching et contenu multicanal",
+        "url": "https://femmefataleobsession.fr/",
+        "mechanics": "Podcast, contenus sociaux, ebooks, masterclass, cercle de coaching, lives et replays",
+        "scope": "Public site officiel; détail des réseaux non vérifié individuellement",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-02",
+        "name": "Farah Kay",
+        "field": "coaching femme fatale",
+        "url": "https://femme-fatal.com/accompagnement-femme-fatale16195582772531726825020028",
+        "mechanics": "Pages de programme, vidéo de présentation, leçons, audio, fiches et challenge 21 jours",
+        "scope": "Page de vente publique",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-03",
+        "name": "Ren Malekine / Femme Letale",
+        "field": "podcast et coaching",
+        "url": "https://podcastrepublic.net/podcast/1746554321",
+        "mechanics": "Podcast, YouTube, Instagram, TikTok et coaching, beau/macabre et philosophie martiale",
+        "scope": "Répertoire podcast public",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-04",
+        "name": "Lisa Glamour",
+        "field": "YouTube et cours",
+        "url": "https://lisaglamour.com/",
+        "mechanics": "Vidéo longue, programme femme fatale / siren, appels à l'action vers formation",
+        "scope": "Lien site et vidéo recensée publiquement",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-05",
+        "name": "Alicia / Dark feminine energy",
+        "field": "création multi-réseaux",
+        "url": "https://linktr.ee/curhat_refemguides",
+        "mechanics": "Instagram, TikTok, YouTube et lien de prise de contact",
+        "scope": "Linktree public",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-06",
+        "name": "That Femme Fatale Podcast",
+        "field": "podcast et communauté",
+        "url": "https://linktr.ee/thatfemmefatalepodcast",
+        "mechanics": "Podcast, groupes, Instagram, YouTube, TikTok, Facebook et renvois multiplateformes",
+        "scope": "Linktree public",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-07",
+        "name": "Femme Fatale Official",
+        "field": "mini-guides et réseaux",
+        "url": "https://linktr.ee/femmefataleofficial",
+        "mechanics": "Mini-guide gratuit, guide payant, Instagram et TikTok",
+        "scope": "Linktree public; 'psychologie noire' traité comme terme commercial",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-08",
+        "name": "Opulent Femme",
+        "field": "blog et quiz",
+        "url": "https://opulentfemme.com/",
+        "mechanics": "Articles, quiz esthétique, sections dark feminine, glow up et personal branding",
+        "scope": "Site public",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      },
+      {
+        "id": "social-09",
+        "name": "Femme Fatale TV",
+        "field": "média et interviews",
+        "url": "https://linktr.ee/femmefataletv",
+        "mechanics": "Interviews, séries vidéo, talent créatif et distribution multi-réseaux",
+        "scope": "Linktree public; usage du nom Femme Fatale différent du coaching",
+        "added": "2026-10-12",
+        "notVerified": [
+          "Audience réelle",
+          "Fréquence actuelle de publication",
+          "Revenus",
+          "Efficacité du coaching"
+        ]
+      }
+    ],
+    "formats": [
+      "Reel court face caméra",
+      "Carrousel pédagogique",
+      "Story questions/réponses",
+      "Vidéo YouTube approfondie",
+      "Podcast solo",
+      "Podcast interview",
+      "Live questions/réponses",
+      "Masterclass thématique",
+      "Défi 21 jours",
+      "Rituel d'écriture guidé",
+      "Newsletter éditoriale",
+      "Quiz d'orientation",
+      "Mini guide gratuit",
+      "Workbook progressif",
+      "Témoignage authentifié",
+      "Article d'analyse culturelle",
+      "Démonstration de communication",
+      "Exercice de voix et diction",
+      "Capsule histoire du cinéma",
+      "Série mythologie critique",
+      "Présentation livre et références",
+      "Moodboard stylistique",
+      "Routine sensorialité non sexuelle",
+      "Séance de coaching collectif",
+      "Questions de communauté",
+      "FAQ programme",
+      "Guide de limites relationnelles",
+      "Décryptage d'une tendance",
+      "Bilan de parcours",
+      "Présentation de ressource"
+    ],
+    "campaign": [
+      {
+        "id": "idea-001",
+        "theme": "Ève et représentations",
+        "format": "Reel court face caméra",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-002",
+        "theme": "Lilith et traditions",
+        "format": "Carrousel pédagogique",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-003",
+        "theme": "Salomé",
+        "format": "Story questions/réponses",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-004",
+        "theme": "Circé",
+        "format": "Vidéo YouTube approfondie",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-005",
+        "theme": "Médée",
+        "format": "Podcast solo",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-006",
+        "theme": "Sirènes",
+        "format": "Podcast interview",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-007",
+        "theme": "Cléopâtre et propagande romaine",
+        "format": "Live questions/réponses",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-008",
+        "theme": "Morgane",
+        "format": "Masterclass thématique",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-009",
+        "theme": "Dalila",
+        "format": "Défi 21 jours",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-010",
+        "theme": "Inanna et Ishtar",
+        "format": "Rituel d'écriture guidé",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-011",
+        "theme": "Hélène de Troie",
+        "format": "Newsletter éditoriale",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-012",
+        "theme": "Héroïnes ambiguës",
+        "format": "Quiz d'orientation",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-013",
+        "theme": "Carmen",
+        "format": "Mini guide gratuit",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-014",
+        "theme": "La marquise de Merteuil",
+        "format": "Workbook progressif",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-015",
+        "theme": "Milady de Winter",
+        "format": "Témoignage authentifié",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-016",
+        "theme": "Salomé de Wilde",
+        "format": "Article d'analyse culturelle",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-017",
+        "theme": "Lulu de Wedekind",
+        "format": "Démonstration de communication",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-018",
+        "theme": "Littérature décadente",
+        "format": "Exercice de voix et diction",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-019",
+        "theme": "Art symboliste",
+        "format": "Capsule histoire du cinéma",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-020",
+        "theme": "Gustave Moreau",
+        "format": "Série mythologie critique",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-021",
+        "theme": "Portraits de femmes autonomes",
+        "format": "Présentation livre et références",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-022",
+        "theme": "Femme dangereuse dans le roman",
+        "format": "Moodboard stylistique",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-023",
+        "theme": "Opéra et personnage féminin",
+        "format": "Routine sensorialité non sexuelle",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-024",
+        "theme": "Représentation du regard",
+        "format": "Séance de coaching collectif",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-025",
+        "theme": "Film noir classique",
+        "format": "Questions de communauté",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-026",
+        "theme": "Double Indemnity",
+        "format": "FAQ programme",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-027",
+        "theme": "Out of the Past",
+        "format": "Guide de limites relationnelles",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-028",
+        "theme": "The Lady from Shanghai",
+        "format": "Décryptage d'une tendance",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-029",
+        "theme": "Gilda",
+        "format": "Bilan de parcours",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-030",
+        "theme": "Neo-noir",
+        "format": "Présentation de ressource",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-031",
+        "theme": "The Love Witch",
+        "format": "Reel court face caméra",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-032",
+        "theme": "Écriture d'anti-héroïne",
+        "format": "Carrousel pédagogique",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-033",
+        "theme": "Masculinités anxieuses",
+        "format": "Story questions/réponses",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-034",
+        "theme": "Costumes de cinéma",
+        "format": "Vidéo YouTube approfondie",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-035",
+        "theme": "Photographie noir et blanc",
+        "format": "Podcast solo",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-036",
+        "theme": "Analyse des stéréotypes",
+        "format": "Podcast interview",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-037",
+        "theme": "Valeurs personnelles",
+        "format": "Live questions/réponses",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-038",
+        "theme": "Refus des rôles imposés",
+        "format": "Masterclass thématique",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-039",
+        "theme": "Liberté de choisir",
+        "format": "Défi 21 jours",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-040",
+        "theme": "Dire non",
+        "format": "Rituel d'écriture guidé",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-041",
+        "theme": "Respect de soi",
+        "format": "Newsletter éditoriale",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-042",
+        "theme": "Gestion du regard extérieur",
+        "format": "Quiz d'orientation",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-043",
+        "theme": "Assertivité",
+        "format": "Mini guide gratuit",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-044",
+        "theme": "Confiance sobre",
+        "format": "Workbook progressif",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-045",
+        "theme": "Autonomie économique",
+        "format": "Témoignage authentifié",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-046",
+        "theme": "Limites relationnelles",
+        "format": "Article d'analyse culturelle",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-047",
+        "theme": "Peur du jugement",
+        "format": "Démonstration de communication",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-048",
+        "theme": "Décisions sans manipulation",
+        "format": "Exercice de voix et diction",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-049",
+        "theme": "Charisme sans domination",
+        "format": "Capsule histoire du cinéma",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-050",
+        "theme": "Expression vocale",
+        "format": "Série mythologie critique",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-051",
+        "theme": "Diction",
+        "format": "Présentation livre et références",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-052",
+        "theme": "Posture libre",
+        "format": "Moodboard stylistique",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-053",
+        "theme": "Prise de parole",
+        "format": "Routine sensorialité non sexuelle",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-054",
+        "theme": "Écoute active",
+        "format": "Séance de coaching collectif",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-055",
+        "theme": "Communication non verbale",
+        "format": "Questions de communauté",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-056",
+        "theme": "Gestuelle",
+        "format": "FAQ programme",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-057",
+        "theme": "Conversation sereine",
+        "format": "Guide de limites relationnelles",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-058",
+        "theme": "Silence non punitif",
+        "format": "Décryptage d'une tendance",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-059",
+        "theme": "Présence publique",
+        "format": "Bilan de parcours",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-060",
+        "theme": "Storytelling authentique",
+        "format": "Présentation de ressource",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-061",
+        "theme": "Histoire du rouge à lèvres",
+        "format": "Reel court face caméra",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-062",
+        "theme": "Noir cinématographique",
+        "format": "Carrousel pédagogique",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-063",
+        "theme": "Garde-robe capsule",
+        "format": "Story questions/réponses",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-064",
+        "theme": "Parfum et mémoire",
+        "format": "Vidéo YouTube approfondie",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-065",
+        "theme": "Textures satin et soie",
+        "format": "Podcast solo",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-066",
+        "theme": "Lumière et portrait",
+        "format": "Podcast interview",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-067",
+        "theme": "Coiffure vintage",
+        "format": "Live questions/réponses",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-068",
+        "theme": "Maquillage éditorial",
+        "format": "Masterclass thématique",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-069",
+        "theme": "Bijoux symboliques",
+        "format": "Défi 21 jours",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-070",
+        "theme": "Image authentique",
+        "format": "Rituel d'écriture guidé",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-071",
+        "theme": "Direction photo mode",
+        "format": "Newsletter éditoriale",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-072",
+        "theme": "Style sans injonction",
+        "format": "Quiz d'orientation",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-073",
+        "theme": "Sens et textures",
+        "format": "Mini guide gratuit",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-074",
+        "theme": "Danse libre",
+        "format": "Workbook progressif",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-075",
+        "theme": "Rythme corporel",
+        "format": "Témoignage authentifié",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-076",
+        "theme": "Rapport au miroir",
+        "format": "Article d'analyse culturelle",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-077",
+        "theme": "Sensualité non sexuelle",
+        "format": "Démonstration de communication",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-078",
+        "theme": "Consentement",
+        "format": "Exercice de voix et diction",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-079",
+        "theme": "Intimité respectueuse",
+        "format": "Capsule histoire du cinéma",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-080",
+        "theme": "Image corporelle",
+        "format": "Série mythologie critique",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-081",
+        "theme": "Mouvement et confiance",
+        "format": "Présentation livre et références",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-082",
+        "theme": "Respiration simple",
+        "format": "Moodboard stylistique",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-083",
+        "theme": "Désir personnel",
+        "format": "Routine sensorialité non sexuelle",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-084",
+        "theme": "Rituels sensoriels",
+        "format": "Séance de coaching collectif",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-085",
+        "theme": "Attachement anxieux",
+        "format": "Questions de communauté",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-086",
+        "theme": "Disponibilité émotionnelle",
+        "format": "FAQ programme",
+        "channel": "Instagram",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-087",
+        "theme": "Choix mutuel",
+        "format": "Guide de limites relationnelles",
+        "channel": "TikTok",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-088",
+        "theme": "Flirt respectueux",
+        "format": "Décryptage d'une tendance",
+        "channel": "YouTube",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-089",
+        "theme": "Distance et proximité",
+        "format": "Bilan de parcours",
+        "channel": "Podcast",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      },
+      {
+        "id": "idea-090",
+        "theme": "Réciprocité des actes",
+        "format": "Présentation de ressource",
+        "channel": "Blog",
+        "status": "Idée originale à produire",
+        "editorialAngle": "Clarté, autonomie, réciprocité et approche non manipulatoire"
+      }
+    ],
+    "principles": [
+      "Créer des scripts, images, vidéos, pages et produits originaux, non des reproductions des contenus d'autres créateurs.",
+      "Aucun compte social tiers n'est connecté ni aspiré automatiquement.",
+      "Distinguer marketing, représentation culturelle, données scientifiques et résultats non démontrés.",
+      "Ne pas inventer des chiffres d'abonnés, taux d'engagement ou revenus."
+    ]
+  }
 }
