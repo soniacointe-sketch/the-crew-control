@@ -10,7 +10,7 @@ const linked=c=>links.filter(x=>x.case_id===c.id);
 function card(c){return '<article class="mailcard v3-case"><div class="mini"><span class="pill '+c.priority.toLowerCase()+'">'+esc(c.priority)+'</span><span class="pill">'+esc(c.domain)+'</span><span class="pill">'+esc(c.status)+'</span></div><h3>'+esc(c.title)+'</h3><p><strong>À faire :</strong> '+esc(c.next_action||"À définir")+'</p><p class="small">'+(c.due_on?"Échéance : "+fmt(c.due_on)+" · "+esc(c.due_source||"source non précisée"):"Pas de date vérifiée")+' · '+linked(c).length+' message(s) relié(s)</p><div class="actions"><button data-case-open="'+esc(c.id)+'">Ouvrir / modifier</button></div></article>'}
 function render(){
  const b=B();if(!b||!["bureau","cases"].includes(b.getView()))return;
- if(!loaded){$("content").innerHTML='<div class="empty">'+esc(error||"Chargement des dossiers privés…")+'</div>';if(!loading)load();return}
+ if(!loaded){$("content").innerHTML='<div class="empty">'+esc(error||"Chargement des dossiers privés…")+(error?'<div class="actions"><button id="v3TryAgain">Réessayer la connexion</button></div>':'')+'</div>';if(error){const retry=$("v3TryAgain");if(retry)retry.onclick=()=>{error="";load(true)}}else if(!loading)load();return}
  const today=new Intl.DateTimeFormat("en-CA",{timeZone:"Europe/Paris",year:"numeric",month:"2-digit",day:"2-digit"}).format(new Date());
  const active=cases.filter(open),urg=active.filter(x=>x.priority==="P1"),due=active.filter(x=>x.due_on).sort((a,b)=>String(a.due_on).localeCompare(String(b.due_on)));
  const view=b.getView(),shown=view==="bureau"?urg:cases.filter(c=>filter==="all"||filter==="open"&&open(c)||filter==="school"&&c.domain==="École"||filter==="closed"&&!open(c));
