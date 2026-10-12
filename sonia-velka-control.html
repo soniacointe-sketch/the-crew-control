@@ -87,7 +87,7 @@ const actions=document.createElement('section');actions.id='sv-house-actions';ac
 const identity=document.getElementById('velka-fiche-complete');
 const visionTitle=[...identity.querySelectorAll(':scope > h2')].find(e=>/VISION BOARD/i.test(e.textContent));
 const vision=document.createElement('section');vision.id='sv-house-vision';
-if(visionTitle){let node=visionTitle;while(node&&node!==identity.querySelector('h2:last-of-type')){const next=node.nextElementSibling;vision.append(node);node=next;}const planTitle=[...vision.querySelectorAll('h2')].find(e=>/plan d.action/i.test(e.textContent));if(planTitle){let element=planTitle;while(element){const next=element.nextElementSibling;vision.append(element);element=next;}}}
+if(visionTitle){let node=visionTitle;while(node){const next=node.nextElementSibling;vision.append(node);node=next;}}
 vision.insertAdjacentHTML('afterbegin','<div class="eyebrow">MES RÊVES · SONIA VELKA</div>');
 main.insertBefore(vision,identity.nextSibling);
 const selectors={vision:[vision],studio:[studio],actions:[actions],home:[home],identity:['#velka-fiche-complete'],mind:['#sonia-velka-dashboard'],books:['#velka-chapitres'],ideas:['#sv300'],projects:['#metrics','.toolbar','#status','.split']};
