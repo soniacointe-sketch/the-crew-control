@@ -1,0 +1,170 @@
+{
+  "version": "2026-10-12",
+  "name": "POWER & GLAM — Mémoire visuelle officielle",
+  "source": "Document fourni par Sonia le 12 octobre 2026",
+  "status": "Référence de production validée pour Etsy Factory",
+  "layers": {
+    "photographic": "Univers naturel tropical, aquatique, minéral, solaire, vivant, photographique premium",
+    "editorial": "Fond crème, noir, rouge, typographies éditoriales, 5 couleurs d'univers, compositions aérées"
+  },
+  "matterMix": [
+    {
+      "name": "VIE",
+      "weight": 45,
+      "subjects": [
+        "jungle",
+        "canopée",
+        "fougères",
+        "palmiers",
+        "monstera",
+        "mousse",
+        "lianes",
+        "jardin tropical",
+        "verrière botanique"
+      ]
+    },
+    {
+      "name": "EAU",
+      "weight": 25,
+      "subjects": [
+        "lagon turquoise",
+        "cascade",
+        "cénote",
+        "rivière tropicale",
+        "source",
+        "océan",
+        "sous-marin",
+        "pluie",
+        "brume",
+        "reflets",
+        "eau sur peau"
+      ]
+    },
+    {
+      "name": "TERRE",
+      "weight": 15,
+      "subjects": [
+        "basalte noir",
+        "obsidienne",
+        "roche volcanique",
+        "grotte",
+        "sable noir",
+        "pierre humide",
+        "marbre",
+        "travertin",
+        "bronze"
+      ]
+    },
+    {
+      "name": "PEAU",
+      "weight": 10,
+      "subjects": [
+        "femme réelle en mouvement",
+        "mains",
+        "épaules",
+        "visage",
+        "peau solaire",
+        "lin",
+        "satin",
+        "soie",
+        "ombres naturelles"
+      ]
+    },
+    {
+      "name": "FEU",
+      "weight": 5,
+      "subjects": [
+        "hibiscus rouge unique",
+        "corail",
+        "rayons du couchant",
+        "chaleur",
+        "reflets ambrés"
+      ]
+    }
+  ],
+  "proportionsNote": "Proportions de direction globale de la collection, jamais imposées mathématiquement à chaque image.",
+  "palette": {
+    "base": {
+      "cream": "#F4EFE7",
+      "black": "#111111",
+      "red": "#D32027"
+    },
+    "worlds": {
+      "AMOUR": "#A63D57",
+      "BEAUTÉ": "#C98E9A",
+      "ARGENT": "#28705A",
+      "VIE": "#789477",
+      "DÉSIR": "#D7654F"
+    }
+  },
+  "fonts": [
+    "Bodoni Moda",
+    "Inter",
+    "Caveat"
+  ],
+  "scenes": {
+    "EAU": [
+      "lagon",
+      "cascade",
+      "cénote",
+      "rivière",
+      "océan",
+      "pluie",
+      "brume",
+      "transparences"
+    ],
+    "VIE": [
+      "jungle",
+      "canopée",
+      "forêt humide",
+      "jardin tropical",
+      "verrière botanique"
+    ],
+    "TERRE": [
+      "volcan",
+      "basalte",
+      "obsidienne",
+      "pierre",
+      "architecture monumentale"
+    ],
+    "PEAU": [
+      "gestes réels",
+      "présence en mouvement",
+      "peau dorée",
+      "linge naturel"
+    ],
+    "FEU": [
+      "hibiscus rouge rare",
+      "soleil couchant",
+      "corail naturel"
+    ],
+    "OTHER": [
+      "arches monumentales",
+      "spa minéral",
+      "temple égyptien",
+      "désert et dunes",
+      "bibliothèque",
+      "lifestyle plage piscine voyage café ordinateur carnet"
+    ]
+  },
+  "humanDirection": "La femme ne pose jamais, elle traverse toujours. Son mouvement raconte une histoire. Les compositions sans personne sont également importantes.",
+  "artFamilies": [
+    "portrait manifeste",
+    "nature symbolique",
+    "scène lifestyle",
+    "objet manifeste",
+    "affiche typographique",
+    "carte conceptuelle"
+  ],
+  "rules": [
+    "Pas de rendu IA visible, de peau plastique, de végétation artificielle",
+    "Aucun voile coloré artificiel pour simuler une cohérence visuelle",
+    "Aucun calice imposé",
+    "Hibiscus ponctuel et souvent unique, jamais systématique",
+    "Images sans personnes fréquentes",
+    "Photographie hyperréaliste premium, qualité optique et lumière naturelle",
+    "Diversité entre tropiques, aquatique, minéral, humain, architecture et lifestyle",
+    "Éviter toute copie d'une création Etsy protégée",
+    "Ne pas réutiliser automatiquement les images de référence; vérifier licences et droits commerciaux"
+  ]
+}
