@@ -47,16 +47,16 @@ a{color:#805B2C}
 .chat-prompt-existing summary{cursor:pointer;color:#805D2C;font-weight:650}
 #chatPromptInfo{min-height:1.5em}
 @media(max-width:550px){#chatPromptDialog{padding:15px}#chatPromptDialog h2{font-size:23px}.chat-prompt-actions .btn{flex:1 1 100%}.chat-prompt-text{min-height:200px}}
-</style></head><body>
+.mission-order-toolbar{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin:16px 0}.mission-order-toolbar .btn{padding:13px 18px}.mission-order-toolbar .muted{font-size:12px}.mission-order-main{background:#926C32;color:#fff;box-shadow:0 3px 14px rgba(130,92,43,.15)}@media(max-width:700px){.mission-order-toolbar{align-items:stretch;flex-direction:column}.mission-order-toolbar .btn{width:100%}}</style></head><body>
 <div id="authScreen"><div class="panel"><div class="brand">SONIA OS</div><h2>Accès privé</h2><p class="muted">Connecte-toi avec le même compte que The Crew Control.</p><input class="field" id="email" type="email" autocomplete="username" placeholder="Adresse e-mail"><input class="field" id="password" type="password" autocomplete="current-password" placeholder="Mot de passe" style="margin-top:10px"><button class="btn" id="login" style="margin-top:12px;width:100%">Connexion</button><p id="authInfo" class="muted"></p><a href="./">← Retour à The Crew Control</a></div></div>
 <div id="app" class="layout"><aside class="side"><div class="brand">SONIA OS</div><div class="sub">COMMAND CENTER · ÉDITION PRIVÉE</div><nav class="nav" id="nav"></nav><p class="muted" style="font-size:12px">Données des nouveaux modules enregistrées uniquement dans ce navigateur. Export régulier conseillé.</p><a href="./">← The Crew Control</a></aside><main class="main"><div class="top"><div><h1 id="pageTitle">Vue d'ensemble</h1><p class="muted" id="pageSub">Piloter les deux marques sans double comptage</p></div><button class="btn secondary" id="logout">Déconnexion</button></div><div class="toolbar"><select class="field" style="max-width:240px" id="scope"><option value="all">Tous les univers</option><option value="crew">The Crew Orchies</option><option value="pg">Power & Glam</option><option value="os">SONIA OS</option><option value="velka">Sonia Velka</option><option value="eloah">ELOAH</option><option value="parisis">PARISIS ENGINE</option><option value="lion">Le Lion Blanc</option></select><button class="btn" id="newRecord">+ Nouvel élément</button><button class="btn secondary" id="globalSearch">⌕ Rechercher partout</button><button class="btn chat-entry" id="openChatGPT">↗ Continuer ici avec ChatGPT</button><button class="btn secondary" id="cloudPull">↓ Charger le cloud</button><button class="btn secondary" id="cloudPush">↑ Envoyer au cloud</button><button class="btn secondary" id="export">Sauvegarder JSON</button><button class="btn secondary" id="import">Restaurer JSON</button><input id="importFile" type="file" accept=".json,application/json" hidden></div><div id="view"></div></main></div>
 <dialog id="editor"><form id="recordForm"><h2 id="editTitle">Nouvel élément</h2><div class="form" id="fields"></div><div class="toolbar"><button class="btn" type="submit">Enregistrer</button><button class="btn secondary" type="button" id="cancel">Annuler</button></div></form></dialog>
 <dialog id="chatPromptDialog" aria-labelledby="chatPromptTitle">
  <div class="chat-prompt-head"><span class="pill">SONIA OS → CHATGPT</span><button class="btn secondary" type="button" id="chatPromptCloseTop" aria-label="Fermer">✕</button></div>
  <h2 id="chatPromptTitle">Continuer mon travail avec ChatGPT</h2>
- <p class="muted">Le prompt est prêt pour le module ouvert. Tu peux le modifier avant de l’utiliser. Aucune donnée privée de tes fiches n’est ajoutée automatiquement.</p>
+ <p class="muted">Le prompt est prêt pour le module ouvert. Tu peux le modifier avant de l’utiliser. Une commande de missions reprend uniquement leurs titres, univers, statuts et liens AAF. Aucun champ privé de contact ou de paiement n’est intégré.</p>
  <label for="chatPromptType" class="chat-prompt-label">Que veux-tu faire ?</label>
- <select class="field" id="chatPromptType"><option value="continue">Poursuivre le développement</option><option value="audit">Auditer et corriger</option><option value="mission">Construire une mission</option><option value="architecture">Faire évoluer toute l’architecture</option></select>
+ <select class="field" id="chatPromptType"><option value="continue">Poursuivre le développement</option><option value="audit">Auditer et corriger</option><option value="mission">Construire une mission</option><option value="command">Commander les missions de la console</option><option value="architecture">Faire évoluer toute l’architecture</option></select>
  <label for="chatPromptText" class="chat-prompt-label">Prompt à transmettre</label>
  <textarea class="field chat-prompt-text" id="chatPromptText" rows="11" spellcheck="true"></textarea>
  <div class="chat-prompt-actions">
@@ -170,10 +170,10 @@ if(view==="aafSecurity"){
 }
 else if(view==="missionDesk"){
  const tasks=db.tasks.filter(t=>scope==="all"||businessId(t.business)===scope);
- h='<div class="panel"><h2>Console AAF · Préparation et traçabilité</h2><p class="muted">Contrôles locaux uniquement. Aucun agent ou service extérieur n’est exécuté.</p><div class="notice">A0 observer · A1 analyser · A2 préparer · A3 avec validation explicite.</div><div class="tablewrap"><table><thead><tr><th>Mission</th><th>Agent</th><th>Décision</th><th>Audit</th><th>Contrôle</th></tr></thead><tbody>'+tasks.map(t=>{
+ h='<div class="panel"><h2>Console AAF · Préparation et traçabilité</h2><p class="muted">Contrôles locaux uniquement. Aucun agent ou service extérieur n’est exécuté.</p><div class="notice">A0 observer · A1 analyser · A2 préparer · A3 avec validation explicite.</div><div class="mission-order-toolbar"><button type="button" class="btn mission-order-main" id="commandAllMissions">↗ Commander les '+tasks.length+' missions dans ChatGPT</button><span class="muted">Prompt avec les missions affichées. Aucune action extérieure automatique.</span></div><div class="tablewrap"><table><thead><tr><th>Mission</th><th>Agent</th><th>Décision</th><th>Audit</th><th>Contrôle</th></tr></thead><tbody>'+tasks.map(t=>{
  const agent=db.agents.find(a=>a.id===t.agent_id),decision=db.decisions.find(d=>d.id===t.decision_id),audit=db.audits.find(a=>a.id===t.audit_id);
  const ok=!!(agent&&decision&&decision.status==="approuvée"&&decision.approver&&audit);
- return '<tr><td>'+esc(t.name)+'</td><td>'+esc(agent?.name||"Non lié")+'</td><td>'+esc(decision?.status||"Non liée")+'</td><td>'+esc(audit?.status||"Non lié")+'</td><td><span class="pill">'+(ok?"Références présentes":"À compléter")+'</span> <button class="btn secondary" data-preflight="'+esc(t.id)+'">Contrôler localement</button> <button class="btn" data-server-preflight="'+esc(t.id)+'">Contrôler sur serveur</button></td></tr>'
+ return '<tr><td>'+esc(t.name)+'</td><td>'+esc(agent?.name||"Non lié")+'</td><td>'+esc(decision?.status||"Non liée")+'</td><td>'+esc(audit?.status||"Non lié")+'</td><td><span class="pill">'+(ok?"Références présentes":"À compléter")+'</span> <button class="btn secondary" data-preflight="'+esc(t.id)+'">Contrôler localement</button> <button class="btn" data-server-preflight="'+esc(t.id)+'">Contrôler sur serveur</button> <button class="btn secondary" data-mission-order="'+esc(t.id)+'">↗ Commander</button></td></tr>'
  }).join("")+'</tbody></table></div><p class="muted">Ces validations documentaires ne confèrent aucun droit technique. Le moteur serveur et les connecteurs restent à développer.</p></div>';
 }
 else if(view==="search"){h='<div class="panel"><h2>Recherche universelle</h2><p class="muted">Recherche dans les fiches enregistrées sur cet appareil. Les contenus des fichiers externes ne sont pas indexés.</p><input id="osSearchInput" class="field" placeholder="Mot, projet, agent, référence, mission..." aria-label="Recherche globale"><div id="osSearchResults"></div></div>';}
@@ -204,7 +204,11 @@ if(view==="overview")h+="<div class=\"panel\"><h2>SONIA OS · Gouvernance et cap
   if(error){list.textContent="Journal indisponible : "+error.message;return}
   list.innerHTML='<div class="tablewrap"><table><thead><tr><th>Date</th><th>Action</th><th>Décision</th><th>Raison</th></tr></thead><tbody>'+((data||[]).map(x=>'<tr><td>'+esc(new Date(x.checked_at).toLocaleString("fr-FR"))+'</td><td>'+esc(x.action_type)+'</td><td>'+esc(x.decision)+'</td><td>'+esc(x.reason)+'</td></tr>').join("")||'<tr><td colspan="4">Aucune vérification enregistrée.</td></tr>')+'</tbody></table></div>';
  };
-}if(view==="overview"){document.getElementById("k-agents").textContent=db.agents.length;document.getElementById("k-decisions").textContent=db.decisions.filter(x=>x.status==="à valider").length;document.getElementById("k-workflows").textContent=db.workflows.filter(x=>x.status==="testé"||x.status==="actif").length;document.getElementById("k-audits").textContent=db.audits.filter(x=>x.status==="ouvert"||x.status==="en investigation").length}document.querySelectorAll("[data-road]").forEach(b=>b.onclick=()=>{view=b.dataset.road;render()});document.querySelectorAll("[data-server-preflight]").forEach(b=>b.onclick=async()=>{
+}if(view==="overview"){document.getElementById("k-agents").textContent=db.agents.length;document.getElementById("k-decisions").textContent=db.decisions.filter(x=>x.status==="à valider").length;document.getElementById("k-workflows").textContent=db.workflows.filter(x=>x.status==="testé"||x.status==="actif").length;document.getElementById("k-audits").textContent=db.audits.filter(x=>x.status==="ouvert"||x.status==="en investigation").length}document.querySelectorAll("[data-road]").forEach(b=>b.onclick=()=>{view=b.dataset.road;render()});
+ const commandAll=document.getElementById("commandAllMissions");
+ if(commandAll)commandAll.onclick=()=>openMissionOrder();
+ document.querySelectorAll("[data-mission-order]").forEach(button=>button.onclick=()=>openMissionOrder([button.dataset.missionOrder]));
+ document.querySelectorAll("[data-server-preflight]").forEach(b=>b.onclick=async()=>{
  const task=db.tasks.find(t=>t.id===b.dataset.serverPreflight);
  if(!task)return;
  if(!confirm("Lancer le précontrôle serveur pour "+task.name+" ? Les références de cette mission doivent déjà avoir été envoyées au cloud. Aucun agent ni outil externe ne sera exécuté."))return;
@@ -246,13 +250,65 @@ const chatInfo=document.getElementById("chatPromptInfo");
 const chatConversation=document.getElementById("chatConversationUrl");
 let chatContextView="overview";
 let chatContextScope="all";
+let chatMissionSelection=null;
 const promptObjectives={
  continue:"Poursuis la construction concrète du module et propose, puis réalise, la prochaine amélioration vérifiable si les outils GitHub/Supabase sont disponibles. Préserve toutes les données et fonctionnalités existantes.",
  audit:"Audite le module : expérience mobile, données, sécurité, liens, permissions AAF et tests. Distingue erreurs démontrées, risques et hypothèses. Corrige les défauts vérifiés sans interrompre les fonctions existantes.",
  mission:"Transforme mon besoin en mission exécutable : objectif, périmètre, agent compétent, étapes, contrôles AAF A0–A3, livrables et critères de validation. Ne déclenche aucune action externe sans mon autorisation.",
  architecture:"Poursuis l’architecture globale SONIA OS / ELOAH. Cartographie les modules existants et les dépendances, évite les doublons, propose les raccordements techniques sûrs et implémente les éléments que tu peux vérifier."
 };
+
+function buildMissionCommandPrompt(){
+ const chosen=chatMissionSelection?db.tasks.filter(t=>chatMissionSelection.includes(t.id)):db.tasks.filter(t=>chatContextScope==="all"||businessId(t.business)===chatContextScope);
+ const lines=chosen.map((t,i)=>{
+  const agent=db.agents.find(a=>a.id===t.agent_id);
+  const decision=db.decisions.find(d=>d.id===t.decision_id);
+  const audit=db.audits.find(a=>a.id===t.audit_id);
+  const title=String(t.name||"Mission sans titre").replace(/\s+/g," ").slice(0,170);
+  const universe=String(t.business||"SONIA OS").slice(0,65);
+  const status=String(t.status||"à faire").slice(0,45);
+  const agentLabel=agent?"lié : "+String(agent.name||agent.id).slice(0,70):"non lié";
+  const decisionLabel=decision?String(decision.status||"à vérifier").slice(0,60):"non liée";
+  const auditLabel=audit?String(audit.status||"à vérifier").slice(0,60):"non lié";
+  return (i+1)+". "+title+" ["+universe+" ; "+status+" ; agent : "+agentLabel+" ; décision : "+decisionLabel+" ; audit : "+auditLabel+"]";
+ });
+ return [
+  "SONIA OS — COMMANDE DE LA CONSOLE DE MISSIONS",
+  "",
+  "Site : https://soniacointe-sketch.github.io/the-crew-control/sonia-os.html",
+  "Dépôt : soniacointe-sketch/the-crew-control ; page : sonia-os.html",
+  "Périmètre : "+(chatMissionSelection?"mission sélectionnée":"toutes les missions affichées dans la Console de missions"),
+  "Nombre : "+chosen.length,
+  "",
+  "MISSION GÉNÉRALE : piloter concrètement ces missions depuis ChatGPT. Pour chacune, identifier le bon agent, les dépendances, l’état réellement vérifié, le niveau AAF requis, les décisions et audits manquants. Organiser un ordre de priorité et produire des résultats vérifiables.",
+  "",
+  "MISSIONS ACTUELLES :",
+  ...lines,
+  "",
+  "PROTOCOLE :",
+  "1. Vérifie d’abord le dépôt et les services disponibles. Ne considère jamais un état déclaratif comme une réalisation.",
+  "2. Associe chaque mission aux agents, décisions, audits et CORES existants ; propose les liens manquants sans inventer d’identifiants ni d’approbations.",
+  "3. Regroupe les doublons, cartographie les dépendances et prépare les livrables A0/A1/A2 avec des actions vérifiables, sans effacer de données.",
+  "4. Une action A3 (publication, paiement, envoi, suppression, webhook, modification sensible) exige un mandat technique et une autorisation explicite correspondant à l’action. Aucun mandat n’est présumé.",
+  "5. Fournis un tableau : mission, agent proposé, niveau AAF, décision, audit, avancement, résultat vérifié et prochaine étape. Si les outils GitHub/Supabase autorisés sont disponibles, cite commits et contrôles ; sinon donne le livrable directement dans ChatGPT.",
+  "6. Les contrôles locaux/serveur vérifient des références : ils ne prouvent pas qu’un agent a exécuté une mission. Signale clairement les limites.",
+  "",
+  "COMMENCE par l’inventaire des missions et les dépendances, puis traite-les sans me redemander les données déjà fournies."
+ ].join("\n");
+}
+function openMissionOrder(ids){
+ chatContextView="missionDesk";
+ chatContextScope=scope;
+ chatMissionSelection=Array.isArray(ids)?ids.slice():null;
+ chatMode.value="command";
+ chatText.value=buildMissionCommandPrompt();
+ chatInfo.textContent=chatMissionSelection?"Commande individuelle prête : relis le prompt avant l’envoi.":"Commande globale prête : relis le prompt avant l’envoi.";
+ chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
+ chatComposer.showModal();
+}
+
 function buildChatPrompt(mode){
+ if(mode==="command")return buildMissionCommandPrompt();
  const universe=universes.find(u=>u[0]===chatContextScope)?.[1]||"Tous les univers";
  const moduleName=labels[chatContextView]||chatContextView;
  return [
@@ -273,7 +329,8 @@ function buildChatPrompt(mode){
  ].join("\n");
 }
 function openChatComposer(){
- chatContextView=view;chatContextScope=scope;chatMode.value="continue";
+ chatMissionSelection=null;
+ chatContextView=view;chatContextScope=scope;chatMode.value=view==="missionDesk"?"command":"continue";
  chatText.value=buildChatPrompt(chatMode.value);
  chatInfo.textContent="";
  chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
