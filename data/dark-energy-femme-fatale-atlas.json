@@ -1,0 +1,2299 @@
+{
+  "version": "2026-10-12",
+  "project": "Dark Energy",
+  "library": "Femme Fatale — Atlas",
+  "description": "Bibliothèque structurée de recherche, d'inspirations publiques et de création originale; aucune reproduction de contenus payants.",
+  "sources": [
+    {
+      "type": "Étude universitaire",
+      "title": "The Big Seduction: Feminist Film Criticism and the Femme Fatale",
+      "url": "https://doi.org/10.1057/9780230282018_16",
+      "angle": "Archétype, histoire et lecture féministe",
+      "evidence": "étude",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Étude universitaire",
+      "title": "The Femme Fatale on Screen",
+      "url": "https://onlinelibrary.wiley.com/doi/10.1002/9781119429128.iegmc301",
+      "angle": "Cinéma noir, sexualité et pouvoir",
+      "evidence": "étude",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Recherche universitaire",
+      "title": "Fatal Woman Revisited",
+      "url": "https://scholarworks.umt.edu/utpp/38/",
+      "angle": "Stéréotypes et contexte historique",
+      "evidence": "étude",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Recherche universitaire",
+      "title": "The Emergence of the Feminist Fatale",
+      "url": "https://digitalcommons.cwu.edu/etd/630/",
+      "angle": "Évolution de la figure et lectures contestées",
+      "evidence": "étude",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Livre scientifique",
+      "title": "Postfeminism and the Fatale Figure",
+      "url": "https://link.springer.com/book/10.1057/9781137503596",
+      "angle": "Néo-noir et représentations féminines",
+      "evidence": "étude",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Recherche française",
+      "title": "Femme fatale/femme assassine dans le film noir",
+      "url": "https://epi-revel.univ-cotedazur.fr/publication/item/621",
+      "angle": "Stéréotypes et contradictions du cinéma noir",
+      "evidence": "étude",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Recherche universitaire",
+      "title": "La Parisienne in Cinema: Femme fatale",
+      "url": "https://doi.org/10.7228/manchester/9781526109538.003.0005",
+      "angle": "Figure française et héritage culturel",
+      "evidence": "étude",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Catalogue commercial",
+      "title": "Farah KAY — Programme Femme Fatale",
+      "url": "https://femme-fatal.com/accompagnement-femme-fatale16195582772531726825020028",
+      "angle": "Confiance, charisme, voix, garde-robe, fiches, challenge 21 jours",
+      "evidence": "marketing",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Catalogue commercial",
+      "title": "Le Cercle des Femmes Fatales",
+      "url": "https://femmefataleobsession.fr/products/cercle-des-femmes-fatales",
+      "angle": "Live collectif, communauté, routines, replays, coaching",
+      "evidence": "marketing",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    },
+    {
+      "type": "Catalogue commercial",
+      "title": "La Routine Fatale",
+      "url": "https://femmefataleobsession.fr/products/transformation-en-femme-fatale-en-30-jours",
+      "angle": "Programme routine 30 jours et promesses de magnétisme",
+      "evidence": "marketing",
+      "verifiedScope": "Page ou notice publique; contenu intégral non collecté"
+    }
+  ],
+  "domains": [
+    {
+      "name": "Histoire & mythologie",
+      "count": 12
+    },
+    {
+      "name": "Littérature & arts",
+      "count": 12
+    },
+    {
+      "name": "Cinéma & médias",
+      "count": 12
+    },
+    {
+      "name": "Identité & autonomie",
+      "count": 12
+    },
+    {
+      "name": "Présence & communication",
+      "count": 12
+    },
+    {
+      "name": "Style & beauté",
+      "count": 12
+    },
+    {
+      "name": "Sensualité & corps",
+      "count": 12
+    },
+    {
+      "name": "Relations & réciprocité",
+      "count": 12
+    },
+    {
+      "name": "Business & branding",
+      "count": 12
+    },
+    {
+      "name": "Lecture critique",
+      "count": 12
+    }
+  ],
+  "entries": [
+    {
+      "id": "his-01",
+      "category": "Histoire & mythologie",
+      "title": "Ève et représentations",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-02",
+      "category": "Histoire & mythologie",
+      "title": "Lilith et traditions",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-03",
+      "category": "Histoire & mythologie",
+      "title": "Salomé",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-04",
+      "category": "Histoire & mythologie",
+      "title": "Circé",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-05",
+      "category": "Histoire & mythologie",
+      "title": "Médée",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-06",
+      "category": "Histoire & mythologie",
+      "title": "Sirènes",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-07",
+      "category": "Histoire & mythologie",
+      "title": "Cléopâtre et propagande romaine",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-08",
+      "category": "Histoire & mythologie",
+      "title": "Morgane",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-09",
+      "category": "Histoire & mythologie",
+      "title": "Dalila",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-10",
+      "category": "Histoire & mythologie",
+      "title": "Inanna et Ishtar",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-11",
+      "category": "Histoire & mythologie",
+      "title": "Hélène de Troie",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "his-12",
+      "category": "Histoire & mythologie",
+      "title": "Héroïnes ambiguës",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Histoire & mythologie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-01",
+      "category": "Littérature & arts",
+      "title": "Carmen",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-02",
+      "category": "Littérature & arts",
+      "title": "La marquise de Merteuil",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-03",
+      "category": "Littérature & arts",
+      "title": "Milady de Winter",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-04",
+      "category": "Littérature & arts",
+      "title": "Salomé de Wilde",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-05",
+      "category": "Littérature & arts",
+      "title": "Lulu de Wedekind",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-06",
+      "category": "Littérature & arts",
+      "title": "Littérature décadente",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-07",
+      "category": "Littérature & arts",
+      "title": "Art symboliste",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-08",
+      "category": "Littérature & arts",
+      "title": "Gustave Moreau",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-09",
+      "category": "Littérature & arts",
+      "title": "Portraits de femmes autonomes",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-10",
+      "category": "Littérature & arts",
+      "title": "Femme dangereuse dans le roman",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-11",
+      "category": "Littérature & arts",
+      "title": "Opéra et personnage féminin",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lit-12",
+      "category": "Littérature & arts",
+      "title": "Représentation du regard",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Littérature & arts",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-01",
+      "category": "Cinéma & médias",
+      "title": "Film noir classique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-02",
+      "category": "Cinéma & médias",
+      "title": "Double Indemnity",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-03",
+      "category": "Cinéma & médias",
+      "title": "Out of the Past",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-04",
+      "category": "Cinéma & médias",
+      "title": "The Lady from Shanghai",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-05",
+      "category": "Cinéma & médias",
+      "title": "Gilda",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-06",
+      "category": "Cinéma & médias",
+      "title": "Neo-noir",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-07",
+      "category": "Cinéma & médias",
+      "title": "The Love Witch",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-08",
+      "category": "Cinéma & médias",
+      "title": "Écriture d'anti-héroïne",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-09",
+      "category": "Cinéma & médias",
+      "title": "Masculinités anxieuses",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-10",
+      "category": "Cinéma & médias",
+      "title": "Costumes de cinéma",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-11",
+      "category": "Cinéma & médias",
+      "title": "Photographie noir et blanc",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "cin-12",
+      "category": "Cinéma & médias",
+      "title": "Analyse des stéréotypes",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Cinéma & médias",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-01",
+      "category": "Identité & autonomie",
+      "title": "Valeurs personnelles",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-02",
+      "category": "Identité & autonomie",
+      "title": "Refus des rôles imposés",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-03",
+      "category": "Identité & autonomie",
+      "title": "Liberté de choisir",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-04",
+      "category": "Identité & autonomie",
+      "title": "Dire non",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-05",
+      "category": "Identité & autonomie",
+      "title": "Respect de soi",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-06",
+      "category": "Identité & autonomie",
+      "title": "Gestion du regard extérieur",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-07",
+      "category": "Identité & autonomie",
+      "title": "Assertivité",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-08",
+      "category": "Identité & autonomie",
+      "title": "Confiance sobre",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-09",
+      "category": "Identité & autonomie",
+      "title": "Autonomie économique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-10",
+      "category": "Identité & autonomie",
+      "title": "Limites relationnelles",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-11",
+      "category": "Identité & autonomie",
+      "title": "Peur du jugement",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "ide-12",
+      "category": "Identité & autonomie",
+      "title": "Décisions sans manipulation",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Identité & autonomie",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-01",
+      "category": "Présence & communication",
+      "title": "Charisme sans domination",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-02",
+      "category": "Présence & communication",
+      "title": "Expression vocale",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-03",
+      "category": "Présence & communication",
+      "title": "Diction",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-04",
+      "category": "Présence & communication",
+      "title": "Posture libre",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-05",
+      "category": "Présence & communication",
+      "title": "Prise de parole",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-06",
+      "category": "Présence & communication",
+      "title": "Écoute active",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-07",
+      "category": "Présence & communication",
+      "title": "Communication non verbale",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-08",
+      "category": "Présence & communication",
+      "title": "Gestuelle",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-09",
+      "category": "Présence & communication",
+      "title": "Conversation sereine",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-10",
+      "category": "Présence & communication",
+      "title": "Silence non punitif",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-11",
+      "category": "Présence & communication",
+      "title": "Présence publique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "pre-12",
+      "category": "Présence & communication",
+      "title": "Storytelling authentique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Présence & communication",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-01",
+      "category": "Style & beauté",
+      "title": "Histoire du rouge à lèvres",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-02",
+      "category": "Style & beauté",
+      "title": "Noir cinématographique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-03",
+      "category": "Style & beauté",
+      "title": "Garde-robe capsule",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-04",
+      "category": "Style & beauté",
+      "title": "Parfum et mémoire",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-05",
+      "category": "Style & beauté",
+      "title": "Textures satin et soie",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-06",
+      "category": "Style & beauté",
+      "title": "Lumière et portrait",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-07",
+      "category": "Style & beauté",
+      "title": "Coiffure vintage",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-08",
+      "category": "Style & beauté",
+      "title": "Maquillage éditorial",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-09",
+      "category": "Style & beauté",
+      "title": "Bijoux symboliques",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-10",
+      "category": "Style & beauté",
+      "title": "Image authentique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-11",
+      "category": "Style & beauté",
+      "title": "Direction photo mode",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sty-12",
+      "category": "Style & beauté",
+      "title": "Style sans injonction",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Style & beauté",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-01",
+      "category": "Sensualité & corps",
+      "title": "Sens et textures",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-02",
+      "category": "Sensualité & corps",
+      "title": "Danse libre",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-03",
+      "category": "Sensualité & corps",
+      "title": "Rythme corporel",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-04",
+      "category": "Sensualité & corps",
+      "title": "Rapport au miroir",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-05",
+      "category": "Sensualité & corps",
+      "title": "Sensualité non sexuelle",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-06",
+      "category": "Sensualité & corps",
+      "title": "Consentement",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-07",
+      "category": "Sensualité & corps",
+      "title": "Intimité respectueuse",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-08",
+      "category": "Sensualité & corps",
+      "title": "Image corporelle",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-09",
+      "category": "Sensualité & corps",
+      "title": "Mouvement et confiance",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-10",
+      "category": "Sensualité & corps",
+      "title": "Respiration simple",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-11",
+      "category": "Sensualité & corps",
+      "title": "Désir personnel",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "sen-12",
+      "category": "Sensualité & corps",
+      "title": "Rituels sensoriels",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Sensualité & corps",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-01",
+      "category": "Relations & réciprocité",
+      "title": "Attachement anxieux",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-02",
+      "category": "Relations & réciprocité",
+      "title": "Disponibilité émotionnelle",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-03",
+      "category": "Relations & réciprocité",
+      "title": "Choix mutuel",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-04",
+      "category": "Relations & réciprocité",
+      "title": "Flirt respectueux",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-05",
+      "category": "Relations & réciprocité",
+      "title": "Distance et proximité",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-06",
+      "category": "Relations & réciprocité",
+      "title": "Réciprocité des actes",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-07",
+      "category": "Relations & réciprocité",
+      "title": "Définir ses attentes",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-08",
+      "category": "Relations & réciprocité",
+      "title": "Conflit constructif",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-09",
+      "category": "Relations & réciprocité",
+      "title": "Rupture et autonomie",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-10",
+      "category": "Relations & réciprocité",
+      "title": "Éviter les jeux de pouvoir",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-11",
+      "category": "Relations & réciprocité",
+      "title": "Limites et consentement",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "rel-12",
+      "category": "Relations & réciprocité",
+      "title": "Amour sans dépendance",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Relations & réciprocité",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-01",
+      "category": "Business & branding",
+      "title": "Archétype de marque",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-02",
+      "category": "Business & branding",
+      "title": "Positionnement éditorial",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-03",
+      "category": "Business & branding",
+      "title": "Promesse éthique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-04",
+      "category": "Business & branding",
+      "title": "Parcours d'achat",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-05",
+      "category": "Business & branding",
+      "title": "Masterclass",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-06",
+      "category": "Business & branding",
+      "title": "Cohortes",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-07",
+      "category": "Business & branding",
+      "title": "Communauté",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-08",
+      "category": "Business & branding",
+      "title": "Abonnement",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-09",
+      "category": "Business & branding",
+      "title": "Programmes vidéo",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-10",
+      "category": "Business & branding",
+      "title": "Workbook",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-11",
+      "category": "Business & branding",
+      "title": "Ressources gratuites",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "bus-12",
+      "category": "Business & branding",
+      "title": "Newsletter",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Business & branding",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-01",
+      "category": "Lecture critique",
+      "title": "Stéréotypes misogynes",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-02",
+      "category": "Lecture critique",
+      "title": "Male gaze",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-03",
+      "category": "Lecture critique",
+      "title": "Pouvoir et sexualité",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-04",
+      "category": "Lecture critique",
+      "title": "Manipulation vs affirmation",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-05",
+      "category": "Lecture critique",
+      "title": "Promesses pseudoscientifiques",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-06",
+      "category": "Lecture critique",
+      "title": "Énergie féminine comme métaphore",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-07",
+      "category": "Lecture critique",
+      "title": "Consentement vs séduction coercitive",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-08",
+      "category": "Lecture critique",
+      "title": "Résultats marketing non prouvés",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-09",
+      "category": "Lecture critique",
+      "title": "Citations sourcées",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-10",
+      "category": "Lecture critique",
+      "title": "Licences et droits",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-11",
+      "category": "Lecture critique",
+      "title": "Approche interculturelle",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    },
+    {
+      "id": "lec-12",
+      "category": "Lecture critique",
+      "title": "Accompagnement non clinique",
+      "status": "Piste de recherche / contenu inédit à produire",
+      "confidence": "non vérifié individuellement",
+      "tags": [
+        "Lecture critique",
+        "Femme Fatale",
+        "Dark Energy"
+      ],
+      "deliverables": [
+        "fiche documentée",
+        "analyse critique",
+        "exercice original",
+        "brief ChatGPT"
+      ]
+    }
+  ],
+  "guardrails": [
+    "Distinguer archétype fictionnel et comportements réels.",
+    "Les affirmations de magnétisme, énergie et reprogrammation sont des promesses marketing à ne pas valider scientifiquement.",
+    "Refuser manipulation, harcèlement, contrôle d'autrui et non-respect du consentement.",
+    "Respecter les œuvres et formations protégées; analyser structures et méthodes générales.",
+    "Marquer les thèmes non encore vérifiés comme pistes, pas comme données scientifiques."
+  ]
+}
