@@ -102,7 +102,7 @@ async function remoteFetch(resource,options={}){
  const headers={"apikey":SUPABASE_KEY,"Authorization":"Bearer "+access,"Content-Type":"application/json",...(options.headers||{})};
  const r=await fetch(SUPABASE_URL+"/rest/v1/"+resource,{...options,headers});
  if(!r.ok)throw Error("Accès privé impossible (HTTP "+r.status+"). Vérifie la session et les autorisations.");
- return r.status===204?null:r.json();
+ const body=await r.text();return body?JSON.parse(body):null;
 }
 async function saveCloudItem(x){
  return remoteFetch("eloah_mail_items?gmail_id=eq."+encodeURIComponent(x.id),{method:"PATCH",body:JSON.stringify({status:x.status,priority:x.priority,note:String(x.note||"").slice(0,3000),source_kind:"manual_review",reviewed_at:new Date().toISOString(),updated_at:new Date().toISOString()}),headers:{"Prefer":"return=minimal"}});
