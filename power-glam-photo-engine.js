@@ -43,27 +43,42 @@ render();
 }
 function initStudio(){
 const layout=document.querySelector('main .layout');if(!layout||document.getElementById('pg-photo-incoming'))return;
-const q=new URLSearchParams(location.search),photo=byId(q.get('pg_photo'));
-const panel=document.createElement('section');panel.id='pg-photo-incoming';
-layout.parentNode.insertBefore(panel,layout);
-if(!photo){panel.innerHTML='<strong>Photothèque Power & Glam</strong><p>Associer une photographie et sa direction artistique à un nouvel article.</p><a href="power-glam-photographie.html#phototheque">Choisir une image dans la photothèque →</a>';return}
-const universe=universes.includes(q.get('pg_univers'))?q.get('pg_univers'):photo.universe;
-panel.innerHTML='<div class="pg-si-flex"><div class="pg-studio-photo-preview" role="img" aria-label="'+esc(photo.alt)+'" style="background-position:'+photo.position+'"></div><div class="pg-si-description"><span class="eyebrow">PHOTO SÉLECTIONNÉE · '+esc(photo.material)+'</span><h2>'+esc(photo.name)+'</h2><p>'+esc(photo.feeling)+' · '+esc(photo.light)+'</p><p>Univers : <b>'+esc(universe)+'</b>. La photo est une <b>référence visuelle</b> : aucune URL de couverture WordPress n’est ajoutée automatiquement.</p><button id="pg-si-use" type="button" class="pg-pe-main">Utiliser dans mon brief</button><button id="pg-si-copy" type="button">Copier la fiche photo</button><a href="power-glam-photographie.html#phototheque">Changer d’image ↗</a><p id="pg-si-status" role="status" aria-live="polite"></p></div></div>';
+const q=new URLSearchParams(location.search);
+let saved=null;try{saved=JSON.parse(safeGet('pg-photo-linked-article-v1')||'null')}catch(e){}
+const requested=byId(q.get('pg_photo'));
+const linked=!requested&&saved&&byId(saved.photo)?byId(saved.photo):null;
+const photo=requested||linked;
+const panel=document.createElement('section');panel.id='pg-photo-incoming';layout.parentNode.insertBefore(panel,layout);
+if(!photo){panel.innerHTML='<strong>Photothèque Power & Glam</strong><p>Associe une photographie de référence et sa direction artistique à ton prochain article.</p><a href="power-glam-photographie.html#phototheque">Choisir une image dans la photothèque →</a>';return}
+const universe=requested?(universes.includes(q.get('pg_univers'))?q.get('pg_univers'):photo.universe):(universes.includes(saved.universe)?saved.universe:photo.universe);
+panel.innerHTML='<div class="pg-si-flex"><div class="pg-studio-photo-preview" role="img" aria-label="'+esc(photo.alt)+'" style="background-position:'+photo.position+'"></div><div class="pg-si-description"><span class="eyebrow">PHOTO LIÉE · '+esc(photo.material)+'</span><h2>'+esc(photo.name)+'</h2><p>'+esc(photo.feeling)+' · '+esc(photo.light)+'</p><p>Univers : <b>'+esc(universe)+'</b>. Cette photo est une <b>référence visuelle</b> : elle ne dispose pas encore d’une URL HD de couverture WordPress.</p><button id="pg-si-use" type="button" class="pg-pe-main">Utiliser dans mon brief</button><button id="pg-si-copy" type="button">Copier la fiche photo</button><a href="power-glam-photographie.html#phototheque">Changer d’image ↗</a><button id="pg-si-unlink" type="button">Dissocier l’image</button><p id="pg-si-status" role="status" aria-live="polite"></p></div></div>';
 const status=panel.querySelector('#pg-si-status'),prompt=document.getElementById('prompt'),universeField=document.getElementById('universe'),alt=document.getElementById('alt');
+const marker='[PHOTO P&G : '+photo.id+']';
 function apply(ask){
-if(ask&&prompt.value.trim()&&!window.confirm('Ton brouillon contient déjà un brief. Ajouter cette direction photographique à la suite, sans effacer ton texte ?'))return;
+if(prompt.value.includes(marker)){status.textContent='Cette direction photo figure déjà dans ton brief.';return}
+if(ask&&prompt.value.trim()&&!window.confirm('Ton brouillon contient déjà un brief. Ajouter la référence photographique à sa suite, sans effacer ton texte ?'))return;
 universeField.value=universe;
-const b=buildBrief(photo,universe);
-prompt.value=prompt.value.trim()?prompt.value.trim()+'\n\n'+b:'Sujet à préciser pour cet article.\n\n'+b;
+const brief=marker+'\n'+buildBrief(photo,universe);
+prompt.value=prompt.value.trim()?prompt.value.trim()+'\n\n'+brief:'Sujet proposé : '+photo.idea+'.\n\n'+brief;
 if(!alt.value.trim())alt.value=photo.alt;
 prompt.dispatchEvent(new Event('input',{bubbles:true}));
 universeField.dispatchEvent(new Event('change',{bubbles:true}));
-status.textContent='Direction photographique ajoutée au brief. Le brouillon existant est conservé ; clique sur « Conserver localement » pour enregistrer.';
+status.textContent='Direction photo ajoutée au brief sans écraser le texte existant. Enregistre ton brouillon pour la conserver.';
 }
 panel.querySelector('#pg-si-use').onclick=()=>apply(true);
-panel.querySelector('#pg-si-copy').onclick=async()=>{try{await navigator.clipboard.writeText(buildBrief(photo,universe));status.textContent='Fiche copiée.'}catch(e){status.textContent='Copie non disponible.'}};
-if(!prompt.value.trim()){apply(false)}else{status.textContent='Brouillon existant détecté et conservé. Clique sur « Utiliser dans mon brief » pour ajouter la référence.'}
-const save=document.getElementById('save-local');if(save)save.addEventListener('click',()=>{safeSet('pg-photo-linked-article-v1',JSON.stringify({photo:photo.id,universe:universe,updated:new Date().toISOString()}))});
+panel.querySelector('#pg-si-copy').onclick=async()=>{try{await navigator.clipboard.writeText(buildBrief(photo,universe));status.textContent='Fiche photographique copiée.'}catch(e){status.textContent='Copie non disponible dans ce navigateur.'}};
+panel.querySelector('#pg-si-unlink').onclick=()=>{
+if(!window.confirm('Dissocier cette photographie du brouillon ? Le texte de ton article ne sera pas supprimé.'))return;
+try{localStorage.removeItem('pg-photo-linked-article-v1');localStorage.removeItem('pg-photo-selection-v1')}catch(e){}
+const u=new URL(location.href);u.searchParams.delete('pg_photo');u.searchParams.delete('pg_univers');history.replaceState(null,'',u.pathname+u.search+u.hash);
+panel.innerHTML='<strong>Photographie dissociée</strong><p>Le texte de ton brouillon est conservé. Tu peux sélectionner une autre image.</p><a href="power-glam-photographie.html#phototheque">Ouvrir la photothèque →</a>';
+};
+if(!prompt.value.trim()){apply(false)}else{status.textContent=prompt.value.includes(marker)?'Cette image fait déjà partie du brief enregistré.':'Brouillon existant conservé. Clique sur « Utiliser dans mon brief » pour y ajouter la photographie.'}
+const save=document.getElementById('save-local');if(save)save.addEventListener('click',()=>{
+const payload={photo:photo.id,universe,updated:new Date().toISOString()};
+if(!safeSet('pg-photo-linked-article-v1',JSON.stringify(payload))){status.textContent='Impossible de mémoriser le lien photo sur cet appareil : exporte ton brouillon.'}
+});
 }
+
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',()=>{initAtlas();initStudio()});else{initAtlas();initStudio()}
 })();
