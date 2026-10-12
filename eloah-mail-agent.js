@@ -7,7 +7,7 @@ const categories=["reply","money","documents","security","events","other"];
 let view="overview", editing=null,maxVisible=80;const cloudIds=new Set();
 let state={format:"eloah-mail-agent-v1",generated_at:null,scanned:0,counts:{inbox:null,unread:null,drafts:null},items:[]};
 try{const saved=JSON.parse(localStorage.getItem(KEY)||"null");if(saved?.format==="eloah-mail-agent-v1"&&Array.isArray(saved.items))state={...state,...saved}}catch{}
-function save(){try{localStorage.setItem(KEY,JSON.stringify({...state,items:state.items.filter(x=>!cloudIds.has(x.id))}));render();return true}catch(err){alert("Impossible de sauvegarder sur ce navigateur. Pense à exporter les données.");return false}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify({...state,items:state.items.filter(x=>!cloudIds.has(x.id)||x.source_kind==="imported_report")}));render();return true}catch(err){alert("Impossible de sauvegarder sur ce navigateur. Pense à exporter les données.");return false}}
 function safeDate(s){if(!s)return"";const d=new Date(s);return Number.isFinite(d.getTime())?d.toLocaleDateString("fr-FR"):""}
 function categoryName(k){return ({reply:"Réponse",money:"Paiement",documents:"Document",security:"Sécurité",events:"Date",other:"Autre"})[k]||"Autre"}
 function itemStatus(v){return ["À trier","À faire","À vérifier","En attente","Terminé","Ignoré"].includes(v)?v:"À vérifier"}
@@ -59,7 +59,7 @@ function importData(file){
  const seen=new Set();for(const x of data.items){if(!x||typeof x.id!=="string"||x.id.length>150||typeof x.subject!=="string"||seen.has(x.id))throw Error("Une entrée n’est pas valide.");seen.add(x.id)}
  if(!confirm("Importer "+data.items.length+" entrées ? Les notes et statuts locaux déjà modifiés seront préservés."))return;
  const edits=new Map(state.items.map(x=>[x.id,{status:x.status,priority:x.priority,note:x.note}]));
- const next=data.items.map(x=>{const local=edits.get(x.id);return {...x,category:categories.includes(x.category)?x.category:"other",status:local?.status||itemStatus(x.status),priority:local?.priority||itemPriority(x.priority),note:local?.note||x.note||"",link:cleanUrl(x.link)}});
+ const next=data.items.map(x=>{const local=edits.get(x.id);return {...x,source_kind:"imported_report",category:categories.includes(x.category)?x.category:"other",status:local?.status&&local.status!=="À trier"?local.status:itemStatus(x.status),priority:local?.status&&local.status!=="À trier"?local.priority:itemPriority(x.priority),note:local?.note||x.note||"",link:cleanUrl(x.link)}});
  const previous=state.items.filter(x=>!seen.has(x.id));state={format:"eloah-mail-agent-v1",generated_at:data.generated_at||new Date().toISOString(),scanned:Number(data.scanned)||data.items.length,counts:{inbox:Number.isFinite(Number(data.counts?.inbox))?Number(data.counts.inbox):null,unread:Number.isFinite(Number(data.counts?.unread))?Number(data.counts.unread):null,drafts:Number.isFinite(Number(data.counts?.drafts))?Number(data.counts.drafts):null},items:next.concat(previous)};save()
  }).catch(err=>alert("Import impossible : "+err.message))
 }
@@ -125,8 +125,9 @@ async function refreshCloud(){
    cloudIds.add(r.gmail_id);
    return {id:r.gmail_id,subject:r.subject||"",sender_name:r.sender||"Courriel",date:r.received_at,category:categories.includes(r.category)?r.category:"other",priority:itemPriority(r.priority),status:itemStatus(r.status),summary:r.snippet||"",action:r.action||"À examiner à partir du message complet",deadline:r.due_on,steps:Array.isArray(r.steps)?r.steps:[],has_attachment:!!r.has_attachment,link:cleanUrl(r.gmail_url)||"https://mail.google.com/mail/u/0/#all/"+encodeURIComponent(r.gmail_id),note:r.note||"",source_kind:r.source_kind};
   });
+  const imports=new Map(state.items.filter(x=>x.source_kind==="imported_report").map(x=>[x.id,x]));
   const local=state.items.filter(x=>!cloudIds.has(x.id));
-  state.items=mapped.concat(local);
+  state.items=mapped.map(x=>imports.has(x.id)?{...x,...imports.get(x.id)}:x).concat(local);
   const st=Array.isArray(stats)?stats[0]:null;
   if(st){state.counts={inbox:st.inbox_total,unread:st.inbox_unread,drafts:st.drafts_total};state.scanned=st.messages_examined||0;state.generated_at=st.last_sync_at||null}
   cloudState("Coffre privé connecté · "+rows.length+" messages indexés","Synchronisation Gmail : dernier import "+(state.generated_at?safeDate(state.generated_at):"non daté")+". Les en-têtes non lus en entier restent « À trier ». "+(st?.coverage_note||""),true);
