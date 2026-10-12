@@ -2,8 +2,8 @@
 "use strict";
 const KEY="eloah-gmail-command-v1",$=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const views={overview:["Vue générale","Les sujets importants et les prochaines décisions."],priority:["Priorités","Commence par les actions qui demandent une vérification rapide."],reply:["Réponses à préparer","Les messages auxquels répondre ou revenir."],money:["Factures & paiements","Contrôler les échéances depuis les espaces officiels, sans payer depuis cet outil."],documents:["Documents & formalités","Pièces à rassembler, dossiers à classer et suivis administratifs."],security:["Comptes & sécurité","Identifier les alertes et vérifier directement dans les applications concernées."],events:["Rendez-vous & dates","Les dates présentes dans les messages, sans création automatique d'événement."],all:["Tous les dossiers","L'ensemble des entrées du rapport importé."],settings:["Import & sécurité","Confidentialité, sauvegarde et limites de l'analyse."]};
-const categories=["reply","money","documents","security","events","other"];
+const views={school:["École & enfants","Messages scolaires et formalités à distinguer des autres dossiers."],deadlines:["Urgences & dates","Échéances réellement attestées et décisions sans date à préciser."],compose:["Réponses & courriers","Brouillons personnalisables, jamais envoyés automatiquement."],spreadsheet:["Tableur de suivi","Tableau filtrable et export CSV compatible Excel."],notes:["Notes & brouillons","Documents de travail enregistrés dans le coffre privé."],overview:["Vue générale","Les sujets importants et les prochaines décisions."],priority:["Priorités","Commence par les actions qui demandent une vérification rapide."],reply:["Réponses à préparer","Les messages auxquels répondre ou revenir."],money:["Factures & paiements","Contrôler les échéances depuis les espaces officiels, sans payer depuis cet outil."],documents:["Documents & formalités","Pièces à rassembler, dossiers à classer et suivis administratifs."],security:["Comptes & sécurité","Identifier les alertes et vérifier directement dans les applications concernées."],events:["Rendez-vous & dates","Les dates présentes dans les messages, sans création automatique d'événement."],all:["Tous les dossiers","L'ensemble des entrées du rapport importé."],settings:["Import & sécurité","Confidentialité, sauvegarde et limites de l'analyse."]};
+const categories=["reply","money","documents","security","events","other"];const WORKBENCH_VIEWS=["school","deadlines","compose","spreadsheet","notes"];
 let view="overview", editing=null,maxVisible=80;const cloudIds=new Set();
 let state={format:"eloah-mail-agent-v1",generated_at:null,scanned:0,counts:{inbox:null,unread:null,drafts:null},items:[]};
 try{const saved=JSON.parse(localStorage.getItem(KEY)||"null");if(saved?.format==="eloah-mail-agent-v1"&&Array.isArray(saved.items))state={...state,...saved}}catch{}
@@ -35,9 +35,10 @@ function matchingItems(){
 }
 function renderItem(item){
  const status=itemStatus(item.status),priority=itemPriority(item.priority),url=cleanUrl(item.link),steps=Array.isArray(item.steps)?item.steps:[],provenance=item.source_kind==="gmail_read"||item.source_kind==="manual_review"?"Message examiné":item.source_kind==="imported_report"?"Rapport importé":"Objet indexé · non analysé";
- return '<article class="mailcard"><div class="mailtop"><div><div class="mini"><span class="pill '+priority.toLowerCase()+'">'+priority+'</span><span class="pill">'+esc(categoryName(item.category))+'</span><span class="pill '+(status==="Terminé"?"done":"")+'">'+esc(status)+'</span><span class="pill">'+esc(provenance)+'</span></div><h3>'+esc(item.subject||"Sans objet")+'</h3><span class="small">'+esc(item.sender_name||"Courriel")+" · "+esc(safeDate(item.date)||"Date à relever")+(item.has_attachment?" · Pièce jointe":"")+'</span></div></div><p>'+esc(item.summary||"Aucun résumé.")+'</p><div class="recordnote"><strong>À faire :</strong> '+esc(item.action||"Examiner la demande.")+(item.deadline?'<div>Échéance indiquée : '+esc(safeDate(item.deadline)||item.deadline)+'</div>':"")+'</div>'+(steps.length?'<ul class="tasks">'+steps.slice(0,6).map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>':"")+(item.note?'<p class="small"><strong>Mon suivi :</strong> '+esc(item.note)+'</p>':"")+'<div class="actions"><button data-edit="'+esc(item.id)+'">Suivre / modifier</button>'+(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Lire dans Gmail ↗</a>':'<a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener noreferrer">Ouvrir Gmail ↗</a>')+'</div></article>'
+ return '<article class="mailcard"><div class="mailtop"><div><div class="mini"><span class="pill '+priority.toLowerCase()+'">'+priority+'</span><span class="pill">'+esc(categoryName(item.category))+'</span><span class="pill '+(status==="Terminé"?"done":"")+'">'+esc(status)+'</span><span class="pill">'+esc(provenance)+'</span></div><h3>'+esc(item.subject||"Sans objet")+'</h3><span class="small">'+esc(item.sender_name||"Courriel")+" · "+esc(safeDate(item.date)||"Date à relever")+(item.has_attachment?" · Pièce jointe":"")+'</span></div></div><p>'+esc(item.summary||"Aucun résumé.")+'</p><div class="recordnote"><strong>À faire :</strong> '+esc(item.action||"Examiner la demande.")+(item.deadline?'<div>Échéance indiquée : '+esc(safeDate(item.deadline)||item.deadline)+'</div>':"")+'</div>'+(steps.length?'<ul class="tasks">'+steps.slice(0,6).map(x=>'<li>'+esc(x)+'</li>').join("")+'</ul>':"")+(item.note?'<p class="small"><strong>Mon suivi :</strong> '+esc(item.note)+'</p>':"")+'<div class="actions"><button data-edit="'+esc(item.id)+'">Suivre / modifier</button>'+'<button data-compose-mail="'+esc(item.id)+'">Rédiger une réponse</button>'+(url?'<a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">Lire dans Gmail ↗</a>':'<a href="https://mail.google.com/mail/u/0/#inbox" target="_blank" rel="noopener noreferrer">Ouvrir Gmail ↗</a>')+'</div></article>'
 }
 function renderContent(){
+ if(WORKBENCH_VIEWS.includes(view)){const target=window.EloahMailWorkbench; if(target?.render){target.render(view);return} $("content").innerHTML='<div class="empty">Chargement de l’atelier administratif…</div>';return}
  const items=matchingItems(),head='<div class="freshness"><strong>Couverture du rapport :</strong> '+Number(state.scanned||0)+' messages examinés · Données figées '+(state.generated_at?safeDate(state.generated_at):"—")+'. Le site ne lit pas Gmail automatiquement. Les compteurs et les actions peuvent avoir changé depuis l’analyse.</div>';
  if(view==="settings"){
  $("content").innerHTML='<section class="panel"><h3>Comment alimenter ton centre de commande</h3><p>1. Dans ChatGPT, utilise l’agent avec Gmail connecté. 2. Fais générer un fichier JSON « eloah-mail-agent-v1 ». 3. Importe le fichier depuis cette page. Les données importées peuvent être sauvegardées dans ton compte privé Supabase après confirmation.</p><p>Le tableau charge le coffre Supabase après authentification, mais <strong>n’a pas d’accès direct à Gmail</strong>. Il ne peut pas envoyer de mails, supprimer des messages ni effectuer des paiements.</p><button id="importSettings">Importer un fichier JSON</button><button id="clearLocal">Effacer les dossiers locaux</button><p class="small">La suppression concerne uniquement ce navigateur, pas Gmail.</p></section>';
@@ -51,7 +52,7 @@ function render(){
  $("viewTitle").textContent=views[view][0];$("viewDescription").textContent=views[view][1];$("viewType").textContent=view==="overview"?"TABLEAU DE BORD":"DOSSIERS · "+view.toUpperCase();
  renderCounts();renderContent()
 }
-function openItem(id){const x=state.items.find(x=>x.id===id);if(!x)return;editing=id;$("itemHeading").textContent=x.subject||"Sans objet";const f=$("editForm");f.elements.status.value=itemStatus(x.status);f.elements.priority.value=itemPriority(x.priority);f.elements.note.value=x.note||"";$("editModal").showModal()}
+function openItem(id){const x=state.items.find(x=>x.id===id);if(!x)return;editing=id;$("itemHeading").textContent=x.subject||"Sans objet";const f=$("editForm");f.elements.status.value=itemStatus(x.status);f.elements.priority.value=itemPriority(x.priority);f.elements.note.value=x.note||"";f.elements.domain.value=x.domain||"Autre";f.elements.deadline.value=x.deadline?String(x.deadline).slice(0,10):"";$("editModal").showModal()}
 function output(){
  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="eloah-agent-courrier-"+new Date().toISOString().slice(0,10)+".json";a.click();setTimeout(()=>URL.revokeObjectURL(url),900)
 }
@@ -74,8 +75,8 @@ const prompts={
 };
 function launch(mode){const q='SONIA OS · ELOAH / AGENT COURRIER. Mandat A1 uniquement.\n'+(prompts[mode]||prompts.import)+'\nTu as accès au connecteur Gmail dans ChatGPT si connecté. Travaille directement sur les messages réels et signale les limites de couverture. Aucun contenu personnel dans des URLs externes.';window.open("https://chatgpt.com/?q="+encodeURIComponent(q),"_blank","noopener,noreferrer")}
 $("nav").onclick=e=>{const b=e.target.closest("[data-view]");if(b){view=b.dataset.view;maxVisible=80;render()}};
-$("content").onclick=e=>{const b=e.target.closest("[data-edit]");if(b)openItem(b.dataset.edit)};
-$("editForm").onsubmit=async e=>{e.preventDefault();const x=state.items.find(x=>x.id===editing);if(!x)return;const data=Object.fromEntries(new FormData(e.target));const old={status:x.status,priority:x.priority,note:x.note};x.status=data.status;x.priority=data.priority;x.note=data.note;if(cloudIds.has(x.id)){try{await saveCloudItem(x)}catch(err){Object.assign(x,old);alert("Suivi distant non enregistré : "+err.message);return}}$("editModal").close();save()};
+$("content").onclick=e=>{const b=e.target.closest("[data-edit]");if(b)openItem(b.dataset.edit);const c=e.target.closest("[data-compose-mail]");if(c){view="compose";render();window.EloahMailWorkbench?.selectMail(c.dataset.composeMail)}};
+$("editForm").onsubmit=async e=>{e.preventDefault();const x=state.items.find(x=>x.id===editing);if(!x)return;const data=Object.fromEntries(new FormData(e.target));const old={status:x.status,priority:x.priority,note:x.note,domain:x.domain,deadline:x.deadline,due_confirmed:x.due_confirmed,due_source:x.due_source};x.status=data.status;x.priority=data.priority;x.note=data.note;x.domain=data.domain;x.deadline=data.deadline||null;x.due_confirmed=!!data.deadline;x.due_source=data.deadline?"Date saisie manuellement dans ELOAH":null;if(cloudIds.has(x.id)){try{await saveCloudItem(x)}catch(err){Object.assign(x,old);alert("Suivi distant non enregistré : "+err.message);return}}$("editModal").close();save()};
 $("cancel").onclick=()=> $("editModal").close();
 $("search").oninput=()=>{maxVisible=80;render()};$("statusFilter").onchange=render;$("priorityFilter").onchange=render;
 $("uploadButton").onclick=()=> $("upload").click();
@@ -107,7 +108,7 @@ async function remoteFetch(resource,options={}){
  const body=await r.text();return body?JSON.parse(body):null;
 }
 async function saveCloudItem(x){
- return remoteFetch("eloah_mail_items?gmail_id=eq."+encodeURIComponent(x.id),{method:"PATCH",body:JSON.stringify({status:x.status,priority:x.priority,note:String(x.note||"").slice(0,3000),source_kind:"manual_review",reviewed_at:new Date().toISOString(),updated_at:new Date().toISOString()}),headers:{"Prefer":"return=minimal"}});
+ return remoteFetch("eloah_mail_items?gmail_id=eq."+encodeURIComponent(x.id),{method:"PATCH",body:JSON.stringify({status:x.status,priority:x.priority,note:String(x.note||"").slice(0,3000),domain:x.domain||"Autre",due_on:x.deadline||null,due_source:x.due_source||null,due_confirmed:!!x.due_confirmed,source_kind:"manual_review",reviewed_at:new Date().toISOString(),updated_at:new Date().toISOString()}),headers:{"Prefer":"return=minimal"}});
 }
 function cloudState(heading,description,success){
  $("cloudTitle").textContent=heading;$("cloudText").textContent=description;$("cloudBanner").dataset.ready=success?"yes":"no";
@@ -118,14 +119,14 @@ async function refreshCloud(){
  cloudState("Connexion au coffre ELOAH…","Accès en lecture à la base sécurisée Supabase.",false);
  try{
   const rows=[];for(let offset=0;offset<10000;offset+=500){
-   const data=await remoteFetch("eloah_mail_items?select=gmail_id,thread_id,received_at,sender,subject,snippet,gmail_url,labels,has_attachment,category,priority,status,action,due_on,steps,source_kind,reviewed_at,note&order=received_at.desc&limit=500&offset="+offset);
+   const data=await remoteFetch("eloah_mail_items?select=gmail_id,thread_id,received_at,sender,subject,snippet,gmail_url,labels,has_attachment,category,priority,status,action,due_on,due_source,due_confirmed,domain,steps,source_kind,reviewed_at,note&order=received_at.desc&limit=500&offset="+offset);
    if(!Array.isArray(data))throw Error("Réponse de la base invalide.");
    rows.push(...data);if(data.length<500)break;
   }
   const stats=await remoteFetch("eloah_mail_status?select=inbox_total,inbox_unread,drafts_total,messages_examined,indexed_total,last_sync_at,coverage_note&limit=1");
   cloudIds.clear();const mapped=rows.map(r=>{
    cloudIds.add(r.gmail_id);
-   return {id:r.gmail_id,subject:r.subject||"",sender_name:r.sender||"Courriel",date:r.received_at,category:categories.includes(r.category)?r.category:"other",priority:itemPriority(r.priority),status:itemStatus(r.status),summary:r.snippet||"",action:r.action||"À examiner à partir du message complet",deadline:r.due_on,steps:Array.isArray(r.steps)?r.steps:[],has_attachment:!!r.has_attachment,link:cleanUrl(r.gmail_url)||"https://mail.google.com/mail/u/0/#all/"+encodeURIComponent(r.gmail_id),note:r.note||"",source_kind:r.source_kind};
+   return {id:r.gmail_id,subject:r.subject||"",sender_name:r.sender||"Courriel",date:r.received_at,category:categories.includes(r.category)?r.category:"other",priority:itemPriority(r.priority),status:itemStatus(r.status),summary:r.snippet||"",action:r.action||"À examiner à partir du message complet",deadline:r.due_on,due_source:r.due_source,due_confirmed:!!r.due_confirmed,domain:r.domain||"Autre",steps:Array.isArray(r.steps)?r.steps:[],has_attachment:!!r.has_attachment,link:cleanUrl(r.gmail_url)||"https://mail.google.com/mail/u/0/#all/"+encodeURIComponent(r.gmail_id),note:r.note||"",source_kind:r.source_kind};
   });
   const imports=new Map(state.items.filter(x=>x.source_kind==="imported_report").map(x=>[x.id,x]));
   const local=state.items.filter(x=>!cloudIds.has(x.id));
@@ -169,6 +170,7 @@ async function pushPrivateReport(){
 }
 $("pushReport").onclick=pushPrivateReport;
 
+window.EloahMailBridge={getItems:()=>state.items,privateFetch:remoteFetch,getToken:bearer,refresh:refreshCloud,openItem,copyData:output,escape:esc,sorter,isOpen,getView:()=>view,setView:(name)=>{if(views[name]){view=name;render()}},getCounts:()=>state.counts};
 $("refreshCloud").onclick=refreshCloud;
 refreshCloud();
 
