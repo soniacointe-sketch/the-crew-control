@@ -69,7 +69,20 @@ render();
  [...new Set(data.records.map(r=>r.universe))].forEach(u=>{const o=document.createElement('option');o.value=u;o.textContent=u;sel.append(o)});
  document.getElementById('catalogueStats').innerHTML='<p><strong>'+data.records.length+'</strong> pistes à explorer · <strong>'+data.sources.length+'</strong> sources candidates · <strong>'+data.funnels.length+'</strong> entonnoirs structurés.</p>';
  document.getElementById('sourceRegistry').innerHTML=data.sources.map(x=>'<div class="item"><a href="'+esc(x.url)+'" target="_blank" rel="noopener noreferrer">'+esc(x.name)+'</a><br><small>'+esc(x.scope)+' · '+esc(x.status)+'</small></div>').join('');
- function draw(){const term=q.value.toLowerCase(),un=sel.value;const xs=data.records.filter(x=>(!un||x.universe===un)&&(x.topic+' '+x.universe).toLowerCase().includes(term));holder.innerHTML='<p>'+xs.length+' pistes visibles</p>'+xs.map(x=>'<div class="item"><span class="tag">'+esc(x.id)+'</span> <span class="tag">'+esc(x.universe)+'</span><h3>'+esc(x.topic)+'</h3><small>'+esc(x.state)+' · '+esc(x.kind)+'</small><p>'+esc(x.instructions)+'</p><button type="button" data-topic="'+esc(x.id)+'">Préparer la collecte</button></div>').join('');
+
+ function makeCollectionPrompt(x){
+ return ['BUZZ AGENT — COLLECTE DANS CHATGPT','UNIVERS : '+x.universe,'SUJET : '+x.topic,'RÉFÉRENCE : '+x.id,
+ 'MISSION : Lance maintenant une recherche approfondie sur ce sujet dans ChatGPT.',
+ 'Explore les sources publiques pertinentes avec références et dates et les conversations passées réellement accessibles.',
+ 'Collecte les informations vérifiables, tendances, idées, questions fréquentes, angles, ressources et opportunités.',
+ 'Classe les résultats dans un dossier complet : titre, description, source, URL, date, niveau de fiabilité, statut, univers, idées de contenus et entonnoirs.',
+ 'Distingue clairement les données réellement recueillies des pistes non consultées. Ne prétends pas avoir accès à tout mon historique.',
+ 'Ne recueille pas de données personnelles de tiers et respecte les droits des contenus.',
+ 'Livre le résultat dans cette conversation sous forme lisible et avec un bloc JSON exportable. Ne publie rien sans validation.'].join('\n');
+ }
+ function launchCollection(x){window.open('https://chatgpt.com/?q='+encodeURIComponent(makeCollectionPrompt(x)),'_blank','noopener,noreferrer')}
+ function draw(){const term=q.value.toLowerCase(),un=sel.value;const xs=data.records.filter(x=>(!un||x.universe===un)&&(x.topic+' '+x.universe).toLowerCase().includes(term));holder.innerHTML='<p>'+xs.length+' pistes visibles</p>'+xs.map(x=>'<div class="item"><span class="tag">'+esc(x.id)+'</span> <span class="tag">'+esc(x.universe)+'</span><h3>'+esc(x.topic)+'</h3><small>'+esc(x.state)+' · '+esc(x.kind)+'</small><p>'+esc(x.instructions)+'</p><button type="button" data-topic="'+esc(x.id)+'">Préparer la collecte</button> <button type="button" class="primary" data-chat="'+esc(x.id)+'">Collecter ici dans ChatGPT ↗</button></div>').join('');
+ holder.querySelectorAll('[data-chat]').forEach(btn=>btn.onclick=()=>{const x=data.records.find(v=>v.id===btn.dataset.chat);if(x)launchCollection(x)});
  holder.querySelectorAll('[data-topic]').forEach(btn=>btn.onclick=()=>{const x=data.records.find(v=>v.id===btn.dataset.topic);if(!x)return;document.querySelector('[data-tab="capture"]').click();const form=document.getElementById('captureForm');form.elements.title.value='Piste : '+x.topic;form.elements.universe.value=x.universe;form.elements.source.value='Catalogue BUZZ AGENT';form.elements.type.value='Recherche';form.elements.status.value='À vérifier';form.elements.notes.value=x.instructions;form.elements.url.value='';form.elements.title.focus()});
  }
  sel.onchange=draw;q.oninput=draw;draw();
