@@ -107,6 +107,320 @@ seedV4Archive();
 const researchCrossIndex={"corpus":[["Atlas Archange Michel — dossier HUM-003","Corpus transversal de Michel, iconographie, textes anciens et lieux ; séparer les traditions historiques, les manuscrits et les rapprochements modernes."],["Toison d’Or — dossier d’étude","Analyse croisée des œuvres Jason / Médée, de la fondation de l’ordre en 1430 et de sites parisiens ; aucun réseau intentionnel établi."],["Pentateuque et lecture comparée des textes","Dossier de questions sur la Torah et les traditions textuelles ; examiner textes et contextes historiques avant interprétations symboliques."],["Nouvelle Jérusalem — sources et iconographie","Comparer textes, plans, représentations et traditions, sans projet parisien présumé."]],"symboles":[["Archange Michel — iconographie","Chrétien","Comparer l’épée, la balance, le dragon, les lieux et les périodes ; ne pas attribuer une signification unique à toutes les représentations."],["Toison d’Or — symboles distincts","Héraldique","Distinguer Jason et Médée, ordre bourguignon, armoriaux et usages postérieurs."],["Pomme de pin","Végétal","Notice POP rattachée à Garnier ; sens du motif à contextualiser historiquement."],["Nouvelle Jérusalem","Architecture","Distinguer texte religieux, représentation iconographique et hypothèse cartographique."]],"toponym":[["Rue Abel Gance — chaîne cinéma / Napoléon","La méthode présentée dans Parisis Code doit être comparée aux délibérations municipales et aux dates de dénomination."],["Thierry Namur et piste From Hell","Généalogie intellectuelle présentée dans Parisis Code p.33 ; vérifier livres, auteurs, publications et dates."],["René Boyvin — rue du Temple vers 1562","Ancienne piste sur gravures et atelier parisien. Adresse et datation à contrôler dans les notices d’estampes."]],"chronos":[["Ordre de la Toison d’Or — 1430","Chronologie historique institutionnelle distincte des monuments bâtis au XIXe siècle."],["Palais Garnier — 5 janvier 1875","Date d’inauguration, point chronologique seulement."],["Sainte-Chapelle — 1239","Acquisition de la Couronne d’épines par Louis IX ; ne détermine aucun axe cartographique."],["Monuments aux morts d’Orchies — 1899 / 1922 / 1951","Dossier local hors Paris, à géolocaliser et dater séparément avant toute interprétation."]],"audit":[["Test Toison d’Or — différents écarts calculés","Un ancien calcul mentionne ~17 m, d’autres mesures environ 27 m ou 3,7 m ; l’écart dépend des coordonnées. Réexécuter avant tout verdict."],["4Q529 — relations textuelles avec 4Q571 et 6Q23","4Q571 dispose d’un chevauchement rapporté ; 6Q23 reste une attribution à traiter prudemment. Aucun lien spatial avec Paris."],["Orchies : monuments aux morts","Ne pas confondre dates et usages des monuments 1899, 1922 et 1951 ; interprétation « passage/mémoire » reste symbolique."],["Contrôle des noms anciens et des étymologies","Ne pas déduire un sens du découpage phonétique d’un toponyme sans étymologie documentée."]]};
 function seedCrossIndex(){const mark=KEY+"-cross-index-v1";if(localStorage.getItem(mark))return;for(const [module,rows] of Object.entries(researchCrossIndex)){rows.forEach((x,i)=>{const id="cross-"+module+"-"+i;if(store[module].some(y=>y.id===id))return;const r={id,title:x[0],status:module==="audit"?"À faire":"À vérifier",notes:"Recherche antérieure retrouvée ; sources et affirmations à recouper."};if(module==="corpus")Object.assign(r,{author:"Recherche PARISIS ENGINE antérieure",pages:"Dossier à localiser",claim:x[1]});if(module==="symboles")Object.assign(r,{family:x[1],claim:x[2]});if(module==="toponym")Object.assign(r,{place:"Lieu ou archive à vérifier",claim:x[1]});if(module==="chronos")Object.assign(r,{date:"Chronologie dans le titre",claim:x[1]});if(module==="audit")r.claim=x[1];store[module].push(r)})}try{localStorage.setItem(KEY,JSON.stringify(store));localStorage.setItem(mark,"1")}catch(e){console.warn("Index transversal non enregistré",e)}}
 seedCrossIndex();
+// Corpus ALPHA-001 — recherche Jésus enfant, Alpha/Aleph, lettres et création.
+// Les fiches sont ajoutées sans écraser les données enregistrées par Sonia dans le navigateur.
+const alphaResearch20261012={
+  "corpus": [
+    {
+      "id": "alpha-001-jesus-enfant",
+      "title": "ALPHA-001 · Jésus enfant, Alpha et Aleph — dossier maître",
+      "author": "HUMANITIES LAB · PARISIS ENGINE",
+      "pages": "Luc 2,41-52 ; Évangile de l’enfance selon Thomas, épisode du maître Zachée ; Irénée, Contre les hérésies I,20",
+      "reference": "https://github.com/soniacointe-sketch/the-crew-control/blob/main/corpus/parisis-alpha-aleph-lettres-creation.md",
+      "claim": "Comparer la parole de Jésus à 12 ans dans Luc aux épisodes apocryphes de l’enfance et à la question : « si tu ignores la nature de l’alpha, comment enseigner le bêta ? ». Attestation littéraire ≠ parole historiquement prononcée.",
+      "status": "Source trouvée",
+      "notes": "Dossier de référence : corpus/parisis-alpha-aleph-lettres-creation.md. Les variations manuscrites et traductions seront contrôlées édition par édition."
+    },
+    {
+      "id": "alpha-001-papyrus",
+      "title": "ALPHA-001A · P.Hamb.Graec. 1011 — oiseaux d’argile",
+      "author": "Lajos Berkes et Gabriel Nocchi Macedo",
+      "pages": "ZPE 229 (2024), p. 68–74 ; papyrus IVe–Ve siècle",
+      "reference": "https://orbi.uliege.be/handle/2268/311682",
+      "claim": "Le plus ancien témoin manuscrit actuellement connu de l’Évangile de l’enfance selon Thomas conserve une partie de l’épisode des oiseaux d’argile. Ce n’est pas un témoignage contemporain de Jésus.",
+      "status": "Source trouvée",
+      "notes": "Distinguer les lettres visibles sur le fragment de la reconstitution éditoriale par comparaison avec d’autres témoins."
+    },
+    {
+      "id": "alpha-001-bereshit",
+      "title": "ALPHA-001B · Aleph, Beth et Bereshit",
+      "author": "Genèse 1,1 ; Exode 20,2 ; Bereshit Rabbah 1,10",
+      "pages": "Bereshit Rabbah 1,10",
+      "reference": "https://www.sefaria.org/Bereshit_Rabbah.1.10",
+      "claim": "La Genèse commence par Beth (ב), dans Bereshit. Le Midrash associe Beth à berakhah (bénédiction) et fait parler Aleph jusqu’à l’ouverture du Décalogue par Anokhi.",
+      "status": "Source trouvée",
+      "notes": "Récit rabbinique interprétatif rédigé après l’époque de Jésus ; ne pas y lire une étymologie universelle ni un enseignement de Jésus."
+    },
+    {
+      "id": "alpha-001-shabbat104",
+      "title": "ALPHA-001C · Les enfants et les lettres — Shabbat 104a",
+      "author": "Talmud de Babylone",
+      "pages": "Shabbat 104a",
+      "reference": "https://www.sefaria.org/Shabbat.104a",
+      "claim": "De jeunes élèves interprètent Aleph-Beth comme l’apprentissage de la sagesse et Guimel-Daleth comme l’aide aux pauvres, expliquée par la forme des lettres.",
+      "status": "Source trouvée",
+      "notes": "Parallèle thématique avec l’enfant savant des apocryphes ; ne pas affirmer de filiation textuelle sans étude chronologique."
+    },
+    {
+      "id": "alpha-001-seferyetsirah",
+      "title": "ALPHA-001D · Sefer Yetsirah — 22 lettres et trois mères",
+      "author": "Sefer Yetsirah — versions textuelles diverses",
+      "pages": "Chapitres 1–3, en particulier 2,1–4 et 3,3",
+      "reference": "https://www.sefaria.org/Sefer_Yetzirah.2.1",
+      "claim": "Le texte organise vingt-deux lettres en trois mères (א מ ש), sept doubles et douze simples ; associe les mères à air, eau, feu ; évoque 231 portes et dix sefirot / 32 voies.",
+      "status": "Source trouvée",
+      "notes": "Datation et variantes débattues ; ne pas attribuer ce texte à Jésus. Distinguer les sefirot ici des systèmes kabbalistiques médiévaux."
+    },
+    {
+      "id": "alpha-001-comparaisons",
+      "title": "ALPHA-001E · Textes comparés — Verbe, création et Coran",
+      "author": "Jean 1,1 ; Apocalypse 22,13 ; Coran 19,29–33 et 3,49",
+      "pages": "Passages comparés",
+      "reference": "https://github.com/soniacointe-sketch/the-crew-control/blob/main/corpus/parisis-alpha-aleph-lettres-creation.md",
+      "claim": "Comparer le Logos, Alpha et Oméga, Jésus nourrisson parlant et l’oiseau d’argile, dans leurs cadres théologiques distincts.",
+      "status": "À vérifier",
+      "notes": "Ressemblance de motifs ≠ démonstration d’emprunt ni événement historique prouvé."
+    }
+  ],
+  "symboles": [
+    {
+      "id": "alpha-001-symbol-aleph",
+      "title": "ALPHA-001 · Aleph / Alpha",
+      "family": "Chiffres / lettres",
+      "place": "Alphabets sémitiques, phénicien, hébreu, grec",
+      "reference": "Évolution alphabétique ; Genèse 1,1 ; Exode 20,2 ; Bereshit Rabbah 1,10",
+      "claim": "Aleph (א) et Alpha (Α) sont historiquement apparentés par transmission alphabétique. La valeur 1 et les lectures de l’unité ou du commencement relèvent de contextes distincts.",
+      "status": "Documenté",
+      "notes": "Ne pas inférer un code d’urbanisme parisien à partir de la seule ressemblance."
+    },
+    {
+      "id": "alpha-001-symbol-beth",
+      "title": "ALPHA-001 · Beth — lettre et maison",
+      "family": "Chiffres / lettres",
+      "place": "Genèse 1,1 ; tradition rabbinique",
+      "reference": "https://www.sefaria.org/Bereshit_Rabbah.1.10",
+      "claim": "Beth (ב), seconde lettre et valeur 2 ; ouvre Bereshit. Son association étymologique à la maison et sa lecture comme bénédiction sont à distinguer.",
+      "status": "Documenté",
+      "notes": "L’interprétation de la forme de Beth dans le Midrash n’est pas un sens linguistique obligatoire."
+    },
+    {
+      "id": "alpha-001-symbol-gimel-dalet",
+      "title": "ALPHA-001 · Guimel et Daleth",
+      "family": "Chiffres / lettres",
+      "place": "Talmud de Babylone Shabbat 104a",
+      "reference": "https://www.sefaria.org/Shabbat.104a",
+      "claim": "Guimel (ג) et Daleth (ד), valeurs 3 et 4 ; lecture morale de leurs formes : donner et préserver la dignité de la personne aidée.",
+      "status": "Documenté",
+      "notes": "Exégèse rabbinique datée, et non code graphique universel."
+    },
+    {
+      "id": "alpha-001-symbol-mothers",
+      "title": "ALPHA-001 · Trois lettres mères אמש",
+      "family": "Chiffres / lettres",
+      "place": "Sefer Yetsirah, chapitre 3",
+      "reference": "https://www.sefaria.org/Sefer_Yetzirah.3.3",
+      "claim": "Aleph א = air/souffle ; Mem מ = eau ; Shin ש = feu. Cosmologie symbolique avec équilibre entre opposés.",
+      "status": "Documenté",
+      "notes": "Les correspondances dépendent des versions et traductions ; pas une théorie physique."
+    },
+    {
+      "id": "alpha-001-symbol-231",
+      "title": "ALPHA-001 · Roue des 231 portes",
+      "family": "Géométrie",
+      "place": "Sefer Yetsirah 2,4",
+      "reference": "https://www.sefaria.org/Sefer_Yetzirah.2.4",
+      "claim": "22 lettres combinées en paires distinctes : 22 × 21 ÷ 2 = 231 ; modèle combinatoire de l’alphabet.",
+      "status": "Documenté",
+      "notes": "Aucun lien mesuré avec un plan de Paris ; toute transposition est à tester, sans présumer d’intention."
+    }
+  ],
+  "sources": [
+    {
+      "id": "alpha-001-src-burke",
+      "title": "Évangile de l’enfance selon Thomas — traduction critique",
+      "author": "Tony Burke, spécialiste du christianisme ancien",
+      "date": "Traduction moderne ; œuvre apocryphe généralement située au IIe siècle",
+      "pages": "Épisode de l’enseignant Zachée / Alpha-Bêta",
+      "url": "https://www.tonyburke.ca/infancy-gospel-of-thomas/the-childhood-of-the-saviour-infancy-gospel-of-thomas-a-new-translation/",
+      "status": "Consulté",
+      "notes": "Comparer les versions ; la traduction critique reconstitue un état ancien et ne garantit pas l’historicité du récit."
+    },
+    {
+      "id": "alpha-001-src-irenaeus",
+      "title": "Contre les hérésies I,20 — le maître et Alpha",
+      "author": "Irénée de Lyon",
+      "date": "Fin du IIe siècle",
+      "pages": "Livre I, chapitre 20, paragraphe 1",
+      "url": "https://www.newadvent.org/fathers/0103120.htm",
+      "status": "Consulté",
+      "notes": "Témoignage ancien et critique d’un récit utilisé dans certains milieux. Son auteur n’approuve pas la lecture symbolique qu’il rapporte."
+    },
+    {
+      "id": "alpha-001-src-hamburg",
+      "title": "Papyrus P.Hamb.Graec. 1011 — édition scientifique",
+      "author": "Lajos Berkes ; Gabriel Nocchi Macedo",
+      "date": "2024 ; manuscrit IVe–Ve siècle",
+      "pages": "Zeitschrift für Papyrologie und Epigraphik 229, p. 68–74",
+      "url": "https://orbi.uliege.be/handle/2268/311682",
+      "status": "Consulté",
+      "notes": "Premier témoin papyrologique connu ; épisode des oiseaux d’argile ; compléter avec examen de l’édition et de la photographie."
+    },
+    {
+      "id": "alpha-001-src-bereshit",
+      "title": "Bereshit Rabbah 1,10 — Beth et Aleph",
+      "author": "Tradition rabbinique",
+      "date": "Compilation antique tardive",
+      "pages": "Bereshit Rabbah 1,10",
+      "url": "https://www.sefaria.org/Bereshit_Rabbah.1.10",
+      "status": "Consulté",
+      "notes": "Midrash sur bénédiction, malédiction, forme de Beth et protestation d’Aleph jusqu’au Sinaï."
+    },
+    {
+      "id": "alpha-001-src-shabbat",
+      "title": "Shabbat 104a — interprétation des lettres par les enfants",
+      "author": "Talmud de Babylone",
+      "date": "Compilation tardo-antique",
+      "pages": "Shabbat 104a",
+      "url": "https://www.sefaria.org/Shabbat.104a",
+      "status": "Consulté",
+      "notes": "Aleph-Beth apprendre, Guimel-Daleth donner ; morale de la discrétion."
+    },
+    {
+      "id": "alpha-001-src-yetsirah",
+      "title": "Sefer Yetsirah — vingt-deux lettres et 231 portes",
+      "author": "Sefer Yetsirah — auteur et datation débattus",
+      "date": "Datation disputée",
+      "pages": "2,1–4 ; 3,3",
+      "url": "https://www.sefaria.org/Sefer_Yetzirah.2.1",
+      "status": "Consulté",
+      "notes": "Vérifier les variantes des traductions ; ne pas assimiler sans nuance les dix sefirot aux représentations kabbalistiques ultérieures."
+    },
+    {
+      "id": "alpha-001-src-luc",
+      "title": "Luc 2,41–52 — Jésus à douze ans",
+      "author": "Évangile selon Luc",
+      "date": "Texte chrétien du Ier siècle",
+      "pages": "2,41–52",
+      "url": "",
+      "status": "À vérifier",
+      "notes": "Parole canonique de Jésus au Temple ; distincte des apocryphes."
+    },
+    {
+      "id": "alpha-001-src-cross",
+      "title": "Textes comparés — Jean, Apocalypse et Coran",
+      "author": "Jean ; Apocalypse ; Coran",
+      "date": "Textes d’époques distinctes",
+      "pages": "Jean 1,1 ; Apocalypse 22,13 ; Coran 19,29–33 et 3,49",
+      "url": "",
+      "status": "À vérifier",
+      "notes": "Comparaison intertextuelle ; respecter les divergences théologiques."
+    }
+  ],
+  "preuves": [
+    {
+      "id": "alpha-001-prf-attestation",
+      "title": "ALPHA-001 · Le récit Alpha/Bêta était connu au IIe siècle",
+      "level": "F0 - Fait attesté",
+      "reference": "Irénée, Contre les hérésies I,20,1 ; https://www.newadvent.org/fathers/0103120.htm",
+      "claim": "Irénée cite la scène d’enseignement de l’Alpha à Jésus enfant et sa lecture par d’autres groupes.",
+      "status": "Corroboré",
+      "notes": "Établit la circulation du motif au IIe siècle, non la véracité des paroles attribuées à Jésus."
+    },
+    {
+      "id": "alpha-001-prf-22",
+      "title": "ALPHA-001 · 22 lettres, 3 mères, 7 doubles, 12 simples",
+      "level": "F0 - Fait attesté",
+      "reference": "Sefer Yetsirah 2,1 ; https://www.sefaria.org/Sefer_Yetzirah.2.1",
+      "claim": "Cette classification apparaît dans le texte transmis du Sefer Yetsirah.",
+      "status": "Corroboré",
+      "notes": "Fait textuel, pas description scientifique du monde."
+    },
+    {
+      "id": "alpha-001-prf-mothers",
+      "title": "ALPHA-001 · Air, eau et feu : symbolisme des lettres",
+      "level": "F1 - Sens documenté",
+      "reference": "Sefer Yetsirah 3,3 ; https://www.sefaria.org/Sefer_Yetzirah.3.3",
+      "claim": "Les lettres mères sont associées aux trois éléments dans la cosmologie du texte.",
+      "status": "Corroboré",
+      "notes": "Symbolisme religieux documenté, pas vérité physique."
+    },
+    {
+      "id": "alpha-001-prf-hypothesis",
+      "title": "ALPHA-001 · Jésus connaissait Sefer Yetsirah",
+      "level": "H - Hypothèse",
+      "reference": "Comparaison moderne de textes de datation différente",
+      "claim": "Aucun témoignage ancien ne démontre que Jésus ait connu ce traité.",
+      "status": "Non démontré",
+      "notes": "Ne pas présenter comme fait. La datation du Sefer Yetsirah est disputée et des formes transmises sont postérieures."
+    },
+    {
+      "id": "alpha-001-prf-paris",
+      "title": "ALPHA-001 · Lettres cachées dans le plan de Paris",
+      "level": "H - Hypothèse",
+      "reference": "SYMBOL ATLAS / module géométrie — aucun relevé fourni",
+      "claim": "Aucune correspondance topographique intentionnelle n’est établie entre ces lettres et Paris.",
+      "status": "Non démontré",
+      "notes": "Ne créer aucune cartographie ni prédiction de tracés sans critères fixés à l’avance, coordonnées et contre-tests."
+    },
+    {
+      "id": "alpha-001-prf-historical",
+      "title": "ALPHA-001 · Paroles historiques de Jésus à cinq ans",
+      "level": "H - Hypothèse",
+      "reference": "Évangile de l’enfance selon Thomas ; papyrus P.Hamb.Graec. 1011",
+      "claim": "Les textes attestent des récits et leur transmission, mais ne prouvent pas que ces épisodes ont eu lieu.",
+      "status": "Non démontré",
+      "notes": "Ne jamais confondre datation d’un manuscrit et datation d’un événement raconté."
+    }
+  ],
+  "audit": [
+    {
+      "id": "alpha-001-audit-textes",
+      "title": "ALPHA-001 · Comparer les versions grecques et anciennes",
+      "reference": "Tony Burke ; témoins grec, syriaque, latin et éthiopien",
+      "claim": "Relever ce que chaque version dit de la lettre Alpha et du maître Zachée ; identifier les variantes et les passages reconstruits.",
+      "status": "À faire",
+      "notes": "Documenter la leçon exacte, sa traduction et la cote du manuscrit pour chaque citation."
+    },
+    {
+      "id": "alpha-001-audit-dates",
+      "title": "ALPHA-001 · Chronologie et transmission des sources",
+      "reference": "Irénée IIe siècle ; P.Hamb.Graec. 1011 IVe–Ve ; tradition rabbinique et Sefer Yetsirah",
+      "claim": "Établir les terminus et la datation des versions, sans imaginer un enseignement commun antérieur à toutes.",
+      "status": "À faire",
+      "notes": "Conserver datation proposée, incertitudes, langues et familles de manuscrits."
+    },
+    {
+      "id": "alpha-001-audit-symboles",
+      "title": "ALPHA-001 · Contrôle des rapprochements symboliques",
+      "reference": "HUMANITIES LAB / SYMBOL ATLAS",
+      "claim": "Séparer parenté alphabétique, commentaire exégétique, analogie iconographique et hypothèse d’intention.",
+      "status": "À faire",
+      "notes": "Aucune « preuve » tirée d’une simple ressemblance de formes ou de chiffres."
+    }
+  ],
+  "chronos": [
+    {
+      "id": "alpha-001-chronos-irenee",
+      "title": "ALPHA-001 · Irénée et le récit Alpha-Bêta",
+      "date": "Fin du IIe siècle",
+      "reference": "Contre les hérésies I,20",
+      "claim": "Témoignage littéraire ancien ; atteste la circulation d’un motif, sans attester l’événement.",
+      "status": "Documenté",
+      "notes": "Chronologie de rédaction approximative ; contrôle par édition critique à poursuivre."
+    },
+    {
+      "id": "alpha-001-chronos-papyrus",
+      "title": "ALPHA-001 · Plus ancien papyrus conservé de l’Enfance selon Thomas",
+      "date": "IVe–Ve siècle ; identifié et publié en 2024",
+      "reference": "Berkes & Nocchi Macedo, ZPE 229 (2024), 68–74",
+      "claim": "P.Hamb.Graec. 1011 : tradition manuscrite des oiseaux d’argile.",
+      "status": "Documenté",
+      "notes": "Date du support, pas date du récit."
+    }
+  ]
+};
+function seedAlphaResearch20261012(){
+ const marker=KEY+'-alpha-001-20261012-v1';
+ if(localStorage.getItem(marker))return;
+ for(const [module,rows] of Object.entries(alphaResearch20261012)){
+  if(!Array.isArray(store[module]))continue;
+  const present=new Set(store[module].map(item=>item.id));
+  for(const row of rows)if(!present.has(row.id))store[module].push({...row});
+ }
+ try{localStorage.setItem(KEY,JSON.stringify(store));localStorage.setItem(marker,'1')}
+ catch(e){console.warn('ALPHA-001 non persisté dans ce navigateur',e)}
+}
+seedAlphaResearch20261012();
 function save(){try{localStorage.setItem(KEY,JSON.stringify(store));render();return true}catch(e){alert('Enregistrement local impossible. Exporte une sauvegarde.');return false}}
 function current(){return cfg[active]}
 function schemaOptions(spec){return spec.slice(7).split('|')}
