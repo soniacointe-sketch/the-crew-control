@@ -4,6 +4,11 @@
 
 Explore les apocryphes, les sources juives anciennes, les manuscrits bibliques et les témoignages historiques. La bibliothèque distingue **document attesté, tradition religieuse, hypothèse et interprétation**.
 
+
+## ATLAS GÉNÉRAL — Tous les apocryphes et documents associés
+
+**600 notices documentaires** sont désormais consultables dans l'[Atlas ELOAH des apocryphes](eloah-apocryphes-atlas.html) : 450 entrées du catalogue scientifique e-Clavis, 55 notices de versions coptes Brill, 74 repères pseudépigraphiques et 21 références liées aux livres deutérocanoniques et aux différents canons. Les catégories se recoupent : ce chiffre n'est pas un décompte d'œuvres distinctes. Recherche, filtres par familles, fiches, liens de sources et favoris locaux sont disponibles dans l'Atlas.
+
 ## Choisir une collection
 
 01. **[Jésus, l’enfance inconnue](foi-control.html?doc=11)** — Les récits sur Jésus enfant, sa famille et ses premiers enseignements. *10 documents repères à étudier.*
