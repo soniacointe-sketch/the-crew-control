@@ -94,4 +94,30 @@ if($("export"))$("export").onclick=()=>{const u=URL.createObjectURL(new Blob([JS
 if($("import"))$("import").onclick=()=>$("importFile").click();if($("importFile"))$("importFile").onchange=async e=>{try{const p=JSON.parse(await e.target.files[0].text());if(p.format!=="sonia-maia-v1"||!Array.isArray(p.items))throw Error("Fichier incompatible");if(confirm("Remplacer les fiches MAIA locales ?")){items=p.items;if(p.modules&&["rooms","stocks","repairs"].every(k=>Array.isArray(p.modules[k]))){modules=p.modules;localStorage.setItem(extensionKey,JSON.stringify(modules))}save()}}catch(err){alert(err.message)}};
 }
 $("newTask").onclick=()=>edit(null,"Aujourd’hui");$("cancel").onclick=()=>$("editor").close();$("form").onsubmit=e=>{e.preventDefault();const x=Object.fromEntries(new FormData(e.target)),old=items.find(a=>a.id===editing);if(old)Object.assign(old,x);else items.unshift({...x,id:crypto.randomUUID(),done:false});$("editor").close();save()};render()})();
+</script><section id="maia-secure-household" style="margin:22px 0;padding:23px;background:#fffdf9;border:1px solid #e4dacf;border-radius:13px"><div class="eyebrow">MAIA · ACCÈS PRIVÉS</div><h2>Mon foyer sécurisé</h2><p class="muted">Les données de cette page restent pour l’instant enregistrées localement. Ce module gère uniquement l’existence du foyer et ses accès Supabase : il ne synchronise pas tes notes ni les données des enfants.</p><p id="maia-household-state" role="status">Vérification de la session…</p><div id="maia-household-list"></div><form id="maia-household-create" hidden style="margin-top:16px"><label>Nom du nouveau foyer <input id="maia-household-name" maxlength="100" required value="Maison" autocomplete="off"></label><button type="submit" class="primary">Créer mon foyer privé</button></form><p class="muted" style="font-size:12px">Invitations des proches : désactivées jusqu’à l’ajout d’un parcours d’invitation validé côté serveur. Aucun partage automatique.</p><a href="eloah-projet.html?projet=MAIA">Gérer ma connexion ELOAH ↗</a></section><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script><script>
+(()=>{'use strict';
+const status=document.getElementById('maia-household-state'),list=document.getElementById('maia-household-list'),form=document.getElementById('maia-household-create'),name=document.getElementById('maia-household-name');
+if(!status||!list||!form||!window.supabase)return;
+const client=window.supabase.createClient('https://voytsqyorhoveurnguxn.supabase.co','sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy',{auth:{storageKey:'eloah-cloud-auth-v1',persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+async function refresh(){
+ form.hidden=true;list.replaceChildren();
+ try{
+ const {data:{user},error:authError}=await client.auth.getUser();if(authError||!user){status.textContent='Connexion ELOAH requise avant de consulter ou créer ton foyer.';return}
+ const {data:memberships,error}=await client.from('home_access').select('household_id,role').eq('user_id',user.id);if(error)throw error;
+ if(!memberships?.length){status.textContent='Aucun foyer lié à ce compte. Tu peux créer un nouveau foyer privé.';form.hidden=false;return}
+ status.textContent=memberships.length+' foyer(s) autorisé(s) pour ce compte.';
+ for(const item of memberships){
+ const p=document.createElement('p');p.textContent='Foyer '+String(item.household_id).slice(0,8)+'… · Rôle : '+item.role;
+ const {data:house}=await client.from('home_households').select('name').eq('id',item.household_id).maybeSingle();if(house?.name)p.textContent=house.name+' · Rôle : '+item.role;
+ list.append(p);
+ }
+ }catch(e){status.textContent='Accès au foyer non disponible : '+e.message}
+}
+form.addEventListener('submit',async e=>{
+ e.preventDefault();if(!confirm('Créer un nouveau foyer MAIA privé avec toi comme propriétaire ?'))return;
+ const button=form.querySelector('button');button.disabled=true;status.textContent='Création du foyer sécurisé…';
+ try{const {error}=await client.rpc('eloah_create_my_household',{p_name:name.value.trim()});if(error)throw error;await refresh()}catch(err){status.textContent='Création impossible : '+err.message}finally{button.disabled=false}
+});
+refresh();
+})();
 </script><script src="eloah-navigation.js?v=6"></script></body></html>
