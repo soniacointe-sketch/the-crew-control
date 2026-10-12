@@ -31,7 +31,7 @@ async function snapshot(){
  const p={format:'eloah-portable',version:2,createdAt:new Date().toISOString(),entries,files};validate(p);return p;
 }
 async function run(fn){document.querySelectorAll('button,input').forEach(e=>e.disabled=true);try{await fn()}catch(e){status('Opération interrompue : '+e.message)}finally{document.querySelectorAll('button,input').forEach(e=>e.disabled=false);$('apply').disabled=!pending||!$('consent').checked}}
-$('export-all').onclick=()=>run(async()=>{const p=await snapshot();download(p,'ELOAH-sauvegarde');const n=validate(p);status('Fichier préparé : '+n.projects+' projets, '+n.entries+' ensembles de données et '+n.files+' pièces jointes. Vérifie sa présence dans tes téléchargements.');});
+$('export-all').onclick=()=>run(async()=>{const accepted=confirm('CONFIDENTIALITÉ — Cette sauvegarde JSON n’est PAS chiffrée. Elle peut contenir des conversations, informations personnelles et pièces jointes. Ne la partage pas et conserve-la dans un emplacement privé et protégé. Continuer l’export ?');if(!accepted){status('Export annulé : aucune sauvegarde créée.');return}const p=await snapshot();download(p,'ELOAH-sauvegarde-CONFIDENTIELLE');const n=validate(p);status('Sauvegarde NON CHIFFRÉE préparée : '+n.projects+' projets, '+n.entries+' ensembles de données et '+n.files+' pièces jointes. Protège ce fichier et supprime les copies inutiles.');});
 $('import-file').onchange=e=>run(async()=>{
  pending=null;$('preview').hidden=true;const file=e.target.files[0];if(!file)return;
  if(file.size>150*1024*1024)throw Error('Fichier trop volumineux (maximum 150 Mo).');
