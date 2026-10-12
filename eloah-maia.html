@@ -120,4 +120,25 @@ form.addEventListener('submit',async e=>{
 });
 refresh();
 })();
+</script><section id="maia-invitations" style="margin:20px 0;padding:23px;background:#fffdf9;border:1px solid #e4dacf;border-radius:13px"><div class="eyebrow">MAIA · INVITATIONS PRIVÉES</div><h2>Inviter un proche</h2><p class="muted">L’invitation cible l’identifiant Supabase exact du compte invité. Seul le propriétaire peut inviter ; la personne invitée doit accepter depuis son propre compte. Expiration : 7 jours. Aucune invitation envoyée par e-mail automatiquement.</p><form id="maia-invite-form"><label>Foyer <select id="maia-invite-household" required></select></label> <label>Identifiant du compte invité <input id="maia-invite-user" required pattern="[0-9a-fA-F-]{36}" placeholder="UUID du compte Supabase" autocomplete="off"></label> <label>Accès <select id="maia-invite-role"><option value="viewer">Lecture seule</option><option value="adult">Adulte (modifications)</option></select></label> <button class="primary" type="submit">Créer l’invitation</button></form><p id="maia-invite-status" role="status"></p><h3>Invitations reçues</h3><div id="maia-received"></div><button type="button" id="maia-refresh-invites">Actualiser</button><p class="muted" style="font-size:12px">Le compte invité peut récupérer son identifiant depuis sa session Supabase. Ne partage jamais de jeton de connexion, de mot de passe ou de clé secrète.</p></section><script>
+(()=>{'use strict';
+const $=id=>document.getElementById(id),status=$('maia-invite-status'),select=$('maia-invite-household'),received=$('maia-received');
+if(!window.supabase||!status)return;
+const client=window.supabase.createClient('https://voytsqyorhoveurnguxn.supabase.co','sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy',{auth:{storageKey:'eloah-cloud-auth-v1',persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+async function refresh(){
+ select.replaceChildren();received.replaceChildren();
+ try{
+ const {data:{user},error:ue}=await client.auth.getUser();if(ue||!user){status.textContent='Connecte-toi à ELOAH pour gérer les invitations.';return}
+ const {data:own,error:oe}=await client.from('home_access').select('household_id,role').eq('user_id',user.id);if(oe)throw oe;
+ for(const item of own||[]){if(item.role!=='owner')continue;const opt=document.createElement('option');opt.value=item.household_id;opt.textContent='Foyer '+item.household_id.slice(0,8);select.append(opt)}
+ const {data:invitations,error:ie}=await client.rpc('maia_my_invitations');if(ie)throw ie;
+ for(const invite of invitations||[]){const p=document.createElement('p');p.textContent=(invite.household_name||'Foyer')+' · '+(invite.role==='viewer'?'Lecture seule':'Adulte')+' · expire le '+new Date(invite.expires_at).toLocaleDateString('fr-FR')+' ';const b=document.createElement('button');b.textContent='Accepter';b.onclick=async()=>{if(!confirm('Accepter cette invitation à rejoindre ce foyer ?'))return;b.disabled=true;const {error}=await client.rpc('maia_accept_invitation',{p_invitation:invite.id});if(error){status.textContent=error.message;b.disabled=false}else{status.textContent='Invitation acceptée.';await refresh()}};p.append(b);received.append(p)}
+ if(!received.children.length)received.textContent='Aucune invitation reçue en attente.';
+ status.textContent=select.children.length?'Tu peux inviter depuis tes foyers propriétaires.':'Aucun foyer dont tu es propriétaire : tu peux seulement accepter une invitation.';
+ $('maia-invite-form').hidden=!select.children.length;
+ }catch(e){status.textContent='Invitations indisponibles : '+e.message}
+}
+$('maia-invite-form').onsubmit=async e=>{e.preventDefault();const target=$('maia-invite-user').value.trim();if(!confirm('Créer une invitation ciblée pour ce compte, valable 7 jours ?'))return;const b=e.target.querySelector('button');b.disabled=true;const {error}=await client.rpc('maia_invite_member',{p_household:select.value,p_invitee:target,p_role:$('maia-invite-role').value});status.textContent=error?'Invitation refusée : '+error.message:'Invitation enregistrée : le destinataire doit ouvrir MAIA avec son compte pour l’accepter.';b.disabled=false};
+$('maia-refresh-invites').onclick=refresh;refresh();
+})();
 </script><script src="eloah-navigation.js?v=6"></script></body></html>
