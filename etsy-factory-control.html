@@ -38,7 +38,7 @@ const KEY='eloah-etsy-factory-v1';
 const seed={products:[],refs:[],listings:{}};
 let data;
 try{let x=JSON.parse(localStorage.getItem(KEY));data=x&&Array.isArray(x.products)&&Array.isArray(x.refs)&&x.listings&&typeof x.listings==='object'?x:structuredClone(seed)}catch{data=structuredClone(seed)}
-const $=id=>document.getElementById(id);const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const $=id=>document.getElementById(id);const E=$;const safe=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>crypto.randomUUID?.()||String(Date.now())+'-'+Math.random().toString(36).slice(2);
 const starterCatalogue=[
 {id:'starter-pg-40',name:'Power & Glam · Collection 40 templates Instagram',brand:'Power & Glam',collection:'5 univers · 8 modèles chacun',status:'Conception',format:'Templates Instagram',price:0,deliverables:'40 sources SVG 4:5 proposées dans le studio, à contrôler ; photographies premium et fichiers commerciaux finaux restent à produire.',next:'Ouvrir Studio de création, vérifier les SVG et personnaliser chaque publication.'},
