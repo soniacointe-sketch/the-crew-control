@@ -166,5 +166,136 @@
     "Diversité entre tropiques, aquatique, minéral, humain, architecture et lifestyle",
     "Éviter toute copie d'une création Etsy protégée",
     "Ne pas réutiliser automatiquement les images de référence; vérifier licences et droits commerciaux"
-  ]
+  ],
+  "brandBook": {
+    "title": "POWER & GLAM — BRAND BOOK MASTER 2026",
+    "positioning": "Maison éditoriale et créative premium explorant amour, beauté, argent, vie, désir",
+    "personality": [
+      "libre",
+      "lucide",
+      "affirmée",
+      "féminine sans clichés"
+    ],
+    "atmosphere": [
+      "élégante",
+      "adulte",
+      "sensuelle",
+      "mystérieuse",
+      "cinématographique",
+      "profondément humaine"
+    ],
+    "principle": "Pas de femme parfaite : une femme réelle qui ressent, comprend, possède, construit et décide.",
+    "editorialColorSplit": {
+      "cream": 60,
+      "black": 30,
+      "redOrUniverseAccent": 10,
+      "note": "Répartition indicative des pages éditoriales, non des photographies plein cadre"
+    },
+    "goldRule": "Doré principalement issu de la lumière et des matières, non d'un effet métallique artificiel systématique",
+    "universes": [
+      {
+        "id": "AMOUR",
+        "number": 1,
+        "element": "EAU",
+        "color": "#A63D57",
+        "declaration": "Je ressens.",
+        "intent": "Attachement, lucidité, émotion, forces qui traversent et révèlent",
+        "visuals": [
+          "reflets",
+          "eau",
+          "peau",
+          "lettres manuscrites",
+          "silhouettes",
+          "vitres",
+          "ondulations"
+        ]
+      },
+      {
+        "id": "BEAUTÉ",
+        "number": 2,
+        "element": "PEAU",
+        "color": "#C98E9A",
+        "declaration": "J'habite.",
+        "intent": "Présence à soi au-delà du regard extérieur",
+        "visuals": [
+          "peau naturelle",
+          "tissus délicats",
+          "miroirs",
+          "lumière du matin",
+          "textures",
+          "détails corporels"
+        ]
+      },
+      {
+        "id": "ARGENT",
+        "number": 3,
+        "element": "TERRE",
+        "color": "#28705A",
+        "declaration": "Je possède.",
+        "intent": "Indépendance, valeur, choix, sécurité",
+        "visuals": [
+          "pierre",
+          "architecture",
+          "objets précieux sobres",
+          "bureaux élégants",
+          "matières solides",
+          "veines minérales"
+        ]
+      },
+      {
+        "id": "VIE",
+        "number": 4,
+        "element": "VIE",
+        "color": "#789477",
+        "declaration": "Je déploie.",
+        "intent": "Expérimentation, reconstruction, expansion",
+        "visuals": [
+          "feuilles",
+          "chemins",
+          "horizons",
+          "mouvement",
+          "carnets",
+          "mains au travail",
+          "végétation"
+        ]
+      },
+      {
+        "id": "DÉSIR",
+        "number": 5,
+        "element": "FEU",
+        "color": "#D7654F",
+        "declaration": "Je décide.",
+        "intent": "Élan vers ce que l'on veut véritablement",
+        "visuals": [
+          "feu discret",
+          "lumière rouge",
+          "soie",
+          "lèvres naturelles",
+          "fleurs",
+          "coucher de soleil",
+          "ombres sensuelles"
+        ]
+      }
+    ],
+    "hibiscus": {
+      "role": "symbole signature transversal de vitalité, sensualité, féminité affirmée et mouvement",
+      "forms": [
+        "fleur entière",
+        "pétale isolé",
+        "macro",
+        "reflet aquatique",
+        "ombre florale",
+        "silhouette botanique discrète"
+      ],
+      "avoid": [
+        "accumulation de fleurs artificielles",
+        "hibiscus cartoon",
+        "tropical touristique",
+        "rose générique substituée",
+        "saturation rouge excessive"
+      ],
+      "frequency": "rare, intentionnel, non automatique"
+    },
+    "sourceScope": "Contenu de la section Brand Book fourni dans la conversation le 12 octobre 2026."
+  }
 }
