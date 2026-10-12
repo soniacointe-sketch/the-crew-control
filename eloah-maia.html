@@ -143,4 +143,27 @@ $('maia-invite-form').onsubmit=async e=>{e.preventDefault();const target=$('maia
 $('maia-copy-user-id').onclick=async()=>{const id=$('maia-my-user-id').textContent;if(!/^[0-9a-fA-F-]{36}$/.test(id))return;try{await navigator.clipboard.writeText(id);status.textContent='Identifiant copié. Ne partage pas tes informations de connexion.'}catch(e){status.textContent='Copie automatique indisponible : sélectionne manuellement ton identifiant.'}};
 $('maia-refresh-invites').onclick=refresh;refresh();
 })();
+</script><section id="maia-isolation-audit" style="margin:22px 0;padding:23px;background:#fffdf9;border:1px solid #e4dacf;border-radius:13px"><div class="eyebrow">SÉCURITÉ P0 · TEST NON DESTRUCTIF</div><h2>Contrôler l’isolation de mon compte</h2><p class="muted">Ce contrôle effectue uniquement des lectures avec ta session actuelle, en cherchant un identifiant de foyer fictif généré aléatoirement. Il ne consulte pas les données d’une autre personne, n’ajoute aucun membre et n’écrit rien dans la base.</p><button type="button" id="maia-isolation-run">Lancer le contrôle de lecture</button><p id="maia-isolation-result" role="status" aria-live="polite">Non exécuté.</p><small>Un résultat réussi confirme seulement que ces requêtes n’ont retourné aucun enregistrement pour un identifiant inconnu. Il ne remplace pas un test d’isolation avec deux vrais comptes et ne prouve pas toutes les politiques RLS.</small></section><script>
+(()=>{'use strict';
+const button=document.getElementById('maia-isolation-run'),output=document.getElementById('maia-isolation-result');
+if(!button||!output)return;
+button.addEventListener('click',async()=>{
+ button.disabled=true;output.textContent='Contrôle en lecture seule…';
+ try{
+  if(!window.supabase||!crypto.randomUUID)throw Error('Navigateur ou connexion indisponible.');
+  const client=window.supabase.createClient('https://voytsqyorhoveurnguxn.supabase.co','sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy',{auth:{storageKey:'eloah-cloud-auth-v1',persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
+  const {data:{user},error:authError}=await client.auth.getUser();
+  if(authError||!user)throw Error('Connecte-toi à ELOAH avant le contrôle.');
+  const fictive=crypto.randomUUID();
+  const checks=[['home_households','id'],['home_children','household_id'],['home_access','household_id']];
+  for(const [table,column] of checks){
+    const {data,error}=await client.from(table).select(column).eq(column,fictive).limit(1);
+    if(error)throw Error('Lecture '+table+' : '+error.message);
+    if(data?.length)throw Error('Résultat inattendu sur '+table+' ; vérification nécessaire.');
+  }
+  output.textContent='Contrôle limité réussi : aucun enregistrement obtenu pour le foyer fictif dans les trois tables. Le test inter-comptes reste à faire.';
+ }catch(err){output.textContent='Contrôle non validé : '+err.message}
+ finally{button.disabled=false}
+});
+})();
 </script><script src="eloah-navigation.js?v=6"></script></body></html>
