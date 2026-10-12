@@ -490,19 +490,26 @@ function pageLinks(p){
  const matches=pageRelations(p);
  return '<div class="page-relations"><strong>Fiches associées · rapprochements lexicaux, non preuves</strong>'+(matches.length?'<div class="record-controls">'+matches.map(m=>'<button type="button" data-related-module="'+m.module+'" data-related-id="'+escape(m.item.id)+'">'+escape(m.item.title)+' ↗</button><span class="pill">'+escape(relationLabel(p,m.module,m.item.id))+'</span>'+'<button type="button" data-review-page="'+escape(p.page)+'" data-review-module="'+escape(m.module)+'" data-review-id="'+escape(m.item.id)+'">Évaluer</button>').join("")+'</div>':'<p class="micro">Aucune fiche associée automatiquement. Indexation à compléter.</p>')+'</div>';
 }
+let proofTarget=null;
 function reviewRelation(button){
- const page=pagedCorpus.find(p=>p.page===button.dataset.reviewPage);
- const module=button.dataset.reviewModule,id=button.dataset.reviewId;
- if(!page||!store[module]?.some(x=>x.id===id))return;
- const key=relationKey(page,module,id),current=relationReviews[key]||{};
- const level=prompt("Niveau de preuve : L0 (mots en commun), L1 (référence contrôlée), L2 (relation démontrée).",current.level?.slice(0,2)||"L0");
- if(level===null)return;const choice=level.trim().toUpperCase();
- if(!["L0","L1","L2"].includes(choice)){alert("Niveau invalide");return}
- const source=prompt("Source, cote ou protocole de vérification",current.source||"");if(source===null)return;
- if(choice!=="L0"&&!source.trim()){alert("Une source précise est obligatoire pour L1/L2.");return}
- const notes=prompt("Justification et contre-exemples",current.notes||"");if(notes===null)return;
- relationReviews[key]={level:choice+" · "+({L0:"Rapprochement lexical",L1:"Référence à contrôler",L2:"Relation à auditer"}[choice]),source:source.trim(),notes:notes.trim(),reviewedAt:new Date().toISOString(),verified:false};
- try{localStorage.setItem(LINK_STORE_KEY,JSON.stringify(relationReviews));render()}catch(e){alert("Enregistrement local impossible")}
+ const page=pagedCorpus.find(p=>p.page===button.dataset.reviewPage),module=button.dataset.reviewModule,id=button.dataset.reviewId;
+ const item=store[module]?.find(x=>x.id===id);if(!page||!item)return;
+ proofTarget={page,module,id};const key=relationKey(page,module,id),d=relationReviews[key]||{},form=$("proofForm");
+ form.reset();$("proofContext").textContent="Page "+page.page+" · "+page.heading+" → "+item.title;
+ const oldLevel=String(d.level||"L0").slice(0,2);form.elements.level.value=["L0","L1","L2"].includes(oldLevel)?oldLevel:"L0";
+ for(const k of ["source","date","relationType","method","objections","countertest","decision","notes"]){
+  if(d[k]!==undefined&&form.elements[k])form.elements[k].value=d[k];
+ }
+ $("proofDialog").showModal();
+}
+function storeProof(e){
+ e.preventDefault();if(!proofTarget)return;
+ const {page,module,id}=proofTarget,form=$("proofForm"),d=Object.fromEntries(new FormData(form)),source=String(d.source||"").trim();
+ if(d.level!=="L0"&&!source){alert("Pour L1 ou L2, une référence documentaire est obligatoire.");form.elements.source.focus();return}
+ if(d.level==="L2"&&(!String(d.method||"").trim()||!String(d.countertest||"").trim())){alert("Pour L2, indique une méthode et un contre-test. Cela ne valide pas la relation automatiquement.");return}
+ const previous=relationReviews[relationKey(page,module,id)]||{};
+ relationReviews[relationKey(page,module,id)]={...previous,...d,source,level:d.level+" · "+({L0:"Correspondance non vérifiée",L1:"Source identifiée — non auditée",L2:"Dossier renseigné — à auditer"}[d.level]),reviewedAt:new Date().toISOString(),verified:false};
+ try{localStorage.setItem(LINK_STORE_KEY,JSON.stringify(relationReviews));$("proofDialog").close();render()}catch(err){alert("Sauvegarde locale impossible : "+err.message)}
 }
 function auditPage(index){
  const p=pagedCorpus[index];if(!p)return;
@@ -585,6 +592,9 @@ else if(b.dataset.delete){if(confirm('Supprimer cette fiche PARISIS ?')){store[a
 else if(b.dataset.chat){const r=store[active].find(x=>x.id===b.dataset.chat);if(r)chat(r)}
 else if(b.dataset.chatGlobal)chat(null);
 };
+$("proofForm").onsubmit=storeProof;
+$("closeProof").onclick=()=>$("proofDialog").close();
+$("cancelProof").onclick=()=>$("proofDialog").close();
 $('newRecord').onclick=()=>openEditor(null);
 $('askChat').onclick=()=>chat(null);
 $('globalSearch').oninput=search;
