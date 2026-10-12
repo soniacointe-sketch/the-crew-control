@@ -1,0 +1,614 @@
+{
+  "version": "2026-10-12",
+  "project": "DARK ENERGY",
+  "scope": "Dossier documentaire de sources publiques et pistes de programmes originaux",
+  "principle": "Étudier les mécanismes pédagogiques et publics, ne pas collecter ni reproduire les contenus privés/payants de formations concurrentes.",
+  "sources": [
+    {
+      "type": "programme public",
+      "title": "Odyssée Bloom",
+      "url": "https://www.chloebloom.fr/odyssee-offre",
+      "use": "Étudier architecture bundles archétypes couples bonus et parcours; aucune reproduction de cours."
+    },
+    {
+      "type": "catalogue public",
+      "title": "Chloé Bloom catalogue",
+      "url": "https://clients.chloebloom.com/catalogue-bloom",
+      "use": "Repérer les thèmes Sensuelle Solaire Intuitive Clair Obscur Conscience Créatrice Couple Initiatique."
+    },
+    {
+      "type": "programme public",
+      "title": "Couple Initiatique",
+      "url": "https://go.chloebloom.com/couple-initiatique",
+      "use": "Étudier la présence de pratiques, séquences, exercices et bonus; ne pas confondre rhétorique spirituelle et preuve clinique."
+    },
+    {
+      "type": "revue systématique",
+      "title": "Attachment and social support in romantic dyads",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/31566266/",
+      "use": "Attachement et qualité du soutien dans les couples; 43 études retenues."
+    },
+    {
+      "type": "méta-analyse",
+      "title": "Adult attachment and mental health",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/36201836/",
+      "use": "Corrélations entre dimensions d'attachement et santé mentale; ne prouve pas la causalité."
+    },
+    {
+      "type": "revue scientifique",
+      "title": "Adult attachment stress and romantic relationships",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/28813288/",
+      "use": "Stress et différences de régulation selon attachement anxieux ou évitant."
+    },
+    {
+      "type": "méta-analyse",
+      "title": "Adult attachment and psychotherapy outcome",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/30238450/",
+      "use": "Résultats associés à l'attachement en psychothérapie; ne pas confondre avec efficacité d'un coaching."
+    },
+    {
+      "type": "méta-analyse",
+      "title": "Cognitive behavioral therapy for relationship distress",
+      "url": "https://pubmed.ncbi.nlm.nih.gov/32808591/",
+      "use": "Résultats de thérapie de couple, pas validation de Dark Energy."
+    }
+  ],
+  "themes": [
+    {
+      "id": 1,
+      "title": "Attachement anxieux",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Attachement évitant",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Cycle poursuite-retrait",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Attente des messages",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Hypervigilance relationnelle",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Interprétations catastrophiques",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Peurs de rejet",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Solitude dans le couple",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 9,
+      "title": "Dépendance affective",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 10,
+      "title": "Jalousie et comparaison",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 11,
+      "title": "Réciprocité",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 12,
+      "title": "Communication non accusatoire",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 13,
+      "title": "Frontières émotionnelles",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 14,
+      "title": "Rupture et deuil",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 15,
+      "title": "Réorganisation de vie",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 16,
+      "title": "Rencontres après rupture",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 17,
+      "title": "Confiance après tromperie",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 18,
+      "title": "Relation à distance",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 19,
+      "title": "Relation intermittente",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 20,
+      "title": "Indisponibilité émotionnelle",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 21,
+      "title": "Consentement et intimité",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 22,
+      "title": "Sensualité et présence corporelle",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 23,
+      "title": "Autonomie financière",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 24,
+      "title": "Temps personnel",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 25,
+      "title": "Amitiés et réseau de soutien",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 26,
+      "title": "Décision de rester ou partir",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 27,
+      "title": "Valeurs relationnelles",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 28,
+      "title": "Culpabilité et suradaptation",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 29,
+      "title": "Reconnaître les comportements de contrôle",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 30,
+      "title": "Co-parentalité et limites",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 31,
+      "title": "Gestion des conflits",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 32,
+      "title": "Besoins de sécurité",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 33,
+      "title": "Régulation des émotions",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 34,
+      "title": "Journal des faits et hypothèses",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 35,
+      "title": "Reconstruction de l'estime",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 36,
+      "title": "Projet de vie hors couple",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 37,
+      "title": "Attentes et accords",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 38,
+      "title": "Écoute et réparation",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 39,
+      "title": "Tensions et stress",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 40,
+      "title": "Rythme des réponses",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 41,
+      "title": "Accords de communication",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 42,
+      "title": "Définir ses non-négociables",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 43,
+      "title": "Réagir au silence",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 44,
+      "title": "Réapprendre à dire non",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 45,
+      "title": "Intimité non sexuelle",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 46,
+      "title": "Conversations difficiles",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 47,
+      "title": "Observer les actes",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 48,
+      "title": "Soutien mutuel",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 49,
+      "title": "Après un refus",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    },
+    {
+      "id": 50,
+      "title": "Retrouver le choix",
+      "status": "À développer",
+      "deliverables": [
+        "séance originale",
+        "fiche d'exercice",
+        "journal guidé",
+        "script audio"
+      ]
+    }
+  ],
+  "evidenceNotes": [
+    "Les corrélations scientifiques ne sont pas des preuves de causalité.",
+    "Une thérapie évaluée ne valide pas automatiquement un programme de coaching.",
+    "Une promesse commerciale n'est pas un résultat clinique.",
+    "Les relations coercitives ou violentes demandent un aiguillage vers les dispositifs spécialisés."
+  ]
+}
