@@ -175,5 +175,5 @@ function generate(){
   finally{btn.disabled=false;btn.textContent="Télécharger le PDF ↓"}
  },30);
 }
-window.EloahMailPDF={render};
+window.EloahMailPDF={render,createReport:(items,scope="actions")=>{const previous=mode;mode=scope;try{const pdf=new DocumentPDF();const blob=pdf.make(items,choose(items));return {blob,pages:pdf.pages.length}}finally{mode=previous}}};
 })();
