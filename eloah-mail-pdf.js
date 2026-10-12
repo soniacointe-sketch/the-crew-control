@@ -120,7 +120,8 @@ class DocumentPDF{
   this.p("Émis le "+new Date().toLocaleString("fr-FR",{timeZone:"Europe/Paris"}),9);
   this.gap(8);
   this.p("BILAN : "+n.total+" indexés, "+n.reviewed+" analysés, "+n.unread+" à trier.",9,true);
-  this.p("FAIT : "+n.done+" | À FAIRE : "+n.todo+" | À VÉRIFIER : "+n.check+" | EN ATTENTE : "+n.wait,9);
+  this.p("FAIT : "+n.done+" | PAS FAIT : "+(n.todo+n.check+n.wait)+" | À FAIRE : "+n.todo,9);
+  this.p("À VÉRIFIER : "+n.check+" | EN ATTENTE : "+n.wait+" | PAS ENCORE ANALYSÉ : "+n.unread,9);
   this.p("ÉCHÉANCES RENSEIGNÉES OUVERTES : "+n.dates+" | FICHES DANS CE RAPPORT : "+rows.length,9);
   this.gap(5);
   this.p("Attention : un mail indexé n’est pas nécessairement lu. Une date absente n’est jamais inventée. Les statuts reflètent les suivis ELOAH à la date du rapport.",8);
