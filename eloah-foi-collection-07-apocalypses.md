@@ -2,7 +2,7 @@
 
 **ELOAH · FOI & SPIRITUALITÉ · BIBLIOTHÈQUE DES TEXTES ANCIENS**
 
-[← Les 10 collections](foi-control.html?doc=9) · [Précédente](foi-control.html?doc=15) · [Suivante](foi-control.html?doc=17)
+[← Les 10 collections](foi-control.html?doc=10) · [Précédente](foi-control.html?doc=16) · [Suivante](foi-control.html?doc=18)
 
 > Les visions du jugement, de la fin des temps et de l’au-delà.
 
@@ -59,4 +59,4 @@ Noter les contradictions, les sources absentes, les objections, les hypothèses 
 
 **Modèle de preuve ELOAH :** **A** lecture directe du témoin ; **B** édition savante convergente ; **C** datation / restitution proposée ; **D** tradition ou interprétation ; **H** hypothèse à vérifier. Ce classement est une convention interne, pas un label scientifique officiel.
 
-[◈ Revenir aux dix collections](foi-control.html?doc=9)
+[◈ Revenir aux dix collections](foi-control.html?doc=10)
