@@ -24,7 +24,7 @@ connect.addEventListener('click',async()=>{
  connect.disabled=true;
  show('Ouverture de la demande d’autorisation Google…');
  try{
-  const {data,error}=await client.auth.signInWithOAuth({provider:'google',options:{scopes:'https://www.googleapis.com/auth/calendar.readonly',redirectTo:location.origin+location.pathname,queryParams:{access_type:'online',prompt:'consent'},skipBrowserRedirect:false}});
+  const {data,error}=await client.auth.signInWithOAuth({provider:'google',options:{scopes:'https://www.googleapis.com/auth/calendar.readonly',redirectTo:location.origin+location.pathname,queryParams:{access_type:'online',prompt:'select_account consent'},skipBrowserRedirect:false}});
   if(error)throw error;
   if(!data?.url)show('Aucune page de connexion renvoyée : vérifier la configuration du fournisseur Google.');
  }catch(e){show('Configuration ou connexion Google à vérifier : '+e.message)}
