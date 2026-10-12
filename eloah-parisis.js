@@ -111,6 +111,22 @@ const modules=[
 ['GEOMETRY','Calculer angles, distances et écarts reproductibles.'],['SOLAR','Tester des phénomènes astronomiques avec paramètres explicites.'],
 ['HISTORIA','Consulter plans, archives et éditions.'],['AUDIT','Chercher les contre-exemples et l’hypothèse du hasard.']
 ];
+function legacyRecords(){
+try{const r=JSON.parse(localStorage.getItem('sonia-universe-v1-parisis')||'[]');return Array.isArray(r)?r.filter(x=>x&&typeof x.title==='string'):[]}catch{return []}
+}
+function legacyPanel(){
+const old=legacyRecords(),notImported=old.filter(x=>!Object.values(store).some(rows=>rows.some(y=>y.id==='parisis-legacy-'+x.id)));
+return '<section class="panel"><div class="panel-header"><h2>Travaux de l’ancien PARISIS Control</h2><span class="pill">'+old.length+' fiche(s) locales détectées</span></div><p class="micro">L’ancien tableau reste inchangé. Les notes sont accessibles seulement si elles existent sur ce navigateur ; aucune synchronisation ni suppression automatique.</p><div class="record-controls"><a class="button-light" href="parisis-control.html">Ouvrir l’ancien espace ↗</a>'+ (notImported.length?'<button id="legacyImport">Importer '+notImported.length+' fiche(s) dans le nouveau moteur</button>':'<span class="micro">'+(old.length?'Fiches déjà reprises ou aucune nouvelle fiche.':'Aucune donnée historique détectée ici.')+'</span>')+'</div></section>';
+}
+function importLegacy(){
+const existing=legacyRecords(),map={'Enquêtes':'preuves','Hypothèses':'preuves','Sources & archives':'sources','Atlas des symboles':'symboles'},newRows=existing.filter(x=>!Object.values(store).some(rows=>rows.some(y=>y.id==='parisis-legacy-'+x.id)));
+if(!newRows.length)return;
+if(!confirm('Importer '+newRows.length+' notes de l’ancien PARISIS Control ? Leurs originaux restent inchangés et les nouvelles copies seront à vérifier.'))return;
+for(const x of newRows){const section=map[x.module]||'preuves',item={id:'parisis-legacy-'+x.id,title:String(x.title),status:'À vérifier',notes:'Import historique local, à recontrôler. '+String(x.note||'').slice(0,7000)};
+if(x.url&&/^https:\/\//.test(x.url))item.url=String(x.url);if(section==='preuves'){item.level='H - Hypothèse';item.claim='Entrée historique à classer et vérifier.'}if(section==='sources')item.author='Auteur / institution à compléter';
+store[section].push(item)}
+save();
+}
 function overview(){
 const total=Object.values(store).reduce((n,a)=>n+a.length,0),toAudit=store.preuves.filter(x=>/À vérifier|Non démontré|Hypothèse/.test(x.status)).length;
 const stats=[['Fiches documentées ou à vérifier',total],['Lieux candidats',store.lieux.length],['Familles symboliques',store.symboles.length],['Hypothèses ouvertes',toAudit]];
@@ -118,7 +134,7 @@ const statsHTML='<div class="grid-stats">'+stats.map(([n,v])=>'<div class="stat"
 const method='<section class="panel"><div class="panel-header"><h2>Les dix moteurs de recherche</h2><span class="pill">Méthode documentaire</span></div><div class="method-list">'+modules.map(x=>'<div class="method"><b>'+x[0]+'</b><p>'+x[1]+'</p></div>').join('')+'</div></section>';
 const corpus='<section class="panel"><div class="panel-header"><h2>Corpus de travail</h2><button data-nav="corpus">Ouvrir le corpus →</button></div>'+store.corpus.slice(0,3).map(x=>'<p><strong>'+escape(x.title)+'</strong><br><span class="micro">'+escape(x.claim||'')+'</span></p>').join('')+'</section>';
 const todo='<section class="panel"><div class="panel-header"><h2>À examiner ensuite</h2><button data-nav="audit">Ouvrir AUDIT →</button></div><p class="micro">Pour chaque piste : source primaire, date, localisation exacte, type de symbole, test géographique et contre-exemple.</p><button class="primary" data-chat-global="1">Lancer une analyse PARISIS dans ChatGPT ↗</button></section>';
-return statsHTML+method+'<div class="two-col">'+corpus+todo+'</div>'
+return statsHTML+method+'<div class="two-col">'+corpus+todo+'</div>'+legacyPanel()
 }
 function layoutRecords(){
 const q=$('globalSearch').value.toLowerCase().trim();
@@ -138,6 +154,7 @@ $('view').innerHTML=content;
 const filter=$('statusFilter');if(filter)filter.onchange=()=>{const v=filter.value;document.querySelectorAll('#records .record').forEach(card=>{const id=card.querySelector('[data-edit]')?.dataset.edit;const rec=store[active].find(x=>x.id===id);card.hidden=!!v&&rec?.status!==v})};
 const form=$('geoForm');if(form)form.onsubmit=calculate;
 const saveGeo=$('saveGeometry');if(saveGeo)saveGeo.onclick=()=>{active='align';render();openEditor(null,{title:'Relevé géométrique à vérifier',claim:lastMeasured,status:'À vérifier',notes:'Calcul exploratoire ; valider coordonnées, emprises, sources et contre-tests.'})};
+const li=$('legacyImport');if(li)li.onclick=importLegacy;
 const sx=$('settingsExport');if(sx)sx.onclick=exportData;
 const sc=$('settingsChat');if(sc)sc.onclick=()=>chat(null);
 }
