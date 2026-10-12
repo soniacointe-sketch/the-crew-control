@@ -1,0 +1,26 @@
+{
+  "checked_at": "2026-10-12T17:53:47.086482+00:00",
+  "sites": [
+    {
+      "name": "ELOAH",
+      "url": "https://soniacointe-sketch.github.io/the-crew-control/mes-univers.html",
+      "ok": true,
+      "http_status": 200,
+      "error": ""
+    },
+    {
+      "name": "The Crew",
+      "url": "https://thecreworchies.blog",
+      "ok": true,
+      "http_status": 200,
+      "error": ""
+    },
+    {
+      "name": "Power & Glam",
+      "url": "https://powerglam1.wordpress.com",
+      "ok": true,
+      "http_status": 200,
+      "error": ""
+    }
+  ]
+}
