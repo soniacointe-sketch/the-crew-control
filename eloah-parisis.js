@@ -155,6 +155,26 @@ store[section].push(item)}
 save();
 }
 const pagedCorpus=[{"page":"16","heading":"Le code de la Bible","claim":"Présentation des affirmations relatives à Eliyahu Rips, la Torah et aux codes bibliques.","places":[],"symbols":["lettres hébraïques","codage biblique"],"checks":"Retrouver étude citée, protocole statistique et objections.","ref":"Photo de page, bibliothèque personnelle, p.16"},{"page":"19","heading":"Analogies anatomiques","claim":"Comparaisons proposées entre détails d'œuvres de Michel-Ange et formes anatomiques.","places":[],"symbols":["anatomie","iconographie"],"checks":"Documenter l'œuvre et la datation, comparer hypothèses concurrentes.","ref":"Photo de page, bibliothèque personnelle, p.19"},{"page":"33","heading":"Le Parisis Code","claim":"Présentation du parcours de recherche de l'auteur et références à Thierry Namur et From Hell.","places":["Paris"],"symbols":["méthodologie"],"checks":"Vérifier dates, références bibliographiques et citations.","ref":"Photo de page, bibliothèque personnelle, p.33"},{"page":"43","heading":"Mode d'emploi du Parisis Code","claim":"Exemple utilisant Abel Gance, Napoléon et une dénomination de rue.","places":["rue Abel Gance","Paris"],"symbols":["toponymie"],"checks":"Comparer dates, emplacement réel, délibérations et plan d'époque.","ref":"Photo de page, bibliothèque personnelle, p.43"},{"page":"à identifier A","heading":"Les clefs symboliques du code","claim":"Opéra Garnier présenté comme clef avec avenues et boulevards attenants.","places":["Opéra Garnier","boulevard des Capucines","boulevard des Italiens","avenue de l'Opéra"],"symbols":["géométrie urbaine"],"checks":"Identifier page, édition et vérifier le plan aérien utilisé.","ref":"Photo de page, bibliothèque personnelle, pagination absente"},{"page":"à identifier B","heading":"Déterminer l'emplacement exact d'une adresse","claim":"Étude de repères parisiens et mention de carte Michelin n°55.","places":["Arc de Triomphe","tour Eiffel","Louvre","Palais de la Légion d'honneur"],"symbols":["cartographie"],"checks":"Identifier page et contrôler chaque localisation.","ref":"Photo de page, bibliothèque personnelle, pagination absente"},{"page":"à identifier C","heading":"Rue Abel Gance et repères","claim":"Rapprochement proposé avec Invalides, Musée du Cinéma, Palais de Chaillot et Trocadéro.","places":["rue Abel Gance","Invalides","Trocadéro"],"symbols":["toponymie","alignement"],"checks":"Vérifier tracés, adresses et dates.","ref":"Photo de page, bibliothèque personnelle, pagination absente"}];
+function normalizeRef(v){return String(v||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().replace(/[^a-z0-9]/g,"")}
+function pageRelations(p){
+ const tokens=[...p.places,...p.symbols].map(normalizeRef).filter(x=>x.length>3);
+ const matches=[];
+ for(const module of ["lieux","symboles","preuves","sources","corpus","audit"]){
+ for(const item of store[module]){
+ const target=normalizeRef([item.title,item.place,item.family,item.claim].filter(Boolean).join(" "));
+ const common=tokens.filter(t=>target.includes(t)||t.includes(normalizeRef(item.title)));
+ if(common.length)matches.push({module,item,why:common.join(", ")});
+ }}
+ return matches.slice(0,12);
+}
+function pageLinks(p){
+ const matches=pageRelations(p);
+ return '<div class="page-relations"><strong>Fiches associées · rapprochements lexicaux, non preuves</strong>'+(matches.length?'<div class="record-controls">'+matches.map(m=>'<button type="button" data-related-module="'+m.module+'" data-related-id="'+escape(m.item.id)+'">'+escape(m.item.title)+' ↗</button>').join("")+'</div>':'<p class="micro">Aucune fiche associée automatiquement. Indexation à compléter.</p>')+'</div>';
+}
+function auditPage(index){
+ const p=pagedCorpus[index];if(!p)return;
+ active="audit";render();openEditor(null,{title:"Audit de page "+p.page+" — "+p.heading,reference:p.ref,claim:"Examiner l’affirmation : "+p.claim+" ; lieux : "+p.places.join(", ")+" ; symboles : "+p.symbols.join(", "),status:"À faire",notes:p.checks+" Vérifier la provenance des documents, les contre-exemples et les datations."});
+}
 function pageAtlas(){return '<section class="panel"><div class="panel-header"><div><div class="eyebrow">INDEX DE PAGES</div><h2>Parisis Code · Photographies retrouvées</h2></div><span class="pill">'+pagedCorpus.length+' références</span></div><p class="micro">Références des images partagées, non hébergées sur ce site. Résumés analytiques et pistes de vérification, sans reproduction du livre.</p>'+pagedCorpus.map((x,i)=>'<article class="record"><div class="record-top"><div><span class="smallmeta">PAGE '+escape(x.page)+'</span><h3>'+escape(x.heading)+'</h3></div><span class="pill guess">Lecture à recouper</span></div><p>'+escape(x.claim)+'</p><p><b>Lieux :</b> '+escape(x.places.join(", ")||"Non précisés")+'</p><p><b>Symboles / sujets :</b> '+escape(x.symbols.join(", "))+'</p><p><b>Contrôle :</b> '+escape(x.checks)+'</p><div class="record-controls"><button data-page-chat="'+i+'">Analyser cette page dans ChatGPT ↗</button></div></article>').join("")+'</section>'}
 function overview(){
 const total=Object.values(store).reduce((n,a)=>n+a.length,0),toAudit=store.preuves.filter(x=>/À vérifier|Non démontré|Hypothèse/.test(x.status)).length;
@@ -222,7 +242,9 @@ for(const k of Object.keys(cfg))store[k]=data.modules[k].map(x=>({...x}));save()
 }
 $('nav').onclick=e=>{const b=e.target.closest('[data-nav]');if(b&&views.some(v=>v.id===b.dataset.nav)){active=b.dataset.nav;$('globalSearch').value='';render()}};
 $('view').onclick=e=>{const b=e.target.closest('button');if(!b)return;
-if(b.dataset.pageChat!==undefined){const p=pagedCorpus[Number(b.dataset.pageChat)];if(p)chat({title:p.heading,claim:'Page '+p.page+'. '+p.claim+' Lieux : '+p.places.join(', ')+'. Symboles : '+p.symbols.join(', ')+'. À vérifier : '+p.checks,reference:p.ref})}
+if(b.dataset.pageAudit!==undefined){auditPage(Number(b.dataset.pageAudit))}
+else if(b.dataset.relatedModule){active=b.dataset.relatedModule;render();const el=document.querySelector('[data-edit="'+CSS.escape(b.dataset.relatedId)+'"]');el?.closest(".record")?.scrollIntoView({behavior:"smooth",block:"center"});el?.closest(".record")?.classList.add("related-focus")}
+else if(b.dataset.pageChat!==undefined){const p=pagedCorpus[Number(b.dataset.pageChat)];if(p)chat({title:p.heading,claim:'Page '+p.page+'. '+p.claim+' Lieux : '+p.places.join(', ')+'. Symboles : '+p.symbols.join(', ')+'. À vérifier : '+p.checks,reference:p.ref})}
 else if(b.dataset.nav){active=b.dataset.nav;render()}
 else if(b.dataset.edit)openEditor(b.dataset.edit);
 else if(b.dataset.delete){if(confirm('Supprimer cette fiche PARISIS ?')){store[active]=store[active].filter(x=>x.id!==b.dataset.delete);save()}}
