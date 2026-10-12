@@ -14,7 +14,7 @@ function safeSet(key,val){try{localStorage.setItem(key,val);return true}catch(e)
 function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function tagSelect(list,attr,selected){return list.map(v=>'<option value="'+esc(v)+'"'+(v===selected?' selected':'')+'>'+esc(v)+'</option>').join('')}
 function matchPhoto(p,u){return u==='Tous'||p.universe===u||p.also.includes(u)}
-function studioLink(p,u){return 'eloah-power-glam-article-studio.html?pg_photo='+encodeURIComponent(p.id)+'&pg_univers='+encodeURIComponent(u)}
+function studioLink(p,u){return 'eloah-power-glam-article-studio.html?pg_photo='+encodeURIComponent(p.id)+'&pg_univers='+encodeURIComponent(u)+'#pg-image-prompts'}
 function buildBrief(p,u){return 'Direction photographique Power & Glam — univers '+u+'.\nImage de référence : '+p.name+'.\nDescription : '+p.alt+'\nÉmotion : '+p.feeling+'.\nLumière : '+p.light+'.\nCadrage : '+p.frame+'.\nPiste éditoriale possible : '+p.idea+'.\nRègles : photographie crédible, mouvement naturel, pas de rendu plastique, pas de filtre artificiel, pas de symboles ajoutés systématiquement.\nLe visuel est une référence intégrée à la photothèque, pas encore une URL publique de couverture WordPress.'}
 function initAtlas(){
 const original=document.getElementById('galerie-images');if(!original||document.getElementById('pg-photo-engine'))return;
