@@ -52,8 +52,8 @@ function edit(id){
  '<label>Source de cette date<input class="field" name="due_source" maxlength="350" value="'+esc(c.due_source||"")+'" placeholder="Courriel daté, ou saisie manuelle"></label>'+
  '<label>Prochaine action<textarea class="field" name="next_action" rows="3">'+esc(c.next_action||"")+'</textarea></label>'+
  '<label>Notes privées<textarea class="field" name="details" rows="4">'+esc(c.details||"")+'</textarea></label>'+
- (id?'<section class="v3-related"><h3>Mails liés</h3>'+linked(c).map(m=>{const x=B().getItems().find(z=>z.id===m.gmail_id);return '<div class="v3-line"><span>'+esc(x?.subject||"Courriel lié")+'</span><button type="button" data-v3-openmail="'+esc(m.gmail_id)+'">Gmail ↗</button></div>'}).join("")+
- '<label>Associer un courriel déjà qualifié<select id="v3MailSelect" class="field"><option value="">Choisir…</option>'+B().getItems().filter(m=>m.source_kind==="gmail_read"&&!linked(c).some(l=>l.gmail_id===m.id)).slice(0,110).map(m=>'<option value="'+esc(m.id)+'">'+esc(m.subject).slice(0,140)+'</option>').join("")+'</select></label><button type="button" id="v3Link">Relier le mail</button></section>':'')+
+ (id?'<section class="v3-related"><h3>Mails liés</h3>'+linked(c).map(m=>{const x=B().getItems().find(z=>z.id===m.gmail_id);return '<div class="v3-line"><span>'+esc(x?.subject||"Courriel lié")+'</span><button type="button" data-v3-reply="'+esc(m.gmail_id)+'">Préparer réponse</button><button type="button" data-v3-openmail="'+esc(m.gmail_id)+'">Gmail ↗</button></div>'}).join("")+
+ '<label>Associer un courriel déjà qualifié<select id="v3MailSelect" class="field"><option value="">Choisir…</option>'+B().getItems().filter(m=>m.source_kind==="gmail_read"&&!linked(c).some(l=>l.gmail_id===m.id)).slice(0,110).map(m=>'<option value="'+esc(m.id)+'">'+esc(m.subject).slice(0,140)+'</option>').join("")+'</select></label><button type="button" id="v3Link">Relier le mail</button><h3>Historique des actions</h3><div id="v3History" class="small">Chargement de l’historique privé…</div></section>':'')+
  '<div class="dialogbuttons"><button type="button" id="v3Cancel">Annuler</button><button type="submit" class="primary">Enregistrer</button></div></form>';
  document.body.appendChild(d);d.showModal();d.querySelector("#v3Cancel").onclick=()=>d.close();d.onclose=()=>d.remove();
  d.querySelector("#v3Form").onsubmit=async event=>{
@@ -67,6 +67,8 @@ function edit(id){
   }catch(ex){alert("Impossible d’enregistrer : "+ex.message)}
  };
  if(id){
+  d.querySelectorAll("[data-v3-reply]").forEach(b=>b.onclick=()=>{d.close();window.EloahMailWorkbench?.selectMail(b.dataset.v3Reply)});
+  B().privateFetch("eloah_mail_case_history?select=description,created_at&case_id=eq."+encodeURIComponent(id)+"&order=created_at.desc&limit=40").then(rows=>{const el=$("v3History");if(el)el.innerHTML=(rows||[]).map(x=>'<p>'+esc(fmt(x.created_at)+" · "+x.description)+'</p>').join("")||"Aucun changement enregistré."}).catch(()=>{const el=$("v3History");if(el)el.textContent="Historique indisponible";});
   d.querySelectorAll("[data-v3-openmail]").forEach(b=>b.onclick=()=>{if(/^[a-f0-9]{10,30}$/i.test(b.dataset.v3Openmail))window.open("https://mail.google.com/mail/u/0/#all/"+b.dataset.v3Openmail,"_blank","noopener,noreferrer")});
   d.querySelector("#v3Link").onclick=async()=>{
    const mail=d.querySelector("#v3MailSelect").value;if(!mail)return;
