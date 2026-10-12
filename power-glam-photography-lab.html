@@ -71,7 +71,7 @@ if(g==='prev')currentPage=Math.max(1,currentPage-1);
 if(g==='next')currentPage++;
 if(g==='last'){const count=Number($('#count').textContent.split(' ')[0])||0;currentPage=Math.max(1,Math.ceil(count/pageSize))}
 renderCollection();
-$('#explorer').scrollIntoView({behavior:'smooth',block:'start'});
+document.querySelector('.library').scrollIntoView({behavior:'smooth',block:'start'});
 });
 function renderSelected(){const d=selected;state.selected=d.id;save();
 $('#selected-family').textContent=d.family+' · '+d.world;$('#selected-name').textContent=d.name;$('#selected-scene').textContent=d.scene;$('#selected-desc').textContent=d.meaning;$('#selected-id').textContent='Direction '+d.id+' · Matière '+d.world;
