@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sonia Velka · Bibliothèque personnelle · ELOAH</title>
+<style>
+:root{--bg:#f7f7f3;--surface:#fff;--ink:#303530;--muted:#777c74;--line:#e3e4df;--accent:#7762af;--tint:#f0ecf8;--wine:#934755}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.55 system-ui,-apple-system,sans-serif}
+a{color:inherit;text-decoration:none}button,.button{font:inherit;cursor:pointer;padding:10px 14px;background:var(--surface);color:var(--ink);border:1px solid var(--line);border-radius:7px}
+button:hover,.button:hover{background:var(--tint)}button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+header{border-bottom:1px solid var(--line);background:var(--surface);padding:17px clamp(16px,4vw,42px);display:flex;gap:15px;justify-content:space-between;align-items:center}
+.logo{font-weight:750;letter-spacing:.16em}.back{font-size:12px;color:var(--accent)}
+.wrap{max-width:1230px;margin:auto;padding:30px clamp(16px,4vw,36px) 70px}
+.overline{color:var(--wine);font-size:11px;letter-spacing:.17em;font-weight:700}
+h1{font-size:clamp(29px,5vw,51px);line-height:1.1;font-weight:650;margin:10px 0}h2{font-size:21px;font-weight:650;margin:0 0 12px}
+.lead{font-size:16px;max-width:720px;color:#63665f}
+.metrics{display:flex;gap:10px;flex-wrap:wrap;margin:23px 0 30px}
+.metric{background:var(--surface);border:1px solid var(--line);border-radius:9px;padding:14px 18px;min-width:128px}.metric strong{font-size:23px;display:block}.metric span{font-size:11px;color:var(--muted)}
+.grid{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(0,1fr);gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:23px;margin-bottom:19px}
+.notice{background:#fbf4ef;border:1px solid #e3cfc1;border-radius:9px;padding:16px;color:#6a5149;font-size:13px;margin:18px 0}
+.info{color:var(--muted);font-size:12px} .small{font-size:12px;color:var(--muted)}.pill{display:inline-block;font-size:10px;background:var(--tint);color:var(--accent);border-radius:50px;padding:4px 9px}
+strong{font-weight:700}.file{display:flex;align-items:center;justify-content:space-between;gap:12px;border:1px solid var(--line);border-radius:8px;padding:13px;margin:12px 0}
+.file b{display:block;font-size:13px}.file span{font-size:11px;color:var(--muted)}.actions{display:flex;gap:7px;flex-wrap:wrap}
+.primary{background:var(--accent);color:#fff;border-color:var(--accent)}.primary:hover{background:#665295}.danger{color:#9d3f42}
+.chapters{display:grid;gap:8px}.chapter{display:flex;gap:12px;align-items:center;border:1px solid var(--line);background:#fff;border-radius:8px;padding:11px}
+.chapter .num{color:var(--wine);font-size:11px;font-weight:800;min-width:22px}
+.chapter .ct{flex:1}.chapter b{font-size:13px;display:block}.chapter small{color:var(--muted)}.chapter button{font-size:11px;padding:6px 9px}
+input[type=file]{position:absolute;width:1px;height:1px;opacity:0}
+input[type=search]{width:100%;padding:12px;border:1px solid var(--line);border-radius:7px;font:inherit;margin:8px 0 16px}
+#viewer{width:100%;height:65vh;border:1px solid var(--line);border-radius:10px;background:#e8e8e8}
+#viewer[hidden]{display:none}#reader-empty{background:var(--bg);border:1px dashed var(--line);border-radius:9px;padding:22px;text-align:center;color:var(--muted)}
+details{border-top:1px solid var(--line);padding:13px 0}summary{cursor:pointer;font-weight:650}
+textarea{width:100%;min-height:105px;resize:vertical;padding:12px;font:inherit;border:1px solid var(--line);border-radius:8px}#status{font-size:12px;color:#497354;min-height:20px;margin-top:9px}
+@media(max-width:840px){.grid{grid-template-columns:1fr}.wrap{padding-top:23px}.card{padding:17px}#viewer{height:58vh}.file{align-items:flex-start;flex-direction:column}}
+</style></head>
+<body><header><a class="logo" href="mes-univers.html">ELOAH</a><a class="back" href="eloah-projet.html?projet=Sonia%20Velka&amp;retour=sonia-velka-control.html">← Espace projet Sonia Velka</a></header>
+<main class="wrap">
+<div class="overline">SONIA VELKA / BIBLIOTHÈQUE DU PROJET</div>
+<h1>Mon livre. Mes archives.<br>Ma voix.</h1>
+<p class="lead">Un espace de lecture et de pilotage pour le livre Sonia Velka, ses versions, ses chapitres et ses décisions. Les fichiers personnels ne sont pas déposés sur le site.</p>
+<div class="metrics"><div class="metric"><strong>100</strong><span>Pages de l'édition familiale</span></div><div class="metric"><strong>16</strong><span>Versions de travail évoquées</span></div><div class="metric"><strong>7</strong><span>Grandes familles de contenus</span></div><div class="metric"><strong id="fileTotal">0</strong><span>PDF locaux enregistrés</span></div></div>
+<div class="notice"><strong>Confidentialité :</strong> le dépôt GitHub Pages est public. N'y publie jamais le PDF familial, les lettres, les prénoms ou les confidences. Les PDF sélectionnés ici sont conservés dans le stockage de ce navigateur sur cet appareil uniquement. Ce stockage n'est pas chiffré et n'est pas une sauvegarde sécurisée : protège ton appareil et conserve une copie privée ailleurs.</div>
+<div class="grid"><div>
+<section class="card"><div class="overline">01 · DOCUMENTS</div><h2>Ma bibliothèque PDF</h2>
+<p class="small">Importe ici les PDF récupérés dans la conversation ChatGPT. Ils apparaissent aussi dans l'onglet « Fichiers » de l'espace projet ELOAH sur ce navigateur.</p>
+<div class="actions"><label class="button primary" for="fileInput" tabindex="0">＋ Importer les PDF</label><input id="fileInput" type="file" accept=".pdf,application/pdf" multiple><button id="refresh">Actualiser</button></div>
+<div id="fileList"><p class="small">Chargement des fichiers locaux…</p></div><p id="status" role="status"></p>
+</section>
+<section class="card"><div class="overline">02 · LECTEUR PRIVÉ</div><h2 id="reader-title">Lire mon document</h2>
+<div id="reader-empty">Choisis « Lire » à côté d'un PDF importé. Rien n'est envoyé au serveur.</div>
+<iframe id="viewer" title="Lecteur PDF personnel" hidden></iframe>
+<div class="actions" style="margin-top:12px"><button id="closeReader" hidden>Fermer le lecteur</button><button id="downloadReader" hidden>Télécharger le document ouvert</button></div>
+</section>
+<section class="card"><div class="overline">03 · REPÈRES</div><h2>Les décisions déjà exprimées</h2>
+<p><strong>Voix :</strong> naturelle, audacieuse, un mélange de franchise et d'humour. <span class="pill">CHOISI</span></p>
+<p><strong>Style :</strong> parfois rock, mais toujours authentique. Pas de personnage artificiel ni de faux portrait. <span class="pill">CHOISI</span></p>
+<p><strong>Signature :</strong> « Je fais comme je peux. Mais jamais à moitié. » <span class="pill">À VALIDER</span></p>
+<p><strong>Édition publique :</strong> à séparer des lettres privées et des contenus familiaux. <span class="pill">À PRÉPARER</span></p>
+</section>
+</div>
+<div>
+<section class="card"><div class="overline">04 · SOMMAIRE DU LIVRE</div><h2>Les univers du livre</h2>
+<input id="search" type="search" placeholder="Rechercher un chapitre ou un sujet…" aria-label="Rechercher les chapitres">
+<div class="chapters" id="chapters"></div>
+<p class="small">Les repères de pages correspondent aux versions de travail. La version familiale reprend les 93 premières pages de la V12 et remplace ses sept dernières par les lettres privées.</p>
+</section>
+<section class="card"><div class="overline">05 · MES VALIDATIONS</div><h2>Notes personnelles</h2>
+<p class="small">Notes enregistrées uniquement dans ce navigateur. Tu peux les exporter en fichier texte pour sauvegarde.</p>
+<textarea id="notes" placeholder="À garder, à corriger, à retirer, prochaines décisions…"></textarea>
+<div class="actions"><button class="primary" id="saveNotes">Enregistrer mes notes</button><button id="exportNotes">Exporter en TXT</button></div>
+</section>
+<section class="card"><h2>Les autres espaces</h2>
+<p><a class="button" href="sonia-velka-control.html">Ouvrir Sonia Velka Control ↗</a></p>
+<p><a class="button" href="eloah-projet.html?projet=Sonia%20Velka&amp;retour=sonia-velka-control.html">Revenir au projet ELOAH ↗</a></p>
+</section></div></div>
+</main>
+<script>
+'use strict';
+const project='Sonia Velka',DB='eloah-project-files',STORE='files',NOTES='eloah:velka:lecture-notes:v1';
+let db,files=[],current=null,readerUrl=null;
+const el=id=>document.getElementById(id);
+const chapters=[
+['Identité & portrait','1–13','Le nom, le portrait et les premières biographies'],
+['Voix & dictionnaire','3–10','Humour, franc-parler, nuances et publications'],
+['Univers personnel','23–28','Valeurs, facettes et ambitions à relire'],
+['Mes 100 envies','29–40','Voyages, découvertes, vie et créations'],
+['Mes choix & mon avenir','41–50','Ce que je conserve, ce que je construis'],
+['Projets de vie','51–60','The Crew, Power & Glam, SONIA OS et objectifs'],
+['Mes différentes facettes','61–70','Créatrice, femme libre, convictions et sensibilité'],
+['Style et signature','71–80','Codes éditoriaux, visuels et formats'],
+['Vision à 1, 3 et 5 ans','81–90','Horizons de réflexion et priorités'],
+['Carnet personnel','91–93','Souvenirs et petites victoires conservés dans l’édition familiale'],
+['Lettres familiales privées','94–100','Sept pages personnelles, jamais hébergées sur ce site']
+];
+const safe=s=>String(s).replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+function message(s){el('status').textContent=s;}
+function renderChapters(){let q=el('search').value.toLowerCase();el('chapters').innerHTML=chapters.filter(x=>x.join(' ').toLowerCase().includes(q)).map((x,i)=>'<div class="chapter"><span class="num">'+(i+1).toString().padStart(2,'0')+'</span><span class="ct"><b>'+safe(x[0])+'</b><small>Pages '+x[1]+' · '+safe(x[2])+'</small></span></div>').join('')||'<p class="small">Aucun chapitre trouvé.</p>';}
+el('search').addEventListener('input',renderChapters);renderChapters();
+function openDb(){return new Promise((res,rej)=>{const r=indexedDB.open(DB,1);r.onupgradeneeded=()=>{if(!r.result.objectStoreNames.contains(STORE))r.result.createObjectStore(STORE,{keyPath:'id'});};r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error);});}
+function txDone(tx){return new Promise((res,rej)=>{tx.oncomplete=res;tx.onerror=()=>rej(tx.error);});}
+async function refresh(){if(!db)return;return new Promise((res,rej)=>{let tx=db.transaction(STORE,'readonly');let req=tx.objectStore(STORE).getAll();req.onsuccess=()=>{files=req.result.filter(f=>f.project===project && (/\.pdf$/i.test(f.name)||f.blob?.type==='application/pdf'));renderFiles();res();};req.onerror=()=>rej(req.error);});}
+function renderFiles(){el('fileTotal').textContent=files.length;el('fileList').innerHTML=files.length?files.map(f=>'<div class="file"><div><b>'+safe(f.name)+'</b><span>'+((f.blob?.size||0)/1024/1024).toFixed(2)+' Mo · Sur cet appareil</span></div><div class="actions"><button data-read="'+safe(f.id)+'">Lire</button><button data-download="'+safe(f.id)+'">Exporter</button><button class="danger" data-delete="'+safe(f.id)+'">Retirer</button></div></div>').join(''):'<p class="small">Aucun PDF encore importé. Ajoute le livre familial de 100 pages ou tes éditions de travail.</p>';}
+function openFile(f){closeReader();current=f;readerUrl=URL.createObjectURL(f.blob);el('viewer').src=readerUrl;el('viewer').hidden=false;el('reader-empty').hidden=true;el('reader-title').textContent=f.name;el('closeReader').hidden=false;el('downloadReader').hidden=false;el('viewer').scrollIntoView({behavior:'smooth',block:'nearest'});}
+function closeReader(){el('viewer').src='about:blank';el('viewer').hidden=true;el('reader-empty').hidden=false;el('reader-title').textContent='Lire mon document';el('closeReader').hidden=true;el('downloadReader').hidden=true;if(readerUrl)URL.revokeObjectURL(readerUrl);readerUrl=null;current=null;}
+function downloadBlob(blob,name){const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+el('closeReader').onclick=closeReader;el('downloadReader').onclick=()=>{if(current)downloadBlob(current.blob,current.name);};
+el('fileInput').onchange=async e=>{if(!db){message('Stockage local indisponible.');return;}const items=[...e.target.files].filter(f=>/\.pdf$/i.test(f.name)||f.type==='application/pdf');for(const f of items){const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).put({id:crypto.randomUUID(),project,name:f.name,blob:f,date:new Date().toISOString()});await txDone(tx);}e.target.value='';await refresh();message(items.length+' document(s) conservé(s) sur cet appareil. Aucun transfert distant.');};
+el('fileList').addEventListener('click',async e=>{const b=e.target.closest('[data-read],[data-download],[data-delete]');if(!b)return;const id=b.dataset.read||b.dataset.download||b.dataset.delete;const f=files.find(x=>x.id===id);if(!f)return;if(b.dataset.read)openFile(f);else if(b.dataset.download)downloadBlob(f.blob,f.name);else if(confirm('Retirer ce PDF du stockage local de cet appareil ?')){if(current?.id===f.id)closeReader();const tx=db.transaction(STORE,'readwrite');tx.objectStore(STORE).delete(f.id);await txDone(tx);await refresh();message('Document retiré localement.');}});
+el('refresh').onclick=refresh;
+try{el('notes').value=localStorage.getItem(NOTES)||'';}catch{}
+el('saveNotes').onclick=()=>{try{localStorage.setItem(NOTES,el('notes').value);message('Notes enregistrées dans ce navigateur.');}catch{message('Stockage indisponible : exporte tes notes.');}};
+el('exportNotes').onclick=()=>downloadBlob(new Blob([el('notes').value],{type:'text/plain;charset=utf-8'}),'sonia-velka-notes-privees.txt');
+openDb().then(d=>{db=d;return refresh();}).catch(()=>{el('fileList').innerHTML='<p class="small">Stockage local indisponible sur ce navigateur.</p>';message('Import de PDF indisponible.');});
+</script></body></html>
