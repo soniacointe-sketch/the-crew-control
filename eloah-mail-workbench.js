@@ -76,7 +76,7 @@ function mailOptions(){const a=(B()?.getItems()||[]).filter(x=>x.status!=="À tr
 function renderCompose(){
  $("content").innerHTML='<section class="panel"><div class="eyebrow">ATELIER DE RÉDACTION</div><h3>Réponses et courriers prêts à personnaliser</h3><p class="small">Ces modèles sont des brouillons neutres : ils ne répondent pas à ta place et ne valent pas confirmation des faits. Un envoi Gmail nécessite une validation séparée.</p>'+
  '<div class="work-fields"><label>Mail source<select id="workMail" class="field">'+mailOptions()+'</select></label><label>Type de document<select id="workKind" class="field"><option value="reponse">Réponse email</option><option value="courrier">Courrier administratif</option></select></label><label>Titre<input id="workTitle" class="field" maxlength="180" placeholder="Objet du courrier"></label><label>Texte à relire<textarea id="workText" class="field" rows="17" placeholder="Ton brouillon éditable…"></textarea></label></div>'+
- '<div class="actions"><button id="workTemplate">Créer un modèle</button><button id="workSaveDoc" class="primary">Enregistrer en privé</button><button id="workCopy">Copier le texte</button><button id="workTextDownload">Exporter .txt</button><button id="workChat">Reformuler dans ChatGPT ↗</button></div></section>'+
+ '<div class="actions"><button id="workTemplate">Créer un modèle</button><button id="workSaveDoc" class="primary">Enregistrer en privé</button><button id="workCopy">Copier le texte</button><button id="workTextDownload">Exporter .txt</button><button id="workWord">Exporter Word (.rtf)</button><button id="workChat">Reformuler dans ChatGPT ↗</button></div></section>'+
  '<section class="panel"><h3>Mes brouillons</h3><div id="workDraftList">'+(docLoaded?listDocs("compose"):'<p class="small">Chargement privé…</p>')+'</div></section>';
  $("workMail").onchange=v=>{selected=v.target.value;draftId=""};
  $("workKind").onchange=v=>{docKind=v.target.value};
@@ -87,6 +87,7 @@ function renderCompose(){
  $("workSaveDoc").onclick=()=>saveDoc(false);
  $("workCopy").onclick=()=>copyText($("workText").value);
  $("workTextDownload").onclick=()=>download("courrier-eloah-"+today()+".txt",$("workText").value,"text/plain;charset=utf-8");
+ $("workWord").onclick=()=>{const encode=t=>String(t).replace(/\\/g,"\\\\").replace(/[{}]/g,c=>"\\"+c).replace(/\r?\n/g,"\\par\n").replace(/[^\x00-\x7F]/g,c=>"\\u"+(c.charCodeAt(0)>32767?c.charCodeAt(0)-65536:c.charCodeAt(0))+"?");download("courrier-eloah-"+today()+".rtf","{\\rtf1\\ansi\\deff0{\\fonttbl{\\f0 Calibri;}}\\f0\\fs24 "+encode($("workText").value)+"}", "application/rtf")};
  $("workChat").onclick=()=>{copyText($("workText").value).then(()=>window.open("https://chatgpt.com/","_blank","noopener,noreferrer"));alert("Texte copié. Colle-le dans ChatGPT pour demander une reformulation ; aucun courrier n’est envoyé automatiquement.")};
  bindDocList();
  if(!docLoaded)loadDocs().then(()=>{if(B().getView()==="compose"&&$("workDraftList")){$("workDraftList").innerHTML=listDocs("compose");bindDocList()}}).catch(err=>{const target=$("workDraftList");if(target)target.textContent="Connexion privée nécessaire : "+err.message});
