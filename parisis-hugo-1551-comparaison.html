@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4efe7"><title>PARISIS ENGINE · Hugo 1482 et Truschet-Hoyau 1551</title>
+<style>
+:root{--bg:#f4efe7;--paper:#fffdf9;--ink:#302c28;--line:#dacfbf;--muted:#756d63;--teal:#137c87;--orange:#bb623b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 system-ui,-apple-system,sans-serif}a{color:#365e5b}button{font:inherit;cursor:pointer;border-radius:8px;border:1px solid #d4c6b2;background:#fffdf9;padding:8px 12px;color:#34342d}button:focus-visible,a:focus-visible{outline:3px solid #996f46;outline-offset:2px}
+header{background:#fffdf7;padding:17px clamp(14px,3vw,40px);border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+header h1{font:clamp(26px,3.5vw,42px) Georgia,serif;margin:4px 0}header p{margin:0;color:var(--muted)}.eyebrow{font-size:10px;color:#857050;letter-spacing:.13em;font-weight:700;text-transform:uppercase}
+.btn{display:inline-block;text-decoration:none;padding:9px 13px;border:1px solid var(--line);border-radius:8px;background:#fffdf8;color:inherit}
+main{padding:20px clamp(12px,2vw,35px);max-width:1950px;margin:auto}
+.lead{max-width:1100px;line-height:1.72;font-size:14px}
+.lead strong{color:#365e5b}
+.viewer-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:17px}
+.viewer{min-width:0;background:var(--paper);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.viewer-header{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;padding:13px 15px;border-bottom:1px solid var(--line)}
+.viewer-header h2{font:21px Georgia,serif;margin:3px 0}
+.viewer-header p{font-size:11px;color:var(--muted);margin:2px 0 0}
+.controls{display:flex;align-items:center;gap:5px;flex-wrap:wrap}
+.historical-viewport{overflow:auto;height:620px;background:#e8ded0;overscroll-behavior:contain;touch-action:pan-x pan-y}
+.historical-viewport img{display:block;max-width:none;width:100%;height:auto;object-fit:contain;user-select:none}
+#mapFrame{display:block;width:100%;height:620px;border:0;background:#ede9df}
+.caption{font-size:11px;color:#5f594f;padding:12px 15px;line-height:1.6;background:#fcf7ed;border-top:1px solid var(--line)}
+.filters{display:flex;gap:8px;flex-wrap:wrap;padding:10px 15px;border-top:1px solid var(--line)}
+.filters label{font-size:12px;display:flex;gap:6px;align-items:center}
+.filters input{accent-color:#507d73}
+.paper{background:var(--paper);border:1px solid var(--line);padding:20px;border-radius:13px;margin-top:15px}
+.paper h2{font:26px Georgia,serif;margin:0 0 9px}
+.paper h3{font:19px Georgia,serif;margin:11px 0 5px}
+.comparison{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.compare-route{border:1px solid #e6daca;border-radius:9px;padding:15px;background:#fffefa}
+.route-head{display:flex;align-items:center;gap:9px}.swatch{height:6px;width:29px;border-radius:6px;display:inline-block}
+ol{padding-left:21px;margin:8px 0}li{padding:4px 0}li span{display:block;font-size:11px;color:#786e60}
+.pill{font-size:11px;color:#526c5f;background:#eaf0e9;padding:4px 9px;border-radius:12px}
+.warn{border-left:4px solid #b48d5d;background:#f9f0e3;padding:12px;font-size:12px;margin:13px 0}
+.source-links{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.source-links a{font-size:12px;text-decoration:none;border:1px solid #ddd0be;background:#faf4e9;border-radius:6px;padding:8px 10px}
+.difference{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:14px 0}
+.difference div{padding:15px;border-radius:9px;border:1px solid var(--line);background:#fefcf7}
+.difference strong{font:20px Georgia,serif;display:block}
+.difference p{font-size:12px;color:var(--muted)}
+footer{font-size:11px;color:#6e6a64;padding:20px 0}
+@media(max-width:1050px){.viewer-grid{grid-template-columns:1fr}.historical-viewport,#mapFrame{height:54vh;min-height:390px}}
+@media(max-width:670px){.comparison,.difference{grid-template-columns:1fr}.viewer-header{align-items:flex-start}}
+</style></head>
+<body><header><div><div class="eyebrow">ELOAH / PARISIS ENGINE · VH-ATLAS-1551</div><h1>Victor Hugo face au Paris de 1551</h1><p>Deux itinéraires du roman comparés au plan de Truschet et Hoyau, conservé par Paris Musées</p></div><nav><a class="btn" href="eloah-parisis.html">← PARISIS</a> <a class="btn" href="parisis-hugo-notre-dame.html">Dossier Hugo ↗</a></nav></header>
+<main>
+<div class="lead">Le roman <em>Notre-Dame de Paris</em> (1831) raconte le Paris de <strong>1482</strong>. Le plan de Truschet et Hoyau représente la ville vers <strong>1551–1552</strong>, environ <strong>69–70 ans plus tard</strong>. Nous pouvons étudier les mêmes secteurs et leurs anciennes rues, mais <strong>nous ne pouvons pas affirmer que tous les bâtiments, portes et ponts étaient identiques</strong>. Le document original est orienté avec <strong>le nord à gauche</strong> : il ne peut pas être plaqué tel quel sur une carte moderne orientée nord en haut.</div>
+<div class="viewer-grid">
+<section class="viewer" aria-label="Document historique"><div class="viewer-header"><div><div class="eyebrow">PIÈCE HISTORIQUE · MUSÉE CARNAVALET</div><h2>Paris vers 1551</h2><p>Truschet &amp; Hoyau · reproduction ancienne · domaine public/CC0</p></div><div class="controls"><button id="zoomOut" type="button" aria-label="Réduire la carte">−</button><span id="zoomVal" style="min-width:40px;text-align:center">100 %</span><button id="zoomIn" type="button" aria-label="Agrandir la carte">+</button><button id="reset" type="button">Réinitialiser</button></div></div>
+<div class="historical-viewport" id="histPane"><img id="histImage" alt="Reproduction du plan de Paris de Truschet et Hoyau vers 1551, orienté avec le nord à gauche" loading="eager" src="https://apicollections.parismusees.paris.fr/sites/default/files/styles/4k/collections/atoms/images/CAR/aze_carphtop004310_001.jpg?itok=S7P1xtph"></div>
+<div class="caption" id="imageStatus">Source : Musée Carnavalet / Paris Musées, notice 642545, manifeste IIIF 320287793. La photographie publiée reproduit le plan ancien ; elle n’est pas un relevé métrique géoréférencé.</div>
+</section>
+<section class="viewer" aria-label="Carte actuelle avec les parcours tracés"><div class="viewer-header"><div><div class="eyebrow">TRACÉS PARISIS · REPÈRES ACTUELS</div><h2>Les deux artères de Hugo</h2><p>Positions modernes de travail · lignes schématiques déjà dessinées</p></div><a href="parisis-hugo-axes.html" class="btn">Ouvrir en grand ↗</a></div>
+<iframe id="mapFrame" src="parisis-hugo-axes.html?v=compare1551" loading="eager" title="Carte actuelle interactive des deux tracés de Victor Hugo"></iframe>
+<div class="filters"><label><input type="checkbox" id="routeA" checked> <span class="swatch" style="background:var(--teal)"></span> Saint-Jacques → Saint-Martin</label><label><input type="checkbox" id="routeB" checked> <span class="swatch" style="background:var(--orange)"></span> Saint-Michel → Saint-Denis</label></div>
+</section>
+</div>
+<div class="paper">
+<div class="eyebrow">COMPARAISON HISTORIQUE · PREMIER CONTRÔLE</div><h2>Ce que le rapprochement des documents permet de dire</h2>
+<div class="difference"><div><strong>1482</strong><p>Époque du roman. Reconstruction littéraire faite par Victor Hugo au XIXe siècle.</p></div><div><strong>1551–1552</strong><p>Époque représentée dans le plan ancien, avec une orientation inhabituelle et une perspective figurative.</p></div><div><strong>Aujourd’hui</strong><p>Positions modernes des ponts et des rues ; plusieurs monuments et franchissements ont été remplacés ou déplacés.</p></div></div>
+<div class="comparison">
+<div class="compare-route"><div class="route-head"><span class="swatch" style="background:var(--teal)"></span><h3>Axe 01 · Saint-Jacques → Saint-Martin</h3></div><ol><li>Porte Saint-Jacques <span>Emplacement et porte anciens à identifier sur le plan de 1551.</span></li><li>Rue Saint-Jacques <span>Voie historique à confronter aux rues représentées.</span></li><li>Petit-Pont <span>Franchissement historique ; le pont actuel est plus récent.</span></li><li>Rue de la Juiverie <span>Ancien nom ; secteur de la Cité à examiner.</span></li><li>Pont Notre-Dame <span>Franchissement à confronter aux dessins de ponts anciens.</span></li><li>Rue Saint-Martin <span>Continuité vers la rive droite décrite par Hugo.</span></li><li>Porte Saint-Martin <span>La porte du roman n'est pas l'arc monumental visible aujourd'hui.</span></li></ol><span class="pill">Itinéraire littéraire attesté · géométrie historique à relever</span></div>
+<div class="compare-route"><div class="route-head"><span class="swatch" style="background:var(--orange)"></span><h3>Axe 02 · Saint-Michel → Saint-Denis</h3></div><ol><li>Porte Saint-Michel <span>Ancien point d'entrée, localisation à recouper avec le réseau médiéval.</span></li><li>Rue de la Harpe <span>Voie partiellement transformée au XIXe siècle.</span></li><li>Pont Saint-Michel <span>Franchissement historique, structure actuelle plus récente.</span></li><li>Rue de la Barillerie <span>Ancienne rue de l'île de la Cité, disparue sous les transformations modernes.</span></li><li>Pont au Change <span>Le franchissement existe depuis longtemps ; pont actuel plus récent.</span></li><li>Rue Saint-Denis <span>Voie médiévale à confronter au plan.</span></li><li>Porte Saint-Denis <span>La porte de 1482 ne correspond pas à l'arc monumental actuel.</span></li></ol><span class="pill">Itinéraire littéraire attesté · géométrie historique à relever</span></div>
+</div>
+<div class="warn"><strong>Ce qui n’est pas encore fait :</strong> les sept points de chaque axe ne sont pas encore localisés et vérifiés pixel par pixel sur la photographie du plan ancien. Aucune superposition géoréférencée ni « alignement secret » n'est démontré. La vue de gauche est l'original numérisé ; les lignes à droite sont des reconstitutions schématiques à partir des lieux de Hugo sur fond moderne.</div>
+<h3>Sources originales à comparer</h3><div class="source-links"><a href="https://parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/paris-vers-1551-plan-de-truschet-et-hoyau" target="_blank" rel="noopener">Musée Carnavalet · notice et téléchargement ↗</a><a href="https://apicollections.parismusees.paris.fr/iiif/320287793/manifest" target="_blank" rel="noopener">Manifeste IIIF ↗</a><a href="https://fr.wikisource.org/wiki/Notre-Dame_de_Paris/Livre_troisi%C3%A8me" target="_blank" rel="noopener">Hugo · Livre III ↗</a><a href="parisis-hugo-axes.html">Carte PARISIS · Deux parcours ↗</a></div>
+</div>
+<footer>PARISIS ENGINE — comparaison documentaire V1 · Aucune conclusion épigraphique, symbolique ou géométrique automatique. Les sources anciennes et les tracés schématiques demeurent explicitement distincts.</footer>
+</main>
+<script>
+(()=>{'use strict';const pane=document.getElementById('histPane'),img=document.getElementById('histImage'),zoom=document.getElementById('zoomVal'),map=document.getElementById('mapFrame');let level=1;const fallback='https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9a/Paris_vers_1551_-_plan_de_Truschet_et_Hoyau_-_Paris_Mus%C3%A9es.jpg/3840px-Paris_vers_1551_-_plan_de_Truschet_et_Hoyau_-_Paris_Mus%C3%A9es.jpg';
+img.onerror=()=>{if(img.dataset.fallback)return;img.dataset.fallback='1';img.src=fallback;document.getElementById('imageStatus').textContent='Reproduction alternative depuis Wikimedia Commons (source Paris Musées). Si le chargement échoue, ouvrir le document depuis le lien du musée sous la comparaison.'};
+function setZoom(next){const previous=pane.scrollWidth;const sx=(pane.scrollLeft+pane.clientWidth/2)/Math.max(previous,1);const sy=(pane.scrollTop+pane.clientHeight/2)/Math.max(pane.scrollHeight,1);level=Math.max(1,Math.min(4,next));img.style.width=(100*level)+'%';zoom.textContent=Math.round(level*100)+' %';requestAnimationFrame(()=>{pane.scrollLeft=pane.scrollWidth*sx-pane.clientWidth/2;pane.scrollTop=pane.scrollHeight*sy-pane.clientHeight/2})}
+document.getElementById('zoomIn').onclick=()=>setZoom(level+.5);
+document.getElementById('zoomOut').onclick=()=>setZoom(level-.5);
+document.getElementById('reset').onclick=()=>{setZoom(1);pane.scrollTop=0;pane.scrollLeft=0};
+function updateRoute(){try{const doc=map.contentWindow.document;for(const [id,check] of [['showA','routeA'],['showB','routeB']]){const el=doc.getElementById(id);if(el){el.checked=document.getElementById(check).checked;el.dispatchEvent(new Event('change',{bubbles:true}))}}}catch(e){document.getElementById('imageStatus').textContent+=' Note : les filtres synchronisés ne sont disponibles que lorsque les deux pages s’ouvrent sous le même domaine.'}}
+map.addEventListener('load',updateRoute);
+document.getElementById('routeA').onchange=updateRoute;
+document.getElementById('routeB').onchange=updateRoute;
+})();
+</script></body></html>
