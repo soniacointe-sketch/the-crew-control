@@ -19,6 +19,21 @@ footer{font-size:12px;margin:60px 0 0;padding-top:22px;border-top:1px solid var(
 @media(max-width:950px){.layout{grid-template-columns:1fr}.sidebar{position:relative;height:auto;padding:14px 20px;border-right:0;border-bottom:1px solid var(--line)}.brand{font-size:23px}.aside-title,.sidebar p{display:none}.aside-links{display:flex;flex-wrap:wrap;gap:4px}.side-link{padding:6px 10px}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){main{padding:22px 16px}.toolbar{grid-template-columns:1fr}.stats{gap:8px}.stat{padding:13px}.stat strong{font-size:25px}.cards{grid-template-columns:1fr}.entry{padding:17px}.entry h3{font-size:23px}.lead{font-size:16px}dialog{padding:17px}.side-link{font-size:12px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+.study-summary{margin:18px 0 8px;padding:18px 20px;background:#fffbf4;border:1px solid #d3bd9f;border-radius:12px;display:flex;align-items:center;gap:15px;flex-wrap:wrap;justify-content:space-between}
+.study-summary p{margin:5px 0 0;font-size:13px;color:var(--muted)}.study-summary strong{font:24px Georgia,serif}.study-summary .button{min-height:42px}
+.review-note{border-left:2px solid #ac8754;padding:8px 12px;background:#fbf4e9;color:#62503a;font-size:12px}
+.critique{padding:14px 0;border-bottom:1px solid #e1d4c1}
+.critique h3{font:23px/1.24 Georgia,serif;margin:9px 0 12px}
+.critique p{margin:10px 0;line-height:1.7}
+.manuscripts{display:grid;grid-template-columns:1fr;gap:9px;margin:12px 0}
+.manuscript{padding:13px;background:#f9f1e6;border:1px solid #e3d3bd;border-radius:10px}
+.manuscript strong{display:block;font-weight:730}
+.manuscript small{display:block;color:var(--muted);font-size:12px}
+.manuscript a{display:inline-block;margin:7px 0 0;font-size:12px}
+.source-list{display:flex;flex-direction:column;gap:7px;padding:10px 0}
+.source-list a{overflow-wrap:anywhere}
+@media(max-width:650px){.study-summary{align-items:flex-start;flex-direction:column}}
 </style></head><body>
 <div class="layout">
 <aside class="sidebar"><a class="brand" href="mes-univers.html">ELOAH</a><div class="brand-sub">FOI & SPIRITUALITÉ</div><div class="aside-title">BIBLIOTHÈQUE VIVANTE</div>
@@ -30,6 +45,7 @@ footer{font-size:12px;margin:60px 0 0;padding-top:22px;border-top:1px solid var(
 <p class="lead">Évangiles oubliés, récits d’enfance, apocalypses, lettres, voyages des apôtres, codices coptes, écrits juifs et traditions bibliques. Retrouve les références et décide des manuscrits que nous allons étudier.</p>
 <div class="status">IMPORTANT · « Tous » n'est pas une liste définitivement close : les classifications évoluent et des fragments peuvent encore être identifiés. Les références e-Clavis sont issues d'un répertoire scientifique ; les corpus complémentaires sont des pistes documentaires et comportent des doublons d’œuvres.</div>
 <div id="stats" class="stats" aria-label="Statistiques du corpus"><div class="stat"><strong>—</strong><small>Références</small></div></div>
+<section class="study-summary" aria-label="Premières études documentées"><div><strong id="studyCount">Études critiques en cours</strong><p>Manuscrits, cotes, datations, textes et liens vers les collections documentaires.</p></div><button id="studied" class="button" type="button" aria-pressed="false">Voir les études documentées</button></section>
 <div class="toolbar">
 <label for="search">Rechercher partout<input id="search" type="search" placeholder="Thomas, Marie, Michel, ECCA 421, NHC II…" autocomplete="off"></label>
 <label for="family">Famille documentaire<select id="family"><option value="">Toutes les familles</option></select></label>
@@ -43,9 +59,31 @@ footer{font-size:12px;margin:60px 0 0;padding-top:22px;border-top:1px solid var(
 <dialog id="detail" aria-labelledby="detailTitle"><div class="dialog-head"><div><div class="eyebrow">FICHE DOCUMENTAIRE · APERÇU</div><h2 id="detailTitle">Titre</h2></div><button type="button" id="close" aria-label="Fermer">×</button></div><div id="detailBody"></div><div class="dialog-actions"><a id="sourceLink" class="button primary" target="_blank" rel="noopener">Consulter la source ↗</a><button id="study" class="button" type="button">Copier le prompt d'étude</button><button id="saveDetail" class="button" type="button">Ajouter aux favoris</button></div></dialog>
 <script>
 "use strict";
-const PATH="eloah-apocryphes-corpus.json?v=20261013", FAV="eloah-foi-apocryphes-favoris-v1";
+const ENRICHED_PATH="eloah-apocryphes-etudes-verifiees.json?v=20261013", PATH="eloah-apocryphes-corpus.json?v=20261013", FAV="eloah-foi-apocryphes-favoris-v1";
 const $=id=>document.getElementById(id);
-let all=[],visible=[],limit=40,active=null,onlyFav=false;
+let all=[],visible=[],limit=40,active=null,onlyFav=false,onlyStudied=false;
+let enriched=[];
+function studyFor(e){
+ return enriched.find(st=>st.key.startsWith("ECCA ")&&e.identifier.startsWith(st.key+" ")||st.key.startsWith("ECCA ")&&e.identifier===st.key
+   ||st.key.startsWith("NHC ")&&e.identifier.startsWith(st.key+" ")
+   ||st.key.startsWith("PSEUDO:")&&norm(e.title)===norm(st.key.slice(7)));
+}
+function linked(label,url){const a=el("a",null,label);a.href=url;a.target="_blank";a.rel="noopener noreferrer";return a}
+function createSection(parent,title,description){const block=el("section","critique");block.append(el("h3",null,title),el("p",null,description));parent.append(block);return block}
+function enrichDetail(e){
+ const st=studyFor(e),root=$("detailBody");
+ if(!st){root.append(row("Niveau documentaire","Notice d’inventaire : manuscrits, dates et éditions critiques à consulter dans la source."));return}
+ const summary=el("div","review-note","Étude critique documentée · "+st.dateDossier+" · Les liens « images » mènent aux pages des collections ou aux photographies quand celles-ci sont disponibles ; ce ne sont pas toujours des images directes.");
+ root.append(summary,row("Thématique",st.thematic),row("Langues attestées / présumées",st.language),row("Composition / transmission",st.dating));
+ const group=el("section","critique");group.append(el("h3",null,"Manuscrits et témoins documentés"));const gr=el("div","manuscripts");
+ for(const w of st.witnesses){const card=el("div","manuscript");card.append(el("strong",null,w.ref),el("small",null,w.holder+" · "+w.date),el("p",null,w.detail),linked("Consulter la notice ou les images ↗",w.images));gr.append(card)}group.append(gr);root.append(group);
+ createSection(root,"Analyse historique",st.analysis);
+ createSection(root,"Édition scientifique à consulter",st.edition);
+ createSection(root,"Incertitudes et limites",st.uncertainty);
+ const resources=el("section","critique");resources.append(el("h3",null,"Sources et photographies à consulter"));const links=el("div","source-list");
+ for(const [label,url]of st.links)links.append(linked(label+" ↗",url));
+ resources.append(links);root.append(resources);
+}
 const stored=(()=>{try{const a=JSON.parse(localStorage.getItem(FAV)||"[]");return new Set(Array.isArray(a)?a:[])}catch{return new Set()}})();
 function persist(){try{localStorage.setItem(FAV,JSON.stringify([...stored]))}catch(e){console.warn("Sauvegarde locale indisponible",e)}}
 function norm(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr")}
@@ -53,21 +91,35 @@ function el(tag,className,txt){const x=document.createElement(tag);if(className)
 function setChoices(id,arr,label){const control=$(id);const selected=control.value;control.replaceChildren(new Option(label,""));[...new Set(arr)].sort((a,b)=>a.localeCompare(b,"fr")).forEach(x=>control.add(new Option(x,x)));if([...control.options].some(x=>x.value===selected))control.value=selected}
 function toggleFavorite(e){const key=e.id;stored.has(key)?stored.delete(key):stored.add(key);persist();updateFav();render()}
 function updateFav(){$("favorites").textContent=(onlyFav?"★ ":"☆ ")+"Mes favoris ("+stored.size+")";$("favorites").setAttribute("aria-pressed",String(onlyFav))}
-function card(e){const box=el("article","entry");const line=el("div","line");const info=el("div");info.append(el("span","tag",e.category));const fav=el("button","button favorite",stored.has(e.id)?"★":"☆");fav.type="button";fav.title="Ajouter ou retirer des favoris";fav.setAttribute("aria-label",fav.title);fav.setAttribute("aria-pressed",String(stored.has(e.id)));fav.onclick=()=>toggleFavorite(e);line.append(info,fav);const h=el("h3",null,e.title);const identifier=el("div","meta",e.identifier+" · "+e.origin);const actions=el("div","entry-actions");const view=el("button",null,"Voir la fiche");view.type="button";view.onclick=()=>openDetail(e);actions.append(view);const link=el("a",null,"Source ↗");link.href=e.url;link.target="_blank";link.rel="noopener noreferrer";actions.append(link);box.append(line,h,identifier,actions);return box}
-function render(){const term=norm($("search").value.trim()),fam=$("family").value,cat=$("category").value;visible=all.filter(x=>(!fam||x.family===fam)&&(!cat||x.category===cat)&&(!onlyFav||stored.has(x.id))&&(!term||norm(x.title+" "+x.identifier+" "+x.category+" "+x.family+" "+x.origin).includes(term)));const frag=document.createDocumentFragment();visible.slice(0,limit).forEach(x=>frag.append(card(x)));const holder=$("results");holder.replaceChildren(frag);if(!visible.length){holder.append(el("div","noresults","Aucune notice pour ces critères. Modifie les filtres ou efface la recherche."))}$("count").textContent=visible.length+" référence(s) · "+Math.min(limit,visible.length)+" affichée(s)";$("more").hidden=visible.length<=limit;updateFav()}
+function card(e){const box=el("article","entry");const line=el("div","line");const info=el("div");info.append(el("span","tag",e.category));const fav=el("button","button favorite",stored.has(e.id)?"★":"☆");fav.type="button";fav.title="Ajouter ou retirer des favoris";fav.setAttribute("aria-label",fav.title);fav.setAttribute("aria-pressed",String(stored.has(e.id)));fav.onclick=()=>toggleFavorite(e);line.append(info,fav);const h=el("h3",null,e.title);const identifier=el("div","meta",e.identifier+" · "+e.origin);const st=studyFor(e);const actions=el("div","entry-actions");const view=el("button",null,st?"Lire l’étude et les témoins":"Voir la fiche");view.type="button";view.onclick=()=>openDetail(e);actions.append(view);const link=linked("Source ↗",e.url);actions.append(link);box.append(line,h,identifier);if(st)box.append(el("div","review-note","Étude documentée · "+st.thematic+" · "+st.witnesses.length+" témoin(s) décrits"));box.append(actions);return box}
+function render(){const term=norm($("search").value.trim()),fam=$("family").value,cat=$("category").value;visible=all.filter(x=>(!fam||x.family===fam)&&(!cat||x.category===cat)&&(!onlyFav||stored.has(x.id))&&(!onlyStudied||Boolean(studyFor(x)))&&(!term||norm(x.title+" "+x.identifier+" "+x.category+" "+x.family+" "+x.origin).includes(term)));const frag=document.createDocumentFragment();visible.slice(0,limit).forEach(x=>frag.append(card(x)));const holder=$("results");holder.replaceChildren(frag);if(!visible.length){holder.append(el("div","noresults","Aucune notice pour ces critères. Modifie les filtres ou efface la recherche."))}$("count").textContent=visible.length+" référence(s) · "+Math.min(limit,visible.length)+" affichée(s)";$("more").hidden=visible.length<=limit;updateFav();$("studied").setAttribute("aria-pressed",String(onlyStudied));$("studied").textContent=onlyStudied?"✓ Afficher tout le catalogue":"Voir les études documentées"}
 function row(title,value){const block=el("div","detail-row");block.append(el("small",null,title),el("div",null,value||"Non renseigné"));return block}
-function openDetail(e){active=e;$("detailTitle").textContent=e.title;$("detailBody").replaceChildren(row("Référence",e.identifier),row("Famille",e.family),row("Catégorie documentaire",e.category),row("Source",e.origin),row("À vérifier avant de conclure",e.note),row("Champs encore à renseigner","Datation, cote matérielle, provenance, langue, transcription, photographie, variantes, édition critique, histoire de la réception."));$("sourceLink").href=e.url;$("saveDetail").textContent=stored.has(e.id)?"Retirer des favoris":"Ajouter aux favoris";$("detail").showModal()}
+function openDetail(e){active=e;$("detailTitle").textContent=e.title;$("detailBody").replaceChildren(row("Référence",e.identifier),row("Famille",e.family),row("Catégorie documentaire",e.category),row("Source",e.origin));enrichDetail(e);$("sourceLink").href=e.url;$("saveDetail").textContent=stored.has(e.id)?"Retirer des favoris":"Ajouter aux favoris";$("detail").showModal()}
 function promptFor(e){return "ELOAH — FOI & SPIRITUALITÉ · ÉTUDE SCIENTIFIQUE D'UN TEXTE ANCIEN\nTitre : "+e.title+"\nRéférence : "+e.identifier+"\nFamille : "+e.family+"\nSource à consulter : "+e.url+"\nMission : produire une étude approfondie avec cote précise des manuscrits, institutions, langues, datation de la composition et de la copie, photographies vérifiables, transcription des passages principaux, traduction prudente, variantes entre témoins, histoire de la réception, liens avec les autres apocryphes, bibliographie scientifique et problèmes non résolus. Distinguer chaque affirmation attestée d'une hypothèse. Ne pas inventer un témoin manquant."}
 $("close").onclick=()=>$("detail").close();
 $("detail").addEventListener("click",e=>{if(e.target===$("detail"))$("detail").close()});
 $("saveDetail").onclick=()=>{if(active){toggleFavorite(active);$("saveDetail").textContent=stored.has(active.id)?"Retirer des favoris":"Ajouter aux favoris"}};
 $("study").onclick=async()=>{if(!active)return;const p=promptFor(active);try{await navigator.clipboard.writeText(p);$("study").textContent="Prompt copié ✓";setTimeout(()=>$("study").textContent="Copier le prompt d'étude",2300)}catch{window.prompt("Copier ce prompt pour ChatGPT :",p)}};
 $("favorites").onclick=()=>{onlyFav=!onlyFav;limit=40;render()};
-$("reset").onclick=()=>{$("search").value="";$("family").value="";$("category").value="";onlyFav=false;limit=40;render()};
+$("studied").onclick=()=>{onlyStudied=!onlyStudied;limit=40;render();$("results").scrollIntoView({block:"start",behavior:"smooth"})};
+$("reset").onclick=()=>{$("search").value="";$("family").value="";$("category").value="";onlyFav=false;onlyStudied=false;limit=40;render()};
 $("search").addEventListener("input",()=>{limit=40;render()});
 $("family").addEventListener("change",()=>{limit=40;render()});
 $("category").addEventListener("change",()=>{limit=40;render()});
 $("more").onclick=()=>{limit+=40;render()};
 $("export").onclick=()=>{const data=all.filter(x=>stored.has(x.id));const blob=new Blob([JSON.stringify({format:"eloah-foi-apocryphes-favoris-v1",exported:new Date().toISOString(),entries:data},null,2)],{type:"application/json"});const u=URL.createObjectURL(blob);const a=el("a");a.href=u;a.download="eloah-apocryphes-mes-recherches.json";a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)};
-(async()=>{try{const response=await fetch(PATH,{cache:"no-store"});if(!response.ok)throw Error("HTTP "+response.status);const corpus=await response.json();if(!Array.isArray(corpus.entries))throw Error("Index invalide");all=corpus.entries;$("stats").replaceChildren();for(const [label,value]of [["Notices au total",all.length],["e-Clavis / NASSCAL",corpus.counts.christian],["Versions coptes / Brill",corpus.counts.brill],["Pseudépigraphes + canons",corpus.counts.pseudepigrapha+corpus.counts.deuterocanon]]){const b=el("div","stat");b.append(el("strong",null,String(value)),el("small",null,label));$("stats").append(b)}setChoices("family",all.map(x=>x.family),"Toutes les familles");setChoices("category",all.map(x=>x.category),"Tous les types");const params=new URLSearchParams(location.search);if(params.has("q"))$("search").value=params.get("q");render()}catch(e){$("count").textContent="La base documentaire n’a pas pu être chargée : "+e.message;$("results").replaceChildren(el("div","noresults","Vérifie la publication du fichier eloah-apocryphes-corpus.json dans le même dossier GitHub Pages."))}})();
+(async()=>{try{
+ const [resp,studyResponse]=await Promise.all([fetch(PATH,{cache:"no-store"}),fetch(ENRICHED_PATH,{cache:"no-store"}).catch(()=>null)]);
+ if(!resp.ok)throw Error("HTTP "+resp.status);
+ const corpus=await resp.json();if(!Array.isArray(corpus.entries))throw Error("Index invalide");
+ all=corpus.entries;
+ if(studyResponse&&studyResponse.ok){const d=await studyResponse.json();enriched=Array.isArray(d.items)?d.items:[]}
+ $("studyCount").textContent=enriched.length+" études documentées";
+ $("stats").replaceChildren();
+ for(const [label,value]of [["Notices au total",all.length],["e-Clavis / NASSCAL",corpus.counts.christian],["Versions coptes / Brill",corpus.counts.brill],["Pseudépigraphes + canons",corpus.counts.pseudepigrapha+corpus.counts.deuterocanon]]){const b=el("div","stat");b.append(el("strong",null,String(value)),el("small",null,label));$("stats").append(b)}
+ setChoices("family",all.map(x=>x.family),"Toutes les familles");setChoices("category",all.map(x=>x.category),"Tous les types");
+ const params=new URLSearchParams(location.search);if(params.has("q"))$("search").value=params.get("q");
+ if(params.get("etudes")==="1")onlyStudied=true;
+ render();
+}catch(e){$("count").textContent="La base documentaire n’a pas pu être chargée : "+e.message;$("results").replaceChildren(el("div","noresults","Vérifie la publication du fichier de données dans le même dossier GitHub Pages."))}})();
 </script></body></html>
