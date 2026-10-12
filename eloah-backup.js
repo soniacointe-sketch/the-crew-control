@@ -18,7 +18,7 @@ function validate(p){
  return {areas:[...new Set(p.entries.map(e=>area(e.key)))],entries:p.entries.length,files:p.files.length,bytes,projects:p.entries.filter(e=>e.key.startsWith('eloah-project-v1:')).length};
 }
 if(typeof module!=='undefined'&&module.exports){module.exports={validate,allowed};return}
-const $=id=>document.getElementById(id);let pending=null,db;
+const $=id=>document.getElementById(id);let pending=null,db,recoveryReady=false;
 const status=s=>$('backup-status').textContent=s;
 async function database(){if(db)return db;return new Promise((resolve,reject)=>{const r=indexedDB.open('eloah-project-files',1);r.onupgradeneeded=()=>r.result.createObjectStore('files',{keyPath:'id'});r.onerror=()=>reject(r.error);r.onblocked=()=>reject(Error('Ferme les autres onglets ELOAH puis réessaie.'));r.onsuccess=()=>{db=r.result;resolve(db)}})}
 async function allFiles(){const d=await database();return new Promise((resolve,reject)=>{const r=d.transaction('files').objectStore('files').getAll();r.onsuccess=()=>resolve(r.result.filter(f=>!String(f.project).startsWith('eloah-recovery:')));r.onerror=()=>reject(r.error)})}
@@ -39,7 +39,7 @@ async function snapshot(){
 async function run(fn){document.querySelectorAll('button,input').forEach(e=>e.disabled=true);try{await fn()}catch(e){status('Opération interrompue : '+e.message)}finally{document.querySelectorAll('button,input').forEach(e=>e.disabled=false);$('apply').disabled=!pending||!$('consent').checked}}
 $('export-all').onclick=()=>run(async()=>{const pass=$('backup-password').value,repeat=$('backup-password-again').value;if(pass.length<12)throw Error('Choisis une phrase secrète d’au moins 12 caractères.');if(pass!==repeat)throw Error('Les deux phrases secrètes sont différentes.');if(!confirm('Créer une sauvegarde chiffrée sur cet appareil ? Si tu perds la phrase secrète, cette sauvegarde sera irrécupérable.'))return;const p=await snapshot();status('Chiffrement local de la sauvegarde…');const sealed=await seal(p,pass);download(sealed,'ELOAH-sauvegarde-CHIFFREE');$('backup-password').value='';$('backup-password-again').value='';const n=validate(p);status('Sauvegarde chiffrée préparée : '+n.projects+' projets et '+n.files+' fichiers. Conserve séparément ta phrase secrète, elle n’est ni enregistrée ni envoyée.');});
 $('import-file').onchange=e=>run(async()=>{
- pending=null;$('preview').hidden=true;const file=e.target.files[0];if(!file)return;
+ pending=null;recoveryReady=false;$('recovery-confirmed').checked=false;$('recovery-confirmation').hidden=true;$('apply').textContent='Préparer ma copie de secours chiffrée';$('preview').hidden=true;const file=e.target.files[0];if(!file)return;
  if(file.size>150*1024*1024)throw Error('Fichier trop volumineux (maximum 150 Mo).');
  const loaded=JSON.parse(await file.text());let p;if(loaded?.format==='eloah-encrypted-backup'){const pass=$('restore-password').value;if(!pass)throw Error('Saisis la phrase secrète pour ouvrir la sauvegarde chiffrée.');status('Déchiffrement local…');p=await unseal(loaded,pass);$('restore-password').value='';}else{if(!confirm('Cette ancienne sauvegarde JSON est NON chiffrée. Elle sera lue localement. Continuer ?'))return;p=loaded;}const n=validate(p);
  const conflicts=p.entries.filter(e=>localStorage.getItem(e.key)!==null).length;
@@ -50,7 +50,7 @@ $('import-file').onchange=e=>run(async()=>{
 $('consent').onchange=()=>{$('apply').disabled=!pending||!$('consent').checked};
 $('apply').onclick=()=>run(async()=>{
  if(!pending||!$('consent').checked)return;
- const p=pending;validate(p);const recoveryPass=$('recovery-password').value;if(recoveryPass.length<12)throw Error('Choisis une phrase secrète de 12 caractères minimum pour chiffrer la copie avant restauration.');const before=await snapshot();status('Chiffrement de la copie de secours avant restauration…');const protectedBefore=await seal(before,recoveryPass);download(protectedBefore,'ELOAH-avant-restauration-CHIFFREE');$('recovery-password').value='';
+ const p=pending;validate(p);if(!recoveryReady){const recoveryPass=$('recovery-password').value;if(recoveryPass.length<12)throw Error('Choisis une phrase secrète de 12 caractères minimum pour chiffrer la copie avant restauration.');const before=await snapshot();status('Chiffrement de la copie de secours avant restauration…');const protectedBefore=await seal(before,recoveryPass);download(protectedBefore,'ELOAH-avant-restauration-CHIFFREE');$('recovery-password').value='';recoveryReady=true;$('recovery-confirmation').hidden=false;$('apply').textContent='Confirmer la restauration';status('Copie de secours proposée au téléchargement. Vérifie que le fichier chiffré existe bien sur ton appareil, puis coche la confirmation et clique une seconde fois. Aucune donnée remplacée.');return;}if(!$('recovery-confirmed').checked)throw Error('Confirme la présence du fichier de secours chiffré avant de restaurer.');if(!confirm('Dernière confirmation : remplacer les données locales indiquées dans le bilan ?'))return;
  const decoded=p.files.map(f=>{const s=atob(f.data),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return {id:f.id,project:f.project,name:f.name,date:f.date,folder:f.folder,blob:new Blob([u],{type:f.type})}});
  const original=new Map(p.entries.map(e=>[e.key,localStorage.getItem(e.key)]));let touched=false;
  try{
@@ -60,6 +60,6 @@ $('apply').onclick=()=>run(async()=>{
   if(touched){try{for(const k of original.keys())localStorage.removeItem(k);for(const [k,v] of original){if(v!==null)localStorage.setItem(k,v)}}catch{throw Error('Restauration interrompue et retour local incomplet. Utilise le fichier ELOAH-avant-restauration téléchargé.');}}
   throw e;
  }
- pending=null;$('preview').hidden=true;$('import-file').value='';status('Restauration terminée. Recharge tes autres onglets ELOAH avant de travailler. La copie précédente a été proposée au téléchargement.');$('back-home').hidden=false;
+ pending=null;recoveryReady=false;$('preview').hidden=true;$('import-file').value='';status('Restauration terminée. Recharge tes autres onglets ELOAH avant de travailler. La copie précédente a été proposée au téléchargement.');$('back-home').hidden=false;
 });
 })();
