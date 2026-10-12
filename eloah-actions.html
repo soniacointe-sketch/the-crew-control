@@ -19,7 +19,7 @@
 <div id="task-list" class="task-list" aria-live="polite"></div>
 <p class="save-hint">Ces tâches sont indépendantes des agendas, courriels et projets ELOAH existants. Aucun envoi, synchronisation cloud ou rappel automatique n'est activé. L'export JSON permet de conserver une copie.</p>
 </section>
-<section class="grid" aria-label="Actions par univers">
+<section class="events" id="calendar-local" aria-labelledby="calendar-title"><span class="eyebrow">Agenda privé · sur cet appareil</span><h3 id="calendar-title">Mon agenda importé</h3><p class="event-info">Importe un fichier .ics exporté depuis Google Agenda. Le contenu reste dans ce navigateur : aucun rendez-vous personnel n'est ajouté au dépôt public ni envoyé à un serveur par cette fonction. Les répétitions ne sont pas développées automatiquement.</p><div class="filter-row"><label for="calendar-file" class="back" style="cursor:pointer">Importer un calendrier .ics ↓</label><input id="calendar-file" type="file" accept=".ics,text/calendar" hidden><button id="calendar-clear" type="button">Effacer les événements importés</button><a class="back" href="https://calendar.google.com/calendar/u/0/r" target="_blank" rel="noopener noreferrer">Ouvrir Google Agenda ↗</a></div><p class="event-info" id="calendar-status" role="status" aria-live="polite">Aucun calendrier importé.</p><div class="event-list" id="calendar-events"></div></section><section class="grid" aria-label="Actions par univers">
 <article class="card"><h2>The Crew Orchies</h2><p>Association, cours, inscriptions et événements.</p><div class="actions"><a class="primary" href="eloah-projet.html?projet=The%20Crew%20Orchies">Gérer le projet ↗</a><a href="eloah-the-crew.html">Tableau de bord ↗</a><a href="index.html">Gestion ↗</a></div></article>
 <article class="card"><h2>Power & Glam</h2><p>Éditorial, offres, contenus et publication.</p><div class="actions"><a class="primary" href="eloah-projet.html?projet=Power%20%26%20Glam">Gérer le projet ↗</a><a href="power-glam-control.html">Tableau de bord ↗</a></div></article>
 <article class="card"><h2>SONIA OS</h2><p>Agents, gouvernance et missions.</p><div class="actions"><a class="primary" href="eloah-projet.html?projet=SONIA%20OS">Gérer le projet ↗</a><a href="sonia-os.html">Tableau de bord ↗</a></div></article>
@@ -78,5 +78,49 @@ $('tasks-export').onclick=()=>{const blob=new Blob([JSON.stringify({format:'eloa
 $('tasks-import').onclick=()=>$('tasks-file').click();
 $('tasks-file').onchange=async e=>{const file=e.target.files[0];if(!file)return;try{if(file.size>2000000)throw Error('Fichier trop volumineux');const raw=JSON.parse(await file.text());if(raw.format!=='eloah-action-tasks-v1'||!Array.isArray(raw.tasks)||raw.tasks.length>3000||raw.tasks.some(t=>!valid(t)))throw Error('Format ou données invalides');if(confirm('Importer '+raw.tasks.length+' tâches ? Les tâches locales actuelles seront remplacées.')){tasks=raw.tasks.map(t=>({id:t.id,title:t.title,project:t.project,date:t.date||'',priority:t.priority,done:t.done}));save();render()}}catch(err){alert('Import impossible : '+err.message)}finally{e.target.value=''}};
 load();render();renderKnownEvents();
+})();
+</script><script>
+(function(){
+'use strict';
+const KEY='eloah-private-calendar-import-v1';
+const file=document.getElementById('calendar-file'),host=document.getElementById('calendar-events'),status=document.getElementById('calendar-status');
+const escapeDate=(s)=>{if(!s)return '';const v=s.replace(/[^0-9TZ]/g,'');if(v.length<8)return '';return v.slice(0,4)+'-'+v.slice(4,6)+'-'+v.slice(6,8)};
+const unescapeText=s=>s.replace(/\\n/gi,' · ').replace(/\\,/g,',').replace(/\\;/g,';').replace(/\\\\/g,'\\');
+function decode(raw){
+ const lines=raw.replace(/\r\n[ \t]/g,'').replace(/\n[ \t]/g,'').split(/\r?\n/);
+ const entries=[];let current=null;
+ for(const line of lines){
+  if(line==='BEGIN:VEVENT'){current={};continue}
+  if(line==='END:VEVENT'){if(current&&current.title&&current.date)entries.push(current);current=null;continue}
+  if(!current)continue;
+  const p=line.indexOf(':');if(p<0)continue;
+  const k=line.slice(0,p).split(';')[0].toUpperCase(),v=line.slice(p+1);
+  if(k==='SUMMARY')current.title=unescapeText(v).slice(0,220);
+  if(k==='DTSTART')current.date=escapeDate(v);
+  if(k==='LOCATION')current.location=unescapeText(v).slice(0,160);
+  if(k==='UID')current.id=v.slice(0,200);
+  if(k==='STATUS'&&v==='CANCELLED')current.cancelled=true;
+ }
+ return entries.filter(x=>!x.cancelled).slice(0,1000).sort((a,b)=>a.date.localeCompare(b.date));
+}
+let events=[];
+try{const saved=JSON.parse(localStorage.getItem(KEY)||'[]');if(Array.isArray(saved))events=saved.filter(x=>x&&typeof x.title==='string'&&/^\d{4}-\d{2}-\d{2}$/.test(x.date)).slice(0,1000)}catch{}
+function render(){
+ host.replaceChildren();const now=new Date(),today=[now.getFullYear(),String(now.getMonth()+1).padStart(2,'0'),String(now.getDate()).padStart(2,'0')].join('-');
+ const future=events.filter(x=>x.date>=today).slice(0,40);status.textContent=events.length?events.length+' événement(s) importé(s) sur cet appareil · '+future.length+' prochain(s) affiché(s)':'Aucun calendrier importé.';
+ if(events.length&&!future.length){const p=document.createElement('p');p.textContent='Aucun événement futur trouvé dans ce fichier.';host.append(p)}
+ for(const e of future){
+  const card=document.createElement('article');card.className='event';
+  const date=document.createElement('div');date.className='event-date';date.textContent=e.date;
+  const title=document.createElement('div');title.className='event-title';title.textContent=e.title;
+  const loc=document.createElement('div');loc.className='event-desc';loc.textContent=e.location||'Calendrier importé · horaire à consulter dans Google Agenda';
+  const btn=document.createElement('button');btn.textContent='Préparer une tâche liée ↗';
+  btn.onclick=()=>{const project='ELOAH';const titleText='Préparer : '+e.title;const url='eloah-projet.html?projet='+encodeURIComponent(project)+'&demande='+encodeURIComponent(titleText.slice(0,500));location.href=url};
+  card.append(date,title,loc,btn);host.append(card)
+ }
+}
+file.addEventListener('change',async()=>{const f=file.files[0];if(!f)return;try{if(f.size>3000000)throw Error('Fichier supérieur à 3 Mo');const raw=await f.text();if(!raw.includes('BEGIN:VCALENDAR'))throw Error('Ce fichier n’est pas un calendrier .ics');const result=decode(raw);if(!result.length)throw Error('Aucun événement exploitable');events=result;try{localStorage.setItem(KEY,JSON.stringify(events))}catch{status.textContent='Stockage indisponible : événements visibles pour cette session uniquement'}render()}catch(e){status.textContent='Import impossible : '+e.message}finally{file.value=''}});
+document.getElementById('calendar-clear').onclick=()=>{if(!confirm('Effacer les événements de calendrier conservés dans ce navigateur ?'))return;events=[];try{localStorage.removeItem(KEY)}catch{}render()};
+render();
 })();
 </script></body></html>
