@@ -50,7 +50,7 @@ $('import-file').onchange=e=>run(async()=>{
 $('consent').onchange=()=>{$('apply').disabled=!pending||!$('consent').checked};
 $('apply').onclick=()=>run(async()=>{
  if(!pending||!$('consent').checked)return;
- const p=pending;validate(p);const before=await snapshot();download(before,'ELOAH-avant-restauration');
+ const p=pending;validate(p);const recoveryPass=$('recovery-password').value;if(recoveryPass.length<12)throw Error('Choisis une phrase secrète de 12 caractères minimum pour chiffrer la copie avant restauration.');const before=await snapshot();status('Chiffrement de la copie de secours avant restauration…');const protectedBefore=await seal(before,recoveryPass);download(protectedBefore,'ELOAH-avant-restauration-CHIFFREE');$('recovery-password').value='';
  const decoded=p.files.map(f=>{const s=atob(f.data),u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i);return {id:f.id,project:f.project,name:f.name,date:f.date,folder:f.folder,blob:new Blob([u],{type:f.type})}});
  const original=new Map(p.entries.map(e=>[e.key,localStorage.getItem(e.key)]));let touched=false;
  try{
