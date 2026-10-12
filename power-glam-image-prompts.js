@@ -49,7 +49,7 @@ const selectedPhoto=photos.find(p=>p.id===q.get('pg_photo'));
 const store=getStore();
 const first=selectedPhoto||photos.find(p=>p.id===store.photo)||photos[0];
 const chooseU=universes.includes(q.get('pg_univers'))?q.get('pg_univers'):selectedPhoto?first.universe:universes.includes(base.value)?base.value:first.universe;
-let photo=first,universe=chooseU,fmt=formats.includes(store.format)?store.format:'4:5',use=Object.hasOwn(choices,store.use)?store.use:'Article / WordPress',chosen=0,dirty={};
+let photo=first,universe=chooseU,fmt=formats.includes(store.format)?store.format:'4:5',use=Object.prototype.hasOwnProperty.call(choices,store.use)?store.use:'Article / WordPress',chosen=0,dirty=(store.edits&&typeof store.edits==='object'&&!Array.isArray(store.edits))?store.edits:{};
 const host=document.createElement('section');host.id='pg-image-prompts';host.setAttribute('aria-label','Atelier de dix prompts images Power & Glam');
 layout.parentNode.insertBefore(host,layout);
 host.innerHTML='<div class="pgip-header"><div><span class="pgip-overline">POWER & GLAM · IMAGE LAB · 10 PROMPTS</span><h2>Dix images à imaginer, une à créer à la fois.</h2><p>Depuis une photographie de référence, prépare dix cadrages originaux. Ouvre celui de ton choix dans ChatGPT pour générer l’image ici, puis reviens à ton article.</p></div><span class="pgip-pill">10 propositions photographiques</span></div>'+
@@ -77,11 +77,11 @@ setStatus('');
 }
 async function copy(x,label){try{await navigator.clipboard.writeText(x);setStatus(label+' copié.')}catch(e){el('pgip-text').focus();el('pgip-text').select();setStatus('Copie automatique indisponible. Le texte du prompt est sélectionné : utilise Ctrl+C.')}}
 el('pgip-grid').addEventListener('click',e=>{const button=e.target.closest('[data-edit]');if(button){chosen=Number(button.dataset.edit);redraw();el('pgip-text').scrollIntoView({behavior:'smooth',block:'center'})}});
-el('pgip-text').addEventListener('input',()=>{dirty[configId(chosen)]=el('pgip-text').value;el('pgip-open').href='https://chatgpt.com/?q='+encodeURIComponent(el('pgip-text').value);const link=el('pgip-grid').querySelector('[data-create="'+chosen+'"]');if(link)link.href=el('pgip-open').href});
+el('pgip-text').addEventListener('input',()=>{dirty[configId(chosen)]=el('pgip-text').value;const updated=getStore();updated.edits=dirty;saveStore(updated);el('pgip-open').href='https://chatgpt.com/?q='+encodeURIComponent(el('pgip-text').value);const link=el('pgip-grid').querySelector('[data-create="'+chosen+'"]');if(link)link.href=el('pgip-open').href});
 ['pgip-photo','pgip-universe','pgip-use','pgip-format'].forEach(id=>el(id).addEventListener('change',configure));
 el('pgip-copy').onclick=()=>copy(el('pgip-text').value,'Prompt');
 el('pgip-all').onclick=()=>copy(variants.map((v,i)=>'—— '+(i+1)+' / 10 · '+v.title+' ——\n'+promptAt(i)).join('\n\n'),'Les dix prompts');
-el('pgip-reset').onclick=()=>{delete dirty[configId(chosen)];redraw();setStatus('Prompt restauré dans sa version originale.')};
+el('pgip-reset').onclick=()=>{delete dirty[configId(chosen)];const updated=getStore();updated.edits=dirty;saveStore(updated);redraw();setStatus('Prompt restauré dans sa version originale.')};
 el('pgip-add').onclick=()=>{
 const marker='[PROMPT IMAGE POWER & GLAM '+photo.id+' / '+(chosen+1)+']';
 if(brief.value.includes(marker)){setStatus('Ce prompt a déjà été ajouté au brief de l’article.');return}
@@ -91,6 +91,7 @@ brief.dispatchEvent(new Event('input',{bubbles:true}));
 setStatus('Prompt ajouté au brief sans effacer ton article. Pense à cliquer sur « Conserver localement ».');
 };
 redraw();
+if(location.hash==='#pg-image-prompts')window.setTimeout(()=>host.scrollIntoView({behavior:'smooth',block:'start'}),120);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
