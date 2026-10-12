@@ -89,7 +89,7 @@ function renderCompose(){
  $("workTextDownload").onclick=()=>download("courrier-eloah-"+today()+".txt",$("workText").value,"text/plain;charset=utf-8");
  $("workChat").onclick=()=>{copyText($("workText").value).then(()=>window.open("https://chatgpt.com/","_blank","noopener,noreferrer"));alert("Texte copié. Colle-le dans ChatGPT pour demander une reformulation ; aucun courrier n’est envoyé automatiquement.")};
  bindDocList();
- if(!docLoaded)loadDocs().then(()=>{if(B().getView()==="compose")renderCompose()}).catch(err=>{const target=$("workDraftList");if(target)target.textContent="Connexion privée nécessaire : "+err.message});
+ if(!docLoaded)loadDocs().then(()=>{if(B().getView()==="compose"&&$("workDraftList")){$("workDraftList").innerHTML=listDocs("compose");bindDocList()}}).catch(err=>{const target=$("workDraftList");if(target)target.textContent="Connexion privée nécessaire : "+err.message});
 }
 function listDocs(mode){
  const subset=docs.filter(d=>mode==="compose"?d.kind!=="note":d.kind==="note");
@@ -127,7 +127,7 @@ function renderNotes(){
  $("workSaveNote").onclick=()=>saveDoc(true);
  $("workNewNote").onclick=()=>{draftId="";$("workNoteTitle").value="";$("workNoteText").value="";$("workNoteMail").value=""};
  bindDocList();
- if(!docLoaded)loadDocs().then(()=>{if(B().getView()==="notes")renderNotes()}).catch(err=>{const t=$("workNotesList");if(t)t.textContent="Connexion privée nécessaire : "+err.message});
+ if(!docLoaded)loadDocs().then(()=>{if(B().getView()==="notes"&&$("workNotesList")){$("workNotesList").innerHTML=listDocs("notes");bindDocList()}}).catch(err=>{const t=$("workNotesList");if(t)t.textContent="Connexion privée nécessaire : "+err.message});
 }
 async function copyText(value){try{await navigator.clipboard.writeText(value)}catch(err){alert("Copie indisponible, sélectionne et copie le texte manuellement.")}}
 function bindCommon(){
