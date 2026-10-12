@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f4efe7"><title>PARISIS ENGINE · Les deux artères de Victor Hugo</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--bg:#f4efe7;--paper:#fffdf9;--ink:#2e332f;--muted:#6c736b;--line:#ded8cd;--a:#137c87;--b:#bb623b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.54 system-ui,sans-serif}a{color:#245c58}header{background:#fffcf5;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px clamp(16px,3vw,36px);flex-wrap:wrap}.kicker{font-size:11px;letter-spacing:.13em;color:#846e53;font-weight:700;text-transform:uppercase}header h1{font:clamp(25px,3vw,40px) Georgia,serif;margin:4px 0}header p{color:var(--muted);margin:3px 0}.back{display:inline-block;border:1px solid #d6cbbd;padding:10px 13px;text-decoration:none;background:white;border-radius:8px}
+.layout{display:grid;grid-template-columns:minmax(295px,385px) minmax(0,1fr);min-height:calc(100dvh - 118px)}
+aside{padding:20px;overflow-y:auto;max-height:calc(100dvh - 118px);border-right:1px solid var(--line)}
+#map{height:calc(100dvh - 118px);min-height:620px;background:#ebe9e2}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:11px;padding:15px;margin-bottom:13px}
+.panel h2{font:22px Georgia,serif;margin:4px 0 10px}.panel h3{font:18px Georgia,serif;margin:2px 0 7px}
+label{display:block;margin:10px 0;font-weight:650}input{accent-color:#32736d}button{background:#fffdf9;border:1px solid #c9c1b5;padding:9px 11px;border-radius:7px;font:inherit;cursor:pointer}button:hover{background:#f3e9dd}.actions{display:flex;flex-wrap:wrap;gap:7px;margin:12px 0}
+.notice{padding:12px;background:#f9f1e2;border-left:4px solid #b28e50;border-radius:6px;font-size:12px;color:#5e584f}
+.row{display:flex;gap:8px;align-items:center}.line{display:inline-block;width:28px;height:6px;border-radius:4px;flex-shrink:0}.num{color:#806e57;font-size:12px;margin:0 0 9px}
+table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px solid #e4ded2;padding:8px 4px;text-align:left;vertical-align:top}th{color:#746a5d;font-weight:650}
+.legend{font-size:12px;color:var(--muted)}.custom-point{background:#fff;border-radius:18px;padding:1px 6px;font:11px system-ui;white-space:nowrap;box-shadow:0 1px 5px #0002;border:1px solid #ddd}
+.leaflet-popup-content{font:13px/1.5 system-ui,sans-serif;max-width:260px}.leaflet-popup-content p{margin:7px 0}
+@media(max-width:820px){.layout{display:flex;flex-direction:column}aside{max-height:none;order:2;border-right:0}#map{order:1;height:60dvh;min-height:410px}header{padding:14px 16px}}
+</style></head><body>
+<header><div><div class="kicker">ELOAH / PARISIS ENGINE / HUGO · CARTOGRAPHIE</div><h1>Les deux artères de Paris</h1><p>Victor Hugo · Notre-Dame de Paris · Livre III, chapitre II</p></div><a class="back" href="eloah-parisis.html">← PARISIS ENGINE</a></header>
+<div class="layout"><aside>
+<section class="panel"><div class="kicker">Mission · VH-AXES-001</div><h2>Deux itinéraires déjà tracés</h2><p>Le trait suit l'ordre des lieux cités dans le roman. Les segments entre repères sur la carte moderne sont <b>schématiques</b> : ils ne reconstituent pas encore chaque parcelle et chaque voie de 1482.</p>
+<label class="row"><input type="checkbox" id="showA" checked><span class="line" style="background:var(--a)"></span> Axe 1 · Saint-Jacques → Saint-Martin</label>
+<label class="row"><input type="checkbox" id="showB" checked><span class="line" style="background:var(--b)"></span> Axe 2 · Saint-Michel → Saint-Denis</label>
+<label class="row"><input type="checkbox" id="showLabels" checked>Afficher les noms sur la carte</label>
+<div class="actions"><button id="fit">Voir les deux tracés</button><button id="export">Exporter GeoJSON</button></div>
+<div class="notice"><strong>Point de méthode :</strong> les portes au nord représentées par des arcs actuels datent de 1672 et 1674. Leurs emplacements correspondent aux anciennes portes de l'enceinte de Charles V, mais il ne s'agit pas des bâtiments du roman. Les ponts actuels ont aussi été reconstruits. Les coordonnées des portions de rues sont indicatives.</div>
+</section>
+<section class="panel"><h3><span class="line" style="background:var(--a)"></span> Axe 1 · Points</h3><table id="listA"><thead><tr><th>Étape</th><th>Repère cité par Hugo</th></tr></thead><tbody></tbody></table></section>
+<section class="panel"><h3><span class="line" style="background:var(--b)"></span> Axe 2 · Points</h3><table id="listB"><thead><tr><th>Étape</th><th>Repère cité par Hugo</th></tr></thead><tbody></tbody></table></section>
+<section class="panel"><h3>Documents qui justifient l'enquête</h3><p><a href="https://fr.wikisource.org/wiki/Page:Hugo_-_%C5%92uvres_compl%C3%A8tes%2C_Impr._nat.%2C_Roman%2C_tome_II.djvu/119" target="_blank" rel="noopener">Le passage original de Hugo ↗</a></p><p><a href="https://parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/paris-vers-1551-plan-de-truschet-et-hoyau" target="_blank" rel="noopener">Musée Carnavalet · Plan de Truschet et Hoyau, vers 1551 ↗</a></p><p><a href="https://www.paris.fr/pages/sur-la-piste-de-l-enceinte-medievale-philippe-auguste-rive-gauche-episode-2-2-21081" target="_blank" rel="noopener">Ville de Paris · Porte Saint-Jacques ↗</a></p><p><a href="parisis-hugo-notre-dame.html">Dossier historique de Victor Hugo ↗</a></p>
+<div class="notice">Le plan de 1551 est postérieur de près de sept décennies au Paris de 1482 raconté par Hugo. Il sert de document de comparaison, pas de photographie exacte de la ville en 1482.</div></section>
+</aside><div id="map" role="application" aria-label="Carte interactive des deux itinéraires de Victor Hugo à Paris"></div></div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script><script>
+(function(){
+'use strict';
+if(!window.L){document.getElementById('map').textContent='Le fond de carte ne peut pas se charger. Vérifie la connexion.';return;}
+const routes=[
+{key:'A',color:'#137c87',name:'Saint-Jacques → Saint-Martin',points:[
+['Porte Saint-Jacques',48.846756,2.343338,'Ancienne porte de Philippe Auguste, à la rue Soufflot / rue Saint-Jacques. Plaque près du n° 172.','https://www.paris.fr/pages/sur-la-piste-de-l-enceinte-medievale-philippe-auguste-rive-gauche-episode-2-2-21081','reference'],
+['Rue Saint-Jacques',48.85080,2.34540,'Point de passage représentatif sur la rue actuelle, tracé non relevé en 1482.','https://fr.wikisource.org/wiki/Page:Hugo_-_%C5%92uvres_compl%C3%A8tes%2C_Impr._nat.%2C_Roman%2C_tome_II.djvu/119','indicatif'],
+['Petit-Pont',48.853333,2.346944,'Emplacement du franchissement ; le pont actuel a été construit en 1853.','https://fr.wikipedia.org/wiki/Petit-Pont-Cardinal-Lustiger','reference'],
+['Rue de la Juiverie',48.85455,2.34810,'Ancienne rue incorporée à la rue de la Cité en 1834. Coordonnée de travail approximative.','https://fr.wikipedia.org/wiki/Rue_de_la_Juiverie_(Paris)','indicatif'],
+['Pont Notre-Dame',48.856389,2.348889,'Franchissement nord de la Cité ; le pont moderne a été reconstruit au XXe siècle.','https://fr.wikipedia.org/wiki/Pont_Notre-Dame','reference'],
+['Rue Saint-Martin',48.86315,2.35099,'Repère schématique au long de la rue actuelle, pas une voie médiévale relevée.','https://fr.wikisource.org/wiki/Page:Hugo_-_%C5%92uvres_compl%C3%A8tes%2C_Impr._nat.%2C_Roman%2C_tome_II.djvu/119','indicatif'],
+['Porte Saint-Martin',48.86912,2.35566,'Arc de 1674 à l’emplacement de la porte médiévale : le monument visible est postérieur à 1482.','https://parisjetaime.com/culture/porte-saint-martin-p1799','reference']
+]},
+{key:'B',color:'#bb623b',name:'Saint-Michel → Saint-Denis',points:[
+['Porte Saint-Michel',48.84770,2.34160,'Ancienne porte dite aussi porte d’Enfer, approximativement près de la place Edmond-Rostand, à contrôler sur plan.','https://www.sh6e.com/activites/histoire-du-6eme/les-lieux-edifices-et-monuments/enceinte-de-philippe-auguste-les-portes-saint-germain-de-bussy-saint-germain-dauphine-et-saint-michel','indicatif'],
+['Rue de la Harpe',48.85125,2.34315,'La partie sud de l’ancienne rue a été transformée par le percement du boulevard Saint-Michel ; ligne indicative.','https://fr.wikisource.org/wiki/Dictionnaire_administratif_et_historique_des_rues_de_Paris_et_de_ses_monuments/Harpe_(rue_de_la)','indicatif'],
+['Pont Saint-Michel',48.854167,2.344722,'Franchissement ouest ; le pont moderne date du XIXe siècle.','https://fr.wikipedia.org/wiki/Pont_Saint-Michel_(Paris)','reference'],
+['Rue de la Barillerie',48.85505,2.345523,'Rue disparue de l’île de la Cité, dans l’axe approximatif du boulevard du Palais.','https://fr.wikipedia.org/wiki/Rue_de_la_Barillerie_(Paris)','indicatif'],
+['Pont au Change',48.856667,2.346667,'Franchissement nord ; le pont moderne a été construit en 1858–1860.','https://fr.wikipedia.org/wiki/Pont_au_Change','reference'],
+['Rue Saint-Denis',48.86375,2.34995,'Point de passage schématique sur la rue actuelle, non recalé sur une voie de 1482.','https://fr.wikisource.org/wiki/Page:Hugo_-_%C5%92uvres_compl%C3%A8tes%2C_Impr._nat.%2C_Roman%2C_tome_II.djvu/119','indicatif'],
+['Porte Saint-Denis',48.86981,2.35261,'Arc de 1672 à l’emplacement de la porte ancienne de l’enceinte de Charles V.','https://parisjetaime.com/culture/porte-de-saint-denis-p1798','reference']
+]}];
+const map=L.map('map',{preferCanvas:false,zoomControl:true}).setView([48.8585,2.3486],14);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© contributeurs OpenStreetMap'}).addTo(map);
+const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};
+const allCoords=[];
+function clean(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;'}[c]))}
+function render(){
+for(const r of routes){const layer=layers[r.key];layer.clearLayers();const coords=r.points.map(p=>[p[1],p[2]]);coords.forEach(c=>allCoords.push(c));
+L.polyline(coords,{color:r.color,opacity:1,weight:7,lineCap:'round',lineJoin:'round'}).addTo(layer).bindTooltip('Axe '+r.key+' · tracé schématique de '+r.name,{sticky:true});
+r.points.forEach((p,i)=>{
+const m=L.circleMarker([p[1],p[2]],{radius:7,weight:3,color:r.color,fillColor:'#fff',fillOpacity:1}).addTo(layer);
+m.bindPopup('<b>Axe '+r.key+' · '+(i+1)+'. '+clean(p[0])+'</b><p>'+clean(p[3])+'</p><p><small>Précision : '+(p[5]==='reference'?'emplacement actuel documenté':'position indicative à vérifier')+'</small></p><a target="_blank" rel="noopener" href="'+p[4]+'">Voir la source ↗</a>');
+if(document.getElementById('showLabels').checked)L.tooltip({permanent:true,direction:r.key==='A'?'right':'left',offset:r.key==='A'?[8,-3]:[-8,-3],className:'custom-point',opacity:.9}).setLatLng([p[1],p[2]]).setContent((i+1)+'. '+p[0]).addTo(layer);
+});
+const tb=document.querySelector('#list'+r.key+' tbody');tb.textContent='';r.points.forEach((p,i)=>{const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=(i+1)+'.';const b=document.createElement('td');b.textContent=p[0];tr.append(a,b);tb.append(tr)});
+}}
+function fit(){map.fitBounds(L.latLngBounds(routes.flatMap(r=>r.points.map(p=>[p[1],p[2]]))).pad(.12))}
+function show(){routes.forEach(r=>{if(document.getElementById('show'+r.key).checked){if(!map.hasLayer(layers[r.key]))layers[r.key].addTo(map)}else map.removeLayer(layers[r.key])});}
+document.getElementById('showA').addEventListener('change',show);document.getElementById('showB').addEventListener('change',show);
+document.getElementById('showLabels').addEventListener('change',()=>{render();show()});
+document.getElementById('fit').addEventListener('click',fit);
+document.getElementById('export').addEventListener('click',()=>{
+const fc={type:'FeatureCollection',name:'PARISIS HUGO AXES — RECONSTITUTION SCHÉMATIQUE',features:routes.map(r=>({type:'Feature',properties:{id:'VH-AXE-'+r.key,title:r.name,source:'Victor Hugo, Notre-Dame de Paris, livre III chapitre II',caution:'Coordonnées modernes de travail. Tracé non géoréférencé à partir de plans de 1482.',points:r.points.map(p=>({name:p[0],lat:p[1],lon:p[2],accuracy:p[5],source:p[4]}))},geometry:{type:'LineString',coordinates:r.points.map(p=>[p[2],p[1]])}}))};
+const url=URL.createObjectURL(new Blob([JSON.stringify(fc,null,2)],{type:'application/geo+json'}));const a=document.createElement('a');a.href=url;a.download='parisis-hugo-deux-axes.geojson';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)
+});
+render();fit();
+})();
+</script></body></html>
