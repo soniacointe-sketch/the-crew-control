@@ -1,0 +1,3196 @@
+{
+  "schema": "buzz-agent-catalogue-v2",
+  "generated": "2026-10-12",
+  "disclaimer": "Inventaire initial de pistes de recherche, non données aspirées ni faits vérifiés. Aucune donnée personnelle collectée.",
+  "records": [
+    {
+      "id": "CAT-001",
+      "universe": "Power & Glam",
+      "topic": "Attachement et relations",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-002",
+      "universe": "Power & Glam",
+      "topic": "Frontières émotionnelles",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-003",
+      "universe": "Power & Glam",
+      "topic": "Réciprocité",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-004",
+      "universe": "Power & Glam",
+      "topic": "Séparation et reconstruction",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-005",
+      "universe": "Power & Glam",
+      "topic": "Beauté et soin",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-006",
+      "universe": "Power & Glam",
+      "topic": "Argent et autonomie",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-007",
+      "universe": "Power & Glam",
+      "topic": "Travail invisible",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-008",
+      "universe": "Power & Glam",
+      "topic": "Désir et choix",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-009",
+      "universe": "Power & Glam",
+      "topic": "Coaching amoureux",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-010",
+      "universe": "Power & Glam",
+      "topic": "Livres et études",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-011",
+      "universe": "Power & Glam",
+      "topic": "Articles du site",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-012",
+      "universe": "Power & Glam",
+      "topic": "Posts sociaux",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-013",
+      "universe": "Power & Glam",
+      "topic": "Podcasts et vidéos",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-014",
+      "universe": "Power & Glam",
+      "topic": "Questions fréquentes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-015",
+      "universe": "Power & Glam",
+      "topic": "Newsletter",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-016",
+      "universe": "Power & Glam",
+      "topic": "Offres et parcours",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-017",
+      "universe": "Power & Glam",
+      "topic": "SEO des cinq univers",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-018",
+      "universe": "Power & Glam",
+      "topic": "Témoignages consentis",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-019",
+      "universe": "The Crew Orchies",
+      "topic": "Cours enfants",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-020",
+      "universe": "The Crew Orchies",
+      "topic": "Cours ados et adultes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-021",
+      "universe": "The Crew Orchies",
+      "topic": "Cours d'essai",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-022",
+      "universe": "The Crew Orchies",
+      "topic": "Ateliers danse",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-023",
+      "universe": "The Crew Orchies",
+      "topic": "Pompons et matériel",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-024",
+      "universe": "The Crew Orchies",
+      "topic": "Événements Lille et Pévèle",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-025",
+      "universe": "The Crew Orchies",
+      "topic": "Partenaires associatifs",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-026",
+      "universe": "The Crew Orchies",
+      "topic": "Adhésions et tarifs",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-027",
+      "universe": "The Crew Orchies",
+      "topic": "Planning",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-028",
+      "universe": "The Crew Orchies",
+      "topic": "Contenus Facebook",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-029",
+      "universe": "The Crew Orchies",
+      "topic": "Vidéos chorégraphies",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-030",
+      "universe": "The Crew Orchies",
+      "topic": "Inscriptions autorisées",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-031",
+      "universe": "The Crew Orchies",
+      "topic": "Retours adhérents",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-032",
+      "universe": "The Crew Orchies",
+      "topic": "Subventions culture sport",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-033",
+      "universe": "The Crew Orchies",
+      "topic": "Écoles et interventions",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-034",
+      "universe": "The Crew Orchies",
+      "topic": "Campagnes locales",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-035",
+      "universe": "The Crew Orchies",
+      "topic": "Page d'accueil",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-036",
+      "universe": "The Crew Orchies",
+      "topic": "Événements HelloAsso",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-037",
+      "universe": "Sonia Velka",
+      "topic": "Biographie",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-038",
+      "universe": "Sonia Velka",
+      "topic": "Voix et humour",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-039",
+      "universe": "Sonia Velka",
+      "topic": "Photographies authentiques",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-040",
+      "universe": "Sonia Velka",
+      "topic": "Prises de parole",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-041",
+      "universe": "Sonia Velka",
+      "topic": "Vidéos courtes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-042",
+      "universe": "Sonia Velka",
+      "topic": "Publications Facebook",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-043",
+      "universe": "Sonia Velka",
+      "topic": "Projets personnels",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-044",
+      "universe": "Sonia Velka",
+      "topic": "Livre autobiographique",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-045",
+      "universe": "Sonia Velka",
+      "topic": "Archives choisies",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-046",
+      "universe": "Sonia Velka",
+      "topic": "Messages aux enfants privés",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-047",
+      "universe": "Sonia Velka",
+      "topic": "Thématiques citoyennes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-048",
+      "universe": "Sonia Velka",
+      "topic": "Interviews",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-049",
+      "universe": "Sonia Velka",
+      "topic": "Événements publics",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-050",
+      "universe": "Sonia Velka",
+      "topic": "Éthique image",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-051",
+      "universe": "Sonia Velka",
+      "topic": "Newsletter opt-in",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-052",
+      "universe": "Sonia Velka",
+      "topic": "Communauté",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-053",
+      "universe": "Sonia Velka",
+      "topic": "Portrait presse",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-054",
+      "universe": "Sonia Velka",
+      "topic": "Stratégie médias",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-055",
+      "universe": "ELOAH",
+      "topic": "Accueil et navigation",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-056",
+      "universe": "ELOAH",
+      "topic": "Portefeuille projets",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-057",
+      "universe": "ELOAH",
+      "topic": "Tableau de bord",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-058",
+      "universe": "ELOAH",
+      "topic": "Notes et conversations",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-059",
+      "universe": "ELOAH",
+      "topic": "Bibliothèque de fichiers",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-060",
+      "universe": "ELOAH",
+      "topic": "Recherche interne",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-061",
+      "universe": "ELOAH",
+      "topic": "Paramètres",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-062",
+      "universe": "ELOAH",
+      "topic": "Expérience utilisateur",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-063",
+      "universe": "ELOAH",
+      "topic": "Données des modules",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-064",
+      "universe": "ELOAH",
+      "topic": "Sauvegardes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-065",
+      "universe": "ELOAH",
+      "topic": "Amélioration interface",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-066",
+      "universe": "ELOAH",
+      "topic": "Accessibilité",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-067",
+      "universe": "ELOAH",
+      "topic": "Exports",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-068",
+      "universe": "ELOAH",
+      "topic": "Statistiques projet",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-069",
+      "universe": "ELOAH",
+      "topic": "Documentation",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-070",
+      "universe": "ELOAH",
+      "topic": "Sécurité et accès",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-071",
+      "universe": "ELOAH",
+      "topic": "Journal de versions",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-072",
+      "universe": "ELOAH",
+      "topic": "Liens entre pages",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-073",
+      "universe": "Etsy Factory",
+      "topic": "Tendances Etsy publiques",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-074",
+      "universe": "Etsy Factory",
+      "topic": "Recherche mots clés",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-075",
+      "universe": "Etsy Factory",
+      "topic": "Catégories produits",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-076",
+      "universe": "Etsy Factory",
+      "topic": "Templates Instagram",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-077",
+      "universe": "Etsy Factory",
+      "topic": "Templates Canva",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-078",
+      "universe": "Etsy Factory",
+      "topic": "Produits numériques",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-079",
+      "universe": "Etsy Factory",
+      "topic": "Fiches produits",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-080",
+      "universe": "Etsy Factory",
+      "topic": "Prix publics",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-081",
+      "universe": "Etsy Factory",
+      "topic": "Concurrence benchmark",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-082",
+      "universe": "Etsy Factory",
+      "topic": "Styles éditoriaux",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-083",
+      "universe": "Etsy Factory",
+      "topic": "Niches et publics",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-084",
+      "universe": "Etsy Factory",
+      "topic": "Mockups originaux",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-085",
+      "universe": "Etsy Factory",
+      "topic": "Titres et tags",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-086",
+      "universe": "Etsy Factory",
+      "topic": "Descriptions SEO",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-087",
+      "universe": "Etsy Factory",
+      "topic": "Licences et propriété intellectuelle",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-088",
+      "universe": "Etsy Factory",
+      "topic": "Bundles",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-089",
+      "universe": "Etsy Factory",
+      "topic": "Saisonnalité",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-090",
+      "universe": "Etsy Factory",
+      "topic": "Tunnel de vente",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-091",
+      "universe": "Dark Energy",
+      "topic": "Programme de coaching",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-092",
+      "universe": "Dark Energy",
+      "topic": "Positionnement femme fatale",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-093",
+      "universe": "Dark Energy",
+      "topic": "Confiance en soi",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-094",
+      "universe": "Dark Energy",
+      "topic": "Charisme",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-095",
+      "universe": "Dark Energy",
+      "topic": "Affirmation",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-096",
+      "universe": "Dark Energy",
+      "topic": "Autonomie",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-097",
+      "universe": "Dark Energy",
+      "topic": "Identité et présence",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-098",
+      "universe": "Dark Energy",
+      "topic": "Limites relationnelles",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-099",
+      "universe": "Dark Energy",
+      "topic": "Bibliothèque de lectures",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-100",
+      "universe": "Dark Energy",
+      "topic": "Exercices originaux",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-101",
+      "universe": "Dark Energy",
+      "topic": "Parcours 7 jours",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-102",
+      "universe": "Dark Energy",
+      "topic": "Parcours 30 jours",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-103",
+      "universe": "Dark Energy",
+      "topic": "Série email opt-in",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-104",
+      "universe": "Dark Energy",
+      "topic": "Workbooks",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-105",
+      "universe": "Dark Energy",
+      "topic": "Masterclass",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-106",
+      "universe": "Dark Energy",
+      "topic": "Page programme",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-107",
+      "universe": "Dark Energy",
+      "topic": "Témoignages autorisés",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-108",
+      "universe": "Dark Energy",
+      "topic": "Vérification des sources",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-109",
+      "universe": "Le Lion Blanc",
+      "topic": "Protection de l'enfance",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-110",
+      "universe": "Le Lion Blanc",
+      "topic": "Sources officielles",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-111",
+      "universe": "Le Lion Blanc",
+      "topic": "Droits et démarches",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-112",
+      "universe": "Le Lion Blanc",
+      "topic": "Atelier administratif",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-113",
+      "universe": "Le Lion Blanc",
+      "topic": "Budget familial",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-114",
+      "universe": "Le Lion Blanc",
+      "topic": "Associations locales",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-115",
+      "universe": "Le Lion Blanc",
+      "topic": "Partenariats Lille",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-116",
+      "universe": "Le Lion Blanc",
+      "topic": "Campagnes publiques",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-117",
+      "universe": "Le Lion Blanc",
+      "topic": "Bénévolat",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-118",
+      "universe": "Le Lion Blanc",
+      "topic": "Événements citoyens",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-119",
+      "universe": "Le Lion Blanc",
+      "topic": "Prévention des violences",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-120",
+      "universe": "Le Lion Blanc",
+      "topic": "Ressources pour familles",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-121",
+      "universe": "Le Lion Blanc",
+      "topic": "Publications explicatives",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-122",
+      "universe": "Le Lion Blanc",
+      "topic": "Réunions locales",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-123",
+      "universe": "Le Lion Blanc",
+      "topic": "Cartographie partenaires",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-124",
+      "universe": "Le Lion Blanc",
+      "topic": "Formulaires volontaires",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-125",
+      "universe": "Le Lion Blanc",
+      "topic": "Sécurité des participants",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-126",
+      "universe": "Le Lion Blanc",
+      "topic": "Suivi des actions",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-127",
+      "universe": "PARISIS ENGINE",
+      "topic": "Manuscrits",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-128",
+      "universe": "PARISIS ENGINE",
+      "topic": "Palimpsestes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-129",
+      "universe": "PARISIS ENGINE",
+      "topic": "Symboles religieux",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-130",
+      "universe": "PARISIS ENGINE",
+      "topic": "Paris et urbanisme",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-131",
+      "universe": "PARISIS ENGINE",
+      "topic": "Monuments",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-132",
+      "universe": "PARISIS ENGINE",
+      "topic": "Étymologie et toponymie",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-133",
+      "universe": "PARISIS ENGINE",
+      "topic": "Cartes historiques",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-134",
+      "universe": "PARISIS ENGINE",
+      "topic": "Archives Gallica",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-135",
+      "universe": "PARISIS ENGINE",
+      "topic": "BnF et catalogues",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-136",
+      "universe": "PARISIS ENGINE",
+      "topic": "Corpus Qumrân",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-137",
+      "universe": "PARISIS ENGINE",
+      "topic": "Hénoch et Michel",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-138",
+      "universe": "PARISIS ENGINE",
+      "topic": "Textes apocryphes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-139",
+      "universe": "PARISIS ENGINE",
+      "topic": "Géométrie",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-140",
+      "universe": "PARISIS ENGINE",
+      "topic": "Astronomie et dates",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-141",
+      "universe": "PARISIS ENGINE",
+      "topic": "Bibliographies",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-142",
+      "universe": "PARISIS ENGINE",
+      "topic": "Audits de preuve",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-143",
+      "universe": "PARISIS ENGINE",
+      "topic": "Photos de pages fournies",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-144",
+      "universe": "PARISIS ENGINE",
+      "topic": "Registre hypothèses",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-145",
+      "universe": "SONIA OS",
+      "topic": "Architecture agents",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-146",
+      "universe": "SONIA OS",
+      "topic": "Router et pilotes",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-147",
+      "universe": "SONIA OS",
+      "topic": "Contrats d'autonomie",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-148",
+      "universe": "SONIA OS",
+      "topic": "AAF autorité",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-149",
+      "universe": "SONIA OS",
+      "topic": "Inventaire de modules",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-150",
+      "universe": "SONIA OS",
+      "topic": "GitHub Pages",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-151",
+      "universe": "SONIA OS",
+      "topic": "Veille IA",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-152",
+      "universe": "SONIA OS",
+      "topic": "Évaluation qualité",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-153",
+      "universe": "SONIA OS",
+      "topic": "Sécurité et accès",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-154",
+      "universe": "SONIA OS",
+      "topic": "Observabilité",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-155",
+      "universe": "SONIA OS",
+      "topic": "Bibliothèque centralisée",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-156",
+      "universe": "SONIA OS",
+      "topic": "Versionnement",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-157",
+      "universe": "SONIA OS",
+      "topic": "Automatisations permises",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-158",
+      "universe": "SONIA OS",
+      "topic": "Workflows",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-159",
+      "universe": "SONIA OS",
+      "topic": "Intégrations autorisées",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-160",
+      "universe": "SONIA OS",
+      "topic": "Tests",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-161",
+      "universe": "SONIA OS",
+      "topic": "Registre erreurs",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    },
+    {
+      "id": "CAT-162",
+      "universe": "SONIA OS",
+      "topic": "Décisions validées",
+      "kind": "piste de collecte",
+      "state": "à documenter",
+      "origin": "cartographie BUZZ AGENT",
+      "instructions": "Trouver sources publiques ou contenu propriétaire autorisé, conserver URL/date/auteur/droits, comparer, dédupliquer, vérifier, puis proposer une création originale.",
+      "route": [
+        "Détecter",
+        "Qualifier",
+        "Vérifier",
+        "Transformer",
+        "Valider",
+        "Diffuser",
+        "Mesurer"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "name": "Google Trends",
+      "url": "https://trends.google.com/trends/",
+      "scope": "tendances publiques",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Google News",
+      "url": "https://news.google.com/",
+      "scope": "actualité publique",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "YouTube",
+      "url": "https://www.youtube.com/",
+      "scope": "vidéos publiques/API sous conditions",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "TikTok Creative Center",
+      "url": "https://ads.tiktok.com/business/creativecenter/",
+      "scope": "tendances accessibles",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Pinterest Trends",
+      "url": "https://trends.pinterest.com/",
+      "scope": "tendances",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Reddit",
+      "url": "https://www.reddit.com/",
+      "scope": "communautés publiques selon conditions",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Etsy",
+      "url": "https://www.etsy.com/",
+      "scope": "catalogue public et benchmark original",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Gallica",
+      "url": "https://gallica.bnf.fr/",
+      "scope": "documents patrimoniaux",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "BnF",
+      "url": "https://catalogue.bnf.fr/",
+      "scope": "bibliographie",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Persée",
+      "url": "https://www.persee.fr/",
+      "scope": "recherche scientifique",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "data.gouv.fr",
+      "url": "https://www.data.gouv.fr/",
+      "scope": "données ouvertes",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "INSEE",
+      "url": "https://www.insee.fr/",
+      "scope": "statistiques",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Service-Public",
+      "url": "https://www.service-public.fr/",
+      "scope": "information administrative",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Legifrance",
+      "url": "https://www.legifrance.gouv.fr/",
+      "scope": "lois et règlements",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Europeana",
+      "url": "https://www.europeana.eu/",
+      "scope": "patrimoine européen",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "HAL",
+      "url": "https://hal.science/",
+      "scope": "publications de recherche",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "WordPress",
+      "url": "https://wordpress.com/",
+      "scope": "site propre avec autorisation",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "Google Search Console",
+      "url": "https://search.google.com/search-console/",
+      "scope": "site propre autorisé",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "HelloAsso",
+      "url": "https://www.helloasso.com/",
+      "scope": "compte associatif autorisé",
+      "status": "référencé, non connecté"
+    },
+    {
+      "name": "GitHub",
+      "url": "https://github.com/",
+      "scope": "dépôt propriétaire autorisé",
+      "status": "référencé, non connecté"
+    }
+  ],
+  "funnels": [
+    {
+      "universe": "Power & Glam",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Guide ou ressource originale",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Inscription volontaire, prise de contact ou accès à une offre existante",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "The Crew Orchies",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Cours d'essai offert",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Inscription volontaire à un cours ou atelier",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "Sonia Velka",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Guide ou ressource originale",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Inscription volontaire, prise de contact ou accès à une offre existante",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "ELOAH",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Guide ou ressource originale",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Inscription volontaire, prise de contact ou accès à une offre existante",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "Etsy Factory",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Extrait de collection de templates",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Achat de produit numérique original",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "Dark Energy",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Guide ou ressource originale",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Inscription volontaire, prise de contact ou accès à une offre existante",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "Le Lion Blanc",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Guide pratique public",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Participation ou bénévolat volontaire",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "PARISIS ENGINE",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Dossier sourcé gratuit",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Consultation de dossiers et inscription volontaire",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    },
+    {
+      "universe": "SONIA OS",
+      "entry": "Articles, vidéos, recherches, SEO, événements, réseaux et recommandations",
+      "leadmagnet": "Guide ou ressource originale",
+      "trust": "Contenu utile, vérification, preuve, exemples, transparence",
+      "conversion": "Inscription volontaire, prise de contact ou accès à une offre existante",
+      "retention": "Email opt-in, ressources, retour d'expérience, fidélisation consentie",
+      "indicators": [
+        "Visites",
+        "Interactions",
+        "Clics",
+        "Opt-in",
+        "Conversions",
+        "Désabonnements"
+      ]
+    }
+  ],
+  "counts": {
+    "pistes": 162,
+    "sources": 20,
+    "entonnoirs": 9
+  }
+}
