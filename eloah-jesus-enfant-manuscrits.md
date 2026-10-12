@@ -1,4 +1,7 @@
 # C. Les manuscrits sur Jésus enfant
+
+> **RECTIFICATION DOCUMENTAIRE — 12 octobre 2026.** Après lecture de l’editio princeps (Berkes et Nocchi Macedo, *ZPE* 229, 2024, pp. 68–74), **P.Hamb.Graec. 1011 ne conserve pas la scène Alpha–Bêta/Zachée**. Ses 14 lignes fragmentaires concernent **les oiseaux d’argile et le début de l’épisode des bassins d’eau**, correspondant à la recension grecque Gs 2.4–3.1. Le motif Alpha–Bêta est à étudier dans d’autres témoins de la tradition et chez Irénée, non à attribuer à ce papyrus. Source primaire : [édition scientifique avec photographie, transcription et commentaire (PDF)](https://orbi.uliege.be/bitstream/2268/311682/1/ZPE_229_berkes_macedo.pdf#page=6).
+
 **ELOAH · Foi & spiritualité · HUMANITIES LAB · Fiche MAN-JESUS-001 · 12 octobre 2026**
 
 ![Fragment de papyrus grec étudié pour l'Évangile de l'enfance selon Thomas](https://media.thegospelcoalition.org/wp-content/uploads/2024/07/08174002/infancy-manuscript.jpg)
@@ -68,3 +71,60 @@ On ne peut cependant pas démontrer, à partir de la présence du mot Alpha, que
 **Bibliographie de départ :** Berkes et Nocchi Macedo (2024), *Zeitschrift für Papyrologie und Epigraphik* 229, p. 68–74 ; Tony Burke (2010), *De infantia Iesu euangelium Thomae graece*, CCSA 17 ; Irénée, *Contre les hérésies* I,20,1 ; [Université de Liège, article](https://www.cedopal.uliege.be/cms/c_11961445/en/the-earliest-manuscript-of-the-so-called-infancy-gospel-of-thomas).
 
 **Conclusion :** l'intérêt historique de ces manuscrits réside dans leur capacité à documenter ce que des chrétiens de l'Antiquité racontaient de Jésus enfant, comment ils transmettaient ces histoires et ce qu'ils cherchaient à exprimer par les lettres et la sagesse. Leur existence ne transforme pas les scènes en biographies historiquement prouvées.
+
+
+## I. MAN-JESUS-002 — Lecture critique réelle du papyrus de Hambourg
+
+![Fac-similé édité du papyrus P.Hamb.Graec. 1011 — consulter l’édition scientifique à la page 72](https://www.hu-berlin.de/de/pr/medien/pressemitteilungen-pdf-datei/bildmaterial/papyrus_fragment_collage_01.jpg)
+
+### I.1. Ce que montrent effectivement les deux colonnes de l’édition
+
+Les éditeurs publient côte à côte **transcription diplomatique** (lettres identifiées sur l’objet) et **texte reconstruit** (lettres et mots restitués grâce aux autres manuscrits). Cette séparation est fondamentale : l’édition ne donne pas quatorze lignes entièrement préservées. Les bords sont cassés, les lignes sont partielles et plusieurs lettres portent des corrections ou des traces d’effacement. Voir [Berkes–Nocchi Macedo, 2024, p. 72, photographie et tableau grec](https://orbi.uliege.be/bitstream/2268/311682/1/ZPE_229_berkes_macedo.pdf#page=6).
+
+| Ligne | Élément conservé ou identifiable dans l’édition | Sens et limite |
+|---|---|---|
+| 1 | Très rares vestiges, dont alpha et partie de gamma/omega discutées | Restitution majoritairement hypothétique |
+| 2 | ]ιηϲουϲυν[ | Suite du nom Jésus et début apparent de συν- ; graphie non abrégée |
+| 3 | ]νηϲεπεταϲεν[ | Fin de « voix », puis forme verbale liée à l’envol |
+| 4 | ]νκαιειπενοιηϲο[ | « et Jésus dit », avec nom incomplet |
+| 5 | ]ντεϲ…ταδεπ[ avec effacement | Paroles/vol des oiseaux ; correction matérielle visible |
+| 6 | ]κεκραγο[ | Forme liée au cri des oiseaux |
+| 7 | ]μβηθηκαι[ | Stupeur/étonnement, variante importante |
+| 8 | ]ϲαυτουοδ[ | « de lui », puis début d’un autre sujet |
+| 9 | ]καιαυτοϲα[ | « et lui-même » ; suite impossible à reconstruire sûrement |
+| 10 | ]κλωνο[ | κλῶνον : une branche |
+| 11 | ]υϲκαιεξ[ | Fin d’un mot lié aux bassins et début d’un verbe |
+| 12 | ]αγεν…[ | Fin de « rassembler », marques d’effacement discutées |
+| 13 | ]εξ…η[ | Traces d’un verbe relié à l’assèchement ; lecture lacunaire |
+| 14 | Simple trace d’encre | Aucun mot identifiable avec assurance |
+
+Ce tableau est un **guide de lecture français** des formes grecques sélectionnées par les éditeurs, pas une nouvelle édition diplomatique indépendante. Les pointillés ne sont pas des lettres manuscrites ; pour la transcription exacte des lacunes et signes éditoriaux, consulter le PDF cité.
+
+### I.2. Trois variantes manuscrites qui comptent
+
+**Ligne 3 :** le papyrus porte une forme verbale singulière *ἐπέταϲεν* là où le Codex Sabaiticus présente *ἐπέταϲαν* au pluriel. Les auteurs notent que le singulier peut correspondre à un accord grec classique du verbe avec un sujet neutre pluriel. **Constat :** variation grammaticale attestée ; **interprétation :** le degré d’ancienneté de la variante reste à discuter.
+
+**Ligne 5 :** les traces permettent aux éditeurs de reconstruire *τὰ δὲ πεταϲθέντα* ; ils soulignent que le papyrus ne répète vraisemblablement pas le mot *στρουθία* (« moineaux ») à cet endroit. Cette lecture se rapproche par endroits de la recension longue Ga. **Constat :** omission et formulation différentes dans la transmission.
+
+**Ligne 7 :** le papyrus conserve une forme de *θαμβέω* (« être frappé de stupeur »), là où Gs a *ἐθαύμαϲεν* (« s’étonna »). Les éditeurs y voient une lecture potentiellement moins commune, simplifiée dans certaines versions. **Constat :** choix de verbe différent, non preuve d’un enseignement ésotérique.
+
+Source de ces observations : [commentaire critique des lignes 3, 5 et 7, pp. 73–74](https://orbi.uliege.be/bitstream/2268/311682/1/ZPE_229_berkes_macedo.pdf#page=7).
+
+### I.3. Grec, syriaque et palimpseste latin : limites comparatives
+
+Berkes et Nocchi Macedo comparent directement le papyrus à la recension **Gs** connue par le Codex **Sabaiticus 259**, et discutent des variantes **Ga**. Ils expliquent que les anciennes recensions syriaques **Sa et Sw** sont trop éloignées pour restituer utilement ce passage précis ; quant au palimpseste latin du Ve siècle, il **ne conserve pas ce passage**. Il serait incorrect d’affirmer que les trois textes donnent ici trois lectures grec-syriaque-latine alignées mot à mot.
+
+**Résultat :** le papyrus est un témoin grec ancien d’un passage déjà connu sous d’autres formes. Son intérêt est de fournir des lectures antérieures de plusieurs siècles aux copies grecques médiévales, non de confirmer la scène Alpha–Bêta.
+
+### I.4. Contexte matériel et limites de preuve
+
+Fragment de papyrus de 11,1 × 5 cm, cassé sur tous les côtés, 14 lignes incomplètes. Écriture irrégulière avec des corrections ; absence d’abréviation du nom de Jésus. Les éditeurs suggèrent un **exercice de copie** dans un contexte scolaire ou monastique. La provenance exacte de l’objet reste inconnue ; son écriture est datée du IVe ou début Ve siècle par comparaison paléographique. Une datation paléographique est une estimation savante, pas une date notée sur le papyrus.
+
+### I.5. Conclusion d’audit
+
+- **Attesté :** fragment grec ancien, lignes et variantes publiées ; épisode des oiseaux et de l’eau.
+- **Proposé par les chercheurs :** reconstitution des lacunes, fonction scolaire possible, liens précis de recension.
+- **Non attesté sur cet objet :** dialogue d’Alpha–Bêta ou rencontre avec le maître Zachée.
+- **À poursuivre séparément :** étude de l’épisode Alpha–Bêta dans Irénée et les versions qui le conservent.
+
+**Accès aux documents :** [PDF de l’édition originale](https://orbi.uliege.be/bitstream/2268/311682/1/ZPE_229_berkes_macedo.pdf) · [notice NASSCAL du fragment](https://www.nasscal.com/manuscripta-apocryphorum/hamburg-staats-und-universitatsbibliothek-p-hamb-graec-1011/) · [catalogue des versions](https://www.nasscal.com/e-clavis-christian-apocrypha/infancy-gospel-of-thomas/).
