@@ -174,7 +174,21 @@ function pageRelations(p){
 }
 function pageLinks(p){
  const matches=pageRelations(p);
- return '<div class="page-relations"><strong>Fiches associées · rapprochements lexicaux, non preuves</strong>'+(matches.length?'<div class="record-controls">'+matches.map(m=>'<button type="button" data-related-module="'+m.module+'" data-related-id="'+escape(m.item.id)+'">'+escape(m.item.title)+' ↗</button><span class="pill">'+escape(relationLabel(p,m.module,m.item.id))+'</span>').join("")+'</div>':'<p class="micro">Aucune fiche associée automatiquement. Indexation à compléter.</p>')+'</div>';
+ return '<div class="page-relations"><strong>Fiches associées · rapprochements lexicaux, non preuves</strong>'+(matches.length?'<div class="record-controls">'+matches.map(m=>'<button type="button" data-related-module="'+m.module+'" data-related-id="'+escape(m.item.id)+'">'+escape(m.item.title)+' ↗</button><span class="pill">'+escape(relationLabel(p,m.module,m.item.id))+'</span>'+'<button type="button" data-review-page="'+escape(p.page)+'" data-review-module="'+escape(m.module)+'" data-review-id="'+escape(m.item.id)+'">Évaluer</button>').join("")+'</div>':'<p class="micro">Aucune fiche associée automatiquement. Indexation à compléter.</p>')+'</div>';
+}
+function reviewRelation(button){
+ const page=pagedCorpus.find(p=>p.page===button.dataset.reviewPage);
+ const module=button.dataset.reviewModule,id=button.dataset.reviewId;
+ if(!page||!store[module]?.some(x=>x.id===id))return;
+ const key=relationKey(page,module,id),current=relationReviews[key]||{};
+ const level=prompt("Niveau de preuve : L0 (mots en commun), L1 (référence contrôlée), L2 (relation démontrée).",current.level?.slice(0,2)||"L0");
+ if(level===null)return;const choice=level.trim().toUpperCase();
+ if(!["L0","L1","L2"].includes(choice)){alert("Niveau invalide");return}
+ const source=prompt("Source, cote ou protocole de vérification",current.source||"");if(source===null)return;
+ if(choice!=="L0"&&!source.trim()){alert("Une source précise est obligatoire pour L1/L2.");return}
+ const notes=prompt("Justification et contre-exemples",current.notes||"");if(notes===null)return;
+ relationReviews[key]={level:choice+" · "+({L0:"Rapprochement lexical",L1:"Référence à contrôler",L2:"Relation à auditer"}[choice]),source:source.trim(),notes:notes.trim(),reviewedAt:new Date().toISOString(),verified:false};
+ try{localStorage.setItem(LINK_STORE_KEY,JSON.stringify(relationReviews));render()}catch(e){alert("Enregistrement local impossible")}
 }
 function auditPage(index){
  const p=pagedCorpus[index];if(!p)return;
@@ -247,7 +261,8 @@ for(const k of Object.keys(cfg))store[k]=data.modules[k].map(x=>({...x}));save()
 }
 $('nav').onclick=e=>{const b=e.target.closest('[data-nav]');if(b&&views.some(v=>v.id===b.dataset.nav)){active=b.dataset.nav;$('globalSearch').value='';render()}};
 $('view').onclick=e=>{const b=e.target.closest('button');if(!b)return;
-if(b.dataset.pageAudit!==undefined){auditPage(Number(b.dataset.pageAudit))}
+if(b.dataset.reviewPage!==undefined){reviewRelation(b)}
+else if(b.dataset.pageAudit!==undefined){auditPage(Number(b.dataset.pageAudit))}
 else if(b.dataset.relatedModule){active=b.dataset.relatedModule;render();const el=document.querySelector('[data-edit="'+CSS.escape(b.dataset.relatedId)+'"]');el?.closest(".record")?.scrollIntoView({behavior:"smooth",block:"center"});el?.closest(".record")?.classList.add("related-focus")}
 else if(b.dataset.pageChat!==undefined){const p=pagedCorpus[Number(b.dataset.pageChat)];if(p)chat({title:p.heading,claim:'Page '+p.page+'. '+p.claim+' Lieux : '+p.places.join(', ')+'. Symboles : '+p.symbols.join(', ')+'. À vérifier : '+p.checks,reference:p.ref})}
 else if(b.dataset.nav){active=b.dataset.nav;render()}
