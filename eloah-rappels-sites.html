@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ELOAH · Rappels et suivi des sites</title><style>
+:root{font-family:Inter,system-ui,sans-serif;color:#292d2a;background:#f6f5f0}
+*{box-sizing:border-box}body{margin:0}.wrap{max-width:1100px;margin:auto;padding:24px}a{color:#4057a5}header{display:flex;justify-content:space-between;gap:15px;align-items:center}h1{font:normal clamp(35px,5vw,57px) Georgia;margin:35px 0 12px}h2{font:normal 25px Georgia}.sub{color:#636b63;line-height:1.6}.panel{background:#fff;border:1px solid #dbded6;padding:22px;margin-top:20px}.sites{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}.site{background:#fafaf7;border:1px solid #ddd;padding:17px}.status{font-weight:700}.ok{color:#25704d}.bad{color:#b22f36}.muted{color:#6f746e;font-size:13px}input,select,button{font:inherit;padding:11px;border:1px solid #d0d4cc;background:white;border-radius:3px}button{cursor:pointer;background:#29342c;color:white}.form{display:flex;flex-wrap:wrap;gap:10px}.form>*{flex:1;min-width:150px}.task{display:flex;align-items:center;gap:10px;border-bottom:1px solid #e3e5e0;padding:12px 0}.task span{flex:1}.task.done span{text-decoration:line-through;color:#888}.task button{background:#fff;color:#333}.actions{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}footer{margin:30px 0;color:#666;font-size:13px}@media(max-width:600px){.wrap{padding:17px}header{align-items:flex-start;flex-direction:column}}
+</style></head><body><div class="wrap">
+<header><strong>ELOAH · CENTRE DE CONTRÔLE</strong><a href="mes-univers.html">← Mes univers</a></header>
+<h1>Rappels & surveillance</h1><p class="sub">Disponibilité des sites, alertes de panne et tâches de maintenance. Les contrôles automatiques sont planifiés toutes les heures par GitHub Actions ; les rappels locaux apparaissent uniquement lorsque cette page est ouverte.</p>
+<section class="panel"><h2>État des sites</h2><p id="last" class="muted">Chargement du dernier contrôle…</p><div id="sites" class="sites"></div><div class="actions"><button id="refresh">Actualiser l’affichage</button><a href="https://github.com/soniacointe-sketch/the-crew-control/actions/workflows/site-monitor.yml" target="_blank" rel="noopener">Historique des contrôles ↗</a><a href="https://github.com/soniacointe-sketch/the-crew-control/issues?q=is%3Aissue+is%3Aopen+%22ELOAH+SITE+DOWN%22" target="_blank" rel="noopener">Alertes de panne ↗</a></div><p class="muted">Un code HTTP 2xx ou 3xx signifie que le site répond, mais ne garantit pas que toutes ses fonctionnalités marchent. Les alertes GitHub apparaissent sous forme d’issues ; leur livraison par email dépend de vos réglages GitHub.</p></section>
+<section class="panel"><h2>Mes rappels</h2><form id="new" class="form"><input id="task" required maxlength="140" placeholder="Ex. vérifier les liens de Power & Glam" aria-label="Tâche"><input id="date" type="datetime-local" required aria-label="Date du rappel"><button type="submit">Ajouter</button></form><div class="actions"><button id="notify" type="button">Autoriser les notifications</button><button id="export" type="button">Exporter les rappels</button></div><p class="muted" id="notestatus">Les rappels sont enregistrés dans ce navigateur, pas synchronisés avec d’autres appareils. Les notifications de tâches exigent que la page soit ouverte et l’autorisation du navigateur.</p><div id="tasks"></div></section>
+<footer>Les vérifications côté serveur peuvent démarrer avec un léger décalage par rapport à l’heure prévue. Si le workflow n’est pas autorisé ou si l’écriture est bloquée, aucune actualisation ne sera publiée.</footer></div>
+<script>
+const KEY="eloah-site-reminders-v1";
+const $=id=>document.getElementById(id);
+const load=()=>{try{return JSON.parse(localStorage.getItem(KEY)||"[]")}catch{return []}};
+const save=x=>localStorage.setItem(KEY,JSON.stringify(x));
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+async function status(){
+ $("last").textContent="Chargement…";
+ try{
+ const response=await fetch("eloah-site-status.json?t="+Date.now(),{cache:"no-store"});
+ if(!response.ok)throw Error("Aucun rapport publié (HTTP "+response.status+")");
+ const data=await response.json();
+ $("last").textContent="Dernier contrôle : "+new Date(data.checked_at).toLocaleString("fr-FR",{dateStyle:"medium",timeStyle:"short"})+" · Actualisation du rapport indépendante de cette page";
+ $("sites").innerHTML=data.sites.map(s=>'<div class="site"><strong>'+esc(s.name)+'</strong><p class="status '+(s.ok?'ok':'bad')+'">'+(s.ok?'Accessible':'Indisponible ou erreur')+'</p><p class="muted">HTTP : '+esc(s.http_status??"aucune réponse")+'</p><a target="_blank" rel="noopener" href="'+esc(s.url)+'">Visiter le site ↗</a></div>').join("");
+ }catch(e){$("last").textContent="Pas de résultat de surveillance disponible : "+e.message;$("sites").innerHTML="";}
+}
+function render(){
+ let tasks=load().sort((a,b)=>a.date.localeCompare(b.date));
+ $("tasks").innerHTML=tasks.length?tasks.map(t=>'<div class="task '+(t.done?'done':'')+'"><input type="checkbox" data-check="'+esc(t.id)+'" '+(t.done?'checked':'')+' aria-label="Terminer"><span>'+esc(t.title)+'<small class="muted" style="display:block">'+new Date(t.date).toLocaleString("fr-FR")+'</small></span><button type="button" data-del="'+esc(t.id)+'">Supprimer</button></div>').join(""):'<p class="muted">Aucun rappel enregistré.</p>';
+}
+$("new").addEventListener("submit",e=>{e.preventDefault();let x=load();x.push({id:crypto.randomUUID(),title:$("task").value.trim(),date:new Date($("date").value).toISOString(),done:false,notified:false});save(x);e.target.reset();render()});
+$("tasks").addEventListener("click",e=>{let id=e.target.dataset.del;if(!id)return;save(load().filter(x=>x.id!==id));render()});
+$("tasks").addEventListener("change",e=>{let id=e.target.dataset.check;if(!id)return;let x=load();let t=x.find(x=>x.id===id);if(t)t.done=e.target.checked;save(x);render()});
+$("refresh").onclick=status;
+$("notify").onclick=async()=>{if(!("Notification" in window))return alert("Notifications indisponibles dans ce navigateur.");let p=await Notification.requestPermission();$("notestatus").textContent="Autorisation : "+p+". La page doit rester ouverte pour les rappels locaux."};
+$("export").onclick=()=>{let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(load(),null,2)],{type:"application/json"}));a.download="eloah-rappels.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+function due(){let x=load(),dirty=false;for(let t of x){if(!t.done&&!t.notified&&Date.parse(t.date)<=Date.now()){if("Notification" in window&&Notification.permission==="granted"){new Notification("ELOAH · Rappel",{body:t.title});t.notified=true;dirty=true}}}if(dirty)save(x)}
+status();render();due();setInterval(due,60000);
+</script></body></html>
