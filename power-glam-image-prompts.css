@@ -1,0 +1,31 @@
+/* Power & Glam — Atelier de 10 prompts d'images */
+#pg-image-prompts{margin:24px 0 26px;padding:clamp(20px,3vw,31px);background:#fffaf6;border:1px solid #dccdc1;border-top:5px solid #a63d57;border-radius:12px;color:#282327;scroll-margin-top:18px}
+#pg-image-prompts *{box-sizing:border-box}
+#pg-image-prompts .pgip-header{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;flex-wrap:wrap}
+#pg-image-prompts .pgip-overline{font:700 11px system-ui;letter-spacing:.14em;text-transform:uppercase;color:#9b475c}
+#pg-image-prompts h2{font:clamp(27px,3.5vw,38px)/1.17 Georgia,serif;margin:8px 0 10px;color:#272124}
+#pg-image-prompts h3{font:23px/1.2 Georgia,serif;color:#30242a;margin:6px 0}
+#pg-image-prompts p{font:13px/1.7 system-ui;color:#695a59;margin:8px 0}
+#pg-image-prompts .pgip-pill{display:inline-block;padding:8px 11px;border:1px solid #dcc2bd;border-radius:20px;font:700 12px system-ui;color:#803c4e}
+#pg-image-prompts .pgip-options{display:grid;grid-template-columns:1fr 1fr 2fr;gap:12px;margin:20px 0}
+#pg-image-prompts label{display:block;font:600 12px system-ui;color:#3c3134}
+#pg-image-prompts select,#pg-image-prompts input,#pg-image-prompts textarea{display:block;margin-top:6px;width:100%;min-width:0;padding:10px 11px;border:1px solid #d2c2ba;border-radius:6px;background:white;color:#282327;font:13px system-ui}
+#pg-image-prompts .pgip-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:20px 0}
+#pg-image-prompts .pgip-card{background:white;border:1px solid #e0d5cb;border-radius:9px;padding:17px;display:flex;flex-direction:column;gap:7px}
+#pg-image-prompts .pgip-card[aria-selected=true]{outline:2px solid #a63d57;outline-offset:1px}
+#pg-image-prompts .pgip-topline{display:flex;justify-content:space-between;gap:6px;align-items:center}
+#pg-image-prompts .pgip-count{color:#923f56;font:700 11px system-ui;letter-spacing:.08em}
+#pg-image-prompts .pgip-use{font:11px system-ui;color:#726664}
+#pg-image-prompts .pgip-card p{margin:0 0 8px}
+#pg-image-prompts .pgip-actions{display:flex;gap:7px;flex-wrap:wrap;margin-top:auto}
+#pg-image-prompts button,#pg-image-prompts .pgip-link{border:1px solid #ba9e9b;border-radius:5px;background:white;color:#422f34;cursor:pointer;padding:10px 11px;text-decoration:none;display:inline-block;font:700 12px system-ui}
+#pg-image-prompts .pgip-open{background:#3d2c36!important;color:white!important;border-color:#3d2c36!important}
+#pg-image-prompts .pgip-utilities{display:flex;gap:9px;flex-wrap:wrap;margin-top:12px}
+#pg-image-prompts .pgip-editor{background:#f4ede6;border:1px solid #ded0c5;border-radius:10px;padding:18px;margin-top:20px}
+#pg-image-prompts .pgip-editor textarea{min-height:240px;line-height:1.7;resize:vertical;background:white}
+#pg-image-prompts .pgip-editor .pgip-link{margin-top:10px}
+#pg-image-prompts .pgip-notice{font:12px/1.6 system-ui;color:#75676a}
+#pg-image-prompts .pgip-status{min-height:19px;font:13px/1.5 system-ui;color:#28705a;margin-top:10px}
+#pg-image-prompts [hidden]{display:none!important}
+@media(max-width:760px){#pg-image-prompts .pgip-options{grid-template-columns:1fr 1fr}#pg-image-prompts .pgip-options label:last-child{grid-column:1/-1}#pg-image-prompts .pgip-grid{grid-template-columns:1fr}}
+@media(max-width:420px){#pg-image-prompts .pgip-options{grid-template-columns:1fr}#pg-image-prompts .pgip-options label:last-child{grid-column:auto}}
