@@ -8,6 +8,7 @@ const URL='https://voytsqyorhoveurnguxn.supabase.co';
 const PUBLIC_KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const client=window.supabase?.createClient(URL,PUBLIC_KEY,{auth:{storageKey:'eloah-google-calendar-oauth-v1',persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,flowType:'pkce'}});
 let providerToken=null;
+let selectedAccount='';
 const show=t=>{state.textContent=t};
 const buttonState=()=>{refresh.disabled=!providerToken;disconnect.disabled=!providerToken};
 async function checkSession(){
@@ -51,7 +52,7 @@ async function loadEvents(){
    if(event.htmlLink&&event.htmlLink.startsWith('https://')){const a=document.createElement('a');a.className='back';a.href=event.htmlLink;a.target='_blank';a.rel='noopener noreferrer';a.textContent='Voir dans Google Agenda ↗';card.append(a)}
    list.append(card);
   }
-  show(events.length+' événement(s) lus depuis Google Agenda · période de 30 jours. Aucune donnée publiée.');
+  show(events.length+' événement(s) lus depuis le calendrier principal du compte autorisé · 30 jours. Aucune donnée publiée.');
   if(!events.length){const p=document.createElement('p');p.textContent='Aucun événement à venir dans ce calendrier principal.';list.append(p)}
  }catch(e){show('Lecture impossible : '+e.message)}
  finally{buttonState()}
