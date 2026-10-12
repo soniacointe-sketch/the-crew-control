@@ -49,4 +49,19 @@
 <div class="dialog-actions"><button type="button" id="cancelEditor">Annuler</button><button type="submit" class="primary">Enregistrer</button></div>
 </form></dialog>
 <script src="eloah-parisis.js?v=2" defer></script>
-</body></html>
+<dialog id="proofDialog" aria-labelledby="proofTitle"><form id="proofForm">
+<div class="dialog-top"><div><div class="eyebrow">PARISIS ENGINE · AUDIT DOCUMENTAIRE</div><h2 id="proofTitle">Fiche de preuve</h2></div><button type="button" id="closeProof" class="icon-btn" aria-label="Fermer">×</button></div>
+<p class="micro" id="proofContext"></p>
+<div class="field-grid">
+<label><strong>Niveau de relation</strong><select class="field" name="level"><option value="L0">L0 · Correspondance non vérifiée</option><option value="L1">L1 · Source identifiée</option><option value="L2">L2 · Analyse documentée à auditer</option></select></label>
+<label><strong>Décision d'audit</strong><select class="field" name="decision"><option>Non examiné</option><option>À approfondir</option><option>Rejeté</option><option>Corroboré sous réserves</option></select></label>
+<label class="wide"><strong>Source primaire, cote et page</strong><textarea class="field" name="source" placeholder="Institution, référence précise, page, URL documentaire"></textarea></label>
+<label><strong>Date ou période attestée</strong><input class="field" name="date" placeholder="Date / époque / incertitude"></label>
+<label><strong>Nature du lien</strong><select class="field" name="relationType"><option>Correspondance lexicale</option><option>Référence iconographique</option><option>Relation chronologique</option><option>Relation topographique</option><option>Comparaison textuelle</option><option>Autre</option></select></label>
+<label class="wide"><strong>Méthode reproductible</strong><textarea class="field" name="method" placeholder="Étapes, coordonnées, édition, tolérances et protocole"></textarea></label>
+<label class="wide"><strong>Objections et interprétations alternatives</strong><textarea class="field" name="objections"></textarea></label>
+<label class="wide"><strong>Contre-test et résultat</strong><textarea class="field" name="countertest"></textarea></label>
+<label class="wide"><strong>Conclusion et limites</strong><textarea class="field" name="notes"></textarea></label>
+</div><p class="micro">Évaluation manuelle : aucune certification scientifique automatique.</p>
+<div class="dialog-actions"><button type="button" id="cancelProof">Annuler</button><button class="primary" type="submit">Enregistrer la fiche de preuve</button></div>
+</form></dialog></body></html>
