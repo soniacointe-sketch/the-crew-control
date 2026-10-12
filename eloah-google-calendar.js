@@ -41,6 +41,7 @@ async function loadEvents(){
   if(!response.ok){if(response.status===401){providerToken=null;buttonState();throw Error('Autorisation expirée : reconnecte Google.')}throw Error('Google Calendar HTTP '+response.status+' (vérifier API et permissions)')}
   const data=await response.json();
   const events=(Array.isArray(data.items)?data.items:[]).filter(e=>e.status!=='cancelled');
+  window.dispatchEvent(new CustomEvent('eloah-google-calendar-loaded',{detail:events.map(e=>({id:e.id||'',title:e.summary||'Événement sans titre',date:(e.start?.dateTime||e.start?.date||'').slice(0,10),url:e.htmlLink||''}))}));
   for(const event of events){
    const card=document.createElement('article');card.className='event';
    const date=document.createElement('div');date.className='event-date';
@@ -62,7 +63,7 @@ async function loadEvents(){
        if(tasks.some(t=>t.seedId===seedId)){show('Cette tâche a déjà été ajoutée.');return}
        if(!confirm('Créer la tâche « '+titleText+' » pour le '+day+' ?'))return;
        tasks.push({id:crypto.randomUUID?crypto.randomUUID():String(Date.now()),seedId,title:titleText,date:day,project:'ELOAH',priority:'normale',done:false});
-       localStorage.setItem(key,JSON.stringify(tasks));
+       localStorage.setItem(key,JSON.stringify(tasks));window.dispatchEvent(new Event('eloah-task-changed'));
        show('Tâche ajoutée. Recharge le tableau pour actualiser les compteurs.');
        add.disabled=true;add.textContent='Tâche ajoutée ✓';
      }catch(e){show('Impossible de sauvegarder la tâche localement : '+e.message)}
@@ -77,7 +78,7 @@ async function loadEvents(){
 }
 refresh.addEventListener('click',loadEvents);
 disconnect.addEventListener('click',async()=>{
- providerToken=null;list.replaceChildren();buttonState();
+ providerToken=null;list.replaceChildren();window.dispatchEvent(new CustomEvent('eloah-google-calendar-loaded',{detail:[]}));buttonState();
  try{if(client)await client.auth.signOut({scope:'local'});show('Session Google locale fermée. Pour retirer aussi l’autorisation accordée à l’application, consulte les paramètres de sécurité de ton compte Google.')}catch(e){show('Déconnexion locale non confirmée : '+e.message)}
 });
 checkSession();
