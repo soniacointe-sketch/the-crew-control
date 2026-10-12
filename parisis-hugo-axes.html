@@ -59,7 +59,7 @@ const map=L.map('map',{preferCanvas:false,zoomControl:true}).setView([48.8585,2.
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© contributeurs OpenStreetMap'}).addTo(map);
 const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};
 const allCoords=[];
-function clean(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;'}[c]))}
+function clean(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function render(){
 for(const r of routes){const layer=layers[r.key];layer.clearLayers();const coords=r.points.map(p=>[p[1],p[2]]);coords.forEach(c=>allCoords.push(c));
 L.polyline(coords,{color:r.color,opacity:1,weight:7,lineCap:'round',lineJoin:'round'}).addTo(layer).bindTooltip('Axe '+r.key+' · tracé schématique de '+r.name,{sticky:true});
