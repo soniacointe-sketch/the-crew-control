@@ -1,0 +1,70 @@
+name: ELOAH - Surveillance des sites
+on:
+  schedule:
+    - cron: '17 * * * *'
+  workflow_dispatch:
+permissions:
+  contents: write
+  issues: write
+concurrency:
+  group: eloah-sites
+  cancel-in-progress: false
+jobs:
+  monitor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Controler les sites et publier les statuts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import json, urllib.request, urllib.error, datetime, subprocess, os
+          urls={
+            "ELOAH": "https://soniacointe-sketch.github.io/the-crew-control/mes-univers.html",
+            "The Crew": "https://thecreworchies.blog",
+            "Power & Glam": "https://powerglam1.wordpress.com",
+          }
+          stamp=datetime.datetime.now(datetime.timezone.utc).isoformat()
+          out={"checked_at":stamp,"sites":[]}
+          for name,url in urls.items():
+            try:
+              request=urllib.request.Request(url,headers={"User-Agent":"ELOAH-site-monitor/1.0"})
+              with urllib.request.urlopen(request,timeout=20) as response:
+                code=response.status
+              error=""
+            except urllib.error.HTTPError as e:
+              code=e.code; error=str(e)
+            except Exception as e:
+              code=None; error=str(e)[:180]
+            ok=bool(code and 200<=code<400)
+            out["sites"].append({"name":name,"url":url,"ok":ok,"http_status":code,"error":error})
+            if not ok:
+              title=f"[ELOAH SITE DOWN] {name}"
+              query=subprocess.run(["gh","issue","list","--state","open","--search",title,"--json","title"],capture_output=True,text=True)
+              try: exists=any(x.get("title")==title for x in json.loads(query.stdout))
+              except Exception: exists=False
+              if not exists:
+                subprocess.run(["gh","issue","create","--title",title,"--body",f"Site: {url}\nControle: {stamp}\nHTTP: {code}\nErreur: {error}\nVerification automatique ELOAH."],check=False)
+            else:
+              title=f"[ELOAH SITE DOWN] {name}"
+              query=subprocess.run(["gh","issue","list","--state","open","--search",title,"--json","number,title"],capture_output=True,text=True)
+              try: issues=json.loads(query.stdout)
+              except Exception: issues=[]
+              for issue in issues:
+                if issue.get("title")==title:
+                  subprocess.run(["gh","issue","close",str(issue["number"]),"--comment",f"Site de nouveau accessible le {stamp}."],check=False)
+          with open("eloah-site-status.json","w",encoding="utf-8") as f:
+            json.dump(out,f,ensure_ascii=False,indent=2)
+          print(json.dumps(out,ensure_ascii=False))
+          PY
+      - name: Enregistrer le statut
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add eloah-site-status.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: actualiser la surveillance ELOAH"
+            git push
+          fi
