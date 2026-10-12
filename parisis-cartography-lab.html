@@ -21,8 +21,19 @@ function meridianDistance(p){return dist({lat:p.lat,lng:p.lng},{lat:p.lat,lng:me
 $('cross').onclick=()=>{
 overlay.clearLayers();
 L.polyline([[48.82,meridian],[48.9,meridian]],{color:'#177c91',weight:3,dashArray:'8 5'}).bindTooltip('Méridien de Paris — longitude IGN').addTo(overlay);
+// Visible investigative lines: explicitly labeled as exploratory rather than historical claims.
+const sitesByName=Object.fromEntries(crossSites.map(p=>[p.name,p]));
+function trace(names,color,dashed,label,close=false){
+const coords=names.map(n=>sitesByName[n]).filter(Boolean).map(p=>[p.lat,p.lng]);
+if(close&&coords.length>2)coords.push(coords[0]);
+L.polyline(coords,{color,weight:3,opacity:.85,dashArray:dashed?'7 6':undefined}).bindTooltip(label,{sticky:true}).addTo(overlay);
+}
+trace(['Tour Eiffel','Opéra Garnier','Notre-Dame'],'#d16b24',true,'Triangle exploratoire : Eiffel · Opéra · Notre-Dame',true);
+trace(['Louvre','Opéra Garnier','Jardins-Saint-Paul — vestige'],'#a43c78',true,'Comparaison exploratoire : Louvre · Opéra · vestige');
+trace(['Rue Clovis — vestige','Jardins-Saint-Paul — vestige'],'#6746a4',true,'Liaison entre deux vestiges : CE N’EST PAS le tracé du rempart');
+trace(['Arc de Triomphe','Louvre'],'#c3a14e',true,'Axe comparatif : Arc de Triomphe · Louvre');
 crossSites.forEach(p=>{const col=p.kind==='Monument'?'#b04f2e':'#6746a4';L.circleMarker([p.lat,p.lng],{radius:7,color:col,fillColor:col,fillOpacity:.8}).bindPopup('<b>'+p.name+'</b><br>Écart est-ouest approximatif au méridien : '+fmt(meridianDistance(p))+' m<br>Coordonnées de travail, à auditer.').addTo(overlay);L.polyline([[p.lat,p.lng],[p.lat,meridian]],{color:col,weight:1,opacity:.48,dashArray:'3 6'}).addTo(overlay)});
-$('crossReport').textContent='Écarts approximatifs au méridien de Paris (mêmes latitudes) :\n'+crossSites.map(p=>p.name+' : '+fmt(meridianDistance(p))+' m').join('\n')+'\n\nBleu : méridien. Orange : monuments. Violet : vestiges.\nLes liaisons horizontales sont des instruments de mesure, pas des axes anciens.\nPlan de Turgot 1739 : ressource documentaire seulement ; aucune superposition géoréférencée dans cette version.';
+$('crossReport').textContent='Écarts approximatifs au méridien de Paris (mêmes latitudes) :\n'+crossSites.map(p=>p.name+' : '+fmt(meridianDistance(p))+' m').join('\n')+'\n\nBleu : méridien. Orange : monuments. Violet : vestiges. Les TRAITS COLORÉS relient les lieux automatiquement : orange triangle, rose liaison exploratoire, violet sites médiévaux, or Arc–Louvre. Ce sont des comparaisons, pas des axes anciens démontrés.\nLes liaisons horizontales sont des instruments de mesure, pas des axes anciens.\nPlan de Turgot 1739 : ressource documentaire seulement ; aucune superposition géoréférencée dans cette version.';
 map.fitBounds([[48.82,2.275],[48.9,2.37]])};
 $('crossOff').onclick=()=>overlay.clearLayers();
 const presets=[
