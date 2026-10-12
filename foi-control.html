@@ -19,7 +19,22 @@ dialog::backdrop{background:#372f2966}
 .foi-quick a{color:#79542b!important}
 .foi-reader{background:#f4efe7!important;border-color:#d6c8b7!important}
 footer{color:#6e6559!important;border-color:#d9cdbb!important}
-</style><style id="foi-left-nav-fix">#foi-direct-nav{display:flex;flex-direction:column;gap:3px;margin:12px 0 22px}#foi-direct-nav button,#foi-direct-nav a{text-align:left;width:100%;padding:8px 10px;background:transparent!important;color:#514538!important;border:1px solid transparent!important;border-radius:7px;font-size:12px;cursor:pointer;text-decoration:none;white-space:normal}#foi-direct-nav button:hover,#foi-direct-nav a:hover{background:#e6d9c6!important}#foi-direct-nav button[aria-current="page"]{background:#ddcbaa!important;color:#493217!important;font-weight:800;border-color:#c9b086!important}.foi-nav-label{font-size:10px;letter-spacing:.14em;font-weight:800;color:#8b6d47;margin:15px 9px 6px}aside{max-height:100vh;overflow-y:auto}#mes-notes-foi nav{border-top:1px solid #d8cbbb;padding-top:12px}#foi-reader{scroll-margin-top:20px}@media(max-width:1000px){aside{max-height:300px;overflow:auto}#foi-direct-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}#foi-direct-nav .foi-nav-label{grid-column:1/-1}#mes-notes-foi nav{flex-wrap:wrap}}@media(max-width:520px){#foi-direct-nav{grid-template-columns:1fr 1fr}}</style></head><body style="--accent:#d9cfa8"><div class="layout"><aside><div class="brand">Foi & spiritualité</div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="foi-direct-nav" aria-label="Accès direct aux chapitres Foi et spiritualité">
+</style><style id="foi-left-nav-fix">#foi-direct-nav{display:flex;flex-direction:column;gap:3px;margin:12px 0 22px}#foi-direct-nav button,#foi-direct-nav a{text-align:left;width:100%;padding:8px 10px;background:transparent!important;color:#514538!important;border:1px solid transparent!important;border-radius:7px;font-size:12px;cursor:pointer;text-decoration:none;white-space:normal}#foi-direct-nav button:hover,#foi-direct-nav a:hover{background:#e6d9c6!important}#foi-direct-nav button[aria-current="page"]{background:#ddcbaa!important;color:#493217!important;font-weight:800;border-color:#c9b086!important}.foi-nav-label{font-size:10px;letter-spacing:.14em;font-weight:800;color:#8b6d47;margin:15px 9px 6px}aside{max-height:100vh;overflow-y:auto}#mes-notes-foi nav{border-top:1px solid #d8cbbb;padding-top:12px}#foi-reader{scroll-margin-top:20px}@media(max-width:1000px){aside{max-height:300px;overflow:auto}#foi-direct-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}#foi-direct-nav .foi-nav-label{grid-column:1/-1}#mes-notes-foi nav{flex-wrap:wrap}}@media(max-width:520px){#foi-direct-nav{grid-template-columns:1fr 1fr}}</style><style id="foi-fluid-v2">
+html{scroll-behavior:smooth}
+#foi-direct-nav{gap:2px!important}
+#foi-direct-nav button{transition:background-color .14s ease,border-color .14s ease,color .14s ease;line-height:1.3}
+#foi-catalog{grid-template-columns:repeat(auto-fit,minmax(165px,1fr));gap:8px}
+#foi-catalog button{min-height:66px;transition:background-color .14s ease,border-color .14s ease;line-height:1.35}
+#foi-reader{display:block;opacity:1;transition:opacity .15s ease;scroll-margin-top:24px}
+#foi-reader.foi-changing{opacity:.68}
+#foi-loading-status{font-size:12px;color:#806b50;padding:5px 8px}
+.foi-quick{justify-content:space-between}
+#bibliotheque-foi{scroll-margin-top:16px}
+@media(min-width:1001px){.layout{grid-template-columns:260px minmax(0,1fr)}.layout>aside{position:sticky;top:0;height:100dvh;overflow-y:auto;scrollbar-width:thin;scrollbar-color:#cdbda6 transparent}.layout main{min-width:0}#foi-reader{height:min(80vh,980px);min-height:590px}}
+@media(max-width:1000px){.layout>aside{max-height:240px;overflow-y:auto}#foi-direct-nav{grid-template-columns:repeat(3,minmax(0,1fr))!important}#foi-reader{height:75dvh;min-height:500px}}
+@media(max-width:570px){#foi-direct-nav{grid-template-columns:repeat(2,minmax(0,1fr))!important}#foi-catalog{grid-template-columns:repeat(2,minmax(0,1fr))}#foi-catalog button{font-size:12px;padding:9px}#foi-reader{height:74dvh;min-height:480px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}#foi-reader,#foi-direct-nav button,#foi-catalog button{transition:none}}
+</style></head><body style="--accent:#d9cfa8"><div class="layout"><aside><div class="brand">Foi & spiritualité</div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="foi-direct-nav" aria-label="Accès direct aux chapitres Foi et spiritualité">
 <div class="foi-nav-label">MA BIBLIOTHÈQUE</div>
 <button type="button" data-foi-link="eloah-foi-lecture.html?doc=personnel" data-foi-title="Dossier personnel">Accueil · Mon dossier</button>
 <button type="button" data-foi-link="eloah-foi-lecture.html" data-foi-title="Grande bibliothèque">Grande bibliothèque</button>
@@ -69,24 +84,43 @@ footer{color:#6e6559!important;border-color:#d9cdbb!important}
 <iframe id="foi-reader" class="foi-reader" title="Livre complet Foi et spiritualité" loading="eager" src="eloah-foi-lecture.html?doc=personnel"></iframe>
 <p class="notice">Ces dossiers sont déjà enregistrés dans le dépôt du site. Les liens et images externes dépendent de leurs hébergeurs. Les notes saisies dans cet espace restent localement dans le navigateur ; pense à exporter une sauvegarde.</p>
 </section>
-<script id="foi-library-navigation">
+<script id="foi-navigation-fluid">
 (function(){
 const docs=[
 ["Dossier personnel","12 rubriques · Foi, Marie, Pierre, Léon XIV","eloah-foi-lecture.html?doc=personnel"],
-["Grande bibliothèque","Textes complets, images, sources, tableaux","eloah-foi-lecture.html"],
-["C · Manuscrits sur Jésus enfant","MAN-JESUS-001/002 · Papyrus Hambourg","eloah-foi-lecture.html?doc=jesus-enfant"],
+["Grande bibliothèque","Textes, illustrations et références","eloah-foi-lecture.html"],
+["C · Manuscrits sur Jésus enfant","Papyrus de Hambourg et lectures","eloah-foi-lecture.html?doc=jesus-enfant"],
 ["ALPHA-002","Zachée, Alpha et Bêta","eloah-foi-lecture.html?doc=alpha-002"],
-["ALPHA-003","Géométrie de la lettre Alpha","eloah-foi-lecture.html?doc=alpha-003"],
-["ALPHA-004","Aleph, Beth et lettres de la création","eloah-foi-lecture.html?doc=alpha-004"],
-["ALPHA-005","Écriture antique, exercices et manuscrits","eloah-foi-lecture.html?doc=alpha-005"],
-["Chapelet, notes et parcours","Prière interactive, dictionnaire, suivi","eloah-foi-spiritualite.html"]
+["ALPHA-003","Géométrie de l'Alpha","eloah-foi-lecture.html?doc=alpha-003"],
+["ALPHA-004","Aleph, Beth et création","eloah-foi-lecture.html?doc=alpha-004"],
+["ALPHA-005","Formes et exercices antiques","eloah-foi-lecture.html?doc=alpha-005"],
+["Chapelet, notes et parcours","Prière et outils interactifs","eloah-foi-spiritualite.html"]
 ];
-const root=document.getElementById("foi-catalog"),frame=document.getElementById("foi-reader"),current=document.getElementById("foi-current"),open=document.getElementById("foi-open");
-docs.forEach((d,i)=>{
-const b=document.createElement("button");b.type="button";b.setAttribute("aria-pressed",String(i===0));
-const title=document.createElement("strong");title.textContent=d[0];const subt=document.createElement("small");subt.textContent=d[1];b.append(title,subt);
-b.addEventListener("click",()=>{frame.src=d[2];current.textContent=d[0];open.href=d[2];root.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));b.setAttribute("aria-pressed","true");frame.scrollIntoView({behavior:"smooth",block:"start"})});root.appendChild(b)
-});
+const root=document.getElementById("foi-catalog"),left=document.getElementById("foi-direct-nav"),frame=document.getElementById("foi-reader"),label=document.getElementById("foi-current"),open=document.getElementById("foi-open"),wrapper=document.getElementById("bibliotheque-foi");
+if(!root||!left||!frame)return;
+const status=document.createElement("span");status.id="foi-loading-status";status.setAttribute("role","status");status.setAttribute("aria-live","polite");status.textContent="Lecture prête";label.after(status);
+const full=new URL(frame.getAttribute("src"),location.href).href;
+let active=full;
+const normalize=val=>new URL(val,location.href).href;
+function focusReading(){const rect=wrapper.getBoundingClientRect();if(rect.top>180||rect.bottom<140)wrapper.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"instant":"smooth",block:"start"});}
+function select(url,title,shouldScroll=true,push=true){
+const target=normalize(url);const short=new URL(target).pathname.split("/").at(-1)+new URL(target).search;
+label.textContent=title;open.href=target;
+for(const b of left.querySelectorAll("button[data-foi-link]")){if(normalize(b.getAttribute("data-foi-link"))===target)b.setAttribute("aria-current","page");else b.removeAttribute("aria-current")}
+for(const b of root.querySelectorAll("button[data-src]"))b.setAttribute("aria-pressed",String(normalize(b.dataset.src)===target));
+if(target!==active){active=target;frame.classList.add("foi-changing");status.textContent="Ouverture du chapitre…";frame.src=target}
+else status.textContent="Lecture prête";
+if(push){const u=new URL(location.href);u.searchParams.set("lecture",short);history.replaceState({lecture:short},"",u)}
+if(shouldScroll)focusReading();
+}
+docs.forEach((d,i)=>{const b=document.createElement("button");b.type="button";b.dataset.src=d[2];b.setAttribute("aria-pressed",String(i===0));const strong=document.createElement("strong");strong.textContent=d[0];const sub=document.createElement("small");sub.textContent=d[1];b.append(strong,sub);b.addEventListener("click",()=>select(d[2],d[0]));root.appendChild(b)});
+left.addEventListener("click",event=>{const b=event.target.closest("button[data-foi-link]");if(!b)return;select(b.getAttribute("data-foi-link"),b.dataset.foiTitle)});
+frame.addEventListener("load",()=>{frame.classList.remove("foi-changing");status.textContent="Chapitre affiché";});
+const url=new URL(location.href);
+const param=url.searchParams.get("lecture"),legacy=url.searchParams.get("rubrique");
+if(param&&/^(eloah-foi-lecture\.html|eloah-foi-spiritualite\.html)(\?.*)?$/.test(param)){const match=[...left.querySelectorAll("button[data-foi-link]")].find(b=>normalize(b.getAttribute("data-foi-link"))===normalize(param));select(param,match?.dataset.foiTitle||"Lecture",false,false)}
+else if(legacy){const b=[...left.querySelectorAll("button[data-foi-link]")].find(x=>x.dataset.foiTitle===legacy);if(b)select(b.getAttribute("data-foi-link"),legacy,false,false)}
+else{left.querySelector("button[data-foi-link]")?.setAttribute("aria-current","page");}
 })();
 </script><div class="metrics" id="metrics"></div><section id="ananke-archives-complement" style="background:#fffdf7;border:1px solid #d9cfa8;border-radius:12px;padding:24px;margin:18px 0;color:#252923">
 <div class="eyebrow">PARISIS ENGINE · ANANKÈ · ARCHIVES AVANT 1831 · MISE À JOUR 12 OCTOBRE 2026</div><h2 style="font:30px Georgia,serif;margin:8px 0">La piste des badigeons : 1756, 1780 et 1804</h2><p>Les sources historiques attestent plusieurs campagnes de travaux et de blanchiment des murs de Notre-Dame avant la préface de Victor Hugo (1831). Ce contexte rend possible la disparition d'une inscription, mais ne prouve pas que le mot ἈΝΆΓΚΗ ait été gravé sur un mur.</p>
@@ -109,9 +143,4 @@ b.addEventListener("click",()=>{frame.src=d[2];current.textContent=d[0];open.hre
 <h3>Chronologie et niveaux de preuve</h3><p><strong>Avant 1831 :</strong> inscription supposée et disparition racontées par Hugo ; document matériel non retrouvé. <strong>1831 :</strong> récit écrit publié. <strong>1844–1865 :</strong> vaste campagne de restauration documentée ; elle est postérieure à la disparition alléguée.</p>
 <p style="border-left:4px solid #b99b63;padding:12px;background:#fbf4e6"><strong>À ne pas confondre :</strong> texte de 1831 attesté ≠ gravure médiévale authentifiée. Le nom grec ἈΝΆΓΚΗ signifie nécessité ou fatalité ; aucun lien avec une inscription ésotérique secrète n'est démontré.</p>
 <p><a href="parisis-ananke.html">Bibliothèque approfondie ANANKÈ ↗</a> · <a href="parisis-hugo-notre-dame.html">Victor Hugo · Notre-Dame ↗</a> · <a href="eloah-parisis.html">PARISIS ENGINE ↗</a></p>
-</section><div class="toolbar"><input id="search" aria-label="Rechercher" placeholder="Rechercher dans cet univers…"><button id="export">Exporter</button><button id="restore">Restaurer</button><input type="file" accept=".json,application/json" id="file" hidden></div><p id="status" role="status"></p><div class="split"><section class="panel"><h2 id="section">Tous</h2><div id="list"></div></section><section class="panel"><div class="eyebrow">Ton fil conducteur</div><h2 style="margin-top:15px">Une idée devient une action.</h2><p>Ajoute un titre, choisis une rubrique, note la prochaine étape et fixe une échéance si nécessaire.</p><p>Fais évoluer le statut, conserve tes liens et archive ce qui est terminé.</p><p class="notice">Les saisies restent sur ce navigateur. Aucune synchronisation automatique ni connexion aux réseaux sociaux. Exporte régulièrement une sauvegarde. Cet espace ne dispose pas de verrouillage : utilise un profil navigateur privé pour tes notes.</p></section></div><footer>Foi & spiritualité · Un espace de la galaxie Sonia</footer></main></div><dialog id="editor"><h2>Ton élément</h2><form id="form"><label>Titre<input name="title" required maxlength="180"></label><label>Rubrique<select name="module" id="module"></select></label><label>Statut<select name="state"><option>À faire</option><option>En cours</option><option>À vérifier</option><option>Terminé</option></select></label><label>Échéance<input type="date" name="date"></label><label>Notes / prochaine étape<textarea name="note" maxlength="12000"></textarea></label><label>Lien de ressource<input name="url" type="url" placeholder="https://"></label><div class="actions"><button class="primary" type="submit">Enregistrer</button><button type="button" id="cancel">Annuler</button></div></form></dialog><script type="application/json" id="config">{"id":"foi","name":"Foi & spiritualité","modules":["Prières","Textes bibliques","Études","Léon XIV","Ma foi et mes convictions","Jésus-Christ","Marie et le chapelet","Saint Pierre et les clés","Anges et archanges","Bible et textes sacrés","Lettres et création","Symboles et architecture","Histoire et manuscrits","Mes prières et méditations","Journal de découvertes","Enquêtes ALPHA et manuscrits"]}</script><script id="foi-left-nav-events">
-(function(){const links=document.getElementById("foi-direct-nav"),frame=document.getElementById("foi-reader"),current=document.getElementById("foi-current"),open=document.getElementById("foi-open"),catalog=document.getElementById("foi-catalog");if(!links||!frame)return;
-links.addEventListener("click",e=>{const b=e.target.closest("button[data-foi-link]");if(!b)return;const url=b.getAttribute("data-foi-link").replaceAll("&amp;","&");frame.src=url;current.textContent=b.dataset.foiTitle;open.href=url;links.querySelectorAll("button").forEach(x=>x.removeAttribute("aria-current"));b.setAttribute("aria-current","page");catalog?.querySelectorAll("button").forEach(x=>x.setAttribute("aria-pressed","false"));document.getElementById("bibliotheque-foi").scrollIntoView({behavior:"smooth",block:"start"});});
-const selected=new URLSearchParams(location.search).get("rubrique");if(selected){const b=[...links.querySelectorAll("button")].find(x=>x.dataset.foiTitle===selected);if(b)b.click();}
-})();
-</script><script src="univers-control.js?v=2"></script><script src="eloah-navigation.js?v=6"></script></body></html>
+</section><div class="toolbar"><input id="search" aria-label="Rechercher" placeholder="Rechercher dans cet univers…"><button id="export">Exporter</button><button id="restore">Restaurer</button><input type="file" accept=".json,application/json" id="file" hidden></div><p id="status" role="status"></p><div class="split"><section class="panel"><h2 id="section">Tous</h2><div id="list"></div></section><section class="panel"><div class="eyebrow">Ton fil conducteur</div><h2 style="margin-top:15px">Une idée devient une action.</h2><p>Ajoute un titre, choisis une rubrique, note la prochaine étape et fixe une échéance si nécessaire.</p><p>Fais évoluer le statut, conserve tes liens et archive ce qui est terminé.</p><p class="notice">Les saisies restent sur ce navigateur. Aucune synchronisation automatique ni connexion aux réseaux sociaux. Exporte régulièrement une sauvegarde. Cet espace ne dispose pas de verrouillage : utilise un profil navigateur privé pour tes notes.</p></section></div><footer>Foi & spiritualité · Un espace de la galaxie Sonia</footer></main></div><dialog id="editor"><h2>Ton élément</h2><form id="form"><label>Titre<input name="title" required maxlength="180"></label><label>Rubrique<select name="module" id="module"></select></label><label>Statut<select name="state"><option>À faire</option><option>En cours</option><option>À vérifier</option><option>Terminé</option></select></label><label>Échéance<input type="date" name="date"></label><label>Notes / prochaine étape<textarea name="note" maxlength="12000"></textarea></label><label>Lien de ressource<input name="url" type="url" placeholder="https://"></label><div class="actions"><button class="primary" type="submit">Enregistrer</button><button type="button" id="cancel">Annuler</button></div></form></dialog><script type="application/json" id="config">{"id":"foi","name":"Foi & spiritualité","modules":["Prières","Textes bibliques","Études","Léon XIV","Ma foi et mes convictions","Jésus-Christ","Marie et le chapelet","Saint Pierre et les clés","Anges et archanges","Bible et textes sacrés","Lettres et création","Symboles et architecture","Histoire et manuscrits","Mes prières et méditations","Journal de découvertes","Enquêtes ALPHA et manuscrits"]}</script><script src="univers-control.js?v=2"></script><script src="eloah-navigation.js?v=6"></script></body></html>
