@@ -105,7 +105,7 @@ async function remoteFetch(resource,options={}){
  return r.status===204?null:r.json();
 }
 async function saveCloudItem(x){
- return remoteFetch("eloah_mail_items?gmail_id=eq."+encodeURIComponent(x.id),{method:"PATCH",body:JSON.stringify({status:x.status,priority:x.priority,note:String(x.note||"").slice(0,3000),updated_at:new Date().toISOString()}),headers:{"Prefer":"return=minimal"}});
+ return remoteFetch("eloah_mail_items?gmail_id=eq."+encodeURIComponent(x.id),{method:"PATCH",body:JSON.stringify({status:x.status,priority:x.priority,note:String(x.note||"").slice(0,3000),source_kind:"manual_review",reviewed_at:new Date().toISOString(),updated_at:new Date().toISOString()}),headers:{"Prefer":"return=minimal"}});
 }
 function cloudState(heading,description,success){
  $("cloudTitle").textContent=heading;$("cloudText").textContent=description;$("cloudBanner").dataset.ready=success?"yes":"no";
@@ -135,6 +135,38 @@ async function refreshCloud(){
  }catch(err){cloudState("Coffre non chargé",err.message,false)}
  finally{btn.disabled=false;btn.textContent="Actualiser mes dossiers ↻";cloudLoading=false}
 }
+
+async function pushPrivateReport(){
+ const report=state.items.filter(x=>x.source_kind==="imported_report");
+ if(!report.length){$("upload").click();return}
+ if(!confirm("Transférer "+report.length+" fiches de suivi de ce navigateur vers ton espace privé Supabase ? Cela ne modifie aucun message Gmail."))return;
+ const btn=$("pushReport");btn.disabled=true;btn.textContent="Transfert en cours…";
+ try{
+  const token=await bearer(),u=await fetch(SUPABASE_URL+"/auth/v1/user",{headers:{"apikey":SUPABASE_KEY,"Authorization":"Bearer "+token}});
+  if(!u.ok)throw Error("Identité non vérifiée : reconnecte-toi");const owner=(await u.json()).id;
+  if(!owner)throw Error("Compte privé introuvable");
+  const existing=await remoteFetch("eloah_mail_items?select=gmail_id,source_kind&gmail_id=in.("+report.map(x=>encodeURIComponent(x.id)).join(",")+")");
+  const known=new Map(existing.map(x=>[x.gmail_id,x.source_kind]));
+  for(const x of report){
+   const payload={category:x.category,priority:x.priority,status:x.status,action:String(x.action||"").slice(0,3000),
+    snippet:String(x.summary||"").slice(0,3000),steps:Array.isArray(x.steps)?x.steps.slice(0,15):[],
+    due_on:x.deadline||null,source_kind:"gmail_read",reviewed_at:new Date().toISOString(),updated_at:new Date().toISOString()};
+   if(!known.has(x.id)){
+    await remoteFetch("eloah_mail_items",{method:"POST",headers:{"Prefer":"resolution=ignore-duplicates,return=minimal"},
+     body:JSON.stringify({...payload,owner_id:owner,gmail_id:x.id,subject:String(x.subject||"").slice(0,1000),
+     sender:String(x.sender_name||"").slice(0,300),received_at:x.date||null,gmail_url:cleanUrl(x.link)||null,has_attachment:!!x.has_attachment})});
+   }else if(known.get(x.id)==="gmail_header"){
+    await remoteFetch("eloah_mail_items?gmail_id=eq."+encodeURIComponent(x.id)+"&source_kind=eq.gmail_header",
+     {method:"PATCH",headers:{"Prefer":"return=minimal"},body:JSON.stringify(payload)});
+   }
+   x.source_kind="gmail_read";
+  }
+  save();await refreshCloud();alert("Rapport intégré au coffre privé.");
+ }catch(err){alert("Transfert interrompu : "+err.message)}
+ finally{btn.disabled=false;btn.textContent="Enregistrer mon rapport dans le coffre privé"}
+}
+$("pushReport").onclick=pushPrivateReport;
+
 $("refreshCloud").onclick=refreshCloud;
 refreshCloud();
 
