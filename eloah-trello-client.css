@@ -1,0 +1,112 @@
+/* ELOAH Boards · parcours cliente. Styles scoped to this page only. */
+body.eloah-boards-client{
+  --bg:#f6f5f0;--panel:#fffefa;--ink:#303530;--muted:#666e64;--line:#dedfd7;--accent:#7762af;--soft:#f0ebf7;
+  color:var(--ink);font:15px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif;
+  background-color:var(--bg);
+}
+.eloah-boards-client [hidden]{display:none!important}
+.eloah-boards-client main{max-width:1420px;margin-inline:auto;padding:30px clamp(15px,3vw,42px) 60px}
+.eloah-boards-client .client-site-header{padding:14px clamp(15px,3vw,40px);background:#fffefa;border-color:var(--line);gap:13px;justify-content:space-between;position:relative;z-index:4}
+.eloah-boards-client .client-site-header>strong{font:400 27px/1.2 Georgia,serif}
+.eloah-boards-client .client-site-header>small{font-size:12px}
+.eloah-boards-client .client-site-header>.right{display:flex;align-items:center;gap:10px;margin-left:auto}
+.eloah-boards-client .client-site-header>.right>a{display:inline-flex;align-items:center;min-height:44px;font-size:13px;text-decoration:none}
+.eloah-boards-client .client-global-options{position:relative;font-size:13px}
+.eloah-boards-client .client-global-options>summary{cursor:pointer;display:flex;align-items:center;justify-content:center;min-height:44px;border:1px solid var(--line);border-radius:8px;padding:10px 14px;background:var(--panel);list-style:none}
+.eloah-boards-client .client-global-options>summary::after{content:'⌄';font-size:16px;margin-left:8px}
+.eloah-boards-client .client-global-options>summary::-webkit-details-marker{display:none}
+.eloah-boards-client .client-global-links{display:grid;grid-template-columns:minmax(0,1fr);align-items:stretch;gap:8px;position:absolute;top:calc(100% + 8px);right:0;z-index:6;width:min(310px,calc(100vw - 24px));max-height:75dvh;overflow-y:auto;border:1px solid var(--line);border-radius:12px;padding:12px;background:var(--panel);box-shadow:0 15px 40px #30353024}
+.eloah-boards-client .client-global-links>a,
+.eloah-boards-client .client-global-links>button{display:flex;align-items:center;min-height:44px;border:1px solid var(--line);background:#fff;border-radius:7px;padding:10px 12px;text-decoration:none;font:500 13px/1.4 system-ui;overflow-wrap:anywhere}
+.eloah-boards-client .client-global-links input[type=file]{max-width:100%;min-width:0}
+.eloah-boards-client .client-global-links .client-help{font-size:12px;margin:6px 0}
+.eloah-boards-client .client-hero{max-width:850px;margin:0 0 22px}
+.eloah-boards-client .client-hero .eyebrow{font-size:11px;letter-spacing:.15em;color:#79649c}
+.eloah-boards-client .client-hero h1{font:400 clamp(35px,4vw,50px)/1.12 Georgia,serif;margin:10px 0 12px}
+.eloah-boards-client .client-hero>p{font-size:16px;line-height:1.65;margin:10px 0}
+.eloah-boards-client .client-hero>.client-get-started{font-size:13px;color:#5d655e;margin-top:17px;padding-left:14px;border-left:3px solid #bcaed0}
+.eloah-boards-client button,.eloah-boards-client .client-shortcuts a{min-height:44px}
+.eloah-boards-client .client-essential-tools{display:flex;align-items:end;flex-wrap:wrap;gap:10px;margin:22px 0 12px;padding:18px;background:var(--panel);border:1px solid var(--line);border-radius:13px}
+.eloah-boards-client .client-essential-tools label{display:flex;flex-direction:column;gap:6px;margin:0;color:#626d62;font-size:12px;font-weight:650}
+.eloah-boards-client .client-essential-tools .client-board-select{flex:1 1 210px}
+.eloah-boards-client .client-essential-tools .client-search{flex:1 1 230px}
+.eloah-boards-client .client-essential-tools select,.eloah-boards-client .client-essential-tools input{width:100%;min-width:0;margin:0;padding:11px;min-height:44px;background:#fff;border:1px solid var(--line);border-radius:8px;font:14px/1.4 system-ui}
+.eloah-boards-client .client-essential-tools>button{font-size:14px;white-space:nowrap;padding:11px 15px}
+.eloah-boards-client #newCard{background:#303530;color:#fff;border-color:#303530;font-weight:650}
+.eloah-boards-client .client-shortcuts{display:flex;gap:9px;align-items:center;flex-wrap:wrap;margin:14px 0}
+.eloah-boards-client .client-shortcuts>a,.eloah-boards-client .client-shortcuts>button{display:inline-flex;align-items:center;justify-content:center;font-size:13px;text-decoration:none;padding:11px 13px;border:1px solid var(--line);background:var(--panel);border-radius:8px}
+.eloah-boards-client .client-options,.eloah-boards-client .client-storage{border:1px solid var(--line);border-radius:10px;background:var(--panel);margin:14px 0;overflow:visible}
+.eloah-boards-client .client-options>summary,.eloah-boards-client .client-storage>summary{cursor:pointer;min-height:52px;padding:14px 17px;font-size:14px;font-weight:600}
+.eloah-boards-client .client-filters{display:flex;align-items:end;flex-wrap:wrap;gap:10px;padding:0 16px 15px}
+.eloah-boards-client .client-filters label{flex:1 1 175px;display:grid;gap:7px;min-width:130px;font-size:12px}
+.eloah-boards-client .client-filters select{display:block;width:100%;padding:10px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:white}
+.eloah-boards-client .client-filters>button{font-size:13px;padding:10px 12px}
+.eloah-boards-client #themePicker{margin:0 16px 17px!important;padding:15px!important;overflow-wrap:anywhere}
+.eloah-boards-client .client-board-info{display:flex;align-items:start;flex-wrap:wrap;gap:6px 16px;margin:22px 0 7px}
+.eloah-boards-client .client-board-info strong{font-size:17px}
+.eloah-boards-client .client-board-info .client-help{font-size:13px;color:#666e64;flex:1 1 330px;margin:0}
+.eloah-boards-client .board{gap:14px;max-width:100%;min-height:45vh;padding:12px 2px 16px;scrollbar-width:thin;scrollbar-color:#bbb1c8 transparent}
+.eloah-boards-client .lane{flex-basis:300px;border:1px solid #dcdcd6;background:#eeede9;max-height:74vh;scrollbar-width:thin}
+.eloah-boards-client .lane h2{font-size:15px;color:#303530}
+.eloah-boards-client .lane .add{font-size:13px;min-height:44px;background:transparent}
+.eloah-boards-client .lane .card{border-radius:9px;box-shadow:0 1px 8px #0000000a}
+.eloah-boards-client .lane .card:hover{border-color:#ad9bc4}
+.eloah-boards-client .lane .card:focus-visible{outline:3px solid #7762af}
+.eloah-boards-client .lane .card select{font-size:14px;min-height:42px;background:#fff}
+.eloah-boards-client .client-lane-nav{display:none}
+.eloah-boards-client #calendar{min-height:0}
+.eloah-boards-client .client-storage{margin-top:30px}
+.eloah-boards-client .client-storage-content{padding:0 16px 18px}
+.eloah-boards-client .client-help{color:#667169;line-height:1.6}
+.eloah-boards-client .client-storage-content>.client-help{font-size:13px;max-width:820px}
+.eloah-boards-client #cloudPanel{margin:12px 0!important;padding:18px!important;max-width:950px;min-width:0!important}
+.eloah-boards-client #cloudPanel p{font-size:13px}
+.eloah-boards-client #cloudPanel input{max-width:100%}
+.eloah-boards-client #editor{background:#fffefa;color:#303530;max-height:90dvh;overflow-y:auto}
+.eloah-boards-client #editor form label{font-size:13px;color:#505a52}
+.eloah-boards-client #editor input,.eloah-boards-client #editor select,.eloah-boards-client #editor textarea{font-size:16px;min-height:44px}
+.eloah-boards-client #editor .client-editor-help{font-size:13px;line-height:1.6;color:#5c655d;border-left:3px solid #bcaed0;padding:7px 12px;background:#f5f2f8;border-radius:4px}
+.eloah-boards-client #editor .actions{gap:8px}
+.eloah-boards-client #editor .actions button{font-size:13px}
+.eloah-boards-client #notice:empty{display:none}
+.eloah-boards-client #notice:not(:empty){margin:13px 0;padding:10px 14px;border-radius:8px;background:#ede8f4;font-size:12px}
+@media(max-width:850px){
+  .eloah-boards-client main{padding:23px 16px 45px}
+  .eloah-boards-client .client-hero h1{font-size:39px}
+  .eloah-boards-client .client-essential-tools{padding:14px}
+  .eloah-boards-client .client-essential-tools .client-search{flex:1 1 100%}
+}
+@media(max-width:650px){
+  .eloah-boards-client .client-site-header{padding:12px 14px;gap:8px}
+  .eloah-boards-client .client-site-header>strong{font-size:24px}
+  .eloah-boards-client .client-site-header>small{display:none}
+  .eloah-boards-client .client-site-header>.right{margin-left:0;width:100%;justify-content:space-between;gap:8px}
+  .eloah-boards-client .client-global-options>summary{font-size:12px}
+  .eloah-boards-client .client-global-links{right:0;width:min(310px,calc(100vw - 24px))}
+  .eloah-boards-client main{padding:18px 12px 40px}
+  .eloah-boards-client .client-hero h1{font-size:35px}
+  .eloah-boards-client .client-hero>p{font-size:15px}
+  .eloah-boards-client .client-essential-tools{gap:9px}
+  .eloah-boards-client .client-essential-tools .client-board-select{flex:1 1 100%}
+  .eloah-boards-client .client-essential-tools .client-search{flex:1 1 100%}
+  .eloah-boards-client .client-essential-tools>button{flex:1 1 calc(50% - 9px)}
+  .eloah-boards-client .client-shortcuts>a,.eloah-boards-client .client-shortcuts>button{flex:1 1 calc(50% - 9px);font-size:12px;padding:10px 8px;text-align:center}
+  .eloah-boards-client .client-filters>button{flex:1 1 40%}
+  .eloah-boards-client .client-board-info{display:block}
+  .eloah-boards-client .client-board-info .client-help{margin-top:7px}
+  .eloah-boards-client .client-lane-nav:not([hidden]){display:flex;align-items:center;justify-content:space-between;gap:9px;margin:12px 0 4px;padding:6px 10px;background:#eae7ee;border:1px solid #dcd2e8;border-radius:9px}
+  .eloah-boards-client .client-lane-nav button{background:#fffefa;min-width:44px;min-height:44px;font-size:19px;padding:5px}
+  .eloah-boards-client .client-lane-nav span{font-size:12px;font-weight:650;overflow-wrap:anywhere;text-align:center}
+  .eloah-boards-client .board{scroll-snap-type:x mandatory;overscroll-behavior-x:contain;scroll-padding-inline:0;gap:12px;min-height:48vh;padding:8px 0 15px}
+  .eloah-boards-client .board>.lane{scroll-snap-align:start;flex-basis:calc(100vw - 46px);max-height:70dvh;min-width:0}
+  .eloah-boards-client .board>.addlane{flex-basis:85vw}
+  .eloah-boards-client .client-storage-content{padding:0 12px 12px}
+  .eloah-boards-client #editor{width:calc(100vw - 24px);max-width:calc(100vw - 24px);padding:18px;max-height:90dvh}
+  .eloah-boards-client #editor .actions{justify-content:stretch}
+  .eloah-boards-client #editor .actions button{flex:1 1 calc(50% - 8px)}
+}
+@media(max-width:350px){
+  .eloah-boards-client .client-shortcuts>a,.eloah-boards-client .client-shortcuts>button{flex:1 1 100%}
+  .eloah-boards-client #editor .actions button{flex:1 1 100%}
+}
+@media(prefers-reduced-motion:reduce){.eloah-boards-client *{scroll-behavior:auto!important}}
