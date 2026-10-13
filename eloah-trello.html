@@ -122,4 +122,4 @@ render();
 
 const params=new URLSearchParams(location.search),targetBoard=params.get('board'),targetCard=params.get('card');
 if(targetBoard&&targetCard){const b=data.boards.find(x=>x.id===targetBoard),c=b?.cards?.find(x=>x.id===targetCard);if(b&&c){data.active=b.id;showArchive=!!c.archived;if(showArchive)$('archiveView').textContent='Cartes actives';$('search').value='';$('filterTag').value='';showingCalendar=false;save();render();openCard(c.id);history.replaceState(null,'',location.pathname)}} 
-</script><script src="eloah-boards-mobile.js?v=20261014-phone2"></script><script src="eloah-trello-client.js?v=20261014-client3"></script></body></html>
+</script><script src="eloah-boards-mobile.js?v=20261014-client4"></script><script src="eloah-trello-client.js?v=20261014-client3"></script></body></html>
