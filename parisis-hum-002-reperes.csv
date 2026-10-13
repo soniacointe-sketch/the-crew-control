@@ -1,0 +1,8 @@
+id,nom,longitude_wgs84,latitude_wgs84,est_lambert93_m,nord_lambert93_m,source,limite
+rue,Rue Abel-Gance Paris 13e,2.3737337039070483,48.83561484662868,654030.473113,6859689.163742,Ville de Paris identifiant 8783,Emprise actuelle
+tombe,Tombeau de Napoleon Ier,2.31254,48.85503,649557.604253,6861885.293853,OSM node 11586646324,Point OSM contemporain
+chaillot,Palais de Chaillot,2.28807,48.86234,647769.493654,6862714.007890,Mapcarta GeoNames,Pas entree historique du musee
+place,Place Abel-Gance Boulogne,2.25783,48.83374,645521.120279,6859554.422765,OSM way 1101491520,Place actuelle
+pyramide,Cour Napoleon Louvre,2.335869,48.861040,651274.949847,6862538.903060,Wikimedia Commons plan de la Cour Napoleon,Point approche
+arts,Musee des Arts et Metiers,2.35541,48.8661,652713.167743,6863089.653923,OSM node 247618453,Point du musee non emprise
+cours,Cours du 7e Art Paris 19e,2.3868571719154783,48.87814319209955,655030.469038,6864410.402398,Ville de Paris identifiant 14744,Emprise actuelle
