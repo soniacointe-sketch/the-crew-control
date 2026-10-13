@@ -487,7 +487,7 @@ const localTemplates=new Set(catalogue.map(c=>c.id));
 const mailingBrands=["Power & Glam","The Crew Orchies","Le Lion Blanc"];
 const branding={
  "Power & Glam":{slug:"pg",short:"P&G",section:"Regard Power & Glam",action:"Le geste à essayer",footer:"Sonia · Power & Glam",website:"https://powerglam1.wordpress.com/",websiteLabel:"Explorer Power & Glam",sender:"Power & Glam (via The Crew Orchies)",email:"newsletter@thecreworchies.blog",reply:"soniacointe@powerglam.fr"},
- "The Crew Orchies":{slug:"crew",short:"CREW",section:"La vie du Crew",action:"À essayer ensemble",footer:"L’équipe The Crew Orchies",website:"https://thecreworchies.blog/",websiteLabel:"Découvrir The Crew Orchies",sender:"The Crew Orchies",email:"newsletter@thecreworchies.blog",reply:"soniacointe@powerglam.fr"},
+ "The Crew Orchies":{slug:"crew",short:"CREW",section:"La vie du Crew",action:"À essayer ensemble",footer:"L’équipe The Crew Orchies",website:"https://thecreworchies.blog/",websiteLabel:"Découvrir The Crew Orchies",sender:"The Crew Orchies",email:"newsletter@thecreworchies.blog",reply:""},
  "Le Lion Blanc":{slug:"lion",short:"LION",section:"Notre regard citoyen",action:"Une piste concrète",footer:"L’équipe du Lion Blanc",website:"",websiteLabel:"",sender:"Le Lion Blanc",email:"",reply:""}
 };
 const editorialVoices={
@@ -495,17 +495,19 @@ const editorialVoices={
  "The Crew Orchies":{id:"crew",tag:"La lettre du Crew · The Crew Orchies",presentation:"La voix du collectif : naturelle, drôle quand il faut, proche des familles et des danseurs, sans slogans ni jargon.",address:"tu / vous",style:"Comme un message écrit après le cours, avec des informations vérifiées et une énergie sincère.",disclaimer:"Pas de date, lieu, tarif ou place disponible inventés. Vérifier le calendrier."},
  "Le Lion Blanc":{id:"lion",tag:"Lettre citoyenne · Le Lion Blanc",presentation:"Une voix citoyenne ferme, précise, compréhensible et profondément humaine, sans accusation non étayée.",address:"nous / vous",style:"Un constat, une mise au point, une démarche concrète et ce qu’il reste à vérifier.",disclaimer:"Ne constitue pas un avis juridique. Respect des sources, des personnes et des mineurs."}
 };
+const editorialHeadings={"pg":[["Ce que l’attente fabrique dans ta tête","Ne te laisse pas réduire à une notification"],["Quand tu t’effaces pour conserver le lien","Une demande claire, sans plaidoyer"],["Le visage d’une vraie journée","Faire du soin un plaisir, pas une obligation"],["Quand un non devient un dossier à défendre","Le droit de s’arrêter à une phrase"],["L’argent, ce que les chiffres représentent","Regarder sa situation pour choisir"],["Le piège du « quand j’aurai le temps »","Un premier geste réel"],["Quand la peur écrit les messages à ta place","Formuler ce dont tu as besoin"],["Ce qui te donne vraiment envie","Retrouver une envie à toi"],["Le courage n’a pas toujours l’air sûr de lui","Regarder les preuves plutôt que les sensations"],["Pourquoi ton temps n’est jamais libre","Une heure qui n’a rien à prouver"],["Ce qui reste de toi quand tout change","Garder l’essentiel, changer le reste"],["Le prix invisible des oui automatiques","Gagner le droit de répondre plus tard"],["Un corps, pas un chantier","Cinq minutes pour l’écouter"],["Le quotidien raconte aussi l’amour","Regarder les faits avec douceur"],["Pourquoi on fuit parfois ses comptes","Trois colonnes, pas un procès"],["Tout ce qu’on retarde au nom du parfait","Laisser enfin entrer le réel"],["Ce que la colère essaie de signaler","Une limite sans explosion"],["La reconstruction au milieu de la vraie vie","Une lettre à celle que tu seras"]],"crew":[["Ce qui se passe après le premier pas","Viens essayer, vraiment"],["Tout le monde a commencé quelque part","Ton premier cours, sans pression"],["Huit temps, et on recommence","Une répétition qui change tout"],["La précision derrière les pompons","Le petit détail à travailler"],["Les victoires qu’on ne voit pas toujours","Un souvenir à partager à la maison"],["Ce que les générations s’apportent","Le prochain rendez-vous dans la salle"],["Ce qui nous plaît dans les rythmes latino","Les informations à vérifier"],["Quand la playlist met tout le monde d’accord","Le titre que tu proposerais"],["Découper les pas pour mieux les apprendre","Une chorégraphie à suggérer"],["Le travail derrière un flashmob","Vérifier le planning et répéter"],["Les questions qu’on se pose la première fois","Préparer son sac tout simplement"],["Les rencontres entre deux chorégraphies","Un geste pour accueillir quelqu’un"],["Quand les pieds n’écoutent pas les bras","Huit temps pour progresser"],["Ces moments qu’on garde longtemps","Un souvenir à raconter"],["Les projets ne se font pas tout seuls","Une idée pour le collectif"],["Le soutien discret des familles","Les informations qu’on veut clarifier"],["Vos musiques racontent aussi le groupe","La prochaine chanson à proposer"],["Les envies et les moyens du Crew","Ce qu’on peut construire ensemble"]],"lion":[["Notre méthode avant les grands discours","Une question citoyenne à faire remonter"],["Commencer par comprendre la décision","Les vérifications qui évitent une erreur"],["Les chiffres sans les jugements","Les trois éléments à rassembler"],["La parole des familles mérite mieux qu’un slogan","Poser une question sans exposer un enfant"],["La protection n’est pas un argument de communication","Ce que nous devons vérifier avant de publier"],["Une citation de loi ne suffit pas","Où chercher l’information correcte"],["L’écoute ne se remplace pas par des conseils rapides","Reformuler avant d’orienter"],["Ranger les faits avant le rendez-vous","Trois demandes concrètes à préparer"],["Les obstacles qui ne devraient pas en être","Protéger ses accès et ses documents"],["Une émotion, un témoignage, une pièce : trois choses différentes","Construire un dossier précis"],["L’entraide se mesure dans le quotidien","Une action réalisable près de chez nous"],["Comprendre ce qui a réellement été décidé","Chercher le bon interlocuteur"],["Les réunions doivent déboucher sur quelque chose","Assigner un suivi à chaque proposition"],["La fermeté n’a pas besoin de la rumeur","Écrire une demande vérifiable"],["Le classement ne résout pas tout, mais il aide","Préparer un atelier utile"],["Pourquoi on ne partage pas tout","Choisir un canal adapté et sûr"],["Lire un document avant de commenter","Distinguer projet, vote et application"],["De la parole aux actions suivies","Choisir un objectif réaliste"]]};
 function templateDraft(t){
  const brand=t.brand||"Power & Glam",b=branding[brand]||branding["Power & Glam"];
  const voice=editorialVoices[brand]||editorialVoices["Power & Glam"];
  const index=Math.max(0,Number(t.id.slice(-2))-1);
  const authored=(window.ELOAH_MAILING_VOICES||{})[voice.id]?.[index]||[];
  const scene=authored[0]||"",analysis=authored[1]||"";
+ const sections=editorialHeadings[voice.id]?.[index]||["Le sujet du jour","Ce que tu peux essayer"];
  const para=["# "+t.subject,""];
  if(voice.id==="pg"){
   para.push(scene||t.opening,"",t.opening,"",
-  "## Ce qu’on ne voit pas toujours","",analysis||t.reflection,"",t.reflection,"",
-  "## Un pas pour toi, sans pression","",t.exercise,"",
+  "## "+sections[0],"",analysis||t.reflection,"",t.reflection,"",
+  "## "+sections[1],"",t.exercise,"",
   "> "+t.question,"",
   "Tu n’as pas à trouver une réponse parfaite maintenant. Peut-être que cette question mérite simplement quelques minutes de silence, cette fois pour toi.","",
   "---","",
@@ -514,17 +516,17 @@ function templateDraft(t){
   "Si tu veux prolonger la lecture, d’autres textes t’attendent dans l’univers Power & Glam.","");
  }else if(voice.id==="crew"){
   para.push("Salut le Crew !","",scene||t.opening,"",t.opening,"",
-  "## Ce qu’on a envie de partager","",analysis||t.reflection,"",t.reflection,"",
-  "## À essayer au prochain cours","",t.exercise,"",
+  "## "+sections[0],"",analysis||t.reflection,"",t.reflection,"",
+  "## "+sections[1],"",t.exercise,"",
   "Pas de pression : on est là pour apprendre ensemble. L’essentiel, c’est de trouver du plaisir dans le mouvement et de progresser à son rythme.","",
   "> "+t.question,"","---","",
   "**On garde le lien**","",
   "Tu as une idée de musique, une question ou un moment que tu aimerais partager ? On adore avoir vos retours. Et pour les horaires ou événements, réfère-toi toujours aux informations officielles de l’association.","");
  }else{
   para.push("Bonjour,","",scene||t.opening,"",t.opening,"",
-  "## Les éléments à distinguer","",analysis||t.reflection,"",t.reflection,"",
+  "## "+sections[0],"",analysis||t.reflection,"",t.reflection,"",
   "Une information relayée n’est pas automatiquement un fait confirmé. Pour agir sérieusement, gardons les documents, les dates et les questions encore ouvertes séparés.","",
-  "## Une action concrète, à votre rythme","",t.exercise,"",
+  "## "+sections[1],"",t.exercise,"",
   "Cette lettre propose une méthode générale. Les procédures et droits dépendent de chaque situation : les sources officielles et, si nécessaire, un professionnel compétent restent indispensables.","",
   "> "+t.question,"","---","",
   "**Participer avec sérieux**","",
@@ -1063,7 +1065,7 @@ $('campaign-target').addEventListener('change',()=>{
  if(target==='crew-test'||target==='The Crew Orchies'){
   if(!name.value.trim()||name.value.trim()==='ITRIIA'||name.value.trim()==='Power & Glam')name.value='The Crew Orchies';
   if(!email.value.trim()||email.value.trim()==='noreply@itriia.com'||email.value.trim()==='soniacointe@powerglam.fr')email.value='newsletter@thecreworchies.blog';
-  if(target==='The Crew Orchies'&&!reply.value.trim())reply.value='soniacointe@powerglam.fr';
+  
   status('Domaine The Crew vérifié : tu peux essayer vers ton adresse ELOAH ou Power & Glam. Aucune campagne groupée activée.');
  }else if(target==='Power & Glam'){
   if(!$('campaign-test-address').value||$('campaign-test-address').value.toLowerCase()===ownerEmail?.toLowerCase())$('campaign-test-address').value='soniacointe@powerglam.fr';
