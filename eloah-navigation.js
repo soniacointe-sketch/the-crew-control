@@ -3,6 +3,7 @@
 if(document.querySelector('.eloah-global-nav'))return;
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
 const routes=[["Accueil général","mes-univers.html"],["Mon Espace","eloah-partenaire.html?rubrique=Mon%20Espace"],["ELOAH Studio","eloah-partenaire.html?rubrique=ELOAH%20Studio"],["Coffre-fort","eloah-partenaire.html?rubrique=Coffre-fort"],["Entretiens","eloah-partenaire.html?rubrique=Entretiens"],["Mailing","eloah-partenaire.html?rubrique=Mailing"],["Documents","eloah-partenaire.html?rubrique=Documents"],["Mon abonnement","eloah-partenaire.html?rubrique=Mon%20abonnement"],["Crédits IA","eloah-partenaire.html?rubrique=Cr%C3%A9dits%20IA"],["Formations","eloah-partenaire.html?rubrique=Formations"],["Analytics","eloah-partenaire.html?rubrique=Analytics"],["Projets","eloah-partenaire.html?rubrique=Projets"],["Bases d’Expertise","eloah-partenaire.html?rubrique=Bases%20d%E2%80%99Expertise"],["Chroniques","eloah-partenaire.html?rubrique=Chroniques"],["Mon profil","eloah-partenaire.html?rubrique=Mon%20profil"]];
+routes.unshift(['Contrôle parcours 07 ↗','eloah-controle-parcours-07.html']);
 const assistantRoute=['Assistant IA','eloah-projet.html?projet=ELOAH']; routes.push(assistantRoute)
 let universe=query.get('projet')||'';
 try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
