@@ -142,3 +142,46 @@ footer{border-top:1px solid var(--line);font-size:11px;color:var(--muted);paddin
 .mission-details>summary{font-weight:650;cursor:pointer}
 .mission-details p{margin:12px 0}
 @media(max-width:760px){.mission-grid{grid-template-columns:1fr}.mission-title h2{font-size:26px}.mission-toolgrid{grid-template-columns:1fr}.mission-lead h2{font-size:29px}}
+
+/* Adaptation automatique : l'interface PC reste la référence visuelle,
+   mais l'écran ajuste les colonnes et les contrôles à sa largeur. */
+@media (max-width:900px){
+  html,body{max-width:100%;overflow-x:clip}
+  .shell{display:block;min-width:0}
+  .side{position:sticky;top:0;z-index:30;height:auto;overflow:visible;border-right:0;border-bottom:1px solid var(--line);padding:9px 13px;background:#fbf8f3;box-shadow:0 3px 12px #3c322012}
+  .wordmark{font-size:23px;letter-spacing:.17em}
+  .side nav{display:flex;gap:5px;overflow-x:auto;overscroll-behavior-inline:contain;scroll-snap-type:x proximity;scrollbar-width:thin;-webkit-overflow-scrolling:touch;padding:4px 0 6px}
+  .side nav button{flex:0 0 auto;width:auto;white-space:nowrap;min-height:44px;scroll-snap-align:start;padding:10px 13px}
+  .main{max-width:100%;padding:17px 14px 32px}
+  .top{display:block}
+  .top h1{font-size:clamp(32px,6vw,45px)}
+  .top-actions{display:flex;flex-wrap:nowrap;max-width:100%;overflow-x:auto;overscroll-behavior-inline:contain;-webkit-overflow-scrolling:touch;scrollbar-width:thin;padding:10px 2px 13px;margin:7px 0 0;gap:8px}
+  .top-actions > a,.top-actions > button{white-space:nowrap;flex:0 0 auto;min-height:44px;max-width:85vw}
+  .content-grid{grid-template-columns:minmax(0,1fr)}
+  .inspector{grid-template-columns:repeat(3,minmax(0,1fr))}
+  #view,.panel,.mission-collection,.record{min-width:0;max-width:100%;overflow-wrap:anywhere}
+}
+@media (max-width:700px){
+  .inspector{grid-template-columns:1fr}
+  .grid-stats{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .top .sub{line-height:1.55}
+  .panel{padding:16px}
+  .mission-lead{padding:19px}
+  .mission-lead h2{font-size:29px}
+  .mission-grid{grid-template-columns:minmax(0,1fr)}
+  .mission-toolgrid{grid-template-columns:minmax(0,1fr)}
+  .mission-card{padding:17px}
+  .toolbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .toolbar .searchbox{grid-column:1/-1;min-width:0;max-width:none;width:100%;flex-basis:auto}
+  .toolbar button{min-width:0;padding:11px 8px}
+  .panel table,#view table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .two-col,.proof-grid,.method-list,.catalog-grid,.geom-fields,.pair,.field-grid{grid-template-columns:minmax(0,1fr)}
+  .record-top{flex-direction:column}
+  .field-grid label.wide{grid-column:auto}
+  input,select,textarea{font-size:16px}
+  dialog{width:min(100% - 16px,740px);padding:17px;max-height:88dvh}
+}
+@media (min-width:701px) and (max-width:900px){
+  .mission-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
