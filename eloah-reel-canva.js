@@ -1065,6 +1065,140 @@ async function usePhoto(id,asBackground=false){
  }finally{photoDownloading=false}
 }
 
+
+let brandView='overview',brandSearch='',brandUploadCategory='photos';
+let brandKitId='';
+try{brandKitId=localStorage.getItem('eloah_reel_active_brand')||''}catch{}
+const brandImageCache=new Map();
+function brandKit(){
+ const lib=window.ELOAHBrand;if(!lib)return null;
+ if(!brandKitId){brandKitId=lib.all().find(k=>k.name===S.brand)?.id||lib.all()[0].id}
+ return lib.all().find(k=>k.id===brandKitId)||lib.all()[0];
+}
+function brandStatus(result,success){
+ if(!result){toast('Action indisponible pour cette identité.');return false}
+ if(result.result)result=result.result;
+ if(result.ok===false){toast(result.message||'Stockage local impossible. Exporte ton kit en JSON.');return false}
+ if(success)toast(success);
+ return true;
+}
+function brandFamilyName(key){return window.ELOAHText?.families?.[key]?.name||key}
+function brandTypeSections(){
+ return [['overview','Toutes les ressources','▦'],['guides','Directives','▤'],['models','Modèles de marque','▧'],
+ ['logos','Logos','◈'],['colors','Couleurs','●'],['fonts','Polices','T'],['voice','Voix de marque','♫'],
+ ['photos','Photos','▣'],['illustrations','Illustrations','❀'],['icons','Icônes','☆'],['charts','Graphiques','▥']];
+}
+function brandNav(){
+ return '<nav class="ecs-brand-nav" aria-label="Rubriques de la marque">'+brandTypeSections().map(([key,label,icon])=>
+ '<button type="button" class="'+(brandView===key?'active':'')+'" data-brand-view="'+key+'"><span>'+icon+'</span>'+label+'</button>').join('')+'</nav>';
+}
+function brandBrandLogo(kit){
+ const mono=kit.name.split(/\s+/).filter(Boolean).slice(0,3).map(x=>x[0]).join('').toUpperCase();
+ return kit.logo?'<img src="'+kit.logo+'" alt="Logo importé de '+xss(kit.name)+'">':
+ '<span class="ecs-brand-monogram" style="background:'+kit.colors[0][1]+';color:'+kit.colors[Math.min(1,kit.colors.length-1)][1]+'">'+xss(mono)+'</span>';
+}
+function brandOverview(kit){
+ const modelCards=kit.models.slice(0,3).map(m=>
+ '<button class="ecs-brand-mini-model" data-brand-use-model="'+xss(m.id)+'"><span>▧</span><strong>'+xss(m.name)+'</strong><small>Réutiliser →</small></button>').join('');
+ const colors='<div class="ecs-brand-swatch-strip">'+kit.colors.map((v,i)=>
+ '<button type="button" data-brand-quickcolor="'+i+'" style="background:'+v[1]+'" title="'+xss(v[0])+' · '+v[1]+'" aria-label="Appliquer '+xss(v[0])+' au fond"></button>').join('')+'</div>';
+ const header='<section class="ecs-brand-section"><h3>Tous les modèles de marque</h3><div class="ecs-brand-hero"><span>▧</span><strong>Crée des designs homogènes</strong><p>Conserve tes couleurs, polices, logos et modèles dans une même identité ELOAH.</p><button class="ecs-brand-primary" data-brand-save-model>＋ Enregistrer ce Reel comme modèle</button></div>'+
+ (modelCards?'<div class="ecs-brand-mini-models">'+modelCards+'</div>':'<p class="ecs-note">Aucun modèle enregistré pour cette identité. Commence avec une composition prête à utiliser.</p>')+
+ '<div class="ecs-brand-layout-actions">'+[['cover','Couverture'],['quote','Citation'],['event','Annonce'],['story','Story'],['banner','Signature']].map(([k,n])=>'<button data-brand-layout="'+k+'">＋ '+n+'</button>').join('')+'</div></section>';
+ return header+'<section class="ecs-brand-section"><div class="ecs-sectiontitle"><strong>Logos</strong><button data-brand-view="logos">Afficher tout →</button></div>'+
+ '<button type="button" class="ecs-brand-logo-tile" data-brand-view="logos">'+brandBrandLogo(kit)+'</button>'+
+ '<p class="ecs-note">'+(kit.logo?'Ton logo est enregistré sur cet appareil.':'Monogramme provisoire : importe ton véritable logo.')+'</p></section>'+
+ '<section class="ecs-brand-section"><div class="ecs-sectiontitle"><strong>Couleurs</strong><button data-brand-view="colors">Afficher tout →</button></div>'+
+ colors+'<p class="ecs-note">Clique une couleur pour l’appliquer au fond du Reel.</p></section>'+
+ '<section class="ecs-brand-section"><div class="ecs-sectiontitle"><strong>Polices</strong><button data-brand-view="fonts">Afficher tout →</button></div>'+
+ '<button class="ecs-brand-font-preview" data-brand-view="fonts"><span style="font-family:Georgia,serif">En-tête</span><small>'+xss(brandFamilyName(kit.heading))+' · '+xss(brandFamilyName(kit.body))+'</small></button></section>'+
+ '<section class="ecs-brand-section"><div class="ecs-sectiontitle"><strong>Directives et voix</strong><button data-brand-view="guides">Voir →</button></div><p class="ecs-note">'+xss(kit.voice||'Définis ici la voix de ta marque.')+'</p></section>';
+}
+function brandGuides(kit){
+ return '<div class="ecs-brand-fields"><h3>Directives</h3><p class="ecs-note">Définis une identité utilisable dans tes créations et tes textes.</p>'+
+ '<label class="ecs-sidelabel">Nom</label><input data-brand-field="name" maxlength="80" value="'+xss(kit.name)+'">'+
+ '<label class="ecs-sidelabel">Description</label><input data-brand-field="tagline" maxlength="125" value="'+xss(kit.tagline)+'">'+
+ '<label class="ecs-sidelabel">Signature</label><input data-brand-field="signature" maxlength="110" value="'+xss(kit.signature)+'">'+
+ '<label class="ecs-sidelabel">À privilégier</label><textarea data-brand-field="doText" rows="5">'+xss(kit.doText)+'</textarea>'+
+ '<label class="ecs-sidelabel">À éviter</label><textarea data-brand-field="dontText" rows="5">'+xss(kit.dontText)+'</textarea>'+
+ '<button data-brand-insert-signature class="ecs-brand-primary">＋ Ajouter la signature au Reel</button></div>';
+}
+function brandModels(kit){
+ const builtin=[['cover','Couverture éditoriale'],['quote','Citation'],['event','Annonce événement'],['story','Story verticale'],['banner','Signature / bandeau']];
+ const saved=kit.models.map(m=>'<div class="ecs-brand-model-row" data-brand-filterable data-search="'+xss(m.name.toLowerCase())+'"><span>▧</span><div><strong>'+xss(m.name)+'</strong><small>'+m.elements.length+' élément(s) sans médias</small></div>'+
+ '<button data-brand-use-model="'+xss(m.id)+'" title="Ajouter les éléments au Reel">＋</button><button data-brand-remove-model="'+xss(m.id)+'" title="Supprimer ce modèle">×</button></div>').join('');
+ return '<h3>Modèles de marque</h3><p class="ecs-note">Ajoute un modèle prêt à personnaliser ou enregistre la composition actuelle. Le projet existant ne sera pas effacé.</p>'+
+ '<div class="ecs-brand-model-layouts">'+builtin.map(([key,name])=>'<button data-brand-layout="'+key+'"><span>'+['▧','❝','▤','▣','◈'][builtin.findIndex(x=>x[0]===key)]+'</span>'+name+'</button>').join('')+'</div>'+
+ '<h3>Mes modèles sauvegardés</h3>'+(saved||'<p class="ecs-note">Aucun modèle sauvegardé pour le moment.</p>')+
+ '<label class="ecs-sidelabel">Nom du modèle à enregistrer</label><input id="ecs-brand-model-name" maxlength="80" placeholder="Ex. Couverture du magazine">'+
+ '<button class="ecs-brand-primary" data-brand-save-model>＋ Enregistrer le Reel comme modèle</button>'+
+ '<p class="ecs-note">Les éléments vectoriels, textes et graphiques sont repris. Les fichiers photo et vidéo externes ne sont pas intégrés aux modèles.</p>';
+}
+function brandLogos(kit){
+ return '<h3>Logos</h3><p class="ecs-note">Les vrais logos doivent être importés depuis tes fichiers. Aucune image Canva n’est récupérée.</p>'+
+ '<div class="ecs-brand-logo-large">'+brandBrandLogo(kit)+'</div>'+
+ '<div class="ecs-brand-actions"><button data-brand-upload="logo" class="ecs-brand-primary">↑ Importer mon logo</button>'+
+ (kit.logo?'<button data-brand-insert-logo>＋ Placer le logo</button><button data-brand-remove-logo>Supprimer</button>':
+ '<button data-brand-insert-signature>＋ Ajouter un monogramme texte</button>')+'</div>'+
+ '<p class="ecs-note">PNG transparent recommandé. Le logo importé pourra être placé, déplacé et redimensionné dans le Reel.</p>';
+}
+function brandColors(kit){
+ return '<h3>Couleurs</h3><p class="ecs-note">Clique un échantillon pour l’appliquer au fond. Modifie les valeurs pour personnaliser ton identité.</p>'+
+ '<div class="ecs-brand-color-list">'+kit.colors.map(([name,hex],i)=>
+ '<div class="ecs-brand-color-row" data-brand-filterable data-search="'+xss(name.toLowerCase())+'">'+
+ '<input type="color" data-brand-color="'+i+'" value="'+hex+'" aria-label="Couleur '+xss(name)+'">'+
+ '<input type="text" maxlength="80" data-brand-color-name="'+i+'" value="'+xss(name)+'" aria-label="Nom de la couleur">'+
+ '<span>'+hex+'</span><button data-brand-quickcolor="'+i+'" title="Appliquer au fond">↗</button>'+
+ (kit.colors.length>1?'<button data-brand-delete-color="'+i+'" title="Supprimer la couleur">×</button>':'')+'</div>').join('')+'</div>'+
+ '<button class="ecs-brand-outline" data-brand-add-color>＋ Ajouter une couleur</button>'+
+ '<button class="ecs-brand-primary" data-brand-apply>Appliquer l’identité au Reel</button>';
+}
+function brandFonts(kit){
+ const fonts=window.ELOAHText?.families||{};
+ return '<h3>Polices</h3><p class="ecs-note">Les polices sont celles disponibles dans le studio et sur ton appareil ; elles ne sont pas importées depuis Canva.</p>'+
+ '<label class="ecs-sidelabel">Police des en-têtes</label><select data-brand-font="heading">'+Object.entries(fonts).map(([id,info])=>'<option value="'+id+'" '+(kit.heading===id?'selected':'')+'>'+xss(info.name)+'</option>').join('')+'</select>'+
+ '<label class="ecs-sidelabel">Police du corps</label><select data-brand-font="body">'+Object.entries(fonts).map(([id,info])=>'<option value="'+id+'" '+(kit.body===id?'selected':'')+'>'+xss(info.name)+'</option>').join('')+'</select>'+
+ '<div class="ecs-brand-font-example"><div style="font-family:'+(fonts[kit.heading]?.css||'Georgia,serif')+'">En-tête de marque</div>'+
+ '<p style="font-family:'+(fonts[kit.body]?.css||'Arial,sans-serif')+'">Un texte clair et cohérent pour ton univers.</p></div>'+
+ '<button class="ecs-brand-primary" data-brand-add-heading>＋ Insérer un titre avec cette police</button>';
+}
+function brandVoice(kit){
+ return '<h3>Voix de marque</h3><p class="ecs-note">Ces consignes sont enregistrées pour cette identité. Elles ne déclenchent pas automatiquement un générateur IA.</p>'+
+ '<label class="ecs-sidelabel">Comment cette marque s’exprime-t-elle ?</label>'+
+ '<textarea data-brand-field="voice" rows="8" maxlength="1400" placeholder="Ton, vocabulaire, rythme, mots à privilégier…">'+xss(kit.voice)+'</textarea>'+
+ '<button class="ecs-brand-primary" data-brand-insert-signature>＋ Utiliser ma signature dans le Reel</button>';
+}
+function brandResourcePanel(kit,category){
+ const titles={photos:'Photos',illustrations:'Illustrations',icons:'Icônes',charts:'Graphiques'};
+ const items=kit.assets.filter(a=>a.category===category);
+ const list=items.map(a=>
+ '<div class="ecs-brand-asset" data-brand-filterable data-search="'+xss(a.name.toLowerCase())+'"><img src="'+a.data+'" alt="'+xss(a.name)+'"><small>'+xss(a.name)+'</small>'+
+ '<div><button data-brand-asset-insert="'+xss(a.id)+'">＋ Ajouter</button><button data-brand-asset-delete="'+xss(a.id)+'" aria-label="Supprimer '+xss(a.name)+'">×</button></div></div>').join('');
+ const buttons=category==='illustrations'?'<button class="ecs-brand-outline" data-brand-open-elements="illustrations">Explorer les illustrations ELOAH →</button>':
+ category==='icons'?'<button class="ecs-brand-outline" data-brand-open-elements="shapes">Explorer les formes et icônes ELOAH →</button>':
+ category==='charts'?'<button class="ecs-brand-primary" data-brand-open-elements="charts">▥ Ouvrir Graphiques ELOAH</button>':'';
+ return '<h3>'+titles[category]+'</h3>'+
+ (category==='charts'?'<p class="ecs-note">Les graphiques modifiables du Reel Studio utilisent les données que tu saisis. Retrouve ici les ressources enregistrées de ton identité.</p>':
+ '<p class="ecs-note">Ajoute tes propres ressources à cette identité, sans les confondre avec une banque d’images commerciale.</p>')+
+ (category!=='charts'?'<button data-brand-upload="'+category+'" class="ecs-brand-primary">↑ Importer '+titles[category].toLowerCase()+'</button>':'')+
+ (items.length?'<div class="ecs-brand-assets">'+list+'</div>':'<p class="ecs-note">Aucune ressource ajoutée dans cette catégorie.</p>')+
+ buttons;
+}
+function brandPanel(){
+ const lib=window.ELOAHBrand;if(!lib)return '<p>Les identités de marque ne sont pas chargées. Actualise la page.</p>';
+ const kit=brandKit(),options=lib.all().map(k=>'<option value="'+xss(k.id)+'" '+(kit.id===k.id?'selected':'')+'>'+xss(k.name)+'</option>').join('');
+ const top='<div class="ecs-brand-kitbar"><label for="ecs-brand-kit">Identité visuelle</label><div><select id="ecs-brand-kit" aria-label="Choisir une identité visuelle">'+options+'</select><button data-brand-create title="Créer une identité de marque">＋</button></div></div>';
+ const details=brandView==='overview'?brandOverview(kit):brandView==='guides'?brandGuides(kit):brandView==='models'?brandModels(kit):
+ brandView==='logos'?brandLogos(kit):brandView==='colors'?brandColors(kit):brandView==='fonts'?brandFonts(kit):
+ brandView==='voice'?brandVoice(kit):brandResourcePanel(kit,brandView);
+ const tools='<div class="ecs-brand-backup"><button data-brand-export>↓ Exporter le kit</button><button data-brand-import>↑ Importer un kit</button>'+
+ '<p>Les identités sont enregistrées localement sur cet appareil. Pour les transférer, exporte leur fichier JSON.</p></div>';
+ return '<div class="ecs-brand-panel"><div class="ecs-brand-search"><span>⌕</span><input id="ecs-brand-search" placeholder="Rechercher une ressource" aria-label="Rechercher dans la marque" value="'+xss(brandSearch)+'"></div>'+
+ top+'<div class="ecs-brand-workspace">'+brandNav()+'<div class="ecs-brand-content">'+
+ '<div class="ecs-brand-section-heading"><small>'+xss(kit.tagline||'Identité visuelle')+'</small><h2>'+xss(brandView==='overview'?'Toutes les ressources':brandTypeSections().find(x=>x[0]===brandView)?.[1]||'Marque')+'</h2></div>'+
+ details+tools+'</div></div></div>';
+}
+
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
@@ -1072,7 +1206,7 @@ function renderSide(){
  if(activeTab==='models')html='<p class="ecs-note">Choisis un point de départ. Tu pourras modifier tous les éléments.</p><div class="ecs-cardgrid">'+Object.entries(themes).map(([key,t],i)=>'<button class="ecs-model m'+(i+1)+'" data-theme="'+key+'">'+xss(t.title)+'</button>').join('')+'</div><p class="ecs-note">Modèles originaux ELOAH, non issus de la bibliothèque Canva.</p>';
  if(activeTab==='elements')html=elementsMarkup();
  if(activeTab==='text')html=textPanel();
- if(activeTab==='brand')html='<label class="ecs-sidelabel">Univers</label><select data-setting="brand">'+['Power & Glam','The Crew Orchies','Sonia Velka','ELOAH','Le Lion Blanc','Autre'].map(x=>'<option '+(x===S.brand?'selected':'')+'>'+x+'</option>').join('')+'</select>'+color('Couleur du fond','bg',S.bg)+'<p class="ecs-note">Les modèles apportent des palettes adaptées à tes univers.</p>'+btn('brandLabel','Ajouter la signature');
+ if(activeTab==='brand')html=brandPanel();
  if(activeTab==='import')html='<div class="ecs-upload"><strong>Importe tes fichiers</strong><p class="ecs-note">Glisse tes fichiers directement sur la page ou choisis ci-dessous.</p>'+btn('importVideo','Vidéo',true)+btn('importImage','Photo')+btn('importAudio','Audio')+'</div><p class="ecs-note">Fichiers traités dans le navigateur. Les photos peuvent être un fond ou un élément mobile.</p>'+btn('addImage','Photo comme élément');
  if(activeTab==='tools')html=range('Durée du Reel (secondes)','duration',1,60,.5,S.duration)+color('Fond','bg',S.bg)+'<label class="ecs-sidelabel">Effet de couleur</label><select data-setting="filter">'+[['none','Naturel'],['cinema','Cinéma'],['gold','Lumière dorée'],['vivid','Couleurs intenses'],['mono','Noir et blanc']].map(([k,v])=>'<option value="'+k+'" '+(S.filter===k?'selected':'')+'>'+v+'</option>').join('')+'</select>'+btn('png','Exporter une image PNG')+'<p class="ecs-note">Les filtres modifient la vidéo et les photos de fond. Le son est conservé selon les capacités du navigateur à l’export.</p>';
  if(activeTab==='projects')html='<p class="ecs-note">Sauvegarde ton projet en JSON pour retrouver les textes, positions et couleurs.</p>'+btn('save','Sauvegarder projet',true)+btn('load','Ouvrir un projet')+btn('reset','Nouveau projet')+'<p class="ecs-note">Les vidéos, photos et musiques ne sont pas intégrées au fichier JSON : conserve-les séparément et réimporte-les après ouverture.</p>';
