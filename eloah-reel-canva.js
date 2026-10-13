@@ -532,6 +532,63 @@ function shapeProperties(e){
  '<p class="ecs-note">Toutes ces modifications sont enregistrées dans ton projet et dans la vidéo exportée.</p></div>';
 }
 
+
+let chartView='home',chartSearch='';
+const chartLabel=id=>window.ELOAHCharts?.byId.get(id)?.label||'Graphique';
+function chartTile(item){
+ if(!item)return '';
+ const src=window.ELOAHCharts.thumbnail(item.id);
+ return '<button type="button" class="ecs-chart-tile" data-chart-add="'+xss(item.id)+'" data-search="'+xss((item.label+' '+item.group+' '+item.type).toLocaleLowerCase('fr'))+'" title="Ajouter '+xss(item.label)+' au Reel">'+
+ '<span class="ecs-chart-thumb"><img src="'+src+'" alt="" loading="lazy" decoding="async"></span>'+
+ '<span class="ecs-chart-caption">'+xss(item.label)+'</span><span class="ecs-chart-plus" aria-hidden="true">＋</span></button>';
+}
+function chartSection(group,i){
+ return '<section class="ecs-chart-section" data-chart-section><div class="ecs-sectiontitle"><strong>'+xss(group.name)+'</strong><button type="button" data-chart-group="g'+i+'">Afficher tout →</button></div>'+
+ '<div class="ecs-chart-strip">'+group.items.map(chartTile).join('')+'</div></section>';
+}
+function chartCatalog(){
+ const lib=window.ELOAHCharts;
+ if(!lib)return '<div class="ecs-empty">La bibliothèque de graphiques n’a pas chargé. Actualise la page.</div>';
+ const recent=S.elements.filter(e=>e.kind==='chart').slice(-12).reverse().map(e=>lib.byId.get(e.variant)||lib.byId.get(e.variant==='pie'?'eloah-chart-pie':'eloah-chart-vertical'));
+ const head='<div class="ecs-audio-header"><button type="button" data-cat="overview" aria-label="Retour aux éléments">←</button><strong>Graphiques</strong></div>'+
+ '<div class="ecs-search"><span>▥</span><input id="ecs-chart-search" placeholder="Rechercher un graphique" aria-label="Rechercher un graphique" autocomplete="off" value="'+xss(chartSearch)+'"><span>⌕</span></div>'+
+ '<button type="button" class="ecs-chart-data-launch" data-chart-open-data><span>▤</span> Ajouter des données <span>＋</span></button>';
+ if(chartView!=='home'){
+  const recentView=chartView==='recent',group=lib.groups[Number(chartView.slice(1))],items=recentView?recent:group?.items||[];
+  return head+'<button class="ecs-els-back" data-chart-group="home">← Tous les graphiques</button><h3 class="ecs-panelheading">'+xss(recentView?'Utilisés récemment':group?.name||'Graphiques')+'</h3>'+
+   '<div class="ecs-chart-grid">'+items.map(chartTile).join('')+'</div>';
+ }
+ return head+(recent.length?'<section class="ecs-chart-section" data-chart-section><div class="ecs-sectiontitle"><strong>Utilisés récemment</strong><button data-chart-group="recent">Afficher tout →</button></div><div class="ecs-chart-strip">'+recent.map(chartTile).join('')+'</div></section>':'')+
+ lib.groups.map(chartSection).join('')+
+ '<p class="ecs-note ecs-chart-disclaimer">Des graphiques éditables, intégrés à ton Reel. Clique pour ajouter un modèle puis remplace les chiffres par les tiens. Aucun abonnement ni connexion externe nécessaires.</p>';
+}
+function chartProperties(e){
+ const lib=window.ELOAHCharts,def=lib?.byId.get(e.variant)||lib?.byId.get(e.variant==='pie'?'eloah-chart-pie':'eloah-chart-vertical');
+ if(!def)return '<p class="ecs-note">Ce modèle de graphique n’est pas disponible.</p>';
+ const data=lib.migrateLegacy(e);
+ const paletteOptions={original:'Bleu · Canva-like',editorial:'Power & Glam',crew:'The Crew · Noir & or',ocean:'Océan',nature:'Nature',pastel:'Pastel'};
+ const flags=[['chartShowTitle','Afficher le titre'],['chartShowGrid','Afficher la grille'],['chartShowLegend','Afficher la légende'],['chartShowValues','Afficher les chiffres']];
+ return '<div class="ecs-chart-edit"><strong>▥ '+xss(def.label)+'</strong><small>'+xss(def.group)+'</small>'+
+ '<label class="ecs-sidelabel">Nom du graphique</label><input data-p="chartTitle" maxlength="65" value="'+xss(e.chartTitle??'Résultats')+'" placeholder="Exemple : Mes résultats">'+
+ '<label class="ecs-sidelabel" for="ecs-chart-data">Ajouter des données</label><p class="ecs-note">Une ligne par catégorie, première ligne pour les titres des colonnes. Utilise un point-virgule, une virgule ou une tabulation comme séparateur.</p>'+
+ '<textarea id="ecs-chart-data" rows="9" spellcheck="false" data-p="dataText" aria-label="Tableau des données du graphique">'+xss(data)+'</textarea>'+
+ '<div class="ecs-chart-data-actions">'+btn('chartImportCSV','↑ Importer CSV',true)+btn('chartExportCSV','↓ Exporter CSV')+btn('chartExample','↻ Exemple')+'</div>'+
+ '<label class="ecs-sidelabel">Couleurs</label><select data-p="chartPalette">'+Object.entries(paletteOptions).map(([k,label])=>'<option value="'+k+'" '+((e.chartPalette||'original')===k?'selected':'')+'>'+xss(label)+'</option>').join('')+'</select>'+
+ '<div class="ecs-chart-swatches">'+(lib.palettes[e.chartPalette]||lib.palettes.original).map(color=>'<span style="background:'+color+'"></span>').join('')+'</div>'+
+ '<label class="ecs-sidelabel">Fond du graphique</label><input type="color" data-p="chartBackground" value="'+xss(e.chartBackground||'#ffffff')+'">'+
+ '<div class="ecs-chart-flags">'+flags.map(([key,label])=>'<label class="ecs-chart-check"><input type="checkbox" data-chart-flag="'+key+'" '+(e[key]!==false&&e[key]!==undefined||e[key]===true?'checked':'')+'><span>'+label+'</span></label>').join('')+'</div>'+
+ range('Taille du titre','chartFontSize',20,65,1,e.chartFontSize||34)+
+ '<p class="ecs-note">Ces chiffres, couleurs et options sont conservés dans le projet JSON et visibles dans les exports image et vidéo.</p></div>';
+}
+function createChart(id,openData=false){
+ const lib=window.ELOAHCharts;if(!lib)return toast('Moteur de graphiques non chargé.');
+ const def=lib.byId.get(id)||lib.catalogue[0];
+ const options=lib.settings(def.id);
+ const e=add('chart',{...options,x:120,y:690,w:840,h:650});
+ if(openData)requestAnimationFrame(()=>one('#ecs-chart-data')?.focus());
+ return e;
+}
+
 function elementsMarkup(){
  if(elementsCategory==='illustrations')return illustrationCatalog();
  if(elementsCategory==='animations')return stickerAnimations();
@@ -539,6 +596,7 @@ function elementsMarkup(){
  if(elementsCategory==='grids')return gridCatalog();
  if(elementsCategory==='mockups')return mockupCatalog();
  if(elementsCategory==='shapes')return shapeCatalog();
+ if(elementsCategory==='charts')return chartCatalog();
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
   const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
@@ -566,7 +624,23 @@ function xss(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
 function toast(s){const box=one('.ecs-toast');box.textContent=s;box.classList.remove('ecs-hide');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.add('ecs-hide'),5000)}
 function serial(){return {name:S.name,duration:S.duration,trimStart:S.trimStart,bg:S.bg,filter:S.filter,brand:S.brand,elements:JSON.parse(JSON.stringify(S.elements))}}
 function snapshot(){history.push(JSON.stringify(serial()));if(history.length>70)history.shift();future=[]}
-function apply(a){Object.assign(S,a);S.elements=a.elements||[];selected=null;S.time=Math.min(S.time,S.duration);one('#ecs-name').value=S.name;renderSide();renderTimeline();draw()}
+function apply(a){Object.assign(S,a);S.elements=a.elements||[];selected=null;S.time=Math.min(S.time,S.duration);const chartFileInput=document.createElement('input');
+chartFileInput.type='file';chartFileInput.id='ecs-chart-file-input';chartFileInput.accept='.csv,.tsv,.txt,text/csv,text/plain';
+chartFileInput.className='ecs-fileinput';chartFileInput.setAttribute('aria-label','Choisir un tableau CSV à importer');
+root.append(chartFileInput);
+chartFileInput.addEventListener('change',async ev=>{
+ const file=ev.target.files?.[0];ev.target.value='';if(!file)return;
+ const element=S.elements.find(e=>e.id===selected&&e.kind==='chart');if(!element)return toast('Sélectionne un graphique avant d’importer le fichier.');
+ if(file.size>1024*1024)return toast('Fichier trop volumineux : limite 1 Mo.');
+ try{
+  const data=await file.text();
+  const parsed=window.ELOAHCharts.parse(data);
+  if(!parsed.labels.length)throw Error('Aucune ligne de données valide.');
+  snapshot();element.dataText=data;saveLocal();renderSide();draw();
+  toast(parsed.labels.length+' catégories et '+parsed.names.length+' séries importées.');
+ }catch(e){toast('Import CSV impossible : '+e.message)}
+});
+one('#ecs-name').value=S.name;renderSide();renderTimeline();draw()}
 function undo(){if(!history.length)return;future.push(JSON.stringify(serial()));apply(JSON.parse(history.pop()))}
 function redo(){if(!future.length)return;history.push(JSON.stringify(serial()));apply(JSON.parse(future.pop()))}
 function add(kind,extra={}){snapshot();const n={id:nextId++,kind,x:110,y:790,w:860,h:280,color:'#222222',text:'Nouveau texte',font:78,start:0,end:S.duration,...extra};S.elements.push(n);selected=n.id;activeTab='properties';renderSide();renderTimeline();draw();saveLocal();return n}
@@ -618,19 +692,7 @@ function paint(c,t,mark=false){
     c.beginPath();c.roundRect(e.x+pad,e.y+pad,e.w-pad*2,e.h-pad*2,rad);c.fill();c.stroke();
     c.fillStyle=e.color||'#252b35';c.beginPath();c.roundRect(e.x+e.w*.38,e.y+pad*.95,e.w*.24,pad*.7,pad*.3);c.fill();c.restore();
   }
-  if(e.kind==='chart'){
-    const values=String(e.values||'35,55,25,45').split(/[;,\s]+/).map(Number).filter(v=>Number.isFinite(v)&&v>0).slice(0,12);
-    if(values.length){const palette=[e.color||'#419fc0','#d7654f','#dda84d','#5c9679','#ab72b2','#c37c99'];
-      c.save();c.fillStyle='#ffffffdf';c.fillRect(e.x,e.y,e.w,e.h);
-      if(e.variant==='pie'){
-        const total=values.reduce((a,b)=>a+b,0),r=Math.min(e.w,e.h)*.4,cx=e.x+e.w/2,cy=e.y+e.h/2;let at=-Math.PI/2;
-        values.forEach((v,i)=>{const next=at+v/total*Math.PI*2;c.beginPath();c.moveTo(cx,cy);c.arc(cx,cy,r,at,next);c.closePath();c.fillStyle=palette[i%palette.length];c.fill();at=next});
-      }else{
-        const max=Math.max(...values),gap=e.w*.035,bw=(e.w*.84-gap*(values.length-1))/values.length;
-        values.forEach((v,i)=>{const h=v/max*e.h*.75;c.fillStyle=palette[i%palette.length];c.fillRect(e.x+e.w*.08+i*(bw+gap),e.y+e.h*.87-h,bw,h)});
-      }c.restore();
-    }
-  }
+  if(e.kind==='chart'&&window.ELOAHCharts)window.ELOAHCharts.render(c,e);
   if(e.kind==='text')drawText(c,e);
   if(e.kind==='image'){const im=images.get(e.id);if(im?.complete)try{c.drawImage(im,e.x,e.y,e.w,e.h)}catch{}}
   if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
@@ -875,7 +937,7 @@ function renderSide(){
    if(e.kind==='text')html+='<label class="ecs-sidelabel">Texte</label><textarea rows="4" data-p="text">'+xss(e.text)+'</textarea>'+range('Taille des caractères','font',14,250,1,e.font);
    if(e.kind==='photoFrame')html+=frameProperties(e);
    if(e.kind==='shapeAsset')html+=shapeProperties(e);
-   if(e.kind==='chart')html+='<label class="ecs-sidelabel">Valeurs séparées par des virgules</label><input data-p="values" value="'+xss(e.values||'35,55,25,45')+'">';
+   if(e.kind==='chart')html+=chartProperties(e);
    if(e.kind==='sticker')html+='<p class="ecs-note">Sticker animé : '+xss(window.ELOAHAnimations?.byId.get(e.variant)?.name||'Animation ELOAH')+'</p><label class="ecs-sidelabel">Mouvement</label><select data-p="motion">'+Object.entries(window.ELOAHAnimations?.motionNames||{}).map(([v,n])=>'<option value="'+v+'" '+((e.motion||'pulse')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>'+range('Vitesse (0,2× à 4×)','speed',.2,4,.1,e.speed||1);
    else html+='<label class="ecs-sidelabel">Animation</label><select data-p="animation">'+[['none','Aucune'],['fade','Apparition douce'],['pop','Zoom dynamique'],['slide','Entrée latérale'],['pulse','Pulsation'],['float','Flottement'],['bounce','Rebond'],['wobble','Oscillation'],['swing','Balancement'],['rotate','Rotation'],['twinkle','Clignotement'],['shake','Vibration']].map(([v,n])=>'<option value="'+v+'" '+((e.animation||'none')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>';
 
@@ -886,7 +948,7 @@ function renderSide(){
  box.innerHTML=html;
  if(activeTab==='videos')requestAnimationFrame(scheduleStockThumbnails);
 }
-function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}if(tab==='photos'){photoView='home';photoSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
+function setTab(tab){if(tab==='elements'){elementsCategory=null;chartView='home';chartSearch=''}if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}if(tab==='photos'){photoView='home';photoSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
 function action(name){
  if(name==='old'){pause();root.style.display='none';legacy.style.display='block';document.body.classList.add('ecs-legacy-open');const h=document.querySelector('body > header');if(h)h.style.display='flex';const back=document.createElement('button');back.textContent='↗ Retour à l’éditeur visuel';back.style.cssText='position:fixed;bottom:16px;right:16px;z-index:99;background:#147a9f;color:white;padding:13px;border-radius:9px';back.onclick=()=>{legacy.style.display='none';root.style.display='flex';back.remove();if(h)h.style.display='none'};document.body.append(back);return}
  if(name==='undo'){undo();return}if(name==='redo'){redo();return}
@@ -908,7 +970,18 @@ function action(name){
  if(name==='duplicate'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à dupliquer.');return}const {id:originalId,...copy}=e;const cloned=add(e.kind,{...copy,x:Math.min(Math.max(0,1080-e.w),e.x+36),y:Math.min(Math.max(0,1920-e.h),e.y+36)});if(e.kind==='image'&&images.has(e.id))images.set(cloned.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(cloned.id+':'+i,src)}saveFrameMediaLocal()}return}
  if(name==='delete'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à supprimer.');return}snapshot();S.elements=S.elements.filter(x=>x.id!==selected);if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++)framePhotos.delete(e.id+':'+i);saveFrameMediaLocal()}selected=null;setTab('elements');renderTimeline();saveLocal();return}
  if(name==='forward'||name==='backward'){let i=S.elements.findIndex(x=>x.id===selected);if(i<0)return;snapshot();let e=S.elements.splice(i,1)[0];S.elements.splice(name==='forward'?S.elements.length:0,0,e);saveLocal();return}
- if(name==='mockupVideo'){
+ if(name==='chartImportCSV'){one('#ecs-chart-file-input')?.click();return}
+ if(name==='chartExportCSV'){
+  const e=S.elements.find(x=>x.id===selected&&x.kind==='chart');if(!e)return toast('Sélectionne un graphique.');
+  const csv=window.ELOAHCharts.migrateLegacy(e);
+  download(new Blob(['\uFEFF'+csv],{type:'text/csv;charset=utf-8'}),'eloah-donnees-graphique.csv');
+  toast('Données CSV exportées.');return;
+ }
+ if(name==='chartExample'){
+  const e=S.elements.find(x=>x.id===selected&&x.kind==='chart');if(!e)return;
+  snapshot();e.dataText=window.ELOAHCharts.DEFAULT_DATA;saveLocal();renderSide();draw();toast('Données d’exemple restaurées.');return;
+ }
+  if(name==='mockupVideo'){
   const e=frameSelected();
   if(!e?.isMockup){toast('Sélectionne une maquette avec écran.');return}
   snapshot();
@@ -940,6 +1013,14 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const chartGroup=ev.target.closest('[data-chart-group]');if(chartGroup){chartView=chartGroup.dataset.chartGroup;chartSearch='';renderSide();return}
+ const chartAdd=ev.target.closest('[data-chart-add]');if(chartAdd){createChart(chartAdd.dataset.chartAdd);return}
+ const chartData=ev.target.closest('[data-chart-open-data]');if(chartData){
+  const selectedChart=S.elements.find(e=>e.id===selected&&e.kind==='chart');
+  if(selectedChart){setTab('properties');requestAnimationFrame(()=>one('#ecs-chart-data')?.focus())}
+  else createChart('eloah-chart-vertical',true);
+  return;
+ }
  const shapeGroup=ev.target.closest('[data-shape-group]');
  if(shapeGroup){shapeView=shapeGroup.dataset.shapeGroup;shapeSearch='';renderSide();return}
  const shapeAdd=ev.target.closest('[data-shape-add]');
@@ -1029,7 +1110,7 @@ root.addEventListener('click',ev=>{
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
  const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
- const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';mockupView='home';mockupSearch='';shapeView='home';shapeSearch='';activeTab='elements';renderSide();return}
+ const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;chartView='home';chartSearch='';illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';mockupView='home';mockupSearch='';shapeView='home';shapeSearch='';activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(clone.id+':'+i,src)}saveFrameMediaLocal()}toast('Élément dupliqué sur la page.')}return}
  const tb=ev.target.closest('[data-tab]');if(tb&&root.contains(tb)){setTab(tb.dataset.tab);return}
@@ -1039,14 +1120,29 @@ root.addEventListener('click',ev=>{
 });
 one('#ecs-name').addEventListener('change',e=>{S.name=e.target.value.slice(0,90)||'Mon Reel';saveLocal()});
 one('.ecs-sidebody').addEventListener('change',e=>{
+ if(e.target.dataset.chartFlag){
+  const eChart=S.elements.find(x=>x.id===selected&&x.kind==='chart');if(!eChart)return;
+  snapshot();eChart[e.target.dataset.chartFlag]=e.target.checked;saveLocal();draw();return;
+ }
  if(e.target.hasAttribute('data-frame-slot')){activeFrameSlot=Math.max(0,Number(e.target.value)||0);renderSide();draw();return}
  if(e.target.id==='ecs-tts-speed'){voiceSpeed=Number(e.target.value);return}
  if(e.target.id==='ecs-tts-voice'){const voices=window.speechSynthesis?.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr'))||[];voiceSelection=voices[Number(e.target.value)]?.name||'';return}
  const p=e.target.dataset.p,setting=e.target.dataset.setting;
- if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion','lineStyle','lineCap','strokeColor'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();return}
+ if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion','lineStyle','lineCap','strokeColor','chartPalette','chartTitle','dataText','chartBackground'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();return}
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(e.target.id==='ecs-chart-search'){
+  chartSearch=e.target.value;
+  const query=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  all('.ecs-chart-tile').forEach(el=>{el.hidden=!!query&&!el.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(query)});
+  all('[data-chart-section]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-chart-tile')].some(el=>!el.hidden)});
+  return;
+ }
+ if(e.target.id==='ecs-chart-data'){
+   const active=S.elements.find(x=>x.id===selected&&x.kind==='chart');if(!active)return;
+   active.dataText=e.target.value;saveLocal();draw();return;
+ }
  if(e.target.id==='ecs-shape-search'){
   shapeSearch=e.target.value;
   const q=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
