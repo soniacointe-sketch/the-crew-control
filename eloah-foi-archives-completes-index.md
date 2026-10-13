@@ -260,3 +260,8 @@ Les illustrations de l'index et les images d'ouverture des archives sont des œu
 [← Retour à Foi & Spiritualité](foi-control.html) · [Les dix collections](foi-control.html?file=eloah-foi-collections-index.md) · [La Grande bibliothèque](foi-control.html?file=eloah-foi-bibliotheque-complete.md).
 
 **Statut de ce registre :** inventaire reconstruit et partiellement restauré, avec liens testables à des documents réels. Les archives manquantes restent identifiées sans être présentées comme déjà restaurées.
+
+
+## Complément d'inventaire — recherches non encore intégrées
+
+[Consulter le registre des dossiers à retrouver et les accès vérifiés](foi-control.html?file=eloah-foi-registre-chantiers-retrouver.md).
