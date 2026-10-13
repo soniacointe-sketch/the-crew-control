@@ -133,3 +133,8 @@ Certains chantiers mentionnés dans nos échanges ne sont pas des dossiers auton
 ## Complément d'inventaire — recherches non encore intégrées
 
 [Consulter le registre des dossiers à retrouver et les accès vérifiés](foi-control.html?file=eloah-foi-registre-chantiers-retrouver.md).
+
+
+## Complément — MICHEL-4Q529
+
+[Lire l'étude critique du manuscrit et accéder aux photographies institutionnelles](foi-control.html?file=eloah-foi-michel-4q529-etude-critique.md).
