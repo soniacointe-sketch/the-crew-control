@@ -105,6 +105,26 @@ function collapseOld(){
   const title=document.createElement('summary');title.textContent='Historique du chantier et audit technique · document public';
   wrap.append(title);audit.before(wrap);wrap.append(audit);
  }
+ // Conserver tout l'inventaire, mais le proposer seulement à la demande.
+ const heading=document.getElementById('maisons');
+ const history=document.getElementById('eloah-legacy-audit')||document.getElementById('eloah-audit');
+ if(heading&&!document.getElementById('eloah-all-universes')){
+  heading.textContent='Tous mes autres univers';
+  const details=document.createElement('details');details.id='eloah-all-universes';
+  const summary=document.createElement('summary');summary.textContent='Afficher le catalogue complet des univers, studios et agents';
+  details.append(summary);heading.after(details);
+  let node=details.nextElementSibling;
+  while(node&&node!==history&&node.tagName!=='FOOTER'){
+   const next=node.nextElementSibling;
+   details.append(node);node=next;
+  }
+  const openCatalogue=()=>{
+   if(location.hash==='#maisons'||location.hash==='#eloah-all-universes')details.open=true;
+  };
+  window.addEventListener('hashchange',openCatalogue);
+  home.querySelectorAll('a[href="#maisons"]').forEach(a=>a.addEventListener('click',()=>details.open=true));
+  openCatalogue();
+ }
  // Les modules et les univers historiques restent accessibles ; le lien Tous mes univers saute à cette section.
 }
 collapseOld();
