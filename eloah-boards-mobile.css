@@ -1,0 +1,124 @@
+/* ELOAH Boards · interface dédiée aux téléphones · le bureau reste inchangé */
+#eloahMobile{display:none}
+@media screen and (max-width:767px){
+ html,body{width:100%;height:100%;margin:0;overscroll-behavior:none}
+ body{overflow:hidden}
+ body>header,body>main{display:none!important}
+ #eloahMobile{position:fixed;inset:0;z-index:30;display:flex;flex-direction:column;overflow:hidden;background:#f4f4f8;color:#22242c;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;font-size:15px;line-height:1.45;isolation:isolate}
+ #eloahMobile *{box-sizing:border-box}
+ #eloahMobile button,#eloahMobile input,#eloahMobile select{font:inherit}
+ #eloahMobile button{background:none;border:0;border-radius:0;color:inherit;padding:0;cursor:pointer;min-height:0;box-shadow:none}
+ #eloahMobile button:focus-visible,#eloahMobile input:focus-visible,#eloahMobile a:focus-visible{outline:3px solid #178df8;outline-offset:3px}
+ #eloahMobile a{text-decoration:none;color:inherit}
+ #eloahMobile svg{width:24px;height:24px;display:block;stroke:currentColor;stroke-width:1.9;fill:none;stroke-linecap:round;stroke-linejoin:round;flex:none}
+ #eloahMobile .em-screen{height:100%;display:flex;flex-direction:column;min-height:0}
+ #eloahMobile .em-scroll{flex:1;min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:calc(100px + env(safe-area-inset-bottom))}
+ #eloahMobile .em-home-head{padding:calc(env(safe-area-inset-top) + 24px) 18px 11px;background:#f4f4f8;flex:none}
+ #eloahMobile .em-head-row{display:flex;align-items:center;gap:10px;justify-content:space-between}
+ #eloahMobile .em-heading{margin:0;font-size:clamp(30px,8vw,43px);font-weight:750;letter-spacing:-.045em;line-height:1.2;color:#101116;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+ #eloahMobile .em-head-actions{display:flex;gap:10px;align-items:center}
+ #eloahMobile .em-circle-btn{width:56px;height:56px;border-radius:50%;background:#fff;display:grid;place-items:center;box-shadow:0 4px 20px rgba(44,46,81,.05)}
+ #eloahMobile .em-circle-btn.em-blue{background:#0f8ef3;color:#fff}
+ #eloahMobile .em-circle-btn svg{width:27px;height:27px}
+ #eloahMobile .em-circle-btn.em-blue svg{width:31px;height:31px}
+ #eloahMobile .em-searchbox{display:flex;align-items:center;gap:12px;background:#fff;border-radius:999px;margin:22px 0 8px;padding:0 19px;min-height:59px;box-shadow:0 3px 18px rgba(31,34,62,.025)}
+ #eloahMobile .em-searchbox svg{width:24px;height:24px;color:#555962}
+ #eloahMobile .em-searchbox input{border:0;box-shadow:none;outline:0;min-width:0;width:100%;background:transparent;font-size:19px;color:#20232a;padding:12px 0}
+ #eloahMobile .em-searchbox input::placeholder{color:#8b8e94}
+ #eloahMobile .em-inbox-box{margin:17px 15px 22px;border-radius:20px;padding:12px;background:#e6effe;border:9px solid #e1ecff}
+ #eloahMobile .em-inbox-title{display:flex;align-items:center;gap:12px;font-size:21px;font-weight:690;margin:0 4px 12px}
+ #eloahMobile .em-inbox-title .em-count{font-size:16px;color:#1767c5;margin-left:2px}
+ #eloahMobile .em-inbox-title .em-right-icon{margin-left:auto}
+ #eloahMobile .em-inbox-add{width:100%;min-height:76px;border:1px solid #dce0e6!important;background:white!important;border-radius:13px!important;color:#7c7f88!important;text-align:left;padding:15px 17px!important;font-size:21px!important;display:flex;align-items:center;justify-content:space-between}
+ #eloahMobile .em-inbox-add svg{color:#41454e}
+ #eloahMobile .em-section-h{display:flex;align-items:center;gap:13px;padding:14px 18px 10px;font-size:21px;font-weight:560;color:#24252d}
+ #eloahMobile .em-section-h svg{width:23px;height:23px}
+ #eloahMobile .em-list{background:#fff}
+ #eloahMobile .em-board-row{display:flex;width:100%;align-items:center;gap:13px;padding:12px 16px!important;text-align:left;min-height:81px;background:#fff!important;border-bottom:1px solid #f4f4f7!important}
+ #eloahMobile .em-board-row:active{background:#f5f8ff!important}
+ #eloahMobile .em-thumb{display:block;flex:none;width:59px;height:59px;border-radius:11px;background:#7565b8;background-position:center;background-size:cover;box-shadow:inset 0 0 0 1px #0000000c}
+ #eloahMobile .em-row-label{display:flex;min-width:0;flex-direction:column;flex:1}
+ #eloahMobile .em-row-name{font-size:20px;font-weight:410;line-height:1.3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+ #eloahMobile .em-row-meta{font-size:12px;color:#80838d;margin-top:3px}
+ #eloahMobile .em-workspace-head{padding:19px 17px;background:#ececf1;letter-spacing:.025em;font-size:17px;font-weight:700;color:#63656e}
+ #eloahMobile .em-workspace-row{display:flex;align-items:center;gap:10px;padding:17px 16px;background:#f0f0f4;font-size:18px;font-weight:500}
+ #eloahMobile .em-workspace-row .em-arrow{margin-left:auto;color:#0a82f5}
+ #eloahMobile .em-empty{padding:18px;color:#646872;font-size:15px}
+ #eloahMobile .em-dock{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;gap:0;position:absolute;bottom:calc(8px + env(safe-area-inset-bottom));left:12px;right:12px;background:rgba(255,255,255,.94);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px);box-shadow:0 10px 35px #28304720;border:1px solid #fff;border-radius:35px;padding:6px 4px 5px;z-index:5}
+ #eloahMobile .em-tab{min-width:0;min-height:68px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;color:#22242c!important;font-size:10px!important;letter-spacing:-.025em;border-radius:31px!important}
+ #eloahMobile .em-tab svg{width:25px;height:25px}
+ #eloahMobile .em-tab span{max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+ #eloahMobile .em-tab[aria-current="page"]{background:#ecedf4;color:#1765c5!important;font-weight:700}
+ #eloahMobile .em-tab .em-avatar{width:30px;height:30px;border-radius:100%;display:grid;place-items:center;background:#6651ad;color:white;font-size:11px}
+ #eloahMobile .em-simple-top{display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top) + 24px) 18px 13px}
+ #eloahMobile .em-simple-top h1{font-family:inherit;font-size:27px;font-weight:740;margin:0;line-height:1.2}
+ #eloahMobile .em-back{width:42px;height:42px;border-radius:100%!important;background:#fff!important;display:grid!important;place-items:center}
+ #eloahMobile .em-section-card{margin:12px 15px;background:#fff;border-radius:16px;padding:17px}
+ #eloahMobile .em-section-card h2{font:650 18px -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0 0 9px}
+ #eloahMobile .em-section-card p{font-size:14px;color:#696d78}
+ #eloahMobile .em-action{display:flex;justify-content:space-between;align-items:center;gap:12px;background:#fff!important;width:100%;text-align:left;padding:13px 12px!important;border-bottom:1px solid #f1f1f5!important;font-size:15px!important}
+ #eloahMobile .em-action:active{background:#f5f6fa!important}
+ #eloahMobile .em-mini{font-size:12px;color:#6e7480}
+ #eloahMobile .em-pill{display:inline-flex;padding:4px 9px;border-radius:12px;background:#e7eefb;color:#235caa;font-size:12px;font-weight:600}
+ #eloahMobile .em-board-screen{background:#162024;position:relative}
+ #eloahMobile .em-wallpaper{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
+ #eloahMobile .em-wallpaper::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,#0007 0%,transparent 22%,transparent 72%,#0008 100%)}
+ #eloahMobile .em-board-head{position:relative;z-index:2;display:flex;align-items:center;gap:12px;padding:calc(env(safe-area-inset-top) + 16px) 17px 12px;color:#fff}
+ #eloahMobile .em-board-close{width:52px;height:52px;border-radius:50%!important;background:rgba(18,18,20,.8)!important;display:grid!important;place-items:center}
+ #eloahMobile .em-board-close svg{width:28px;height:28px}
+ #eloahMobile .em-board-identity{flex:1;min-width:0}
+ #eloahMobile .em-board-identity strong{display:block;font-size:18px;font-weight:600;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+ #eloahMobile .em-board-identity small{display:block;color:#d4d6d9;font-size:12px}
+ #eloahMobile .em-board-head>button:last-child{width:42px;height:42px;border-radius:100%!important;background:#0005!important;display:grid!important;place-items:center}
+ #eloahMobile .em-filter-chip{margin:0 18px 11px;z-index:2;position:relative;align-self:flex-start;display:flex;gap:6px;color:#fff;background:#0009;border-radius:99px;padding:8px 12px;font-size:12px}
+ #eloahMobile .em-filter-chip button{color:#fff;text-decoration:underline}
+ #eloahMobile .em-lanes{position:relative;z-index:1;display:flex;align-items:flex-start;gap:12px;padding:15px 6vw 80px;flex:1;min-height:0;overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;scroll-padding-inline:6vw;overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+ #eloahMobile .em-lanes::-webkit-scrollbar{display:none}
+ #eloahMobile .em-lane{flex:0 0 84vw;max-width:380px;min-height:160px;max-height:calc(100dvh - 275px - env(safe-area-inset-top) - env(safe-area-inset-bottom));overflow-y:auto;overscroll-behavior-y:contain;scroll-snap-align:start;background:#f2f1f6;color:#25262b;padding:12px 11px 12px;border-radius:17px;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+ #eloahMobile .em-lane-header{display:flex;align-items:center;gap:8px;min-height:39px;margin-bottom:8px;padding:0 3px}
+ #eloahMobile .em-lane-header h2{font:700 18px/1.2 -apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;margin:0;flex:1;overflow-wrap:anywhere}
+ #eloahMobile .em-lane-header small{font-size:17px}
+ #eloahMobile .em-lane-header .em-lane-count{font-size:16px;color:#41424b}
+ #eloahMobile .em-lane-header .em-more{padding:6px!important;flex:none}
+ #eloahMobile .em-card{display:block;position:relative;width:100%;border-radius:13px;background:#fff;box-shadow:0 2px 5px rgba(0,0,0,.09);padding:13px 12px;margin:10px 0}
+ #eloahMobile .em-card-header{display:flex;align-items:flex-start;gap:10px}
+ #eloahMobile .em-check-toggle{display:grid!important;place-items:center;flex:0 0 24px;width:24px;height:24px;border:2px solid #858891!important;border-radius:100%!important;margin-top:3px;color:#2587e6!important}
+ #eloahMobile .em-check-toggle[aria-pressed="true"]{border-color:#1974ce!important;background:#1974ce!important;color:#fff!important}
+ #eloahMobile .em-check-toggle svg{width:17px;height:17px}
+ #eloahMobile .em-card-title{flex:1;display:block;font-size:18px;font-weight:440;text-align:left;line-height:1.4;overflow-wrap:anywhere}
+ #eloahMobile .em-card-title.em-done{text-decoration:line-through;color:#777d84}
+ #eloahMobile .em-card-cover{height:105px;margin:-13px -12px 10px;border-radius:13px 13px 0 0;background-size:cover;background-position:center}
+ #eloahMobile .em-card-meta{display:flex;align-items:center;flex-wrap:wrap;gap:8px;color:#3f4149;font-size:13px;margin:9px 0 0 34px}
+ #eloahMobile .em-card-meta svg{width:16px;height:16px}
+ #eloahMobile .em-due{padding:3px 6px;border-radius:5px;background:#fce8ec;color:#9f394d;display:inline-flex;align-items:center;gap:4px}
+ #eloahMobile .em-due.em-due-later{background:#e8effc;color:#1a5fbb}
+ #eloahMobile .em-meta{display:inline-flex;gap:4px;align-items:center}
+ #eloahMobile .em-add-card{display:flex;justify-content:space-between;align-items:center;padding:14px 7px 5px!important;font-size:17px!important;color:#333!important;width:100%}
+ #eloahMobile .em-board-dots{position:absolute;bottom:calc(111px + env(safe-area-inset-bottom));left:15%;right:15%;display:flex;align-items:center;justify-content:center;gap:8px;z-index:3;pointer-events:none}
+ #eloahMobile .em-dot{width:7px;height:7px;background:#ffffff8a;border-radius:50%;transition:all .15s}
+ #eloahMobile .em-dot.active{width:9px;height:9px;background:#fff}
+ #eloahMobile .em-board-tools{position:absolute;bottom:calc(22px + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;z-index:3;white-space:nowrap}
+ #eloahMobile .em-toolcluster{display:flex;align-items:center;gap:8px;padding:8px 11px;background:#111bdb;border-radius:40px;color:#fff;box-shadow:0 4px 20px #0008;backdrop-filter:blur(16px)}
+ #eloahMobile .em-toolcluster{background:rgba(15,18,20,.82)}
+ #eloahMobile .em-tool{width:43px;height:43px;display:grid!important;place-items:center;border-radius:28px!important;color:#fff!important}
+ #eloahMobile .em-tool:active{background:#fff2!important}
+ #eloahMobile .em-expand{width:56px;height:56px;border-radius:100%!important;background:rgba(23,51,29,.88)!important;display:grid!important;place-items:center;color:#fff!important}
+ #eloahMobile .em-sheet-backdrop{position:absolute;inset:0;z-index:9;background:#1118;display:flex;align-items:flex-end}
+ #eloahMobile .em-sheet{width:100%;max-height:83%;overflow-y:auto;border-radius:23px 23px 0 0;padding:20px 19px calc(25px + env(safe-area-inset-bottom));background:#fff;box-shadow:0 -15px 40px #0003}
+ #eloahMobile .em-sheet h2{font-size:22px;font-weight:700;margin:0 0 16px;font-family:inherit}
+ #eloahMobile .em-sheet-row{width:100%;text-align:left;padding:15px 3px!important;border-bottom:1px solid #ececf0!important;font-size:17px!important}
+ #eloahMobile .em-sheet-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+ #eloahMobile .em-blue-action{background:#128cf4!important;color:#fff!important;padding:12px 18px!important;border-radius:12px!important;font-weight:650!important}
+ #eloahMobile .em-sheet input,#eloahMobile .em-sheet select{background:#f7f8fb;border:1px solid #ddd;border-radius:10px;min-height:44px;padding:9px 12px;width:100%;color:#222}
+ #eloahMobile .em-color-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px}
+ #eloahMobile .em-color{border-radius:12px!important;min-height:67px;text-align:center;padding:10px!important;color:#fff!important;text-shadow:0 1px 6px #000a}
+ #eloahMobile .em-no-results{padding:14px;color:#747781}
+ #eloahMobile .em-overview .em-lanes{display:block;overflow-y:auto;overflow-x:hidden;padding-bottom:120px}
+ #eloahMobile .em-overview .em-lane{width:100%;max-width:100%;max-height:none;margin-bottom:14px}
+ #eloahMobile .em-overview .em-board-dots{display:none}
+ #editor[open]{width:calc(100vw - 18px);max-width:calc(100vw - 18px);max-height:calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom) - 20px);overflow-y:auto;border-radius:18px;padding:20px;overscroll-behavior:contain;z-index:100}
+ #editor form{gap:11px}
+ #editor h2{font-size:22px;font-weight:700}
+ #editor .actions button{min-height:40px}
+}
+@media screen and (min-width:768px){#eloahMobile{display:none!important}}
