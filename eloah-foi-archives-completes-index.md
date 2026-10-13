@@ -16,6 +16,34 @@ Ce registre reste l'inventaire scientifique complet ; la Grande Bibliothèque of
 
 > **À lire pour commencer.** Cette page est l'index commun de toutes nos enquêtes de foi et d'histoire. Elle distingue **archive intégrale retrouvée**, **travail déjà présent et accessible**, **notice ou chantier en cours**, et **ancien dossier identifié dont le texte intégral reste à retrouver**. Une présence dans l'index ne doit jamais être confondue avec une restauration complète.
 
+## 00 · PUBLICATIONS D'ORIGINE RÉCUPÉRÉES — 15 SOURCES
+
+**Découverte documentaire du 13 octobre 2026 :** le site original ELOAH Scanner était consultable par un autre accès documentaire. J'ai récupéré **le texte publié de 13 des 14 dossiers jusque-là reconstruits**, plus **deux autres publications** auparavant conservées seulement sous forme de synthèse. Les textes ont été enregistrés tels qu'extraits de leurs pages, avec leurs annexes et leurs URL d'origine, en documents indépendants du lecteur. Seul l'ancien dossier **Bayeux — Le fil, la conquête et le pouvoir** n'a pas été localisé parmi ces 14.
+
+**Limite essentielle :** les images et anciens scans affichés sur le site source **ne sont pas transférés** avec cette extraction Markdown. Les publications d'origine restent accessibles via leurs liens externes inclus dans chaque chapitre ; la restauration des photographies dans le dépôt demeure distincte de celle des textes. **Les 14 rééditions précédentes sont conservées en parallèle** pour comparaison, sans remplacer les originaux.
+
+| Repère | Texte publié authentiquement récupéré | Ouvrir l'original | Édition complémentaire |
+|---|---|---|---|
+| 08 | Le jardin, l’arbre et l’interdit | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-jardin-arbre-interdit.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-jardin-arbre-interdit.md) ; scans originaux à restaurer |
+| 09 | La flamme, le Temple et la République | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-flamme-temple-republique.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-flamme-temple-republique.md) ; scans originaux à restaurer |
+| 11 | Babel, la langue et le nom | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-babel-langue-unique.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-babel-langue-tour-nom.md) ; scans originaux à restaurer |
+| 12 | Le nom effacé | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-nom-efface-identite.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-nom-efface-identite.md) ; scans originaux à restaurer |
+| 13 | La bibliothèque d’Alexandrie | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-bibliotheque-alexandrie.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-alexandrie-bibliotheque.md) ; scans originaux à restaurer |
+| 14 | Le sommeil des prophètes | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-sommeil-prophetes.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-sommeil-prophetes.md) ; scans originaux à restaurer |
+| 15 | Le miroir | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-miroir-verite-illusion.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-miroir-reflets.md) ; scans originaux à restaurer |
+| 16 | Les portes de l’enfer | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-portes-enfer.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-enfer-traditions.md) ; scans originaux à restaurer |
+| 17 | La reine de Saba | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-reine-de-saba.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-reine-saba.md) ; scans originaux à restaurer |
+| 18 | Le Déluge | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-deluge-avant-noe.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-deluge-noe.md) ; scans originaux à restaurer |
+| 19 | L’Arche d’alliance | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-arche-alliance.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-arche-alliance-noe.md) ; scans originaux à restaurer |
+| 21 | Le Livre des morts égyptien | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-livre-morts-egyptien.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-livre-morts-egyptien.md) ; scans originaux à restaurer |
+| 22 | Marie, deux Écritures | **ORIGINAL RETROUVÉ** : [lire le texte source](foi-control.html?file=eloah-foi-source-marie-deux-ecritures.md) · [nouvelle étude distincte](foi-control.html?file=eloah-reconstitution-marie-traditions.md) ; scans originaux à restaurer |
+| Complément | Jésus — Le sens devenu chair | [Lire la publication archivée](foi-control.html?file=eloah-foi-source-jesus-le-sens-devenu-chair.md) | — |
+| Complément | Les anges : ailes, textes et art | [Lire la publication archivée](foi-control.html?file=eloah-foi-source-anges-ailes-art.md) | — |
+
+**Bayeux** : [étude moderne reconstituée, seule version actuellement récupérée](foi-control.html?file=eloah-reconstitution-bayeux-fil-conquete.md). Recherche du texte ancien et des 31 scans à poursuivre.
+
+---
+
 ## 01 · Six textes longs anciens — réintégrés sans résumé
 
 Ces six fichiers proviennent des **originaux retrouvés dans notre bibliothèque de documents**, rétablis comme des chapitres entiers. Ils comportent les sections, tableaux, références, définitions et analyses originelles ; une illustration identifiée a été ajoutée à leur ouverture sans couper le texte.
@@ -128,7 +156,7 @@ Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes mar
 
 | N° | Ancien dossier / sujet | État de récupération |
 |---|---|---|
-| 01 | Jésus — Le sens devenu chair | **Synthèse retrouvée** dans la Grande bibliothèque ; texte autonome ancien non récupéré |
+| 01 | Jésus — Le sens devenu chair | **ORIGINAL RETROUVÉ** : [lire](foi-control.html?file=eloah-foi-source-jesus-le-sens-devenu-chair.md) ; texte court de la publication source |
 | 02 | Les djinns de Salomon et ceux qui lui résistent | **Archive intégrale** [ouvrir](foi-control.html?file=eloah-scanner-salomon-djinns-integral.md) |
 | 03 | Les archives de Salomon | **Archive intégrale** [ouvrir](foi-control.html?file=eloah-scanner-salomon-archives-integral.md) |
 | 04 | Les commencements I — Genèse | **Archive intégrale** [ouvrir](foi-control.html?file=eloah-scanner-commencements-01-genese.md) |
@@ -147,7 +175,7 @@ Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes mar
 | 17 | La reine de Saba | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-reine-saba.md) |
 | 18 | Le déluge | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-deluge-noe.md) |
 | 19 | L'Arche | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-arche-alliance-noe.md) ; sujet ancien précis à confirmer |
-| 20 | Les anges | Contenus partiels dans Grande bibliothèque et collection 04 ; ancien texte autonome à retrouver |
+| 20 | Les anges | **ORIGINAL RETROUVÉ** : [lire les ailes dans les textes](foi-control.html?file=eloah-foi-source-anges-ailes-art.md) ; voir aussi la [Collection 04](foi-control.html?file=eloah-foi-collection-04-anges-cieux.md) |
 | 21 | Le Livre des morts égyptien | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-livre-morts-egyptien.md) |
 | 22 | Marie et ses traditions | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-marie-traditions.md) |
 
@@ -206,11 +234,13 @@ Les illustrations de l'index et les images d'ouverture des archives sont des œu
 
 ---
 
-## 09 · Lectures en cours et prochaine restauration
+## 09 · Prochaine restauration et audit matériel
 
-**Priorité documentaire :** retrouver l'ancien dossier autonome « Jésus — Le sens devenu chair », le texte « Le jardin, l'arbre et l'interdit », puis les documents illustrés des sujets 09 à 22. Leur contenu ne sera marqué « intégral » que lorsque son fichier-source aura été consulté et recopié sans suppression.
+**Priorité :** retrouver la publication initiale de Bayeux, encore absente des sources récupérées ; restaurer les anciennes planches, les scans et images de chaque page d'origine dans le dépôt ELOAH avec identification des droits et provenance. Les textes de 13 anciennes études sont déjà recopiés et reliés, ainsi que deux anciens dossiers complémentaires (Jésus et les anges).
 
-**Enquêtes scientifiques à poursuivre :** MAGDALENA-010 (Jean 11 / P66), collation APO-019, relevé indépendant d'ἈΝΆΓΚΗ, fonds de Qumrân et manuscrits de l'enfance de Jésus.
+**À contrôler :** rendu public des chapitres et des annexes, présence des liens, fidélité de la transcription et correspondance entre manuscrits évoqués et photographies des originaux. Une image éditoriale générée pour ELOAH ne doit pas être présentée comme un fac-similé antique.
+
+**Enquêtes scientifiques ultérieures :** MAGDALENA-010 (Jean 11/P66), collation APO-019, ANANKÈ, corpus de Qumrân et manuscrits sur Jésus enfant.
 
 [← Retour à Foi & Spiritualité](foi-control.html) · [Les dix collections](foi-control.html?file=eloah-foi-collections-index.md) · [La Grande bibliothèque](foi-control.html?file=eloah-foi-bibliotheque-complete.md).
 
