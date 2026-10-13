@@ -47,6 +47,51 @@ body.personal-view .side nav > details:not(:first-of-type){display:block}
 .side .all-folders{border-top:1px solid #d4c4b0;padding-top:8px}
 body.personal-view .top .tools > #allDocsShortcut{display:inline-block}
 @media(max-width:620px){.el-doors{grid-template-columns:1fr}.el-door:first-child{grid-column:auto}.el-door{min-height:100px;padding:15px}.el-door strong{font-size:19px}}
+
+/* ELOAH · Revue Foi & Spiritualité — direction éditoriale */
+body.eloah-revue .shell{display:block}
+body.eloah-revue .side,body.eloah-revue .toc,body.eloah-revue .reader-footer{display:none}
+body.eloah-revue main{max-width:1250px;margin:auto;padding:0 clamp(18px,4vw,64px) 85px}
+body.eloah-revue .top{position:relative}
+body.eloah-revue .reader{max-width:none}
+body.eloah-revue .top .tools>:not(#focus):not(#allDocsShortcut){display:none}
+body.eloah-revue .search{max-width:780px;margin:20px auto 30px;display:block}
+.rev-hero{padding:65px 0 55px;border-bottom:1px solid #baaa95}
+.rev-hero small,.rev-overline{display:block;font:800 11px/1.5 system-ui;letter-spacing:.18em;text-transform:uppercase;color:#8b6948}
+.rev-hero h1{font:normal clamp(51px,8vw,105px)/.99 Georgia,serif!important;letter-spacing:-.045em;margin:22px 0 20px}
+.rev-lede{font:clamp(20px,2.7vw,29px)/1.45 Georgia,serif;max-width:760px;color:#62513d}
+.rev-note{font-size:14px;color:#786b5b;max-width:690px}
+.rev-bar{display:flex;justify-content:space-between;align-items:end;border-bottom:1px solid #c7b8a5;padding-bottom:12px;margin:53px 0 20px;gap:12px}
+.rev-bar h2{font:normal clamp(27px,3vw,37px) Georgia,serif!important;margin:0!important;border:0!important;padding:0!important}
+.rev-bar span{font-size:11px;letter-spacing:.11em;color:#907352}
+.rev-axes{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.rev-axis,.rev-story{background:#fffaf3;border:1px solid #d9cab7;text-align:left;color:#332b24;cursor:pointer}
+.rev-axis{min-height:172px;padding:23px 17px;display:flex;flex-direction:column;gap:13px}
+.rev-axis em{font:italic 27px Georgia,serif;color:#987650}
+.rev-axis strong{font:normal 23px/1.17 Georgia,serif}
+.rev-axis small{font-size:12px;line-height:1.4;color:#73695d}
+.rev-axis:hover,.rev-story:hover{background:#f0e7db;border-color:#99754b}
+.rev-feature{display:grid;grid-template-columns:1.1fr 1fr;gap:22px}
+.rev-art{min-height:305px;background:radial-gradient(circle at 38% 30%,#e4d2ad,#a68762 37%,#3a382f 77%,#292921);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.rev-art:before{content:"Α · א";font:italic clamp(78px,11vw,160px) Georgia,serif;color:#f7ecd1;opacity:.8;letter-spacing:-.13em;transform:rotate(-8deg)}
+.rev-art:after{content:"ELOAH / ALPHA-001";position:absolute;bottom:18px;left:22px;color:#fff7e7;font:10px system-ui;letter-spacing:.16em}
+.rev-feature-copy{padding:15px 0}
+.rev-feature-copy h3{font:normal clamp(30px,3.3vw,45px)/1.12 Georgia,serif!important;margin:15px 0}
+.rev-feature-copy p{line-height:1.68;color:#695e51}
+.rev-read{display:inline-block;border-bottom:1px solid #795839;background:none;border-radius:0;padding:7px 0;color:#624a30;font-size:13px;font-weight:700;margin-top:12px}
+.rev-stories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rev-story{padding:20px;min-height:190px}
+.rev-story small{display:block;letter-spacing:.13em;color:#9a744e;font-size:10px;margin-bottom:15px}
+.rev-story strong{font:normal 24px/1.18 Georgia,serif;display:block}
+.rev-story span{display:block;color:#756758;font-size:13px;line-height:1.48;margin-top:12px}
+.rev-chapters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px 22px}
+.rev-chapters button{background:transparent;border:0;border-top:1px solid #c7b9a6;display:flex;gap:14px;align-items:start;text-align:left;padding:15px 0}
+.rev-chapters em{font:italic 20px Georgia,serif;color:#9c784f}
+.rev-chapters strong{font:normal 18px/1.25 Georgia,serif}
+.rev-footer{border-top:1px solid #bba994;margin-top:55px;padding-top:23px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+.rev-footer a{color:#735535}
+@media(max-width:850px){.rev-axes{grid-template-columns:repeat(2,1fr)}.rev-feature{grid-template-columns:1fr}.rev-chapters{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:580px){.rev-hero{padding:35px 0}.rev-axes,.rev-stories,.rev-chapters{grid-template-columns:1fr}.rev-axis{min-height:124px}.rev-art{min-height:240px}.rev-bar{margin-top:36px}.rev-hero h1{font-size:50px!important}}
 </style></head><body>
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><details open><summary>Mon espace personnel</summary><div id="personal"></div></details><details open><summary>Les 10 grandes collections</summary><button type="button" id="apocryphesNav">✧ Tous les apocryphes · Atlas 600 ↗</button><a href="eloah-apocryphes-atlas.html?etudes=1" style="display:block;padding:10px 11px;color:#71532d;text-decoration:none;font-size:13px;font-weight:700">✍ 19 études et manuscrits ↗</a><button type="button" id="apo019Nav">APO-019 · Livre secret de Jacques ↗</button><button type="button" id="apo019Trans">Lire le Livre secret de Jacques en entier ↗</button><button type="button" id="apo019Collation">Collation manuscrit · Pages 1–3 ↗</button><div id="collectionsNav"></div></details><details open><summary>✦ Marie-Madeleine · Études 007–009</summary><div id="magdalenaNav"></div></details><details open><summary>▣ Toutes nos recherches · Archives</summary><div id="archiveStudiesNav"></div></details><details open><summary>✧ Publications originales retrouvées · 15</summary><div id="sourcesEloahNav"></div></details><details open><summary>◇ Études anciennes reconstituées · 14</summary><div id="reconstitutionsNav"></div></details><details open><summary>✦ Paraboles de Jésus · Laboratoire</summary><a href="eloah-foi-paraboles-lab.html" class="study-nav-direct" style="display:block;color:#674a28;background:#f9f1e5;padding:11px;border-radius:8px;text-decoration:none;font-size:13px;font-weight:800">◈ Ouvrir Paraboles Lab · 58 notices ↗</a><a href="foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md" style="display:block;padding:9px 11px;text-decoration:none;color:#674a28;font-weight:700">Volume II · 12 paraboles de Thomas ↗</a><a href="foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md" style="display:block;padding:9px 11px;text-decoration:none;color:#674a28;font-weight:700">Pourquoi Jésus parle en paraboles ↗</a><div id="parabolesNav"></div></details><details open><summary>Recherche & manuscrits</summary><div id="research"></div></details><details><summary>Mes outils</summary><button type="button" id="notesNav">✎ Mes notes et tâches</button><button type="button" id="rosaryNav">◉ Chapelet interactif ↗</button><button type="button" id="archiveNav">ἈΝΆΓΚΗ · Archives ↗</button></details></nav><p class="small" style="margin:25px 10px"><a href="mes-univers.html">← Mes univers</a></p></aside>
 <main><div class="top"><div><button id="mobileMenu" class="action mobile-menu" aria-label="Afficher les chapitres">☰</button><span class="eyebrow">BIBLIOTHÈQUE INTELLIGENTE · LIVRE VIVANT</span><div class="small" id="crumb">ELOAH / Foi & spiritualité</div></div><div class="tools"><button class="action" id="collectionsShortcut" type="button">◈ 10 collections</button><a class="action primary" href="foi-control.html?file=eloah-foi-archives-completes-index.md">▣ Toutes mes recherches</a><a class="action" href="foi-control.html?file=eloah-foi-source-jardin-arbre-interdit.md">✧ Textes d’origine</a><a class="action" href="foi-control.html?file=eloah-foi-galerie-originaux.md">▧ Galerie illustrée</a><a class="action" href="foi-control.html?file=eloah-foi-magdalena-007-sept.md">✦ Marie-Madeleine</a><a class="action" href="eloah-apocryphes-atlas.html">Atlas des apocryphes ↗</a><a class="action" href="eloah-foi-paraboles-lab.html">Paraboles Lab ↗</a><button class="action" type="button" id="grandLivreNav">Grand Livre des paraboles ↗</button><a class="action" href="foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md">Thomas · 12 récits ↗</a><a class="action" href="eloah-apocryphes-atlas.html?etudes=1">Études critiques ↗</a><button class="action" id="readJacques" type="button">Texte intégral de Jacques ↗</button><a class="action" href="foi-control.html?file=eloah-foi-grand-sommaire-recherches.md">☷ Grand sommaire</a><button class="action" type="button" id="allDocsShortcut">☷ Bibliothèque</button><button class="action" id="focus">Mode lecture</button><button class="action" id="export">Exporter mes notes</button></div></div><input class="search" id="search" type="search" placeholder="Rechercher dans tous mes textes, ALPHA, Michel, Zachée…" aria-label="Recherche globale"><div id="searchResults" class="results" hidden></div><div id="library"><div id="loading" class="loading">Ouverture de la bibliothèque…</div><article id="article" class="reader"></article><div class="reader-footer"><button class="action" id="prev">← Précédent</button><button class="action primary" id="next">Suivant →</button></div></div><section id="ananke-archives" hidden style="max-width:920px;margin:25px auto;padding:clamp(17px,3vw,35px);background:#fffdf8;border:1px solid #d9cfa8;border-radius:12px;color:#30291f">
@@ -223,13 +268,37 @@ document.getElementById("allDocsShortcut").onclick=()=>openDoc(DOCS.findIndex(d=
 function updateReadingNav(){const category=DOCS[current][2];const eligible=DOCS.map((d,i)=>({d,i})).filter(x=>x.d[2]===category);const pos=eligible.findIndex(x=>x.i===current);const prev=document.getElementById("prev"),next=document.getElementById("next");prev.disabled=pos<=0;next.disabled=pos>=eligible.length-1;prev.onclick=()=>{if(pos>0)openDoc(eligible[pos-1].i)};next.onclick=()=>{if(pos<eligible.length-1)openDoc(eligible[pos+1].i)}}
 function renderPersonalIndex(){
  if(current!==0)return;
- const chapters=DOCS.map((d,i)=>({d,i})).filter(x=>x.d[2]==="Personnel"&&x.i!==0);
- const doors=document.createElement("div");doors.className="el-doors";doors.setAttribute("aria-label","Choisir un espace");doors.append(...ELOAH_DOORS.map(d=>makeDoor(d,"el-door")));
- const grid=document.createElement("div");grid.className="personal-chapters";grid.setAttribute("aria-label","Ouvrir un chapitre personnel");
- chapters.forEach(({d,i},j)=>{const btn=document.createElement("button");btn.type="button";const no=document.createElement("small");no.textContent="CHAPITRE "+String(j+1).padStart(2,"0");const strong=document.createElement("strong");strong.textContent=d[0].slice(5);btn.append(no,strong);btn.onclick=()=>openDoc(i);grid.append(btn)});
- const h=[...article.querySelectorAll("h1")][1]||article.querySelector("h1");if(h)h.after(doors,grid);else article.prepend(doors,grid);
- const intro=document.createElement("p");intro.className="personal-intro";intro.textContent="12 chapitres indépendants. Choisis ce que tu veux lire ; la bibliothèque et les archives restent accessibles séparément.";grid.before(intro);
- const old=[...article.querySelectorAll("h2")].find(h=>h.textContent.includes("Le contenu déjà rempli"));if(old){let el=old;while(el){const next=el.nextSibling;el.remove();el=next}}headings();
+ article.replaceChildren();
+ const section=(tag,cls,txt)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(txt)el.textContent=txt;return el};
+ const jump=(name)=>{const i=DOCS.findIndex(d=>d[1]===name);if(i>=0)openDoc(i)};
+ const hero=section("section","rev-hero");hero.append(section("small","","ELOAH · Revue de recherche et de spiritualité"),section("h1","","Foi & Spiritualité."),section("p","rev-lede","Lire les textes. Interroger les symboles. Remonter aux sources. Et garder la liberté de chercher."),section("p","rev-note","Une bibliothèque vivante où les manuscrits, les traditions, l'histoire et le chemin spirituel se rencontrent — sans confondre hypothèse et preuve."));article.append(hero);
+ const bar=(title,sub)=>{const b=section("div","rev-bar");b.append(section("h2","",title),section("span","",sub));article.append(b)};
+ bar("Quatre chemins pour explorer","DÉCOUVRIR");
+ const axes=section("div","rev-axes");
+ const paths=[
+ ["01","Lire","Évangiles, apocryphes et textes anciens","eloah-foi-collections-index.md"],
+ ["02","Déchiffrer","Lettres, symboles et langues","eloah-alpha-001-jesus-enfant-lettres.md"],
+ ["03","Enquêter","Manuscrits, archives et sources","eloah-foi-grand-sommaire-recherches.md"],
+ ["04","Cheminer","Prière, questions et journal personnel","eloah-foi-personnel-01-ma-foi.md"]];
+ paths.forEach(([n,title,desc,file])=>{const b=section("button","rev-axis");b.type="button";b.append(section("em","",n),section("strong","",title),section("small","",desc));b.onclick=()=>jump(file);axes.append(b)});article.append(axes);
+ bar("À la une","LE DOSSIER");
+ const feature=section("div","rev-feature"),art=section("div","rev-art"),copy=section("div","rev-feature-copy");
+ copy.append(section("small","rev-overline","JÉSUS ENFANT · ALPHA-001"),section("h3","","L'Alpha, l'Aleph et l'enfant qui interroge les maîtres"),section("p","","Des récits d'enfance aux traditions sur les lettres, une enquête sur ce que les manuscrits racontent — et ce qu'ils ne permettent pas d'affirmer."));
+ const read=section("button","rev-read","Lire l'enquête ↗");read.type="button";read.onclick=()=>jump("eloah-alpha-001-jesus-enfant-lettres.md");copy.append(read);feature.append(art,copy);article.append(feature);
+ bar("Publications et enquêtes","NOS RECHERCHES");
+ const stories=section("div","rev-stories");
+ const entries=[
+ ["MANUSCRITS · QUMRÂN","Michel et les paroles du ciel","4Q529, fragments araméens et visions célestes.","eloah-foi-michel-4q529-etude-critique.md"],
+ ["MARIE-MADELEINE","Le chiffre sept","Entre Évangiles, traditions anciennes et lectures symboliques.","eloah-foi-magdalena-007-sept.md"],
+ ["TEXTES APOCRYPHES","Le Livre secret de Jacques","Un codex, des lacunes et une enquête sur la transmission.","eloah-foi-apo-019-livre-secret-jacques.md"],
+ ["PARABOLES","Apprendre à décoder","Lire les images de Jésus en contexte, sans leur inventer de secrets.","eloah-foi-paraboles-manuel-etude.md"],
+ ["HISTOIRE DES TEXTES","Les commencements","Genèse et Coran, étude comparative des traditions.","eloah-scanner-commencements-03-bible-coran.md"],
+ ["ARCHIVES","Les textes retrouvés","Éditions originales, reconstitutions et recherches conservées.","eloah-foi-archives-completes-index.md"]];
+ entries.forEach(([cat,title,desc,file])=>{const b=section("button","rev-story");b.type="button";b.append(section("small","",cat),section("strong","",title),section("span","",desc));b.onclick=()=>jump(file);stories.append(b)});article.append(stories);
+ bar("Mon chemin spirituel","DOUZE CHAPITRES");
+ const chapters=section("div","rev-chapters");
+ DOCS.map((d,i)=>({d,i})).filter(x=>x.d[2]==="Personnel"&&x.i!==0).forEach(({d,i},j)=>{const b=section("button","");b.type="button";b.append(section("em","",String(j+1).padStart(2,"0")),section("strong","",d[0].slice(5)));b.onclick=()=>openDoc(i);chapters.append(b)});article.append(chapters);
+ const footer=section("div","rev-footer");const archive=document.createElement("a");archive.href="foi-control.html?file=eloah-foi-grand-sommaire-recherches.md";archive.textContent="Explorer toutes les recherches →";const library=document.createElement("a");library.href="eloah-foi-grande-bibliotheque.html";library.textContent="Grande bibliothèque visuelle →";footer.append(archive,library);article.append(footer);headings();
 }
 function renderMarkdown(md){if(typeof marked==="undefined"){article.textContent=md;return}article.innerHTML=marked.parse(md,{gfm:true});article.querySelectorAll("img").forEach(x=>{x.loading="lazy";x.onerror=()=>{const a=document.createElement("a");a.href=x.src;a.textContent="Ouvrir l'illustration : "+x.alt;a.target="_blank";x.replaceWith(a)}});article.querySelectorAll("a").forEach(a=>{if(a.protocol==="http:"||a.protocol==="https:"){a.target="_blank";a.rel="noopener noreferrer"}const u=new URL(a.href,location.href);if(u.origin===location.origin&&u.pathname===location.pathname&&(u.searchParams.has("doc")||u.searchParams.has("file"))){const next=u.searchParams.has("file")?DOCS.findIndex(d=>d[1]===u.searchParams.get("file")):Number(u.searchParams.get("doc"));if(Number.isInteger(next)&&next>=0&&next<DOCS.length){a.target="_self";a.onclick=e=>{e.preventDefault();const section=u.hash?decodeURIComponent(u.hash):"";if(next===current&&section){const target=article.querySelector("#"+CSS.escape(section.slice(1)));if(target){target.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState({},"",location.pathname+"?file="+encodeURIComponent(DOCS[current][1])+section);return}}openDoc(next,section)}}}});headings();}
 const COLLECTION_CARD_DESCRIPTIONS=[
@@ -257,7 +326,7 @@ function renderCollectionsGrid(){
   const h=article.querySelector("h1");if(h)h.after(grid);else article.prepend(grid);
 }
 async function getDoc(i){if(cache.has(i))return cache.get(i);const res=await fetch(DOCS[i][1],{cache:"no-store"});if(!res.ok)throw Error("Erreur "+res.status);const md=await res.text();cache.set(i,md);return md;}
-async function openDoc(i,section="",restore=false){const request=++busy;current=i;sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel");document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0)renderPersonalIndex();loading.hidden=true;let target=section&&(section.startsWith("#")?article.querySelector("#"+CSS.escape(section.slice(1))):[...article.querySelectorAll("h1,h2,h3")].find(x=>x.textContent.toLowerCase().includes(section.toLowerCase())));if(!target&&restore&&location.hash){const anchor=decodeURIComponent(location.hash.slice(1));target=article.querySelector("#"+CSS.escape(anchor))||null}if(!target&&restore){const saved=JSON.parse(localStorage.getItem(POS)||"{}");if(saved.doc===i)target=document.getElementById(saved.heading)}if(target)target.scrollIntoView({block:"start"});else window.scrollTo({top:0,behavior:"instant"});history.replaceState({},"",location.pathname+"?file="+encodeURIComponent(DOCS[i][1])+(target?"#"+target.id:""));localStorage.setItem(POS,JSON.stringify({doc:i,heading:target?.id||""}))}catch(e){loading.hidden=false;loading.textContent="Impossible de charger le document : "+e.message+". Ouvre le fichier source depuis GitHub."}}
+async function openDoc(i,section="",restore=false){const request=++busy;current=i;sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel");document.body.classList.toggle("eloah-revue",i===0);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0)renderPersonalIndex();loading.hidden=true;let target=section&&(section.startsWith("#")?article.querySelector("#"+CSS.escape(section.slice(1))):[...article.querySelectorAll("h1,h2,h3")].find(x=>x.textContent.toLowerCase().includes(section.toLowerCase())));if(!target&&restore&&location.hash){const anchor=decodeURIComponent(location.hash.slice(1));target=article.querySelector("#"+CSS.escape(anchor))||null}if(!target&&restore){const saved=JSON.parse(localStorage.getItem(POS)||"{}");if(saved.doc===i)target=document.getElementById(saved.heading)}if(target)target.scrollIntoView({block:"start"});else window.scrollTo({top:0,behavior:"instant"});history.replaceState({},"",location.pathname+"?file="+encodeURIComponent(DOCS[i][1])+(target?"#"+target.id:""));localStorage.setItem(POS,JSON.stringify({doc:i,heading:target?.id||""}))}catch(e){loading.hidden=false;loading.textContent="Impossible de charger le document : "+e.message+". Ouvre le fichier source depuis GitHub."}}
 
 document.getElementById("mobileMenu").onclick=()=>sidebar.classList.toggle("open");
 document.getElementById("focus").onclick=()=>{document.body.classList.toggle("focus");document.getElementById("focus").textContent=document.body.classList.contains("focus")?"Afficher les menus":"Mode lecture"};
