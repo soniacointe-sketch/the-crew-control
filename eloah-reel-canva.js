@@ -1070,7 +1070,7 @@ async function usePhoto(id,asBackground=false){
 let brandView='overview',brandSearch='',brandUploadCategory='photos',brandUploadTargetId='';
 let brandKitId='';
 try{brandKitId=localStorage.getItem('eloah_reel_active_brand')||''}catch{}
-const brandImageCache=new Map();
+const brandImageCache=new Map(),brandEmbeddedImages=new Map();
 function brandKit(){
  const lib=window.ELOAHBrand;if(!lib)return null;
  if(!brandKitId){brandKitId=lib.all().find(k=>k.name===S.brand)?.id||lib.all()[0].id}
@@ -1254,28 +1254,67 @@ function brandUseModel(id){
  snapshot();
  for(const element of model.elements){
   const {id:original,...copy}=JSON.parse(JSON.stringify(element));
+  if(copy.kind==='brandAsset')copy.brandId=kit.id;
   S.elements.push({...copy,id:nextId++,start:Math.max(0,Math.min(S.duration-.1,Number(copy.start)||0)),
    end:Math.max(.1,Math.min(S.duration,Number(copy.end)||S.duration))});
  }
  selected=S.elements.at(-1).id;saveLocal();renderTimeline();setTab('properties');draw();
  toast('Modèle "'+model.name+'" ajouté sans remplacer le contenu actuel.');
 }
+
+function validBrandImageData(data){
+ return typeof data==='string'&&data.length<800000&&/^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/i.test(data);
+}
+function captureBrandAssets(maxChars=19500000){
+ const items=[],used=new Set();let size=0,skipped=0;
+ for(const e of S.elements){
+  if(e.kind!=='brandAsset'||used.has(e.id))continue;
+  used.add(e.id);
+  const embedded=brandEmbeddedImages.get(e.id);
+  const data=validBrandImageData(embedded)?embedded:window.ELOAHBrand?.getAsset(e.brandId,e.assetId)?.data;
+  if(!validBrandImageData(data)){skipped++;continue}
+  if(size+data.length>maxChars){skipped++;continue}
+  items.push({id:e.id,data});size+=data.length;
+ }
+ return {items,skipped};
+}
+function saveBrandMediaLocal(){
+ try{
+  const result=captureBrandAssets(2450000);
+  localStorage.setItem('eloah_reel_editor_brand_assets',JSON.stringify(result.items));
+  return result.skipped===0;
+ }catch(e){console.warn('Stockage des médias de marque limité',e);return false}
+}
+function restoreBrandAssets(items,idMap=null){
+ if(!Array.isArray(items))return 0;
+ let count=0;
+ for(const item of items.slice(0,120)){
+  const id=idMap?.get(String(item.id))??Number(item.id);
+  if(!Number.isInteger(id)||!S.elements.some(e=>e.id===id&&e.kind==='brandAsset'))continue;
+  if(!validBrandImageData(item.data))continue;
+  brandEmbeddedImages.set(id,item.data);count++;
+ }
+ return count;
+}
+
 function brandInsertAsset(id){
  const kit=brandKit(),asset=window.ELOAHBrand.getAsset(kit?.id,id);
  if(!asset?.data){toast('Importe d’abord une image pour pouvoir l’ajouter.');return}
  const result=add('brandAsset',{brandId:kit.id,assetId:id,
   sourceName:asset.name,color:'#ffffff',x:id==='logo'?300:170,y:id==='logo'?715:540,
   w:id==='logo'?480:740,h:id==='logo'?480:740});
- toast(asset.name+' ajouté au Reel.');
+ if(validBrandImageData(asset.data))brandEmbeddedImages.set(result.id,asset.data);
+ const persisted=saveBrandMediaLocal();
+ toast(asset.name+' ajouté au Reel.'+(persisted?'':' Exporte le projet en JSON pour conserver ce visuel.'));
 }
 function brandImage(ctx,e){
- const asset=window.ELOAHBrand?.getAsset(e.brandId,e.assetId);
- if(!asset?.data)return;
- const cacheId=e.brandId+':'+e.assetId;
+ const data=brandEmbeddedImages.get(e.id)||window.ELOAHBrand?.getAsset(e.brandId,e.assetId)?.data;
+ if(!validBrandImageData(data))return;
+ const cacheId='element:'+e.id;
  let cache=brandImageCache.get(cacheId);
- if(!cache||cache.src!==asset.data){
+ if(!cache||cache.src!==data){
   const im=new Image();im.onload=()=>{draw()};im.onerror=()=>{console.warn('Logo ou ressource illisible',cacheId)};
-  im.src=asset.data;cache={src:asset.data,image:im};brandImageCache.set(cacheId,cache);
+  im.src=data;cache={src:data,image:im};brandImageCache.set(cacheId,cache);
  }
  const im=cache.image;if(!im.complete||!im.naturalWidth)return;
  const ratio=Math.min(e.w/im.naturalWidth,e.h/im.naturalHeight),w=im.naturalWidth*ratio,h=im.naturalHeight*ratio;
