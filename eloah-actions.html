@@ -123,4 +123,4 @@ file.addEventListener('change',async()=>{const f=file.files[0];if(!f)return;try{
 document.getElementById('calendar-clear').onclick=()=>{if(!confirm('Effacer les événements de calendrier conservés dans ce navigateur ?'))return;events=[];try{localStorage.removeItem(KEY)}catch{}render()};
 render();
 })();
-</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script><script src="eloah-daily.js?v=1"></script><script src="eloah-google-calendar.js?v=3"></script></body></html>
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script><script src="eloah-daily.js?v=1"></script><script src="eloah-google-calendar.js?v=3"></script><script defer src="eloah-navigation.js?v=7"></script></body></html>
