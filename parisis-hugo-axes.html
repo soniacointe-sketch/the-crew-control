@@ -337,6 +337,6 @@ document.getElementById('fitRoyal').addEventListener('click',zoomRoyal);
 document.getElementById('fitParis').addEventListener('click',fit);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-royal-point]');if(!b)return;const id=b.dataset.royalPoint,p=royalPoints.find(x=>x.id===id);if(!p)return;document.getElementById('showRoyal').checked=true;showRoyalLayer();map.flyTo([p.lat,p.lng],p.category==='destination'?14:16,{duration:.65});setTimeout(()=>royalMarkers[id]?.openPopup(),700)});
 royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
-if(new URLSearchParams(location.search).get('royal')==='1')zoomRoyal();else fit();
+if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
 })();
 </script></body></html>
