@@ -127,8 +127,8 @@ function renderHome(){
  const att=n("span");att.innerHTML=ico("paperclip");add.append(att);box.append(add);scroll.appendChild(box);
  const recentHead=n("div","em-section-h");recentHead.id="emRecentHeading";recentHead.innerHTML=ico("clock");recentHead.append(n("span",null,"Tableaux récents"));scroll.append(recentHead);
  const recentList=n("div","em-list");recentList.id="emRecent";scroll.appendChild(recentList);
- const spaceHead=n("div","em-workspace-head", "MES TABLEAUX ELOAH");scroll.appendChild(spaceHead);
- const workspace=n("div","em-workspace-row");workspace.innerHTML=ico("people");workspace.append(n("span",null,"Mes projets ELOAH"));
+ const spaceHead=n("div","em-workspace-head", "VOS ESPACES DE TRAVAIL");scroll.appendChild(spaceHead);
+ const workspace=n("div","em-workspace-row");workspace.innerHTML=ico("people");workspace.append(n("span",null,"Espace de travail ELOAH"));
  const toBoards=n("span","em-arrow");toBoards.innerHTML=ico("chevron");workspace.append(toBoards);
  scroll.append(workspace);
  const workspaceList=n("div","em-list");workspaceList.id="emWorkspaceList";scroll.appendChild(workspaceList);
