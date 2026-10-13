@@ -1,5 +1,12 @@
 # ELOAH — Archives de toutes nos recherches · Foi & Spiritualité
 
+## 📚 Entrer dans la Grande Bibliothèque du Sacré
+
+**[Ouvrir la bibliothèque visuelle : 10 collections, rayonnages, recherche et accès aux études →](eloah-foi-grande-bibliotheque.html)**
+
+Ce registre reste l'inventaire scientifique complet ; la Grande Bibliothèque offre une entrée visuelle pour explorer les livres et les études. Les dossiers récupérés, études en cours et textes encore manquants sont distingués.
+
+
 **Bibliothèque intelligente · Livre vivant · Registre de restitution — 13 octobre 2026**  
 **Objectif : retrouver toute la recherche depuis les premiers dossiers ELOAH, et conserver intégralement les textes anciens là où les originaux sont accessibles.**
 
