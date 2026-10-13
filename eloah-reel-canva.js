@@ -1187,16 +1187,125 @@ function brandResourcePanel(kit,category){
 function brandPanel(){
  const lib=window.ELOAHBrand;if(!lib)return '<p>Les identités de marque ne sont pas chargées. Actualise la page.</p>';
  const kit=brandKit(),options=lib.all().map(k=>'<option value="'+xss(k.id)+'" '+(kit.id===k.id?'selected':'')+'>'+xss(k.name)+'</option>').join('');
- const top='<div class="ecs-brand-kitbar"><label for="ecs-brand-kit">Identité visuelle</label><div><select id="ecs-brand-kit" aria-label="Choisir une identité visuelle">'+options+'</select><button data-brand-create title="Créer une identité de marque">＋</button></div></div>';
+ const top='<div class="ecs-brand-kitbar"><label for="ecs-brand-kit">Identité visuelle</label><div><select id="ecs-brand-kit" aria-label="Choisir une identité visuelle">'+options+'</select><button data-brand-create title="Créer une identité de marque">＋</button></div>'+
+ (brandCreating?'<div class="ecs-brand-newkit"><input id="ecs-brand-new-name" placeholder="Nom de la nouvelle marque" maxlength="80"><button data-brand-create-confirm>Créer</button></div>':'')+'</div>';
  const details=brandView==='overview'?brandOverview(kit):brandView==='guides'?brandGuides(kit):brandView==='models'?brandModels(kit):
  brandView==='logos'?brandLogos(kit):brandView==='colors'?brandColors(kit):brandView==='fonts'?brandFonts(kit):
  brandView==='voice'?brandVoice(kit):brandResourcePanel(kit,brandView);
  const tools='<div class="ecs-brand-backup"><button data-brand-export>↓ Exporter le kit</button><button data-brand-import>↑ Importer un kit</button>'+
  '<p>Les identités sont enregistrées localement sur cet appareil. Pour les transférer, exporte leur fichier JSON.</p></div>';
- return '<div class="ecs-brand-panel"><div class="ecs-brand-search"><span>⌕</span><input id="ecs-brand-search" placeholder="Rechercher une ressource" aria-label="Rechercher dans la marque" value="'+xss(brandSearch)+'"></div>'+
+ return '<div class="ecs-brand-panel"><div class="ecs-brand-search"><span>⌕</span><input id="ecs-brand-search" placeholder="Rechercher une ressource" aria-label="Rechercher dans la marque" value="'+xss(brandSearch)+'"></div><div id="ecs-brand-results">'+brandSearchMarkup(brandSearch,kit)+'</div>'+
  top+'<div class="ecs-brand-workspace">'+brandNav()+'<div class="ecs-brand-content">'+
  '<div class="ecs-brand-section-heading"><small>'+xss(kit.tagline||'Identité visuelle')+'</small><h2>'+xss(brandView==='overview'?'Toutes les ressources':brandTypeSections().find(x=>x[0]===brandView)?.[1]||'Marque')+'</h2></div>'+
  details+tools+'</div></div></div>';
+}
+
+
+let brandCreating=false;
+function brandApplyIdentity(){
+ const kit=brandKit();if(!kit)return;
+ snapshot();S.brand=kit.name;S.bg=kit.colors[0][1];saveLocal();draw();
+ toast('Identité '+kit.name+' appliquée au fond de ce Reel. Les éléments existants sont conservés.');
+}
+function brandAddSignature(){
+ const kit=brandKit();if(!kit)return;
+ add('text',{text:kit.signature||kit.name.toUpperCase(),font:66,fontFamily:kit.heading,fontWeight:800,
+ x:100,y:1520,w:880,h:200,color:kit.colors[Math.min(1,kit.colors.length-1)][1],align:'center'});
+ toast('Signature '+kit.name+' ajoutée.');
+}
+function brandAddHeading(){
+ const kit=brandKit();if(!kit)return;
+ add('text',{text:'MON GRAND TITRE',font:105,fontFamily:kit.heading,fontWeight:800,x:95,y:710,w:890,h:340,
+ color:kit.colors[Math.min(1,kit.colors.length-1)][1],align:'center'});
+ toast('En-tête ajouté avec la police de marque.');
+}
+function brandCompose(type){
+ const kit=brandKit();if(!kit)return;
+ const bg=kit.colors[0][1],ink=kit.colors[1]?.[1]||'#222222',accent=kit.colors[2]?.[1]||ink;
+ snapshot();S.brand=kit.name;S.bg=bg;
+ const addText=(text,x,y,w,h,size,opts={})=>S.elements.push({id:nextId++,kind:'text',
+ text,font:size,fontFamily:opts.family||kit.heading,fontWeight:opts.weight||800,
+ color:opts.color||ink,x,y,w,h,align:opts.align||'center',start:0,end:S.duration,...opts});
+ const accentLine=(x,y,w)=>S.elements.push({id:nextId++,kind:'rect',x,y,w,h:13,color:accent,start:0,end:S.duration});
+ if(type==='cover'){accentLine(160,560,760);addText(kit.name.toUpperCase(),90,655,900,380,114);addText(kit.tagline||'Le nouveau dossier',130,1060,820,195,58,{color:accent,family:kit.body,weight:500})}
+ else if(type==='quote'){addText('“ Écris une phrase qui te ressemble. ”',100,690,880,560,86,{family:kit.heading});addText('— '+kit.name,200,1370,680,150,40,{family:kit.body,color:accent})}
+ else if(type==='event'){addText('PROCHAIN ÉVÉNEMENT',95,570,890,250,100);accentLine(160,852,760);addText('Date · Lieu · Programme',120,968,840,190,60,{family:kit.body,color:accent});addText(kit.name,130,1460,820,120,42,{family:kit.body})}
+ else if(type==='story'){addText('TON MESSAGE',95,640,890,340,115);addText('Écris ici ta prochaine story.',115,1010,850,340,67,{family:kit.body,weight:500,color:accent});addText(kit.signature||kit.name,120,1570,840,150,44)}
+ else{accentLine(110,1500,860);addText(kit.signature||kit.name,120,1515,840,210,68,{family:kit.heading})}
+ selected=S.elements[S.elements.length-1]?.id||null;saveLocal();renderTimeline();setTab('properties');draw();
+ toast('Modèle '+type+' ajouté avec l’identité '+kit.name+'. Tes anciens éléments sont conservés.');
+}
+function brandSaveModel(){
+ const kit=brandKit();if(!kit)return;
+ const items=S.elements.filter(e=>!['image','photoFrame'].includes(e.kind));
+ if(!items.length){toast('Ajoute d’abord un titre, une forme ou un graphique dans ton Reel.');return}
+ const name=one('#ecs-brand-model-name')?.value.trim()||S.name||'Mon modèle';
+ const result=window.ELOAHBrand.addModel(kit.id,name,items);
+ if(brandStatus(result,'Modèle de marque enregistré : '+name)){brandView='models';renderSide()}
+}
+function brandUseModel(id){
+ const kit=brandKit(),model=kit?.models.find(x=>x.id===id);if(!model)return;
+ if(!model.elements.length){toast('Ce modèle ne contient pas d’éléments à ajouter.');return}
+ snapshot();
+ for(const element of model.elements){
+  const {id:original,...copy}=JSON.parse(JSON.stringify(element));
+  S.elements.push({...copy,id:nextId++,start:Math.max(0,Math.min(S.duration-.1,Number(copy.start)||0)),
+   end:Math.max(.1,Math.min(S.duration,Number(copy.end)||S.duration))});
+ }
+ selected=S.elements.at(-1).id;saveLocal();renderTimeline();setTab('properties');draw();
+ toast('Modèle "'+model.name+'" ajouté sans remplacer le contenu actuel.');
+}
+function brandInsertAsset(id){
+ const kit=brandKit(),asset=window.ELOAHBrand.getAsset(kit?.id,id);
+ if(!asset?.data){toast('Importe d’abord une image pour pouvoir l’ajouter.');return}
+ const result=add('brandAsset',{brandId:kit.id,assetId:id,
+  sourceName:asset.name,color:'#ffffff',x:id==='logo'?300:170,y:id==='logo'?715:540,
+  w:id==='logo'?480:740,h:id==='logo'?480:740});
+ toast(asset.name+' ajouté au Reel.');
+}
+function brandImage(ctx,e){
+ const asset=window.ELOAHBrand?.getAsset(e.brandId,e.assetId);
+ if(!asset?.data)return;
+ const cacheId=e.brandId+':'+e.assetId;
+ let cache=brandImageCache.get(cacheId);
+ if(!cache||cache.src!==asset.data){
+  const im=new Image();im.onload=()=>{draw()};im.onerror=()=>{console.warn('Logo ou ressource illisible',cacheId)};
+  im.src=asset.data;cache={src:asset.data,image:im};brandImageCache.set(cacheId,cache);
+ }
+ const im=cache.image;if(!im.complete||!im.naturalWidth)return;
+ const ratio=Math.min(e.w/im.naturalWidth,e.h/im.naturalHeight),w=im.naturalWidth*ratio,h=im.naturalHeight*ratio;
+ const x=e.x+(e.w-w)/2,y=e.y+(e.h-h)/2;
+ try{ctx.drawImage(im,x,y,w,h)}catch{}
+}
+function brandSearchMarkup(value,kit){
+ const q=String(value||'').trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+ if(!q)return '';
+ const match=v=>String(v||'').toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(q);
+ const sections=brandTypeSections().filter(x=>match(x[1])).map(x=>'<button data-brand-view="'+x[0]+'">▸ '+xss(x[1])+'</button>');
+ const colors=kit.colors.map(([label,hex],i)=>({label,hex,i})).filter(v=>match(v.label)||match(v.hex)).map(v=>'<button data-brand-quickcolor="'+v.i+'"><span style="background:'+v.hex+'"></span>'+xss(v.label)+'</button>');
+ const assets=kit.assets.filter(x=>match(x.name)).slice(0,9).map(x=>'<button data-brand-asset-insert="'+xss(x.id)+'">＋ '+xss(x.name)+'</button>');
+ const models=kit.models.filter(x=>match(x.name)).slice(0,9).map(x=>'<button data-brand-use-model="'+xss(x.id)+'">▧ '+xss(x.name)+'</button>');
+ const all=[...sections,...colors,...assets,...models];
+ return '<div class="ecs-brand-result-list">'+(all.length?all.join(''):'<p>Aucune ressource correspondant à la recherche.</p>')+'</div>';
+}
+async function resizeBrandImage(file,logo=false){
+ if(!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error('Format accepté : JPG, PNG ou WebP.');
+ if(file.size>22*1024*1024)throw Error('Fichier trop volumineux : 22 Mo maximum.');
+ const src=URL.createObjectURL(file),im=new Image();im.src=src;
+ try{await im.decode()}finally{URL.revokeObjectURL(src)}
+ const width=logo?650:1000,limit=logo?730000:620000;
+ let scale=Math.min(1,width/Math.max(im.naturalWidth,im.naturalHeight)),url='',quality=.82;
+ for(let i=0;i<6;i++){
+  const c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.naturalWidth*scale));c.height=Math.max(1,Math.round(im.naturalHeight*scale));
+  const cx=c.getContext('2d');
+  if(!logo){cx.fillStyle='#ffffff';cx.fillRect(0,0,c.width,c.height)}
+  cx.drawImage(im,0,0,c.width,c.height);
+  url=c.toDataURL(logo?'image/png':'image/jpeg',quality);
+  if(url.length<limit)break;
+  scale*=.76;quality=Math.max(.55,quality-.08);
+ }
+ if(!url||url.length>=limit)throw Error('Image encore trop lourde. Réduis sa résolution et réessaie.');
+ return url;
 }
 
 function renderSide(){
