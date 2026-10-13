@@ -196,3 +196,6 @@ if(page==='mes-univers.html'){
   }
 }
 })();
+
+/* Training cards use the existing editor, archive and export tools. */
+(()=>{if(location.pathname.endsWith('/eloah-partenaire.html')&&new URLSearchParams(location.search).get('rubrique')==='Formations'){const s=document.createElement('script');s.src='eloah-formations.js?v=1';document.head.appendChild(s)}})();
