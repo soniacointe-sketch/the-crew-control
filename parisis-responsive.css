@@ -1,0 +1,18 @@
+/* PARISIS ENGINE — adaptation automatique selon la largeur et l'orientation.
+   Les cartes, outils et enquêtes conservent leurs interactions. */
+html{max-width:100%}
+body{-webkit-text-size-adjust:100%;overflow-wrap:break-word}
+img,video{max-width:100%;height:auto}
+:where(main,article,section,.layout,.container,.wrap,.panel,.sheet,.narrative,.viewer){min-width:0;max-width:100%}
+:where(.scroll-table){max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+@media(max-width:760px){
+  html,body{max-width:100%;overflow-x:clip}
+  :where(h1){overflow-wrap:anywhere;font-size:clamp(27px,7.5vw,40px)}
+  :where(.layout){grid-template-columns:minmax(0,1fr)}
+  :where(.two-col,.two-images,.proof-grid,.method-list,.compare-grid,.columns){grid-template-columns:minmax(0,1fr)}
+  :where(.sheet,.panel,.narrative){padding-left:clamp(14px,4vw,23px);padding-right:clamp(14px,4vw,23px)}
+  :where(table){display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  :where(input,select,textarea){font-size:16px}
+  :where(button,.btn,.button,.back){touch-action:manipulation}
+  :where(iframe){max-width:100%}
+}
