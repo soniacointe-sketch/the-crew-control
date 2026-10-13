@@ -1,0 +1,1531 @@
+{
+  "version": "2026-10-14-300",
+  "targetTotal": 300,
+  "added": 54,
+  "boards": [
+    {
+      "id": "eloah-curated-eloah",
+      "name": "ELOAH",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-01-01",
+          "title": "Mes univers — tester le parcours utilisateur",
+          "description": "Objectif : ouvrir chaque univers depuis l’accueil puis retrouver le projet et son dernier travail. Livrable : une liste des liens corrects et des liens à réparer.",
+          "tag": "Suivi",
+          "laneName": "À vérifier",
+          "due": "",
+          "checks": [
+            {
+              "text": "Ouvrir les accès des différents univers",
+              "done": false
+            },
+            {
+              "text": "Noter chaque erreur de navigation et son URL",
+              "done": false
+            },
+            {
+              "text": "Corriger puis revérifier sur mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-01-02",
+          "title": "ELOAH Boards — recetter les 300 cartes",
+          "description": "Objectif : contrôler l’affichage, la recherche, les filtres et l’ouverture directe des cartes après alimentation de la base. Validation : le total réel est cohérent sur les appareils connectés.",
+          "tag": "Important",
+          "laneName": "À vérifier",
+          "due": "",
+          "checks": [
+            {
+              "text": "Comparer le total affiché avec Supabase",
+              "done": false
+            },
+            {
+              "text": "Ouvrir une carte dans chaque tableau",
+              "done": false
+            },
+            {
+              "text": "Tester modification, rechargement et recherche",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-01-03",
+          "title": "Entretiens — fiche cliente et suivi des séances",
+          "description": "Préparer une fiche utilisable en entretien : objectif de la cliente, notes pertinentes, actions convenues et suivi. Ne saisir aucune donnée personnelle réelle dans une fiche de démonstration.",
+          "tag": "Administratif",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les champs indispensables",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple fictif",
+              "done": false
+            },
+            {
+              "text": "Vérifier les autorisations d’accès",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-01-04",
+          "title": "Formations ELOAH — concevoir l’accueil d’une élève",
+          "description": "Structurer le parcours depuis la présentation d’une formation jusqu’au programme et à la progression. L’accès, les paiements et les inscriptions restent à tester ou construire.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les modules et le niveau visé",
+              "done": false
+            },
+            {
+              "text": "Lister les écrans d’inscription et de progression",
+              "done": false
+            },
+            {
+              "text": "Distinguer fonctions existantes et futures",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-01-05",
+          "title": "Documents — tester l’assemblage de photos en PDF",
+          "description": "Vérifier la sélection multiple de photos, l’ordre des pages et l’export PDF dans la bibliothèque ELOAH. Livrable : un test reproductible avec des fichiers non sensibles.",
+          "tag": "Suivi",
+          "laneName": "À vérifier",
+          "due": "",
+          "checks": [
+            {
+              "text": "Sélectionner plusieurs images de test",
+              "done": false
+            },
+            {
+              "text": "Modifier l’ordre puis générer le PDF",
+              "done": false
+            },
+            {
+              "text": "Contrôler téléchargement et pagination",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "ari:cloud:trello::board/workspace/63bc8e6f424fb501c61e212f/67b335cc2b3e563952f5c23e",
+      "name": "Femme Fatale Empire – Gestion & Stratégie",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-02-01",
+          "title": "Audit de cohérence — Femme Fatale, Sonia Velka et Power & Glam",
+          "description": "Clarifier les identités, promesses et publics pour éviter de mélanger une ancienne marque, la voix personnelle et les offres éditoriales actuelles. Livrable : une fiche de positionnement par identité.",
+          "tag": "Important",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les activités de chaque identité",
+              "done": false
+            },
+            {
+              "text": "Repérer les noms et offres encore actifs",
+              "done": false
+            },
+            {
+              "text": "Valider les différences de ton et d’usage",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-02-02",
+          "title": "Parcours cliente — premier contact et confidentialité",
+          "description": "Dessiner un suivi simple : demande, échange, proposition, accompagnement et bilan. Utiliser des fiches fictives pour l’essai et prévoir les règles d’accès avant toute donnée réelle.",
+          "tag": "Administratif",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les étapes du parcours",
+              "done": false
+            },
+            {
+              "text": "Écrire un exemple de fiche fictive",
+              "done": false
+            },
+            {
+              "text": "Contrôler consentement et accès",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-02-03",
+          "title": "Vidéos courtes — trois approches à tester",
+          "description": "Préparer trois concepts différents : une opinion assumée, une scène de vie et une explication pratique. Livrable : trois scripts courts, sans promesse commerciale invérifiable.",
+          "tag": "Création",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir le message de chaque vidéo",
+              "done": false
+            },
+            {
+              "text": "Écrire les premières secondes et une conclusion",
+              "done": false
+            },
+            {
+              "text": "Prévoir un plan de tournage simple",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-02-04",
+          "title": "Charte visuelle héritée — trier les références",
+          "description": "Classer les anciens visuels en trois catégories : réutilisable, à adapter et à archiver. Livrable : une planche d’identité validée avant production.",
+          "tag": "Création",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Recenser les visuels existants",
+              "done": false
+            },
+            {
+              "text": "Comparer palette, typographies et photographies",
+              "done": false
+            },
+            {
+              "text": "Valider les éléments réutilisables",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-02-05",
+          "title": "Réutilisation éditoriale — transformer les anciennes idées",
+          "description": "Repérer cinq anciennes idées de contenu pouvant nourrir les univers actuels sans recopier mot à mot un ancien discours. Livrable : cinq briefs contextualisés.",
+          "tag": "Publication",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Sélectionner cinq anciens sujets",
+              "done": false
+            },
+            {
+              "text": "Définir leur angle actuel",
+              "done": false
+            },
+            {
+              "text": "Préparer les briefs de publication",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "eloah-curated-foi-spiritualit-",
+      "name": "Foi & spiritualité",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-03-01",
+          "title": "4Q529 — établir la fiche des témoins et éditions",
+          "description": "Rassembler les références publiées concernant les « Paroles de Michel » de Qumrân, en distinguant transcription, traduction et commentaire. Ne pas restituer les lacunes comme des faits.",
+          "tag": "Important",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Relever les cotes et les éditions critiques",
+              "done": false
+            },
+            {
+              "text": "Distinguer texte conservé et restitutions",
+              "done": false
+            },
+            {
+              "text": "Inscrire chaque interprétation avec sa source",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-03-02",
+          "title": "Apocryphes — index des traductions et droits d’usage",
+          "description": "Créer un répertoire par texte, langue originale, édition et disponibilité légale. Livrable : index documentaire pour la bibliothèque ELOAH.",
+          "tag": "Suivi",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les corpus déjà étudiés",
+              "done": false
+            },
+            {
+              "text": "Noter auteurs et dates des éditions",
+              "done": false
+            },
+            {
+              "text": "Vérifier les autorisations de reproduction",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-03-03",
+          "title": "Paraboles — grille de lecture historique et symbolique",
+          "description": "Construire une méthode commune : contexte du passage, variantes, métaphores, lectures historiques et hypothèses personnelles clairement séparées.",
+          "tag": "Création",
+          "laneName": "Idées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Choisir deux paraboles de test",
+              "done": false
+            },
+            {
+              "text": "Comparer traductions et contexte",
+              "done": false
+            },
+            {
+              "text": "Décrire ce qui relève de l’interprétation",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-03-04",
+          "title": "Jésus enfant — Alpha et Aleph, dossier comparatif",
+          "description": "Confronter le récit des lettres dans les versions de l’Évangile de l’enfance selon Thomas. Livrable : tableau des variantes et références de passage.",
+          "tag": "Important",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les versions consultables",
+              "done": false
+            },
+            {
+              "text": "Aligner les passages correspondants",
+              "done": false
+            },
+            {
+              "text": "Rédiger la comparaison sourcée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-03-05",
+          "title": "Catalogue des dix collections — navigation et renvois",
+          "description": "Vérifier les dix collections de la bibliothèque Foi : dossiers, titres, liens de lecture et chemins de retour. Livrable : inventaire des entrées manquantes.",
+          "tag": "Suivi",
+          "laneName": "À vérifier",
+          "due": "",
+          "checks": [
+            {
+              "text": "Ouvrir chaque collection",
+              "done": false
+            },
+            {
+              "text": "Relever les pages manquantes et doublons",
+              "done": false
+            },
+            {
+              "text": "Corriger les liens après validation",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "eloah-curated-le-lion-blanc",
+      "name": "Le Lion Blanc",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-04-01",
+          "title": "Ateliers — fiche d’accueil accessible aux participants",
+          "description": "Préparer une fiche avec objectifs, durée indicative, matériel et contact de l’association, sans solliciter plus de données personnelles que nécessaire.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Choisir les informations indispensables",
+              "done": false
+            },
+            {
+              "text": "Rédiger une version simple et claire",
+              "done": false
+            },
+            {
+              "text": "Tester la compréhension de la fiche",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-04-02",
+          "title": "Démarches administratives — supports pratiques",
+          "description": "Créer des supports pédagogiques distinguant les documents à réunir, les interlocuteurs et les étapes de vérification, sans promettre un résultat administratif.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Choisir les démarches prioritaires",
+              "done": false
+            },
+            {
+              "text": "Vérifier les sources officielles",
+              "done": false
+            },
+            {
+              "text": "Préparer une fiche par démarche",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-04-03",
+          "title": "Atelier budget — trois exercices progressifs",
+          "description": "Concevoir un atelier d’initiation : repérer les charges fixes, planifier les échéances et comparer dépenses prévues et réalisées. Utiliser des exemples fictifs.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Créer un budget fictif simple",
+              "done": false
+            },
+            {
+              "text": "Préparer trois exercices et leurs corrigés",
+              "done": false
+            },
+            {
+              "text": "Vérifier l’accessibilité des supports",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-04-04",
+          "title": "Partenaires et réunions — registre de suivi",
+          "description": "Organiser les contacts institutionnels et associatifs, les propositions et les suites données. Ne rien indiquer comme partenariat conclu sans confirmation.",
+          "tag": "Suivi",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Classer les interlocuteurs envisagés",
+              "done": false
+            },
+            {
+              "text": "Lister les informations à vérifier",
+              "done": false
+            },
+            {
+              "text": "Préparer un suivi des échanges",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-04-05",
+          "title": "Bénévoles — confidentialité et gestion des documents",
+          "description": "Définir des règles de stockage, d’accès et de conservation pour les documents éventuellement confiés à l’association.",
+          "tag": "Administratif",
+          "laneName": "À vérifier",
+          "due": "",
+          "checks": [
+            {
+              "text": "Inventorier les documents traités",
+              "done": false
+            },
+            {
+              "text": "Définir les accès nécessaires",
+              "done": false
+            },
+            {
+              "text": "Préparer une consigne de confidentialité",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "eloah-curated-parisis-engine",
+      "name": "PARISIS ENGINE",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-05-01",
+          "title": "Cartographie — confronter ALPAGE, Truschet-Hoyau et Vasserot",
+          "description": "Créer une comparaison documentée des époques, échelles et déformations avant de superposer les tracés. Livrable : légende des incertitudes.",
+          "tag": "Important",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Relever les éditions et dates des cartes",
+              "done": false
+            },
+            {
+              "text": "Définir points de contrôle géographiques",
+              "done": false
+            },
+            {
+              "text": "Documenter les écarts de géoréférencement",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-05-02",
+          "title": "Notre-Dame — dossier ἈΝΆΓΚΗ chez Victor Hugo",
+          "description": "Revenir au texte de Hugo et distinguer son usage littéraire des interprétations symboliques ultérieures. Livrable : note sourcée.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Relever le passage et l’édition",
+              "done": false
+            },
+            {
+              "text": "Préciser le contexte narratif",
+              "done": false
+            },
+            {
+              "text": "Séparer citation, commentaire et hypothèse",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-05-03",
+          "title": "Sainte-Chapelle — iconographie de la rose de l’Apocalypse",
+          "description": "Construire un dossier illustré sourcé : datation, programme iconographique et interprétations proposées par les historiens.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les sources patrimoniales",
+              "done": false
+            },
+            {
+              "text": "Classer les images par partie de la rose",
+              "done": false
+            },
+            {
+              "text": "Rédiger les légendes avec références",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-05-04",
+          "title": "Boyvin 1563 — vérifier les reproductions de la Toison d’Or",
+          "description": "Recenser les documents et les différentes attributions avant de formuler des rapprochements iconographiques. Livrable : dossier d’images comparables.",
+          "tag": "Suivi",
+          "laneName": "À vérifier",
+          "due": "",
+          "checks": [
+            {
+              "text": "Relever la référence bibliographique complète",
+              "done": false
+            },
+            {
+              "text": "Comparer les reproductions accessibles",
+              "done": false
+            },
+            {
+              "text": "Noter les points incertains",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-05-05",
+          "title": "Saint-Michel-du-Palais — chronologie critique",
+          "description": "Ordonner les mentions documentées de la chapelle par date en séparant existence, transformations et hypothèses de localisation.",
+          "tag": "Important",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Constituer une liste des sources datées",
+              "done": false
+            },
+            {
+              "text": "Comparer les variantes de noms et lieux",
+              "done": false
+            },
+            {
+              "text": "Mettre à jour la fiche chronologique",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "ari:cloud:trello::board/workspace/63bc8e6f424fb501c61e212f/672fbb814c7d6ddd9f06307f",
+      "name": "Power & Glam™ Master Board.",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-06-01",
+          "title": "Love Journal — tester la livraison du PDF après paiement",
+          "description": "Vérifier réellement le parcours d’achat du journal « Je me choisis », du bouton de paiement au téléchargement reçu par l’acheteuse. Éviter de déclarer la livraison fonctionnelle sans test.",
+          "tag": "Important",
+          "laneName": "🗂️ Prochains projets",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler le lien de paiement",
+              "done": false
+            },
+            {
+              "text": "Effectuer un essai autorisé du parcours de livraison",
+              "done": false
+            },
+            {
+              "text": "Noter les erreurs et le résultat vérifié",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-06-02",
+          "title": "Dossier AMOUR — l’attachement quand l’autre s’éloigne",
+          "description": "Préparer la publication éditoriale : chapitrage, sources, introduction accessible et encadré d’orientation vers les offres concernées.",
+          "tag": "Publication",
+          "laneName": "📣 Contenus & bibliothèque",
+          "due": "",
+          "checks": [
+            {
+              "text": "Relire le dossier complet",
+              "done": false
+            },
+            {
+              "text": "Contrôler les références et intertitres",
+              "done": false
+            },
+            {
+              "text": "Préparer la mise en page mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-06-03",
+          "title": "P&G Audio 001 — contrôle de la narration française",
+          "description": "Écouter l’épisode 001 du début à la fin pour corriger la diction, les coupures et l’habillage sonore avant mise en ligne.",
+          "tag": "Création",
+          "laneName": "🗂️ Prochains projets",
+          "due": "",
+          "checks": [
+            {
+              "text": "Retrouver la version audio de référence",
+              "done": false
+            },
+            {
+              "text": "Noter les passages à corriger",
+              "done": false
+            },
+            {
+              "text": "Valider le lecteur sur téléphone",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-06-04",
+          "title": "Etsy Social Vault — contrôle qualité des modèles",
+          "description": "Passer en revue une série de templates Instagram : lisibilité mobile, cohérence des cinq univers, marges et textes réellement modifiables.",
+          "tag": "Suivi",
+          "laneName": "🎨 Identité & ressources",
+          "due": "",
+          "checks": [
+            {
+              "text": "Vérifier une série dans chaque univers",
+              "done": false
+            },
+            {
+              "text": "Tester les exports 4:5 et 9:16",
+              "done": false
+            },
+            {
+              "text": "Répertorier les modèles à reprendre",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-06-05",
+          "title": "Mailing Power & Glam — lettre éditoriale pilote",
+          "description": "Concevoir une première lettre fondée sur un dossier publié, avec un objet clair, un visuel et une seule action principale. Ne pas envoyer sans validation.",
+          "tag": "Publication",
+          "laneName": "📣 Contenus & bibliothèque",
+          "due": "",
+          "checks": [
+            {
+              "text": "Choisir le dossier et l’objectif",
+              "done": false
+            },
+            {
+              "text": "Rédiger objet et pré-en-tête",
+              "done": false
+            },
+            {
+              "text": "Contrôler le rendu et les consentements",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "ari:cloud:trello::board/workspace/63bc8e6f424fb501c61e212f/6804ead602fc4ee871287069",
+      "name": "serenya khelith",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-07-01",
+          "title": "Les sept pièces — index navigable et fiches maîtresses",
+          "description": "Relier chaque pièce à ses thèmes, exercices, textes et ressources, en évitant les variations de nom entre les cartes déjà présentes.",
+          "tag": "Suivi",
+          "laneName": "Plan",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les sept noms retenus",
+              "done": false
+            },
+            {
+              "text": "Relier les cartes existantes",
+              "done": false
+            },
+            {
+              "text": "Créer un sommaire de navigation",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-07-02",
+          "title": "Les neuf chambres — progression et objectifs pédagogiques",
+          "description": "Organiser les neuf chambres initiatiques comme un parcours éditorial explicite : intention, lecture, exercice et bilan pour chaque étape.",
+          "tag": "Création",
+          "laneName": "programme 9",
+          "due": "",
+          "checks": [
+            {
+              "text": "Classer les neuf étapes existantes",
+              "done": false
+            },
+            {
+              "text": "Définir les objectifs de chacune",
+              "done": false
+            },
+            {
+              "text": "Préparer un plan de progression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-07-03",
+          "title": "Mythes et symboles — fiches de sources",
+          "description": "Créer une fiche standard pour Isis, Osiris et les autres références : source ancienne, édition consultée, résumé prudent et lecture symbolique personnelle.",
+          "tag": "Important",
+          "laneName": "sujets à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les textes de référence",
+              "done": false
+            },
+            {
+              "text": "Ajouter les références d’édition",
+              "done": false
+            },
+            {
+              "text": "Signaler les relectures contemporaines",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-07-04",
+          "title": "Grand Œuvre — distinguer récit et histoire documentée",
+          "description": "Revoir les dossiers qui proposent des correspondances historiques ou géographiques afin d’identifier ce qui est attesté, spéculatif ou métaphorique.",
+          "tag": "Suivi",
+          "laneName": "a commencer",
+          "due": "",
+          "checks": [
+            {
+              "text": "Repérer les affirmations vérifiables",
+              "done": false
+            },
+            {
+              "text": "Chercher une source pour chacune",
+              "done": false
+            },
+            {
+              "text": "Annoter les hypothèses non établies",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-07-05",
+          "title": "Cahier d’exercices — prototype imprimable",
+          "description": "Concevoir un extrait de cahier guidé lié à une pièce : consignes, espace de notes, exemple et page de bilan, sans promesse thérapeutique.",
+          "tag": "Création",
+          "laneName": "Plan",
+          "due": "",
+          "checks": [
+            {
+              "text": "Sélectionner une pièce pilote",
+              "done": false
+            },
+            {
+              "text": "Rédiger les exercices et consignes",
+              "done": false
+            },
+            {
+              "text": "Tester une version PDF lisible",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "eloah-curated-sonia-os",
+      "name": "SONIA OS",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-08-01",
+          "title": "Routeur AAF — préciser les contrôles A0 à A3",
+          "description": "Documenter les seuils de validation des actions pour que chaque agent sache quand préparer, proposer, exécuter ou demander une décision.",
+          "tag": "Important",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger la grille des quatre niveaux",
+              "done": false
+            },
+            {
+              "text": "Associer chaque niveau à des exemples",
+              "done": false
+            },
+            {
+              "text": "Valider les actions nécessitant accord",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-08-02",
+          "title": "Agent courrier — sécuriser l’envoi des messages",
+          "description": "Concevoir un circuit brouillon, relecture, validation et envoi effectif avec traçabilité. Éviter tout envoi automatique non autorisé.",
+          "tag": "Administratif",
+          "laneName": "À vérifier",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les sources des messages",
+              "done": false
+            },
+            {
+              "text": "Définir les contrôles avant envoi",
+              "done": false
+            },
+            {
+              "text": "Tester le circuit sur un brouillon",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-08-03",
+          "title": "Mission Control — distinguer actions actives et suivis",
+          "description": "Créer des règles pour classer les missions prioritaires, les sujets à suivre et les dossiers terminés sur des preuves de réalisation.",
+          "tag": "Suivi",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Relever les statuts existants",
+              "done": false
+            },
+            {
+              "text": "Définir les critères d’avancement",
+              "done": false
+            },
+            {
+              "text": "Ajouter une prochaine action par mission",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-08-04",
+          "title": "Journal des agents — actions réellement exécutées",
+          "description": "Préparer une fiche de traçabilité mentionnant l’outil utilisé, le résultat, le lien de preuve et les limites de vérification.",
+          "tag": "Important",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les colonnes du journal",
+              "done": false
+            },
+            {
+              "text": "Distinguer résultat obtenu et résultat proposé",
+              "done": false
+            },
+            {
+              "text": "Tester sur une mission existante",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-08-05",
+          "title": "Passerelle Studio / Projets — ranger les livrables",
+          "description": "Organiser le rattachement des textes, visuels et documents générés aux tableaux ELOAH et à leurs dossiers sans réimport inutile.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les types de livrables",
+              "done": false
+            },
+            {
+              "text": "Choisir les liens de rattachement",
+              "done": false
+            },
+            {
+              "text": "Tester un dossier de bout en bout",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "eloah-curated-sonia-velka",
+      "name": "Sonia Velka",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-09-01",
+          "title": "Portraits personnels — sélectionner les vraies photographies",
+          "description": "Construire un dossier de portraits personnels sélectionnés pour leur qualité et leur cohérence, sans substituer d’images générées à de vraies photos.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Trier les photos disponibles",
+              "done": false
+            },
+            {
+              "text": "Choisir une série cohérente",
+              "done": false
+            },
+            {
+              "text": "Documenter les usages autorisés",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-09-02",
+          "title": "Posts Sonia Velka — calendrier de voix authentique",
+          "description": "Préparer une sélection de publications mêlant humour mordant, réflexion et récit vécu, sans transformer chaque texte en slogan artificiel.",
+          "tag": "Publication",
+          "laneName": "Idées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les sujets à reprendre",
+              "done": false
+            },
+            {
+              "text": "Rédiger des légendes naturelles",
+              "done": false
+            },
+            {
+              "text": "Choisir des photos réelles adaptées",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-09-03",
+          "title": "Avance et ne te retourne plus — retrouver le texte",
+          "description": "Retrouver la version du texte ou PDF déjà travaillé avant toute réécriture. Livrable : version de référence avec corrections à prévoir.",
+          "tag": "Suivi",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rechercher le document d’origine",
+              "done": false
+            },
+            {
+              "text": "Comparer les versions disponibles",
+              "done": false
+            },
+            {
+              "text": "Noter les passages à corriger",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-09-04",
+          "title": "Facettes — montrer la force sans gommer l’humanité",
+          "description": "Construire cinq repères d’expression : liberté, mystère, humour, limites et humanité, avec un exemple de texte par facette.",
+          "tag": "Création",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Décrire les facettes en une phrase chacune",
+              "done": false
+            },
+            {
+              "text": "Écrire un exemple représentatif",
+              "done": false
+            },
+            {
+              "text": "Vérifier la cohérence d’ensemble",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-09-05",
+          "title": "Univers musical — planche de références et essais",
+          "description": "Rassembler des références de son, de rythme et d’interprétation pour définir une signature artistique personnelle avant toute production.",
+          "tag": "Création",
+          "laneName": "Idées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Sélectionner des références musicales",
+              "done": false
+            },
+            {
+              "text": "Noter les qualités de voix souhaitées",
+              "done": false
+            },
+            {
+              "text": "Organiser les essais et retours",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "ari:cloud:trello::board/workspace/63bc8e6f424fb501c61e212f/67bae5eabc65836e9661c7cd",
+      "name": "The Crew Orchies",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-10-01",
+          "title": "Dance Party Latino — contrôle final du 17 octobre 2026",
+          "description": "Vérifier la liste des participants, les paiements, la capacité de la salle et le matériel pour l’atelier ados/adultes à l’Espace Marypomme de 18 h 30 à 20 h 30. Ne pas supposer les places restantes sans vérification.",
+          "tag": "Important",
+          "laneName": "📅 Cours & ateliers",
+          "due": "2026-10-17",
+          "checks": [
+            {
+              "text": "Contrôler les inscriptions HelloAsso",
+              "done": false
+            },
+            {
+              "text": "Préparer musique, accueil et salle",
+              "done": false
+            },
+            {
+              "text": "Vérifier le message pratique aux inscrits",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-10-02",
+          "title": "Flashback Années 80 — actualiser au 24 octobre 2026",
+          "description": "Harmoniser toutes les annonces autour du samedi 24 octobre, 18 h 30–20 h 30, dès 12 ans. Vérifier notamment les anciennes cartes ou annonces portant une autre date.",
+          "tag": "Important",
+          "laneName": "📣 Communication & site",
+          "due": "2026-10-24",
+          "checks": [
+            {
+              "text": "Repérer les anciens visuels avec une autre date",
+              "done": false
+            },
+            {
+              "text": "Mettre à jour les pages et messages",
+              "done": false
+            },
+            {
+              "text": "Contrôler la billetterie et le texte final",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-10-03",
+          "title": "Flashmob Thriller Lille — feuille de route du 31 octobre",
+          "description": "Centraliser les repères confirmés : répétition 9 h–16 h, rendez-vous 17 h, début 18 h. Préparer le suivi du groupe et des informations de déplacement sans inventer d’horaires de transport.",
+          "tag": "Important",
+          "laneName": "📅 Cours & ateliers",
+          "due": "2026-10-31",
+          "checks": [
+            {
+              "text": "Confirmer les consignes au groupe",
+              "done": false
+            },
+            {
+              "text": "Regrouper les contacts et points de rendez-vous",
+              "done": false
+            },
+            {
+              "text": "Préparer la checklist du jour J",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-10-04",
+          "title": "K-POP HUNTERS — revalider la date du report",
+          "description": "L’atelier a été déplacé à un autre week-end ; ne pas publier « annulé » ni une date non confirmée. Préparer la nouvelle annonce dès que le créneau est validé.",
+          "tag": "Suivi",
+          "laneName": "📅 Cours & ateliers",
+          "due": "",
+          "checks": [
+            {
+              "text": "Vérifier le créneau avec les participants",
+              "done": false
+            },
+            {
+              "text": "Mettre à jour l’annonce uniquement après validation",
+              "done": false
+            },
+            {
+              "text": "Préparer les supports chorégraphiques",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-10-05",
+          "title": "T-shirts The Crew — valider le prototype noir et or",
+          "description": "Documenter l’essai du prototype taille M : coupe, marquage couronne, qualité, devis et options de tailles avant d’envisager une commande collective.",
+          "tag": "Suivi",
+          "laneName": "👗 Costumes & matériel",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler le prototype taille M",
+              "done": false
+            },
+            {
+              "text": "Lister les ajustements éventuels",
+              "done": false
+            },
+            {
+              "text": "Faire le point sur les quantités sans commande prématurée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    },
+    {
+      "id": "ari:cloud:trello::board/workspace/63bc8e6f424fb501c61e212f/65ca40861d0bcc40aad2ab5c",
+      "name": "The Crew Orchies",
+      "cards": [
+        {
+          "id": "eloah-300-20261014-11-01",
+          "title": "Archives vidéos — indexer les démonstrations de danse",
+          "description": "Créer un répertoire des vidéos déjà réalisées avec date, groupe, thème et lien de stockage, pour faciliter les nouvelles publications.",
+          "tag": "Suivi",
+          "laneName": "Liste : À Faire / Backlog",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les vidéos disponibles",
+              "done": false
+            },
+            {
+              "text": "Noter groupe et droits de diffusion",
+              "done": false
+            },
+            {
+              "text": "Ranger les liens par thème",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-11-02",
+          "title": "Fiche pratique d’accueil — version à distribuer",
+          "description": "Réunir horaires, accès à Marypomme, cours d’essai et contacts dans une seule fiche simple pour les nouvelles familles.",
+          "tag": "Création",
+          "laneName": "Liste : À Faire / Backlog",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler les horaires actuels",
+              "done": false
+            },
+            {
+              "text": "Vérifier les consignes d’accès",
+              "done": false
+            },
+            {
+              "text": "Préparer un format mobile et imprimable",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-11-03",
+          "title": "Photos des mineurs — modèle d’autorisation à vérifier",
+          "description": "Préparer et faire relire un modèle d’autorisation d’utilisation des images adapté aux activités de l’association, sans présumer des accords des familles.",
+          "tag": "Administratif",
+          "laneName": "Liste : À Faire / Backlog",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les usages prévus des images",
+              "done": false
+            },
+            {
+              "text": "Vérifier les règles applicables",
+              "done": false
+            },
+            {
+              "text": "Préparer la gestion des refus",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        },
+        {
+          "id": "eloah-300-20261014-11-04",
+          "title": "Contenus publiés — tableau de retour et apprentissages",
+          "description": "Mettre en place un suivi des publications : sujet, canal, date, retour observé et enseignement. Ne pas inventer d’indicateurs absents.",
+          "tag": "Suivi",
+          "laneName": "Liste : À Faire / Backlog",
+          "due": "",
+          "checks": [
+            {
+              "text": "Choisir les indicateurs réellement disponibles",
+              "done": false
+            },
+            {
+              "text": "Créer le modèle de suivi",
+              "done": false
+            },
+            {
+              "text": "Tester sur quelques publications existantes",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — ajout éditorial direct 300"
+        }
+      ]
+    }
+  ]
+}
