@@ -10,13 +10,18 @@ const actions=q('.erc-actions'),originalDraft=q('[data-act="draft"]');
 if(!actions)return;
 const sendBtn=document.createElement('button');sendBtn.type='button';sendBtn.dataset.act='send-impact';sendBtn.textContent='Envoyer aux abonnés';sendBtn.className='erc-primary erc-send-impact';sendBtn.hidden=true;sendBtn.disabled=true;
 actions.append(sendBtn);
+const testBtn=document.createElement('button');testBtn.type='button';testBtn.dataset.act='test-impact';testBtn.textContent='✉ M’envoyer un test';testBtn.className='erc-test-impact';testBtn.hidden=true;testBtn.disabled=true;
+actions.insertBefore(testBtn,sendBtn);
 const restoreBtn=document.createElement('button');restoreBtn.type='button';restoreBtn.textContent='Restaurer la version prête';restoreBtn.hidden=true;restoreBtn.className='erc-restore-impact';
 actions.append(restoreBtn);
 const badge=document.createElement('p');badge.className='erc-impact-status';badge.setAttribute('role','status');badge.setAttribute('aria-live','polite');
 actions.after(badge);
+const testNotice=document.createElement('p');testNotice.className='erc-test-target';testNotice.textContent='Test privé vers soniacointe@icloud.com · aucun abonné contacté';testNotice.hidden=true;badge.after(testNotice);
+const testResult=document.createElement('p');testResult.className='erc-test-result';testResult.setAttribute('role','status');testResult.setAttribute('aria-live','polite');testNotice.after(testResult);
+let displayedTestId=null;
 const link=document.createElement('a');link.className='erc-campaign-provider';link.target='_blank';link.rel='noopener noreferrer';link.hidden=true;link.textContent='Ouvrir ce brouillon dans Resend ↗';
 badge.after(link);
-const style=document.createElement('style');style.textContent='.erc-send-impact{background:#b00c17!important;border-color:#b00c17!important;color:#fff!important;min-width:200px}.erc-impact-status{font:600 12px/1.55 Arial,sans-serif!important;margin:10px 0!important;color:#6c553c!important}.erc-campaign-provider{display:inline-block;color:#795e3c;font:600 12px/1.4 Arial,sans-serif;margin:2px 0 12px}.erc-campaign-provider[hidden],.erc-send-impact[hidden],.erc-restore-impact[hidden]{display:none!important}.erc-impact-dialog{border:1px solid #d6c8b4;border-radius:16px;max-width:460px;width:calc(100% - 26px);background:#fffdf9;color:#2c2422;padding:24px;box-shadow:0 25px 75px #2016144d}.erc-impact-dialog::backdrop{background:#19191bcc}.erc-impact-dialog h2{font:26px Georgia,serif;color:#2c2422;margin:0 0 13px}.erc-impact-dialog p{font:14px/1.65 Arial,sans-serif;color:#514640}.erc-impact-dialog label{display:block;font:600 13px/1.6 Arial,sans-serif;margin-top:18px}.erc-impact-dialog input{display:block;margin-top:7px;padding:10px 12px;width:100%;border:1px solid #c8bcae;border-radius:6px;font:14px Arial,sans-serif}.erc-impact-dialog .buttons{display:flex;gap:8px;margin-top:19px;flex-wrap:wrap}.erc-impact-dialog button{font:700 13px Arial,sans-serif;padding:12px 15px;border-radius:7px;border:1px solid #b6a89c;background:#fff;color:#352a29;cursor:pointer}.erc-impact-dialog button.primary{background:#a70813;color:#fff;border-color:#a70813}.erc-impact-dialog button:disabled{opacity:.4;cursor:not-allowed}';document.head.append(style);
+const style=document.createElement('style');style.textContent='.erc-test-impact{border-color:#ab9376!important;color:#67462c!important;background:#fffaf1!important;font-weight:700!important}.erc-test-target{font:12px/1.5 Arial,sans-serif!important;color:#726557!important;margin:7px 0!important}.erc-test-target[hidden],.erc-test-impact[hidden]{display:none!important}.erc-test-result{font:600 12px/1.6 Arial,sans-serif!important;color:#28705a!important;margin:8px 0!important}.erc-test-result[data-error="true"]{color:#a02f35!important}.erc-send-impact{background:#b00c17!important;border-color:#b00c17!important;color:#fff!important;min-width:200px}.erc-impact-status{font:600 12px/1.55 Arial,sans-serif!important;margin:10px 0!important;color:#6c553c!important}.erc-campaign-provider{display:inline-block;color:#795e3c;font:600 12px/1.4 Arial,sans-serif;margin:2px 0 12px}.erc-campaign-provider[hidden],.erc-send-impact[hidden],.erc-restore-impact[hidden]{display:none!important}.erc-impact-dialog{border:1px solid #d6c8b4;border-radius:16px;max-width:460px;width:calc(100% - 26px);background:#fffdf9;color:#2c2422;padding:24px;box-shadow:0 25px 75px #2016144d}.erc-impact-dialog::backdrop{background:#19191bcc}.erc-impact-dialog h2{font:26px Georgia,serif;color:#2c2422;margin:0 0 13px}.erc-impact-dialog p{font:14px/1.65 Arial,sans-serif;color:#514640}.erc-impact-dialog label{display:block;font:600 13px/1.6 Arial,sans-serif;margin-top:18px}.erc-impact-dialog input{display:block;margin-top:7px;padding:10px 12px;width:100%;border:1px solid #c8bcae;border-radius:6px;font:14px Arial,sans-serif}.erc-impact-dialog .buttons{display:flex;gap:8px;margin-top:19px;flex-wrap:wrap}.erc-impact-dialog button{font:700 13px Arial,sans-serif;padding:12px 15px;border-radius:7px;border:1px solid #b6a89c;background:#fff;color:#352a29;cursor:pointer}.erc-impact-dialog button.primary{background:#a70813;color:#fff;border-color:#a70813}.erc-impact-dialog button:disabled{opacity:.4;cursor:not-allowed}';document.head.append(style);
 const dialog=document.createElement('dialog');dialog.className='erc-impact-dialog';
 dialog.innerHTML='<h2>Envoyer aux abonnés ?</h2><p class="erc-confirm-summary"></p><p><strong>Liste :</strong> The Crew Orchies. L’envoi est lancé à tous les abonnés actifs au moment de la diffusion ; Resend gère les désabonnements.</p><p>Cette action est une diffusion réelle. Tu dois avoir vérifié le texte, le bouton et les images.</p><label>Écris ENVOYER pour confirmer<input type="text" class="erc-confirm-typing" autocomplete="off" placeholder="ENVOYER"></label><div class="buttons"><button type="button" class="erc-cancel">Annuler</button><button type="button" class="erc-confirm-final primary" disabled>Confirmer et envoyer</button></div>';
 studio.append(dialog);
@@ -41,6 +46,8 @@ function currentRow(){const model=activeTemplate();return model?serverCampaigns.
 function setState(message){badge.textContent=message}
 function update(){
  const model=activeTemplate(),row=currentRow();
+ testBtn.hidden=!model;testBtn.disabled=busy||!model;testNotice.hidden=!model;
+ if((model?.id||null)!==displayedTestId){testResult.textContent='';testResult.removeAttribute('data-error');displayedTestId=model?.id||null;}
  sendBtn.hidden=!model;restoreBtn.hidden=true;link.hidden=true;
  if(originalDraft)originalDraft.hidden=Boolean(model);
  if(!model){badge.textContent='';return}
@@ -95,6 +102,24 @@ function openDialog(){
  confirmText.value='';finalButton.disabled=true;dialog.showModal();confirmText.focus();
 }
 sendBtn.onclick=openDialog;
+testBtn.onclick=async()=>{
+ const model=activeTemplate();
+ if(!model||busy)return;
+ const content=snapshot();
+ if(String(content.subject).trim().length<3||String(content.body).trim().length<20){
+   testResult.dataset.error='true';testResult.textContent='Ajoute un objet et un contenu complet avant ton test.';return;
+ }
+ busy=true;update();testResult.removeAttribute('data-error');
+ testResult.textContent='Envoi du test visuel vers soniacointe@icloud.com…';
+ try{
+   const result=await api('crew-impact-test',{templateId:model.id,snapshot:content});
+   testResult.textContent=(result.message||'Test accepté par Resend.')+(result.emailId?' Référence : '+result.emailId+'.':'');
+ }catch(err){
+   testResult.dataset.error='true';
+   testResult.textContent=(err?.message||'Test non confirmé.')+' Aucun envoi collectif n’a été demandé.';
+ }finally{busy=false;update()}
+};
+
 finalButton.onclick=async()=>{
  if(busy||confirmText.value.trim()!=='ENVOYER')return;
  const model=activeTemplate(),row=currentRow();
