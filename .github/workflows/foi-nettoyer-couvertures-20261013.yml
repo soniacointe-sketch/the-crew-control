@@ -1,4 +1,5 @@
 name: Nettoyer les photos ELOAH Foi sans formes
+# Deuxième exécution : le catalogue contient déjà ses images et elles doivent être remplacées.
 on:
   push:
     paths:
