@@ -166,13 +166,13 @@ function drawBars(c,e,d,def,colorList){
    const orig=vals[j]||0,v=opts.percent?Math.max(0,orig)/total*100:orig;
    const grouped=!opts.stacked&&series>1;
    const count=grouped?series:1;
-   const cell=gap*.76/count,offset=(gap*.76)/2;
+   const cell=gap*.76/count;
    const color=opts.multicolor?colorList[i%colorList.length]:colorList[j%colorList.length];
    if(vertical){
     const cx=180+i*gap+gap*.12+(grouped?j*cell:0);
     const low=opts.stacked?cumulative:0,high=low+v,top=Math.min(mapY(low),mapY(high)),h=Math.abs(mapY(low)-mapY(high));
     if(opts.lollipop){
-     c.beginPath();c.moveTo(cx+cell*.34,zero);c.lineTo(cx+cell*.34,mapY(v));canvasLine(c,new Path2D('M'+(cx+cell*.34)+' '+zero+'L'+(cx+cell*.34)+' '+mapY(v)),color,5);
+     c.beginPath();c.moveTo(cx+cell*.34,zero);c.lineTo(cx+cell*.34,mapY(v));c.strokeStyle=color;c.lineWidth=5;c.stroke();
      c.fillStyle=color;c.beginPath();c.arc(cx+cell*.34,mapY(v),13,0,Math.PI*2);c.fill();
     }else roundBar(c,cx,top,Math.max(7,cell*(opts.thin?.5:.78)),Math.max(1,h),color,opts.rounded?17:4);
     if(e.chartShowValues&&(!opts.stacked||j===series-1))text(c,short(opts.stacked?orig:v),cx+cell*.4,Math.max(184,top-21),20,'#555e67');
@@ -215,7 +215,6 @@ function drawLines(c,e,d,def,colors){
    c.fillStyle=colors[j%colors.length];c.globalAlpha=o.opacity||(.23+j*.06);c.fill();c.globalAlpha=1;
   }
   c.beginPath();pathThrough(c,coords,!!o.smooth,!!o.step);
-  canvasLine(c,new Path2D('M0 0'),colors[j%colors.length],1); // normalize line styling consistently
   c.strokeStyle=colors[j%colors.length];c.lineWidth=7;c.lineJoin='round';c.lineCap='round';c.setLineDash(o.dashed?[17,12]:[]);c.stroke();c.setLineDash([]);
   if(o.points||e.chartShowValues){coords.forEach(([x,cy],i)=>{c.fillStyle=colors[j%colors.length];c.beginPath();c.arc(x,cy,10,0,Math.PI*2);c.fill();if(e.chartShowValues)text(c,short(rows[i][j]),x,cy-22,18,'#516071')})}
   c.restore();
