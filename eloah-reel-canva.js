@@ -562,6 +562,37 @@ function chartCatalog(){
  lib.groups.map(chartSection).join('')+
  '<p class="ecs-note ecs-chart-disclaimer">Des graphiques éditables, intégrés à ton Reel. Clique pour ajouter un modèle puis remplace les chiffres par les tiens. Aucun abonnement ni connexion externe nécessaires.</p>';
 }
+function serializeChartTable(dataset){
+ const escapeCell=v=>{
+  const value=String(v??'');
+  return /[;\n\r"]/.test(value)?'"'+value.replace(/"/g,'""')+'"':value;
+ };
+ const head=['Catégorie',...dataset.names].map(escapeCell).join(';');
+ const rows=dataset.labels.map((label,i)=>[label,...(dataset.values[i]||[])].map(escapeCell).join(';'));
+ return [head,...rows].join('\n');
+}
+function chartTableMarkup(e){
+ const lib=window.ELOAHCharts,data=lib.parse(lib.migrateLegacy(e));
+ if(!data.labels.length||!data.names.length)return '<div class="ecs-empty">Ajoute des données CSV pour modifier les cellules.</div>';
+ const cols=data.names.slice(0,3),labels=data.labels.slice(0,24);
+ const head='<tr><th>Catégorie</th>'+cols.map((name,i)=>'<th><input type="text" aria-label="Nom de la série '+(i+1)+'" data-chart-series="'+i+'" value="'+xss(name)+'"></th>').join('')+'<th aria-label="Supprimer">✕</th></tr>';
+ const rows=labels.map((label,i)=>'<tr><td><input type="text" data-chart-cell="'+i+':0" aria-label="Nom de la catégorie '+(i+1)+'" value="'+xss(label)+'"></td>'+
+ cols.map((name,j)=>'<td><input type="number" step="any" data-chart-cell="'+i+':'+(j+1)+'" aria-label="'+xss(name)+' · '+xss(label)+'" value="'+(Number(data.values[i]?.[j])||0)+'"></td>').join('')+
+ '<td><button type="button" data-chart-remove-row="'+i+'" title="Supprimer cette catégorie" aria-label="Supprimer '+xss(label)+'">×</button></td></tr>').join('');
+ return '<div class="ecs-chart-tablewrap"><table class="ecs-chart-table"><thead>'+head+'</thead><tbody>'+rows+'</tbody></table></div>'+
+ '<div class="ecs-chart-data-actions">'+
+ '<button type="button" class="ecs-pillbtn" data-chart-add-row>＋ Ligne</button>'+
+ '<button type="button" class="ecs-pillbtn" data-chart-add-series>＋ Série</button>'+
+ '<button type="button" class="ecs-pillbtn" data-chart-remove-series>− Série</button></div>'+
+ '<p class="ecs-note">Les cellules sont modifiables directement. Maximum 24 catégories et 3 séries pour l’affichage.</p>';
+}
+function updateChartTable(mutator){
+ const e=S.elements.find(el=>el.id===selected&&el.kind==='chart');if(!e)return;
+ const source=window.ELOAHCharts.parse(window.ELOAHCharts.migrateLegacy(e));
+ const data={labels:[...source.labels],names:source.names.slice(0,3),values:source.values.map(row=>row.slice(0,3))};
+ mutator(data);snapshot();e.dataText=serializeChartTable(data);
+ saveLocal();renderSide();draw();
+}
 function chartProperties(e){
  const lib=window.ELOAHCharts,def=lib?.byId.get(e.variant)||lib?.byId.get(e.variant==='pie'?'eloah-chart-pie':'eloah-chart-vertical');
  if(!def)return '<p class="ecs-note">Ce modèle de graphique n’est pas disponible.</p>';
@@ -571,7 +602,8 @@ function chartProperties(e){
  return '<div class="ecs-chart-edit"><strong>▥ '+xss(def.label)+'</strong><small>'+xss(def.group)+'</small>'+
  '<label class="ecs-sidelabel">Nom du graphique</label><input data-p="chartTitle" maxlength="65" value="'+xss(e.chartTitle??'Résultats')+'" placeholder="Exemple : Mes résultats">'+
  '<label class="ecs-sidelabel" for="ecs-chart-data">Ajouter des données</label><p class="ecs-note">Une ligne par catégorie, première ligne pour les titres des colonnes. Utilise un point-virgule, une virgule ou une tabulation comme séparateur.</p>'+
- '<textarea id="ecs-chart-data" rows="9" spellcheck="false" data-p="dataText" aria-label="Tableau des données du graphique">'+xss(data)+'</textarea>'+
+ chartTableMarkup(e)+'<label class="ecs-sidelabel" for="ecs-chart-data">Coller ou corriger les données CSV</label>'+
+ '<textarea id="ecs-chart-data" rows="7" spellcheck="false" data-p="dataText" aria-label="Tableau des données du graphique">'+xss(data)+'</textarea>'+
  '<div class="ecs-chart-data-actions">'+btn('chartImportCSV','↑ Importer CSV',true)+btn('chartExportCSV','↓ Exporter CSV')+btn('chartExample','↻ Exemple')+'</div>'+
  '<label class="ecs-sidelabel">Couleurs</label><select data-p="chartPalette">'+Object.entries(paletteOptions).map(([k,label])=>'<option value="'+k+'" '+((e.chartPalette||'original')===k?'selected':'')+'>'+xss(label)+'</option>').join('')+'</select>'+
  '<div class="ecs-chart-swatches">'+(lib.palettes[e.chartPalette]||lib.palettes.original).map(color=>'<span style="background:'+color+'"></span>').join('')+'</div>'+
@@ -1013,6 +1045,14 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const chartRowButton=ev.target.closest('[data-chart-add-row]');
+ if(chartRowButton){updateChartTable(d=>{if(d.labels.length>=24){toast('Maximum de 24 catégories.');return}d.labels.push('Catégorie '+(d.labels.length+1));d.values.push(d.names.map(()=>0))});return}
+ const chartSeriesAdd=ev.target.closest('[data-chart-add-series]');
+ if(chartSeriesAdd){updateChartTable(d=>{if(d.names.length>=3){toast('Maximum de 3 séries affichées.');return}d.names.push('Série '+(d.names.length+1));d.values.forEach(row=>row.push(0))});return}
+ const chartSeriesRemove=ev.target.closest('[data-chart-remove-series]');
+ if(chartSeriesRemove){updateChartTable(d=>{if(d.names.length<=1){toast('Une série est nécessaire.');return}d.names.pop();d.values.forEach(row=>row.pop())});return}
+ const chartRemoveRow=ev.target.closest('[data-chart-remove-row]');
+ if(chartRemoveRow){updateChartTable(d=>{if(d.labels.length<=1){toast('Il faut au moins une catégorie.');return}const i=Number(chartRemoveRow.dataset.chartRemoveRow);d.labels.splice(i,1);d.values.splice(i,1)});return}
  const chartGroup=ev.target.closest('[data-chart-group]');if(chartGroup){chartView=chartGroup.dataset.chartGroup;chartSearch='';renderSide();return}
  const chartAdd=ev.target.closest('[data-chart-add]');if(chartAdd){createChart(chartAdd.dataset.chartAdd);return}
  const chartData=ev.target.closest('[data-chart-open-data]');if(chartData){
@@ -1120,6 +1160,17 @@ root.addEventListener('click',ev=>{
 });
 one('#ecs-name').addEventListener('change',e=>{S.name=e.target.value.slice(0,90)||'Mon Reel';saveLocal()});
 one('.ecs-sidebody').addEventListener('change',e=>{
+ if(e.target.dataset.chartCell||e.target.dataset.chartSeries){
+  const cell=e.target.dataset.chartCell,series=e.target.dataset.chartSeries;
+  const value=e.target.value;
+  updateChartTable(d=>{
+   if(cell){const [ri,col]=cell.split(':').map(Number);if(!Number.isInteger(ri)||ri<0||ri>=d.labels.length)return;
+    if(col===0)d.labels[ri]=String(value).slice(0,25)||'Sans titre';
+    else if(col<=d.names.length)d.values[ri][col-1]=Number.isFinite(Number(value))?Number(value):0;
+   }else if(series!==undefined){const i=Number(series);if(Number.isInteger(i)&&i>=0&&i<d.names.length)d.names[i]=String(value).slice(0,25)||'Série '+(i+1)}
+  });
+  return;
+ }
  if(e.target.dataset.chartFlag){
   const eChart=S.elements.find(x=>x.id===selected&&x.kind==='chart');if(!eChart)return;
   snapshot();eChart[e.target.dataset.chartFlag]=e.target.checked;saveLocal();draw();return;
