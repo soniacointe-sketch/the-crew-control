@@ -1105,6 +1105,7 @@ function brandOverview(kit){
  '<button type="button" data-brand-quickcolor="'+i+'" style="background:'+v[1]+'" title="'+xss(v[0])+' · '+v[1]+'" aria-label="Appliquer '+xss(v[0])+' au fond"></button>').join('')+'</div>';
  const header='<section class="ecs-brand-section"><h3>Tous les modèles de marque</h3><div class="ecs-brand-hero"><span>▧</span><strong>Crée des designs homogènes</strong><p>Conserve tes couleurs, polices, logos et modèles dans une même identité ELOAH.</p><button class="ecs-brand-primary" data-brand-save-model>＋ Enregistrer ce Reel comme modèle</button></div>'+
  (modelCards?'<div class="ecs-brand-mini-models">'+modelCards+'</div>':'<p class="ecs-note">Aucun modèle enregistré pour cette identité. Commence avec une composition prête à utiliser.</p>')+
+ '<button class="ecs-brand-outline" data-brand-apply>Appliquer cette identité au Reel ↗</button>'+
  '<div class="ecs-brand-layout-actions">'+[['cover','Couverture'],['quote','Citation'],['event','Annonce'],['story','Story'],['banner','Signature']].map(([k,n])=>'<button data-brand-layout="'+k+'">＋ '+n+'</button>').join('')+'</div></section>';
  return header+'<section class="ecs-brand-section"><div class="ecs-sectiontitle"><strong>Logos</strong><button data-brand-view="logos">Afficher tout →</button></div>'+
  '<button type="button" class="ecs-brand-logo-tile" data-brand-view="logos">'+brandBrandLogo(kit)+'</button>'+
@@ -1152,6 +1153,7 @@ function brandColors(kit){
  '<span>'+hex+'</span><button data-brand-quickcolor="'+i+'" title="Appliquer au fond">↗</button>'+
  (kit.colors.length>1?'<button data-brand-delete-color="'+i+'" title="Supprimer la couleur">×</button>':'')+'</div>').join('')+'</div>'+
  '<button class="ecs-brand-outline" data-brand-add-color>＋ Ajouter une couleur</button>'+
+ '<button class="ecs-brand-outline" data-brand-apply-to-element>Appliquer la couleur d’accent à l’élément sélectionné</button>'+
  '<button class="ecs-brand-primary" data-brand-apply>Appliquer l’identité au Reel</button>';
 }
 function brandFonts(kit){
@@ -1431,6 +1433,14 @@ root.addEventListener('click',ev=>{
   if(!kit?.colors[i])return;
   snapshot();S.bg=kit.colors[i][1];S.brand=kit.name;saveLocal();draw();
   toast('Couleur '+kit.colors[i][0]+' appliquée au fond.');return;
+ }
+ const brandApplyElement=ev.target.closest('[data-brand-apply-to-element]');
+ if(brandApplyElement){
+  const kit=brandKit(),element=S.elements.find(e=>e.id===selected);
+  if(!element){toast('Sélectionne d’abord un texte, une forme ou un graphique sur le Reel.');return}
+  if(['image','brandAsset','photoFrame'].includes(element.kind)){toast('La couleur d’accent s’applique aux textes, graphiques et formes, pas aux photos.');return}
+  snapshot();element.color=kit.colors[Math.min(2,kit.colors.length-1)][1];saveLocal();draw();
+  toast('Couleur de marque appliquée à l’élément sélectionné.');return;
  }
  const brandApply=ev.target.closest('[data-brand-apply]');
  if(brandApply){brandApplyIdentity();return}
