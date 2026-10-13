@@ -2,6 +2,10 @@
 
 ---
 
+![Illustration de recherche — Manuscrit coranique de Birmingham (VIIe siècle, fragments des sourates 18–20) : document matériel ancien, **pas un feuillet du récit de création étudié**.](https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript.jpg?width=1100)
+
+*Manuscrit coranique de Birmingham (VIIe siècle, fragments des sourates 18–20) : document matériel ancien, **pas un feuillet du récit de création étudié**. [Notice et crédits Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg).*
+
 # ELOAH · LES COMMENCEMENTS II
 
 # Le Coran — « Sois », les six jours, l’eau, la fumée, l’argile et le souffle
