@@ -156,3 +156,9 @@ Cette liste forme un **réseau de motifs**, mais ne contient pas la totalité de
 - **PAR-003** : confronter la lecture sociale et la lecture théologique des ouvriers de la vigne.
 - **PAR-004** : documenter les sens historiques et spirituels attribués à l'huile sans fabriquer un code unique.
 - **PAR-005** : comparer la liste des images d'APO-019 pages 7–8 avec les références canoniques et Thomas.
+
+## Suite documentaire — Le mystère des paraboles et les douze logia de Thomas
+
+Après les 44 analyses bibliques, deux volumes complémentaires sont consultables dans le même lecteur ELOAH : [**PAR-046 — Pourquoi Jésus parle en paraboles ?**](foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md) et [**PAR-047–058 — douze récits de l'Évangile selon Thomas comparés aux Synoptiques**](foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md). Ils étudient la fonction du mystère chez Marc, le problème d'Isaïe 6, et la transmission de motifs comme le semeur, l'ivraie, le banquet et la brebis perdue.
+
+**Méthode :** les différences de récit ou l'absence d'une explication chez Thomas ne prouvent pas qu'une tradition a été « censurée ». L'analyse privilégie les témoins matériels, la comparaison de rédaction, les variantes attestées et les objections.
