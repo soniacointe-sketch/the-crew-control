@@ -14,4 +14,4 @@ document.getElementById('readerNext').addEventListener('click',()=>{if(currentRe
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape')closeReader()});
 section.addEventListener('click',ev=>{let a=ev.target.closest('a.book');if(!a)return;let f=new URL(a.href,location.href).searchParams.get('file');if(f&&a.href.includes('foi-control.html')){ev.preventDefault();openReader(f)}});
 loadCatalogue();
-</script></body></html>
+</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
