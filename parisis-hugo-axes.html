@@ -14,16 +14,16 @@ label{display:block;margin:10px 0;font-weight:650}input{accent-color:#32736d}but
 .notice{padding:12px;background:#f9f1e2;border-left:4px solid #b28e50;border-radius:6px;font-size:12px;color:#5e584f}
 .row{display:flex;gap:8px;align-items:center}.line{display:inline-block;width:28px;height:6px;border-radius:4px;flex-shrink:0}.num{color:#806e57;font-size:12px;margin:0 0 9px}
 table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px solid #e4ded2;padding:8px 4px;text-align:left;vertical-align:top}th{color:#746a5d;font-weight:650}
-.legend{font-size:12px;color:var(--muted)}.custom-point{background:#fff;border-radius:18px;padding:1px 6px;font:11px system-ui;white-space:nowrap;box-shadow:0 1px 5px #0002;border:1px solid #ddd}
+.legend{font-size:12px;color:var(--muted)}.map-overlay-options{margin:11px 0;padding:13px;background:#f0e8db;border:1px solid #dacbb7;border-radius:9px}.map-overlay-options input[type=range]{width:100%;accent-color:#54756c}.map-overlay-options .row{font-size:13px}.map-overlay-options small{display:block;color:#756c60;font-size:11px;line-height:1.5;margin:8px 0}.historic-pill{display:inline-block;font-size:10px;color:#53614e;background:#e3eddf;padding:4px 8px;border-radius:18px}.custom-point{background:#fff;border-radius:18px;padding:1px 6px;font:11px system-ui;white-space:nowrap;box-shadow:0 1px 5px #0002;border:1px solid #ddd}
 .leaflet-popup-content{font:13px/1.5 system-ui,sans-serif;max-width:260px}.leaflet-popup-content p{margin:7px 0}
 @media(max-width:820px){.layout{display:flex;flex-direction:column}aside{max-height:none;order:2;border-right:0}#map{order:1;height:60dvh;min-height:410px}header{padding:14px 16px}}
 </style></head><body>
 <header><div><div class="kicker">ELOAH / PARISIS ENGINE / HUGO · CARTOGRAPHIE</div><h1>Les deux artères de Paris</h1><p>Victor Hugo · Notre-Dame de Paris · Livre III, chapitre II</p></div><a class="back" href="parisis-hugo-1551-comparaison.html">Comparer au plan de 1551 ↗</a> <a class="back" href="eloah-parisis.html">← PARISIS ENGINE</a></header>
 <div class="layout"><aside>
-<section class="panel"><div class="kicker">Mission · VH-AXES-001</div><h2>Deux itinéraires déjà tracés</h2><p>Le trait suit l'ordre des lieux cités dans le roman. Les segments entre repères sur la carte moderne sont <b>schématiques</b> : ils ne reconstituent pas encore chaque parcelle et chaque voie de 1482.</p>
+<section class="panel"><div class="kicker">Mission · VH-AXES-001</div><h2>Deux itinéraires tracés sur le plan ancien</h2><p>Le trait suit l'ordre des lieux cités dans le roman. Les segments entre repères sur la carte moderne sont <b>schématiques</b> : ils ne reconstituent pas encore chaque parcelle et chaque voie de 1482.</p>
 <label class="row"><input type="checkbox" id="showA" checked><span class="line" style="background:var(--a)"></span> Axe 1 · Saint-Jacques → Saint-Martin</label>
 <label class="row"><input type="checkbox" id="showB" checked><span class="line" style="background:var(--b)"></span> Axe 2 · Saint-Michel → Saint-Denis</label>
-<label class="row"><input type="checkbox" id="showLabels" checked>Afficher les noms sur la carte</label>
+<label class="row"><input type="checkbox" id="showLabels" checked>Afficher les noms sur la carte</label><div class="map-overlay-options"><label class="row"><input type="checkbox" id="showOldMap" checked><b>Plan de 1551 derrière les tracés</b></label><label for="oldOpacity">Transparence du plan : <output id="opacityValue">80 %</output></label><input type="range" id="oldOpacity" min="15" max="100" value="80" step="5"><small>Carte ancienne de Truschet et Hoyau provenant de la bibliothèque de Bâle, calée par Wikimaps Warper avec 16 points de contrôle. Calage communautaire non audité — aucun alignement précis n’en est déduit.</small><div class="historic-pill" id="histStatus">Fond ancien activé · chargement des tuiles</div> <a href="https://warper.wmflabs.org/maps/2704" target="_blank" rel="noopener">Voir les points de contrôle ↗</a></div>
 <div class="actions"><button id="fit">Voir les deux tracés</button><button id="export">Exporter GeoJSON</button></div>
 <div class="notice"><strong>Point de méthode :</strong> les portes au nord représentées par des arcs actuels datent de 1672 et 1674. Leurs emplacements correspondent aux anciennes portes de l'enceinte de Charles V, mais il ne s'agit pas des bâtiments du roman. Les ponts actuels ont aussi été reconstruits. Les coordonnées des portions de rues sont indicatives.</div>
 </section>
@@ -57,6 +57,16 @@ const routes=[
 ]}];
 const map=L.map('map',{preferCanvas:false,zoomControl:true}).setView([48.8585,2.3486],14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© contributeurs OpenStreetMap'}).addTo(map);
+const oldMapTiles=L.tileLayer('https://warper.wmflabs.org/maps/tile/2704/{z}/{x}/{y}.png',{minZoom:10,maxZoom:19,maxNativeZoom:17,opacity:.8,attribution:'Plan Truschet et Hoyau · Bibliothèque de Bâle · Wikimaps Warper (16 points de contrôle)',zIndex:300,crossOrigin:true});
+oldMapTiles.addTo(map);
+let oldTilesLoaded=false,oldTileErrors=0;
+const statusEl=document.getElementById('histStatus');
+oldMapTiles.on('tileload',()=>{if(!oldTilesLoaded){oldTilesLoaded=true;statusEl.textContent='Plan ancien chargé · calage indicatif'}});
+oldMapTiles.on('tileerror',()=>{oldTileErrors++;if(!oldTilesLoaded&&oldTileErrors>4)statusEl.textContent='Tuiles anciennes indisponibles ; les traits restent visibles sur la carte moderne.'});
+const oldToggle=document.getElementById('showOldMap'),oldOpacity=document.getElementById('oldOpacity'),oldLabel=document.getElementById('opacityValue');
+oldToggle.addEventListener('change',()=>{if(oldToggle.checked){oldMapTiles.addTo(map);statusEl.textContent=oldTilesLoaded?'Plan ancien affiché · calage indicatif':'Chargement du plan ancien'}else{map.removeLayer(oldMapTiles);statusEl.textContent='Plan ancien masqué · carte moderne'}});
+oldOpacity.addEventListener('input',()=>{oldMapTiles.setOpacity(Number(oldOpacity.value)/100);oldLabel.textContent=oldOpacity.value+' %'});
+
 const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};
 const allCoords=[];
 function clean(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
