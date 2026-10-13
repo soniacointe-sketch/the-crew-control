@@ -149,7 +149,8 @@ def main():
     cards = page.select("article.pub-card")
     generated = []
     for n, card in enumerate(cards, 1):
-        if card.select_one(".pub-cover img"):
+        existing_cover = card.select_one(".pub-cover img")
+        if existing_cover and not existing_cover.get("src", "").startswith("assets/foi-publications/generated-"):
             continue
         title = card.select_one(".pub-info h2").get_text(" ", strip=True)
         group = card.get("data-group", "Dossier")
