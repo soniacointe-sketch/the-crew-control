@@ -6,6 +6,14 @@
 
 > Les sources romaines, juives et chrétiennes proches des origines.
 
+## BAYEUX-001 — Broderie, latin et pouvoir
+
+![Scène 57 de la broderie de Bayeux : mort d'Harold, photo CC0 par Myrabella](https://commons.wikimedia.org/wiki/Special:FilePath/Bayeux_Tapestry_scene57_Harold_death.jpg?width=1050)
+
+*Document du XIe siècle photographié en 2013 par Myrabella, CC0. [Fiche de la photo](https://commons.wikimedia.org/wiki/File:Bayeux_Tapestry_scene57_Harold_death.jpg).*
+
+[**Étudier les scènes de la Tapisserie : serment, couronnement, comète, mort d'Harold (BAYEUX-001)**](foi-control.html?file=eloah-reconstitution-bayeux-fil-conquete.md). Comparaison entre les mots latins brodés, les images et les chroniques ; liens vers le panorama scientifique officiel. Ancien document ELOAH originel toujours recherché.
+
 ## Notre axe de recherche
 
 Évaluer le contexte de rédaction, les interpolations débattues, les biais et la chaîne de transmission.

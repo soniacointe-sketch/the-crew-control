@@ -48,6 +48,16 @@ Ce registre reste l'inventaire scientifique complet ; la Grande Bibliothèque of
 
 [**Voir les 15 images dans la galerie ELOAH**](foi-control.html?file=eloah-foi-galerie-originaux.md) · [Inventaire et manifestes](foi-control.html?file=eloah-foi-visuels-retrouves-inventaire.md). Les PNG originaux ont été sauvegardés ; 15 copies WebP optimisées sont maintenant publiées dans `assets/foi-archives/` pour la lecture mobile. Les scans historiques des manuscrits d'ELOAH Scanner restent à récupérer séparément.
 
+## BAYEUX-001 · Le fil, la conquête et le pouvoir — dossier illustré approfondi
+
+![Scène 23 : serment de Harold sur les reliques, photographie CC0 de la broderie du XIe siècle](https://commons.wikimedia.org/wiki/Special:FilePath/Bayeux_Tapestry_scene23_Harold_oath_William.jpg?width=970)
+
+*Scène 23 de la broderie, photo Myrabella (2013), CC0. [Fiche et provenance](https://commons.wikimedia.org/wiki/File:Bayeux_Tapestry_scene23_Harold_oath_William.jpg).*
+
+[**Lire BAYEUX-001 : l'Atlas critique illustré (4 photographies de scènes, latin, sources et objections)**](foi-control.html?file=eloah-reconstitution-bayeux-fil-conquete.md) · [**Explorer les 58 scènes dans le panorama officiel de la Ville de Bayeux**](https://www.bayeuxmuseum.com/la-tapisserie-de-bayeux/decouvrir-la-tapisserie-de-bayeux/explorer-la-tapisserie-de-bayeux-en-ligne/).
+
+**Statut distinct :** cette étude est une **nouvelle enquête documentée** ; l'ancien texte ELOAH Scanner portant ce thème n'est pas retrouvé. Les quatre images intégrées au dossier sont des photographies identifiées sous CC0, **et non des copies extraites du panorama officiel**, dont les conditions interdisent l'extraction.
+
 ## 01 · Six textes longs anciens — réintégrés sans résumé
 
 Ces six fichiers proviennent des **originaux retrouvés dans notre bibliothèque de documents**, rétablis comme des chapitres entiers. Ils comportent les sections, tableaux, références, définitions et analyses originelles ; une illustration identifiée a été ajoutée à leur ouverture sans couper le texte.
