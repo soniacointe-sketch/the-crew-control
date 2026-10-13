@@ -513,3 +513,19 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
  #eloah-canva-studio .ecs-chart-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
  #eloah-canva-studio .ecs-chart-flags{grid-template-columns:1fr}
 }
+
+/* Graphiques — cellules de données directement modifiables */
+#eloah-canva-studio .ecs-chart-tablewrap{max-width:100%;max-height:278px;overflow:auto;border:1px solid #d6e0ea;border-radius:10px;background:#fff;margin:11px 0}
+#eloah-canva-studio .ecs-chart-table{width:100%;border-collapse:separate;border-spacing:0;min-width:335px;font-size:11px}
+#eloah-canva-studio .ecs-chart-table th,#eloah-canva-studio .ecs-chart-table td{padding:5px 3px;border-right:1px solid #e5eaf1;border-bottom:1px solid #e5eaf1;white-space:nowrap;background:#fff;text-align:left}
+#eloah-canva-studio .ecs-chart-table th{position:sticky;top:0;background:#eef4fa;z-index:2;font-size:11px;color:#4c6279}
+#eloah-canva-studio .ecs-chart-table th:first-child,#eloah-canva-studio .ecs-chart-table td:first-child{position:sticky;left:0;z-index:1;background:#f5f8fb}
+#eloah-canva-studio .ecs-chart-table th:first-child{z-index:3;background:#e5eff8}
+#eloah-canva-studio .ecs-chart-table input{display:block;min-width:78px;width:100%;height:32px;padding:5px 6px;border:1px solid transparent;border-radius:6px;background:transparent;font-size:11px;color:#1f3346}
+#eloah-canva-studio .ecs-chart-table input[type=number]{min-width:76px;width:78px;appearance:textfield}
+#eloah-canva-studio .ecs-chart-table input:focus{outline:2px solid #6cacdd;background:#fff}
+#eloah-canva-studio .ecs-chart-table td:last-child{text-align:center;padding-inline:5px}
+#eloah-canva-studio .ecs-chart-table button{border:0;background:#f5e9e9;color:#a54952;border-radius:5px;font-size:16px;padding:4px 8px}
+#eloah-canva-studio .ecs-chart-table button:hover{background:#f9d9de}
+#eloah-canva-studio .ecs-chart-edit .ecs-chart-data-actions{gap:5px}
+#eloah-canva-studio .ecs-chart-edit .ecs-chart-data-actions button{flex:0 1 auto}
