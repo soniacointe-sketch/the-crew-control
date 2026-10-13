@@ -854,7 +854,7 @@ document.getElementById("chatOpenExisting").onclick=async()=>{
 document.getElementById("chatPromptClose").onclick=()=>chatComposer.close();
 document.getElementById("chatPromptCloseTop").onclick=()=>chatComposer.close();
 
-document.getElementById("openChatGPT").onclick=openChatComposer;document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;missionFilter=(scope==="all"||scope==="os")?"pack":"all";render()};
+document.getElementById("openChatGPT").onclick=openChatComposer;document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;missionFilter=(scope==="all"||scope==="os")?"pack":"all";securityArea="all";securitySearch="";render()};
 
 async function readCloud(){const all=[];for(let i=0;;i+=500){const {data,error}=await sb.from("sonia_command_records").select("id,module,payload,updated_at").eq("owner_id",currentUser.id).range(i,i+499);if(error)throw error;all.push(...(data||[]));if(!data||data.length<500)break;}return all}
 async function cloudPull(){
