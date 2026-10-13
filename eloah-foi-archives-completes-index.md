@@ -124,7 +124,7 @@ L'étude existante examine les témoignages sur l'inscription ἈΝΆΓΚΗ all�
 
 ## 07 · Registre des 22 premiers dossiers ELOAH / SCANNER LE SENS
 
-Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes marqués « Archive intégrale » ont été retrouvés et réinstallés. D'autres sujets sont attestés dans l'historique de travail mais **leur texte original intégral n'a pas été localisé** dans le dépôt GitHub ou les fichiers récupérés ; on ne les remplace pas par une invention.
+Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes marqués « Archive intégrale » ont été retrouvés et réinstallés. Quatorze autres dossiers ont reçu une **réédition documentée** distincte ; leurs textes originaux complets et leurs anciennes planches restent à retrouver. Les deux autres axes n'ont été retrouvés que partiellement.
 
 | N° | Ancien dossier / sujet | État de récupération |
 |---|---|---|
@@ -135,27 +135,57 @@ Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes mar
 | 05 | Les commencements II — Coran | **Archive intégrale** [ouvrir](foi-control.html?file=eloah-scanner-commencements-02-coran.md) |
 | 06 | Les commencements III — Bible et Coran | **Archive intégrale** [ouvrir](foi-control.html?file=eloah-scanner-commencements-03-bible-coran.md) |
 | 07 | Adam — Terre, souffle et conscience | **Archive intégrale** [ouvrir](foi-control.html?file=eloah-scanner-adam-terre-souffle.md) |
-| 08 | Le jardin, l'arbre et l'interdit | Sujet connu, source textuelle complète à retrouver |
-| 09 | La flamme et la République | Sujet connu, source textuelle complète à retrouver |
-| 10 | Tapisserie et histoire de Bayeux | Sujet connu, source textuelle complète à retrouver |
-| 11 | Babel et les langues | Sujet connu, source textuelle complète à retrouver |
-| 12 | Le nom effacé | Sujet connu, source textuelle complète à retrouver |
-| 13 | Alexandrie, archives et mémoire | Sujet connu, source textuelle complète à retrouver |
-| 14 | Le sommeil des prophètes | Sujet connu, source textuelle complète à retrouver |
-| 15 | Le miroir | Sujet connu, source textuelle complète à retrouver |
-| 16 | L'enfer dans les traditions | Sujet connu, source textuelle complète à retrouver |
-| 17 | La reine de Saba | Sujet connu, source textuelle complète à retrouver |
-| 18 | Le déluge | Sujet connu, source textuelle complète à retrouver |
-| 19 | L'Arche | Sujet connu, source textuelle complète à retrouver |
+| 08 | Le jardin, l'arbre et l'interdit | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-jardin-arbre-interdit.md), original non retrouvé |
+| 09 | La flamme et la République | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-flamme-temple-republique.md) ; titre initial complet : La flamme, le Temple et la République |
+| 10 | Tapisserie et histoire de Bayeux | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-bayeux-fil-conquete.md) ; ancien titre : Le fil, la conquête et le pouvoir |
+| 11 | Babel et les langues | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-babel-langue-tour-nom.md) |
+| 12 | Le nom effacé | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-nom-efface-identite.md) |
+| 13 | Alexandrie, archives et mémoire | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-alexandrie-bibliotheque.md) |
+| 14 | Le sommeil des prophètes | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-sommeil-prophetes.md) |
+| 15 | Le miroir | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-miroir-reflets.md) |
+| 16 | L'enfer dans les traditions | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-enfer-traditions.md) |
+| 17 | La reine de Saba | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-reine-saba.md) |
+| 18 | Le déluge | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-deluge-noe.md) |
+| 19 | L'Arche | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-arche-alliance-noe.md) ; sujet ancien précis à confirmer |
 | 20 | Les anges | Contenus partiels dans Grande bibliothèque et collection 04 ; ancien texte autonome à retrouver |
-| 21 | Le Livre des morts égyptien | Sujet connu, source textuelle complète à retrouver |
-| 22 | Marie et ses traditions | Sujet ancien identifié ; ne pas le confondre automatiquement avec les dossiers MAGDALENA 007–009 |
+| 21 | Le Livre des morts égyptien | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-livre-morts-egyptien.md) |
+| 22 | Marie et ses traditions | **Nouvelle étude reconstituée** — [ouvrir](foi-control.html?file=eloah-reconstitution-marie-traditions.md) |
 
 **Inventaire de récupération et non certification de publication :** des échanges anciens mentionnaient la mise en ligne de ces 22 dossiers dans un premier projet ELOAH. Je ne peux pas confirmer aujourd'hui que chacun est encore accessible sur le site d'origine, ni reproduire leurs anciens visuels sans les fichiers originaux.
 
 ### Sources anciennes retrouvées hors du site
 
 Deux illustrations de notre histoire de travail (« Le jardin, l'arbre et l'interdit » et « Reine de Saba, quête de sagesse ») ont été repérées dans la bibliothèque de fichiers, **mais pas leurs manuscrits textuels complets**. Leur existence ne suffit pas à reconstituer les textes au mot près.
+
+## 07 bis · Quatorze nouveaux chapitres reconstitués (13 octobre 2026)
+
+**Travail effectué :** les 14 sujets anciens précédemment sans chapitre autonome disposent maintenant d'une **nouvelle étude détaillée** avec une illustration légendée, les références anciennes, des comparaisons et les limites de preuve. Ce sont **14 rédactions nouvelles**, et **non les textes d'origine retrouvés** : l'ancien site `eloah-scanner.soniacointe.chatgpt.site` reste inaccessible à la récupération automatique, et ses anciens scans ne sont pas dans les archives disponibles.
+
+| Repère du registre | Sujet | Ouvrir la nouvelle étude |
+|---|---|---|
+| 08 | Le jardin, l'arbre et l'interdit | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-jardin-arbre-interdit.md) |
+| 09 | La flamme, le Temple et la République | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-flamme-temple-republique.md) |
+| 10 | Le fil, la conquête et le pouvoir — Bayeux | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-bayeux-fil-conquete.md) |
+| 11 | Babel — La langue, la tour et le nom | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-babel-langue-tour-nom.md) |
+| 12 | Le nom effacé — Identité et mémoire | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-nom-efface-identite.md) |
+| 13 | Alexandrie, bibliothèques et mémoire | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-alexandrie-bibliotheque.md) |
+| 14 | Le sommeil des prophètes | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-sommeil-prophetes.md) |
+| 15 | Le miroir | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-miroir-reflets.md) |
+| 16 | L'enfer dans les traditions | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-enfer-traditions.md) |
+| 17 | La reine de Saba | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-reine-saba.md) |
+| 18 | Le Déluge | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-deluge-noe.md) |
+| 19 | L'Arche | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-arche-alliance-noe.md) |
+| 21 | Le Livre des morts égyptien | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-livre-morts-egyptien.md) |
+| 22 | Marie et ses traditions | [Lire le chapitre](foi-control.html?file=eloah-reconstitution-marie-traditions.md) |
+
+**Deux pistes de récupération des originaux anciens** restent identifiées : les adresses historiques de [Babel](https://eloah-scanner.soniacointe.chatgpt.site/publications/babel-langue-unique) et du [Nom effacé](https://eloah-scanner.soniacointe.chatgpt.site/publications/nom-efface-identite). Ces anciennes URLs ne constituent pas des preuves que le contenu est actuellement récupérable.
+
+### État du corpus après cette étape
+
+- **6 textes sources retrouvés et recopiés sans suppression** dans le dépôt actuel.
+- **14 chapitres recréés comme études sourcées**, à comparer ultérieurement avec les anciens originaux.
+- **2 axes anciens représentés par des contenus partiels** : « Jésus — Le sens devenu chair » et « Les anges ».
+- **Textes historiques anciens et séries d'images annoncées lors des premières publications** : récupération non achevée.
 
 ## 08 · Méthode de bibliothèque : une fiche, des preuves et des images créditées
 
