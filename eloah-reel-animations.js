@@ -5,7 +5,7 @@ const grouped=[{"group":"Recommandations magiques","entries":[{"id":"follow","na
 const catalogue=grouped.flatMap(g=>g.entries.map(e=>({...e,group:g.group})));
 const byId=new Map(catalogue.map(e=>[e.id,e]));
 const cache=new Map();
-const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;':'&quot;',"'":'&apos;'}[c]));
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&apos;'}[c]));
 function graphic(e){
  const {id,type,color:c}=e,stroke='stroke="'+c+'" fill="none" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"';
  if(type==='word'||type==='pill'){
