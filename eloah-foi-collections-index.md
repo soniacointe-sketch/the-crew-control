@@ -11,16 +11,16 @@ Explore les apocryphes, les sources juives anciennes, les manuscrits bibliques e
 
 ## Choisir une collection
 
-01. **[Jésus, l’enfance inconnue](foi-control.html?doc=11)** — Les récits sur Jésus enfant, sa famille et ses premiers enseignements. *10 documents repères à étudier.*
-02. **[Paroles et enseignements de Jésus](foi-control.html?doc=12)** — Les logia attribués à Jésus, leurs parallèles et leur transmission. *11 documents repères à étudier.*
-03. **[Marie et les femmes des origines](foi-control.html?doc=13)** — Marie, Marie Madeleine, Thécla et les premières traditions chrétiennes. *11 documents repères à étudier.*
-04. **[Anges et mondes célestes](foi-control.html?doc=14)** — Michel, Gabriel, les Veilleurs et les traditions des cieux. *11 documents repères à étudier.*
-05. **[Manuscrits de la mer Morte](foi-control.html?doc=15)** — Atlas critique des rouleaux, fragments et manuscrits de Qumrân. *13 documents repères à étudier.*
-06. **[Passion, résurrection et vies des apôtres](foi-control.html?doc=16)** — Les récits extra-canoniques autour de la Passion et des missions apostoliques. *12 documents repères à étudier.*
-07. **[Apocalypses et au-delà](foi-control.html?doc=17)** — Les visions du jugement, de la fin des temps et de l’au-delà. *10 documents repères à étudier.*
-08. **[Nag Hammadi et courants gnostiques](foi-control.html?doc=18)** — Les textes coptes, les discours de révélation et la diversité des courants anciens. *11 documents repères à étudier.*
-09. **[Archives et témoignages historiques](foi-control.html?doc=19)** — Les sources romaines, juives et chrétiennes proches des origines. *12 documents repères à étudier.*
-10. **[Transmission, traductions et canon](foi-control.html?doc=20)** — Comment les livres ont été copiés, traduits, réunis et canonisés. *15 documents repères à étudier.*
+01. **[Jésus, l’enfance inconnue](foi-control.html?file=eloah-foi-collection-01-jesus-enfant.md)** — Les récits sur Jésus enfant, sa famille et ses premiers enseignements. *10 documents repères à étudier.*
+02. **[Paroles et enseignements de Jésus](foi-control.html?file=eloah-foi-collection-02-paroles-jesus.md)** — Les logia attribués à Jésus, leurs parallèles et leur transmission. *11 documents repères à étudier.*
+03. **[Marie et les femmes des origines](foi-control.html?file=eloah-foi-collection-03-marie-femmes.md)** — Marie, Marie Madeleine, Thécla et les premières traditions chrétiennes. *11 documents repères à étudier.*
+04. **[Anges et mondes célestes](foi-control.html?file=eloah-foi-collection-04-anges-cieux.md)** — Michel, Gabriel, les Veilleurs et les traditions des cieux. *11 documents repères à étudier.*
+05. **[Manuscrits de la mer Morte](foi-control.html?file=eloah-foi-collection-05-qumran.md)** — Atlas critique des rouleaux, fragments et manuscrits de Qumrân. *13 documents repères à étudier.*
+06. **[Passion, résurrection et vies des apôtres](foi-control.html?file=eloah-foi-collection-06-passion-apotres.md)** — Les récits extra-canoniques autour de la Passion et des missions apostoliques. *12 documents repères à étudier.*
+07. **[Apocalypses et au-delà](foi-control.html?file=eloah-foi-collection-07-apocalypses.md)** — Les visions du jugement, de la fin des temps et de l’au-delà. *10 documents repères à étudier.*
+08. **[Nag Hammadi et courants gnostiques](foi-control.html?file=eloah-foi-collection-08-nag-hammadi.md)** — Les textes coptes, les discours de révélation et la diversité des courants anciens. *11 documents repères à étudier.*
+09. **[Archives et témoignages historiques](foi-control.html?file=eloah-foi-collection-09-temoignages-historiques.md)** — Les sources romaines, juives et chrétiennes proches des origines. *12 documents repères à étudier.*
+10. **[Transmission, traductions et canon](foi-control.html?file=eloah-foi-collection-10-transmission-canon.md)** — Comment les livres ont été copiés, traduits, réunis et canonisés. *15 documents repères à étudier.*
 
 ## Méthode de la bibliothèque vivante
 
