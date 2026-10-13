@@ -12,6 +12,8 @@ const defaults=[
 ];
 const families=['sans','rounded','editorial','classic','poster','hand','mono','condensed','bodoni','inter','caveat'];
 const validColor=s=>/^#[0-9a-fA-F]{6}$/.test(String(s||''))?String(s).toUpperCase():null;
+const validImageData=(value,maxLength=750000)=>typeof value==='string'&&value.length<=maxLength&&
+ /^data:image\/(?:png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/i.test(value);
 const copy=o=>JSON.parse(JSON.stringify(o));
 const normalizeName=s=>String(s||'').trim().slice(0,80);
 const slug=s=>normalizeName(s).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'').slice(0,55)||'nouvelle-marque';
@@ -28,11 +30,11 @@ function normalize(raw,base=null){
   const v=Array.isArray(item)?item:[item?.name,item?.hex];
   return [normalizeName(v[0]||'Couleur '+(i+1)),validColor(v[1])||'#777777'];
  }).filter(x=>x[0]);if(!out.colors.length)out.colors=copy(baseData.colors);
- out.logo=typeof raw?.logo==='string'&&raw.logo.startsWith('data:image/')&&raw.logo.length<=750000?raw.logo:null;
+ out.logo=validImageData(raw?.logo)?raw.logo:null;
  out.assets=Array.isArray(raw?.assets)?raw.assets.slice(0,36).map(item=>({
   id:String(item?.id||'').slice(0,100),name:normalizeName(item?.name||'Ressource'),
   category:['photos','illustrations','icons'].includes(item?.category)?item.category:'photos',
-  data:typeof item?.data==='string'&&item.data.startsWith('data:image/')&&item.data.length<650000?item.data:''
+  data:validImageData(item?.data,650000)?item.data:''
  })).filter(item=>item.id&&item.data):[];
  out.models=Array.isArray(raw?.models)?raw.models.slice(0,25).map(item=>({
   id:String(item?.id||'').slice(0,100),name:normalizeName(item?.name||'Modèle'),
@@ -65,10 +67,10 @@ function removeColor(id,index){const k=kits.find(x=>x.id===id);if(!k||k.colors.l
 function colorName(id,index,name){const k=kits.find(x=>x.id===id);if(!k||!k.colors[index])return null;k.colors[index][0]=normalizeName(name);return save()}
 function create(name){const label=normalizeName(name)||'Nouvelle marque';const id='user-'+slug(label)+'-'+Date.now().toString(36);if(kits.length>=24)return null;
  const kit=normalize({id,name:label,signature:label.toUpperCase()});kits.push(kit);return {kit,result:save()}}
-function setLogo(id,data){const k=kits.find(x=>x.id===id);if(!k)return null;k.logo=data&&data.startsWith('data:image/')?data:null;return save()}
+function setLogo(id,data){const k=kits.find(x=>x.id===id);if(!k)return null;if(data!==null&&!validImageData(data))return null;k.logo=data;return save()}
 function addAsset(id,item){const k=kits.find(x=>x.id===id);if(!k||k.assets.length>=36)return null;
  const asset={id:'asset-'+Date.now().toString(36)+'-'+Math.floor(Math.random()*1e6),name:normalizeName(item.name||'Image'),category:item.category||'photos',data:item.data};
- if(!asset.data?.startsWith('data:image/'))return null;
+ if(!validImageData(asset.data,650000))return null;
  k.assets.push(asset);return {asset,result:save()}}
 function removeAsset(id,assetId){const k=kits.find(x=>x.id===id);if(!k)return null;k.assets=k.assets.filter(a=>a.id!==assetId);return save()}
 function getAsset(id,assetId){const k=kits.find(x=>x.id===id);if(!k)return null;if(assetId==='logo')return k.logo?{id:'logo',name:'Logo '+k.name,data:k.logo}:null;return k.assets.find(x=>x.id===assetId)||null}
