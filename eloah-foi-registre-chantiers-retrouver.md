@@ -27,7 +27,7 @@ Ce registre indique ce qui est **accessible**, **partiellement documenté** ou *
 | Toison d'Or, Boyvin et Thiry | Sources iconographiques signalées | Travaux à rattacher |
 | Codex H / Coislinianus 015 | Projet de reconstitution 42 pages | Ne pas annoncer 42 pages retrouvées |
 | Marie-Madeleine, MAGDALENA-010 | Comparaison Jean 11 et P66 évoquée | Projet, non publié comme étude autonome ici |
-| Manuscrit 4Q529 | Mention dans le corpus angélologique | Vérifier un dossier critique autonome et ses traductions |
+| Manuscrit 4Q529 | [Étude critique et photographies officielles](foi-control.html?file=eloah-foi-michel-4q529-etude-critique.md) | Fiche autonome créée ; collation et traduction intégrale restent à réaliser |
 | ALPHA-001 | [Fiche de synthèse reconstituée](foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md) | Ajouté, source originelle non certifiée |
 
 ## Règles de conservation
