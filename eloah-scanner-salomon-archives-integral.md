@@ -2,6 +2,10 @@
 
 ---
 
+![Illustration de recherche — Gravure de reconstitution du Temple de Salomon, Wellcome Collection : iconographie tardive, non plan archéologique démontré du Temple.](https://commons.wikimedia.org/wiki/Special:FilePath/The_Temple_of_Solomon%2C_its_grounds_and_some_of_its_interiors_Wellcome_V0034334.jpg?width=1100)
+
+*Gravure de reconstitution du Temple de Salomon, Wellcome Collection : iconographie tardive, non plan archéologique démontré du Temple. [Notice et crédits Wikimedia Commons](https://commons.wikimedia.org/wiki/File:The_Temple_of_Solomon,_its_grounds_and_some_of_its_interiors_Wellcome_V0034334.jpg).*
+
 # ELOAH · SCANNER LE SENS · SÉRIE III
 
 # Les archives de Salomon
