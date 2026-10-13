@@ -341,28 +341,33 @@ body.eloah-revue .rev-chapter-story:focus-visible{outline:3px solid #e0b96e;outl
 /* Même gabarit que les cartes de Publications : 3 colonnes et couverture 4:5. */
 body.eloah-revue #foi-mon-chemin .rev-personal-stories{
  display:grid!important;
- grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ grid-template-columns:repeat(3,minmax(0,260px))!important;
+ justify-content:center!important;
+ width:100%!important;
+ max-width:100%!important;
  gap:17px!important;
  align-items:stretch;
 }
 body.eloah-revue #foi-mon-chemin .rev-chapter-story{
  display:flex!important;
  flex-direction:column;
- width:100%;
- min-width:0;
- height:100%;
+ width:260px!important;
+ max-width:100%!important;
+ min-width:0!important;
+ height:auto!important;
  padding:0!important;
 }
 body.eloah-revue #foi-mon-chemin .rev-chapter-story>img{
  display:block!important;
  width:100%!important;
  max-width:100%!important;
- height:auto!important;
+ height:325px!important;
+ min-height:0!important;
+ max-height:325px!important;
  aspect-ratio:4/5!important;
- max-height:none!important;
  object-fit:cover!important;
  object-position:center!important;
- flex:none;
+ flex:0 0 325px!important;
  margin:0!important;
  border-radius:0!important;
  background:#26282a;
@@ -383,8 +388,8 @@ body.eloah-revue .rev-chapter-story .rev-story-info em{align-self:flex-start;mar
 body.eloah-revue .rev-chapter-no-image{min-height:310px}
 body.eloah-revue .rev-chapter-no-image:before{content:"ELOAH · FOI & SPIRITUALITÉ";background:linear-gradient(130deg,#3d3942,#927447);color:#f7e6ca;display:grid;place-items:center;min-height:220px;letter-spacing:.13em;font:700 11px/1.7 system-ui;padding:10px;text-align:center}
 body.eloah-revue .rev-personal-image-note{margin:21px 0 0;font:11px/1.7 system-ui;color:#bfc0c1}
-@media(max-width:900px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
-@media(max-width:560px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:1fr!important}body.eloah-revue #foi-mon-chemin .rev-chapter-story .rev-story-info strong{font-size:22px!important}}
+@media(max-width:900px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:repeat(2,minmax(0,260px))!important}}
+@media(max-width:560px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:minmax(0,260px)!important}body.eloah-revue #foi-mon-chemin .rev-chapter-story .rev-story-info strong{font-size:22px!important}}
 </style></head><body>
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
