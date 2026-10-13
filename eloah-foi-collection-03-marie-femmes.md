@@ -12,6 +12,22 @@ Distinguer les femmes portant le même prénom, les rôles historiquement attest
 
 Cette collection réunit les documents à examiner, et non une liste d'événements authentifiés. **Un texte ancien atteste d'une tradition, pas automatiquement des faits qu'il raconte.**
 
+## Nouveau · Dossier Marie-Madeleine — trois enquêtes illustrées
+
+![Marie-Madeleine face à Jésus ressuscité, Fra Angelico, vers 1440 — une œuvre artistique et non un portrait du Ier siècle](https://commons.wikimedia.org/wiki/Special:FilePath/Angelico%2C_noli_me_tangere.jpg?width=900)
+
+*Fra Angelico, Noli me tangere, Florence, XVe siècle. [Source de l'illustration](https://commons.wikimedia.org/wiki/File:Angelico,_noli_me_tangere.jpg).*
+
+Trois études documentaires complètes sont désormais intégrées à la bibliothèque. Elles comprennent des photographies d'œuvres et de manuscrits identifiés, des tableaux comparatifs, des traductions de travail, des références, des hypothèses et des limites de preuve.
+
+| Dossier | Sujet | Accès |
+|---|---|---|
+| **MAGDALENA-007** | Marie-Madeleine, les sept démons, les sept formes de l'Évangile de Marie, Grégoire le Grand, Sainte-Baume | [Lire l'étude 007](foi-control.html?file=eloah-foi-magdalena-007-sept.md) |
+| **MAGDALENA-008** | Conflit entre Marie, Pierre, André et Lévi ; Thomas, Philippe et *Pistis Sophia* ; variantes grecques et coptes | [Lire l'étude 008](foi-control.html?file=eloah-foi-magdalena-008-pierre-autorite.md) |
+| **MAGDALENA-009** | Mémoire et autorité du IIe au Ve siècle ; Irénée, Hippolyte, Origène, Épiphane, Ambroise, Jérôme, Chrysostome, Augustin ; hypothèses de marginalisation | [Lire l'étude 009](foi-control.html?file=eloah-foi-magdalena-009-memoire-patristique.md) |
+
+**Lecture critique :** ces études distinguent explicitement la date des œuvres et des copies, ce que disent les manuscrits, les interprétations anciennes, et les hypothèses modernes. Elles ne prétendent pas avoir réalisé une collation manuscrite exhaustive.
+
 ## Corpus documentaire initial — 11 entrées
 
 1. **Protévangile de Jacques** — Ouvrir une fiche avec cote, langue, manuscrits conservés, date de la copie, date probable de composition, extrait, variantes et édition critique.
