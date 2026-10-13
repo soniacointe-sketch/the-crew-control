@@ -58,7 +58,7 @@ a{color:#805B2C}
  <h2 id="chatPromptTitle">Continuer mon travail avec ChatGPT</h2>
  <p class="muted">Le prompt est prêt pour le module ouvert. Tu peux le modifier avant de l’utiliser. Une commande de missions reprend uniquement leurs titres, univers, statuts et liens AAF. Aucun champ privé de contact ou de paiement n’est intégré.</p>
  <label for="chatPromptType" class="chat-prompt-label">Que veux-tu faire ?</label>
- <select class="field" id="chatPromptType"><option value="continue">Poursuivre le développement</option><option value="audit">Auditer et corriger</option><option value="mission">Construire une mission</option><option value="command">Commander les missions de la console</option><option value="routine">Commander les routines</option><option value="program">Commander le Programme</option><option value="integration">Préparer les connexions</option><option value="automation">Préparer les automatisations</option><option value="architecture">Faire évoluer toute l’architecture</option></select>
+ <select class="field" id="chatPromptType"><option value="continue">Poursuivre le développement</option><option value="audit">Auditer et corriger</option><option value="mission">Construire une mission</option><option value="command">Commander les missions de la console</option><option value="routine">Commander les routines</option><option value="program">Commander le Programme</option><option value="integration">Préparer les connexions</option><option value="automation">Préparer les automatisations</option><option value="workflow">Préparer les workflows</option><option value="architecture">Faire évoluer toute l’architecture</option></select>
  <label for="chatPromptText" class="chat-prompt-label">Prompt à transmettre</label>
  <textarea class="field chat-prompt-text" id="chatPromptText" rows="11" spellcheck="true"></textarea>
  <div class="chat-prompt-actions">
@@ -878,6 +878,17 @@ if(view==="automationPlans"){
   alert("La date de test ne peut pas être future.");return;
  }
 }
+if(view==="workflows"){
+ if(data.status==="actif"){
+  alert("Le registre Workflows ne contient pas de moteur d'exécution. Il ne permet pas de certifier le statut « actif ». Vérifie le moteur et l'autorisation AAF par une procédure distincte.");return;
+ }
+ if(data.status==="testé"&&(!data.last_test||!String(data.evidence||"").trim()||!String(data.acceptance||"").trim())){
+  alert("Pour déclarer un workflow « testé », indique une date de test, une référence de preuve et un critère d'acceptation. Le formulaire ne certifie pas automatiquement le résultat.");return;
+ }
+ if(data.last_test&&data.last_test>new Date().toISOString().slice(0,10)){
+  alert("La date du test ne peut pas être future.");return;
+ }
+}
 const existing=db[view].find(x=>x.id===editId);data.id=existing?.id||crypto.randomUUID();if(view==="transactions"&&data.type==="vente"&&data.status==="confirmé"&&data.external_id){let duplicate=db.transactions.find(x=>x.id!==data.id&&x.source===data.source&&x.external_id===data.external_id&&x.type===data.type);if(duplicate){alert("Cette référence de paiement existe déjà. Doublon refusé.");return}}if(view==="tasks"&&data.status==="terminée"&&(!data.agent_id||!db.agents.some(a=>a.id===data.agent_id)||!data.decision_id||!db.decisions.some(d=>d.id===data.decision_id&&/valid|approuv/i.test(d.status||""))||!data.audit_id||!db.audits.some(a=>a.id===data.audit_id))){alert("Clôture refusée : agent référencé, décision AAF approuvée et audit existant obligatoires.");return}if(existing)Object.assign(existing,data);else db[view].push(data);save(view);document.getElementById("editor").close();render()};
 
 
@@ -1164,7 +1175,58 @@ function openAutomationPrompt(ids){
  chatComposer.showModal();
 }
 
+
+function normalizeWorkflowSearch(text){return String(text||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr").trim()}
+function filteredWorkflowRows(){
+ const search=normalizeWorkflowSearch(workflowSearch);
+ return visible("workflows").filter(x=>(workflowStatus==="all"||x.status===workflowStatus)&&(workflowAuthority==="all"||x.authority===workflowAuthority)&&(!search||normalizeWorkflowSearch([x.name,x.business,x.trigger,x.steps,x.output,x.acceptance,x.dependencies].join(" ")).includes(search)));
+}
+function updateWorkflowSearch(){
+ const search=normalizeWorkflowSearch(workflowSearch);let count=0;
+ document.querySelectorAll(".workflow-card").forEach(card=>{
+  const show=!search||String(card.dataset.workflowSearch||"").includes(search);
+  card.hidden=!show;if(show)count++;
+ });
+ const counter=document.getElementById("workflowShown");
+ if(counter)counter.textContent=count+" workflow(s) affiché(s) · aucune exécution automatique.";
+ const empty=document.getElementById("workflowEmpty");if(empty)empty.hidden=count!==0;
+}
+function buildWorkflowPrompt(){
+ const rows=chatWorkflowSelection?chatWorkflowRows.filter(x=>chatWorkflowSelection.includes(x.id)):chatWorkflowRows;
+ return [
+  "SONIA OS — WORKFLOWS · DU SCÉNARIO AU RÉSULTAT TESTÉ",
+  "Page : https://soniacointe-sketch.github.io/the-crew-control/sonia-os.html?section=workflows",
+  "Nombre de workflows : "+rows.length,
+  "",
+  "MISSION : préparer, comparer et auditer les workflows choisis, sans les activer. Pour chacun : déclencheur exact, entrées réellement disponibles, pilote, étapes, dépendances, droits AAF, cas d'échec, livrable, critère d'acceptation, protocole de test sans effet externe, résultat attendu versus observé et preuve à conserver.",
+  "",
+  ...rows.map((x,i)=>[
+   (i+1)+". "+String(x.name||"Workflow")+" — "+String(x.business||"Univers à définir"),
+   "Déclencheur : "+String(x.trigger||"à définir"),
+   "Données d'entrée : "+String(x.input||"à confirmer"),
+   "Étapes : "+String(x.steps||"à préparer"),
+   "Livrable : "+String(x.output||"à définir"),
+   "Critère de validation : "+String(x.acceptance||"à définir"),
+   "Dépendances : "+String(x.dependencies||"à vérifier"),
+   "Responsable : "+String(x.owner||"à affecter")+" ; AAF : "+String(x.authority||"à confirmer"),
+   "Statut actuel : "+String(x.status||"proposé")+" ; test : "+String(x.last_test||"aucun")+" ; preuve : "+String(x.evidence||"aucune")
+  ].join("\n")),
+  "",
+  "LIVRABLE : tableau par workflow avec pilote, risques, test de simulation, preuve et prochain chantier concret. Vérifie l'état technique réel avant d'affirmer qu'un workflow existe ou fonctionne. Le tableau n'exécute aucune action extérieure : aucune publication, paiement, email, webhook, suppression ni programmation. A3 exige une autorisation spécifique et un contrôle serveur indépendant."
+ ].join("\n");
+}
+function openWorkflowPrompt(ids){
+ chatWorkflowSelection=Array.isArray(ids)?ids.slice():null;
+ chatWorkflowRows=chatWorkflowSelection?db.workflows.filter(x=>chatWorkflowSelection.includes(x.id)):filteredWorkflowRows();
+ chatContextView="workflows";chatContextScope=scope;chatMode.value="workflow";
+ chatText.value=buildWorkflowPrompt();
+ chatInfo.textContent=chatWorkflowSelection?"Workflow choisi · relis le prompt avant de l'ouvrir.":"Lot de workflows préparé · copie intégrale possible.";
+ chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
+ chatComposer.showModal();
+}
+
 function buildChatPrompt(mode){
+ if(mode==="workflow")return buildWorkflowPrompt();
  if(mode==="automation")return buildAutomationPrompt();
  if(mode==="integration")return buildIntegrationPrompt();
  if(mode==="program")return buildProgramChatPrompt();
@@ -1190,6 +1252,8 @@ function buildChatPrompt(mode){
  ].join("\n");
 }
 function openChatComposer(){
+ chatWorkflowSelection=null;
+ chatWorkflowRows=view==="workflows"?filteredWorkflowRows():[];
  chatAutomationSelection=null;
  chatAutomationRows=view==="automationPlans"?filteredAutomationRows():[];
  chatIntegrationSelection=null;
@@ -1200,7 +1264,7 @@ function openChatComposer(){
  chatRoutineFrequency=routineFrequency;
  chatMissionSelection=null;
  chatMissionFilter=missionFilter;
- chatContextView=view;chatContextScope=scope;chatMode.value=view==="missionDesk"?"command":view==="routines"?"routine":view==="roadmap"?"program":view==="integrations"?"integration":view==="automationPlans"?"automation":"continue";
+ chatContextView=view;chatContextScope=scope;chatMode.value=view==="missionDesk"?"command":view==="routines"?"routine":view==="roadmap"?"program":view==="integrations"?"integration":view==="automationPlans"?"automation":view==="workflows"?"workflow":"continue";
  chatText.value=buildChatPrompt(chatMode.value);
  chatInfo.textContent="";
  chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
@@ -1240,7 +1304,7 @@ document.getElementById("chatOpenExisting").onclick=async()=>{
 document.getElementById("chatPromptClose").onclick=()=>chatComposer.close();
 document.getElementById("chatPromptCloseTop").onclick=()=>chatComposer.close();
 
-document.getElementById("openChatGPT").onclick=openChatComposer;document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;missionFilter=(scope==="all"||scope==="os")?"pack":"all";securityArea="all";securitySearch="";programPhase="all";programPriority="all";programSearch="";integrationStatus="all";integrationCategory="all";integrationSearch="";automationFrequency="all";automationApproval="all";automationStatus="all";automationSearch="";render()};
+document.getElementById("openChatGPT").onclick=openChatComposer;document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;missionFilter=(scope==="all"||scope==="os")?"pack":"all";securityArea="all";securitySearch="";programPhase="all";programPriority="all";programSearch="";integrationStatus="all";integrationCategory="all";integrationSearch="";automationFrequency="all";automationApproval="all";automationStatus="all";automationSearch="";workflowStatus="all";workflowAuthority="all";workflowSearch="";render()};
 
 async function readCloud(){const all=[];for(let i=0;;i+=500){const {data,error}=await sb.from("sonia_command_records").select("id,module,payload,updated_at").eq("owner_id",currentUser.id).range(i,i+499);if(error)throw error;all.push(...(data||[]));if(!data||data.length<500)break;}return all}
 async function cloudPull(){
