@@ -28,7 +28,8 @@ preuves:{title:'Registre des hypothèses et preuves',hint:'F0 : fait ; F1 : sens
 audit:{title:'AUDIT · Contrôles',hint:'Vérifier précision, sélection des candidats, répétition et hasard avant toute conclusion.',fields:[['title','Contrôle','text'],['reference','Dossier / fiche examinée','text'],['claim','Question du test','textarea'],['status','Résultat','select:À faire|En cours|Conforme|À corriger|Non démontré'],['notes','Preuve du contrôle et prochaine étape','textarea']]}
 };
 const store={};for(const k of Object.keys(cfg))store[k]=[];
-let active='overview',editing=null,lastMeasured='';
+const initialModule=new URLSearchParams(location.search).get('module');
+let active=views.some(v=>v.id===initialModule)?initialModule:'overview',editing=null,lastMeasured='';
 try{const saved=JSON.parse(localStorage.getItem(KEY)||'{}');for(const k of Object.keys(cfg))if(Array.isArray(saved[k]))store[k]=saved[k]}catch{}
 function seed(){
 if(localStorage.getItem(SEEDKEY))return;
@@ -618,7 +619,24 @@ if(!confirm('Remplacer les fiches locales PARISIS ENGINE par cette sauvegarde ? 
 for(const k of Object.keys(cfg))store[k]=data.modules[k].map(x=>({...x}));save()
 }).catch(e=>alert('Restauration impossible : '+e.message))
 }
-$('nav').onclick=e=>{const b=e.target.closest('[data-nav]');if(b&&views.some(v=>v.id===b.dataset.nav)){active=b.dataset.nav;$('globalSearch').value='';render()}};
+function activateModule(id,push=true){
+ if(!views.some(v=>v.id===id))return;
+ active=id;$('globalSearch').value='';
+ if(push){
+   const url=new URL(location.href);
+   if(id==="overview")url.searchParams.delete("module");
+   else url.searchParams.set("module",id);
+   history.pushState({parisisModule:id},"",url.pathname+url.search+url.hash);
+ }
+ render();
+}
+window.addEventListener("popstate",()=>{
+ const id=new URLSearchParams(location.search).get("module");
+ active=views.some(v=>v.id===id)?id:"overview";
+ $('globalSearch').value="";
+ render();
+});
+$('nav').onclick=e=>{const b=e.target.closest('[data-nav]');if(b)activateModule(b.dataset.nav)};
 $('view').onclick=e=>{const b=e.target.closest('button');if(!b)return;
 if(b.dataset.editorialCase){
  const source=window.PARISIS_EDITORIAL_DATA?.modules?.[active]?.items?.find(item=>item.id===b.dataset.editorialCase);
@@ -637,9 +655,9 @@ if(b.dataset.editorialCase){
 }
 else if(b.dataset.reviewPage!==undefined){reviewRelation(b)}
 else if(b.dataset.pageAudit!==undefined){auditPage(Number(b.dataset.pageAudit))}
-else if(b.dataset.relatedModule){active=b.dataset.relatedModule;render();const el=document.querySelector('[data-edit="'+CSS.escape(b.dataset.relatedId)+'"]');el?.closest(".record")?.scrollIntoView({behavior:"smooth",block:"center"});el?.closest(".record")?.classList.add("related-focus")}
+else if(b.dataset.relatedModule){activateModule(b.dataset.relatedModule);const el=document.querySelector('[data-edit="'+CSS.escape(b.dataset.relatedId)+'"]');el?.closest(".record")?.scrollIntoView({behavior:"smooth",block:"center"});el?.closest(".record")?.classList.add("related-focus")}
 else if(b.dataset.pageChat!==undefined){const p=pagedCorpus[Number(b.dataset.pageChat)];if(p)chat({title:p.heading,claim:'Page '+p.page+'. '+p.claim+' Lieux : '+p.places.join(', ')+'. Symboles : '+p.symbols.join(', ')+'. À vérifier : '+p.checks,reference:p.ref})}
-else if(b.dataset.nav){active=b.dataset.nav;render()}
+else if(b.dataset.nav){activateModule(b.dataset.nav)}
 else if(b.dataset.edit)openEditor(b.dataset.edit);
 else if(b.dataset.delete){if(confirm('Supprimer cette fiche PARISIS ?')){store[active]=store[active].filter(x=>x.id!==b.dataset.delete);save()}}
 else if(b.dataset.chat){const r=store[active].find(x=>x.id===b.dataset.chat);if(r)chat(r)}
