@@ -834,3 +834,8 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
  #eloah-canva-studio .ecs-import-card-meta strong{font-size:9px}
  #eloah-canva-studio .ecs-import-folders{gap:6px}
 }
+
+#eloah-canva-studio .ecs-import-upload-pick{display:flex;align-items:center;gap:8px;margin:10px 1px 6px}
+#eloah-canva-studio .ecs-import-upload-pick label{flex:0 0 auto;margin:0;font-size:10px;font-weight:750;color:#6d7890}
+#eloah-canva-studio .ecs-import-upload-pick select{flex:1;min-width:0;background:#fff;border:1px solid #dfe4eb;border-radius:8px;padding:7px 9px;font-size:11px;color:#3e5267}
+@media(max-width:390px){#eloah-canva-studio .ecs-import-upload-pick{flex-wrap:wrap}#eloah-canva-studio .ecs-import-upload-pick select{flex-basis:100%}}
