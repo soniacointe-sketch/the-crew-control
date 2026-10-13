@@ -1,0 +1,117 @@
+{
+  "schema": "parisis.cadastral_corroboration.v1",
+  "dossier": "PAR-ISIS-005",
+  "date": "2026-10-13",
+  "scope": "Palais-Royal / Butte des Moulins, étude des plans Vasserot",
+  "rule": "Ne pas convertir une coordonnée d'image en latitude/longitude sans points de calage vérifiés et transformation documentée.",
+  "sheets": [
+    {
+      "id": "PV-005-026",
+      "cote": "F/31/75/26",
+      "district": "Palais-Royal, ancien sixième quartier",
+      "islets": "îlot n° 7, signalé par source secondaire",
+      "streetCandidates": [
+        "rue des Orties-Saint-Honoré"
+      ],
+      "period": "1813–1814 (ensemble de quartier, non datation individuelle)",
+      "originalExamined": false,
+      "coteVerifiedInOfficialScan": false,
+      "mirrorImageUrl": "https://plu.france-cadastre.fr/cadastre-ancien/75/75056/79413_74026.jpg",
+      "mirrorFetch": "récupérable lors du contrôle, contenu non collationné",
+      "confidence": "cote bibliographique localisée, image primaire non vérifiée",
+      "coordinates": null,
+      "measurements": []
+    },
+    {
+      "id": "PV-005-037",
+      "cote": "F/31/75/37",
+      "district": "Palais-Royal, ancien sixième quartier",
+      "islets": "îlots n° 18 et 19, signalés par source secondaire",
+      "streetCandidates": [
+        "rue des Orties-Saint-Honoré"
+      ],
+      "period": "1813–1814 (ensemble de quartier)",
+      "originalExamined": false,
+      "coteVerifiedInOfficialScan": false,
+      "mirrorImageUrl": "https://plu.france-cadastre.fr/cadastre-ancien/75/75056/79424_74037.jpg",
+      "mirrorFetch": "échec de récupération dans l'outil de contrôle",
+      "confidence": "image primaire non vérifiée",
+      "coordinates": null,
+      "measurements": []
+    },
+    {
+      "id": "PV-005-038",
+      "cote": "F/31/75/38",
+      "district": "Palais-Royal, ancien sixième quartier",
+      "islets": "îlots n° 20 et 21, signalés par source secondaire",
+      "streetCandidates": [
+        "rue des Orties-Saint-Honoré"
+      ],
+      "period": "1813–1814 (ensemble de quartier)",
+      "originalExamined": false,
+      "coteVerifiedInOfficialScan": false,
+      "mirrorImageUrl": "https://plu.france-cadastre.fr/cadastre-ancien/75/75056/79425_74038.jpg",
+      "mirrorFetch": "échec de récupération dans l'outil de contrôle",
+      "confidence": "image primaire non vérifiée",
+      "coordinates": null,
+      "measurements": []
+    },
+    {
+      "id": "PV-005-039",
+      "cote": "F/31/75/39",
+      "district": "Palais-Royal, ancien sixième quartier",
+      "islets": "îlots n° 22 et 23, signalés par source secondaire",
+      "streetCandidates": [
+        "rue de l’Anglade"
+      ],
+      "period": "1813–1814 (ensemble de quartier)",
+      "originalExamined": false,
+      "coteVerifiedInOfficialScan": false,
+      "mirrorImageUrl": "https://plu.france-cadastre.fr/cadastre-ancien/75/75056/79426_74039.jpg",
+      "mirrorFetch": "échec de récupération dans l'outil de contrôle",
+      "confidence": "image primaire non vérifiée",
+      "coordinates": null,
+      "measurements": []
+    }
+  ],
+  "documentaryEvidence": [
+    {
+      "id": "DECRET-OPERA-1876-06-27",
+      "type": "acte administratif reproduit",
+      "date": "1876-06-27",
+      "description": "Déclaration d'utilité publique : avenue prévue de 30 m entre place du Théâtre-Français et rue Louis-le-Grand ; suppression rues de l'Évêque, des Orties, des Moineaux, du Clos Georgeau et partie rue des Moulins.",
+      "prescribedWidthM": 30,
+      "source": "https://books.google.es/books?id=2EwoAAAAYAAJ",
+      "reference": "Ville de Paris, Recueil..., 1886, p. 411",
+      "transcript": "https://vergue.com/post/541/Rue-du-Clos-Georgeau.html",
+      "measurementType": "normative design width; not a measured cadastral distance"
+    }
+  ],
+  "collections": [
+    {
+      "institution": "Archives de Paris",
+      "url": "https://archives.paris.fr/archives-numerisees/documents-iconographiques/plans-parcellaires/accedez-aux-plans-de-paris-dans-ses-limites-avant-1860"
+    },
+    {
+      "institution": "Fabrique numérique du Passé",
+      "url": "https://www.fabriquenumeriquedupasse.fr/explore/assets/atlas-vasserot/explore/"
+    },
+    {
+      "institution": "Miroir tiers - index",
+      "url": "https://france-cadastre.fr/cadastre-ancien/75/paris/"
+    }
+  ],
+  "geometry": {
+    "historicGeoreferencedPoints": 0,
+    "historicAlignmentsReproducible": 0,
+    "linesAddedToCentralAtlas": 0,
+    "pointsAddedToCentralAtlas": 0
+  },
+  "requiredNextActions": [
+    "Collationner chaque scan F/31/75/26, 37, 38, 39 avec sa notice institutionnelle et son cachet de cote",
+    "Lire les noms de voies et fixer des intersections prouvées",
+    "Sélectionner carte indépendante et points de calage fixes",
+    "Estimer l'incertitude de transformation et effectuer mesure en Lambert-93",
+    "Consigner les contre-exemples avant toute interprétation symbolique"
+  ]
+}
