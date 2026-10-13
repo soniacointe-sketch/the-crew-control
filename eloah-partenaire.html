@@ -258,7 +258,7 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 </div>
 <div class="campaign-compose-footer">
 <div class="campaign-test-send"><label for="campaign-test-address">E-mail pour test</label><div class="campaign-inline-control"><input id="campaign-test-address" type="email" placeholder="adresse@exemple.fr"><button type="button" id="campaign-send-test">➤ Préparer un test ↗</button></div><small>Ouvre ta messagerie pour validation, sans envoi automatique.</small></div>
-<div class="campaign-schedule"><div class="campaign-schedule-mode" role="group" aria-label="Moment d'envoi"><button type="button" id="campaign-send-now" aria-pressed="true">Maintenant</button><button type="button" id="campaign-send-later" aria-pressed="false">Programmer</button></div><label class="campaign-schedule-date" for="campaign-schedule-at"><span>Date et heure prévues</span><input type="datetime-local" id="campaign-schedule-at" disabled></label><button type="button" id="campaign-save-schedule">Préparer la programmation</button></div>
+<div class="campaign-schedule"><div class="campaign-schedule-mode" role="group" aria-label="Moment d'envoi"><button type="button" id="campaign-send-now" aria-pressed="true">Maintenant</button><button type="button" id="campaign-send-later" aria-pressed="false">Programmer</button></div><input id="campaign-schedule-mode" type="hidden" value="now"><label class="campaign-schedule-date" for="campaign-schedule-at"><span>Date et heure prévues</span><input type="datetime-local" id="campaign-schedule-at" disabled></label><button type="button" id="campaign-save-schedule">Préparer la programmation</button></div>
 </div>
 <p id="campaign-delivery-warning" class="campaign-delivery-warning">L’envoi et la programmation automatique ne sont pas connectés. Aucune campagne ne part sans action explicite dans un service d’envoi.</p>
 <div class="actions campaign-compose-actions"><button type="submit" id="campaign-save">Enregistrer le brouillon</button><button type="button" id="campaign-preview">Actualiser l’aperçu</button><button type="button" id="campaign-cancel">Fermer</button></div>
@@ -433,7 +433,7 @@ function render(){host.replaceChildren();$('mailing-list-title').textContent='Me
 $('mailing-import-csv').onclick=()=>$('mailing-import-file').click();
 $('mailing-import-file').onchange=async e=>{const file=e.target.files[0];if(!file||!current)return;if(file.size>3*1024*1024){status('Fichier trop volumineux (limite 3 Mo).');return}try{const rows=parseCsv(await file.text()),headers=rows.shift().map(v=>v.toLowerCase().trim()),ei=headers.indexOf('email'),ni=headers.indexOf('name'),si=headers.indexOf('status');if(ei<0)throw Error('Colonne email absente');const storageKey='eloah-mailing-contacts-'+current.id;let saved=[];try{saved=JSON.parse(localStorage.getItem(storageKey)||'[]')}catch{}const seen=new Set(saved.map(x=>(typeof x==='string'?x:x.email).toLowerCase()));let added=0,skipped=0,blocked=0,suspected=0;const pattern=/https?:|\b(?:USDC|crypto|transfer|bonus|graph\.org)\b/i;for(const line of rows){const email=(line[ei]||'').trim().toLowerCase(),name=(line[ni]||'').trim(),state=(line[si]||'enabled').trim().toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)||seen.has(email)){skipped++;continue}const statusValue=state==='blocklisted'?'blocklisted':state==='enabled'?'enabled':'unverified';const spamFlag=pattern.test(name);if(statusValue==='blocklisted')blocked++;if(spamFlag)suspected++;saved.push({email,name,status:statusValue,review:spamFlag});seen.add(email);added++}localStorage.setItem(storageKey,JSON.stringify(saved));logMail('Import CSV : '+added+' nouveaux contacts');detail(current.id,'contacts');$('mailing-import-result').textContent=added+' contacts importés localement · '+skipped+' doublons/invalides · '+blocked+' bloqués · '+suspected+' à examiner. Les comptes bloqués ne doivent pas recevoir de campagne.';status('Import enregistré uniquement dans ce navigateur. Aucun envoi réalisé.')}catch(err){status('Import impossible : '+err.message)}e.target.value=''};
 $('mailing-export-contacts').onclick=()=>{if(!current)return;let data=[];try{data=JSON.parse(localStorage.getItem('eloah-mailing-contacts-'+current.id)||'[]')}catch{}const csv=['email,name,status',...data.map(x=>{const c=typeof x==='string'?{email:x,name:'',status:'enabled'}:x;return [c.email,c.name,c.status].map(v=>'"'+String(v||'').replaceAll('"','""')+'"').join(',')})].join('\r\n');const url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='mailing-contacts-'+current.id+'.csv';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
-render()})();</script><script id="mail-campaign-script">(()=>{'use strict';const $=id=>document.getElementById(id),key='eloah-mail-campaign-drafts-v1',scratch='eloah-mail-current-draft-v1';let drafts=[];try{drafts=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(drafts))drafts=[]}catch{}const fields=['subject','target','template','sender-name','sender-email','reply-to','name','body'];function value(id){return $('campaign-'+id).value}function capture(){const d={};fields.forEach(k=>d[k]=value(k));return d}function fill(d){fields.forEach(k=>{if(d[k]!==undefined)$('campaign-'+k).value=d[k]});$('campaign-restored').hidden=false}function open(d=null){$('campaign-form').hidden=false;$('campaign-preview-output').hidden=true;$('campaign-form').reset();$('campaign-restored').hidden=true;if(d)fill(d);else{let previous=null;try{previous=JSON.parse(localStorage.getItem(scratch)||'null')}catch{}if(previous&&Object.values(previous).some(Boolean))fill(previous)}$('campaign-form').scrollIntoView({behavior:'smooth',block:'start'})}function render(){const host=$('campaign-list');host.replaceChildren();if(!drafts.length){const p=document.createElement('p');p.textContent='Aucune campagne importée dans ce navigateur.';host.append(p)}drafts.forEach(d=>{const card=document.createElement('div');card.className='mailing-list-card';const title=document.createElement('h3');title.textContent=d.name||d.subject||'Sans titre';const p=document.createElement('p');p.textContent=(d.target||'Sans liste')+' · Brouillon · '+(d.subject||'Sans sujet');const btn=document.createElement('button');btn.textContent='Modifier';btn.onclick=()=>{$('campaign-form').dataset.edit=d.id;open(d)};card.append(title,p,btn);host.append(card)})}
+render()})();</script><script id="mail-campaign-script">(()=>{'use strict';const $=id=>document.getElementById(id),key='eloah-mail-campaign-drafts-v1',scratch='eloah-mail-current-draft-v1';let drafts=[];try{drafts=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(drafts))drafts=[]}catch{}const fields=['subject','target','template','sender-name','sender-email','reply-to','name','body','schedule-at','schedule-mode'];function value(id){return $('campaign-'+id).value}function capture(){const d={};fields.forEach(k=>d[k]=value(k));return d}function fill(d){fields.forEach(k=>{if(d[k]!==undefined)$('campaign-'+k).value=d[k]});$('campaign-restored').hidden=false}function open(d=null){$('campaign-form').hidden=false;$('campaign-preview-output').hidden=true;$('campaign-form').reset();$('campaign-restored').hidden=true;if(d)fill(d);else{let previous=null;try{previous=JSON.parse(localStorage.getItem(scratch)||'null')}catch{}if(previous&&Object.values(previous).some(Boolean))fill(previous)}$('campaign-form').scrollIntoView({behavior:'smooth',block:'start'})}function render(){const host=$('campaign-list');host.replaceChildren();if(!drafts.length){const p=document.createElement('p');p.textContent='Aucune campagne importée dans ce navigateur.';host.append(p)}drafts.forEach(d=>{const card=document.createElement('div');card.className='mailing-list-card';const title=document.createElement('h3');title.textContent=d.name||d.subject||'Sans titre';const p=document.createElement('p');p.textContent=(d.target||'Sans liste')+' · Brouillon · '+(d.subject||'Sans sujet');const btn=document.createElement('button');btn.textContent='Modifier';btn.onclick=()=>{$('campaign-form').dataset.edit=d.id;open(d)};card.append(title,p,btn);host.append(card)})}
 $('campaign-new').onclick=()=>{delete $('campaign-form').dataset.edit;open()};
 $('campaign-cancel').onclick=()=>$('campaign-form').hidden=true;
 fields.forEach(k=>$('campaign-'+k).addEventListener('input',()=>{try{localStorage.setItem(scratch,JSON.stringify(capture()))}catch{}}));
@@ -637,5 +637,73 @@ function renderPreview(){
  }
 }
 const preview=document.getElementById('campaign-preview');if(preview)preview.onclick=renderPreview;
+})();
+</script><script id="eloah-campaign-live-coordinator">
+(()=>{'use strict';
+const id=s=>document.getElementById(s);
+const form=id('campaign-form'),subject=id('campaign-subject'),body=id('campaign-body'),template=id('campaign-template'),target=id('campaign-target');
+const preview=id('campaign-preview'),frame=id('campaign-preview-frame'),templateLabel=id('campaign-preview-template');
+const testAddress=id('campaign-test-address'),testButton=id('campaign-send-test');
+const nowButton=id('campaign-send-now'),laterButton=id('campaign-send-later'),scheduleInput=id('campaign-schedule-at'),scheduleMode=id('campaign-schedule-mode'),scheduleButton=id('campaign-save-schedule');
+const count=id('campaign-editor-count'),status=id('campaign-status'),warning=id('campaign-delivery-warning');
+if(!form||!preview||!frame||!body||!scheduleMode)return;
+let renderQueued=false;
+function scheduleRender(){
+ if(renderQueued||form.hidden)return;
+ renderQueued=true;
+ requestAnimationFrame(()=>{renderQueued=false;if(form.hidden)return;
+  frame.dataset.template=template.value;
+  templateLabel.textContent=template.value;
+  count.textContent=body.value.length.toLocaleString('fr-FR')+' caractères';
+  preview.click();
+ });
+}
+const watched=[subject,body,template,target,id('campaign-sender-name'),id('campaign-sender-email')];
+watched.forEach(el=>{if(el){el.addEventListener('input',scheduleRender);el.addEventListener('change',scheduleRender)}});
+function setScheduleMode(mode,save=true){
+ const scheduled=mode==='later';
+ scheduleMode.value=scheduled?'later':'now';
+ scheduleInput.disabled=!scheduled;
+ nowButton.setAttribute('aria-pressed',String(!scheduled));
+ laterButton.setAttribute('aria-pressed',String(scheduled));
+ scheduleButton.textContent=scheduled?'Enregistrer la date prévue':'Enregistrer les réglages';
+ if(save)scheduleMode.dispatchEvent(new Event('input',{bubbles:true}));
+}
+nowButton.onclick=()=>setScheduleMode('now');
+laterButton.onclick=()=>setScheduleMode('later');
+scheduleInput.addEventListener('input',()=>{scheduleInput.dispatchEvent(new Event('change',{bubbles:true}))});
+scheduleButton.onclick=()=>{
+ if(scheduleMode.value==='later'){
+  if(!scheduleInput.value){status.textContent='Choisis une date et une heure avant d’enregistrer.';scheduleInput.focus();return}
+  const time=new Date(scheduleInput.value);
+  if(!Number.isFinite(time.getTime())||time.getTime()<=Date.now()){status.textContent='Choisis une date et une heure futures.';scheduleInput.focus();return}
+ }
+ if(!subject.value.trim()||!target.value){status.textContent='Renseigne un sujet et une liste destinataire.';return}
+ const label=scheduleMode.value==='later'?'Date prévue enregistrée dans le brouillon — envoi automatique non activé.':'Brouillon enregistré pour un envoi manuel ultérieur.';
+ // Save using the same existing draft mechanism, without sending or queuing messages.
+ form.requestSubmit();
+ status.textContent=label;
+};
+function safeAddress(value){return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)}
+testButton.onclick=()=>{
+ const email=testAddress.value.trim();
+ if(!safeAddress(email)){status.textContent='Renseigne une adresse e-mail de test valide.';testAddress.focus();return}
+ if(!subject.value.trim()||!body.value.trim()){status.textContent='Renseigne le sujet et le contenu avant de préparer un test.';return}
+ // Opens a local draft in the user's email application. It does not send anything on its own.
+ const draft=body.value.length>5500?body.value.slice(0,5500)+'\n\n[Texte tronqué pour le lien de messagerie]':body.value;
+ const link='mailto:'+encodeURIComponent(email)+'?subject='+encodeURIComponent('[TEST] '+subject.value.trim())+'&body='+encodeURIComponent(draft);
+ const a=document.createElement('a');a.href=link;a.click();
+ status.textContent='Un brouillon de test a été préparé dans ta messagerie. Aucun e-mail n’a été envoyé par ELOAH.';
+};
+function updateOpen(){
+ if(form.hidden)return;
+ setScheduleMode(scheduleMode.value==='later'?'later':'now',false);
+ warning.textContent='Aucun fournisseur d’envoi connecté : les e-mails tests passent par ta messagerie et les dates programmées restent des brouillons locaux.';
+ scheduleRender();
+}
+new MutationObserver(updateOpen).observe(form,{attributes:true,attributeFilter:['hidden']});
+new MutationObserver(updateOpen).observe(id('campaign-restored'),{attributes:true,attributeFilter:['hidden']});
+document.querySelector('[data-mail-tab="campagnes"]')?.addEventListener('click',()=>{if(!form.hidden)scheduleRender()});
+updateOpen();
 })();
 </script></body></html>
