@@ -2,7 +2,7 @@
 
 **ELOAH · Foi & Spiritualité · PARABOLES LAB · Version du 13 octobre 2026**
 
-[Ouvrir le laboratoire interactif](eloah-foi-paraboles-lab.html) · [Retour à Foi & Spiritualité](foi-control.html)
+[Ouvrir le laboratoire interactif](eloah-foi-paraboles-lab.html) · [Lire le Grand Livre des 44 analyses](foi-control.html?file=eloah-foi-paraboles-grand-livre-44.md) · [Décoder la tête de la prophétie : PAR-045](foi-control.html?file=eloah-foi-par-045-tete-prophetie.md) · [Retour à Foi & Spiritualité](foi-control.html)
 
 > **Principe central :** une parabole n'est pas un rébus dont chaque objet aurait une traduction obligatoire. C'est une parole imagée située dans un récit, une controverse, une scène de vie, une tradition de transmission et un horizon de foi.
 
