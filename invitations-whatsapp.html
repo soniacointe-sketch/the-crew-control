@@ -128,4 +128,4 @@ $('export').onclick=()=>{const hist=JSON.parse(data("history")||"[]");const csv=
 $('logout').onclick=async()=>{await sb.auth.signOut();user=null;prereg=[];renderQueue();$('first').value="";$('phone').value="";$('message').value="";enter()};
 enter().catch(e=>{$('loginStatus').textContent=e.message});
 })();
-</script></body></html>
+</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
