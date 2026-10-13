@@ -124,6 +124,47 @@ oldOpacity.addEventListener('input',()=>{oldMapTiles.setOpacity(Number(oldOpacit
 
 const streetLayers=L.layerGroup().addTo(map);
 const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};const pointMarkers={};
+
+const cadastreOutline=L.geoJSON(null,{style:{color:'#9c783f',weight:1,opacity:.85,fillColor:'#dfc28b',fillOpacity:.11},onEachFeature:(feature,layer)=>{
+layer.bindPopup('<b>Parcelle Vasserot 1810–1836</b><br>Limite foncière vectorisée par ALPAGE, époque postérieure au Paris décrit par Hugo.<br><small>Licence ODbL · Géométrie historique et non parcelle actuelle.</small>');
+}}).addTo(map);
+const cadastreROI={south:48.8516,north:48.8583,west:2.338,east:2.358};
+function geoBounds(feature){
+let west=Infinity,east=-Infinity,south=Infinity,north=-Infinity;
+const pending=[feature?.geometry?.coordinates];
+while(pending.length){
+const n=pending.pop();
+if(!Array.isArray(n))continue;
+if(n.length>=2&&typeof n[0]==='number'&&typeof n[1]==='number'){
+const x=n[0],y=n[1];if(Number.isFinite(x)&&Number.isFinite(y)){west=Math.min(west,x);east=Math.max(east,x);south=Math.min(south,y);north=Math.max(north,y);}
+}else for(const v of n)pending.push(v);
+}
+return {west,east,south,north};
+}
+window.PARISIS_VASSEROT={
+load(collection){
+if(!collection||collection.type!=='FeatureCollection'||!Array.isArray(collection.features))throw Error('Le fichier doit être un GeoJSON FeatureCollection.');
+const candidates=[];
+for(const feature of collection.features){
+if(!feature?.geometry)continue;
+const b=geoBounds(feature);
+if(b.west>180||b.east< -180||b.south>90||b.north< -90)throw Error('Coordonnées incompatibles avec WGS84. Vérifier le fichier .prj de la source.');
+if(b.west<=cadastreROI.east&&b.east>=cadastreROI.west&&b.south<=cadastreROI.north&&b.north>=cadastreROI.south){
+candidates.push(feature);
+if(candidates.length>4000)throw Error('Plus de 4000 éléments retenus : zone ou géométrie à vérifier.');
+}
+}
+cadastreOutline.clearLayers();
+if(candidates.length)cadastreOutline.addData({type:'FeatureCollection',features:candidates});
+cadastreOutline.bringToBack();
+if(!map.hasLayer(cadastreOutline))cadastreOutline.addTo(map);
+return {count:candidates.length,sourceCount:collection.features.length,bounds:'Île de la Cité et ses abords'};
+},
+visible(flag){if(flag){if(!map.hasLayer(cadastreOutline))cadastreOutline.addTo(map)}else map.removeLayer(cadastreOutline);},
+clear(){cadastreOutline.clearLayers();},
+isVisible(){return map.hasLayer(cadastreOutline);}
+};
+
 const allCoords=[];
 function clean(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function render(){
