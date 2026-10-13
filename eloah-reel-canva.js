@@ -346,6 +346,44 @@ function frameCatalog(){
  return head+(recent.length?'<section class="ecs-frame-section" data-frame-section><div class="ecs-sectiontitle"><strong>Utilisés récemment</strong><button type="button" data-frame-group="recent">Afficher tout →</button></div><div class="ecs-frame-strip">'+recent.map(frameTile).join('')+'</div></section>':'')+
  lib.groups.map(frameSection).join('')+'<div class="ecs-frame-footer"><p class="ecs-note">187 cadres originaux ELOAH, dont des cadres à plusieurs cases. Ajoute un cadre, puis choisis les photos à placer dedans.</p><button class="ecs-pillbtn primary" data-action="addImage" type="button">＋ Importer mes photos</button></div>';
 }
+
+function captureFrameAssets(maxSide=950,maxChars=10000000){
+ const assets=[];let total=0;const exists=new Set(S.elements.filter(e=>e.kind==='photoFrame').map(e=>String(e.id)));
+ for(const [key,im] of framePhotos.entries()){
+  const [id,slot]=key.split(':');if(!exists.has(id)||!im?.complete||!im.naturalWidth)continue;
+  try{
+   const k=Math.min(1,maxSide/Math.max(im.naturalWidth,im.naturalHeight));
+   const c=document.createElement('canvas');c.width=Math.max(1,Math.round(im.naturalWidth*k));c.height=Math.max(1,Math.round(im.naturalHeight*k));
+   const ctx=c.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,c.width,c.height);
+   ctx.drawImage(im,0,0,c.width,c.height);
+   const data=c.toDataURL('image/jpeg',.78);
+   if(total+data.length>maxChars)continue;
+   assets.push({id:Number(id),slot:Number(slot),data});total+=data.length;
+  }catch(e){console.warn('Photo non embarquée dans le projet',key,e)}
+ }
+ return assets;
+}
+function saveFrameMediaLocal(){
+ try{
+  const frames=captureFrameAssets(800,3500000);
+  localStorage.setItem('eloah_reel_editor_frame_assets',JSON.stringify(frames));
+ }catch(e){console.warn('Stockage local des photos limité',e)}
+}
+async function restoreFrameAssets(assets,idMap=null){
+ if(!Array.isArray(assets))return 0;
+ let count=0;
+ for(const a of assets){
+  if(typeof a.data!=='string'||!a.data.startsWith('data:image/')||a.data.length>6000000)continue;
+  const id=idMap?.get(String(a.id))??Number(a.id);
+  const e=S.elements.find(el=>el.id===id&&el.kind==='photoFrame');
+  if(!e||!Number.isInteger(a.slot)||a.slot<0||a.slot>=frameSlotCount(e))continue;
+  const im=new Image();im.src=a.data;
+  try{await im.decode();framePhotos.set(e.id+':'+a.slot,im);count++}catch{}
+ }
+ if(count){renderSide();draw()}
+ return count;
+}
+
 function frameSelected(){return S.elements.find(e=>e.id===selected&&e.kind==='photoFrame')}
 function frameSlotCount(e){const item=window.ELOAHFrames?.byId.get(e?.variant);return item?window.ELOAHFrames.slots(item).length:0}
 function frameSlotNumberAt(e,p){
