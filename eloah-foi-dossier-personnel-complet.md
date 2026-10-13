@@ -1,16 +1,22 @@
-# ELOAH — FOI & SPIRITUALITÉ
+**ELOAH · FOI & SPIRITUALITÉ**
 
-**NOUVEAU CHAPITRE · DOSSIER PERSONNEL**
+*DOSSIER PERSONNEL · CARNET DE RECHERCHE ET DE MÉDITATION*
 
 # Ce que je crois. Ce que je cherche. Ce que je découvre.
 
-Un espace pour relier ma foi, mes questions, mes lectures, mes recherches et ce que tout cela signifie dans ma vie.
+Il y a les textes vers lesquels on revient, les questions que l'on n'a pas encore résolues et les découvertes qui donnent envie de poursuivre. Ce chapitre est né de cette rencontre entre la foi, la lecture et la curiosité. Il ne cherche pas à tout expliquer : il ouvre un lieu où les interrogations peuvent rester vivantes.
 
-J'ai reconstitué ce premier chapitre à partir de nos échanges précédents. Il contient tes recherches sur le christianisme, Jésus, Marie, saint Pierre, Léon XIV, l'archange Michel, les textes anciens, les manuscrits et les traditions symboliques.
+J'y rassemble plusieurs fils de recherche : la vie et les paroles de Jésus, Marie et la prière, Pierre et la transmission, Léon XIV et l'héritage augustinien, l'archange Michel, les manuscrits anciens, les textes apocryphes, les lettres et les symboles. Certains sujets se répondent ; d'autres demandent encore à être étudiés séparément.
 
-Il reste personnel : **je ne transforme pas automatiquement tes sujets de recherche en croyances que tu aurais affirmées.**
+**Une distinction essentielle guide ce carnet :** un fait attesté par un document, une tradition religieuse, une interprétation symbolique et une conviction intime n'ont pas le même statut. Les rapprocher peut éclairer une question ; les confondre risquerait de lui retirer tout son sens.
+
+> Chercher n'oblige pas à prétendre savoir. Croire n'interdit pas de poser des questions.
+
+Ce dossier reste volontairement ouvert. Les recherches qui y figurent ne sont pas automatiquement des convictions personnelles, et les méditations proposées ne deviennent pas mes propres prières tant que je ne les ai pas choisies et écrites comme telles.
 
 ## Tableau de bord — Foi & spiritualité
+
+**Les repères du chapitre.** Douze rubriques pour organiser les lectures, des corpus à comparer et un journal à poursuivre. Ces chiffres décrivent la structure du dossier, pas une mesure de la foi ou de la progression spirituelle.
 
 | Indicateur | Valeur |
 |---|---|
@@ -18,6 +24,10 @@ Il reste personnel : **je ne transforme pas automatiquement tes sujets de recher
 | Corpus de recherche | **3** |
 | Parcours spirituel | **1** |
 | Questions à explorer | **∞** |
+
+### Les douze portes du dossier
+
+Choisis une rubrique dans le sommaire : chaque titre ouvre son chapitre complet dans la bibliothèque ELOAH. Les notes plus bas conservent les premières pistes de lecture, sans remplacer les études détaillées.
 
 | Numéro | Rubrique | Description |
 |---|---|---|
@@ -34,7 +44,9 @@ Il reste personnel : **je ne transforme pas automatiquement tes sujets de recher
 | 11 | [Mes prières et méditations →](foi-control.html?file=eloah-foi-personnel-11-prieres-meditations.md) | Pratiques, textes personnels, chemin spirituel |
 | 12 | [Mon journal de découvertes →](foi-control.html?file=eloah-foi-personnel-12-journal-decouvertes.md) | Chronologie, questions et prochaines recherches |
 
-## Le contenu déjà rempli
+## Carnet de lecture — premières pistes
+
+Ces pages rassemblent les questions, comparaisons et sources déjà ouvertes. Elles forment un point de départ : les textes d'origine, leurs datations et leurs différentes traditions restent à confronter dans chaque enquête.
 
 ### 01 — Ma foi et mes convictions
 
@@ -168,6 +180,6 @@ Voici une première méditation originale, proposée pour ce chapitre, et non pr
 
 **Approfondir ma bibliothèque**
 
-État du travail (texte initial) : le contenu du chapitre est constitué ici, avec les douze rubriques et les premières fiches renseignées. Il n'a pas encore été écrit dans le site ou le dépôt ELOAH ; je ne le présente donc pas comme déjà publié.
+État du dossier : les douze rubriques et les premières fiches sont désormais publiées dans la bibliothèque ELOAH. Elles peuvent être approfondies, documentées ou corrigées au fil des lectures. Le carnet ne prétend pas être achevé.
 
 L'objectif est que cet espace devienne à la fois **ton journal spirituel personnel et ta bibliothèque de recherche**, avec des connaissances vérifiables, tes propres réflexions, et toute la place nécessaire pour continuer à découvrir.
