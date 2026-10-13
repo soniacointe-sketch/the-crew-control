@@ -1,5 +1,5 @@
-/* Mes repères: public links and non-confidential notes, never a secret vault.
-   This view keeps the historical route and storage schema. No automatic writes. */
+/* Mes favoris: public resources with a short personal annotation, never a secret vault.
+   Historical route, storage key, module and export schema are retained. No automatic writes. */
 (() => {
   'use strict';
   if (!location.pathname.endsWith('/eloah-partenaire.html') || new URLSearchParams(location.search).get('rubrique') !== 'Coffre-fort') return;
@@ -16,7 +16,7 @@
     function read() {
       let value;
       try { value = JSON.parse(localStorage.getItem(KEY) || '[]'); }
-      catch { throw Error('Tes repères ne peuvent pas être lus dans ce navigateur. Aucune donnée n’a été remplacée.'); }
+      catch { throw Error('Tes favoris ne peuvent pas être lus dans ce navigateur. Aucune donnée n’a été remplacée.'); }
       if (!Array.isArray(value)) throw Error('Les données de ce navigateur sont illisibles. Aucune donnée n’a été remplacée.');
       return value;
     }
@@ -36,33 +36,35 @@
       const d = new Date(value + 'T12:00:00Z');
       return Number.isFinite(d.getTime()) && d.toISOString().slice(0, 10) === value;
     }
-    const root = el('section'); root.id = 'coffre-client-root'; root.dataset.version = 'client2';
+    const root = el('section'); root.id = 'coffre-client-root'; root.dataset.version = 'favoris1';
     root.innerHTML = `
       <header class="cr-hero">
-        <div class="cr-top"><span class="cr-eyebrow">ELOAH · MES REPÈRES</span><a href="mes-univers.html">← Mon accueil</a></div>
-        <h1>Mes repères</h1>
-        <p class="cr-intro">Garde les liens et les notes utiles à tes projets. Retrouve l’essentiel sans avoir à chercher partout.</p>
-        <div class="cr-actions"><button type="button" class="cr-primary" id="cr-add">+ Ajouter un lien ou une note</button><a class="cr-btn" href="eloah-bibliotheque.html?type=fichiers">Ouvrir mes documents</a></div>
+        <div class="cr-top"><span class="cr-eyebrow">ELOAH · BIBLIOTHÈQUE</span><a href="eloah-bibliotheque.html?type=fichiers">← Ma bibliothèque</a></div>
+        <h1>Mes favoris</h1>
+        <p class="cr-intro"><strong>Tes liens utiles, au même endroit.</strong><br>Garde une page, un outil ou une référence, ajoute quelques mots pour te rappeler pourquoi, et retrouve-les quand tu en as besoin.</p>
+        <div class="cr-actions"><button type="button" class="cr-primary" id="cr-add">+ Ajouter un favori</button><a class="cr-btn" href="eloah-bibliotheque.html?type=fichiers">Ouvrir mes documents</a></div>
+        <p class="cr-help cr-purpose">Une vidéo à revoir, un article à relire, un outil à retrouver. Pour écrire ou préparer un texte, ouvre plutôt <a href="eloah-partenaire.html?rubrique=Mon%20Espace">Mes notes</a>.</p>
       </header>
-      <div class="cr-security" id="cr-security"><strong>Des repères, pas des secrets.</strong><p>Cet espace n’est ni chiffré ni verrouillé. Ajoute uniquement des liens publics et des notes non confidentielles : aucun mot de passe, code d’accès ou document sensible.</p></div>
+      <div class="cr-security" id="cr-security"><strong>Des liens utiles, pas des secrets.</strong><p>Cet espace n’est ni chiffré ni verrouillé. Garde uniquement des liens publics et des commentaires non confidentiels : aucun mot de passe, code d’accès ou document sensible.</p></div>
       <p id="cr-error" class="cr-error" role="alert" hidden></p>
       <section class="cr-collection" aria-labelledby="cr-list-title">
-        <div class="cr-section-head"><h2 id="cr-list-title">Mes liens et notes</h2><div class="cr-switch" role="group" aria-label="Choisir les repères affichés"><button type="button" id="cr-active" aria-pressed="true">Mes repères</button><button type="button" id="cr-archived" aria-pressed="false">Mes archives</button></div></div>
-        <div class="cr-filters"><label for="cr-search">Rechercher<input id="cr-search" type="search" placeholder="Un titre, un lien, un mot dans une note…" autocomplete="off" maxlength="200"></label><label for="cr-kind">Afficher<select id="cr-kind"><option value="all">Tous les repères</option><option value="links">Avec un lien</option><option value="notes">Notes sans lien</option></select></label><button type="button" id="cr-clear" hidden>Effacer les filtres</button></div>
+        <div class="cr-section-head"><h2 id="cr-list-title">Les ressources que je garde</h2><div class="cr-switch" role="group" aria-label="Choisir les favoris affichés"><button type="button" id="cr-active" aria-pressed="true">Mes favoris</button><button type="button" id="cr-archived" aria-pressed="false">Mes archives</button></div></div>
+        <div class="cr-filters"><label for="cr-search">Rechercher<input id="cr-search" type="search" placeholder="Un titre, un site, un mot dans mon commentaire…" autocomplete="off" maxlength="200"></label><label for="cr-kind">Afficher<select id="cr-kind"><option value="all">Tous mes favoris</option><option value="links">Avec un lien</option><option value="notes">Références sans lien</option></select></label><button type="button" id="cr-clear" hidden>Effacer les filtres</button></div>
         <div id="cr-feedback" class="cr-feedback" hidden><p id="cr-status" role="status" aria-live="polite" aria-atomic="true"></p><button type="button" id="cr-undo" hidden>Annuler l’archivage</button></div>
         <p id="cr-count" class="cr-help" role="status" aria-live="polite"></p><div id="cr-list" class="cr-grid"></div>
       </section>
-      <details class="cr-details" id="cr-backup"><summary>Conserver ou récupérer mes repères</summary><div><p>Télécharge une copie de cette rubrique, archives comprises. L’import ajoute seulement les fiches absentes et laisse les fiches déjà présentes inchangées.</p><div class="cr-actions"><button type="button" id="cr-export">Télécharger mes repères</button><button type="button" id="cr-import">Importer une copie</button><input type="file" id="cr-file" accept=".json,application/json" hidden></div><p id="cr-backup-status" class="cr-help" role="status" aria-live="polite"></p><p id="cr-backup-error" class="cr-error" role="alert" hidden></p><p class="cr-help">Cette copie n’est pas chiffrée et ne contient pas les autres rubriques. Conserve le fichier dans un endroit sûr.</p></div></details>
-      <details class="cr-details" id="cr-help"><summary>Ce que je peux garder ici</summary><div class="cr-help-grid"><div><h3>Des ressources utiles</h3><p>Le site public d’un outil, une page à relire, une référence ou des instructions non confidentielles.</p></div><div><h3>Ce qui reste ailleurs</h3><p>Les mots de passe et codes d’accès restent dans un gestionnaire de mots de passe. Les documents confidentiels n’ont pas leur place ici.</p></div><div><h3>Sur cet appareil</h3><p>Les fiches restent dans ce navigateur et ne sont pas séparées par compte. Changer de compte ne les efface pas. Aucune synchronisation automatique n’est activée par cette rubrique.</p></div></div></details>
-      <p class="cr-footer">Tes repères sont enregistrés dans ce navigateur. Pense à conserver une copie avant de changer d’appareil.</p>`;
+      <details class="cr-details" id="cr-help"><summary>Un exemple et les bons endroits où ranger</summary><div class="cr-help-grid"><div><h3>Mes favoris : retrouver</h3><p>Un tutoriel pour préparer une affiche, avec ce commentaire : « Reprendre à 4 minutes pour la mise en page. »</p></div><div><h3>Mes notes : écrire</h3><p>Mes idées, un brouillon ou la préparation de mon prochain atelier.</p><a href="eloah-partenaire.html?rubrique=Mon%20Espace">Ouvrir mes notes →</a></div><div><h3>Mes documents : classer</h3><p>Mes fichiers et les textes de mes projets se retrouvent dans la bibliothèque.</p><a href="eloah-bibliotheque.html?type=fichiers">Ouvrir mes documents →</a></div></div></details>
+      <details class="cr-details" id="cr-backup"><summary>Conserver ou récupérer mes favoris</summary><div><p>Télécharge une copie de cette rubrique, archives comprises. L’import ajoute seulement les fiches absentes et laisse les fiches déjà présentes inchangées. Les anciennes copies de « Mes repères » restent compatibles.</p><div class="cr-actions"><button type="button" id="cr-export">Télécharger mes favoris</button><button type="button" id="cr-import">Importer une copie</button><input type="file" id="cr-file" accept=".json,application/json" hidden></div><p id="cr-backup-status" class="cr-help" role="status" aria-live="polite"></p><p id="cr-backup-error" class="cr-error" role="alert" hidden></p><p class="cr-help">Cette copie n’est pas chiffrée et ne contient pas les autres rubriques. Conserve le fichier dans un endroit sûr.</p></div></details>
+      <details class="cr-details" id="cr-storage"><summary>Où sont conservés mes favoris ?</summary><div><p>Les fiches restent dans ce navigateur et ne sont pas séparées par compte. Changer de compte ne les efface pas. Aucune synchronisation automatique n’est activée par cette rubrique.</p><p>Les mots de passe et les documents confidentiels doivent rester dans des outils adaptés, pas dans tes favoris.</p></div></details>
+      <p class="cr-footer">Tes favoris sont enregistrés dans ce navigateur. Pense à conserver une copie avant de changer d’appareil.</p>`;
     main.append(root);
     const $ = id => document.getElementById(id);
     const editor = el('dialog', 'cr-dialog'); editor.id = 'cr-editor'; editor.setAttribute('aria-labelledby', 'cr-editor-title'); editor.setAttribute('aria-describedby', 'cr-editor-help');
-    editor.innerHTML = `<div class="cr-section-head"><h2 id="cr-editor-title">Ajouter un repère</h2><button type="button" id="cr-close" aria-label="Fermer le formulaire">×</button></div><p class="cr-help" id="cr-editor-help">Un lien public ou une note non confidentielle. Aucun mot de passe ni code d’accès.</p><form id="cr-form" novalidate><label for="cr-title">Nom du repère<input id="cr-title" name="title" required maxlength="180" autocomplete="off" placeholder="Ex. Ressources pour mon prochain atelier" aria-describedby="cr-title-error"></label><p id="cr-title-error" class="cr-field-error" hidden></p><label for="cr-url">Lien public <small>(facultatif)</small><input id="cr-url" name="url" type="url" maxlength="2048" placeholder="https://" autocomplete="off" aria-describedby="cr-url-help cr-url-error"></label><p class="cr-help" id="cr-url-help">Une adresse publique, sans identifiant ni code d’accès dans le lien.</p><p id="cr-url-error" class="cr-field-error" hidden></p><label for="cr-note">Ma note <small>(facultative)</small><textarea id="cr-note" name="note" maxlength="12000" rows="6" placeholder="Ce que je souhaite retrouver ou retenir…" aria-describedby="cr-note-error"></textarea></label><p id="cr-note-error" class="cr-field-error" hidden></p><details class="cr-details" id="cr-followup"><summary>Ajouter un suivi <small>(facultatif)</small></summary><div class="cr-form-grid"><label for="cr-state">Avancement<select id="cr-state" name="state" aria-describedby="cr-form-error"></select></label><label for="cr-date">Date à prévoir<input id="cr-date" name="date" type="date" aria-describedby="cr-form-error"></label></div><p class="cr-help">Cette date ne déclenche pas de rappel.</p></details><p id="cr-form-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="submit" class="cr-primary" id="cr-save">Enregistrer mon repère</button><button type="button" id="cr-cancel">Annuler</button></div></form>`;
+    editor.innerHTML = `<div class="cr-section-head"><h2 id="cr-editor-title">Ajouter un favori</h2><button type="button" id="cr-close" aria-label="Fermer le formulaire">×</button></div><p class="cr-help" id="cr-editor-help">Une ressource à retrouver, avec quelques mots pour te rappeler son utilité. Aucun mot de passe ni code d’accès.</p><form id="cr-form" novalidate><label for="cr-title">Nom du favori<input id="cr-title" name="title" required maxlength="180" autocomplete="off" placeholder="Ex. Tutoriel pour préparer mon affiche" aria-describedby="cr-title-error"></label><p id="cr-title-error" class="cr-field-error" hidden></p><label for="cr-url">Lien public <small>(facultatif)</small><input id="cr-url" name="url" type="url" maxlength="2048" placeholder="https://" autocomplete="off" aria-describedby="cr-url-help cr-url-error"></label><p class="cr-help" id="cr-url-help">Une adresse publique, sans identifiant ni code d’accès dans le lien. Tu peux aussi garder une référence sans lien.</p><p id="cr-url-error" class="cr-field-error" hidden></p><label for="cr-note">Pourquoi je le garde <small>(facultatif)</small><textarea id="cr-note" name="note" maxlength="12000" rows="6" placeholder="Ex. Reprendre la vidéo à 4 minutes pour la mise en page." aria-describedby="cr-note-error"></textarea></label><p id="cr-note-error" class="cr-field-error" hidden></p><details class="cr-details" id="cr-followup"><summary>Ajouter un suivi <small>(facultatif)</small></summary><div class="cr-form-grid"><label for="cr-state">Avancement<select id="cr-state" name="state" aria-describedby="cr-form-error"></select></label><label for="cr-date">Date à prévoir<input id="cr-date" name="date" type="date" aria-describedby="cr-form-error"></label></div><p class="cr-help">Cette date ne déclenche pas de rappel.</p></details><p id="cr-form-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="submit" class="cr-primary" id="cr-save">Enregistrer mon favori</button><button type="button" id="cr-cancel">Annuler</button></div></form>`;
     const preview = el('dialog', 'cr-dialog'); preview.id = 'cr-preview'; preview.setAttribute('aria-labelledby', 'cr-preview-title'); preview.setAttribute('aria-describedby', 'cr-preview-summary');
-    preview.innerHTML = `<h2 id="cr-preview-title">Récupérer mes repères</h2><p id="cr-preview-summary"></p><p class="cr-help">Seuls les repères de cette rubrique sont récupérés. Les fiches existantes et les autres rubriques ne sont pas remplacées.</p><p id="cr-preview-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="button" class="cr-primary" id="cr-apply">Ajouter les repères manquants</button><button type="button" id="cr-import-cancel">Annuler</button></div>`;
+    preview.innerHTML = `<h2 id="cr-preview-title">Récupérer mes favoris</h2><p id="cr-preview-summary"></p><p class="cr-help">Seuls les favoris de cette rubrique sont récupérés. Les fiches existantes et les autres rubriques ne sont pas remplacées.</p><p id="cr-preview-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="button" class="cr-primary" id="cr-apply">Ajouter les favoris manquants</button><button type="button" id="cr-import-cancel">Annuler</button></div>`;
     const discard = el('dialog', 'cr-dialog'); discard.id = 'cr-discard'; discard.setAttribute('aria-labelledby', 'cr-discard-title'); discard.setAttribute('aria-describedby', 'cr-discard-help');
-    discard.innerHTML = `<h2 id="cr-discard-title">Quitter sans enregistrer ?</h2><p id="cr-discard-help">Les dernières modifications ne seront pas conservées. Ton repère déjà enregistré restera inchangé.</p><div class="cr-actions"><button type="button" class="cr-primary" id="cr-keep-editing" autofocus>Continuer la saisie</button><button type="button" id="cr-discard-confirm">Quitter sans enregistrer</button></div>`;
+    discard.innerHTML = `<h2 id="cr-discard-title">Quitter sans enregistrer ?</h2><p id="cr-discard-help">Les dernières modifications ne seront pas conservées. Ton favori déjà enregistré restera inchangé.</p><div class="cr-actions"><button type="button" class="cr-primary" id="cr-keep-editing" autofocus>Continuer la saisie</button><button type="button" id="cr-discard-confirm">Quitter sans enregistrer</button></div>`;
     document.body.append(editor, preview, discard);
     for (const s of STATES) $('cr-state').add(new Option(s, s));
     let archive = false, editing = null, baseline = null, dirty = false, pending = null, opener = null, undo = null, afterClose = null;
@@ -87,19 +89,19 @@
       const q = normal($('cr-search').value.trim()), kind = $('cr-kind').value;
       const selected = all.filter(own).filter(r => !!r.archived === archive);
       const filtered = selected.filter(r => (!q || normal([r.title, r.note, r.url].join(' ')).includes(q)) && (kind === 'all' || (kind === 'links' ? !!r.url : !r.url))).sort((a, b) => a.title.localeCompare(b.title, 'fr', {numeric:true}));
-      $('cr-count').textContent = filtered.length + (filtered.length === 1 ? ' repère' : ' repères') + (archive ? ' dans les archives' : '') + (q || kind !== 'all' ? ' pour cette recherche' : '');
-      $('cr-list-title').textContent = archive ? 'Mes archives' : 'Mes liens et notes';
+      $('cr-count').textContent = filtered.length + (filtered.length === 1 ? ' favori' : ' favoris') + (archive ? ' dans les archives' : '') + (q || kind !== 'all' ? ' pour cette recherche' : '');
+      $('cr-list-title').textContent = archive ? 'Mes archives' : 'Les ressources que je garde';
       $('cr-active').setAttribute('aria-pressed', String(!archive)); $('cr-archived').setAttribute('aria-pressed', String(archive)); $('cr-clear').hidden = !q && kind === 'all';
       const host = $('cr-list'); host.replaceChildren();
       if (!filtered.length) {
         const box = el('div', 'cr-empty');
-        box.append(el('h3', '', q || kind !== 'all' ? 'Aucun repère trouvé.' : archive ? 'Tes archives sont vides.' : 'Tes liens utiles commencent ici.'), el('p', '', q || kind !== 'all' ? 'Essaie un autre mot ou efface les filtres.' : archive ? 'Les fiches que tu archives restent disponibles ici.' : 'Un site à retrouver, une page à relire, quelques instructions : ajoute ton premier lien ou ta première note.'));
-        box.append(button(q || kind !== 'all' ? 'Effacer les filtres' : archive ? 'Retrouver mes repères' : '+ Ajouter mon premier repère', () => { if (q || kind !== 'all') clear(); else if (archive) { archive = false; render(); } else edit(); })); host.append(box); return;
+        box.append(el('h3', '', q || kind !== 'all' ? 'Aucun favori trouvé.' : archive ? 'Tes archives sont vides.' : 'Le prochain lien utile, garde-le ici.'), el('p', '', q || kind !== 'all' ? 'Essaie un autre mot ou efface les filtres.' : archive ? 'Les fiches que tu archives restent disponibles ici.' : 'Un tutoriel pour ton affiche, un article à relire ou le site d’un outil : ajoute son lien et ce que tu souhaites en retenir.'));
+        box.append(button(q || kind !== 'all' ? 'Effacer les filtres' : archive ? 'Retrouver mes favoris' : '+ Ajouter mon premier favori', () => { if (q || kind !== 'all') clear(); else if (archive) { archive = false; render(); } else edit(); })); host.append(box); return;
       }
       for (const r of filtered) {
         const card = el('article', 'cr-card'), url = safeURL(r.url); card.dataset.record = r.id;
-        card.append(el('span', 'cr-tag', r.url ? (r.note ? 'LIEN ET NOTE' : 'LIEN') : 'NOTE'), el('h3', '', r.title));
-        if (r.note) { const detail = el('details', 'cr-note-details'); detail.append(el('summary', '', 'Lire ma note'), el('p', 'cr-full-note', String(r.note))); card.append(detail); }
+        card.append(el('span', 'cr-tag', r.url ? 'LIEN FAVORI' : 'RÉFÉRENCE SANS LIEN'), el('h3', '', r.title));
+        if (r.note) { const detail = el('details', 'cr-note-details'); detail.append(el('summary', '', 'Pourquoi je le garde'), el('p', 'cr-full-note', String(r.note))); card.append(detail); }
         if (url) {
           const a = el('a', 'cr-resource', 'Ouvrir le lien ↗'); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
           a.setAttribute('aria-label', 'Ouvrir le lien : ' + r.title + ' (nouvel onglet)'); card.append(a, el('span', 'cr-domain', new URL(url).hostname));
@@ -127,7 +129,7 @@
       try {
         const all = read(), previous = uniqueRecord(all, id), record = {...previous, archived:next, updated:new Date().toISOString()};
         write(all.map(r => r === previous ? record : r)); render();
-        status(next ? 'Repère archivé. Il reste disponible dans « Mes archives ».' : 'Repère remis dans « Mes repères ».', {id, previous, next, snapshot:JSON.stringify(record)});
+        status(next ? 'Favori archivé. Il reste disponible dans « Mes archives ».' : 'Favori remis dans « Mes favoris ».', {id, previous, next, snapshot:JSON.stringify(record)});
         $('cr-undo').focus();
       } catch (e) { error(e.message); }
     }
@@ -135,9 +137,8 @@
       if (!undo) return;
       try {
         const action = undo, all = read(), current = uniqueRecord(all, action.id);
-        if (JSON.stringify(current) !== action.snapshot) { status('Ce repère a changé depuis. Retrouve-le dans tes repères ou tes archives pour le modifier.'); render(); return; }
-        // Restore only this record; do not overwrite another tab's changes.
-        write(all.map(r => r === current ? action.previous : r)); showRecord(action.previous); status('Dernière action annulée. Ton repère est conservé.');
+        if (JSON.stringify(current) !== action.snapshot) { status('Ce favori a changé depuis. Retrouve-le dans tes favoris ou tes archives pour le modifier.'); render(); return; }
+        write(all.map(r => r === current ? action.previous : r)); showRecord(action.previous); status('Dernière action annulée. Ton favori est conservé.');
       } catch (e) { error(e.message); }
     };
     function edit(id = null) {
@@ -145,7 +146,7 @@
         const all = read(), record = id ? uniqueRecord(all, id) : null;
         editing = id; baseline = record ? JSON.stringify(record) : null; dirty = false; afterClose = null; opener = document.activeElement;
         $('cr-form').reset(); setFormError(''); ['title','url','note'].forEach(n => fieldError(n, ''));
-        $('cr-editor-title').textContent = record ? 'Modifier mon repère' : 'Ajouter un repère';
+        $('cr-editor-title').textContent = record ? 'Modifier mon favori' : 'Ajouter un favori';
         for (const name of ['title','url','note','date','state']) $('cr-' + name).value = record?.[name] || (name === 'state' ? 'À faire' : '');
         $('cr-followup').open = !!record?.date || (!!record?.state && record.state !== 'À faire');
         editor.showModal(); $('cr-title').focus();
@@ -153,7 +154,7 @@
     }
     function closeEditor() {
       if (!dirty) { editor.close(); return; }
-      $('cr-discard-help').textContent = editing ? 'Les dernières modifications ne seront pas conservées. Ton repère déjà enregistré restera inchangé.' : 'Ce nouveau repère n’a pas encore été enregistré. Tu peux revenir à ta saisie pour le conserver.';
+      $('cr-discard-help').textContent = editing ? 'Les dernières modifications ne seront pas conservées. Ton favori déjà enregistré restera inchangé.' : 'Ce nouveau favori n’a pas encore été enregistré. Tu peux revenir à ta saisie pour le conserver.';
       if (!discard.open) discard.showModal(); $('cr-keep-editing').focus();
     }
     editor.addEventListener('cancel', e => { e.preventDefault(); closeEditor(); });
@@ -167,9 +168,9 @@
       e.preventDefault(); setFormError(''); ['title','url','note'].forEach(n => fieldError(n, ''));
       const data = Object.fromEntries(new FormData(e.target)); data.title = data.title.trim(); data.url = data.url.trim();
       let first = '';
-      if (!data.title || data.title.length > 180) { fieldError('title', 'Donne un nom à ton repère, en 180 caractères maximum.'); first = 'title'; }
+      if (!data.title || data.title.length > 180) { fieldError('title', 'Donne un nom à ton favori, en 180 caractères maximum.'); first = 'title'; }
       if (data.url.length > 2048 || (data.url && !safeURL(data.url))) { fieldError('url', 'Ajoute une adresse complète commençant par https:// ou http://, sans identifiant ni mot de passe dans le lien.'); first = first || 'url'; }
-      if (data.note.length > 12000) { fieldError('note', 'Raccourcis ta note à 12 000 caractères maximum.'); first = first || 'note'; }
+      if (data.note.length > 12000) { fieldError('note', 'Raccourcis ton commentaire à 12 000 caractères maximum.'); first = first || 'note'; }
       if (first) { setFormError('Il reste un champ à vérifier. Les précisions sont indiquées sous ta saisie.'); $('cr-' + first).focus(); return; }
       if (!validDate(data.date) || $('cr-date').validity.badInput || !STATES.includes(data.state)) { $('cr-followup').open = true; setFormError('Vérifie la date et l’avancement de cette fiche.'); $('cr-date').focus(); return; }
       try {
@@ -178,7 +179,7 @@
         const record = {...previous, ...data, module:MODULE, id:editing || crypto.randomUUID(), updated:new Date().toISOString()};
         write(previous ? all.map(r => r === previous ? record : r) : [...all, record]);
         const resetFilters = $('cr-search').value.trim() || $('cr-kind').value !== 'all' || archive !== !!record.archived;
-        dirty = false; afterClose = record; editor.close(); status('Ton repère est enregistré sur cet appareil.' + (resetFilters ? ' Les filtres ont été effacés pour te le montrer.' : '')); 
+        dirty = false; afterClose = record; editor.close(); status('Ton favori est enregistré sur cet appareil.' + (resetFilters ? ' Les filtres ont été effacés pour te le montrer.' : ''));
       } catch (e) { setFormError(e.message); }
     });
     $('cr-add').onclick = () => edit(); $('cr-close').onclick = closeEditor; $('cr-cancel').onclick = closeEditor;
@@ -189,12 +190,12 @@
         backupMessage();
         const records = read().filter(own), payload = {format:'sonia-universe-v1', universe:'itriia', scope:MODULE, exportedAt:new Date().toISOString(), records};
         const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}));
-        const a = el('a'); a.href = url; a.download = 'eloah-mes-reperes-' + new Date().toISOString().slice(0,10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-        backupMessage('Copie préparée : ' + records.length + (records.length === 1 ? ' repère' : ' repères') + ', archives comprises. Vérifie le fichier dans tes téléchargements.');
+        const a = el('a'); a.href = url; a.download = 'eloah-mes-favoris-' + new Date().toISOString().slice(0,10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+        backupMessage('Copie préparée : ' + records.length + (records.length === 1 ? ' favori' : ' favoris') + ', archives comprises. Vérifie le fichier dans tes téléchargements.');
       } catch (e) { backupMessage('', e.message); }
     };
     function importRecord(r) {
-      if (!own(r) || !r.id || r.id.length > 200 || !r.title.trim() || r.title.length > 180 || !STATES.includes(r.state) || typeof (r.note || '') !== 'string' || (r.note || '').length > 12000 || typeof (r.url || '') !== 'string' || (r.url || '').length > 2048 || (r.url && !safeURL(r.url)) || !validDate(r.date || '')) throw Error('Une fiche de cette copie est invalide. Aucun repère n’a été ajouté.');
+      if (!own(r) || !r.id || r.id.length > 200 || !r.title.trim() || r.title.length > 180 || !STATES.includes(r.state) || typeof (r.note || '') !== 'string' || (r.note || '').length > 12000 || typeof (r.url || '') !== 'string' || (r.url || '').length > 2048 || (r.url && !safeURL(r.url)) || !validDate(r.date || '')) throw Error('Une fiche de cette copie est invalide. Aucun favori n’a été ajouté.');
       return {id:r.id, title:r.title, module:MODULE, state:r.state, note:r.note || '', url:r.url || '', date:r.date || '', archived:!!r.archived};
     }
     $('cr-import').onclick = () => $('cr-file').click();
@@ -204,11 +205,11 @@
         const file = e.target.files[0]; if (!file) return;
         if (file.size > 8 * 1024 * 1024) throw Error('Choisis une copie de moins de 8 Mo.');
         const payload = JSON.parse(await file.text());
-        if (payload?.format !== 'sonia-universe-v1' || payload.universe !== 'itriia' || !Array.isArray(payload.records) || payload.records.length > 5000) throw Error('Ce fichier n’est pas une copie compatible avec tes repères ELOAH.');
+        if (payload?.format !== 'sonia-universe-v1' || payload.universe !== 'itriia' || !Array.isArray(payload.records) || payload.records.length > 5000) throw Error('Ce fichier n’est pas une copie compatible avec tes favoris ELOAH.');
         const candidates = payload.records.filter(r => r && r.module === MODULE).map(importRecord);
         const seen = new Set(read().filter(r => r && typeof r.id === 'string').map(r => r.id));
         pending = candidates.filter(r => { if (seen.has(r.id)) return false; seen.add(r.id); return true; });
-        $('cr-preview-summary').textContent = !candidates.length ? 'Cette copie ne contient aucun repère de cette rubrique. Rien ne sera ajouté.' : !pending.length ? 'Tous les repères de cette copie sont déjà présents ou répétés. Rien ne sera remplacé.' : pending.length + (pending.length === 1 ? ' repère peut être ajouté.' : ' repères peuvent être ajoutés.') + ' ' + (candidates.length - pending.length) + ' déjà présents ou répétés seront ignorés.';
+        $('cr-preview-summary').textContent = !candidates.length ? 'Cette copie ne contient aucun favori de cette rubrique. Rien ne sera ajouté.' : !pending.length ? 'Tous les favoris de cette copie sont déjà présents ou répétés. Rien ne sera remplacé.' : pending.length + (pending.length === 1 ? ' favori peut être ajouté.' : ' favoris peuvent être ajoutés.') + ' ' + (candidates.length - pending.length) + ' déjà présents ou répétés seront ignorés.';
         $('cr-preview-error').hidden = true; $('cr-apply').disabled = pending.length === 0; $('cr-import-cancel').textContent = pending.length ? 'Annuler' : 'Fermer'; preview.showModal();
         (pending.length ? $('cr-apply') : $('cr-import-cancel')).focus();
       } catch (err) { backupMessage('', err instanceof SyntaxError ? 'Ce fichier ne peut pas être lu. Choisis une copie téléchargée depuis ELOAH.' : err.message); }
@@ -220,7 +221,7 @@
         const all = read(), ids = new Set(all.filter(r => r && typeof r.id === 'string').map(r => r.id)), added = pending.filter(r => { if (ids.has(r.id)) return false; ids.add(r.id); return true; });
         if (added.length) write([...all, ...added]);
         preview.close(); pending = null; archive = false; $('cr-search').value = ''; $('cr-kind').value = 'all'; render();
-        const message = added.length + (added.length === 1 ? ' repère récupéré.' : ' repères récupérés.') + ' Les fiches déjà présentes sont conservées. Les fiches archivées restent dans « Mes archives ».';
+        const message = added.length + (added.length === 1 ? ' favori récupéré.' : ' favoris récupérés.') + ' Les fiches déjà présentes sont conservées. Les fiches archivées restent dans « Mes archives ».';
         status(message); backupMessage(message);
       } catch (e) { $('cr-preview-error').textContent = e.message; $('cr-preview-error').hidden = false; }
     };
@@ -241,8 +242,9 @@
     #coffre-client-root .cr-top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
     #coffre-client-root .cr-top a{font-size:13px;color:var(--cr-muted)}
     #coffre-client-root .cr-eyebrow{font:650 11px/1.5 system-ui;letter-spacing:.15em;color:var(--cr-muted)}
-    #coffre-client-root .cr-intro{font-size:17px;max-width:640px;margin:0 0 23px}
+    #coffre-client-root .cr-intro{font-size:17px;max-width:680px;margin:0 0 23px}
     #coffre-client-root a{color:inherit;text-underline-offset:3px}
+    #coffre-client-root .cr-purpose{max-width:680px;margin-top:16px}
     #coffre-client-root button,#coffre-client-root .cr-btn,.cr-dialog button{min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:10px 15px;background:var(--cr-paper)!important;color:var(--cr-ink)!important;border:1px solid var(--cr-line)!important;border-radius:8px;font:inherit;cursor:pointer;text-decoration:none}
     #coffre-client-root .cr-primary,.cr-dialog .cr-primary{background:var(--cr-ink)!important;border-color:var(--cr-ink)!important;color:#fffefa!important}
     #coffre-client-root button:hover,#coffre-client-root .cr-btn:hover,.cr-dialog button:hover{box-shadow:0 0 0 1px #b9acd3}
@@ -281,6 +283,7 @@
     #coffre-client-root .cr-details p,.cr-dialog .cr-details p{font-size:13px}
     #coffre-client-root .cr-help-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
     #coffre-client-root .cr-help-grid h3{font:600 14px system-ui}
+    #coffre-client-root .cr-help-grid a{font-size:13px}
     #coffre-client-root .cr-footer{font-size:12px;margin:24px 0 0;color:#73786e}
     #coffre-client-root .cr-feedback{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;background:#ece7f4;padding:12px 15px;border-radius:8px;margin:15px 0}
     #coffre-client-root .cr-feedback p{flex:1;min-width:160px;margin:0;color:#534367}
@@ -298,11 +301,10 @@
     .cr-dialog #cr-close{font-size:25px;width:44px;padding:0}
     @media(max-width:700px){#coffre-client-root .cr-grid{grid-template-columns:1fr}#coffre-client-root .cr-help-grid{grid-template-columns:1fr;gap:5px}#coffre-client-root .cr-intro{font-size:15px}#coffre-client-root .cr-filters{padding:14px}#coffre-client-root .cr-filters label:first-child,#coffre-client-root .cr-filters label:nth-child(2){width:100%;flex:auto}#coffre-client-root .cr-card{padding:19px}#coffre-client-root input,#coffre-client-root select,.cr-dialog input,.cr-dialog select,.cr-dialog textarea{font-size:16px}.cr-dialog{padding:20px}.cr-dialog .cr-form-grid{grid-template-columns:1fr}#coffre-client-root .cr-empty{padding:25px 16px}#coffre-client-root h2,.cr-dialog h2{font-size:25px}#coffre-client-root .cr-hero .cr-actions>*{width:100%}#coffre-client-root .cr-security{margin:22px 0 27px}}
     `;
-    document.head.append(css); document.body.classList.add('eloah-coffre-client'); document.title = 'Mes repères · ELOAH';
+    document.head.append(css); document.body.classList.add('eloah-coffre-client'); document.title = 'Mes favoris · ELOAH';
     const wordmark = document.querySelector('.eloah-global-nav .eloah-wordmark'); if (wordmark) wordmark.textContent = 'ELOAH · MON ESPACE';
-    // Rename this page's existing menu entry; keep its destination and saved module names.
     document.querySelectorAll('.eloah-global-nav a').forEach(a => {
-      try { const u = new URL(a.href); if (u.pathname.endsWith('/eloah-partenaire.html') && u.searchParams.get('rubrique') === MODULE) { a.textContent = 'Mes repères'; a.setAttribute('aria-current', 'page'); } } catch {}
+      try { const u = new URL(a.href); if (u.pathname.endsWith('/eloah-partenaire.html') && u.searchParams.get('rubrique') === MODULE) { a.textContent = 'Mes favoris'; a.setAttribute('aria-current', 'page'); } } catch {}
     });
     render();
   }
