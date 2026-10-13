@@ -480,10 +480,15 @@ function renderArticleFrame(i){
  const originalTitle=title.textContent.trim();
  const sourceHeaders=[...body.querySelectorAll("h2,h3")].filter(h=>/sources|bibliograph|r[ée]f[ée]rences|points d.appui|[ée]ditions et travaux|documents consult[ée]s/i.test(h.textContent));
  const allSections=[...body.querySelectorAll("h2,h3")];
+ const mediaNodes=[...body.querySelectorAll("a[href]")].filter(node=>/^https:\/\//i.test(node.href)&&(/\.(mp4|webm)(?:[?#]|$)/i.test(node.href)||/youtube\.com\/watch|youtu\.be\/|vimeo\.com\//i.test(node.href)));
+ const embeddedMedia=body.querySelector('video,iframe[src*="youtube.com/embed"],iframe[src*="player.vimeo.com"]');
+ if(embeddedMedia)embeddedMedia.id=embeddedMedia.id||"rev-model-film";
+ const mediaExists=Boolean(embeddedMedia||mediaNodes.length);
  const root=el("div","rev-model");
  const nav=el("nav","rev-model-nav");nav.dataset.noaudio="1";nav.setAttribute("aria-label","Navigation dans le dossier");
  nav.append(a("foi-control.html?file=eloah-foi-dossier-personnel-complet.md","ELOAH · Foi & Spiritualité"));
  nav.append(a("#rev-model-body","Lire le dossier"));
+ if(mediaExists)nav.append(a(embeddedMedia?"#"+embeddedMedia.id:"#rev-model-film","La vidéo"));
  if(sourceHeaders.length)nav.append(a("#rev-model-sources","Les sources"));
  nav.append(a("eloah-foi-publications.html","Toutes les publications ↗"));
  root.append(nav);
@@ -497,7 +502,7 @@ function renderArticleFrame(i){
  const actions=el("div","rev-model-actions");
  actions.append(a("#rev-model-body","Lire le texte ↓"));
  if(document.getElementById("faith-audio"))actions.append(a("#faith-audio","▶ Écouter"));
- const pdf=el("button","","Imprimer / PDF ↓");pdf.type="button";pdf.onclick=()=>window.print();actions.append(pdf);
+ const pdf=el("button","","Imprimer ou enregistrer en PDF ↓");pdf.type="button";pdf.onclick=()=>window.print();actions.append(pdf);
  const download=el("button","","Texte .md ↓");download.type="button";download.onclick=async()=>{
    try{const md=await getDoc(i);const blob=new Blob([md],{type:"text/markdown;charset=utf-8"});const url=URL.createObjectURL(blob);const link=a(url,"");link.download=doc[1];document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
    catch(err){alert("Le téléchargement n'est pas disponible : "+err.message);}
@@ -506,6 +511,13 @@ function renderArticleFrame(i){
  const imageName=ELOAH_PUBLICATION_IMAGES[doc[1]];
  if(imageName){hero.classList.add("has-image");const fig=el("figure","rev-model-cover");const img=el("img");img.src="assets/foi-publications/"+imageName;img.alt="Couverture illustrative du dossier "+doc[0];img.loading="lazy";img.width=480;img.height=600;const caption=el("figcaption","","Illustration éditoriale ELOAH générée, non photographie authentifiée du manuscrit.");fig.append(img,caption);hero.append(fig)}
  root.append(hero);
+ if(mediaExists&&!embeddedMedia){
+   const film=el("section","rev-model-reference");film.id="rev-model-film";film.dataset.noaudio="1";
+   film.append(el("h2","","Vidéo liée à ce dossier"));
+   const content=el("p","","Ce dossier comporte un lien vers une vidéo ; elle n'est pas reproduite ici si elle est hébergée à l'extérieur. ");
+   mediaNodes.slice(0,3).forEach((item,j)=>{if(j)content.append(" · ");const go=a(item.href,(item.textContent.trim()||"Ouvrir la vidéo")+" ↗");go.target="_blank";go.rel="noopener noreferrer";content.append(go)});
+   film.append(content);root.append(film);
+ }
  if(allSections.length>0){
    const tri=el("div","rev-model-thematic");tri.dataset.noaudio="1";
    allSections.filter(h=>h.tagName==="H2").slice(0,3).forEach((h,j)=>{const item=a("#"+h.id,"");item.append(el("span","",String(j+1).padStart(2,"0")),el("strong","",h.textContent));tri.append(item)});
