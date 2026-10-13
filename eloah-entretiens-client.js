@@ -30,7 +30,7 @@ function openForm(r){current=r||null;$('#form').reset();$('#edit-title').textCon
     empty.append(node('p',q?'Essaie un autre prénom, titre ou mot-clé.':'Ajoute un rendez-vous, même sans date : sa fiche apparaîtra ensuite ici.'));
     const actions=node('div','');actions.className='actions';
     if(q){const clear=node('button','Effacer la recherche');clear.type='button';clear.onclick=()=>{input.value='';renderRelations();input.focus()};actions.append(clear)}
-    else{const add=node('button','+ Noter mon premier rendez-vous');add.type='button';add.className='primary';add.onclick=()=>openForm();actions.append(add)}
+    else{const add=node('button','+ Noter mon premier rendez-vous');add.type='button';add.className='primary';add.onclick=()=>openForm();actions.append(add);const copy=node('button','Retrouver une ancienne copie');copy.type='button';copy.onclick=goCopies;actions.append(copy)}
     if(cloudMode&&localBackup.length){
       const msg=node('p',localBackup.length+' fiche(s) sont aussi conservées sur cet appareil. Elles ne sont pas automatiquement transférées vers le compte connecté.');
       const copy=node('button','Voir mes copies et ma connexion');copy.type='button';copy.onclick=goCopies;
