@@ -2,7 +2,7 @@
 
 **ELOAH · FOI & SPIRITUALITÉ · BIBLIOTHÈQUE DES TEXTES ANCIENS**
 
-[← Les 10 collections](foi-control.html?doc=10) · [Précédente](foi-control.html?doc=17) · [Suivante](foi-control.html?doc=19)
+[← Les 10 collections](foi-control.html?file=eloah-foi-collections-index.md) · [Précédente](foi-control.html?file=eloah-foi-collection-07-apocalypses.md) · [Suivante](foi-control.html?file=eloah-foi-collection-09-temoignages-historiques.md)
 
 > Les textes coptes, les discours de révélation et la diversité des courants anciens.
 
@@ -60,4 +60,11 @@ Noter les contradictions, les sources absentes, les objections, les hypothèses 
 
 **Modèle de preuve ELOAH :** **A** lecture directe du témoin ; **B** édition savante convergente ; **C** datation / restitution proposée ; **D** tradition ou interprétation ; **H** hypothèse à vérifier. Ce classement est une convention interne, pas un label scientifique officiel.
 
-[◈ Revenir aux dix collections](foi-control.html?doc=10)
+[◈ Revenir aux dix collections](foi-control.html?file=eloah-foi-collections-index.md)
+
+
+## Enquête universitaire ouverte — APO-019
+
+**[Le Livre secret de Jacques : lire l'enquête complète, les seize pages commentées, les cotes et les éditions critiques](foi-control.html?file=eloah-foi-apo-019-livre-secret-jacques.md)**.
+
+Texte classé dans **Nag Hammadi Codex I,2**, distinct des deux *Apocalypses de Jacques*. Vérifier dans [e-Clavis ECCA 495](https://www.nasscal.com/e-clavis-christian-apocrypha/apocryphon-of-james/).
