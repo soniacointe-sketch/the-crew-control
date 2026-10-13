@@ -40,10 +40,10 @@ h2{font-size:clamp(27px,3vw,39px);line-height:1.2;margin:7px 0 18px}h3{font-size
 footer{padding:19px 0 32px;border-top:1px solid var(--border);font-size:12px;color:var(--muted)}
 @media(max-width:950px){.frame{display:block}.toc{position:static;display:flex;overflow:auto;gap:2px;white-space:nowrap;padding:8px;margin-bottom:16px}.toc strong{display:none}.toc a{flex:none}.proof{grid-template-columns:1fr 1fr}}
 @media(max-width:650px){.cards,.figrow{grid-template-columns:1fr}.chapter{padding:20px 17px}.figrow img{height:auto}.viewer-scroll{height:380px}.top .navtools{width:100%}.wordmark{font-size:21px}}
-</style></head><body>
+.geo-wrap{display:grid;grid-template-columns:minmax(245px,340px) minmax(0,1fr);gap:18px;align-items:start}.geo-diagram{background:#faf6ed;border:1px solid var(--border);border-radius:10px;padding:14px}.geo-diagram svg{display:block;max-width:260px;width:100%;max-height:580px;height:auto;margin:auto}.geo-datatable{min-width:0}.metric-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:15px 0}.metric{padding:14px;background:#faf5ec;border-radius:9px;border:1px solid var(--border)}.metric strong{font:26px Georgia,serif;display:block;color:#87663d}.metric span{font-size:11px;color:#6d655b}.geo-note{font-size:12px;color:#70665b}.geo-datatable table td{white-space:nowrap}.geo-datatable table td:nth-child(2){white-space:normal}@media(max-width:670px){.geo-wrap{grid-template-columns:1fr}.geo-diagram svg{max-width:220px}.metric-row{grid-template-columns:1fr}}</style></head><body>
 <header class="top"><div class="wordmark">PARISIS <em>ENGINE</em></div><nav class="navtools"><a class="btn" href="eloah-parisis.html">← Bibliothèque</a><a class="btn" href="parisis-par-isis-004-atlas-avant-apres.html">004 · Paris 1825–1877</a><a class="btn" href="parisis-cartography-lab.html">Atelier cartes ↗</a></nav></header>
 <div class="frame">
-<nav class="toc" aria-label="Sommaire"><strong>PAR-ISIS-005</strong><a href="#entree">00 · Découverte</a><a href="#croquis">01 · Croquis 1848/1877</a><a href="#analyse">02 · Lire le document</a><a href="#cotes">03 · Cotes Vasserot</a><a href="#apres">04 · Plans postérieurs</a><a href="#marville">05 · Archives photographiques</a><a href="#mesurer">06 · Protocole de mesure</a><a href="#sources">07 · Documents et liens</a></nav>
+<nav class="toc" aria-label="Sommaire"><strong>PAR-ISIS-005</strong><a href="#entree">00 · Découverte</a><a href="#croquis">01 · Croquis 1848/1877</a><a href="#analyse">02 · Lire le document</a><a href="#cotes">03 · Cotes Vasserot</a><a href="#apres">04 · Plans postérieurs</a><a href="#marville">05 · Archives photographiques</a><a href="#mesurer">06 · Protocole de mesure</a><a href="#mesures-modernes">07 · Calcul moderne</a><a href="#sources">07 · Documents et liens</a></nav>
 <main>
 <section id="entree" class="hero">
 <div class="eyebrow">HUMANITIES LAB · PAR-ISIS-005 · 13 OCTOBRE 2026</div>
@@ -116,8 +116,56 @@ footer{padding:19px 0 32px;border-top:1px solid var(--border);font-size:12px;col
 <tr><td>Contre-exemples</td><td>Points de contrôle sélectionnés selon la même règle.</td><td>À préparer avant les mesures.</td></tr>
 <tr><td>Intention historique</td><td>Déclaration ou archives d'aménagement démontrant un motif voulu.</td><td>Aucune preuve identifiée ici.</td></tr>
 </tbody></table></div>
-<div class="warning"><b>Conclusion au 13 octobre 2026 :</b> nous avons progressé en attribution des sources et en chronologie, pas encore en mesure reproductible F2. Aucun tableau de coordonnées n'est présenté, puisque les points et la précision cartographique ne sont pas vérifiés.</div>
+<div class="warning"><b>Conclusion au 13 octobre 2026 :</b> nous avons progressé en attribution des sources et en chronologie, pas encore en mesure reproductible F2. Aucune coordonnée historique n'est publiée, faute de contrôle des carrefours sur les feuilles Vasserot. Une expérience séparée sur des coordonnées modernes est présentée dans la phase 2 ci-dessous ; elle ne vaut pas validation de l'alignement ancien.</div>
 <div class="timeline"><p><strong>Prochaine étape 1.</strong> Ouvrir les feuilles individuelles de l'ancien quartier Palais-Royal autour de la rue des Moineaux et contrôler les anciens numéros d'îlots.</p><p><strong>Prochaine étape 2.</strong> Identifier la feuille PP de l'après-1876 couvrant le même secteur.</p><p><strong>Prochaine étape 3.</strong> Géoréférencer sur trois points stables au minimum, puis calculer et publier une table de mesures reproductible.</p><p><strong>Prochaine étape 4.</strong> Confronter ces résultats à la figure réellement publiée par Van de Leur : ne jamais substituer notre schéma à son dessin.</p></div>
+</section>
+<section class="chapter" id="mesures-modernes">
+<div class="eyebrow">PAR-ISIS-005 · PHASE 2 · PREMIER CALCUL REPRODUCTIBLE</div>
+<h2>Des coordonnées réelles, une droite et un contre-exemple</h2>
+<p class="opening">Pour préparer la future mesure des feuilles Vasserot, nous commençons par une expérience vérifiable sur des coordonnées modernes publiées : cinq repères du quartier, transformés en mètres dans la projection Lambert-93.</p>
+<p>Cette étape est <strong>méthodologique, non historique</strong>. Les lieux sont géolocalisés par leur point de référence publié ; ce ne sont ni des carrefours précisément arpentés ni les points choisis par Thierry Van de Leur. Leurs centres approximatifs peuvent varier selon les bases.</p>
+<div class="metric-row">
+<div class="metric"><strong>787,5 m</strong><span>A → B · distance projetée</span></div>
+<div class="metric"><strong>163,9°</strong><span>Azimut de grille Lambert-93 A → B</span></div>
+<div class="metric"><strong>132,3 m</strong><span>Écart de Saint-Roch à la droite A–B (valeur absolue)</span></div>
+</div>
+<div class="geo-wrap">
+<figure class="geo-diagram">
+<svg viewBox="0 0 360 1030" role="img" aria-label="Carte géométrique simplifiée et à l'échelle des repères A place de l'Opéra, B place André-Malraux, C avenue de l'Opéra, D Saint-Roch et E Palais Garnier, à partir de la projection Lambert-93 ; ce n'est pas un relevé cadastral.">
+<rect width="360" height="1030" rx="9" fill="#faf6ed"/>
+<g stroke="#e6dbc9" stroke-width="1"><path d="M20 150 H340 M20 350 H340 M20 550 H340 M20 750 H340 M20 950 H340 M60 15 V1009 M160 15 V1009 M260 15 V1009" /></g>
+<text x="24" y="24" font-size="13" fill="#836a45">N ↑</text>
+<path d="M66.19 210.29 L284.00 967.07" stroke="#355f56" stroke-width="5" fill="none"/>
+<path d="M94.33 786.55 L249.38 741.91" stroke="#af6852" stroke-width="2" stroke-dasharray="6 5" fill="none"/>
+<g font-size="16" font-weight="700" font-family="system-ui,sans-serif">
+<circle cx="66.19" cy="210.29" r="7" fill="#285b50"/><text x="83" y="205" fill="#285b50">A</text>
+<circle cx="284.00" cy="967.07" r="7" fill="#285b50"/><text x="303" y="967" fill="#285b50">B</text>
+<circle cx="183.18" cy="603.82" r="7" fill="#c18b50"/><text x="201" y="605" fill="#78562e">C</text>
+<circle cx="94.33" cy="786.55" r="7" fill="#ae604d"/><text x="60" y="773" fill="#a45543">D</text>
+<circle cx="31.63" cy="46.53" r="7" fill="#9f83b1"/><text x="50" y="53" fill="#6f547d">E</text>
+</g>
+<text x="17" y="1011" font-size="11" fill="#665b4e">Schéma métrique moderne · Lambert-93</text>
+</svg>
+<figcaption class="geo-note">Graphique construit à partir des coordonnées publiées, à échelle relative homogène en mètres. L'axe A–B est un choix d'expérience. Les points de bâtiments et de places ne remplacent pas les carrefours historiques.</figcaption></figure>
+<div class="geo-datatable">
+<div class="tablewrap"><table><thead><tr><th>Point et source</th><th>Latitude, longitude</th><th>X / Y Lambert-93</th><th>Écart signé à AB</th></tr></thead><tbody>
+<tr><td>A · <a href="https://fr.wikipedia.org/wiki/Place_de_l%27Op%C3%A9ra" target="_blank" rel="noopener">Place de l'Opéra ↗</a></td><td>48.870560, 2.332220</td><td>651016,19 / 6863599,71</td><td>0,0 m</td></tr>
+<tr><td>B · <a href="https://fr.wikipedia.org/wiki/Place_Andr%C3%A9-Malraux" target="_blank" rel="noopener">Place André-Malraux ↗</a></td><td>48.863771, 2.335276</td><td>651234,00 / 6862842,93</td><td>0,0 m</td></tr>
+<tr><td>C · <a href="https://mapcarta.com/fr/38962220" target="_blank" rel="noopener">Avenue de l'Opéra ↗</a></td><td>48.867030, 2.333860</td><td>651133,18 / 6863206,18</td><td>+3,6 m</td></tr>
+<tr><td>D · <a href="https://mapcarta.com/fr/35846138" target="_blank" rel="noopener">Église Saint-Roch ↗</a></td><td>48.865380, 2.332670</td><td>651044,33 / 6863023,45</td><td>−132,3 m</td></tr>
+<tr><td>E · <a href="https://mapcarta.com/fr/25251450" target="_blank" rel="noopener">Palais Garnier ↗</a></td><td>48.872030, 2.331730</td><td>650981,63 / 6863763,47</td><td>+12,1 m*</td></tr>
+</tbody></table></div>
+<p class="geo-note">* La projection orthogonale du point E sur la droite se trouve <strong>en dehors du segment A–B</strong> (paramètre t = −0,212). Il ne s'agit donc pas de sa distance au segment. Les écarts sont des distances mathématiques aux coordonnées nominales, pas une précision topographique certifiée à 10 cm.</p>
+<p><strong>Calcul :</strong> en Lambert-93 (EPSG:2154), d(A,B) = √[(XB−XA)²+(YB−YA)²]. Pour un troisième point P, l'écart signé à la droite est [(XB−XA)(YP−YA) − (YB−YA)(XP−XA)] / d(A,B). L'azimut de grille provient de atan2(XB−XA,YB−YA), ramené entre 0 et 360°.</p>
+<p>Le point C est un géorepère <strong>de la même avenue</strong> : son petit écart est attendu et n'est pas une découverte indépendante. Le point D montre comment un lieu voisin peut s'écarter franchement de cette droite. Modifier la définition des points, même légèrement, modifie les résultats.</p>
+</div></div>
+<div class="warning"><strong>Interprétation scientifique :</strong> ce calcul commence la vérification d'un protocole et est reproductible à partir du CSV et du script ci-dessous. Il <strong>ne mesure pas une ligne de l'Ankh sur les plans historiques</strong>. Pour atteindre F2 historique, il reste à lire les quatre feuilles originales, fixer des intersections visibles et estimer les erreurs de géoréférencement. L'intention des urbanistes demeure H.</div>
+<div class="navtools" style="margin-top:12px">
+<a class="btn" href="parisis-005-points-modernes.csv" download>Télécharger les 5 coordonnées (CSV) ↗</a>
+<a class="btn" href="parisis-005-recalcul.py" download>Télécharger le script de calcul (Python) ↗</a>
+<a class="btn" href="https://epsg.io/2154" target="_blank" rel="noopener">Référence projection Lambert-93 ↗</a>
+</div>
+<p class="geo-note" style="margin-top:12px">Reproduction : télécharger les deux fichiers dans le même dossier, puis exécuter <code>python3 parisis-005-recalcul.py parisis-005-points-modernes.csv</code>. Aucun module Python externe n'est nécessaire. Les valeurs proviennent des sources citées dans chaque ligne du CSV.</p>
 </section>
 <section class="chapter" id="sources"><div class="eyebrow">BIBLIOTHÈQUE · SOURCES INSTITUTIONNELLES</div><h2>Images originales, cotes et recherches à consulter</h2>
 <div class="source"><a href="https://www.parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/croquis-du-plan-de-la-butte-des-moulins" target="_blank" rel="noopener">01 · Leymonnerye, Croquis du Plan de la Butte des Moulins, 1877 ↗</a><small>Carnavalet D.8021(24) ; deux états de la ville représentés par hachures et liseré.</small></div>
