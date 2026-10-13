@@ -138,3 +138,8 @@ Certains chantiers mentionnés dans nos échanges ne sont pas des dossiers auton
 ## Complément — MICHEL-4Q529
 
 [Lire l'étude critique du manuscrit et accéder aux photographies institutionnelles](foi-control.html?file=eloah-foi-michel-4q529-etude-critique.md).
+
+
+## MICHEL-4Q529/B — Collation documentaire
+
+[Lire la confrontation des trois fragments et des 16 lignes du premier](foi-control.html?file=eloah-foi-michel-4q529-collation-fragments.md).
