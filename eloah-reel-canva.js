@@ -848,6 +848,7 @@ function paint(c,t,mark=false){
   if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
   if(e.kind==='sticker'&&window.ELOAHAnimations)window.ELOAHAnimations.render(c,e);
   if(e.kind==='shapeAsset'&&window.ELOAHShapes)window.ELOAHShapes.draw(c,e);
+  if(e.kind==='brandAsset')brandImage(c,e);
   if(e.kind==='photoFrame'&&e.isMockup&&window.ELOAHMockups)window.ELOAHMockups.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1,video);
   else if(e.kind==='photoFrame'&&window.ELOAHFrames)window.ELOAHFrames.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1);
   c.restore();
@@ -1359,7 +1360,8 @@ function action(name){
  if(name==='line'){add('line',{x:160,y:950,w:760,h:20,color:'#2479a7'});return}
  
  if(name==='star'){add('star',{x:360,y:780,w:360,h:360,color:'#d7ad46'});return}
- if(['heading','subtitle','addText','brandLabel'].includes(name)){const k=name==='addText'?'simple':name==='brandLabel'?'simple':name;const e=createTextBlock(k);if(name==='brandLabel'){e.text=S.brand.toUpperCase();e.font=43;e.y=1700;e.h=130;e.color='#c69b46';saveLocal();draw()}return}
+ if(['heading','subtitle','addText','brandLabel'].includes(name)){const k=name==='addText'?'simple':name==='brandLabel'?'simple':name;const e=createTextBlock(k);if(name==='brandLabel'){brandAddSignature();return}
+ if(name==='brandLabelOld'){e.text=S.brand.toUpperCase();e.font=43;e.y=1700;e.h=130;e.color='#c69b46';saveLocal();draw()}return}
  if(name==='duplicate'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à dupliquer.');return}const {id:originalId,...copy}=e;const cloned=add(e.kind,{...copy,x:Math.min(Math.max(0,1080-e.w),e.x+36),y:Math.min(Math.max(0,1920-e.h),e.y+36)});if(e.kind==='image'&&images.has(e.id))images.set(cloned.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(cloned.id+':'+i,src)}saveFrameMediaLocal()}return}
  if(name==='delete'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à supprimer.');return}snapshot();S.elements=S.elements.filter(x=>x.id!==selected);if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++)framePhotos.delete(e.id+':'+i);saveFrameMediaLocal()}selected=null;setTab('elements');renderTimeline();saveLocal();return}
  if(name==='forward'||name==='backward'){let i=S.elements.findIndex(x=>x.id===selected);if(i<0)return;snapshot();let e=S.elements.splice(i,1)[0];S.elements.splice(name==='forward'?S.elements.length:0,0,e);saveLocal();return}
@@ -1406,6 +1408,74 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+
+ const brandViewBtn=ev.target.closest('[data-brand-view]');
+ if(brandViewBtn){brandView=brandViewBtn.dataset.brandView;brandSearch='';renderSide();return}
+ const brandCreate=ev.target.closest('[data-brand-create]');
+ if(brandCreate){brandCreating=!brandCreating;renderSide();if(brandCreating)one('#ecs-brand-new-name')?.focus();return}
+ const brandConfirm=ev.target.closest('[data-brand-create-confirm]');
+ if(brandConfirm){
+  const name=one('#ecs-brand-new-name')?.value.trim();
+  if(!name){toast('Donne un nom à cette identité.');return}
+  const result=window.ELOAHBrand.create(name);
+  if(!result)return toast('Limite de 24 identités visuelles atteinte.');
+  brandKitId=result.kit.id;brandView='overview';brandCreating=false;brandSearch='';
+  try{localStorage.setItem('eloah_reel_active_brand',brandKitId)}catch{}
+  brandStatus(result,'Identité '+result.kit.name+' créée.');renderSide();return;
+ }
+ const brandQuickColor=ev.target.closest('[data-brand-quickcolor]');
+ if(brandQuickColor){
+  const kit=brandKit(),i=Number(brandQuickColor.dataset.brandQuickcolor);
+  if(!kit?.colors[i])return;
+  snapshot();S.bg=kit.colors[i][1];S.brand=kit.name;saveLocal();draw();
+  toast('Couleur '+kit.colors[i][0]+' appliquée au fond.');return;
+ }
+ const brandApply=ev.target.closest('[data-brand-apply]');
+ if(brandApply){brandApplyIdentity();return}
+ const brandLayout=ev.target.closest('[data-brand-layout]');
+ if(brandLayout){brandCompose(brandLayout.dataset.brandLayout);return}
+ const brandSave=ev.target.closest('[data-brand-save-model]');
+ if(brandSave){brandSaveModel();return}
+ const brandUse=ev.target.closest('[data-brand-use-model]');
+ if(brandUse){brandUseModel(brandUse.dataset.brandUseModel);return}
+ const brandRemoveModel=ev.target.closest('[data-brand-remove-model]');
+ if(brandRemoveModel){
+  const kit=brandKit();if(!confirm('Supprimer définitivement ce modèle enregistré dans '+kit.name+' ?'))return;
+  brandStatus(window.ELOAHBrand.removeModel(kit.id,brandRemoveModel.dataset.brandRemoveModel),'Modèle supprimé.');renderSide();return;
+ }
+ const brandUpload=ev.target.closest('[data-brand-upload]');
+ if(brandUpload){brandUploadCategory=brandUpload.dataset.brandUpload;brandUploadTargetId=brandKit()?.id;one('#ecs-brand-image-input')?.click();return}
+ const brandLogo=ev.target.closest('[data-brand-insert-logo]');
+ if(brandLogo){brandInsertAsset('logo');return}
+ const brandRemoveLogo=ev.target.closest('[data-brand-remove-logo]');
+ if(brandRemoveLogo){const kit=brandKit();if(!confirm('Retirer le logo importé de '+kit.name+' ?'))return;brandStatus(window.ELOAHBrand.setLogo(kit.id,null),'Logo retiré.');renderSide();draw();return}
+ const brandSignature=ev.target.closest('[data-brand-insert-signature]');
+ if(brandSignature){brandAddSignature();return}
+ const brandHeading=ev.target.closest('[data-brand-add-heading]');
+ if(brandHeading){brandAddHeading();return}
+ const brandAddColor=ev.target.closest('[data-brand-add-color]');
+ if(brandAddColor){brandStatus(window.ELOAHBrand.addColor(brandKit()?.id),'Nouvelle couleur ajoutée.');renderSide();return}
+ const brandDeleteColor=ev.target.closest('[data-brand-delete-color]');
+ if(brandDeleteColor){brandStatus(window.ELOAHBrand.removeColor(brandKit()?.id,Number(brandDeleteColor.dataset.brandDeleteColor)),'Couleur retirée.');renderSide();return}
+ const brandAssetAdd=ev.target.closest('[data-brand-asset-insert]');
+ if(brandAssetAdd){brandInsertAsset(brandAssetAdd.dataset.brandAssetInsert);return}
+ const brandAssetDelete=ev.target.closest('[data-brand-asset-delete]');
+ if(brandAssetDelete){
+  const kit=brandKit();
+  if(!confirm('Supprimer cette ressource de '+kit.name+' ?'))return;
+  brandStatus(window.ELOAHBrand.removeAsset(kit.id,brandAssetDelete.dataset.brandAssetDelete),'Ressource supprimée.');renderSide();draw();return;
+ }
+ const brandElements=ev.target.closest('[data-brand-open-elements]');
+ if(brandElements){activeTab='elements';elementsCategory=brandElements.dataset.brandOpenElements;renderSide();return}
+ const brandExport=ev.target.closest('[data-brand-export]');
+ if(brandExport){
+  const kit=brandKit(),json=window.ELOAHBrand.exportKit(kit.id);
+  if(!json)return toast('Identité introuvable.');
+  download(new Blob([json],{type:'application/json;charset=utf-8'}),'eloah-marque-'+kit.id.replace(/[^a-z0-9-]/ig,'')+'.json');
+  toast('Identité '+kit.name+' exportée avec ses réglages et ressources.');return;
+ }
+ const brandImport=ev.target.closest('[data-brand-import]');
+ if(brandImport){one('#ecs-brand-json-input')?.click();return}
  const textViewBtn=ev.target.closest('[data-text-view]');
  if(textViewBtn){textView=textViewBtn.dataset.textView;textSearch='';renderSide();return}
  const textPresetBtn=ev.target.closest('[data-text-preset]');
@@ -1556,6 +1626,27 @@ root.addEventListener('click',ev=>{
 });
 one('#ecs-name').addEventListener('change',e=>{S.name=e.target.value.slice(0,90)||'Mon Reel';saveLocal()});
 one('.ecs-sidebody').addEventListener('change',e=>{
+
+ if(e.target.id==='ecs-brand-kit'){
+  brandKitId=e.target.value;brandView='overview';brandSearch='';brandCreating=false;
+  try{localStorage.setItem('eloah_reel_active_brand',brandKitId)}catch{}
+  renderSide();return;
+ }
+ if(e.target.dataset.brandFont){
+  const result=window.ELOAHBrand.edit(brandKit()?.id,{[e.target.dataset.brandFont]:e.target.value});
+  brandStatus(result,'Police de marque enregistrée.');renderSide();return;
+ }
+ if(e.target.dataset.brandColor!==undefined){
+  brandStatus(window.ELOAHBrand.recolor(brandKit()?.id,Number(e.target.dataset.brandColor),e.target.value),'Couleur enregistrée.');renderSide();return;
+ }
+ if(e.target.dataset.brandColorName!==undefined){
+  brandStatus(window.ELOAHBrand.colorName(brandKit()?.id,Number(e.target.dataset.brandColorName),e.target.value));
+  renderSide();return;
+ }
+ if(e.target.dataset.brandField){
+  const kit=brandKit();if(kit&&kit.name===S.brand&&e.target.dataset.brandField==='name'){S.brand=e.target.value;saveLocal()}
+  renderSide();return;
+ }
  if(e.target.id==='ecs-magic-tone'){textMagicTone=e.target.value;return}
  if(e.target.dataset.textToggle){
   const element=S.elements.find(x=>x.id===selected&&(x.kind==='text'||x.kind==='textCombo'));if(!element)return;
@@ -1593,6 +1684,18 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+
+ if(e.target.id==='ecs-brand-search'){
+  brandSearch=e.target.value;
+  const results=one('#ecs-brand-results');if(results)results.innerHTML=brandSearchMarkup(brandSearch,brandKit());
+  return;
+ }
+ if(e.target.dataset.brandField){
+  const kit=brandKit(),field=e.target.dataset.brandField;
+  const result=window.ELOAHBrand.edit(kit?.id,{[field]:e.target.value});
+  if(result?.ok===false)toast(result.message);
+  return;
+ }
  if(e.target.id==='ecs-text-search'){
   textSearch=e.target.value;
   const needle=textSearch.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
