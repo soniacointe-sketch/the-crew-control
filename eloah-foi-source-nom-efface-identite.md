@@ -4,6 +4,18 @@
 
 ---
 
+## Visuels ELOAH retrouvés et réintégrés
+
+Ces images proviennent des créations éditoriales ELOAH retrouvées dans la bibliothèque originale et remises en ligne en WebP optimisé. **Ce ne sont ni des photographies de manuscrits antiques, ni des reconstitutions archéologiques établies.** [Voir toute la galerie](foi-control.html?file=eloah-foi-galerie-originaux.md).
+
+![Objets anonymes reliés par l’or](assets/foi-archives/eloah-archive-10.webp)
+
+*Objets anonymes reliés par l’or — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Trace d’or dans la pierre](assets/foi-archives/eloah-archive-15.webp)
+
+*Trace d’or dans la pierre — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
 [ELOAH·](/)
 
 ELOAH · Nom & Identité · I

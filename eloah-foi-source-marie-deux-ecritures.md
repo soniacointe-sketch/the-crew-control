@@ -4,6 +4,14 @@
 
 ---
 
+## Visuels ELOAH retrouvés et réintégrés
+
+Ces images proviennent des créations éditoriales ELOAH retrouvées dans la bibliothèque originale et remises en ligne en WebP optimisé. **Ce ne sont ni des photographies de manuscrits antiques, ni des reconstitutions archéologiques établies.** [Voir toute la galerie](foi-control.html?file=eloah-foi-galerie-originaux.md).
+
+![Marie à l’écoute de la Parole](assets/foi-archives/eloah-archive-09.webp)
+
+*Marie à l’écoute de la Parole — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
 [ELOAH·](/)
 
 ELOAH · Femmes & Écritures · I

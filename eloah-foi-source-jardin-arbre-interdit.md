@@ -4,6 +4,22 @@
 
 ---
 
+## Visuels ELOAH retrouvés et réintégrés
+
+Ces images proviennent des créations éditoriales ELOAH retrouvées dans la bibliothèque originale et remises en ligne en WebP optimisé. **Ce ne sont ni des photographies de manuscrits antiques, ni des reconstitutions archéologiques établies.** [Voir toute la galerie](foi-control.html?file=eloah-foi-galerie-originaux.md).
+
+![Le jardin, l’arbre et l’interdit](assets/foi-archives/eloah-archive-06.webp)
+
+*Le jardin, l’arbre et l’interdit — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Le fruit derrière la ligne d’or](assets/foi-archives/eloah-archive-05.webp)
+
+*Le fruit derrière la ligne d’or — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Gousse ancienne sur table de basalte](assets/foi-archives/eloah-archive-03.webp)
+
+*Gousse ancienne sur table de basalte — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
 [ELOAH·](/)
 
 ELOAH · Les commencements · V

@@ -4,6 +4,18 @@
 
 ---
 
+## Visuels ELOAH retrouvés et réintégrés
+
+Ces images proviennent des créations éditoriales ELOAH retrouvées dans la bibliothèque originale et remises en ligne en WebP optimisé. **Ce ne sont ni des photographies de manuscrits antiques, ni des reconstitutions archéologiques établies.** [Voir toute la galerie](foi-control.html?file=eloah-foi-galerie-originaux.md).
+
+![Le cœur et la plume](assets/foi-archives/eloah-archive-04.webp)
+
+*Le cœur et la plume — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Le papyrus vers la lumière](assets/foi-archives/eloah-archive-08.webp)
+
+*Le papyrus vers la lumière — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
 [ELOAH·](/)
 
 ELOAH · Mort & Passage · I

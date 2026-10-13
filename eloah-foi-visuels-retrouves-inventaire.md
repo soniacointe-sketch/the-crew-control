@@ -1,53 +1,30 @@
-# ELOAH — Inventaire des visuels originaux récupérés
+# ELOAH — Inventaire des 15 visuels originaux retrouvés
 
-**Foi & Spiritualité · Registre iconographique · 13 octobre 2026**
+**Foi & Spiritualité · Galerie publiée le 13 octobre 2026**
 
-> **15 fichiers image d'origine retrouvés dans l'ancienne bibliothèque de fichiers ELOAH.** Ce sont les images effectivement conservées parmi les travaux créatifs antérieurs, et non les 26 à 32 fac-similés historiques annoncés dans certaines anciennes publications. Les images récupérées sont des **compositions éditoriales** : ne jamais les présenter comme des photographies de papyrus, d'objets archéologiques ou de personnes historiques.
+> Les 15 PNG précédemment créés pour ELOAH ont été retrouvés. Les versions WebP optimisées ont été publiées sur GitHub Pages dans `assets/foi-archives/` ; leurs noms d'origine sont conservés dans le manifeste. **Ces créations éditoriales ne sont pas des photographies historiques ni les anciens scans des manuscrits.**
 
-Ces 15 PNG originaux ont été récupérés octet pour octet et empaquetés dans une archive ZIP fournie dans la conversation ChatGPT correspondante. Les noms exacts sont conservés pour pouvoir les réimporter. **Ils ne sont pas encore téléchargés dans le dépôt GitHub**, donc aucune image privée ni URL temporaire n'est inventée sur cette page.
+[**Ouvrir la galerie illustrée complète**](foi-control.html?file=eloah-foi-galerie-originaux.md) · [Revenir aux archives](foi-control.html?file=eloah-foi-archives-completes-index.md).
 
-## Jardin et interdit
+- **Cabinet de curiosités aux reliques anciennes** — [voir l'image WebP](assets/foi-archives/eloah-archive-01.webp) · original conservé sous `Cabinet de curiosités aux reliques anciennes.png`.
+- **Fragments de rêves et fil d’or** — [voir l'image WebP](assets/foi-archives/eloah-archive-02.webp) · original conservé sous `Fragments de rêves et fil d’or.png`.
+- **Gousse ancienne sur table de basalte** — [voir l'image WebP](assets/foi-archives/eloah-archive-03.webp) · original conservé sous `Gousse ancienne sur table de basalte.png`.
+- **Le cœur et la plume** — [voir l'image WebP](assets/foi-archives/eloah-archive-04.webp) · original conservé sous `Le cœur et la plume.png`.
+- **Le fruit derrière la ligne d’or** — [voir l'image WebP](assets/foi-archives/eloah-archive-05.webp) · original conservé sous `Le fruit derrière la ligne d’or.png`.
+- **Le jardin, l’arbre et l’interdit** — [voir l'image WebP](assets/foi-archives/eloah-archive-06.webp) · original conservé sous `Le jardin, l’arbre et l’interdit.png`.
+- **Le miroir et la porte de lumière** — [voir l'image WebP](assets/foi-archives/eloah-archive-07.webp) · original conservé sous `Le miroir et la porte de lumière.png`.
+- **Le papyrus vers la lumière** — [voir l'image WebP](assets/foi-archives/eloah-archive-08.webp) · original conservé sous `Le papyrus vers la lumière.png`.
+- **Marie à l’écoute de la Parole** — [voir l'image WebP](assets/foi-archives/eloah-archive-09.webp) · original conservé sous `Marie à l’écoute de la Parole.png`.
+- **Objets anonymes reliés par l’or** — [voir l'image WebP](assets/foi-archives/eloah-archive-10.webp) · original conservé sous `Objets anonymes reliés par l’or.png`.
+- **Quatre reflets, un masque fragmenté** — [voir l'image WebP](assets/foi-archives/eloah-archive-11.webp) · original conservé sous `Quatre reflets, un masque fragmenté.png`.
+- **Quatre strates de la reine de Saba** — [voir l'image WebP](assets/foi-archives/eloah-archive-12.webp) · original conservé sous `Quatre strates de la reine de Saba.png`.
+- **Reine de Saba, quête de sagesse** — [voir l'image WebP](assets/foi-archives/eloah-archive-13.webp) · original conservé sous `Reine de Saba, quête de sagesse.png`.
+- **Sommeil sous la lumière dorée** — [voir l'image WebP](assets/foi-archives/eloah-archive-14.webp) · original conservé sous `Sommeil sous la lumière dorée.png`.
+- **Trace d’or dans la pierre** — [voir l'image WebP](assets/foi-archives/eloah-archive-15.webp) · original conservé sous `Trace d’or dans la pierre.png`.
 
-- `Le jardin, l’arbre et l’interdit.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Le fruit derrière la ligne d’or.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Gousse ancienne sur table de basalte.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
+## Conservation et méthode
 
-## Mémoire et nom
-
-- `Objets anonymes reliés par l’or.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Trace d’or dans la pierre.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-
-## Sommeil et prophétie
-
-- `Fragments de rêves et fil d’or.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Sommeil sous la lumière dorée.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-
-## Reine de Saba
-
-- `Cabinet de curiosités aux reliques anciennes.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Quatre strates de la reine de Saba.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Reine de Saba, quête de sagesse.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-
-## Miroir
-
-- `Le miroir et la porte de lumière.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Quatre reflets, un masque fragmenté.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-
-## Livre des morts
-
-- `Le cœur et la plume.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-- `Le papyrus vers la lumière.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-
-## Marie et ses traditions
-
-- `Marie à l’écoute de la Parole.png` — **fichier original récupéré**, PNG ; référence à rechercher sous ce nom exact dans la bibliothèque de fichiers.
-
-
-
-## Où voir les images en attendant la restauration serveur ?
-
-Le fichier d'archive `ELOAH_15_visuels_originaux_retrouves.zip` est téléchargeable depuis la conversation de récupération. Il contient les 15 PNG, avec un manifeste JSON de leurs empreintes SHA-256. Pour publier ces images sur le site, il faudra transférer les fichiers PNG réels (ou leurs versions WebP optimisées) dans le dossier d'images du dépôt, **sans les remplacer par des illustrations inventées ou par de faux fac-similés**.
-
-L'ancien site [ELOAH Scanner](https://eloah-scanner.soniacointe.chatgpt.site/) reste la référence pour certaines images de publications non rapatriées. Exemple d'images liées dans la publication originale de Babel : [tour et plaine](https://eloah-scanner.soniacointe.chatgpt.site/images/babel/tour-plaine.webp), [langues et chemins](https://eloah-scanner.soniacointe.chatgpt.site/images/babel/langues-chemins.webp). **Ces deux liens sont distincts des 15 PNG de la bibliothèque.**
-
-[← Toutes nos recherches](foi-control.html?file=eloah-foi-archives-completes-index.md) · [Textes originaux retrouvés](foi-control.html?file=eloah-foi-source-babel-langue-unique.md).
+- Les PNG de départ restent dans l'archive ZIP de la conversation ELOAH ; ils n'ont pas été modifiés.
+- Les 15 versions WebP ont été enregistrées dans le dépôt GitHub, sans images fabriquées en remplacement.
+- [Manifeste machine lisible](assets/foi-archives/manifest.json) pour l'association titre d'origine / fichier publié.
+- Les publications ELOAH Scanner restent la source à consulter pour les anciens **scans historiques** non rapatriés ; ils sont distincts des 15 créations éditoriales.

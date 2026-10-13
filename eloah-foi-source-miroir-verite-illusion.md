@@ -4,6 +4,18 @@
 
 ---
 
+## Visuels ELOAH retrouvés et réintégrés
+
+Ces images proviennent des créations éditoriales ELOAH retrouvées dans la bibliothèque originale et remises en ligne en WebP optimisé. **Ce ne sont ni des photographies de manuscrits antiques, ni des reconstitutions archéologiques établies.** [Voir toute la galerie](foi-control.html?file=eloah-foi-galerie-originaux.md).
+
+![Le miroir et la porte de lumière](assets/foi-archives/eloah-archive-07.webp)
+
+*Le miroir et la porte de lumière — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Quatre reflets, un masque fragmenté](assets/foi-archives/eloah-archive-11.webp)
+
+*Quatre reflets, un masque fragmenté — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
 [ELOAH·](/)
 
 ELOAH · Image & Conscience · I

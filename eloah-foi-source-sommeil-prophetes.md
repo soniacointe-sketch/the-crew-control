@@ -4,6 +4,18 @@
 
 ---
 
+## Visuels ELOAH retrouvés et réintégrés
+
+Ces images proviennent des créations éditoriales ELOAH retrouvées dans la bibliothèque originale et remises en ligne en WebP optimisé. **Ce ne sont ni des photographies de manuscrits antiques, ni des reconstitutions archéologiques établies.** [Voir toute la galerie](foi-control.html?file=eloah-foi-galerie-originaux.md).
+
+![Sommeil sous la lumière dorée](assets/foi-archives/eloah-archive-14.webp)
+
+*Sommeil sous la lumière dorée — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Fragments de rêves et fil d’or](assets/foi-archives/eloah-archive-02.webp)
+
+*Fragments de rêves et fil d’or — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
 [ELOAH·](/)
 
 ELOAH · Sommeil & Révélation · I

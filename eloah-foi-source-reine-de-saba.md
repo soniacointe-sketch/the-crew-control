@@ -4,6 +4,22 @@
 
 ---
 
+## Visuels ELOAH retrouvés et réintégrés
+
+Ces images proviennent des créations éditoriales ELOAH retrouvées dans la bibliothèque originale et remises en ligne en WebP optimisé. **Ce ne sont ni des photographies de manuscrits antiques, ni des reconstitutions archéologiques établies.** [Voir toute la galerie](foi-control.html?file=eloah-foi-galerie-originaux.md).
+
+![Reine de Saba, quête de sagesse](assets/foi-archives/eloah-archive-13.webp)
+
+*Reine de Saba, quête de sagesse — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Quatre strates de la reine de Saba](assets/foi-archives/eloah-archive-12.webp)
+
+*Quatre strates de la reine de Saba — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
+![Cabinet de curiosités aux reliques anciennes](assets/foi-archives/eloah-archive-01.webp)
+
+*Cabinet de curiosités aux reliques anciennes — création éditoriale ELOAH, fichier antérieur retrouvé.*
+
 [ELOAH·](/)
 
 ELOAH · Reines & Sagesse · I
