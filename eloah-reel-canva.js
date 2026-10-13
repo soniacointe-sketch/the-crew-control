@@ -132,6 +132,103 @@ function synthPlay(){
  say.onerror=()=>{speechStatus='Cette voix est indisponible. Essaie une autre.'};
  window.speechSynthesis.speak(say);speechStatus='Préparation de la lecture vocale…';renderSide();
 }
+// Bibliothèque de vrais enregistrements CC0, chargés à la demande depuis le dépôt public FreePD.
+// Les droits sont indépendants de Canva : https://github.com/0lhi/FreePD/blob/stream/LICENSE
+const publicMusic={
+ loading:false,loaded:false,error:'',tracks:[],lastFilter:'',activePreview:null,
+ source:'https://github.com/0lhi/FreePD'
+};
+const supportedAudioExtensions=/\.(?:mp3|ogg|oga|wav|m4a)$/i;
+function audioDuration(s){if(!Number.isFinite(s))return '—';const t=Math.floor(s);return Math.floor(t/60)+':'+String(t%60).padStart(2,'0')}
+function prettyMusicName(path){
+ const name=path.split('/').pop().replace(/\.(mp3|ogg|oga|wav|m4a)$/i,'').replace(/[_-]+/g,' ').replace(/^\d+\s*[-. ]\s*/,'').trim();
+ return name||'Musique sans titre';
+}
+function freepdMusicUrl(path){
+ return 'https://raw.githubusercontent.com/0lhi/FreePD/stream/'+path.split('/').map(encodeURIComponent).join('/');
+}
+async function loadPublicMusic(){
+ if(publicMusic.loaded||publicMusic.loading)return;
+ publicMusic.loading=true;publicMusic.error='';
+ if(activeTab==='audio'&&audioView==='home')renderSide();
+ try{
+  const response=await fetch('https://api.github.com/repos/0lhi/FreePD/git/trees/stream?recursive=1',{headers:{Accept:'application/vnd.github+json'}});
+  if(!response.ok)throw Error('Catalogue indisponible (HTTP '+response.status+')');
+  const data=await response.json();
+  if(!Array.isArray(data.tree))throw Error('Le catalogue ne contient pas de pistes lisibles.');
+  const paths=data.tree.filter(item=>item.type==='blob'&&supportedAudioExtensions.test(item.path)&&item.size>2048&&item.size<30000000);
+  if(!paths.length)throw Error('Aucun fichier musical compatible retrouvé dans la source.');
+  publicMusic.tracks=paths.map((item,index)=>({
+   id:'freepd-'+index,path:item.path,name:prettyMusicName(item.path),
+   artist:'FreePD · Musique CC0',style:item.path.split('/')[0]||'Musique',
+   icon:['♫','▶','✦','♪','♬'][index%5],css:['aurora','piano','summer','pulse','velka'][index%5],
+   url:freepdMusicUrl(item.path),size:item.size,duration:null
+  }));
+  publicMusic.loaded=true;
+ }catch(e){publicMusic.error=e.message}
+ finally{publicMusic.loading=false;if(activeTab==='audio'&&audioView==='home')renderSide()}
+}
+function publicMusicRow(t){
+ const playing=publicMusic.activePreview===t.id;
+ const text=(t.name+' '+t.artist+' '+t.style).toLocaleLowerCase('fr');
+ return '<div class="ecs-soundrow ecs-real-track" data-public-track="'+xss(t.id)+'" data-search="'+xss(text)+'"><button type="button" class="ecs-soundplay" data-real-preview="'+xss(t.id)+'" aria-label="Écouter '+xss(t.name)+'"><span class="ecs-soundart '+t.css+'">'+(playing?'Ⅱ':t.icon)+'</span></button><div class="ecs-soundcopy"><strong>'+xss(t.name)+'</strong><small>'+xss(t.artist)+' · '+xss(t.style)+(t.duration?' · '+audioDuration(t.duration):'')+'</small></div><button type="button" class="ecs-soundadd" data-real-add="'+xss(t.id)+'" title="Ajouter cette musique au Reel">＋</button></div>';
+}
+function publicMusicMarkup(){
+ if(publicMusic.loading)return '<section class="ecs-audiosection"><div class="ecs-sectiontitle"><strong>Vraies musiques · Domaine public</strong></div><p class="ecs-note">Chargement de la bibliothèque FreePD…</p></section>';
+ if(publicMusic.error)return '<section class="ecs-audiosection"><div class="ecs-sectiontitle"><strong>Vraies musiques · Domaine public</strong></div><p class="ecs-note">'+xss(publicMusic.error)+'</p><button type="button" class="ecs-pillbtn" data-retry-music>↻ Réessayer</button> <a class="ecs-music-source" href="https://github.com/0lhi/FreePD" target="_blank" rel="noopener noreferrer">Bibliothèque source ↗</a></section>';
+ if(!publicMusic.loaded)return '<section class="ecs-audiosection"><div class="ecs-sectiontitle"><strong>Vraies musiques · Domaine public</strong></div><button class="ecs-pillbtn primary" data-retry-music>Charger les musiques gratuites</button></section>';
+ const selected=publicMusic.tracks.slice(0,90);
+ const groups=[['Dynamique & électronique',selected.filter(t=>/electronic|upbeat|world|dance/i.test(t.style))],['Romantique & cinématique',selected.filter(t=>/romance|scoring|epic|zoned/i.test(t.style))],['Ambiance & autres styles',selected.filter(t=>!/electronic|upbeat|world|dance|romance|scoring|epic|zoned/i.test(t.style))]];
+ return '<div class="ecs-freepd"><div class="ecs-sectiontitle"><strong>Vraies musiques · Domaine public</strong><span>'+publicMusic.tracks.length+' titres</span></div><p class="ecs-note">Enregistrements CC0. ▶ pour écouter, ＋ pour ajouter une piste complète au Reel.</p>'+groups.filter(x=>x[1].length).map(([label,items])=>'<section class="ecs-audiosection" data-soundsection><div class="ecs-sectiontitle"><strong>'+label+'</strong><span>'+items.length+'</span></div>'+items.map(publicMusicRow).join('')+'</section>').join('')+'<a class="ecs-music-source" target="_blank" rel="noopener noreferrer" href="https://github.com/0lhi/FreePD">Source et licence CC0 ↗</a></div>';
+}
+const mixkitExamples=[
+ {name:'Driving Ambition',artist:'Ahjay Stelino',time:'1:42',style:'Motivation',category:'mood/uplifting'},
+ {name:'Classical vibes 4',artist:'Grigoriy Nuzhny',time:'2:17',style:'Piano',category:'instrument/piano'},
+ {name:'Cat Walk',artist:'Arulo',time:'2:04',style:'Dance / House',category:'edm'},
+ {name:'Wedding 01',artist:'Francisco Alvear',time:'2:26',style:'Piano émotion',category:'film-score'},
+ {name:'Silent Descent',artist:'Eugenio Mininni',time:'2:40',style:'Cinématique',category:'film-score'},
+ {name:'Latin Lovers',artist:'Ahjay Stelino',time:'1:35',style:'Latino',category:'instrument/piano'},
+ {name:'Summer Fun',artist:'Ahjay Stelino',time:'2:19',style:'Été',category:'instrument/piano'},
+ {name:'Gimme that Groove!',artist:'Michael Ramir C.',time:'1:28',style:'Funk',category:''}
+];
+function mixkitMarkup(){
+ return '<section class="ecs-audiosection" data-soundsection><div class="ecs-sectiontitle"><strong>À découvrir · Artistes Mixkit</strong><span>8 titres</span></div><p class="ecs-note">Pour respecter les conditions de leur catalogue, télécharge ces morceaux sur Mixkit puis importe le MP3 dans ELOAH.</p>'+mixkitExamples.map((t,i)=>{
+  const dest='https://mixkit.co/free-stock-music/'+(t.category?t.category+'/':'');
+  return '<div class="ecs-soundrow ecs-mixkit-track" data-search="'+xss((t.name+' '+t.artist+' '+t.style).toLowerCase())+'"><a class="ecs-soundplay" href="'+dest+'" target="_blank" rel="noopener noreferrer" title="Trouver cette musique sur Mixkit"><span class="ecs-soundart '+['aurora','piano','pulse','velka','summer','latin'][i%6]+'">♫</span></a><div class="ecs-soundcopy"><strong>'+xss(t.name)+'</strong><small>'+xss(t.artist)+' · '+xss(t.time)+'</small></div><a class="ecs-soundadd" href="'+dest+'" target="_blank" rel="noopener noreferrer" title="Trouver et télécharger sur Mixkit" aria-label="Ouvrir Mixkit pour '+xss(t.name)+'">↗</a></div>';
+ }).join('')+'</section>';
+}
+async function previewPublicMusic(id){
+ const t=publicMusic.tracks.find(t=>t.id===id);if(!t)return;
+ if(audioPreview){audioPreview.pause();audioPreview=null;if(publicMusic.activePreview===id){publicMusic.activePreview=null;renderSide();return}}
+ if(audioBusy)return;audioBusy=true;
+ try{
+  audioPreview=new Audio(t.url);publicMusic.activePreview=id;
+  audioPreview.preload='metadata';
+  audioPreview.onloadedmetadata=()=>{if(Number.isFinite(audioPreview.duration))t.duration=audioPreview.duration};
+  audioPreview.onended=()=>{audioPreview=null;publicMusic.activePreview=null;if(activeTab==='audio'&&audioView==='home')renderSide()};
+  await audioPreview.play();
+  toast('▶ '+t.name+' · FreePD CC0');
+ }catch(e){publicMusic.activePreview=null;audioPreview=null;toast('Écoute impossible : '+e.message+' — essaie un autre morceau.')}
+ finally{audioBusy=false;if(activeTab==='audio'&&audioView==='home')renderSide()}
+}
+async function addPublicMusic(id){
+ const t=publicMusic.tracks.find(t=>t.id===id);if(!t||audioBusy)return;
+ audioBusy=true;toast('Téléchargement de '+t.name+'…');
+ try{
+  if(audioPreview){audioPreview.pause();audioPreview=null;publicMusic.activePreview=null}
+  const response=await fetch(t.url);
+  if(!response.ok)throw Error('HTTP '+response.status);
+  const blob=await response.blob();
+  if(!blob.size||blob.size>30000000)throw Error('Fichier audio invalide ou trop volumineux');
+  const ext=t.path.split('.').pop().toLowerCase();
+  const mime=ext==='mp3'?'audio/mpeg':ext==='ogg'||ext==='oga'?'audio/ogg':ext==='wav'?'audio/wav':'audio/mp4';
+  const file=new File([blob],t.name+'.'+ext,{type:mime});
+  await loadAudio(file);
+  toast('♫ '+t.name+' ajouté à la timeline · musique CC0');
+  if(activeTab==='audio'&&audioView==='home')renderSide();
+ }catch(e){toast('Import impossible : '+e.message+'. Ouvre le catalogue source puis importe le fichier téléchargé.')}
+ finally{audioBusy=false}
+}
 function renderAudio(){
  if(audioView==='record')return '<button class="ecs-els-back" data-audio-view="home">← Audio</button><h3 class="ecs-panelheading">Enregistrer une voix off</h3><p class="ecs-note">Autorise ton microphone, parle, puis arrête. La prise sera placée dans la piste audio du montage.</p><div class="ecs-audio-rec"><span class="ecs-rec-mic">🎙</span><strong>'+(recording?'Enregistrement en cours…':'Microphone prêt')+'</strong><p class="ecs-note">Enregistre dans un endroit calme.</p>'+(recording?btn('recordStop','■ Arrêter l’enregistrement',true):btn('recordStart','● Enregistrer ma voix',true))+'</div><p class="ecs-note ecs-rec-status" role="status">'+xss(recordStatus||'Aucun enregistrement pour le moment.')+'</p>'+(media.audioUrl?'<p class="ecs-note">Piste actuelle : '+xss(audio.dataset.filename||'Audio')+'</p>':'')+btn('importAudio','Importer une voix enregistrée');
  if(audioView==='tts'){
@@ -139,7 +236,7 @@ function renderAudio(){
   return '<button class="ecs-els-back" data-audio-view="home">← Audio</button><h3 class="ecs-panelheading">Créer une voix de synthèse</h3><p class="ecs-note">Aperçu vocal avec une voix française de ton appareil. Ce mode n’utilise pas un générateur IA externe et ne produit pas encore un fichier audio exportable.</p><label class="ecs-sidelabel" for="ecs-tts-text">Texte à lire</label><textarea id="ecs-tts-text" rows="6">'+xss(voiceText)+'</textarea><label class="ecs-sidelabel" for="ecs-tts-voice">Voix française</label><select id="ecs-tts-voice">'+(voices.length?voices.map((v,i)=>'<option value="'+i+'" '+(voiceSelection===v.name?'selected':'')+'>'+xss(v.name)+' · '+xss(v.lang)+'</option>').join(''):'<option value="">Meilleure voix disponible</option>')+'</select><label class="ecs-sidelabel" for="ecs-tts-speed">Vitesse de lecture</label><select id="ecs-tts-speed">'+[.8,1,1.15,1.3].map(v=>'<option value="'+v+'" '+(voiceSpeed===v?'selected':'')+'>'+v+'×</option>').join('')+'</select><div class="ecs-audio-buttons">'+btn('voicePlay','▶ Écouter',true)+btn('voiceStop','■ Arrêter')+'</div><p class="ecs-note" role="status">'+xss(speechStatus||'La lecture vocale se fait sur ton appareil et ne sera pas ajoutée à l’export vidéo.')+'</p>';
  }
  const recent=recentSounds.map(id=>soundLibrary.find(t=>t.id===id)).filter(Boolean);
- return '<div class="ecs-audio-header"><button data-tab="elements" aria-label="Retour aux éléments">←</button><strong>Audio</strong></div><div class="ecs-search"><input id="ecs-audio-search" placeholder="Rechercher des éléments" aria-label="Rechercher des sons"><span>⌕</span></div><div class="ecs-sectiontitle"><strong>Voix off</strong></div><div class="ecs-audio-voicecards"><button type="button" data-audio-view="record"><span class="ecs-voiceicon mic">♩</span><strong>Enregistrez une voix off</strong></button><button type="button" data-audio-view="tts"><span class="ecs-voiceicon ai">Aa</span><strong>Générez une voix de synthèse</strong></button></div>'+audioSection('Utilisés récemment',recent.length?recent:[])+audioSection('Recommandations ELOAH',soundLibrary.slice(0,3))+audioSection('Tendances · ambiances',soundLibrary.slice(3))+'<div class="ecs-audio-footer"><p class="ecs-note">Musiques de démonstration originales, générées dans ELOAH. Elles ne proviennent pas du catalogue Canva.</p>'+btn('importAudio','＋ Importer une musique',true)+(media.audioUrl?'<div class="ecs-audio-loaded"><strong>♫ Piste ajoutée</strong><span>'+xss(audio.dataset.filename||'Audio')+'</span>'+btn('removeAudio','Retirer la piste')+'</div>':'')+'</div>';
+ return '<div class="ecs-audio-header"><button data-tab="elements" aria-label="Retour aux éléments">←</button><strong>Audio</strong></div><div class="ecs-search"><input id="ecs-audio-search" placeholder="Rechercher des éléments" aria-label="Rechercher des sons"><span>⌕</span></div><div class="ecs-sectiontitle"><strong>Voix off</strong></div><div class="ecs-audio-voicecards"><button type="button" data-audio-view="record"><span class="ecs-voiceicon mic">♩</span><strong>Enregistrez une voix off</strong></button><button type="button" data-audio-view="tts"><span class="ecs-voiceicon ai">Aa</span><strong>Générez une voix de synthèse</strong></button></div>'+publicMusicMarkup()+mixkitMarkup()+audioSection('Utilisés récemment · Boucles ELOAH',recent.length?recent:[])+audioSection('Compositions ELOAH · 10 s',soundLibrary)+'<div class="ecs-audio-footer"><p class="ecs-note">Musiques originales ELOAH et pistes FreePD CC0 disponibles. Les pistes Mixkit s’importent après téléchargement sur leur site.</p>'+btn('importAudio','＋ Importer une musique',true)+(media.audioUrl?'<div class="ecs-audio-loaded"><strong>♫ Piste ajoutée</strong><span>'+xss(audio.dataset.filename||'Audio')+'</span>'+btn('removeAudio','Retirer la piste')+'</div>':'')+'</div>';
 }
 
 let images=new Map(),activeTab='models',elementsCategory=null,selected=null,nextId=1,drag=null,history=[],future=[],lastFrame=performance.now(),busy=false,toastTimer=0,importKind='background';
@@ -313,7 +410,7 @@ function renderSide(){
  }
  box.innerHTML=html;
 }
-function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';activeTab=tab;renderSide();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
+function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
 function action(name){
  if(name==='old'){pause();root.style.display='none';legacy.style.display='block';document.body.classList.add('ecs-legacy-open');const h=document.querySelector('body > header');if(h)h.style.display='flex';const back=document.createElement('button');back.textContent='↗ Retour à l’éditeur visuel';back.style.cssText='position:fixed;bottom:16px;right:16px;z-index:99;background:#147a9f;color:white;padding:13px;border-radius:9px';back.onclick=()=>{legacy.style.display='none';root.style.display='flex';back.remove();if(h)h.style.display='none'};document.body.append(back);return}
  if(name==='undo'){undo();return}if(name==='redo'){redo();return}
@@ -352,6 +449,9 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const retry=ev.target.closest('[data-retry-music]');if(retry){publicMusic.error='';publicMusic.loaded=false;loadPublicMusic();return}
+ const publicPreview=ev.target.closest('[data-real-preview]');if(publicPreview){previewPublicMusic(publicPreview.dataset.realPreview);return}
+ const publicAdd=ev.target.closest('[data-real-add]');if(publicAdd){addPublicMusic(publicAdd.dataset.realAdd);return}
  const audioPanel=ev.target.closest('[data-audio-view]');
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
