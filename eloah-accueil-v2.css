@@ -68,3 +68,7 @@
 #eloah-legacy-cockpit .partner-top{margin-top:10px}
 #eloah-legacy-cockpit .learning{max-width:100%}
 @media(max-width:760px){#eloah-legacy-cockpit .partner-grid{grid-template-columns:1fr}#eloah-all-universes{padding:0 10px}}
+
+#eloah-home-v2 .eloah-account-gateway{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:15px 0 8px;padding:13px 14px;background:#f6f0fb;border:1px solid #e0d3e9;border-radius:10px;color:#634d70;font:12px/1.5 system-ui}
+#eloah-home-v2 .eloah-account-gateway a{font:700 12px system-ui;color:#704c9b;text-decoration:underline;text-underline-offset:3px}
+#eloah-home-v2 .eloah-account-gateway small{display:block;flex-basis:100%;color:#8d7d95;font:11px/1.55 system-ui}
