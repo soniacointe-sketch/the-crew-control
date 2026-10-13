@@ -1,0 +1,54 @@
+/* ELOAH · Accueil V2 : vue de travail cohérente et responsive */
+#eloah-home-v2{max-width:1220px;margin:0 auto 26px;color:#27292e;font:14px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}
+#eloah-home-v2 *{box-sizing:border-box}
+#eloah-home-v2 .eloah-intro{padding:30px clamp(18px,3vw,38px);border:1px solid #e1dadd;border-radius:16px;background:linear-gradient(116deg,#fffaf8,#f5f2fa 80%);box-shadow:0 7px 30px #3c2a3510}
+#eloah-home-v2 .eloah-eyebrow{font:750 10px/1.4 system-ui;letter-spacing:.16em;color:#98657d;text-transform:uppercase}
+#eloah-home-v2 h1{font:500 clamp(34px,4vw,52px)/1.12 Georgia,"Times New Roman",serif;color:#2d2b31;letter-spacing:-.02em;margin:9px 0 12px}
+#eloah-home-v2 .eloah-intro-text{color:#6f6770;max-width:780px;font:15px/1.7 system-ui;margin:0 0 22px}
+#eloah-home-v2 .eloah-search-row{display:flex;align-items:center;gap:11px;border:1px solid #cabfd2;border-radius:11px;background:#fff;padding:0 15px;min-height:53px}
+#eloah-home-v2 .eloah-search-row svg{width:20px;height:20px;fill:none;stroke:#9679a3;stroke-width:1.8}
+#eloah-home-v2 input[type=search]{border:0!important;min-height:50px;outline:0;background:transparent!important;color:#2e2834!important;width:100%;font:15px system-ui;min-width:0;padding:10px 0}
+#eloah-home-v2 input[type=search]:focus-visible{outline:0}
+#eloah-home-v2 .eloah-search-row:focus-within{outline:3px solid #a68cbc;outline-offset:2px}
+#eloah-home-v2 .eloah-search-help{color:#8b7c88;font:11px/1.6 system-ui;margin:10px 0 0}
+#eloah-home-v2 .eloah-search-results{background:#fff;border:1px solid #ded4df;border-radius:10px;padding:10px;margin:10px 0 0;max-height:390px;overflow-y:auto}
+#eloah-home-v2 .eloah-search-results[hidden]{display:none!important}
+#eloah-home-v2 .eloah-search-results a{display:flex;align-items:center;justify-content:space-between;gap:14px;color:#38313d;padding:12px;border-radius:6px;text-decoration:none;border-bottom:1px solid #f2edf3}
+#eloah-home-v2 .eloah-search-results a:hover{background:#f5eff8}
+#eloah-home-v2 .eloah-search-results strong{font:650 13px system-ui;display:block}
+#eloah-home-v2 .eloah-search-results small{font:11px system-ui;color:#978995;display:block;margin-top:5px}
+#eloah-home-v2 .eloah-access-section{margin:27px 0}
+#eloah-home-v2 .eloah-section-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 13px;flex-wrap:wrap}
+#eloah-home-v2 h2{font:500 27px/1.25 Georgia,serif;color:#2a2730;margin:0}
+#eloah-home-v2 .eloah-section-top a{font:650 12px system-ui;color:#755293;text-decoration:none}
+#eloah-home-v2 .eloah-work-shortcuts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+#eloah-home-v2 .eloah-shortcut{display:flex;align-items:center;gap:11px;border:1px solid #e0d9df;background:#fff;padding:18px 15px;border-radius:11px;text-decoration:none;color:#38313b;font:650 13px/1.45 system-ui;min-height:77px}
+#eloah-home-v2 .eloah-shortcut:hover,#eloah-home-v2 .eloah-universe a:hover{border-color:#a48dba;background:#fbf8fe}
+#eloah-home-v2 .eloah-shortcut svg{width:24px;height:24px;fill:none;stroke:#7f63a0;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+#eloah-home-v2 .eloah-universe-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+#eloah-home-v2 .eloah-universe{border:1px solid #dfd9e1;border-top:3px solid var(--uni-color,#9279ab);border-radius:12px;background:#fff;padding:21px 22px;min-width:0}
+#eloah-home-v2 .eloah-universe-header{display:flex;align-items:center;gap:10px}
+#eloah-home-v2 .eloah-universe-mark{height:32px;width:32px;display:grid;place-items:center;border-radius:9px;background:color-mix(in srgb,var(--uni-color) 12%,white);color:var(--uni-color);font:700 15px Georgia,serif;flex:none}
+#eloah-home-v2 .eloah-universe h3{font:500 24px/1.2 Georgia,serif;color:#2f2a30;margin:0}
+#eloah-home-v2 .eloah-universe p{font:13px/1.55 system-ui;color:#77707b;margin:10px 0 13px;min-height:39px}
+#eloah-home-v2 .eloah-universe-links{display:flex;flex-wrap:wrap;gap:7px}
+#eloah-home-v2 .eloah-universe-links a{display:inline-flex;align-items:center;min-height:38px;padding:9px 11px;border:1px solid #e7e0e8;border-radius:7px;background:#faf8fb;color:#594b65;text-decoration:none;font:650 11px/1.3 system-ui}
+#eloah-home-v2 .eloah-universe .eloah-main-link{border:0;background:none;color:var(--uni-color);font:700 12px system-ui;margin:4px 0 0;padding:7px 0;display:inline-flex;min-height:26px;text-decoration:none}
+#eloah-home-v2 .eloah-web-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+#eloah-home-v2 .eloah-web-group{background:#fcfafb;border:1px solid #e5dde6;border-radius:11px;padding:16px;min-width:0}
+#eloah-home-v2 .eloah-web-group h3{font:650 13px system-ui;color:#65516c;margin:0 0 10px}
+#eloah-home-v2 .eloah-web-group nav{display:flex;flex-wrap:wrap;gap:6px}
+#eloah-home-v2 .eloah-web-group a{display:inline-flex;align-items:center;min-height:35px;padding:7px 10px;background:#fff;border:1px solid #e3dce5;border-radius:7px;color:#564d5b;text-decoration:none;font:650 11px/1.4 system-ui}
+#eloah-home-v2 .eloah-web-group a:hover{background:#f6edf8}
+#eloah-home-v2 .eloah-public-note{font:11px/1.6 system-ui;color:#8a7e8a;margin-top:13px}
+#eloah-legacy-cockpit,#eloah-legacy-audit{max-width:1220px;margin:19px auto;background:#fff;border:1px solid #e0dae2;border-radius:12px;padding:0 18px}
+#eloah-legacy-cockpit>summary,#eloah-legacy-audit>summary{cursor:pointer;list-style:none;padding:18px 3px;font:650 14px/1.4 system-ui;color:#614878}
+#eloah-legacy-cockpit>summary::-webkit-details-marker,#eloah-legacy-audit>summary::-webkit-details-marker{display:none}
+#eloah-legacy-cockpit>summary:after,#eloah-legacy-audit>summary:after{content:"⌄";float:right}
+#eloah-legacy-cockpit[open]>summary:after,#eloah-legacy-audit[open]>summary:after{transform:rotate(180deg)}
+#eloah-legacy-cockpit .partner-top{margin-top:10px}
+#eloah-legacy-audit #eloah-audit{background:transparent}
+#eloah-home-v2 a:focus-visible,#eloah-legacy-cockpit summary:focus-visible,#eloah-legacy-audit summary:focus-visible{outline:3px solid #9c7fb5;outline-offset:3px}
+@media(max-width:1050px){#eloah-home-v2 .eloah-work-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:780px){#eloah-home-v2 .eloah-universe-grid{grid-template-columns:1fr}#eloah-home-v2 .eloah-web-links{grid-template-columns:1fr}#eloah-home-v2 .eloah-universe{padding:17px}#eloah-home-v2 .eloah-intro{padding:25px 18px}}
+@media(max-width:510px){#eloah-home-v2 .eloah-work-shortcuts{gap:8px}#eloah-home-v2 .eloah-shortcut{padding:11px 9px;gap:8px;min-height:69px;font-size:12px}#eloah-home-v2 .eloah-shortcut svg{width:21px;height:21px}#eloah-home-v2 .eloah-universe-links a{flex:1 1 39%;justify-content:center}#eloah-home-v2 h2{font-size:24px}}
