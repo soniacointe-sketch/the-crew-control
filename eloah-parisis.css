@@ -185,3 +185,32 @@ footer{border-top:1px solid var(--line);font-size:11px;color:var(--muted);paddin
   .mission-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
   .grid-stats{grid-template-columns:repeat(4,minmax(0,1fr))}
 }
+
+/* PARISIS · menu hamburger automatique (téléphone + tablette).
+   Toutes les rubriques et tous les liens demeurent accessibles. */
+.parisis-side-top{display:block}
+.parisis-menu-button{display:none}
+.parisis-menu-panel{display:contents}
+.parisis-menu-links-title,.parisis-menu-links,.parisis-menu-backdrop{display:none}
+@media(max-width:900px){
+  body.parisis-menu-open{overflow:hidden;touch-action:pan-y}
+  .side{height:64px;min-height:64px;padding:0 14px;position:sticky;top:0;z-index:60;overflow:visible;background:#fbf8f3}
+  .parisis-side-top{display:flex;align-items:center;justify-content:space-between;gap:12px;height:64px;width:100%}
+  .parisis-side-top .wordmark{font-size:25px;margin:0;line-height:1.2}
+  .parisis-menu-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-width:104px;min-height:44px;padding:8px 12px;border-radius:10px;border:1px solid #d9cbb7;background:#fffdfa;color:#4c4030;font-size:14px;font-weight:700}
+  .parisis-menu-glyph{font-size:25px;line-height:1;display:inline-block;width:25px;text-align:center;font-weight:400}
+  .parisis-menu-panel{display:none;position:fixed;top:64px;bottom:0;left:0;width:min(440px,92vw);max-width:92vw;background:#fbf8f3;border-right:1px solid #ded2c0;box-shadow:10px 8px 40px #1c1c1c22;z-index:62;padding:17px 18px 25px;overflow-y:auto;overscroll-behavior:contain;-webkit-overflow-scrolling:touch}
+  body.parisis-menu-open .parisis-menu-panel{display:block}
+  .parisis-menu-backdrop:not([hidden]){display:block;position:fixed;inset:64px 0 0;background:#151a1c80;z-index:55}
+  .parisis-menu-panel .brand-sub{display:block;margin:0 0 12px;font-size:11px}
+  .parisis-menu-panel .side-heading{display:block;margin:14px 0 3px;padding:9px 4px}
+  .parisis-menu-panel .parent-link{display:block;padding:13px 10px;background:#fffdfa;border-radius:9px;margin-bottom:13px}
+  .parisis-menu-panel #nav{display:grid;gap:5px;overflow:visible;padding:0;scroll-snap-type:none}
+  .parisis-menu-panel #nav button{display:flex;white-space:normal;width:100%;min-height:44px;text-align:left;flex:initial;font-size:14px;line-height:1.35;padding:11px 12px;scroll-snap-align:none}
+  .parisis-menu-links-title{display:block;padding:18px 4px 8px;font-size:11px;font-weight:750;letter-spacing:.12em;color:#92734a;border-top:1px solid var(--line);margin-top:19px}
+  .parisis-menu-links{display:block}
+  .parisis-menu-links .top-actions{display:grid;grid-template-columns:minmax(0,1fr);width:100%;max-width:100%;max-height:none;overflow:visible;margin:0;padding:0;gap:7px}
+  .parisis-menu-links .top-actions > a,.parisis-menu-links .top-actions > button{display:block;width:100%;max-width:100%;white-space:normal;text-align:left;line-height:1.45;font-size:13px;min-height:44px;padding:12px 13px}
+  .parisis-menu-panel .side-bottom{display:block;padding:16px 4px 20px;margin-top:22px}
+  .top > .top-actions{display:none}
+}
