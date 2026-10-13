@@ -821,6 +821,19 @@ document.getElementById("recordForm").onsubmit=e=>{e.preventDefault();const data
  }
  if(data.last_test>new Date().toISOString().slice(0,10)){alert("La date du test ne peut pas être dans le futur.");return}
 }
+if(view==="automationPlans"){
+ if(data.status==="actif vérifié"){
+  alert("Ce catalogue ne pilote aucun moteur d’exécution. Le statut « actif vérifié » ne peut pas être attribué depuis cette page. Réalise et audite d’abord une intégration distincte avec autorisation AAF.");
+  return;
+ }
+ if(data.status==="testé"&&(!data.last_test||!String(data.evidence||"").trim())){
+  alert("Le statut « testé » exige une date de test et une preuve documentée. Un scénario rédigé n’est pas un test.");
+  return;
+ }
+ if(data.last_test&&data.last_test>new Date().toISOString().slice(0,10)){
+  alert("La date de test ne peut pas être future.");return;
+ }
+}
 const existing=db[view].find(x=>x.id===editId);data.id=existing?.id||crypto.randomUUID();if(view==="transactions"&&data.type==="vente"&&data.status==="confirmé"&&data.external_id){let duplicate=db.transactions.find(x=>x.id!==data.id&&x.source===data.source&&x.external_id===data.external_id&&x.type===data.type);if(duplicate){alert("Cette référence de paiement existe déjà. Doublon refusé.");return}}if(view==="tasks"&&data.status==="terminée"&&(!data.agent_id||!db.agents.some(a=>a.id===data.agent_id)||!data.decision_id||!db.decisions.some(d=>d.id===data.decision_id&&/valid|approuv/i.test(d.status||""))||!data.audit_id||!db.audits.some(a=>a.id===data.audit_id))){alert("Clôture refusée : agent référencé, décision AAF approuvée et audit existant obligatoires.");return}if(existing)Object.assign(existing,data);else db[view].push(data);save(view);document.getElementById("editor").close();render()};
 
 
