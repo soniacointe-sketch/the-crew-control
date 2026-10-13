@@ -23,7 +23,7 @@ studio.append(dialog);
 const confirmText=dialog.querySelector('.erc-confirm-typing'),finalButton=dialog.querySelector('.erc-confirm-final');
 dialog.querySelector('.erc-cancel').onclick=()=>{if(!busy)dialog.close()};
 confirmText.addEventListener('input',()=>{finalButton.disabled=confirmText.value.trim()!=='ENVOYER'||busy});
-let authClient=null,busy=false,loading=false,loaded=false,serverCampaigns=new Map();
+let authClient=null,busy=false,loading=false,loaded=false,serverCampaigns=new Map(),lastFailure=null;
 const ENDPOINT='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-mailing-resend';
 const PUB='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const allowedKeys=new Set(fields);
@@ -55,11 +55,12 @@ function update(){
  else if(loading)message='Vérification du brouillon dans Resend…';
  else if(!loaded)message='Statut non vérifié. Connecte-toi à ELOAH pour autoriser l’envoi.';
  else if(!row)message='Cette newsletter ne possède pas encore de brouillon Resend autorisé.';
+ else if(lastFailure?.id===model.id&&row.status==='draft')message='Dernier essai refusé : '+lastFailure.message+' · Aucun envoi confirmé.';
  else if(row.status==='draft')message='Brouillon prêt dans Resend. Clique pour envoyer cette version à la liste The Crew Orchies.';
  else if(row.status==='queued')message='Envoi déjà demandé. Resend traite la campagne : ne la renvoie pas.';
  else if(row.status==='submitting')message='Envoi en cours : ne clique pas une deuxième fois.';
  else message='Statut à vérifier dans Resend avant toute nouvelle tentative.';
- sendBtn.disabled=busy||loading||!loaded||changed||row?.status!=='draft';
+ sendBtn.disabled=busy||loading||!loaded||changed||row?.status!=='draft'||lastFailure?.id===model.id;
  setState(message);
 }
 async function getSession(){
@@ -104,10 +105,11 @@ finalButton.onclick=async()=>{
  try{
    const result=await api('crew-impact-send',{brand:'The Crew Orchies',templateId:chosen,snapshot:content,confirmation:'ENVOYER THE CREW AUX ABONNÉS'});
    serverCampaigns.set(chosen,{...row,status:'queued',broadcastId:result.broadcastId||row.broadcastId});
-   loaded=true;
+   loaded=true;lastFailure=null;
    setState('Resend a accepté la diffusion et l’a placée en file d’envoi. La livraison individuelle reste à vérifier.');
  }catch(e){
-   setState((e?.message||'Envoi non confirmé.')+' Ouvre Resend pour vérifier avant de réessayer.');
+   lastFailure={id:chosen,message:e?.message||'Envoi non confirmé.'};
+   setState(lastFailure.message+' Ouvre Resend pour vérifier avant de réessayer.');
    loaded=false;
  }finally{
    busy=false;
@@ -129,6 +131,6 @@ document.getElementById('crew-impact-cards')?.addEventListener('click',()=>Promi
 document.getElementById('campaign-list')?.addEventListener('click',()=>Promise.resolve().then(update));
 window.addEventListener('popstate',update);
 const reloadBtn=document.createElement('button');reloadBtn.type='button';reloadBtn.textContent='Actualiser les statuts Resend';reloadBtn.className='erc-reload-impact';
-reloadBtn.onclick=refresh;actions.append(reloadBtn);
+reloadBtn.onclick=()=>{lastFailure=null;refresh()};actions.append(reloadBtn);
 update();refresh();
 })();
