@@ -34,7 +34,11 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <label class="row"><input id="showLegacy" type="checkbox" checked><span class="line" style="background:#c08747"></span> Anciens tracés PARISIS : méridien, triangle, rose, violet, doré, axe historique</label>
 <p class="legend">Couleurs des autres couches : <b style="color:#137c87">bleu-vert</b> et <b style="color:#bb623b">orange</b> pour Hugo ; <b style="color:#744591">violet</b> pour Fouquet royal ; <b style="color:#4267a0">bleu</b> pour les lieux des martyrs ; <b style="color:#2e7081">bleu pétrole</b> pour le panorama.</p>
 <div class="notice" id="allMapState">Les couches sont enregistrées séparément. Les repères de la basilique au nord de Paris sont accessibles avec « Voir l'ensemble des points ».</div>
-</section><section class="panel" id="fouquet-panorama-points">
+</section><section class="panel" id="nesle-coin-liaison"><div class="kicker">AXE-012 · ENCEINTE DE PHILIPPE AUGUSTE</div><h2>La tour de Nesle face à la tour du Coin</h2><p>Nouvelle <b>liaison défensive historiquement documentée</b> au-dessus de la Seine. Le point RS-01 situe approximativement la tour du Coin disparue. Le trait bleu acier rejoint DP-04, la tour de Nesle conservée dans nos recherches précédentes.</p>
+<label class="row"><input type="checkbox" id="showRiver" checked><span class="line" style="background:#32778d"></span> Afficher le lien des tours fluviales</label>
+<div class="actions"><button id="fitRiver" type="button">Voir les deux tours reliées</button><a class="back" href="parisis-nesle-coin-seine.html">Lire la nouvelle enquête ↗</a></div>
+<div class="notice">Ce trait relie les centres approximatifs des deux tours pour visualiser une relation de défense attestée, et non la longueur ou l'emplacement exact des chaînes tendues sur l'eau. <a href="https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263" target="_blank" rel="noopener">Ville de Paris ↗</a></div>
+<div id="riverPointList" class="legend"></div></section><section class="panel" id="fouquet-panorama-points">
 <div class="kicker">AXE-011 · BNF FR. 6465 · FOLIO 57</div><h2>4 sites associés au panorama de Dagobert</h2>
 <p>La notice Biblissima du folio cite le Palais de la Cité, le Louvre et la tour de Nesle. Notre-Dame est également visible dans le paysage selon l'observation iconographique. <b>Ces repères ne sont pas les positions des silhouettes sur l'image :</b> ce sont des localisations de travail sur le plan actuel.</p>
 <label class="row"><input id="showPanorama" type="checkbox" checked> Montrer les quatre repères reliés du panorama</label>
@@ -254,6 +258,27 @@ const panoramaSites=[
 {id:'DP-03',name:'Château médiéval du Louvre',lat:48.860611,lng:2.337644,proof:'Lieu associé au folio par le catalogue Biblissima',detail:'Point général sur le site du Louvre, très transformé depuis le XVe siècle. Ce n’est pas une localisation de façade médiévale.',source:'https://portail.biblissima.fr/fr/ark:/43093/ifdata12a65fb44254a2afe519a5ea480ac360b56dfb03'},
 {id:'DP-04',name:'Tour de Nesle · édifice disparu',lat:48.85750,lng:2.337222,proof:'Lieu associé au folio par le catalogue Biblissima',detail:'La tour de Nesle se dressait sur la rive gauche près de l’Institut de France actuel. Ne pas confondre cette tour avec l’hôtel de Nesle, point de vue du panorama du Met.',source:'https://portail.biblissima.fr/fr/ark:/43093/ifdata12a65fb44254a2afe519a5ea480ac360b56dfb03'}
 ];
+
+const riverPoints=[
+{id:'RS-01',name:'Tour du Coin · rive droite · édifice disparu',lat:48.859294,lng:2.337964,source:'https://mazarinum.bibliotheque-mazarine.fr/expositions-virtuelles/item/18071-i-une-tour-de-pierre-histoire-et-archeologie',precision:'Emplacement approximatif de la tour d’angle de Philippe Auguste, au bord de la Seine près du Louvre.'}
+];
+const riverLayer=L.layerGroup(),riverMarkers={};
+function renderRiver(){
+riverLayer.clearLayers();
+const coin=riverPoints[0],nesle=panoramaSites.find(p=>p.id==='DP-04');
+if(!coin||!nesle)return;
+L.polyline([[coin.lat,coin.lng],[nesle.lat,nesle.lng]],{color:'#32778d',weight:6,opacity:.95,dashArray:'11 6',lineCap:'round'})
+.bindTooltip('Tours défensives face à face au Moyen Âge ; liaison documentée, trait et coordonnées approximatifs',{sticky:true}).addTo(riverLayer);
+for(const p of [coin,nesle]){
+const m=L.circleMarker([p.lat,p.lng],{radius:10,weight:3,color:'#fffdf8',fillColor:'#32778d',fillOpacity:1}).addTo(riverLayer);
+m.bindTooltip(p.id+' · '+p.name,{sticky:true});
+m.bindPopup('<b>'+clean(p.name)+'</b><p>'+clean(p.precision||p.detail)+'</p><p>La Ville de Paris et la Bibliothèque Mazarine documentent la défense fluviale. Les coordonnées restent indicatives.</p><a href="'+(p.id==='RS-01'?p.source:'https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263')+'" target="_blank" rel="noopener">Source historique ↗</a>');
+riverMarkers[p.id]=m;
+}
+document.getElementById('riverPointList').textContent='RS-01 · Tour du Coin (nouveau point) ↔ DP-04 · Tour de Nesle (ancien point conservé).';
+}
+function showRiver(){const yes=document.getElementById('showRiver').checked;if(yes){if(!map.hasLayer(riverLayer))riverLayer.addTo(map)}else map.removeLayer(riverLayer);}
+function zoomRiver(){document.getElementById('showRiver').checked=true;showRiver();const n=panoramaSites.find(p=>p.id==='DP-04'),c=riverPoints[0];map.fitBounds(L.latLngBounds([[n.lat,n.lng],[c.lat,c.lng]]).pad(.7),{maxZoom:16});}
 const panoramaLayer=L.layerGroup(),panoramaMarkers={};
 function drawPanoramaSites(){
 panoramaLayer.clearLayers();
@@ -505,6 +530,7 @@ line('HUGO-AXE-'+r.key,r.name,'Hugo · tracé schématique',r.points.map(p=>[p[1
 for(const p of royalPoints)point('Fouquet · lieux royaux',p,p.id,p.name,p.url);
 for(const p of iconoPoints)point('Iconographie des trois martyrs',p,p.id,p.name,p.source);
 for(const p of panoramaSites)point('Dagobert · panorama et monuments',p,p.id,p.name,p.source);
+for(const p of riverPoints)point('Fortification fluviale médiévale',p,p.id,p.name,p.source);
 for(const p of legacySites)point('Premiers tracés PARISIS',p,p.id,p.name,'parisis-cartography-lab.html');
 const roy=id=>royalPoints.find(p=>p.id===id),ico=id=>iconoPoints.find(p=>p.id===id),pan=id=>panoramaSites.find(p=>p.id===id),old=id=>legacySites.find(p=>p.id===id);
 function edge(id,name,group,a,b,status){if(a&&b)line(id,name,group,[pos(a),pos(b)],status);}
@@ -515,6 +541,7 @@ for(const [i,j]of [[1,2],[2,3],[3,4]])edge('FQ-peinture-'+i+'-'+j,'Monuments du 
 for(const [a,b,g]of [['SP-01','SP-02','provenance du fragment'],['SP-01','SP-03','mémoire iconographique'],['SP-04','FQ-07','provenance du relief'],['SP-05','FQ-07','axe urbain du XIXe siècle']]){
 const resolve=id=>ico(id)||roy(id);edge('LIEN-'+a+'-'+b,g,'Martyrs et œuvres',resolve(a),resolve(b),'Relation documentaire, pas preuve d’alignement médiéval');
 }
+edge('RIVER-NESLE-COIN','Tours de Nesle et du Coin · défense de la Seine','Liaison défensive attestée',riverPoints[0],pan('DP-04'),'Deux tours en vis-à-vis documentées ; segment géographique approximatif, non reconstitution des chaînes');
 for(const p of panoramaSites.slice(1))edge('PAN-'+p.id,'Notre-Dame ↔ '+p.name,'Même enluminure Fouquet',pan('DP-01'),p,'Graphe de comparaison, non géométrie peinte mesurée');
 const legacyLook=Object.fromEntries(legacySites.map(p=>[p.id,p]));
 function legacyLine(id,ids,name,status,close=false){
@@ -541,11 +568,13 @@ document.getElementById('allMapState').textContent='Export demandé : '+obj.feat
 }
 document.getElementById('exportAtlasAll').addEventListener('click',downloadFullAtlas);
 document.getElementById('showLegacy').addEventListener('change',showLegacyLayer);
-document.getElementById('displayAll').addEventListener('click',()=>{for(const id of ['showRoyal','showSaints','showPanorama','showLegacy','showA','showB','showCorridors']){const c=document.getElementById(id);if(c)c.checked=true;}showRoyalLayer();toggleSaints();showPanorama();showLegacyLayer();show();document.getElementById('allMapState').textContent='Tous les anciens points et les nouvelles liaisons sont visibles. Utiliser « Voir l’ensemble » pour inclure la basilique hors Paris.';});
-document.getElementById('zoomAll').addEventListener('click',()=>{oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('displayAll').click();const pts=[...routes.flatMap(r=>r.points.map(p=>[p[1],p[2]])),...royalPoints.map(p=>[p.lat,p.lng]),...iconoPoints.map(p=>[p.lat,p.lng]),...panoramaSites.map(p=>[p.lat,p.lng]),...legacySites.map(p=>[p.lat,p.lng])];map.fitBounds(L.latLngBounds(pts).pad(.15),{maxZoom:13});});
+document.getElementById('displayAll').addEventListener('click',()=>{for(const id of ['showRoyal','showSaints','showPanorama','showLegacy','showRiver','showA','showB','showCorridors']){const c=document.getElementById(id);if(c)c.checked=true;}showRoyalLayer();toggleSaints();showPanorama();showLegacyLayer();showRiver();showRiver();show();document.getElementById('allMapState').textContent='Tous les anciens points et les nouvelles liaisons sont visibles. Utiliser « Voir l’ensemble » pour inclure la basilique hors Paris.';});
+document.getElementById('zoomAll').addEventListener('click',()=>{oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('displayAll').click();const pts=[...routes.flatMap(r=>r.points.map(p=>[p[1],p[2]])),...royalPoints.map(p=>[p.lat,p.lng]),...iconoPoints.map(p=>[p.lat,p.lng]),...panoramaSites.map(p=>[p.lat,p.lng]),...legacySites.map(p=>[p.lat,p.lng]),...riverPoints.map(p=>[p.lat,p.lng])];map.fitBounds(L.latLngBounds(pts).pad(.15),{maxZoom:13});});
 document.getElementById('zoomCentre').addEventListener('click',()=>{map.fitBounds(L.latLngBounds([[48.845,2.295],[48.886,2.372]]).pad(.12),{maxZoom:14});});
-drawLegacy();drawPanoramaSites();renderPanoramaList();renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
+document.getElementById('showRiver').addEventListener('change',showRiver);
+document.getElementById('fitRiver').addEventListener('click',()=>{oldToggle.checked=false;map.removeLayer(oldMapTiles);zoomRiver()});
+renderRiver();drawLegacy();drawPanoramaSites();renderPanoramaList();renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
 toggleSaints();showPanorama();showLegacyLayer();
-if(new URLSearchParams(location.search).get('all')==='1'){document.getElementById('zoomAll').click();}else if(new URLSearchParams(location.search).get('fouquetparis')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Panorama Fouquet : fond moderne, sites du folio 57 marqués comme indices, pas comme superposition métrique.';zoomPanorama();}else if(new URLSearchParams(location.search).get('estree')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Vue Saint-Denis : plan de Paris 1551 masqué car hors couverture.';zoomEstree();}else if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
+if(new URLSearchParams(location.search).get('nesle')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);zoomRiver();}else if(new URLSearchParams(location.search).get('all')==='1'){document.getElementById('zoomAll').click();}else if(new URLSearchParams(location.search).get('fouquetparis')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Panorama Fouquet : fond moderne, sites du folio 57 marqués comme indices, pas comme superposition métrique.';zoomPanorama();}else if(new URLSearchParams(location.search).get('estree')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Vue Saint-Denis : plan de Paris 1551 masqué car hors couverture.';zoomEstree();}else if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
 })();
 </script></body></html>
