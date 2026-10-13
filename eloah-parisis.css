@@ -214,3 +214,28 @@ footer{border-top:1px solid var(--line);font-size:11px;color:var(--muted);paddin
   .parisis-menu-panel .side-bottom{display:block;padding:16px 4px 20px;margin-top:22px}
   .top > .top-actions{display:none}
 }
+
+/* Native PARISIS mobile menu — CSS-only opening, no script dependency. */
+.parisis-menu-toggle{position:absolute;width:1px;height:1px;opacity:0;overflow:hidden;pointer-events:none}
+@media(max-width:900px){
+  .parisis-menu-button{cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
+  .parisis-menu-toggle:focus-visible + .parisis-side-top .parisis-menu-button{outline:3px solid #b89557;outline-offset:3px}
+  .side > .parisis-menu-panel{display:none}
+  .side > #parisisMenuToggle:checked ~ .parisis-menu-panel{display:block}
+  .side > .parisis-menu-backdrop{display:none}
+  .side > #parisisMenuToggle:checked ~ .parisis-menu-backdrop{
+    display:block;position:fixed;inset:64px 0 0;background:#151a1c80;z-index:61;cursor:pointer
+  }
+  body.parisis-native-menu-open{overflow:hidden}
+  .top > .top-actions{display:none!important}
+  .parisis-menu-links .parisis-top-link-list{display:grid;grid-template-columns:minmax(0,1fr);width:100%;gap:7px;padding:0;margin:0}
+  .parisis-menu-links .parisis-top-link-list > a,
+  .parisis-menu-links .parisis-top-link-list > button{
+    display:block;box-sizing:border-box;white-space:normal;text-align:left;
+    width:100%;min-height:44px;padding:12px 13px;line-height:1.45;font-size:13px;
+    max-width:100%;text-decoration:none
+  }
+  .side > #parisisMenuToggle:checked ~ .parisis-side-top .parisis-menu-button{
+    background:#e9ddcb;border-color:#b99c76
+  }
+}
