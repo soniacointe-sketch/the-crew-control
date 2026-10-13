@@ -58,7 +58,16 @@ function shapePath(name){
  return 'M0 0H1000V1000H0Z';
 }
 function S(x,y,w,h,shape='rect'){return {x,y,w,h,shape}}
-function slots(item){
+function slots(item,gap=null){
+ if(Array.isArray(item.customSlots)){
+  const raw=gap===null?Number(item.defaultGap)||0:Number(gap);
+  const gutter=Math.max(0,Math.min(60,Number.isFinite(raw)?raw:0));
+  return item.customSlots.map(o=>{
+   const left=o.x>0?gutter/2:0,right=o.x+o.w<1000?gutter/2:0;
+   const top=o.y>0?gutter/2:0,bottom=o.y+o.h<1000?gutter/2:0;
+   return {x:o.x+left,y:o.y+top,w:Math.max(1,o.w-left-right),h:Math.max(1,o.h-top-bottom),shape:o.shape||'rect'};
+  });
+ }
  const l=item.layout,sh=item.shape;
  if(l==='single')return [S(37,36,926,926,sh)];
  if(l==='square')return [S(60,60,880,880,sh)];
@@ -95,6 +104,7 @@ function slots(item){
  return [S(36,36,928,928,sh)];
 }
 function dimensions(item){
+ if(item.customDims)return {...item.customDims};
  const l=item.layout;
  if(/wide|film-3|film-4|device-tablet-h|device-laptop|device-monitor|device-tv|device-wide/.test(l))return {w:900,h:560};
  if(/phone|portrait|story|device-slim|device-watch|device-tablet-v/.test(l))return {w:600,h:920};
@@ -184,7 +194,7 @@ function imageCover(ctx,image,slotWidth,slotHeight,zoom=1,panX=0,panY=0){
 }
 function draw(ctx,e,photos,activeSlot=-1){
  const item=byId.get(e.variant);if(!item)return;
- const list=slots(item);
+ const list=slots(item,item.isGrid?(e.gridGap??item.defaultGap):null);
  ctx.save();ctx.translate(e.x,e.y);ctx.scale(e.w/1000,e.h/1000);
  ctx.save();ctx.shadowColor='#1112';ctx.shadowBlur=14;drawBack(ctx,item);ctx.restore();
  for(let i=0;i<list.length;i++){
@@ -209,7 +219,7 @@ function draw(ctx,e,photos,activeSlot=-1){
 }
 function svg(id){
  const item=byId.get(id);if(!item)return '';
- const list=slots(item),c=item.accent,bg=bgColor(item);
+ const list=slots(item,item.isGrid?item.defaultGap:null),c=item.accent,bg=bgColor(item);
  const defs='<defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#b9e2ec"/><stop offset=".72" stop-color="#e1f3ea"/><stop offset="1" stop-color="#d2efc6"/></linearGradient></defs>';
  const tiles=list.map((sl,i)=>{
   const trans='translate('+sl.x+' '+sl.y+') scale('+(sl.w/1000)+' '+(sl.h/1000)+')';
