@@ -72,3 +72,8 @@ Aucune traduction intégrale personnelle n'est donnée ici comme certifiée : el
 4. Produire un tableau « fragment / ligne / transcription / traduction / certitude / désaccords ».
 
 [← Retour au registre des recherches](foi-control.html?file=eloah-foi-registre-chantiers-retrouver.md)
+
+
+## MICHEL-4Q529/B — Collation documentaire
+
+[Lire la confrontation des trois fragments et des 16 lignes du premier](foi-control.html?file=eloah-foi-michel-4q529-collation-fragments.md).
