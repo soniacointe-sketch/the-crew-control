@@ -1347,4 +1347,4 @@ async function enter(){const {data:{user}}=await sb.auth.getUser();currentUser=u
 document.getElementById("login").onclick=async()=>{document.getElementById("authInfo").textContent="Connexion…";const {error}=await sb.auth.signInWithPassword({email:document.getElementById("email").value,password:document.getElementById("password").value});document.getElementById("authInfo").textContent=error?error.message:"";if(!error)await enter()};
 enter().catch(()=>{document.getElementById("authInfo").textContent="Impossible de vérifier la session."});
 })();
-</script><script src="eloah-navigation.js?v=6"></script></body></html>
+</script><script src="eloah-navigation.js?v=20261013-sidebar1"></script></body></html>

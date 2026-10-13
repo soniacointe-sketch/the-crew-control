@@ -92,4 +92,4 @@ $('#export-prompts').onclick=()=>{const output=directions.map((d,i)=>'# '+(i+1)+
 $('#studio').addEventListener('click',()=>{const payload={id:selected.id,title:selected.name,prompt:$('#prompt').value,universe:config.universe,photo:photoReference[selected.world].id,updated:new Date().toISOString()};try{localStorage.setItem(transferKey,JSON.stringify(payload))}catch(e){notify('Stockage impossible : copie le prompt avant d’ouvrir le Studio Articles.')}});
 $('#families').innerHTML=families.map(f=>'<span class="family-chip" style="--chip:'+worldColors[f.world]+'">'+esc(f.name)+' <b>'+f.items.length+'</b></span>').join('');
 renderCollection();renderSelected();
-</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
+</script><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script></body></html>

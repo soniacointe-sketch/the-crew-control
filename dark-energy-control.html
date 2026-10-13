@@ -41,4 +41,4 @@ el('researchSources').innerHTML=researchLinks.map(x=>'<div class="row"><a href="
 el('themeChat').onclick=()=>{if(!el('themeSelect').value)return;chat(themePrompt())};
 el('themeExport').onclick=()=>{if(!el('themeSelect').value)return;const url=URL.createObjectURL(new Blob([themePrompt()],{type:'text/plain;charset=utf-8'}));let a=document.createElement('a');a.href=url;a.download='dark-energy-recherche.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 for(let k of ['situation','ressenti','objectif'])if(data.answers[k])el(k).value=data.answers[k];render();
-})();</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
+})();</script><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script></body></html>

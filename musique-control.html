@@ -58,4 +58,4 @@ $('audit-project').onclick=()=>{const f=$('form').elements;const items=[['Nom d�
 
 $('audio-file').onchange=e=>{const f=e.target.files[0];if(!f)return;if(audioURL)URL.revokeObjectURL(audioURL);audioURL=URL.createObjectURL(f);$('player').src=audioURL;$('player').hidden=false;$('audio-note').textContent=f.name+' — écoute temporaire, fichier non sauvegardé.'};window.addEventListener('storage',e=>{if(e.key===key)render()});render();
 })();
-</script><script type="application/json" id="config">{"id":"musique","name":"Musique & identité artistique"}</script><script src="eloah-navigation.js?v=6"></script></body></html>
+</script><script type="application/json" id="config">{"id":"musique","name":"Musique & identité artistique"}</script><script src="eloah-navigation.js?v=20261013-sidebar1"></script></body></html>

@@ -4,4 +4,4 @@ page.onchange=()=>{const url=new URL(page.value,location.href);url.searchParams.
 width.onchange=()=>{frame.style.width=width.value+'px';result.textContent='Largeur réglée à '+width.value+' px'};
 function check(){try{const d=frame.contentDocument;result.textContent=d.documentElement.scrollWidth>d.documentElement.clientWidth?'Débordement horizontal : '+d.documentElement.scrollWidth+' / '+d.documentElement.clientWidth+' px':'Aucun débordement horizontal · '+d.documentElement.clientWidth+' px'}catch{result.textContent='Vérification indisponible'}}
 document.getElementById('check').onclick=check;frame.onload=check;
-</script><script defer src="eloah-navigation.js?v=7"></script></html>
+</script><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script></html>

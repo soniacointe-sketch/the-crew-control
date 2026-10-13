@@ -4,9 +4,8 @@
 (()=>{'use strict';
 if(document.querySelector('.eloah-global-nav'))return;
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
-const routes=[["Accueil général","mes-univers.html"],["Mon Espace","eloah-partenaire.html?rubrique=Mon%20Espace"],["ELOAH Studio","eloah-partenaire.html?rubrique=ELOAH%20Studio"],["Coffre-fort","eloah-partenaire.html?rubrique=Coffre-fort"],["Entretiens","eloah-partenaire.html?rubrique=Entretiens"],["Mailing","eloah-partenaire.html?rubrique=Mailing"],["Documents","eloah-partenaire.html?rubrique=Documents"],["Mon abonnement","eloah-partenaire.html?rubrique=Mon%20abonnement"],["Crédits IA","eloah-partenaire.html?rubrique=Cr%C3%A9dits%20IA"],["Formations","eloah-partenaire.html?rubrique=Formations"],["Analytics","eloah-partenaire.html?rubrique=Analytics"],["Projets","eloah-partenaire.html?rubrique=Projets"],["Bases d’Expertise","eloah-partenaire.html?rubrique=Bases%20d%E2%80%99Expertise"],["Chroniques","eloah-partenaire.html?rubrique=Chroniques"],["Mon profil","eloah-partenaire.html?rubrique=Mon%20profil"]];
-routes.unshift(['Tableau de bord','mes-univers.html']);
-const assistantRoute=['Assistant IA','eloah-projet.html?projet=ELOAH']; routes.push(assistantRoute)
+const routes=[["Tableau de bord", "mes-univers.html"], ["Mes projets", "eloah-projet.html?projet=ELOAH"], ["Mon Espace", "eloah-partenaire.html?rubrique=Mon%20Espace"], ["ELOAH Studio", "eloah-partenaire.html?rubrique=ELOAH%20Studio"], ["Coffre-fort", "eloah-partenaire.html?rubrique=Coffre-fort"], ["Entretiens", "eloah-partenaire.html?rubrique=Entretiens"], ["Mailing", "eloah-partenaire.html?rubrique=Mailing"], ["Documents", "eloah-bibliotheque.html?type=fichiers"], ["Offres ELOAH", "eloah-offres.html"], ["Mon abonnement", "eloah-partenaire.html?rubrique=Mon%20abonnement"], ["Crédits IA", "eloah-partenaire.html?rubrique=Cr%C3%A9dits%20IA"], ["Formations", "eloah-partenaire.html?rubrique=Formations"], ["Projets", "mes-univers.html#maisons"], ["Bases d’Expertise", "eloah-bibliotheque.html?type=bases"], ["Chroniques", "eloah-partenaire.html?rubrique=Chroniques"], ["Mon profil", "eloah-projet.html?projet=ELOAH&onglet=parametres&compte=1"], ["Analytics", "eloah-partenaire.html?rubrique=Analytics"]];
+const assistantRoute=["Assistant IA","eloah-projet.html?projet=ELOAH"];
 let universe=query.get('projet')||'';
 try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
 if(['eloah-the-crew.html','eloah-academy.html','eloah-import.html','index.html'].includes(page))universe='The Crew Orchies';
@@ -15,8 +14,8 @@ if(page==='power-glam-control.html')universe='Power & Glam';
 if(page==='eloah-maia.html')universe='MAIA';
 const assistant=assistantRoute;assistant[1]='eloah-projet.html?projet='+encodeURIComponent(universe||'ELOAH');
 const nav=document.createElement('nav');nav.className='eloah-global-nav';nav.setAttribute('aria-label','Navigation commune ELOAH');
-function navLink(label,href,cls=''){const target=new URL(href,location.href);const current=target.pathname.split('/').pop()===page&&[...target.searchParams].every(([key,value])=>query.get(key)===value);return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
-nav.innerHTML=navLink('ELOAH · Accueil','mes-univers.html','eloah-wordmark')+navLink('Changer d’univers','mes-univers.html#maisons','eloah-switch')+'<div class="eloah-nav-shortcuts">'+[['Mon Espace','eloah-partenaire.html?rubrique=Mon%20Espace'],['Mailing','eloah-partenaire.html?rubrique=Mailing'],['Documents','eloah-partenaire.html?rubrique=Documents']].map(r=>navLink(...r)).join('')+'</div><details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>r[0]!=='Accueil général').map(r=>{
+function navLink(label,href,cls=''){const target=new URL(href,location.href);const current=target.pathname.split('/').pop()===page&&[...target.searchParams].every(([key,value])=>query.get(key)===value)&&target.hash===location.hash&&(!query.has('onglet')||target.searchParams.has('onglet'));return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
+nav.innerHTML=navLink('ELOAH · L’ESPACE DE SONIA','mes-univers.html','eloah-wordmark')+navLink('Changer d’univers','mes-univers.html#maisons','eloah-switch')+'<div class="eloah-nav-shortcuts">'+[['Mon Espace','eloah-partenaire.html?rubrique=Mon%20Espace'],['Mailing','eloah-partenaire.html?rubrique=Mailing'],['Documents','eloah-partenaire.html?rubrique=Documents']].map(r=>navLink(...r)).join('')+'</div><details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>r[0]!=='Accueil général').map(r=>{
  if(r[0]==='Analytics'){
   const links=[['Dashboard Personnel','dashboard'],['Métriques Projet','projets'],['Coûts & Performance','couts']];
   return '<details class="eloah-nav-analytics"><summary>Analytics <span aria-hidden="true">⌄</span></summary><div class="eloah-nav-analytics-entries">'+links.map(([label,id])=>navLink(label,'eloah-partenaire.html?rubrique=Analytics&vue='+id)).join('')+'</div></details>';
@@ -27,8 +26,8 @@ document.body.prepend(nav);
 document.body.classList.add('eloah-screen');
 document.body.dataset.eloahPage=page;
 const menu=nav.querySelector('details');
-document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open){menu.open=false;menu.querySelector('summary').focus()}});
-document.addEventListener('click',e=>{if(menu.open&&!menu.contains(e.target))menu.open=false});
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.open&&!matchMedia('(min-width:1001px)').matches){menu.open=false;menu.querySelector('summary').focus()}});
+document.addEventListener('click',e=>{if(menu.open&&!matchMedia('(min-width:1001px)').matches&&!menu.contains(e.target))menu.open=false});
 document.querySelectorAll('a[href="mes-univers.html"],a[href="mes-univers.html#maisons"]').forEach(a=>{
  if(nav.contains(a)||a.children.length)return;
  const label=a.textContent.trim();
@@ -99,6 +98,27 @@ const harmony=document.createElement('style');harmony.textContent=`
 .eloah-menu-links .eloah-nav-analytics-entries{display:grid;margin-left:11px;border-left:2px solid #d5cae8;padding-left:8px;gap:2px}
 .eloah-menu-links .eloah-nav-analytics-entries a{min-height:41px;font-size:12px}
 `;document.head.appendChild(harmony);
+/* One sidebar on desktop; the same links in the mobile menu. */
+const sidebarStyle=document.createElement('style');sidebarStyle.textContent=`
+@media(min-width:1001px){
+ body.eloah-screen{padding-left:250px!important}
+ .eloah-global-nav{position:fixed!important;inset:0 auto 0 0!important;width:250px!important;height:100dvh!important;display:flex!important;flex-direction:column;align-items:stretch;overflow-y:auto!important;padding:20px 12px!important;background:#f0f0eb;border-right:1px solid #dedfd7;z-index:100}
+ .eloah-global-nav .eloah-wordmark{white-space:normal;font-size:12px;letter-spacing:.08em;margin-bottom:14px}
+ .eloah-global-nav>.eloah-switch,.eloah-global-nav>.eloah-nav-shortcuts{display:none!important}
+ .eloah-global-nav>.eloah-menu{margin:0!important;width:100%}
+ .eloah-global-nav>.eloah-menu>summary{display:none!important}
+ .eloah-global-nav .eloah-menu-links{position:static!important;width:100%!important;max-height:none!important;overflow:visible!important;box-shadow:none;border:0;background:transparent;padding:0}
+ .eloah-global-nav .eloah-menu-links a{min-height:40px;white-space:normal}
+ body[data-eloah-page="mes-univers.html"] .layout,body[data-eloah-page="eloah-partenaire.html"] .layout{grid-template-columns:minmax(0,1fr)!important}
+}
+body[data-eloah-page="mes-univers.html"] .layout>aside,body[data-eloah-page="eloah-partenaire.html"] .layout>aside{display:none!important}
+`;
+document.head.appendChild(sidebarStyle);
+const desktopMenu=matchMedia('(min-width:1001px)');
+function syncSidebar(){menu.open=desktopMenu.matches}
+syncSidebar();desktopMenu.addEventListener('change',syncSidebar);
+menu.addEventListener('toggle',()=>{if(desktopMenu.matches&&!menu.open)menu.open=true});
+if(query.get('rubrique')==='Analytics')nav.querySelector('.eloah-nav-analytics').open=true;
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function projects(){const out=[];try{for(const k of Object.keys(localStorage).filter(k=>k.startsWith('eloah-project-v1:'))){try{const s=JSON.parse(localStorage.getItem(k));if(Array.isArray(s?.threads))out.push({key:k.slice(17),name:s.settings?.name||k.slice(17),updated:s.updated,deadline:s.settings?.deadline,archived:s.settings?.archived})}catch{}}}catch{}return out.sort((a,b)=>(b.updated||'').localeCompare(a.updated||''))}
 if(page==='mes-univers.html'){
