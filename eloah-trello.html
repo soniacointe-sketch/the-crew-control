@@ -7,8 +7,8 @@
 </style></head><body>
 <header><strong>ELOAH <span style="color:#7560a7">Boards</span></strong><small>Tableaux de projets</small><div class="right"><a href="mes-univers.html">← Mes univers</a><button id="export">Exporter JSON</button><button id="importBtn">Importer JSON</button><input type="file" id="importFile" accept=".json,application/json" hidden></div></header>
 <main><span class="eyebrow">ELOAH · ORGANISATION</span><h1>Mes tableaux</h1><p>Organise tes projets comme dans Trello : cartes, listes, étiquettes, dates, checklists et déplacement entre colonnes. Données enregistrées dans ce navigateur.</p>
-<div class="toolbar"><select id="boardSelect" aria-label="Choisir un tableau"></select><button id="newBoard">+ Tableau</button><input id="search" type="search" placeholder="Rechercher une carte…"><button id="calendarBtn">📅 Calendrier</button><button id="newCard" class="primary">+ Nouvelle carte</button></div>
-<div id="notice" role="status"></div><section id="calendar" hidden aria-label="Calendrier des échéances"></section><section class="board" id="lanes" aria-label="Colonnes du tableau"></section>
+<div class="toolbar"><select id="boardSelect" aria-label="Choisir un tableau"></select><button id="newBoard">+ Tableau</button><input id="search" type="search" placeholder="Rechercher une carte…"><button id="calendarBtn">📅 Calendrier</button><button id="themesBtn">🎨 Fonds d’écran</button><button id="newCard" class="primary">+ Nouvelle carte</button></div>
+<div id="themePicker" hidden style="margin:14px 0;padding:15px;background:#fffefa;border:1px solid #dddeda;border-radius:12px"><h2 style="font-size:18px">Fond de ce tableau</h2><div id="themeSwatches" style="display:flex;flex-wrap:wrap;gap:9px"></div><div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:8px"><input id="themeImage" type="url" placeholder="URL de ton image (https://…)" style="flex:1;min-width:170px"><button id="applyImage">Utiliser cette image</button><button id="clearTheme">Fond d’origine</button></div><p style="font-size:12px">Chaque tableau peut avoir son propre fond. Les préférences restent sur cet appareil.</p></div><div id="notice" role="status"></div><section id="calendar" hidden aria-label="Calendrier des échéances"></section><section class="board" id="lanes" aria-label="Colonnes du tableau"></section>
 </main>
 <dialog id="editor"><form method="dialog" id="editForm"><h2 id="dialogTitle">Modifier une carte</h2><label>Titre<input id="title" required maxlength="160"></label><label>Description<textarea id="description"></textarea></label><label>Liste<select id="laneChoice"></select></label><label>Étiquette / priorité<select id="tag"><option value="">Aucune</option><option>Urgent</option><option>Important</option><option>Création</option><option>Administratif</option><option>Publication</option><option>Suivi</option></select></label><label>Échéance<input type="date" id="due"></label><label>Liens et pièces jointes (URL, une par ligne)<textarea id="links" placeholder="https://…"></textarea></label><label>Notes et commentaires personnels<textarea id="comments" placeholder="Notes de suivi…"></textarea></label><label>Checklist</label><div class="checks" id="checks"></div><div style="display:flex;gap:7px"><input id="checkText" placeholder="Nouvelle étape" style="flex:1"><button id="addCheck" type="button">+ Étape</button></div><div class="actions"><button type="button" id="deleteCard" style="margin-right:auto">Supprimer</button><button type="button" id="cancel">Annuler</button><button class="primary" id="save">Enregistrer</button></div></form></dialog>
 <script>
@@ -21,9 +21,32 @@ let data;try{data=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!data||!Arr
 let editing=null,checks=[];
 const $=id=>document.getElementById(id);
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data));$('notice').textContent='Sauvegarde locale effectuée.'}catch(e){$('notice').textContent='Impossible de sauvegarder : stockage saturé ou bloqué.'}};
-const board=()=>data.boards.find(b=>b.id===data.active);let showingCalendar=false;
+const board=()=>data.boards.find(b=>b.id===data.active);
+const themeKey='eloah-board-themes-v1';
+const themes=[
+['Crème éditorial','linear-gradient(125deg,#e7ddcd,#f9f2e6)'],
+['Noir et or','linear-gradient(130deg,#151414,#644d27,#171513)'],
+['Power & Glam','linear-gradient(140deg,#f4efe7,#d7a7a5,#9b3647)'],
+['Sonia Velka','linear-gradient(135deg,#12121b,#512737,#1a131b)'],
+['Canopée','linear-gradient(135deg,#244237,#6c9273,#d9d3b3)'],
+['Parisis ancien','linear-gradient(135deg,#c9b691,#e9dcc1,#a88b6c)'],
+['Ciel violet','linear-gradient(130deg,#7772ae,#c6b8df,#eff0f7)'],
+['Bleu nuit','linear-gradient(130deg,#142841,#335c78,#7d9da4)'],
+['Terre cuivrée','linear-gradient(135deg,#60372d,#b46e51,#e9cfac)'],
+['Rose poudré','linear-gradient(135deg,#e7bec3,#f8e9e5,#c88e9a)'],
+['Blanc lumineux','linear-gradient(125deg,#f8f8f5,#dfe5e1)'],
+['Rouge intense','linear-gradient(135deg,#3b1217,#9c2e38,#e39076)']
+];
+let savedThemes={};try{savedThemes=JSON.parse(localStorage.getItem(themeKey))||{}}catch(e){}
+function setTheme(value){savedThemes[board().id]=value;try{localStorage.setItem(themeKey,JSON.stringify(savedThemes))}catch(e){}applyTheme()}
+function applyTheme(){if(!Object.prototype.hasOwnProperty.call(savedThemes,board().id)){const n=board().name.toLowerCase();let t=themes[6][1];if(n.includes('crew'))t=themes[1][1];else if(n.includes('glam')||n.includes('fatale'))t=themes[2][1];else if(n.includes('velka'))t=themes[3][1];else if(n.includes('parisis'))t=themes[5][1];else if(n.includes('foi'))t=themes[10][1];else if(n.includes('lion'))t=themes[7][1];else if(n.includes('cuisine'))t=themes[8][1];else if(n.includes('metatron'))t=themes[7][1];else if(n.includes('sonia os'))t=themes[0][1];savedThemes[board().id]=t;try{localStorage.setItem(themeKey,JSON.stringify(savedThemes))}catch(e){}}const v=savedThemes[board().id]||'';const bg=v||'';document.body.style.backgroundImage=bg.startsWith('https://')?'linear-gradient(#1114,#1114),url("'+bg.replace(/["'()\\]/g,'')+'")':bg;document.body.style.backgroundSize=bg.startsWith('https://')?'cover':'auto';document.body.style.backgroundAttachment='fixed';document.body.style.backgroundPosition='center';}
+function renderSwatches(){const area=document.getElementById('themeSwatches');area.replaceChildren();themes.forEach(([name,bg])=>{const b=document.createElement('button');b.type='button';b.textContent=name;b.style.background=bg;b.style.color=['Noir et or','Sonia Velka','Bleu nuit','Terre cuivrée','Rouge intense'].includes(name)?'#fff':'#222';b.style.minHeight='66px';b.style.minWidth='125px';b.onclick=()=>setTheme(bg);area.append(b)})}
+document.getElementById('themesBtn').onclick=()=>{const el=document.getElementById('themePicker');el.hidden=!el.hidden};
+document.getElementById('applyImage').onclick=()=>{const v=document.getElementById('themeImage').value.trim();if(!/^https:\/\//.test(v)){alert('Utilise une URL HTTPS pour ton image.');return}setTheme(v)};
+document.getElementById('clearTheme').onclick=()=>setTheme('');
+renderSwatches();let showingCalendar=false;
 const node=(tag,cls,text)=>{const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;return e};
-function render(){const b=board();$('boardSelect').replaceChildren(...data.boards.map(x=>{const o=node('option',null,x.name);o.value=x.id;return o}));$('boardSelect').value=b.id;
+function render(){applyTheme();const b=board();$('boardSelect').replaceChildren(...data.boards.map(x=>{const o=node('option',null,x.name);o.value=x.id;return o}));$('boardSelect').value=b.id;
 const q=$('search').value.trim().toLocaleLowerCase('fr');$('lanes').replaceChildren();renderCalendar();
 for(const lane of b.lanes){const el=node('div','lane');const h=node('h2',null,lane.name);const items=b.cards.filter(c=>c.lane===lane.id&&(!q||(c.title+' '+c.description+' '+c.tag).toLocaleLowerCase('fr').includes(q)));h.append(node('span','count',String(items.length)));el.append(h);
 el.addEventListener('dragover',e=>{e.preventDefault();el.classList.add('dragover')});el.addEventListener('dragleave',()=>el.classList.remove('dragover'));el.addEventListener('drop',e=>{e.preventDefault();el.classList.remove('dragover');const c=b.cards.find(c=>c.id===e.dataTransfer.getData('text/plain'));if(c){c.lane=lane.id;save();render()}});
