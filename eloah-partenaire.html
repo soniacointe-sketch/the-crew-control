@@ -43,7 +43,7 @@ function updateLayout(){
  if(frame)frame.style.display=isEntretiens?'block':'none';
  for(const selector of ['main > .metrics','main > header','main > .hero','main > .toolbar','main > .split','#moduleHelp','#status']){
   const el=document.querySelector(selector);if(!el)continue;
-  const hide=isEntretiens && selector!=='main > header' ? true : isEntretiens;
+  const hide=selector==='main > header'?isEntretiens:(isEntretiens||isMailing);
   const desired=hide?'none':'';
   if(el.style.display!==desired)el.style.display=desired;
  }
