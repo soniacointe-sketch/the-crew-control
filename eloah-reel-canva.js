@@ -790,23 +790,7 @@ function xss(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&l
 function toast(s){const box=one('.ecs-toast');box.textContent=s;box.classList.remove('ecs-hide');clearTimeout(toastTimer);toastTimer=setTimeout(()=>box.classList.add('ecs-hide'),5000)}
 function serial(){return {name:S.name,duration:S.duration,trimStart:S.trimStart,bg:S.bg,filter:S.filter,brand:S.brand,elements:JSON.parse(JSON.stringify(S.elements))}}
 function snapshot(){history.push(JSON.stringify(serial()));if(history.length>70)history.shift();future=[]}
-function apply(a){Object.assign(S,a);S.elements=a.elements||[];selected=null;S.time=Math.min(S.time,S.duration);const chartFileInput=document.createElement('input');
-chartFileInput.type='file';chartFileInput.id='ecs-chart-file-input';chartFileInput.accept='.csv,.tsv,.txt,text/csv,text/plain';
-chartFileInput.className='ecs-fileinput';chartFileInput.setAttribute('aria-label','Choisir un tableau CSV à importer');
-root.append(chartFileInput);
-chartFileInput.addEventListener('change',async ev=>{
- const file=ev.target.files?.[0];ev.target.value='';if(!file)return;
- const element=S.elements.find(e=>e.id===selected&&e.kind==='chart');if(!element)return toast('Sélectionne un graphique avant d’importer le fichier.');
- if(file.size>1024*1024)return toast('Fichier trop volumineux : limite 1 Mo.');
- try{
-  const data=await file.text();
-  const parsed=window.ELOAHCharts.parse(data);
-  if(!parsed.labels.length)throw Error('Aucune ligne de données valide.');
-  snapshot();element.dataText=data;saveLocal();renderSide();draw();
-  toast(parsed.labels.length+' catégories et '+parsed.names.length+' séries importées.');
- }catch(e){toast('Import CSV impossible : '+e.message)}
-});
-one('#ecs-name').value=S.name;renderSide();renderTimeline();draw()}
+function apply(a){Object.assign(S,a);S.elements=a.elements||[];selected=null;S.time=Math.min(S.time,S.duration);one('#ecs-name').value=S.name;renderSide();renderTimeline();draw()}
 function undo(){if(!history.length)return;future.push(JSON.stringify(serial()));apply(JSON.parse(history.pop()))}
 function redo(){if(!future.length)return;history.push(JSON.stringify(serial()));apply(JSON.parse(future.pop()))}
 function add(kind,extra={}){snapshot();const n={id:nextId++,kind,x:110,y:790,w:860,h:280,color:'#222222',text:'Nouveau texte',font:78,start:0,end:S.duration,...extra};S.elements.push(n);selected=n.id;activeTab='properties';renderSide();renderTimeline();draw();saveLocal();return n}
@@ -1362,7 +1346,7 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(e.target.id==='ecs-tts-speed'){voiceSpeed=Number(e.target.value);return}
  if(e.target.id==='ecs-tts-voice'){const voices=window.speechSynthesis?.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr'))||[];voiceSelection=voices[Number(e.target.value)]?.name||'';return}
  const p=e.target.dataset.p,setting=e.target.dataset.setting;
- if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion','lineStyle','lineCap','strokeColor','chartPalette','chartTitle','dataText','chartBackground','fontFamily','secondaryFont','subtext','eyebrow','textMode','align','outlineColor','backgroundColor','comboBackground','accentColor'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();if(p==='chartPalette'||p==='dataText')renderSide();return}
+ if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion','lineStyle','lineCap','strokeColor','chartPalette','chartTitle','dataText','chartBackground','fontFamily','secondaryFont','subtext','eyebrow','textMode','align','outlineColor','backgroundColor','comboBackground','accentColor'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();if(['chartPalette','dataText','textMode','comboBackground','fontFamily','secondaryFont','backgroundColor'].includes(p))renderSide();return}
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
@@ -1623,6 +1607,23 @@ async function exportVideo(){
  }catch(e){toast('Export impossible : '+e.message)}
  finally{busy=false;label.disabled=false;label.textContent='⬇ Exporter vidéo';pause();seek(0)}
 }
+const chartFileInput=document.createElement('input');
+chartFileInput.type='file';chartFileInput.id='ecs-chart-file-input';chartFileInput.accept='.csv,.tsv,.txt,text/csv,text/plain';
+chartFileInput.className='ecs-fileinput';chartFileInput.setAttribute('aria-label','Choisir un tableau CSV à importer');
+root.append(chartFileInput);
+chartFileInput.addEventListener('change',async ev=>{
+ const file=ev.target.files?.[0];ev.target.value='';if(!file)return;
+ const element=S.elements.find(e=>e.id===selected&&e.kind==='chart');if(!element)return toast('Sélectionne un graphique avant d’importer le fichier.');
+ if(file.size>1024*1024)return toast('Fichier trop volumineux : limite 1 Mo.');
+ try{
+  const data=await file.text();
+  const parsed=window.ELOAHCharts.parse(data);
+  if(!parsed.labels.length)throw Error('Aucune ligne de données valide.');
+  snapshot();element.dataText=data;saveLocal();renderSide();draw();
+  toast(parsed.labels.length+' catégories et '+parsed.names.length+' séries importées.');
+ }catch(e){toast('Import CSV impossible : '+e.message)}
+});
+
 try{const saved=JSON.parse(localStorage.getItem('eloah_reel_editor')||'null');if(saved&&Array.isArray(saved.elements)){Object.assign(S,saved);S.trimStart=0;S.time=0;S.playing=false;nextId=Math.max(1,...S.elements.map(e=>+e.id+1||1))}}catch{}
 one('#ecs-name').value=S.name;renderSide();renderTimeline();
 try{const persisted=JSON.parse(localStorage.getItem('eloah_reel_editor_frame_assets')||'[]');restoreFrameAssets(persisted).catch(e=>console.warn(e))}catch{}
