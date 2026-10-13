@@ -277,6 +277,26 @@ body.eloah-article #faith-audio{scroll-margin-top:20px}
 .foi-personnel-related-actions a{display:inline-flex;align-items:center;min-height:40px;padding:10px 12px;background:#e8dfd0;color:#544229;text-decoration:none;border-radius:7px;font:650 12px/1.35 system-ui}
 .foi-toc-link{font-weight:700;color:#80562d;text-decoration:underline;text-underline-offset:3px}
 @media(max-width:640px){.foi-personnel-grid{grid-template-columns:1fr}.foi-personnel-chapter-button{min-height:52px}.foi-personnel-related-actions a{flex:1 1 auto;justify-content:center}}
+</style><style id="foi-personal-revue-restore">
+/* Rétablir la revue illustrée pour le dossier personnel complet, sans toucher aux autres dossiers. */
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-guide{border-top:3px solid #161616;margin:55px 0 0;padding:25px 0 18px;display:flex;flex-direction:column;gap:8px}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-guide>span{font:800 11px/1.5 system-ui;letter-spacing:.14em;color:#93632a}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-guide h2{font:normal clamp(31px,4vw,46px)/1.2 Georgia,serif!important;color:#151515!important;margin:0}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-guide p{font:14px/1.65 system-ui;color:#6d6660;max-width:850px;margin:0}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-guide a{display:inline-flex;align-self:flex-start;text-decoration:none;border:1px solid #b79e74;background:#fffaf2;color:#604a2b;padding:10px 15px;font:700 13px system-ui;margin-top:8px}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral{max-width:960px;margin:16px auto 70px;padding:clamp(18px,4vw,45px);background:#fffdf9;color:#322b25;border:1px solid #d8c9b6;scroll-margin-top:35px;box-shadow:0 7px 25px #22170e0b}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral>h1{font:normal clamp(27px,4vw,47px)/1.13 Georgia,serif!important;color:#302924!important;letter-spacing:-.01em}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral h2{font:normal clamp(24px,3vw,31px)/1.24 Georgia,serif!important;color:#3c3126!important;border-top:1px solid #dbcdbb;margin:40px 0 16px;padding-top:22px}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral h3{font:normal 24px/1.3 Georgia,serif!important}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral p,
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral li{font:15px/1.82 system-ui;color:#50473e}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral table{width:100%;border-collapse:collapse;display:block;overflow-x:auto}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral th,
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral td{border:1px solid #ded1c2;padding:11px;text-align:left}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral a{color:#79582b;text-underline-offset:3px}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral img{height:auto;max-width:100%;border-radius:6px}
+body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral blockquote{border-left:3px solid #b79b6c;padding-left:17px;margin:22px 0;color:#6f5940}
+@media(max-width:650px){body.eloah-revue:has(#foi-texte-integral) .foi-dossier-guide{margin-top:35px}body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral{padding:17px 13px}}
 </style></head><body>
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
@@ -629,7 +649,7 @@ function renderPersonalDossierNavigation(i){
  }else article.prepend(wrap);
 }
 function renderPersonalIndex(){
- if(current!==0)return;
+ if(current!==0&&DOCS[current]?.[1]!=="eloah-foi-dossier-personnel-complet.md")return;
  article.replaceChildren();
  const section=(tag,cls,txt)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(txt)el.textContent=txt;return el};
  const jump=(name)=>{const i=DOCS.findIndex(d=>d[1]===name);if(i>=0)openDoc(i)};
@@ -688,7 +708,36 @@ function renderCollectionsGrid(){
   const h=article.querySelector("h1");if(h)h.after(grid);else article.prepend(grid);
 }
 async function getDoc(i){if(i===0)return "";if(cache.has(i))return cache.get(i);const res=await fetch(DOCS[i][1],{cache:"no-store"});if(!res.ok)throw Error("Erreur "+res.status);const md=await res.text();cache.set(i,md);return md;}
-async function openDoc(i,section="",restore=false){const request=++busy;current=i;sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel");document.body.classList.toggle("eloah-revue",i===0);document.body.classList.toggle("eloah-article",i!==0);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){renderPersonalIndex();document.title="Foi & Spiritualité · ELOAH";}else{renderArticleFrame(i);renderPersonalDossierNavigation(i);}loading.hidden=true;let target=section&&(section.startsWith("#")?article.querySelector("#"+CSS.escape(section.slice(1))):[...article.querySelectorAll("h1,h2,h3")].find(x=>x.textContent.toLowerCase().includes(section.toLowerCase())));if(!target&&restore&&location.hash){const anchor=decodeURIComponent(location.hash.slice(1));target=article.querySelector("#"+CSS.escape(anchor))||null}if(!target&&restore){const saved=JSON.parse(localStorage.getItem(POS)||"{}");if(saved.doc===i)target=document.getElementById(saved.heading)}if(target)target.scrollIntoView({block:"start"});else window.scrollTo({top:0,behavior:"instant"});history.replaceState({},"",location.pathname+(i===0?"?vue=accueil":"?file="+encodeURIComponent(DOCS[i][1]))+(target?"#"+target.id:""));localStorage.setItem(POS,JSON.stringify({doc:i,heading:target?.id||""}))}catch(e){loading.hidden=false;loading.textContent="Impossible de charger le document : "+e.message+". Ouvre le fichier source depuis GitHub."}}
+async function openDoc(i,section="",restore=false){const request=++busy;current=i;sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;const fullPersonalDossier=DOCS[i][1]==="eloah-foi-dossier-personnel-complet.md";document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel"&&!fullPersonalDossier);document.body.classList.toggle("eloah-revue",i===0||fullPersonalDossier);document.body.classList.toggle("eloah-article",i!==0&&!fullPersonalDossier);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){
+ renderPersonalIndex();
+ document.title="Foi & Spiritualité · ELOAH";
+}else if(fullPersonalDossier){
+ // Garder la maquette de la revue et rendre le document complet en dessous, sans le remplacer.
+ const integral=document.createElement("section");
+ integral.id="foi-texte-integral";
+ integral.className="foi-dossier-texte-integral";
+ integral.setAttribute("aria-label","Texte intégral du dossier personnel");
+ while(article.firstChild)integral.append(article.firstChild);
+ renderPersonalIndex();
+ const jump=document.createElement("div");
+ jump.className="foi-dossier-guide";
+ const badge=document.createElement("span");
+ badge.textContent="DOSSIER PERSONNEL · SOURCE INTÉGRALE";
+ const heading=document.createElement("h2");
+ heading.textContent="Le dossier complet";
+ const instruction=document.createElement("p");
+ instruction.textContent="Retrouve ci-dessous le texte original et les douze liens vers les chapitres. Les boutons « Mon chemin spirituel » de la revue restent utilisables.";
+ const link=document.createElement("a");
+ link.href="#foi-texte-integral";
+ link.textContent="Lire le texte intégral ↓";
+ jump.append(badge,heading,instruction,link);
+ article.append(jump,integral);
+ // Les douze boutons présents dans la revue et les liens du tableau ouvrent les fichiers Markdown réels.
+ headings();
+ document.title="Mon dossier personnel · Foi & Spiritualité · ELOAH";
+}else{
+ renderArticleFrame(i);
+}loading.hidden=true;let target=section&&(section.startsWith("#")?article.querySelector("#"+CSS.escape(section.slice(1))):[...article.querySelectorAll("h1,h2,h3")].find(x=>x.textContent.toLowerCase().includes(section.toLowerCase())));if(!target&&restore&&location.hash){const anchor=decodeURIComponent(location.hash.slice(1));target=article.querySelector("#"+CSS.escape(anchor))||null}if(!target&&restore){const saved=JSON.parse(localStorage.getItem(POS)||"{}");if(saved.doc===i)target=document.getElementById(saved.heading)}if(target)target.scrollIntoView({block:"start"});else window.scrollTo({top:0,behavior:"instant"});history.replaceState({},"",location.pathname+(i===0?"?vue=accueil":"?file="+encodeURIComponent(DOCS[i][1]))+(target?"#"+target.id:""));localStorage.setItem(POS,JSON.stringify({doc:i,heading:target?.id||""}))}catch(e){loading.hidden=false;loading.textContent="Impossible de charger le document : "+e.message+". Ouvre le fichier source depuis GitHub."}}
 
 document.getElementById("mobileMenu").onclick=()=>sidebar.classList.toggle("open");
 document.getElementById("focus").onclick=()=>{document.body.classList.toggle("focus");document.getElementById("focus").textContent=document.body.classList.contains("focus")?"Afficher les menus":"Mode lecture"};
