@@ -336,8 +336,102 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 #eloah-subscription-board .eloah-commercial-primary{background:#7555b2;color:white}
 #eloah-subscription-board .eloah-commercial-secondary{background:white;color:#7555b2}
 @media(max-width:760px){#eloah-subscription-board .eloah-commercial-grid{grid-template-columns:1fr}#eloah-subscription-board .eloah-commercial-grid article{padding:22px}}
+</style><style id="eloah-analytics-design">
+#eloah-analytics-board[hidden],#eloah-analytics-board [hidden]{display:none!important}
+#eloah-analytics-board{max-width:1260px;margin:16px auto 35px;color:#302d35;font-family:system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+#eloah-analytics-board *{box-sizing:border-box}
+#eloah-analytics-board .eloah-analytics-top{display:flex;align-items:center;justify-content:space-between;gap:18px;margin:24px 0 24px;flex-wrap:wrap}
+#eloah-analytics-board .eloah-analytics-kicker{font:750 10px system-ui;color:#8f7093;letter-spacing:.14em}
+#eloah-analytics-board .eloah-analytics-top h2{font:500 clamp(30px,3.3vw,44px)/1.15 Georgia,serif;color:#24212c;margin:7px 0}
+#eloah-analytics-board .eloah-analytics-top p{margin:0;color:#7b7380;font:13px/1.6 system-ui}
+#eloah-analytics-board .analytics-home-link{font:650 12px system-ui;text-decoration:none;color:#7a61a6;border:1px solid #ddd3ed;border-radius:8px;background:white;padding:11px 14px}
+#eloah-analytics-board .eloah-analytics-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:0 0 18px}
+#eloah-analytics-board .eloah-analytics-tabs a{display:flex;align-items:center;gap:11px;min-height:64px;background:#fff;color:#514a5d;border:1px solid #e0dce7;border-radius:10px;padding:13px;text-decoration:none;font:650 13px/1.4 system-ui}
+#eloah-analytics-board .eloah-analytics-tabs a svg{width:20px;height:20px;stroke:#977cb6;stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+#eloah-analytics-board .eloah-analytics-tabs a[aria-current=page]{border-color:#8f76b7;background:#f2eef9;color:#5c4484;box-shadow:0 2px 9px #8266af19}
+#eloah-analytics-board .eloah-analytics-source{font:11px/1.5 system-ui;color:#887d89;margin:0 0 25px}
+#eloah-analytics-board .eloah-analytics-section-head{margin:0 0 20px}
+#eloah-analytics-board .eloah-analytics-section-head span{font:700 10px system-ui;color:#90769a;letter-spacing:.13em}
+#eloah-analytics-board .eloah-analytics-section-head h3{font:normal 32px Georgia,serif;color:#30283b;margin:6px 0}
+#eloah-analytics-board .eloah-analytics-section-head p{font:13px/1.6 system-ui;color:#7d7481;margin:4px 0}
+#eloah-analytics-board .eloah-analytics-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;margin:0 0 19px}
+#eloah-analytics-board .analytics-project-stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+#eloah-analytics-board .eloah-analytics-stats article{border:1px solid #e2dce6;border-radius:12px;background:#fff;padding:20px;min-height:139px;display:flex;flex-direction:column}
+#eloah-analytics-board .eloah-analytics-stats span{font:650 12px system-ui;color:#716b79}
+#eloah-analytics-board .eloah-analytics-stats strong{font:700 clamp(25px,3.2vw,37px)/1.4 system-ui;color:#5b4780;margin:9px 0}
+#eloah-analytics-board .eloah-analytics-stats small{font:11px/1.5 system-ui;color:#a099a4}
+#eloah-analytics-board .eloah-analytics-insight{border:1px solid #e3dce8;border-radius:12px;background:#fff;padding:22px;margin:15px 0}
+#eloah-analytics-board .eloah-analytics-insight h4{font:500 24px Georgia,serif;color:#312a3b;margin:0 0 10px}
+#eloah-analytics-board .eloah-analytics-insight p{color:#706976;font:13px/1.7 system-ui}
+#eloah-analytics-board .eloah-analytics-insight a{font:650 12px system-ui;color:#7454a1}
+#eloah-analytics-board .analytics-project-row{padding:13px 0;border-top:1px solid #eee8f0}
+#eloah-analytics-board .analytics-project-row header{display:flex;justify-content:space-between;gap:12px;font:650 13px system-ui}
+#eloah-analytics-board .analytics-project-row small{font:11px system-ui;color:#89818d}
+#eloah-analytics-board .analytics-progress-track{height:7px;background:#f0eaf3;border-radius:20px;overflow:hidden;margin-top:9px}
+#eloah-analytics-board .analytics-progress-track i{display:block;height:100%;background:#8d75b8;border-radius:20px}
+#eloah-analytics-board .analytics-cost-form{display:grid;grid-template-columns:125px 160px minmax(180px,1fr) 140px auto;align-items:end;gap:9px}
+#eloah-analytics-board .analytics-cost-form label{display:block;font:650 11px system-ui;color:#706875}
+#eloah-analytics-board .analytics-cost-form input,#eloah-analytics-board .analytics-cost-form select{display:block;width:100%;margin-top:6px;min-height:42px;border:1px solid #d7cfdd;border-radius:7px;padding:9px;background:#fff;color:#2c2630;font:13px system-ui}
+#eloah-analytics-board .analytics-cost-form button,#eloah-analytics-board .analytics-cost-remove{border:1px solid #7a5ca4;border-radius:7px;padding:10px 14px;background:#795fa9;color:#fff;font:650 12px system-ui;cursor:pointer}
+#eloah-analytics-board .analytics-cost-remove{background:#fff;color:#795fa9;border-color:#dfd5e6;padding:7px 10px}
+#eloah-analytics-board .analytics-cost-line{display:flex;justify-content:space-between;gap:15px;border-top:1px solid #f0ecf2;padding:13px 0;align-items:center;font-size:13px}
+#eloah-analytics-board .analytics-cost-line small{display:block;color:#8a8390;margin-top:4px}
+#eloah-analytics-board .analytics-cost-line aside{display:flex;gap:12px;align-items:center;position:static!important;height:auto!important;overflow:visible!important;background:transparent!important;border:0!important}
+#eloah-analytics-board .eloah-analytics-cost-warning{font:11px/1.65 system-ui;color:#8c7582;background:#fbf6f7;border-left:3px solid #b78999;padding:12px}
+#eloah-analytics-board .analytics-cost-status{font:12px system-ui;color:#78608c;min-height:16px}
+@media(max-width:1050px){#eloah-analytics-board .eloah-analytics-stats{grid-template-columns:repeat(2,minmax(0,1fr))}#eloah-analytics-board .analytics-cost-form{grid-template-columns:repeat(2,minmax(0,1fr))}#eloah-analytics-board .analytics-cost-form button{grid-column:1/-1}}
+@media(max-width:680px){#eloah-analytics-board{padding:0 3px}#eloah-analytics-board .eloah-analytics-tabs{grid-template-columns:1fr;gap:7px}#eloah-analytics-board .eloah-analytics-tabs a{min-height:49px}#eloah-analytics-board .eloah-analytics-stats{grid-template-columns:1fr 1fr;gap:8px}#eloah-analytics-board .eloah-analytics-stats article{padding:13px;min-height:120px}#eloah-analytics-board .eloah-analytics-stats strong{font-size:26px}#eloah-analytics-board .eloah-analytics-insight{padding:17px}#eloah-analytics-board .analytics-cost-form{grid-template-columns:1fr}}
 </style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header>
-<section id="eloah-subscription-board" hidden aria-labelledby="eloah-subscription-title">
+
+<section id="eloah-analytics-board" hidden aria-labelledby="eloah-analytics-heading">
+  <div class="eloah-analytics-top">
+    <div><span class="eloah-analytics-kicker">ELOAH · ANALYTICS</span><h2 id="eloah-analytics-heading">Analyser pour mieux avancer.</h2><p>Une lecture de ton activité, de tes projets et de tes dépenses, fondée sur les données disponibles.</p></div>
+    <a href="eloah-partenaire.html?rubrique=Mon%20Espace" class="analytics-home-link">← Mon Espace</a>
+  </div>
+  <nav class="eloah-analytics-tabs" aria-label="Rubriques Analytics">
+    <a href="eloah-partenaire.html?rubrique=Analytics&vue=dashboard" data-analytics-tab="dashboard" aria-current="page"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="8" rx="1.3"/><rect x="14" y="3" width="7" height="5" rx="1.3"/><rect x="14" y="12" width="7" height="9" rx="1.3"/><rect x="3" y="15" width="7" height="6" rx="1.3"/></svg>Dashboard Personnel</a>
+    <a href="eloah-partenaire.html?rubrique=Analytics&vue=projets" data-analytics-tab="projets"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20V10M10 20V4M16 20v-7M22 20v-11M2 20h21"/></svg>Métriques Projet</a>
+    <a href="eloah-partenaire.html?rubrique=Analytics&vue=couts" data-analytics-tab="couts"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4v16h18"/><path d="M5 15l5-4 4 3 6-8"/><path d="M16 6h4v4"/></svg>Coûts &amp; Performance</a>
+  </nav>
+  <p class="eloah-analytics-source" id="eloah-analytics-source">Données calculées sur cet appareil uniquement. Aucun fournisseur externe n'est connecté à ces tableaux.</p>
+  <section class="eloah-analytics-panel" data-analytics-panel="dashboard" aria-label="Dashboard Personnel">
+    <div class="eloah-analytics-section-head"><div><span>VUE D’ENSEMBLE</span><h3>Dashboard Personnel</h3><p>Un aperçu des éléments ELOAH enregistrés localement.</p></div></div>
+    <div class="eloah-analytics-stats">
+      <article><span>Éléments actifs</span><strong data-analytics-value="active">—</strong><small>Notes et actions non archivées</small></article>
+      <article><span>Terminés</span><strong data-analytics-value="done">—</strong><small>Éléments déclarés terminés</small></article>
+      <article><span>Échéances dépassées</span><strong data-analytics-value="late">—</strong><small>Dates passées non terminées</small></article>
+      <article><span>Projets locaux</span><strong data-analytics-value="projects">—</strong><small>Espaces projet retrouvés sur cet appareil</small></article>
+    </div>
+    <div class="eloah-analytics-insight"><h4>Ce que raconte ton tableau de bord</h4><p id="eloah-analytics-summary">Analyse des notes locales en cours…</p><a href="eloah-partenaire.html?rubrique=Mon%20Espace">Retrouver mon espace →</a></div>
+  </section>
+  <section class="eloah-analytics-panel" data-analytics-panel="projets" hidden aria-label="Métriques Projet">
+    <div class="eloah-analytics-section-head"><div><span>SUIVI DES PROJETS</span><h3>Métriques Projet</h3><p>Répartition des notes et actions enregistrées dans les rubriques ELOAH.</p></div></div>
+    <div class="eloah-analytics-stats analytics-project-stats">
+      <article><span>Rubriques utilisées</span><strong data-analytics-value="modules">—</strong><small>Catégories avec au moins un élément</small></article>
+      <article><span>Projets locaux</span><strong data-analytics-value="projects2">—</strong><small>Espaces de projet sur cet appareil</small></article>
+      <article><span>Progression connue</span><strong data-analytics-value="completion">—</strong><small>Éléments terminés / éléments actifs</small></article>
+    </div>
+    <div class="eloah-analytics-insight"><h4>Avancement par rubrique</h4><div id="eloah-analytics-breakdown" class="analytics-breakdown"><p>Aucune donnée locale analysée.</p></div></div>
+    <div class="eloah-analytics-insight"><h4>Projets ELOAH retrouvés</h4><div id="eloah-analytics-projects"><p>Aucun projet local identifié.</p></div></div>
+  </section>
+  <section class="eloah-analytics-panel" data-analytics-panel="couts" hidden aria-label="Coûts et performance">
+    <div class="eloah-analytics-section-head"><div><span>DÉPENSES &amp; RESSOURCES</span><h3>Coûts &amp; Performance</h3><p>Un registre de coûts manuel, séparé des données de facturation et des consommations IA réelles.</p></div></div>
+    <div class="eloah-analytics-stats">
+      <article><span>Coûts saisis ce mois-ci</span><strong data-analytics-value="monthCosts">0,00 €</strong><small>Saisie manuelle sur cet appareil</small></article>
+      <article><span>Total enregistré</span><strong data-analytics-value="totalCosts">0,00 €</strong><small>Montants saisis, non synchronisés</small></article>
+      <article><span>Transactions suivies</span><strong data-analytics-value="costEntries">0</strong><small>Entrées du registre manuel</small></article>
+    </div>
+    <div class="eloah-analytics-insight"><h4>Ajouter une dépense</h4><form id="eloah-analytics-cost-form" class="analytics-cost-form">
+      <label>Date<input id="analytics-cost-date" type="date" required></label>
+      <label>Catégorie<select id="analytics-cost-category"><option value="IA et outils">IA et outils</option><option value="Abonnements">Abonnements</option><option value="Communication">Communication</option><option value="Événements">Événements</option><option value="Autre">Autre</option></select></label>
+      <label>Libellé<input id="analytics-cost-label" type="text" maxlength="120" placeholder="Ex. abonnement à un outil" required></label>
+      <label>Montant (€)<input id="analytics-cost-amount" type="number" min="0.01" max="999999" step="0.01" placeholder="0,00" required></label>
+      <button type="submit">＋ Ajouter</button>
+    </form><p id="analytics-cost-status" class="analytics-cost-status" role="status"></p></div>
+    <div class="eloah-analytics-insight"><h4>Registre manuel</h4><div id="eloah-analytics-costs-list"></div></div>
+    <p class="eloah-analytics-cost-warning">Les données Stripe, les abonnements réels, les jetons LLM et les dépenses des connecteurs ne sont pas synchronisés. Les calculs affichés proviennent uniquement des montants que tu saisis ici.</p>
+  </section>
+</section><section id="eloah-subscription-board" hidden aria-labelledby="eloah-subscription-title">
   <div class="eloah-plans-wrap">
     <header class="eloah-plans-heading">
       <span class="eloah-plans-eyebrow">ELOAH · MON ABONNEMENT</span>
@@ -563,22 +657,23 @@ function updateLayout(){
  const route=new URLSearchParams(location.search).get('rubrique');
  const section=document.getElementById('section');
  const active=route||section?.textContent?.trim()||'Tous';
- const isEntretiens=active==='Entretiens',isMailing=active==='Mailing',isSubscription=active==='Mon abonnement';
+ const isEntretiens=active==='Entretiens',isMailing=active==='Mailing',isSubscription=active==='Mon abonnement',isAnalytics=active==='Analytics';
  const frame=document.getElementById('eloah-entretiens-integrated');
  if(frame)frame.style.display=isEntretiens?'block':'none';const mailBoard=document.getElementById('mailing-dashboard');if(mailBoard)mailBoard.hidden=!isMailing;
  const subBoard=document.getElementById('eloah-subscription-board');if(subBoard)subBoard.hidden=!isSubscription;
+ const analyticsBoard=document.getElementById('eloah-analytics-board');if(analyticsBoard)analyticsBoard.hidden=!isAnalytics;
  for(const selector of ['main > .metrics','main > header','main > .hero','main > .toolbar','main > .split','#moduleHelp','#status']){
   const el=document.querySelector(selector);if(!el)continue;
-  const hide=selector==='main > header'?isEntretiens:(isEntretiens||isMailing||isSubscription);
+  const hide=selector==='main > header'?isEntretiens:(isEntretiens||isMailing||isSubscription||isAnalytics);
   const desired=hide?'none':'';
   if(el.style.display!==desired)el.style.display=desired;
  }
  const heading=document.querySelector('main > header h1');
  const eyebrow=document.querySelector('main > header .eyebrow');
  const subtitle=document.getElementById('mailing-subtitle');
- const name=isMailing?'Mailing & Newsletter':isSubscription?'Mon abonnement':'ELOAH Control';
+ const name=isMailing?'Mailing & Newsletter':isSubscription?'Mon abonnement':isAnalytics?'Analytics':'ELOAH Control';
  if(heading&&heading.textContent!==name)heading.textContent=name;
- if(eyebrow){const desired=isMailing||isSubscription?'none':'';if(eyebrow.style.display!==desired)eyebrow.style.display=desired}
+ if(eyebrow){const desired=isMailing||isSubscription||isAnalytics?'none':'';if(eyebrow.style.display!==desired)eyebrow.style.display=desired}
  if(subtitle&&subtitle.hidden===isMailing)subtitle.hidden=!isMailing;
 }
 function ready(){document.querySelectorAll('[data-mail-tab]').forEach(button=>button.addEventListener('click',()=>{document.querySelectorAll('[data-mail-tab]').forEach(b=>b.setAttribute('aria-selected',String(b===button)));document.querySelectorAll('[data-mail-panel]').forEach(panel=>panel.hidden=panel.dataset.mailPanel!==button.dataset.mailTab)}));
