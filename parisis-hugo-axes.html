@@ -30,7 +30,7 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <section class="panel" id="parisis-all-map">
 <div class="kicker">ATLAS TOTAL · CONSERVATION DES ENQUÊTES</div><h2>Une carte, tous les points, tous les traits</h2>
 <p>Les anciens et les nouveaux travaux sont conservés. Les liaisons entre documents iconographiques sont des <b>traits de comparaison</b>, pas des routes empruntées par des personnes ni des alignements voulus par les bâtisseurs.</p>
-<div class="actions"><button type="button" id="displayAll" class="active">Tout afficher</button><button type="button" id="zoomAll">Voir l'ensemble des points</button><button type="button" id="zoomCentre">Zoom sur Paris</button></div>
+<div class="actions"><button type="button" id="displayAll" class="active">Tout afficher</button><button type="button" id="zoomAll">Voir l'ensemble des points</button><button type="button" id="exportAtlasAll">Exporter tous les points et traits (GeoJSON)</button><button type="button" id="zoomCentre">Zoom sur Paris</button></div>
 <label class="row"><input id="showLegacy" type="checkbox" checked><span class="line" style="background:#c08747"></span> Anciens tracés PARISIS : méridien, triangle, rose, violet, doré, axe historique</label>
 <p class="legend">Couleurs des autres couches : <b style="color:#137c87">bleu-vert</b> et <b style="color:#bb623b">orange</b> pour Hugo ; <b style="color:#744591">violet</b> pour Fouquet royal ; <b style="color:#4267a0">bleu</b> pour les lieux des martyrs ; <b style="color:#2e7081">bleu pétrole</b> pour le panorama.</p>
 <div class="notice" id="allMapState">Les couches sont enregistrées séparément. Les repères de la basilique au nord de Paris sont accessibles avec « Voir l'ensemble des points ».</div>
@@ -488,6 +488,58 @@ document.addEventListener('click',e=>{const b=e.target.closest('button[data-sain
 document.getElementById('showPanorama').addEventListener('change',showPanorama);
 document.getElementById('fitPanorama').addEventListener('click',zoomPanorama);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-panorama-point]');if(!b)return;const p=panoramaSites.find(x=>x.id===b.dataset.panoramaPoint);if(!p)return;document.getElementById('showPanorama').checked=true;showPanorama();map.flyTo([p.lat,p.lng],15,{duration:.55});setTimeout(()=>panoramaMarkers[p.id]?.openPopup(),580)});
+
+function makeGeoAtlas(){
+const features=[],stamp=new Date().toISOString();
+function point(group,p,id,name,source){
+features.push({type:'Feature',geometry:{type:'Point',coordinates:[p.lng,p.lat]},properties:{id,group,name,source:source||'',precision:'Coordonnées cartographiques de travail ; vérifier dans le dossier original'}});
+}
+function line(id,name,group,coords,status,source){
+features.push({type:'Feature',geometry:{type:'LineString',coordinates:coords.map(p=>[p[1],p[0]])},properties:{id,name,group,status,source:source||''}});
+}
+const pos=p=>[p.lat,p.lng];
+for(const r of routes){
+r.points.forEach((p,i)=>features.push({type:'Feature',geometry:{type:'Point',coordinates:[p[2],p[1]]},properties:{id:'HUGO-'+r.key+'-'+(i+1),group:'Victor Hugo · itinéraire',name:p[0],source:p[4],status:p[5]}}));
+line('HUGO-AXE-'+r.key,r.name,'Hugo · tracé schématique',r.points.map(p=>[p[1],p[2]]),'Itinéraire du roman avec points actuels de travail');
+}
+for(const p of royalPoints)point('Fouquet · lieux royaux',p,p.id,p.name,p.url);
+for(const p of iconoPoints)point('Iconographie des trois martyrs',p,p.id,p.name,p.source);
+for(const p of panoramaSites)point('Dagobert · panorama et monuments',p,p.id,p.name,p.source);
+for(const p of legacySites)point('Premiers tracés PARISIS',p,p.id,p.name,'parisis-cartography-lab.html');
+const roy=id=>royalPoints.find(p=>p.id===id),ico=id=>iconoPoints.find(p=>p.id===id),pan=id=>panoramaSites.find(p=>p.id===id),old=id=>legacySites.find(p=>p.id===id);
+function edge(id,name,group,a,b,status){if(a&&b)line(id,name,group,[pos(a),pos(b)],status);}
+edge('FQ-royal-basilique','Porte Saint-Denis → basilique','Historique · relation cérémonielle',roy('FQ-01'),roy('FQ-07'),'Relation historique attestée ; segment de carte NON parcours processionnel');
+edge('FQ-portes','Porte médiévale → arc 1672','Comparaison des emplacements',roy('FQ-01'),roy('FQ-06'),'Différence des sites à travers les siècles');
+edge('FQ-portes-anciennes','Porte aux Peintres → bastide','Succession de portes',roy('FQ-05'),roy('FQ-01'),'Chronologie, pas voie historique démontrée');
+for(const [i,j]of [[1,2],[2,3],[3,4]])edge('FQ-peinture-'+i+'-'+j,'Monuments du folio royal FQ-'+i+' / FQ-'+j,'Comparaison iconographique',roy('FQ-0'+i),roy('FQ-0'+j),'Traits exploratoires de comparaison, sans route historique');
+for(const [a,b,g]of [['SP-01','SP-02','provenance du fragment'],['SP-01','SP-03','mémoire iconographique'],['SP-04','FQ-07','provenance du relief'],['SP-05','FQ-07','axe urbain du XIXe siècle']]){
+const resolve=id=>ico(id)||roy(id);edge('LIEN-'+a+'-'+b,g,'Martyrs et œuvres',resolve(a),resolve(b),'Relation documentaire, pas preuve d’alignement médiéval');
+}
+for(const p of panoramaSites.slice(1))edge('PAN-'+p.id,'Notre-Dame ↔ '+p.name,'Même enluminure Fouquet',pan('DP-01'),p,'Graphe de comparaison, non géométrie peinte mesurée');
+const legacyLook=Object.fromEntries(legacySites.map(p=>[p.id,p]));
+function legacyLine(id,ids,name,status,close=false){
+const vertices=ids.map(id=>legacyLook[id]).filter(Boolean).map(pos);
+if(close&&vertices.length>2)vertices.push(vertices[0]);
+line(id,name,'Archives · premiers tracés',vertices,status);
+}
+legacyLine('OLD-orange',['OLD-01','OLD-02','OLD-03'],'Triangle monumental','Hypothèse exploratoire sans intention démontrée',true);
+legacyLine('OLD-rose',['OLD-04','OLD-02','OLD-07'],'Louvre → Opéra → vestige','Liaison exploratoire');
+legacyLine('OLD-violet',['OLD-06','OLD-07'],'Rue Clovis → Jardins-Saint-Paul','Segment de comparaison, PAS tracé du rempart');
+legacyLine('OLD-or',['OLD-05','OLD-04'],'Arc → Louvre','Comparaison de sites');
+line('OLD-axe-vert','Grand axe historique · points approximatifs','Tracé historique documenté',historicalAxis,'Corridor historique attesté, mesures indicatives');
+const longitude=2+20/60+14.025/3600;
+line('OLD-meridien','Méridien de Paris','Repère de référence',[[48.82,longitude],[48.9,longitude]],'Longitude conventionnelle de référence');
+historicalAxis.slice(1,-1).forEach((p,i)=>features.push({type:'Feature',geometry:{type:'Point',coordinates:[p[1],p[0]]},properties:{id:'OLD-AXE-'+(i+1),group:'Grand axe historique',name:['Carrousel','Tuileries','Concorde'][i],status:'Emplacement de travail'}}));
+return {type:'FeatureCollection',name:'PARISIS ENGINE · Atlas complet · tous les points et traits conservés',properties:{generatedAt:stamp,projection:'EPSG:4326',version:'2026-10-13',notice:'Traits classés par nature ; superposition spatiale ne prouve aucune intention.'},features};
+}
+function downloadFullAtlas(){
+const obj=makeGeoAtlas();
+const url=URL.createObjectURL(new Blob([JSON.stringify(obj,null,2)],{type:'application/geo+json'}));
+const a=document.createElement('a');a.href=url;a.download='parisis-atlas-complet-points-et-traits.geojson';a.click();
+setTimeout(()=>URL.revokeObjectURL(url),2000);
+document.getElementById('allMapState').textContent='Export demandé : '+obj.features.filter(f=>f.geometry.type==='Point').length+' points et '+obj.features.filter(f=>f.geometry.type==='LineString').length+' liaisons, avec types, sources et réserves.';
+}
+document.getElementById('exportAtlasAll').addEventListener('click',downloadFullAtlas);
 document.getElementById('showLegacy').addEventListener('change',showLegacyLayer);
 document.getElementById('displayAll').addEventListener('click',()=>{for(const id of ['showRoyal','showSaints','showPanorama','showLegacy','showA','showB','showCorridors']){const c=document.getElementById(id);if(c)c.checked=true;}showRoyalLayer();toggleSaints();showPanorama();showLegacyLayer();show();document.getElementById('allMapState').textContent='Tous les anciens points et les nouvelles liaisons sont visibles. Utiliser « Voir l’ensemble » pour inclure la basilique hors Paris.';});
 document.getElementById('zoomAll').addEventListener('click',()=>{oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('displayAll').click();const pts=[...routes.flatMap(r=>r.points.map(p=>[p[1],p[2]])),...royalPoints.map(p=>[p.lat,p.lng]),...iconoPoints.map(p=>[p.lat,p.lng]),...panoramaSites.map(p=>[p.lat,p.lng]),...legacySites.map(p=>[p.lat,p.lng])];map.fitBounds(L.latLngBounds(pts).pad(.15),{maxZoom:13});});
