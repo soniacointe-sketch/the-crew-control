@@ -824,14 +824,14 @@ function renderPersonalIndex(){
   card.setAttribute("aria-label","Lire le chapitre "+String(j+1).padStart(2,"0")+" : "+d[0]);
   const cover=section("img","");
   cover.src=src;
-  cover.alt="Illustration éditoriale ELOAH : "+d[0].replace(/^\\d+\\s*[·—-]\\s*/,"");
+  cover.alt="Illustration éditoriale ELOAH : "+d[0].slice(5);
   cover.loading="lazy";cover.decoding="async";
   cover.width=840;cover.height=1080;
   cover.onerror=()=>{cover.style.display="none";card.classList.add("rev-chapter-no-image")};
   const info=section("div","rev-story-info");
   info.append(
    section("small","",category),
-   section("strong","",d[0].replace(/^\\d+\\s*[·—-]\\s*/,"")),
+   section("strong","",d[0].slice(5)),
    section("span","",desc),
    section("em","","LIRE LE CHAPITRE ↗")
   );
