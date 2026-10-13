@@ -290,6 +290,9 @@ const pictorial=royalPoints.filter(x=>['FQ-01','FQ-02','FQ-03','FQ-04'].includes
 for(let i=1;i<pictorial.length;i++){L.polyline([[pictorial[i-1].lat,pictorial[i-1].lng],[pictorial[i].lat,pictorial[i].lng]],
 {color:'#744591',weight:2.8,opacity:.75,dashArray:'2 9'}).bindTooltip('Mise en relation documentaire des repères décrits dans une même enluminure, et NON une route de cortège',{sticky:true}).addTo(royalLayer);}
 const historic=royalPoints[0],modern=royalPoints.find(x=>x.id==='FQ-06'),basilica=royalPoints.find(x=>x.id==='FQ-07');
+const early=royalPoints.find(p=>p.id==='FQ-05');
+if(early){L.polyline([[early.lat,early.lng],[historic.lat,historic.lng]],{color:'#777386',weight:3.2,opacity:.9,dashArray:'6 6'}).bindTooltip('Deux portes successives nommées Saint-Denis : liaison chronologique, pas une route processionnelle').addTo(royalLayer);}
+
 L.polyline([[historic.lat,historic.lng],[basilica.lat,basilica.lng]],{color:'#b18a35',weight:4,opacity:.85,dashArray:'9 8'}).addTo(royalLayer).bindTooltip('Liaison historique porte → basilique : trait géométrique indicatif, pas itinéraire exact');
 L.polyline([[historic.lat,historic.lng],[modern.lat,modern.lng]],{color:'#777777',weight:5,opacity:.9,dashArray:'4 5'}).addTo(royalLayer).bindTooltip('Écart entre l’ancienne porte et l’arc actuel');
 for(const p of royalPoints){
