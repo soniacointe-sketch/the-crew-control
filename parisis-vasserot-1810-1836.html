@@ -23,6 +23,17 @@ main{padding:20px clamp(14px,2vw,36px);max-width:1720px;margin:auto}.intro{max-w
 <label style="display:flex;align-items:center;gap:9px;font-size:12px"><input type="checkbox" id="toggleParcel" checked> Afficher les contours de parcelles</label>
 <div class="archive-state" id="parcelStatus" role="status">Les contours ne sont pas encore chargés. Le site tentera de récupérer l'archive publique ; si le navigateur bloque cette requête, l'import ZIP fonctionne sans transférer le fichier vers un serveur.</div>
 <p style="font-size:11px;color:#756d61"><strong>Licence :</strong> ODbL — ALPAGE / Anne-Laure Bethe. Affichage limité à l'île de la Cité et à ses abords pour éviter de saturer le navigateur. Fichier .zip SHP avec son .prj recommandé. Pas de reconstitution certifiée de 1482.</p>
+</section><section class="panel" id="historicalRoads"><div class="eyebrow">NOUVEAU · COUCHE ALPAGE · RÉSEAU VIAIRE</div><h2>Les vraies rues du cadastre, en bleu</h2>
+<p>ALPAGE fournit aussi un <b>réseau viaire de 1810–1836</b>. Lorsqu'il est chargé, il s'affiche en <b>bleu</b>, indépendamment des parcelles dorées et des parcours colorés de Victor Hugo.</p>
+<div class="archive-loader"><button class="primary" id="loadRoads" type="button">Charger les rues historiques</button><button id="importRoads" type="button">Importer le jeu de rues</button><input type="file" id="roadsFile" accept=".zip,.geojson,.json,application/zip,application/json" hidden><a target="_blank" rel="noopener" href="https://geodata.lib.utexas.edu/catalog/stanford-db591kz1574">Données des rues en lignes ↗</a><a target="_blank" rel="noopener" href="https://geodata.lib.utexas.edu/catalog/stanford-gy980ch3900">Surfaces anciennes des voies ↗</a></div>
+<label style="display:flex;align-items:center;gap:8px;font-size:12px"><input type="checkbox" id="roadsVisible" checked> Montrer les rues historiques quand les données sont chargées</label>
+<div id="roadStatus" class="archive-state" role="status">Réseau ancien pas encore chargé : tentative de téléchargement à l'ouverture de la carte. Sinon, l'import du fichier d'origine reste disponible.</div>
+<p style="font-size:11px;color:#756d61"><b>Source :</b> ALPAGE · Anne-Laure Bethe (lignes) et Paul Rouet (surfaces) · licence ODbL. Le jeu ne doit pas être pris pour un itinéraire exact de 1482.</p></section>
+<section class="panel" id="twoNeighbourhoods"><div class="eyebrow">DEUX SECTEURS · DEUX COTES D'ARCHIVES</div><h2>La Cité 1827 et le Palais 1828</h2>
+<p>Le catalogue de <em>La Fabrique numérique du passé</em> référence deux feuilles cadastrales différentes, indispensables à confronter pour notre enquête :</p>
+<div class="source"><strong>Quartier de la Cité — 1827</strong><small>38 îlots · 273 points de calage · F/31/90/01 à F/31/90/20</small><a target="_blank" rel="noopener" href="https://api.nakala.fr/data/10.34847/nkl.07886353/faa679f4fe04631eb8dca491a48e3f604bd1190c">Fichier numérisé original (JP2) ↗</a><p class="street-footnote">Piste prioritaire pour l'ancienne Juiverie, le Marché-Palu et la Lanterne.</p></div>
+<div class="source"><strong>Quartier du Palais de Justice — 1828</strong><small>4 îlots · 55 points de calage · F/31/94/01 à F/31/94/04</small><a target="_blank" rel="noopener" href="https://api.nakala.fr/data/10.34847/nkl.07886353/b6ce54dae66eb54bc8c68195154e6c5cd3602e80">Fichier numérisé original (JP2) ↗</a><p class="street-footnote">Piste prioritaire pour le secteur du Palais et la Barillerie ; emprise exacte des rues à contrôler.</p></div>
+<p class="important"><b>Ce que cela change :</b> la Juiverie et la Barillerie ne doivent pas être étudiées sur une seule feuille choisie au hasard. Les secteurs sont voisins, mais leurs documents, dates et points de calage diffèrent. Il faut croiser les deux avant de mesurer un alignement.</p>
 </section><section class="panel"><div class="eyebrow">CORRIDORS SOURCE PAR SOURCE</div><h2>Six parcours à confronter</h2><div id="corridorList"></div><p class="important">Cliquer sur une rue recentre le parcours déjà dessiné. Les bandes translucides montrent un périmètre d'étude schématique ; elles ne sont pas les limites cadastrales originales.</p></section>
 <section class="panel"><h2>Archives et données ouvertes</h2>
 <div class="source"><strong>Archives de Paris · Atlas Vasserot</strong><small>Cadastre par îlots, 1810–1836 ; compléments Vasserot–Bellanger, 1830–1850.</small><a href="https://archives.paris.fr/archives-numerisees/documents-iconographiques/plans-parcellaires/accedez-aux-plans-de-paris-dans-ses-limites-avant-1860" target="_blank" rel="noopener">Consulter les plans originaux ↗</a></div>
@@ -105,6 +116,66 @@ items.forEach(x=>{const b=document.createElement('button');b.className='study';b
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-focus-study]');if(!b)return;const target=list.querySelector('button[data-id="'+b.dataset.focusStudy+'"]');if(target){target.click();document.getElementById('realCadastre').scrollIntoView({behavior:'smooth',block:'start'});}});
 list.addEventListener('click',e=>{const b=e.target.closest('button[data-id]');if(!b)return;const x=items.find(y=>y[0]===b.dataset.id);if(!x)return;activeStreet=x;list.querySelectorAll('.study').forEach(el=>el.classList.toggle('active',el===b));note.textContent=x[2]+' — '+x[3]+' Le fond de 1551 reste une reconstitution géoréférencée non auditée et non un relevé Vasserot.';try{const doc=frame.contentWindow.document;const target=doc.querySelector('button[data-street-id="'+x[0]+'"]');if(target)target.click();else note.textContent+=' Carte indisponible : ouvrir en grand.'}catch{note.textContent+=' Pour localiser le corridor, ouvrir la carte en grand.'}});
 
+
+const roadStatus=document.getElementById('roadStatus');
+const roadsButton=document.getElementById('loadRoads');
+const roadImport=document.getElementById('importRoads');
+const roadFile=document.getElementById('roadsFile');
+const roadCheck=document.getElementById('roadsVisible');
+let roadBusy=false,roadsStarted=false;
+function roadSay(message,kind=''){roadStatus.textContent=message;roadStatus.className='archive-state'+(kind?' '+kind:'');}
+function roadsLayer(){
+const api=frame.contentWindow?.PARISIS_VASSEROT;
+if(!api?.loadRoads)throw new Error('Module cartographique en cours de chargement, actualiser la page.');
+return api;
+}
+function finishRoads(parsed,reference){
+const collection=collectionFrom(parsed);
+const result=roadsLayer().loadRoads(collection);
+roadsLayer().showRoads(roadCheck.checked);
+if(!result.count)throw new Error('Aucune portion de rue dans le secteur de la Cité. Vérifier le référentiel géographique.');
+roadSay(result.count+' éléments historiques du réseau viaire chargés sur '+result.sourceCount+' éléments source ('+reference+'). Ce sont des rues 1810–1836, non 1482.','ok');
+return result;
+}
+async function parseRoadBlob(blob,name){
+if(/\.geojson$|\.json$/i.test(name)){return finishRoads(JSON.parse(await blob.text()),name)}
+if(!/\.zip$/i.test(name))throw Error('Fichier GeoJSON ou ZIP attendu.');
+if(typeof window.shp!=='function')throw Error('Le convertisseur de fichiers SHP n’est pas disponible. Importer du GeoJSON.');
+return finishRoads(await window.shp(await blob.arrayBuffer()),name);
+}
+async function remoteRoads(){
+if(roadBusy)return;
+roadBusy=true;roadsButton.disabled=true;
+try{
+roadSay('Recherche du réseau historique ALPAGE auprès des catalogues universitaires…');
+const records=['stanford-db591kz1574','stanford-gy980ch3900'];
+let result=null,lastError=null;
+for(const id of records){
+try{
+const host='https://geo.btaa.org';
+const metaUrl=host+'/api/v1/resources/'+id+'/downloads/generated/geojson';
+const metadata=await fetch(metaUrl,{mode:'cors'});
+if(!metadata.ok)throw Error('Métadonnées HTTP '+metadata.status);
+const info=await metadata.json();
+const url=new URL(info.download_url||'/api/v1/resources/'+id+'/downloads/generated/geojson/file',host);
+if(url.origin!==host)throw Error('Source de téléchargement inattendue.');
+const response=await fetch(url,{mode:'cors'});
+if(!response.ok)throw Error('Fichier HTTP '+response.status);
+const buffer=await response.blob();
+if(buffer.size>25000000)throw Error('Jeu de données trop volumineux pour le navigateur.');
+roadSay('Conversion des rues historiques en cours…');
+result=await parseRoadBlob(buffer,info.file_name||'reseau.geojson');
+if(result?.count)break;
+}catch(e){lastError=e;}
+}
+if(!result?.count)throw Error(lastError?.message||'Données non reçues');
+}catch(e){roadSay('Le catalogue ne permet pas le téléchargement direct depuis cette page ('+e.message+'). Ouvrir la notice du jeu de rues puis importer le GeoJSON ou ZIP. Aucun trait historique supplémentaire n’a été inventé.','warn')}
+finally{roadBusy=false;roadsButton.disabled=false;}
+}
+roadsButton.addEventListener('click',remoteRoads);
+roadImport.addEventListener('click',()=>roadFile.click());
+roadFile.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>25000000)throw Error('Fichier supérieur à 25 Mo.');await parseRoadBlob(file,file.name)}catch(err){roadSay('Lecture impossible : '+err.message,'warn')}finally{e.target.value=''}});
+roadCheck.addEventListener('change',()=>{try{roadsLayer().showRoads(roadCheck.checked)}catch(e){roadSay(e.message,'warn')}});
 const status=document.getElementById('parcelStatus');
 const button=document.getElementById('loadParcels');
 const fileButton=document.getElementById('fileParcel');
@@ -182,6 +253,6 @@ const area=activeStreet?activeStreet[2]:'la Juiverie, la Barillerie et les deux 
 const prompt='PARISIS ENGINE — ENQUÊTE HISTORIQUE ORIGINALE. Sujet : '+area+'. Rédige une analyse narrative historique de fond, évocatrice et captivante, comme une enquête menée dans les archives et sur les cartes, sans copier le style ni les phrases d’un auteur identifiable. INTRODUCTION SENSORIELLE, puis 1) énigme précisément formulée ; 2) documents originaux avec cotes, dates et liens vérifiables ; 3) confrontation Hugo 1482 / Truschet et Hoyau 1551 / Lazare 1844 / Vasserot 1810–1836 ; 4) comparaison cartographique argumentée ; 5) faits contre hypothèses et objections ; 6) conclusion compréhensible et prochaines vérifications. Ne jamais inventer de découvertes ni de citations. Fournis des passages en prose développée, sans slogans ou listes génériques. Prépare aussi la fiche PARISIS à ajouter à ELOAH.';
 window.open('https://chatgpt.com/?q='+encodeURIComponent(prompt),'_blank','noopener,noreferrer');
 });
-frame.addEventListener('load',()=>{if(!started){started=true;fromRemote();}});if(frame.contentDocument?.readyState==='complete'&&!started){started=true;fromRemote();}
+frame.addEventListener('load',()=>{if(!started){started=true;fromRemote();}if(!roadsStarted){roadsStarted=true;remoteRoads();}});if(frame.contentDocument?.readyState==='complete'){if(!started){started=true;fromRemote();}if(!roadsStarted){roadsStarted=true;remoteRoads();}}
 })();
 </script></body></html>
