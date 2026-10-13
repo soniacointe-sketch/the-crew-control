@@ -18,7 +18,7 @@
 .parisis-folder-links .button-light{display:block;font-size:12px;padding:9px 10px;line-height:1.35;border:0;background:#faf5ee;white-space:normal}
 .top-actions{gap:8px}.top-actions .button-light{font-size:12px}
 @media(max-width:900px){.parisis-folder-links{max-height:none}.parisis-folder summary{padding:14px}}
-</style></head>
+.parisis-library{margin:18px 0 25px}.parisis-library-heading{display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:16px}.parisis-library-heading h2{font-size:clamp(25px,2.6vw,36px);margin:6px 0}.parisis-library-heading p{color:#766a5d;max-width:680px}.parisis-library-layout{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(270px,1fr);gap:16px;align-items:stretch}.parisis-atlas-card,.parisis-reading-card{background:#fffdfa;border:1px solid #e4d7c7;border-radius:18px;padding:16px;min-width:0;box-shadow:0 6px 24px #56402808}.parisis-card-heading{display:flex;gap:12px;align-items:center;justify-content:space-between;font-size:11px;letter-spacing:.07em;font-weight:800;color:#8b6d43;margin-bottom:12px}.parisis-card-heading a{color:#514639;text-decoration:underline}.parisis-atlas-card iframe{display:block;width:100%;height:440px;background:#f6eee4;border:1px solid #e7dfd5;border-radius:12px}.parisis-atlas-foot{font-size:11px;color:#766a5d;margin:11px 2px 2px}.parisis-collection-search{display:flex;align-items:center;gap:8px;border:1px solid #e5d9c9;border-radius:10px;background:#faf5ee;padding:0 12px;margin-bottom:12px}.parisis-collection-search input{width:100%;min-width:0;padding:12px 0;border:0;outline:0;background:transparent}.parisis-library-books{max-height:430px;overflow:auto;padding-right:3px}.parisis-library-books .parisis-folder{margin:6px 0}.parisis-library-books .parisis-folder-links{max-height:260px}.parisis-library-shortcuts{display:flex;gap:8px;flex-wrap:wrap;margin:13px 0}.parisis-library-shortcuts a{background:#f8f2e9;border:1px solid #e4d7c7;border-radius:30px;padding:9px 14px;font-size:12px;color:#5c4b37}.parisis-library [hidden]{display:none!important}@media(max-width:1100px){.parisis-library-layout{grid-template-columns:1fr}.parisis-atlas-card iframe{height:350px}.parisis-library-books{max-height:none}}@media(max-width:600px){.parisis-atlas-card iframe{height:310px}.parisis-library-heading h2{font-size:26px}.parisis-library-shortcuts a{flex:1;text-align:center}}</style></head>
 <body>
 <div class="shell">
 <aside class="side">
@@ -43,7 +43,15 @@
 <div><div class="eyebrow">ELOAH / Recherche historique & symbolique</div><h1>PARISIS <em>ENGINE</em></h1><p class="sub">Des faits, des cartes, des sources — et des questions auxquelles on peut réellement répondre.</p></div>
 <span id="parisisActionsAnchor" hidden></span><div class="top-actions"><a class="button-light" href="parisis-hugo-axes.html?all=1&amp;v=atlas-complet-20261013">🗺 Atlas complet ↗</a><a class="button-light" href="parisis-axe-015-proces-fosse-nesle.html?v=20261013">📖 Dernière enquête ↗</a><a class="button-light" href="parisis-cartography-lab.html?v=decouvertes">📐 Cartographie ↗</a><button id="askChat" class="primary" type="button">Travailler dans ChatGPT ↗</button></div>
 </header>
-<section class="research-principle"><strong>Une piste n'est pas un résultat.</strong> La ressemblance d'un symbole, un tracé géométrique ou une date commune ne suffisent jamais à démontrer une intention historique. Les éléments préremplis sont des pistes d'étude, pas des découvertes validées.</section>
+<section class="parisis-library" aria-labelledby="libraryTitle">
+<div class="parisis-library-heading"><div><div class="eyebrow">CENTRE DE RECHERCHE · BIBLIOTHÈQUE VIVANTE</div><h2 id="libraryTitle">Une ville. Des archives. Des enquêtes.</h2><p>Retrouve un lieu sur la carte, ouvre une collection et reprends ton dossier.</p></div><a class="button-light" href="parisis-axe-015-proces-fosse-nesle.html?v=20261013">Continuer AXE-015 ↗</a></div>
+<div class="parisis-library-layout">
+<div class="parisis-atlas-card"><div class="parisis-card-heading"><span>01 / L'ATLAS VIVANT</span><a href="parisis-hugo-axes.html?all=1&amp;v=atlas-complet-20261013">Ouvrir en grand ↗</a></div><iframe loading="lazy" title="Atlas interactif des points et liaisons de PARISIS ENGINE" src="parisis-hugo-axes.html?all=1&amp;v=atlas-complet-20261013"></iframe><p class="parisis-atlas-foot">Les points et tracés restent dans l'atlas existant.</p></div>
+<div class="parisis-reading-card"><div class="parisis-card-heading"><span>02 / MA BIBLIOTHÈQUE</span><span>6 collections</span></div><label class="parisis-collection-search"><span aria-hidden="true">⌕</span><input id="parisisLibrarySearch" type="search" placeholder="Rechercher dans les archives…" aria-label="Rechercher dans les collections"></label><div id="parisisLibraryBooks" class="parisis-library-books"></div><p id="parisisLibraryNoResults" hidden>Aucune collection ne correspond à cette recherche.</p></div>
+</div>
+<nav class="parisis-library-shortcuts" aria-label="Accès aux ateliers"><a href="parisis-cartography-lab.html?v=decouvertes">⌖ Cartes et tracés</a><a href="parisis-005-alpage-sig.html?v=alpage20261013">▱ Mesures et SIG</a><a href="parisis-vasserot-1810-1836.html">▤ Plans anciens</a><a href="#research-workspace">✎ Mes fiches de recherche ↓</a></nav>
+</section>
+<section class="research-principle" id="research-workspace"><strong>Une piste n'est pas un résultat.</strong> La ressemblance d'un symbole, un tracé géométrique ou une date commune ne suffisent jamais à démontrer une intention historique. Les éléments préremplis sont des pistes d'étude, pas des découvertes validées.</section>
 <div class="toolbar">
 <div class="searchbox"><span aria-hidden="true">⌕</span><input id="globalSearch" type="search" placeholder="Rechercher une fiche, un lieu, une source…" aria-label="Rechercher dans le module"></div>
 <button id="newRecord" class="primary" type="button">+ Nouvelle fiche</button>
@@ -81,7 +89,30 @@
     var copied = document.querySelector('.parisis-top-link-list');
     if (!toggle || !menu || !original || !copied) return;
     // Keep new header links automatically in the mobile hamburger.
-    // The folders are the single source of navigation on desktop and mobile.
+    var bookHost=document.getElementById('parisisLibraryBooks');
+    var search=document.getElementById('parisisLibrarySearch');
+    if(bookHost){
+      document.querySelectorAll('.parisis-top-link-list > .parisis-folder').forEach(function(folder,i){
+        var copy=folder.cloneNode(true);
+        if(i===0)copy.open=true;
+        bookHost.appendChild(copy);
+      });
+      if(search) search.addEventListener('input',function(){
+        var term=search.value.toLocaleLowerCase('fr').trim(),shown=0;
+        bookHost.querySelectorAll('.parisis-folder').forEach(function(folder){
+          var groupMatch=folder.querySelector('summary').textContent.toLocaleLowerCase('fr').includes(term);
+          var hits=0;
+          folder.querySelectorAll('a').forEach(function(link){
+            var match=!term||groupMatch||link.textContent.toLocaleLowerCase('fr').includes(term);
+            link.hidden=!match;if(match)hits++;
+          });
+          folder.hidden=hits===0;
+          if(term&&hits)folder.open=true;
+          if(hits)shown++;
+        });
+        document.getElementById('parisisLibraryNoResults').hidden=shown>0;
+      });
+    }
     menu.addEventListener('click',function(e){
       var chat=e.target.closest('[data-parisis-mobile-chat]');
       if(chat){e.preventDefault();document.getElementById('askChat')?.click();}
