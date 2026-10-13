@@ -1,5 +1,5 @@
 /* Universal ELOAH narration, available on all pages loading this navigation. */
-(()=>{if(document.querySelector('script[data-eloah-reader]'))return;const el=document.createElement('script');el.src='eloah-lecture-universelle.js?v=20261013';el.defer=true;el.dataset.eloahReader='1';document.head.appendChild(el);})();
+(()=>{if(document.querySelector('script[data-eloah-reader]'))return;const el=document.createElement('script');el.src='eloah-lecture-universelle.js?v=20261013b';el.defer=true;el.dataset.eloahReader='1';document.head.appendChild(el);})();
 /* Canonical ELOAH navigation. Existing storage remains untouched. */
 (()=>{'use strict';
 if(document.querySelector('.eloah-global-nav'))return;
