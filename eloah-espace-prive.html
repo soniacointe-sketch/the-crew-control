@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="robots" content="noindex,nofollow">
+<title>ELOAH · Espace privé client</title>
+<style>
+*{box-sizing:border-box}html{color-scheme:light}body{margin:0;background:#f4efe9;color:#252229;font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:#76509f}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #9870c3;outline-offset:3px}
+header{background:#fffdfa;border-bottom:1px solid #e3dadd;padding:17px clamp(16px,4vw,45px);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+header a{text-decoration:none;font:650 14px system-ui}header .wordmark{font:500 25px Georgia,serif;letter-spacing:.12em}
+main{width:min(980px,calc(100% - 28px));margin:35px auto 75px}
+.overline{font:700 11px system-ui;letter-spacing:.16em;color:#936888}
+h1{font:500 clamp(32px,4.8vw,51px)/1.12 Georgia,serif;letter-spacing:-.02em;margin:12px 0}
+.lead{color:#726a73;font-size:16px;max-width:750px;margin:5px 0 24px}
+.panel{border:1px solid #e3dce3;border-radius:15px;background:#fffdfa;padding:clamp(19px,4vw,29px);margin:18px 0;box-shadow:0 4px 20px #25112b08}
+.panel h2{font:500 28px Georgia,serif;margin:0 0 11px}
+.panel h3{font:600 15px system-ui;margin:0 0 7px}
+.panel p{font-size:13px;color:#736d75;margin:7px 0 14px}
+label{font:650 13px system-ui;color:#514654;display:block;margin:12px 0}
+input,select,textarea{display:block;width:100%;margin-top:6px;padding:11px 12px;border:1px solid #d6c9d8;background:#fff;border-radius:8px;color:#302839;min-height:45px;font:15px system-ui}
+textarea{min-height:88px;resize:vertical}
+button{background:#7655a1;color:#fff;border:1px solid #7655a1;min-height:43px;padding:10px 17px;border-radius:8px;cursor:pointer;font:650 13px system-ui}
+button:disabled{opacity:.55;cursor:wait}
+button.light{background:#fff;color:#7655a1;border-color:#d9c8e8}
+.row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.grid{display:grid;grid-template-columns:290px minmax(0,1fr);gap:17px}
+.items{display:grid;gap:8px}
+.workspace{padding:12px 14px;text-align:left;border:1px solid #e1dbe5;background:#fff;color:#413549;border-radius:8px;width:100%;min-height:54px}
+.workspace[aria-pressed=true]{background:#eee5f5;border-color:#9777b5;color:#603f84}
+.workspace small{display:block;font-weight:400;font-size:11px;color:#817888;margin-top:4px}
+.task{padding:12px 0;border-top:1px solid #eee9ee}
+.task strong{display:block;font-size:14px}
+.task small{color:#847a87}
+.task p{white-space:pre-wrap;overflow-wrap:anywhere}
+.notice{border-left:3px solid #a184ad;background:#f9f5fb;padding:12px 14px;font:12px/1.65 system-ui;color:#63556d}
+.status{font:12px/1.5 system-ui;color:#735684;min-height:22px}
+.private-indicator{display:inline-flex;gap:8px;align-items:center;border:1px solid #d6cae2;border-radius:99px;padding:6px 12px;font:650 11px system-ui;color:#745b8e;background:#fbf7ff}
+[hidden]{display:none!important}
+footer{padding:25px;text-align:center;color:#877c87;font:11px/1.7 system-ui}
+@media(max-width:690px){.grid{grid-template-columns:1fr}main{margin-top:22px}.panel{padding:19px}}
+</style>
+</head>
+<body>
+<header><a class="wordmark" href="eloah-offres.html">ELOAH</a><nav class="row"><a href="eloah-offres.html">Offres publiques ↗</a><a href="mes-univers.html">Mes univers ↗</a></nav></header>
+<main>
+<div class="overline">ELOAH · ESPACE CLIENT PILOTE</div>
+<h1>Un espace à toi, séparé des autres.</h1>
+<p class="lead">Ce portail de préparation utilise une connexion Supabase et des règles d'accès par propriétaire. Il n'affiche aucune donnée du cockpit personnel ni aucun dossier d'un autre utilisateur.</p>
+<div class="private-indicator">◈ Accès aux données contrôlé côté serveur (RLS)</div>
+<section class="panel" id="sign-in">
+ <h2>Se connecter</h2>
+ <p>Utilise une adresse e-mail déjà autorisée dans ELOAH. La création automatique de comptes n'est pas activée depuis ce formulaire.</p>
+ <form id="login-form"><label for="auth-email">Adresse e-mail du compte ELOAH<input type="email" name="email" id="auth-email" autocomplete="email" required placeholder="toi@exemple.fr"></label>
+ <button type="submit" id="login-submit">Recevoir un lien de connexion</button></form>
+ <p id="login-status" class="status" role="status"></p>
+</section>
+<section id="private-area" hidden>
+ <div class="panel"><div class="row" style="justify-content:space-between"><div><h2>Bienvenue dans ton espace</h2><p id="signed-in-email"></p><p id="current-plan"></p></div><button class="light" id="logout" type="button">Se déconnecter</button></div>
+ <p class="notice">Ce portail est une version pilote. Aucun abonnement ou paiement n'est activé ici. Les offres payantes requerront une vérification des droits côté serveur avant toute ouverture commerciale.</p></div>
+ <div class="grid">
+  <div class="panel"><h2>Mes espaces</h2><div id="workspace-list" class="items"></div>
+   <form id="workspace-form"><label for="workspace-title">Nouvel espace<input id="workspace-title" maxlength="120" minlength="2" placeholder="Ex. Mon association" required></label>
+   <label for="workspace-kind">Type<select id="workspace-kind"><option value="pilotage">Pilotage</option><option value="creation">Studio créatif</option><option value="association">Association</option></select></label>
+   <button type="submit">Créer mon espace</button></form>
+   <p class="status" id="workspace-status" role="status"></p>
+  </div>
+  <div class="panel">
+   <h2 id="workspace-heading">Mes actions</h2>
+   <p id="workspace-hint">Choisis d'abord un espace à gauche.</p>
+   <div id="task-list" class="items"></div>
+   <form id="task-form" hidden><label for="task-title">Nouvelle action<input id="task-title" maxlength="180" required placeholder="Une étape à réaliser"></label>
+   <label for="task-notes">Notes facultatives<textarea id="task-notes" maxlength="8000"></textarea></label>
+   <label for="task-date">Échéance facultative<input id="task-date" type="date"></label>
+   <button type="submit">Ajouter cette action</button></form>
+   <p id="task-status" class="status" role="status"></p>
+  </div>
+ </div>
+</section>
+<section class="panel"><h2>Confidentialité et limites</h2>
+<p>Le code de cette page est public parce qu'il est publié sur GitHub Pages. Seules les données enregistrées dans les tables Supabase de ce portail sont soumises aux règles privées du serveur. Les autres pages ELOAH publiées sur GitHub Pages, y compris leurs textes et leurs fichiers, ne sont pas rendues confidentielles par cette connexion.</p>
+<p>Les sauvegardes déjà enregistrées dans ton navigateur ne sont pas importées ici. Aucune donnée n'est envoyée automatiquement et aucun moyen de paiement n'est connecté.</p></section>
+</main>
+<footer>ELOAH · Espace privé pilote · Aucun abonnement vendu depuis cette page.</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+<script>
+(()=>{'use strict';
+const url='https://voytsqyorhoveurnguxn.supabase.co';
+const publishableKey='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
+const $=id=>document.getElementById(id);
+const status=(id,message)=>{$(id).textContent=message};
+let client=null,user=null,workspaceId=null;
+function getClient(){
+ if(!window.supabase?.createClient)throw Error('Bibliothèque Supabase indisponible.');
+ if(!client)client=window.supabase.createClient(url,publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+ return client;
+}
+function el(tag,textContent,css){const node=document.createElement(tag);if(css)node.className=css;if(textContent!==undefined)node.textContent=String(textContent);return node}
+function errMessage(e){return (e&&typeof e.message==='string')?e.message:'Une erreur est survenue.'}
+async function refresh(){
+ try{
+  const {data,error}=await getClient().auth.getUser();
+  if(error||!data?.user){user=null;workspaceId=null;$('sign-in').hidden=false;$('private-area').hidden=true;return}
+  user=data.user;$('signed-in-email').textContent=user.email||'Compte connecté';
+  $('sign-in').hidden=true;$('private-area').hidden=false;
+  await loadPlan();await loadWorkspaces();
+ }catch(e){status('login-status',errMessage(e))}
+}
+async function loadPlan(){
+ const {data,error}=await getClient().from('eloah_customer_entitlements').select('plan,status').eq('owner_id',user.id).maybeSingle();
+ const msg=error?'Droits d’abonnement indisponibles.':data?'Offre enregistrée : '+data.plan+' · État : '+data.status:'Aucun abonnement client activé.';
+ $('current-plan').textContent=msg;
+}
+function choose(ws){
+ workspaceId=ws.id;
+ $('workspace-heading').textContent=ws.title;
+ $('workspace-hint').textContent='Actions de cet espace uniquement.';
+ $('task-form').hidden=false;
+ document.querySelectorAll('#workspace-list .workspace').forEach(n=>n.setAttribute('aria-pressed',String(n.dataset.id===ws.id)));
+ loadTasks();
+}
+async function loadWorkspaces(){
+ const {data,error}=await getClient().from('eloah_customer_workspaces').select('id,title,category,created_at').order('created_at',{ascending:false}).limit(100);
+ if(error){status('workspace-status','Lecture impossible : '+errMessage(error));return}
+ const list=$('workspace-list');list.replaceChildren();
+ if(!data.length)list.append(el('p','Aucun espace créé pour ce compte.'));
+ for(const ws of data){
+  const b=el('button',undefined,'workspace');b.type='button';b.dataset.id=ws.id;
+  b.append(el('strong',ws.title),el('small',ws.category));
+  b.onclick=()=>choose(ws);list.append(b);
+ }
+ const selected=data.find(w=>w.id===workspaceId);
+ if(selected)choose(selected);
+ else if(data.length)choose(data[0]);
+ else {workspaceId=null;$('task-form').hidden=true;$('workspace-heading').textContent='Mes actions';$('task-list').replaceChildren()}
+}
+async function loadTasks(){
+ if(!workspaceId)return;
+ const requestedWorkspace=workspaceId;
+ const {data,error}=await getClient().from('eloah_customer_workspace_items')
+  .select('id,title,notes,status,due_date,created_at')
+  .eq('workspace_id',requestedWorkspace).order('created_at',{ascending:false}).limit(100);
+ if(requestedWorkspace!==workspaceId)return;
+ if(error){status('task-status','Lecture impossible : '+errMessage(error));return}
+ const list=$('task-list');list.replaceChildren();
+ if(!data.length)list.append(el('p','Aucune action dans cet espace.'));
+ for(const item of data){
+  const section=el('article',undefined,'task');section.append(el('strong',item.title));
+  const meta=[item.status,item.due_date].filter(Boolean).join(' · ');
+  if(meta)section.append(el('small',meta));
+  if(item.notes)section.append(el('p',item.notes));
+  list.append(section);
+ }
+}
+$('login-form').addEventListener('submit',async e=>{
+ e.preventDefault();
+ const button=$('login-submit');button.disabled=true;
+ try{
+  const email=$('auth-email').value.trim();
+  const redirectTo=location.origin+location.pathname;
+  const {error}=await getClient().auth.signInWithOtp({email,options:{emailRedirectTo:redirectTo,shouldCreateUser:false}});
+  if(error)throw error;
+  status('login-status','Si ce compte est autorisé, un lien de connexion a été demandé. Consulte ta messagerie, sans partager le lien.');
+ }catch(e){status('login-status','Connexion : '+errMessage(e))}
+ finally{button.disabled=false}
+});
+$('logout').addEventListener('click',async()=>{
+ await getClient().auth.signOut();
+ user=null;workspaceId=null;$('private-area').hidden=true;$('sign-in').hidden=false;
+ status('login-status','Compte ELOAH déconnecté sur ce navigateur.');
+});
+$('workspace-form').addEventListener('submit',async e=>{
+ e.preventDefault();
+ if(!user)return;
+ const name=$('workspace-title').value.trim(),category=$('workspace-kind').value;
+ if(name.length<2)return;
+ const {data,error}=await getClient().from('eloah_customer_workspaces').insert({title:name,category}).select('id,title,category').single();
+ if(error){status('workspace-status','Création impossible : '+errMessage(error));return}
+ $('workspace-title').value='';
+ workspaceId=data.id;status('workspace-status','Espace créé pour ton compte.');
+ await loadWorkspaces();
+});
+$('task-form').addEventListener('submit',async e=>{
+ e.preventDefault();if(!user||!workspaceId)return;
+ const title=$('task-title').value.trim(),notes=$('task-notes').value.trim(),due_date=$('task-date').value||null;
+ if(!title)return;
+ const {error}=await getClient().from('eloah_customer_workspace_items').insert({workspace_id:workspaceId,title,notes,due_date});
+ if(error){status('task-status','Enregistrement impossible : '+errMessage(error));return}
+ $('task-title').value='';$('task-notes').value='';$('task-date').value='';
+ status('task-status','Action enregistrée dans ton espace privé.');await loadTasks();
+});
+if(!window.supabase?.createClient){status('login-status','La bibliothèque de connexion est indisponible. Recharge la page plus tard.');return}
+getClient().auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN'||event==='SIGNED_OUT')setTimeout(refresh,0)});
+refresh();
+})();
+</script>
+</body></html>
