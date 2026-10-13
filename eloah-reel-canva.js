@@ -388,7 +388,7 @@ function frameSelected(){return S.elements.find(e=>e.id===selected&&e.kind==='ph
 function frameSlotCount(e){const item=window.ELOAHFrames?.byId.get(e?.variant);return item?window.ELOAHFrames.slots(item).length:0}
 function frameSlotNumberAt(e,p){
  const item=window.ELOAHFrames?.byId.get(e?.variant);if(!item)return 0;
- const x=(p.x-e.x)/e.w*1000,y=(p.y-e.y)/e.h*1000,slots=window.ELOAHFrames.slots(item);
+ const x=(p.x-e.x)/e.w*1000,y=(p.y-e.y)/e.h*1000,slots=window.ELOAHFrames.slots(item,e.isGrid?e.gridGap:null);
  for(let i=slots.length-1;i>=0;i--){let q=slots[i];if(x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h)return i}
  return 0;
 }
@@ -397,6 +397,7 @@ function frameProperties(e){
  const n=frameSlotCount(e);activeFrameSlot=Math.min(Math.max(0,activeFrameSlot),n-1);
  const opt=e.frameSlots?.[activeFrameSlot]||{},hasPhoto=framePhotos.has(e.id+':'+activeFrameSlot);
  return '<div class="ecs-frame-edit"><strong>'+xss(item.label)+'</strong><small>'+xss(item.group)+' · '+n+' case'+(n>1?'s':'')+'</small>'+
+ (e.isGrid?'<div class="ecs-grid-edit"><label class="ecs-sidelabel" for="ecs-grid-gap-slider">Espacement entre les photos</label><input id="ecs-grid-gap-slider" type="range" min="0" max="55" step="1" data-grid-gap value="'+(e.gridGap??12)+'"><span class="ecs-note">'+(e.gridGap??12)+' px</span><div>'+btn('gridFillAll','▦ Remplir plusieurs cases',true)+'</div><p class="ecs-note">Sélectionne plusieurs photos : elles seront réparties dans les cases de la grille, de gauche à droite.</p></div>':'')+
  (n>1?'<label class="ecs-sidelabel">Choisir une case</label><select data-frame-slot>'+Array.from({length:n},(_,i)=>'<option value="'+i+'" '+(i===activeFrameSlot?'selected':'')+'>Case '+(i+1)+(framePhotos.has(e.id+':'+i)?' ✓':'')+'</option>').join('')+'</select>':'')+
  '<p class="ecs-frame-help">'+(hasPhoto?'✓ Une photo est installée dans cette case.':'Ajoute une photo pour remplacer le paysage d’exemple.')+'</p>'+
  btn('frameImage','▧ Remplir avec ma photo',true)+btn('frameLibrary','Photos ELOAH')+(hasPhoto?btn('frameClear','✕ Retirer la photo'):'')+
@@ -559,7 +560,7 @@ function seek(t){S.time=Math.max(0,Math.min(S.duration,t));if(media.videoUrl&&vi
 function renderTimeline(){
  const px=Math.max(720,S.duration*70+45),ruler=one('#ecs-timeruler'),tracks=one('#ecs-tracks');ruler.style.width=px+'px';
  ruler.innerHTML=Array.from({length:Math.floor(S.duration)+1},(_,i)=>'<span style="left:'+(i*70)+'px">'+clock(i)+'</span>').join('');
- const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'?e.text:(e.kind==='image'?'Image':e.kind))+'</button>';
+ const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'?e.text:e.kind==='photoFrame'?(e.isGrid?'Grille · ':'Cadre · ')+(window.ELOAHFrames?.byId.get(e.variant)?.label||'Photos'):(e.kind==='image'?'Image':e.kind))+'</button>';
  let bg='<div class="ecs-track" style="width:'+px+'px"><button class="ecs-clip" data-tab="import" style="left:0;width:'+(S.duration*70)+'px">▧ '+(media.videoUrl?'Vidéo importée':media.bgImage?'Photo de fond':'Fond / scène')+'</button></div>';
  const els='<div class="ecs-track" style="width:'+px+'px">'+S.elements.map(e=>clip(e,'text')).join('')+'</div>';
  const au='<div class="ecs-track" style="width:'+px+'px">'+(media.audioUrl?'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px">♫ Piste audio</button>':'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px;opacity:.65">＋ Ajouter une piste audio</button>')+'</div>';
@@ -813,7 +814,11 @@ function action(name){
  if(name==='duplicate'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à dupliquer.');return}const {id:originalId,...copy}=e;const cloned=add(e.kind,{...copy,x:Math.min(Math.max(0,1080-e.w),e.x+36),y:Math.min(Math.max(0,1920-e.h),e.y+36)});if(e.kind==='image'&&images.has(e.id))images.set(cloned.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(cloned.id+':'+i,src)}saveFrameMediaLocal()}return}
  if(name==='delete'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à supprimer.');return}snapshot();S.elements=S.elements.filter(x=>x.id!==selected);if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++)framePhotos.delete(e.id+':'+i);saveFrameMediaLocal()}selected=null;setTab('elements');renderTimeline();saveLocal();return}
  if(name==='forward'||name==='backward'){let i=S.elements.findIndex(x=>x.id===selected);if(i<0)return;snapshot();let e=S.elements.splice(i,1)[0];S.elements.splice(name==='forward'?S.elements.length:0,0,e);saveLocal();return}
- if(name==='frameImage'){if(!frameSelected()){toast('Sélectionne un cadre.');return}importKind='frame';one('#ecs-image-input').click();return}
+ if(name==='gridFillAll'){
+  const f=frameSelected();if(!f?.isGrid){toast('Sélectionne une grille.');return}
+  activeFrameSlot=0;importKind='frame';one('#ecs-image-input').click();return;
+ }
+  if(name==='frameImage'){if(!frameSelected()){toast('Sélectionne un cadre.');return}importKind='frame';one('#ecs-image-input').click();return}
  if(name==='frameLibrary'){if(!frameSelected()){toast('Sélectionne un cadre.');return}setTab('photos');return}
  if(name==='frameClear'){const frame=frameSelected();if(!frame)return;framePhotos.delete(frame.id+':'+activeFrameSlot);saveFrameMediaLocal();renderSide();draw();saveLocal();return}
  if(name==='importVideo'){one('#ecs-video-input').click();return}
@@ -833,7 +838,18 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
- const frameGroup=ev.target.closest('[data-frame-group]');if(frameGroup){frameView=frameGroup.dataset.frameGroup;frameSearch='';renderSide();return}
+ const gridGroup=ev.target.closest('[data-grid-group]');
+ if(gridGroup){gridView=gridGroup.dataset.gridGroup;gridSearch='';renderSide();return}
+ const gridAdd=ev.target.closest('[data-grid-add]');
+ if(gridAdd){
+  const def=window.ELOAHGrids?.byId.get(gridAdd.dataset.gridAdd);if(!def)return;
+  const size=window.ELOAHFrames.dimensions(def);
+  const el=add('photoFrame',{variant:def.id,isGrid:true,gridGap:def.defaultGap||12,color:'#ffffff',borderSize:0,frameSlots:[],x:Math.round((1080-size.w)/2),y:Math.round((1920-size.h)/2),w:size.w,h:size.h});
+  activeFrameSlot=0;gridView='all';gridSearch='';renderSide();
+  toast(def.label+' · '+def.customSlots.length+' cases ajoutées. Ajoute tes photos dans Modifier.');
+  return;
+ }
+  const frameGroup=ev.target.closest('[data-frame-group]');if(frameGroup){frameView=frameGroup.dataset.frameGroup;frameSearch='';renderSide();return}
  const frameAdd=ev.target.closest('[data-frame-add]');if(frameAdd){
    const def=window.ELOAHFrames?.byId.get(frameAdd.dataset.frameAdd);if(!def)return;
    const sz=window.ELOAHFrames.dimensions(def);
@@ -879,7 +895,7 @@ root.addEventListener('click',ev=>{
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
  const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
- const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';activeTab='elements';renderSide();return}
+ const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(clone.id+':'+i,src)}saveFrameMediaLocal()}toast('Élément dupliqué sur la page.')}return}
  const tb=ev.target.closest('[data-tab]');if(tb&&root.contains(tb)){setTab(tb.dataset.tab);return}
@@ -897,7 +913,20 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
- if(e.target.id==='ecs-frame-search'){
+ if(e.target.id==='ecs-grid-search'){
+  gridSearch=e.target.value;
+  const needle=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  all('.ecs-grid-tile').forEach(item=>{item.hidden=!!needle&&!item.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(needle)});
+  all('[data-grid-section]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-grid-tile')].some(tile=>!tile.hidden)});
+  return;
+ }
+ if(e.target.hasAttribute('data-grid-gap')){
+  const frame=frameSelected();if(!frame?.isGrid)return;
+  frame.gridGap=Math.max(0,Math.min(55,Number(e.target.value)||0));
+  const txt=e.target.nextElementSibling;if(txt?.classList.contains('ecs-note'))txt.textContent=frame.gridGap+' px';
+  draw();saveLocal();return;
+ }
+  if(e.target.id==='ecs-frame-search'){
   frameSearch=e.target.value;
   const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   all('.ecs-frame-tile').forEach(button=>{button.hidden=!!term&&!button.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term)});
