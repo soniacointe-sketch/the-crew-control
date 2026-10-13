@@ -58,6 +58,7 @@ function mount(){
  if(root||!mq.matches)return;
  root=n("div");root.id="eloahMobile";root.setAttribute("aria-label","ELOAH Boards sur téléphone");document.body.appendChild(root);
  try{inbox()}catch(e){}
+ if(document.getElementById("editor")?.open&&allBoards().some(b=>b.id===data.active)){screen="board";chosenBoardId=data.active;}
  render();
 }
 function show(which){screen=which;searchText="";render();}
