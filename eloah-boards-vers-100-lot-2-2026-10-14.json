@@ -1,0 +1,1973 @@
+{
+  "version": "2026-10-14",
+  "boards": [
+    {
+      "id": "ari:cloud:trello::board/workspace/63bc8e6f424fb501c61e212f/67b335cc2b3e563952f5c23e",
+      "name": "Femme Fatale Empire – Gestion & Stratégie",
+      "base": 59,
+      "target": 100,
+      "cards": [
+        {
+          "id": "eloah-100-20261014-fem-001",
+          "title": "FEM-001 · Positionnement et signature de marque — État des lieux documenté",
+          "description": "Domaine : Positionnement et signature de marque.\nObjectif : clarifier la place de cette identité parmi les univers actuels.\nTravail : Faire l'inventaire des éléments réellement existants avant de décider quoi reprendre.\nLivrable : une fiche d'audit sourcée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Retrouver les supports déjà produits",
+              "done": false
+            },
+            {
+              "text": "Classer ce qui fonctionne, ce qui manque et ce qui n'est pas vérifié",
+              "done": false
+            },
+            {
+              "text": "Noter les liens vers les ressources originales",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-002",
+          "title": "FEM-002 · Positionnement et signature de marque — Objectif et public",
+          "description": "Domaine : Positionnement et signature de marque.\nObjectif : clarifier la place de cette identité parmi les univers actuels.\nTravail : Formuler un résultat concret, le public concerné et les limites de la proposition.\nLivrable : un brief ciblé. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir le besoin réel",
+              "done": false
+            },
+            {
+              "text": "Décrire le résultat attendu sans promesse exagérée",
+              "done": false
+            },
+            {
+              "text": "Vérifier cohérence avec les autres univers",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-003",
+          "title": "FEM-003 · Positionnement et signature de marque — Structure réutilisable",
+          "description": "Domaine : Positionnement et signature de marque.\nObjectif : clarifier la place de cette identité parmi les univers actuels.\nTravail : Créer un modèle comprenant les sections, éléments visuels et actions attendus.\nLivrable : un modèle duplicable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les champs indispensables",
+              "done": false
+            },
+            {
+              "text": "Préparer un exemple fictif",
+              "done": false
+            },
+            {
+              "text": "Contrôler lisibilité et adaptation mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-004",
+          "title": "FEM-004 · Positionnement et signature de marque — Rédaction et mise en forme",
+          "description": "Domaine : Positionnement et signature de marque.\nObjectif : clarifier la place de cette identité parmi les univers actuels.\nTravail : Élaborer une version complète avec un ton adulte, assumé et une seule intention principale.\nLivrable : un brouillon éditable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Création",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Écrire le texte ou le processus",
+              "done": false
+            },
+            {
+              "text": "Assurer cohérence des titres et du ton",
+              "done": false
+            },
+            {
+              "text": "Préparer une version de relecture",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-005",
+          "title": "FEM-005 · Positionnement et signature de marque — Vérification opérationnelle",
+          "description": "Domaine : Positionnement et signature de marque.\nObjectif : clarifier la place de cette identité parmi les univers actuels.\nTravail : Tester le parcours concerné avec des données de démonstration et noter les anomalies.\nLivrable : une fiche de recette. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Préparer un scénario de test",
+              "done": false
+            },
+            {
+              "text": "Vérifier chaque écran ou étape",
+              "done": false
+            },
+            {
+              "text": "Lister les erreurs à corriger",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-006",
+          "title": "FEM-006 · Positionnement et signature de marque — Qualité et éthique",
+          "description": "Domaine : Positionnement et signature de marque.\nObjectif : clarifier la place de cette identité parmi les univers actuels.\nTravail : Vérifier l'authenticité, les consentements, les accès et les limites des arguments utilisés.\nLivrable : une grille de conformité adaptée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Important",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler les faits et sources",
+              "done": false
+            },
+            {
+              "text": "Vérifier droits, confidentialité et image personnelle",
+              "done": false
+            },
+            {
+              "text": "Supprimer les formulations trompeuses",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-007",
+          "title": "FEM-007 · Positionnement et signature de marque — Bilan et archivage",
+          "description": "Domaine : Positionnement et signature de marque.\nObjectif : clarifier la place de cette identité parmi les univers actuels.\nTravail : Documenter la version choisie, les retours observés et le prochain ajustement.\nLivrable : un dossier de clôture ou d'amélioration. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Suivi",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Conserver le lien du résultat réel",
+              "done": false
+            },
+            {
+              "text": "Noter les retours disponibles sans inventer de chiffres",
+              "done": false
+            },
+            {
+              "text": "Archiver les versions remplacées",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-008",
+          "title": "FEM-008 · Coaching et parcours de cliente — État des lieux documenté",
+          "description": "Domaine : Coaching et parcours de cliente.\nObjectif : préparer un parcours d'accompagnement traçable et respectueux de la confidentialité.\nTravail : Faire l'inventaire des éléments réellement existants avant de décider quoi reprendre.\nLivrable : une fiche d'audit sourcée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Retrouver les supports déjà produits",
+              "done": false
+            },
+            {
+              "text": "Classer ce qui fonctionne, ce qui manque et ce qui n'est pas vérifié",
+              "done": false
+            },
+            {
+              "text": "Noter les liens vers les ressources originales",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-009",
+          "title": "FEM-009 · Coaching et parcours de cliente — Objectif et public",
+          "description": "Domaine : Coaching et parcours de cliente.\nObjectif : préparer un parcours d'accompagnement traçable et respectueux de la confidentialité.\nTravail : Formuler un résultat concret, le public concerné et les limites de la proposition.\nLivrable : un brief ciblé. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir le besoin réel",
+              "done": false
+            },
+            {
+              "text": "Décrire le résultat attendu sans promesse exagérée",
+              "done": false
+            },
+            {
+              "text": "Vérifier cohérence avec les autres univers",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-010",
+          "title": "FEM-010 · Coaching et parcours de cliente — Structure réutilisable",
+          "description": "Domaine : Coaching et parcours de cliente.\nObjectif : préparer un parcours d'accompagnement traçable et respectueux de la confidentialité.\nTravail : Créer un modèle comprenant les sections, éléments visuels et actions attendus.\nLivrable : un modèle duplicable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les champs indispensables",
+              "done": false
+            },
+            {
+              "text": "Préparer un exemple fictif",
+              "done": false
+            },
+            {
+              "text": "Contrôler lisibilité et adaptation mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-011",
+          "title": "FEM-011 · Coaching et parcours de cliente — Rédaction et mise en forme",
+          "description": "Domaine : Coaching et parcours de cliente.\nObjectif : préparer un parcours d'accompagnement traçable et respectueux de la confidentialité.\nTravail : Élaborer une version complète avec un ton adulte, assumé et une seule intention principale.\nLivrable : un brouillon éditable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Création",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Écrire le texte ou le processus",
+              "done": false
+            },
+            {
+              "text": "Assurer cohérence des titres et du ton",
+              "done": false
+            },
+            {
+              "text": "Préparer une version de relecture",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-012",
+          "title": "FEM-012 · Coaching et parcours de cliente — Vérification opérationnelle",
+          "description": "Domaine : Coaching et parcours de cliente.\nObjectif : préparer un parcours d'accompagnement traçable et respectueux de la confidentialité.\nTravail : Tester le parcours concerné avec des données de démonstration et noter les anomalies.\nLivrable : une fiche de recette. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Préparer un scénario de test",
+              "done": false
+            },
+            {
+              "text": "Vérifier chaque écran ou étape",
+              "done": false
+            },
+            {
+              "text": "Lister les erreurs à corriger",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-013",
+          "title": "FEM-013 · Coaching et parcours de cliente — Qualité et éthique",
+          "description": "Domaine : Coaching et parcours de cliente.\nObjectif : préparer un parcours d'accompagnement traçable et respectueux de la confidentialité.\nTravail : Vérifier l'authenticité, les consentements, les accès et les limites des arguments utilisés.\nLivrable : une grille de conformité adaptée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Important",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler les faits et sources",
+              "done": false
+            },
+            {
+              "text": "Vérifier droits, confidentialité et image personnelle",
+              "done": false
+            },
+            {
+              "text": "Supprimer les formulations trompeuses",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-014",
+          "title": "FEM-014 · Coaching et parcours de cliente — Bilan et archivage",
+          "description": "Domaine : Coaching et parcours de cliente.\nObjectif : préparer un parcours d'accompagnement traçable et respectueux de la confidentialité.\nTravail : Documenter la version choisie, les retours observés et le prochain ajustement.\nLivrable : un dossier de clôture ou d'amélioration. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Suivi",
+          "laneName": "3️⃣ GESTION DES COACHINGS & CLIENTES – L’ART DE TRANSFORMER",
+          "due": "",
+          "checks": [
+            {
+              "text": "Conserver le lien du résultat réel",
+              "done": false
+            },
+            {
+              "text": "Noter les retours disponibles sans inventer de chiffres",
+              "done": false
+            },
+            {
+              "text": "Archiver les versions remplacées",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-015",
+          "title": "FEM-015 · Posts, carrousels et vidéos — État des lieux documenté",
+          "description": "Domaine : Posts, carrousels et vidéos.\nObjectif : organiser une production créative qui sert un message concret.\nTravail : Faire l'inventaire des éléments réellement existants avant de décider quoi reprendre.\nLivrable : une fiche d'audit sourcée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Retrouver les supports déjà produits",
+              "done": false
+            },
+            {
+              "text": "Classer ce qui fonctionne, ce qui manque et ce qui n'est pas vérifié",
+              "done": false
+            },
+            {
+              "text": "Noter les liens vers les ressources originales",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-016",
+          "title": "FEM-016 · Posts, carrousels et vidéos — Objectif et public",
+          "description": "Domaine : Posts, carrousels et vidéos.\nObjectif : organiser une production créative qui sert un message concret.\nTravail : Formuler un résultat concret, le public concerné et les limites de la proposition.\nLivrable : un brief ciblé. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir le besoin réel",
+              "done": false
+            },
+            {
+              "text": "Décrire le résultat attendu sans promesse exagérée",
+              "done": false
+            },
+            {
+              "text": "Vérifier cohérence avec les autres univers",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-017",
+          "title": "FEM-017 · Posts, carrousels et vidéos — Structure réutilisable",
+          "description": "Domaine : Posts, carrousels et vidéos.\nObjectif : organiser une production créative qui sert un message concret.\nTravail : Créer un modèle comprenant les sections, éléments visuels et actions attendus.\nLivrable : un modèle duplicable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les champs indispensables",
+              "done": false
+            },
+            {
+              "text": "Préparer un exemple fictif",
+              "done": false
+            },
+            {
+              "text": "Contrôler lisibilité et adaptation mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-018",
+          "title": "FEM-018 · Posts, carrousels et vidéos — Rédaction et mise en forme",
+          "description": "Domaine : Posts, carrousels et vidéos.\nObjectif : organiser une production créative qui sert un message concret.\nTravail : Élaborer une version complète avec un ton adulte, assumé et une seule intention principale.\nLivrable : un brouillon éditable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Création",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Écrire le texte ou le processus",
+              "done": false
+            },
+            {
+              "text": "Assurer cohérence des titres et du ton",
+              "done": false
+            },
+            {
+              "text": "Préparer une version de relecture",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-019",
+          "title": "FEM-019 · Posts, carrousels et vidéos — Vérification opérationnelle",
+          "description": "Domaine : Posts, carrousels et vidéos.\nObjectif : organiser une production créative qui sert un message concret.\nTravail : Tester le parcours concerné avec des données de démonstration et noter les anomalies.\nLivrable : une fiche de recette. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Préparer un scénario de test",
+              "done": false
+            },
+            {
+              "text": "Vérifier chaque écran ou étape",
+              "done": false
+            },
+            {
+              "text": "Lister les erreurs à corriger",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-020",
+          "title": "FEM-020 · Posts, carrousels et vidéos — Qualité et éthique",
+          "description": "Domaine : Posts, carrousels et vidéos.\nObjectif : organiser une production créative qui sert un message concret.\nTravail : Vérifier l'authenticité, les consentements, les accès et les limites des arguments utilisés.\nLivrable : une grille de conformité adaptée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Important",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler les faits et sources",
+              "done": false
+            },
+            {
+              "text": "Vérifier droits, confidentialité et image personnelle",
+              "done": false
+            },
+            {
+              "text": "Supprimer les formulations trompeuses",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-021",
+          "title": "FEM-021 · Posts, carrousels et vidéos — Bilan et archivage",
+          "description": "Domaine : Posts, carrousels et vidéos.\nObjectif : organiser une production créative qui sert un message concret.\nTravail : Documenter la version choisie, les retours observés et le prochain ajustement.\nLivrable : un dossier de clôture ou d'amélioration. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Suivi",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Conserver le lien du résultat réel",
+              "done": false
+            },
+            {
+              "text": "Noter les retours disponibles sans inventer de chiffres",
+              "done": false
+            },
+            {
+              "text": "Archiver les versions remplacées",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-022",
+          "title": "FEM-022 · Portrait, photographie et esthétique — État des lieux documenté",
+          "description": "Domaine : Portrait, photographie et esthétique.\nObjectif : préciser les références visuelles sans utiliser de faux portraits personnels.\nTravail : Faire l'inventaire des éléments réellement existants avant de décider quoi reprendre.\nLivrable : une fiche d'audit sourcée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Retrouver les supports déjà produits",
+              "done": false
+            },
+            {
+              "text": "Classer ce qui fonctionne, ce qui manque et ce qui n'est pas vérifié",
+              "done": false
+            },
+            {
+              "text": "Noter les liens vers les ressources originales",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-023",
+          "title": "FEM-023 · Portrait, photographie et esthétique — Objectif et public",
+          "description": "Domaine : Portrait, photographie et esthétique.\nObjectif : préciser les références visuelles sans utiliser de faux portraits personnels.\nTravail : Formuler un résultat concret, le public concerné et les limites de la proposition.\nLivrable : un brief ciblé. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir le besoin réel",
+              "done": false
+            },
+            {
+              "text": "Décrire le résultat attendu sans promesse exagérée",
+              "done": false
+            },
+            {
+              "text": "Vérifier cohérence avec les autres univers",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-024",
+          "title": "FEM-024 · Portrait, photographie et esthétique — Structure réutilisable",
+          "description": "Domaine : Portrait, photographie et esthétique.\nObjectif : préciser les références visuelles sans utiliser de faux portraits personnels.\nTravail : Créer un modèle comprenant les sections, éléments visuels et actions attendus.\nLivrable : un modèle duplicable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les champs indispensables",
+              "done": false
+            },
+            {
+              "text": "Préparer un exemple fictif",
+              "done": false
+            },
+            {
+              "text": "Contrôler lisibilité et adaptation mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-025",
+          "title": "FEM-025 · Portrait, photographie et esthétique — Rédaction et mise en forme",
+          "description": "Domaine : Portrait, photographie et esthétique.\nObjectif : préciser les références visuelles sans utiliser de faux portraits personnels.\nTravail : Élaborer une version complète avec un ton adulte, assumé et une seule intention principale.\nLivrable : un brouillon éditable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Création",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Écrire le texte ou le processus",
+              "done": false
+            },
+            {
+              "text": "Assurer cohérence des titres et du ton",
+              "done": false
+            },
+            {
+              "text": "Préparer une version de relecture",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-026",
+          "title": "FEM-026 · Portrait, photographie et esthétique — Vérification opérationnelle",
+          "description": "Domaine : Portrait, photographie et esthétique.\nObjectif : préciser les références visuelles sans utiliser de faux portraits personnels.\nTravail : Tester le parcours concerné avec des données de démonstration et noter les anomalies.\nLivrable : une fiche de recette. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Préparer un scénario de test",
+              "done": false
+            },
+            {
+              "text": "Vérifier chaque écran ou étape",
+              "done": false
+            },
+            {
+              "text": "Lister les erreurs à corriger",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-027",
+          "title": "FEM-027 · Portrait, photographie et esthétique — Qualité et éthique",
+          "description": "Domaine : Portrait, photographie et esthétique.\nObjectif : préciser les références visuelles sans utiliser de faux portraits personnels.\nTravail : Vérifier l'authenticité, les consentements, les accès et les limites des arguments utilisés.\nLivrable : une grille de conformité adaptée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Important",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler les faits et sources",
+              "done": false
+            },
+            {
+              "text": "Vérifier droits, confidentialité et image personnelle",
+              "done": false
+            },
+            {
+              "text": "Supprimer les formulations trompeuses",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-028",
+          "title": "FEM-028 · Portrait, photographie et esthétique — Bilan et archivage",
+          "description": "Domaine : Portrait, photographie et esthétique.\nObjectif : préciser les références visuelles sans utiliser de faux portraits personnels.\nTravail : Documenter la version choisie, les retours observés et le prochain ajustement.\nLivrable : un dossier de clôture ou d'amélioration. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Suivi",
+          "laneName": "4️⃣ BRANDING & IMAGE DE MARQUE – L’ART D’IMPOSER SA PRÉSENCE",
+          "due": "",
+          "checks": [
+            {
+              "text": "Conserver le lien du résultat réel",
+              "done": false
+            },
+            {
+              "text": "Noter les retours disponibles sans inventer de chiffres",
+              "done": false
+            },
+            {
+              "text": "Archiver les versions remplacées",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-029",
+          "title": "FEM-029 · Offres et tunnel de réservation — État des lieux documenté",
+          "description": "Domaine : Offres et tunnel de réservation.\nObjectif : vérifier la cohérence entre promesse, service, paiement et livraison.\nTravail : Faire l'inventaire des éléments réellement existants avant de décider quoi reprendre.\nLivrable : une fiche d'audit sourcée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Retrouver les supports déjà produits",
+              "done": false
+            },
+            {
+              "text": "Classer ce qui fonctionne, ce qui manque et ce qui n'est pas vérifié",
+              "done": false
+            },
+            {
+              "text": "Noter les liens vers les ressources originales",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-030",
+          "title": "FEM-030 · Offres et tunnel de réservation — Objectif et public",
+          "description": "Domaine : Offres et tunnel de réservation.\nObjectif : vérifier la cohérence entre promesse, service, paiement et livraison.\nTravail : Formuler un résultat concret, le public concerné et les limites de la proposition.\nLivrable : un brief ciblé. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir le besoin réel",
+              "done": false
+            },
+            {
+              "text": "Décrire le résultat attendu sans promesse exagérée",
+              "done": false
+            },
+            {
+              "text": "Vérifier cohérence avec les autres univers",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-031",
+          "title": "FEM-031 · Offres et tunnel de réservation — Structure réutilisable",
+          "description": "Domaine : Offres et tunnel de réservation.\nObjectif : vérifier la cohérence entre promesse, service, paiement et livraison.\nTravail : Créer un modèle comprenant les sections, éléments visuels et actions attendus.\nLivrable : un modèle duplicable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les champs indispensables",
+              "done": false
+            },
+            {
+              "text": "Préparer un exemple fictif",
+              "done": false
+            },
+            {
+              "text": "Contrôler lisibilité et adaptation mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-032",
+          "title": "FEM-032 · Offres et tunnel de réservation — Rédaction et mise en forme",
+          "description": "Domaine : Offres et tunnel de réservation.\nObjectif : vérifier la cohérence entre promesse, service, paiement et livraison.\nTravail : Élaborer une version complète avec un ton adulte, assumé et une seule intention principale.\nLivrable : un brouillon éditable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Création",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Écrire le texte ou le processus",
+              "done": false
+            },
+            {
+              "text": "Assurer cohérence des titres et du ton",
+              "done": false
+            },
+            {
+              "text": "Préparer une version de relecture",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-033",
+          "title": "FEM-033 · Offres et tunnel de réservation — Vérification opérationnelle",
+          "description": "Domaine : Offres et tunnel de réservation.\nObjectif : vérifier la cohérence entre promesse, service, paiement et livraison.\nTravail : Tester le parcours concerné avec des données de démonstration et noter les anomalies.\nLivrable : une fiche de recette. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Préparer un scénario de test",
+              "done": false
+            },
+            {
+              "text": "Vérifier chaque écran ou étape",
+              "done": false
+            },
+            {
+              "text": "Lister les erreurs à corriger",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-034",
+          "title": "FEM-034 · Offres et tunnel de réservation — Qualité et éthique",
+          "description": "Domaine : Offres et tunnel de réservation.\nObjectif : vérifier la cohérence entre promesse, service, paiement et livraison.\nTravail : Vérifier l'authenticité, les consentements, les accès et les limites des arguments utilisés.\nLivrable : une grille de conformité adaptée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Important",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler les faits et sources",
+              "done": false
+            },
+            {
+              "text": "Vérifier droits, confidentialité et image personnelle",
+              "done": false
+            },
+            {
+              "text": "Supprimer les formulations trompeuses",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-035",
+          "title": "FEM-035 · Offres et tunnel de réservation — Bilan et archivage",
+          "description": "Domaine : Offres et tunnel de réservation.\nObjectif : vérifier la cohérence entre promesse, service, paiement et livraison.\nTravail : Documenter la version choisie, les retours observés et le prochain ajustement.\nLivrable : un dossier de clôture ou d'amélioration. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Suivi",
+          "laneName": "1️⃣ PRIORITÉS & OBJECTIFS – L'ART DE LA DOMINATION",
+          "due": "",
+          "checks": [
+            {
+              "text": "Conserver le lien du résultat réel",
+              "done": false
+            },
+            {
+              "text": "Noter les retours disponibles sans inventer de chiffres",
+              "done": false
+            },
+            {
+              "text": "Archiver les versions remplacées",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-036",
+          "title": "FEM-036 · Calendrier et qualité éditoriale — État des lieux documenté",
+          "description": "Domaine : Calendrier et qualité éditoriale.\nObjectif : mettre en place un rythme de travail réaliste et mesurable.\nTravail : Faire l'inventaire des éléments réellement existants avant de décider quoi reprendre.\nLivrable : une fiche d'audit sourcée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Retrouver les supports déjà produits",
+              "done": false
+            },
+            {
+              "text": "Classer ce qui fonctionne, ce qui manque et ce qui n'est pas vérifié",
+              "done": false
+            },
+            {
+              "text": "Noter les liens vers les ressources originales",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-037",
+          "title": "FEM-037 · Calendrier et qualité éditoriale — Objectif et public",
+          "description": "Domaine : Calendrier et qualité éditoriale.\nObjectif : mettre en place un rythme de travail réaliste et mesurable.\nTravail : Formuler un résultat concret, le public concerné et les limites de la proposition.\nLivrable : un brief ciblé. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir le besoin réel",
+              "done": false
+            },
+            {
+              "text": "Décrire le résultat attendu sans promesse exagérée",
+              "done": false
+            },
+            {
+              "text": "Vérifier cohérence avec les autres univers",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-038",
+          "title": "FEM-038 · Calendrier et qualité éditoriale — Structure réutilisable",
+          "description": "Domaine : Calendrier et qualité éditoriale.\nObjectif : mettre en place un rythme de travail réaliste et mesurable.\nTravail : Créer un modèle comprenant les sections, éléments visuels et actions attendus.\nLivrable : un modèle duplicable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Définir les champs indispensables",
+              "done": false
+            },
+            {
+              "text": "Préparer un exemple fictif",
+              "done": false
+            },
+            {
+              "text": "Contrôler lisibilité et adaptation mobile",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-039",
+          "title": "FEM-039 · Calendrier et qualité éditoriale — Rédaction et mise en forme",
+          "description": "Domaine : Calendrier et qualité éditoriale.\nObjectif : mettre en place un rythme de travail réaliste et mesurable.\nTravail : Élaborer une version complète avec un ton adulte, assumé et une seule intention principale.\nLivrable : un brouillon éditable. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Création",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Écrire le texte ou le processus",
+              "done": false
+            },
+            {
+              "text": "Assurer cohérence des titres et du ton",
+              "done": false
+            },
+            {
+              "text": "Préparer une version de relecture",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-040",
+          "title": "FEM-040 · Calendrier et qualité éditoriale — Vérification opérationnelle",
+          "description": "Domaine : Calendrier et qualité éditoriale.\nObjectif : mettre en place un rythme de travail réaliste et mesurable.\nTravail : Tester le parcours concerné avec des données de démonstration et noter les anomalies.\nLivrable : une fiche de recette. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Administratif",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Préparer un scénario de test",
+              "done": false
+            },
+            {
+              "text": "Vérifier chaque écran ou étape",
+              "done": false
+            },
+            {
+              "text": "Lister les erreurs à corriger",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-fem-041",
+          "title": "FEM-041 · Calendrier et qualité éditoriale — Qualité et éthique",
+          "description": "Domaine : Calendrier et qualité éditoriale.\nObjectif : mettre en place un rythme de travail réaliste et mesurable.\nTravail : Vérifier l'authenticité, les consentements, les accès et les limites des arguments utilisés.\nLivrable : une grille de conformité adaptée. Aucun résultat n'est considéré comme réalisé sans vérification.",
+          "tag": "Important",
+          "laneName": "📂 2. LISTE : CRÉATION DE CONTENU",
+          "due": "",
+          "checks": [
+            {
+              "text": "Contrôler les faits et sources",
+              "done": false
+            },
+            {
+              "text": "Vérifier droits, confidentialité et image personnelle",
+              "done": false
+            },
+            {
+              "text": "Supprimer les formulations trompeuses",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Femme Fatale à 100 cartes"
+        }
+      ]
+    },
+    {
+      "id": "ari:cloud:trello::board/workspace/63bc8e6f424fb501c61e212f/6804ead602fc4ee871287069",
+      "name": "serenya khelith",
+      "base": 70,
+      "target": 100,
+      "cards": [
+        {
+          "id": "eloah-100-20261014-ser-001",
+          "title": "SER-001 · La Chambre Rouge — Notice et sources",
+          "description": "Univers : La Chambre Rouge.\nAngle : symbolique de la vitalité et de l'affirmation.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-002",
+          "title": "SER-002 · La Chambre Rouge — Parcours de réflexion",
+          "description": "Univers : La Chambre Rouge.\nAngle : symbolique de la vitalité et de l'affirmation.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-003",
+          "title": "SER-003 · La Chambre Rouge — Cahier et mise en forme",
+          "description": "Univers : La Chambre Rouge.\nAngle : symbolique de la vitalité et de l'affirmation.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-004",
+          "title": "SER-004 · La Bibliothèque Noire — Notice et sources",
+          "description": "Univers : La Bibliothèque Noire.\nAngle : exploration critique des récits et croyances.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-005",
+          "title": "SER-005 · La Bibliothèque Noire — Parcours de réflexion",
+          "description": "Univers : La Bibliothèque Noire.\nAngle : exploration critique des récits et croyances.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-006",
+          "title": "SER-006 · La Bibliothèque Noire — Cahier et mise en forme",
+          "description": "Univers : La Bibliothèque Noire.\nAngle : exploration critique des récits et croyances.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-007",
+          "title": "SER-007 · Le Boudoir d’Or — Notice et sources",
+          "description": "Univers : Le Boudoir d’Or.\nAngle : rapport à l'estime de soi et aux ressources.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-008",
+          "title": "SER-008 · Le Boudoir d’Or — Parcours de réflexion",
+          "description": "Univers : Le Boudoir d’Or.\nAngle : rapport à l'estime de soi et aux ressources.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-009",
+          "title": "SER-009 · Le Boudoir d’Or — Cahier et mise en forme",
+          "description": "Univers : Le Boudoir d’Or.\nAngle : rapport à l'estime de soi et aux ressources.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-010",
+          "title": "SER-010 · Le Jardin des Ombres — Notice et sources",
+          "description": "Univers : Le Jardin des Ombres.\nAngle : observation des émotions et des zones d'incertitude.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-011",
+          "title": "SER-011 · Le Jardin des Ombres — Parcours de réflexion",
+          "description": "Univers : Le Jardin des Ombres.\nAngle : observation des émotions et des zones d'incertitude.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-012",
+          "title": "SER-012 · Le Jardin des Ombres — Cahier et mise en forme",
+          "description": "Univers : Le Jardin des Ombres.\nAngle : observation des émotions et des zones d'incertitude.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-013",
+          "title": "SER-013 · Le Temple du Feu Sacré — Notice et sources",
+          "description": "Univers : Le Temple du Feu Sacré.\nAngle : construction d'une intention personnelle et de ses limites.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-014",
+          "title": "SER-014 · Le Temple du Feu Sacré — Parcours de réflexion",
+          "description": "Univers : Le Temple du Feu Sacré.\nAngle : construction d'une intention personnelle et de ses limites.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-015",
+          "title": "SER-015 · Le Temple du Feu Sacré — Cahier et mise en forme",
+          "description": "Univers : Le Temple du Feu Sacré.\nAngle : construction d'une intention personnelle et de ses limites.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-016",
+          "title": "SER-016 · Le Salon Pourpre — Notice et sources",
+          "description": "Univers : Le Salon Pourpre.\nAngle : voix, choix et expression artistique.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-017",
+          "title": "SER-017 · Le Salon Pourpre — Parcours de réflexion",
+          "description": "Univers : Le Salon Pourpre.\nAngle : voix, choix et expression artistique.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-018",
+          "title": "SER-018 · Le Salon Pourpre — Cahier et mise en forme",
+          "description": "Univers : Le Salon Pourpre.\nAngle : voix, choix et expression artistique.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-019",
+          "title": "SER-019 · La Crypte de la Rose — Notice et sources",
+          "description": "Univers : La Crypte de la Rose.\nAngle : mémoire narrative, héritage et identité.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-020",
+          "title": "SER-020 · La Crypte de la Rose — Parcours de réflexion",
+          "description": "Univers : La Crypte de la Rose.\nAngle : mémoire narrative, héritage et identité.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-021",
+          "title": "SER-021 · La Crypte de la Rose — Cahier et mise en forme",
+          "description": "Univers : La Crypte de la Rose.\nAngle : mémoire narrative, héritage et identité.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "7 pièces sacrées",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-022",
+          "title": "SER-022 · La Galerie des Reflets Brisés — Notice et sources",
+          "description": "Univers : La Galerie des Reflets Brisés.\nAngle : perceptions de soi et récits intérieurs.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-023",
+          "title": "SER-023 · La Galerie des Reflets Brisés — Parcours de réflexion",
+          "description": "Univers : La Galerie des Reflets Brisés.\nAngle : perceptions de soi et récits intérieurs.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-024",
+          "title": "SER-024 · La Galerie des Reflets Brisés — Cahier et mise en forme",
+          "description": "Univers : La Galerie des Reflets Brisés.\nAngle : perceptions de soi et récits intérieurs.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-025",
+          "title": "SER-025 · L’Atelier des Liens Invisibles — Notice et sources",
+          "description": "Univers : L’Atelier des Liens Invisibles.\nAngle : façons de comprendre les relations et les frontières personnelles.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-026",
+          "title": "SER-026 · L’Atelier des Liens Invisibles — Parcours de réflexion",
+          "description": "Univers : L’Atelier des Liens Invisibles.\nAngle : façons de comprendre les relations et les frontières personnelles.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-027",
+          "title": "SER-027 · L’Atelier des Liens Invisibles — Cahier et mise en forme",
+          "description": "Univers : L’Atelier des Liens Invisibles.\nAngle : façons de comprendre les relations et les frontières personnelles.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-028",
+          "title": "SER-028 · Le Sanctuaire de l’Argent Sacré — Notice et sources",
+          "description": "Univers : Le Sanctuaire de l’Argent Sacré.\nAngle : symbolique de l'abondance confrontée aux réalités matérielles.\nAction : Préparer une présentation structurée des références culturelles et symboliques, en distinguant clairement texte ancien, lecture moderne et invention éditoriale.\nLivrable attendu : une notice sourcée et nuancée. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Important",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Identifier les références effectivement consultables",
+              "done": false
+            },
+            {
+              "text": "Distinguer les citations et interprétations personnelles",
+              "done": false
+            },
+            {
+              "text": "Rédiger les limites de la lecture proposée",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-029",
+          "title": "SER-029 · Le Sanctuaire de l’Argent Sacré — Parcours de réflexion",
+          "description": "Univers : Le Sanctuaire de l’Argent Sacré.\nAngle : symbolique de l'abondance confrontée aux réalités matérielles.\nAction : Construire une séquence de questions non intrusives guidant l'exploration personnelle sans la présenter comme une thérapie.\nLivrable attendu : une fiche de parcours facultatif. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Suivi",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Formuler une intention accessible",
+              "done": false
+            },
+            {
+              "text": "Écrire trois questions ouvertes",
+              "done": false
+            },
+            {
+              "text": "Prévoir une conclusion respectueuse des limites personnelles",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        },
+        {
+          "id": "eloah-100-20261014-ser-030",
+          "title": "SER-030 · Le Sanctuaire de l’Argent Sacré — Cahier et mise en forme",
+          "description": "Univers : Le Sanctuaire de l’Argent Sacré.\nAngle : symbolique de l'abondance confrontée aux réalités matérielles.\nAction : Mettre en page un support pédagogique autonome, avec exemple fictif, espace d'écriture et fiche de retour.\nLivrable attendu : un prototype de cahier PDF. Séparer explicitement récits symboliques et affirmations historiques.",
+          "tag": "Création",
+          "laneName": "sujet à developper",
+          "due": "",
+          "checks": [
+            {
+              "text": "Rédiger le déroulé et les consignes",
+              "done": false
+            },
+            {
+              "text": "Créer un exemple ne révélant aucune information privée",
+              "done": false
+            },
+            {
+              "text": "Tester la lisibilité et les marges à l'impression",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Serenya à 100 cartes"
+        }
+      ]
+    },
+    {
+      "id": "eloah-curated-le-lion-blanc",
+      "name": "Le Lion Blanc",
+      "base": 99,
+      "target": 100,
+      "cards": [
+        {
+          "id": "eloah-100-20261014-lion-091",
+          "title": "LION-091 · Orientation urgente — protocole d'écoute et relais",
+          "description": "Définir ce que peut faire une association lorsqu'une personne demande une aide pressante : écoute non jugeante, limites de compétence, relais vers les professionnels et services compétents. Livrable : une fiche opérationnelle à vérifier juridiquement et localement avant usage.",
+          "tag": "Important",
+          "laneName": "À faire",
+          "due": "",
+          "checks": [
+            {
+              "text": "Lister les types de demandes nécessitant une orientation spécialisée",
+              "done": false
+            },
+            {
+              "text": "Vérifier les ressources officielles et contacts disponibles",
+              "done": false
+            },
+            {
+              "text": "Définir confidentialité, traçabilité minimale et limites d'intervention",
+              "done": false
+            }
+          ],
+          "links": [],
+          "comments": "",
+          "thread": [],
+          "archived": false,
+          "source": "ELOAH — extension Le Lion Blanc à 100 cartes"
+        }
+      ]
+    }
+  ]
+}
