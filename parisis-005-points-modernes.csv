@@ -1,0 +1,6 @@
+id,nom,latitude_deg,longitude_deg,type_repere,epoque,source,precision_note
+A,Place de l'Opéra,48.87056,2.33222,centre référencé de place,actuel,https://fr.wikipedia.org/wiki/Place_de_l%27Op%C3%A9ra,Point toponymique approximatif et non angle de trottoir
+B,Place André-Malraux,48.863771,2.335276,centre référencé de place,actuel,https://fr.wikipedia.org/wiki/Place_Andr%C3%A9-Malraux,Point toponymique approximatif et non angle de trottoir
+C,Avenue de l'Opéra,48.86703,2.33386,point référencé de voie,actuel,https://mapcarta.com/fr/38962220,Point descriptif de voie et non carrefour historique indépendant
+D,Église Saint-Roch,48.86538,2.33267,centre référencé de bâtiment,actuel,https://mapcarta.com/fr/35846138,Emprise du monument et non point d'angle fixe
+E,Palais Garnier,48.87203,2.33173,centre référencé de bâtiment,actuel,https://mapcarta.com/fr/25251450,Emprise du monument postérieur à 1860
