@@ -21,18 +21,18 @@ Il reste personnel : **je ne transforme pas automatiquement tes sujets de recher
 
 | Numéro | Rubrique | Description |
 |---|---|---|
-| 01 | Ma foi et mes convictions | Le Christ, mes repères et mes interrogations |
-| 02 | Jésus-Christ | Sa vie, ses paroles, son enfance et sa symbolique |
-| 03 | Marie et le chapelet | Prière, méditation et mystères du Rosaire |
-| 04 | Saint Pierre et les clés | Autorité, pardon, restauration et service |
-| 05 | Pape Léon XIV | Pensée augustinienne, symboles et enseignements |
-| 06 | Anges et archanges | Michel, traditions et textes anciens |
-| 07 | Bible et textes sacrés | Canon, apocryphes, Qumrân et Hénoch |
-| 08 | Lettres et création | Alpha, Aleph, Beth, Mem, Shin et Sefer Yetsirah |
-| 09 | Symboles et architecture | Croix, eau, feu, pierre, lumière, lieux sacrés |
-| 10 | Histoire et manuscrits | Sources, palimpsestes et enquêtes PARISIS |
-| 11 | Mes prières et méditations | Pratiques, textes personnels, chemin spirituel |
-| 12 | Mon journal de découvertes | Chronologie, questions et prochaines recherches |
+| 01 | [Ma foi et mes convictions →](foi-control.html?file=eloah-foi-personnel-01-ma-foi.md) | Le Christ, mes repères et mes interrogations |
+| 02 | [Jésus-Christ →](foi-control.html?file=eloah-foi-personnel-02-jesus-christ.md) | Sa vie, ses paroles, son enfance et sa symbolique |
+| 03 | [Marie et le chapelet →](foi-control.html?file=eloah-foi-personnel-03-marie-chapelet.md) | Prière, méditation et mystères du Rosaire |
+| 04 | [Saint Pierre et les clés →](foi-control.html?file=eloah-foi-personnel-04-saint-pierre.md) | Autorité, pardon, restauration et service |
+| 05 | [Pape Léon XIV →](foi-control.html?file=eloah-foi-personnel-05-leon-xiv.md) | Pensée augustinienne, symboles et enseignements |
+| 06 | [Anges et archanges →](foi-control.html?file=eloah-foi-personnel-06-anges-archanges.md) | Michel, traditions et textes anciens |
+| 07 | [Bible et textes sacrés →](foi-control.html?file=eloah-foi-personnel-07-bible-textes.md) | Canon, apocryphes, Qumrân et Hénoch |
+| 08 | [Lettres et création →](foi-control.html?file=eloah-foi-personnel-08-lettres-creation.md) | Alpha, Aleph, Beth, Mem, Shin et Sefer Yetsirah |
+| 09 | [Symboles et architecture →](foi-control.html?file=eloah-foi-personnel-09-symboles-architecture.md) | Croix, eau, feu, pierre, lumière, lieux sacrés |
+| 10 | [Histoire et manuscrits →](foi-control.html?file=eloah-foi-personnel-10-histoire-manuscrits.md) | Sources, palimpsestes et enquêtes PARISIS |
+| 11 | [Mes prières et méditations →](foi-control.html?file=eloah-foi-personnel-11-prieres-meditations.md) | Pratiques, textes personnels, chemin spirituel |
+| 12 | [Mon journal de découvertes →](foi-control.html?file=eloah-foi-personnel-12-journal-decouvertes.md) | Chronologie, questions et prochaines recherches |
 
 ## Le contenu déjà rempli
 
