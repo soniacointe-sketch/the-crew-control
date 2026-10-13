@@ -16,11 +16,11 @@ const KEY='eloah-boards-v1';
 const seedNames=['ELOAH','The Crew Orchies','Power & Glam','SONIA OS','PARISIS ENGINE','Foi & spiritualité','Sonia Velka','Le Lion Blanc'];
 const defaultLanes=['Idées','À faire','En cours','À vérifier','Terminé'];
 const uid=()=>globalThis.crypto?.randomUUID?.()||('id-'+Date.now()+'-'+Math.random().toString(36).slice(2));
-const fresh=()=>({version:1,active:null,boards:seedNames.map(name=>({id:uid(),name,lanes:defaultLanes.map(n=>({id:uid(),name})),cards:[]}))});
+const fresh=()=>({version:1,active:null,boards:[{id:uid(),name:'Mon premier tableau',lanes:defaultLanes.map(n=>({id:uid(),name})),cards:[]}]});
 let data;try{data=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!data||!Array.isArray(data.boards))data=fresh();if(!data.active||!data.boards.some(b=>b.id===data.active))data.active=data.boards[0].id;
 const unwantedBoards=new Set(['metatron','metatron liste client','bravo','template','cuisine']);
-function withoutRemovedBoards(payload){if(!Array.isArray(payload?.boards))return payload;const cleaned={...payload,boards:payload.boards.filter(b=>!unwantedBoards.has((b.name||'').trim().toLocaleLowerCase('fr')))};if(!cleaned.boards.some(b=>b.id===cleaned.active))cleaned.active=cleaned.boards[0]?.id||null;return cleaned}
-if(data.boards.some(b=>unwantedBoards.has((b.name||'').trim().toLocaleLowerCase('fr')))){try{localStorage.setItem('eloah-boards-before-removal-2026-10-14',JSON.stringify(data));data=withoutRemovedBoards(data);localStorage.setItem(KEY,JSON.stringify(data))}catch(e){data=withoutRemovedBoards(data)}}
+function withoutRemovedBoards(payload){return payload; /* Existing cards are never removed merely because of a board name. */}
+/* Previous legacy removals remain in stored data; never re-run a name-based cleanup for other customers. */
 let editing=null,checks=[],thread=[] ,showArchive=false;function updateCoverPreview(){const value=document.getElementById('cover').value.trim(),p=document.getElementById('coverPreview');p.style.display=/^https:\/\//i.test(value)?'block':'none';p.style.backgroundImage=p.style.display==='block'?'url('+JSON.stringify(value)+')':''}document.getElementById('cover').addEventListener('input',updateCoverPreview);
 const $=id=>document.getElementById(id);
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data));$('notice').textContent='Sauvegarde locale effectuée.';if(typeof scheduleCloudSync==='function')scheduleCloudSync()}catch(e){$('notice').textContent='Impossible de sauvegarder : stockage saturé ou bloqué.'}};
@@ -88,6 +88,7 @@ function normalizedForCompare(value){if(Array.isArray(value))return value.map(no
 function sameData(a,b){return JSON.stringify(normalizedForCompare(a))===JSON.stringify(normalizedForCompare(b))}
 function remoteCoversLocal(remote){
  if(!validBoards(remote)||!validBoards(data))return false;
+ if(data.boards.length===1&&data.boards[0].name==='Mon premier tableau'&&data.boards[0].cards.length===0)return true;
  const remoteCards=new Map(remote.boards.flatMap(b=>b.cards.map(c=>[c.id,c])));
  if(!data.boards.every(b=>b.cards.every(c=>remoteCards.has(c.id)&&sameData(c,remoteCards.get(c.id)))))return false;
  const remoteIds=new Set(remote.boards.map(b=>b.id));
@@ -100,7 +101,7 @@ if(syncUser?.id===u.id)return;syncUser=u;syncRev=undefined;syncBaseline=null;
 const remote=await readRemote();const markerKey='eloah-sync-baseline-'+u.id;const marker=localStorage.getItem(markerKey);
 if(remote){syncRev=remote.updated_at;if(marker===snapshot()||sameData(remote.payload.boards,data.boards)||remoteCoversLocal(remote.payload)){acceptRemote(remote);localStorage.setItem(markerKey,snapshot());syncStatus('Tableaux chargés depuis ELOAH · '+u.email)}
 else{syncBaseline=marker;syncStatus('Données différentes sur cet appareil · choisir Sauvegarder ou Récupérer avant la synchronisation automatique')}}
-else{syncRev=null;syncBaseline=snapshot();syncStatus('Connecté · première sauvegarde en préparation');scheduleCloudSync()}
+else{syncRev=null;syncBaseline=null;syncStatus('Compte connecté · aucune sauvegarde en ligne pour le moment. Choisis « Sauvegarder en ligne » pour créer la première copie.')}
 }catch(e){syncStatus('Synchronisation indisponible : '+e.message)}}
 async function pushCloud(manual){if(!syncUser||syncBusy||syncRev===undefined||localStorage.getItem('eloah-boards-restored-at'))return;const markerKey='eloah-sync-baseline-'+syncUser.id;const current=snapshot(),payload=JSON.parse(JSON.stringify(data));if(!manual&&syncBaseline===null){syncStatus('Versions différentes · choisir Sauvegarder ou Récupérer');return}
 syncBusy=true;try{const {data:rows,error}=await cloud.rpc('eloah_boards_sync',{p_expected:syncRev,p_payload:payload});if(error)throw error;const row=rows?.[0];if(!row)throw Error('Réponse de synchronisation absente');if(!row.saved){syncRev=row.remote_updated_at;syncStatus('Modifications sur un autre appareil · sauvegarde suspendue. Utilise Récupérer ou exporte tes cartes.');syncBaseline=null;return}
