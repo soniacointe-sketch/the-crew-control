@@ -63,7 +63,7 @@ const streetStudies=[
 {id:'ST-05',route:'B',from:2,to:4,name:'Barillerie · Saint-Barthélemy · pont Saint-Michel',source:'Lazare, 1844, « Barillerie (rue de la) »',url:'https://fr.wikisource.org/wiki/Dictionnaire_administratif_et_historique_des_rues_de_Paris_et_de_ses_monuments/Barillerie_(rue_de_la)',finding:'La Barillerie longeait le Palais ; les Lazare différencient l’ancienne partie nord, dite Saint-Barthélemy, et le tronçon sud jadis nommé rue du Pont-Saint-Michel.',uncertainty:'Un alignement a été ordonné en 1784, puis les transformations du Palais ont modifié la voie. Le boulevard du Palais n’est qu’un repère moderne.'},
 {id:'ST-06',route:'B',from:4,to:6,name:'Rue Saint-Denis · rive droite',source:'Lazare, 1844, « Denis (rue Saint-) »',url:'https://fr.wikisource.org/wiki/Dictionnaire_administratif_et_historique_des_rues_de_Paris_et_de_ses_monuments/Denis_(rue_Saint-)',finding:'Grande route médiévale vers Saint-Denis ; les Lazare distinguent plusieurs anciennes appellations et l’extension jusqu’à une porte de l’enceinte de Charles V au XVe siècle.',uncertainty:'Le raccordement nord depuis le pont au Change et la chaussée de 1482 n’ont pas été mesurés sur le plan de 1551.'}
 ];
-const streetLayers=L.layerGroup().addTo(map);
+
 function renderStreets(){
 streetLayers.clearLayers();
 for(const study of streetStudies){
@@ -122,6 +122,7 @@ const oldToggle=document.getElementById('showOldMap'),oldOpacity=document.getEle
 oldToggle.addEventListener('change',()=>{if(oldToggle.checked){oldMapTiles.addTo(map);statusEl.textContent=oldTilesLoaded?'Plan ancien affiché · calage indicatif':'Chargement du plan ancien'}else{map.removeLayer(oldMapTiles);statusEl.textContent='Plan ancien masqué · carte moderne'}});
 oldOpacity.addEventListener('input',()=>{oldMapTiles.setOpacity(Number(oldOpacity.value)/100);oldLabel.textContent=oldOpacity.value+' %'});
 
+const streetLayers=L.layerGroup().addTo(map);
 const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};const pointMarkers={};
 const allCoords=[];
 function clean(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
