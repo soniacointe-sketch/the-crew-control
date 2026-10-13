@@ -116,6 +116,35 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
  #campaign-table-dialog .campaign-table-actions{gap:3px}
  #campaign-table-dialog .campaign-table-actions button{padding:10px 12px}
 }
+</style>
+<style id="mail-editor-image-dialog-css">
+#campaign-image-dialog{width:min(94vw,740px);max-width:740px;max-height:90dvh;overflow:auto;border:1px solid #e2ddec;border-radius:18px;background:#fff;color:#35333e;padding:30px 31px 28px;box-shadow:0 24px 85px #1e193f42}
+#campaign-image-dialog::backdrop{background:#20202c80;backdrop-filter:blur(2px)}
+#campaign-image-dialog .campaign-image-header{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+#campaign-image-dialog .campaign-image-icon{width:49px;height:49px;display:grid;place-items:center;color:#9580d5;background:#f4f0fe;border:1px solid #e6dff8;border-radius:12px;flex:none}
+#campaign-image-dialog h2{margin:0;flex:1;font:600 clamp(22px,3vw,29px)/1.2 system-ui,sans-serif;letter-spacing:-.03em}
+#campaign-image-dialog #campaign-image-close{width:40px;height:40px;padding:0;border:0;background:transparent;color:#98959f;font:300 34px/1 system-ui;cursor:pointer}
+#campaign-image-dialog .campaign-image-label{display:block;margin:0 0 22px;color:#85818a;font:700 13px/1.3 system-ui;letter-spacing:.055em}
+#campaign-image-dialog .campaign-image-label input{display:block;width:100%;height:52px;margin-top:10px;padding:12px 16px;border:1px solid #e0dce6;border-radius:10px;color:#393642;background:white;font:400 16px system-ui}
+#campaign-image-dialog input:focus{outline:2px solid #b6a2ef;outline-offset:1px}
+#campaign-image-dialog .campaign-image-settings{display:grid;grid-template-columns:1.1fr 1fr;gap:17px;margin:24px 0 17px}
+#campaign-image-dialog .campaign-image-choice{border:0;padding:0;margin:0;min-width:0}
+#campaign-image-dialog .campaign-image-choice legend{font:700 13px system-ui;color:#83808c;letter-spacing:.055em;margin-bottom:11px}
+#campaign-image-dialog .campaign-image-options{display:flex;flex-wrap:wrap;align-items:center;gap:4px}
+#campaign-image-dialog .campaign-image-options button{border:1px solid transparent;background:transparent;min-height:42px;padding:9px 11px;border-radius:7px;color:#85808c;font:600 14px system-ui;cursor:pointer;white-space:nowrap}
+#campaign-image-dialog .campaign-image-options button[aria-pressed=true]{color:#fff;background:#997ce1;border-color:#997ce1}
+#campaign-image-dialog .campaign-image-options button:not([aria-pressed=true]):hover{background:#f7f3fd}
+#campaign-image-dialog #campaign-image-help{margin:18px 0 24px;color:#8a8790;font:13px/1.7 system-ui}
+#campaign-image-dialog #campaign-image-error{background:#fff1f1;color:#9a2936;padding:9px 12px;border-radius:6px;font:13px system-ui}
+#campaign-image-dialog .campaign-image-actions{display:flex;gap:11px;justify-content:flex-end;margin-top:14px}
+#campaign-image-dialog .campaign-image-actions button{min-height:45px;display:inline-flex;gap:8px;align-items:center;justify-content:center;padding:11px 17px;border:1px solid transparent;border-radius:9px;background:#fff;color:#77717f;font:600 15px system-ui;cursor:pointer}
+#campaign-image-dialog #campaign-image-insert{border-color:#e0d8f5;color:#8369cb;background:#f8f5ff}
+#campaign-image-dialog #campaign-image-insert:hover:not(:disabled){background:#eee6ff}
+#campaign-image-dialog #campaign-image-insert:disabled{opacity:.48;cursor:not-allowed}
+#campaign-image-dialog [hidden]{display:none!important}
+#campaign-preview-output .mailing-image-block{margin:16px 0}
+#campaign-preview-output .mailing-image-block img{display:inline-block;max-width:100%;height:auto}
+@media(max-width:650px){#campaign-image-dialog{padding:20px 17px;border-radius:15px}#campaign-image-dialog .campaign-image-settings{grid-template-columns:1fr;gap:15px}#campaign-image-dialog .campaign-image-options button{padding:9px 10px;font-size:13px}}
 </style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header><section id="mailing-dashboard" hidden aria-label="Mailing & Newsletter"><nav class="mailing-nav" aria-label="Sections Mailing"><button type="button" data-mail-tab="listes" aria-selected="true">☷ Mes listes</button><button type="button" data-mail-tab="campagnes" aria-selected="false">✉ Campagnes</button><button type="button" data-mail-tab="quotas" aria-selected="false">▥ Quotas</button></nav><div class="mailing-content" data-mail-panel="listes"><div class="mailing-list-head"><h2 id="mailing-list-title">Mes listes (3)</h2><button type="button" id="mailing-new-list">＋ Nouvelle liste</button></div><p class="mailing-list-note">Effectifs de référence fournis pour la configuration ; aucune synchronisation des abonnés n'est encore connectée.</p><div id="mailing-list-cards"></div><div id="mailing-list-editor" hidden><h3>Nouvelle liste</h3><label>Nom de la liste<input id="mailing-list-name" maxlength="110"></label><label>Description<input id="mailing-list-desc" maxlength="220"></label><button type="button" id="mailing-list-save">Enregistrer la liste</button><button type="button" id="mailing-list-cancel">Annuler</button></div><div id="mailing-list-detail" hidden><button type="button" id="mailing-detail-back">← Mes listes</button><h3 id="mailing-detail-title"></h3><p id="mailing-detail-desc"></p><div id="mailing-contacts-area" hidden><div class="mailing-list-head"><h3 id="mail-contacts-title">Contacts (127)</h3><select id="mail-contact-filter" aria-label="Filtrer les contacts"><option value="all">Tous statuts</option><option value="enabled">Activés</option><option value="disabled">Désactivés</option><option value="blocklisted">Bloqués</option></select></div><div class="actions" style="margin:16px 0"><button type="button" id="mailing-export-contacts">⇩ Exporter</button><button type="button" id="mailing-import-csv">⇧ Importer</button><input id="mailing-import-file" type="file" accept=".csv,text/csv" hidden><button type="button" id="mail-history-btn">◷ Historique</button><button type="button" id="mail-show-add">＋ Ajouter</button></div><div id="mailing-contact-add-form" hidden><label>Adresse e-mail<input type="email" id="mailing-contact-email"></label><button type="button" id="mailing-contact-add">Enregistrer le contact</button></div><p id="mailing-import-result" role="status"></p><div class="mail-contact-table"><div class="mail-contact-head"><input type="checkbox" id="mail-select-all" aria-label="Sélectionner les contacts de cette page"><strong>Email</strong><strong>Statut</strong></div><div id="mailing-contacts-content"></div></div><div class="mailing-pager"><span><span id="mail-page-count">50 sur la page</span> · <span id="mail-selected-count">0 sélectionné(s)</span></span><div><button id="mail-prev" type="button">←</button><span id="mail-page">1 / 1</span><button id="mail-next" type="button">→</button></div></div><div id="mail-history-content" hidden><h4>Historique local</h4><p>Importations et modifications effectuées sur cet appareil.</p><div id="mail-history-list"></div></div></div><div id="mailing-compose-area" hidden><h4>Composer un message</h4><label>Objet<input id="mailing-compose-subject" maxlength="180"></label><label>Message<textarea id="mailing-compose-body" rows="7"></textarea></label><button type="button" id="mailing-compose-save">Enregistrer le brouillon</button><button type="button" id="mailing-compose-copy">Copier le message</button><p>Aucun envoi d'e-mail automatique n'est activé.</p></div><p id="mailing-action-status" role="status"></p></div></div><div class="mailing-content" data-mail-panel="campagnes" hidden><div class="mailing-list-head"><h2 id="campaign-title">Mes campagnes (18)</h2><button type="button" id="campaign-new">＋ Nouvelle campagne</button></div><p class="mailing-list-note">18 campagnes de référence · détails non synchronisés.</p><div id="campaign-list"><p>Aucune campagne importée dans ce navigateur.</p></div><form id="campaign-form" hidden><div class="mailing-list-head"><h2>Composer une campagne</h2><span id="campaign-restored" hidden>✓ brouillon restauré</span></div><label>Sujet<input id="campaign-subject" maxlength="180" required></label><label>Liste destinataire<select id="campaign-target" required><option value="">— sélectionner —</option><option value="La Voix d'Orchies">La Voix d'Orchies (6)</option><option value="La Voix d'Orchies — Asso">La Voix d'Orchies — Asso (0)</option><option value="Power & Glam">Power &amp; Glam (127)</option></select></label><label>Modèle<select id="campaign-template"><option>Souverain</option><option>Académique</option><option>Direct</option></select></label><button type="button" id="campaign-ai">✦ Générer avec l'IA</button><div class="campaign-fields"><label>Nom expéditeur<input id="campaign-sender-name" maxlength="120"></label><label>Email expéditeur<input type="email" id="campaign-sender-email"></label><label>Reply-To (optionnel)<input type="email" id="campaign-reply-to"></label></div><label>Nom interne de campagne<input id="campaign-name" maxlength="160"></label><div class="campaign-editor-toolbar" role="toolbar" aria-label="Mise en forme de la campagne">
 <button type="button" data-format="bold" title="Gras (Ctrl+B)" aria-label="Gras"><b>B</b></button>
 <button type="button" data-format="italic" title="Italique (Ctrl+I)" aria-label="Italique"><i>I</i></button>
@@ -166,6 +195,50 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
   </button>
  </div>
 </form>
+</dialog>
+<dialog id="campaign-image-dialog" aria-labelledby="campaign-image-heading" aria-describedby="campaign-image-help">
+ <form id="campaign-image-form" method="dialog">
+  <div class="campaign-image-header">
+   <span class="campaign-image-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M4 18 10 12l3.5 3.2 2.8-2.5 4.3 4.4"/></svg></span>
+   <h2 id="campaign-image-heading">Insérer une image</h2>
+   <button id="campaign-image-close" type="button" aria-label="Fermer">×</button>
+  </div>
+  <label class="campaign-image-label" for="campaign-image-url">URL DE L’IMAGE
+   <input id="campaign-image-url" type="url" placeholder="https://exemple.com/photo.jpg" autocomplete="url" required>
+  </label>
+  <label class="campaign-image-label" for="campaign-image-alt">TEXTE ALTERNATIF (OPTIONNEL)
+   <input id="campaign-image-alt" type="text" placeholder="Description de l’image pour l’accessibilité" maxlength="250">
+  </label>
+  <div class="campaign-image-settings">
+   <fieldset class="campaign-image-choice" id="campaign-image-width-field">
+    <legend>LARGEUR</legend>
+    <div class="campaign-image-options" aria-label="Largeur de l’image">
+     <button type="button" data-img-width="auto" aria-pressed="true">Auto</button>
+     <button type="button" data-img-width="25%" aria-pressed="false">25%</button>
+     <button type="button" data-img-width="50%" aria-pressed="false">50%</button>
+     <button type="button" data-img-width="75%" aria-pressed="false">75%</button>
+     <button type="button" data-img-width="100%" aria-pressed="false">100%</button>
+    </div>
+   </fieldset>
+   <fieldset class="campaign-image-choice" id="campaign-image-align-field">
+    <legend>ALIGNEMENT</legend>
+    <div class="campaign-image-options" aria-label="Alignement de l’image">
+     <button type="button" data-img-align="left" aria-pressed="false">← Gauche</button>
+     <button type="button" data-img-align="center" aria-pressed="true">↔ Centre</button>
+     <button type="button" data-img-align="right" aria-pressed="false">Droite →</button>
+    </div>
+   </fieldset>
+  </div>
+  <p id="campaign-image-help">L’image doit être hébergée publiquement (URL accessible sans login). Hébergeurs courants : Imgur, Cloudinary, GitHub raw, ton CDN.</p>
+  <p id="campaign-image-error" role="alert" hidden></p>
+  <div class="campaign-image-actions">
+   <button type="button" id="campaign-image-cancel">Annuler</button>
+   <button type="submit" id="campaign-image-insert" disabled>
+    <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.6"/><path d="M4 18 10 12l3.5 3.2 2.8-2.5 4.3 4.4"/></svg>
+    Insérer
+   </button>
+  </div>
+ </form>
 </dialog><p id="campaign-status" role="status"></p></div><div class="mailing-content" data-mail-panel="quotas" hidden><h2>Quotas</h2><p>Les limites d’envoi et les statistiques réelles seront affichées après connexion de ton service de mailing.</p></div></section><section class="hero"><h2>Développement IA et applications.</h2><p>Applications · Architecture · Développement · Validation</p><button class="primary" id="new">+ Ajouter un élément</button></section><div id="moduleHelp" role="status"></div><div class="metrics" id="metrics"></div><div class="toolbar"><input id="search" aria-label="Rechercher" placeholder="Rechercher dans cet univers…"><button id="export">Exporter</button><button id="restore">Restaurer</button><input type="file" accept=".json,application/json" id="file" hidden></div><p id="status" role="status"></p><section id="eloah-entretiens-integrated" style="margin:24px 0;background:#fff;border:1px solid #dce4da;padding:8px;border-radius:12px"><iframe id="eloah-entretiens-frame" src="eloah-entretiens-control.html?v=header-clean-20261013-5" title="Entretiens Control" loading="lazy" style="display:block;width:100%;height:1120px;max-width:100%;border:1px solid #dce4da;border-radius:10px;background:#f6f7f2"></iframe><p style="font-size:12px;color:#69776d;margin:10px 0 0">La connexion Supabase privée et la sauvegarde locale sont conservées. Si aucune session n'est disponible, le module fonctionne en mode local.</p></section><script id="eloah-entretiens-visibility">
 (()=>{'use strict';
 function updateLayout(){
@@ -296,10 +369,7 @@ function action(type){
    const url=safeUrl(raw);if(!url){window.alert('Lien invalide : utilise une URL https:// ou http://.');return}
    fragment='['+(selected||'Texte du lien')+']('+url+')';
  }else if(type==='image'){
-   const raw=window.prompt('URL de l’image à afficher (https://...)','https://');
-   if(raw===null)return;
-   const url=safeUrl(raw);if(!url||!/^https?:/.test(url)){window.alert('L’image doit être accessible via une URL https:// ou http://.');return}
-   fragment='!['+(selected||'Description de l’image')+']('+url+')';
+   openImageDialog();return;
  }else return;
  replaceSelection(fragment)
 }
@@ -357,6 +427,69 @@ tableForm.addEventListener('submit',event=>{
  replaceSelection(block);
  tableDialog.close('insert');
 });
+const imageDialog=document.getElementById('campaign-image-dialog');
+const imageForm=document.getElementById('campaign-image-form');
+const imageUrl=document.getElementById('campaign-image-url');
+const imageAlt=document.getElementById('campaign-image-alt');
+const imageInsert=document.getElementById('campaign-image-insert');
+const imageError=document.getElementById('campaign-image-error');
+let imageSelection={start:0,end:0},imageWidth='auto',imageAlign='center';
+function validImageUrl(){
+ try{const u=new URL(imageUrl.value.trim());return u.protocol==='https:'&&!u.username&&!u.password&&!!u.hostname}catch{return false}
+}
+function selectImageSetting(kind,value){
+ const selector=kind==='width'?'[data-img-width]':'[data-img-align]';
+ imageDialog.querySelectorAll(selector).forEach(btn=>btn.setAttribute('aria-pressed',String(btn.getAttribute(kind==='width'?'data-img-width':'data-img-align')===value)));
+ if(kind==='width')imageWidth=value;else imageAlign=value;
+}
+function updateImageInsert(){
+ const valid=validImageUrl();imageInsert.disabled=!valid;
+ if(valid)imageError.hidden=true;
+}
+function openImageDialog(){
+ imageSelection={start:area.selectionStart,end:area.selectionEnd};
+ imageUrl.value='';imageAlt.value=area.value.slice(imageSelection.start,imageSelection.end).slice(0,250);
+ imageError.hidden=true;
+ selectImageSetting('width','auto');selectImageSetting('align','center');
+ updateImageInsert();
+ if(!imageDialog.open)imageDialog.showModal();
+ imageUrl.focus();
+}
+imageDialog.querySelectorAll('[data-img-width]').forEach(btn=>btn.onclick=()=>selectImageSetting('width',btn.dataset.imgWidth));
+imageDialog.querySelectorAll('[data-img-align]').forEach(btn=>btn.onclick=()=>selectImageSetting('align',btn.dataset.imgAlign));
+imageUrl.addEventListener('input',updateImageInsert);
+document.getElementById('campaign-image-close').onclick=()=>imageDialog.close('cancel');
+document.getElementById('campaign-image-cancel').onclick=()=>imageDialog.close('cancel');
+imageDialog.addEventListener('click',ev=>{if(ev.target===imageDialog)imageDialog.close('cancel')});
+function htmlAttr(value){return String(value).replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/'/g,'&#39;')}
+imageForm.addEventListener('submit',ev=>{
+ ev.preventDefault();
+ if(!validImageUrl()){imageError.textContent='Indique une URL publique https:// valide.';imageError.hidden=false;return}
+ const url=new URL(imageUrl.value.trim()).href;
+ const width=imageWidth==='auto'?'auto':imageWidth;
+ const alt=imageAlt.value.trim();
+ // GFM accepts inline HTML. Preserve width and alignment in exported Markdown.
+ const snippet='\n\n<div data-pg-image="1" style="text-align:'+imageAlign+'"><img src="'+htmlAttr(url)+'" alt="'+htmlAttr(alt)+'" style="width:'+width+';max-width:100%;height:auto"></div>\n\n';
+ area.focus();area.setSelectionRange(imageSelection.start,imageSelection.end);
+ replaceSelection(snippet);
+ imageDialog.close('insert');
+});
+function readImgAttrs(src){
+ const attrs={},re=/([a-zA-Z][\w-]*)\s*=\s*"([^"]*)"/g;let m;
+ while((m=re.exec(src)))attrs[m[1]]=m[2];
+ const dec=s=>String(s||'').replace(/&(amp|quot|lt|gt|#39);/g,(_,k)=>({amp:'&',quot:'"',lt:'<',gt:'>', '#39':"'"})[k]);
+ return {src:dec(attrs.src),alt:dec(attrs.alt),style:attrs.style||''};
+}
+function renderSafeCampaignImage(line,out){
+ const match=line.match(/^<div data-pg-image="1" style="text-align:(left|center|right)"><img (.+)><\/div>$/);
+ if(!match)return false;
+ const attrs=readImgAttrs(match[2]);
+ const url=safeUrl(attrs.src);
+ if(!url||!/^https:/.test(url))return true;
+ const width=(attrs.style.match(/(?:^|;)width:(auto|25%|50%|75%|100%)(?:;|$)/)||[])[1]||'auto';
+ const holder=document.createElement('div');holder.className='mailing-image-block';holder.style.textAlign=match[1];
+ const img=document.createElement('img');img.src=url;img.alt=attrs.alt;img.loading='lazy';img.style.width=width;img.style.maxWidth='100%';img.style.height='auto';holder.append(img);out.append(holder);return true;
+}
 buttons.forEach(btn=>btn.onclick=()=>action(btn.dataset.format));
 area.addEventListener('keydown',e=>{
  if(!(e.ctrlKey||e.metaKey)||e.altKey)return;
@@ -382,6 +515,7 @@ function renderPreview(){
  const lines=area.value.split(/\r?\n/);
  for(let i=0;i<lines.length;i++){
   const line=lines[i],trim=line.trim();if(!trim)continue;
+  if(renderSafeCampaignImage(trim,out))continue;
   if(/^---+$/.test(trim)){out.append(document.createElement('hr'));continue}
   const heading=trim.match(/^(#{1,3})\s+(.+)/);
   if(heading){const node=document.createElement('h'+heading[1].length);inline(node,heading[2]);out.append(node);continue}
