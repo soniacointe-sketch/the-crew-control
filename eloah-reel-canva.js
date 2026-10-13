@@ -15,6 +15,34 @@ one('.ecs-rail').innerHTML=tabs.map(([key,icon,label])=>'<button class="ecs-rail
 const video=document.createElement('video'),audio=document.createElement('audio');
 video.playsInline=true;video.preload='auto';audio.preload='auto';
 const media={videoUrl:null,audioUrl:null,imageUrl:null,bgImage:null};
+const soundLibrary=[
+ {id:'elan',name:'Élan lumineux',artist:'ELOAH · Composition originale',duration:10,style:'Calme',icon:'✦',css:'aurora',notes:[60,64,67,72,67,64,62,67]},
+ {id:'pulse',name:'Pulse Crew',artist:'ELOAH · Composition originale',duration:10,style:'Dynamique',icon:'♫',css:'pulse',notes:[48,55,60,55,48,55,63,55]},
+ {id:'piano',name:'Piano des souvenirs',artist:'ELOAH · Composition originale',duration:10,style:'Émotion',icon:'♬',css:'piano',notes:[57,60,64,60,55,60,64,67]},
+ {id:'summer',name:'Lumière d’été',artist:'ELOAH · Composition originale',duration:10,style:'Solaire',icon:'☀',css:'summer',notes:[60,67,69,67,64,69,72,67]},
+ {id:'latin',name:'Tempo Latino',artist:'ELOAH · Composition originale',duration:10,style:'Rythmé',icon:'♪',css:'latin',notes:[57,60,64,69,64,60,62,67]},
+ {id:'velka',name:'Minuit velours',artist:'ELOAH · Composition originale',duration:10,style:'Cinématique',icon:'◐',css:'velka',notes:[45,52,57,52,48,52,55,52]}
+];
+const soundCache=new Map();
+let audioView='home',recording=null,recordStatus='',speechStatus='',voiceSelection='',voiceSpeed=1,voiceText='Bienvenue dans mon univers. Voici mon histoire.',audioPreview=null,audioPreviewId=null,audioBusy=false,recentSounds=[];
+try{recentSounds=JSON.parse(localStorage.getItem('eloah_reel_recent_audio')||'[]').filter(v=>soundLibrary.some(t=>t.id===v)).slice(0,5)}catch{}
+function soundRow(t){
+ const playing=t.id===audioPreviewId;
+ return '<div class="ecs-soundrow" data-audio-track="'+t.id+'" data-search="'+xss((t.name+' '+t.artist+' '+t.style).toLocaleLowerCase('fr'))+'"><button type="button" class="ecs-soundplay" data-preview-track="'+t.id+'" aria-label="'+(playing?'Arrêter':'Écouter')+' '+xss(t.name)+'"><span class="ecs-soundart '+t.css+'">'+(playing?'Ⅱ':t.icon)+'</span></button><div class="ecs-soundcopy"><strong>'+xss(t.name)+'</strong><small>'+xss(t.artist)+' · 0:10</small></div><button type="button" class="ecs-soundadd" data-add-track="'+t.id+'" title="Ajouter à la timeline" aria-label="Ajouter '+xss(t.name)+' à la timeline">＋</button></div>';
+}
+function audioSection(title,items){
+ return '<section class="ecs-audiosection" data-soundsection><div class="ecs-sectiontitle"><strong>'+xss(title)+'</strong><span>'+items.length+' sons</span></div>'+items.map(soundRow).join('')+'</section>';
+}
+function renderAudio(){
+ if(audioView==='record')return '<button class="ecs-els-back" data-audio-view="home">← Audio</button><h3 class="ecs-panelheading">Enregistrer une voix off</h3><p class="ecs-note">Autorise ton microphone, parle, puis arrête. La prise sera placée dans la piste audio du montage.</p><div class="ecs-audio-rec"><span class="ecs-rec-mic">🎙</span><strong>'+(recording?'Enregistrement en cours…':'Microphone prêt')+'</strong><p class="ecs-note">Enregistre dans un endroit calme.</p>'+(recording?btn('recordStop','■ Arrêter l’enregistrement',true):btn('recordStart','● Enregistrer ma voix',true))+'</div><p class="ecs-note ecs-rec-status" role="status">'+xss(recordStatus||'Aucun enregistrement pour le moment.')+'</p>'+(media.audioUrl?'<p class="ecs-note">Piste actuelle : '+xss(audio.dataset.filename||'Audio')+'</p>':'')+btn('importAudio','Importer une voix enregistrée');
+ if(audioView==='tts'){
+  const voices=typeof speechSynthesis!=='undefined'?speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr')):[];
+  return '<button class="ecs-els-back" data-audio-view="home">← Audio</button><h3 class="ecs-panelheading">Créer une voix de synthèse</h3><p class="ecs-note">Aperçu vocal avec une voix française de ton appareil. Ce mode n’utilise pas un générateur IA externe et ne produit pas encore un fichier audio exportable.</p><label class="ecs-sidelabel" for="ecs-tts-text">Texte à lire</label><textarea id="ecs-tts-text" rows="6">'+xss(voiceText)+'</textarea><label class="ecs-sidelabel" for="ecs-tts-voice">Voix française</label><select id="ecs-tts-voice">'+(voices.length?voices.map((v,i)=>'<option value="'+i+'" '+(voiceSelection===v.name?'selected':'')+'>'+xss(v.name)+' · '+xss(v.lang)+'</option>').join(''):'<option value="">Meilleure voix disponible</option>')+'</select><label class="ecs-sidelabel" for="ecs-tts-speed">Vitesse de lecture</label><select id="ecs-tts-speed">'+[.8,1,1.15,1.3].map(v=>'<option value="'+v+'" '+(voiceSpeed===v?'selected':'')+'>'+v+'×</option>').join('')+'</select><div class="ecs-audio-buttons">'+btn('voicePlay','▶ Écouter',true)+btn('voiceStop','■ Arrêter')+'</div><p class="ecs-note" role="status">'+xss(speechStatus||'La lecture vocale se fait sur ton appareil et ne sera pas ajoutée à l’export vidéo.')+'</p>';
+ }
+ const recent=recentSounds.map(id=>soundLibrary.find(t=>t.id===id)).filter(Boolean);
+ return '<div class="ecs-audio-header"><button data-tab="elements" aria-label="Retour aux éléments">←</button><strong>Audio</strong></div><div class="ecs-search"><input id="ecs-audio-search" placeholder="Rechercher des éléments" aria-label="Rechercher des sons"><span>⌕</span></div><div class="ecs-sectiontitle"><strong>Voix off</strong></div><div class="ecs-audio-voicecards"><button type="button" data-audio-view="record"><span class="ecs-voiceicon mic">♩</span><strong>Enregistrez une voix off</strong></button><button type="button" data-audio-view="tts"><span class="ecs-voiceicon ai">Aa</span><strong>Générez une voix de synthèse</strong></button></div>'+audioSection('Utilisés récemment',recent.length?recent:[])+audioSection('Recommandations ELOAH',soundLibrary.slice(0,3))+audioSection('Tendances · ambiances',soundLibrary.slice(3))+'<div class="ecs-audio-footer"><p class="ecs-note">Musiques de démonstration originales, générées dans ELOAH. Elles ne proviennent pas du catalogue Canva.</p>'+btn('importAudio','＋ Importer une musique',true)+(media.audioUrl?'<div class="ecs-audio-loaded"><strong>♫ Piste ajoutée</strong><span>'+xss(audio.dataset.filename||'Audio')+'</span>'+btn('removeAudio','Retirer la piste')+'</div>':'')+'</div>';
+}
+
 let images=new Map(),activeTab='models',elementsCategory=null,selected=null,nextId=1,drag=null,history=[],future=[],lastFrame=performance.now(),busy=false,toastTimer=0,importKind='background';
 const S={name:'Mon Reel',duration:5,trimStart:0,time:0,playing:false,bg:'#fffaf1',filter:'none',brand:'Power & Glam',elements:[]};
 const elementCategories=[
@@ -169,7 +197,7 @@ function renderSide(){
  if(activeTab==='tools')html=range('Durée du Reel (secondes)','duration',1,60,.5,S.duration)+color('Fond','bg',S.bg)+'<label class="ecs-sidelabel">Effet de couleur</label><select data-setting="filter">'+[['none','Naturel'],['cinema','Cinéma'],['gold','Lumière dorée'],['vivid','Couleurs intenses'],['mono','Noir et blanc']].map(([k,v])=>'<option value="'+k+'" '+(S.filter===k?'selected':'')+'>'+v+'</option>').join('')+'</select>'+btn('png','Exporter une image PNG')+'<p class="ecs-note">Les filtres modifient la vidéo et les photos de fond. Le son est conservé selon les capacités du navigateur à l’export.</p>';
  if(activeTab==='projects')html='<p class="ecs-note">Sauvegarde ton projet en JSON pour retrouver les textes, positions et couleurs.</p>'+btn('save','Sauvegarder projet',true)+btn('load','Ouvrir un projet')+btn('reset','Nouveau projet')+'<p class="ecs-note">Les vidéos, photos et musiques ne sont pas intégrées au fichier JSON : conserve-les séparément et réimporte-les après ouverture.</p>';
  if(activeTab==='photos')html=btn('importImage','Importer une photo',true)+btn('addImage','Ajouter une photo déplaçable')+'<p class="ecs-note">Tu peux également déposer un JPEG, PNG ou WebP directement sur le plan de travail.</p>';
- if(activeTab==='audio')html=btn('importAudio','Ajouter un fichier audio',true)+'<p class="ecs-note">'+(media.audioUrl?'Piste chargée : '+xss(audio.dataset.filename||'Audio'):'Aucune piste audio ajoutée.')+'<br>Lecture synchronisée avec le montage. À l’export, l’audio dépend du format pris en charge.</p>'+(media.audioUrl?btn('removeAudio','Retirer l’audio'): '');
+ if(activeTab==='audio')html=renderAudio();
  if(activeTab==='videos')html=btn('importVideo','Importer une vidéo',true)+'<p class="ecs-note">'+(media.videoUrl?'Vidéo chargée : '+xss(video.dataset.filename||'Vidéo'):'Aucune vidéo chargée.')+'<br>La vidéo apparaît dans le cadre vertical. Tu peux ajouter textes et formes dessus.</p>'+(media.videoUrl?range('Commencer la vidéo à (secondes)','trimStart',0,Math.max(0,Math.floor(video.duration*10)/10),.1,S.trimStart)+'<p class="ecs-note">Découpe l’extrait en réglant son point de départ. Sa durée se règle dans Outils.</p>'+btn('removeVideo','Retirer la vidéo'): '');
  if(activeTab==='properties'){
   const e=S.elements.find(q=>q.id===selected);
@@ -186,7 +214,7 @@ function renderSide(){
  }
  box.innerHTML=html;
 }
-function setTab(tab){if(tab==='elements')elementsCategory=null;activeTab=tab;renderSide();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
+function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';activeTab=tab;renderSide();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
 function action(name){
  if(name==='old'){pause();root.style.display='none';legacy.style.display='block';document.body.classList.add('ecs-legacy-open');const h=document.querySelector('body > header');if(h)h.style.display='flex';const back=document.createElement('button');back.textContent='↗ Retour à l’éditeur visuel';back.style.cssText='position:fixed;bottom:16px;right:16px;z-index:99;background:#147a9f;color:white;padding:13px;border-radius:9px';back.onclick=()=>{legacy.style.display='none';root.style.display='flex';back.remove();if(h)h.style.display='none'};document.body.append(back);return}
  if(name==='undo'){undo();return}if(name==='redo'){redo();return}
