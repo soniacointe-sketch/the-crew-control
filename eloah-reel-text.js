@@ -138,8 +138,11 @@ function drawCombo(ctx,e,t){
  const border=e.comboBorder??0;
  if(border>0){ctx.lineWidth=border;ctx.strokeStyle=e.accentColor||p.accent;ctx.strokeRect(x+border/2,y+border/2,w-border,h-border)}
  const base=Math.min(250,Math.max(30,+e.font||p.defaultSize));
- const innerWidth=w*.91,centerX=x+w/2,mainColor=e.color||p.ink,accent=e.accentColor||p.accent;
- const primary=String(e.text||p.title),sub=String(e.subtext??p.subtitle),top=String(e.eyebrow??p.eyebrow);
+ const alignment=['left','center','right'].includes(e.align)?e.align:'center';
+ const innerWidth=w*.86,centerX=alignment==='left'?x+w*.08:alignment==='right'?x+w*.92:x+w/2;
+ const mainColor=e.color||p.ink,accent=e.accentColor||p.accent;
+ const primary=String(e.textMode&&e.textMode!=='none'?dynamicText(e,t):e.text||p.title);
+ const sub=String(e.subtext??p.subtitle),top=String(e.eyebrow??p.eyebrow);
  const mainFamily=fontFor(e.fontFamily||p.font),secondaryFamily=fontFor(e.secondaryFont||p.subFont);
  let size=base;
  ctx.font=(e.italic?'italic ':'')+(e.fontWeight||800)+' '+size+'px '+mainFamily;
@@ -157,12 +160,12 @@ function drawCombo(ctx,e,t){
  const mainLines=breakLines(ctx,primary,innerWidth,size,titleFont,3,0);
  const spacing=size*.97;
  const mainTop=mainY-(mainLines.length-1)*spacing/2;
- mainLines.forEach((line,i)=>paintString(ctx,line,centerX,mainTop+i*spacing,{font:titleFont,size,align:'center',color:mainColor,
-  outline:p.layout==='outline'?Math.max(2,size*.025):0,strokeColor:accent,shadow:p.layout==='poster',shadowBlur:15}));
+ mainLines.forEach((line,i)=>paintString(ctx,line,centerX,mainTop+i*spacing,{font:titleFont,size,align:alignment,color:mainColor,
+  outline:p.layout==='outline'?Math.max(2,size*.025):0,strokeColor:accent,shadow:!!e.shadow,shadowBlur:15}));
  const subColor=p.layout==='ribbon'?'#ffffff':accent;
- paintString(ctx,sub,centerX,subY,{font:subFont,size:subSize,align:'center',color:e.subColor||subColor,shadow:false});
+ paintString(ctx,sub,centerX,subY,{font:subFont,size:subSize,align:alignment,color:e.subColor||subColor,shadow:false});
  const topSize=Math.max(16,Math.min(32,base*.18));
- paintString(ctx,top.toUpperCase(),centerX,topY,{font:'600 '+topSize+'px Arial,sans-serif',size:topSize,align:'center',color:accent,tracking:Math.max(1,base*.02)});
+ paintString(ctx,top.toUpperCase(),centerX,topY,{font:'600 '+topSize+'px Arial,sans-serif',size:topSize,align:alignment,color:accent,tracking:Math.max(1,base*.02)});
  ctx.restore();
 }
 function draw(ctx,e,t){
