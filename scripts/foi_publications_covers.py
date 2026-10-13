@@ -59,47 +59,43 @@ def prepare_sources():
             print(f"Photo {number:02d} generated: {out.stat().st_size} bytes")
 
 def lookup(entry: str, group: str, salt: int) -> Path:
-    title = entry.lower()
-    def photo(idx):
-        return CHAPTERS / f"photo-{idx:02d}.webp"
-    def tile(idx):
-        return TOPICS / f"scene-{idx:02d}.webp"
-    rules = [
-        (("magdalena", "madeleine"), tile(3)),
-        (("marie-", "marie_", "vierge"), photo(3)),
-        (("jesus", "jésus", "zachee", "zachée", "resurrection", "résurrection"), tile(1)),
-        (("ange", "archange", "michel", "celeste", "céleste"), photo(6)),
-        (("pierre", "clefs", "clés", "autorite", "autorité"), photo(4)),
-        (("qumran", "qumrân", "4q529", "papyrus", "ostracon", "collation"), tile(2)),
-        (("alphabet", "alpha", "aleph", "lettre", "ecriture", "écriture"), photo(8)),
-        (("eglise", "église", "temple", "architecture", "symbol", "flamme"), photo(9)),
-        (("jardin", "arbre", "eden", "éden"), tile(6)),
-        (("salomon", "saba", "babel", "alexandrie", "alexandria"), tile(5)),
-        (("parabole", "logia", "prophetie", "prophétie"), tile(8)),
-        (("bible", "coran", "genese", "genèse", "livre", "manuscrit", "enoch", "hénoch"), photo(7)),
-        (("archives", "histoire", "source", "registre", "document", "reconstitution"), photo(10)),
-        (("spirituel", "priere", "prière", "meditation", "méditation"), photo(11)),
+    """Choose a real, clean photographic crop without artificial line or circle overlays."""
+    title = entry.casefold()
+    def scene(number: int) -> Path:
+        return TOPICS / f"scene-{number:02d}.webp"
+    keywords = [
+        (("madeleine", "magdalena", "marie", "vierge"), [3]),
+        (("alpha", "zachée", "zachee", "alphabet", "jésus enfant", "jesus enfant"), [1, 2]),
+        (("qumr", "4q529", "ostracon", "papyrus", "fragment", "collation", "manuscrit"), [2, 7]),
+        (("résurrection", "resurrection", "passion", "tombeau", "pilate"), [4]),
+        (("jérusalem", "jerusalem", "pierre", "apôtre", "apotre", "temple"), [5, 4]),
+        (("arbre", "jardin", "éden", "eden", "olivier", "figuier", "nature"), [6]),
+        (("source", "écriture", "ecriture", "livre", "genèse", "genese", "coran", "bible", "texte", "bibliothèque"), [7, 2]),
+        (("prière", "priere", "méditation", "meditation", "foi", "ange", "archange", "ciel"), [8, 6]),
+        (("parabole", "thomas", "prophète", "prophete", "vision", "mystère", "mystere"), [8, 4]),
+        (("histoire", "archive", "inventaire", "reconstitution", "transmission"), [7, 5]),
     ]
-    for words, candidate in rules:
-        if any(w in title for w in words) and candidate.exists():
-            return candidate
-    group_choices = {
-        "Bibliothèque": [tile(7), photo(10)],
-        "Collections": [tile(2), tile(4), tile(8), photo(7)],
-        "Reconstitutions": [tile(5), tile(6), tile(4), photo(9)],
-        "Sources & illustrations": [tile(2), tile(7), photo(10), photo(8)],
-        "Manuscrits & enquêtes": [tile(2), photo(10), photo(8)],
-        "Paraboles": [tile(8), tile(1), photo(2)],
-        "Archives": [tile(5), photo(10)],
-        "Marie-Madeleine": [tile(3)],
-        "Chemin personnel": [photo(11), tile(8)],
+    for words, options in keywords:
+        if any(word in title for word in words):
+            choices = [scene(num) for num in options if scene(num).exists()]
+            if choices:
+                return choices[salt % len(choices)]
+    group_options = {
+        "Bibliothèque": [2, 7],
+        "Collections": [1, 2, 3, 4, 5, 6, 7, 8],
+        "Reconstitutions": [4, 5, 6, 7],
+        "Sources & illustrations": [2, 5, 6, 7],
+        "Manuscrits & enquêtes": [1, 2, 7],
+        "Paraboles": [4, 6, 8],
+        "Archives": [2, 5, 7],
+        "Marie-Madeleine": [3],
+        "Chemin personnel": [5, 6, 8],
     }
-    pool = [p for p in group_choices.get(group, []) if p.exists()]
-    if not pool:
-        pool = [p for p in TOPICS.glob("*.webp")]
-    if not pool:
-        raise FileNotFoundError("Missing illustration source images")
-    return pool[salt % len(pool)]
+    candidates = [scene(num) for num in group_options.get(group, list(range(1, 9))) if scene(num).exists()]
+    if not candidates:
+        raise FileNotFoundError("No clean source photo is available")
+    return candidates[salt % len(candidates)]
+
 
 def font(size: int, serif=True, bold=False):
     candidates = (
@@ -131,84 +127,21 @@ def split_title(title: str, f, draw, max_width: int):
     return lines
 
 def make_cover(source: Path, title: str, group: str, filename: str, ordinal: int, dest: Path):
+    """Photographic cover only: no circles, geometry, frames, lettering or badges baked in."""
     seed = int(hashlib.sha1(filename.encode("utf8")).hexdigest()[:9], 16)
     rng = random.Random(seed)
     image = Image.open(source).convert("RGB")
-    centering = (0.38 + rng.random() * .25, 0.34 + rng.random() * .27)
-    image = ImageOps.fit(image, (600, 750), method=Image.Resampling.LANCZOS,
-                         centering=centering)
-    image = ImageEnhance.Color(image).enhance(0.69 + .19 * rng.random())
-    image = ImageEnhance.Contrast(image).enhance(1.06)
-    image = ImageEnhance.Brightness(image).enhance(0.76)
-    rgba = image.convert("RGBA")
-    overlay = Image.new("RGBA", (600, 750), (0, 0, 0, 0))
-    pix = overlay.load()
-    for y in range(750):
-        t = y / 750
-        # Strong lower vignette: text remains readable without obscuring the main photograph.
-        fade = max(0, (t - .37) / .63)
-        alpha = int(55 + 188 * fade ** 1.45 + 18 * (1 - t))
-        for x in range(600):
-            side = abs((x - 300) / 300)
-            a = min(247, alpha + int(27 * side ** 1.9))
-            pix[x, y] = (10, 10, 17, a)
-    rgba = Image.alpha_composite(rgba, overlay)
-    draw = ImageDraw.Draw(rgba, "RGBA")
-    palette = {
-        "Bibliothèque": (224, 194, 138),
-        "Collections": (208, 191, 143),
-        "Reconstitutions": (223, 165, 116),
-        "Sources & illustrations": (169, 196, 192),
-        "Manuscrits & enquêtes": (210, 177, 118),
-        "Paraboles": (222, 191, 133),
-        "Archives": (188, 180, 160),
-        "Marie-Madeleine": (226, 181, 172),
-        "Chemin personnel": (221, 192, 147),
-    }
-    gold = palette.get(group, (224, 194, 138))
-    g = (*gold, 230)
-    draw.rectangle((28, 28, 572, 722), outline=(*gold, 135), width=2)
-    draw.line((56, 101, 545, 101), fill=(*gold, 175), width=2)
-    draw.line((56, 669, 545, 669), fill=(*gold, 155), width=2)
-    draw.text((55, 61), "E L O A H   /   F O I   &   S P I R I T U A L I T É",
-              font=font(15, serif=False, bold=True), fill=(245, 225, 187, 255))
-    # The editorial crest changes with each entry, producing a distinct illustration.
-    cx = int(295 + rng.randrange(-47, 48)); cy = int(240 + rng.randrange(-55, 56))
-    rings = 82 + (seed % 39)
-    for rad, fade in [(rings + 38, 28), (rings, 95), (rings // 2, 70)]:
-        draw.ellipse((cx-rad, cy-rad, cx+rad, cy+rad), outline=(*gold, fade), width=2)
-    for k in range(12):
-        ang = (math.pi * 2 * k / 12) + (seed % 30) / 30
-        r1, r2 = rings + 46, rings + 62
-        draw.line((cx + r1 * math.cos(ang), cy + r1 * math.sin(ang),
-                   cx + r2 * math.cos(ang), cy + r2 * math.sin(ang)),
-                  fill=(*gold, 60), width=2)
-    draw.line((56, 449, 120, 449), fill=g, width=3)
-    grp = group.upper()
-    grp_f = font(14, serif=False, bold=True)
-    if draw.textbbox((0, 0), grp, font=grp_f)[2] > 470:
-        grp_f = font(12, serif=False, bold=True)
-    draw.text((56, 460), grp, font=grp_f, fill=g)
-    normalized = re.sub(r"\s+", " ", title).strip()
-    text_font = font(35, serif=True, bold=True)
-    lines = split_title(normalized, text_font, draw, 490)
-    while len(lines) > 4 and text_font.size > 25:
-        text_font = font(text_font.size - 2, serif=True, bold=True)
-        lines = split_title(normalized, text_font, draw, 490)
-    lh = text_font.size + 12
-    total_h = lh * len(lines)
-    y0 = max(500, 641 - total_h)
-    for n, line in enumerate(lines):
-        draw.text((55, y0 + n * lh), line, font=text_font, fill=(250, 244, 229, 255),
-                  stroke_width=1, stroke_fill=(10, 10, 16, 100))
-    draw.text((56, 686), "OUVRIR LE DOSSIER  ↗", font=font(14, serif=False, bold=True), fill=g)
-    draw.text((546, 685), f"{ordinal:02d}", anchor="ra",
-              font=font(23, serif=True), fill=(*gold, 225))
-    rgb = rgba.convert("RGB")
+    # Preserve the photographic subject but use slightly distinct crops for related dossiers.
+    position = (0.39 + rng.random() * 0.23, 0.36 + rng.random() * 0.24)
+    image = ImageOps.fit(image, (600, 750), method=Image.Resampling.LANCZOS, centering=position)
+    image = ImageEnhance.Color(image).enhance(0.94 + rng.random() * 0.12)
+    image = ImageEnhance.Contrast(image).enhance(1.01 + rng.random() * 0.04)
+    image = ImageEnhance.Brightness(image).enhance(0.98 + rng.random() * 0.06)
     dest.parent.mkdir(parents=True, exist_ok=True)
-    rgb.save(dest, "WEBP", quality=82, method=5)
+    image.save(dest, "WEBP", quality=85, method=6)
     if dest.stat().st_size < 10000:
-        raise ValueError("Suspiciously small generated cover " + str(dest))
+        raise ValueError("Suspiciously small clean cover " + str(dest))
+
 
 def main():
     prepare_sources()
