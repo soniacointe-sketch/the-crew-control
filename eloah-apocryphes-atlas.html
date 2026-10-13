@@ -34,29 +34,207 @@ footer{font-size:12px;margin:60px 0 0;padding-top:22px;border-top:1px solid var(
 .source-list{display:flex;flex-direction:column;gap:7px;padding:10px 0}
 .source-list a{overflow-wrap:anywhere}
 @media(max-width:650px){.study-summary{align-items:flex-start;flex-direction:column}}
+
+/* ELOAH — Atlas éditorial · continuité avec la Grande Bibliothèque */
+:root{color-scheme:dark;--bg:#1d1e21;--paper:#2a2c31;--side:#202126;--line:#58544e;--ink:#f6f1e8;--muted:#cec4b4;--gold:#e6b85e;--soft:#303139;--focus:#f5cf80;--accent:#d6a85a}
+body{background:var(--bg);color:var(--ink);font:15px/1.58 system-ui,-apple-system,"Segoe UI",sans-serif}
+.layout{display:block;max-width:1500px;margin:auto;min-height:100vh;padding:0 clamp(14px,3vw,45px)}
+.sidebar{position:relative;top:auto;height:auto;overflow:visible;display:flex;align-items:center;flex-wrap:wrap;gap:14px;padding:20px 0;border:0;border-bottom:1px solid #686157;background:transparent}
+.brand{font:normal clamp(27px,3.2vw,40px)/1 Georgia,serif;letter-spacing:.13em;color:var(--ink)}
+.brand::first-letter{color:var(--gold)}
+.brand-sub{font:10px/1.3 system-ui;letter-spacing:.17em;color:var(--gold);white-space:nowrap}
+.aside-title,.sidebar>p{display:none}
+.aside-links{margin-left:auto;display:flex;flex-wrap:wrap;align-items:center;gap:3px}
+.side-link{font:650 12px/1.3 system-ui;border:1px solid transparent;border-radius:0;color:#e9decb;margin:0;padding:9px 11px}
+.side-link:hover,.side-link.current{background:#373532;color:#f8dda9;border-color:#a58351}
+main{max-width:none;margin:0;padding:0 0 80px}
+.toplinks{display:none}
+.atlas-hero{margin-top:25px;background:#111214;border:1px solid #5d5040;display:grid;grid-template-columns:minmax(0,1.17fr) minmax(0,.83fr);min-height:490px;overflow:hidden}
+.atlas-hero-copy{min-width:0;padding:clamp(29px,5vw,75px);display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.eyebrow{color:#f0c46e;font:800 11px/1.5 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase}
+.atlas-hero h1{color:#fff9ee;font:normal clamp(49px,6.4vw,87px)/1.06 Georgia,serif;letter-spacing:-.045em;margin:22px 0 23px;max-width:730px}
+.atlas-hero h1 em{color:#eac474;font-style:italic}
+.lead{font:clamp(19px,2.25vw,27px)/1.49 Georgia,serif;color:#e1d2bc;max-width:720px;margin:0}
+.atlas-hero-description{font:13px/1.65 system-ui;color:#bdb4a7;max-width:640px;margin:14px 0 0}
+.atlas-hero-actions{margin-top:29px;display:flex;flex-wrap:wrap;gap:10px}
+.atlas-hero-actions a{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;padding:12px 16px;border:1px solid #c4a15e;color:#fff3dc;font:800 12px system-ui;min-height:43px}
+.atlas-hero-actions a:first-child{background:#edc778;color:#141414;border-color:#edc778}
+.atlas-hero-actions a:hover{background:#f4dda9;color:#171717}
+.atlas-hero-visual{margin:0;position:relative;min-height:100%;background:#3b3329}
+.atlas-hero-visual img{width:100%;height:100%;display:block;object-fit:cover;object-position:50% 50%;min-height:490px}
+.atlas-hero-visual:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#111214aa 0%,transparent 43%,#11121444 100%);pointer-events:none}
+.atlas-hero-visual figcaption{position:absolute;right:20px;bottom:21px;z-index:1;font:10px/1.4 system-ui;letter-spacing:.12em;text-transform:uppercase;color:#fff5df;text-align:right}
+.atlas-metrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border:1px solid #655a4b;border-top:0}
+.atlas-metrics div{display:flex;align-items:center;gap:12px;border-right:1px solid #655a4b;padding:17px 25px}
+.atlas-metrics div:last-child{border-right:0}
+.atlas-metrics strong{font:italic clamp(28px,3vw,43px) Georgia,serif;color:#efc978}
+.atlas-metrics span{color:#eee4d7;font:12px/1.4 system-ui;letter-spacing:.04em}
+.atlas-headline{display:flex;align-items:end;justify-content:space-between;gap:20px;border-bottom:2px solid #b28a4c;margin:59px 0 24px;padding-bottom:14px}
+.atlas-headline h2{font:normal clamp(29px,3.3vw,45px)/1.15 Georgia,serif;color:#fff8ea;margin:4px 0 0}
+.atlas-headline p{color:#cfc5b7;max-width:470px;font-size:12px;text-align:right;margin:0}
+.atlas-headline small{font:800 10px system-ui;letter-spacing:.16em;text-transform:uppercase;color:#e8bb67}
+.atlas-highlights{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:17px}
+.atlas-highlight{display:flex;flex-direction:column;min-width:0;overflow:hidden;background:#3c424b;border:1px solid #66636a;text-decoration:none;color:#fff}
+.atlas-highlight:hover{border-color:#edbf67;transform:translateY(-3px)}
+.atlas-highlight .art{aspect-ratio:4/4.4;overflow:hidden;position:relative;background:#111}
+.atlas-highlight .art img{width:100%;height:100%;object-fit:cover;object-position:top;display:block}
+.atlas-highlight .art:after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#15151577 0%,transparent 40%)}
+.atlas-highlight .study-info{padding:22px 20px;display:flex;flex-direction:column;align-items:start;flex:1;gap:8px}
+.atlas-highlight .study-info small{font:800 10px system-ui;letter-spacing:.12em;text-transform:uppercase;color:#eac274}
+.atlas-highlight h3{font:normal clamp(23px,2.1vw,31px)/1.18 Georgia,serif;color:#fff;margin:0}
+.atlas-highlight p{font:13px/1.6 system-ui;color:#ebe6dd;margin:0 0 12px}
+.atlas-highlight .action{font:800 11px system-ui;border-top:1px solid #c19b5a;color:#f3d18c;padding-top:11px;margin-top:auto}
+.atlas-note{background:#292b30;color:#d2c9bc;border-left:3px solid #d5aa5a;padding:17px 21px;font:13px/1.7 system-ui;margin:28px 0}
+.atlas-note strong{color:#f0d18d}
+.atlas-note a{color:#efcb83;text-decoration:underline}
+.stats{grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin:21px 0 26px;border:1px solid #625b50}
+.stat{border:0;border-right:1px solid #625b50;background:#2b2d33;border-radius:0;padding:22px}
+.stat:last-child{border-right:0}
+.stat strong{font:normal 34px Georgia,serif;color:#f1c97b}
+.stat small{color:#d3c7b8;font:12px/1.35 system-ui;margin-top:8px}
+.study-summary{background:#2c2e33;border:1px solid #6c5b41;border-radius:0;padding:21px 25px;margin:23px 0 20px}
+.study-summary strong{font:normal 26px Georgia,serif;color:#fff5e5}
+.study-summary p{color:#d5ccbf}
+.button,.toplinks a{border-radius:2px;background:#33363d;color:#fff2dd;border:1px solid #8a795c}
+.button:hover,.toplinks a:hover{background:#d9b36d;color:#181818;border-color:#d9b36d}
+.button.primary{background:#d9b36d;border-color:#d9b36d;color:#171716;font-weight:800}
+.button:disabled{opacity:.4}
+button[aria-pressed="true"],.favorite[aria-pressed="true"]{background:#dab567;color:#191817;border-color:#dab567}
+.atlas-catalog{scroll-margin-top:22px}
+.toolbar{grid-template-columns:minmax(0,1.8fr) minmax(0,1fr) minmax(0,1fr);background:#282a2f;border:1px solid #55565a;padding:22px;gap:14px;margin:18px 0}
+.toolbar label{color:#edc778;font:800 11px system-ui;letter-spacing:.08em;text-transform:uppercase}
+.toolbar input,.toolbar select{background:#f8f5ee;color:#222;border:1px solid #d5c4a5;border-radius:2px;padding:12px}
+.viewtools{padding:10px 0 20px;border-bottom:1px solid #696258;margin:8px 0 24px;gap:14px}
+.sorttools{gap:8px}
+.helptext{color:#e7ddce;font-size:13px}
+.cards{grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;align-items:stretch}
+.entry{background:#292c32;color:#fff;border:1px solid #555962;border-radius:3px;padding:21px;gap:13px;min-height:235px}
+.entry:hover{border-color:#d4ad65;background:#32353c}
+.entry h3{font:normal 25px/1.2 Georgia,serif;color:#fff8ed;margin:0}
+.entry .meta{color:#cfc4b4;font-size:11px}
+.entry .tag{background:transparent;border:1px solid #957950;border-radius:2px;color:#eac883;padding:5px 10px;font:700 10px/1.3 system-ui}
+.entry-actions{margin-top:auto}
+.entry-actions a,.entry-actions button{background:#353940;color:#f5e3c2;border:1px solid #817251;border-radius:2px;font-size:12px;padding:9px 11px}
+.entry-actions a:hover,.entry-actions button:hover{background:#ddba77;border-color:#ddba77;color:#171717}
+.entry .review-note{background:#363942;border:0;border-left:2px solid #d6a95c;color:#e0d5c3;font:12px/1.55 system-ui}
+.noresults{background:#303239;color:#e6dbcc;border:1px solid #807363;border-radius:0}
+.controls{margin:25px 0}
+[hidden]{display:none!important}
+.atlas-sources{padding:28px;background:#2a2c31;border:1px solid #655943;margin-top:48px}
+.atlas-sources h2{font:normal 31px Georgia,serif;margin:0 0 13px;color:#fff4df}
+.atlas-sources p{color:#d9d0c3;font:14px/1.7 system-ui;margin:0}
+.atlas-sources a{color:#efc878;text-decoration:underline;text-underline-offset:4px}
+footer{border-top:1px solid #696259;color:#c9c1b8;margin-top:55px;padding-top:26px}
+dialog{background:#292b30;color:#f9f3ea;border:1px solid #b2986b;border-radius:4px;box-shadow:0 32px 90px #000a}
+dialog::backdrop{background:#090909c2}
+dialog h2{color:#fff9e9}
+.dialog-head button{background:#3a3b40;color:#eee1c9;border:1px solid #736750;border-radius:2px}
+.detail-row{border-bottom:1px solid #5a5b60}
+.detail-row small{color:#e6bd72}
+.detail-row div{color:#eee3d4}
+.review-note{background:#36383e;color:#e9dcc5;border-left:3px solid #d1a15a;border-radius:0}
+.critique{border-bottom:1px solid #55565b}
+.critique h3{color:#fff3df}
+.critique p{color:#e2d8ca}
+.manuscript{background:#35373d;color:#eee0cd;border:1px solid #5e5a52;border-radius:3px}
+.manuscript small{color:#d9c5a6}
+.source-list a{color:#edc77e}
+@media(max-width:1160px){.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:920px){.layout{display:block}.sidebar{padding:16px 0}.atlas-hero{grid-template-columns:minmax(0,1fr) minmax(0,.68fr)}.atlas-hero-visual img{min-height:420px}.aside-links{margin-left:0}.atlas-highlights{gap:11px}}
+@media(max-width:740px){.atlas-hero{grid-template-columns:1fr}.atlas-hero-copy{padding:35px 26px}.atlas-hero-visual img{height:270px;min-height:270px;object-position:50% 35%}.atlas-hero-visual:after{background:linear-gradient(0deg,#11121499,transparent 65%)}.atlas-metrics{grid-template-columns:1fr}.atlas-metrics div{border-right:0;border-bottom:1px solid #655a4b}.atlas-metrics div:last-child{border-bottom:0}.atlas-highlights{grid-template-columns:1fr}.atlas-highlight{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.atlas-highlight .art{height:100%;aspect-ratio:auto}.atlas-highlight .study-info{padding:18px 16px}.atlas-highlight h3{font-size:23px}.atlas-headline{align-items:start;flex-direction:column}.atlas-headline p{text-align:left}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid #625b50}.toolbar{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.sidebar{gap:10px}.brand-sub{width:100%}}
+@media(max-width:420px){.atlas-highlight{display:flex}.atlas-highlight .art{aspect-ratio:5/3.5}.atlas-hero h1{font-size:49px}.atlas-hero-actions{width:100%}.atlas-hero-actions a{flex:1}.stat strong{font-size:27px}}
+@media(prefers-reduced-motion:reduce){.atlas-highlight{transition:none}}
 </style></head><body>
 <div class="layout">
-<aside class="sidebar"><a class="brand" href="mes-univers.html">ELOAH</a><div class="brand-sub">FOI & SPIRITUALITÉ</div><div class="aside-title">BIBLIOTHÈQUE VIVANTE</div>
-<nav class="aside-links" aria-label="Navigation"><a class="side-link" href="foi-control.html">← Foi & Spiritualité</a><a class="side-link" href="foi-control.html?doc=10">Les 10 collections</a><a class="side-link current" aria-current="page" href="eloah-apocryphes-atlas.html">Tous les apocryphes</a><a class="side-link" href="eloah-parisis.html">PARISIS ENGINE</a><a class="side-link" href="mes-univers.html">Mes univers</a></nav>
-<p>Le catalogue est un instrument de recherche. Les titres peuvent désigner une œuvre, une version manuscrite, un fragment ou un document associé. Aucun texte n'est déclaré authentique par sa simple présence.</p></aside>
+<aside class="sidebar">
+<a class="brand" href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md">ELOAH</a>
+<div class="brand-sub">FOI &amp; SPIRITUALITÉ</div>
+<nav class="aside-links" aria-label="Navigation de la revue">
+<a class="side-link" href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md">Accueil Foi</a>
+<a class="side-link" href="eloah-foi-grande-bibliotheque.html">Grande Bibliothèque</a>
+<a class="side-link" href="eloah-foi-publications.html">Publications</a>
+<a class="side-link current" aria-current="page" href="eloah-apocryphes-atlas.html">Atlas des apocryphes</a>
+<a class="side-link" href="mes-univers.html">Mes univers</a>
+</nav>
+</aside>
 <main>
-<div class="toplinks"><a href="foi-control.html?doc=10">← Retour aux collections</a><a href="foi-control.html">Ouvrir le livre vivant</a></div>
-<div class="eyebrow">ELOAH · FOI & SPIRITUALITÉ · ATLAS DOCUMENTAIRE</div><h1>Les apocryphes.<br>La grande bibliothèque.</h1>
-<p class="lead">Évangiles oubliés, récits d’enfance, apocalypses, lettres, voyages des apôtres, codices coptes, écrits juifs et traditions bibliques. Retrouve les références et décide des manuscrits que nous allons étudier.</p>
-<div class="status">IMPORTANT · « Tous » n'est pas une liste définitivement close : les classifications évoluent et des fragments peuvent encore être identifiés. Les références e-Clavis sont issues d'un répertoire scientifique ; les corpus complémentaires sont des pistes documentaires et comportent des doublons d’œuvres.</div>
-<div id="stats" class="stats" aria-label="Statistiques du corpus"><div class="stat"><strong>—</strong><small>Références</small></div></div>
-<section class="study-summary" aria-label="Premières études documentées"><div><strong id="studyCount">Études critiques en cours</strong><p>Manuscrits, cotes, datations, textes et liens vers les collections documentaires.</p></div><button id="studied" class="button" type="button" aria-pressed="false">Voir les études documentées</button></section>
+<section class="atlas-hero" aria-labelledby="atlasTitle">
+<div class="atlas-hero-copy">
+<span class="eyebrow">ELOAH · ATLAS DOCUMENTAIRE · FOI &amp; SPIRITUALITÉ</span>
+<h1 id="atlasTitle">Les textes <em>apocryphes.</em></h1>
+<p class="lead">Remonter les manuscrits. Confronter les traditions. Explorer les écrits anciens sans leur attribuer des certitudes qu'ils ne portent pas.</p>
+<p class="atlas-hero-description">Évangiles d'enfance, paroles, lettres, apocalypses et codices. Un catalogue de références documentaires, distinct d'une collection de traductions intégrales.</p>
+<div class="atlas-hero-actions">
+<a href="#catalogue">Explorer les notices ↘</a>
+<a href="?etudes=1#catalogue">Études documentées ↗</a>
+</div>
+</div>
+<figure class="atlas-hero-visual">
+<img src="assets/foi-archives/eloah-archive-08.webp" alt="Illustration éditoriale du papyrus, création ELOAH et non photographie d'un manuscrit authentifié" width="680" height="760">
+<figcaption>ÉCRITURES · TÉMOINS · TRANSMISSION</figcaption>
+</figure>
+</section>
+<div class="atlas-metrics" aria-label="Repères de l'Atlas">
+<div><strong>600</strong><span>Notices du corpus référencé</span></div>
+<div><strong>19</strong><span>Études critiques associées</span></div>
+<div><strong>4</strong><span>Familles de ressources agrégées</span></div>
+</div>
+<section aria-labelledby="featuredTitle">
+<div class="atlas-headline">
+<div><small>ÉTUDES À DÉCOUVRIR</small><h2 id="featuredTitle">Trois enquêtes pour commencer.</h2></div>
+<p>Chaque dossier possède son texte intégral, ses questions et ses références. Ces visuels sont des créations éditoriales.</p>
+</div>
+<div class="atlas-highlights">
+<a class="atlas-highlight" href="foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md">
+<div class="art"><img src="assets/foi-publications/alpha-aleph.webp" alt="Couverture illustrée, Alpha et Aleph" loading="lazy" width="480" height="600"></div>
+<div class="study-info"><small>JÉSUS ENFANT · ALPHA-001</small><h3>Enfance, alphabets et traditions.</h3><p>Interroger l'école de Zachée, les récits d'enfance et la transmission des lettres.</p><span class="action">Lire l'enquête ↗</span></div>
+</a>
+<a class="atlas-highlight" href="foi-control.html?file=eloah-foi-apo-019-livre-secret-jacques.md">
+<div class="art"><img src="assets/foi-publications/livre-secret-jacques.webp" alt="Couverture illustrée du Livre secret de Jacques" loading="lazy" width="480" height="600"></div>
+<div class="study-info"><small>NAG HAMMADI · APO-019</small><h3>Le Livre secret de Jacques.</h3><p>Lire un codex copte, ses lacunes, son récit et ses éditions critiques.</p><span class="action">Lire le dossier ↗</span></div>
+</a>
+<a class="atlas-highlight" href="foi-control.html?file=eloah-foi-magdalena-008-pierre-autorite.md">
+<div class="art"><img src="assets/foi-publications/marie-madeleine-sept.webp" alt="Couverture éditoriale sur Marie-Madeleine, image générée" loading="lazy" width="480" height="600"></div>
+<div class="study-info"><small>MARIE-MADELEINE · AUTORITÉ</small><h3>Marie, Pierre, André et Lévi.</h3><p>Étudier les tensions de transmission et d'autorité dans l'Évangile de Marie.</p><span class="action">Lire l'étude ↗</span></div>
+</a>
+</div>
+</section>
+<div class="atlas-note"><strong>Attention au mot « apocryphe ».</strong> Les 600 entrées réunissent œuvres, notices, fragments ou versions, avec recouvrements possibles. Les études détaillées ne couvrent pas encore tout ce corpus. <a href="eloah-foi-grande-bibliotheque.html">Revenir aux dix collections ↗</a></div>
+<section id="catalogue" class="atlas-catalog" aria-labelledby="catalogueTitle">
+<div class="atlas-headline"><div><small>INVENTAIRE SCIENTIFIQUE</small><h2 id="catalogueTitle">Explorer les notices.</h2></div><p>Recherche par titre, cote, famille documentaire ou type de texte.</p></div>
+<div id="stats" class="stats" aria-label="Statistiques du corpus"><div class="stat"><strong>—</strong><small>Références en cours de chargement</small></div></div>
+<section class="study-summary" aria-label="Études critiques documentées">
+<div><strong id="studyCount">Études critiques en cours</strong><p>Manuscrits, datations, témoins, éditions scientifiques et questions ouvertes.</p></div>
+<button id="studied" class="button" type="button" aria-pressed="false">Voir les études documentées</button>
+</section>
 <div class="toolbar">
-<label for="search">Rechercher partout<input id="search" type="search" placeholder="Thomas, Marie, Michel, ECCA 421, NHC II…" autocomplete="off"></label>
+<label for="search">Rechercher une référence<input id="search" type="search" placeholder="Thomas, Marie, Michel, ECCA 421, NHC II…" autocomplete="off"></label>
 <label for="family">Famille documentaire<select id="family"><option value="">Toutes les familles</option></select></label>
 <label for="category">Type de documents<select id="category"><option value="">Tous les types</option></select></label>
 </div>
-<div class="viewtools"><div id="count" class="helptext" role="status">Chargement de la bibliothèque…</div><div class="sorttools"><button class="button" id="favorites" type="button" aria-pressed="false">☆ Mes favoris (0)</button><button class="button" id="reset" type="button">Effacer les filtres</button><button class="button" id="export" type="button">Exporter mes favoris</button></div></div>
-<div id="results" class="cards" aria-live="polite"></div><div class="controls"><button id="more" class="button primary" type="button" hidden>Afficher davantage →</button></div>
-<section aria-label="Sources" style="margin-top:45px"><h2>Sources et méthode</h2><p>Les notices e-Clavis sont créditées à la <a href="https://www.nasscal.com/e-clavis-christian-apocrypha/" target="_blank" rel="noopener">NASSCAL</a> (répertoire en CC BY 4.0). Les positions de textes coptes viennent du catalogue de la <a href="https://scholarlyeditions.brill.com/cglo/" target="_blank" rel="noopener">Coptic Gnostic Library (Brill)</a>. Pour les pseudépigraphes, consulter les éditions de l’<a href="https://pseudepigrapha.org/" target="_blank" rel="noopener">Online Critical Pseudepigrapha</a>. Les listes ne remplacent ni les photographies, ni les éditions critiques.</p></section>
-<footer>ELOAH · SONIA OS · Foi & Spiritualité · Catalogue documentaire. Les favoris sont sauvegardés dans ce navigateur uniquement ; aucune synchronisation serveur n’est annoncée.</footer>
-</main></div>
-<dialog id="detail" aria-labelledby="detailTitle"><div class="dialog-head"><div><div class="eyebrow">FICHE DOCUMENTAIRE · APERÇU</div><h2 id="detailTitle">Titre</h2></div><button type="button" id="close" aria-label="Fermer">×</button></div><div id="detailBody"></div><div class="dialog-actions"><a id="sourceLink" class="button primary" target="_blank" rel="noopener">Consulter la source ↗</a><button id="study" class="button" type="button">Copier le prompt d'étude</button><button id="saveDetail" class="button" type="button">Ajouter aux favoris</button></div></dialog>
+<div class="viewtools">
+<div id="count" class="helptext" role="status">Chargement du corpus de références…</div>
+<div class="sorttools">
+<button class="button" id="favorites" type="button" aria-pressed="false">☆ Mes favoris (0)</button>
+<button class="button" id="reset" type="button">Effacer les filtres</button>
+<button class="button" id="export" type="button">Exporter mes favoris</button>
+</div>
+</div>
+<div id="results" class="cards" aria-live="polite"></div>
+<div class="controls"><button id="more" class="button primary" type="button" hidden>Afficher davantage →</button></div>
+</section>
+<section class="atlas-sources" aria-label="Sources du catalogue">
+<h2>Sources &amp; méthode</h2>
+<p>Répertoire <a href="https://www.nasscal.com/e-clavis-christian-apocrypha/" target="_blank" rel="noopener noreferrer">NASSCAL e-Clavis</a> (CC BY 4.0), <a href="https://scholarlyeditions.brill.com/cglo/" target="_blank" rel="noopener noreferrer">Coptic Gnostic Library (Brill)</a> et <a href="https://pseudepigrapha.org/" target="_blank" rel="noopener noreferrer">Online Critical Pseudepigrapha</a>. Les notices ne remplacent pas les photographies des témoins, les transcriptions ni les éditions critiques. <a href="eloah-foi-publications.html">Voir toutes les publications ELOAH ↗</a></p>
+</section>
+<footer>ELOAH · FOI &amp; SPIRITUALITÉ — Les favoris restent enregistrés uniquement dans ce navigateur ; aucune synchronisation serveur n'est annoncée.</footer>
+</main>
+</div>
+<dialog id="detail" aria-labelledby="detailTitle">
+<div class="dialog-head"><div><div class="eyebrow">FICHE DOCUMENTAIRE · APERÇU</div><h2 id="detailTitle">Titre</h2></div><button type="button" id="close" aria-label="Fermer">×</button></div>
+<div id="detailBody"></div>
+<div class="dialog-actions"><a id="sourceLink" class="button primary" target="_blank" rel="noopener noreferrer">Consulter la source ↗</a><button id="study" class="button" type="button">Copier le prompt d'étude</button><button id="saveDetail" class="button" type="button">Ajouter aux favoris</button></div>
+</dialog>
 <script>
 "use strict";
 const ENRICHED_PATH="eloah-apocryphes-etudes-verifiees.json?v=20261013", PATH="eloah-apocryphes-corpus.json?v=20261013", FAV="eloah-foi-apocryphes-favoris-v1";
