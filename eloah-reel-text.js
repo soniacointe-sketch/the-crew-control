@@ -175,7 +175,7 @@ function textElement(kind,content,opts={}){
  if(kind==='body')return {kind:'text',text:content||'Écris ton texte ici.',font:41,fontFamily:'sans',fontWeight:400,color:'#28303a',x:115,y:930,w:850,h:260,align:'center',...opts};
  if(kind==='caption')return {kind:'text',text:content||'Bienvenue dans mon Reel. Ici, on danse, on crée et on avance ensemble.',font:60,fontFamily:'sans',fontWeight:900,color:'#ffffff',x:90,y:1480,w:900,h:225,align:'center',textMode:'caption',backgroundColor:'#161616',bgOpacity:.78,...opts};
  if(kind==='page')return {kind:'text',text:'01 / 05',font:50,fontFamily:'mono',fontWeight:800,color:'#ffffff',x:710,y:1730,w:280,h:88,align:'center',textMode:'counter',pageInterval:2,backgroundColor:'#1c1c1c',bgOpacity:.67,...opts};
- return {kind:'text',text:content||'Écris ton texte',font:70,fontFamily:'sans',fontWeight:800,color:'#ffffff',x:100,y:850,w:880,h:230,align:'center',...opts};
+ return {kind:'text',text:content||'Écris ton texte',font:70,fontFamily:'sans',fontWeight:800,color:'#2b2b2b',x:100,y:850,w:880,h:230,align:'center',...opts};
 }
 window.ELOAHText={families,presets,groups,byId,preview,draw,drawPlain,drawCombo,textElement,textModes,modeNames};
 })();
