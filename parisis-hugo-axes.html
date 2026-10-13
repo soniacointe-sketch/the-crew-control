@@ -27,7 +27,7 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <div class="actions"><button id="fit">Voir les deux tracés</button><button id="export">Exporter GeoJSON</button></div>
 <div class="notice"><strong>Point de méthode :</strong> les portes au nord représentées par des arcs actuels datent de 1672 et 1674. Leurs emplacements correspondent aux anciennes portes de l'enceinte de Charles V, mais il ne s'agit pas des bâtiments du roman. Les ponts actuels ont aussi été reconstruits. Les coordonnées des portions de rues sont indicatives.</div>
 </section>
-<section class="panel"><h3><span class="line" style="background:var(--a)"></span> Axe 1 · Points</h3><table id="listA"><thead><tr><th>Étape</th><th>Repère cité par Hugo</th></tr></thead><tbody></tbody></table></section>
+<section class="panel" id="historicalEvidencePanel"><div class="kicker">Lecture du plan ancien · Contrôle documentaire</div><h2>8 repères documentés · 6 portions à préciser</h2><p>Les quatre anciennes portes et les quatre ponts apparaissent sur le plan de Truschet et Hoyau, ou dans des extraits sourcés. Les <b>six positions de rue</b> restent des repères schématiques qui doivent être confrontés aux tracés historiques. Un extrait de carte ne prouve pas à lui seul la précision d'une coordonnée moderne.</p><div class="notice"><b>Deux corrections effectives :</b> la porte Saint-Martin médiévale a été déplacée d'environ 70 m sur notre carte ; la porte Saint-Denis médiévale d'environ 86 m. Les deux points précédents correspondaient aux arcs actuels du XVIIe siècle.</div><div id="historicalEvidenceList"></div><p class="legend"><a href="https://www.institutparisregion.fr/nos-travaux/publications/la-ville-cite-et-universite-de-paris-dit-plan-de-bale/" target="_blank" rel="noopener">Fiche du plan de Bâle (Institut Paris Région) ↗</a></p></section><section class="panel"><h3><span class="line" style="background:var(--a)"></span> Axe 1 · Points</h3><table id="listA"><thead><tr><th>Étape</th><th>Repère cité par Hugo et contrôle</th></tr></thead><tbody></tbody></table></section>
 <section class="panel"><h3><span class="line" style="background:var(--b)"></span> Axe 2 · Points</h3><table id="listB"><thead><tr><th>Étape</th><th>Repère cité par Hugo</th></tr></thead><tbody></tbody></table></section>
 <section class="panel"><h3>Documents qui justifient l'enquête</h3><p><a href="https://fr.wikisource.org/wiki/Page:Hugo_-_%C5%92uvres_compl%C3%A8tes%2C_Impr._nat.%2C_Roman%2C_tome_II.djvu/119" target="_blank" rel="noopener">Le passage original de Hugo ↗</a></p><p><a href="https://parismuseescollections.paris.fr/fr/musee-carnavalet/oeuvres/paris-vers-1551-plan-de-truschet-et-hoyau" target="_blank" rel="noopener">Musée Carnavalet · Plan de Truschet et Hoyau, vers 1551 ↗</a></p><p><a href="https://www.paris.fr/pages/sur-la-piste-de-l-enceinte-medievale-philippe-auguste-rive-gauche-episode-2-2-21081" target="_blank" rel="noopener">Ville de Paris · Porte Saint-Jacques ↗</a></p><p><a href="parisis-hugo-notre-dame.html">Dossier historique de Victor Hugo ↗</a></p>
 <div class="notice">Le plan de 1551 est postérieur de près de sept décennies au Paris de 1482 raconté par Hugo. Il sert de document de comparaison, pas de photographie exacte de la ville en 1482.</div></section>
@@ -55,6 +55,28 @@ const routes=[
 ['Rue Saint-Denis',48.86375,2.34995,'Point de passage schématique sur la rue actuelle, non recalé sur une voie de 1482.','https://fr.wikisource.org/wiki/Page:Hugo_-_%C5%92uvres_compl%C3%A8tes%2C_Impr._nat.%2C_Roman%2C_tome_II.djvu/119','indicatif'],
 ['Porte Saint-Denis',48.8690722,2.3522778,'POINT HISTORIQUE CORRIGÉ : porte fortifiée du XIVe siècle (bastide Saint-Denis) près des n°246–248 et 285 rue Saint-Denis, au sud de l’arc de 1672. Coordonnée de restitution sourcée, non relevé archéologique.','https://urbanisation-paris.com/2020/03/28/paris-vers-1550-le-plan-de-truschet-et-hoyau/','reference']
 ]}];
+const historicalEvidence={
+'A:0':{name:'Porte Saint-Jacques',label:'Porte visible sur extrait du plan',url:'https://commons.wikimedia.org/wiki/File:Plan_de_Paris_vers_1550_porte_St-Jacques.jpg'},
+'A:2':{name:'Petit-Pont',label:'Franchissement décrit dans l’analyse du plan ; pont de 1551 et pont moderne différents',url:'https://urbanisation-paris.com/2020/03/28/paris-vers-1550-le-plan-de-truschet-et-hoyau/'},
+'A:4':{name:'Pont Notre-Dame',label:'Extrait iconographique identifié ; pont reconstruit entre 1499 et 1512',url:'https://commons.wikimedia.org/wiki/File:Plan_de_Paris_vers_1550_Pont_ND.jpg'},
+'A:6':{name:'Porte Saint-Martin médiévale',label:'Porte de Charles V figurée sur le plan, près des 355–357 rue Saint-Martin',url:'https://commons.wikimedia.org/wiki/File:Plan_de_Paris_vers_1550_porte_St-Martin.jpg'},
+'B:0':{name:'Porte Saint-Michel',label:'Porte représentée sur extrait du plan, près du 53 boulevard Saint-Michel actuel',url:'https://commons.wikimedia.org/wiki/File:Plan_de_Paris_vers_1550_porte_St-Michel.jpg'},
+'B:2':{name:'Pont Saint-Michel',label:'Extrait iconographique identifié ; pont reconstruit après la crue de 1547',url:'https://commons.wikimedia.org/wiki/File:Plan_de_Paris_vers_1550_pont_St-Michel.jpg'},
+'B:4':{name:'Pont au Change',label:'Extrait du pont à boutiques sur le plan de 1551',url:'https://commons.wikimedia.org/wiki/File:Plan_de_Paris_vers_1550_Pont_au_change.jpg'},
+'B:6':{name:'Porte Saint-Denis médiévale',label:'Bastide médiévale au sud de l’arc actuel, près de la rue Blondel',url:'https://urbanisation-paris.com/2020/03/28/paris-vers-1550-le-plan-de-truschet-et-hoyau/'}
+};
+function evidencePanel(){
+const panel=document.getElementById('historicalEvidenceList');panel.textContent='';
+for(const r of routes)r.points.forEach((p,i)=>{
+const info=historicalEvidence[r.key+':'+i];if(!info)return;
+const wrap=document.createElement('div');wrap.style.cssText='border-top:1px solid #e2d7c7;padding:9px 0;';
+const head=document.createElement('strong');head.textContent=r.key+(i+1)+' · '+p[0];wrap.appendChild(head);
+const detail=document.createElement('div');detail.className='legend';detail.textContent=info.label;wrap.appendChild(detail);
+const a=document.createElement('a');a.href=info.url;a.target='_blank';a.rel='noopener';a.textContent='Voir l’extrait historique ↗';a.style.marginRight='12px';wrap.appendChild(a);
+const btn=document.createElement('button');btn.type='button';btn.textContent='Voir le point sur la carte';btn.dataset.focusRoute=r.key;btn.dataset.focusIndex=String(i);btn.style.padding='5px 8px';btn.style.marginTop='5px';wrap.appendChild(btn);
+panel.appendChild(wrap);
+});
+}
 const map=L.map('map',{preferCanvas:false,zoomControl:true}).setView([48.8585,2.3486],14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© contributeurs OpenStreetMap'}).addTo(map);
 const oldMapTiles=L.tileLayer('https://warper.wmflabs.org/maps/tile/2704/{z}/{x}/{y}.png',{minZoom:10,maxZoom:19,maxNativeZoom:17,opacity:.8,attribution:'Plan Truschet et Hoyau · Bibliothèque de Bâle · Wikimaps Warper (16 points de contrôle)',zIndex:300});
@@ -67,7 +89,7 @@ const oldToggle=document.getElementById('showOldMap'),oldOpacity=document.getEle
 oldToggle.addEventListener('change',()=>{if(oldToggle.checked){oldMapTiles.addTo(map);statusEl.textContent=oldTilesLoaded?'Plan ancien affiché · calage indicatif':'Chargement du plan ancien'}else{map.removeLayer(oldMapTiles);statusEl.textContent='Plan ancien masqué · carte moderne'}});
 oldOpacity.addEventListener('input',()=>{oldMapTiles.setOpacity(Number(oldOpacity.value)/100);oldLabel.textContent=oldOpacity.value+' %'});
 
-const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};
+const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};const pointMarkers={};
 const allCoords=[];
 function clean(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
 function render(){
@@ -75,10 +97,10 @@ for(const r of routes){const layer=layers[r.key];layer.clearLayers();const coord
 L.polyline(coords,{color:r.color,opacity:1,weight:7,lineCap:'round',lineJoin:'round'}).addTo(layer).bindTooltip('Axe '+r.key+' · tracé schématique de '+r.name,{sticky:true});
 r.points.forEach((p,i)=>{
 const m=L.circleMarker([p[1],p[2]],{radius:7,weight:3,color:r.color,fillColor:'#fff',fillOpacity:1}).addTo(layer);
-m.bindPopup('<b>Axe '+r.key+' · '+(i+1)+'. '+clean(p[0])+'</b><p>'+clean(p[3])+'</p><p><small>Précision : '+(p[5]==='reference'?'emplacement actuel documenté':'position indicative à vérifier')+'</small></p><a target="_blank" rel="noopener" href="'+p[4]+'">Voir la source ↗</a>');
+m.bindPopup('<b>Axe '+r.key+' · '+(i+1)+'. '+clean(p[0])+'</b><p>'+clean(p[3])+'</p><p><small>Précision : '+(p[5]==='reference'?'emplacement actuel documenté':'position indicative à vérifier')+'</small></p><a target="_blank" rel="noopener" href="'+p[4]+'">Voir la source ↗</a>');pointMarkers[r.key+':'+i]=m;
 if(document.getElementById('showLabels').checked)L.tooltip({permanent:true,direction:r.key==='A'?'right':'left',offset:r.key==='A'?[8,-3]:[-8,-3],className:'custom-point',opacity:.9}).setLatLng([p[1],p[2]]).setContent((i+1)+'. '+p[0]).addTo(layer);
 });
-const tb=document.querySelector('#list'+r.key+' tbody');tb.textContent='';r.points.forEach((p,i)=>{const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=(i+1)+'.';const b=document.createElement('td');b.textContent=p[0];tr.append(a,b);tb.append(tr)});
+const tb=document.querySelector('#list'+r.key+' tbody');tb.textContent='';r.points.forEach((p,i)=>{const tr=document.createElement('tr');const a=document.createElement('td');a.textContent=(i+1)+'.';const b=document.createElement('td');const ev=historicalEvidence[r.key+':'+i];b.textContent=p[0]+' — '+(ev?'extrait ancien identifié':'à localiser sur le plan');const button=document.createElement('button');button.type='button';button.textContent='Centrer';button.dataset.focusRoute=r.key;button.dataset.focusIndex=String(i);button.style.cssText='display:block;padding:3px 7px;margin-top:4px;font-size:11px';b.appendChild(button);tr.append(a,b);tb.append(tr)});
 }}
 function fit(){map.fitBounds(L.latLngBounds(routes.flatMap(r=>r.points.map(p=>[p[1],p[2]]))).pad(.12))}
 function show(){routes.forEach(r=>{if(document.getElementById('show'+r.key).checked){if(!map.hasLayer(layers[r.key]))layers[r.key].addTo(map)}else map.removeLayer(layers[r.key])});}
@@ -89,6 +111,7 @@ document.getElementById('export').addEventListener('click',()=>{
 const fc={type:'FeatureCollection',name:'PARISIS HUGO AXES — RECONSTITUTION SCHÉMATIQUE',features:routes.map(r=>({type:'Feature',properties:{id:'VH-AXE-'+r.key,title:r.name,source:'Victor Hugo, Notre-Dame de Paris, livre III chapitre II',caution:'Coordonnées modernes de travail. Tracé non géoréférencé à partir de plans de 1482.',points:r.points.map(p=>({name:p[0],lat:p[1],lon:p[2],accuracy:p[5],source:p[4]}))},geometry:{type:'LineString',coordinates:r.points.map(p=>[p[2],p[1]])}}))};
 const url=URL.createObjectURL(new Blob([JSON.stringify(fc,null,2)],{type:'application/geo+json'}));const a=document.createElement('a');a.href=url;a.download='parisis-hugo-deux-axes.geojson';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)
 });
-render();fit();
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-focus-route]');if(!b)return;const r=b.dataset.focusRoute,i=Number(b.dataset.focusIndex),point=routes.find(x=>x.key===r)?.points[i];if(!point)return;document.getElementById('show'+r).checked=true;show();map.flyTo([point[1],point[2]],16,{duration:.5});setTimeout(()=>pointMarkers[r+':'+i]?.openPopup(),550)});
+evidencePanel();render();fit();
 })();
 </script></body></html>
