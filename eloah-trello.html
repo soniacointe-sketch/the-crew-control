@@ -109,6 +109,47 @@ window.addEventListener('focus',()=>void checkCloudChanges());
 window.setInterval(()=>{if(!document.hidden)void checkCloudChanges()},45000);
 
 render();
+
+async function populateEloahBoards(){
+ const key='eloah-boards-content-applied-2026-10-14';
+ if(localStorage.getItem(key))return;
+ try{
+  const response=await fetch('eloah-boards-contenu-2026-10-14.json',{cache:'no-store'});
+  if(!response.ok)throw Error('Contenu non accessible');
+  const source=await response.json();
+  if(!Array.isArray(source.boards))throw Error('Contenu invalide');
+  const norm=v=>(v||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const group=v=>norm(v).includes('power glam')?'power glam':norm(v);
+  const updated=JSON.parse(JSON.stringify(data));
+  let added=0;
+  for(const imported of source.boards){
+   if(unwantedBoards.has(norm(imported.name)))continue;
+   let target=updated.boards.find(b=>group(b.name)===group(imported.name));
+   if(!target){target={id:imported.id,name:imported.name,lanes:[],cards:[]};updated.boards.push(target)}
+   const lanes=new Map();
+   for(const lane of imported.lanes){
+    let present=target.lanes.find(l=>l.id===lane.id)||target.lanes.find(l=>norm(l.name)===norm(lane.name));
+    if(!present){present={id:lane.id,name:lane.name};target.lanes.push(present)}
+    lanes.set(lane.id,present.id);
+   }
+   for(const card of imported.cards){
+    if(target.cards.some(c=>c.id===card.id||(norm(c.title)===norm(card.title)&&norm(c.description)===norm(card.description))))continue;
+    target.cards.push({...card,lane:lanes.get(card.lane)||target.lanes[0]?.id});added++;
+   }
+  }
+  if(added){
+   const when=new Date().toISOString();
+   localStorage.setItem('eloah-boards-backup-'+when.replace(/[:.]/g,'-'),JSON.stringify({at:when,reason:'Avant remplissage automatique',payload:data}));
+   localStorage.setItem(KEY,JSON.stringify(updated));
+   localStorage.setItem('eloah-boards-restored-at',when);
+   data=updated;
+  }
+  localStorage.setItem(key,'1');
+  render();
+  $('notice').textContent=added+' cartes de projets ajoutées à ELOAH · sauvegarde locale conservée.';
+ }catch(err){$('notice').textContent='Remplissage automatique non terminé : '+err.message}
+}
+void populateEloahBoards();
 const params=new URLSearchParams(location.search),targetBoard=params.get('board'),targetCard=params.get('card');
 if(targetBoard&&targetCard){const b=data.boards.find(x=>x.id===targetBoard),c=b?.cards?.find(x=>x.id===targetCard);if(b&&c){data.active=b.id;showArchive=!!c.archived;if(showArchive)$('archiveView').textContent='Cartes actives';$('search').value='';$('filterTag').value='';showingCalendar=false;save();render();openCard(c.id);history.replaceState(null,'',location.pathname)}} 
 </script></body></html>
