@@ -1,0 +1,30 @@
+(()=>{'use strict';
+if(new URLSearchParams(location.search).get('rubrique')!=='Mailing')return;
+const root=document.getElementById('mailing-dashboard');if(!root)return;
+const el=document.createElement('section');el.id='eloah-resend-campaign-control';
+el.style.cssText='background:#fff;color:#242426;border:1px solid #ddd6cd;border-radius:12px;padding:20px;margin:18px 0';
+el.innerHTML='<h2 style="font:28px Georgia,serif">Envoi réel · Campagnes Resend</h2><p>Créer, prévisualiser, tester et programmer une newsletter. Aucun envoi aux abonnés sans confirmation.</p><form id="erc-form" style="display:grid;gap:12px"><label>Liste <select id="erc-brand" style="display:block;padding:10px;width:100%"><option>The Crew Orchies</option><option>Power & Glam</option><option>Le Lion Blanc</option></select></label><label>Objet <input id="erc-subject" required maxlength="180" style="display:block;padding:10px;width:100%"></label><label>Texte d’aperçu <input id="erc-preview" maxlength="150" style="display:block;padding:10px;width:100%"></label><label>Newsletter <textarea id="erc-body" rows="10" required style="display:block;padding:10px;width:100%"></textarea></label><div style="display:flex;gap:8px;flex-wrap:wrap"><button type="button" id="erc-view">Aperçu</button><button type="button" id="erc-save">Créer le brouillon Resend</button><button type="button" id="erc-test">Envoyer un test à mon compte</button></div><div id="erc-preview-panel" hidden style="white-space:pre-wrap;background:#faf7f2;padding:18px;border:1px solid #ddd"></div><p id="erc-link"></p><label>Programmer pour (facultatif) <input type="datetime-local" id="erc-date"></label><label>Confirmation : saisir exactement <strong id="erc-required">ENVOYER The Crew Orchies</strong><input id="erc-confirm" autocomplete="off" style="display:block;padding:10px;width:100%"></label><button type="button" id="erc-send" disabled>Envoyer / Programmer la campagne</button><p role="status" id="erc-status"></p></form>';
+root.append(el);
+const q=id=>el.querySelector('#'+id),brand=q('erc-brand'),sub=q('erc-subject'),body=q('erc-body'),preview=q('erc-preview'),st=q('erc-status');
+const endpoint='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-mailing-resend',pub='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
+let draft='',savedFingerprint='',locked=false;
+function fingerprint(){return JSON.stringify([brand.value,sub.value,body.value,preview.value])}
+function buttons(){q('erc-required').textContent='ENVOYER '+brand.value;q('erc-send').disabled=!draft||fingerprint()!==savedFingerprint||locked||brand.value==='Le Lion Blanc';}
+function reset(){draft='';savedFingerprint='';q('erc-link').replaceChildren();buttons()}
+[brand,sub,body,preview].forEach(x=>x.addEventListener('input',reset));
+async function invoke(action,data={}){
+if(!window.supabase?.createClient)throw Error('Supabase indisponible');
+const client=window.supabase.createClient('https://voytsqyorhoveurnguxn.supabase.co',pub,{auth:{persistSession:true,autoRefreshToken:true}});
+const auth=await client.auth.getSession(),token=auth.data?.session?.access_token;if(!token)throw Error('Connecte-toi au compte ELOAH avant cette opération');
+const res=await fetch(endpoint,{method:'POST',headers:{Authorization:'Bearer '+token,apikey:pub,'Content-Type':'application/json'},body:JSON.stringify({action,...data})});
+const result=await res.json();if(!res.ok)throw Error(result.error||'Opération refusée');return result}
+q('erc-view').onclick=()=>{const panel=q('erc-preview-panel');panel.hidden=false;panel.textContent=brand.value+'\n\n'+sub.value+'\n\n'+body.value+'\n\nSe désabonner : lien ajouté par Resend';};
+q('erc-save').onclick=async()=>{if(locked)return;if(brand.value==='Le Lion Blanc'){st.textContent='Segment Le Lion Blanc non configuré dans Resend.';return}
+locked=true;buttons();try{const data=await invoke('broadcast-create',{brand:brand.value,subject:sub.value,body:body.value,preview:preview.value});if(!data.id)throw Error('Identifiant de brouillon absent');draft=data.id;savedFingerprint=fingerprint();const link=document.createElement('a');link.href='https://resend.com/broadcasts/'+draft;link.target='_blank';link.rel='noopener';link.textContent='Ouvrir le brouillon Resend ↗';q('erc-link').replaceChildren(link);st.textContent='Brouillon créé dans Resend. Aucun abonné contacté.';}catch(e){st.textContent=e.message}finally{locked=false;buttons()}};
+q('erc-test').onclick=async()=>{if(locked)return;locked=true;buttons();try{const cfg=brand.value==='The Crew Orchies'?'crew':null;if(!cfg)throw Error('Test disponible pour The Crew seulement, en attendant la validation de l’expéditeur des autres marques.');const data=await invoke('test',{listId:cfg,senderEmail:'newsletter@thecreworchies.blog',senderName:brand.value,subject:sub.value,body:body.value,replyTo:'newsletter@thecreworchies.blog'});st.textContent=data.message||'Test transmis au compte autorisé.';}catch(e){st.textContent=e.message}finally{locked=false;buttons()}};
+q('erc-send').onclick=async()=>{if(locked||!draft||fingerprint()!==savedFingerprint)return;const expected='ENVOYER '+brand.value;if(q('erc-confirm').value.trim()!==expected){st.textContent='Tape la confirmation exacte pour poursuivre.';return}
+const date=q('erc-date').value;const scheduledAt=date?new Date(date).toISOString():undefined;
+if(!window.confirm('Confirmer '+(date?'la programmation':'l’envoi')+' à toute la liste « '+brand.value+' » ?'))return;
+locked=true;buttons();try{const data=await invoke('broadcast-send',{brand:brand.value,broadcastId:draft,confirmation:expected,...(scheduledAt?{scheduledAt}:{})});st.textContent=data.status==='scheduled'?'Campagne programmée par Resend.':'Demande d’envoi acceptée par Resend.';draft='';}catch(e){st.textContent=e.message}finally{locked=false;buttons()}};
+buttons();
+})();
