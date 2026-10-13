@@ -9,7 +9,14 @@ function save(next){try{localStorage.setItem(key,JSON.stringify(next));rows=next
 function render(){
 const active=rows.filter(r=>!r.archived),today=new Date().toLocaleDateString('en-CA');
 $('#metrics').innerHTML=[['Éléments actifs',active.length],['Terminés',active.filter(r=>r.state==='Terminé').length],['Échéances dépassées',active.filter(r=>r.date&&r.date<today&&r.state!=='Terminé').length]].map(([l,n])=>'<div class="panel">'+l+'<strong>'+n+'</strong></div>').join('');
-$('#tabs').innerHTML=['Tous',...cfg.modules,'Archives'].map((x,i)=>'<button class="'+(view===x?'active':'')+'" data-view="'+esc(x)+'" aria-current="'+(view===x?'page':'false')+'">'+icon(i)+'<span>'+esc(x==='Tous'?'Toutes mes notes':x==='ELOAH Studio'?'ELOAH Studio':x)+'</span></button>').join('');
+$('#tabs').innerHTML=['Tous',...cfg.modules,'Archives'].map((x,i)=>{
+ if(x==='Analytics'){
+  const sub=new URLSearchParams(location.search).get('vue')||'dashboard';
+  const entries=[['dashboard','Dashboard Personnel','M3 3h7v7H3z M14 3h7v5h-7z M14 12h7v9h-7z M3 15h7v6H3z'],['projets','Métriques Projet','M4 20V10 M10 20V4 M16 20v-7 M22 20V9 M2 20h21'],['couts','Coûts & Performance','M3 4v16h18 M5 15l5-4 4 3 6-8 M16 6h4v4']];
+  return '<details class="eloah-analytics-side"'+(view==='Analytics'?' open':'')+'><summary aria-label="Dérouler Analytics">'+icon(i)+'<span>Analytics</span><span class="eloah-analytics-caret" aria-hidden="true">⌄</span></summary><div class="eloah-analytics-side-links">'+entries.map(([id,label,path])=>'<a href="eloah-partenaire.html?rubrique=Analytics&amp;vue='+id+'"'+(view==='Analytics'&&sub===id?' aria-current="page"':'')+'><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="'+path+'"/></svg><span>'+label+'</span></a>').join('')+'</div></details>';
+ }
+ return '<button class="'+(view===x?'active':'')+'" data-view="'+esc(x)+'" aria-current="'+(view===x?'page':'false')+'">'+icon(i)+'<span>'+esc(x==='Tous'?'Toutes mes notes':x==='ELOAH Studio'?'ELOAH Studio':x)+'</span></button>';
+}).join('');
 const q=$('#search').value.toLocaleLowerCase();
 const visible=rows.filter(r=>(view==='Archives'?r.archived:!r.archived)&&(view==='Tous'||view==='Archives'||r.module===view)&&[r.title,r.note,r.module].join(' ').toLocaleLowerCase().includes(q)).sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999'));
 $('#list').innerHTML=visible.length?visible.map(r=>'<article class="row"><h3>'+esc(r.title)+'</h3><div class="meta">'+esc(r.module==='ELOAH Studio'?'ELOAH Studio':r.module)+' · '+esc(r.state)+(r.date?' · '+esc(r.date):'')+'</div>'+(r.note?'<p>'+esc(r.note)+'</p>':'')+(r.url?'<p><a target="_blank" rel="noopener noreferrer" href="'+esc(r.url)+'">Ouvrir la ressource ↗</a></p>':'')+'<div class="actions"><button data-edit="'+esc(r.id)+'">Modifier</button><button data-archive="'+esc(r.id)+'">'+(r.archived?'Restaurer':'Archiver')+'</button></div></article>').join(''):'<div class="empty">Aucun élément ici. Ajoute ton premier projet, ta tâche ou ta note.</div>';
