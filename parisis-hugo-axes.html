@@ -156,7 +156,7 @@ if(candidates.length>4000)throw Error('Plus de 4000 éléments retenus : zone ou
 }
 cadastreOutline.clearLayers();
 if(candidates.length)cadastreOutline.addData({type:'FeatureCollection',features:candidates});
-cadastreOutline.bringToBack();
+cadastreOutline.eachLayer(layer=>{if(typeof layer.bringToBack==='function')layer.bringToBack()});
 if(!map.hasLayer(cadastreOutline))cadastreOutline.addTo(map);
 return {count:candidates.length,sourceCount:collection.features.length,bounds:'Île de la Cité et ses abords'};
 },
