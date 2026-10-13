@@ -436,12 +436,23 @@ function videoCatalog(){
 function scheduleStockThumbnails(){
  const el=one('.ecs-sidebody');if(!el||activeTab!=='videos')return;
  const items=[...el.querySelectorAll('video[data-thumb-src]')];
- if(!('IntersectionObserver' in window)){
-   items.slice(0,8).forEach(v=>{v.src=v.dataset.thumbSrc;v.preload='metadata';v.load()});return;
- }
+ const loadThumb=v=>{
+   if(v.getAttribute('src'))return;
+   const id=v.closest('[data-stock]')?.dataset.stock;
+   v.muted=true;v.playsInline=true;
+   v.addEventListener('loadedmetadata',()=>{
+     if(id&&Number.isFinite(v.duration))stockDuration.set(id,v.duration);
+     const label=v.closest('.ecs-video-open')?.querySelector('.ecs-video-duration');
+     if(label&&Number.isFinite(v.duration))label.textContent=audioDuration(v.duration);
+     try{v.currentTime=Math.min(.5,Math.max(0,(v.duration||1)-.1))}catch{}
+   },{once:true});
+   v.addEventListener('error',()=>{const card=v.closest('.ecs-video-card');if(card)card.classList.add('ecs-video-unavailable')},{once:true});
+   v.preload='metadata';v.src=v.dataset.thumbSrc;v.load();
+ };
+ if(!('IntersectionObserver' in window)){items.slice(0,6).forEach(loadThumb);return}
  const observer=new IntersectionObserver(entries=>{
-   for(const entry of entries)if(entry.isIntersecting){const v=entry.target;if(!v.src){v.src=v.dataset.thumbSrc;v.preload='metadata';v.load()}observer.unobserve(v)}
- },{root:el,rootMargin:'100px'});
+   for(const entry of entries)if(entry.isIntersecting){loadThumb(entry.target);observer.unobserve(entry.target)}
+ },{root:el,rootMargin:'60px'});
  items.forEach(item=>observer.observe(item));
 }
 function rememberStock(id){
@@ -453,7 +464,7 @@ function closeStockPreview(){
 }
 function openStockVideo(id){
  const c=videoStock.find(c=>c.id===id);if(!c)return;closeStockPreview();stockPreview=id;
- const dialog=document.createElement('div');dialog.className='ecs-video-modal';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Prévisualisation vidéo');
+ const dialog=document.createElement('div');dialog.className='ecs-video-modal';dialog.addEventListener('click',e=>{if(e.target===dialog)closeStockPreview()});dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Prévisualisation vidéo');
  dialog.innerHTML='<div class="ecs-video-modalbox"><div class="ecs-video-modalhead"><strong>'+xss(c.name)+'</strong><button type="button" data-stock-close aria-label="Fermer">✕</button></div><video controls playsinline preload="metadata" src="'+xss(c.url)+'"></video><p class="ecs-note">Source : Pexels · '+xss(c.format)+' · '+xss(c.size.toUpperCase())+'</p><div class="ecs-video-modalactions"><button type="button" data-stock-add="'+xss(c.id)+'">＋ Ajouter au Reel</button><a target="_blank" rel="noopener noreferrer" href="'+xss(c.page)+'">Voir la vidéo originale ↗</a></div><p class="ecs-note">Si la lecture ou l’importation sont bloquées, télécharge le MP4 depuis la page Pexels, puis importe-le dans ELOAH.</p></div>';
  root.append(dialog);
  const v=dialog.querySelector('video');
@@ -465,7 +476,7 @@ async function importStockVideo(id){
  toast('Importation de '+c.name+'…');
  try{
    // Limite de taille pour conserver un éditeur réactif sur mobile et PC.
-   const response=await fetch(c.url);
+   const response=await fetch(c.url,{mode:'cors'});
    if(!response.ok)throw Error('HTTP '+response.status);
    if(Number(response.headers.get('content-length')||0)>55*1024*1024)throw Error('Fichier volumineux');
    const blob=await response.blob();
@@ -607,7 +618,7 @@ canvas.addEventListener('pointermove',ev=>{if(!drag)return;const p=coords(ev),el
 });
 canvas.addEventListener('pointerup',()=>{if(drag){drag=null;renderSide();saveLocal()}});
 canvas.addEventListener('dblclick',ev=>{const p=coords(ev),e=[...S.elements].reverse().find(x=>x.kind==='text'&&p.x>=x.x&&p.x<=x.x+x.w&&p.y>=x.y&&p.y<=x.y+x.h);if(e){const t=prompt('Modifier le texte',e.text);if(t!==null){snapshot();e.text=t;selected=e.id;setTab('properties');saveLocal()}}});
-document.addEventListener('keydown',ev=>{if(root.style.display==='none'||!root.contains(document.activeElement)&&!canvas.matches(':hover'))return;if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();action('delete')}if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='z'){ev.preventDefault();ev.shiftKey?redo():undo()}});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&stockPreview){closeStockPreview();return}if(root.style.display==='none'||!root.contains(document.activeElement)&&!canvas.matches(':hover'))return;if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();action('delete')}if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='z'){ev.preventDefault();ev.shiftKey?redo():undo()}});
 // Montage manuel : glisser un clip pour le déplacer, tirer ses bords pour changer sa durée.
 one('#ecs-tracks').addEventListener('pointerdown',event=>{
  const button=event.target.closest('.ecs-clip[data-select]');if(!button)return;
