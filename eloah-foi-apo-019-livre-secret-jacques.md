@@ -4,7 +4,7 @@
 
 **Statut : dossier de recherche étayé par le témoin conservé et les éditions scientifiques ; certaines datations et interprétations restent débattues.**
 
-[← Retour aux 10 collections](foi-control.html?doc=10) · [Collection 08 · Nag Hammadi](foi-control.html?doc=18) · [Atlas général des apocryphes](eloah-apocryphes-atlas.html?q=Apocryphon%20of%20James) · [Photographie du manuscrit, page 1](https://ccdl.claremont.edu/digital/collection/nha/id/1829/rec/248)
+[← Retour aux 10 collections](foi-control.html?file=eloah-foi-collections-index.md) · [Collection 08 · Nag Hammadi](foi-control.html?file=eloah-foi-collection-08-nag-hammadi.md) · [Atlas général des apocryphes](eloah-apocryphes-atlas.html?q=Apocryphon%20of%20James) · [Photographie du manuscrit, page 1](https://ccdl.claremont.edu/digital/collection/nha/id/1829/rec/248)
 
 > **La question de ce premier dossier :** pourquoi un chrétien de l'Antiquité a-t-il imaginé une lettre de Jacques contenant un enseignement particulier de Jésus ressuscité, transmis à Jacques et Pierre ? Que nous apprend réellement le document sur la circulation des récits et sur l'autorité des disciples ?
 
@@ -247,4 +247,4 @@ Ces références sont à consulter en tant que **bibliographie scientifique**, n
 
 ---
 
-[← Retour à l'Atlas](eloah-apocryphes-atlas.html?q=Apocryphon%20of%20James) · [Ouvrir le manuscrit](https://www.gospels.net/manuscript) · [Continuer la bibliothèque Nag Hammadi](foi-control.html?doc=18)
+[← Retour à l'Atlas](eloah-apocryphes-atlas.html?q=Apocryphon%20of%20James) · [Ouvrir le manuscrit](https://www.gospels.net/manuscript) · [Continuer la bibliothèque Nag Hammadi](foi-control.html?file=eloah-foi-collection-08-nag-hammadi.md)
