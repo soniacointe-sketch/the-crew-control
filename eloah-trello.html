@@ -81,4 +81,6 @@ $('cloudDownload').onclick=async()=>{if(!cloud)return;try{const {data:{user},err
 $('cloudLogout').onclick=async()=>{if(cloud)await cloud.auth.signOut();refreshCloud()};
 if(cloud){cloud.auth.onAuthStateChange(()=>refreshCloud());refreshCloud()}
 render();
+const params=new URLSearchParams(location.search),targetBoard=params.get('board'),targetCard=params.get('card');
+if(targetBoard&&targetCard){const b=data.boards.find(x=>x.id===targetBoard),c=b?.cards?.find(x=>x.id===targetCard);if(b&&c){data.active=b.id;showArchive=!!c.archived;if(showArchive)$('archiveView').textContent='Cartes actives';$('search').value='';$('filterTag').value='';showingCalendar=false;save();render();openCard(c.id);history.replaceState(null,'',location.pathname)}} 
 </script></body></html>
