@@ -3,7 +3,7 @@ const help={"Mon Espace":"Tes fiches de préparation : priorités, briefs et pro
 const cfg=JSON.parse(document.getElementById('config').textContent),key='sonia-universe-v1-'+cfg.id;
 const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let storageReadable=true;
-let rows=[],view=new URLSearchParams(location.search).get('rubrique')||'Tous',editing=null;if(view!=='Tous'&&!cfg.modules.includes(view))view='Tous';
+let rows=[],view=new URLSearchParams(location.search).get('rubrique')||'Tous',editing=null;if(!['Tous','Archives',...cfg.modules].includes(view))view='Tous';
 try{rows=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(rows))throw Error();rows=rows.map(r=>({...r,module:r.module==='ITRIIA Studio'?'ELOAH Studio':r.module}))}catch(e){storageReadable=false;$('#status').textContent='Lecture du stockage impossible. Restaure une sauvegarde.';rows=[]}
 function save(next){try{localStorage.setItem(key,JSON.stringify(next));rows=next;$('#status').textContent='Enregistré sur ce navigateur.';render();return true}catch(e){$('#status').textContent='Enregistrement impossible : exporte tes données avant de fermer.';return false}}
 function render(){
