@@ -26,7 +26,7 @@
 </header>
 <p id="home-storage-status" class="home-status" role="status" hidden></p>
 <section id="mes-projets" class="section" aria-labelledby="home-projects-title">
-<div class="section-head"><div><h2 id="home-projects-title">Reprendre mes projets</h2><p>Les projets que tu as ouverts sur cet appareil.</p></div><a href="eloah-pilotage.html#mes-projets">Voir tous mes projets →</a></div>
+<div class="section-head"><div><h2 id="home-projects-title">Reprendre mes projets</h2><p>Accès à tes espaces essentiels et aux projets ouverts sur cet appareil.</p></div><a href="eloah-pilotage.html#mes-projets">Voir tous mes projets →</a></div>
 <div id="home-projects" class="project-grid" hidden></div>
 <div id="home-project-empty" class="empty-state"><div><strong>Ton premier projet commence ici.</strong><p>Un atelier à préparer, une idée à développer, un objectif personnel… Donne-lui un nom et commence à ton rythme.</p></div><button type="button" data-new-project>Créer mon premier projet</button></div>
 </section>
@@ -101,7 +101,17 @@ function getNotes(){const result=[];try{for(let i=0;i<localStorage.length;i++){c
 function element(tag,text,cls){const node=document.createElement(tag);if(text!==undefined)node.textContent=text;if(cls)node.className=cls;return node}
 function today(){const parts=new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/Paris',year:'numeric',month:'2-digit',day:'2-digit'}).formatToParts(new Date());const p=Object.fromEntries(parts.map(x=>[x.type,x.value]));return p.year+'-'+p.month+'-'+p.day}
 function dateLabel(date){if(!date)return 'Date à choisir';const [y,m,d]=date.split('-');return date===today()?'Aujourd’hui':d+'/'+m+'/'+y+(date<today()?' · date passée':'')}
-function renderProjects(){const host=$('home-projects');host.replaceChildren();host.hidden=!projects.length;$('home-project-empty').hidden=!!projects.length;for(const p of projects.slice(0,6)){const a=element('a',undefined,'project-link');a.href=projectURL(p.id);a.append(element('strong',p.name),element('span','Reprendre mon projet →'));host.append(a)}}
+function renderProjects(){
+ const host=$('home-projects');host.replaceChildren();
+ const shortcuts=[
+  {name:'ELOAH Boards',description:'Tous mes tableaux, cartes et projets.',url:'eloah-trello.html'},
+  {name:'Foi & spiritualité',description:'Le dossier de Sonia : textes, prières et recherches.',url:'foi-control.html?file=eloah-foi-dossier-personnel-complet.md'},
+  {name:'PARISIS Engine',description:'Enquêtes sur Paris, cartes et sources.',url:'eloah-parisis.html'}
+ ];
+ for(const p of shortcuts){const a=element('a',undefined,'project-link');a.href=p.url;a.append(element('strong',p.name),element('span',p.description));host.append(a)}
+ for(const p of projects.slice(0,6)){const a=element('a',undefined,'project-link');a.href=projectURL(p.id);a.append(element('strong',p.name),element('span','Reprendre mon projet →'));host.append(a)}
+ host.hidden=false;$('home-project-empty').hidden=true;
+}
 function renderActions(){const host=$('home-tasks');host.replaceChildren();host.hidden=!actions.length;$('home-tasks-empty').hidden=!!actions.length;for(const a of actions.slice(0,4)){const row=element('article',undefined,'task'),body=element('div'),link=element('a','Ouvrir →');body.append(element('strong',a.title),element('small',a.project+' · '+dateLabel(a.date)+' · '+a.status));link.href=a.old?'eloah-actions.html#pilotage':'eloah-pilotage.html?projet='+encodeURIComponent(a.project)+'#ops-calendar';link.setAttribute('aria-label','Ouvrir : '+a.title);row.append(body,link);host.append(row)}}
 const tools=[...document.querySelectorAll('[data-search-tool]')].map(a=>({title:a.closest('article').querySelector('h3').textContent,extra:a.dataset.searchTool,type:'Outil',url:a.getAttribute('href')}));
 const directory=[...$('home-directory').querySelectorAll('a')];
