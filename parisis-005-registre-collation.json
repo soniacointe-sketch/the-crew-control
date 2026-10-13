@@ -113,5 +113,24 @@
     "Sélectionner carte indépendante et points de calage fixes",
     "Estimer l'incertitude de transformation et effectuer mesure en Lambert-93",
     "Consigner les contre-exemples avant toute interprétation symbolique"
-  ]
+  ],
+  "vectorSources": [
+    {
+      "id": "ALPAGE-ROADS-BETHE-2011",
+      "identifier": "stanford-db591kz1574",
+      "title": "Vasserot Road Network (1810–1836)",
+      "author": "Anne-Laure Bethe",
+      "year": 2011,
+      "geometry": "LineString / MultiLineString après export GeoJSON de la couche linéaire",
+      "catalog": "https://geodiscovery.uwm.edu/catalog/stanford-db591kz1574",
+      "original": "https://purl.stanford.edu/db591kz1574",
+      "licence": "ODbL 1.0",
+      "currentStatus": "catalogue authentifié, téléchargement du fichier complet non obtenu dans cette session",
+      "geometryLoaded": false,
+      "historicalLinesMeasured": 0,
+      "historicControlPointsVerified": 0,
+      "notes": "Les distances à calculer sont celles du modèle vectoriel issu du géoréférencement moderne de feuilles de 1810–1836, non une preuve de conception symbolique. Ne pas substituer la couche polygonale homonyme de Paul Rouet."
+    }
+  ],
+  "nextAction": "Exporter la couche linéaire originale en GeoJSON EPSG:4326 via le catalogue, la charger dans l'atelier PARISIS SIG, conserver la provenance puis comparer aux cotes F/31 avant toute annonce de F2."
 }
