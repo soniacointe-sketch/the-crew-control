@@ -2,6 +2,10 @@
 
 ---
 
+![Illustration de recherche — Michel-Ange, *La Création d'Adam* : illustration renaissante de la lecture chrétienne, et non une représentation historique d'Adam.](https://commons.wikimedia.org/wiki/Special:FilePath/Creation_of_Adam_%28Michelangelo%29_Detail.jpg?width=1100)
+
+*Michel-Ange, *La Création d'Adam* : illustration renaissante de la lecture chrétienne, et non une représentation historique d'Adam. [Notice et crédits Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Creation_of_Adam_(Michelangelo)_Detail.jpg).*
+
 # Adam — Terre, souffle et conscience
 
 ## Comment l’humain devient un être vivant dans la Bible et le Coran
