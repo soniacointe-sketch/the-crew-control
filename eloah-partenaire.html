@@ -262,21 +262,144 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 #campaign-voice-note[data-brand=lion] strong{color:#834c3f}
 </style><style id="campaign-voice-upgrade-css">#campaign-form #campaign-expand-voice{align-self:flex-start;margin-top:7px;padding:11px 15px;border:1px solid #ad8090;border-radius:8px;background:#f8edf1;color:#813b54;font:600 12px/1.45 system-ui;cursor:pointer}#campaign-form #campaign-expand-voice[hidden]{display:none!important}</style><style id="eloah-subscription-offer-css">
 #eloah-subscription-board[hidden]{display:none!important}
-#eloah-subscription-board{margin:22px 0 32px;color:#242326}
-#eloah-subscription-board .subscription-intro{max-width:1100px;min-height:260px;padding:clamp(28px,5vw,65px);border:1px solid #e5ded7;border-radius:17px;background:#fdfaf6;box-shadow:0 9px 28px #34251d0b}
-#eloah-subscription-board .subscription-eyebrow{display:block;color:#95746c;letter-spacing:.17em;font:700 11px/1.5 system-ui;margin-bottom:15px}
-#eloah-subscription-board h2{font:normal clamp(34px,4.8vw,57px)/1.12 Georgia,'Times New Roman',serif;color:#201d22;margin:0 0 15px}
-#eloah-subscription-board .subscription-lead{font:clamp(16px,1.6vw,21px)/1.6 system-ui;color:#62565c;margin:0 0 31px;max-width:660px}
-#eloah-subscription-board .subscription-pending{display:flex;gap:9px;align-items:start;padding-top:18px;border-top:1px solid #e8e1df;max-width:710px;color:#8d8285;font:12px/1.7 system-ui}
-#eloah-subscription-board .subscription-pending span{color:#a27d89;font-size:17px}
-@media(max-width:620px){#eloah-subscription-board .subscription-intro{padding:25px 20px;min-height:230px}}
-</style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header><section id="eloah-subscription-board" hidden aria-labelledby="eloah-subscription-title">
-<div class="subscription-intro">
- <span class="subscription-eyebrow">ELOAH · ABONNEMENTS</span>
- <h2 id="eloah-subscription-title">Choisis ton offre</h2>
- <p class="subscription-lead">Fais grandir ton espace ELOAH au rythme de tes besoins.</p>
- <div class="subscription-pending" role="note"><span aria-hidden="true">◇</span> Les formules et leurs tarifs n’ont pas encore été renseignés. Aucun paiement ni changement d’abonnement n’est déclenché depuis cette page.</div>
-</div>
+#eloah-subscription-board{margin:0 auto 35px;color:#303136;font:14px/1.5 system-ui,-apple-system,"Segoe UI",Arial,sans-serif;width:100%;max-width:1300px}
+#eloah-subscription-board *{box-sizing:border-box}
+#eloah-subscription-board .eloah-plans-wrap{max-width:1110px;margin:0 auto;padding:32px clamp(10px,2vw,24px) 16px}
+#eloah-subscription-board .eloah-plans-heading{text-align:center;margin:8px 0 33px}
+#eloah-subscription-board .eloah-plans-eyebrow{display:none}
+#eloah-subscription-board .eloah-plans-heading h2{font:750 clamp(27px,3.3vw,37px)/1.2 system-ui,sans-serif;letter-spacing:-.045em;color:#252730;margin:0 0 10px}
+#eloah-subscription-board .eloah-plans-heading p{margin:0;color:#777783;font:15px/1.55 system-ui,sans-serif}
+#eloah-subscription-board .eloah-plans-summary{display:grid;grid-template-columns:170px minmax(0,1fr) minmax(0,1fr);gap:22px;align-items:center;background:#fff;border:1px solid #e0e2eb;border-radius:14px;padding:21px 24px;margin:0 0 30px;box-shadow:0 5px 15px #24304b08}
+#eloah-subscription-board .eloah-summary-plan span{display:block;font:12px/1.4 system-ui;color:#777884;margin-bottom:6px}
+#eloah-subscription-board .eloah-summary-plan small{font-weight:400;color:#9a9ca8}
+#eloah-subscription-board .eloah-summary-plan strong{display:block;font:700 20px system-ui;color:#292a34}
+#eloah-subscription-board .eloah-summary-metric{min-width:0}
+#eloah-subscription-board .eloah-summary-caption{display:flex;justify-content:space-between;gap:10px;align-items:end;color:#757580;font:12px system-ui;margin-bottom:9px}
+#eloah-subscription-board .eloah-summary-caption strong{font-weight:650;color:#454853;white-space:nowrap}
+#eloah-subscription-board .eloah-summary-track{width:100%;height:6px;border-radius:10px;background:#eceef2;overflow:hidden}
+#eloah-subscription-board .eloah-summary-track i{display:block;background:#3268c2;height:100%;border-radius:10px}
+#eloah-subscription-board .eloah-plans-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;align-items:stretch}
+#eloah-subscription-board .eloah-plan-card{display:flex;flex-direction:column;position:relative;min-width:0;min-height:392px;background:#fff;border:1px solid #dcdee9;border-radius:15px;padding:27px 23px 23px;box-shadow:0 3px 10px #27394e07}
+#eloah-subscription-board .eloah-plan-card.featured{border:1.6px solid #3765bd;box-shadow:0 4px 20px #2c5cbb12}
+#eloah-subscription-board .eloah-plan-popular{position:absolute;left:50%;transform:translateX(-50%);top:-13px;background:#3969bf;color:#fff;border-radius:999px;padding:5px 17px;white-space:nowrap;font:700 10px/1.5 system-ui;letter-spacing:.03em;box-shadow:0 3px 8px #3969bf33}
+#eloah-subscription-board .eloah-plan-card-head h3{font:700 18px/1.35 system-ui;margin:0 0 3px;color:#32343b}
+#eloah-subscription-board .eloah-plan-card-head p{margin:0;color:#858692;font:12px/1.45 system-ui}
+#eloah-subscription-board .eloah-plan-price{display:flex;gap:5px;align-items:baseline;margin:24px 0 21px;min-height:44px;color:#30313c}
+#eloah-subscription-board .eloah-plan-price strong{font:750 31px/1.2 system-ui;letter-spacing:-.03em}
+#eloah-subscription-board .eloah-plan-price span{font:12px system-ui;color:#838593}
+#eloah-subscription-board .eloah-plan-features{list-style:none;margin:0 0 27px;padding:0;display:grid;gap:13px;color:#4d4f5d;font:13px/1.45 system-ui}
+#eloah-subscription-board .eloah-plan-features li{display:grid;grid-template-columns:16px minmax(0,1fr);gap:7px;align-items:baseline}
+#eloah-subscription-board .eloah-plan-check{font:bold 15px system-ui;color:#326ac8}
+#eloah-subscription-board .eloah-plan-features .unavailable{color:#a0a1aa}
+#eloah-subscription-board .eloah-plan-features .unavailable span{color:#aeb0ba}
+#eloah-subscription-board .eloah-plan-button{display:block;min-height:43px;width:100%;margin-top:auto;padding:10px 13px;border-radius:9px;border:1.5px solid #5276c9;font:650 13px/1.4 system-ui;cursor:pointer;transition:background .16s,color .16s,transform .16s}
+#eloah-subscription-board .eloah-plan-button:hover{transform:translateY(-1px)}
+#eloah-subscription-board .eloah-plan-button.current{background:#eef0f4;border-color:#eef0f4;color:#5e6490;cursor:default;transform:none}
+#eloah-subscription-board .eloah-plan-button.secondary{background:white;color:#3860b5}
+#eloah-subscription-board .eloah-plan-button.secondary:hover{background:#edf3ff}
+#eloah-subscription-board .eloah-plan-button.primary{background:#326ac8;border-color:#326ac8;color:white}
+#eloah-subscription-board .eloah-plan-button.primary:hover{background:#2358b3}
+#eloah-subscription-board .eloah-plan-caption,#eloah-subscription-board .eloah-plans-footer{text-align:center;color:#9799a5;font:11px/1.6 system-ui;margin:17px auto 0;max-width:870px}
+#eloah-subscription-board .eloah-plans-footer{margin-top:9px}
+#eloah-subscription-board .eloah-plans-footer button{font:inherit;color:#596f9f;text-decoration:underline;background:transparent;border:0;cursor:pointer;padding:0}
+#eloah-subscription-dialog{width:min(92vw,485px);max-width:485px;padding:27px;border-radius:16px;border:1px solid #dfe4f2;box-shadow:0 18px 65px #131a3840;background:#fff;color:#313746}
+#eloah-subscription-dialog::backdrop{background:#0b193c70}
+#eloah-subscription-dialog .eloah-plan-dialog-head{display:flex;justify-content:space-between;align-items:center}
+#eloah-subscription-dialog .eloah-plan-dialog-icon{display:grid;place-items:center;width:34px;height:34px;border-radius:9px;background:#eaf0ff;color:#326ac8;font-size:19px}
+#eloah-subscription-dialog #eloah-plan-dialog-close{border:0;background:transparent;color:#737988;font-size:26px;cursor:pointer}
+#eloah-subscription-dialog h3{font:700 23px system-ui;margin:15px 0 9px}
+#eloah-subscription-dialog p{font:14px/1.65 system-ui;color:#5d6573}
+#eloah-subscription-dialog .eloah-plan-dialog-note{font:12px/1.6 system-ui;color:#7b8290;background:#f5f7fc;padding:11px;border-radius:8px}
+#eloah-subscription-dialog .eloah-plan-dialog-actions{display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap;margin-top:21px}
+#eloah-subscription-dialog .eloah-plan-dialog-actions button{border-radius:8px;padding:10px 13px;border:1px solid #cbd5ea;color:#375c9f;background:#fff;cursor:pointer;font:600 13px system-ui}
+#eloah-subscription-dialog .eloah-plan-dialog-actions #eloah-plan-dialog-done{background:#326ac8;border-color:#326ac8;color:#fff}
+@media(max-width:1030px){#eloah-subscription-board .eloah-plans-grid{gap:12px}#eloah-subscription-board .eloah-plan-card{padding:23px 16px 18px}#eloah-subscription-board .eloah-plans-summary{grid-template-columns:145px 1fr 1fr;gap:17px}}
+@media(max-width:760px){#eloah-subscription-board .eloah-plans-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto;gap:22px}#eloah-subscription-board .eloah-plan-card{min-height:310px;padding:25px}#eloah-subscription-board .eloah-plans-summary{grid-template-columns:1fr 1fr;gap:17px;padding:18px}#eloah-subscription-board .eloah-summary-plan{grid-column:1/-1;border-bottom:1px solid #e7eaf3;padding-bottom:10px}#eloah-subscription-board .eloah-plans-wrap{padding:24px 8px 10px}}
+@media(max-width:420px){#eloah-subscription-board .eloah-plans-summary{grid-template-columns:1fr}#eloah-subscription-board .eloah-summary-plan{grid-column:auto}#eloah-subscription-board .eloah-plans-heading p{font-size:14px}}
+</style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header>
+<section id="eloah-subscription-board" hidden aria-labelledby="eloah-subscription-title">
+  <div class="eloah-plans-wrap">
+    <header class="eloah-plans-heading">
+      <span class="eloah-plans-eyebrow">ELOAH · MON ABONNEMENT</span>
+      <h2 id="eloah-subscription-title">Choisis ton offre</h2>
+      <p>Fais grandir ton espace ELOAH au rythme de tes besoins.</p>
+    </header>
+    <div class="eloah-plans-summary" aria-label="Présentation de l'offre Découverte">
+      <div class="eloah-summary-plan">
+        <span>Offre affichée <small>· démonstration</small></span>
+        <strong>Découverte</strong>
+      </div>
+      <div class="eloah-summary-metric">
+        <div class="eloah-summary-caption"><span>Messages / mois</span><strong>≈ 30 inclus</strong></div>
+        <div class="eloah-summary-track" role="img" aria-label="Environ 30 messages mensuels inclus dans l'offre Découverte, usage réel non connecté"><i style="width:62%"></i></div>
+      </div>
+      <div class="eloah-summary-metric">
+        <div class="eloah-summary-caption"><span>Projets</span><strong>1 inclus</strong></div>
+        <div class="eloah-summary-track" role="img" aria-label="Un projet inclus, usage réel non connecté"><i style="width:35%"></i></div>
+      </div>
+    </div>
+    <div class="eloah-plans-grid" aria-label="Comparer les offres ELOAH">
+      <article class="eloah-plan-card" data-plan="decouverte">
+        <div class="eloah-plan-card-head">
+          <h3>Découverte</h3>
+          <p>Pour explorer ELOAH</p>
+        </div>
+        <div class="eloah-plan-price"><strong>0 €</strong></div>
+        <ul class="eloah-plan-features">
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>1 projet</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>≈ 30 messages / mois</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>Chat &amp; mémoire</li>
+          <li class="unavailable"><span aria-hidden="true">—</span>Studio, Coffre-fort, Connecteurs</li>
+        </ul>
+        <button class="eloah-plan-button current" type="button" data-eloah-plan="decouverte">Offre affichée</button>
+      </article>
+      <article class="eloah-plan-card" data-plan="entree">
+        <div class="eloah-plan-card-head">
+          <h3>Entrée</h3>
+          <p>Usage personnel régulier</p>
+        </div>
+        <div class="eloah-plan-price"><strong>14,90 €</strong><span>/ mois</span></div>
+        <ul class="eloah-plan-features">
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>Messages illimités*</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>Enveloppe LLM incluse*</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>Chat &amp; mémoire complets*</li>
+          <li class="unavailable"><span aria-hidden="true">—</span>Fonctions premium (Studio…)</li>
+        </ul>
+        <button class="eloah-plan-button secondary" type="button" data-eloah-plan="entree">Choisir Entrée</button>
+      </article>
+      <article class="eloah-plan-card featured" data-plan="partenaire">
+        <span class="eloah-plan-popular">✦ POPULAIRE</span>
+        <div class="eloah-plan-card-head">
+          <h3>Partenaire</h3>
+          <p>Pour créer et publier</p>
+        </div>
+        <div class="eloah-plan-price"><strong>69 €</strong><span>/ mois</span></div>
+        <ul class="eloah-plan-features">
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>Tout l’Entrée, sans limite*</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>ELOAH Studio (images + voix)*</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>Coffre-fort chiffré*</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>Connecteurs &amp; agents*</li>
+          <li><span class="eloah-plan-check" aria-hidden="true">✓</span>BYOK — ta clé, ta conso*</li>
+        </ul>
+        <button class="eloah-plan-button primary" type="button" data-eloah-plan="partenaire">Choisir Partenaire</button>
+      </article>
+    </div>
+    <p class="eloah-plan-caption">* Offres et fonctionnalités présentées d’après la maquette. Les limites, droits d’accès et tarifs sont à confirmer avant leur commercialisation.</p>
+    <p class="eloah-plans-footer">Paiement Stripe à configurer · Aucun prélèvement depuis cette page. <button id="eloah-manage-plan" type="button">Gérer mon abonnement ↗</button></p>
+  </div>
+  <dialog id="eloah-subscription-dialog" aria-labelledby="eloah-plan-dialog-title">
+    <div class="eloah-plan-dialog-head">
+      <span class="eloah-plan-dialog-icon" aria-hidden="true">✦</span>
+      <button id="eloah-plan-dialog-close" type="button" aria-label="Fermer">×</button>
+    </div>
+    <h3 id="eloah-plan-dialog-title">Offre ELOAH</h3>
+    <p id="eloah-plan-dialog-message"></p>
+    <p class="eloah-plan-dialog-note">Les abonnements ELOAH ne sont pas encore raccordés à des liens de paiement Stripe vérifiés. Ce choix ne déclenche aucune transaction et ne modifie pas ton abonnement.</p>
+    <div class="eloah-plan-dialog-actions">
+      <button id="eloah-plan-dialog-copy" type="button">Copier les détails</button>
+      <button id="eloah-plan-dialog-done" type="button">Compris</button>
+    </div>
+  </dialog>
 </section><section id="mailing-dashboard" hidden aria-label="Mailing & Newsletter"><nav class="mailing-nav" aria-label="Sections Mailing"><button type="button" data-mail-tab="listes" aria-selected="true">☷ Mes listes</button><button type="button" data-mail-tab="campagnes" aria-selected="false">✉ Campagnes</button><button type="button" data-mail-tab="quotas" aria-selected="false">▥ Quotas</button></nav><div class="mailing-content" data-mail-panel="listes"><div class="mailing-list-head"><h2 id="mailing-list-title">Mes listes (3)</h2><button type="button" id="mailing-new-list">＋ Nouvelle liste</button></div><p class="mailing-list-note">Effectifs de référence, non vérifiés : les noms ont été actualisés sans déplacer ni envoyer de contacts. Les contacts locaux et historiques existants restent conservés.</p><div id="mailing-list-cards"></div><div id="mailing-list-editor" hidden><h3>Nouvelle liste</h3><label>Nom de la liste<input id="mailing-list-name" maxlength="110"></label><label>Description<input id="mailing-list-desc" maxlength="220"></label><button type="button" id="mailing-list-save">Enregistrer la liste</button><button type="button" id="mailing-list-cancel">Annuler</button></div><div id="mailing-list-detail" hidden><button type="button" id="mailing-detail-back">← Mes listes</button><h3 id="mailing-detail-title"></h3><p id="mailing-detail-desc"></p><div id="mailing-contacts-area" hidden><div class="mailing-list-head"><h3 id="mail-contacts-title">Contacts (127)</h3><select id="mail-contact-filter" aria-label="Filtrer les contacts"><option value="all">Tous statuts</option><option value="enabled">Activés</option><option value="disabled">Désactivés</option><option value="blocklisted">Bloqués</option></select></div><div class="actions" style="margin:16px 0"><button type="button" id="mailing-export-contacts">⇩ Exporter</button><button type="button" id="mailing-import-csv">⇧ Importer</button><input id="mailing-import-file" type="file" accept=".csv,text/csv" hidden><button type="button" id="mail-history-btn">◷ Historique</button><button type="button" id="mail-show-add">＋ Ajouter</button></div><div id="mailing-contact-add-form" hidden><label>Adresse e-mail<input type="email" id="mailing-contact-email"></label><button type="button" id="mailing-contact-add">Enregistrer le contact</button></div><p id="mailing-import-result" role="status"></p><div class="mail-contact-table"><div class="mail-contact-head"><input type="checkbox" id="mail-select-all" aria-label="Sélectionner les contacts de cette page"><strong>Email</strong><strong>Statut</strong></div><div id="mailing-contacts-content"></div></div><div class="mailing-pager"><span><span id="mail-page-count">50 sur la page</span> · <span id="mail-selected-count">0 sélectionné(s)</span></span><div><button id="mail-prev" type="button">←</button><span id="mail-page">1 / 1</span><button id="mail-next" type="button">→</button></div></div><div id="mail-history-content" hidden><h4>Historique local</h4><p>Importations et modifications effectuées sur cet appareil.</p><div id="mail-history-list"></div></div></div><div id="mailing-compose-area" hidden><h4>Composer un message</h4><label>Objet<input id="mailing-compose-subject" maxlength="180"></label><label>Message<textarea id="mailing-compose-body" rows="7"></textarea></label><button type="button" id="mailing-compose-save">Enregistrer le brouillon</button><button type="button" id="mailing-compose-copy">Copier le message</button><p>Aucun envoi d'e-mail automatique n'est activé.</p></div><p id="mailing-action-status" role="status"></p></div></div><div class="mailing-content" data-mail-panel="campagnes" hidden><div class="mailing-list-head"><h2 id="campaign-title">Mes campagnes (18)</h2><div class="campaign-head-actions"><button type="button" id="campaign-demo-load">✦ Charger la newsletter Power &amp; Glam</button><button type="button" id="campaign-new">＋ Nouvelle campagne</button></div></div><p class="mailing-list-note" id="campaign-list-note">54 modèles éditoriaux au total, organisés par univers. Aucun envoi ni programmation automatique activée.</p><div id="campaign-filter-bar" class="campaign-filter-bar" role="group" aria-label="Afficher les campagnes par liste"><button type="button" data-campaign-filter="all" aria-pressed="true">Toutes · 54</button><button type="button" data-campaign-filter="Power & Glam" aria-pressed="false">Power &amp; Glam · 18</button><button type="button" data-campaign-filter="The Crew Orchies" aria-pressed="false">The Crew Orchies · 18</button><button type="button" data-campaign-filter="Le Lion Blanc" aria-pressed="false">Le Lion Blanc · 18</button></div><div id="campaign-list" class="campaign-library-list"><p>Aucune campagne importée dans ce navigateur.</p></div><form id="campaign-form" hidden aria-label="Composer une campagne"><div class="campaign-compose-top">
 <div class="campaign-compose-title"><span class="campaign-compose-symbol" aria-hidden="true">✉</span><h2>Composer une campagne</h2><span id="campaign-restored" hidden>✓ brouillon restauré</span></div>
 <p id="campaign-compose-note">Rédige et visualise ta newsletter avant de la sauvegarder ou de préparer son envoi.</p><div id="campaign-voice-note" class="campaign-voice-note" data-brand="pg"><strong id="campaign-voice-title">La lettre intime · Power &amp; Glam</strong><p id="campaign-voice-presentation">Une écriture adulte, sensuelle sans caricature, directe et nuancée.</p><small id="campaign-voice-caution">Aucune promesse de transformation miracle.</small></div><button type="button" id="campaign-demo-reload">✦ Préremplir l’essai éditorial Power &amp; Glam</button><button type="button" id="campaign-expand-voice" hidden>✍ Charger la version éditoriale développée</button><p id="campaign-demo-banner" role="status" hidden></p></div>
@@ -1217,5 +1340,40 @@ if(new URLSearchParams(location.search).get('newsletter')==='essai'&&!new URLSea
   banner.textContent='Un brouillon précédent a été restauré. Clique sur « Préremplir l’essai éditorial Power & Glam » pour charger notre exemple sans effacer ton brouillon sauvegardé.';
  }
 }
+})();
+</script><script id="eloah-plans-interactions">
+(()=>{'use strict';
+const board=document.getElementById('eloah-subscription-board');
+if(!board)return;
+const dialog=document.getElementById('eloah-subscription-dialog');
+const title=document.getElementById('eloah-plan-dialog-title');
+const message=document.getElementById('eloah-plan-dialog-message');
+const copy=document.getElementById('eloah-plan-dialog-copy');
+const plans={
+ decouverte:{name:'Découverte',price:'0 €',description:'Pour explorer ELOAH. Un projet, environ 30 messages par mois, chat et mémoire.'},
+ entree:{name:'Entrée',price:'14,90 €/mois',description:'Pour un usage personnel régulier. Offre indiquée sur la maquette : messages illimités, enveloppe LLM et mémoire enrichie.'},
+ partenaire:{name:'Partenaire',price:'69 €/mois',description:'Pour créer et publier. Offre indiquée sur la maquette : ELOAH Studio, coffre-fort, connecteurs, agents et BYOK.'}
+};
+let current='decouverte';
+function openOffer(id){
+ current=id;
+ const offer=plans[id];
+ title.textContent=id==='decouverte'?'Offre Découverte':id==='gestion'?'Gestion de mon abonnement':'Choisir '+offer.name;
+ message.textContent=id==='gestion'?'L’accès à l’abonnement réel et au portail client Stripe doit encore être relié à ton compte. Aucun forfait n’a été modifié.':
+ id==='decouverte'?'La formule Découverte est affichée pour reproduire ta maquette. Nous n’avons pas encore vérifié quel abonnement est réellement actif sur ton compte.':
+ offer.description+' Prix affiché : '+offer.price+'. Le paiement et l’attribution des droits seront activés une fois les liens Stripe et le suivi client configurés.';
+ copy.hidden=id==='gestion';
+ dialog.showModal();
+}
+board.querySelectorAll('[data-eloah-plan]').forEach(button=>button.addEventListener('click',()=>openOffer(button.dataset.eloahPlan)));
+document.getElementById('eloah-manage-plan').addEventListener('click',()=>openOffer('gestion'));
+document.getElementById('eloah-plan-dialog-close').addEventListener('click',()=>dialog.close());
+document.getElementById('eloah-plan-dialog-done').addEventListener('click',()=>dialog.close());
+dialog.addEventListener('click',ev=>{if(ev.target===dialog)dialog.close()});
+copy.addEventListener('click',async()=>{
+ const offer=plans[current];if(!offer)return;
+ const text=offer.name+' — '+offer.price+'\n'+offer.description+'\nOffre ELOAH proposée : paiement non activé.';
+ try{await navigator.clipboard.writeText(text);copy.textContent='Copié ✓'}catch{copy.textContent='Copie indisponible'}
+});
 })();
 </script></body></html>
