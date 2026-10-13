@@ -8,6 +8,12 @@
 
 > **La question de ce premier dossier :** pourquoi un chrétien de l'Antiquité a-t-il imaginé une lettre de Jacques contenant un enseignement particulier de Jésus ressuscité, transmis à Jacques et Pierre ? Que nous apprend réellement le document sur la circulation des récits et sur l'autorité des disciples ?
 
+## Lire le texte ancien en entier et collationner l'original
+
+**La traduction française complète des seize pages est maintenant disponible** : [Lire le Livre secret de Jacques en entier](foi-control.html?file=eloah-foi-apo-019-traduction-integrale.md). Il s'agit d'une version française de lecture établie avec l'aide de la traduction anglaise de Mattison, placée dans le domaine public, avec lacunes et notes. **Elle n'est pas une nouvelle édition du copte**.
+
+**Collation détaillée des pages 1–3** : [Comparer les lettres coptes, les lacunes et les éditions de 1968 et 1987](foi-control.html?file=eloah-foi-apo-019-collation-pages-1-3.md).
+
 ## 01 · Fiche d'identification et degré de preuve
 
 | Élément | Résultat contrôlé |
