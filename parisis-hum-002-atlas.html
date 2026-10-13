@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HUM-002 · Carte métrique Abel Gance · PARISIS ENGINE</title>
+<style>
+:root{color-scheme:light;--bg:#f4efe7;--paper:#fffdf9;--ink:#20352d;--line:#d9d6cc;--green:#1c6960;--amber:#ab783b}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 system-ui,-apple-system,Arial,sans-serif}
+main{max-width:1150px;margin:auto;padding:clamp(15px,3vw,38px)}
+a{color:#155c60}h1,h2{font-family:Georgia,serif;line-height:1.2}h1{font-size:clamp(32px,5vw,56px);margin:12px 0}h2{font-size:clamp(24px,3vw,35px)}
+header,.card{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:clamp(19px,3vw,38px);margin-bottom:16px}
+.eyebrow{font-size:11px;letter-spacing:.15em;font-weight:800;color:var(--green)}.sub{color:#65726a;font-size:13px}
+.toolbar{display:flex;flex-wrap:wrap;gap:9px;margin:15px 0}
+button{border:1px solid var(--line);background:#f5f6f0;padding:11px 15px;border-radius:99px;cursor:pointer;font-weight:700}
+button[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:#fff}
+figure{margin:0}svg{display:block;width:100%;height:auto;background:#f8f7f0;border:1px solid var(--line);border-radius:9px}svg text{font:15px system-ui;fill:#23332e;stroke:#f8f7f0;stroke-width:3.5px;paint-order:stroke fill}
+svg .tiny{font-size:12px}svg .guide{stroke:#e3e5dc;stroke-width:1}
+.table{overflow:auto}table{border-collapse:collapse;width:100%;min-width:560px}td,th{border-bottom:1px solid var(--line);text-align:left;padding:10px;vertical-align:top}th{background:#e9f1eb}
+p{max-width:83ch}code{background:#e9ece6;border-radius:5px;padding:3px 6px}
+.notice{background:#fff5e7;border-left:4px solid var(--amber);padding:16px;margin-top:15px}
+.actions a{display:inline-block;margin:5px 9px 5px 0;padding:8px 13px;border-radius:7px;border:1px solid #c9d4c9;text-decoration:none}
+@media(max-width:700px){svg{min-height:355px}.toolbar button{flex:1}header,.card{padding:18px}}
+</style></head>
+<body><main>
+<p><a href="parisis-hum-002-abel-gance.html">← Dossier Abel-Gance</a> · <a href="eloah-parisis.html">Retour PARISIS ENGINE</a></p>
+<header><div class="eyebrow">HUM-002 · GEOMETRY / ALIGN / AUDIT · 13 OCTOBRE 2026</div><h1>Deux axes, trois écarts</h1>
+<p>Reconstruction métrique reproductible des alignements décrits dans le <em>Parisis Code</em> (tome 1). Affichage à partir de points documentés mais hétérogènes : deux repères officiels de la Ville de Paris et cinq points cartographiques modernes. <strong>Ni intention historique ni alignement exact démontrés.</strong></p></header>
+<section class="card"><h2>Carte des deux hypothèses</h2>
+<div class="toolbar" role="group" aria-label="Choisir les axes">
+<button data-axis="all" aria-pressed="true">Les deux axes</button>
+<button data-axis="a" aria-pressed="false">A · Invalides</button>
+<button data-axis="b" aria-pressed="false">B · Louvre</button></div>
+<figure><svg id="map" viewBox="0 0 1100 650" role="img" aria-label="Carte métrique de deux axes géographiques et de leurs distances perpendiculaires.">
+<rect width="1100" height="650" fill="#f8f7f0"/><g id="back"></g><g id="lines"></g><g id="points"></g>
+<text class="tiny" x="85" y="37">Lambert-93 · EPSG:2154 · repères modernes</text>
+<path d="M85 597H235" stroke="#3c5147" stroke-width="4"/><text class="tiny" x="85" y="586">2 kilomètres</text>
+<path d="M1050 103v-43m0 0l-8 13m8-13l8 13" stroke="#3c5147" stroke-width="2"/><text x="1041" y="49" class="tiny">N</text>
+</svg><figcaption class="sub">L'échelle est métrique ; ce dessin ne représente ni la largeur réelle des rues ni les limites anciennes des bâtiments. Les traits pointillés marquent les écarts mesurés.</figcaption></figure>
+<div class="table"><table><thead><tr><th>Axe</th><th>Point intermédiaire</th><th>Longueur du segment</th><th>Écart latéral</th><th>Azimut</th></tr></thead><tbody id="values"></tbody></table></div>
+</section>
+<section class="card"><h2>Les sept points et leur statut</h2>
+<div class="table"><table><thead><tr><th>Lieu</th><th>Latitude</th><th>Longitude</th><th>Source</th></tr></thead><tbody id="coordinates"></tbody></table></div>
+<div class="actions"><a href="parisis-hum-002-reperes.csv">Données CSV ↗</a><a href="parisis-hum-002-mesures.py">Calcul Python reproductible ↗</a><a href="https://opendata.paris.fr/explore/dataset/denominations-emprises-voies-actuelles/">Ville de Paris · nomenclature officielle ↗</a></div>
+</section>
+<section class="card"><h2>La première objection à tester</h2>
+<p>Le centre actuel de la rue Abel-Gance n'est pas l'une des extrémités de sa voie de 190 mètres. Le point du Palais de Chaillot ne correspond pas à l'entrée historique du Musée du cinéma Henri-Langlois. Le point du Louvre provient d'un plan moderne et non d'un relevé officiel du centre de la pyramide. Le point des Arts et Métiers est un point de musée, pas son emprise bâtie.</p>
+<p>Un changement de point peut donc déplacer l'axe de plusieurs mètres. Les anciennes coordonnées encyclopédiques de la rue et du cours diffèrent respectivement d'environ <strong>8,4 m et 14,4 m</strong> des points de référence municipaux. Avec ces coordonnées alternatives, les écarts deviennent respectivement ~34,0 m aux Invalides, ~36,3 m au Louvre et ~128,4 m aux Arts et Métiers.</p>
+<div class="notice"><strong>F2 exploratoire, pas F2 historien validé.</strong> L'étape suivante nécessite les plans annexés de 1989, 1993 et 1999, la porte du musée de Chaillot à la date pertinente et des comparaisons avec des voies non sélectionnées pour leur ressemblance symbolique. Aucune probabilité de hasard chiffrée n'est revendiquée ici.</div>
+<div class="actions"><a href="https://rdf.archives-nationales.culture.gouv.fr/garance/entities/place/FRAN_RI_025-d3nz8d9ikq-19wf86uzuy1gu/">Rue Paris 1993 · Archives nationales ↗</a><a href="https://rdf.archives-nationales.culture.gouv.fr/garance/entities/place/FRAN_RI_025-d3nzdb354a-j1qkk9ceggo8/">Cours 1999 · Archives nationales ↗</a><a href="https://www.boulognebillancourt.com/fileadmin/medias/Publications/BBI/BBI_2021/BBI_Janv_2021_.pdf">Place Boulogne 1989 · mention municipale ↗</a><a href="https://archives.paris.fr/recherches/presentation-des-fonds/administration-communale/conseil-municipal-et-arretes-du-maire">Archives de Paris · dossiers préparatoires ↗</a></div></section>
+<p class="sub">PARISIS ENGINE · Aucun rapport supposé avec 4Q529. Une ressemblance ne démontre ni coordination ni intention.</p>
+</main>
+<script>
+const P={
+rue:{n:"Rue Abel-Gance",lat:48.83561484662868,lon:2.3737337039070483,x:654030.473113,y:6859689.163742,s:"Ville de Paris · 8783",ox:-158,oy:22},
+tombe:{n:"Tombeau de Napoléon",lat:48.85503,lon:2.31254,x:649557.604253,y:6861885.293853,s:"OSM node 11586646324",ox:-185,oy:24},
+chaillot:{n:"Palais de Chaillot",lat:48.86234,lon:2.28807,x:647769.493654,y:6862714.007890,s:"Mapcarta / GeoNames (pas entrée du musée)",ox:-140,oy:-16},
+place:{n:"Place Abel-Gance",lat:48.83374,lon:2.25783,x:645521.120279,y:6859554.422765,s:"OSM way 1101491520",ox:-8,oy:28},
+pyramide:{n:"Cour Napoléon",lat:48.861040,lon:2.335869,x:651274.949847,y:6862538.903060,s:"Plan Wikimedia · point approché",ox:20,oy:38},
+arts:{n:"Musée Arts et Métiers",lat:48.8661,lon:2.35541,x:652713.167743,y:6863089.653923,s:"OSM node 247618453",ox:20,oy:-15},
+cours:{n:"Cours du 7e Art",lat:48.87814319209955,lon:2.3868571719154783,x:655030.469038,y:6864410.402398,s:"Ville de Paris · 14744",ox:-152,oy:-15}};
+const CFG={a:{start:"rue",end:"chaillot",targets:["tombe"],color:"#166963"},b:{start:"place",end:"cours",targets:["pyramide","arts"],color:"#b17e35"}},svgNS="http://www.w3.org/2000/svg";
+function tag(where,name,attr,text){const n=document.createElementNS(svgNS,name);for(const [k,v] of Object.entries(attr))n.setAttribute(k,v);if(text)n.textContent=text;where.appendChild(n);return n}
+const toScreen=p=>({x:70+(p.x-644000)*.075,y:70+(6865500-p.y)*.075});
+function measure(a,b,p){const dx=b.x-a.x,dy=b.y-a.y,d=Math.hypot(dx,dy),t=((p.x-a.x)*dx+(p.y-a.y)*dy)/(d*d);return{d,offset:Math.abs(dx*(p.y-a.y)-dy*(p.x-a.x))/d,foot:{x:a.x+dx*t,y:a.y+dy*t},az:(Math.atan2(dx,dy)*180/Math.PI+360)%360};}
+const bg=document.getElementById("back");for(let x=100;x<1050;x+=150)tag(bg,"path",{d:"M"+x+" 60V600",class:"guide"});for(let y=100;y<600;y+=125)tag(bg,"path",{d:"M75 "+y+"H1040",class:"guide"});
+Object.values(P).forEach(p=>{const row=document.createElement("tr");for(const cell of [p.n,p.lat.toFixed(8),p.lon.toFixed(8),p.s]){const td=document.createElement("td");td.textContent=cell;row.appendChild(td)}document.querySelector("#coordinates").appendChild(row)});
+function redraw(which){const line=document.getElementById("lines"),pts=document.getElementById("points");line.replaceChildren();pts.replaceChildren();document.querySelector("#values").replaceChildren();let shown=new Set();
+for(const key of which==="all"?["a","b"]:[which]){const c=CFG[key],a=P[c.start],b=P[c.end],sa=toScreen(a),sb=toScreen(b);tag(line,"line",{x1:sa.x,y1:sa.y,x2:sb.x,y2:sb.y,stroke:c.color,"stroke-width":3.5});shown.add(c.start);shown.add(c.end);
+for(const id of c.targets){shown.add(id);const target=P[id],s=toScreen(target),m=measure(a,b,target),foot=toScreen(m.foot);tag(line,"line",{x1:s.x,y1:s.y,x2:foot.x,y2:foot.y,stroke:c.color,"stroke-width":2,"stroke-dasharray":"5 5"});const tr=document.createElement("tr");
+for(const txt of [key.toUpperCase(),target.n,(m.d/1000).toFixed(3)+" km",m.offset.toFixed(1)+" m",m.az.toFixed(2)+"°"]){const td=document.createElement("td");td.textContent=txt;tr.appendChild(td)}document.querySelector("#values").appendChild(tr);}
+}
+for(const id of shown){const p=P[id],s=toScreen(p);const isA=["rue","tombe","chaillot"].includes(id);tag(pts,"circle",{cx:s.x,cy:s.y,r:7,fill:isA?"#166963":"#b17e35",stroke:"#fff","stroke-width":2});const label=tag(pts,"text",{x:s.x+p.ox,y:s.y+p.oy},p.n);tag(label,"title",{},p.s)}
+document.querySelectorAll("[data-axis]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.axis===which)))}
+document.querySelectorAll("[data-axis]").forEach(btn=>btn.addEventListener("click",()=>redraw(btn.dataset.axis)));redraw("all");
+</script></body></html>
