@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1080" width="840" height="1080" role="img" aria-labelledby="title desc">
+<title id="title">Couverture ELOAH : ANGES ET ARCHANGES</title>
+<desc id="desc">Illustration vectorielle éditoriale créée pour le chapitre 06 du chemin spirituel ELOAH.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1c2d3a"/><stop offset="100%" stop-color="#12151c"/></linearGradient>
+ <radialGradient id="halo"><stop offset="0%" stop-color="#e3c98b" stop-opacity=".22"/><stop offset="73%" stop-color="#e3c98b" stop-opacity=".05"/><stop offset="100%" stop-color="#e3c98b" stop-opacity="0"/></radialGradient>
+ <pattern id="dots" patternUnits="userSpaceOnUse" width="26" height="26"><circle cx="5" cy="6" r="1" fill="#d9e3dc" opacity=".13"/></pattern>
+ <pattern id="lines" patternUnits="userSpaceOnUse" width="45" height="45" patternTransform="rotate(39)"><path d="M0 0V45" stroke="#d9e3dc" stroke-width=".8" opacity=".06"/></pattern>
+</defs>
+<rect width="840" height="1080" fill="url(#bg)"/>
+<rect width="840" height="1080" fill="url(#dots)"/>
+<rect width="840" height="1080" fill="url(#lines)"/>
+<circle cx="430" cy="520" r="410" fill="url(#halo)"/>
+<rect x="36" y="35" width="768" height="1010" fill="none" stroke="#e3c98b" stroke-width="2" opacity=".55"/>
+<path d="M76 119H765M76 925H765" stroke="#e3c98b" stroke-width="2" opacity=".55"/>
+<text x="80" y="96" fill="#d9e3dc" font-size="20" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">ELOAH · FOI &amp; SPIRITUALITÉ</text>
+<g transform="translate(420 502)"><path d="M0 0Q-75-195-290-220Q-220-70-82 35Q-220-32-305 17Q-210 143-70 102Q-124 160-150 230Q-13 183 0 57Q13 183 150 230Q124 160 70 102Q210 143 305 17Q220-32 82 35Q220-70 290-220Q75-195 0 0Z" fill="#e0dcc9" opacity=".75" stroke="#eddbab" stroke-width="6" stroke-linejoin="round"/><path d="M0-230V250M-35 165L0 240L35 165" fill="none" stroke="#f7dda1" stroke-width="10"/><circle cx="0" cy="-233" r="28" fill="#f7dda1" opacity=".6"/></g>
+<text x="78" y="980" fill="#d9e3dc" font-size="22" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">CHEMIN SPIRITUEL</text>
+<text x="770" y="1003" text-anchor="end" fill="#e3c98b" font-size="67" font-family="Georgia, serif" font-style="italic">06</text>
+</svg>
