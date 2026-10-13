@@ -27,7 +27,12 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <div class="actions"><button id="fit">Voir les deux tracés</button><button id="export">Exporter GeoJSON</button></div>
 <div class="notice"><strong>Point de méthode :</strong> les portes au nord représentées par des arcs actuels datent de 1672 et 1674. Leurs emplacements correspondent aux anciennes portes de l'enceinte de Charles V, mais il ne s'agit pas des bâtiments du roman. Les ponts actuels ont aussi été reconstruits. Les coordonnées des portions de rues sont indicatives.</div>
 </section>
-<section class="panel" id="fouquet-points">
+<section class="panel" id="trois-martyrs-points"><div class="kicker">NOUVEAU · ÉPIGRAPHIE & ICONOGRAPHIE</div><h2>Le réseau des trois martyrs</h2>
+<p>Quatre lieux de conservation ou d'origine, distincts de la porte médiévale et de la basilique déjà présentes dans les sept points royaux. <b>Chaque point indique un bâtiment, pas une position exacte de statue dans ce bâtiment.</b></p>
+<label class="row"><input type="checkbox" id="showSaints"> Afficher les 4 points iconographiques</label>
+<div class="actions"><button type="button" id="fitSaints">Voir les quatre lieux sur la carte</button><a class="back" href="parisis-axe-spirituel-nord-sud.html#enquete-trois-martyrs">Lire l'analyse détaillée ↗</a></div>
+<div class="notice"><b>Violet foncé :</b> Notre-Dame (portail ancien) et musée de Cluny (fragment original). <b>Vert :</b> Saint-Germain-l'Auxerrois (statues du XIXe siècle). <b>Bleu :</b> Louvre (relief du XIVe siècle provenant de l'abbaye de Saint-Denis). Aucun trait géométrique ne relie automatiquement les œuvres : leur lien est <b>iconographique et documentaire</b>.</div>
+<div id="saintsPointList"></div></section><section class="panel" id="fouquet-points">
 <div class="kicker">NOUVEAU · FOUQUET · BNF FR. 6465 F. 417R</div><h2>7 points du Paris royal</h2>
 <p><strong>Sept repères cartographiques</strong> pour distinguer les monuments représentés dans l'enluminure de Jean Fouquet, les anciennes portes successives et le lieu de sépulture royale. Une miniature <strong>n'est pas un relevé métrique</strong> : les points sont des localisations modernes de travail.</p>
 <label class="row"><input type="checkbox" id="showRoyal" checked> Afficher les points royaux en violet et or</label>
@@ -141,6 +146,38 @@ const royalPoints=[
 {id:'FQ-06',name:'Arc de la porte Saint-Denis · 1672',lat:48.86981,lng:2.35261,period:'Arc actuel · 1672',category:'later',detail:'Monument beaucoup plus récent, situé environ 60 mètres au nord de la porte médiévale représentée par Fouquet.',url:'https://armma.saprat.fr/monument/paris-porte-saint-denis/'},
 {id:'FQ-07',name:'Basilique de Saint-Denis',lat:48.935556,lng:2.359722,period:'Nécropole royale · bâtiment existant',category:'destination',detail:'Destination des cortèges funéraires royaux ; la relation cérémonielle à la porte Saint-Denis est attestée. Le segment de carte est une liaison géométrique, pas un relevé du parcours.',url:'https://www.saint-denis-basilique.fr/'}
 ];
+
+const iconoPoints=[
+{id:'SP-01',name:'Notre-Dame · portail Saint-Étienne',lat:48.85308737345562,lng:2.349922147855014,kind:'origine',date:'1258–1265 · portail du transept sud',detail:'Les témoins anciens y situent Denis, Rustique et Éleuthère. Décor très mutilé puis déposé pendant la Révolution. Localisation du portail issue de la Base Théophile.',source:'https://www.musee-moyenage.fr/media/documents-pdf/dossiers-de-presse/dp-faire-parler-les-pierres.pdf'},
+{id:'SP-02',name:'Musée de Cluny · fragment de Notre-Dame',lat:48.85055,lng:2.34447,kind:'conservation',date:'Statue sculptée 1258–1265 · découverte 1839',detail:'Statue Cl. 18651 attribuée avec réserve à Rustique OU Éleuthère. Exhumée rue de la Santé en 1839, auparavant à Notre-Dame. Emplacement actuel représenté au niveau du musée, non de la vitrine.',source:'https://sculpturesmedievales-cluny.fr/notices/notice.php?id=55'},
+{id:'SP-03',name:'Église Saint-Germain-l’Auxerrois · trois statues',lat:48.85946,lng:2.34162,kind:'moderne',date:'Œuvres du XIXe siècle · notice PM75000126',detail:'Trois statues en pierre identifiées Denis, Rustique et Éleuthère dans la chapelle Saint-Denis. Ces statues datent du XIXe siècle et ne proviennent pas de la porte médiévale.',source:'https://pop.culture.gouv.fr/notice/palissy/PM75000126'},
+{id:'SP-04',name:'Musée du Louvre · relief des trois saints',lat:48.860611,lng:2.337644,kind:'collection',date:'Vers 1300–1325 · RF 462 A / RF 2614',detail:'Fragment de retable en marbre de l’abbaye de Saint-Denis, possiblement issu de son autel matutinal. Conservé au Louvre, salle 205, aile Richelieu ; collection et provenance ne coïncident pas.',source:'https://collections.louvre.fr/ark:/53355/cl010092986'}
+];
+const saintLayer=L.layerGroup();
+const saintMarkers={};
+const iconoColors={origine:'#5c3779',conservation:'#7c568e',moderne:'#448264',collection:'#4267a0'};
+function renderSaints(){
+saintLayer.clearLayers();
+for(const p of iconoPoints){
+const marker=L.circleMarker([p.lat,p.lng],{radius:10,color:'#fffdfa',weight:3,fillColor:iconoColors[p.kind],fillOpacity:1}).addTo(saintLayer);
+marker.bindTooltip(p.id+' · '+p.name,{sticky:true});
+marker.bindPopup('<b>'+clean(p.name)+'</b><br>'+clean(p.date)+'<p>'+clean(p.detail)+'</p><a target="_blank" rel="noopener" href="'+p.source+'">Source officielle ↗</a>');
+saintMarkers[p.id]=marker;
+}
+}
+function toggleSaints(){const checked=document.getElementById('showSaints').checked;if(checked){if(!map.hasLayer(saintLayer))saintLayer.addTo(map)}else map.removeLayer(saintLayer);}
+function zoomSaints(){document.getElementById('showSaints').checked=true;toggleSaints();map.fitBounds(L.latLngBounds(iconoPoints.map(p=>[p.lat,p.lng]).concat([[royalPoints[0].lat,royalPoints[0].lng]])).pad(.24),{maxZoom:14});}
+function renderSaintList(){
+const parent=document.getElementById('saintsPointList');parent.textContent='';
+for(const p of iconoPoints){
+const wrap=document.createElement('div');wrap.className='street-study';
+const head=document.createElement('strong');head.textContent=p.id+' · '+p.name;wrap.append(head);
+const note=document.createElement('p');note.textContent=p.date+' — '+p.detail;wrap.append(note);
+const row=document.createElement('div');row.className='row';
+const a=document.createElement('a');a.href=p.source;a.target='_blank';a.rel='noopener';a.textContent='Fiche d’archive ↗';a.className='street-source';
+const btn=document.createElement('button');btn.type='button';btn.dataset.saintPoint=p.id;btn.textContent='Voir ce point';row.append(a,btn);wrap.append(row);parent.append(wrap);
+}
+}
 const royalLayer=L.layerGroup().addTo(map);
 const royalMarkers={};
 function royalColor(p){return p.category==='destination'?'#9a6e29':p.category==='later'?'#7c7e7b':p.category==='fouquet'?'#744591':'#8b6d8d';}
@@ -336,7 +373,10 @@ document.getElementById('showRoyal').addEventListener('change',showRoyalLayer);
 document.getElementById('fitRoyal').addEventListener('click',zoomRoyal);
 document.getElementById('fitParis').addEventListener('click',fit);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-royal-point]');if(!b)return;const id=b.dataset.royalPoint,p=royalPoints.find(x=>x.id===id);if(!p)return;document.getElementById('showRoyal').checked=true;showRoyalLayer();map.flyTo([p.lat,p.lng],p.category==='destination'?14:16,{duration:.65});setTimeout(()=>royalMarkers[id]?.openPopup(),700)});
-royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
-if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
+document.getElementById('showSaints').addEventListener('change',toggleSaints);
+document.getElementById('fitSaints').addEventListener('click',zoomSaints);
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-saint-point]');if(!b)return;const p=iconoPoints.find(x=>x.id===b.dataset.saintPoint);if(!p)return;document.getElementById('showSaints').checked=true;toggleSaints();map.flyTo([p.lat,p.lng],16,{duration:.5});setTimeout(()=>saintMarkers[p.id]?.openPopup(),550)});
+renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
+if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
 })();
 </script></body></html>
