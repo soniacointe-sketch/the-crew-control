@@ -11,6 +11,10 @@ Explore les apocryphes, les sources juives anciennes, les manuscrits bibliques e
 
 Ce registre différencie les **textes originaux effectivement récupérés** des anciens dossiers dont seul le titre ou la synthèse existe encore. Les photos de manuscrits non récupérées ne sont pas considérées comme sauvegardées.
 
+## Grand Livre des paraboles et métaphores de Jésus
+
+**44 analyses écrites + PAR-045 (la tête de la prophétie)** : [ouvrir le Grand Livre vivant](foi-control.html?file=eloah-foi-paraboles-grand-livre-44.md), [explorer les fiches interactives](eloah-foi-paraboles-lab.html) et [lire l'étude copte sur Jean et la prophétie](foi-control.html?file=eloah-foi-par-045-tete-prophetie.md). Les lectures sont documentaires, et non des éditions critiques grecques définitives.
+
 ## ATLAS GÉNÉRAL — Tous les apocryphes et documents associés
 
 **600 notices documentaires** sont désormais consultables dans l'[Atlas ELOAH des apocryphes](eloah-apocryphes-atlas.html) : 450 entrées du catalogue scientifique e-Clavis, 55 notices de versions coptes Brill, 74 repères pseudépigraphiques et 21 références liées aux livres deutérocanoniques et aux différents canons. Les catégories se recoupent : ce chiffre n'est pas un décompte d'œuvres distinctes. Recherche, filtres par familles, fiches, liens de sources et favoris locaux sont disponibles dans l'Atlas.
