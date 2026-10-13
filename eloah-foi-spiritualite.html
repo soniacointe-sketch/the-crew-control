@@ -41,40 +41,4 @@ else{view.innerHTML='<h2>Bibliothèque des sources</h2><p>Les références ci-de
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{current=Number(b.dataset.tab);render();window.scrollTo(0,0)});}
 render();renderPersonal();document.getElementById("personal-search").addEventListener("input",renderPersonal);document.getElementById("goto-dossiers").addEventListener("click",()=>{current=0;render();document.getElementById("view").scrollIntoView({behavior:"smooth"})});
 </script><script defer src="eloah-navigation.js?v=7"></script>
-<style>
-.foi-audio{display:flex;align-items:center;gap:10px;flex-wrap:wrap;background:#fffdf9;border:1px solid #c5ac85;border-radius:12px;padding:14px;margin:18px 0}
-.foi-audio select{width:auto;max-width:100%}.foi-audio button:disabled{opacity:.5;cursor:default}.foi-audio-status{flex-basis:100%;font-size:13px;color:#68645e}
-</style>
-<script>
-(()=>{
-'use strict';
-const view=document.getElementById('view');
-const bar=document.createElement('div');
-bar.className='foi-audio';
-bar.setAttribute('aria-label','Lecture à voix haute');
-bar.innerHTML='<button type="button" data-play>▶ Écouter le dossier</button><button type="button" data-pause disabled>⏸ Pause</button><button type="button" data-stop disabled>■ Arrêter</button><label>Vitesse <select data-rate><option value="0.85">Lente</option><option value="1" selected>Normale</option><option value="1.15">Rapide</option></select></label><label>Voix <select data-voice aria-label="Voix française"></select></label><span class="foi-audio-status" role="status" aria-live="polite">Écouter le dossier affiché ci-dessous.</span>';
-view.before(bar);
-const play=bar.querySelector('[data-play]'),pause=bar.querySelector('[data-pause]'),stop=bar.querySelector('[data-stop]'),rate=bar.querySelector('[data-rate]'),voice=bar.querySelector('[data-voice]'),status=bar.querySelector('[role=status]');
-if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){play.disabled=true;status.textContent='La lecture vocale n’est pas disponible dans ce navigateur.';return;}
-const synth=window.speechSynthesis;
-let voices=[],parts=[],index=0,run=0,active=false,paused=false,utterance=null;
-function loadVoices(){const previous=voice.value;voices=synth.getVoices().filter(v=>/^fr(?:-|_|$)/i.test(v.lang));voice.replaceChildren();voices.forEach((v,i)=>{const o=document.createElement('option');o.value=String(i);o.textContent=v.name;voice.append(o)});if(!voices.length){const o=document.createElement('option');o.value='';o.textContent='Français · voix par défaut';voice.append(o)}else if(previous && voices[Number(previous)])voice.value=previous;}
-loadVoices();synth.addEventListener('voiceschanged',loadVoices);
-function reset(message){run++;active=false;paused=false;synth.cancel();utterance=null;pause.disabled=true;stop.disabled=true;pause.textContent='⏸ Pause';status.textContent=message||'Lecture arrêtée.';}
-function readNext(token){if(token!==run||!active)return;if(index>=parts.length){reset('Lecture terminée.');return;}
-utterance=new SpeechSynthesisUtterance(parts[index]);utterance.lang='fr-FR';utterance.rate=Number(rate.value);const chosen=voices[Number(voice.value)];if(chosen)utterance.voice=chosen;
-utterance.onend=()=>{if(token!==run)return;index++;readNext(token)};
-utterance.onerror=e=>{if(token===run && e.error!=='canceled' && e.error!=='interrupted')reset('Lecture interrompue. Appuie sur Écouter pour réessayer.');};
-synth.speak(utterance);}
-function textOf(root){const copy=root.cloneNode(true);copy.querySelectorAll('button,input,textarea,select,label,script,style,.hide,[hidden],.foi-audio').forEach(n=>n.remove());copy.querySelectorAll('h1,h2,h3,p,article,div,summary,li,br').forEach(n=>n.append(document.createTextNode('\n')));return copy.textContent.replace(/\\n/g,' ').replace(/[ \t]+/g,' ').trim();}
-function start(root){reset();const text=textOf(root);parts=text.match(/[^.!?\n]{1,220}(?:[.!?]+|\s|$)|[^.!?\n]{1,220}/g)||[];parts=parts.map(s=>s.trim()).filter(Boolean);index=0;if(!parts.length){status.textContent='Aucun texte à lire dans cette rubrique.';return;}active=true;pause.disabled=false;stop.disabled=false;status.textContent='Lecture en cours…';readNext(run);}
-play.onclick=()=>start(view);
-pause.onclick=()=>{if(!active)return;if(paused){synth.resume();paused=false;pause.textContent='⏸ Pause';status.textContent='Lecture en cours…';}else{synth.pause();paused=true;pause.textContent='▶ Reprendre';status.textContent='Lecture en pause.';}};
-stop.onclick=()=>reset();
-function addPersonalButtons(){document.querySelectorAll('#personal-items details').forEach(detail=>{if(detail.querySelector('[data-read-rubric]'))return;const button=document.createElement('button');button.type='button';button.dataset.readRubric='';button.textContent='▶ Écouter cette rubrique';button.onclick=()=>{start(detail);bar.scrollIntoView({behavior:'smooth',block:'center'});};detail.querySelector('summary').after(button);});}
-addPersonalButtons();new MutationObserver(addPersonalButtons).observe(document.getElementById('personal-items'),{childList:true});
-new MutationObserver(()=>{if(active)reset('Dossier modifié. Appuie sur Écouter pour lire le texte affiché.');}).observe(view,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
-window.addEventListener('pagehide',()=>reset());
-})();
-</script>
-</body></html>
+<script defer src="eloah-foi-audio.js?v=1"></script></body></html>
