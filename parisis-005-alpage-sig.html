@@ -42,6 +42,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 28px;font-size:12px;color
 </section>
 <section class="panel" id="import"><div class="eyebrow">02 · CHARGER LE FICHIER VECTEUR</div><h2>Analyse géographique reproductible</h2>
 <p>Depuis le catalogue, utilisez l'option « Export GeoJSON », puis ouvrez ici le fichier obtenu. Les données ne sont pas transmises à un serveur par cette page : l'analyse est effectuée dans le navigateur.</p>
+<div class="notice" id="inputProvenance"><strong>Avant de charger :</strong> choisir la couche <em>linéaire</em> « Vasserot Road Network (1810–1836) » d'Anne-Laure Bethe, et non la couche polygonale homonyme de Paul Rouet. Le laboratoire accepte les lignes GeoJSON en WGS84 (EPSG:4326) ou Lambert-93 (EPSG:2154). Un système natif différent doit être reprojeté avant import. Le chargement du fichier n'est pas réalisé automatiquement ici.</div>
 <div class="flex" style="align-items:end">
 <label style="flex:2;min-width:260px" for="geojsonFile">Fichier GeoJSON du réseau de rues<input id="geojsonFile" type="file" accept=".geojson,.json,application/geo+json,application/json"></label>
 <label for="radius" style="min-width:170px">Rayon autour de l'Opéra<input id="radius" type="range" min="300" max="1400" step="100" value="700"><span id="radiusLabel" class="small">700 mètres</span></label>
@@ -63,7 +64,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 28px;font-size:12px;color
 <section class="panel" id="audit"><div class="eyebrow">03 · AUDIT ET PROCHAINES MESURES</div><h2>Du réseau vectorisé au test d'un alignement</h2>
 <p>La mesure d'une couche géographique et le test d'une hypothèse géométrique sont deux opérations distinctes. Pour tester l'Ankh autour du Palais Garnier, il faut d'abord identifier dans le livre les tronçons exacts retenus par son auteur. Puis les confronter à l'époque des voies, aux noms figurant sur les feuilles et à des points de contrôle sélectionnés avant le calcul.</p>
 <div class="scroll"><table><thead><tr><th>Élément</th><th>Situation</th><th>Conséquence</th></tr></thead><tbody>
-<tr><td>Réseau SIG ALPAGE</td><td>Fichier linéaire repéré dans deux catalogues universitaires.</td><td>Géométrie calculable après import.</td></tr>
+<tr><td>Réseau SIG ALPAGE</td><td>Couche linéaire repérée dans deux catalogues universitaires. Les données brutes ne sont pas encore importées ici.</td><td>Géométrie calculable après chargement réel du GeoJSON.</td></tr>
 <tr><td>Cotes F/31/75/26, 37, 38, 39</td><td>Références identifiées ; images pas encore collationnées sur les notices originales.</td><td>Toponymie locale et intersections non certifiées.</td></tr>
 <tr><td>Plan avant / après 1876</td><td>Sources historiques et géoréférencement postérieur repérés.</td><td>Superposition parcellaire de détail encore à effectuer.</td></tr>
 <tr><td>Figure du livre</td><td>Description textuelle connue, géométrie originale non fournie.</td><td>Il est interdit de sélectionner a posteriori les points pour « faire apparaître » l'Ankh.</td></tr>
@@ -71,6 +72,7 @@ footer{border-top:1px solid var(--line);padding:20px 0 28px;font-size:12px;color
 </tbody></table></div>
 <p><a href="parisis-vasserot-feuilles-audit.html">Ouvrir les quatre feuilles candidates et consigner des intersections vérifiées ↗</a></p>
 </section>
+<div class="notice"><strong>Référence scientifique :</strong> <a href="https://purl.stanford.edu/db591kz1574" target="_blank" rel="noopener">Bethe, Anne-Laure (2011), <em>Vasserot Road Network (1810–1836)</em>, ALPAGE ↗</a> · <a href="https://geodiscovery.uwm.edu/catalog/stanford-db591kz1574" target="_blank" rel="noopener">Métadonnées et export GeoJSON ↗</a>. Licence ODbL. La référence documentaire n'est pas une mesure.</div>
 <footer>PARISIS ENGINE · HUMANITIES LAB · PAR-ISIS-005. Analyse locale uniquement. Aucun tracé ni nombre de points de l'atlas central n'est modifié automatiquement. Données historiques ALPAGE : ODbL ; décrire précisément la couche et respecter sa licence en cas de redistribution.</footer>
 </main>
 <script>
@@ -85,7 +87,7 @@ const v=Math.log(Math.tan(Math.PI/4+phi/2)*Math.pow((1-e*Math.sin(phi))/(1+e*Mat
 const R=EARTH.C*Math.exp(-EARTH.n*v);
 return [EARTH.xs+R*Math.sin(EARTH.n*(L-EARTH.lon0)),EARTH.ys-R*Math.cos(EARTH.n*(L-EARTH.lon0))];
 };
-const center=lambert(48.8684,2.3335);
+const center=lambert(48.8719,2.3317);
 let json=null,result=null,filename='';
 const f2=(n)=>Number(n).toLocaleString('fr-FR',{maximumFractionDigits:1});
 function coord(value){
@@ -155,12 +157,12 @@ return 'M'+x1+' '+y1+'L'+x2+' '+y2;
 $('mapSvg').innerHTML='<rect width="700" height="700" fill="#f7f1e8"/><circle cx="350" cy="350" r="285" fill="#fcf8f0" stroke="#b99d75" stroke-width="2"/><path d="M350 65V635 M65 350H635" stroke="#ded1bc" stroke-width="1"/><path d="'+linePaths+'" stroke="#365f55" stroke-width="1.7" fill="none" stroke-linecap="round"/><circle cx="350" cy="350" r="6" fill="#a67d43"/><text x="360" y="339" font-size="14" fill="#6b573f">Opéra · repère central</text><text x="350" y="680" text-anchor="middle" font-size="14" fill="#655a4b">Rayon '+R+' m · Lambert-93 · couches historiques importées</text>';
 const max=Math.max(...histogram,1);
 $('hist').innerHTML=histogram.map((v,i)=>'<div class="histrow"><span>'+(i*22.5)+'–'+((i+1)*22.5)+'°</span><div class="bar"><span style="width:'+((v/max)*100).toFixed(1)+'%"></span></div><span>'+f2(v)+' m</span></div>').join('');
-status.textContent=f2(features)+' objets intersectent le périmètre, '+f2(length)+' m de longueurs cumulées et '+nSegments+' segments découpés. Résultats de calcul du modèle importé ; aucune intention historique inférée.';
+status.textContent=f2(features)+' objets intersectent le périmètre, '+f2(length)+' m de longueurs cumulées et '+nSegments+' segments découpés. '+(draw.length<nSegments?'Affichage limité aux '+draw.length+' premiers segments pour préserver la fluidité ; statistiques sur toutes les géométries. ':'')+'Résultats sur le fichier fourni ; sa provenance et l’intention historique ne sont pas vérifiées automatiquement.';
 exp.disabled=false;
 }
 file.addEventListener('change',async e=>{
 json=null;result=null;btn.disabled=true;exp.disabled=true;filename='';const f=e.target.files?.[0];if(!f)return;
-if(f.size>75*1024*1024){status.textContent='Fichier trop volumineux (limite 75 Mo). Préférez un export GeoJSON filtré.';return;}
+if(f.size>18*1024*1024){status.textContent='Fichier trop volumineux pour un téléphone (limite 18 Mo). Utilisez un export GeoJSON filtré au quartier de l’Opéra.';return;}
 try{
 const parsed=JSON.parse(await f.text());
 if(parsed?.type!=='FeatureCollection'||!Array.isArray(parsed.features))throw new Error('Une FeatureCollection GeoJSON est nécessaire.');
