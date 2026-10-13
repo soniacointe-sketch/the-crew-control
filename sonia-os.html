@@ -368,6 +368,101 @@ if(view==="members"&&(scope==="all"||scope==="crew")){
 }
 if(view==="overview"){h+='<div class="panel"><h2>Centre des opérations</h2><p class="muted">11 nouveaux registres intégrés aux sauvegardes et à la synchronisation cloud manuelle. Les automatismes sont des projets documentés, jamais des exécutions implicites.</p><div class="toolbar"><button class="btn secondary" data-road="projects">Projets & portefeuilles</button><button class="btn secondary" data-road="documents">Bibliothèque documentaire</button><button class="btn secondary" data-road="goals">Objectifs & indicateurs</button><button class="btn secondary" data-road="routines">Routines & procédures</button><button class="btn secondary" data-road="integrations">Connexions & services</button><button class="btn secondary" data-road="automationPlans">Automatisations & déclencheurs</button><button class="btn secondary" data-road="risks">Risques & incidents</button><button class="btn secondary" data-road="assets">Ressources & actifs</button><button class="btn secondary" data-road="procedures">Méthodes & règles</button><button class="btn secondary" data-road="journal">Journal des opérations</button><button class="btn secondary" data-road="backlog">Idées & laboratoire</button></div></div>';h+='<section class="panel"><h2>Ma maison numérique · Tous les univers</h2><div class="universe-grid">'+universes.map(([id,name,url,desc])=>'<a class="universe-card" href="./'+url+'"><b>'+esc(name)+'</b><small>'+esc(desc)+'</small><span>Ouvrir ↗</span></a>').join("")+'</div></section><section class="panel"><h2>Actions immédiates</h2><div class="toolbar"><button class="btn" data-road="missionDesk">Console AAF</button><button class="btn" data-road="tasks">Missions</button><button class="btn secondary" data-road="decisions">Validations AAF</button><button class="btn secondary" data-road="knowledge">Bibliothèque</button><button class="btn secondary" data-road="audits">Audits</button></div></section>';}
 if(view==="overview")h+="<div class=\"panel\"><h2>SONIA OS · Gouvernance et capacités</h2><div class=\"grid\"><div class=\"kpi\"><span class=\"muted\">Agents répertoriés</span><strong id=\"k-agents\">0</strong></div><div class=\"kpi\"><span class=\"muted\">Décisions à valider</span><strong id=\"k-decisions\">0</strong></div><div class=\"kpi\"><span class=\"muted\">Workflows testés</span><strong id=\"k-workflows\">0</strong></div><div class=\"kpi\"><span class=\"muted\">Audits ouverts</span><strong id=\"k-audits\">0</strong></div></div><div class=\"toolbar\"><button class=\"btn\" data-road=\"decisions\">Mes validations</button><button class=\"btn secondary\" data-road=\"agents\">Registre agents</button><button class=\"btn secondary\" data-road=\"roadmap\">Programme</button></div></div><div class=\"notice\">AAF · A0 observer · A1 analyser · A2 préparer · A3 exécuter uniquement avec un mandat explicite. Les niveaux sont documentaires, pas des contrôles techniques de permission.</div>";if(configs[view]&&view!=="transactions"&&view!=="contacts"&&view!=="members")h+='<div class="notice">Les entrées préremplies sont un inventaire de travail : les états et connexions doivent être vérifiés avant toute action réelle.</div>';document.getElementById("view").innerHTML=h;
+ if(view==="settings"){
+ const reviewedKey=prefix+"security_control_read_v1";
+ const readReviewed=()=>{try{const v=JSON.parse(localStorage.getItem(reviewedKey)||"{}");return v&&typeof v==="object"&&!Array.isArray(v)?v:{}}catch{return {}}};
+ const setText=(id,value)=>{const node=document.getElementById(id);if(node)node.textContent=String(value)};
+ function refreshReviewUI(){
+  const reviewed=readReviewed();
+  setText("securityReviewCount",securityControlCatalog.filter(x=>reviewed[x.id]).length);
+  document.querySelectorAll("[data-security-read]").forEach(label=>{
+   const has=Boolean(reviewed[label.dataset.securityRead]);
+   label.textContent=has?"Lu localement":"À examiner";
+   label.dataset.reviewed=has?"yes":"no";
+  });
+  document.querySelectorAll("[data-security-reviewed]").forEach(button=>{
+   button.textContent=reviewed[button.dataset.securityReviewed]?"Annuler « lu »":"Marquer lu";
+  });
+ }
+ function runSecuritySearch(){
+  const input=document.getElementById("securitySearch");
+  const term=String(input?.value||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr").trim();
+  let count=0;
+  document.querySelectorAll(".security-control").forEach(item=>{
+   const match=!term||String(item.dataset.securityIndex||"").includes(term);
+   item.hidden=!match;
+   if(match)count++;
+  });
+  securitySearch=input?.value||"";
+  setText("securityVisibleCount",count+" contrôle(s) affiché(s), 70 dans le catalogue complet.");
+ }
+ function prepareSecurityChat(item){
+  const chosen=item?[item]:securityControlCatalog.filter(x=>(scope==="all"||businessId(x.universe)===scope)&&(securityArea==="all"||x.category===securityArea)&&(!securitySearch.trim()||(x.universe+" "+x.title+" "+x.category+" "+x.goal+" "+x.proof).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr").includes(securitySearch.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr").trim())));
+  const lines=chosen.map((x,index)=>(index+1)+". "+x.title+" · "+x.universe+" · "+x.category+"\nBut : "+x.goal+"\nÀ vérifier : "+x.proof+"\nPériodicité indicative : "+x.frequency);
+  chatContextView="settings";chatContextScope=scope;chatMode.value="audit";
+  chatText.value=[
+   "SONIA OS — AUDIT DOCUMENTAIRE SÉCURITÉ & DONNÉES",
+   "Page : https://soniacointe-sketch.github.io/the-crew-control/sonia-os.html?section=settings",
+   "Périmètre : "+(item?item.universe+" / "+item.title:"Sélection visible dans le tableau de bord")+" ; "+chosen.length+" contrôle(s).",
+   "",
+   "Consigne : effectuer un audit réaliste de chaque point. Séparer les observations déjà appuyées par des preuves, les éléments manquants, les risques, les corrections réalisables et les validations à demander. Ne jamais déclarer qu'une politique RLS, un accès ou une sauvegarde est sécurisé sans test explicite. Les registres SONIA OS sont surtout locaux au navigateur ; les boutons JSON et Cloud ont été retirés. Les missions AAF ne permettent pas d'action externe.",
+   "",
+   ...lines,
+   "",
+   "Produire un rapport structuré : contrôle, gravité, preuve requise, procédure de test non destructive, constat vérifié, recommandation et prochaine action. Utilise GitHub et Supabase seulement si les accès et outils sont disponibles, et ne divulgue jamais de clés privées ou de données personnelles."
+  ].join("\n");
+  chatInfo.textContent="Prompt préparé, à relire. Le contenu transmis ne contient pas les fiches privées du navigateur.";
+  chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
+  chatComposer.showModal();
+ }
+ const category=document.getElementById("securityArea");
+ if(category)category.onchange=()=>{securityArea=category.value;render()};
+ const search=document.getElementById("securitySearch");
+ if(search){search.oninput=runSecuritySearch;runSecuritySearch()}
+ document.querySelectorAll("[data-security-reviewed]").forEach(button=>button.onclick=()=>{
+  const id=button.dataset.securityReviewed;
+  if(!securityControlCatalog.some(x=>x.id===id))return;
+  const values=readReviewed();
+  if(values[id])delete values[id];else values[id]=new Date().toISOString();
+  try{localStorage.setItem(reviewedKey,JSON.stringify(values))}
+  catch(error){alert("Impossible de mémoriser cette lecture sur l'appareil : "+(error.message||error));return}
+  refreshReviewUI();
+ });
+ document.querySelectorAll("[data-security-chat]").forEach(button=>button.onclick=()=>{
+  const item=securityControlCatalog.find(x=>x.id===button.dataset.securityChat);
+  if(item)prepareSecurityChat(item);
+ });
+ const batch=document.getElementById("securityPromptAll");if(batch)batch.onclick=()=>prepareSecurityChat(null);
+ document.querySelectorAll("[data-security-nav]").forEach(button=>button.onclick=()=>{const destination=button.dataset.securityNav;if(labels[destination]){view=destination;render()}});
+ const refresh=document.getElementById("securityRefresh");
+ async function collectSecuritySignals(){
+  if(refresh){refresh.disabled=true;refresh.textContent="Lecture en cours…"}
+  setText("securitySessionState","Vérification…");
+  setText("securityAAFState","Vérification…");
+  try{
+   const names=stores.filter(k=>{try{return localStorage.getItem(prefix+k)!==null}catch{return false}});
+   const bytes=names.reduce((sum,k)=>{try{return sum+(localStorage.getItem(prefix+k)||"").length*2}catch{return sum}},0);
+   setText("securityLocalModules",names.length);
+   setText("securityLocalState",names.length+" registres · environ "+(bytes/1024).toLocaleString("fr-FR",{maximumFractionDigits:1})+" Kio de texte");
+   if(names.length===0)setText("securityLocalState","Aucun registre enregistré ou stockage bloqué");
+  }catch(error){setText("securityLocalState","Lecture locale impossible");setText("securityLocalModules","—")}
+  try{
+   const {data,error}=await sb.auth.getUser();
+   if(error||!data?.user)throw Error("Pas de session valide");
+   setText("securitySessionState","Session valide · identité contrôlée par Supabase");
+   const {count,error:countError}=await sb.from("sonia_os_aaf_checks").select("id",{count:"exact",head:true});
+   if(countError)throw countError;
+   setText("securityAAFState",String(count??0)+" contrôles visibles depuis ce compte");
+  }catch(error){
+   if(document.getElementById("securitySessionState")?.textContent==="Vérification…")setText("securitySessionState","Session non vérifiée");
+   setText("securityAAFState","Lecture impossible ou accès restreint");
+  }finally{if(refresh?.isConnected){refresh.disabled=false;refresh.textContent="↻ Actualiser les constats (lecture seule)"}}
+ }
+ if(refresh)refresh.onclick=collectSecuritySignals;
+ refreshReviewUI();
+ collectSecuritySignals();
+}
+
  if(view==="routines"){
   const select=document.getElementById("routineRhythm");if(select)select.onchange=()=>{routineFrequency=select.value;render()};
   const batch=document.getElementById("routineBatch");if(batch)batch.onclick=()=>openRoutineOrder();
