@@ -1159,8 +1159,10 @@ function brandFonts(kit){
  return '<h3>Polices</h3><p class="ecs-note">Les polices sont celles disponibles dans le studio et sur ton appareil ; elles ne sont pas importées depuis Canva.</p>'+
  '<label class="ecs-sidelabel">Police des en-têtes</label><select data-brand-font="heading">'+Object.entries(fonts).map(([id,info])=>'<option value="'+id+'" '+(kit.heading===id?'selected':'')+'>'+xss(info.name)+'</option>').join('')+'</select>'+
  '<label class="ecs-sidelabel">Police du corps</label><select data-brand-font="body">'+Object.entries(fonts).map(([id,info])=>'<option value="'+id+'" '+(kit.body===id?'selected':'')+'>'+xss(info.name)+'</option>').join('')+'</select>'+
+ '<label class="ecs-sidelabel">Police d’accent</label><select data-brand-font="accent">'+Object.entries(fonts).map(([id,info])=>'<option value="'+id+'" '+((kit.accent||'hand')===id?'selected':'')+'>'+xss(info.name)+'</option>').join('')+'</select>'+
  '<div class="ecs-brand-font-example"><div style="font-family:'+(fonts[kit.heading]?.css||'Georgia,serif')+'">En-tête de marque</div>'+
- '<p style="font-family:'+(fonts[kit.body]?.css||'Arial,sans-serif')+'">Un texte clair et cohérent pour ton univers.</p></div>'+
+ '<p style="font-family:'+(fonts[kit.body]?.css||'Arial,sans-serif')+'">Un texte clair et cohérent pour ton univers.</p>'+
+ '<div style="font-family:'+(fonts[kit.accent]?.css||'cursive')+';font-size:26px">Une note personnelle</div></div>'+
  '<button class="ecs-brand-primary" data-brand-add-heading>＋ Insérer un titre avec cette police</button>';
 }
 function brandVoice(kit){
