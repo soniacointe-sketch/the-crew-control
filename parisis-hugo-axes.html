@@ -27,7 +27,13 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <div class="actions"><button id="fit">Voir les deux tracés</button><button id="export">Exporter GeoJSON</button></div>
 <div class="notice"><strong>Point de méthode :</strong> les portes au nord représentées par des arcs actuels datent de 1672 et 1674. Leurs emplacements correspondent aux anciennes portes de l'enceinte de Charles V, mais il ne s'agit pas des bâtiments du roman. Les ponts actuels ont aussi été reconstruits. Les coordonnées des portions de rues sont indicatives.</div>
 </section>
-<section class="panel" id="trois-martyrs-points"><div class="kicker">NOUVEAU · ÉPIGRAPHIE & ICONOGRAPHIE</div><h2>Le réseau des trois martyrs et l’Estrée</h2>
+<section class="panel" id="fouquet-panorama-points">
+<div class="kicker">AXE-011 · BNF FR. 6465 · FOLIO 57</div><h2>4 sites associés au panorama de Dagobert</h2>
+<p>La notice Biblissima du folio cite le Palais de la Cité, le Louvre et la tour de Nesle. Notre-Dame est également visible dans le paysage selon l'observation iconographique. <b>Ces repères ne sont pas les positions des silhouettes sur l'image :</b> ce sont des localisations de travail sur le plan actuel.</p>
+<label class="row"><input id="showPanorama" type="checkbox"> Montrer les quatre repères du panorama</label>
+<div class="actions"><button id="fitPanorama" type="button">Voir les quatre sites</button><a class="back" href="parisis-fouquet-panoramas.html#chapitre-panoramas">Comparer les deux peintures ↗</a></div>
+<div class="notice">La liste détaillée des monuments du Metropolitan Museum concerne une <b>autre miniature</b> de Fouquet. Nous ne l'avons pas recopiée comme preuve pour Dagobert. Aucun nouveau trait n'est dessiné entre ces quatre lieux.</div><div id="panoramaPointList"></div>
+</section><section class="panel" id="trois-martyrs-points"><div class="kicker">NOUVEAU · ÉPIGRAPHIE & ICONOGRAPHIE</div><h2>Le réseau des trois martyrs et l’Estrée</h2>
 <p>Cinq lieux documentaires : quatre lieux de conservation ou d’origine des œuvres et l’église actuelle Saint-Denys-de-l’Estrée. <b>Chaque point identifie un site actuel, pas l’emplacement précis d’une sculpture ni la position exacte de la chapelle du VIIe siècle.</b></p>
 <label class="row"><input type="checkbox" id="showSaints"> Afficher les 5 points iconographiques</label>
 <div class="actions"><button type="button" id="fitSaints">Voir les cinq lieux sur la carte</button><a class="back" href="parisis-axe-spirituel-nord-sud.html#enquete-trois-martyrs">Lire l'analyse détaillée ↗</a></div>
@@ -180,6 +186,37 @@ const note=document.createElement('p');note.textContent=p.date+' — '+p.detail;
 const row=document.createElement('div');row.className='row';
 const a=document.createElement('a');a.href=p.source;a.target='_blank';a.rel='noopener';a.textContent='Fiche d’archive ↗';a.className='street-source';
 const btn=document.createElement('button');btn.type='button';btn.dataset.saintPoint=p.id;btn.textContent='Voir ce point';row.append(a,btn);wrap.append(row);parent.append(wrap);
+}
+}
+
+const panoramaSites=[
+{id:'DP-01',name:'Notre-Dame de Paris',lat:48.852968,lng:2.349902,proof:'Lecture iconographique du folio 57, à confronter à la vue du Met',detail:'Cathédrale médiévale représentée dans plusieurs panoramas de Fouquet. Notre-Dame ne doit pas être localisée au pixel près d’après le folio.',source:'https://portail.biblissima.fr/fr/ark:/43093/ifdata12a65fb44254a2afe519a5ea480ac360b56dfb03'},
+{id:'DP-02',name:'Palais de la Cité',lat:48.85555,lng:2.34522,proof:'Lieu associé au folio par le catalogue Biblissima',detail:'Point placé dans l’ensemble historique du Palais de la Cité. Sa forme et ses tours au XVe siècle demandent une analyse plus précise de la miniature.',source:'https://portail.biblissima.fr/fr/ark:/43093/ifdata12a65fb44254a2afe519a5ea480ac360b56dfb03'},
+{id:'DP-03',name:'Château médiéval du Louvre',lat:48.860611,lng:2.337644,proof:'Lieu associé au folio par le catalogue Biblissima',detail:'Point général sur le site du Louvre, très transformé depuis le XVe siècle. Ce n’est pas une localisation de façade médiévale.',source:'https://portail.biblissima.fr/fr/ark:/43093/ifdata12a65fb44254a2afe519a5ea480ac360b56dfb03'},
+{id:'DP-04',name:'Tour de Nesle · édifice disparu',lat:48.85750,lng:2.337222,proof:'Lieu associé au folio par le catalogue Biblissima',detail:'La tour de Nesle se dressait sur la rive gauche près de l’Institut de France actuel. Ne pas confondre cette tour avec l’hôtel de Nesle, point de vue du panorama du Met.',source:'https://portail.biblissima.fr/fr/ark:/43093/ifdata12a65fb44254a2afe519a5ea480ac360b56dfb03'}
+];
+const panoramaLayer=L.layerGroup(),panoramaMarkers={};
+function drawPanoramaSites(){
+panoramaLayer.clearLayers();
+for(const p of panoramaSites){
+const m=L.circleMarker([p.lat,p.lng],{radius:9,weight:2,color:'#fffdf9',fillColor:'#2e7081',fillOpacity:1}).addTo(panoramaLayer);
+m.bindTooltip(p.id+' · '+p.name,{sticky:true});
+m.bindPopup('<b>'+clean(p.name)+'</b><p>'+clean(p.proof)+'</p><p>'+clean(p.detail)+'</p><a target="_blank" rel="noopener" href="'+p.source+'">Biblissima · source du folio ↗</a>');
+panoramaMarkers[p.id]=m;
+}
+}
+function showPanorama(){const checked=document.getElementById('showPanorama').checked;if(checked){if(!map.hasLayer(panoramaLayer))panoramaLayer.addTo(map)}else map.removeLayer(panoramaLayer);}
+function zoomPanorama(){document.getElementById('showPanorama').checked=true;showPanorama();map.fitBounds(L.latLngBounds(panoramaSites.map(p=>[p.lat,p.lng])).pad(.34),{maxZoom:14});}
+function renderPanoramaList(){
+const el=document.getElementById('panoramaPointList');el.textContent='';
+for(const p of panoramaSites){
+const wrap=document.createElement('div');wrap.className='street-study';
+const heading=document.createElement('strong');heading.textContent=p.id+' · '+p.name;wrap.appendChild(heading);
+const para=document.createElement('p');para.textContent=p.proof+' — '+p.detail;wrap.appendChild(para);
+const row=document.createElement('div');row.className='row';
+const link=document.createElement('a');link.href=p.source;link.target='_blank';link.rel='noopener';link.className='street-source';link.textContent='Voir la source ↗';
+const button=document.createElement('button');button.type='button';button.textContent='Placer au centre';button.dataset.panoramaPoint=p.id;
+row.append(link,button);wrap.appendChild(row);el.appendChild(wrap);
 }
 }
 const royalLayer=L.layerGroup().addTo(map);
@@ -380,7 +417,10 @@ document.addEventListener('click',e=>{const b=e.target.closest('button[data-roya
 document.getElementById('showSaints').addEventListener('change',toggleSaints);
 document.getElementById('fitSaints').addEventListener('click',zoomSaints);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-saint-point]');if(!b)return;const p=iconoPoints.find(x=>x.id===b.dataset.saintPoint);if(!p)return;document.getElementById('showSaints').checked=true;toggleSaints();map.flyTo([p.lat,p.lng],16,{duration:.5});setTimeout(()=>saintMarkers[p.id]?.openPopup(),550)});
-renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
-if(new URLSearchParams(location.search).get('estree')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Vue Saint-Denis : plan de Paris 1551 masqué car hors couverture.';zoomEstree();}else if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
+document.getElementById('showPanorama').addEventListener('change',showPanorama);
+document.getElementById('fitPanorama').addEventListener('click',zoomPanorama);
+document.addEventListener('click',e=>{const b=e.target.closest('button[data-panorama-point]');if(!b)return;const p=panoramaSites.find(x=>x.id===b.dataset.panoramaPoint);if(!p)return;document.getElementById('showPanorama').checked=true;showPanorama();map.flyTo([p.lat,p.lng],15,{duration:.55});setTimeout(()=>panoramaMarkers[p.id]?.openPopup(),580)});
+drawPanoramaSites();renderPanoramaList();renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
+if(new URLSearchParams(location.search).get('fouquetparis')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Panorama Fouquet : fond moderne, sites du folio 57 marqués comme indices, pas comme superposition métrique.';zoomPanorama();}else if(new URLSearchParams(location.search).get('estree')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Vue Saint-Denis : plan de Paris 1551 masqué car hors couverture.';zoomEstree();}else if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
 })();
 </script></body></html>
