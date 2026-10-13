@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1080" width="840" height="1080" role="img" aria-labelledby="title desc">
+<title id="title">Couverture ELOAH : JÉSUS-CHRIST</title>
+<desc id="desc">Illustration vectorielle éditoriale créée pour le chapitre 02 du chemin spirituel ELOAH.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#453023"/><stop offset="100%" stop-color="#12151c"/></linearGradient>
+ <radialGradient id="halo"><stop offset="0%" stop-color="#ebcf99" stop-opacity=".22"/><stop offset="73%" stop-color="#ebcf99" stop-opacity=".05"/><stop offset="100%" stop-color="#ebcf99" stop-opacity="0"/></radialGradient>
+ <pattern id="dots" patternUnits="userSpaceOnUse" width="26" height="26"><circle cx="5" cy="6" r="1" fill="#b8a184" opacity=".13"/></pattern>
+ <pattern id="lines" patternUnits="userSpaceOnUse" width="45" height="45" patternTransform="rotate(39)"><path d="M0 0V45" stroke="#b8a184" stroke-width=".8" opacity=".06"/></pattern>
+</defs>
+<rect width="840" height="1080" fill="url(#bg)"/>
+<rect width="840" height="1080" fill="url(#dots)"/>
+<rect width="840" height="1080" fill="url(#lines)"/>
+<circle cx="430" cy="520" r="410" fill="url(#halo)"/>
+<rect x="36" y="35" width="768" height="1010" fill="none" stroke="#ebcf99" stroke-width="2" opacity=".55"/>
+<path d="M76 119H765M76 925H765" stroke="#ebcf99" stroke-width="2" opacity=".55"/>
+<text x="80" y="96" fill="#b8a184" font-size="20" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">ELOAH · FOI &amp; SPIRITUALITÉ</text>
+<g transform="translate(420 502)"><circle cx="0" cy="-72" r="126" fill="#e9c47e" opacity=".35"/><path d="M-320 190Q-80-50 90 110Q200-5 320 75V290H-320Z" fill="#6e5440" opacity=".9"/><path d="M-260 205Q-60 90 135 210" stroke="#f1dfc1" stroke-width="7" fill="none"/><path d="M170 193V-190M170-130L104-169M170-65L249-117M170 15L105-55M170 82L247 20" stroke="#d9c695" stroke-width="11" stroke-linecap="round"/><ellipse cx="105" cy="-175" rx="24" ry="10" transform="rotate(-35 105 -175)" fill="#d8c391"/><ellipse cx="250" cy="-116" rx="23" ry="10" transform="rotate(35 250 -116)" fill="#d8c391"/></g>
+<text x="78" y="980" fill="#b8a184" font-size="22" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">CHEMIN SPIRITUEL</text>
+<text x="770" y="1003" text-anchor="end" fill="#ebcf99" font-size="67" font-family="Georgia, serif" font-style="italic">02</text>
+</svg>
