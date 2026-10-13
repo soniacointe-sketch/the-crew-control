@@ -383,7 +383,7 @@ function renderArticleFrame(i){
    for(const other of related){
      const a=link("foi-control.html?file="+encodeURIComponent(other.d[1]),"");
      const small=document.createElement("small");small.textContent=label;
-     const strong=document.createElement("strong");strong.textContent=other.d[0];a.append(small,strong);list.append(a);
+     const strong=document.createElement("strong");strong.textContent=other.d[0];a.append(small,strong);a.onclick=e=>{e.preventDefault();openDoc(other.index)};list.append(a);
    }
    section.append(list);article.append(section);
  }
