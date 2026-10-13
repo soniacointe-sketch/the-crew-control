@@ -293,16 +293,44 @@ function illustrationCatalog(){
  return header+(recent.length?illustrationSection('Utilisés récemment',recent.slice(0,8),'recent'):'')+illustrationGroups.map(([title,ids],i)=>illustrationSection(title,ids,'g'+i)).join('')+
  '<p class="ecs-note ecs-ill-license">Illustrations vectorielles originales ELOAH : tu peux les déplacer, les redimensionner, modifier leur couleur et les animer dans ton montage. Elles sont intégrées aux exports.</p>';
 }
+let animationView='home',animationSearch='';
+function stickerCard(a){
+ const lib=window.ELOAHAnimations;
+ const src=lib?.uri(a.id,a.color)||'';
+ return '<button type="button" class="ecs-anim-card" data-sticker="'+xss(a.id)+'" data-search="'+xss((a.name+' '+a.group).toLocaleLowerCase('fr'))+'" title="Ajouter '+xss(a.name)+'"><span class="ecs-anim-stage '+xss(a.motion)+'"><img src="'+src+'" alt="" loading="lazy" decoding="async"></span><span class="ecs-anim-cardlabel">'+xss(a.name)+'</span><span class="ecs-anim-add" aria-hidden="true">＋</span></button>';
+}
+function stickerSection(title,items,id){
+ if(!items.length)return '';
+ return '<section class="ecs-anim-section" data-anim-section><div class="ecs-sectiontitle"><strong>'+xss(title)+'</strong><button type="button" data-animation-group="'+xss(id)+'">Afficher tout →</button></div><div class="ecs-anim-strip">'+items.map(stickerCard).join('')+'</div></section>';
+}
+function stickerAnimations(){
+ const lib=window.ELOAHAnimations;
+ if(!lib)return '<div class="ecs-empty">Chargement de la bibliothèque Animations… Actualise la page si elle n’apparaît pas.</div>';
+ const recent=S.elements.filter(e=>e.kind==='sticker').slice(-16).reverse().map(e=>lib.byId.get(e.variant)).filter(Boolean);
+ const head='<div class="ecs-audio-header"><button type="button" data-cat="overview" aria-label="Retour aux éléments">←</button><strong>Animations</strong></div><div class="ecs-search"><span>＋</span><input id="ecs-animation-search" placeholder="Rechercher des animations" autocomplete="off" aria-label="Rechercher des animations" value="'+xss(animationSearch)+'"><span>⌕</span></div>';
+ const selectedElement=S.elements.find(e=>e.id===selected);
+ const controls=selectedElement?
+ '<div class="ecs-anim-controls"><strong>Animer l’élément sélectionné</strong><p class="ecs-note">Choisis un effet, puis lance ▶ pour voir le mouvement.</p><div class="ecs-anim-effects">'+[['pulse','Pulsation'],['float','Flottement'],['bounce','Rebond'],['wobble','Oscillation'],['rotate','Rotation'],['twinkle','Clignotement'],['none','Sans effet']].map(([val,label])=>'<button data-apply-motion="'+val+'" type="button">'+label+'</button>').join('')+'</div></div>':
+ '<p class="ecs-note ecs-anim-tip">Clique sur une vignette pour ajouter un élément animé. Ensuite, modifie son mouvement et sa vitesse dans les propriétés.</p>';
+ if(animationView!=='home'){
+  const recentView=animationView==='recent',ix=Number(animationView.slice(1)),group=lib.grouped[ix];
+  const items=recentView?recent:(group?.entries||[]).map(e=>lib.byId.get(e.id)).filter(Boolean);
+  return head+'<button class="ecs-els-back" data-animation-group="home">← Toutes les animations</button><h3 class="ecs-panelheading">'+xss(recentView?'Utilisés récemment':group?.group||'Animations')+'</h3><div class="ecs-anim-grid">'+items.map(stickerCard).join('')+'</div>'+controls;
+ }
+ return head+(recent.length?stickerSection('Utilisés récemment',recent.slice(0,10),'recent'):'')+
+ lib.grouped.map((g,i)=>stickerSection(g.group,g.entries.map(e=>lib.byId.get(e.id)).filter(Boolean),'g'+i)).join('')+controls+
+ '<p class="ecs-note ecs-anim-disclaimer">Autocollants animés originaux ELOAH, dessinés pour le studio. Les animations sont visibles pendant la lecture et intégrées à l’export vidéo compatible.</p>';
+}
+
 function elementsMarkup(){
  if(elementsCategory==='illustrations')return illustrationCatalog();
+ if(elementsCategory==='animations')return stickerAnimations();
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
   const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
   let content='';
   if(elementsCategory==='recent'){
     content=S.elements.length?'<div class="ecs-gallery">'+S.elements.slice().reverse().map(e=>'<button class="ecs-galleryitem" data-recent="'+e.id+'"><span class="ecs-galleryicon">'+(e.kind==='text'?'T':e.kind==='image'?'▧':e.kind==='chart'?'▥':'◈')+'</span><span>'+xss(e.kind==='text'?e.text.slice(0,35):e.kind)+'</span></button>').join('')+'</div>':'<p class="ecs-note">Pas encore d’éléments récents dans ce projet.</p>';
-  }else if(elementsCategory==='animations'){
-    content='<p class="ecs-note">Sélectionne un texte, une illustration ou une forme dans ton Reel, puis applique un mouvement.</p><div class="ecs-list">'+[['none','Aucune animation'],['fade','Apparition douce'],['pop','Zoom dynamique'],['slide','Entrée latérale']].map(([key,label])=>'<button class="ecs-itembtn" data-animation="'+key+'">'+label+'</button>').join('')+'</div>';
   }else if(['audio','videos','photos'].includes(elementsCategory)){
     content='<p class="ecs-note">Importe un fichier depuis ton appareil pour l’utiliser dans ton Reel.</p><div class="ecs-list"><button class="ecs-itembtn" data-tab="'+elementsCategory+'">Ouvrir les outils '+title.toLowerCase()+' →</button></div>';
   }else{
@@ -342,6 +370,7 @@ function paint(c,t,mark=false){
   if(e.animation==='fade')c.globalAlpha*=phase;
   if(e.animation==='pop'){const z=.25+.75*(1-Math.pow(1-phase,3));c.translate(e.x+e.w/2,e.y+e.h/2);c.scale(z,z);c.translate(-e.x-e.w/2,-e.y-e.h/2)}
   if(e.animation==='slide'){c.translate((1-phase)*-400,0);c.globalAlpha*=.35+.65*phase}
+  if(window.ELOAHAnimations&&(e.kind==='sticker'||['pulse','float','bounce','wobble','swing','rotate','twinkle','fall','shake'].includes(e.animation)))window.ELOAHAnimations.applyMotion(c,e,t,S.playing||busy);
   if(e.kind==='rect'){c.fillStyle=e.color;c.fillRect(e.x,e.y,e.w,e.h)}
   if(e.kind==='ellipse'){c.fillStyle=e.color;c.beginPath();c.ellipse(e.x+e.w/2,e.y+e.h/2,Math.abs(e.w/2),Math.abs(e.h/2),0,0,Math.PI*2);c.fill()}
   if(e.kind==='star'){c.save();c.translate(e.x+e.w/2,e.y+e.h/2);c.beginPath();for(let i=0;i<10;i++){const r=(i%2?0.48:1)*Math.min(e.w,e.h)/2,a=i*Math.PI/5-Math.PI/2;c.lineTo(Math.cos(a)*r,Math.sin(a)*r)}c.closePath();c.fillStyle=e.color;c.fill();c.restore()}
@@ -389,6 +418,7 @@ function paint(c,t,mark=false){
   if(e.kind==='text')drawText(c,e);
   if(e.kind==='image'){const im=images.get(e.id);if(im?.complete)try{c.drawImage(im,e.x,e.y,e.w,e.h)}catch{}}
   if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
+  if(e.kind==='sticker'&&window.ELOAHAnimations)window.ELOAHAnimations.render(c,e);
   c.restore();
   if(mark&&selected===e.id){c.strokeStyle='#1676d0';c.lineWidth=6;c.strokeRect(e.x,e.y,e.w,e.h);c.fillStyle='#fff';c.fillRect(e.x+e.w-12,e.y+e.h-12,24,24);c.strokeRect(e.x+e.w-12,e.y+e.h-12,24,24)}
  }
@@ -624,7 +654,8 @@ function renderSide(){
    html='<p class="ecs-note">Fais glisser cet élément sur le Reel. Pour le redimensionner, tire le petit carré dans son angle inférieur droit.</p>';
    if(e.kind==='text')html+='<label class="ecs-sidelabel">Texte</label><textarea rows="4" data-p="text">'+xss(e.text)+'</textarea>'+range('Taille des caractères','font',14,250,1,e.font);
    if(e.kind==='chart')html+='<label class="ecs-sidelabel">Valeurs séparées par des virgules</label><input data-p="values" value="'+xss(e.values||'35,55,25,45')+'">';
-   html+='<label class="ecs-sidelabel">Animation</label><select data-p="animation">'+[['none','Aucune'],['fade','Apparition douce'],['pop','Zoom dynamique'],['slide','Entrée latérale']].map(([v,n])=>'<option value="'+v+'" '+((e.animation||'none')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>';
+   if(e.kind==='sticker')html+='<p class="ecs-note">Sticker animé : '+xss(window.ELOAHAnimations?.byId.get(e.variant)?.name||'Animation ELOAH')+'</p><label class="ecs-sidelabel">Mouvement</label><select data-p="motion">'+Object.entries(window.ELOAHAnimations?.motionNames||{}).map(([v,n])=>'<option value="'+v+'" '+((e.motion||'pulse')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>'+range('Vitesse (0,2× à 4×)','speed',.2,4,.1,e.speed||1);
+   else html+='<label class="ecs-sidelabel">Animation</label><select data-p="animation">'+[['none','Aucune'],['fade','Apparition douce'],['pop','Zoom dynamique'],['slide','Entrée latérale'],['pulse','Pulsation'],['float','Flottement'],['bounce','Rebond'],['wobble','Oscillation'],['swing','Balancement'],['rotate','Rotation'],['twinkle','Clignotement'],['shake','Vibration']].map(([v,n])=>'<option value="'+v+'" '+((e.animation||'none')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>';
 
    if(e.kind!=='image')html+=color('Couleur','color',e.color);
    html+='<div class="ecs-rows"><div>'+range('Position X','x',0,1080,1,Math.round(e.x))+'</div><div>'+range('Position Y','y',0,1920,1,Math.round(e.y))+'</div></div><div class="ecs-rows"><div>'+range('Largeur','w',20,1080,1,Math.round(e.w))+'</div><div>'+range('Hauteur','h',20,1920,1,Math.round(e.h))+'</div></div><div class="ecs-rows"><div>'+range('Début (s)','start',0,S.duration,.1,e.start)+'</div><div>'+range('Fin (s)','end',0,S.duration,.1,e.end)+'</div></div>'+btn('duplicate','Dupliquer')+btn('delete','Supprimer');
@@ -672,6 +703,20 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const animGroup=ev.target.closest('[data-animation-group]');if(animGroup){animationView=animGroup.dataset.animationGroup;animationSearch='';renderSide();return}
+ const sticker=ev.target.closest('[data-sticker]');if(sticker){
+  const item=window.ELOAHAnimations?.byId.get(sticker.dataset.sticker);if(!item)return;
+  const element=add('sticker',{variant:item.id,color:item.color,x:270,y:650,w:540,h:540,motion:item.motion,animation:'none',speed:1});
+  elementsCategory='animations';animationView='home';animationSearch='';activeTab='elements';renderSide();renderTimeline();
+  seek(element.start);toast(item.name+' ajouté — ▶ pour voir son animation.');return;
+ }
+ const motionBtn=ev.target.closest('[data-apply-motion]');if(motionBtn){
+  const element=S.elements.find(e=>e.id===selected);
+  if(!element){toast('Sélectionne un élément sur la page.');return}
+  snapshot();
+  if(element.kind==='sticker'){element.motion=motionBtn.dataset.applyMotion;element.animation='none'}else element.animation=motionBtn.dataset.applyMotion;
+  saveLocal();seek(element.start);renderSide();toast('Mouvement appliqué : '+motionBtn.textContent+'. Lance ▶ pour prévisualiser.');return;
+ }
  const illGroup=ev.target.closest('[data-ill-group]');if(illGroup){illustrationView=illGroup.dataset.illGroup;illustrationSearch='';renderSide();return}
  const illAdd=ev.target.closest('[data-ill-add]');if(illAdd){
   const item=window.ELOAHIllustrations?.byId.get(illAdd.dataset.illAdd);
@@ -697,7 +742,7 @@ root.addEventListener('click',ev=>{
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
  const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
- const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';activeTab='elements';renderSide();return}
+ const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));toast('Élément dupliqué sur la page.')}return}
  const tb=ev.target.closest('[data-tab]');if(tb&&root.contains(tb)){setTab(tb.dataset.tab);return}
@@ -710,10 +755,17 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(e.target.id==='ecs-tts-speed'){voiceSpeed=Number(e.target.value);return}
  if(e.target.id==='ecs-tts-voice'){const voices=window.speechSynthesis?.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr'))||[];voiceSelection=voices[Number(e.target.value)]?.name||'';return}
  const p=e.target.dataset.p,setting=e.target.dataset.setting;
- if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();return}
+ if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();return}
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(e.target.id==='ecs-animation-search'){
+  animationSearch=e.target.value;
+  const needle=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  all('.ecs-anim-card').forEach(button=>{button.hidden=!!needle&&!button.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(needle)});
+  all('[data-anim-section]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-anim-card')].some(card=>!card.hidden)});
+  return;
+ }
  if(e.target.id==='ecs-ill-search'){
   illustrationSearch=e.target.value;const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
   all('.ecs-ill-tile').forEach(tile=>{tile.hidden=!!term&&!tile.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term)});
