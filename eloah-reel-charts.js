@@ -118,7 +118,7 @@ function dataset(e){
  if(def.options.series===1)return {...d,names:d.names.slice(0,1),values:d.values.map(x=>x.slice(0,1))};
  return {...d,names:d.names.slice(0,3),values:d.values.map(x=>x.slice(0,3))};
 }
-function colors(e){return palettes[e?.chartPalette]||palettes.original}
+function colors(e){const base=palettes[e?.chartPalette]||palettes.original;return /^#[0-9a-f]{6}$/i.test(e?.chartCustomColor||'')?[e.chartCustomColor,...base.slice(1)]:base}
 function short(v){
  const n=Number(v);
  if(!Number.isFinite(n))return '0';
