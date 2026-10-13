@@ -1,0 +1,42 @@
+/* PARISIS ENGINE · système éditorial partagé · 2026-10-13
+   Ajout non destructif : atlas, scripts, cartes, sauvegardes et formulaires d'origine restent inchangés. */
+body.pe-unified{--pe-dark:#1e1f23;--pe-gold:#e1bc74;--pe-line:#b59a67;--pe-light:#f6f0e6;}
+body.pe-unified.pe-document{background:#efe8dc;color:#29261f;}
+body.pe-unified .pe-masthead,body.pe-unified .pe-cover,body.pe-unified .pe-tail{font-family:system-ui,-apple-system,"Segoe UI",sans-serif;box-sizing:border-box;}
+body.pe-unified .pe-masthead *,body.pe-unified .pe-cover *,body.pe-unified .pe-tail *{box-sizing:border-box}
+body.pe-unified .pe-masthead{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;width:100%;background:#1b1c1f;color:#fff8ed;border-bottom:2px solid #b38b50;padding:14px clamp(14px,3vw,42px);position:relative;z-index:300}
+body.pe-unified .pe-masthead .pe-logo{font:normal clamp(20px,2.2vw,29px)/1.1 Georgia,serif;letter-spacing:.1em;color:#fff8ed;text-decoration:none}
+body.pe-unified .pe-logo em{color:#efc878;font-style:normal}
+body.pe-unified .pe-masthead nav{display:flex;align-items:center;gap:6px;flex-wrap:wrap;min-width:0}
+body.pe-unified .pe-masthead nav a{display:inline-flex;align-items:center;font:700 12px/1.35 system-ui,-apple-system,sans-serif;text-decoration:none;background:transparent;color:#f1e3cd;padding:9px 11px;border:1px solid transparent;border-radius:2px;min-height:39px}
+body.pe-unified .pe-masthead nav a:hover,body.pe-unified .pe-masthead nav a:focus-visible{border-color:#d5b575;color:#ffe1a5;background:#34302c}
+body.pe-unified .pe-cover{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(235px,.82fr);background:#141517;color:#fff8e8;border-bottom:3px solid #b69459;min-height:290px;grid-column:1/-1;width:100%;position:relative;overflow:hidden}
+body.pe-unified .pe-cover.pe-compact{display:block;min-height:0;background:linear-gradient(112deg,#18191c,#383129);border-bottom:2px solid #b69459}
+body.pe-unified .pe-cover-copy{padding:clamp(29px,4vw,62px) clamp(19px,3.5vw,51px);min-width:0;display:flex;flex-direction:column;align-items:flex-start;justify-content:center}
+body.pe-unified .pe-cover.pe-compact .pe-cover-copy{padding:21px clamp(16px,3vw,44px)}
+body.pe-unified .pe-kicker{font:800 10px/1.5 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:#f0c777}
+body.pe-unified .pe-cover h2{font:normal clamp(30px,4.1vw,53px)/1.12 Georgia,serif;color:#fff6e9;letter-spacing:-.025em;margin:13px 0 14px;max-width:790px}
+body.pe-unified .pe-cover.pe-compact h2{font-size:clamp(23px,2.7vw,32px);margin:8px 0 7px}
+body.pe-unified .pe-cover p{font:14px/1.65 system-ui,sans-serif;color:#ded0bd;max-width:700px;margin:0}
+body.pe-unified .pe-cover.pe-compact p{font-size:12px}
+body.pe-unified .pe-cover-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:21px}
+body.pe-unified .pe-cover-actions a{display:inline-flex;align-items:center;justify-content:center;padding:10px 13px;color:#221c16;background:#e8c27b;border:1px solid #e8c27b;font:800 12px/1.3 system-ui;text-decoration:none}
+body.pe-unified .pe-cover-actions a+ a{background:transparent;color:#f8e6c5}
+body.pe-unified .pe-cover-actions a:hover{background:#fff0c8;color:#191713}
+body.pe-unified .pe-cover-image{margin:0;position:relative;background:#282720;min-width:0}
+body.pe-unified .pe-cover-image img{display:block;width:100%;height:100%;min-height:290px;max-height:430px;object-fit:cover;object-position:center}
+body.pe-unified .pe-cover-image:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#141517a6,transparent 58%),linear-gradient(0deg,#141517a0,transparent 40%);pointer-events:none}
+body.pe-unified .pe-cover-image figcaption{position:absolute;bottom:12px;right:18px;left:18px;z-index:1;font:10px/1.5 system-ui;color:#faf0db;text-align:right}
+body.pe-unified .pe-cover-image figcaption a{color:#f8d68b;text-decoration:underline}
+body.pe-unified .pe-tail{border-top:2px solid #b99359;margin:45px auto 28px;padding:24px clamp(18px,3vw,38px);max-width:1200px;background:#28292c;color:#fff5e5}
+body.pe-unified .pe-tail h2{font:normal clamp(22px,2.5vw,32px)/1.2 Georgia,serif;color:#fff4df;margin:0 0 16px}
+body.pe-unified .pe-tail-items{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+body.pe-unified .pe-tail a{display:flex;flex-direction:column;gap:6px;border:1px solid #746447;color:#f7e2b7;background:#343437;text-decoration:none;font:normal 19px/1.25 Georgia,serif;padding:17px;min-width:0}
+body.pe-unified .pe-tail a:hover{background:#474037;border-color:#ecc378}
+body.pe-unified .pe-tail a small{font:800 10px system-ui;color:#e0b974;letter-spacing:.12em;text-transform:uppercase}
+body.pe-unified.pe-document main :is(.card,.panel,.sheet,.record){border-radius:4px}
+body.pe-unified.pe-document main :is(h1,h2,h3){scroll-margin-top:25px}
+body.pe-unified :is(.pe-masthead,.pe-cover,.pe-tail) a:focus-visible{outline:3px solid #f9d58e;outline-offset:3px}
+@media(max-width:900px){body.pe-unified .pe-cover{grid-template-columns:1fr}.pe-cover-image img{max-height:310px}body.pe-unified .pe-tail-items{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){body.pe-unified .pe-masthead{padding:12px 15px}body.pe-unified .pe-masthead nav{gap:2px}body.pe-unified .pe-masthead nav a{padding:8px;font-size:11px}body.pe-unified .pe-cover-copy{padding:29px 20px}body.pe-unified .pe-cover h2{font-size:34px}body.pe-unified .pe-tail-items{grid-template-columns:1fr}}
+@media print{body.pe-unified .pe-masthead,body.pe-unified .pe-tail,body.pe-unified .pe-cover-actions{display:none!important}body.pe-unified .pe-cover{background:white;color:black;min-height:0;display:block}body.pe-unified .pe-cover h2,body.pe-unified .pe-cover p{color:black}body.pe-unified .pe-cover-image{display:none}}
