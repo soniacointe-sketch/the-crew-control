@@ -244,3 +244,5 @@
 
   // Query parameters used by other ELOAH modules keep working.
 })();
+/* Mobile cloud card access — loaded only on narrow screens. */
+(()=>{let loaded=false;const mount=()=>{if(loaded||!window.matchMedia('(max-width:767px)').matches)return;loaded=true;const script=document.createElement('script');script.src='eloah-boards-cloud-mobile.js?v=20261014-sync1';document.body.appendChild(script)};mount();window.addEventListener('resize',mount,{passive:true})})();
