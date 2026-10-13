@@ -18,7 +18,7 @@ p{max-width:83ch}code{background:#e9ece6;border-radius:5px;padding:3px 6px}
 .notice{background:#fff5e7;border-left:4px solid var(--amber);padding:16px;margin-top:15px}
 .actions a{display:inline-block;margin:5px 9px 5px 0;padding:8px 13px;border-radius:7px;border:1px solid #c9d4c9;text-decoration:none}
 @media(max-width:700px){svg{min-height:355px}.toolbar button{flex:1}header,.card{padding:18px}}
-</style></head>
+</style><link rel="stylesheet" href="parisis-editorial-shared.css?v=20261013"></head>
 <body><main>
 <p><a href="parisis-hum-002-abel-gance.html">← Dossier Abel-Gance</a> · <a href="eloah-parisis.html">Retour PARISIS ENGINE</a></p>
 <header><div class="eyebrow">HUM-002 · GEOMETRY / ALIGN / AUDIT · 13 OCTOBRE 2026</div><h1>Deux axes, trois écarts</h1>
@@ -70,4 +70,4 @@ for(const txt of [key.toUpperCase(),target.n,(m.d/1000).toFixed(3)+" km",m.offse
 for(const id of shown){const p=P[id],s=toScreen(p);const isA=["rue","tombe","chaillot"].includes(id);tag(pts,"circle",{cx:s.x,cy:s.y,r:7,fill:isA?"#166963":"#b17e35",stroke:"#fff","stroke-width":2});const label=tag(pts,"text",{x:s.x+p.ox,y:s.y+p.oy},p.n);tag(label,"title",{},p.s)}
 document.querySelectorAll("[data-axis]").forEach(btn=>btn.setAttribute("aria-pressed",String(btn.dataset.axis===which)))}
 document.querySelectorAll("[data-axis]").forEach(btn=>btn.addEventListener("click",()=>redraw(btn.dataset.axis)));redraw("all");
-</script><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script></body></html>
+</script><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script><script defer src="parisis-editorial-shared.js?v=20261013"></script></body></html>
