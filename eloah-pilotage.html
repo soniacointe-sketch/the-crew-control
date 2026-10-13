@@ -184,6 +184,7 @@ $('ops-cloud-logout').onclick=()=>run(async()=>{const r=await client.auth.signOu
 if(client)who().then(u=>{status(u?'Connectée au compte ELOAH.':'Connecte-toi pour consulter les versions.');if(u)list().catch(e=>status(e.message))}).catch(e=>status('Connexion à vérifier : '+e.message));else status('Le service de connexion n’a pas pu être chargé. Actualise la page pour réessayer.');
 })();
 </script>
-<script src="eloah-pilotage-client.js?v=20261013-client1"></script>
+<script src="eloah-pilotage-client.js?v=20261014-client2"></script>
+<script src="eloah-pilotage-organisation.js?v=20261014-client1"></script>
 </body>
 </html>
