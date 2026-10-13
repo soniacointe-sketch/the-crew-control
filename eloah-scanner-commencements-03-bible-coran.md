@@ -2,6 +2,10 @@
 
 ---
 
+![Illustration de recherche — Manuscrit coranique de Birmingham (VIIe siècle, sourates 18–20) ; image matérielle d'une tradition scripturaire, **sans lien direct avec les versets de création comparés**.](https://commons.wikimedia.org/wiki/Special:FilePath/Birmingham_Quran_manuscript_full.jpg?width=1100)
+
+*Manuscrit coranique de Birmingham (VIIe siècle, sourates 18–20) ; image matérielle d'une tradition scripturaire, **sans lien direct avec les versets de création comparés**. [Notice et crédits Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript_full.jpg).*
+
 # ELOAH · LES COMMENCEMENTS III
 
 # Bible et Coran — Deux architectures du commencement
