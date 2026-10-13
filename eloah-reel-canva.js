@@ -49,9 +49,9 @@ function paint(c,t,mark=false){
  }
  c.restore();
 }
-function draw(){paint(ctx,S.time,true)}
+function draw(){paint(ctx,S.time,!busy)}
 function clock(t){let n=Math.max(0,Math.floor(t));return Math.floor(n/60)+':'+String(n%60).padStart(2,'0')}
-function tick(now){let dt=Math.min(.15,(now-lastFrame)/1000);lastFrame=now;if(S.playing&&!busy){S.time+=dt;if(S.time>=S.duration){S.time=S.duration;pause()}if(media.videoUrl&&video.readyState>=2&&Math.abs(video.currentTime-S.time)>.25){try{video.currentTime=S.time}catch{}}}
+function tick(now){let dt=Math.min(.15,(now-lastFrame)/1000);lastFrame=now;if(S.playing){S.time+=dt;if(S.time>=S.duration){S.time=S.duration;pause()}if(media.videoUrl&&video.readyState>=2&&Math.abs(video.currentTime-S.time)>.25){try{video.currentTime=S.time}catch{}}}
  draw();one('#ecs-clock').textContent=clock(S.time)+' / '+clock(S.duration);const ph=one('.ecs-playhead');if(ph)ph.style.left=(S.time*70)+'px';requestAnimationFrame(tick)}
 function pause(){S.playing=false;video.pause();audio.pause();one('#ecs-play').textContent='▶'}
 function play(){if(S.playing){pause();return}if(S.time>=S.duration)S.time=0;S.playing=true;one('#ecs-play').textContent='⏸';if(media.videoUrl){try{video.currentTime=S.time;video.play().catch(()=>toast('Lecture vidéo bloquée par le navigateur.'))}catch{}}if(media.audioUrl){try{audio.currentTime=S.time;audio.play().catch(()=>{})}catch{}}}
@@ -104,7 +104,7 @@ function action(name){
  if(name==='ellipse'){add('ellipse',{x:320,y:810,w:430,h:430,color:'#28705a'});return}
  if(name==='star'){add('star',{x:360,y:780,w:360,h:360,color:'#d7ad46'});return}
  if(['heading','subtitle','addText','brandLabel'].includes(name)){add('text',name==='heading'?{text:'MON GRAND TITRE',font:90,y:770,h:310,color:'#2e2e2e'}:name==='subtitle'?{text:'Ton sous-titre ici',font:49,y:1100,h:160,color:'#303030'}:name==='brandLabel'?{text:S.brand.toUpperCase(),font:42,y:1700,h:140,color:'#c69b46'}:{text:'Écris ton texte',font:70,y:970,h:180});return}
- if(name==='duplicate'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à dupliquer.');return}add(e.kind,{...e,id:nextId++,x:Math.min(1020,e.x+36),y:Math.min(1800,e.y+36)});return}
+ if(name==='duplicate'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à dupliquer.');return}const cloned=add(e.kind,{...e,x:Math.min(1020,e.x+36),y:Math.min(1800,e.y+36)});if(e.kind==='image'&&images.has(e.id))images.set(cloned.id,images.get(e.id));return}
  if(name==='delete'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à supprimer.');return}snapshot();S.elements=S.elements.filter(x=>x.id!==selected);selected=null;setTab('elements');renderTimeline();saveLocal();return}
  if(name==='forward'||name==='backward'){let i=S.elements.findIndex(x=>x.id===selected);if(i<0)return;snapshot();let e=S.elements.splice(i,1)[0];S.elements.splice(name==='forward'?S.elements.length:0,0,e);saveLocal();return}
  if(name==='importVideo'){one('#ecs-video-input').click();return}
