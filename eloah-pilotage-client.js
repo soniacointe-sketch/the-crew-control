@@ -20,19 +20,21 @@
     } catch { return []; }
   }
   function projectNames() {
-    return [...new Set([...localProjects().map(p => p.id), ...planningProjects(), new URLSearchParams(location.search).get('projet')].filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
+    return [...new Set(['Personnel', ...localProjects().map(p => p.id), ...planningProjects(), new URLSearchParams(location.search).get('projet')].filter(Boolean))].sort((a, b) => a.localeCompare(b, 'fr'));
   }
   function fillProjectSelect(select, all = false) {
     if (!select) return;
     const current = select.value;
     const names = projectNames();
-    if (!names.length && !all) names.push('ELOAH');
+    if (!names.length && !all) names.push('Personnel');
+    if (!all && select.closest('#ops-task') && document.querySelector('#ops-dialog .ops-head h2')?.textContent?.includes('Modifier') && current && !names.includes(current)) names.push(current);
     const wanted = JSON.stringify([all, names, current]);
     if (select.dataset.clientOptions === wanted) return;
     select.replaceChildren();
     if (all) select.add(new Option('Tous mes projets', ''));
     for (const name of names) select.add(new Option(name, name));
-    if ([...select.options].some(o => o.value === current)) select.value = current;
+    if ([...select.options].some(o => o.value === current) && names.includes(current)) select.value = current;
+    else if (!all && [...select.options].some(o => o.value === 'Personnel')) select.value = 'Personnel';
     select.dataset.clientOptions = JSON.stringify([all, names, select.value]);
   }
   function labelBefore(select, value) {
@@ -129,10 +131,18 @@
     e.preventDefault();
     const input = $('client-project-name'), name = input.value.trim();
     if (!name) { input.setCustomValidity('Donne un nom à ton projet.'); input.reportValidity(); return; }
-    const existing = localProjects().find(p => p.id.toLocaleLowerCase('fr') === name.toLocaleLowerCase('fr'));
-    location.href = projectURL(existing?.id || name);
+    const existing = localProjects().find(p => p.id.localeCompare(name, 'fr', {sensitivity:'base'}) === 0);
+    const id = existing?.id || name;
+    const key = 'eloah-project-v1:' + id;
+    try {
+      if (localStorage.getItem(key) === null) localStorage.setItem(key, JSON.stringify({threads:[],notes:{},settings:{name:id},updated:new Date().toISOString()}));
+    } catch {
+      $('client-project-error').textContent = 'Enregistrement indisponible dans ce navigateur. Aucun projet existant n’a été remplacé.';
+      return;
+    }
+    location.href = projectURL(id);
   });
-  $('client-project-name').addEventListener('input', e => e.target.setCustomValidity(''));
+  $('client-project-name').addEventListener('input', e => {e.target.setCustomValidity('');$('client-project-error').textContent='';});
   window.addEventListener('storage', e => {
     if (!e.key || e.key.startsWith('eloah-project-v1:') || e.key === 'eloah-planning-v1') {
       window.ELOAHWorkspace?.renderCalendar?.(); refresh();
@@ -140,7 +150,7 @@
   });
   window.addEventListener('focus', refresh);
   // Retain the common menu and its destinations; remove the personal name on this page only.
-  text(document.querySelector('.eloah-global-nav .eloah-wordmark'), 'ELOAH · MON ESPACE');
+  text(document.querySelector('.eloah-global-nav .eloah-wordmark'), 'ELOAH · MON ORGANISATION');
   refresh();
   if (location.hash) revealHash();
 })();
