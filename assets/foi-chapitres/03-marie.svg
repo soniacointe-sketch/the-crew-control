@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1080" width="840" height="1080" role="img" aria-labelledby="title desc">
+<title id="title">Couverture ELOAH : MARIE ET LE CHAPELET</title>
+<desc id="desc">Illustration vectorielle éditoriale créée pour le chapitre 03 du chemin spirituel ELOAH.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#213a53"/><stop offset="100%" stop-color="#12151c"/></linearGradient>
+ <radialGradient id="halo"><stop offset="0%" stop-color="#eddaae" stop-opacity=".22"/><stop offset="73%" stop-color="#eddaae" stop-opacity=".05"/><stop offset="100%" stop-color="#eddaae" stop-opacity="0"/></radialGradient>
+ <pattern id="dots" patternUnits="userSpaceOnUse" width="26" height="26"><circle cx="5" cy="6" r="1" fill="#c7dfdf" opacity=".13"/></pattern>
+ <pattern id="lines" patternUnits="userSpaceOnUse" width="45" height="45" patternTransform="rotate(39)"><path d="M0 0V45" stroke="#c7dfdf" stroke-width=".8" opacity=".06"/></pattern>
+</defs>
+<rect width="840" height="1080" fill="url(#bg)"/>
+<rect width="840" height="1080" fill="url(#dots)"/>
+<rect width="840" height="1080" fill="url(#lines)"/>
+<circle cx="430" cy="520" r="410" fill="url(#halo)"/>
+<rect x="36" y="35" width="768" height="1010" fill="none" stroke="#eddaae" stroke-width="2" opacity=".55"/>
+<path d="M76 119H765M76 925H765" stroke="#eddaae" stroke-width="2" opacity=".55"/>
+<text x="80" y="96" fill="#c7dfdf" font-size="20" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">ELOAH · FOI &amp; SPIRITUALITÉ</text>
+<g transform="translate(420 502)"><path d="M0-265C-170-190-157-34-165 185Q0 265 165 185C157-34 170-190 0-265Z" fill="#9bb5c1" opacity=".35" stroke="#f3e3ba" stroke-width="8"/><ellipse cx="0" cy="-50" rx="58" ry="82" fill="#f0d5bc" opacity=".7"/><path d="M-140 185Q-75 28 0 70Q75 28 140 185" fill="none" stroke="#f0e4c8" stroke-width="11"/><ellipse cx="0" cy="224" rx="166" ry="43" fill="none" stroke="#d9c38e" stroke-width="4" stroke-dasharray="4 17"/><path d="M0 225v74M-25 264h50" stroke="#ddc692" stroke-width="8"/></g>
+<text x="78" y="980" fill="#c7dfdf" font-size="22" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">CHEMIN SPIRITUEL</text>
+<text x="770" y="1003" text-anchor="end" fill="#eddaae" font-size="67" font-family="Georgia, serif" font-style="italic">03</text>
+</svg>
