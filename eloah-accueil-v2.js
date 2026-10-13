@@ -108,4 +108,18 @@ function collapseOld(){
  // Les modules et les univers historiques restent accessibles ; le lien Tous mes univers saute à cette section.
 }
 collapseOld();
+const briefing=document.getElementById('eloah-morning'),daily=document.getElementById('eloah-daily');
+if(briefing||daily){
+ let after=home;
+ if(briefing){after.after(briefing);after=briefing}
+ if(daily){after.after(daily)}
+}
+// Les anciens boutons d'accès injectés restent accessibles dans un coin secondaire,
+// plutôt que de prendre la place de la recherche et des raccourcis du nouvel accueil.
+const injected=[...main.querySelectorAll(':scope > a[id]')].filter(a=>['eloah-actions-access','eloah-wordpress-link','pg-article-studio-access','eloah-smith-studio-link'].includes(a.id));
+if(injected.length){
+ const nav=document.createElement('nav');nav.className='eloah-other-shortcuts';nav.setAttribute('aria-label','Autres outils de travail');
+ for(const a of injected)nav.append(a);
+ home.append(nav);
+}
 })();
