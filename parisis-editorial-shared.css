@@ -40,3 +40,70 @@ body.pe-unified :is(.pe-masthead,.pe-cover,.pe-tail) a:focus-visible{outline:3px
 @media(max-width:900px){body.pe-unified .pe-cover{grid-template-columns:1fr}.pe-cover-image img{max-height:310px}body.pe-unified .pe-tail-items{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:600px){body.pe-unified .pe-masthead{padding:12px 15px}body.pe-unified .pe-masthead nav{gap:2px}body.pe-unified .pe-masthead nav a{padding:8px;font-size:11px}body.pe-unified .pe-cover-copy{padding:29px 20px}body.pe-unified .pe-cover h2{font-size:34px}body.pe-unified .pe-tail-items{grid-template-columns:1fr}}
 @media print{body.pe-unified .pe-masthead,body.pe-unified .pe-tail,body.pe-unified .pe-cover-actions{display:none!important}body.pe-unified .pe-cover{background:white;color:black;min-height:0;display:block}body.pe-unified .pe-cover h2,body.pe-unified .pe-cover p{color:black}body.pe-unified .pe-cover-image{display:none}}
+
+
+/* PARISIS · navigation lisible V2 : contraste, espacement et cibles tactiles */
+body.pe-unified .pe-masthead{
+  display:flex!important;align-items:center!important;justify-content:space-between!important;
+  gap:18px!important;padding:17px clamp(16px,3vw,42px)!important;
+  min-height:78px;background:#101113!important;color:#fff8ec!important;
+  border-bottom:3px solid #d8ab60!important;overflow:visible!important;
+  isolation:isolate;
+}
+body.pe-unified .pe-masthead .pe-logo{
+  display:inline-flex!important;align-items:center!important;flex-shrink:0!important;
+  color:#fff8ec!important;font:normal 27px/1.2 Georgia,serif!important;
+  letter-spacing:.08em!important;text-transform:none!important;
+  padding:7px 0!important;white-space:nowrap!important;
+}
+body.pe-unified .pe-masthead nav{
+  display:flex!important;flex-direction:row!important;justify-content:flex-end!important;
+  align-items:center!important;gap:10px!important;flex-wrap:wrap!important;
+  overflow:visible!important;min-width:0!important;max-width:100%!important;
+  width:auto!important;background:transparent!important;padding:0!important;margin:0!important;
+}
+body.pe-unified .pe-masthead nav a{
+  display:inline-flex!important;position:relative!important;align-items:center!important;
+  justify-content:center!important;flex:0 0 auto!important;
+  width:auto!important;min-width:0!important;min-height:46px!important;
+  padding:12px 15px!important;margin:0!important;
+  color:#fff6e6!important;background:#2e3036!important;
+  border:1px solid #877351!important;border-radius:5px!important;
+  font:750 14px/1.25 system-ui,-apple-system,"Segoe UI",sans-serif!important;
+  letter-spacing:0!important;text-align:center!important;text-decoration:none!important;
+  text-transform:none!important;text-shadow:none!important;white-space:nowrap!important;
+  opacity:1!important;visibility:visible!important;
+  box-shadow:0 1px 0 #ffffff0d inset!important;
+}
+body.pe-unified .pe-masthead nav a:first-child{
+  color:#201911!important;background:#eac67d!important;border-color:#eac67d!important;
+}
+body.pe-unified .pe-masthead nav a:hover{
+  background:#dfb86d!important;border-color:#f2ce88!important;color:#141414!important;
+  transform:translateY(-1px);
+}
+body.pe-unified .pe-masthead nav a:focus-visible{
+  outline:3px solid #fff1b5!important;outline-offset:3px!important;
+}
+@media(max-width:1130px){
+ body.pe-unified .pe-masthead{flex-wrap:wrap!important;gap:11px!important}
+ body.pe-unified .pe-masthead nav{
+   justify-content:flex-start!important;width:100%!important;
+   gap:8px!important;
+ }
+ body.pe-unified .pe-masthead nav a{font-size:13px!important;min-height:44px!important}
+}
+@media(max-width:650px){
+ body.pe-unified .pe-masthead{padding:13px 15px 15px!important;min-height:0!important;gap:13px!important}
+ body.pe-unified .pe-masthead .pe-logo{font-size:24px!important}
+ body.pe-unified .pe-masthead nav{display:grid!important;grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+ body.pe-unified .pe-masthead nav a{
+   display:flex!important;min-height:47px!important;white-space:normal!important;
+   padding:10px 8px!important;font-size:12.5px!important;line-height:1.2!important;
+   overflow-wrap:break-word!important;
+ }
+ body.pe-unified .pe-masthead nav a:last-child{grid-column:1/-1!important}
+}
+@media(max-width:370px){
+ body.pe-unified .pe-masthead nav a{font-size:12px!important;min-height:49px!important}
+}
