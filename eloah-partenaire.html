@@ -381,6 +381,20 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 #eloah-analytics-board .analytics-cost-status{font:12px system-ui;color:#78608c;min-height:16px}
 @media(max-width:1050px){#eloah-analytics-board .eloah-analytics-stats{grid-template-columns:repeat(2,minmax(0,1fr))}#eloah-analytics-board .analytics-cost-form{grid-template-columns:repeat(2,minmax(0,1fr))}#eloah-analytics-board .analytics-cost-form button{grid-column:1/-1}}
 @media(max-width:680px){#eloah-analytics-board{padding:0 3px}#eloah-analytics-board .eloah-analytics-tabs{grid-template-columns:1fr;gap:7px}#eloah-analytics-board .eloah-analytics-tabs a{min-height:49px}#eloah-analytics-board .eloah-analytics-stats{grid-template-columns:1fr 1fr;gap:8px}#eloah-analytics-board .eloah-analytics-stats article{padding:13px;min-height:120px}#eloah-analytics-board .eloah-analytics-stats strong{font-size:26px}#eloah-analytics-board .eloah-analytics-insight{padding:17px}#eloah-analytics-board .analytics-cost-form{grid-template-columns:1fr}}
+</style><style id="eloah-sidebar-analytics-css">
+#tabs .eloah-analytics-side{width:100%;min-width:0;background:transparent;border:0;margin:0;padding:0}
+#tabs .eloah-analytics-side>summary{display:flex;align-items:center;gap:11px;cursor:pointer;list-style:none;min-height:45px;padding:10px 12px;color:#626b60;font:600 13px/1.4 system-ui;border:1px solid transparent;border-radius:8px}
+#tabs .eloah-analytics-side>summary::-webkit-details-marker{display:none}
+#tabs .eloah-analytics-side[open]>summary{background:#e9e4f2;color:#715c9c;border-color:#d9d2e7}
+#tabs .eloah-analytics-side>summary>svg{width:19px;height:19px;flex-shrink:0}
+#tabs .eloah-analytics-caret{margin-left:auto;font:18px system-ui;transition:transform .2s}
+#tabs .eloah-analytics-side[open] .eloah-analytics-caret{transform:rotate(180deg)}
+#tabs .eloah-analytics-side-links{display:grid;gap:3px;margin:4px 0 8px;padding-left:12px;border-left:2px solid #dcd2eb}
+#tabs .eloah-analytics-side-links a{display:flex;align-items:center;gap:10px;padding:10px 8px;border-radius:6px;min-height:43px;color:#666071;text-decoration:none;font:12px/1.4 system-ui}
+#tabs .eloah-analytics-side-links a svg{width:18px;height:18px;flex-shrink:0}
+#tabs .eloah-analytics-side-links a[aria-current=page]{background:#efe9f6;color:#62429a;font-weight:750}
+#tabs .eloah-analytics-side-links a:hover{background:#f4f0fa}
+@media(max-width:1000px){#tabs .eloah-analytics-side{width:100%}#tabs .eloah-analytics-side-links{min-width:215px;}}
 </style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header>
 
 <section id="eloah-analytics-board" hidden aria-labelledby="eloah-analytics-heading">
