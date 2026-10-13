@@ -160,6 +160,16 @@ $('hist').innerHTML=histogram.map((v,i)=>'<div class="histrow"><span>'+(i*22.5)+
 status.textContent=f2(features)+' objets intersectent le périmètre, '+f2(length)+' m de longueurs cumulées et '+nSegments+' segments découpés. '+(draw.length<nSegments?'Affichage limité aux '+draw.length+' premiers segments pour préserver la fluidité ; statistiques sur toutes les géométries. ':'')+'Résultats sur le fichier fourni ; sa provenance et l’intention historique ne sont pas vérifiées automatiquement.';
 exp.disabled=false;
 }
+// Contrôles numériques exécutés sans données extérieures et sans simuler d'histoire.
+(function testNumerics(){
+ const E=lambert(48.8719,2.3317);
+ const expected=[650979.312,6863749.029];const validProjection=Math.hypot(E[0]-expected[0],E[1]-expected[1])<0.05;
+ const left=[center[0]-1000,center[1]],right=[center[0]+1000,center[1]];
+ const clipped=circleClip(left,right,700);
+ const validClip=!!clipped&&Math.abs(Math.hypot(clipped[1][0]-clipped[0][0],clipped[1][1]-clipped[0][1])-1400)<0.05;
+ const outside=circleClip([center[0]-1000,center[1]+1000],[center[0]+1000,center[1]+1000],700);
+ if(!validProjection||!validClip||outside){file.disabled=true;btn.disabled=true;status.textContent='Le contrôle mathématique interne a échoué. Aucune mesure n’est autorisée.';}
+})();
 file.addEventListener('change',async e=>{
 json=null;result=null;btn.disabled=true;exp.disabled=true;filename='';const f=e.target.files?.[0];if(!f)return;
 if(f.size>18*1024*1024){status.textContent='Fichier trop volumineux pour un téléphone (limite 18 Mo). Utilisez un export GeoJSON filtré au quartier de l’Opéra.';return;}
