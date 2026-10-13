@@ -215,3 +215,111 @@ Vous aussi, hâtez-vous de recueillir pour vous un épi du blé de vie, afin que
 Tant que je suis avec vous, soyez attentifs à ma parole et faites-moi confiance. Mais quand je serai parti, souvenez-vous de moi. Souvenez-vous de moi parce que, lorsque j'étais parmi vous, vous ne me connaissiez pas vraiment.
 
 Heureux ceux qui m'ont connu ! Malheur à ceux qui m'ont entendu sans croire ! Heureux ceux qui […]
+
+## PAGE 13 — La maison, la lumière et les contradictions
+
+— […] n'ont pas vu, [mais …] !
+
+Encore une fois, je vous [adresse cet appel], car je me révèle à vous comme celui qui bâtit une maison très précieuse pour vous. Vous y trouvez un refuge, et cette maison peut même soutenir celle de vos voisins lorsqu'elle risque de s'effondrer.
+
+En vérité, je vous le dis : malheur à ceux pour qui je suis descendu en ce lieu ! Heureux ceux qui montent vers le Père.
+
+Je vous avertis encore, vous qui existez : soyez comme ceux qui n'existent pas, afin de vous trouver avec ceux qui n'existent pas.
+
+Ne laissez pas le Royaume des cieux devenir un désert en vous. Ne tirez pas orgueil de la lumière qui vous éclaire ; conduisez-vous envers vous-mêmes comme je me suis conduit envers vous. Je me suis soumis à la malédiction pour vous, afin que vous soyez sauvés.
+
+Pierre répondit :
+
+— Seigneur, tantôt tu nous appelles au Royaume des cieux, tantôt tu nous en détournes. Par moments tu nous encourages, tu nous attires vers la foi et nous promets la vie ; à d'autres moments tu sembles nous rejeter hors du Royaume.
+
+Le Seigneur répondit :
+
+— Je vous ai donné la foi à plusieurs reprises. Bien plus, je me suis manifesté à toi, […]
+
+## PAGE 14 — La foi, la promesse et la montée
+
+— […] Jacques, et vous ne m'avez toujours pas connu. À présent encore, je vous vois souvent vous réjouir. Vous êtes heureux lorsqu'on vous promet la vie, mais dès que l'on vous instruit sur le Royaume, vous redevenez tristes et accablés.
+
+Pourtant, par la foi et par la connaissance, vous avez reçu la vie. Méprisez le rejet lorsque vous l'entendez annoncer ; et lorsque vous recevez la promesse, réjouissez-vous davantage encore.
+
+En vérité, je vous le dis : celui qui recevra la vie et croira au Royaume ne le quittera plus jamais, même si le Père voulait le chasser.
+
+Je ne vous dirai pas davantage de ces choses pour le moment. Maintenant, je monterai vers le lieu d'où je suis venu. Lorsque je voulais partir, vous m'avez repoussé ; au lieu de m'accompagner, vous m'avez poursuivi.
+
+Prêtez plutôt attention à la gloire qui m'attend. Ouvrez vos cœurs et écoutez les hymnes préparés là-haut pour moi, car aujourd'hui je dois m'asseoir à la droite du Père.
+
+Voici, je vous ai dit ma dernière parole, et je vous quitte. Un char de l'Esprit m'emporte vers le haut. Désormais je me dépouillerai pour revêtir un autre vêtement.
+
+Mais souvenez-vous : heureux ceux qui ont proclamé le Fils avant sa descente, afin que, lorsqu'il vienne, il puisse aussi remonter. Trois fois heureux ceux qui […]
+
+## PAGE 15 — L'ascension de Jacques et Pierre
+
+— […] avaient été proclamés par le Fils avant de venir à l'existence, afin que vous puissiez avoir part à leur sort.
+
+Après avoir prononcé ces paroles, il partit.
+
+Alors Pierre et moi, nous nous agenouillâmes, nous rendîmes grâce et élevâmes nos cœurs vers le ciel. Nous entendîmes de nos oreilles et vîmes de nos yeux le tumulte des guerres, un son de trompette et une grande agitation.
+
+Quand nous fûmes passés au-delà de ce lieu, nous élevâmes nos pensées plus haut. Nous entendîmes de nouveau, de nos propres oreilles, les hymnes, les louanges et la joie des anges. Les grandeurs célestes chantaient elles aussi, et nous étions dans l'allégresse.
+
+Puis nous voulûmes envoyer notre esprit encore plus haut, vers la Majesté. Mais, tandis que nous nous élevions, nous ne pûmes plus rien voir ni rien entendre, parce que les autres disciples nous appelèrent :
+
+— Qu'avez-vous entendu de la bouche du Maître ? Que vous a-t-il dit ? Où est-il allé ?
+
+Nous leur répondîmes :
+
+— Il est monté. Il nous a tendu sa main droite et nous a promis la vie à tous. Il nous a révélé ceux qui viendront après nous, après nous avoir demandé […]
+
+## PAGE 16 — Dernières paroles de Jacques
+
+— […] de les aimer. Car c'est grâce à eux que nous serons [sauvés].
+
+En entendant cela, les autres disciples crurent bien à la révélation. Pourtant, ils s'irritèrent à l'idée de ceux qui devaient encore naître. Je ne voulais pas les scandaliser ; je les envoyai donc chacun vers un lieu différent.
+
+Quant à moi, je montai vers Jérusalem, priant pour avoir une part avec les bien-aimés qui seront révélés.
+
+Je prie pour que le commencement vienne de vous, car c'est ainsi que je peux être sauvé : ils seront éclairés par moi, grâce à ma foi, mais aussi grâce à une autre foi, meilleure que la mienne. Je souhaite que la mienne soit la moindre.
+
+Faites donc tout votre possible pour devenir semblables à eux, et priez pour recevoir votre part avec eux. Hormis ce que je viens de vous dire, le Sauveur ne nous a pas donné pour eux une autre révélation.
+
+Nous annonçons bien une part avec ceux pour lesquels l'annonce a été faite : ceux que le Seigneur a reconnus comme ses enfants.
+
+**Fin du texte conservé (NHC I,2, 16.30).**
+
+---
+
+## Notes de traduction et incertitudes importantes
+
+**Note 1 — Nom du destinataire.** Le nom n'est pas préservé en entier. La reconstruction Cérinthe / Kerinthos, et les qualificatifs « mon fils », « frère » ou « bien-aimé », ne sont pas des lettres lisibles dans le manuscrit. Voir la [collation des pages 1 à 3](foi-control.html?file=eloah-foi-apo-019-collation-pages-1-3.md) et l'étude de Francis Watson.
+
+**Note 2 — Page 2, 550 jours.** Les 550 jours sont bien mentionnés dans l'œuvre ; leur rattachement exact à la phrase de l'apparition ou au discours des disciples varie selon la ponctuation des éditeurs. Ni ce chiffre ni les dialogues ne sont authentifiés comme faits historiques.
+
+**Note 3 — Pages 3–4, plénitude.** L'opposition entre le manque, la plénitude, l'Esprit et le raisonnement de l'âme est difficile ; la présente version française privilégie le mouvement paradoxal du texte plutôt qu'un système théologique artificiellement cohérent.
+
+**Note 4 — Page 5, condamnation et « raisonnement ».** La traduction « crucifixion fondée sur le raisonnement » est contestée. D'autres éditeurs envisagent un texte à corriger donnant « crucifiés sans raison ». L'anglais de Mattison conserve l'allusion au *logos*, et le lecteur doit être averti qu'il s'agit d'un point philologique à contrôler dans le copte.
+
+**Note 5 — Page 6, Royaume de Dieu ou Royaume de la mort.** L'expression « Royaume de <Dieu> » reflète une **correction éditoriale** retenue par plusieurs traducteurs, alors que la leçon copte transmise a été interprétée comme « Royaume de la mort ». On ne doit jamais masquer cette intervention ; voir les notes explicatives de Mattison et les éditions critiques.
+
+**Note 6 — Page 8, les pièces d'argent.** Les noms de paraboles transmis par le texte renvoient à des traditions connues de l'évangile mais ne fournissent pas une citation littérale complète de chacun de ces récits.
+
+**Note 7 — Page 10, « je ne serais jamais remonté ».** Plusieurs traductions adoptent à la place une lecture du type « je ne serais jamais descendu sur la terre ». Le sens dépend du contexte : départ désiré ou raison de l'incarnation.
+
+**Note 8 — Page 11, Dieu et les prières.** Les traductions divergent sur le fait que Dieu soit « persuadé » ou « non persuadé » par les prières, en fonction de l'analyse de la négation. Ce point est ouvert à la collation.
+
+**Note 9 — Page 12, la « quatrième » place.** La référence à une « quatrième » étape du ciel est difficile à expliquer. Certains rapprochements avec « foi, amour, œuvres » de la page 8 sont des **interprétations** et non des renvois explicites du manuscrit.
+
+**Note 10 — Traditions textuelles.** Le Livre secret de Jacques est distinct de la Première et de la Seconde Apocalypse de Jacques, conservées au codex V. Les récits ne doivent pas être amalgamés.
+
+## À propos de la traduction complète
+
+Cette traduction **couvre le texte ancien transmis aux pages 1–16**, en signalant les manques lorsque la chaîne du récit est endommagée. Elle est destinée à une **lecture complète en français**, non à remplacer une édition critique avec transcription des lettres et variantes.
+
+**Chaîne de travail :** texte copte antique (NHC I,2) → traduction anglaise dans le domaine public de **Mark M. Mattison**, [consultable intégralement](https://www.gospels.net/james) → présente adaptation française nouvelle, avec repérage des pages → contrôle ponctuel sur la transcription copte [Good Works Library / Marcion Project](https://tianmu.org/good-work-library/gnostic/nag-hammadi-library/codex-i/the-apocryphon-of-james) et sur les analyses scientifiques.
+
+**Comparaison des traductions françaises antérieures** : les ouvrages de Malinine et collaborateurs (1968) et de Donald Rouleau (1987) ont été consultés à travers les informations bibliographiques et les analyses philologiques, et la version de Rouleau est [consultable pour lecture personnelle sur le site du centre de recherche de Nag Hammadi](https://www.naghammadi.org/sites/naghammadi.org/files/uploads/traductions/nh-i-2-epitre-apocryphe-de-jacques.pdf). **Nous ne les reproduisons pas et ne présentons pas notre texte comme une réédition de leurs formulations.**
+
+**Sources de référence :** [NASSCAL ECCA 495](https://www.nasscal.com/e-clavis-christian-apocrypha/apocryphon-of-james/), [Brill, Coptic Gnostic Library Online](https://scholarlyeditions.brill.com/cglo/), [Watson, *Texts in Context*, libre accès](https://www.peeters-leuven.be/download_OA.php?id=9789042943902&name=Texts+in+Context), [photos institutionnelles des seize pages](https://www.gospels.net/manuscript).
+
+---
+
+[← Collation des pages 1–3](foi-control.html?file=eloah-foi-apo-019-collation-pages-1-3.md) · [Retour au dossier de recherche APO-019](foi-control.html?file=eloah-foi-apo-019-livre-secret-jacques.md)
