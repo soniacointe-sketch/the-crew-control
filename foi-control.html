@@ -225,4 +225,4 @@ const initialParams=new URLSearchParams(location.search);
 let selected=initialParams.has("file")?DOCS.findIndex(d=>d[1]===initialParams.get("file")):Number(initialParams.get("doc"));
 if(!Number.isInteger(selected)||selected<0||selected>=DOCS.length){try{selected=JSON.parse(localStorage.getItem(POS)||"{}").doc??0}catch{selected=0}}
 openDoc(selected,"",true);if(["#ananke-archives-1820-suite","#ananke-archives","#ananke-pieces-manquantes","#ananke-devis-godde-1820","#ananke-rondelet-1818","#ananke-rondelet-acces-archives","#ananke-inscriptions-1831"].includes(location.hash))openAnanke(location.hash.slice(1));
-</script></body></html>
+</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
