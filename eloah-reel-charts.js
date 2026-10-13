@@ -86,7 +86,9 @@ function parse(text){
  const sep=first.includes('\t')?'\t':first.includes(';')?';':',';
  const rows=lines.map(x=>parseCSVLine(x,sep));
  const header=rows[0]||[];
- const headerIsData=header.length>1&&Number.isFinite(Number((header[1]||'').replace(',','.')));
+ const firstLabel=String(header[0]||'').toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+ const knownHeader=/^(categorie|category|mois|annee|date|nom|produit|label|jour|region|pays|type|activite|classe|segment|periode|trimestre|periode|semaine|x)$/i.test(firstLabel);
+ const headerIsData=!knownHeader&&header.length>1&&Number.isFinite(Number((header[1]||'').replace(',','.')));
  const cols=Math.max(1,Math.min(4,header.length-1));
  const names=headerIsData?Array.from({length:cols},(_,i)=>'Série '+(i+1)):header.slice(1,cols+1).map((h,i)=>h||'Série '+(i+1));
  const data=rows.slice(headerIsData?0:1).filter(row=>row.length>1&&String(row[0]||'').trim()).slice(0,24);
