@@ -501,11 +501,11 @@ function templateDraft(t){
  const voice=editorialVoices[brand]||editorialVoices["Power & Glam"];
  const index=Math.max(0,Number(t.id.slice(-2))-1);
  const authored=(window.ELOAH_MAILING_VOICES||{})[voice.id]?.[index]||[];
- const scene=authored[0]||"",analysis=authored[1]||"";
+ const scene=(authored[0]||"").replace(voice.id==="crew"?/^Salut le Crew\s*!\s*/i:voice.id==="lion"?/^Bonjour\s*[,.]?\s*/i:/^$/, ""),analysis=authored[1]||"";
  const sections=editorialHeadings[voice.id]?.[index]||["Le sujet du jour","Ce que tu peux essayer"];
  const para=["# "+t.subject,""];
  if(voice.id==="pg"){
-  para.push(scene||t.opening,"",t.opening,"",
+  para.push(scene||t.opening,"",
   "## "+sections[0],"",analysis||t.reflection,"",t.reflection,"",
   "## "+sections[1],"",t.exercise,"",
   "> "+t.question,"",
