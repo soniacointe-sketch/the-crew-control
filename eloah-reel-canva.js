@@ -396,7 +396,8 @@ function frameProperties(e){
  const item=window.ELOAHFrames?.byId.get(e.variant);if(!item)return '<p class="ecs-note">Cadre indisponible.</p>';
  const n=frameSlotCount(e);activeFrameSlot=Math.min(Math.max(0,activeFrameSlot),n-1);
  const opt=e.frameSlots?.[activeFrameSlot]||{},hasPhoto=framePhotos.has(e.id+':'+activeFrameSlot);
- return '<div class="ecs-frame-edit"><strong>'+xss(item.label)+'</strong><small>'+xss(item.group)+' · '+n+' case'+(n>1?'s':'')+'</small>'+
+ return '<div class="ecs-frame-edit"><strong>'+xss(item.label||item.name||'Cadre')+'</strong><small>'+xss(item.group)+' · '+n+' case'+(n>1?'s':'')+'</small>'+
+ (e.isMockup?mockupControls(e):'')+
  (e.isGrid?'<div class="ecs-grid-edit"><label class="ecs-sidelabel" for="ecs-grid-gap-slider">Espacement entre les photos</label><input id="ecs-grid-gap-slider" type="range" min="0" max="55" step="1" data-grid-gap value="'+(e.gridGap??12)+'"><span class="ecs-note">'+(e.gridGap??12)+' px</span><div>'+btn('gridFillAll','▦ Remplir plusieurs cases',true)+'</div><p class="ecs-note">Sélectionne plusieurs photos : elles seront réparties dans les cases de la grille, de gauche à droite.</p></div>':'')+
  (n>1?'<label class="ecs-sidelabel">Choisir une case</label><select data-frame-slot>'+Array.from({length:n},(_,i)=>'<option value="'+i+'" '+(i===activeFrameSlot?'selected':'')+'>Case '+(i+1)+(framePhotos.has(e.id+':'+i)?' ✓':'')+'</option>').join('')+'</select>':'')+
  '<p class="ecs-frame-help">'+(hasPhoto?'✓ Une photo est installée dans cette case.':'Ajoute une photo pour remplacer le paysage d’exemple.')+'</p>'+
@@ -445,11 +446,51 @@ function gridCatalog(){
   lib.groups.map(gridSection).join('')+controls;
 }
 
+
+let mockupView='home',mockupSearch='';
+function mockupTile(m){
+ const library=window.ELOAHMockups;
+ return '<button type="button" class="ecs-mock-tile" data-mockup-add="'+xss(m.id)+'" data-search="'+xss((m.name+' '+m.group+' '+m.palette.name).toLocaleLowerCase('fr'))+'" title="Ajouter '+xss(m.name)+'">'+
+ '<span class="ecs-mock-thumb"><img src="'+library.thumb(m.id)+'" alt="" loading="lazy" decoding="async"></span>'+
+ '<span class="ecs-mock-caption">'+xss(m.name)+'</span><span class="ecs-mock-plus" aria-hidden="true">＋</span></button>';
+}
+function mockupSection(name,items,code){
+ return '<section class="ecs-mock-section" data-mockup-section><div class="ecs-sectiontitle"><strong>'+xss(name)+'</strong><button type="button" data-mockup-group="'+xss(code)+'">Afficher tout →</button></div>'+
+ '<div class="ecs-mock-strip">'+items.map(mockupTile).join('')+'</div></section>';
+}
+function mockupCatalog(){
+ const lib=window.ELOAHMockups;
+ if(!lib)return '<div class="ecs-empty">Bibliothèque Maquettes indisponible. Actualise la page.</div>';
+ const recent=S.elements.filter(e=>e.isMockup&&lib.byId.has(e.variant)).slice(-14).reverse().map(e=>lib.byId.get(e.variant));
+ const head='<div class="ecs-audio-header"><button type="button" data-cat="overview" aria-label="Retour aux éléments">←</button><strong>Maquettes</strong></div>'+
+ '<div class="ecs-search"><span>▣</span><input id="ecs-mockup-search" aria-label="Rechercher des maquettes" autocomplete="off" placeholder="Rechercher des maquettes" value="'+xss(mockupSearch)+'"><span>⌕</span></div>';
+ if(mockupView!=='home'){
+   const recentView=mockupView==='recent',group=lib.groups[Number(mockupView.slice(1))],items=recentView?recent:group?.items||[];
+   return head+'<button type="button" class="ecs-els-back" data-mockup-group="home">← Toutes les maquettes</button><h3 class="ecs-panelheading">'+xss(recentView?'Utilisés récemment':group?.name||'Maquettes')+'</h3><div class="ecs-mock-grid">'+items.map(mockupTile).join('')+'</div>';
+ }
+ return head+(recent.length?mockupSection('Utilisés récemment',recent,'recent'):'')+
+ lib.groups.map((g,i)=>mockupSection(g.name,g.items,'g'+i)).join('')+
+ '<div class="ecs-mock-footer"><p class="ecs-note">Maquettes illustrées 2D originales ELOAH. Insère tes propres visuels dans leurs emplacements. Pour les écrans, tu peux aussi utiliser ta vidéo importée.</p>'+
+ '<div class="ecs-mock-links">'+btn('addImage','＋ Importer une image',true)+btn('importVideo','Importer une vidéo')+'</div></div>';
+}
+function mockupControls(e){
+ const m=window.ELOAHMockups?.byId.get(e.variant);if(!m)return '';
+ const slot=Number(e.videoSlot)||0,playing=!!e.mockVideo&&slot===activeFrameSlot;
+ return '<div class="ecs-mock-edit"><strong>Maquette · '+xss(m.name)+'</strong><p class="ecs-note">Illustration de présentation 2D. Remplace le paysage dans chaque case par une de tes photos, ou associe une vidéo à un écran.</p>'+
+ (m.type==='video'||m.type==='phone'||m.type==='device'?
+ '<div class="ecs-mock-videoctrl"><p class="ecs-note">'+(media.videoUrl?'Vidéo importée : '+xss(video.dataset.filename||'Vidéo'):'Aucune vidéo importée.')+'</p>'+
+ btn('mockupVideo',playing?'■ Retirer la vidéo de cette case':'▶ Placer ma vidéo dans cette case',true)+
+ (!media.videoUrl?btn('importVideo','Importer une vidéo MP4'):'')+
+ '<p class="ecs-note">La vidéo apparaît à la lecture et dans l’export compatible. Elle doit être réimportée lorsque tu ouvres un projet JSON.</p></div>':'')+
+ '</div>';
+}
+
 function elementsMarkup(){
  if(elementsCategory==='illustrations')return illustrationCatalog();
  if(elementsCategory==='animations')return stickerAnimations();
  if(elementsCategory==='frames')return frameCatalog();
  if(elementsCategory==='grids')return gridCatalog();
+ if(elementsCategory==='mockups')return mockupCatalog();
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
   const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
@@ -487,7 +528,9 @@ function cover(c,img){if(!img || !(img.videoWidth||img.naturalWidth))return;cons
 function paint(c,t,mark=false){
  c.save();c.fillStyle=S.bg;c.fillRect(0,0,1080,1920);
  c.filter=S.filter==='mono'?'grayscale(1) contrast(1.12)':S.filter==='vivid'?'saturate(1.55) contrast(1.08)':S.filter==='cinema'?'contrast(1.15) saturate(.85)':S.filter==='gold'?'sepia(.2) saturate(1.3)':'none';
- try{if(media.videoUrl&&video.readyState>=2)cover(c,video);else if(media.bgImage)cover(c,media.bgImage)}catch{}
+ try{const videoInMockup=S.elements.some(e=>e.kind==='photoFrame'&&e.isMockup&&e.mockVideo);
+ if(media.videoUrl&&video.readyState>=2&&!videoInMockup)cover(c,video);
+ else if(media.bgImage)cover(c,media.bgImage)}catch{}
  c.filter='none';
  for(const e of S.elements){if(t<e.start||t>e.end)continue;
   c.save();
@@ -544,7 +587,8 @@ function paint(c,t,mark=false){
   if(e.kind==='image'){const im=images.get(e.id);if(im?.complete)try{c.drawImage(im,e.x,e.y,e.w,e.h)}catch{}}
   if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
   if(e.kind==='sticker'&&window.ELOAHAnimations)window.ELOAHAnimations.render(c,e);
-  if(e.kind==='photoFrame'&&window.ELOAHFrames)window.ELOAHFrames.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1);
+  if(e.kind==='photoFrame'&&e.isMockup&&window.ELOAHMockups)window.ELOAHMockups.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1,video);
+  else if(e.kind==='photoFrame'&&window.ELOAHFrames)window.ELOAHFrames.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1);
   c.restore();
   if(mark&&selected===e.id){c.strokeStyle='#1676d0';c.lineWidth=6;c.strokeRect(e.x,e.y,e.w,e.h);c.fillStyle='#fff';c.fillRect(e.x+e.w-12,e.y+e.h-12,24,24);c.strokeRect(e.x+e.w-12,e.y+e.h-12,24,24)}
  }
@@ -560,7 +604,7 @@ function seek(t){S.time=Math.max(0,Math.min(S.duration,t));if(media.videoUrl&&vi
 function renderTimeline(){
  const px=Math.max(720,S.duration*70+45),ruler=one('#ecs-timeruler'),tracks=one('#ecs-tracks');ruler.style.width=px+'px';
  ruler.innerHTML=Array.from({length:Math.floor(S.duration)+1},(_,i)=>'<span style="left:'+(i*70)+'px">'+clock(i)+'</span>').join('');
- const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'?e.text:e.kind==='photoFrame'?(e.isGrid?'Grille · ':'Cadre · ')+(window.ELOAHFrames?.byId.get(e.variant)?.label||'Photos'):(e.kind==='image'?'Image':e.kind))+'</button>';
+ const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'?e.text:e.kind==='photoFrame'?(e.isGrid?'Grille · ':e.isMockup?'Maquette · ':'Cadre · ')+((window.ELOAHFrames?.byId.get(e.variant)?.label||window.ELOAHFrames?.byId.get(e.variant)?.name)||'Photos'):(e.kind==='image'?'Image':e.kind))+'</button>';
  let bg='<div class="ecs-track" style="width:'+px+'px"><button class="ecs-clip" data-tab="import" style="left:0;width:'+(S.duration*70)+'px">▧ '+(media.videoUrl?'Vidéo importée':media.bgImage?'Photo de fond':'Fond / scène')+'</button></div>';
  const els='<div class="ecs-track" style="width:'+px+'px">'+S.elements.map(e=>clip(e,'text')).join('')+'</div>';
  const au='<div class="ecs-track" style="width:'+px+'px">'+(media.audioUrl?'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px">♫ Piste audio</button>':'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px;opacity:.65">＋ Ajouter une piste audio</button>')+'</div>';
@@ -814,7 +858,15 @@ function action(name){
  if(name==='duplicate'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à dupliquer.');return}const {id:originalId,...copy}=e;const cloned=add(e.kind,{...copy,x:Math.min(Math.max(0,1080-e.w),e.x+36),y:Math.min(Math.max(0,1920-e.h),e.y+36)});if(e.kind==='image'&&images.has(e.id))images.set(cloned.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(cloned.id+':'+i,src)}saveFrameMediaLocal()}return}
  if(name==='delete'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à supprimer.');return}snapshot();S.elements=S.elements.filter(x=>x.id!==selected);if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++)framePhotos.delete(e.id+':'+i);saveFrameMediaLocal()}selected=null;setTab('elements');renderTimeline();saveLocal();return}
  if(name==='forward'||name==='backward'){let i=S.elements.findIndex(x=>x.id===selected);if(i<0)return;snapshot();let e=S.elements.splice(i,1)[0];S.elements.splice(name==='forward'?S.elements.length:0,0,e);saveLocal();return}
- if(name==='gridFillAll'){
+ if(name==='mockupVideo'){
+  const e=frameSelected();
+  if(!e?.isMockup){toast('Sélectionne une maquette avec écran.');return}
+  snapshot();
+  if(e.mockVideo&&e.videoSlot===activeFrameSlot){e.mockVideo=false;toast('La vidéo a été retirée de cet écran.')}
+  else{e.mockVideo=true;e.videoSlot=activeFrameSlot;if(!media.videoUrl){toast('Choisis une vidéo à insérer dans la maquette.');one('#ecs-video-input').click()}}
+  saveLocal();renderSide();draw();return;
+ }
+  if(name==='gridFillAll'){
   const f=frameSelected();if(!f?.isGrid){toast('Sélectionne une grille.');return}
   activeFrameSlot=0;importKind='frame';one('#ecs-image-input').click();return;
  }
@@ -838,6 +890,16 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const mockupGroup=ev.target.closest('[data-mockup-group]');
+ if(mockupGroup){mockupView=mockupGroup.dataset.mockupGroup;mockupSearch='';renderSide();return}
+ const mockupAdd=ev.target.closest('[data-mockup-add]');
+ if(mockupAdd){
+  const item=window.ELOAHMockups?.byId.get(mockupAdd.dataset.mockupAdd);if(!item)return;
+  const size=window.ELOAHFrames.dimensions(item);
+  const e=add('photoFrame',{variant:item.id,isMockup:true,mockVideo:false,videoSlot:0,color:item.palette.accent,borderSize:9,frameSlots:[],w:size.w,h:size.h,x:Math.round((1080-size.w)/2),y:Math.round((1920-size.h)/2)});
+  activeFrameSlot=0;mockupView='home';mockupSearch='';renderSide();toast(item.name+' ajouté. Remplis ses emplacements dans Modifier.');
+  return;
+ }
  const gridGroup=ev.target.closest('[data-grid-group]');
  if(gridGroup){gridView=gridGroup.dataset.gridGroup;gridSearch='';renderSide();return}
  const gridAdd=ev.target.closest('[data-grid-add]');
@@ -895,7 +957,7 @@ root.addEventListener('click',ev=>{
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
  const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
- const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';activeTab='elements';renderSide();return}
+ const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';mockupView='home';mockupSearch='';activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(clone.id+':'+i,src)}saveFrameMediaLocal()}toast('Élément dupliqué sur la page.')}return}
  const tb=ev.target.closest('[data-tab]');if(tb&&root.contains(tb)){setTab(tb.dataset.tab);return}
@@ -913,6 +975,13 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(e.target.id==='ecs-mockup-search'){
+  mockupSearch=e.target.value;
+  const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  all('.ecs-mock-tile').forEach(el=>{el.hidden=!!term&&!el.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term)});
+  all('[data-mockup-section]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-mock-tile')].some(el=>!el.hidden)});
+  return;
+ }
  if(e.target.id==='ecs-grid-search'){
   gridSearch=e.target.value;
   const needle=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
