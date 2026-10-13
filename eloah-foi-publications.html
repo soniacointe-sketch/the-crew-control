@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#202125">
+<title>Toutes les publications · ELOAH Foi & Spiritualité</title>
+<meta name="description" content="Explorez les dossiers, manuscrits, collections, archives et recherches de la bibliothèque ELOAH Foi & Spiritualité.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Publications et recherches · ELOAH">
+<meta property="og:description" content="Une bibliothèque de recherches sur les textes sacrés, manuscrits et traditions spirituelles.">
+<meta property="og:image" content="https://soniacointe-sketch.github.io/the-crew-control/assets/foi-publications/alpha-aleph.webp">
+<style>
+:root{color-scheme:dark;--dark:#202125;--panel:#303238;--strip:#4b5059;--gold:#e0b959;--cream:#f7f2e6;--sub:#c7c5c1}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--dark);color:var(--cream);font:15px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}button,input{font:inherit}button{cursor:pointer}
+a:focus-visible,button:focus-visible,input:focus-visible{outline:3px solid #f3d385;outline-offset:3px}
+.wrapper{max-width:1420px;margin:0 auto;padding:0 clamp(16px,3vw,44px)}
+.site-header{display:flex;justify-content:space-between;align-items:center;gap:15px;padding:23px 0;border-bottom:1px solid #6e6354;flex-wrap:wrap}
+.logo{font:clamp(25px,3vw,38px)/1 Georgia,serif;letter-spacing:.13em;text-decoration:none}.logo span{color:var(--gold)}
+.header-links{display:flex;align-items:center;gap:18px;flex-wrap:wrap}.header-links a{text-decoration:none;font-size:13px}.header-links a:hover{text-decoration:underline}
+.hero{padding:58px 0 44px}.eyebrow{font-size:11px;color:var(--gold);font-weight:800;letter-spacing:.22em;text-transform:uppercase}.hero h1{font:normal clamp(48px,7vw,90px)/1.04 Georgia,serif;letter-spacing:-.055em;margin:15px 0 15px}.hero p{max-width:790px;font:clamp(18px,2vw,24px)/1.45 Georgia,serif;color:#e2d8c9;margin:0}
+.intro{font:13px/1.6 system-ui;color:#c5c2bc;margin-top:14px}
+.search-panel{padding:24px;border:1px solid #56565b;background:#292b30}
+.search-panel label{display:block;font-size:12px;letter-spacing:.12em;font-weight:750;margin-bottom:9px;color:var(--gold);text-transform:uppercase}
+#search{display:block;width:100%;background:#f7f7f5;border:0;border-radius:3px;padding:15px 16px;color:#191919;outline-offset:3px}
+.filters{display:flex;gap:9px;flex-wrap:wrap;margin-top:17px}
+.filters button{border:1px solid #777373;border-radius:3px;background:transparent;color:#f9f9f5;padding:9px 13px;font-size:12px}
+.filters button.active,.filters button:hover{background:var(--gold);border-color:var(--gold);color:#141414}
+.catalog-head{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:35px 0 20px;padding-bottom:13px;border-bottom:2px solid var(--gold)}
+.catalog-head h2{margin:0;font:700 18px system-ui;letter-spacing:.12em;text-transform:uppercase}.catalog-head p{margin:0;color:#e1dfdb;font-size:13px}
+.catalog{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.pub-card{min-width:0;border:1px solid #62646b;border-radius:12px;overflow:hidden;background:var(--panel);transition:transform .16s,border-color .16s}
+.pub-card[hidden],#none[hidden]{display:none!important}
+.pub-card:hover{transform:translateY(-3px);border-color:var(--gold)}
+.pub-link{height:100%;display:flex;flex-direction:column;text-decoration:none}
+.pub-cover{position:relative;aspect-ratio:4/5;background:#111;overflow:hidden}
+.pub-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.cover-flag{position:absolute;top:12px;left:12px;background:#d33d2c;color:white;border-radius:4px;padding:7px 10px;font-size:10px;font-weight:850;letter-spacing:.1em}
+.cover-abstract{height:100%;display:flex;flex-direction:column;justify-content:space-between;align-items:center;padding:30px 18px;text-align:center;background:radial-gradient(circle at 52% 63%,#474036 0,#232323 60%,#111 100%);border-bottom:1px solid #7b6949}
+.cover-brand{font:10px Georgia,serif;letter-spacing:.2em;color:#f0e7d5;border-bottom:1px solid var(--gold);padding-bottom:13px;width:100%}
+.cover-letter{font:italic clamp(70px,13vw,130px)/1 Georgia,serif;color:#b78f4a}
+.cover-label{font-size:11px;letter-spacing:.14em;color:var(--gold);text-transform:uppercase}
+.pub-info{padding:19px 20px 21px;min-height:194px;background:var(--strip);display:flex;flex-direction:column;align-items:start}
+.pub-category{font-size:10px;letter-spacing:.11em;color:#e8c16a;font-weight:800;text-transform:uppercase}
+.pub-info h2{font:700 clamp(19px,2.1vw,25px)/1.22 Georgia,serif;margin:8px 0;color:white}
+.pub-info p{color:#f1f0ed;margin:0 0 13px;font:13px/1.54 system-ui}
+.pub-open{display:inline-block;font-size:11px;letter-spacing:.06em;font-weight:800;border:1px solid #aaaeb5;padding:6px 9px;margin-top:auto}
+#none{margin:30px 0;padding:24px;background:#34363b}
+.footer{margin:55px 0 22px;border-top:1px solid #77707a;padding:20px 0;color:#c8c4be;display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap;font-size:12px}
+.footer a{text-decoration:none;color:var(--gold)}
+@media(max-width:1000px){.catalog{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:620px){.catalog{grid-template-columns:1fr}.hero{padding:36px 0}.site-header{align-items:start}.pub-info{min-height:unset}.catalog-head{align-items:start}.catalog-head h2{font-size:16px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.pub-card{transition:none}}
+</style>
+</head>
+<body>
+<div class="wrapper">
+<header class="site-header">
+<a class="logo" href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md">EL<span>O</span>AH</a>
+<nav class="header-links" aria-label="Navigation de la revue">
+<a href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md">Accueil Foi & Spiritualité</a>
+<a href="eloah-foi-grande-bibliotheque.html">Grande bibliothèque</a>
+<a href="mes-univers.html">Mes univers</a>
+</nav>
+</header>
+<main>
+<section class="hero"><div class="eyebrow">ELOAH · FOI & SPIRITUALITÉ · ARCHIVES VIVANTES</div><h1>Les publications.</h1>
+<p>Textes anciens, manuscrits, traditions, archives et découvertes. Choisis une recherche et poursuis la lecture.</p>
+<div class="intro">89 entrées du lecteur · 6 couvertures illustrées · Les archives sont conservées, y compris les études reconstituées.</div>
+</section>
+<section class="search-panel" aria-label="Recherche des publications">
+<label for="search">Rechercher dans les titres et thèmes</label>
+<input id="search" type="search" placeholder="Ex. Qumrân, Marie-Madeleine, Alpha, chapelet..." autocomplete="off">
+<div class="filters" aria-label="Filtrer par collection">
+<button type="button" data-filter="all" aria-pressed="true" class="active">Tous les dossiers</button>
+<button type="button" data-filter="Chemin personnel" aria-pressed="false">Chemin personnel</button>
+<button type="button" data-filter="Bibliothèque" aria-pressed="false">Bibliothèque</button>
+<button type="button" data-filter="Collections" aria-pressed="false">Collections</button>
+<button type="button" data-filter="Manuscrits &amp; enquêtes" aria-pressed="false">Manuscrits &amp; enquêtes</button>
+<button type="button" data-filter="Marie-Madeleine" aria-pressed="false">Marie-Madeleine</button>
+<button type="button" data-filter="Paraboles" aria-pressed="false">Paraboles</button>
+<button type="button" data-filter="Archives" aria-pressed="false">Archives</button>
+<button type="button" data-filter="Reconstitutions" aria-pressed="false">Reconstitutions</button>
+<button type="button" data-filter="Sources &amp; illustrations" aria-pressed="false">Sources &amp; illustrations</button>
+</div>
+</section>
+<div class="catalog-head"><h2>Publications & recherches</h2><p id="count" aria-live="polite">89 documents</p></div>
+<section class="catalog" id="catalog" aria-label="Catalogue de tous les dossiers">
+<article class="pub-card" data-group="Chemin personnel" data-search="dossier personnel eloah-foi-dossier-personnel-complet.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md" aria-label="Lire Dossier personnel" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">01</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>Dossier personnel</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="01 · ma foi et mes convictions eloah-foi-personnel-01-ma-foi.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-01-ma-foi.md" aria-label="Lire 01 · Ma foi et mes convictions" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">02</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>01 · Ma foi et mes convictions</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="02 · jesus-christ eloah-foi-personnel-02-jesus-christ.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-02-jesus-christ.md" aria-label="Lire 02 · Jésus-Christ" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">03</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>02 · Jésus-Christ</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="03 · marie et le chapelet eloah-foi-personnel-03-marie-chapelet.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-03-marie-chapelet.md" aria-label="Lire 03 · Marie et le chapelet" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">04</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>03 · Marie et le chapelet</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="04 · saint pierre et les cles eloah-foi-personnel-04-saint-pierre.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-04-saint-pierre.md" aria-label="Lire 04 · Saint Pierre et les clés" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">05</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>04 · Saint Pierre et les clés</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="05 · pape leon xiv eloah-foi-personnel-05-leon-xiv.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-05-leon-xiv.md" aria-label="Lire 05 · Pape Léon XIV" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">06</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>05 · Pape Léon XIV</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="06 · anges et archanges eloah-foi-personnel-06-anges-archanges.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-06-anges-archanges.md" aria-label="Lire 06 · Anges et archanges" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">07</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>06 · Anges et archanges</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="07 · bible et textes sacres eloah-foi-personnel-07-bible-textes.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-07-bible-textes.md" aria-label="Lire 07 · Bible et textes sacrés" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">08</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>07 · Bible et textes sacrés</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="08 · lettres et creation eloah-foi-personnel-08-lettres-creation.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-08-lettres-creation.md" aria-label="Lire 08 · Lettres et création" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">09</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>08 · Lettres et création</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="09 · symboles et architecture eloah-foi-personnel-09-symboles-architecture.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-09-symboles-architecture.md" aria-label="Lire 09 · Symboles et architecture" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">10</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>09 · Symboles et architecture</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="10 · histoire et manuscrits eloah-foi-personnel-10-histoire-manuscrits.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-10-histoire-manuscrits.md" aria-label="Lire 10 · Histoire et manuscrits" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">11</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>10 · Histoire et manuscrits</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="11 · mes prieres et meditations eloah-foi-personnel-11-prieres-meditations.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-11-prieres-meditations.md" aria-label="Lire 11 · Mes prières et méditations" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">12</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>11 · Mes prières et méditations</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Chemin personnel" data-search="12 · mon journal de decouvertes eloah-foi-personnel-12-journal-decouvertes.md chemin personnel ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-personnel-12-journal-decouvertes.md" aria-label="Lire 12 · Mon journal de découvertes" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">13</span><span class="cover-label">Chemin personnel</span></div></div>
+    <div class="pub-info"><span class="pub-category">Chemin personnel</span><h2>12 · Mon journal de découvertes</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Bibliothèque" data-search="grand sommaire · toutes mes recherches eloah-foi-grand-sommaire-recherches.md bibliotheque ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-grand-sommaire-recherches.md" aria-label="Lire Grand sommaire · Toutes mes recherches" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">14</span><span class="cover-label">Bibliothèque</span></div></div>
+    <div class="pub-info"><span class="pub-category">Bibliothèque</span><h2>Grand sommaire · Toutes mes recherches</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Bibliothèque" data-search="grande bibliotheque eloah-foi-bibliotheque-complete.md bibliotheque ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-bibliotheque-complete.md" aria-label="Lire Grande bibliothèque" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">15</span><span class="cover-label">Bibliothèque</span></div></div>
+    <div class="pub-info"><span class="pub-category">Bibliothèque</span><h2>Grande bibliothèque</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Bibliothèque" data-search="registre · recherches a retrouver eloah-foi-registre-chantiers-retrouver.md bibliotheque ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-registre-chantiers-retrouver.md" aria-label="Lire Registre · Recherches à retrouver" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">16</span><span class="cover-label">Bibliothèque</span></div></div>
+    <div class="pub-info"><span class="pub-category">Bibliothèque</span><h2>Registre · Recherches à retrouver</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="manuscrits sur jesus enfant eloah-jesus-enfant-manuscrits.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-jesus-enfant-manuscrits.md" aria-label="Lire Manuscrits sur Jésus enfant" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">17</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>Manuscrits sur Jésus enfant</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-001 · jesus enfant et les lettres eloah-alpha-001-jesus-enfant-lettres.md manuscrits &amp; enquetes jesus enfant, les lettres grecques et hebraiques, les traditions et les manuscrits.">
+    <a href="foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md" aria-label="Lire ALPHA-001 · Jésus enfant et les lettres" class="pub-link">
+    <div class="pub-cover"><img src="assets/foi-publications/alpha-aleph.webp" alt="Illustration éditoriale de ALPHA-001 · Jésus enfant et les lettres, image créée pour ELOAH" loading="lazy" width="600" height="750"><span class="cover-flag">ILLUSTRÉ</span></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-001 · Jésus enfant et les lettres</h2><p>Jésus enfant, les lettres grecques et hébraïques, les traditions et les manuscrits.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="michel-4q529 · etude critique eloah-foi-michel-4q529-etude-critique.md manuscrits &amp; enquetes etude critique du manuscrit arameen 4q529 et des visions celestes.">
+    <a href="foi-control.html?file=eloah-foi-michel-4q529-etude-critique.md" aria-label="Lire MICHEL-4Q529 · Étude critique" class="pub-link">
+    <div class="pub-cover"><img src="assets/foi-publications/michel-4q529.webp" alt="Illustration éditoriale de MICHEL-4Q529 · Étude critique, image créée pour ELOAH" loading="lazy" width="600" height="750"><span class="cover-flag">ILLUSTRÉ</span></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>MICHEL-4Q529 · Étude critique</h2><p>Étude critique du manuscrit araméen 4Q529 et des visions célestes.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="michel-4q529/b · collation trois fragments eloah-foi-michel-4q529-collation-fragments.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-michel-4q529-collation-fragments.md" aria-label="Lire MICHEL-4Q529/B · Collation trois fragments" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">20</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>MICHEL-4Q529/B · Collation trois fragments</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-002 · zachee et l&#39;alphabet eloah-alpha-002-zachee-lettres.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-002-zachee-lettres.md" aria-label="Lire ALPHA-002 · Zachée et l&#39;alphabet" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">21</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-002 · Zachée et l&#39;alphabet</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-003 · geometrie d&#39;alpha eloah-alpha-003-geometrie-lettre.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-003-geometrie-lettre.md" aria-label="Lire ALPHA-003 · Géométrie d&#39;Alpha" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">22</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-003 · Géométrie d&#39;Alpha</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-004 · aleph et beth eloah-alpha-004-aleph-beth-creation.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-004-aleph-beth-creation.md" aria-label="Lire ALPHA-004 · Aleph et Beth" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">23</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-004 · Aleph et Beth</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-005 · ecritures anciennes eloah-alpha-005-lettres-ecriture-antique.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-005-lettres-ecriture-antique.md" aria-label="Lire ALPHA-005 · Écritures anciennes" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">24</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-005 · Écritures anciennes</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-006 · alphabets des musees eloah-alpha-006-exercices-alphabet-musees.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-006-exercices-alphabet-musees.md" aria-label="Lire ALPHA-006 · Alphabets des musées" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">25</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-006 · Alphabets des musées</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-007 · lecture paleographique eloah-alpha-007-lecture-paleographique.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-007-lecture-paleographique.md" aria-label="Lire ALPHA-007 · Lecture paléographique" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">26</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-007 · Lecture paléographique</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-008 · ostracon de toronto eloah-alpha-008-ostracon-toronto.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-008-ostracon-toronto.md" aria-label="Lire ALPHA-008 · Ostracon de Toronto" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">27</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-008 · Ostracon de Toronto</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-009 · planche et collation eloah-alpha-009-planche-originale-toronto.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-009-planche-originale-toronto.md" aria-label="Lire ALPHA-009 · Planche et collation" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">28</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-009 · Planche et collation</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="alpha-008 · ostracon grec de toronto eloah-alpha-008-toronto-transcription-critique.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-alpha-008-toronto-transcription-critique.md" aria-label="Lire ALPHA-008 · Ostracon grec de Toronto" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">29</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>ALPHA-008 · Ostracon grec de Toronto</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Bibliothèque" data-search="les 10 grandes collections eloah-foi-collections-index.md bibliotheque ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collections-index.md" aria-label="Lire Les 10 grandes collections" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">30</span><span class="cover-label">Bibliothèque</span></div></div>
+    <div class="pub-info"><span class="pub-category">Bibliothèque</span><h2>Les 10 grandes collections</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="01 · jesus, l’enfance inconnue eloah-foi-collection-01-jesus-enfant.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-01-jesus-enfant.md" aria-label="Lire 01 · Jésus, l’enfance inconnue" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">31</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>01 · Jésus, l’enfance inconnue</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="02 · paroles de jesus eloah-foi-collection-02-paroles-jesus.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-02-paroles-jesus.md" aria-label="Lire 02 · Paroles de Jésus" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">32</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>02 · Paroles de Jésus</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="03 · marie et les femmes eloah-foi-collection-03-marie-femmes.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-03-marie-femmes.md" aria-label="Lire 03 · Marie et les femmes" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">33</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>03 · Marie et les femmes</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="04 · anges et mondes celestes eloah-foi-collection-04-anges-cieux.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-04-anges-cieux.md" aria-label="Lire 04 · Anges et mondes célestes" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">34</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>04 · Anges et mondes célestes</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="05 · manuscrits de qumran eloah-foi-collection-05-qumran.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-05-qumran.md" aria-label="Lire 05 · Manuscrits de Qumrân" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">35</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>05 · Manuscrits de Qumrân</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="06 · passion et apotres eloah-foi-collection-06-passion-apotres.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-06-passion-apotres.md" aria-label="Lire 06 · Passion et apôtres" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">36</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>06 · Passion et apôtres</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="07 · apocalypses et au-dela eloah-foi-collection-07-apocalypses.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-07-apocalypses.md" aria-label="Lire 07 · Apocalypses et au-delà" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">37</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>07 · Apocalypses et au-delà</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="08 · nag hammadi eloah-foi-collection-08-nag-hammadi.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-08-nag-hammadi.md" aria-label="Lire 08 · Nag Hammadi" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">38</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>08 · Nag Hammadi</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="09 · temoignages historiques eloah-foi-collection-09-temoignages-historiques.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-09-temoignages-historiques.md" aria-label="Lire 09 · Témoignages historiques" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">39</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>09 · Témoignages historiques</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Collections" data-search="10 · transmission et canon eloah-foi-collection-10-transmission-canon.md collections ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-collection-10-transmission-canon.md" aria-label="Lire 10 · Transmission et canon" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">40</span><span class="cover-label">Collections</span></div></div>
+    <div class="pub-info"><span class="pub-category">Collections</span><h2>10 · Transmission et canon</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="apo-019 · livre secret de jacques eloah-foi-apo-019-livre-secret-jacques.md manuscrits &amp; enquetes le livre secret de jacques, les lacunes et la transmission des textes.">
+    <a href="foi-control.html?file=eloah-foi-apo-019-livre-secret-jacques.md" aria-label="Lire APO-019 · Livre secret de Jacques" class="pub-link">
+    <div class="pub-cover"><img src="assets/foi-publications/livre-secret-jacques.webp" alt="Illustration éditoriale de APO-019 · Livre secret de Jacques, image créée pour ELOAH" loading="lazy" width="600" height="750"><span class="cover-flag">ILLUSTRÉ</span></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>APO-019 · Livre secret de Jacques</h2><p>Le Livre secret de Jacques, les lacunes et la transmission des textes.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="apo-019/a · collation pages 1–3 eloah-foi-apo-019-collation-pages-1-3.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-apo-019-collation-pages-1-3.md" aria-label="Lire APO-019/A · Collation pages 1–3" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">42</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>APO-019/A · Collation pages 1–3</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Manuscrits &amp; enquêtes" data-search="apo-019/t · traduction integrale de jacques eloah-foi-apo-019-traduction-integrale.md manuscrits &amp; enquetes ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-apo-019-traduction-integrale.md" aria-label="Lire APO-019/T · Traduction intégrale de Jacques" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">43</span><span class="cover-label">Manuscrits &amp; enquêtes</span></div></div>
+    <div class="pub-info"><span class="pub-category">Manuscrits &amp; enquêtes</span><h2>APO-019/T · Traduction intégrale de Jacques</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Marie-Madeleine" data-search="magdalena-007 · le chiffre sept eloah-foi-magdalena-007-sept.md marie-madeleine marie-madeleine, le chiffre sept, les evangiles et les traditions.">
+    <a href="foi-control.html?file=eloah-foi-magdalena-007-sept.md" aria-label="Lire MAGDALENA-007 · Le chiffre sept" class="pub-link">
+    <div class="pub-cover"><img src="assets/foi-publications/marie-madeleine-sept.webp" alt="Illustration éditoriale de MAGDALENA-007 · Le chiffre sept, image créée pour ELOAH" loading="lazy" width="600" height="750"><span class="cover-flag">ILLUSTRÉ</span></div>
+    <div class="pub-info"><span class="pub-category">Marie-Madeleine</span><h2>MAGDALENA-007 · Le chiffre sept</h2><p>Marie-Madeleine, le chiffre sept, les Évangiles et les traditions.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Marie-Madeleine" data-search="magdalena-008 · pierre et l’autorite eloah-foi-magdalena-008-pierre-autorite.md marie-madeleine ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-magdalena-008-pierre-autorite.md" aria-label="Lire MAGDALENA-008 · Pierre et l’autorité" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">45</span><span class="cover-label">Marie-Madeleine</span></div></div>
+    <div class="pub-info"><span class="pub-category">Marie-Madeleine</span><h2>MAGDALENA-008 · Pierre et l’autorité</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Marie-Madeleine" data-search="magdalena-009 · memoire et marginalisation eloah-foi-magdalena-009-memoire-patristique.md marie-madeleine ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-magdalena-009-memoire-patristique.md" aria-label="Lire MAGDALENA-009 · Mémoire et marginalisation" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">46</span><span class="cover-label">Marie-Madeleine</span></div></div>
+    <div class="pub-info"><span class="pub-category">Marie-Madeleine</span><h2>MAGDALENA-009 · Mémoire et marginalisation</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Archives" data-search="archives integrales · toutes nos recherches eloah-foi-archives-completes-index.md archives index des archives integrales, sources retrouvees et dossiers conserves.">
+    <a href="foi-control.html?file=eloah-foi-archives-completes-index.md" aria-label="Lire Archives intégrales · Toutes nos recherches" class="pub-link">
+    <div class="pub-cover"><img src="assets/foi-publications/archives-integrales.webp" alt="Illustration éditoriale de Archives intégrales · Toutes nos recherches, image créée pour ELOAH" loading="lazy" width="600" height="750"><span class="cover-flag">ILLUSTRÉ</span></div>
+    <div class="pub-info"><span class="pub-category">Archives</span><h2>Archives intégrales · Toutes nos recherches</h2><p>Index des archives intégrales, sources retrouvées et dossiers conservés.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Archives" data-search="scanner ii · les djinns de salomon eloah-scanner-salomon-djinns-integral.md archives ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-scanner-salomon-djinns-integral.md" aria-label="Lire SCANNER II · Les djinns de Salomon" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">48</span><span class="cover-label">Archives</span></div></div>
+    <div class="pub-info"><span class="pub-category">Archives</span><h2>SCANNER II · Les djinns de Salomon</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Archives" data-search="scanner iii · archives de salomon eloah-scanner-salomon-archives-integral.md archives ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-scanner-salomon-archives-integral.md" aria-label="Lire SCANNER III · Archives de Salomon" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">49</span><span class="cover-label">Archives</span></div></div>
+    <div class="pub-info"><span class="pub-category">Archives</span><h2>SCANNER III · Archives de Salomon</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Archives" data-search="commencements i · genese eloah-scanner-commencements-01-genese.md archives ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-scanner-commencements-01-genese.md" aria-label="Lire COMMENCEMENTS I · Genèse" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">50</span><span class="cover-label">Archives</span></div></div>
+    <div class="pub-info"><span class="pub-category">Archives</span><h2>COMMENCEMENTS I · Genèse</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Archives" data-search="commencements ii · coran eloah-scanner-commencements-02-coran.md archives ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-scanner-commencements-02-coran.md" aria-label="Lire COMMENCEMENTS II · Coran" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">51</span><span class="cover-label">Archives</span></div></div>
+    <div class="pub-info"><span class="pub-category">Archives</span><h2>COMMENCEMENTS II · Coran</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Archives" data-search="commencements iii · bible et coran eloah-scanner-commencements-03-bible-coran.md archives lecture comparee des textes de creation dans la bible et le coran.">
+    <a href="foi-control.html?file=eloah-scanner-commencements-03-bible-coran.md" aria-label="Lire COMMENCEMENTS III · Bible et Coran" class="pub-link">
+    <div class="pub-cover"><img src="assets/foi-publications/bible-coran.webp" alt="Illustration éditoriale de COMMENCEMENTS III · Bible et Coran, image créée pour ELOAH" loading="lazy" width="600" height="750"><span class="cover-flag">ILLUSTRÉ</span></div>
+    <div class="pub-info"><span class="pub-category">Archives</span><h2>COMMENCEMENTS III · Bible et Coran</h2><p>Lecture comparée des textes de création dans la Bible et le Coran.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Archives" data-search="adam · terre, souffle et conscience eloah-scanner-adam-terre-souffle.md archives ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-scanner-adam-terre-souffle.md" aria-label="Lire ADAM · Terre, souffle et conscience" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">53</span><span class="cover-label">Archives</span></div></div>
+    <div class="pub-info"><span class="pub-category">Archives</span><h2>ADAM · Terre, souffle et conscience</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="jardin · l&#39;arbre et l&#39;interdit eloah-reconstitution-jardin-arbre-interdit.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-jardin-arbre-interdit.md" aria-label="Lire JARDIN · L&#39;arbre et l&#39;interdit" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">54</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>JARDIN · L&#39;arbre et l&#39;interdit</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="flamme · temple et republique eloah-reconstitution-flamme-temple-republique.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-flamme-temple-republique.md" aria-label="Lire FLAMME · Temple et République" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">55</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>FLAMME · Temple et République</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="bayeux · le fil et la conquete eloah-reconstitution-bayeux-fil-conquete.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-bayeux-fil-conquete.md" aria-label="Lire BAYEUX · Le fil et la conquête" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">56</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>BAYEUX · Le fil et la conquête</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="babel · langue et tour eloah-reconstitution-babel-langue-tour-nom.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-babel-langue-tour-nom.md" aria-label="Lire BABEL · Langue et tour" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">57</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>BABEL · Langue et tour</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="nom efface · identite et memoire eloah-reconstitution-nom-efface-identite.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-nom-efface-identite.md" aria-label="Lire NOM EFFACÉ · Identité et mémoire" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">58</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>NOM EFFACÉ · Identité et mémoire</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="alexandrie · bibliotheque eloah-reconstitution-alexandrie-bibliotheque.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-alexandrie-bibliotheque.md" aria-label="Lire ALEXANDRIE · Bibliothèque" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">59</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>ALEXANDRIE · Bibliothèque</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="sommeil · songes des prophetes eloah-reconstitution-sommeil-prophetes.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-sommeil-prophetes.md" aria-label="Lire SOMMEIL · Songes des prophètes" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">60</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>SOMMEIL · Songes des prophètes</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="miroir · image et discernement eloah-reconstitution-miroir-reflets.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-miroir-reflets.md" aria-label="Lire MIROIR · Image et discernement" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">61</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>MIROIR · Image et discernement</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="enfer · traditions et jugements eloah-reconstitution-enfer-traditions.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-enfer-traditions.md" aria-label="Lire ENFER · Traditions et jugements" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">62</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>ENFER · Traditions et jugements</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="saba · reine et salomon eloah-reconstitution-reine-saba.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-reine-saba.md" aria-label="Lire SABA · Reine et Salomon" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">63</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>SABA · Reine et Salomon</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="deluge · noe et mesopotamie eloah-reconstitution-deluge-noe.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-deluge-noe.md" aria-label="Lire DÉLUGE · Noé et Mésopotamie" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">64</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>DÉLUGE · Noé et Mésopotamie</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="arche · alliance et noe eloah-reconstitution-arche-alliance-noe.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-arche-alliance-noe.md" aria-label="Lire ARCHE · Alliance et Noé" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">65</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>ARCHE · Alliance et Noé</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="livre des morts · egypte eloah-reconstitution-livre-morts-egyptien.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-livre-morts-egyptien.md" aria-label="Lire LIVRE DES MORTS · Égypte" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">66</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>LIVRE DES MORTS · Égypte</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Reconstitutions" data-search="marie · les traditions eloah-reconstitution-marie-traditions.md reconstitutions ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-reconstitution-marie-traditions.md" aria-label="Lire MARIE · Les traditions" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">67</span><span class="cover-label">Reconstitutions</span></div></div>
+    <div class="pub-info"><span class="pub-category">Reconstitutions</span><h2>MARIE · Les traditions</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · jardin, arbre et interdit eloah-foi-source-jardin-arbre-interdit.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-jardin-arbre-interdit.md" aria-label="Lire SOURCE · Jardin, arbre et interdit" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">68</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Jardin, arbre et interdit</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · flamme, temple, republique eloah-foi-source-flamme-temple-republique.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-flamme-temple-republique.md" aria-label="Lire SOURCE · Flamme, Temple, République" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">69</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Flamme, Temple, République</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · babel, langue et nom eloah-foi-source-babel-langue-unique.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-babel-langue-unique.md" aria-label="Lire SOURCE · Babel, langue et nom" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">70</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Babel, langue et nom</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · le nom efface eloah-foi-source-nom-efface-identite.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-nom-efface-identite.md" aria-label="Lire SOURCE · Le nom effacé" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">71</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Le nom effacé</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · bibliotheque d’alexandrie eloah-foi-source-bibliotheque-alexandrie.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-bibliotheque-alexandrie.md" aria-label="Lire SOURCE · Bibliothèque d’Alexandrie" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">72</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Bibliothèque d’Alexandrie</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · sommeil des prophetes eloah-foi-source-sommeil-prophetes.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-sommeil-prophetes.md" aria-label="Lire SOURCE · Sommeil des prophètes" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">73</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Sommeil des prophètes</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · le miroir eloah-foi-source-miroir-verite-illusion.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-miroir-verite-illusion.md" aria-label="Lire SOURCE · Le miroir" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">74</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Le miroir</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · portes de l’enfer eloah-foi-source-portes-enfer.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-portes-enfer.md" aria-label="Lire SOURCE · Portes de l’enfer" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">75</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Portes de l’enfer</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · reine de saba eloah-foi-source-reine-de-saba.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-reine-de-saba.md" aria-label="Lire SOURCE · Reine de Saba" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">76</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Reine de Saba</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · deluge avant noe eloah-foi-source-deluge-avant-noe.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-deluge-avant-noe.md" aria-label="Lire SOURCE · Déluge avant Noé" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">77</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Déluge avant Noé</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · arche d’alliance eloah-foi-source-arche-alliance.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-arche-alliance.md" aria-label="Lire SOURCE · Arche d’alliance" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">78</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Arche d’alliance</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · livre des morts egyptien eloah-foi-source-livre-morts-egyptien.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-livre-morts-egyptien.md" aria-label="Lire SOURCE · Livre des morts égyptien" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">79</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Livre des morts égyptien</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · marie, deux ecritures eloah-foi-source-marie-deux-ecritures.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-marie-deux-ecritures.md" aria-label="Lire SOURCE · Marie, deux Écritures" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">80</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Marie, deux Écritures</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · jesus, le sens devenu chair eloah-foi-source-jesus-le-sens-devenu-chair.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-jesus-le-sens-devenu-chair.md" aria-label="Lire SOURCE · Jésus, le sens devenu chair" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">81</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Jésus, le sens devenu chair</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="source · les anges et les ailes eloah-foi-source-anges-ailes-art.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-source-anges-ailes-art.md" aria-label="Lire SOURCE · Les anges et les ailes" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">82</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>SOURCE · Les anges et les ailes</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="visuels originaux · inventaire 15 eloah-foi-visuels-retrouves-inventaire.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-visuels-retrouves-inventaire.md" aria-label="Lire Visuels originaux · Inventaire 15" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">83</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>Visuels originaux · Inventaire 15</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Sources &amp; illustrations" data-search="galerie · 15 visuels eloah eloah-foi-galerie-originaux.md sources &amp; illustrations ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-galerie-originaux.md" aria-label="Lire Galerie · 15 visuels ELOAH" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">84</span><span class="cover-label">Sources &amp; illustrations</span></div></div>
+    <div class="pub-info"><span class="pub-category">Sources &amp; illustrations</span><h2>Galerie · 15 visuels ELOAH</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Paraboles" data-search="paraboles · manuel de decodage et quatre etudes eloah-foi-paraboles-manuel-etude.md paraboles ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-paraboles-manuel-etude.md" aria-label="Lire PARABOLES · Manuel de décodage et quatre études" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">85</span><span class="cover-label">Paraboles</span></div></div>
+    <div class="pub-info"><span class="pub-category">Paraboles</span><h2>PARABOLES · Manuel de décodage et quatre études</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Paraboles" data-search="paraboles · grand livre (44 analyses) eloah-foi-paraboles-grand-livre-44.md paraboles ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-paraboles-grand-livre-44.md" aria-label="Lire PARABOLES · Grand Livre (44 analyses)" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">86</span><span class="cover-label">Paraboles</span></div></div>
+    <div class="pub-info"><span class="pub-category">Paraboles</span><h2>PARABOLES · Grand Livre (44 analyses)</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Paraboles" data-search="par-045 · la tete de la prophetie eloah-foi-par-045-tete-prophetie.md paraboles ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-par-045-tete-prophetie.md" aria-label="Lire PAR-045 · La tête de la prophétie" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">87</span><span class="cover-label">Paraboles</span></div></div>
+    <div class="pub-info"><span class="pub-category">Paraboles</span><h2>PAR-045 · La tête de la prophétie</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Paraboles" data-search="par-046 · pourquoi jesus parle en paraboles eloah-foi-par-046-pourquoi-jesus-paraboles.md paraboles ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md" aria-label="Lire PAR-046 · Pourquoi Jésus parle en paraboles" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">88</span><span class="cover-label">Paraboles</span></div></div>
+    <div class="pub-info"><span class="pub-category">Paraboles</span><h2>PAR-046 · Pourquoi Jésus parle en paraboles</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+<article class="pub-card" data-group="Paraboles" data-search="par-047–058 · thomas et les douze recits eloah-foi-paraboles-thomas-12-comparaisons.md paraboles ouvrir ce document dans la bibliotheque eloah.">
+    <a href="foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md" aria-label="Lire PAR-047–058 · Thomas et les douze récits" class="pub-link">
+    <div class="pub-cover"><div class="cover-abstract" aria-hidden="true"><span class="cover-brand">ELOAH · FOI & SPIRITUALITÉ</span><span class="cover-letter">89</span><span class="cover-label">Paraboles</span></div></div>
+    <div class="pub-info"><span class="pub-category">Paraboles</span><h2>PAR-047–058 · Thomas et les douze récits</h2><p>Ouvrir ce document dans la bibliothèque ELOAH.</p><span class="pub-open">LIRE LE DOSSIER ↗</span></div>
+    </a></article>
+</section>
+<p id="none" hidden role="status">Aucun dossier ne correspond à cette recherche. Essaie un autre mot ou change de catégorie.</p>
+</main>
+<footer class="footer"><span>© ELOAH · Foi & Spiritualité — chaque dossier conserve son statut documentaire.</span><a href="foi-control.html?file=eloah-foi-archives-completes-index.md">Archives complètes ↗</a></footer>
+</div>
+<script>
+(()=>{
+const cards=[...document.querySelectorAll(".pub-card")];
+const buttons=[...document.querySelectorAll("[data-filter]")];
+const input=document.getElementById("search"),count=document.getElementById("count"),none=document.getElementById("none");
+let chosen="all";
+const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+function update(){
+ const q=norm(input.value.trim());let visible=0;
+ for(const card of cards){
+ const show=(chosen==="all"||card.dataset.group===chosen)&&(!q||card.dataset.search.includes(q));
+ card.hidden=!show;if(show)visible++;
+ }
+ count.textContent=visible+" / "+cards.length+" documents";
+ none.hidden=visible!==0;
+}
+buttons.forEach(b=>b.onclick=()=>{chosen=b.dataset.filter;buttons.forEach(x=>{const active=x===b;x.classList.toggle("active",active);x.setAttribute("aria-pressed",active?"true":"false")});update()});
+input.addEventListener("input",update);
+const params=new URLSearchParams(location.search);
+const group=params.get("categorie");if(group){const found=buttons.find(b=>b.dataset.filter===group);if(found)found.click()}
+const term=params.get("q");if(term){input.value=term;update()}
+})();
+</script>
+</body></html>
