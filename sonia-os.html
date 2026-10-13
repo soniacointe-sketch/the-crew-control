@@ -761,7 +761,14 @@ async function loadCrewControlMembers(force=false){
 }
 
 function openEditor(id){editId=id||null;const c=configs[view];if(!c)return;const o=db[view].find(x=>x.id===id)||{};document.getElementById("editTitle").textContent=(id?"Modifier : ":"Ajouter : ")+c.title;document.getElementById("fields").innerHTML=c.fields.map(([key,label,type])=>{const val=esc(o[key]??(type==="business"?(universes.find(u=>u[0]===scope)?.[1]||"SONIA OS"):""));let control;if(type==="textarea"){control='<textarea class="field" name="'+key+'" rows="5">'+val+'</textarea>'}else if(type==="business"){control='<select class="field" name="'+key+'">'+universes.map(([,v])=>'<option '+(v===o[key]||!o[key]&&v===(universes.find(u=>u[0]===scope)?.[1]||"The Crew Orchies")?"selected":"")+'>'+esc(v)+'</option>').join("")+'</select>'}else if(type.startsWith("select:")){control='<select class="field" name="'+key+'">'+type.slice(7).split("|").map(v=>'<option '+(v===o[key]?"selected":"")+'>'+esc(v)+'</option>').join("")+'</select>'}else control='<input class="field" name="'+key+'" type="'+type+'" value="'+val+'" '+(type==="number"?'step="0.01"':'')+'>';return '<label>'+esc(label)+control+'</label>'}).join("");document.getElementById("editor").showModal()}
-document.getElementById("recordForm").onsubmit=e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target));for(const [name,,type] of configs[view].fields)if(type==="number")data[name]=view==="assets"&&data[name]===""?null:Number(data[name])||0;const existing=db[view].find(x=>x.id===editId);data.id=existing?.id||crypto.randomUUID();if(view==="transactions"&&data.type==="vente"&&data.status==="confirmé"&&data.external_id){let duplicate=db.transactions.find(x=>x.id!==data.id&&x.source===data.source&&x.external_id===data.external_id&&x.type===data.type);if(duplicate){alert("Cette référence de paiement existe déjà. Doublon refusé.");return}}if(view==="tasks"&&data.status==="terminée"&&(!data.agent_id||!db.agents.some(a=>a.id===data.agent_id)||!data.decision_id||!db.decisions.some(d=>d.id===data.decision_id&&/valid|approuv/i.test(d.status||""))||!data.audit_id||!db.audits.some(a=>a.id===data.audit_id))){alert("Clôture refusée : agent référencé, décision AAF approuvée et audit existant obligatoires.");return}if(existing)Object.assign(existing,data);else db[view].push(data);save(view);document.getElementById("editor").close();render()};
+document.getElementById("recordForm").onsubmit=e=>{e.preventDefault();const data=Object.fromEntries(new FormData(e.target));for(const [name,,type] of configs[view].fields)if(type==="number")data[name]=view==="assets"&&data[name]===""?null:Number(data[name])||0;if(view==="integrations"&&data.status==="connecté et testé"){
+ if(!data.last_test||!String(data.evidence||"").trim()){
+  alert("Le statut « connecté et testé » requiert une date de test et une référence de preuve. La simple existence d’une fiche ne suffit pas.");
+  return;
+ }
+ if(data.last_test>new Date().toISOString().slice(0,10)){alert("La date du test ne peut pas être dans le futur.");return}
+}
+const existing=db[view].find(x=>x.id===editId);data.id=existing?.id||crypto.randomUUID();if(view==="transactions"&&data.type==="vente"&&data.status==="confirmé"&&data.external_id){let duplicate=db.transactions.find(x=>x.id!==data.id&&x.source===data.source&&x.external_id===data.external_id&&x.type===data.type);if(duplicate){alert("Cette référence de paiement existe déjà. Doublon refusé.");return}}if(view==="tasks"&&data.status==="terminée"&&(!data.agent_id||!db.agents.some(a=>a.id===data.agent_id)||!data.decision_id||!db.decisions.some(d=>d.id===data.decision_id&&/valid|approuv/i.test(d.status||""))||!data.audit_id||!db.audits.some(a=>a.id===data.audit_id))){alert("Clôture refusée : agent référencé, décision AAF approuvée et audit existant obligatoires.");return}if(existing)Object.assign(existing,data);else db[view].push(data);save(view);document.getElementById("editor").close();render()};
 
 
 let cloudSearchCache=null;
@@ -1054,7 +1061,8 @@ function openChatUrl(url){
 document.getElementById("chatPromptOpen").onclick=async()=>{
  const value=chatText.value.trim();if(!value){chatInfo.textContent="Le prompt ne peut pas être vide.";return}
  if(value.length>6000){
-  try{await navigator.clipboard.writeText(value);openChatUrl("https://chatgpt.com/");chatInfo.textContent="Prompt long copié intégralement : colle-le dans ChatGPT. Aucune mission supprimée."}
+  openChatUrl("https://chatgpt.com/");
+  try{await navigator.clipboard.writeText(value);chatInfo.textContent="Prompt long copié intégralement : colle-le dans ChatGPT. Aucun élément supprimé."}
   catch{chatText.focus();chatText.select();chatInfo.textContent="Prompt long sélectionné : copie-le manuellement puis ouvre ChatGPT pour le coller."}
   return;
  }
