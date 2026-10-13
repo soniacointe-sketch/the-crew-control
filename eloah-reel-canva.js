@@ -485,12 +485,60 @@ function mockupControls(e){
  '</div>';
 }
 
+
+let shapeView='home',shapeSearch='';
+function shapeTile(item){
+ if(!item)return '';
+ const linear=window.ELOAHShapes.isLine(item);
+ const term=(item.label+' '+item.group+' '+item.id).toLocaleLowerCase('fr');
+ return '<button type="button" class="ecs-shape-tile'+(linear?' is-line':'')+'" data-shape-add="'+xss(item.id)+'" data-search="'+xss(term)+'" title="Ajouter '+xss(item.label)+' au Reel">'+
+ '<span class="ecs-shape-preview"><img src="'+window.ELOAHShapes.thumb(item.id)+'" alt="" loading="lazy" decoding="async"></span>'+
+ '<span class="ecs-shape-caption">'+xss(item.label)+'</span><span class="ecs-shape-plus" aria-hidden="true">＋</span></button>';
+}
+function shapeSection(group,index,items=group.items){
+ return '<section class="ecs-shape-section" data-shape-section><div class="ecs-sectiontitle"><strong>'+xss(group.name)+'</strong><button type="button" data-shape-group="g'+index+'">Afficher tout →</button></div>'+
+ '<div class="ecs-shape-strip">'+items.map(shapeTile).join('')+'</div></section>';
+}
+function shapeCatalog(){
+ const lib=window.ELOAHShapes;
+ if(!lib)return '<p class="ecs-note">Les formes ne sont pas chargées. Actualise la page.</p>';
+ const recent=S.elements.filter(e=>e.kind==='shapeAsset').slice(-16).reverse().map(e=>lib.byId.get(e.variant)).filter(Boolean);
+ const head='<div class="ecs-audio-header"><button data-cat="overview" aria-label="Retour aux éléments" type="button">←</button><strong>Formes</strong></div>'+
+ '<div class="ecs-search"><span>＋</span><input id="ecs-shape-search" autocomplete="off" aria-label="Rechercher des formes" placeholder="Rechercher des formes" value="'+xss(shapeSearch)+'"><span>⌕</span></div>';
+ if(shapeView!=='home'){
+  const recentView=shapeView==='recent',index=Number(shapeView.slice(1)),g=lib.groups[index];
+  const items=recentView?recent:g?.items||[];
+  return head+'<button class="ecs-els-back" type="button" data-shape-group="home">← Toutes les formes</button><h3 class="ecs-panelheading">'+xss(recentView?'Utilisés récemment':g?.name||'Formes')+'</h3>'+
+   '<div class="ecs-shape-grid">'+items.map(shapeTile).join('')+'</div>';
+ }
+ return head+(recent.length?'<section class="ecs-shape-section" data-shape-section><div class="ecs-sectiontitle"><strong>Utilisés récemment</strong><button data-shape-group="recent" type="button">Afficher tout →</button></div><div class="ecs-shape-strip">'+recent.map(shapeTile).join('')+'</div></section>':'')+
+ lib.groups.map((g,i)=>shapeSection(g,i)).join('')+
+ '<p class="ecs-note ecs-shape-foot">166 formes vectorielles originales ELOAH. Clique pour les ajouter, puis personnalise leur couleur, contour, transparence, angle et position.</p>';
+}
+function shapeProperties(e){
+ const lib=window.ELOAHShapes,def=lib?.byId.get(e.variant);
+ if(!def)return '<p class="ecs-note">Cette forme n’est plus dans la bibliothèque.</p>';
+ const linear=lib.isLine(def),opa=Math.round((e.opacity??1)*100);
+ return '<div class="ecs-shape-properties"><strong>'+xss(def.label)+'</strong><small>'+xss(def.group)+'</small>'+
+ '<div class="ecs-shape-inline">'+
+ (linear?range('Épaisseur du trait','lineWidth',1,120,1,e.lineWidth??20):
+ range('Épaisseur du contour','strokeWidth',0,100,1,e.strokeWidth??0)+color('Couleur du contour','strokeColor',e.strokeColor||'#ffffff'))+
+ '</div>'+
+ '<label class="ecs-sidelabel">Style de ligne</label><select data-p="lineStyle">'+[['solid','Trait continu'],['dash','Tirets'],['dot','Pointillés']].map(([v,t])=>'<option value="'+v+'" '+((e.lineStyle||'solid')===v?'selected':'')+'>'+t+'</option>').join('')+'</select>'+
+ (linear?'<label class="ecs-sidelabel">Extrémités</label><select data-p="lineCap">'+[['round','Arrondies'],['butt','Plates'],['square','Carrées']].map(([v,t])=>'<option value="'+v+'" '+((e.lineCap||'round')===v?'selected':'')+'>'+t+'</option>').join('')+'</select>':'')+
+ '<label class="ecs-sidelabel">Opacité</label><input type="range" min="0" max="100" step="5" value="'+opa+'" data-shape-opacity><span class="ecs-note ecs-opacity-value">'+opa+' %</span>'+
+ range('Rotation (en degrés)','rotation',-180,180,1,e.rotation||0)+
+ '<div class="ecs-shape-flips"><button type="button" data-shape-flip="flipX" aria-pressed="'+!!e.flipX+'">↔ Inverser H</button><button type="button" data-shape-flip="flipY" aria-pressed="'+!!e.flipY+'">↕ Inverser V</button></div>'+
+ '<p class="ecs-note">Toutes ces modifications sont enregistrées dans ton projet et dans la vidéo exportée.</p></div>';
+}
+
 function elementsMarkup(){
  if(elementsCategory==='illustrations')return illustrationCatalog();
  if(elementsCategory==='animations')return stickerAnimations();
  if(elementsCategory==='frames')return frameCatalog();
  if(elementsCategory==='grids')return gridCatalog();
  if(elementsCategory==='mockups')return mockupCatalog();
+ if(elementsCategory==='shapes')return shapeCatalog();
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
   const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
@@ -587,6 +635,7 @@ function paint(c,t,mark=false){
   if(e.kind==='image'){const im=images.get(e.id);if(im?.complete)try{c.drawImage(im,e.x,e.y,e.w,e.h)}catch{}}
   if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
   if(e.kind==='sticker'&&window.ELOAHAnimations)window.ELOAHAnimations.render(c,e);
+  if(e.kind==='shapeAsset'&&window.ELOAHShapes)window.ELOAHShapes.draw(c,e);
   if(e.kind==='photoFrame'&&e.isMockup&&window.ELOAHMockups)window.ELOAHMockups.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1,video);
   else if(e.kind==='photoFrame'&&window.ELOAHFrames)window.ELOAHFrames.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1);
   c.restore();
@@ -604,7 +653,7 @@ function seek(t){S.time=Math.max(0,Math.min(S.duration,t));if(media.videoUrl&&vi
 function renderTimeline(){
  const px=Math.max(720,S.duration*70+45),ruler=one('#ecs-timeruler'),tracks=one('#ecs-tracks');ruler.style.width=px+'px';
  ruler.innerHTML=Array.from({length:Math.floor(S.duration)+1},(_,i)=>'<span style="left:'+(i*70)+'px">'+clock(i)+'</span>').join('');
- const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'?e.text:e.kind==='photoFrame'?(e.isGrid?'Grille · ':e.isMockup?'Maquette · ':'Cadre · ')+((window.ELOAHFrames?.byId.get(e.variant)?.label||window.ELOAHFrames?.byId.get(e.variant)?.name)||'Photos'):(e.kind==='image'?'Image':e.kind))+'</button>';
+ const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'?e.text:e.kind==='shapeAsset'?(window.ELOAHShapes?.byId.get(e.variant)?.label||'Forme'):e.kind==='photoFrame'?(e.isGrid?'Grille · ':e.isMockup?'Maquette · ':'Cadre · ')+((window.ELOAHFrames?.byId.get(e.variant)?.label||window.ELOAHFrames?.byId.get(e.variant)?.name)||'Photos'):(e.kind==='image'?'Image':e.kind))+'</button>';
  let bg='<div class="ecs-track" style="width:'+px+'px"><button class="ecs-clip" data-tab="import" style="left:0;width:'+(S.duration*70)+'px">▧ '+(media.videoUrl?'Vidéo importée':media.bgImage?'Photo de fond':'Fond / scène')+'</button></div>';
  const els='<div class="ecs-track" style="width:'+px+'px">'+S.elements.map(e=>clip(e,'text')).join('')+'</div>';
  const au='<div class="ecs-track" style="width:'+px+'px">'+(media.audioUrl?'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px">♫ Piste audio</button>':'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px;opacity:.65">＋ Ajouter une piste audio</button>')+'</div>';
@@ -825,6 +874,7 @@ function renderSide(){
    html='<p class="ecs-note">Fais glisser cet élément sur le Reel. Pour le redimensionner, tire le petit carré dans son angle inférieur droit.</p>';
    if(e.kind==='text')html+='<label class="ecs-sidelabel">Texte</label><textarea rows="4" data-p="text">'+xss(e.text)+'</textarea>'+range('Taille des caractères','font',14,250,1,e.font);
    if(e.kind==='photoFrame')html+=frameProperties(e);
+   if(e.kind==='shapeAsset')html+=shapeProperties(e);
    if(e.kind==='chart')html+='<label class="ecs-sidelabel">Valeurs séparées par des virgules</label><input data-p="values" value="'+xss(e.values||'35,55,25,45')+'">';
    if(e.kind==='sticker')html+='<p class="ecs-note">Sticker animé : '+xss(window.ELOAHAnimations?.byId.get(e.variant)?.name||'Animation ELOAH')+'</p><label class="ecs-sidelabel">Mouvement</label><select data-p="motion">'+Object.entries(window.ELOAHAnimations?.motionNames||{}).map(([v,n])=>'<option value="'+v+'" '+((e.motion||'pulse')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>'+range('Vitesse (0,2× à 4×)','speed',.2,4,.1,e.speed||1);
    else html+='<label class="ecs-sidelabel">Animation</label><select data-p="animation">'+[['none','Aucune'],['fade','Apparition douce'],['pop','Zoom dynamique'],['slide','Entrée latérale'],['pulse','Pulsation'],['float','Flottement'],['bounce','Rebond'],['wobble','Oscillation'],['swing','Balancement'],['rotate','Rotation'],['twinkle','Clignotement'],['shake','Vibration']].map(([v,n])=>'<option value="'+v+'" '+((e.animation||'none')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>';
@@ -890,6 +940,25 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const shapeGroup=ev.target.closest('[data-shape-group]');
+ if(shapeGroup){shapeView=shapeGroup.dataset.shapeGroup;shapeSearch='';renderSide();return}
+ const shapeAdd=ev.target.closest('[data-shape-add]');
+ if(shapeAdd){
+   const def=window.ELOAHShapes?.byId.get(shapeAdd.dataset.shapeAdd);if(!def)return;
+   const linear=window.ELOAHShapes.isLine(def),name=def.label;
+   const e=add('shapeAsset',{variant:def.id,color:'#182632',strokeWidth:0,strokeColor:'#ffffff',
+    lineStyle:['dash','arrowdash'].includes(def.params.style)?'dash':def.params.style==='dot'?'dot':'solid',
+    lineWidth:def.params.style==='thick'?43:def.params.style==='thin'?10:20,lineCap:'round',
+    opacity:1,rotation:0,flipX:false,flipY:false,w:linear?810:550,h:linear?230:550,
+    x:linear?135:265,y:linear?880:685});
+   toast(name+' ajouté — modifie les réglages ou déplace la forme sur le Reel.');return;
+ }
+ const flipShape=ev.target.closest('[data-shape-flip]');
+ if(flipShape){
+  const e=S.elements.find(x=>x.id===selected&&x.kind==='shapeAsset');if(!e)return;
+  const prop=flipShape.dataset.shapeFlip;if(!['flipX','flipY'].includes(prop))return;
+  snapshot();e[prop]=!e[prop];saveLocal();renderSide();draw();return;
+ }
  const mockupGroup=ev.target.closest('[data-mockup-group]');
  if(mockupGroup){mockupView=mockupGroup.dataset.mockupGroup;mockupSearch='';renderSide();return}
  const mockupAdd=ev.target.closest('[data-mockup-add]');
@@ -957,7 +1026,7 @@ root.addEventListener('click',ev=>{
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
  const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
- const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';mockupView='home';mockupSearch='';activeTab='elements';renderSide();return}
+ const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';mockupView='home';mockupSearch='';shapeView='home';shapeSearch='';activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(clone.id+':'+i,src)}saveFrameMediaLocal()}toast('Élément dupliqué sur la page.')}return}
  const tb=ev.target.closest('[data-tab]');if(tb&&root.contains(tb)){setTab(tb.dataset.tab);return}
@@ -971,10 +1040,23 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(e.target.id==='ecs-tts-speed'){voiceSpeed=Number(e.target.value);return}
  if(e.target.id==='ecs-tts-voice'){const voices=window.speechSynthesis?.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr'))||[];voiceSelection=voices[Number(e.target.value)]?.name||'';return}
  const p=e.target.dataset.p,setting=e.target.dataset.setting;
- if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();return}
+ if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion','lineStyle','lineCap','strokeColor'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();return}
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(e.target.id==='ecs-shape-search'){
+  shapeSearch=e.target.value;
+  const q=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  all('.ecs-shape-tile').forEach(t=>{t.hidden=!!q&&!t.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(q)});
+  all('[data-shape-section]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-shape-tile')].some(tile=>!tile.hidden)});
+  return;
+ }
+ if(e.target.hasAttribute('data-shape-opacity')){
+  const element=S.elements.find(el=>el.id===selected&&el.kind==='shapeAsset');if(!element)return;
+  element.opacity=Math.min(1,Math.max(0,Number(e.target.value)/100));
+  const v=e.target.parentElement?.querySelector('.ecs-opacity-value');if(v)v.textContent=Math.round(element.opacity*100)+' %';
+  saveLocal();draw();return;
+ }
  if(e.target.id==='ecs-mockup-search'){
   mockupSearch=e.target.value;
   const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
@@ -1039,7 +1121,7 @@ one('.ecs-sidebody').addEventListener('input',e=>{
   if(e.target.id==='ecs-audio-search'){const term=e.target.value.trim().toLocaleLowerCase('fr');all('.ecs-soundrow').forEach(row=>row.hidden=!row.dataset.search.includes(term));all('[data-soundsection]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-soundrow')].some(row=>!row.hidden)});return}
  if(e.target.id==='ecs-tts-text'){voiceText=e.target.value;return}
  if(e.target.id==='ecs-element-search'){const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');all('.ecs-category').forEach(button=>{button.hidden=!button.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term)});return}
- const p=e.target.dataset.p;if(p==='text'||p==='values'){const el=S.elements.find(q=>q.id===selected);if(el){el[p]=e.target.value;draw()}}if(p==='color'||p==='bg'){if(p==='bg')S.bg=e.target.value;else{const el=S.elements.find(q=>q.id===selected);if(el)el.color=e.target.value}draw()}
+ const p=e.target.dataset.p;if(p==='text'||p==='values'){const el=S.elements.find(q=>q.id===selected);if(el){el[p]=e.target.value;draw()}}if(p==='color'||p==='bg'||p==='strokeColor'){if(p==='bg')S.bg=e.target.value;else{const el=S.elements.find(q=>q.id===selected);if(el)el[p]=e.target.value}draw();saveLocal()}
 });
 function coords(ev){const r=canvas.getBoundingClientRect();return {x:(ev.clientX-r.left)/r.width*1080,y:(ev.clientY-r.top)/r.height*1920}}
 canvas.addEventListener('pointerdown',ev=>{
