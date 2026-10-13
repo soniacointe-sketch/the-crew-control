@@ -89,7 +89,7 @@ if(remote){syncRev=remote.updated_at;if(marker===snapshot()){acceptRemote(remote
 else{syncBaseline=marker;syncStatus('Données différentes sur cet appareil · choisir Sauvegarder ou Récupérer avant la synchronisation automatique')}}
 else{syncRev=null;syncBaseline=snapshot();syncStatus('Connecté · première sauvegarde en préparation');scheduleCloudSync()}
 }catch(e){syncStatus('Synchronisation indisponible : '+e.message)}}
-async function pushCloud(manual){if(!syncUser||syncBusy||syncRev===undefined)return;const markerKey='eloah-sync-baseline-'+syncUser.id;const current=snapshot();if(!manual&&syncBaseline!==current&&syncBaseline!==null){syncStatus('Conflit local · choisir quelle version conserver');return}
+async function pushCloud(manual){if(!syncUser||syncBusy||syncRev===undefined)return;const markerKey='eloah-sync-baseline-'+syncUser.id;const current=snapshot();if(!manual&&syncBaseline===null){syncStatus('Versions différentes · choisir Sauvegarder ou Récupérer');return}
 syncBusy=true;try{const {data:rows,error}=await cloud.rpc('eloah_boards_sync',{p_expected:syncRev,p_payload:data});if(error)throw error;const row=rows?.[0];if(!row)throw Error('Réponse de synchronisation absente');if(!row.saved){syncRev=row.remote_updated_at;syncStatus('Modifications sur un autre appareil · sauvegarde suspendue. Utilise Récupérer ou exporte tes cartes.');syncBaseline=null;return}
 syncRev=row.remote_updated_at;syncBaseline=current;localStorage.setItem(markerKey,current);syncStatus('Synchronisé automatiquement · '+new Date().toLocaleTimeString('fr-FR'));if(snapshot()!==current)scheduleCloudSync();
 }catch(e){syncStatus('Erreur de sauvegarde · '+e.message)}finally{syncBusy=false}}
