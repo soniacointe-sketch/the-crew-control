@@ -330,6 +330,25 @@ body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral blockquote
 @media(max-width:760px){#foi-texte-integral .foi-integral-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}#foi-texte-integral .foi-integral-chapter-grid{grid-template-columns:1fr}#foi-texte-integral .foi-integral-chapter{min-height:75px;padding:14px}}
 @media(max-width:420px){#foi-texte-integral .foi-integral-metric{padding:15px 10px;min-height:96px}#foi-texte-integral .foi-integral-chapter strong{font-size:14px}}
 @media print{#foi-texte-integral .foi-integral-table-details{display:none!important}#foi-texte-integral .foi-integral-chapter{break-inside:avoid}}
+</style><style id="eloah-foi-chapter-covers-style">
+body.eloah-revue .rev-spiritual-chapters{margin-top:55px}
+body.eloah-revue .rev-spiritual-chapters .rev-pubhead{flex-wrap:wrap}
+body.eloah-revue .rev-spiritual-chapters .rev-pubhead i{min-width:50px}
+body.eloah-revue .rev-personal-lead{font:14px/1.7 system-ui,sans-serif;color:#d6d3d0;max-width:800px;margin:-3px 0 25px}
+body.eloah-revue .rev-personal-stories{grid-template-columns:repeat(3,minmax(0,1fr))!important;align-items:stretch}
+body.eloah-revue .rev-chapter-story{display:flex!important;flex-direction:column;text-decoration:none;cursor:pointer}
+body.eloah-revue .rev-chapter-story:focus-visible{outline:3px solid #e0b96e;outline-offset:3px}
+body.eloah-revue .rev-chapter-story img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center;display:block;background:#26282a}
+body.eloah-revue .rev-chapter-story .rev-story-info{display:flex;flex-direction:column;flex:1}
+body.eloah-revue .rev-chapter-story .rev-story-info small{letter-spacing:.09em}
+body.eloah-revue .rev-chapter-story .rev-story-info strong{font-size:clamp(19px,2.2vw,24px)!important}
+body.eloah-revue .rev-chapter-story .rev-story-info span{flex:1}
+body.eloah-revue .rev-chapter-story .rev-story-info em{align-self:flex-start;margin-top:18px}
+body.eloah-revue .rev-chapter-no-image{min-height:310px}
+body.eloah-revue .rev-chapter-no-image:before{content:"ELOAH · FOI & SPIRITUALITÉ";background:linear-gradient(130deg,#3d3942,#927447);color:#f7e6ca;display:grid;place-items:center;min-height:220px;letter-spacing:.13em;font:700 11px/1.7 system-ui;padding:10px;text-align:center}
+body.eloah-revue .rev-personal-image-note{margin:21px 0 0;font:11px/1.7 system-ui;color:#bfc0c1}
+@media(max-width:900px){body.eloah-revue .rev-personal-stories{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:560px){body.eloah-revue .rev-personal-stories{grid-template-columns:1fr!important}body.eloah-revue .rev-chapter-story .rev-story-info strong{font-size:22px!important}}
 </style></head><body>
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
@@ -786,9 +805,47 @@ function renderPersonalIndex(){
  ["TRADITIONS COMPARÉES","Bible et Coran","Comparer les récits des commencements sans les confondre.","eloah-scanner-commencements-03-bible-coran.md"],
  ["ARCHIVES · RECHERCHES","Archives intégrales","Textes retrouvés, reconstitutions et recherches conservées.","eloah-foi-archives-completes-index.md"]];
  entries.forEach(([cat,title,desc,file])=>{const b=section("button","rev-story");b.type="button";const img=section("img","");img.src="assets/foi-publications/"+ELOAH_PUBLICATION_IMAGES[file];img.alt="Couverture de publication ELOAH : "+title;img.loading="lazy";const info=section("div","rev-story-info");info.append(section("small","",cat),section("strong","",title),section("span","",desc),section("em","","LIRE LE DOSSIER ↗"));b.append(img,info);b.onclick=()=>jump(file);stories.append(b)});pubs.append(stories);article.append(pubs);
- bar("Mon chemin spirituel","DOUZE CHAPITRES");
- const chapters=section("div","rev-chapters");
- DOCS.map((d,i)=>({d,i})).filter(x=>x.d[2]==="Personnel"&&x.d[1]!=="eloah-foi-dossier-personnel-complet.md").forEach(({d,i},j)=>{const b=section("button","");b.type="button";b.append(section("em","",String(j+1).padStart(2,"0")),section("strong","",d[0].slice(5)));b.onclick=()=>openDoc(i);chapters.append(b)});article.append(chapters);
+ const journey=section("section","rev-pubs rev-spiritual-chapters");
+ journey.id="foi-mon-chemin";
+ journey.setAttribute("aria-label","Mon chemin spirituel · Douze chapitres illustrés");
+ const journeyHead=section("div","rev-pubhead");
+ journeyHead.append(section("h2","","Mon chemin spirituel"),section("i",""));
+ const allPersonal=section("a","rev-catalogue-link","Voir le dossier complet →");
+ allPersonal.href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md#foi-texte-integral";
+ journeyHead.append(allPersonal);journey.append(journeyHead);
+ journey.append(section("p","rev-personal-lead","Douze chapitres pour explorer les textes, les symboles, la prière et les questions personnelles. Chaque couverture ouvre le chapitre entier."));
+ const chapters=section("div","rev-stories rev-personal-stories");
+ const descriptions=[["01 · CHEMIN INTÉRIEUR","Le Christ, mes repères et les questions qui nourrissent la foi.","assets/foi-chapitres/01-ma-foi.svg"],["02 · JÉSUS & SES PAROLES","Sa vie, ses enseignements, son enfance et leurs traditions.","assets/foi-chapitres/02-jesus.svg"],["03 · MARIE & PRIÈRE","Le chapelet, le Rosaire et les chemins de méditation.","assets/foi-chapitres/03-marie.svg"],["04 · LES CLÉS DE PIERRE","Le roc, le pardon, l'autorité et le service.","assets/foi-chapitres/04-pierre.svg"],["05 · AUGUSTIN & LÉON XIV","Unité, paix, discernement et héritage spirituel.","assets/foi-chapitres/05-leon.svg"],["06 · MONDES CÉLESTES","Michel, les archanges et les témoignages anciens.","assets/foi-chapitres/06-anges.svg"],["07 · ÉCRITURES SACRÉES","Bible, apocryphes, Qumrân et transmission des textes.","assets/foi-chapitres/07-bible.svg"],["08 · ALPHA, ALEPH & BETH","Les alphabets, les lettres et les traditions de création.","assets/foi-chapitres/08-lettres.svg"],["09 · SYMBOLES & LIEUX","La croix, la lumière, les pierres et l'architecture sacrée.","assets/foi-chapitres/09-symboles.svg"],["10 · SOURCES & HISTOIRE","Enquêtes, manuscrits, variantes et archives à vérifier.","assets/foi-chapitres/10-manuscrits.svg"],["11 · PAROLES INTÉRIEURES","Prières proposées, méditations et cheminement personnel.","assets/foi-chapitres/11-prieres.svg"],["12 · LE CARNET VIVANT","Découvertes datées, questions et nouvelles recherches.","assets/foi-chapitres/12-journal.svg"]];
+ const personalDocs=DOCS.map((d,i)=>({d,i})).filter(x=>x.d[2]==="Personnel"&&x.d[1]!=="eloah-foi-dossier-personnel-complet.md");
+ personalDocs.forEach(({d,i},j)=>{
+  const [category,desc,src]=descriptions[j]||["CHAPITRE "+String(j+1).padStart(2,"0"),"Explorer ce chapitre.",""];
+  const card=section("a","rev-story rev-chapter-story");
+  card.href="foi-control.html?file="+encodeURIComponent(d[1]);
+  card.setAttribute("aria-label","Lire le chapitre "+String(j+1).padStart(2,"0")+" : "+d[0]);
+  const cover=section("img","");
+  cover.src=src;
+  cover.alt="Illustration éditoriale ELOAH : "+d[0].replace(/^\\d+\\s*[·—-]\\s*/,"");
+  cover.loading="lazy";cover.decoding="async";
+  cover.width=840;cover.height=1080;
+  cover.onerror=()=>{cover.style.display="none";card.classList.add("rev-chapter-no-image")};
+  const info=section("div","rev-story-info");
+  info.append(
+   section("small","",category),
+   section("strong","",d[0].replace(/^\\d+\\s*[·—-]\\s*/,"")),
+   section("span","",desc),
+   section("em","","LIRE LE CHAPITRE ↗")
+  );
+  card.append(cover,info);
+  card.addEventListener("click",event=>{
+   if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+   event.preventDefault();
+   openDoc(i);
+  });
+  chapters.append(card);
+ });
+ journey.append(chapters);
+ journey.append(section("p","rev-personal-image-note","Illustrations symboliques créées pour ELOAH, et non reproductions historiques. Les sources et le statut des interprétations sont précisés dans les textes."));
+ article.append(journey);
  const footer=section("div","rev-footer");const archive=document.createElement("a");archive.href="foi-control.html?file=eloah-foi-grand-sommaire-recherches.md";archive.textContent="Explorer toutes les recherches →";const library=document.createElement("a");library.href="eloah-foi-grande-bibliotheque.html";library.textContent="Grande bibliothèque visuelle →";footer.append(archive,library);article.append(footer);headings();
 }
 function renderMarkdown(md){if(typeof marked==="undefined"){article.textContent=md;return}article.innerHTML=marked.parse(md,{gfm:true});article.querySelectorAll("img").forEach(x=>{x.loading="lazy";x.onerror=()=>{const a=document.createElement("a");a.href=x.src;a.textContent="Ouvrir l'illustration : "+x.alt;a.target="_blank";x.replaceWith(a)}});article.querySelectorAll("a").forEach(a=>{if(a.protocol==="http:"||a.protocol==="https:"){a.target="_blank";a.rel="noopener noreferrer"}const u=new URL(a.href,location.href);if(u.origin===location.origin&&u.pathname===location.pathname&&(u.searchParams.has("doc")||u.searchParams.has("file"))){const next=u.searchParams.has("file")?DOCS.findIndex(d=>d[1]===u.searchParams.get("file")):Number(u.searchParams.get("doc"));if(Number.isInteger(next)&&next>=0&&next<DOCS.length){a.target="_self";a.onclick=e=>{e.preventDefault();const section=u.hash?decodeURIComponent(u.hash):"";if(next===current&&section){const target=article.querySelector("#"+CSS.escape(section.slice(1)));if(target){target.scrollIntoView({behavior:"smooth",block:"start"});history.replaceState({},"",location.pathname+"?file="+encodeURIComponent(DOCS[current][1])+section);return}}openDoc(next,section)}}}});headings();}
