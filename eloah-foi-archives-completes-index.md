@@ -84,6 +84,7 @@ Ces six fichiers proviennent des **originaux retrouvés dans notre bibliothèque
 | Code | Dossier existant | Accès direct |
 |---|---|---|
 | MAN-JESUS-001/002 | Papyrus de Hambourg, oiseaux d'argile, écrits d'enfance, versions | [Les manuscrits sur Jésus enfant](foi-control.html?file=eloah-jesus-enfant-manuscrits.md) |
+| ALPHA-001 | Synthèse reconstituée : Jésus enfant, Alpha/Aleph et méthode | [Ouvrir](foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md) |
 | ALPHA-002 | Jésus et Zachée : Alpha et Bêta | [Ouvrir](foi-control.html?file=eloah-alpha-002-zachee-lettres.md) |
 | ALPHA-003 | Géométrie de la lettre Alpha | [Ouvrir](foi-control.html?file=eloah-alpha-003-geometrie-lettre.md) |
 | ALPHA-004 | Aleph, Beth et création | [Ouvrir](foi-control.html?file=eloah-alpha-004-aleph-beth-creation.md) |
