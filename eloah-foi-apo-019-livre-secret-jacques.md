@@ -255,6 +255,12 @@ Ces références sont à consulter en tant que **bibliographie scientifique**, n
 
 [← Retour à l'Atlas](eloah-apocryphes-atlas.html?q=Apocryphon%20of%20James) · [Ouvrir le manuscrit](https://www.gospels.net/manuscript) · [Continuer la bibliothèque Nag Hammadi](foi-control.html?file=eloah-foi-collection-08-nag-hammadi.md)
 
+## Nouvelle enquête · PAR-045 — La tête de la prophétie
+
+La formule sur la **tête retranchée avec Jean** est analysée comme une énigme métaphorique, liée à la question de la prophétie et de la compréhension des paraboles. **[Lire l'étude complète avec le copte, les parallèles, les hypothèses et les objections](foi-control.html?file=eloah-foi-par-045-tete-prophetie.md)**.
+
+[Lire également les 44 études de paraboles et discours figurés](foi-control.html?file=eloah-foi-paraboles-grand-livre-44.md).
+
 ## Nouvelle passerelle — PARABOLES LAB
 
 L'Apocryphon de Jacques (NHC I,2, pages 7–8) rappelle plusieurs images de paraboles : les bergers, la semence, la construction, les lampes des jeunes filles, le salaire des ouvriers et l'argent. Ces correspondances motivent une **étude comparée**, mais **ne permettent pas** de déduire automatiquement un sens secret unique.
