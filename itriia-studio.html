@@ -81,4 +81,4 @@ $('#voice-design-create').onclick=()=>{const n=$('#voice-name').value.trim(),d=$
 $('#export').onclick=()=>{const blob=new Blob([JSON.stringify(entries,null,2)],{type:'application/json'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='itriia-historique.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)};
 $('#clear').onclick=()=>{if(confirm('Effacer définitivement les brouillons de ce navigateur ?')){entries=[];localStorage.removeItem(key);render()}};render()
 })();
-</script></body></html>
+</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
