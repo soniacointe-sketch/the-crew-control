@@ -674,10 +674,11 @@ async function usePhoto(id,asBackground=false){
   if(!blob.size||!blob.type.startsWith('image/'))throw Error('Fichier reçu non reconnu comme image');
   if(blob.size>15*1024*1024)throw Error('Image trop volumineuse');
   const f=new File([blob],p.id+'.jpg',{type:blob.type});
-  const added=await loadImage(f,asBackground?'background':'element');
+  const filled=!!frameSelected()&&!asBackground;
+  const added=await loadImage(f,asBackground?'background':filled?'frame':'element');
   if(added===false)throw Error('Décodage de l’image impossible');
   rememberPhoto(id);closePhotoModal();if(activeTab==='photos')renderSide();
-  toast(asBackground?'Fond photo installé : '+p.name:'Photo ajoutée sur le Reel : '+p.name);
+  toast(asBackground?'Fond photo installé : '+p.name:filled?'Photo placée dans le cadre : '+p.name:'Photo ajoutée sur le Reel : '+p.name);
  }catch(e){
   toast('Ajout direct impossible : '+e.message+'. Ouvre Pexels puis télécharge et importe la photo.');
   const section=one('.ecs-sidebody');
@@ -759,7 +760,7 @@ function action(name){
  if(name==='png'){drawPng();return}
  if(name==='save'){saveProject();return}
  if(name==='load'){one('#ecs-project-input').click();return}
- if(name==='reset'){if(!confirm('Créer un nouveau projet ? Les modifications non exportées seront perdues.'))return;snapshot();S.elements=[];S.bg='#fffaf1';S.duration=5;S.trimStart=0;S.time=0;S.filter='none';selected=null;pause();for(const url of [media.videoUrl,media.audioUrl,media.imageUrl])if(url)URL.revokeObjectURL(url);media.videoUrl=null;media.audioUrl=null;media.imageUrl=null;media.bgImage=null;video.removeAttribute('src');audio.removeAttribute('src');images.clear();setTab('models');renderTimeline();saveLocal();return}
+ if(name==='reset'){if(!confirm('Créer un nouveau projet ? Les modifications non exportées seront perdues.'))return;snapshot();S.elements=[];S.bg='#fffaf1';S.duration=5;S.trimStart=0;S.time=0;S.filter='none';selected=null;pause();for(const url of [media.videoUrl,media.audioUrl,media.imageUrl])if(url)URL.revokeObjectURL(url);media.videoUrl=null;media.audioUrl=null;media.imageUrl=null;media.bgImage=null;video.removeAttribute('src');audio.removeAttribute('src');images.clear();framePhotos.clear();for(const url of frameObjectUrls)URL.revokeObjectURL(url);frameObjectUrls.clear();try{localStorage.removeItem('eloah_reel_editor_frame_assets')}catch{};setTab('models');renderTimeline();saveLocal();return}
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
@@ -921,18 +922,51 @@ one('#ecs-tracks').addEventListener('pointerdown',event=>{
 const scroll=one('.ecs-timeline-scroll');
 scroll.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;const bounds=one('#ecs-tracks').getBoundingClientRect();if(!bounds.width)return;const point=ev.clientX-bounds.left;seek(point/70);const move=e=>seek((e.clientX-bounds.left)/70);scroll.addEventListener('pointermove',move);scroll.addEventListener('pointerup',()=>scroll.removeEventListener('pointermove',move),{once:true})});
 async function loadVideo(file){pause();if(media.videoUrl)URL.revokeObjectURL(media.videoUrl);media.videoUrl=URL.createObjectURL(file);video.src=media.videoUrl;video.dataset.filename=file.name;try{await new Promise((res,rej)=>{video.onloadedmetadata=res;video.onerror=()=>rej(new Error('Vidéo illisible'))});S.trimStart=0;S.duration=Math.min(60,Math.max(1,Math.round(video.duration*10)/10||5));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(0);renderTimeline();renderSide();toast('Vidéo ajoutée : '+file.name);saveLocal()}catch(e){toast('Impossible de lire la vidéo : '+e.message)}}
-async function loadImage(file,kind){const url=URL.createObjectURL(file);const im=new Image();im.src=url;try{await im.decode()}catch{URL.revokeObjectURL(url);toast('Image non lisible.');return false}
- if(kind==='element'){const e=add('image',{x:140,y:490,w:790,h:790,sourceName:file.name});images.set(e.id,im)}
- else{if(media.imageUrl)URL.revokeObjectURL(media.imageUrl);media.imageUrl=url;media.bgImage=im;toast('Image de fond ajoutée : '+file.name)}
- draw();saveLocal();return true}
+async function loadImage(file,kind,slotOverride=null){
+ const url=URL.createObjectURL(file),im=new Image();im.src=url;
+ try{await im.decode()}catch{URL.revokeObjectURL(url);toast('Image non lisible : '+file.name);return false}
+ if(kind==='frame'){
+  const f=frameSelected();
+  if(!f){URL.revokeObjectURL(url);toast('Sélectionne un cadre pour y placer la photo.');return false}
+  frameObjectUrls.add(url);
+  const slot=slotOverride===null?activeFrameSlot:Math.min(frameSlotCount(f)-1,Math.max(0,slotOverride));
+  setFramePhoto(f,slot,im);toast('Photo placée dans la case '+(slot+1)+' : '+file.name);
+ }else if(kind==='element'){
+  const e=add('image',{x:140,y:490,w:790,h:790,sourceName:file.name});images.set(e.id,im);
+ }else{
+  if(media.imageUrl)URL.revokeObjectURL(media.imageUrl);
+  media.imageUrl=url;media.bgImage=im;toast('Image de fond ajoutée : '+file.name);
+ }
+ draw();saveLocal();return true
+}
 async function loadAudio(file){if(media.audioUrl)URL.revokeObjectURL(media.audioUrl);media.audioUrl=URL.createObjectURL(file);audio.src=media.audioUrl;audio.dataset.filename=file.name;audio.load();renderTimeline();renderSide();toast('Audio ajouté : '+file.name)}
 one('#ecs-video-input').addEventListener('change',e=>{if(e.target.files[0])loadVideo(e.target.files[0]);e.target.value=''});
 one('#ecs-audio-input').addEventListener('change',e=>{if(e.target.files[0])loadAudio(e.target.files[0]);e.target.value=''});
-one('#ecs-image-input').addEventListener('change',async e=>{const a=[...e.target.files];for(const f of a)await loadImage(f,importKind);e.target.value=''});
+one('#ecs-image-input').addEventListener('change',async e=>{
+ const a=[...e.target.files],kind=importKind,slotStart=activeFrameSlot;
+ for(let i=0;i<a.length;i++){
+  if(kind==='frame'&&slotStart+i>=frameSlotCount(frameSelected())){toast('Toutes les cases du cadre sont déjà remplies.');break}
+  await loadImage(a[i],kind,kind==='frame'?slotStart+i:null);
+ }
+ e.target.value='';
+});
 const stage=one('.ecs-stagewrap');
 stage.addEventListener('dragover',e=>{e.preventDefault();stage.classList.add('ecs-dragover')});
 stage.addEventListener('dragleave',()=>stage.classList.remove('ecs-dragover'));
-stage.addEventListener('drop',async e=>{e.preventDefault();stage.classList.remove('ecs-dragover');for(const f of [...e.dataTransfer.files]){if(f.type.startsWith('video/'))await loadVideo(f);else if(f.type.startsWith('audio/'))await loadAudio(f);else if(f.type.startsWith('image/'))await loadImage(f,'background')}});
+stage.addEventListener('drop',async e=>{
+ e.preventDefault();stage.classList.remove('ecs-dragover');
+ const point=coords(e),hit=[...S.elements].reverse().find(q=>q.kind==='photoFrame'&&point.x>=q.x&&point.x<=q.x+q.w&&point.y>=q.y&&point.y<=q.y+q.h);
+ if(hit){selected=hit.id;activeFrameSlot=frameSlotNumberAt(hit,point);renderSide();renderTimeline()}
+ let slot=activeFrameSlot;
+ for(const f of [...e.dataTransfer.files]){
+  if(f.type.startsWith('video/'))await loadVideo(f);
+  else if(f.type.startsWith('audio/'))await loadAudio(f);
+  else if(f.type.startsWith('image/')){
+   const frame=frameSelected();
+   await loadImage(f,frame?'frame':'background',frame?slot++:null);
+  }
+ }
+});
 function download(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),4000)}
 function drawPng(){const c=document.createElement('canvas');c.width=1080;c.height=1920;paint(c.getContext('2d'),S.time,false);c.toBlob(b=>b?download(b,'eloah-couverture.png'):toast('Impossible de créer le PNG.'),'image/png')}
 function saveProject(){S.name=one('#ecs-name').value||'Mon Reel';saveLocal();download(new Blob([JSON.stringify({version:2,...serial(),assetsNotIncluded:true},null,2)],{type:'application/json'}),'eloah-reel-projet.json');toast('Projet enregistré. Conserve les médias séparément.')}
