@@ -110,4 +110,4 @@ try{el('notes').value=localStorage.getItem(NOTES)||'';}catch{}
 el('saveNotes').onclick=()=>{try{localStorage.setItem(NOTES,el('notes').value);message('Notes enregistrées dans ce navigateur.');}catch{message('Stockage indisponible : exporte tes notes.');}};
 el('exportNotes').onclick=()=>downloadBlob(new Blob([el('notes').value],{type:'text/plain;charset=utf-8'}),'sonia-velka-notes-privees.txt');
 openDb().then(d=>{db=d;return refresh();}).catch(()=>{el('fileList').innerHTML='<p class="small">Stockage local indisponible sur ce navigateur.</p>';message('Import de PDF indisponible.');});
-</script></body></html>
+</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
