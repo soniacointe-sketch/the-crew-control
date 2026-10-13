@@ -16,7 +16,7 @@ const KEY='eloah-boards-v1';
 const seedNames=['ELOAH','The Crew Orchies','Power & Glam','SONIA OS','PARISIS ENGINE','Foi & spiritualité','Sonia Velka','Le Lion Blanc'];
 const defaultLanes=['Idées','À faire','En cours','À vérifier','Terminé'];
 const uid=()=>globalThis.crypto?.randomUUID?.()||('id-'+Date.now()+'-'+Math.random().toString(36).slice(2));
-const fresh=()=>({version:1,active:null,boards:[{id:uid(),name:'Mon premier tableau',lanes:defaultLanes.map(n=>({id:uid(),name})),cards:[]}]});
+const fresh=()=>({version:1,active:null,boards:[{id:uid(),name:'Mon premier tableau',lanes:defaultLanes.map(n=>({id:uid(),name:n})),cards:[]}]});
 let data;try{data=JSON.parse(localStorage.getItem(KEY))}catch(e){}if(!data||!Array.isArray(data.boards))data=fresh();if(!data.active||!data.boards.some(b=>b.id===data.active))data.active=data.boards[0].id;
 const unwantedBoards=new Set(['metatron','metatron liste client','bravo','template','cuisine']);
 function withoutRemovedBoards(payload){return payload; /* Existing cards are never removed merely because of a board name. */}
