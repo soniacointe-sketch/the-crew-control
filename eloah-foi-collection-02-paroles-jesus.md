@@ -54,6 +54,10 @@ Noter les contradictions, les sources absentes, les objections, les hypothèses 
 
 
 
+## Deux nouveaux dossiers d'exégèse
+
+[**PAR-046 — Pourquoi Jésus emploie-t-il des paraboles ?**](foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md) confronte les formulations grecques de Marc, Matthieu et Luc avec Isaïe 6. [**PAR-047–058 — Douze récits de Thomas**](foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md) examine leurs différences avec les synoptiques lorsque de vrais parallèles existent.
+
 ## Passerelle — Paraboles et paroles de Jésus
 
 [Grand Livre des 44 paraboles et discours figurés](foi-control.html?file=eloah-foi-paraboles-grand-livre-44.md) · [Laboratoire interactif](eloah-foi-paraboles-lab.html) · [Enquête sur la tête de la prophétie, NHC I,2](foi-control.html?file=eloah-foi-par-045-tete-prophetie.md).
