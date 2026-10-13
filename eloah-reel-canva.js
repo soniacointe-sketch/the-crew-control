@@ -1067,7 +1067,7 @@ async function usePhoto(id,asBackground=false){
 }
 
 
-let brandView='overview',brandSearch='',brandUploadCategory='photos';
+let brandView='overview',brandSearch='',brandUploadCategory='photos',brandUploadTargetId='';
 let brandKitId='';
 try{brandKitId=localStorage.getItem('eloah_reel_active_brand')||''}catch{}
 const brandImageCache=new Map();
@@ -1971,6 +1971,46 @@ chartFileInput.addEventListener('change',async ev=>{
 });
 
 try{const saved=JSON.parse(localStorage.getItem('eloah_reel_editor')||'null');if(saved&&Array.isArray(saved.elements)){Object.assign(S,saved);S.trimStart=0;S.time=0;S.playing=false;nextId=Math.max(1,...S.elements.map(e=>+e.id+1||1))}}catch{}
+// Entrées de fichiers privées à l'espace Marque. Les médias ne sont pas envoyés sur un serveur.
+const brandImageInput=document.createElement('input');
+brandImageInput.type='file';brandImageInput.id='ecs-brand-image-input';
+brandImageInput.accept='image/png,image/jpeg,image/webp';brandImageInput.multiple=true;
+brandImageInput.className='ecs-fileinput';brandImageInput.setAttribute('aria-label','Ajouter des images à ma marque');
+root.append(brandImageInput);
+brandImageInput.addEventListener('change',async ev=>{
+ const list=[...(ev.target.files||[])];ev.target.value='';if(!list.length)return;
+ const kitId=brandUploadTargetId||brandKit()?.id,kind=brandUploadCategory;
+ let success=0,errors=[];
+ for(const file of (kind==='logo'?list.slice(0,1):list.slice(0,12))){
+  try{
+   const data=await resizeBrandImage(file,kind==='logo');
+   const result=kind==='logo'?window.ELOAHBrand.setLogo(kitId,data):
+    window.ELOAHBrand.addAsset(kitId,{data,name:file.name,category:kind});
+   if(!result)throw Error('Limite de ressources atteinte.');
+   if(result.result?.ok===false||result.ok===false)throw Error(result.result?.message||result.message||'Impossible de sauvegarder.');
+   success++;
+  }catch(e){errors.push(file.name+' : '+e.message)}
+ }
+ if(activeTab==='brand')renderSide();
+ if(success)toast(success+' ressource(s) ajoutée(s) à cette identité.');
+ if(errors.length)toast('Import incomplet : '+errors.slice(0,2).join('; '));
+});
+const brandJsonInput=document.createElement('input');
+brandJsonInput.type='file';brandJsonInput.id='ecs-brand-json-input';
+brandJsonInput.accept='.json,application/json';brandJsonInput.className='ecs-fileinput';
+brandJsonInput.setAttribute('aria-label','Importer un kit de marque ELOAH');
+root.append(brandJsonInput);
+brandJsonInput.addEventListener('change',async ev=>{
+ const file=ev.target.files?.[0];ev.target.value='';if(!file)return;
+ if(file.size>9*1024*1024)return toast('Fichier de marque trop volumineux : limite 9 Mo.');
+ try{
+  const result=window.ELOAHBrand.importKit(await file.text());
+  brandKitId=result.kit.id;brandView='overview';brandCreating=false;brandSearch='';
+  try{localStorage.setItem('eloah_reel_active_brand',brandKitId)}catch{}
+  brandStatus(result,'Identité '+result.kit.name+' importée.');
+  if(activeTab==='brand')renderSide();
+ }catch(e){toast('Import du kit impossible : '+e.message)}
+});
 one('#ecs-name').value=S.name;renderSide();renderTimeline();
 try{const persisted=JSON.parse(localStorage.getItem('eloah_reel_editor_frame_assets')||'[]');restoreFrameAssets(persisted).catch(e=>console.warn(e))}catch{}
 requestAnimationFrame(tick);
