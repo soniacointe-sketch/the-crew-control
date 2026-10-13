@@ -118,7 +118,7 @@ async function populateEloahBoards(){
   if(!response.ok)throw Error('Contenu non accessible');
   const source=await response.json();
   if(!Array.isArray(source.boards))throw Error('Contenu invalide');
-  const norm=v=>(v||'').normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
+  const norm=v=>(v||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim();
   const group=v=>norm(v).includes('power glam')?'power glam':norm(v);
   const updated=JSON.parse(JSON.stringify(data));
   let added=0;
