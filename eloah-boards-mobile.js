@@ -144,7 +144,7 @@ function renderHome(){
 }
 function fillHomeSections(){
  const term=norm(searchText.trim()),boards=allBoards().filter(b=>norm(b.name).includes(term));
- const recentSet=recent.length?recent:allBoards().slice(0,3).map(b=>b.id);
+ const recentSet=recent; // A tableau is not 'recent' before the customer has opened it.
  const first=recentSet.map(id=>boards.find(b=>b.id===id)).filter(Boolean);
  const recentList=root.querySelector("#emRecent"),workspaceList=root.querySelector("#emWorkspaceList");
  if(!recentList||!workspaceList)return;
