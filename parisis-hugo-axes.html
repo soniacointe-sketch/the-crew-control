@@ -34,10 +34,10 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <label class="row"><input id="showLegacy" type="checkbox" checked><span class="line" style="background:#c08747"></span> Anciens tracés PARISIS : méridien, triangle, rose, violet, doré, axe historique</label>
 <p class="legend">Couleurs des autres couches : <b style="color:#137c87">bleu-vert</b> et <b style="color:#bb623b">orange</b> pour Hugo ; <b style="color:#744591">violet</b> pour Fouquet royal ; <b style="color:#4267a0">bleu</b> pour les lieux des martyrs ; <b style="color:#2e7081">bleu pétrole</b> pour le panorama.</p>
 <div class="notice" id="allMapState">Les couches sont enregistrées séparément. Les repères de la basilique au nord de Paris sont accessibles avec « Voir l'ensemble des points ».</div>
-</section><section class="panel" id="nesle-coin-liaison"><div class="kicker">AXE-012 · ENCEINTE DE PHILIPPE AUGUSTE</div><h2>Trois tours, deux liaisons documentées</h2><p>La première liaison relie RS-02 (tour du Bois, enceinte de Charles V) à RS-01 (tour du Coin) le long de la rive droite. La seconde relie RS-01 et DP-04 (tour de Nesle) en vis-à-vis. Les deux relations sont documentées, leurs coordonnées et traits demeurent indicatifs.</p>
-<label class="row"><input type="checkbox" id="showRiver" checked><span class="line" style="background:#32778d"></span> Afficher les deux liaisons défensives</label>
-<div class="actions"><button id="fitRiver" type="button">Voir les trois tours reliées</button><a class="back" href="parisis-nesle-coin-seine.html">Lire les documents de 1550 et 1665 ↗</a></div>
-<div class="notice">Le trait brun représente schématiquement la courtine vers la tour du Bois ; le trait bleu acier relie la tour du Coin et Nesle en vis-à-vis. Aucune ligne n’est un relevé métrique du mur ou de la chaîne. <a href="https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263" target="_blank" rel="noopener">Ville de Paris ↗</a></div>
+</section><section class="panel" id="nesle-coin-liaison"><div class="kicker">AXE-012 · ENCEINTE DE PHILIPPE AUGUSTE</div><h2>Trois tours et le collège Mazarin : quatre liaisons</h2><p>Liaisons conservées : Bois–Coin et Coin–Nesle. Nouvelles liaisons : Nesle–Collège Mazarin (succession du site) et Collège–Louvre (vis-à-vis architectural du XVIIe siècle). Les quatre traits sont schématiques, mais leurs relations documentaires sont distinctes.</p>
+<label class="row"><input type="checkbox" id="showRiver" checked><span class="line" style="background:#32778d"></span> Afficher les 4 liaisons historiques et architecturales</label>
+<div class="actions"><button id="fitRiver" type="button">Voir les trois tours et le collège</button><a class="back" href="parisis-nesle-coin-seine.html">Lire les documents de 1550 et 1665 ↗</a></div>
+<div class="notice">Brun : courtine Bois–Coin. Bleu acier : défense Coin–Nesle. Violet pointillé : remplacement du site par le collège. Vert : dialogue architectural voulu entre le Louvre et le collège. Aucun trait n’est une mesure d’époque. <a href="https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263" target="_blank" rel="noopener">Ville de Paris ↗</a></div>
 <div id="riverPointList" class="legend"></div></section><section class="panel" id="fouquet-panorama-points">
 <div class="kicker">AXE-011 · BNF FR. 6465 · FOLIO 57</div><h2>4 sites associés au panorama de Dagobert</h2>
 <p>La notice Biblissima du folio cite le Palais de la Cité, le Louvre et la tour de Nesle. Notre-Dame est également visible dans le paysage selon l'observation iconographique. <b>Ces repères ne sont pas les positions des silhouettes sur l'image :</b> ce sont des localisations de travail sur le plan actuel.</p>
@@ -261,7 +261,8 @@ const panoramaSites=[
 
 const riverPoints=[
 {id:'RS-01',name:'Tour du Coin · rive droite · édifice disparu',lat:48.859294,lng:2.337964,source:'https://mazarinum.bibliotheque-mazarine.fr/expositions-virtuelles/item/18071-i-une-tour-de-pierre-histoire-et-archeologie',precision:'Emplacement approximatif de la tour d’angle de Philippe Auguste, au bord de la Seine près du Louvre.'},
-{id:'RS-02',name:'Tour du Bois · enceinte de Charles V · disparue',lat:48.860197,lng:2.33335,source:'https://www.persee.fr/doc/crai_0065-0536_1992_num_136_2_15102',precision:'Tour de l’enceinte de Charles V près de l’actuel pont du Carrousel. Coordonnées indicatives issues de notices historiques, non relevé archéologique de la fondation.'}
+{id:'RS-02',name:'Tour du Bois · enceinte de Charles V · disparue',lat:48.860197,lng:2.33335,source:'https://www.persee.fr/doc/crai_0065-0536_1992_num_136_2_15102',precision:'Tour de l’enceinte de Charles V près de l’actuel pont du Carrousel. Coordonnées indicatives issues de notices historiques, non relevé archéologique de la fondation.'},
+{id:'RS-03',name:'Collège des Quatre-Nations · Institut de France',lat:48.85743,lng:2.33697,source:'https://www.bibliotheque-mazarine.fr/en/about/buildings',precision:'Bâtiment conçu par Le Vau à partir de 1662 et poursuivi sous d’Orbay. Il remplace les fortifications et constructions de Nesle ; point sur le bâtiment actuel, non sur une fondation de la tour.'}
 ];
 const riverLayer=L.layerGroup(),riverMarkers={};
 function renderRiver(){
@@ -273,13 +274,21 @@ L.polyline([[coin.lat,coin.lng],[nesle.lat,nesle.lng]],{color:'#32778d',weight:6
 const bois=riverPoints.find(p=>p.id==='RS-02');
 if(bois){L.polyline([[bois.lat,bois.lng],[coin.lat,coin.lng]],{color:'#8b6745',weight:6,opacity:.92,dashArray:'9 6',lineCap:'round'})
 .bindTooltip('Retour d’enceinte Charles V, tour du Bois → tour du Coin : corridor de courtine attesté, segment approximatif',{sticky:true}).addTo(riverLayer);}
+const college=riverPoints.find(p=>p.id==='RS-03');
+if(college){
+L.polyline([[nesle.lat,nesle.lng],[college.lat,college.lng]],{color:'#846da2',weight:4,opacity:.91,dashArray:'3 6'})
+.bindTooltip('Transformation du site médiéval de Nesle par le collège Mazarin, et NON survivance physique de la tour').addTo(riverLayer);
+const louvre=panoramaSites.find(p=>p.id==='DP-03');
+if(louvre)L.polyline([[louvre.lat,louvre.lng],[college.lat,college.lng]],{color:'#4f8262',weight:3.5,opacity:.87,dashArray:'12 6'})
+.bindTooltip('Relation architecturale voulue au XVIIe siècle entre Collège des Quatre-Nations et Louvre, point de vue de façade, non axe antique').addTo(riverLayer);
+}
 for(const p of [coin,nesle,...riverPoints.filter(p=>p.id!=='RS-01')]){
-const m=L.circleMarker([p.lat,p.lng],{radius:10,weight:3,color:'#fffdf8',fillColor:'#32778d',fillOpacity:1}).addTo(riverLayer);
+const m=L.circleMarker([p.lat,p.lng],{radius:p.id==='RS-03'?11:10,weight:3,color:'#fffdf8',fillColor:p.id==='RS-03'?'#4f8262':'#32778d',fillOpacity:1}).addTo(riverLayer);
 m.bindTooltip(p.id+' · '+p.name,{sticky:true});
-m.bindPopup('<b>'+clean(p.name)+'</b><p>'+clean(p.precision||p.detail)+'</p><p>La Ville de Paris et la Bibliothèque Mazarine documentent la défense fluviale. Les coordonnées restent indicatives.</p><a href="'+(p.id==='RS-01'?p.source:'https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263')+'" target="_blank" rel="noopener">Source historique ↗</a>');
+m.bindPopup('<b>'+clean(p.name)+'</b><p>'+clean(p.precision||p.detail)+'</p><p>'+(p.id==='RS-03'?'Le Vau et la Bibliothèque Mazarine documentent le collège et le remplacement du site de Nesle. Coordonnées du bâtiment actuel ; aucun vestige de la tour n’est localisé au mètre.':'La Ville de Paris et la Bibliothèque Mazarine documentent la défense fluviale. Les coordonnées restent indicatives.')+'</p><a href="'+(p.source||'https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263')+'" target="_blank" rel="noopener">Source historique ↗</a>');
 riverMarkers[p.id]=m;
 }
-document.getElementById('riverPointList').textContent='RS-02 · Tour du Bois → RS-01 · Tour du Coin ↔ DP-04 · Tour de Nesle. Deux connexions défensives documentées : courtine du XIVe siècle et contrôle du fleuve.';
+document.getElementById('riverPointList').textContent='RS-02 Tour du Bois → RS-01 Tour du Coin ↔ DP-04 Tour de Nesle. DP-04 → RS-03 Collège Mazarin : remplacement du site. DP-03 Louvre ↔ RS-03 : vis-à-vis architectural attesté au XVIIe siècle.';
 }
 function showRiver(){const yes=document.getElementById('showRiver').checked;if(yes){if(!map.hasLayer(riverLayer))riverLayer.addTo(map)}else map.removeLayer(riverLayer);}
 function zoomRiver(){document.getElementById('showRiver').checked=true;showRiver();const n=panoramaSites.find(p=>p.id==='DP-04');map.fitBounds(L.latLngBounds([[n.lat,n.lng],...riverPoints.map(p=>[p.lat,p.lng])]).pad(.65),{maxZoom:16});}
@@ -547,6 +556,8 @@ const resolve=id=>ico(id)||roy(id);edge('LIEN-'+a+'-'+b,g,'Martyrs et œuvres',r
 }
 edge('RIVER-NESLE-COIN','Tours de Nesle et du Coin · défense de la Seine','Liaison défensive attestée',riverPoints[0],pan('DP-04'),'Deux tours en vis-à-vis documentées ; segment géographique approximatif, non reconstitution des chaînes');
 edge('RIVER-BOIS-COIN','Tour du Bois → tour du Coin','Courtine de l’enceinte de Charles V',riverPoints.find(p=>p.id==='RS-02'),riverPoints[0],'Courtine riveraine documentée ; le trait droit est indicatif et non un relevé du mur');
+edge('RIVER-NESLE-COLLEGE','Tour de Nesle → collège Mazarin','Succession architecturale du site',pan('DP-04'),riverPoints.find(p=>p.id==='RS-03'),'Même secteur historique, constructions distinctes, localisation approximative de la tour');
+edge('RIVER-COLLEGE-LOUVRE','Collège des Quatre-Nations ↔ Louvre','Vis-à-vis architectural du XVIIe siècle',riverPoints.find(p=>p.id==='RS-03'),pan('DP-03'),'Dialogue architectural documenté dans le projet Le Vau, ligne moderne indicative, pas axe ancien');
 for(const p of panoramaSites.slice(1))edge('PAN-'+p.id,'Notre-Dame ↔ '+p.name,'Même enluminure Fouquet',pan('DP-01'),p,'Graphe de comparaison, non géométrie peinte mesurée');
 const legacyLook=Object.fromEntries(legacySites.map(p=>[p.id,p]));
 function legacyLine(id,ids,name,status,close=false){
@@ -573,7 +584,7 @@ document.getElementById('allMapState').textContent='Export demandé : '+obj.feat
 }
 document.getElementById('exportAtlasAll').addEventListener('click',downloadFullAtlas);
 document.getElementById('showLegacy').addEventListener('change',showLegacyLayer);
-document.getElementById('displayAll').addEventListener('click',()=>{for(const id of ['showRoyal','showSaints','showPanorama','showLegacy','showRiver','showA','showB','showCorridors']){const c=document.getElementById(id);if(c)c.checked=true;}showRoyalLayer();toggleSaints();showPanorama();showLegacyLayer();showRiver();showRiver();show();document.getElementById('allMapState').textContent='Tous les anciens points et les nouvelles liaisons sont visibles. Utiliser « Voir l’ensemble » pour inclure la basilique hors Paris.';});
+document.getElementById('displayAll').addEventListener('click',()=>{for(const id of ['showRoyal','showSaints','showPanorama','showLegacy','showRiver','showA','showB','showCorridors']){const c=document.getElementById(id);if(c)c.checked=true;}showRoyalLayer();toggleSaints();showPanorama();showLegacyLayer();showRiver();show();document.getElementById('allMapState').textContent='Tous les anciens points et les nouvelles liaisons sont visibles. Utiliser « Voir l’ensemble » pour inclure la basilique hors Paris.';});
 document.getElementById('zoomAll').addEventListener('click',()=>{oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('displayAll').click();const pts=[...routes.flatMap(r=>r.points.map(p=>[p[1],p[2]])),...royalPoints.map(p=>[p.lat,p.lng]),...iconoPoints.map(p=>[p.lat,p.lng]),...panoramaSites.map(p=>[p.lat,p.lng]),...legacySites.map(p=>[p.lat,p.lng]),...riverPoints.map(p=>[p.lat,p.lng])];map.fitBounds(L.latLngBounds(pts).pad(.15),{maxZoom:13});});
 document.getElementById('zoomCentre').addEventListener('click',()=>{map.fitBounds(L.latLngBounds([[48.845,2.295],[48.886,2.372]]).pad(.12),{maxZoom:14});});
 document.getElementById('showRiver').addEventListener('change',showRiver);
