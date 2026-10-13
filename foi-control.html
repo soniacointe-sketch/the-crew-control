@@ -617,7 +617,7 @@ function renderPersonalDossierNavigation(i){
        const a=document.createElement("a");
        a.href="foi-control.html?file="+encodeURIComponent(doc.d[1]);
        a.className="foi-toc-link";
-       a.textContent=cell.textContent.trim()+" ↗";
+       a.textContent=cell.textContent.trim().replace(/[↗→]\s*$/,"")+" ↗";
        a.addEventListener("click",event=>{
          if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
          event.preventDefault();openDoc(doc.index);
