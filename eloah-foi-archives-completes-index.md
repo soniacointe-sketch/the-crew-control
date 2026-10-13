@@ -44,6 +44,10 @@ Ce registre reste l'inventaire scientifique complet ; la Grande Bibliothèque of
 
 ---
 
+## Galerie iconographique originale retrouvée — 15 fichiers PNG
+
+[J’ouvre l'inventaire des 15 images d'origine](foi-control.html?file=eloah-foi-visuels-retrouves-inventaire.md). Les fichiers ont été récupérés dans la bibliothèque ELOAH et sont fournis dans une archive ZIP via cette conversation. **Ils ne sont pas encore hébergés dans GitHub Pages**. Les anciens scans des publications du site source doivent être rapatriés séparément.
+
 ## 01 · Six textes longs anciens — réintégrés sans résumé
 
 Ces six fichiers proviennent des **originaux retrouvés dans notre bibliothèque de documents**, rétablis comme des chapitres entiers. Ils comportent les sections, tableaux, références, définitions et analyses originelles ; une illustration identifiée a été ajoutée à leur ouverture sans couper le texte.
