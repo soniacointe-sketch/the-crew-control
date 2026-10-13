@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1080" width="840" height="1080" role="img" aria-labelledby="title desc">
+<title id="title">Couverture ELOAH : BIBLE ET TEXTES SACRÉS</title>
+<desc id="desc">Illustration vectorielle éditoriale créée pour le chapitre 07 du chemin spirituel ELOAH.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#2c342e"/><stop offset="100%" stop-color="#12151c"/></linearGradient>
+ <radialGradient id="halo"><stop offset="0%" stop-color="#dfc69b" stop-opacity=".22"/><stop offset="73%" stop-color="#dfc69b" stop-opacity=".05"/><stop offset="100%" stop-color="#dfc69b" stop-opacity="0"/></radialGradient>
+ <pattern id="dots" patternUnits="userSpaceOnUse" width="26" height="26"><circle cx="5" cy="6" r="1" fill="#dfddd0" opacity=".13"/></pattern>
+ <pattern id="lines" patternUnits="userSpaceOnUse" width="45" height="45" patternTransform="rotate(39)"><path d="M0 0V45" stroke="#dfddd0" stroke-width=".8" opacity=".06"/></pattern>
+</defs>
+<rect width="840" height="1080" fill="url(#bg)"/>
+<rect width="840" height="1080" fill="url(#dots)"/>
+<rect width="840" height="1080" fill="url(#lines)"/>
+<circle cx="430" cy="520" r="410" fill="url(#halo)"/>
+<rect x="36" y="35" width="768" height="1010" fill="none" stroke="#dfc69b" stroke-width="2" opacity=".55"/>
+<path d="M76 119H765M76 925H765" stroke="#dfc69b" stroke-width="2" opacity=".55"/>
+<text x="80" y="96" fill="#dfddd0" font-size="20" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">ELOAH · FOI &amp; SPIRITUALITÉ</text>
+<g transform="translate(420 502)"><path d="M0-145Q-125-200-279-130V211Q-130 157 0 223Q130 157 279 211V-130Q125-200 0-145Z" fill="#f1e7d2" opacity=".85" stroke="#c6a472" stroke-width="10"/><path d="M0-147V225" stroke="#8c7659" stroke-width="11"/><path d="M-239-90Q-132-127-28-85M-239-33Q-132-70-28-28M-239 23Q-132-14-28 28M-239 79Q-132 43-28 84M28-85Q132-127 239-90M28-28Q132-70 239-33M28 28Q132-14 239 23M28 84Q132 43 239 79" fill="none" stroke="#9e8d75" opacity=".65" stroke-width="8"/></g>
+<text x="78" y="980" fill="#dfddd0" font-size="22" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">CHEMIN SPIRITUEL</text>
+<text x="770" y="1003" text-anchor="end" fill="#dfc69b" font-size="67" font-family="Georgia, serif" font-style="italic">07</text>
+</svg>
