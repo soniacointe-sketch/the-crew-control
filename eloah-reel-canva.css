@@ -370,3 +370,31 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-frame-edit .ecs-pillbtn{font-size:12px;padding:9px 11px;white-space:normal}
 @media(max-width:690px){#eloah-canva-studio .ecs-frame-strip .ecs-frame-tile{flex-basis:100px;width:100px}#eloah-canva-studio .ecs-frame-thumb{height:96px}#eloah-canva-studio .ecs-frame-plus{opacity:1}#eloah-canva-studio .ecs-frame-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:360px){#eloah-canva-studio .ecs-frame-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* Grilles — grande galerie de compositions photo à la manière d'un éditeur créatif */
+#eloah-canva-studio .ecs-grid-filters{display:flex;align-items:center;gap:6px;overflow-x:auto;scrollbar-width:thin;padding:5px 0 12px;margin:4px 0 10px;overscroll-behavior-x:contain}
+#eloah-canva-studio .ecs-grid-filters button{flex:0 0 auto;border:1px solid #dce5ed;border-radius:30px;padding:7px 10px;background:#f5f7f9;color:#394d61;font-size:11px;white-space:nowrap}
+#eloah-canva-studio .ecs-grid-filters button.is-active{border-color:#2382b8;background:#e0effa;color:#16638d;font-weight:750}
+#eloah-canva-studio .ecs-grid-section{margin:9px 0 23px}
+#eloah-canva-studio .ecs-grid-section[hidden]{display:none!important}
+#eloah-canva-studio .ecs-grid-section .ecs-sectiontitle{margin:7px 0 10px;align-items:center}
+#eloah-canva-studio .ecs-grid-section .ecs-sectiontitle strong{font-size:13px}
+#eloah-canva-studio .ecs-grid-section .ecs-sectiontitle button{background:transparent;color:#566778;padding:3px 0;font-size:11px}
+#eloah-canva-studio .ecs-grid-gallery{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#eloah-canva-studio .ecs-grid-tile{display:block;position:relative;aspect-ratio:1;border:2px solid transparent;border-radius:5px;overflow:hidden;padding:0!important;background:#edf2f0;color:#fff;cursor:pointer;min-width:0;line-height:1}
+#eloah-canva-studio .ecs-grid-tile[hidden]{display:none!important}
+#eloah-canva-studio .ecs-grid-tile:hover,#eloah-canva-studio .ecs-grid-tile:focus-visible{border-color:#2479bf;outline:2px solid #2479bf;outline-offset:1px}
+#eloah-canva-studio .ecs-grid-tile img{display:block;width:100%;height:100%;object-fit:cover;border-radius:2px;pointer-events:none}
+#eloah-canva-studio .ecs-grid-count{position:absolute;bottom:5px;right:5px;background:#132f3aaf;color:white;border-radius:5px;padding:3px 5px;font-size:10px;font-weight:700;display:flex;align-items:center;gap:3px;pointer-events:none}
+#eloah-canva-studio .ecs-grid-footer{border-top:1px solid #dce4eb;padding-top:14px;margin:14px 0 18px}
+#eloah-canva-studio .ecs-grid-edit{padding:12px 10px;background:#f0f7fc;border:1px solid #d2e5f3;border-radius:10px;margin:11px 0}
+#eloah-canva-studio .ecs-grid-edit .ecs-sidelabel{margin:4px 0 8px}
+#eloah-canva-studio .ecs-grid-edit input[type=range]{width:100%;accent-color:#1685bd}
+#eloah-canva-studio .ecs-grid-edit .ecs-pillbtn{white-space:normal;margin:10px 0 6px}
+#eloah-canva-studio .ecs-grid-edit .ecs-note{line-height:1.5}
+@media(max-width:690px){
+ #eloah-canva-studio .ecs-grid-gallery{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+ #eloah-canva-studio .ecs-grid-filters{margin:0 0 5px}
+ #eloah-canva-studio .ecs-grid-count{bottom:3px;right:3px;font-size:9px}
+}
+@media(max-width:390px){#eloah-canva-studio .ecs-grid-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
