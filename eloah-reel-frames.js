@@ -104,7 +104,55 @@ function dimensions(item){
 function bgColor(item){
  return {paper:'#fffdfa',film:'#313944',device:'#1d2733',kraft:'#e5c79c',gold:'#e5d6b4',neon:'#daf1f3',rose:'#f6e0e7',tape:'#f6e8d3',slide:'#f4f1ea',cinema:'#101824',white:'#fffdfa',clean:'transparent'}[item.chrome]||'transparent';
 }
+function deviceShell(item){
+ const l=item.layout;
+ if(item.chrome!=='device'||!l.startsWith('device-'))return null;
+ if(l==='device-phone')return {x:95,y:24,w:810,h:952,r:75,type:'phone'};
+ if(l==='device-slim')return {x:54,y:12,w:892,h:976,r:55,type:'phone'};
+ if(l==='device-story')return {x:160,y:8,w:680,h:984,r:73,type:'phone'};
+ if(l==='device-watch')return {x:95,y:206,w:810,h:586,r:145,type:'watch'};
+ if(l==='device-tablet-v')return {x:72,y:22,w:856,h:956,r:45,type:'tablet'};
+ if(l==='device-tablet-h')return {x:22,y:188,w:956,h:647,r:35,type:'tablet'};
+ if(l==='device-laptop')return {x:30,y:120,w:940,h:696,r:27,type:'laptop'};
+ if(l==='device-monitor')return {x:22,y:114,w:956,h:708,r:19,type:'monitor'};
+ if(l==='device-tv')return {x:28,y:143,w:944,h:708,r:45,type:'tv'};
+ if(l==='device-retro')return {x:72,y:165,w:856,h:704,r:95,type:'retro'};
+ if(l==='device-camera')return {x:52,y:173,w:896,h:670,r:70,type:'camera'};
+ if(l==='device-wide')return {x:15,y:174,w:970,h:670,r:28,type:'monitor'};
+ return null;
+}
+function deviceChromeSVG(item){
+ const d=deviceShell(item);if(!d)return '';
+ let out='<rect x="'+d.x+'" y="'+d.y+'" width="'+d.w+'" height="'+d.h+'" rx="'+d.r+'" fill="#1d2733" stroke="#8b9aa6" stroke-width="12"/>';
+ if(d.type==='phone'){out+='<rect x="400" y="'+(d.y+18)+'" width="200" height="30" rx="15" fill="#121a23"/><circle cx="80" cy="496" r="8" fill="#aabac4"/>'}
+ if(d.type==='tablet')out+='<circle cx="500" cy="'+(d.y+25)+'" r="11" fill="#82949e"/>';
+ if(d.type==='laptop')out+='<path d="M26 820H974L1000 893H0Z" fill="#74828c" stroke="#c5ccd0" stroke-width="8"/><path d="M370 837H630L665 880H335Z" fill="#435363"/>';
+ if(d.type==='monitor')out+='<path d="M465 830V926H380V955H620V926H535V830Z" fill="#6b7985"/>';
+ if(d.type==='watch')out+='<rect x="380" y="0" width="240" height="215" rx="38" fill="#4c5b64"/><rect x="380" y="787" width="240" height="213" rx="38" fill="#4c5b64"/>';
+ if(d.type==='tv')out+='<path d="M180 859L120 928M820 859L880 928" stroke="#47505b" stroke-width="28"/>';
+ if(d.type==='retro')out+='<circle cx="890" cy="460" r="25" fill="#b7aca0"/><circle cx="890" cy="540" r="25" fill="#b7aca0"/>';
+ if(d.type==='camera')out+='<rect x="185" y="118" width="165" height="58" rx="12" fill="#273c49"/><circle cx="830" cy="143" r="18" fill="#c0c5c9"/>';
+ return out;
+}
+function drawDeviceChrome(ctx,item){
+ const d=deviceShell(item);if(!d)return false;
+ ctx.fillStyle='#1d2733';ctx.strokeStyle='#8b9aa6';ctx.lineWidth=12;
+ ctx.beginPath();ctx.roundRect(d.x,d.y,d.w,d.h,d.r);ctx.fill();ctx.stroke();
+ if(d.type==='phone'){ctx.fillStyle='#0f1824';ctx.beginPath();ctx.roundRect(400,d.y+18,200,30,15);ctx.fill()}
+ if(d.type==='tablet'){ctx.fillStyle='#93a9b4';ctx.beginPath();ctx.arc(500,d.y+25,11,0,Math.PI*2);ctx.fill()}
+ if(d.type==='laptop'){
+  ctx.fillStyle='#74828c';ctx.beginPath();ctx.moveTo(26,820);ctx.lineTo(974,820);ctx.lineTo(1000,893);ctx.lineTo(0,893);ctx.fill();
+  ctx.fillStyle='#435363';ctx.beginPath();ctx.moveTo(370,837);ctx.lineTo(630,837);ctx.lineTo(665,880);ctx.lineTo(335,880);ctx.fill();
+ }
+ if(d.type==='monitor'){ctx.fillStyle='#697985';ctx.fillRect(465,830,70,106);ctx.fillRect(380,928,240,26)}
+ if(d.type==='watch'){ctx.fillStyle='#4c5b64';ctx.beginPath();ctx.roundRect(380,0,240,215,38);ctx.fill();ctx.beginPath();ctx.roundRect(380,787,240,213,38);ctx.fill()}
+ if(d.type==='tv'){ctx.strokeStyle='#5d7180';ctx.lineWidth=28;ctx.beginPath();ctx.moveTo(180,859);ctx.lineTo(120,928);ctx.moveTo(820,859);ctx.lineTo(880,928);ctx.stroke()}
+ if(d.type==='retro'){ctx.fillStyle='#c1b6a8';ctx.beginPath();ctx.arc(890,460,25,0,Math.PI*2);ctx.arc(890,540,25,0,Math.PI*2);ctx.fill()}
+ if(d.type==='camera'){ctx.fillStyle='#273c49';ctx.beginPath();ctx.roundRect(185,118,165,58,12);ctx.fill()}
+ return true;
+}
 function drawBack(ctx,item){
+ if(drawDeviceChrome(ctx,item))return;
  const bg=bgColor(item);if(bg==='transparent')return;
  ctx.fillStyle=bg;ctx.fillRect(0,0,1000,1000);
  if(item.chrome==='film'||item.chrome==='cinema'){
@@ -148,9 +196,9 @@ function draw(ctx,e,photos,activeSlot=-1){
   if(image&&image.complete&&image.naturalWidth>0)imageCover(ctx,image,e.w*sl.w/1000,e.h*sl.h/1000,slotOpt.zoom||1,slotOpt.panX||0,slotOpt.panY||0);
   else drawPlaceholder(ctx);
   ctx.restore();
-  ctx.lineWidth=Math.max(7,Number(e.borderSize)||17);
+  ctx.lineWidth=e.borderSize===undefined?17:Math.max(0,Math.min(60,Number(e.borderSize)||0));
   ctx.strokeStyle=e.color||item.accent;
-  ctx.stroke(path);
+  if(ctx.lineWidth)ctx.stroke(path);
   if(i===activeSlot){
    ctx.lineWidth=15;ctx.strokeStyle='#247cda';ctx.setLineDash([25,16]);ctx.stroke(path);
   }
@@ -169,7 +217,7 @@ function svg(id){
   return '<defs><clipPath id="'+clip+'"><path d="'+p+'"/></clipPath></defs>'+
    '<g transform="'+trans+'"><g clip-path="url(#'+clip+')"><rect width="1000" height="1000" fill="url(#sky)"/><path d="M0 755Q285 545 563 775Q740 930 1000 698V1000H0Z" fill="#a0d07e"/><path d="M0 868Q370 704 584 882Q810 1010 1000 812V1000H0Z" fill="#69ab55"/><path d="M290 340Q320 210 478 250Q565 164 626 271Q768 262 755 363Z" fill="#fffef8a8"/></g><path d="'+p+'" fill="none" stroke="'+c+'" stroke-width="15"/></g>';
  }).join('');
- let back=bg==='transparent'?'':'<rect width="1000" height="1000" fill="'+bg+'"/>';
+ let back=deviceShell(item)?deviceChromeSVG(item):(bg==='transparent'?'':'<rect width="1000" height="1000" fill="'+bg+'"/>');
  if(item.chrome==='film'||item.chrome==='cinema')back+='<g fill="#111921">'+Array.from({length:10},(_,i)=>'<rect x="'+(26+i*101)+'" y="14" width="65" height="28"/><rect x="'+(26+i*101)+'" y="958" width="65" height="28"/>').join('')+'</g>';
  if(item.chrome==='gold')back+='<rect x="8" y="8" width="984" height="984" fill="none" stroke="#b89a50" stroke-width="18"/>';
  return '<svg xmlns="http://www.w3.org/2000/svg" width="176" height="176" viewBox="0 0 1000 1000">'+defs+back+tiles+'</svg>';
