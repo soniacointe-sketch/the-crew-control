@@ -182,6 +182,82 @@ body.eloah-revue .rev-pubhead .rev-catalogue-link:hover{background:#d3aa48;color
 #faith-audio{scroll-margin-top:95px}
 @media(max-width:750px){.reader .rev-related-list{grid-template-columns:1fr}.reader .rev-related-list a{min-height:0}.reader .rev-article-meta{align-items:start}}
 @media(max-width:550px){body.eloah-revue .rev-pubhead{flex-wrap:wrap}body.eloah-revue .rev-pubhead .rev-catalogue-link{width:100%;text-align:center}}
+
+/* ELOAH · Modèle unique de lecture documentaire */
+body.eloah-article{background:#eee9e0;color:#241f19}
+body.eloah-article .shell{display:block!important;min-height:100vh}
+body.eloah-article .side,body.eloah-article .toc{display:none!important}
+body.eloah-article main{max-width:1270px;width:100%;margin:auto;padding:0 clamp(13px,3vw,48px) 72px}
+body.eloah-article .top{position:relative;background:transparent;backdrop-filter:none;border-bottom:1px solid #b7a890}
+body.eloah-article .top .tools>:not(#publicationsShortcut):not(#focus){display:none!important}
+body.eloah-article .top .tools #publicationsShortcut{display:inline-flex!important}
+body.eloah-article #mobileMenu,body.eloah-article #search,body.eloah-article #searchResults{display:none!important}
+body.eloah-article .reader{max-width:none;margin:0;width:100%}
+body.eloah-article #library{display:flex;flex-direction:column}
+body.eloah-article #loading{order:0}
+body.eloah-article #article{order:1}
+body.eloah-article #faith-audio{order:2;max-width:930px;width:calc(100% - 25px);margin:22px auto;background:#fffdf7}
+body.eloah-article .reader-footer{order:3;max-width:940px;width:100%;margin:24px auto 35px}
+body.eloah-article .reader-footer button:disabled{opacity:.45;cursor:not-allowed}
+.rev-model{color:#24201a}
+.rev-model-nav{display:flex;gap:20px;flex-wrap:wrap;align-items:center;padding:20px 0;border-bottom:1px solid #b5a68d}
+.rev-model-nav a{font:750 12px/1.4 system-ui,sans-serif;text-decoration:none;color:#6a5136}
+.rev-model-nav a:hover{text-decoration:underline}
+.rev-model-nav a:first-child{font:19px Georgia,serif;color:#2d2924;margin-right:auto}
+.rev-model-hero{background:#191817;color:#fff9ee;display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:30px;padding:clamp(25px,4vw,58px);align-items:center;margin:0}
+.rev-model-hero:not(.has-image){grid-template-columns:1fr;background:linear-gradient(112deg,#1e1d1c,#352d24)}
+.rev-model-copy{min-width:0}
+.rev-model-kicker{display:block;font:800 12px/1.7 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#dfb65a;margin:0 0 20px}
+.rev-model-hero h1{font:normal clamp(35px,4.2vw,65px)/1.12 Georgia,serif!important;letter-spacing:-.03em;color:#fff8e8!important;margin:0 0 23px!important;overflow-wrap:anywhere}
+.rev-model-hero h1:after{content:"";display:block;width:77px;height:2px;background:#d4ad60;margin:26px 0 0}
+.rev-model-intro{font:clamp(17px,2vw,23px)/1.46 Georgia,serif!important;color:#e3d7c8;max-width:665px;margin:0 0 24px!important}
+.rev-model-byline{color:#c6b6a4;font:12px/1.6 system-ui,sans-serif;letter-spacing:.04em}
+.rev-model-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:27px}
+.rev-model-actions a,.rev-model-actions button{display:inline-flex;align-items:center;justify-content:center;min-height:38px;padding:9px 13px;background:transparent;color:#f9eee0;text-decoration:none;border:1px solid #a59275;border-radius:2px;font:750 12px/1.3 system-ui,sans-serif}
+.rev-model-actions a:first-child{background:#d3ac63;color:#171717;border-color:#d3ac63}
+.rev-model-actions a:hover,.rev-model-actions button:hover{background:#e1bc77;color:#151515}
+.rev-model-cover{margin:0;align-self:stretch;min-width:0}
+.rev-model-cover img{display:block;width:100%;height:100%;min-height:365px;max-height:560px;object-fit:cover;object-position:center top;border-radius:0}
+.rev-model-cover figcaption{color:#e0d4be;font:11px/1.45 system-ui;margin-top:8px}
+.rev-model-thematic{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:#302b25;border-top:1px solid #a88853;color:#fff;margin-bottom:32px}
+.rev-model-thematic a{display:flex;flex-direction:column;gap:11px;padding:23px 25px;text-decoration:none;border-right:1px solid #70614b;min-width:0}
+.rev-model-thematic a:last-child{border-right:0}
+.rev-model-thematic a:hover{background:#48392a}
+.rev-model-thematic span{font:italic 22px Georgia,serif;color:#d6b569}
+.rev-model-thematic strong{font:normal 21px/1.27 Georgia,serif;color:#fff6e5;overflow-wrap:anywhere}
+.rev-model-reading{display:grid;grid-template-columns:minmax(220px,270px) minmax(0,1fr);align-items:start;column-gap:30px;max-width:1140px;margin:40px auto 0}
+.rev-model-toc{position:sticky;top:17px;max-height:calc(100vh - 35px);overflow:auto;padding:22px 15px;background:#dfd5c7;border-top:3px solid #9f814e;font:13px/1.45 system-ui,sans-serif}
+.rev-model-toc-label{display:block;font-size:11px;letter-spacing:.13em;text-transform:uppercase;font-weight:800;color:#6b5232;margin-bottom:15px}
+.rev-model-toc a{display:block;padding:9px 0;text-decoration:none;color:#44392b;border-bottom:1px solid #c7bcac;font-size:12px;line-height:1.35}
+.rev-model-toc a.sub{padding-left:13px;color:#655e50}
+.rev-model-toc a:hover{text-decoration:underline;color:#15120e}
+.rev-model-toc p{font-size:12px;color:#716352}
+.rev-model-text{min-width:0;background:#fffdfa;border:1px solid #dfd5c7;padding:clamp(19px,3vw,42px);font:16px/1.8 Georgia,serif}
+.rev-model-text h1,.rev-model-text h2,.rev-model-text h3{scroll-margin-top:30px;color:#29231c}
+.rev-model-text h1{font-size:36px}
+.rev-model-text h2{font-size:clamp(25px,2.6vw,33px);margin:42px 0 16px;border-bottom:1px solid #decdb7;padding-bottom:11px}
+.rev-model-text h3{font-size:clamp(21px,2.2vw,26px);margin:29px 0 13px}
+.rev-model-text p{line-height:1.85}
+.rev-model-text a{color:#78562b;text-decoration:underline;text-underline-offset:3px}
+.rev-model-text img{max-width:100%;height:auto;max-height:700px;object-fit:contain}
+.rev-model-text pre{max-width:100%;overflow:auto;padding:14px;background:#f5f1e8}
+.rev-model-text table{font:13px/1.5 system-ui,sans-serif}
+.rev-model-text blockquote{background:#f4ece0;border-left:3px solid #b1905a}
+.rev-model-reference{max-width:1140px;margin:0 auto;background:#22201e;color:#eee2d2;padding:28px clamp(20px,3vw,38px)}
+.rev-model-reference h2{font:normal 31px Georgia,serif;color:#fff;margin:0 0 12px}
+.rev-model-reference p{margin:0;color:#d8cbb9;font:14px/1.7 system-ui,sans-serif}
+.rev-model-reference a{color:#f0cd81}
+.rev-model-related{max-width:1140px;margin:45px auto 0}
+.rev-model-related h2{font:normal 30px Georgia,serif;margin:0 0 17px}
+.rev-model-related-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.rev-model-related-grid a{min-width:0;background:#fffaf0;border:1px solid #cdbb9f;padding:21px 18px;display:flex;flex-direction:column;gap:12px;text-decoration:none}
+.rev-model-related-grid a:hover{border-color:#946e3f;background:#f3e8d7}
+.rev-model-related-grid small{font:750 11px system-ui;letter-spacing:.06em;color:#936b3d}
+.rev-model-related-grid strong{font:normal 22px/1.22 Georgia,serif;color:#2f2920}
+body.eloah-article #faith-audio{scroll-margin-top:20px}
+@media(max-width:1000px){.rev-model-hero{grid-template-columns:minmax(0,1fr) minmax(225px,33%)}.rev-model-reading{grid-template-columns:minmax(175px,220px) minmax(0,1fr);gap:15px}}
+@media(max-width:720px){.rev-model-nav{gap:12px}.rev-model-nav a:first-child{width:100%}.rev-model-hero{grid-template-columns:1fr!important;gap:16px}.rev-model-cover{max-width:480px}.rev-model-cover img{height:auto;min-height:0;max-height:450px;object-fit:contain}.rev-model-thematic{grid-template-columns:1fr}.rev-model-thematic a{border-right:0;border-bottom:1px solid #70614b}.rev-model-reading{display:flex;flex-direction:column;gap:15px}.rev-model-toc{position:static;max-height:none;width:100%}.rev-model-text{width:100%}.rev-model-related-grid{grid-template-columns:1fr}body.eloah-article main{padding-left:12px;padding-right:12px}}
+@media print{body.eloah-article{background:white!important;color:black!important}body.eloah-article .top,body.eloah-article .eloah-global-nav,.rev-model-nav,.rev-model-actions,.rev-model-toc,.rev-model-related,body.eloah-article #faith-audio,body.eloah-article .reader-footer{display:none!important}.rev-model-hero{background:white!important;color:black!important;padding:12px!important}.rev-model-hero h1{color:black!important}.rev-model-intro,.rev-model-byline{color:#333!important}.rev-model-hero{grid-template-columns:1fr}.rev-model-cover{display:none}.rev-model-thematic{display:none}.rev-model-reading{display:block;margin:0}.rev-model-text{border:0;padding:0}.rev-model-reference{background:white!important;color:black!important}.rev-model-reference h2,.rev-model-reference p{color:black!important}}
 </style><style id="foi-personnel-return-style">
 .foi-personnel-return{display:block;margin:6px 9px;padding:9px 12px;color:#72552d;text-decoration:none;border:1px solid #dbcbb2;border-radius:7px;background:#fffaf2;font-size:12px;font-weight:700}
 .foi-personnel-return:hover,.foi-personnel-return:focus-visible{background:#f4e9d7}
@@ -365,40 +441,89 @@ document.getElementById("allDocsShortcut").onclick=()=>openDoc(DOCS.findIndex(d=
 function updateReadingNav(){const category=DOCS[current][2];const eligible=DOCS.map((d,i)=>({d,i})).filter(x=>x.d[2]===category);const pos=eligible.findIndex(x=>x.i===current);const prev=document.getElementById("prev"),next=document.getElementById("next");prev.disabled=pos<=0;next.disabled=pos>=eligible.length-1;prev.onclick=()=>{if(pos>0)openDoc(eligible[pos-1].i)};next.onclick=()=>{if(pos<eligible.length-1)openDoc(eligible[pos+1].i)}}
 const ELOAH_PUBLICATION_IMAGES={"eloah-alpha-001-jesus-enfant-lettres.md":"alpha-aleph.webp","eloah-foi-michel-4q529-etude-critique.md":"michel-4q529.webp","eloah-foi-magdalena-007-sept.md":"marie-madeleine-sept.webp","eloah-foi-apo-019-livre-secret-jacques.md":"livre-secret-jacques.webp","eloah-scanner-commencements-03-bible-coran.md":"bible-coran.webp","eloah-foi-archives-completes-index.md":"archives-integrales.webp"};
 function renderDocCover(i){const imageName=ELOAH_PUBLICATION_IMAGES[DOCS[i][1]];if(!imageName)return;const figure=document.createElement("figure");figure.className="rev-article-visual";const img=document.createElement("img");img.src="assets/foi-publications/"+imageName;img.alt="Illustration éditoriale du dossier "+DOCS[i][0];img.loading="lazy";const cap=document.createElement("figcaption");cap.textContent="Illustration éditoriale créée pour ELOAH (image générée, non reproduction photographique d'un manuscrit historique).";figure.append(img,cap);const h=article.querySelector("h1");if(h)h.after(figure);else article.prepend(figure)}
+
 function renderArticleFrame(i){
  if(i===0)return;
- const doc=DOCS[i],group=doc[2];
+ const doc=DOCS[i],type=doc[2];
  const groups={"Personnel":"Chemin personnel","Bibliothèque":"Bibliothèque","CollectionIndex":"Bibliothèque","Collections":"Collections","Enquêtes":"Manuscrits & enquêtes","Magdalena":"Marie-Madeleine","Paraboles":"Paraboles","Archives":"Archives","Reconstitutions":"Reconstitutions","SourcesEloah":"Sources & illustrations"};
- const label=groups[group]||group;
- const header=document.createElement("div");header.className="rev-article-meta";header.dataset.noaudio="1";
- const series=document.createElement("span");series.className="rev-article-series";series.textContent="ELOAH · "+label;
- const links=document.createElement("div");links.className="rev-article-actions";
- function link(href,title){const a=document.createElement("a");a.href=href;a.textContent=title;return a}
- links.append(link("eloah-foi-publications.html?categorie="+encodeURIComponent(label),"← Toutes les publications"));
- const audio=document.getElementById("faith-audio");
- if(audio)links.append(link("#faith-audio","▶ Écouter le texte"));
- const candidates=[...article.querySelectorAll("h2,h3")].filter(h=>/sources|bibliograph|r[ée]f[ée]rences|documents consult[ée]s/i.test(h.textContent));
- if(candidates.length)links.append(link("#"+candidates[0].id,"Sources & références ↓"));
- header.append(series,links);
- const title=article.querySelector("h1");
- if(title)title.before(header);else article.prepend(header);
- const related=DOCS.map((d,index)=>({d,index})).filter(x=>x.d[2]===group&&x.index!==i).slice(0,3);
- if(related.length){
-   const section=document.createElement("section");section.className="rev-related";section.dataset.noaudio="1";section.setAttribute("aria-label","Autres recherches à découvrir");
-   const h=document.createElement("h2");h.textContent="Poursuivre la lecture";section.append(h);
-   const list=document.createElement("div");list.className="rev-related-list";
-   for(const other of related){
-     const a=link("foi-control.html?file="+encodeURIComponent(other.d[1]),"");
-     const small=document.createElement("small");small.textContent=label;
-     const strong=document.createElement("strong");strong.textContent=other.d[0];a.append(small,strong);a.onclick=e=>{e.preventDefault();openDoc(other.index)};list.append(a);
-   }
-   section.append(list);article.append(section);
+ const group=groups[type]||type;
+ const summaries={
+ "eloah-alpha-001-jesus-enfant-lettres.md":"Jésus enfant, les traditions de l’alphabet et les lettres Alpha et Aleph : rapprocher les textes sans confondre les sources.",
+ "eloah-foi-michel-4q529-etude-critique.md":"Qumrân, manuscrit 4Q529 : explorer les fragments araméens, les visions célestes et les limites des restitutions.",
+ "eloah-foi-magdalena-007-sept.md":"Marie-Madeleine et le chiffre sept, des témoignages évangéliques aux lectures symboliques postérieures.",
+ "eloah-foi-apo-019-livre-secret-jacques.md":"Un codex, des voix anciennes et des lacunes : examiner la transmission du Livre secret de Jacques.",
+ "eloah-scanner-commencements-03-bible-coran.md":"Bible et Coran : confronter les récits des commencements sans effacer leurs différences.",
+ "eloah-foi-archives-completes-index.md":"Textes retrouvés, reconstitutions identifiées et recherches conservées dans les archives ELOAH."
+ };
+ const el=(tag,cls,txt)=>{const node=document.createElement(tag);if(cls)node.className=cls;if(txt!==undefined)node.textContent=txt;return node};
+ const a=(href,txt,cls)=>{const node=el("a",cls,txt);node.href=href;return node};
+ const fileHref=name=>"foi-control.html?file="+encodeURIComponent(name);
+ const body=el("section","rev-model-text");body.id="rev-model-body";
+ while(article.firstChild)body.append(article.firstChild);
+ const title=body.querySelector("h1")||el("h1","",doc[0]);
+ const originalTitle=title.textContent.trim();
+ const sourceHeaders=[...body.querySelectorAll("h2,h3")].filter(h=>/sources|bibliograph|r[ée]f[ée]rences|points d.appui|[ée]ditions et travaux|documents consult[ée]s/i.test(h.textContent));
+ const allSections=[...body.querySelectorAll("h2,h3")];
+ const root=el("div","rev-model");
+ const nav=el("nav","rev-model-nav");nav.dataset.noaudio="1";nav.setAttribute("aria-label","Navigation dans le dossier");
+ nav.append(a("foi-control.html?file=eloah-foi-dossier-personnel-complet.md","ELOAH · Foi & Spiritualité"));
+ nav.append(a("#rev-model-body","Lire le dossier"));
+ if(sourceHeaders.length)nav.append(a("#rev-model-sources","Les sources"));
+ nav.append(a("eloah-foi-publications.html","Toutes les publications ↗"));
+ root.append(nav);
+ const hero=el("header","rev-model-hero");hero.dataset.noaudio="1";
+ const copy=el("div","rev-model-copy");
+ copy.append(el("span","rev-model-kicker",group+" · ELOAH"));
+ if(title.parentElement)title.remove();
+ copy.append(title);
+ copy.append(el("p","rev-model-intro",summaries[doc[1]]||"Lire ce dossier, suivre ses pistes et retrouver les documents, les questions et les références disponibles."));
+ copy.append(el("p","rev-model-byline","ELOAH · Foi & Spiritualité / "+group));
+ const actions=el("div","rev-model-actions");
+ actions.append(a("#rev-model-body","Lire le texte ↓"));
+ if(document.getElementById("faith-audio"))actions.append(a("#faith-audio","▶ Écouter"));
+ const pdf=el("button","","Imprimer / PDF ↓");pdf.type="button";pdf.onclick=()=>window.print();actions.append(pdf);
+ const download=el("button","","Texte .md ↓");download.type="button";download.onclick=async()=>{
+   try{const md=await getDoc(i);const blob=new Blob([md],{type:"text/markdown;charset=utf-8"});const url=URL.createObjectURL(blob);const link=a(url,"");link.download=doc[1];document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+   catch(err){alert("Le téléchargement n'est pas disponible : "+err.message);}
+ };actions.append(download);
+ copy.append(actions);hero.append(copy);
+ const imageName=ELOAH_PUBLICATION_IMAGES[doc[1]];
+ if(imageName){hero.classList.add("has-image");const fig=el("figure","rev-model-cover");const img=el("img");img.src="assets/foi-publications/"+imageName;img.alt="Couverture illustrative du dossier "+doc[0];img.loading="lazy";img.width=480;img.height=600;const caption=el("figcaption","","Illustration éditoriale ELOAH générée, non photographie authentifiée du manuscrit.");fig.append(img,caption);hero.append(fig)}
+ root.append(hero);
+ if(allSections.length>0){
+   const tri=el("div","rev-model-thematic");tri.dataset.noaudio="1";
+   allSections.filter(h=>h.tagName==="H2").slice(0,3).forEach((h,j)=>{const item=a("#"+h.id,"");item.append(el("span","",String(j+1).padStart(2,"0")),el("strong","",h.textContent));tri.append(item)});
+   if(tri.children.length)root.append(tri);
  }
- const intro=document.createElement("p");intro.className="rev-article-notice";intro.dataset.noaudio="1";
- intro.textContent="Dossier de la bibliothèque ELOAH. Les photographies et les illustrations éditoriales ne constituent pas, à elles seules, des preuves historiques. Consulter les références et les précautions indiquées dans le texte.";
- if(title)title.after(intro);
+ const reading=el("div","rev-model-reading");const toc=el("nav","rev-model-toc");toc.dataset.noaudio="1";toc.setAttribute("aria-label","Sommaire du dossier");
+ toc.append(el("span","rev-model-toc-label","Dans ce dossier"));
+ if(allSections.length){
+   const list=el("div");
+   allSections.forEach((h,j)=>{const link=a("#"+h.id,(h.tagName==="H3"?"• ":"")+h.textContent,h.tagName==="H3"?"sub":"");list.append(link)});
+   toc.append(list);
+ }else toc.append(el("p","","Lecture continue · un seul chapitre"));
+ reading.append(toc,body);root.append(reading);
+ const refs=el("section","rev-model-reference");refs.id="rev-model-sources";refs.dataset.noaudio="1";
+ refs.append(el("h2","","Les sources et les documents"));
+ const desc=el("p");
+ if(sourceHeaders.length){
+   desc.append("Les références sont indiquées dans le texte. ");
+   sourceHeaders.slice(0,6).forEach((h,j)=>{if(j)desc.append(" · ");desc.append(a("#"+h.id,h.textContent))});
+ }else{
+   desc.textContent="Cette fiche ne dispose pas encore d'une section bibliographique autonome. Les liens et références éventuellement présents dans le texte sont conservés tels quels ; leur présence ne signifie pas qu'ils ont tous été vérifiés.";
+ }
+ refs.append(desc);root.append(refs);
+ const same=DOCS.map((d,index)=>({d,index})).filter(x=>x.d[2]===type&&x.index!==i);
+ const later=same.filter(x=>x.index>i);const related=later.concat(same.filter(x=>x.index<i)).slice(0,3);
+ if(related.length){
+   const block=el("section","rev-model-related");block.dataset.noaudio="1";block.append(el("h2","","Poursuivre la lecture"));
+   const grid=el("div","rev-model-related-grid");
+   related.forEach(other=>{const link=a(fileHref(other.d[1]),"");const label=el("small","",group);const heading=el("strong","",other.d[0]);link.append(label,heading);link.onclick=e=>{e.preventDefault();openDoc(other.index)};grid.append(link)});
+   block.append(grid);root.append(block);
+ }
+ article.append(root);
  headings();
- document.title=doc[0]+" · ELOAH Foi & Spiritualité";
+ document.title=originalTitle+" · ELOAH Foi & Spiritualité";
 }
 function renderPersonalIndex(){
  if(current!==0)return;
@@ -460,7 +585,7 @@ function renderCollectionsGrid(){
   const h=article.querySelector("h1");if(h)h.after(grid);else article.prepend(grid);
 }
 async function getDoc(i){if(cache.has(i))return cache.get(i);const res=await fetch(DOCS[i][1],{cache:"no-store"});if(!res.ok)throw Error("Erreur "+res.status);const md=await res.text();cache.set(i,md);return md;}
-async function openDoc(i,section="",restore=false){const request=++busy;current=i;sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel");document.body.classList.toggle("eloah-revue",i===0);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(i!==0)renderDocCover(i);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){renderPersonalIndex();document.title="Foi & Spiritualité · ELOAH";}else renderArticleFrame(i);loading.hidden=true;let target=section&&(section.startsWith("#")?article.querySelector("#"+CSS.escape(section.slice(1))):[...article.querySelectorAll("h1,h2,h3")].find(x=>x.textContent.toLowerCase().includes(section.toLowerCase())));if(!target&&restore&&location.hash){const anchor=decodeURIComponent(location.hash.slice(1));target=article.querySelector("#"+CSS.escape(anchor))||null}if(!target&&restore){const saved=JSON.parse(localStorage.getItem(POS)||"{}");if(saved.doc===i)target=document.getElementById(saved.heading)}if(target)target.scrollIntoView({block:"start"});else window.scrollTo({top:0,behavior:"instant"});history.replaceState({},"",location.pathname+"?file="+encodeURIComponent(DOCS[i][1])+(target?"#"+target.id:""));localStorage.setItem(POS,JSON.stringify({doc:i,heading:target?.id||""}))}catch(e){loading.hidden=false;loading.textContent="Impossible de charger le document : "+e.message+". Ouvre le fichier source depuis GitHub."}}
+async function openDoc(i,section="",restore=false){const request=++busy;current=i;sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel");document.body.classList.toggle("eloah-revue",i===0);document.body.classList.toggle("eloah-article",i!==0);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){renderPersonalIndex();document.title="Foi & Spiritualité · ELOAH";}else renderArticleFrame(i);loading.hidden=true;let target=section&&(section.startsWith("#")?article.querySelector("#"+CSS.escape(section.slice(1))):[...article.querySelectorAll("h1,h2,h3")].find(x=>x.textContent.toLowerCase().includes(section.toLowerCase())));if(!target&&restore&&location.hash){const anchor=decodeURIComponent(location.hash.slice(1));target=article.querySelector("#"+CSS.escape(anchor))||null}if(!target&&restore){const saved=JSON.parse(localStorage.getItem(POS)||"{}");if(saved.doc===i)target=document.getElementById(saved.heading)}if(target)target.scrollIntoView({block:"start"});else window.scrollTo({top:0,behavior:"instant"});history.replaceState({},"",location.pathname+"?file="+encodeURIComponent(DOCS[i][1])+(target?"#"+target.id:""));localStorage.setItem(POS,JSON.stringify({doc:i,heading:target?.id||""}))}catch(e){loading.hidden=false;loading.textContent="Impossible de charger le document : "+e.message+". Ouvre le fichier source depuis GitHub."}}
 
 document.getElementById("mobileMenu").onclick=()=>sidebar.classList.toggle("open");
 document.getElementById("focus").onclick=()=>{document.body.classList.toggle("focus");document.getElementById("focus").textContent=document.body.classList.contains("focus")?"Afficher les menus":"Mode lecture"};
