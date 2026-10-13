@@ -11,6 +11,12 @@ Explore les apocryphes, les sources juives anciennes, les manuscrits bibliques e
 
 Ce registre différencie les **textes originaux effectivement récupérés** des anciens dossiers dont seul le titre ou la synthèse existe encore. Les photos de manuscrits non récupérées ne sont pas considérées comme sauvegardées.
 
+## Nouveaux volumes — Paraboles et révélation
+
+- **[PAR-046 — Pourquoi Jésus parle-t-il en paraboles ?](foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md)** : Marc, Matthieu, Luc, Isaïe et le vocabulaire grec de la révélation.
+- **[PAR-047 à PAR-058 — Douze récits de l'Évangile selon Thomas](foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md)** : semeur, moutarde, ivraie, vignerons, perle, levain, brebis, trésor, riche, banquet, jarre et récit violent.
+- **[Paraboles Lab — 58 entrées](eloah-foi-paraboles-lab.html)** : 44 commentaires canoniques, la tête de la prophétie, la méthode des paraboles et douze comparaisons avec Thomas.
+
 ## Grand Livre des paraboles et métaphores de Jésus
 
 **44 analyses écrites + PAR-045 (la tête de la prophétie)** : [ouvrir le Grand Livre vivant](foi-control.html?file=eloah-foi-paraboles-grand-livre-44.md), [explorer les fiches interactives](eloah-foi-paraboles-lab.html) et [lire l'étude copte sur Jean et la prophétie](foi-control.html?file=eloah-foi-par-045-tete-prophetie.md). Les lectures sont documentaires, et non des éditions critiques grecques définitives.
