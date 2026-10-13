@@ -139,7 +139,7 @@
     storageContent.append(cloudPanel);
   }
   storageDetails.append(storageContent);
-  if (calendar) calendar.after(storageDetails); else lanes.after(storageDetails);
+  lanes.after(storageDetails);
 
   const editor = $('editor'), form = $('editForm');
   const editorHelp = make('p','client-editor-help','Une carte peut être une tâche, une idée ou un objectif. L’enregistrer ne publie rien et n’envoie aucun message.');
