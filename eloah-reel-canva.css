@@ -290,3 +290,55 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-ill-tile:hover .ecs-ill-tileplus,#eloah-canva-studio .ecs-ill-tile:focus-visible .ecs-ill-tileplus{opacity:1}
 #eloah-canva-studio .ecs-ill-license{border-top:1px solid #e5e9ed;padding:13px 0 0;margin-top:16px}
 @media(max-width:690px){#eloah-canva-studio .ecs-ill-strip .ecs-ill-tile{width:98px;flex-basis:98px}#eloah-canva-studio .ecs-ill-tile img{width:90px;height:85px}#eloah-canva-studio .ecs-ill-tileplus{opacity:1}#eloah-canva-studio .ecs-ill-grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ELOAH Animations — carrousels de stickers vivants, catégories comme dans la référence */
+#eloah-canva-studio .ecs-anim-section{margin:15px 0 24px}
+#eloah-canva-studio .ecs-anim-section[hidden]{display:none!important}
+#eloah-canva-studio .ecs-anim-section .ecs-sectiontitle{align-items:center;margin:11px 0 10px}
+#eloah-canva-studio .ecs-anim-section .ecs-sectiontitle strong{font-size:13px;line-height:1.3}
+#eloah-canva-studio .ecs-anim-section .ecs-sectiontitle button{border:0;background:transparent;color:#576677;font-size:11px;white-space:nowrap;padding:0}
+#eloah-canva-studio .ecs-anim-strip{display:flex;gap:9px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding:2px 0 12px}
+#eloah-canva-studio .ecs-anim-strip .ecs-anim-card{width:105px;flex:0 0 105px;scroll-snap-align:start}
+#eloah-canva-studio .ecs-anim-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 8px;margin:12px 0}
+#eloah-canva-studio .ecs-anim-card{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;text-align:center;gap:6px;padding:4px 3px 8px;border:1px solid transparent;background:transparent;border-radius:10px;min-width:0;color:#4b5562;cursor:pointer}
+#eloah-canva-studio .ecs-anim-card[hidden]{display:none!important}
+#eloah-canva-studio .ecs-anim-card:hover,#eloah-canva-studio .ecs-anim-card:focus-visible{border-color:#9cc3ed;background:#f0f7ff}
+#eloah-canva-studio .ecs-anim-stage{display:flex;justify-content:center;align-items:center;width:100%;height:98px;border-radius:10px;background:linear-gradient(145deg,#f4f5f6,#f9fafb);overflow:hidden}
+#eloah-canva-studio .ecs-anim-stage img{display:block;width:94px;height:94px;max-width:100%;object-fit:contain;transform-origin:center;pointer-events:none}
+#eloah-canva-studio .ecs-anim-cardlabel{display:block;width:100%;font-size:10px;line-height:1.2;font-weight:500;min-height:24px}
+#eloah-canva-studio .ecs-anim-add{position:absolute;right:0;top:5px;display:grid;place-items:center;width:23px;height:23px;border-radius:50%;color:#2779af;background:#fffdfbca;font-size:18px;box-shadow:0 1px 5px #0002;opacity:0}
+#eloah-canva-studio .ecs-anim-card:hover .ecs-anim-add,#eloah-canva-studio .ecs-anim-card:focus-visible .ecs-anim-add{opacity:1}
+#eloah-canva-studio .ecs-anim-controls{border:1px solid #dee7ed;border-radius:11px;background:#f9fbfd;padding:12px;margin:15px 0}
+#eloah-canva-studio .ecs-anim-controls>strong{font-size:13px}
+#eloah-canva-studio .ecs-anim-effects{display:flex;gap:6px;flex-wrap:wrap;margin:12px 0 2px}
+#eloah-canva-studio .ecs-anim-effects button{background:#edf3f8;color:#355773;border-radius:20px;padding:7px 10px;font-size:11px}
+#eloah-canva-studio .ecs-anim-effects button:hover{background:#d5e8fc}
+#eloah-canva-studio .ecs-anim-tip{background:#f5f7fa;padding:10px;border-radius:9px}
+#eloah-canva-studio .ecs-anim-disclaimer{padding-top:13px;border-top:1px solid #e4e7ed}
+@keyframes ecs-thumb-bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes ecs-thumb-float{0%,100%{transform:translateY(6px)}50%{transform:translateY(-8px)}}
+@keyframes ecs-thumb-rotate{to{transform:rotate(360deg)}}
+@keyframes ecs-thumb-pulse{0%,100%{transform:scale(.93)}50%{transform:scale(1.08)}}
+@keyframes ecs-thumb-wobble{0%,100%{transform:rotate(-9deg)}50%{transform:rotate(9deg)}}
+@keyframes ecs-thumb-twinkle{0%,100%{opacity:.65;transform:scale(.93)}50%{opacity:1;transform:scale(1.08)}}
+@keyframes ecs-thumb-slide{0%{transform:translateX(-12px);opacity:.5}55%{transform:translateX(9px);opacity:1}100%{transform:translateX(-12px);opacity:.5}}
+@keyframes ecs-thumb-fall{0%{transform:translateY(-13px)}100%{transform:translateY(11px)}}
+@keyframes ecs-thumb-pop{0%,100%{transform:scale(.85)}50%{transform:scale(1.08)}}
+#eloah-canva-studio .ecs-anim-stage.bounce img{animation:ecs-thumb-bounce 1.3s ease-in-out infinite}
+#eloah-canva-studio .ecs-anim-stage.float img{animation:ecs-thumb-float 2.4s ease-in-out infinite}
+#eloah-canva-studio .ecs-anim-stage.rotate img{animation:ecs-thumb-rotate 7s linear infinite}
+#eloah-canva-studio .ecs-anim-stage.pulse img{animation:ecs-thumb-pulse 1.5s ease-in-out infinite}
+#eloah-canva-studio .ecs-anim-stage.wobble img,#eloah-canva-studio .ecs-anim-stage.swing img{animation:ecs-thumb-wobble 1.7s ease-in-out infinite}
+#eloah-canva-studio .ecs-anim-stage.twinkle img{animation:ecs-thumb-twinkle 1.3s ease-in-out infinite}
+#eloah-canva-studio .ecs-anim-stage.slide img{animation:ecs-thumb-slide 1.7s ease-in-out infinite}
+#eloah-canva-studio .ecs-anim-stage.fall img{animation:ecs-thumb-fall 1.6s ease-in-out infinite alternate}
+#eloah-canva-studio .ecs-anim-stage.pop img{animation:ecs-thumb-pop 1.2s ease-in-out infinite}
+@media(max-width:690px){
+ #eloah-canva-studio .ecs-anim-strip .ecs-anim-card{width:96px;flex-basis:96px}
+ #eloah-canva-studio .ecs-anim-stage{height:86px}
+ #eloah-canva-studio .ecs-anim-stage img{height:80px;width:80px}
+ #eloah-canva-studio .ecs-anim-add{opacity:1}
+}
+@media(prefers-reduced-motion:reduce){
+ #eloah-canva-studio .ecs-anim-stage img{animation:none!important}
+}
