@@ -303,7 +303,7 @@ function draw(ctx,e){
  ctx.scale(w/1000,h/1000);
  const path=new Path2D(geo.d);
  const lineWidth=Math.max(0,Math.min(150,Number.isFinite(Number(e.lineWidth))?Number(e.lineWidth):18));
- ctx.lineJoin='round';ctx.lineCap='round';
+ ctx.lineJoin='round';ctx.lineCap=['round','butt','square'].includes(e.lineCap)?e.lineCap:'round';
  const style=e.lineStyle||(def.params.style==='dash'||def.params.style==='arrowdash'?'dash':def.params.style==='dot'?'dot':'solid');
  ctx.setLineDash(style==='dash'?[55,38]:style==='dot'?[1,44]:[]);
  if(linear){
@@ -313,7 +313,7 @@ function draw(ctx,e){
  }else{
   ctx.fillStyle=color;
   ctx.fill(path,'evenodd');
-  const stroke=Number(e.strokeWidth)||0;
+  const stroke=Math.max(0,Math.min(100,Number(e.strokeWidth)||0));
   if(stroke>0){
    ctx.strokeStyle=/^#[0-9a-f]{6}$/i.test(e.strokeColor||'')?e.strokeColor:'#ffffff';
    ctx.lineWidth=Math.min(100,Math.max(0,stroke));
