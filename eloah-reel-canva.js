@@ -1088,7 +1088,10 @@ one('#ecs-tracks').addEventListener('pointerdown',event=>{
 });
 const scroll=one('.ecs-timeline-scroll');
 scroll.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;const bounds=one('#ecs-tracks').getBoundingClientRect();if(!bounds.width)return;const point=ev.clientX-bounds.left;seek(point/70);const move=e=>seek((e.clientX-bounds.left)/70);scroll.addEventListener('pointermove',move);scroll.addEventListener('pointerup',()=>scroll.removeEventListener('pointermove',move),{once:true})});
-async function loadVideo(file){pause();if(media.videoUrl)URL.revokeObjectURL(media.videoUrl);media.videoUrl=URL.createObjectURL(file);video.src=media.videoUrl;video.dataset.filename=file.name;try{await new Promise((res,rej)=>{video.onloadedmetadata=res;video.onerror=()=>rej(new Error('Vidéo illisible'))});S.trimStart=0;S.duration=Math.min(60,Math.max(1,Math.round(video.duration*10)/10||5));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(0);renderTimeline();renderSide();toast('Vidéo ajoutée : '+file.name);saveLocal()}catch(e){toast('Impossible de lire la vidéo : '+e.message)}}
+async function loadVideo(file){pause();if(media.videoUrl)URL.revokeObjectURL(media.videoUrl);media.videoUrl=URL.createObjectURL(file);video.src=media.videoUrl;video.dataset.filename=file.name;try{await new Promise((res,rej)=>{video.onloadedmetadata=res;video.onerror=()=>rej(new Error('Vidéo illisible'))});const oldDuration=S.duration;
+ S.trimStart=0;S.duration=Math.min(60,Math.max(1,Math.round(video.duration*10)/10||5));
+ S.elements.forEach(x=>{if(Math.abs(x.end-oldDuration)<.11)x.end=S.duration;else x.end=Math.min(S.duration,x.end)});
+ seek(0);renderTimeline();renderSide();toast('Vidéo ajoutée : '+file.name);saveLocal()}catch(e){toast('Impossible de lire la vidéo : '+e.message)}}
 async function loadImage(file,kind,slotOverride=null){
  const url=URL.createObjectURL(file),im=new Image();im.src=url;
  try{await im.decode()}catch{URL.revokeObjectURL(url);toast('Image non lisible : '+file.name);return false}
