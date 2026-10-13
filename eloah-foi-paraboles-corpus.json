@@ -1,8 +1,8 @@
 {
   "title": "PARABOLES LAB · ELOAH",
   "created": "2026-10-13",
-  "description": "Atlas des paraboles et images, lectures critiques sans surinterprétation ; certaines entrées sont des discours figurés, pas des paraboles narratives strictes.",
-  "count": 44,
+  "description": "Atlas de 44 paraboles et discours figurés bibliques + 1 énigme apocryphe étudiée dans le Livre secret de Jacques. Pas un catalogue exhaustif des paraboles de Jésus.",
+  "count": 45,
   "method": [
     "Délimiter le texte et sa situation narrative",
     "Lire les versions évangéliques séparément",
@@ -849,6 +849,40 @@
       "risk": "Ne pas lire la métaphore comme une injonction à rechercher sa propre mort.",
       "apocrypha": "",
       "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-045",
+      "title": "La tête de la prophétie",
+      "category": "Apocryphes et énigmes",
+      "references": [
+        {
+          "label": "Livre secret de Jacques · NHC I,2, pp. 6–7",
+          "url": "https://www.gospels.net/james"
+        },
+        {
+          "label": "Mc 6,17–29",
+          "url": "https://www.aelf.org/bible/Mc/6"
+        },
+        {
+          "label": "Mt 11,13–15",
+          "url": "https://www.aelf.org/bible/Mt/11"
+        },
+        {
+          "label": "Lc 16,16",
+          "url": "https://www.aelf.org/bible/Lc/16"
+        },
+        {
+          "label": "Ac 21,9–11",
+          "url": "https://www.aelf.org/bible/Ac/21"
+        }
+      ],
+      "problem": "Que signifie l'image de la tête retranchée de la prophétie avec Jean le Baptiste ?",
+      "image": "Tête décapitée, prophétie personnifiée, question de Jacques, incapacité des disciples à comprendre paraboles et discours directs.",
+      "reading": "Métaphore corporelle et énigme à partir de la mort de Jean, ouvrant la question de la fin ou de la transformation d'un régime prophétique.",
+      "risk": "Ne pas assimiler la « tête » à une glande cérébrale ésotérique ; ne pas conclure à une fin universelle de toutes les prophéties malgré les Actes des apôtres.",
+      "apocrypha": "Texte de l'Apocryphon de Jacques (NHC I,2) ; comparaisons Matthieu 11,13, Luc 16,16 et Actes 21,9–11.",
+      "studyStatus": "Enquête critique approfondie : phrase copte repérée et trois hypothèses mises à l'épreuve.",
+      "fullStudy": "foi-control.html?file=eloah-foi-par-045-tete-prophetie.md"
     }
   ]
 }
