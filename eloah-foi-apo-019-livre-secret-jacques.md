@@ -255,6 +255,10 @@ Ces références sont à consulter en tant que **bibliographie scientifique**, n
 
 [← Retour à l'Atlas](eloah-apocryphes-atlas.html?q=Apocryphon%20of%20James) · [Ouvrir le manuscrit](https://www.gospels.net/manuscript) · [Continuer la bibliothèque Nag Hammadi](foi-control.html?file=eloah-foi-collection-08-nag-hammadi.md)
 
+## Parcours complémentaire — Comment comprendre les paraboles ?
+
+**[PAR-046 — Le mystère des paraboles](foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md)** éclaire Marc 4, Matthieu 13 et Luc 8 à partir d'Isaïe. **[Le volume II des douze récits de Thomas](foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md)** permet de tester la transmission de plusieurs images présentes dans notre manuscrit.
+
 ## Nouvelle enquête · PAR-045 — La tête de la prophétie
 
 La formule sur la **tête retranchée avec Jean** est analysée comme une énigme métaphorique, liée à la question de la prophétie et de la compréhension des paraboles. **[Lire l'étude complète avec le copte, les parallèles, les hypothèses et les objections](foi-control.html?file=eloah-foi-par-045-tete-prophetie.md)**.
