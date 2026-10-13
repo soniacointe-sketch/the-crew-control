@@ -8,6 +8,21 @@ try{rows=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(rows))thr
 function save(next){try{localStorage.setItem(key,JSON.stringify(next));rows=next;$('#status').textContent='Enregistré sur ce navigateur.';render();return true}catch(e){$('#status').textContent='Enregistrement impossible : exporte tes données avant de fermer.';return false}}
 function domaineMonEspace(r){const t=(r.title+' '+(r.note||'')).toLowerCase();if(/the crew|danse|latino|flashback|chorégr/.test(t))return 'The Crew Orchies';if(/power & glam|p&g|love journal|etsy|éditorial|publication/.test(t))return 'Power & Glam';if(/parisis|atlas|geojson|toponym|cartograph|cadastre/.test(t))return 'PARISIS ENGINE';if(/foi|spiritualité|apocryph|magdalena|manuscrit/.test(t))return 'Foi & Spiritualité';if(/sonia os|router|le siège|agent|mission control/.test(t))return 'SONIA OS';if(/formation|élèves|pédagog|academy/.test(t))return 'Formations';if(/mémoire|conversation|consolidation|chat projet/.test(t))return 'Mémoire & conversations';if(/base d.expertise|corpus|source|document|fichier|atelier d.écriture|pdf|ocr/.test(t))return 'Documents & Bases d’expertise';if(/budget|paiement|facturation|analytics|coût|abonnement/.test(t))return 'Gestion & Analytics';if(/retours|blocage|erreur|accessibilité|recette|sauvegarde|archive|stockage|validation/.test(t))return 'Qualité & sauvegardes';return 'ELOAH · Pilotage & développement';}
 const ordreDomaines=['ELOAH · Pilotage & développement','Formations','The Crew Orchies','Power & Glam','Foi & Spiritualité','PARISIS ENGINE','SONIA OS','Mémoire & conversations','Documents & Bases d’expertise','Gestion & Analytics','Qualité & sauvegardes'];
+(function actualiserFichesHistoriques(){
+if(!storageReadable||cfg.id!=='itriia')return;
+const marker=key+'-historique-domaines-20261013';
+try{
+ if(localStorage.getItem(marker))return;
+ const updates=[
+ ['eloah-mon-espace-v1-01','01 · Ma priorité de la semaine','01 · ELOAH — Priorité de la semaine','Objectif : livrer un résultat concret cette semaine.\\nÀ faire : choisir un chantier entre navigation ELOAH, formations, bibliothèque Foi, atlas PARISIS et contenus Power & Glam.\\nProchaine étape : définir trois actions et une échéance.'],
+ ['eloah-mon-espace-v1-02','02 · Mon point de départ dans ELOAH','02 · ELOAH — Navigation et accès aux projets','Objectif : retrouver tous les projets, documents et bases d’expertise.\\nÀ faire : vérifier les menus identiques sur chaque page et le hamburger mobile (320/390 px).\\nValidation : ouvrir chaque rubrique et revenir à Mon Espace.'],
+ ['eloah-mon-espace-v1-03','03 · The Crew Orchies — cadrer le projet','03 · The Crew Orchies — Ateliers et administration','Objectif : suivre les cours et ateliers.\\nÀ faire : vérifier inscriptions Latino du 17 octobre, Flashback du 24 octobre, paiements, dossier SIRET et échéances.\\nProchaine étape : actualiser les résultats et les prochaines décisions.']
+ ];
+ const next=rows.map(r=>{const u=updates.find(x=>x[0]===r.id);return u&&r.title===u[1]&&r.state==='À faire'&&!r.date?{...r,title:u[2],note:u[3]}:r;});
+ if(next.some((x,i)=>x!==rows[i])){localStorage.setItem(key,JSON.stringify(next));rows=next}
+ localStorage.setItem(marker,'ok');
+}catch(e){}
+})();
 function render(){
 const active=rows.filter(r=>!r.archived),today=new Date().toLocaleDateString('en-CA');
 $('#metrics').innerHTML=[['Éléments actifs',active.length],['Terminés',active.filter(r=>r.state==='Terminé').length],['Échéances dépassées',active.filter(r=>r.date&&r.date<today&&r.state!=='Terminé').length]].map(([l,n])=>'<div class="panel">'+l+'<strong>'+n+'</strong></div>').join('');
