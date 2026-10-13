@@ -1,0 +1,126 @@
+{
+  "source": "Bibliothèque de fichiers ELOAH, 13 octobre 2026",
+  "note": "WebP dérivés de PNG existants. Images de création éditoriale, pas fac-similés.",
+  "items": [
+    {
+      "n": 1,
+      "file": "eloah-archive-01.webp",
+      "source_original_png": "Cabinet de curiosités aux reliques anciennes.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 2,
+      "file": "eloah-archive-02.webp",
+      "source_original_png": "Fragments de rêves et fil d’or.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 3,
+      "file": "eloah-archive-03.webp",
+      "source_original_png": "Gousse ancienne sur table de basalte.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 4,
+      "file": "eloah-archive-04.webp",
+      "source_original_png": "Le cœur et la plume.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 5,
+      "file": "eloah-archive-05.webp",
+      "source_original_png": "Le fruit derrière la ligne d’or.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 6,
+      "file": "eloah-archive-06.webp",
+      "source_original_png": "Le jardin, l’arbre et l’interdit.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 7,
+      "file": "eloah-archive-07.webp",
+      "source_original_png": "Le miroir et la porte de lumière.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 8,
+      "file": "eloah-archive-08.webp",
+      "source_original_png": "Le papyrus vers la lumière.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 9,
+      "file": "eloah-archive-09.webp",
+      "source_original_png": "Marie à l’écoute de la Parole.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 10,
+      "file": "eloah-archive-10.webp",
+      "source_original_png": "Objets anonymes reliés par l’or.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 11,
+      "file": "eloah-archive-11.webp",
+      "source_original_png": "Quatre reflets, un masque fragmenté.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 12,
+      "file": "eloah-archive-12.webp",
+      "source_original_png": "Quatre strates de la reine de Saba.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 13,
+      "file": "eloah-archive-13.webp",
+      "source_original_png": "Reine de Saba, quête de sagesse.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 14,
+      "file": "eloah-archive-14.webp",
+      "source_original_png": "Sommeil sous la lumière dorée.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    },
+    {
+      "n": 15,
+      "file": "eloah-archive-15.webp",
+      "source_original_png": "Trace d’or dans la pierre.png",
+      "kind": "composition éditoriale issue des anciennes créations ELOAH",
+      "optimized": true,
+      "original_png_unmodified": true
+    }
+  ]
+}
