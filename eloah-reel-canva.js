@@ -2014,26 +2014,29 @@ async function restoreReelImages(data,idMap=null){
 function saveProject(){
  S.name=one('#ecs-name').value||'Mon Reel';saveLocal();
  const frameAssets=captureFrameAssets(1400,18000000);
- const mediaOfBrand=captureBrandAssets(19500000);
- const data={version:4,...serial(),frameAssets,brandAssets:mediaOfBrand.items,
-   otherMediaNotIncluded:!!(media.videoUrl||media.audioUrl||images.size)};
+ const mediaOfBrand=captureBrandAssets(19500000),photos=captureReelImages(1500,16500000);
+ const data={version:5,...serial(),frameAssets,brandAssets:mediaOfBrand.items,
+   imageAssets:photos.assets,backgroundImage:photos.background,
+   otherMediaNotIncluded:!!(media.videoUrl||media.audioUrl)};
  download(new Blob([JSON.stringify(data,null,2)],{type:'application/json'}),'eloah-reel-projet.json');
- toast('Projet exporté avec '+frameAssets.length+' photo(s) de cadre et '+mediaOfBrand.items.length+
-   ' ressource(s) de marque.'+(mediaOfBrand.skipped?' '+mediaOfBrand.skipped+' image(s) non incluse(s).':'')+
+ toast('Projet exporté avec '+frameAssets.length+' photo(s) de cadre, '+mediaOfBrand.items.length+
+   ' ressource(s) de marque et '+photos.assets.length+' photo(s).'+
+   (photos.skipped||mediaOfBrand.skipped?' Certaines images volumineuses ne sont pas incluses.':'')+
    ' Les vidéos et musiques restent à conserver séparément.');
 }
 one('#ecs-project-input').addEventListener('change',async ev=>{
  const f=ev.target.files[0];if(!f)return;
  try{
   const data=JSON.parse(await f.text());if(!Array.isArray(data.elements))throw Error('Format inconnu');
-  snapshot();framePhotos.clear();brandEmbeddedImages.clear();brandImageCache.clear();
+  snapshot();framePhotos.clear();brandEmbeddedImages.clear();brandImageCache.clear();images.clear();media.bgImage=null;
   const idMap=new Map(),elements=data.elements.map(e=>{const id=nextId++;idMap.set(String(e.id),id);return {...e,id}});
   apply({name:data.name||'Mon Reel',duration:Math.max(1,Math.min(60,data.duration||5)),trimStart:0,bg:data.bg||'#fffaf1',filter:data.filter||'none',brand:data.brand||'ELOAH',elements});
   const count=await restoreFrameAssets(data.frameAssets,idMap);
   const brandCount=restoreBrandAssets(data.brandAssets,idMap);
-  saveLocal();saveFrameMediaLocal();saveBrandMediaLocal();draw();
-  toast('Projet ouvert avec '+count+' photo(s) de cadre et '+brandCount+
-    ' ressource(s) de marque. Les autres vidéos et musiques doivent être réimportées.');
+  const imageCount=await restoreReelImages({images:data.imageAssets,background:data.backgroundImage},idMap);
+  saveLocal();saveFrameMediaLocal();saveBrandMediaLocal();saveReelImageAssetsLocal();draw();
+  toast('Projet ouvert avec '+count+' photo(s) de cadre, '+brandCount+' ressource(s) de marque et '+
+   imageCount+' photo(s). Les autres vidéos et musiques doivent être réimportées.');
  }catch(e){toast('Projet impossible à ouvrir : '+e.message)}
  ev.target.value='';
 });
@@ -2135,5 +2138,6 @@ brandJsonInput.addEventListener('change',async ev=>{
 one('#ecs-name').value=S.name;renderSide();renderTimeline();
 try{const persisted=JSON.parse(localStorage.getItem('eloah_reel_editor_frame_assets')||'[]');restoreFrameAssets(persisted).catch(e=>console.warn(e))}catch{}
 try{const storedBrand=JSON.parse(localStorage.getItem('eloah_reel_editor_brand_assets')||'[]');restoreBrandAssets(storedBrand)}catch{}
+try{const savedImages=JSON.parse(localStorage.getItem('eloah_reel_editor_image_assets')||'null');if(savedImages)restoreReelImages(savedImages).catch(e=>console.warn(e))}catch{}
 requestAnimationFrame(tick);
 })();
