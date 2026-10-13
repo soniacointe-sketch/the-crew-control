@@ -865,13 +865,13 @@ function renderPersonalIndex(){
   card.setAttribute("aria-label","Lire le chapitre "+String(j+1).padStart(2,"0")+" : "+d[0]);
   const cover=section("img","");
   const preferredCover="assets/foi-chapitres/photo-"+String(j+1).padStart(2,"0")+".webp";
-  cover.src=j<10?preferredCover:src;
+  cover.src=j<12?preferredCover:src;
   cover.alt="Illustration éditoriale ELOAH : "+d[0].slice(5);
   cover.loading="lazy";cover.decoding="async";
   cover.width=840;cover.height=1080;
   let usedBackupCover=false;
   cover.onerror=()=>{
-   if(j<10&&!usedBackupCover){usedBackupCover=true;cover.src=src;return}
+   if(j<12&&!usedBackupCover){usedBackupCover=true;cover.src=src;return}
    cover.style.display="none";card.classList.add("rev-chapter-no-image");
   };
   const info=section("div","rev-story-info");
