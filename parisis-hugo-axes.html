@@ -167,6 +167,44 @@ for(const feature of collection.features){
 }
 return candidates;
 }
+
+function distanceToRouteMeters(lat,lng,route){
+const X=(p)=>p[1]*111320*Math.cos(48.855*Math.PI/180);
+const Y=(p)=>p[0]*111195;
+const pt=[lat,lng],px=X(pt),py=Y(pt);
+let best=Infinity;
+for(let i=1;i<route.length;i++){
+const a=route[i-1],b=route[i],x1=X(a),y1=Y(a),dx=X(b)-x1,dy=Y(b)-y1;
+const t=Math.max(0,Math.min(1,((px-x1)*dx+(py-y1)*dy)/(dx*dx+dy*dy||1)));
+best=Math.min(best,Math.hypot(px-x1-t*dx,py-y1-t*dy));
+}
+return best;
+}
+function analyzeHistoricCadastre(){
+const active={Juiverie:[],Barillerie:[]};
+const parts=[
+{key:'Juiverie',route:routes.find(r=>r.key==='A').points.slice(2,5).map(p=>[p[1],p[2]]),color:'#186e58'},
+{key:'Barillerie',route:routes.find(r=>r.key==='B').points.slice(2,5).map(p=>[p[1],p[2]]),color:'#9960a3'}
+];
+let all=0;
+cadastreOutline.eachLayer(layer=>{
+if(!layer.feature?.geometry)return;
+const type=layer.feature.geometry.type||'';
+if(!/Polygon/.test(type)||!layer.getBounds)return;
+all++;
+const center=layer.getBounds().getCenter();
+const distances=parts.map(x=>({key:x.key,distance:distanceToRouteMeters(center.lat,center.lng,x.route)}));
+const best=distances.reduce((a,b)=>a.distance<b.distance?a:b);
+if(best.distance<=35)active[best.key].push({layer,distance:best.distance});
+});
+if(!all)throw Error('Aucune parcelle authentique chargée. Télécharger ou importer ALPAGE avant la comparaison.');
+cadastreOutline.resetStyle();
+const entries=[['Juiverie','#186e58'],['Barillerie','#9960a3']];
+for(const [key,color] of entries)for(const hit of active[key]){
+hit.layer.setStyle({color,weight:2.4,opacity:1,fillColor:color,fillOpacity:.35});
+}
+return {inspected:all,juiverie:active.Juiverie.length,barillerie:active.Barillerie.length,thresholdMeters:35,method:'Centre de l’enveloppe de chaque parcelle à 35 m maximum du corridor indicatif. Ce sont des candidats de proximité, ni intersections mesurées, ni preuves de conservation du tracé de 1482.'};
+}
 window.PARISIS_VASSEROT={
 load(collection){
 if(!collection||collection.type!=='FeatureCollection'||!Array.isArray(collection.features))throw Error('Le fichier doit être un GeoJSON FeatureCollection.');
@@ -198,7 +236,8 @@ return {count:candidates.length,sourceCount:collection.features.length,scope:'Î
 },
 showRoads(flag){if(flag){if(!map.hasLayer(vasserotRoads))vasserotRoads.addTo(map)}else map.removeLayer(vasserotRoads);},
 clearRoads(){vasserotRoads.clearLayers();},
-roadsVisible(){return map.hasLayer(vasserotRoads)}
+roadsVisible(){return map.hasLayer(vasserotRoads)},
+analyze:analyzeHistoricCadastre
 };
 
 const allCoords=[];
