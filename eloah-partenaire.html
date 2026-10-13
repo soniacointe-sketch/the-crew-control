@@ -316,6 +316,26 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 @media(max-width:1030px){#eloah-subscription-board .eloah-plans-grid{gap:12px}#eloah-subscription-board .eloah-plan-card{padding:23px 16px 18px}#eloah-subscription-board .eloah-plans-summary{grid-template-columns:145px 1fr 1fr;gap:17px}}
 @media(max-width:760px){#eloah-subscription-board .eloah-plans-grid{grid-template-columns:1fr;max-width:480px;margin:0 auto;gap:22px}#eloah-subscription-board .eloah-plan-card{min-height:310px;padding:25px}#eloah-subscription-board .eloah-plans-summary{grid-template-columns:1fr 1fr;gap:17px;padding:18px}#eloah-subscription-board .eloah-summary-plan{grid-column:1/-1;border-bottom:1px solid #e7eaf3;padding-bottom:10px}#eloah-subscription-board .eloah-plans-wrap{padding:24px 8px 10px}}
 @media(max-width:420px){#eloah-subscription-board .eloah-plans-summary{grid-template-columns:1fr}#eloah-subscription-board .eloah-summary-plan{grid-column:auto}#eloah-subscription-board .eloah-plans-heading p{font-size:14px}}
+</style><style id="eloah-commercial-offers-css">
+#eloah-subscription-board .eloah-commercial-divider{border-top:1px solid #e4dfdf;margin-top:45px;padding-top:35px;text-align:center}
+#eloah-subscription-board .eloah-commercial-divider span{font:700 10px/1.5 system-ui;letter-spacing:.15em;color:#9e617c}
+#eloah-subscription-board .eloah-commercial-divider h3{font:500 clamp(27px,3vw,36px)/1.2 Georgia,serif;color:#2e2631;margin:8px 0 10px}
+#eloah-subscription-board .eloah-commercial-divider p{color:#817780;font:13px/1.6 system-ui;margin:0 auto 24px;max-width:700px}
+#eloah-subscription-board .eloah-commercial-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+#eloah-subscription-board .eloah-commercial-grid article{border:1px solid #e3dce5;border-radius:13px;background:#fff;padding:24px;min-width:0;display:flex;flex-direction:column}
+#eloah-subscription-board .eloah-commercial-grid article:nth-child(1){border-top:3px solid #7555b2}
+#eloah-subscription-board .eloah-commercial-grid article:nth-child(2){border-top:3px solid #a63d57}
+#eloah-subscription-board .eloah-commercial-grid article:nth-child(3){border-top:3px solid #477d62}
+#eloah-subscription-board .eloah-commercial-index{font:700 10px/1.5 system-ui;letter-spacing:.11em;color:#907c91}
+#eloah-subscription-board .eloah-commercial-grid h4{font:500 25px/1.2 Georgia,serif;margin:12px 0 9px;color:#322c36}
+#eloah-subscription-board .eloah-commercial-grid p{font:13px/1.6 system-ui;color:#6e6570;margin:0 0 25px}
+#eloah-subscription-board .eloah-commercial-grid a{font:650 12px/1.5 system-ui;color:#6743a0;text-decoration:none;display:inline-block;margin-top:auto}
+#eloah-subscription-board .eloah-commercial-grid a:hover{text-decoration:underline}
+#eloah-subscription-board .eloah-commercial-actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin:22px 0}
+#eloah-subscription-board .eloah-commercial-actions a{padding:11px 17px;border-radius:9px;font:650 13px/1.5 system-ui;text-decoration:none;border:1px solid #7555b2}
+#eloah-subscription-board .eloah-commercial-primary{background:#7555b2;color:white}
+#eloah-subscription-board .eloah-commercial-secondary{background:white;color:#7555b2}
+@media(max-width:760px){#eloah-subscription-board .eloah-commercial-grid{grid-template-columns:1fr}#eloah-subscription-board .eloah-commercial-grid article{padding:22px}}
 </style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header>
 <section id="eloah-subscription-board" hidden aria-labelledby="eloah-subscription-title">
   <div class="eloah-plans-wrap">
@@ -386,6 +406,13 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
     </div>
     <p class="eloah-plan-caption">* Offres et fonctionnalités présentées d’après la maquette. Les limites, droits d’accès et tarifs sont à confirmer avant leur commercialisation.</p>
     <p class="eloah-plans-footer">Paiement Stripe à configurer · Aucun prélèvement depuis cette page. <button id="eloah-manage-plan" type="button">Gérer mon abonnement ↗</button></p>
+  <div class="eloah-commercial-divider"><span>ELOAH · LES TROIS SOLUTIONS</span><h3>Un espace. Plusieurs façons d'avancer.</h3><p>Choisis une plateforme de pilotage, confie-nous tes créations, ou prépare une solution adaptée à ton association.</p></div>
+  <div class="eloah-commercial-grid">
+    <article><span class="eloah-commercial-index">01 · ORGANISER</span><h4>ELOAH Pilotage</h4><p>Gère tes projets, documents, calendriers éditoriaux, contacts et activités dans un environnement pensé pour tes besoins.</p><a href="eloah-offres.html#pilotage">Découvrir l'espace de pilotage <span aria-hidden="true">↗</span></a></article>
+    <article><span class="eloah-commercial-index">02 · CRÉER</span><h4>Studios créatifs</h4><p>Newsletters, écriture éditoriale, visuels et supports de communication. Une prestation sur mesure avec un livrable précis.</p><a href="eloah-offres.html#studio">Explorer les studios <span aria-hidden="true">↗</span></a></article>
+    <article><span class="eloah-commercial-index">03 · RASSEMBLER</span><h4>ELOAH Associations</h4><p>Des solutions pour les petites associations : membres, événements, organisation et communication.</p><a href="eloah-offres.html#associations">Découvrir la solution associative <span aria-hidden="true">↗</span></a></article>
+  </div>
+  <div class="eloah-commercial-actions"><a href="eloah-offres.html" class="eloah-commercial-primary">Découvrir toutes les offres ↗</a><a href="eloah-offres.html#contact" class="eloah-commercial-secondary">Demander une démonstration</a></div>
   </div>
   <dialog id="eloah-subscription-dialog" aria-labelledby="eloah-plan-dialog-title">
     <div class="eloah-plan-dialog-head">
