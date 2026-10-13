@@ -1358,6 +1358,11 @@ async function resizeBrandImage(file,logo=false){
  return url;
 }
 
+const reelImporter=window.ELOAHReelImporter?.create({
+ root,xss,toast,getActiveTab:()=>activeTab,refresh:()=>renderSide(),setTab,
+ loadImage,loadVideo,loadAudio,openStockVideo,importStockVideo,previewSound,addSound,
+ videoStock,soundLibrary
+})||null;
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
@@ -1366,7 +1371,7 @@ function renderSide(){
  if(activeTab==='elements')html=elementsMarkup();
  if(activeTab==='text')html=textPanel();
  if(activeTab==='brand')html=brandPanel();
- if(activeTab==='import')html='<div class="ecs-upload"><strong>Importe tes fichiers</strong><p class="ecs-note">Glisse tes fichiers directement sur la page ou choisis ci-dessous.</p>'+btn('importVideo','Vidéo',true)+btn('importImage','Photo')+btn('importAudio','Audio')+'</div><p class="ecs-note">Fichiers traités dans le navigateur. Les photos peuvent être un fond ou un élément mobile.</p>'+btn('addImage','Photo comme élément');
+ if(activeTab==='import')html=reelImporter?reelImporter.render():'<p class="ecs-note">Bibliothèque Importer non disponible. Actualise la page.</p>';
  if(activeTab==='tools')html=range('Durée du Reel (secondes)','duration',1,60,.5,S.duration)+color('Fond','bg',S.bg)+'<label class="ecs-sidelabel">Effet de couleur</label><select data-setting="filter">'+[['none','Naturel'],['cinema','Cinéma'],['gold','Lumière dorée'],['vivid','Couleurs intenses'],['mono','Noir et blanc']].map(([k,v])=>'<option value="'+k+'" '+(S.filter===k?'selected':'')+'>'+v+'</option>').join('')+'</select>'+btn('png','Exporter une image PNG')+'<p class="ecs-note">Les filtres modifient la vidéo et les photos de fond. Le son est conservé selon les capacités du navigateur à l’export.</p>';
  if(activeTab==='projects')html='<p class="ecs-note">Sauvegarde ton projet en JSON pour retrouver les textes, positions et couleurs.</p>'+btn('save','Sauvegarder projet',true)+btn('load','Ouvrir un projet')+btn('reset','Nouveau projet')+'<p class="ecs-note">Les vidéos, photos et musiques ne sont pas intégrées au fichier JSON : conserve-les séparément et réimporte-les après ouverture.</p>';
  if(activeTab==='photos')html=photoCatalog();
@@ -1457,6 +1462,7 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ if(reelImporter?.handleClick(ev))return;
 
  const brandViewBtn=ev.target.closest('[data-brand-view]');
  if(brandViewBtn){brandView=brandViewBtn.dataset.brandView;brandSearch='';renderSide();return}
@@ -1683,6 +1689,7 @@ root.addEventListener('click',ev=>{
 });
 one('#ecs-name').addEventListener('change',e=>{S.name=e.target.value.slice(0,90)||'Mon Reel';saveLocal()});
 one('.ecs-sidebody').addEventListener('change',e=>{
+ if(reelImporter?.handleChange(e))return;
 
  if(e.target.id==='ecs-brand-kit'){
   brandKitId=e.target.value;brandView='overview';brandSearch='';brandCreating=false;
@@ -1741,6 +1748,7 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(reelImporter?.handleInput(e))return;
 
  if(e.target.id==='ecs-brand-search'){
   brandSearch=e.target.value;
