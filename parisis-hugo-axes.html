@@ -180,33 +180,51 @@ best=Math.min(best,Math.hypot(px-x1-t*dx,py-y1-t*dy));
 }
 return best;
 }
-function analyzeHistoricCadastre(){
+let lastCadastreAudit=null;
+function analyzeHistoricCadastre(threshold=35){
+if(!Number.isFinite(threshold)||threshold<5||threshold>100)throw Error('Seuil de proximité entre 5 et 100 mètres requis.');
 const active={Juiverie:[],Barillerie:[]};
 const parts=[
-{key:'Juiverie',route:routes.find(r=>r.key==='A').points.slice(2,5).map(p=>[p[1],p[2]]),color:'#186e58'},
-{key:'Barillerie',route:routes.find(r=>r.key==='B').points.slice(2,5).map(p=>[p[1],p[2]]),color:'#9960a3'}
+{key:'Juiverie',route:routes.find(r=>r.key==='A').points.slice(2,5).map(p=>[p[1],p[2]])},
+{key:'Barillerie',route:routes.find(r=>r.key==='B').points.slice(2,5).map(p=>[p[1],p[2]])}
 ];
-let all=0;
+let total=0;
+const chosen=[];
 cadastreOutline.eachLayer(layer=>{
 if(!layer.feature?.geometry)return;
-const type=layer.feature.geometry.type||'';
-if(!/Polygon/.test(type)||!layer.getBounds)return;
-all++;
+if(!/Polygon/.test(layer.feature.geometry.type||'')||!layer.getBounds)return;
+total++;
 const center=layer.getBounds().getCenter();
-const distances=parts.map(x=>({key:x.key,distance:distanceToRouteMeters(center.lat,center.lng,x.route)}));
+const distances=parts.map(p=>({key:p.key,distance:distanceToRouteMeters(center.lat,center.lng,p.route)}));
 const best=distances.reduce((a,b)=>a.distance<b.distance?a:b);
-if(best.distance<=35)active[best.key].push({layer,distance:best.distance});
-});
-if(!all)throw Error('Aucune parcelle authentique chargée. Télécharger ou importer ALPAGE avant la comparaison.');
-cadastreOutline.resetStyle();
-const entries=[['Juiverie','#186e58'],['Barillerie','#9960a3']];
-for(const [key,color] of entries)for(const hit of active[key]){
-hit.layer.setStyle({color,weight:2.4,opacity:1,fillColor:color,fillOpacity:.35});
+if(best.distance<=threshold){
+const hit={feature:layer.feature,layer,from:best.key,distance:Math.round(best.distance*10)/10,center:[center.lng,center.lat]};
+active[best.key].push(hit);chosen.push(hit);
 }
-return {inspected:all,juiverie:active.Juiverie.length,barillerie:active.Barillerie.length,thresholdMeters:35,method:'Centre de l’enveloppe de chaque parcelle à 35 m maximum du corridor indicatif. Ce sont des candidats de proximité, ni intersections mesurées, ni preuves de conservation du tracé de 1482.'};
+});
+if(!total)throw Error('Aucune parcelle authentique chargée. Importer les données ALPAGE avant la comparaison.');
+cadastreOutline.resetStyle();
+for(const hit of chosen){
+const color=hit.from==='Juiverie'?'#186e58':'#9960a3';
+hit.layer.setStyle({color,weight:2.4,opacity:1,fillColor:color,fillOpacity:.32});
+}
+lastCadastreAudit={
+at:new Date().toISOString(),thresholdMeters:threshold,inspected:total,
+counts:{Juiverie:active.Juiverie.length,Barillerie:active.Barillerie.length},
+features:chosen.map(hit=>({type:'Feature',geometry:hit.feature.geometry,properties:{...hit.feature.properties,parisis_corridor:hit.from,parisis_distance_m:hit.distance,parisis_center_longitude:hit.center[0],parisis_center_latitude:hit.center[1]}}))
+};
+return {inspected:total,juiverie:active.Juiverie.length,barillerie:active.Barillerie.length,
+thresholdMeters:threshold,method:'Centre de l’enveloppe rectangulaire de chaque parcelle à moins du seuil du tracé indicatif. Candidats de proximité, non intersections exactes ni preuve de conservation depuis 1482.'};
+}
+function auditExport(){
+if(!lastCadastreAudit)throw Error('Lancer une comparaison après chargement des parcelles.');
+return {type:'FeatureCollection',name:'PARISIS · Vasserot 1810–1836 · candidats Juiverie et Barillerie',
+properties:{investigation:'VH-VAS-001',computedAt:lastCadastreAudit.at,thresholdMeters:lastCadastreAudit.thresholdMeters,source:'ALPAGE · parcelles Vasserot (1810–1836), A.-L. Bethe · ODbL',method:'Centre du rectangle englobant des parcelles à distance du corridor indicatif en coordonnées de travail, equirectangulaire autour de 48,855°N.',limitations:'Le résultat dépend fortement du choix du corridor, du seuil, du géoréférencement et des dates ; pas une preuve de rue médiévale.',inspected:lastCadastreAudit.inspected,counts:lastCadastreAudit.counts},
+features:lastCadastreAudit.features};
 }
 window.PARISIS_VASSEROT={
 load(collection){
+lastCadastreAudit=null;
 if(!collection||collection.type!=='FeatureCollection'||!Array.isArray(collection.features))throw Error('Le fichier doit être un GeoJSON FeatureCollection.');
 const candidates=[];
 for(const feature of collection.features){
@@ -225,7 +243,7 @@ if(!map.hasLayer(cadastreOutline))cadastreOutline.addTo(map);
 return {count:candidates.length,sourceCount:collection.features.length,bounds:'Île de la Cité et ses abords'};
 },
 visible(flag){if(flag){if(!map.hasLayer(cadastreOutline))cadastreOutline.addTo(map)}else map.removeLayer(cadastreOutline);},
-clear(){cadastreOutline.clearLayers();},
+clear(){cadastreOutline.clearLayers();lastCadastreAudit=null;},
 isVisible(){return map.hasLayer(cadastreOutline);},
 loadRoads(collection){
 const candidates=subsetHistorique(collection);
@@ -237,7 +255,8 @@ return {count:candidates.length,sourceCount:collection.features.length,scope:'Î
 showRoads(flag){if(flag){if(!map.hasLayer(vasserotRoads))vasserotRoads.addTo(map)}else map.removeLayer(vasserotRoads);},
 clearRoads(){vasserotRoads.clearLayers();},
 roadsVisible(){return map.hasLayer(vasserotRoads)},
-analyze:analyzeHistoricCadastre
+analyze:analyzeHistoricCadastre,
+exportAudit:auditExport
 };
 
 const allCoords=[];
