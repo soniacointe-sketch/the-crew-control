@@ -1,0 +1,74 @@
+name: Importer les dix couvertures Foi
+on:
+  push:
+    paths:
+      - .github/workflows/foi-covers-import-20261013.yml
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  importer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Récupérer le dépôt
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Installer Pillow
+        run: python -m pip install --quiet pillow
+      - name: Transférer et optimiser les dix couvertures
+        env:
+          URL_01: "https://at.adobe.com/d2GeszvtQTThJvXc"
+          URL_02: "https://at.adobe.com/2sZZKL9ZfZx0lOc6"
+          URL_03: "https://at.adobe.com/GTB37HMgQqcSRVZF"
+          URL_04: "https://at.adobe.com/irwQGBZPTNKcnKtw"
+          URL_05: "https://at.adobe.com/QSie31ohrDsi16ta"
+          URL_06: "https://at.adobe.com/zTvo2kaYhhlonIa9"
+          URL_07: "https://at.adobe.com/PFsDqAYsC76xF8hD"
+          URL_08: "https://at.adobe.com/oaDgw2TBy72Kv11n"
+          URL_09: "https://at.adobe.com/sDCzFuVHquZfZX4c"
+          URL_10: "https://at.adobe.com/wMsPLDwMo29QMDHP"
+        run: |
+          python - <<'PY'
+          import os, io, urllib.request
+          from pathlib import Path
+          from PIL import Image, ImageOps
+          sources = [
+            ("01", os.environ["URL_01"]),
+            ("02", os.environ["URL_02"]),
+            ("03", os.environ["URL_03"]),
+            ("04", os.environ["URL_04"]),
+            ("05", os.environ["URL_05"]),
+            ("06", os.environ["URL_06"]),
+            ("07", os.environ["URL_07"]),
+            ("08", os.environ["URL_08"]),
+            ("09", os.environ["URL_09"]),
+            ("10", os.environ["URL_10"])
+          ]
+          destination = Path("assets/foi-chapitres")
+          destination.mkdir(parents=True,exist_ok=True)
+          for number, url in sources:
+              req=urllib.request.Request(url,headers={"User-Agent":"ELOAH-Foi-Importer/1.0"})
+              with urllib.request.urlopen(req, timeout=90) as response:
+                  raw=response.read()
+              image=Image.open(io.BytesIO(raw)).convert("RGB")
+              image.thumbnail((1000,1250),Image.Resampling.LANCZOS)
+              target=destination/("photo-"+number+".webp")
+              image.save(target,"WEBP",quality=83,method=6)
+              if target.stat().st_size<10000:
+                  raise RuntimeError("Image anormalement petite: "+str(target))
+              print(number, image.size, target.stat().st_size)
+          PY
+      - name: Publier les images sur la branche
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/foi-chapitres/photo-*.webp
+          if ! git diff --cached --quiet; then
+            git commit -m "Importer les dix couvertures photographiques ELOAH Foi"
+            git push
+          fi
