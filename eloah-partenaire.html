@@ -778,13 +778,21 @@ $('campaign-login-send').onclick=async()=>{
 };
 
 $('campaign-target').addEventListener('change',()=>{
- if($('campaign-target').value==='crew-test'){
-  const name=$('campaign-sender-name'),email=$('campaign-sender-email');
-  if(!name.value.trim()||name.value.trim()==='ITRIIA')name.value='The Crew Orchies';
-  if(!email.value.trim().toLowerCase().endsWith('@thecreworchies.blog'))email.value='newsletter@thecreworchies.blog';
-  name.dispatchEvent(new Event('input',{bubbles:true}));email.dispatchEvent(new Event('input',{bubbles:true}));
+ const target=$('campaign-target').value;
+ const name=$('campaign-sender-name'),email=$('campaign-sender-email'),reply=$('campaign-reply-to');
+ if(target==='crew-test'){
+  if(!name.value.trim()||name.value.trim()==='ITRIIA'||name.value.trim()==='Power & Glam')name.value='The Crew Orchies';
+  if(!email.value.trim()||email.value.trim()==='noreply@itriia.com'||email.value.trim()==='soniacointe@powerglam.fr')email.value='newsletter@thecreworchies.blog';
   status('Mode technique The Crew : test vers le compte ELOAH uniquement.');
- }else status('Vérification du domaine expéditeur nécessaire pour cette liste. Aucun envoi n’est déclenché.');
+ }else if(target==='Power & Glam'){
+  if(!name.value.trim()||name.value.trim()==='ITRIIA'||name.value.trim()==='The Crew Orchies')name.value='Power & Glam';
+  if(!email.value.trim()||email.value.trim()==='noreply@itriia.com'||email.value.trim()==='newsletter@thecreworchies.blog')email.value='soniacointe@powerglam.fr';
+  if(!reply.value.trim()||reply.value.trim()==='pierre@itriia.com')reply.value='soniacointe@powerglam.fr';
+  status('Adresse Power & Glam renseignée. Le domaine powerglam.fr est encore non vérifié chez Resend : envoi bloqué jusqu’à correction DNS.');
+ }else{
+  status('Vérification du domaine expéditeur nécessaire pour cette liste. Aucun envoi n’est déclenché.');
+ }
+ for(const field of [name,email,reply])field.dispatchEvent(new Event('input',{bubbles:true}));
 });
 new MutationObserver(()=>{if(!f.hidden)check()}).observe(f,{attributes:true,attributeFilter:['hidden']});
 })();
