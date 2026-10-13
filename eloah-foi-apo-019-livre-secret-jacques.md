@@ -254,3 +254,15 @@ Ces références sont à consulter en tant que **bibliographie scientifique**, n
 ---
 
 [← Retour à l'Atlas](eloah-apocryphes-atlas.html?q=Apocryphon%20of%20James) · [Ouvrir le manuscrit](https://www.gospels.net/manuscript) · [Continuer la bibliothèque Nag Hammadi](foi-control.html?file=eloah-foi-collection-08-nag-hammadi.md)
+
+## Nouvelle passerelle — PARABOLES LAB
+
+L'Apocryphon de Jacques (NHC I,2, pages 7–8) rappelle plusieurs images de paraboles : les bergers, la semence, la construction, les lampes des jeunes filles, le salaire des ouvriers et l'argent. Ces correspondances motivent une **étude comparée**, mais **ne permettent pas** de déduire automatiquement un sens secret unique.
+
+- [Ouvrir le PARABOLES LAB (44 récits et discours figurés)](eloah-foi-paraboles-lab.html)
+- [Lire la méthode critique et les quatre premières études](foi-control.html?file=eloah-foi-paraboles-manuel-etude.md)
+- [Étudier le semeur](eloah-foi-paraboles-lab.html?id=PAR-001)
+- [Étudier les ouvriers de la vigne](eloah-foi-paraboles-lab.html?id=PAR-012)
+- [Étudier les dix jeunes filles](eloah-foi-paraboles-lab.html?id=PAR-017)
+
+**Piste APO-019/PAR-001 :** identifier ce que les mots et les images d'APO-019 ajoutent, omettent ou déplacent par rapport à Matthieu, Marc et Luc. Il faut comparer les langues et l'histoire des versions avant de parler de dépendance littéraire.
