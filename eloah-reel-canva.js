@@ -322,9 +322,64 @@ function stickerAnimations(){
  '<p class="ecs-note ecs-anim-disclaimer">Autocollants animés originaux ELOAH, dessinés pour le studio. Les animations sont visibles pendant la lecture et intégrées à l’export vidéo compatible.</p>';
 }
 
+
+let frameView='home',frameSearch='',activeFrameSlot=0;
+const framePhotos=new Map(),frameObjectUrls=new Set();
+function frameTile(f){
+ if(!f)return '';
+ return '<button class="ecs-frame-tile" type="button" data-frame-add="'+xss(f.id)+'" data-search="'+xss((f.label+' '+f.group+' '+f.shape).toLocaleLowerCase('fr'))+'" title="Ajouter '+xss(f.label)+'">'+
+ '<span class="ecs-frame-thumb"><img loading="lazy" decoding="async" src="'+window.ELOAHFrames.thumb(f.id)+'" alt=""></span><span class="ecs-frame-caption">'+xss(f.label)+'</span><span class="ecs-frame-plus" aria-hidden="true">＋</span></button>';
+}
+function frameSection(g,i){
+ return '<section class="ecs-frame-section" data-frame-section><div class="ecs-sectiontitle"><strong>'+xss(g.name)+'</strong><button type="button" data-frame-group="g'+i+'">Afficher tout →</button></div><div class="ecs-frame-strip">'+g.items.map(frameTile).join('')+'</div></section>';
+}
+function frameCatalog(){
+ const lib=window.ELOAHFrames;
+ if(!lib)return '<div class="ecs-empty">Bibliothèque de cadres indisponible. Actualise cette page.</div>';
+ const recent=S.elements.filter(e=>e.kind==='photoFrame').slice(-12).reverse().map(e=>lib.byId.get(e.variant)).filter(Boolean);
+ const head='<div class="ecs-audio-header"><button type="button" data-cat="overview" aria-label="Retour aux éléments">←</button><strong>Cadres</strong></div><div class="ecs-search"><span>＋</span><input id="ecs-frame-search" placeholder="Rechercher des cadres" value="'+xss(frameSearch)+'" aria-label="Rechercher des cadres"><span>⌕</span></div>';
+ if(frameView!=='home'){
+  const ix=Number(frameView.slice(1)),g=lib.groups[ix],recentView=frameView==='recent';
+  const items=recentView?recent:g?.items||[];
+  return head+'<button class="ecs-els-back" type="button" data-frame-group="home">← Tous les cadres</button><h3 class="ecs-panelheading">'+xss(recentView?'Utilisés récemment':g?.name||'Cadres')+'</h3><div class="ecs-frame-grid">'+items.map(frameTile).join('')+'</div>';
+ }
+ return head+(recent.length?'<section class="ecs-frame-section" data-frame-section><div class="ecs-sectiontitle"><strong>Utilisés récemment</strong><button type="button" data-frame-group="recent">Afficher tout →</button></div><div class="ecs-frame-strip">'+recent.map(frameTile).join('')+'</div></section>':'')+
+ lib.groups.map(frameSection).join('')+'<div class="ecs-frame-footer"><p class="ecs-note">187 cadres originaux ELOAH, dont des cadres à plusieurs cases. Ajoute un cadre, puis choisis les photos à placer dedans.</p><button class="ecs-pillbtn primary" data-action="addImage" type="button">＋ Importer mes photos</button></div>';
+}
+function frameSelected(){return S.elements.find(e=>e.id===selected&&e.kind==='photoFrame')}
+function frameSlotCount(e){const item=window.ELOAHFrames?.byId.get(e?.variant);return item?window.ELOAHFrames.slots(item).length:0}
+function frameSlotNumberAt(e,p){
+ const item=window.ELOAHFrames?.byId.get(e?.variant);if(!item)return 0;
+ const x=(p.x-e.x)/e.w*1000,y=(p.y-e.y)/e.h*1000,slots=window.ELOAHFrames.slots(item);
+ for(let i=slots.length-1;i>=0;i--){let q=slots[i];if(x>=q.x&&x<=q.x+q.w&&y>=q.y&&y<=q.y+q.h)return i}
+ return 0;
+}
+function frameProperties(e){
+ const item=window.ELOAHFrames?.byId.get(e.variant);if(!item)return '<p class="ecs-note">Cadre indisponible.</p>';
+ const n=frameSlotCount(e);activeFrameSlot=Math.min(Math.max(0,activeFrameSlot),n-1);
+ const opt=e.frameSlots?.[activeFrameSlot]||{},hasPhoto=framePhotos.has(e.id+':'+activeFrameSlot);
+ return '<div class="ecs-frame-edit"><strong>'+xss(item.label)+'</strong><small>'+xss(item.group)+' · '+n+' case'+(n>1?'s':'')+'</small>'+
+ (n>1?'<label class="ecs-sidelabel">Choisir une case</label><select data-frame-slot>'+Array.from({length:n},(_,i)=>'<option value="'+i+'" '+(i===activeFrameSlot?'selected':'')+'>Case '+(i+1)+(framePhotos.has(e.id+':'+i)?' ✓':'')+'</option>').join('')+'</select>':'')+
+ '<p class="ecs-frame-help">'+(hasPhoto?'✓ Une photo est installée dans cette case.':'Ajoute une photo pour remplacer le paysage d’exemple.')+'</p>'+
+ btn('frameImage','▧ Remplir avec ma photo',true)+btn('frameLibrary','Photos ELOAH')+(hasPhoto?btn('frameClear','✕ Retirer la photo'):'')+
+ '<label class="ecs-sidelabel">Zoom de la photo</label><input type="range" min="100" max="300" step="5" data-frame-opt="zoom" value="'+Math.round((opt.zoom||1)*100)+'"><span class="ecs-note">'+Math.round((opt.zoom||1)*100)+' %</span>'+
+ '<div class="ecs-rows"><div><label class="ecs-sidelabel">Décalage horizontal</label><input type="range" min="-100" max="100" step="5" data-frame-opt="panX" value="'+Math.round((opt.panX||0)*100)+'"></div><div><label class="ecs-sidelabel">Décalage vertical</label><input type="range" min="-100" max="100" step="5" data-frame-opt="panY" value="'+Math.round((opt.panY||0)*100)+'"></div></div>'+
+ range('Épaisseur du cadre','borderSize',0,60,1,e.borderSize??17)+
+ '<p class="ecs-note">Glisse aussi une image depuis ton ordinateur sur le cadre. Tu peux sélectionner chaque case et remplir un collage.</p></div>';
+}
+function setFramePhoto(e,slot,image){
+ if(!e||e.kind!=='photoFrame')return false;
+ const n=frameSlotCount(e),index=Math.max(0,Math.min(n-1,slot));
+ framePhotos.set(e.id+':'+index,image);
+ if(!Array.isArray(e.frameSlots))e.frameSlots=[];
+ if(!e.frameSlots[index])e.frameSlots[index]={zoom:1,panX:0,panY:0};
+ activeFrameSlot=index;saveLocal();renderSide();draw();return true;
+}
+
 function elementsMarkup(){
  if(elementsCategory==='illustrations')return illustrationCatalog();
  if(elementsCategory==='animations')return stickerAnimations();
+ if(elementsCategory==='frames')return frameCatalog();
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
   const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
