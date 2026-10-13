@@ -55,12 +55,42 @@ wrapper.innerHTML='<span style="font:700 11px Arial,sans-serif;letter-spacing:2p
 '<p class="erc-state" role="status"></p><div data-role="draftlink"></div><small>Les envois réels se font uniquement depuis Resend, après vérification de la liste. Les autres univers restent en préparation.</small>'+
 '</div><div class="erc-preview"><div style="display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:10px"><strong>Aperçu visuel</strong><span><button type="button" data-act="desktop">Bureau</button> <button type="button" data-act="mobile">Mobile</button></span></div><iframe sandbox="" title="Aperçu de la newsletter" referrerpolicy="no-referrer"></iframe><small>Aperçu indicatif : certaines messageries adaptent polices et marges.</small></div></div>';
 const marker=panel.querySelector('#campaign-filter-bar');if(marker)marker.before(wrapper);else panel.prepend(wrapper);
+
+const impactSource=Array.isArray(window.ELOAH_CREW_IMPACT)?window.ELOAH_CREW_IMPACT:[];
+const collection=document.createElement('section');collection.id='eloah-crew-impact-library';
+collection.innerHTML='<div class="crew-impact-heading"><div><small>THE CREW · COLLECTION IMPACT</small><h2>20 newsletters, prêtes à personnaliser.</h2><p>Une photo forte, un titre, un bouton rouge, puis les détails. Clique sur une couverture pour modifier son mail.</p></div><label>Rechercher un brouillon<input type="search" id="crew-impact-search" placeholder="Latino, Kids, Thriller…"></label></div><div id="crew-impact-cards"></div><p class="crew-impact-foot">Photographies d’illustration Pexels, pas des photos des adhérents. Remplace-les librement par tes photos autorisées.</p>';
+wrapper.before(collection);
+const cards=collection.querySelector('#crew-impact-cards');
+const cardNodes=impactSource.map((entry,index)=>{const article=document.createElement('article');article.className='crew-impact-card';article.dataset.title=(entry.subject+' '+entry.univers).toLocaleLowerCase('fr');
+ article.innerHTML='<img src="'+escapeHtml(entry.hero)+'" alt="Photo d’illustration : '+escapeHtml(entry.univers)+'" loading="lazy" width="390" height="218"><div class="crew-impact-card-body"><small>'+String(index+1).padStart(2,'0')+' · '+escapeHtml(entry.univers)+'</small><h3>'+escapeHtml(entry.title)+'</h3><p>'+escapeHtml(entry.preheader)+'</p><button type="button">Ouvrir et personnaliser →</button></div>';
+ article.querySelector('button').onclick=()=>openImpact(entry.id,true);cards.append(article);return article;});
+collection.querySelector('#crew-impact-search').addEventListener('input',event=>{const val=event.target.value.toLocaleLowerCase('fr').trim();cardNodes.forEach(card=>card.hidden=Boolean(val&&!card.dataset.title.includes(val)))});
+function visibility(){const btn=panel.querySelector('[data-campaign-filter][aria-pressed="true"]');const filter=btn?.dataset.campaignFilter||'all';collection.hidden=filter!=='all'&&filter!=='The Crew Orchies'}
+const filterBar=panel.querySelector('#campaign-filter-bar');
+if(filterBar)new MutationObserver(visibility).observe(filterBar,{subtree:true,attributes:true,attributeFilter:['aria-pressed']});
+visibility();
+function openImpact(id,scroll){
+ const entry=impactSource.find(x=>x.id===id);if(!entry)return false;
+ let saved={};try{const prev=JSON.parse(localStorage.getItem('eloah-rich-impact-'+id)||'null');if(prev&&typeof prev==='object'&&!Array.isArray(prev))saved=prev}catch{}
+ const model={...entry,...saved,brand:'The Crew Orchies'};
+ activeImpactId=id;currentBrand='The Crew Orchies';field('brand').value='The Crew Orchies';
+ for(const k of keys)field(k).value=model[k]??'';
+ render();
+ const original=document.getElementById('campaign-form');if(original)original.hidden=true;
+ $('.erc-state').textContent='Newsletter Impact chargée · '+entry.subject+'. Les changements sont sauvegardés sur cet appareil.';
+ $('iframe').classList.add('mobile');
+ const url=new URL(location.href);url.searchParams.set('rubrique','Mailing');url.searchParams.set('liste','The Crew Orchies');url.searchParams.set('campagne',id);history.replaceState(null,'',url.pathname+url.search+url.hash);
+ if(scroll)wrapper.scrollIntoView({behavior:'smooth',block:'start'});
+ return true;
+}
+document.addEventListener('eloah:crew-impact-open',e=>openImpact(e.detail?.id,true));
+
 const $=x=>wrapper.querySelector(x);const keys=['subject','title','preheader','eyebrow','body','details','hero','button','link','sign','portrait','layout','instagram','facebook','youtube'];
-const field=k=>$('[data-n="'+k+'"]');let currentBrand='The Crew Orchies';let working=false;
+const field=k=>$('[data-n="'+k+'"]');let currentBrand='The Crew Orchies';let working=false;let activeImpactId=null;
 function read(){const obj={brand:field('brand').value};for(const k of keys)obj[k]=field(k).value;return obj}
-function save(){try{localStorage.setItem('eloah-rich-mail-'+field('brand').value,JSON.stringify(read()))}catch{}}
+function save(){try{const store=activeImpactId?'eloah-rich-impact-'+activeImpactId:'eloah-rich-mail-'+field('brand').value;localStorage.setItem(store,JSON.stringify(read()))}catch{}}
 function render(){save();$('iframe').srcdoc=designHtml(read());$('[data-act="draft"]').disabled=working||field('brand').value!=='The Crew Orchies'}
-function loadBrand(b){const data={...examples[b],layout:'editorial',hero:'',portrait:''};try{const prev=JSON.parse(localStorage.getItem('eloah-rich-mail-'+b)||'null');if(prev&&typeof prev==='object')Object.assign(data,prev)}catch{}for(const k of keys)field(k).value=data[k]||'';render()}
+function loadBrand(b){activeImpactId=null;const data={...examples[b],layout:'editorial',hero:'',portrait:'',title:'',details:''};try{const prev=JSON.parse(localStorage.getItem('eloah-rich-mail-'+b)||'null');if(prev&&typeof prev==='object')Object.assign(data,prev)}catch{}for(const k of keys)field(k).value=data[k]||'';render()}
 field('brand').onchange=()=>{currentBrand=field('brand').value;loadBrand(currentBrand);$('.erc-state').textContent=currentBrand==='The Crew Orchies'?'':'Brouillon visuel uniquement : la liste Resend de cet univers reste à configurer.'};
 keys.forEach(k=>field(k).addEventListener('input',render));
 $('[data-act="mobile"]').onclick=()=>$('iframe').classList.add('mobile');
@@ -80,4 +110,6 @@ const data=await response.json().catch(()=>({}));if(!response.ok||!data.id)throw
 const a=document.createElement('a');a.href='https://resend.com/broadcasts/'+encodeURIComponent(data.id);a.target='_blank';a.rel='noopener noreferrer';a.textContent='Vérifier et envoyer ce brouillon dans Resend ↗';$('.erc-state').textContent='Brouillon visuel enregistré. Aucun e-mail envoyé.';$('[data-role="draftlink"]').replaceChildren(a);
 }catch(e){$('.erc-state').textContent=e.message||'Échec du brouillon.'}finally{working=false;render()}};
 loadBrand(currentBrand);
+const initial=window.ELOAH_CREW_IMPACT_PENDING||new URLSearchParams(location.search).get('campagne');
+if(initial&&impactSource.some(x=>x.id===initial)){openImpact(initial,false);delete window.ELOAH_CREW_IMPACT_PENDING}
 })();
