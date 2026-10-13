@@ -37,4 +37,4 @@ $("notify").onclick=async()=>{if(!("Notification" in window))return alert("Notif
 $("export").onclick=()=>{let a=document.createElement("a");a.href=URL.createObjectURL(new Blob([JSON.stringify(load(),null,2)],{type:"application/json"}));a.download="eloah-rappels.json";a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
 function due(){let x=load(),dirty=false;for(let t of x){if(!t.done&&!t.notified&&Date.parse(t.date)<=Date.now()){if("Notification" in window&&Notification.permission==="granted"){new Notification("ELOAH · Rappel",{body:t.title});t.notified=true;dirty=true}}}if(dirty)save(x)}
 status();render();due();setInterval(due,60000);
-</script></body></html>
+</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
