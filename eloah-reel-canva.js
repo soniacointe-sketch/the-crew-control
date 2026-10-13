@@ -946,11 +946,14 @@ root.addEventListener('click',ev=>{
  if(shapeAdd){
    const def=window.ELOAHShapes?.byId.get(shapeAdd.dataset.shapeAdd);if(!def)return;
    const linear=window.ELOAHShapes.isLine(def),name=def.label;
+   const detail=def.params.style||'',vertical=linear&&detail==='vertical';
+   const organic=linear&&['diag','elbow','step','zigzag','wave','arc','curve','hook','bracket','loop'].includes(detail);
+   const dimensions=vertical?{w:220,h:780}:organic?{w:710,h:560}:linear?{w:810,h:235}:{w:550,h:550};
    const e=add('shapeAsset',{variant:def.id,color:'#182632',strokeWidth:0,strokeColor:'#ffffff',
-    lineStyle:['dash','arrowdash'].includes(def.params.style)?'dash':def.params.style==='dot'?'dot':'solid',
-    lineWidth:def.params.style==='thick'?43:def.params.style==='thin'?10:20,lineCap:'round',
-    opacity:1,rotation:0,flipX:false,flipY:false,w:linear?810:550,h:linear?230:550,
-    x:linear?135:265,y:linear?880:685});
+    lineStyle:['dash','arrowdash'].includes(detail)?'dash':detail==='dot'?'dot':'solid',
+    lineWidth:detail==='thick'?43:detail==='thin'?10:20,lineCap:'round',
+    opacity:1,rotation:0,flipX:false,flipY:false,w:dimensions.w,h:dimensions.h,
+    x:Math.round((1080-dimensions.w)/2),y:Math.round((1920-dimensions.h)/2)});
    toast(name+' ajouté — modifie les réglages ou déplace la forme sur le Reel.');return;
  }
  const flipShape=ev.target.closest('[data-shape-flip]');
