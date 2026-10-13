@@ -5,6 +5,12 @@
 Explore les apocryphes, les sources juives anciennes, les manuscrits bibliques et les témoignages historiques. La bibliothèque distingue **document attesté, tradition religieuse, hypothèse et interprétation**.
 
 
+## Toutes nos recherches depuis le début — archives et dossiers récupérés
+
+[**▣ Ouvrir le registre complet des recherches ELOAH : 22 premiers dossiers, six textes longs restaurés, ALPHA, APO-019, MAGDALENA, ἈΝΆΓΚΗ et les dix collections**](foi-control.html?file=eloah-foi-archives-completes-index.md).
+
+Ce registre différencie les **textes originaux effectivement récupérés** des anciens dossiers dont seul le titre ou la synthèse existe encore. Les photos de manuscrits non récupérées ne sont pas considérées comme sauvegardées.
+
 ## ATLAS GÉNÉRAL — Tous les apocryphes et documents associés
 
 **600 notices documentaires** sont désormais consultables dans l'[Atlas ELOAH des apocryphes](eloah-apocryphes-atlas.html) : 450 entrées du catalogue scientifique e-Clavis, 55 notices de versions coptes Brill, 74 repères pseudépigraphiques et 21 références liées aux livres deutérocanoniques et aux différents canons. Les catégories se recoupent : ce chiffre n'est pas un décompte d'œuvres distinctes. Recherche, filtres par familles, fiches, liens de sources et favoris locaux sont disponibles dans l'Atlas.
