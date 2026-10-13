@@ -414,10 +414,41 @@ function setFramePhoto(e,slot,image){
  activeFrameSlot=index;saveLocal();saveFrameMediaLocal();renderSide();draw();return true;
 }
 
+
+let gridView='all',gridSearch='';
+function gridTile(g){
+ const source=window.ELOAHGrids;
+ return '<button type="button" class="ecs-grid-tile" data-grid-add="'+xss(g.id)+'" data-search="'+xss((g.label+' '+g.group+' '+g.customSlots.length+' cases collage').toLocaleLowerCase('fr'))+'" title="Ajouter '+xss(g.label)+' · '+g.customSlots.length+' photos">'+
+  '<img loading="lazy" decoding="async" alt="" src="'+source.thumbnail(g)+'">'+
+  '<span class="ecs-grid-count">'+g.customSlots.length+' <span aria-hidden="true">▧</span></span></button>';
+}
+function gridSection(g,index){
+ return '<section class="ecs-grid-section" data-grid-section><div class="ecs-sectiontitle"><strong>'+xss(g.name)+'</strong><button type="button" data-grid-group="'+index+'">Afficher tout →</button></div>'+
+  '<div class="ecs-grid-gallery">'+g.items.map(gridTile).join('')+'</div></section>';
+}
+function gridCatalog(){
+ const lib=window.ELOAHGrids;
+ if(!lib)return '<div class="ecs-empty">La bibliothèque de grilles n’est pas disponible. Recharge la page.</div>';
+ const recent=S.elements.filter(e=>e.kind==='photoFrame'&&lib.byId.has(e.variant)).slice(-15).reverse().map(e=>lib.byId.get(e.variant));
+ const selectedGroup=gridView==='all'?null:lib.groups[Number(gridView)];
+ const header='<div class="ecs-audio-header"><button type="button" data-cat="overview" aria-label="Retour aux éléments">←</button><strong>Grilles</strong></div>'+
+  '<div class="ecs-search"><span>▦</span><input id="ecs-grid-search" placeholder="Rechercher une grille" value="'+xss(gridSearch)+'" aria-label="Rechercher une grille ou un nombre de cases" autocomplete="off"><span>⌕</span></div>'+
+  '<p class="ecs-note">Choisis une mise en page. Chaque case peut accueillir une photo différente.</p>';
+ const tabs='<div class="ecs-grid-filters">'+
+  '<button class="'+(gridView==='all'?'is-active':'')+'" data-grid-group="all">Toutes · '+lib.catalogue.length+'</button>'+
+  lib.groups.map((g,i)=>'<button class="'+(gridView===String(i)?'is-active':'')+'" data-grid-group="'+i+'">'+xss(g.name)+'</button>').join('')+'</div>';
+ const controls='<div class="ecs-grid-footer"><p class="ecs-note">'+lib.catalogue.length+' compositions originales ELOAH. Photos redimensionnables et exportables avec le Reel.</p>'+
+  btn('addImage','＋ Importer mes photos',true)+'</div>';
+ if(selectedGroup)return header+tabs+gridSection(selectedGroup,Number(gridView))+controls;
+ return header+tabs+(recent.length?'<section class="ecs-grid-section" data-grid-section><div class="ecs-sectiontitle"><strong>Utilisés récemment</strong><span>'+recent.length+'</span></div><div class="ecs-grid-gallery">'+recent.map(gridTile).join('')+'</div></section>':'')+
+  lib.groups.map(gridSection).join('')+controls;
+}
+
 function elementsMarkup(){
  if(elementsCategory==='illustrations')return illustrationCatalog();
  if(elementsCategory==='animations')return stickerAnimations();
  if(elementsCategory==='frames')return frameCatalog();
+ if(elementsCategory==='grids')return gridCatalog();
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
   const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
