@@ -31,7 +31,7 @@ const ico=(name)=>'<svg viewBox="0 0 24 24" aria-hidden="true">'+(symbols[name]|
 const n=(tag,cls,text)=>{const x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=text;return x;};
 const button=(label,cls,cb)=>{const b=n("button",cls);b.type="button";if(typeof label==="string")b.textContent=label;if(cb)b.addEventListener("click",cb);return b;};
 const iconButton=(icon,label,cls,cb)=>{const b=button("",cls,cb);b.innerHTML=ico(icon);b.setAttribute("aria-label",label);b.title=label;return b;};
-const norm=t=>(t||"").toLocaleLowerCase("fr");
+const norm=t=>String(t||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr");
 const boardCount=b=>(b?.cards||[]).filter(c=>!c.archived).length;
 const allBoards=()=>Array.isArray(data?.boards)?data.boards:[];
 const selected=()=>allBoards().find(b=>b.id===chosenBoardId)||allBoards().find(b=>b.id===data.active)||allBoards()[0];
@@ -117,6 +117,14 @@ function renderHome(){
  input.addEventListener("input",()=>{searchText=input.value;fillHomeSections();});
  find.appendChild(input);shell.querySelector(".em-home-head").appendChild(find);
  const scroll=n("div","em-scroll");
+ const starterBoard=allBoards().length===1&&allBoards()[0].name==="Mon premier tableau"&&boardCount(allBoards()[0])===0;
+ if(starterBoard){
+   const welcome=n("div","em-section-card em-first-board");
+   welcome.append(n("h2",null,"Ton premier tableau est prêt"));
+   welcome.append(n("p",null,"Un tableau pour ton projet, une carte pour chaque action. Commence par ouvrir ce tableau puis choisis « Ajouter une carte »."));
+   welcome.append(button("Ouvrir mon premier tableau →","em-blue-action",()=>openBoard(allBoards()[0].id)));
+   scroll.append(welcome);
+ }
  const box=n("div","em-inbox-box");const title=n("div","em-inbox-title");
  title.innerHTML=ico("inbox");
  title.appendChild(n("span",null,"Boîte de réception"));
@@ -145,7 +153,7 @@ function fillHomeSections(){
  root.querySelector("#emRecentHeading").style.display=first.length?"":"none";
  first.slice(0,5).forEach(b=>recentList.appendChild(listBoardRow(b,false)));
  boards.forEach(b=>workspaceList.appendChild(listBoardRow(b,true)));
- if(!boards.length)workspaceList.append(n("div","em-empty","Aucun tableau trouvé."));
+ if(!boards.length)workspaceList.append(n("div","em-empty",term?"Aucun tableau ne correspond à ta recherche.":"Tu n’as pas encore de tableau. Utilise le bouton + en haut pour en créer un."));
 }
 function openInboxEditor(){
  showSheet("Ajouter à la boîte de réception",body=>{
@@ -191,26 +199,26 @@ function renderAgenda(){
  const card=n("div","em-section-card");card.append(n("h2",null,item.card.title));card.append(n("div","em-mini",item.board.name+" · "+item.card.due));
  card.append(button("Ouvrir la carte →","em-action",()=>goToCard(item.board,item.card)));scroll.append(card);
  }
- if(!cards.length)scroll.append(n("div","em-empty","Aucune échéance enregistrée."));
+ if(!cards.length)scroll.append(n("div","em-empty","Aucune date prévue pour le moment. Ouvre une carte et choisis une échéance pour la retrouver ici."));
  shell.append(scroll);root.append(shell);footer("agenda");
 }
 function renderActivity(){
  root.innerHTML="";const shell=n("div","em-screen");shell.appendChild(simpleHeader("Activité"));const scroll=n("div","em-scroll");
  const events=allBoards().flatMap(b=>(b.cards||[]).flatMap(c=>(c.thread||[]).map(t=>({board:b,card:c,event:t}))))
  .filter(x=>x.event?.at).sort((a,b)=>b.event.at.localeCompare(a.event.at)).slice(0,70);
- const head=n("div","em-section-card");head.append(n("h2",null,"Commentaires récents"));head.append(n("p",null,"Activité datée provenant des cartes ELOAH, sans événements inventés."));scroll.append(head);
+ const head=n("div","em-section-card");head.append(n("h2",null,"Notes récentes"));head.append(n("p",null,"Retrouve les commentaires que tu as ajoutés à tes cartes. Ils ne sont pas publiés auprès d’une équipe."));scroll.append(head);
  for(const item of events){
  const box=n("div","em-section-card");box.append(n("h2",null,item.card.title));
  box.append(n("p",null,item.event.text||"Commentaire"));box.append(n("div","em-mini",item.board.name+" · "+new Date(item.event.at).toLocaleString("fr-FR")));
  box.appendChild(button("Voir la carte →","em-action",()=>goToCard(item.board,item.card)));scroll.append(box);
  }
- if(!events.length)scroll.append(n("div","em-empty","Aucun commentaire daté pour le moment."));
+ if(!events.length)scroll.append(n("div","em-empty","Aucune note ajoutée à une carte pour le moment."));
  shell.append(scroll);root.append(shell);footer("activity");
 }
 function renderAccount(){
  root.innerHTML="";const shell=n("div","em-screen");shell.appendChild(simpleHeader("Compte"));const scroll=n("div","em-scroll");
  const cloudBox=n("div","em-section-card");cloudBox.append(n("h2",null,"Mon espace ELOAH"));
- cloudBox.append(n("p",null,document.getElementById("cloudStatus")?.textContent||"État de la synchronisation à vérifier."));
+ cloudBox.append(n("p",null,document.getElementById("cloudStatus")?.textContent||"État de la synchronisation à vérifier."));cloudBox.append(n("p","em-mini","Sans connexion, tes tableaux restent sur cet appareil. Sur un téléphone partagé, ils peuvent être visibles par d’autres personnes : n’y conserve pas d’informations confidentielles."));
  const emailInput=n("input");emailInput.type="email";emailInput.placeholder="Mon adresse e-mail";
  emailInput.style.cssText="width:100%;padding:11px;border:1px solid #ddd;border-radius:10px";
  if(!document.getElementById("cloudLogin")?.hidden){
@@ -220,7 +228,7 @@ function renderAccount(){
  document.getElementById("cloudEmail").value=email;document.getElementById("cloudLogin").click();
  }));
  }else{
- cloudBox.append(button("Sauvegarder vers Supabase","em-action",()=>document.getElementById("cloudUpload")?.click()));
+ cloudBox.append(button("Sauvegarder mes tableaux en ligne","em-action",()=>document.getElementById("cloudUpload")?.click()));
  cloudBox.append(button("Récupérer mes tableaux","em-action",()=>document.getElementById("cloudDownload")?.click()));
  cloudBox.append(button("Déconnexion","em-action",()=>document.getElementById("cloudLogout")?.click()));
  }
