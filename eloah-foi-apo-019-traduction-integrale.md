@@ -87,3 +87,71 @@ Je lui répondis :
 Le Seigneur répondit :
 
 — Quel avantage y aurait-il pour vous à accomplir la volonté du Père, si vous ne receviez pas aussi son don au temps où Satan vous éprouve ? Mais si vous êtes accablés par Satan, persécutés, et que vous accomplissiez malgré tout […]
+
+## PAGE 5 — Souffrir et ne pas craindre la mort
+
+— […] la volonté (du Père), je vous dis qu'il vous aimera. Il vous fera mes égaux ; il vous regardera comme des bien-aimés devenus tels, par sa providence, selon votre propre choix.
+
+N'allez-vous donc pas cesser d'aimer la chair et de craindre la souffrance ? Ne savez-vous pas que vous n'avez pas encore subi l'injure, ni l'accusation injuste, ni la prison, ni la condamnation illégitime, ni une crucifixion fondée sur le raisonnement, ni l'ensevelissement dans le sable, comme cela me fut fait par le Mauvais ?
+
+Osez-vous ménager votre chair, vous que l'Esprit entoure comme une muraille ?
+
+Considérez depuis combien de temps le monde existait avant vous, et combien de temps il existera encore après vous : vous découvrirez que votre vie n'est guère plus qu'un jour et que vos souffrances durent à peine une heure.
+
+Car les êtres bons ne viennent pas dans ce monde. Méprisez donc la mort et songez à la vie. Souvenez-vous de ma croix et de ma mort : vous vivrez.
+
+Je lui répondis :
+
+— Seigneur, ne nous instruis pas sur la croix et la mort, puisque ces choses sont éloignées […]
+
+## PAGE 6 — La croix, Jean et la fin de la prophétie
+
+— […] de toi !
+
+Le Seigneur répondit :
+
+— En vérité, je vous le dis : nul ne sera sauvé s'il ne [croit] en ma croix, car le Royaume de Dieu appartient à ceux qui ont cru en elle. Devenez des chercheurs de mort, semblables aux morts qui recherchent la vie ; ce qu'ils cherchent leur est révélé. De quoi devraient-ils donc s'inquiéter ? Lorsque vous considérerez la mort, elle vous instruira de l'élection.
+
+En vérité, je vous le dis : celui qui craint la mort ne sera pas sauvé. Car le Royaume de <Dieu> appartient à ceux qui ont été mis à mort. Devenez meilleurs que moi ; devenez semblables à l'enfant de l'Esprit saint.
+
+Je lui demandai :
+
+— Seigneur, comment pourrons-nous prophétiser à ceux qui nous réclament des prophéties ? Ils sont nombreux à nous interroger et à attendre une parole de notre bouche.
+
+Le Seigneur répondit :
+
+— Ne savez-vous pas qu'avec Jean on a tranché la tête de la prophétie ?
+
+Je dis :
+
+— Seigneur, peut-on vraiment enlever la tête de la prophétie ?
+
+Il me répondit :
+
+— Si vous comprenez ce que signifie « tête », et si vous savez que la prophétie sort de la tête, alors vous comprendrez ce qu'on veut dire par « sa tête a été enlevée ». […]
+
+## PAGE 7 — Parler en images et sans images
+
+— […] Auparavant, je vous parlais au moyen de paraboles, et vous ne compreniez pas. À présent, je vous parle ouvertement, et vous ne saisissez toujours pas. Pour moi, vous étiez une parabole parmi les paraboles, et une chose manifestée parmi les choses visibles.
+
+Hâtez-vous d'être sauvés sans attendre que l'on vous y pousse. Préparez-vous de votre propre initiative ; si cela est possible, précédez-moi, car c'est ainsi que le Père vous aimera.
+
+Apprenez à détester l'hypocrisie et les intentions mauvaises. C'est l'intention mauvaise qui engendre l'hypocrisie, et l'hypocrisie demeure loin de la vérité.
+
+Ne laissez pas se dessécher le Royaume des cieux. Il est semblable à la pousse d'un palmier-dattier dont les fruits sont tombés autour de lui. Le palmier a fait sortir des feuilles et, lorsqu'elles se furent développées, elles ont tari sa fécondité. Il en va de même du fruit issu d'une seule racine : une fois recueilli, il a permis à beaucoup de produire du fruit. Ne serait-ce pas une bonne chose si vous pouviez désormais faire croître de nouvelles pousses ? Vous les trouveriez.
+
+Puisque je suis déjà glorifié, pourquoi me retenir alors que je désire partir ? […]
+
+## PAGE 8 — La parole : foi, amour et œuvres
+
+— […] Après [le travail], vous m'avez retenu auprès de vous encore dix-huit jours à cause des paraboles. Pour certains, il suffisait d'écouter l'enseignement et de comprendre les Bergers, la Semence, la Construction, les Lampes des jeunes femmes, le Salaire des ouvriers et les Pièces d'argent avec la Femme.
+
+Attachez-vous sans tarder à la parole ! Sa première étape est la foi, la deuxième est l'amour et la troisième est l'action, car c'est de ces trois choses que vient la vie.
+
+La parole ressemble à un grain de blé. Celui qui le sème se fie à lui. Quand le grain germe, il l'aime, puisqu'il voit apparaître une multitude de grains au lieu d'un seul. Puis il travaille, récolte, prépare le blé pour sa nourriture et assure ainsi sa subsistance ; il en conserve aussi une partie pour de prochaines semailles.
+
+C'est de cette manière que vous pouvez recevoir le Royaume des cieux. Mais si vous ne le recevez pas par la connaissance, vous ne le trouverez pas.
+
+Aussi je vous dis : soyez sobres, ne vous laissez pas tromper ! Je vous l'ai souvent dit à tous ensemble ; et à toi seul, Jacques, je l'ai déclaré : « Sois sauvé ! » Je t'ai ordonné de me suivre et je t'ai enseigné quelle attitude prendre devant les puissances qui gouvernent.
+
+Voyez : je suis descendu, j'ai parlé, j'ai été maltraité et j'ai repris ma couronne […]
