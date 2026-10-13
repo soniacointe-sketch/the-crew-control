@@ -274,7 +274,7 @@ function pathFor(def){
    crown:'M90 251L245 408 500 122 759 408 909 249 827 818H173Z M192 849H807V917H192Z',
    flower:star(10,.42)
   };
-  return {d:basic[p.type]||basic.check,mode:'fill'};
+  return {d:basic[p.type]||basic.check,mode:p.type==='infinity'?'line':'fill'};
  }
  return {d:rr(100,100,800,800,50),mode:'fill'};
 }
@@ -302,13 +302,13 @@ function draw(ctx,e){
  ctx.translate(cx,cy);ctx.rotate(rotation);ctx.scale(e.flipX?-1:1,e.flipY?-1:1);ctx.translate(-w/2,-h/2);
  ctx.scale(w/1000,h/1000);
  const path=new Path2D(geo.d);
- const lineWidth=Math.max(0,Math.min(150,Number(e.lineWidth)??18));
+ const lineWidth=Math.max(0,Math.min(150,Number.isFinite(Number(e.lineWidth))?Number(e.lineWidth):18));
  ctx.lineJoin='round';ctx.lineCap='round';
  const style=e.lineStyle||(def.params.style==='dash'||def.params.style==='arrowdash'?'dash':def.params.style==='dot'?'dot':'solid');
  ctx.setLineDash(style==='dash'?[55,38]:style==='dot'?[1,44]:[]);
  if(linear){
   ctx.strokeStyle=color;
-  ctx.lineWidth=(e.lineWidth===undefined?(def.params.style==='thick'?43:def.params.style==='thin'?10:20):lineWidth);
+  ctx.lineWidth=(e.lineWidth===undefined?(def.params.style==='thick'?43:def.params.style==='thin'?10:def.id==='shape-symbol-infinity'?44:20):lineWidth);
   ctx.stroke(path);
  }else{
   ctx.fillStyle=color;
