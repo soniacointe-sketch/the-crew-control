@@ -129,6 +129,16 @@ const cadastreOutline=L.geoJSON(null,{style:{color:'#9c783f',weight:1,opacity:.8
 layer.bindPopup('<b>Parcelle Vasserot 1810–1836</b><br>Limite foncière vectorisée par ALPAGE, époque postérieure au Paris décrit par Hugo.<br><small>Licence ODbL · Géométrie historique et non parcelle actuelle.</small>');
 }}).addTo(map);
 const cadastreROI={south:48.8516,north:48.8583,west:2.338,east:2.358};
+const vasserotRoads=L.geoJSON(null,{
+  style:{color:'#475c95',weight:3.5,opacity:.95,fillColor:'#647db8',fillOpacity:.16},
+  onEachFeature:(feature,layer)=>{
+    const properties=feature.properties||{};
+    const name=Object.entries(properties).find(([k,v])=>/nom|name|rue|voie|libell/i.test(k)&&typeof v==='string'&&v.length<140)?.[1];
+    const title=name?clean(name):'Réseau viaire Vasserot · 1810–1836';
+    layer.bindPopup('<b>'+title+'</b><p>Géométrie historique ALPAGE, non tracé de 1482. La précision dépend des plans originaux et de leur géoréférencement.</p>');
+  }
+}).addTo(map);
+
 function geoBounds(feature){
 let west=Infinity,east=-Infinity,south=Infinity,north=-Infinity;
 const pending=[feature?.geometry?.coordinates];
@@ -140,6 +150,22 @@ const x=n[0],y=n[1];if(Number.isFinite(x)&&Number.isFinite(y)){west=Math.min(wes
 }else for(const v of n)pending.push(v);
 }
 return {west,east,south,north};
+}
+
+function subsetHistorique(collection,limit=5500){
+if(!collection||collection.type!=='FeatureCollection'||!Array.isArray(collection.features))throw Error('Une collection GeoJSON est nécessaire.');
+const candidates=[];
+for(const feature of collection.features){
+  if(!feature||!feature.geometry)continue;
+  const b=geoBounds(feature);
+  if(!Number.isFinite(b.west)||!Number.isFinite(b.east)||!Number.isFinite(b.south)||!Number.isFinite(b.north))continue;
+  if(b.west>180||b.east< -180||b.south>90||b.north< -90)throw Error('Coordonnées incompatibles avec WGS84. Vérifier le fichier source et sa projection.');
+  if(b.west<=cadastreROI.east&&b.east>=cadastreROI.west&&b.south<=cadastreROI.north&&b.north>=cadastreROI.south){
+    candidates.push(feature);
+    if(candidates.length>limit)throw Error('Trop d’éléments dans ce périmètre pour cet affichage : réduire le fichier.');
+  }
+}
+return candidates;
 }
 window.PARISIS_VASSEROT={
 load(collection){
@@ -162,7 +188,17 @@ return {count:candidates.length,sourceCount:collection.features.length,bounds:'�
 },
 visible(flag){if(flag){if(!map.hasLayer(cadastreOutline))cadastreOutline.addTo(map)}else map.removeLayer(cadastreOutline);},
 clear(){cadastreOutline.clearLayers();},
-isVisible(){return map.hasLayer(cadastreOutline);}
+isVisible(){return map.hasLayer(cadastreOutline);},
+loadRoads(collection){
+const candidates=subsetHistorique(collection);
+vasserotRoads.clearLayers();
+if(candidates.length)vasserotRoads.addData({type:'FeatureCollection',features:candidates});
+if(!map.hasLayer(vasserotRoads))vasserotRoads.addTo(map);
+return {count:candidates.length,sourceCount:collection.features.length,scope:'Île de la Cité · 1810–1836'};
+},
+showRoads(flag){if(flag){if(!map.hasLayer(vasserotRoads))vasserotRoads.addTo(map)}else map.removeLayer(vasserotRoads);},
+clearRoads(){vasserotRoads.clearLayers();},
+roadsVisible(){return map.hasLayer(vasserotRoads)}
 };
 
 const allCoords=[];
