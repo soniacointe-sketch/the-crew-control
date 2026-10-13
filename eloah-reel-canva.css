@@ -398,3 +398,34 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
  #eloah-canva-studio .ecs-grid-count{bottom:3px;right:3px;font-size:9px}
 }
 @media(max-width:390px){#eloah-canva-studio .ecs-grid-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* ELOAH Maquettes — collection d'objets éditables 2D, avec visuels et écrans vidéo. */
+#eloah-canva-studio .ecs-mock-section{margin:12px 0 25px}
+#eloah-canva-studio .ecs-mock-section[hidden]{display:none!important}
+#eloah-canva-studio .ecs-mock-section .ecs-sectiontitle{margin:10px 0 10px;align-items:center}
+#eloah-canva-studio .ecs-mock-section .ecs-sectiontitle strong{font-size:13px}
+#eloah-canva-studio .ecs-mock-section .ecs-sectiontitle button{background:transparent;color:#607184;font-size:11px;padding:3px 0;white-space:nowrap}
+#eloah-canva-studio .ecs-mock-strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding:3px 1px 11px}
+#eloah-canva-studio .ecs-mock-strip .ecs-mock-tile{width:124px;flex:0 0 124px;scroll-snap-align:start}
+#eloah-canva-studio .ecs-mock-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px 6px;padding:5px 0 15px}
+#eloah-canva-studio .ecs-mock-tile{position:relative;min-width:0;border:1px solid transparent;border-radius:11px;background:transparent;color:#3c4650;display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;padding:4px 3px 9px;cursor:pointer}
+#eloah-canva-studio .ecs-mock-tile[hidden]{display:none!important}
+#eloah-canva-studio .ecs-mock-tile:hover,#eloah-canva-studio .ecs-mock-tile:focus-visible{background:#f2f7fb;border-color:#82b6e9;outline-offset:0}
+#eloah-canva-studio .ecs-mock-thumb{width:100%;height:126px;display:flex;align-items:center;justify-content:center;background:#edf0f3;border-radius:8px;overflow:hidden}
+#eloah-canva-studio .ecs-mock-thumb img{display:block;width:100%;height:100%;object-fit:contain}
+#eloah-canva-studio .ecs-mock-caption{display:block;min-height:27px;max-height:29px;overflow:hidden;font-size:10px;line-height:1.25;color:#454c54}
+#eloah-canva-studio .ecs-mock-plus{position:absolute;right:5px;top:6px;background:#ffffffd9;color:#276994;border-radius:50%;display:grid;place-items:center;width:25px;height:25px;font-size:20px;opacity:0;box-shadow:0 2px 7px #0002}
+#eloah-canva-studio .ecs-mock-tile:hover .ecs-mock-plus,#eloah-canva-studio .ecs-mock-tile:focus-visible .ecs-mock-plus{opacity:1}
+#eloah-canva-studio .ecs-mock-footer{margin:13px 0;padding:14px 0;border-top:1px solid #dce4ec}
+#eloah-canva-studio .ecs-mock-links{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+#eloah-canva-studio .ecs-mock-edit{background:#f3f8fd;padding:11px;border:1px solid #d7e5f2;border-radius:10px;margin:9px 0}
+#eloah-canva-studio .ecs-mock-edit strong{font-size:12px;display:block}
+#eloah-canva-studio .ecs-mock-edit .ecs-pillbtn{margin-top:8px;white-space:normal;padding:9px;font-size:11px}
+#eloah-canva-studio .ecs-mock-videoctrl{border-top:1px solid #d8e4ee;padding-top:10px;margin-top:10px}
+@media(max-width:690px){
+ #eloah-canva-studio .ecs-mock-strip .ecs-mock-tile{width:105px;flex-basis:105px}
+ #eloah-canva-studio .ecs-mock-thumb{height:108px}
+ #eloah-canva-studio .ecs-mock-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #eloah-canva-studio .ecs-mock-plus{opacity:1}
+}
+@media(max-width:390px){#eloah-canva-studio .ecs-mock-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
