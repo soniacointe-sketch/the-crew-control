@@ -1,0 +1,184 @@
+{
+  "edition": "PARABOLES LAB · Grand livre critique",
+  "version": 1,
+  "created": "2026-10-13",
+  "description": "Analyses originales par récit, paraphrases et contexte, lectures discutées et contrôle des surinterprétations. Les fiches ne sont pas des éditions du grec ni des collations exhaustives.",
+  "items": [
+    {
+      "id": "PAR-001",
+      "retelling": "Un semeur sort et répand sa graine. La même semence se heurte à quatre conditions : elle est emportée du chemin, sèche sur la pierre, étouffe sous les ronces ou se multiplie dans la terre accueillante. La différence ne se situe pas d'abord dans l'acte de semer, mais dans ce que devient la semence après sa réception.",
+      "context": "Dans Marc 4, l'enseignement public depuis la barque est suivi d'un entretien privé où les disciples demandent une explication. Matthieu souligne la compréhension et Luc la persévérance. Cette diversité de cadrage est une donnée de transmission, non une raison de fondre les textes en un seul récit composite.",
+      "interpretation": "L'explication évangélique oriente vers les manières d'accueillir la Parole. Mais le semeur dépense sa semence sans calculer à chaque geste le rendement : l'abondance du semis peut aussi interroger la générosité de l'annonce. Thomas 9 donne un parallèle à analyser sans prétendre qu'il est obligatoirement plus ancien.",
+      "caution": "Le lecteur doit distinguer le sens donné aux sols dans la rédaction évangélique et toute tentative moderne de classer définitivement des personnes en quatre catégories.",
+      "openQuestion": "Comment la même histoire peut-elle désigner à la fois une difficulté de réception et une confiance dans la fécondité ?"
+    },
+    {
+      "id": "PAR-002",
+      "retelling": "Personne n'allume une lampe pour l'enfermer sous un récipient ou la cacher sous un lit. L'objet est fait pour éclairer. La comparaison se prolonge par le langage de la mesure et de ce qui sera mis au jour.",
+      "context": "Les maisons de l'Antiquité utilisaient des lampes à huile de dimensions modestes : leur placement était déterminant pour l'éclairage. Mais l'image est surtout argumentative : on prend un geste ordinaire pour dénoncer une contradiction. Dans Matthieu 5, le cadre est celui du témoignage visible ; dans Marc 4, celui de l'écoute et du dévoilement.",
+      "interpretation": "Il n'existe pas un code biblique universel selon lequel toute lampe représenterait toujours la même réalité. La métaphore change de fonction lorsque le récit, son destinataire et la question changent.",
+      "caution": "Comparer ici Marc 4,21–25 à Matthieu 5,14–16 et noter ce qui manque dans chaque version : même objet, mais dispositif d'enseignement différent.",
+      "openQuestion": "De quoi l'image de la lumière nous rend-elle responsables : de la vérité possédée ou de la manière dont elle est partagée ?"
+    },
+    {
+      "id": "PAR-003",
+      "retelling": "Un homme jette une semence, dort et se lève, puis constate la croissance sans connaître toutes ses causes. La tige, l'épi puis le grain mûr se succèdent avant la moisson : la terre semble agir d'elle-même dans le récit.",
+      "context": "Cette parabole est propre à Marc dans sa forme canonique. Elle naît de l'expérience agricole : l'agriculteur travaille, mais n'accomplit pas chaque geste biologique de la germination. Le récit oppose intervention humaine et processus qui la dépasse.",
+      "interpretation": "L'image n'exclut pas l'action du semeur : elle en indique la limite. Une lecture théologique peut y reconnaître l'efficacité de l'action divine ; une lecture littéraire insiste sur le rythme autonome de la croissance et sur la patience.",
+      "caution": "L'idée d'un calendrier prophétique exact tiré des trois étapes de la plante n'est pas fournie par Marc.",
+      "openQuestion": "Qu'est-ce que cette histoire change à notre manière de concevoir l'attente et le contrôle ?"
+    },
+    {
+      "id": "PAR-004",
+      "retelling": "L'histoire part d'une graine dite très petite et finit par une plante assez grande pour accueillir des oiseaux. L'écart entre le début minuscule et l'issue ample est le moteur de la comparaison.",
+      "context": "Il ne faut pas transformer la description en traité botanique. Le grain de moutarde sert d'image proverbiale de petitesse, tandis que les branches et les oiseaux convoquent un imaginaire scripturaire des arbres accueillants, notamment chez Ézéchiel et Daniel. Les trois évangiles présentent des formulations proches mais non identiques.",
+      "interpretation": "Les oiseaux peuvent figurer l'étendue de l'accueil ou l'ampleur du résultat ; leur attribuer systématiquement une identité morale unique n'est pas justifié. Le logion 20 de Thomas constitue un parallèle important pour la transmission du motif.",
+      "caution": "L'intérêt n'est pas de retrouver une plante « secrète » mais le renversement entre insignifiance apparente et portée du Royaume.",
+      "openQuestion": "Comment une croissance discrète défie-t-elle nos critères habituels de puissance ?"
+    },
+    {
+      "id": "PAR-005",
+      "retelling": "Une femme mêle une petite quantité de levain à une très grande masse de farine jusqu'à ce que l'ensemble lève. Aucun roi, aucun miracle visible, aucune confrontation spectaculaire : une transformation s'étend à partir d'un geste domestique.",
+      "context": "Les quantités de farine évoquées par Matthieu sont considérables. La présence d'une femme comme personnage agissant est essentielle, tout comme le caractère caché du ferment qui agit dans la pâte. Luc transmet également la comparaison dans un cadre de croissance du Royaume.",
+      "interpretation": "Ailleurs, le levain peut être utilisé négativement, par exemple pour parler d'une influence jugée mauvaise. Cette autre fonction ne doit pas être imposée au présent récit, où la comparaison du Royaume souligne l'efficacité transformante.",
+      "caution": "Thomas 96 offre une version à comparer ; une parenté de motif n'établit pas l'ordre de dépendance des écrits.",
+      "openQuestion": "Que devient notre interprétation si nous cessons de considérer « le levain » comme un symbole figé ?"
+    },
+    {
+      "id": "PAR-006",
+      "retelling": "Un ennemi répand de mauvaises herbes dans le champ déjà semé. Les serviteurs veulent arracher immédiatement les plantes indésirables ; le maître suspend leur empressement parce que l'arrachage pourrait détruire aussi le bon grain. Le tri est repoussé à la moisson.",
+      "context": "Le récit et son explication se trouvent dans Matthieu 13. Ce double dispositif doit être étudié en respectant la distinction entre l'histoire agricole et l'interprétation eschatologique conservée par l'évangéliste. Les auditeurs de l'époque connaissaient la difficulté de séparer certaines plantes avant leur maturité.",
+      "interpretation": "Une leçon possible concerne le danger d'un jugement humain prématuré. Mais l'explication de Matthieu introduit également un jugement final ; effacer cette dureté reviendrait à modifier l'œuvre. Thomas 57 transmet une histoire voisine sans reprendre exactement la même explication.",
+      "caution": "La parabole ne permet pas de désigner aujourd'hui des personnes réelles comme « ivraie » à éliminer.",
+      "openQuestion": "Que gagne-t-on et que risque-t-on à vouloir purifier immédiatement un groupe ?"
+    },
+    {
+      "id": "PAR-007",
+      "retelling": "Un homme découvre un trésor dans un champ, le dissimule, puis vend tous ses biens pour obtenir le terrain. L'histoire est très courte : la découverte provoque une réorganisation immédiate de sa vie économique.",
+      "context": "Le récit est voisin de celui de la perle mais construit autrement le rôle du personnage : ici, il trouve ce qu'il ne cherchait pas nécessairement. L'expérience d'une valeur supérieure justifie l'extrême décision narrative, mais ne fournit pas une instruction détaillée sur le droit des trouvailles.",
+      "interpretation": "Il est possible de lire la découverte comme une expérience de joie et de conversion des priorités. La question morale du trésor caché peut aussi déranger le lecteur, et il est légitime de la traiter au lieu de prétendre que tous les gestes du personnage sont prescrits.",
+      "caution": "Le logion 109 de Thomas parle d'un trésor mais dans un récit différent : un rapprochement thématique n'est pas identité textuelle.",
+      "openQuestion": "Comment une découverte imprévue peut-elle révéler ce qui nous paraissait auparavant précieux ?"
+    },
+    {
+      "id": "PAR-008",
+      "retelling": "Un marchand qui connaît les perles cherche un objet d'une qualité exceptionnelle. Quand il le rencontre, il vend ses biens pour l'acquérir. La recherche active distingue cette parabole du trésor trouvé par surprise.",
+      "context": "L'image suppose un commerce où certaines perles possèdent une valeur considérable. La décision n'a de sens narratif qu'à partir de cette appréciation experte du marchand. Dans Matthieu, le Royaume est comparé à une situation d'évaluation et de choix.",
+      "interpretation": "Il est possible de souligner la clairvoyance du marchand autant que le prix de la perle. Une lecture strictement sacrificielle risque d'oublier la joie ou la certitude qui motive la décision. Thomas 76 connaît une comparaison relative à une perle précieuse.",
+      "caution": "L'argent est ici un moyen narratif de hiérarchiser les valeurs, non la preuve que le Royaume se vend au sens littéral.",
+      "openQuestion": "Que se passe-t-il lorsque quelqu'un reconnaît enfin ce qu'il cherchait depuis longtemps ?"
+    },
+    {
+      "id": "PAR-009",
+      "retelling": "Un filet ramené du lac contient toutes sortes de poissons. La collecte précède la séparation des prises sur le rivage, et Matthieu développe une comparaison avec la fin du temps.",
+      "context": "Le contexte maritime est familier à des auditeurs de Galilée. Mais dans Matthieu 13 le récit est intégré aux comparaisons du Royaume et suivi d'une explication de type jugement. Il faut donc étudier ensemble le niveau quotidien de la pêche et son cadrage eschatologique.",
+      "interpretation": "Le filet réunit avant de trier : on pourrait méditer cette dynamique, mais ce serait insuffisant si l'on faisait disparaître la séparation finale. La parabole du gros poisson dans Thomas 8 fonctionne différemment et ne doit pas être absorbée par Matthieu.",
+      "caution": "La sélection des poissons n'autorise pas à distribuer aujourd'hui des jugements infaillibles sur des personnes.",
+      "openQuestion": "Comment penser ensemble l'accueil large et la gravité du jugement dans la rédaction de Matthieu ?"
+    },
+    {
+      "id": "PAR-010",
+      "retelling": "Deux bâtisseurs terminent apparemment des maisons semblables. L'orage révèle pourtant une différence invisible au départ : le terrain ou les fondations n'assurent pas la même résistance à l'épreuve.",
+      "context": "Matthieu conclut le Sermon sur la montagne par cette comparaison. Luc la formule dans un autre cadre, en insistant sur la profondeur du creusement et de la fondation. Ces variations permettent d'observer comment une métaphore de la construction sert un enseignement éthique.",
+      "interpretation": "La clé n'est pas de savoir à quel matériau associer un personnage caché. La conclusion de chaque évangile relie la stabilité à la mise en pratique des paroles entendues. Le texte ne célèbre pas la seule capacité à réciter un enseignement.",
+      "caution": "Les variations climatiques et architecturales rendent l'image vraisemblable, mais aucun édifice précis ne peut être identifié.",
+      "openQuestion": "En quoi pratiquer une parole construit-il davantage que simplement la connaître ?"
+    },
+    {
+      "id": "PAR-011",
+      "retelling": "Un serviteur obtient la remise d'une dette gigantesque, puis fait emprisonner un compagnon pour une somme très inférieure. Le souverain découvre cette incohérence et retourne contre l'homme sa propre dureté.",
+      "context": "Matthieu place le récit dans une réponse à Pierre sur le pardon. L'écart des montants est si extravagant qu'il oblige à regarder la disproportion, non à chercher une équivalence monétaire précise en euros. La tension entre justice, dette et grâce structure l'intrigue.",
+      "interpretation": "La parabole exige de prendre au sérieux le pardon reçu et refusé, mais ne règle pas de façon simple les cas de violence, d'abus ou de dettes réelles. Le pardon religieux ne signifie pas l'obligation de subir une nouvelle agression ni de renoncer à la protection.",
+      "caution": "La souffrance de celui à qui l'on refuse la remise doit rester visible ; centrer tout le récit sur la punition finale est réducteur.",
+      "openQuestion": "Pourquoi l'expérience d'avoir été pardonné ne rend-elle pas automatiquement miséricordieux ?"
+    },
+    {
+      "id": "PAR-012",
+      "retelling": "Un maître recrute des travailleurs à plusieurs moments de la journée. À la paye, les arrivés tard reçoivent la même somme que ceux qui ont supporté toute la chaleur. Les premiers protestent ; le maître répond qu'il respecte leur accord tout en choisissant d'être généreux.",
+      "context": "Une lecture historique doit considérer le caractère vulnérable du travail journalier et le coût d'une journée sans embauche. Dans Matthieu, l'épisode s'inscrit aussi dans le thème de la dernière et de la première place. Le contexte économique et la théologie du Royaume ne s'annulent pas.",
+      "interpretation": "L'histoire peut s'entendre comme critique de la comparaison jalouse, affirmation de la générosité, mais également comme question sur la sécurité matérielle de ceux que personne n'a recrutés plus tôt. Le point de tension est que le premier groupe a une raison intelligible de protester.",
+      "caution": "En faire un modèle de contrat social autorisant l'exploitation salariale contredirait une lecture attentive aux personnes du récit.",
+      "openQuestion": "Une égalité de résultat peut-elle être injuste ou bien manifester une autre forme de justice ?"
+    },
+    {
+      "id": "PAR-013",
+      "retelling": "Un père demande à deux fils de travailler à la vigne. L'un refuse d'abord, puis change d'avis et agit. L'autre répond favorablement, mais ne va pas travailler.",
+      "context": "Dans Matthieu 21, la question surgit au cours d'un conflit sur l'autorité de Jésus et la réponse à la prédication de Jean. Les personnages servent à mettre en contraste des paroles publiques et une conduite réelle. La forme est brève mais la pointe est nette.",
+      "interpretation": "Le récit ne signifie pas que parler importe peu ; il met en cause la parole qui évite l'action. Selon les manuscrits, l'ordre des réponses et des fils présente des variantes textuelles discutées, ce qui mérite une véritable consultation de l'apparat critique.",
+      "caution": "Il serait abusif d'assigner les deux fils à deux peuples pris comme blocs moraux et immuables.",
+      "openQuestion": "Dans une décision personnelle, quel poids donner à l'acte accompli après une hésitation ?"
+    },
+    {
+      "id": "PAR-014",
+      "retelling": "Un propriétaire confie sa vigne à des cultivateurs. Au moment de réclamer sa part, ses envoyés sont battus ou tués ; il envoie finalement son fils, qui subit le même sort.",
+      "context": "La vigne évoque des images d'Isaïe 5. Les versions de Marc, Matthieu et Luc ne sont pas parfaitement identiques ; Matthieu accentue notamment certaines conséquences et le dialogue avec les interlocuteurs. L'histoire sert une confrontation sur l'autorité, la violence et la responsabilité.",
+      "interpretation": "Dans la réception chrétienne, le fils est souvent relié à Jésus, mais une lecture historique doit distinguer cette perspective théologique des mécanismes de la fiction. Les variantes du logion 65 de Thomas doivent être examinées avec soin.",
+      "caution": "La parabole ne justifie aucune théologie selon laquelle Dieu aurait définitivement remplacé tout le peuple juif par un autre peuple.",
+      "openQuestion": "Comment le pouvoir confié se transforme-t-il en appropriation et en violence ?"
+    },
+    {
+      "id": "PAR-015",
+      "retelling": "Un roi prépare des noces, envoie des invitations, puis se heurte à l'indifférence et à la violence. D'autres personnes sont finalement conviées depuis les routes. Matthieu ajoute un épisode sévère sur le vêtement d'un participant.",
+      "context": "La version de Matthieu n'est pas identique au grand dîner de Luc 14. La violence des serviteurs, le jugement et le vêtement font partie du récit particulier de Matthieu. Le lecteur doit éviter de juxtaposer des fragments des deux comme si Jésus avait prononcé une seule histoire inchangée.",
+      "interpretation": "L'invitation large ouvre un questionnement sur l'accès au banquet, mais la clôture de la scène résiste aux versions purement accueillantes. Reconnaître cette tension permet une exégèse responsable, attentive à l'histoire polémique du passage.",
+      "caution": "L'interprétation antijuive « premiers invités = tous les Juifs » est un raccourci historiquement et éthiquement trompeur.",
+      "openQuestion": "Comment lire un récit à la fois généreux et violent sans effacer une moitié du texte ?"
+    },
+    {
+      "id": "PAR-016",
+      "retelling": "Après que la salle des noces s'est remplie, le roi remarque un participant dépourvu de vêtement approprié. Celui-ci reste silencieux et est exclu. C'est la fin spécifique de la parabole matthéenne.",
+      "context": "L'épisode appartient à Matthieu 22,11–14 ; il ne forme pas nécessairement à l'origine une histoire indépendante de tout le banquet. Les coutumes vestimentaires anciennes peuvent donner des pistes, mais le texte ne détaille pas un uniforme obligatoire ni son prix.",
+      "interpretation": "Des traditions chrétiennes ont identifié le vêtement à la justice, à la charité, au baptême ou à la transformation morale. Ces lectures sont à documenter comme réceptions ; Matthieu ne fournit pas ici une phrase qui fixerait un symbole unique.",
+      "caution": "Éviter d'annoncer que la couleur blanche, un tissu précis ou une puissance invisible seraient codés dans le mot vêtement.",
+      "openQuestion": "Que signifie répondre à une invitation au-delà du fait d'être physiquement présent ?"
+    },
+    {
+      "id": "PAR-017",
+      "retelling": "Dix jeunes femmes attendent l'époux avec des lampes. Toutes s'endorment durant le retard. À l'arrivée, certaines disposent encore d'huile, d'autres doivent s'en procurer, et la porte se ferme avant leur retour.",
+      "context": "Le récit de Matthieu s'inscrit dans des avertissements sur l'attente et la vigilance. L'observation capitale est que le sommeil concerne tout le groupe : le contraste est la préparation à une attente longue, non l'absence totale de sommeil. Les détails sociaux des noces doivent être datés avec prudence.",
+      "interpretation": "Les commentaires chrétiens interprètent l'huile de façons diverses : charité, fidélité, œuvres, Esprit. Aucune de ces équivalences n'est déclarée comme un glossaire explicite dans Matthieu 25. Il ne faut pas inventer des symboles indépendants pour chacune des dix lampes.",
+      "caution": "Le texte invite à la préparation ; il ne donne pas de formule pour prédire le jour d'un événement religieux.",
+      "openQuestion": "Qu'est-ce qui ne peut pas être improvisé à la dernière minute dans une relation de fidélité ?"
+    },
+    {
+      "id": "PAR-018",
+      "retelling": "Un homme part et remet des montants importants à trois serviteurs. Deux les font fructifier. Le troisième cache la somme, craignant son maître, et l'histoire se termine sur un jugement sévère.",
+      "context": "Un talent est une unité monétaire, non l'aptitude personnelle désignée par le français moderne. Les chiffres créent une échelle économique immense. Matthieu 25 place ce récit dans un cycle consacré à l'attente et à la responsabilité.",
+      "interpretation": "L'usage théologique habituel valorise l'initiative et la fidélité pendant l'absence du maître. Pourtant son portrait, surtout dans les paroles du troisième serviteur, peut provoquer une lecture critique de l'autorité et de la peur. Les deux perspectives doivent être mises à l'épreuve du texte.",
+      "caution": "La lecture « Dieu exige un rendement financier maximal » est une réduction anachronique de l'histoire.",
+      "openQuestion": "La peur peut-elle produire la passivité que le troisième serviteur justifie comme prudence ?"
+    },
+    {
+      "id": "PAR-019",
+      "retelling": "Un tableau de jugement présente un roi séparant des groupes, comme un berger distingue les animaux. Les critères rapportés sont concrets : nourrir, accueillir, vêtir, visiter, porter attention aux personnes les plus exposées.",
+      "context": "L'ensemble de Matthieu 25,31–46 est davantage une scène de jugement imagée qu'une petite parabole au sens étroit. Le discours associe le geste envers des personnes vulnérables à la rencontre du roi. L'expression « les plus petits de mes frères » appelle des interprétations diverses quant au groupe visé.",
+      "interpretation": "Le centre du passage est moins la nature du mouton ou du bouc que l'éthique de la relation. Il peut être lu dans la théologie de Matthieu sur le disciple, la communauté et le jugement, sans l'isoler de l'ensemble de l'évangile.",
+      "caution": "Une réduction à « tel animal = telle nation aujourd'hui » n'a pas de fondement direct dans cette scène.",
+      "openQuestion": "Pourquoi ceux qui ont agi ou omis d'agir ne semblent-ils pas reconnaître ce qu'ils ont fait ?"
+    },
+    {
+      "id": "PAR-020",
+      "retelling": "Un figuier qui forme ses feuilles annonce l'approche d'une saison. Cette expérience ordinaire aide à comprendre comment des signes peuvent être reconnus sans fournir une date précise.",
+      "context": "Cette petite comparaison est située dans les discours eschatologiques de Marc 13, Matthieu 24 et Luc 21. La fonction du figuier dépend donc des questions sur le Temple, les crises et la vigilance. Il ne faut pas oublier la différence des contextes et des vocabulaires.",
+      "interpretation": "L'image met en jeu la faculté de discerner un changement. Le récit n'identifie pas un calendrier moderne ni une année politique codée sous le mot figuier. Son caractère proverbial est plus important qu'une carte géopolitique.",
+      "caution": "Une lecture numérologique qui prétend déterminer précisément la fin des temps ne découle pas de ces versets.",
+      "openQuestion": "Comment distinguer la vigilance d'une obsession des prédictions ?"
+    },
+    {
+      "id": "PAR-021",
+      "retelling": "Sur la route, un homme blessé demeure sans secours. Un prêtre et un lévite passent ; un Samaritain s'approche, soigne le blessé, l'emmène dans une auberge et organise la continuité des soins à ses frais.",
+      "context": "La question initiale d'un légiste porte sur la définition du prochain. Jésus la reformule à la fin en demandant qui a agi en prochain. L'identité samaritaine produit une surprise en raison de relations historiques complexes, qu'il serait fautif de réduire à l'opposition morale de deux religions.",
+      "interpretation": "Le récit ne se limite pas à une émotion généreuse : il détaille un investissement de temps, de déplacement, de produits de soin et d'argent. Une réception chrétienne traditionnelle a aussi lu le Samaritain comme une figure du Christ ; elle doit être distinguée du niveau de lecture narratif.",
+      "caution": "L'histoire ne constitue pas une invitation à s'exposer sans protection à un danger réel ou à suspendre l'analyse de situations violentes.",
+      "openQuestion": "Comment passe-t-on de « qui mérite mon aide ? » à « comment puis-je agir en prochain ? » ?"
+    },
+    {
+      "id": "PAR-022",
+      "retelling": "Un créancier remet deux dettes de montants différents. Jésus demande lequel des deux débiteurs aimera davantage ; la réponse relie la reconnaissance de la remise au degré d'amour manifesté.",
+      "context": "Luc place cette petite parabole au cours d'un repas où la conduite d'une femme contraste avec celle de l'hôte. La métaphore économique n'est pas un manuel de droit bancaire : la dette sert à questionner la perception du pardon et la manière d'accueillir.",
+      "interpretation": "L'histoire autorise des débats sur le rapport entre pardon et amour : l'amour apparaît-il comme conséquence de l'expérience du pardon, ou le geste de la femme manifeste-t-il déjà sa foi ? La totalité du récit environnant est nécessaire.",
+      "caution": "Ne pas fusionner les deux débiteurs de Luc 7 avec le serviteur impitoyable de Matthieu 18 : les situations sont distinctes.",
+      "openQuestion": "Qu'est-ce qui conduit à reconnaître une miséricorde déjà reçue ?"
+    }
+  ]
+}
