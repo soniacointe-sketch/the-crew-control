@@ -57,7 +57,7 @@ const routes=[
 ]}];
 const map=L.map('map',{preferCanvas:false,zoomControl:true}).setView([48.8585,2.3486],14);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© contributeurs OpenStreetMap'}).addTo(map);
-const oldMapTiles=L.tileLayer('https://warper.wmflabs.org/maps/tile/2704/{z}/{x}/{y}.png',{minZoom:10,maxZoom:19,maxNativeZoom:17,opacity:.8,attribution:'Plan Truschet et Hoyau · Bibliothèque de Bâle · Wikimaps Warper (16 points de contrôle)',zIndex:300,crossOrigin:true});
+const oldMapTiles=L.tileLayer('https://warper.wmflabs.org/maps/tile/2704/{z}/{x}/{y}.png',{minZoom:10,maxZoom:19,maxNativeZoom:17,opacity:.8,attribution:'Plan Truschet et Hoyau · Bibliothèque de Bâle · Wikimaps Warper (16 points de contrôle)',zIndex:300});
 oldMapTiles.addTo(map);
 let oldTilesLoaded=false,oldTileErrors=0;
 const statusEl=document.getElementById('histStatus');
