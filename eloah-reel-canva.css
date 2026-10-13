@@ -429,3 +429,40 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
  #eloah-canva-studio .ecs-mock-plus{opacity:1}
 }
 @media(max-width:390px){#eloah-canva-studio .ecs-mock-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* FORMES ELOAH — bibliothèque vectorielle illustrée */
+#eloah-canva-studio .ecs-shape-section{margin:15px 0 25px}
+#eloah-canva-studio .ecs-shape-section[hidden]{display:none!important}
+#eloah-canva-studio .ecs-shape-section .ecs-sectiontitle{align-items:center;margin:12px 0 11px}
+#eloah-canva-studio .ecs-shape-section .ecs-sectiontitle strong{font-size:13px;font-weight:750;line-height:1.25}
+#eloah-canva-studio .ecs-shape-section .ecs-sectiontitle button{background:transparent;color:#5b6674;font-size:11px;white-space:nowrap;padding:3px 0}
+#eloah-canva-studio .ecs-shape-strip{display:flex;gap:8px;overflow-x:auto;scroll-snap-type:x proximity;overscroll-behavior-x:contain;padding:2px 1px 9px}
+#eloah-canva-studio .ecs-shape-strip .ecs-shape-tile{flex:0 0 76px;width:76px;scroll-snap-align:start}
+#eloah-canva-studio .ecs-shape-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px 5px;padding:8px 0 20px}
+#eloah-canva-studio .ecs-shape-tile{display:flex;position:relative;flex-direction:column;align-items:center;gap:6px;min-width:0;padding:4px 3px 8px;border:1px solid transparent;border-radius:9px;background:transparent;color:#333c45;text-align:center;cursor:pointer}
+#eloah-canva-studio .ecs-shape-tile[hidden]{display:none!important}
+#eloah-canva-studio .ecs-shape-tile:hover,#eloah-canva-studio .ecs-shape-tile:focus-visible{background:#f0f6fc;border-color:#8fb9eb}
+#eloah-canva-studio .ecs-shape-preview{display:flex;width:100%;height:69px;align-items:center;justify-content:center;border-radius:7px;background:#fafafa;overflow:hidden}
+#eloah-canva-studio .ecs-shape-preview img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}
+#eloah-canva-studio .ecs-shape-tile.is-line .ecs-shape-preview{height:45px;margin-block:12px;background:#fff}
+#eloah-canva-studio .ecs-shape-caption{display:block;font-size:10px;line-height:1.13;max-height:25px;min-height:23px;overflow:hidden;overflow-wrap:anywhere}
+#eloah-canva-studio .ecs-shape-plus{position:absolute;top:2px;right:2px;display:grid;place-items:center;width:21px;height:21px;border-radius:50%;background:#ffffffee;color:#27779c;font-size:16px;box-shadow:0 1px 5px #0002;opacity:0}
+#eloah-canva-studio .ecs-shape-tile:hover .ecs-shape-plus,#eloah-canva-studio .ecs-shape-tile:focus-visible .ecs-shape-plus{opacity:1}
+#eloah-canva-studio .ecs-shape-foot{border-top:1px solid #e4e8ec;margin-top:17px;padding-top:14px}
+#eloah-canva-studio .ecs-shape-properties{padding:13px;background:#f7fafd;border:1px solid #dae6f0;border-radius:11px;margin:10px 0}
+#eloah-canva-studio .ecs-shape-properties strong{font-size:14px;display:block}
+#eloah-canva-studio .ecs-shape-properties small{font-size:11px;color:#6e7985;display:block;margin:4px 0 12px}
+#eloah-canva-studio .ecs-shape-properties .ecs-sidelabel{margin-top:13px}
+#eloah-canva-studio .ecs-shape-properties input[type="range"]{width:100%;accent-color:#1687ba;padding:0}
+#eloah-canva-studio .ecs-shape-properties select,#eloah-canva-studio .ecs-shape-properties input[type=number]{min-height:39px}
+#eloah-canva-studio .ecs-shape-properties input[type=color]{height:42px}
+#eloah-canva-studio .ecs-shape-flips{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+#eloah-canva-studio .ecs-shape-flips button{flex:1 1 46%;background:#e8f0f9;color:#295a7d;border:1px solid #d6e6f3;border-radius:8px;padding:10px 6px;font-size:11px}
+#eloah-canva-studio .ecs-shape-flips button[aria-pressed=true]{background:#c4e4f8;border-color:#349ad1;font-weight:750}
+@media(max-width:690px){
+ #eloah-canva-studio .ecs-shape-strip .ecs-shape-tile{width:74px;flex-basis:74px}
+ #eloah-canva-studio .ecs-shape-grid{grid-template-columns:repeat(5,minmax(0,1fr))}
+ #eloah-canva-studio .ecs-shape-preview{height:61px}
+ #eloah-canva-studio .ecs-shape-plus{opacity:1}
+}
+@media(max-width:390px){#eloah-canva-studio .ecs-shape-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
