@@ -149,8 +149,14 @@ restoreBtn.onclick=()=>{
  document.dispatchEvent(new CustomEvent('eloah:crew-impact-open',{detail:{id:t.id}}));
  Promise.resolve().then(update);
 };
-studio.addEventListener('input',update);
-studio.addEventListener('change',update);
+const invalidateTest=event=>{
+ if(event.target?.closest?.('[data-n]')){
+   testResult.textContent='';testResult.removeAttribute('data-error');
+ }
+ update();
+};
+studio.addEventListener('input',invalidateTest);
+studio.addEventListener('change',invalidateTest);
 document.addEventListener('eloah:crew-impact-open',()=>Promise.resolve().then(update));
 document.getElementById('crew-impact-cards')?.addEventListener('click',()=>Promise.resolve().then(update));
 document.getElementById('campaign-list')?.addEventListener('click',()=>Promise.resolve().then(update));
