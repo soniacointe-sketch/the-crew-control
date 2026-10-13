@@ -263,7 +263,38 @@ const elementOptions={
  shapes:[['rect','▰ Rectangle'],['ellipse','● Cercle'],['star','★ Étoile'],['triangle','▲ Triangle'],['line','━ Ligne']],
  charts:[['bars','▥ Graphique en barres'],['pie','◕ Diagramme circulaire']]
 };
+let illustrationView='home',illustrationSearch='';
+const illustrationGroups=[
+ ['Recommandations magiques',['necklace','rings','spiral','eye','charm','earring']],
+ ['En vedette',['sunburst','crocodile','books','vase','butterfly','flower','gem','daisy']],
+ ['Dégradés',['fade-ink','fade-sunset','fade-halo','fade-ocean','fade-blush','fade-lilac','fade-gold','fade-forest']],
+ ['Animations',['robot','sale','questions','confetti','shooting','sparkles','orbit','pulse']],
+ ['Réseaux sociaux',['paperplane','play','chat','like','thumb','hashtag','at','share','camera']]
+];
+function illustrationTile(ill){
+ if(!ill)return '';
+ const url=window.ELOAHIllustrations?.uri(ill.id,ill.color)||'';
+ return '<button type="button" class="ecs-ill-tile" data-ill-add="'+xss(ill.id)+'" data-search="'+xss((ill.name+' '+ill.group).toLowerCase())+'" title="Ajouter '+xss(ill.name)+' au Reel"><img alt="" loading="lazy" decoding="async" src="'+url+'"><span class="ecs-ill-tilelabel">'+xss(ill.name)+'</span><span class="ecs-ill-tileplus" aria-hidden="true">＋</span></button>';
+}
+function illustrationSection(title,ids,slug){
+ const list=ids.map(id=>window.ELOAHIllustrations?.byId.get(id)).filter(Boolean);
+ if(!list.length)return '';
+ return '<section class="ecs-ill-section" data-ill-section><div class="ecs-sectiontitle"><strong>'+xss(title)+'</strong><button type="button" data-ill-group="'+slug+'">Afficher tout →</button></div><div class="ecs-ill-strip">'+list.map(illustrationTile).join('')+'</div></section>';
+}
+function illustrationCatalog(){
+ if(!window.ELOAHIllustrations)return '<p class="ecs-note">La bibliothèque d’illustrations n’a pas pu être chargée. Actualise la page.</p>';
+ const recent=S.elements.filter(e=>e.kind==='vector').slice(-14).reverse().map(e=>e.variant).filter(id=>window.ELOAHIllustrations.byId.has(id));
+ const header='<div class="ecs-audio-header"><button type="button" data-cat="overview" aria-label="Retour à toutes les catégories">←</button><strong>Illustrations</strong></div><div class="ecs-search"><span>＋</span><input id="ecs-ill-search" placeholder="Rechercher des illustrations" aria-label="Rechercher des illustrations" value="'+xss(illustrationSearch)+'"><span aria-hidden="true">⌕</span></div>';
+ if(illustrationView!=='home'){
+  const group=illustrationView==='recent'?null:illustrationGroups[Number(illustrationView.slice(1))];
+  const ids=illustrationView==='recent'?recent:group?.[1]||[];
+  return header+'<button class="ecs-els-back" type="button" data-ill-group="home">← Toutes les illustrations</button><h3 class="ecs-panelheading">'+xss(illustrationView==='recent'?'Utilisés récemment':group?.[0]||'Illustrations')+'</h3><div class="ecs-ill-grid">'+ids.map(id=>illustrationTile(window.ELOAHIllustrations.byId.get(id))).join('')+'</div>';
+ }
+ return header+(recent.length?illustrationSection('Utilisés récemment',recent.slice(0,8),'recent'):'')+illustrationGroups.map(([title,ids],i)=>illustrationSection(title,ids,'g'+i)).join('')+
+ '<p class="ecs-note ecs-ill-license">Illustrations vectorielles originales ELOAH : tu peux les déplacer, les redimensionner, modifier leur couleur et les animer dans ton montage. Elles sont intégrées aux exports.</p>';
+}
 function elementsMarkup(){
+ if(elementsCategory==='illustrations')return illustrationCatalog();
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
   const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
@@ -357,6 +388,7 @@ function paint(c,t,mark=false){
   }
   if(e.kind==='text')drawText(c,e);
   if(e.kind==='image'){const im=images.get(e.id);if(im?.complete)try{c.drawImage(im,e.x,e.y,e.w,e.h)}catch{}}
+  if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
   c.restore();
   if(mark&&selected===e.id){c.strokeStyle='#1676d0';c.lineWidth=6;c.strokeRect(e.x,e.y,e.w,e.h);c.fillStyle='#fff';c.fillRect(e.x+e.w-12,e.y+e.h-12,24,24);c.strokeRect(e.x+e.w-12,e.y+e.h-12,24,24)}
  }
@@ -640,7 +672,16 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
- const photoClose=ev.target.closest('[data-photo-close]');if(photoClose){closePhotoModal();return}
+ const illGroup=ev.target.closest('[data-ill-group]');if(illGroup){illustrationView=illGroup.dataset.illGroup;illustrationSearch='';renderSide();return}
+ const illAdd=ev.target.closest('[data-ill-add]');if(illAdd){
+  const item=window.ELOAHIllustrations?.byId.get(illAdd.dataset.illAdd);
+  if(!item)return;
+  const gradient=item.id.startsWith('fade-'),animated=item.group==='Animations';
+  add('vector',{variant:item.id,color:item.color,x:gradient?125:260,y:gradient?460:730,w:gradient?830:560,h:gradient?900:560,animation:animated?'pop':'none'});
+  toast(item.name+' ajouté. Tu peux le déplacer, recolorer et animer.');
+  return;
+ }
+  const photoClose=ev.target.closest('[data-photo-close]');if(photoClose){closePhotoModal();return}
  const photoGroup=ev.target.closest('[data-photo-group]');if(photoGroup){photoView=photoGroup.dataset.photoGroup;photoSearch='';renderSide();return}
  const photoOpen=ev.target.closest('[data-photo-open]');if(photoOpen){openPhoto(photoOpen.dataset.photoOpen);return}
  const photoAdd=ev.target.closest('[data-photo-add]');if(photoAdd){usePhoto(photoAdd.dataset.photoAdd,false);return}
@@ -656,7 +697,7 @@ root.addEventListener('click',ev=>{
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
  const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
- const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;activeTab='elements';renderSide();return}
+ const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;illustrationView='home';illustrationSearch='';activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));toast('Élément dupliqué sur la page.')}return}
  const tb=ev.target.closest('[data-tab]');if(tb&&root.contains(tb)){setTab(tb.dataset.tab);return}
@@ -673,7 +714,13 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
- if(e.target.id==='ecs-photo-search'){
+ if(e.target.id==='ecs-ill-search'){
+  illustrationSearch=e.target.value;const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  all('.ecs-ill-tile').forEach(tile=>{tile.hidden=!!term&&!tile.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term)});
+  all('[data-ill-section]').forEach(section=>section.hidden=![...section.querySelectorAll('.ecs-ill-tile')].some(tile=>!tile.hidden));
+  return;
+ }
+  if(e.target.id==='ecs-photo-search'){
    photoSearch=e.target.value;const v=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
    all('.ecs-photo-tile').forEach(card=>{card.hidden=!!v&&!card.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(v)});
    all('[data-photo-section]').forEach(section=>section.hidden=![...section.querySelectorAll('.ecs-photo-tile')].some(card=>!card.hidden));
