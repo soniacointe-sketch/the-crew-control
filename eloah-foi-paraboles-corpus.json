@@ -1,8 +1,8 @@
 {
   "title": "PARABOLES LAB · ELOAH",
   "created": "2026-10-13",
-  "description": "Atlas de 44 paraboles et discours figurés bibliques + 1 énigme apocryphe étudiée dans le Livre secret de Jacques. Pas un catalogue exhaustif des paraboles de Jésus.",
-  "count": 45,
+  "description": "44 récits et discours figurés bibliques, plus 14 études complémentaires : PAR-045 tête de la prophétie, PAR-046 pourquoi parler en paraboles et PAR-047–058 douze logia de Thomas. Les fiches proposent des analyses littéraires, pas une critique exhaustive des manuscrits.",
+  "count": 58,
   "method": [
     "Délimiter le texte et sa situation narrative",
     "Lire les versions évangéliques séparément",
@@ -31,6 +31,18 @@
     {
       "title": "NASSCAL, e-Clavis Christian Apocrypha",
       "url": "https://www.nasscal.com/e-clavis-christian-apocrypha/"
+    },
+    {
+      "title": "Évangile de Thomas — traduction libre Mark M. Mattison",
+      "url": "https://www.gospels.net/thomas/"
+    },
+    {
+      "title": "NASSCAL ECCA 682 · manuscrits de Thomas",
+      "url": "https://www.nasscal.com/e-clavis-christian-apocrypha/gospel-of-thomas/"
+    },
+    {
+      "title": "Pourquoi Jésus parlait en paraboles — Viljoen (2019)",
+      "url": "https://doi.org/10.4102/ids.v53i1.2523"
     }
   ],
   "entries": [
@@ -883,6 +895,333 @@
       "apocrypha": "Texte de l'Apocryphon de Jacques (NHC I,2) ; comparaisons Matthieu 11,13, Luc 16,16 et Actes 21,9–11.",
       "studyStatus": "Enquête critique approfondie : phrase copte repérée et trois hypothèses mises à l'épreuve.",
       "fullStudy": "foi-control.html?file=eloah-foi-par-045-tete-prophetie.md"
+    },
+    {
+      "id": "PAR-046",
+      "title": "Pourquoi Jésus parle-t-il en paraboles ?",
+      "category": "Méthode · Mystère et révélation",
+      "references": [
+        {
+          "label": "Mc 4,10–12",
+          "url": "https://www.aelf.org/bible/Mc/4"
+        },
+        {
+          "label": "Mt 13,10–17",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Lc 8,9–10",
+          "url": "https://www.aelf.org/bible/Lc/8"
+        },
+        {
+          "label": "Is 6,9–10",
+          "url": "https://www.aelf.org/bible/Is/6"
+        }
+      ],
+      "problem": "Pourquoi la parabole dévoile-t-elle une vérité à certains et demeure-t-elle énigmatique pour d'autres ?",
+      "image": "Parole, écoute, mystère, foule, disciples, citation d'Isaïe.",
+      "reading": "La question de la révélation et du voile varie entre Marc, Matthieu et Luc.",
+      "risk": "Ne pas affirmer que toutes les paraboles sont des codes secrets ou, inversement, qu'elles sont forcément transparentes.",
+      "apocrypha": "Thomas, Livre secret de Jacques et problème de l'interprétation.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md"
+    },
+    {
+      "id": "PAR-047",
+      "title": "Thomas 9 · Semeur et quatre terrains",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 9",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Mc 4,1–20",
+          "url": "https://www.aelf.org/bible/Mc/4"
+        },
+        {
+          "label": "Mt 13,1–23",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Lc 8,4–15",
+          "url": "https://www.aelf.org/bible/Lc/8"
+        }
+      ],
+      "problem": "Quelles variantes du semeur apparaissent entre Thomas et Marc, Matthieu, Luc ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Une version plus courte n'est pas automatiquement plus ancienne ou moins censurée.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-047"
+    },
+    {
+      "id": "PAR-048",
+      "title": "Thomas 20 · Graine de moutarde",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 20",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Mc 4,30–32",
+          "url": "https://www.aelf.org/bible/Mc/4"
+        },
+        {
+          "label": "Mt 13,31–32",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Lc 13,18–19",
+          "url": "https://www.aelf.org/bible/Lc/13"
+        }
+      ],
+      "problem": "Que change la formulation de Thomas par rapport aux arbustes et arbres des évangiles ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas transformer la moutarde en calendrier ésotérique.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-048"
+    },
+    {
+      "id": "PAR-049",
+      "title": "Thomas 57 · Bon grain et mauvaises herbes",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 57",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Mt 13,24–30 ; 36–43",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        }
+      ],
+      "problem": "Pourquoi Thomas n'a-t-il pas l'explication développée de Matthieu sur l'ivraie ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas décrire les êtres humains comme une ivraie à éliminer.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-049"
+    },
+    {
+      "id": "PAR-050",
+      "title": "Thomas 65 · Les vignerons et le fils tué",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 65",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Mc 12,1–12",
+          "url": "https://www.aelf.org/bible/Mc/12"
+        },
+        {
+          "label": "Mt 21,33–46",
+          "url": "https://www.aelf.org/bible/Mt/21"
+        },
+        {
+          "label": "Lc 20,9–19",
+          "url": "https://www.aelf.org/bible/Lc/20"
+        }
+      ],
+      "problem": "Quelle est l'importance de la lacune sur le propriétaire au début de Thomas 65 ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas utiliser la parabole pour justifier une condamnation générale des Juifs.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-050"
+    },
+    {
+      "id": "PAR-051",
+      "title": "Thomas 76 · La perle et le trésor durable",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 76",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Mt 13,45–46",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Mt 6,19–21",
+          "url": "https://www.aelf.org/bible/Mt/6"
+        }
+      ],
+      "problem": "Pourquoi Thomas unit-il la perle à un trésor impérissable ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas situer géographiquement un trésor spirituel imagé.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-051"
+    },
+    {
+      "id": "PAR-052",
+      "title": "Thomas 96 · Le levain de la femme",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 96",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Mt 13,33",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Lc 13,20–21",
+          "url": "https://www.aelf.org/bible/Lc/13"
+        }
+      ],
+      "problem": "Comment une femme et le levain expriment-ils une croissance discrète du Royaume ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas supposer que le levain signifie nécessairement le mal.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-052"
+    },
+    {
+      "id": "PAR-053",
+      "title": "Thomas 107 · La plus grande brebis perdue",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 107",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Lc 15,3–7",
+          "url": "https://www.aelf.org/bible/Lc/15"
+        },
+        {
+          "label": "Mt 18,12–14",
+          "url": "https://www.aelf.org/bible/Mt/18"
+        }
+      ],
+      "problem": "Que change l'expression « la plus grande brebis » chez Thomas ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Les autres brebis ne deviennent pas sans valeur.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-053"
+    },
+    {
+      "id": "PAR-054",
+      "title": "Thomas 109 · Le trésor méconnu",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 109",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Mt 13,44",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        }
+      ],
+      "problem": "Pourquoi le trésor caché devient-il un récit de transmission et de prêt à intérêt ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "La comparaison n'atteste pas un véritable trésor enterré.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-054"
+    },
+    {
+      "id": "PAR-055",
+      "title": "Thomas 63 · Le riche et la mort soudaine",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 63",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Lc 12,16–21",
+          "url": "https://www.aelf.org/bible/Lc/12"
+        }
+      ],
+      "problem": "Comment la mort soudaine rompt-elle le projet d'autosuffisance d'un riche ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas condamner toute prudence financière.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-055"
+    },
+    {
+      "id": "PAR-056",
+      "title": "Thomas 64 · Les invités au dîner",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 64",
+          "url": "https://www.gospels.net/thomas/"
+        },
+        {
+          "label": "Lc 14,15–24",
+          "url": "https://www.aelf.org/bible/Lc/14"
+        },
+        {
+          "label": "Mt 22,1–14",
+          "url": "https://www.aelf.org/bible/Mt/22"
+        }
+      ],
+      "problem": "Quelles différences entre les excuses et la conclusion du dîner chez Thomas et Luc ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas fusionner le dîner de Thomas et celui de Matthieu.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-056"
+    },
+    {
+      "id": "PAR-057",
+      "title": "Thomas 97 · La jarre de farine",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 97",
+          "url": "https://www.gospels.net/thomas/"
+        }
+      ],
+      "problem": "Que signifie le fait de perdre progressivement sans s'en apercevoir ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Ne pas faire du personnage féminin un symbole de l'infériorité des femmes.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-057"
+    },
+    {
+      "id": "PAR-058",
+      "title": "Thomas 98 · L’homme à l’épée",
+      "category": "Apocryphes · Évangile selon Thomas",
+      "references": [
+        {
+          "label": "Évangile selon Thomas · logion 98",
+          "url": "https://www.gospels.net/thomas/"
+        }
+      ],
+      "problem": "Comment lire un récit violent comme image sans le transformer en instruction ?",
+      "image": "Récit figuré issu de Thomas ; chercher personnages, objets, actions et effet de surprise.",
+      "reading": "Comparer la version copte transmise chez Thomas et les rédactions canoniques sans imposer une priorité historique.",
+      "risk": "Le récit d'un meurtre ne donne aucune permission d'agression.",
+      "apocrypha": "NHC II,2 ; logion étudié sur la traduction libre de Mark M. Mattison.",
+      "studyStatus": "Étude critique détaillée rédigée, référence bibliographique et limites indiquées.",
+      "fullStudy": "foi-control.html?file=eloah-foi-paraboles-thomas-12-comparaisons.md#par-058"
     }
-  ]
+  ],
+  "updated": "2026-10-13"
 }
