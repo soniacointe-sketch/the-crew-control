@@ -17,7 +17,7 @@ loadVoices();synth.addEventListener('voiceschanged',loadVoices);
 function collect(){
 cancel();queue=[];sections=[{title:'Lire tout le texte',texts:[]}];let current=null;
 const nodes=[...root.querySelectorAll('h1,h2,h3,p,li,blockquote,td,th,summary')];
-nodes.forEach(n=>{if(n.closest('button,nav,textarea,[hidden],.hide')||!n.getClientRects().length)return;if(n.matches('p,li,blockquote')&&n.querySelector('p,li,blockquote'))return;
+nodes.forEach(n=>{if(n.closest('button,nav,textarea,[hidden],.hide,[data-noaudio]')||!n.getClientRects().length)return;if(n.matches('p,li,blockquote')&&n.querySelector('p,li,blockquote'))return;
 const t=n.textContent.replace(/\s+/g,' ').trim();if(!t)return;
 if(n.matches('h1,h2,h3')){current={title:t,texts:[]};sections.push(current);}
 sections[0].texts.push(t);if(current)current.texts.push(t);
