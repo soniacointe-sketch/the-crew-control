@@ -145,4 +145,4 @@ const data=state.points.map(p=>[p.id,p.cote,p.type,p.label,p.notes,p.fx,p.fy,p.i
 get('exportJSON').addEventListener('click',()=>download('PARISIS_005_journal_collation.json',JSON.stringify({dossier:'PAR-ISIS-005',niveau:'coordonnées images sans géoréférencement',sheets,checks:state.checks,points:state.points},null,2),'application/json'));
 loadSheet('26');updateTable();
 })();
-</script></body></html>
+</script><script defer src="eloah-lecture-universelle.js?v=20261013b"></script></body></html>
