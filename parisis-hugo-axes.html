@@ -27,15 +27,22 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <div class="actions"><button id="fit">Voir les deux tracés</button><button id="export">Exporter GeoJSON</button></div>
 <div class="notice"><strong>Point de méthode :</strong> les portes au nord représentées par des arcs actuels datent de 1672 et 1674. Leurs emplacements correspondent aux anciennes portes de l'enceinte de Charles V, mais il ne s'agit pas des bâtiments du roman. Les ponts actuels ont aussi été reconstruits. Les coordonnées des portions de rues sont indicatives.</div>
 </section>
-<section class="panel" id="fouquet-panorama-points">
+<section class="panel" id="parisis-all-map">
+<div class="kicker">ATLAS TOTAL · CONSERVATION DES ENQUÊTES</div><h2>Une carte, tous les points, tous les traits</h2>
+<p>Les anciens et les nouveaux travaux sont conservés. Les liaisons entre documents iconographiques sont des <b>traits de comparaison</b>, pas des routes empruntées par des personnes ni des alignements voulus par les bâtisseurs.</p>
+<div class="actions"><button type="button" id="displayAll" class="active">Tout afficher</button><button type="button" id="zoomAll">Voir l'ensemble des points</button><button type="button" id="zoomCentre">Zoom sur Paris</button></div>
+<label class="row"><input id="showLegacy" type="checkbox" checked><span class="line" style="background:#c08747"></span> Anciens tracés PARISIS : méridien, triangle, rose, violet, doré, axe historique</label>
+<p class="legend">Couleurs des autres couches : <b style="color:#137c87">bleu-vert</b> et <b style="color:#bb623b">orange</b> pour Hugo ; <b style="color:#744591">violet</b> pour Fouquet royal ; <b style="color:#4267a0">bleu</b> pour les lieux des martyrs ; <b style="color:#2e7081">bleu pétrole</b> pour le panorama.</p>
+<div class="notice" id="allMapState">Les couches sont enregistrées séparément. Les repères de la basilique au nord de Paris sont accessibles avec « Voir l'ensemble des points ».</div>
+</section><section class="panel" id="fouquet-panorama-points">
 <div class="kicker">AXE-011 · BNF FR. 6465 · FOLIO 57</div><h2>4 sites associés au panorama de Dagobert</h2>
 <p>La notice Biblissima du folio cite le Palais de la Cité, le Louvre et la tour de Nesle. Notre-Dame est également visible dans le paysage selon l'observation iconographique. <b>Ces repères ne sont pas les positions des silhouettes sur l'image :</b> ce sont des localisations de travail sur le plan actuel.</p>
-<label class="row"><input id="showPanorama" type="checkbox"> Montrer les quatre repères du panorama</label>
+<label class="row"><input id="showPanorama" type="checkbox" checked> Montrer les quatre repères reliés du panorama</label>
 <div class="actions"><button id="fitPanorama" type="button">Voir les quatre sites</button><a class="back" href="parisis-fouquet-panoramas.html#chapitre-panoramas">Comparer les deux peintures ↗</a></div>
-<div class="notice">La liste détaillée des monuments du Metropolitan Museum concerne une <b>autre miniature</b> de Fouquet. Nous ne l'avons pas recopiée comme preuve pour Dagobert. Aucun nouveau trait n'est dessiné entre ces quatre lieux.</div><div id="panoramaPointList"></div>
+<div class="notice">La liste détaillée des monuments du Metropolitan Museum concerne une <b>autre miniature</b> de Fouquet. Nous ne l'avons pas recopiée comme preuve pour Dagobert. Des traits bleu pétrole relient désormais ces lieux comme <b>réseau comparatif de monuments décrits dans un même manuscrit</b>. Ils ne représentent ni des rues médiévales ni une perspective mesurée dans la peinture.</div><div id="panoramaPointList"></div>
 </section><section class="panel" id="trois-martyrs-points"><div class="kicker">NOUVEAU · ÉPIGRAPHIE & ICONOGRAPHIE</div><h2>Le réseau des trois martyrs et l’Estrée</h2>
 <p>Cinq lieux documentaires : quatre lieux de conservation ou d’origine des œuvres et l’église actuelle Saint-Denys-de-l’Estrée. <b>Chaque point identifie un site actuel, pas l’emplacement précis d’une sculpture ni la position exacte de la chapelle du VIIe siècle.</b></p>
-<label class="row"><input type="checkbox" id="showSaints"> Afficher les 5 points iconographiques</label>
+<label class="row"><input type="checkbox" id="showSaints" checked> Afficher les 5 points iconographiques et leurs liens documentaires</label>
 <div class="actions"><button type="button" id="fitSaints">Voir les cinq lieux sur la carte</button><a class="back" href="parisis-axe-spirituel-nord-sud.html#enquete-trois-martyrs">Lire l'analyse détaillée ↗</a></div>
 <div class="notice"><b>Violet foncé :</b> Notre-Dame (portail ancien) et musée de Cluny (fragment original). <b>Vert :</b> Saint-Germain-l'Auxerrois (statues du XIXe siècle). <b>Bleu :</b> Louvre (relief du XIVe siècle provenant de l'abbaye de Saint-Denis). <b>Ocre :</b> l’église actuelle de l’Estrée. Un trait ocre sur la carte relie cette église et la basilique selon l’axe de l’aménagement moderne, attesté par les Archives départementales. Il ne reconstitue aucun chemin mérovingien. Les autres œuvres ne sont pas reliées par des lignes artificielles.</div>
 <div id="saintsPointList"></div></section><section class="panel" id="fouquet-points">
@@ -143,6 +150,46 @@ oldOpacity.addEventListener('input',()=>{oldMapTiles.setOpacity(Number(oldOpacit
 
 const streetLayers=L.layerGroup().addTo(map);
 const layers={A:L.layerGroup().addTo(map),B:L.layerGroup().addTo(map)};const pointMarkers={};
+const legacySites=[
+{id:'OLD-01',name:'Tour Eiffel',lat:48.858370,lng:2.294481},
+{id:'OLD-02',name:'Opéra Garnier',lat:48.872125,lng:2.331784},
+{id:'OLD-03',name:'Notre-Dame',lat:48.852968,lng:2.349902},
+{id:'OLD-04',name:'Louvre',lat:48.860611,lng:2.337644},
+{id:'OLD-05',name:'Arc de Triomphe',lat:48.873792,lng:2.295028},
+{id:'OLD-06',name:'Enceinte de Philippe Auguste · rue Clovis',lat:48.845694,lng:2.349833},
+{id:'OLD-07',name:'Enceinte de Philippe Auguste · Jardins-Saint-Paul',lat:48.853653,lng:2.360386}
+];
+const historicalAxis=[
+[48.860611,2.337644],
+[48.8618,2.3325],
+[48.8637,2.3278],
+[48.86555,2.3211],
+[48.873792,2.295028]
+];
+const legacyLayer=L.layerGroup().addTo(map);
+function drawLegacy(){
+legacyLayer.clearLayers();
+const lookup=Object.fromEntries(legacySites.map(p=>[p.id,[p.lat,p.lng]]));
+function link(ids,color,label,closed){
+const coords=ids.map(id=>lookup[id]).filter(Boolean);
+if(closed&&coords.length>=3)coords.push(coords[0]);
+if(coords.length>=2)L.polyline(coords,{color,weight:4,opacity:.87,dashArray:'10 6',lineJoin:'round'}).bindTooltip(label,{sticky:true}).addTo(legacyLayer);
+}
+const meridian=2+20/60+14.025/3600;
+L.polyline([[48.82,meridian],[48.9,meridian]],{color:'#177c91',weight:3.5,opacity:.9}).bindTooltip('Méridien de Paris · repère scientifique').addTo(legacyLayer);
+link(['OLD-01','OLD-02','OLD-03'],'#d16b24','Triangle monumental exploratoire, pas projet historique attesté',true);
+link(['OLD-04','OLD-02','OLD-07'],'#a43c78','Liaison rose exploratoire · Louvre / Opéra / vestige',false);
+link(['OLD-06','OLD-07'],'#6746a4','Liaison des deux sites de remparts : PAS le tracé original du mur',false);
+link(['OLD-05','OLD-04'],'#c3a14e','Arc de Triomphe ↔ Louvre, axe de comparaison',false);
+L.polyline(historicalAxis,{color:'#168053',weight:4.5,opacity:.9}).bindTooltip('Axe historique urbain attesté, repères de calcul approximatifs').addTo(legacyLayer);
+historicalAxis.slice(1,-1).forEach((p,i)=>L.circleMarker(p,{radius:5,color:'#168053',weight:2,fillColor:'#fffdf9',fillOpacity:1})
+ .bindTooltip(['Arc du Carrousel','Tuileries','Concorde'][i]+' · repère de travail de l’axe historique').addTo(legacyLayer));
+legacySites.forEach(p=>L.circleMarker([p.lat,p.lng],{radius:6,color:'#a56e38',weight:2,fillColor:'#fff7e9',fillOpacity:1})
+ .bindPopup('<b>'+p.id+' · '+clean(p.name)+'</b><p>Repère conservé du premier laboratoire cartographique PARISIS. Les relations originales restent visibles et exploratoires.</p><a href="parisis-cartography-lab.html">Ouvrir l’étude initiale ↗</a>')
+ .addTo(legacyLayer));
+}
+function showLegacyLayer(){const on=document.getElementById('showLegacy').checked;if(on){if(!map.hasLayer(legacyLayer))legacyLayer.addTo(map)}else map.removeLayer(legacyLayer);}
+
 const royalPoints=[
 {id:'FQ-01',name:'Bastide Saint-Denis · porte médiévale',lat:48.8690722,lng:2.3522778,period:'XIVe siècle · point approximatif',category:'fouquet',detail:'Lieu de l’entrée de Charles V figurée par Fouquet. Bastide du XIVe siècle disparue, environ 60 m au sud de l’arc actuel.',url:'https://armma.saprat.fr/monument/paris-porte-saint-denis/'},
 {id:'FQ-02',name:'Porte Saint-Martin médiévale',lat:48.8685333,lng:2.3553306,period:'Enceinte Charles V · point approximatif',category:'fouquet',detail:'Mentionnée dans la lecture topographique de l’enluminure avec l’enceinte urbaine.',url:'https://journals.openedition.org/medievales/pdf/4292'},
@@ -165,6 +212,18 @@ const saintMarkers={};
 const iconoColors={origine:'#5c3779',conservation:'#7c568e',moderne:'#448264',collection:'#4267a0',estree:'#ad772f'};
 function renderSaints(){
 saintLayer.clearLayers();
+const origin=iconoPoints.find(p=>p.id==='SP-01');
+const cluny=iconoPoints.find(p=>p.id==='SP-02');
+const saintGermain=iconoPoints.find(p=>p.id==='SP-03');
+const louvre=iconoPoints.find(p=>p.id==='SP-04');
+const basilicaOrigin=royalPoints.find(p=>p.id==='FQ-07');
+const iconoEdges=[
+{a:origin,b:cluny,color:'#78508d',label:'Provenance du fragment : Notre-Dame → musée de Cluny'},
+{a:origin,b:saintGermain,color:'#448264',label:'Correspondance iconographique des trois martyrs, aucune provenance commune établie'},
+{a:basilicaOrigin,b:louvre,color:'#4267a0',label:'Provenance du relief conservé au Louvre : abbaye de Saint-Denis'}
+];
+for(const edge of iconoEdges){if(!edge.a||!edge.b)continue;
+L.polyline([[edge.a.lat,edge.a.lng],[edge.b.lat,edge.b.lng]],{color:edge.color,weight:3.8,opacity:.86,dashArray:'6 7'}).bindTooltip(edge.label,{sticky:true}).addTo(saintLayer);}
 const estree=iconoPoints.find(p=>p.id==='SP-05'),basilica=royalPoints.find(p=>p.id==='FQ-07');
 if(estree&&basilica){L.polyline([[estree.lat,estree.lng],[basilica.lat,basilica.lng]],{color:'#ad772f',weight:5,opacity:.9,dashArray:'10 7'}).bindTooltip('Axe urbain voulu au XIXe siècle, pas voie historique mérovingienne').addTo(saintLayer);}
 for(const p of iconoPoints){
@@ -198,6 +257,9 @@ const panoramaSites=[
 const panoramaLayer=L.layerGroup(),panoramaMarkers={};
 function drawPanoramaSites(){
 panoramaLayer.clearLayers();
+const base=panoramaSites[0];
+for(const p of panoramaSites.slice(1)){L.polyline([[base.lat,base.lng],[p.lat,p.lng]],{color:'#2e7081',weight:4.5,opacity:.85,dashArray:'7 7',lineCap:'round'})
+.bindTooltip('Liaison iconographique dans le même folio : '+p.name+' / Notre-Dame. Ni itinéraire ni alignement historique.',{sticky:true}).addTo(panoramaLayer);}
 for(const p of panoramaSites){
 const m=L.circleMarker([p.lat,p.lng],{radius:9,weight:2,color:'#fffdf9',fillColor:'#2e7081',fillOpacity:1}).addTo(panoramaLayer);
 m.bindTooltip(p.id+' · '+p.name,{sticky:true});
@@ -224,6 +286,9 @@ const royalMarkers={};
 function royalColor(p){return p.category==='destination'?'#9a6e29':p.category==='later'?'#7c7e7b':p.category==='fouquet'?'#744591':'#8b6d8d';}
 function royalMapRender(){
 royalLayer.clearLayers();
+const pictorial=royalPoints.filter(x=>['FQ-01','FQ-02','FQ-03','FQ-04'].includes(x.id));
+for(let i=1;i<pictorial.length;i++){L.polyline([[pictorial[i-1].lat,pictorial[i-1].lng],[pictorial[i].lat,pictorial[i].lng]],
+{color:'#744591',weight:2.8,opacity:.75,dashArray:'2 9'}).bindTooltip('Mise en relation documentaire des repères décrits dans une même enluminure, et NON une route de cortège',{sticky:true}).addTo(royalLayer);}
 const historic=royalPoints[0],modern=royalPoints.find(x=>x.id==='FQ-06'),basilica=royalPoints.find(x=>x.id==='FQ-07');
 L.polyline([[historic.lat,historic.lng],[basilica.lat,basilica.lng]],{color:'#b18a35',weight:4,opacity:.85,dashArray:'9 8'}).addTo(royalLayer).bindTooltip('Liaison historique porte → basilique : trait géométrique indicatif, pas itinéraire exact');
 L.polyline([[historic.lat,historic.lng],[modern.lat,modern.lng]],{color:'#777777',weight:5,opacity:.9,dashArray:'4 5'}).addTo(royalLayer).bindTooltip('Écart entre l’ancienne porte et l’arc actuel');
@@ -420,7 +485,12 @@ document.addEventListener('click',e=>{const b=e.target.closest('button[data-sain
 document.getElementById('showPanorama').addEventListener('change',showPanorama);
 document.getElementById('fitPanorama').addEventListener('click',zoomPanorama);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-panorama-point]');if(!b)return;const p=panoramaSites.find(x=>x.id===b.dataset.panoramaPoint);if(!p)return;document.getElementById('showPanorama').checked=true;showPanorama();map.flyTo([p.lat,p.lng],15,{duration:.55});setTimeout(()=>panoramaMarkers[p.id]?.openPopup(),580)});
-drawPanoramaSites();renderPanoramaList();renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
-if(new URLSearchParams(location.search).get('fouquetparis')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Panorama Fouquet : fond moderne, sites du folio 57 marqués comme indices, pas comme superposition métrique.';zoomPanorama();}else if(new URLSearchParams(location.search).get('estree')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Vue Saint-Denis : plan de Paris 1551 masqué car hors couverture.';zoomEstree();}else if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
+document.getElementById('showLegacy').addEventListener('change',showLegacyLayer);
+document.getElementById('displayAll').addEventListener('click',()=>{for(const id of ['showRoyal','showSaints','showPanorama','showLegacy','showA','showB','showCorridors']){const c=document.getElementById(id);if(c)c.checked=true;}showRoyalLayer();toggleSaints();showPanorama();showLegacyLayer();show();document.getElementById('allMapState').textContent='Tous les anciens points et les nouvelles liaisons sont visibles. Utiliser « Voir l’ensemble » pour inclure la basilique hors Paris.';});
+document.getElementById('zoomAll').addEventListener('click',()=>{oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('displayAll').click();const pts=[...routes.flatMap(r=>r.points.map(p=>[p[1],p[2]])),...royalPoints.map(p=>[p.lat,p.lng]),...iconoPoints.map(p=>[p.lat,p.lng]),...panoramaSites.map(p=>[p.lat,p.lng]),...legacySites.map(p=>[p.lat,p.lng])];map.fitBounds(L.latLngBounds(pts).pad(.15),{maxZoom:13});});
+document.getElementById('zoomCentre').addEventListener('click',()=>{map.fitBounds(L.latLngBounds([[48.845,2.295],[48.886,2.372]]).pad(.12),{maxZoom:14});});
+drawLegacy();drawPanoramaSites();renderPanoramaList();renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
+toggleSaints();showPanorama();showLegacyLayer();
+if(new URLSearchParams(location.search).get('all')==='1'){document.getElementById('zoomAll').click();}else if(new URLSearchParams(location.search).get('fouquetparis')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Panorama Fouquet : fond moderne, sites du folio 57 marqués comme indices, pas comme superposition métrique.';zoomPanorama();}else if(new URLSearchParams(location.search).get('estree')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Vue Saint-Denis : plan de Paris 1551 masqué car hors couverture.';zoomEstree();}else if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
 })();
 </script></body></html>
