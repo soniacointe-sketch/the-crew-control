@@ -23,7 +23,7 @@ function withoutRemovedBoards(payload){return payload; /* Existing cards are nev
 /* Previous legacy removals remain in stored data; never re-run a name-based cleanup for other customers. */
 let editing=null,checks=[],thread=[] ,showArchive=false;function updateCoverPreview(){const value=document.getElementById('cover').value.trim(),p=document.getElementById('coverPreview');p.style.display=/^https:\/\//i.test(value)?'block':'none';p.style.backgroundImage=p.style.display==='block'?'url('+JSON.stringify(value)+')':''}document.getElementById('cover').addEventListener('input',updateCoverPreview);
 const $=id=>document.getElementById(id);
-const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data));$('notice').textContent='Sauvegarde locale effectuée.';if(typeof scheduleCloudSync==='function')scheduleCloudSync()}catch(e){$('notice').textContent='Impossible de sauvegarder : stockage saturé ou bloqué.'}};
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(data));$('notice').textContent='Sauvegarde locale effectuée.';window.dispatchEvent(new Event('eloah:boards-updated'));if(typeof scheduleCloudSync==='function')scheduleCloudSync()}catch(e){$('notice').textContent='Impossible de sauvegarder : stockage saturé ou bloqué.'}};
 const board=()=>data.boards.find(b=>b.id===data.active)||data.boards[0];
 const themeKey='eloah-board-themes-v1';
 const themes=[
