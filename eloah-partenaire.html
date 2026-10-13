@@ -771,7 +771,7 @@ $('campaign-login-send').onclick=async()=>{
  $('campaign-login-send').disabled=true;
  try{
   const client=getClient();
-  const result=await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname+'?rubrique=Mailing'}});
+  const result=await client.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname+'?rubrique=Mailing',shouldCreateUser:false}});
   message.textContent=result.error?'Connexion non envoyée : '+result.error.message:'Lien de connexion demandé. Ouvre ta messagerie, clique sur le lien puis reviens dans Mailing.';
  }catch(e){message.textContent='Connexion indisponible : '+String(e.message||e)}
  finally{$('campaign-login-send').disabled=false}
@@ -780,8 +780,9 @@ $('campaign-login-send').onclick=async()=>{
 $('campaign-target').addEventListener('change',()=>{
  if($('campaign-target').value==='crew-test'){
   const name=$('campaign-sender-name'),email=$('campaign-sender-email');
-  if(!name.value.trim())name.value='The Crew Orchies';
-  if(!email.value.trim())email.value='newsletter@thecreworchies.blog';
+  if(!name.value.trim()||name.value.trim()==='ITRIIA')name.value='The Crew Orchies';
+  if(!email.value.trim().toLowerCase().endsWith('@thecreworchies.blog'))email.value='newsletter@thecreworchies.blog';
+  name.dispatchEvent(new Event('input',{bubbles:true}));email.dispatchEvent(new Event('input',{bubbles:true}));
   status('Mode technique The Crew : test vers le compte ELOAH uniquement.');
  }else status('Vérification du domaine expéditeur nécessaire pour cette liste. Aucun envoi n’est déclenché.');
 });
