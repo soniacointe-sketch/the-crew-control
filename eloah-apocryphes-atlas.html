@@ -144,6 +144,20 @@ dialog h2{color:#fff9e9}
 @media(max-width:740px){.atlas-hero{grid-template-columns:1fr}.atlas-hero-copy{padding:35px 26px}.atlas-hero-visual img{height:270px;min-height:270px;object-position:50% 35%}.atlas-hero-visual:after{background:linear-gradient(0deg,#11121499,transparent 65%)}.atlas-metrics{grid-template-columns:1fr}.atlas-metrics div{border-right:0;border-bottom:1px solid #655a4b}.atlas-metrics div:last-child{border-bottom:0}.atlas-highlights{grid-template-columns:1fr}.atlas-highlight{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr)}.atlas-highlight .art{height:100%;aspect-ratio:auto}.atlas-highlight .study-info{padding:18px 16px}.atlas-highlight h3{font-size:23px}.atlas-headline{align-items:start;flex-direction:column}.atlas-headline p{text-align:left}.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid #625b50}.toolbar{grid-template-columns:1fr}.cards{grid-template-columns:1fr}.sidebar{gap:10px}.brand-sub{width:100%}}
 @media(max-width:420px){.atlas-highlight{display:flex}.atlas-highlight .art{aspect-ratio:5/3.5}.atlas-hero h1{font-size:49px}.atlas-hero-actions{width:100%}.atlas-hero-actions a{flex:1}.stat strong{font-size:27px}}
 @media(prefers-reduced-motion:reduce){.atlas-highlight{transition:none}}
+
+/* Les quatre corpus — accès directs aux filtres documentaires */
+.atlas-families{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px}
+.atlas-family{display:flex;flex-direction:column;text-align:left;border:1px solid #65615a;color:#fff;background:#2b2c31;padding:0;min-width:0;transition:transform .16s,border-color .16s}
+.atlas-family:hover{border-color:#ecc16f;transform:translateY(-2px);background:#343438}
+.atlas-family:disabled{opacity:.65;cursor:wait}
+.atlas-family img{display:block;width:100%;height:144px;object-fit:cover;object-position:center 42%}
+.atlas-family-body{padding:18px 17px 21px;display:flex;flex-direction:column;flex:1;gap:7px}
+.atlas-family .family-count{font:italic 28px Georgia,serif;color:#f0ca7c}
+.atlas-family strong{font:normal 21px/1.25 Georgia,serif;color:#fffaf0}
+.atlas-family small{font:12px/1.55 system-ui;color:#d1c9c0;margin:0 0 12px}
+.atlas-family .family-open{font:800 11px system-ui;color:#f0cb81;border-top:1px solid #7a6a51;padding-top:11px;margin-top:auto}
+@media(max-width:1050px){.atlas-families{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:520px){.atlas-families{grid-template-columns:1fr}.atlas-family{display:grid;grid-template-columns:minmax(105px,38%) minmax(0,1fr)}.atlas-family img{height:100%;min-height:173px}.atlas-family-body{padding:15px}.atlas-family small{margin-bottom:5px}}
 </style></head><body>
 <div class="layout">
 <aside class="sidebar">
@@ -197,6 +211,15 @@ dialog h2{color:#fff9e9}
 <div class="art"><img src="assets/foi-publications/marie-madeleine-sept.webp" alt="Couverture éditoriale sur Marie-Madeleine, image générée" loading="lazy" width="480" height="600"></div>
 <div class="study-info"><small>MARIE-MADELEINE · AUTORITÉ</small><h3>Marie, Pierre, André et Lévi.</h3><p>Étudier les tensions de transmission et d'autorité dans l'Évangile de Marie.</p><span class="action">Lire l'étude ↗</span></div>
 </a>
+</div>
+</section>
+<section aria-labelledby="familiesTitle">
+<div class="atlas-headline"><div><small>QUATRE FAMILLES DOCUMENTAIRES</small><h2 id="familiesTitle">Choisir une tradition.</h2></div><p>Chaque famille correspond à un ensemble du corpus. Les regroupements ne suppriment pas les recouvrements entre œuvres et versions.</p></div>
+<div class="atlas-families">
+<button class="atlas-family" data-family-jump="Apocryphes chrétiens · e-Clavis" disabled><img src="assets/foi-publications/livre-secret-jacques.webp" alt="Illustration ELOAH, livre ancien" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">450 notices</span><strong>Apocryphes chrétiens</strong><small>Évangiles, actes, lettres, traditions et textes de la Passion.</small><span class="family-open">Explorer les notices ↗</span></span></button>
+<button class="atlas-family" data-family-jump="Nag Hammadi et codex de Berlin · Brill" disabled><img src="assets/foi-archives/eloah-archive-08.webp" alt="Illustration ELOAH, papyrus et codices" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">55 notices</span><strong>Codices coptes</strong><small>Écrits de Nag Hammadi et du codex de Berlin.</small><span class="family-open">Explorer les notices ↗</span></span></button>
+<button class="atlas-family" data-family-jump="Pseudépigraphes et écrits juifs / traditions connexes" disabled><img src="assets/foi-publications/michel-4q529.webp" alt="Illustration ELOAH, fragments et écritures anciennes" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">74 notices</span><strong>Pseudépigraphes et traditions</strong><small>Écrits juifs anciens, visions et corpus connexes.</small><span class="family-open">Explorer les notices ↗</span></span></button>
+<button class="atlas-family" data-family-jump="Deutérocanoniques · réception variable selon traditions" disabled><img src="assets/foi-archives/eloah-archive-01.webp" alt="Illustration ELOAH, cabinet d'archives et textes anciens" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">21 notices</span><strong>Livres deutérocanoniques</strong><small>Canons et réceptions variables selon les traditions.</small><span class="family-open">Explorer les notices ↗</span></span></button>
 </div>
 </section>
 <div class="atlas-note"><strong>Attention au mot « apocryphe ».</strong> Les 600 entrées réunissent œuvres, notices, fragments ou versions, avec recouvrements possibles. Les études détaillées ne couvrent pas encore tout ce corpus. <a href="eloah-foi-grande-bibliotheque.html">Revenir aux dix collections ↗</a></div>
@@ -272,6 +295,22 @@ function toggleFavorite(e){const key=e.id;stored.has(key)?stored.delete(key):sto
 function updateFav(){$("favorites").textContent=(onlyFav?"★ ":"☆ ")+"Mes favoris ("+stored.size+")";$("favorites").setAttribute("aria-pressed",String(onlyFav))}
 function card(e){const box=el("article","entry");const line=el("div","line");const info=el("div");info.append(el("span","tag",e.category));const fav=el("button","button favorite",stored.has(e.id)?"★":"☆");fav.type="button";fav.title="Ajouter ou retirer des favoris";fav.setAttribute("aria-label",fav.title);fav.setAttribute("aria-pressed",String(stored.has(e.id)));fav.onclick=()=>toggleFavorite(e);line.append(info,fav);const h=el("h3",null,e.title);const identifier=el("div","meta",e.identifier+" · "+e.origin);const st=studyFor(e);const actions=el("div","entry-actions");const view=el("button",null,st?.fullStudy?"Voir les témoins et l’enquête complète":st?"Lire l’étude et les témoins":"Voir la fiche");view.type="button";view.onclick=()=>openDetail(e);actions.append(view);const link=linked("Source ↗",e.url);actions.append(link);box.append(line,h,identifier);if(st)box.append(el("div","review-note","Étude documentée · "+st.thematic+" · "+st.witnesses.length+" témoin(s) décrits"));box.append(actions);return box}
 function render(){const term=norm($("search").value.trim()),fam=$("family").value,cat=$("category").value;visible=all.filter(x=>(!fam||x.family===fam)&&(!cat||x.category===cat)&&(!onlyFav||stored.has(x.id))&&(!onlyStudied||Boolean(studyFor(x)))&&(!term||norm(x.title+" "+x.identifier+" "+x.category+" "+x.family+" "+x.origin).includes(term)));const frag=document.createDocumentFragment();visible.slice(0,limit).forEach(x=>frag.append(card(x)));const holder=$("results");holder.replaceChildren(frag);if(!visible.length){holder.append(el("div","noresults","Aucune notice pour ces critères. Modifie les filtres ou efface la recherche."))}$("count").textContent=visible.length+" référence(s) · "+Math.min(limit,visible.length)+" affichée(s)";$("more").hidden=visible.length<=limit;updateFav();$("studied").setAttribute("aria-pressed",String(onlyStudied));$("studied").textContent=onlyStudied?"✓ Afficher tout le catalogue":"Voir les études documentées"}
+function enableFamilyJump(){
+ document.querySelectorAll("[data-family-jump]").forEach(button=>{
+  const target=button.dataset.familyJump;
+  const known=[...$("family").options].some(option=>option.value===target);
+  button.disabled=!known;
+  button.onclick=()=>{
+   if(!known)return;
+   $("family").value=target;
+   $("category").value="";
+   $("search").value="";
+   onlyFav=false;onlyStudied=false;limit=40;
+   render();
+   $("catalogue").scrollIntoView({behavior:"smooth",block:"start"});
+  };
+ });
+}
 function row(title,value){const block=el("div","detail-row");block.append(el("small",null,title),el("div",null,value||"Non renseigné"));return block}
 function openDetail(e){active=e;$("detailTitle").textContent=e.title;$("detailBody").replaceChildren(row("Référence",e.identifier),row("Famille",e.family),row("Catégorie documentaire",e.category),row("Source",e.origin));enrichDetail(e);$("sourceLink").href=e.url;$("saveDetail").textContent=stored.has(e.id)?"Retirer des favoris":"Ajouter aux favoris";$("detail").showModal()}
 function promptFor(e){return "ELOAH — FOI & SPIRITUALITÉ · ÉTUDE SCIENTIFIQUE D'UN TEXTE ANCIEN\nTitre : "+e.title+"\nRéférence : "+e.identifier+"\nFamille : "+e.family+"\nSource à consulter : "+e.url+"\nMission : produire une étude approfondie avec cote précise des manuscrits, institutions, langues, datation de la composition et de la copie, photographies vérifiables, transcription des passages principaux, traduction prudente, variantes entre témoins, histoire de la réception, liens avec les autres apocryphes, bibliographie scientifique et problèmes non résolus. Distinguer chaque affirmation attestée d'une hypothèse. Ne pas inventer un témoin manquant."}
@@ -296,9 +335,9 @@ $("export").onclick=()=>{const data=all.filter(x=>stored.has(x.id));const blob=n
  $("studyCount").textContent=enriched.length+" études documentées";
  $("stats").replaceChildren();
  for(const [label,value]of [["Notices au total",all.length],["e-Clavis / NASSCAL",corpus.counts.christian],["Versions coptes / Brill",corpus.counts.brill],["Pseudépigraphes + canons",corpus.counts.pseudepigrapha+corpus.counts.deuterocanon]]){const b=el("div","stat");b.append(el("strong",null,String(value)),el("small",null,label));$("stats").append(b)}
- setChoices("family",all.map(x=>x.family),"Toutes les familles");setChoices("category",all.map(x=>x.category),"Tous les types");
+ setChoices("family",all.map(x=>x.family),"Toutes les familles");setChoices("category",all.map(x=>x.category),"Tous les types");enableFamilyJump();
  const params=new URLSearchParams(location.search);if(params.has("q"))$("search").value=params.get("q");
  if(params.get("etudes")==="1")onlyStudied=true;
  render();
 }catch(e){$("count").textContent="La base documentaire n’a pas pu être chargée : "+e.message;$("results").replaceChildren(el("div","noresults","Vérifie la publication du fichier de données dans le même dossier GitHub Pages."))}})();
-</script><script defer src="eloah-navigation.js?v=7"></script></body></html>
+</script><script defer src="eloah-navigation.js?v=20261013atlas"></script></body></html>
