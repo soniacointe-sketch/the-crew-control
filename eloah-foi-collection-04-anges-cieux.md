@@ -62,3 +62,8 @@ Noter les contradictions, les sources absentes, les objections, les hypothèses 
 **Modèle de preuve ELOAH :** **A** lecture directe du témoin ; **B** édition savante convergente ; **C** datation / restitution proposée ; **D** tradition ou interprétation ; **H** hypothèse à vérifier. Ce classement est une convention interne, pas un label scientifique officiel.
 
 [◈ Revenir aux dix collections](foi-control.html?file=eloah-foi-collections-index.md)
+
+
+## Complément — MICHEL-4Q529
+
+[Lire l'étude critique du manuscrit et accéder aux photographies institutionnelles](foi-control.html?file=eloah-foi-michel-4q529-etude-critique.md).
