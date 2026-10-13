@@ -54,6 +54,12 @@ Noter les contradictions, les sources absentes, les objections, les hypothèses 
 
 
 
+## Passerelle — Paraboles et paroles de Jésus
+
+[Grand Livre des 44 paraboles et discours figurés](foi-control.html?file=eloah-foi-paraboles-grand-livre-44.md) · [Laboratoire interactif](eloah-foi-paraboles-lab.html) · [Enquête sur la tête de la prophétie, NHC I,2](foi-control.html?file=eloah-foi-par-045-tete-prophetie.md).
+
+**Méthode :** lire les textes dans leur contexte, ne pas imposer un symbole universel et distinguer interprétations contemporaines et attestations manuscrites.
+
 ## Carnet de recherche et statut
 
 **Statut :** collection créée, corpus initial répertorié, enquêtes détaillées à documenter. Aucun manuscrit n'est réputé transcrit ou vérifié par la simple présence de son titre ici.
