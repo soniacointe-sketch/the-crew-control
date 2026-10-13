@@ -131,3 +131,47 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-galleryitem:hover,#eloah-canva-studio .ecs-galleryitem:focus-visible{border-color:#76aff5;background:#f0f7ff}
 @media(max-width:690px){#eloah-canva-studio .ecs-categorygrid{grid-template-columns:repeat(4,minmax(0,1fr))}#eloah-canva-studio .ecs-categoryart{width:60px}#eloah-canva-studio .ecs-categorylabel{font-size:10px}#eloah-canva-studio .ecs-sidebar.ecs-open{max-height:440px}#eloah-canva-studio .ecs-sidebody{max-height:385px}}
 @media(max-width:390px){#eloah-canva-studio .ecs-categorygrid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* Rubrique Audio – cartes voix off + bibliothèque de pistes */
+#eloah-canva-studio .ecs-layout{grid-template-columns:76px minmax(325px,392px) minmax(0,1fr)}
+#eloah-canva-studio .ecs-sidebody:has(.ecs-audio-header){padding:10px 18px 26px}
+#eloah-canva-studio .ecs-audio-header{display:flex;align-items:center;gap:13px;font-size:20px;margin:0 0 15px}
+#eloah-canva-studio .ecs-audio-header button{background:transparent;color:#414753;padding:4px 8px 4px 1px;font-size:25px}
+#eloah-canva-studio .ecs-audio-header strong{font-size:18px}
+#eloah-canva-studio .ecs-audio-voicecards{display:flex;flex-direction:column;gap:10px;margin:8px 0 25px}
+#eloah-canva-studio .ecs-audio-voicecards button{display:flex;align-items:center;text-align:left;gap:14px;width:100%;min-height:96px;padding:11px 12px;border:1px solid #e4e4ea;border-radius:12px;background:#fff;color:#30353b;transition:background .15s,border-color .15s}
+#eloah-canva-studio .ecs-audio-voicecards button:hover,#eloah-canva-studio .ecs-audio-voicecards button:focus-visible{background:#f4f7ff;border-color:#a0c9f3}
+#eloah-canva-studio .ecs-audio-voicecards strong{font-size:13px;line-height:1.35;flex:1}
+#eloah-canva-studio .ecs-voiceicon{display:flex;align-items:center;justify-content:center;flex:0 0 76px;width:76px;height:76px;border-radius:13px;font-weight:800;font-size:29px;color:white;box-shadow:inset -5px -6px #2e0c6526,0 2px 4px #00000015}
+#eloah-canva-studio .ecs-voiceicon.mic{background:linear-gradient(138deg,#8250e7,#c443a2)}
+#eloah-canva-studio .ecs-voiceicon.ai{background:linear-gradient(138deg,#752ccc,#9c5cd7)}
+#eloah-canva-studio .ecs-audiosection{margin:11px 0 23px}
+#eloah-canva-studio .ecs-audiosection[hidden]{display:none}
+#eloah-canva-studio .ecs-audiosection .ecs-sectiontitle{margin:10px 0 12px}
+#eloah-canva-studio .ecs-audiosection .ecs-sectiontitle strong{font-size:14px}
+#eloah-canva-studio .ecs-soundrow{display:flex;align-items:center;gap:11px;min-height:67px;padding:6px 0;border-bottom:1px solid #edeff2}
+#eloah-canva-studio .ecs-soundrow[hidden]{display:none}
+#eloah-canva-studio .ecs-soundplay{padding:0;background:none!important;flex:0 0 57px}
+#eloah-canva-studio .ecs-soundart{display:flex;align-items:center;justify-content:center;border-radius:50%;width:57px;height:57px;font-size:24px;color:white;text-shadow:0 1px 6px #0005;box-shadow:0 2px 7px #0002}
+#eloah-canva-studio .ecs-soundart.aurora{background:radial-gradient(circle at 25% 25%,#e7c8b4,#79858d 65%,#2f3c46)}
+#eloah-canva-studio .ecs-soundart.pulse{background:radial-gradient(circle at 65% 15%,#b0b9d7,#456b96 55%,#1c3249)}
+#eloah-canva-studio .ecs-soundart.piano{background:radial-gradient(circle at 25% 20%,#d4b68a,#6f5b6e 63%,#303a50)}
+#eloah-canva-studio .ecs-soundart.summer{background:radial-gradient(circle at 25% 20%,#ffddb0,#d79857 52%,#759a8c)}
+#eloah-canva-studio .ecs-soundart.latin{background:radial-gradient(circle at 25% 20%,#e1a8b1,#a8596b 55%,#623654)}
+#eloah-canva-studio .ecs-soundart.velka{background:radial-gradient(circle at 25% 20%,#cfacd9,#715587 55%,#24213d)}
+#eloah-canva-studio .ecs-soundcopy{flex:1;min-width:0}
+#eloah-canva-studio .ecs-soundcopy strong{display:block;font-size:13px;font-weight:650;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#eloah-canva-studio .ecs-soundcopy small{display:block;margin-top:3px;font-size:11px;color:#818692;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#eloah-canva-studio .ecs-soundadd{display:flex;align-items:center;justify-content:center;background:#f0f4f8;color:#265d93;width:33px;height:33px;flex:0 0 33px;border-radius:9px;font-size:22px}
+#eloah-canva-studio .ecs-soundadd:hover{background:#d8eafd}
+#eloah-canva-studio .ecs-audio-footer{border-top:1px solid #e8ebef;padding-top:14px}
+#eloah-canva-studio .ecs-audio-loaded{margin-top:18px;padding:12px;background:#edf7f0;border-radius:10px;display:flex;flex-direction:column;gap:5px}
+#eloah-canva-studio .ecs-audio-loaded strong{font-size:12px}
+#eloah-canva-studio .ecs-audio-loaded span{font-size:11px;overflow-wrap:anywhere}
+#eloah-canva-studio .ecs-audio-rec{display:flex;align-items:center;flex-direction:column;gap:10px;padding:22px 10px;margin:18px 0;background:#f7f4fd;border:1px solid #e4d9f8;border-radius:13px;text-align:center}
+#eloah-canva-studio .ecs-rec-mic{font-size:50px}
+#eloah-canva-studio .ecs-rec-status{min-height:30px}
+#eloah-canva-studio .ecs-audio-buttons{display:flex;gap:7px;flex-wrap:wrap;margin:16px 0}
+#eloah-canva-studio .ecs-audio-buttons button{margin:0}
+@media(max-width:1100px){#eloah-canva-studio .ecs-layout{grid-template-columns:68px 320px minmax(0,1fr)}#eloah-canva-studio .ecs-voiceicon{flex-basis:62px;width:62px;height:65px}#eloah-canva-studio .ecs-audio-voicecards button{min-height:79px}}
+@media(max-width:690px){#eloah-canva-studio .ecs-layout{grid-template-columns:1fr}#eloah-canva-studio .ecs-sidebody:has(.ecs-audio-header){max-height:385px}}
