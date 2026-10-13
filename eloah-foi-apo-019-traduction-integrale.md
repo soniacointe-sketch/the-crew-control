@@ -155,3 +155,63 @@ C'est de cette manière que vous pouvez recevoir le Royaume des cieux. Mais si v
 Aussi je vous dis : soyez sobres, ne vous laissez pas tromper ! Je vous l'ai souvent dit à tous ensemble ; et à toi seul, Jacques, je l'ai déclaré : « Sois sauvé ! » Je t'ai ordonné de me suivre et je t'ai enseigné quelle attitude prendre devant les puissances qui gouvernent.
 
 Voyez : je suis descendu, j'ai parlé, j'ai été maltraité et j'ai repris ma couronne […]
+
+## PAGE 9 — La grande lumière et les maisons sans toit
+
+— […] lorsque je vous ai sauvés. Car je suis descendu pour habiter auprès de vous, afin que vous puissiez habiter auprès de moi. J'ai trouvé vos maisons sans toit ; aussi ai-je demeuré dans celles qui pouvaient me recevoir lorsque je suis venu.
+
+Croyez-moi sur ce point, mes frères. Comprenez ce qu'est la grande lumière. Le Père n'a pas besoin de moi : un père n'a pas besoin du fils, tandis que le fils a besoin de son père. Je vais vers lui, puisque le Père du Fils n'a pas besoin de vous.
+
+Écoutez la parole, comprenez la connaissance, aimez la vie ; alors personne ne vous persécutera ni ne vous opprimera, sinon vous-mêmes.
+
+Malheureux que vous êtes ! Misérables ! Hypocrites envers la vérité ! Vous qui falsifiez la connaissance et péchez contre l'Esprit ! Comment supportez-vous encore de vous contenter d'écouter quand, depuis le commencement, il vous aurait fallu parler ? Comment pouvez-vous continuer à dormir lorsque, depuis le commencement, il vous fallait demeurer éveillés pour que le Royaume des cieux vous accueille ?
+
+## PAGE 10 — Les larmes, le départ et la prière
+
+— En vérité, je vous le dis : il serait plus facile à quelqu'un de saint de tomber dans la souillure, ou à une personne éclairée de retomber dans les ténèbres, qu'il ne vous serait facile de régner — ou de ne pas régner.
+
+Je me suis souvenu de vos pleurs, de votre deuil et de votre douleur. Mais ces choses sont loin de nous. Vous qui êtes encore hors de l'héritage du Père, pleurez quand il le faut, soyez dans le deuil quand il le faut, mais annoncez le bien, car le Fils remonte comme il convient.
+
+En vérité, je vous le dis : si j'avais été envoyé seulement vers ceux qui m'écoutent et si je n'avais parlé qu'à eux, je ne serais jamais remonté au-dessus de la terre. Ayez donc honte de votre attitude.
+
+Voici, je vais vous quitter et m'en aller. Je ne veux plus demeurer avec vous, pas plus que vous-mêmes ne l'avez voulu. Désormais, suivez-moi avec ardeur. C'est pour vous que je suis descendu.
+
+Vous êtes des bien-aimés ; vous apporterez la vie à beaucoup. Invoquez le Père, priez Dieu souvent, et il se montrera généreux envers vous.
+
+Heureux celui qui vous a vus auprès de (Dieu), lorsque (Dieu) fut proclamé parmi les anges et glorifié parmi les saints. La vie vous appartient ! Réjouissez-vous, soyez dans l'allégresse comme […]
+
+## PAGE 11 — Le Royaume appartient-il à beaucoup ?
+
+— […] des enfants de Dieu. Observez sa volonté pour être sauvés. Recevez mon avertissement et sauvez-vous. Je plaide pour vous devant le Père, qui vous pardonnera beaucoup.
+
+Lorsque nous eûmes entendu ces choses, nous nous réjouîmes, parce que les paroles précédentes nous avaient attristés.
+
+Mais lui, voyant notre joie, dit :
+
+— Malheur à vous qui avez besoin d'un défenseur ! Malheur à vous qui avez besoin de la grâce ! Heureux ceux qui ont parlé avec courage et obtenu pour eux-mêmes la grâce.
+
+Faites comme si vous étiez des étrangers. Comment les étrangers sont-ils regardés dans votre ville ? Pourquoi êtes-vous troublés lorsque vous vous bannissez vous-mêmes et vous éloignez volontairement de votre cité ? Pourquoi quittez-vous votre propre demeure pour la laisser à ceux qui veulent l'habiter ?
+
+Vous qui êtes exclus, vous qui fuyez, malheur à vous : vous serez rattrapés !
+
+Ou pensez-vous que le Père aime l'humanité à la manière des hommes, qu'il se laisse convaincre par les prières, qu'il accorde la faveur à l'un pour le compte de l'autre, ou qu'il supporte toute personne qui le recherche ?
+
+Il sait ce qu'est le désir, ainsi que ce dont la chair a besoin. Mais ce n'est pas la chair qui désire l'âme, car, sans l'âme, le corps ne pèche pas. De même, […]
+
+## PAGE 12 — Corps, âme, esprit et connaissance de soi
+
+— […] l'âme n'est pas sauvée sans l'esprit. Si l'âme est délivrée du mal et si l'esprit est lui aussi sauvé, le corps cesse d'être pécheur.
+
+Car c'est l'esprit qui relève l'âme, tandis que le corps la tue ; autrement dit, l'âme se fait mourir elle-même.
+
+En vérité, je vous le dis : (Dieu) ne pardonnera pas le péché de l'âme ni la culpabilité de la chair, car personne de ceux qui ont porté la chair ne sera sauvé. Pensez-vous qu'ils sont nombreux, ceux qui ont trouvé le Royaume des cieux ? Heureux celui qui s'est vu lui-même comme le quatrième dans le ciel.
+
+En entendant ces paroles, nous devînmes tristes. Mais il vit notre tristesse et dit :
+
+— Si je vous parle ainsi, c'est pour que vous vous connaissiez vous-mêmes. Le Royaume des cieux est pareil à un épi de blé qui a poussé dans un champ. Lorsqu'il a mûri, il répand ses grains, et l'année suivante le champ se remplit de nouveau d'épis.
+
+Vous aussi, hâtez-vous de recueillir pour vous un épi du blé de vie, afin que vous soyez emplis du Royaume.
+
+Tant que je suis avec vous, soyez attentifs à ma parole et faites-moi confiance. Mais quand je serai parti, souvenez-vous de moi. Souvenez-vous de moi parce que, lorsque j'étais parmi vous, vous ne me connaissiez pas vraiment.
+
+Heureux ceux qui m'ont connu ! Malheur à ceux qui m'ont entendu sans croire ! Heureux ceux qui […]
