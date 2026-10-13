@@ -621,6 +621,140 @@ function createChart(id,openData=false){
  return e;
 }
 
+
+let textView='home',textSearch='',textMagicInput='',textMagicTone='crew',textMagicSuggestions=[];
+let textRecentPresets=[];
+try{textRecentPresets=JSON.parse(localStorage.getItem('eloah_reel_recent_text_presets')||'[]').filter(x=>typeof x==='string').slice(0,15)}catch{}
+function textComboCard(p){
+ const lib=window.ELOAHText;
+ return '<button type="button" class="ecs-type-card" data-text-preset="'+xss(p.id)+'" data-search="'+xss((p.title+' '+p.subtitle+' '+p.group).toLocaleLowerCase('fr'))+'" title="Ajouter '+xss(p.title)+' au montage">'+
+ '<span class="ecs-type-preview"><img loading="lazy" decoding="async" src="'+lib.preview(p.id)+'" alt="Style typographique '+xss(p.title)+'"></span>'+
+ '<span class="ecs-type-add" aria-hidden="true">＋</span></button>';
+}
+function textPresetSection(g,index,limit=0){
+ const items=limit?g.items.slice(0,limit):g.items;
+ return '<section class="ecs-type-section" data-type-section><div class="ecs-sectiontitle"><strong>'+xss(g.name)+'</strong><button type="button" data-text-view="g'+index+'">Afficher tout →</button></div>'+
+ '<div class="ecs-type-strip">'+items.map(textComboCard).join('')+'</div></section>';
+}
+function textMagicScreen(){
+ const suggestions=textMagicSuggestions.map((suggestion,i)=>'<div class="ecs-magic-result"><p>'+xss(suggestion)+'</p><button type="button" data-text-magic-add="'+i+'">＋ Ajouter au Reel</button></div>').join('');
+ return '<button type="button" class="ecs-els-back" data-text-view="home">← Texte</button>'+
+ '<h3 class="ecs-panelheading">Écriture magique · ELOAH</h3>'+
+ '<p class="ecs-note">Suggestions de rédaction créées localement à partir de tes mots. Ce n’est pas une génération par IA : tu gardes la main sur chaque texte.</p>'+
+ '<label class="ecs-sidelabel" for="ecs-magic-idea">Ton idée ou ton message</label>'+
+ '<textarea id="ecs-magic-idea" rows="5" placeholder="Exemple : notre prochain atelier danse, tous niveaux…" maxlength="600">'+xss(textMagicInput)+'</textarea>'+
+ '<label class="ecs-sidelabel" for="ecs-magic-tone">Ton souhaité</label>'+
+ '<select id="ecs-magic-tone">'+[['crew','Dynamique · The Crew'],['glam','Éditorial · Power & Glam'],['direct','Direct et franc'],['soft','Doux et chaleureux']].map(([id,name])=>'<option value="'+id+'" '+(textMagicTone===id?'selected':'')+'>'+name+'</option>').join('')+'</select>'+
+ '<button type="button" class="ecs-text-primary" data-text-magic-generate>✨ Proposer 3 formulations</button>'+
+ (suggestions?'<h3 class="ecs-panelheading">Tes propositions</h3><div class="ecs-magic-results">'+suggestions+'</div>':'<p class="ecs-note">Écris une idée puis génère des formulations éditables.</p>');
+}
+function textPanel(){
+ const lib=window.ELOAHText;
+ if(!lib)return '<div class="ecs-empty">La bibliothèque Texte n’est pas chargée. Actualise la page.</div>';
+ if(textView==='magic')return textMagicScreen();
+ const head='<div class="ecs-text-search"><span>⌕</span><input type="search" id="ecs-text-search" aria-label="Rechercher des styles de texte" placeholder="Rechercher des polices et combinaisons" autocomplete="off" value="'+xss(textSearch)+'"></div>';
+ if(textView!=='home'){
+  const g=lib.groups[Number(textView.slice(1))];
+  if(!g)return head+'<button class="ecs-els-back" data-text-view="home">← Texte</button>';
+  return head+'<button class="ecs-els-back" data-text-view="home">← Tout le texte</button>'+
+   '<h3 class="ecs-panelheading">'+xss(g.name)+'</h3><div class="ecs-type-grid">'+g.items.map(textComboCard).join('')+'</div>';
+ }
+ const recent=textRecentPresets.map(id=>lib.byId.get(id)).filter(Boolean).slice(0,6);
+ const features='<section class="ecs-type-features"><div class="ecs-sectiontitle"><strong>Texte dynamique</strong></div>'+
+ '<button type="button" class="ecs-type-feature" data-text-add="caption"><span class="ecs-feature-art subtitles">▤</span><span><strong>Sous-titres</strong><small>Texte chronométré · à saisir</small></span><span class="ecs-feature-arrow">›</span></button>'+
+ '<button type="button" class="ecs-type-feature" data-text-add="page"><span class="ecs-feature-art numbering">1 <small>2</small></span><span><strong>Numérotation de page</strong><small>Compteur selon la durée</small></span><span class="ecs-feature-arrow">›</span></button></section>';
+ const apps='<section class="ecs-type-apps"><div class="ecs-sectiontitle"><strong>Studios typographiques ELOAH</strong><button type="button" data-text-view="g5">Afficher tout →</button></div>'+
+ '<div class="ecs-text-app-grid"><button data-text-app="studio"><span class="ecs-text-app-icon typestudio">T<span>▰</span></span><strong>TypeStudio</strong></button>'+
+ '<button data-text-app="craft"><span class="ecs-text-app-icon typecraft">Typo</span><strong>TypeCraft</strong></button>'+
+ '<button data-text-app="motion"><span class="ecs-text-app-icon motiontext">M<span>↗</span></span><strong>MotionText</strong></button></div>'+
+ '<p class="ecs-note">Trois espaces de création intégrés à ELOAH : textes expressifs, compositions et mouvement. Pas d’accès aux applications de Canva.</p></section>';
+ const identity='<section class="ecs-type-identity"><div class="ecs-sectiontitle"><strong>♛ Identité visuelle</strong><button type="button" data-tab="brand">Modifier →</button></div>'+
+ '<button type="button" class="ecs-type-identity-btn heading" data-text-add="heading">En-tête</button>'+
+ '<button type="button" class="ecs-type-identity-btn subheading" data-text-add="subtitle">Sous-titre</button>'+
+ '<button type="button" class="ecs-type-identity-btn body" data-text-add="body">CORPS DE TEXTE</button></section>';
+ const combos='<section class="ecs-type-combinations"><div class="ecs-sectiontitle"><strong>Combinaisons de polices</strong><button type="button" data-text-view="g0">Voir les collections →</button></div>'+
+ '<div class="ecs-type-grid">'+lib.presets.slice(0,16).map(textComboCard).join('')+'</div></section>';
+ return head+'<button type="button" class="ecs-text-primary" data-text-add="simple"><span>T</span> Ajouter une zone de texte</button>'+
+ '<button type="button" class="ecs-text-magic" data-text-view="magic"><span>✧</span> Écriture magique <small>Suggestions locales</small></button>'+
+ identity+features+apps+(recent.length?'<section class="ecs-type-recent"><div class="ecs-sectiontitle"><strong>Utilisés récemment</strong></div><div class="ecs-type-strip">'+recent.map(textComboCard).join('')+'</div></section>':'')+
+ combos+lib.groups.map((g,i)=>textPresetSection(g,i,8)).join('')+
+ '<p class="ecs-note ecs-text-disclaimer">90 combinaisons originales ELOAH, modifiables et exportables avec tes vidéos.</p>';
+}
+function textProperties(e){
+ const lib=window.ELOAHText;if(!lib)return '';
+ const combo=e.kind==='textCombo',preset=combo?lib.byId.get(e.variant):null;
+ const families=Object.entries(lib.families);
+ const options=(value)=>families.map(([id,info])=>'<option value="'+id+'" '+((value===id)?'selected':'')+'>'+xss(info.name)+'</option>').join('');
+ const textInput='<label class="ecs-sidelabel">Texte principal</label><textarea data-p="text" rows="3" maxlength="600">'+xss(e.text||'')+'</textarea>';
+ const secondary=combo?'<label class="ecs-sidelabel">Sous-texte</label><input type="text" data-p="subtext" maxlength="140" value="'+xss(e.subtext??preset?.subtitle??'')+'">'+
+  '<label class="ecs-sidelabel">Mention supérieure</label><input type="text" data-p="eyebrow" maxlength="85" value="'+xss(e.eyebrow??preset?.eyebrow??'')+'">'+
+  '<label class="ecs-sidelabel">Police secondaire</label><select data-p="secondaryFont">'+options(e.secondaryFont||preset?.subFont||'classic')+'</select>'+
+  color('Couleur secondaire','accentColor',e.accentColor||preset?.accent||'#c69b46')+
+  '<label class="ecs-sidelabel">Fond de la composition</label><div class="ecs-text-bg"><label><input type="checkbox" data-text-transparent '+(e.comboBackground==='transparent'?'checked':'')+'> Sans fond</label><input type="color" data-p="comboBackground" value="'+xss(e.comboBackground&&e.comboBackground!=='transparent'?e.comboBackground:preset?.back||'#f4efe7')+'"></div>':'';
+ const font=e.fontFamily||preset?.font||'sans';
+ const style='<div class="ecs-type-controls"><label class="ecs-sidelabel">Police de caractère</label><select data-p="fontFamily">'+options(font)+'</select>'+
+ '<div class="ecs-text-props-row"><div>'+range('Taille','font',14,250,1,e.font||70)+'</div><div><label class="ecs-sidelabel">Graisse</label><select data-p="fontWeight">'+[300,400,500,600,700,800,900].map(n=>'<option value="'+n+'" '+(Number(e.fontWeight||800)===n?'selected':'')+'>'+n+'</option>').join('')+'</select></div></div>'+
+ '<div class="ecs-text-toggle-row"><label><input type="checkbox" data-text-toggle="italic" '+(e.italic?'checked':'')+'> Italique</label>'+
+ '<label><input type="checkbox" data-text-toggle="shadow" '+(e.shadow?'checked':'')+'> Ombre</label></div>'+
+ '<label class="ecs-sidelabel">Alignement</label><div class="ecs-text-align">'+[['left','≡ Gauche'],['center','☷ Centre'],['right','≡ Droite']].map(([v,t])=>'<button type="button" data-text-align="'+v+'" aria-pressed="'+((e.align||'center')===v)+'">'+t+'</button>').join('')+'</div>'+
+ (combo?'':range('Espacement des lettres','tracking',-3,28,1,e.tracking??0)+
+ range('Interligne','lineHeight',.7,2,.05,e.lineHeight??1.16)+
+ range('Contour','outlineWidth',0,25,1,e.outlineWidth||0)+color('Couleur du contour','outlineColor',e.outlineColor||'#111111')+
+ '<div class="ecs-text-toggle-row"><label><input type="checkbox" data-text-toggle="textBackground" '+(!!e.backgroundColor?'checked':'')+'> Fond derrière le texte</label></div>'+
+ (e.backgroundColor?color('Couleur du fond','backgroundColor',e.backgroundColor):''))+
+ '<label class="ecs-sidelabel">Animation du texte</label><select data-p="textMode">'+Object.entries(lib.modeNames).map(([v,t])=>'<option value="'+v+'" '+((e.textMode||'none')===v?'selected':'')+'>'+t+'</option>').join('')+'</select>'+
+ ((e.textMode==='counter')?range('Durée par page (s)','pageInterval',.2,20,.1,e.pageInterval||2):'')+
+ ((e.textMode==='caption')?'<p class="ecs-note">Le texte est réparti sur la durée de l’élément. Ce n’est pas une transcription automatique de l’audio.</p>':'')+
+ '</div>';
+ return '<div class="ecs-type-editor"><strong>'+xss(combo?'Composition · '+(preset?.group||'Personnalisée'):'Modifier ton texte')+'</strong>'+
+ '<p class="ecs-note">Modifie les mots et le style. Déplace ou redimensionne ce bloc directement sur le Reel.</p>'+
+ textInput+secondary+style+'</div>';
+}
+function createTextPreset(presetId){
+ const lib=window.ELOAHText,p=lib?.byId.get(presetId);if(!p)return;
+ const el=add('textCombo',{variant:p.id,text:p.title,subtext:p.subtitle,eyebrow:p.eyebrow,
+  x:100,y:630,w:880,h:550,font:p.defaultSize,fontFamily:p.font,secondaryFont:p.subFont,
+  fontWeight:800,color:p.ink,accentColor:p.accent,comboBackground:p.back,textMode:'none'});
+ textRecentPresets=[p.id,...textRecentPresets.filter(x=>x!==p.id)].slice(0,15);
+ try{localStorage.setItem('eloah_reel_recent_text_presets',JSON.stringify(textRecentPresets))}catch{}
+ toast('Style "'+p.title+'" ajouté : textes modifiables dans le panneau.');
+ return el;
+}
+function createTextBlock(kind){
+ const lib=window.ELOAHText;
+ const detail=lib.textElement(kind);
+ const {kind:blockKind,...rest}=detail;
+ const el=add(blockKind,rest);
+ toast(kind==='caption'?'Sous-titres chronométrés ajoutés : saisis tes mots dans Modifier.':
+ kind==='page'?'Numérotation ajoutée. Règle les secondes par page dans Modifier.':'Zone de texte ajoutée.');
+ return el;
+}
+function magicSuggestions(text,tone){
+ const idea=String(text||'').trim().replace(/\s+/g,' ').slice(0,350);
+ if(!idea)return [];
+ const short=idea.replace(/[.!?]+$/,'');
+ if(tone==='crew')return [
+  short.toUpperCase()+' ! 🔥 Viens partager le mouvement avec nous.',
+  'Chez The Crew, on avance ensemble. '+short+'. Et toi, tu nous rejoins ?',
+  short+'. Pas besoin d’être parfait : on vient pour vivre le moment.'
+ ];
+ if(tone==='glam')return [
+  short+'. Parce que les petits choix dessinent parfois de grandes histoires.',
+  'Et si tout commençait ici ? '+short+'. Un instant pour se choisir.',
+  short+'. Une autre manière de regarder la vie, avec liberté et intention.'
+ ];
+ if(tone==='direct')return [
+  short+'. Voilà le sujet. Maintenant, on passe à l’action.',
+  'On arrête de tourner autour : '+short+'. À toi de jouer.',
+  short+'. Sans détour, sans chichis, avec du concret.'
+ ];
+ return [
+  short+'. Prends le temps de savourer ce moment.',
+  'Aujourd’hui, j’avais envie de partager ceci : '+short+'.',
+  short+'. À ton rythme, simplement et avec le cœur.'
+ ];
+}
+
 function elementsMarkup(){
  if(elementsCategory==='illustrations')return illustrationCatalog();
  if(elementsCategory==='animations')return stickerAnimations();
