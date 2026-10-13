@@ -713,6 +713,25 @@ const univers=[
  ['ELOAH','Applications et base de connaissances','eloah-projet.html?projet=ELOAH'],
  ['PARISIS ENGINE','Symbol Atlas, archives et géométrie','eloah-parisis.html']
 ];
+const actualites=[
+ {id:'eloah-plan-20261013-01',title:'ELOAH · Harmoniser tous les menus et la navigation mobile',module:'Développement',note:'Uniformiser les menus latéraux sur toutes les pages ; vérifier le hamburger automatique sur mobile, les liens, les retours et les écrans 320/390 px.',url:'https://soniacointe-sketch.github.io/the-crew-control/mes-univers.html'},
+ {id:'eloah-plan-20261013-02',title:'ELOAH Formations · Créer l’espace élèves et les inscriptions',module:'Formations',note:'Structurer les formations ELOAH, Power & Glam et The Crew Academy. Construire les parcours, fiches pédagogiques, accès élèves, suivi des inscriptions et paiements sécurisés (encore à développer).',url:'https://soniacointe-sketch.github.io/the-crew-control/eloah-partenaire.html?rubrique=Formations'},
+ {id:'eloah-plan-20261013-03',title:'Foi & Spiritualité · Compléter la bibliothèque et les publications',module:'Bases d’Expertise',note:'Réunir les douze chapitres, les apocryphes, les dossiers Magdalena, les images patrimoniales, les sources et les lecteurs audio ; vérifier chaque lien et conserver les archives.',url:'https://soniacointe-sketch.github.io/the-crew-control/eloah-foi-spiritualite.html'},
+ {id:'eloah-plan-20261013-04',title:'PARISIS ENGINE · Poursuivre l’atlas et vérifier les axes',module:'Projets',note:'Conserver les anciens points et liaisons. Poursuivre les fiches AXE-014 et PAR-ISIS-005 avec cartes historiques, coordonnées sourcées, GeoJSON, mesures reproductibles et distinction faits / hypothèses.',url:'https://soniacointe-sketch.github.io/the-crew-control/eloah-parisis.html'},
+ {id:'eloah-plan-20261013-05',title:'Power & Glam · Finaliser la publication et la vente des créations',module:'ELOAH Studio',note:'Vérifier le PDF du Love Journal après paiement, préparer les publications illustrées, le lecteur audio, les collections Etsy et les modèles créatifs de SMITH Studio.',url:'https://powerglam1.wordpress.com/'},
+ {id:'eloah-plan-20261013-06',title:'The Crew · Sécuriser les événements et le suivi administratif',module:'Projets',note:'Vérifier la billetterie Latino du 17 octobre et Flashback du 24 octobre, les paiements et les inscriptions ; contrôler le statut WordPress Premium et le SIRET dans LeCompteAsso.',url:'https://thecreworchies.blog/'}
+];
+function seedActualites(){
+ try{
+  const key='sonia-universe-v1-itriia';
+  const old=JSON.parse(localStorage.getItem(key)||'[]');
+  if(!Array.isArray(old))return;
+  const exists=new Set(old.map(x=>x.id));
+  const additions=actualites.filter(x=>!exists.has(x.id)).map(x=>({...x,state:'À faire',date:'',archived:false,updated:'2026-10-13T20:00:00.000Z'}));
+  if(additions.length)localStorage.setItem(key,JSON.stringify([...old,...additions]));
+ }catch(e){/* Stockage indisponible : les priorités restent visibles sans écraser les notes. */}
+}
+seedActualites();
 function localRecords(){try{const v=JSON.parse(localStorage.getItem('sonia-universe-v1-itriia')||'[]');return Array.isArray(v)?v.filter(x=>x&&!x.archived):[]}catch{return []}}
 function projectRecords(){const out=[];try{for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(!k?.startsWith('eloah-project-v1:'))continue;try{const r=JSON.parse(localStorage.getItem(k));const name=r?.settings?.name||k.slice('eloah-project-v1:'.length);if(!r?.settings?.archived)out.push({name,key:k.slice('eloah-project-v1:'.length),updated:r?.updated||''})}catch{}}}catch{}return out.sort((a,b)=>String(b.updated).localeCompare(String(a.updated)))} 
 function group(title,items,more){return '<section class="eh-section"><div class="eh-heading"><h2>'+title+'</h2><a href="'+more+'">Voir tout →</a></div>'+items+'</section>'}
@@ -732,9 +751,9 @@ function draw(){
  h+=group('Studio de création','<div class="eh-grid"><article class="eh-card"><span class="eh-type">Vidéo · Création</span><h3>ELOAH Reel Studio Pro</h3><p>Importer une vidéo, sélectionner un extrait, ajouter des textes et des effets, prévisualiser et exporter.</p><a class="eh-btn dark" href="eloah-reel-studio.html">Ouvrir le Reel Studio →</a></article></div>','eloah-reel-studio.html');
  h+=group('Reprendre mon travail',recent.length?'<div class="eh-grid">'+recent.map(r=>'<article class="eh-card"><span class="eh-type">'+esc(r.module)+'</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.state)+(r.date?' · '+esc(r.date):'')+'</p><button class="eh-btn" type="button" data-edit-eloah="'+esc(r.id)+'">Reprendre →</button></article>').join('')+'</div>':'<div class="eh-empty">Aucune activité récente à reprendre dans les notes locales de cet appareil.</div>','eloah-partenaire.html?rubrique=Mon%20Espace');
  h+=group('Projets récents',projects.length?'<div class="eh-grid">'+projects.slice(0,4).map(p=>'<article class="eh-card"><span class="eh-type">Projet</span><h3>'+esc(p.name)+'</h3><p>'+esc(p.updated?('Mis à jour : '+p.updated.slice(0,10)):'Date non renseignée')+'</p><a class="eh-btn" href="eloah-projet.html?projet='+encodeURIComponent(p.key)+'">Ouvrir →</a></article>').join('')+'</div>':'<div class="eh-empty">Aucun projet récent détecté dans le stockage local. <a href="mes-univers.html">Parcourir mes univers →</a></div>','mes-univers.html#maisons');
- const todo=rows.filter(r=>r.state!=='Terminé').sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999')).slice(0,6);
- h+=group('Prochaines actions',todo.length?'<div class="eh-actions">'+todo.map(r=>'<div class="eh-action"><div><strong>'+esc(r.title)+'</strong><small>'+esc(r.module)+' · '+esc(r.state)+(r.date?' · Échéance : '+esc(r.date):' · Sans échéance')+'</small></div><button type="button" class="eh-btn" data-edit-eloah="'+esc(r.id)+'">Ouvrir →</button></div>').join('')+'</div>':'<div class="eh-empty">Aucune prochaine action disponible.</div>','eloah-partenaire.html?rubrique=Mon%20Espace');
- h+='<p class="eh-foot">Vue alimentée par les éléments enregistrés dans ce navigateur. La synchronisation externe, les notifications et les permissions avancées ne sont pas vérifiées ici. Les notes et outils existants sont conservés ci-dessous.</p>';
+ const todo=actualites.map(a=>rows.find(r=>r.id===a.id)||({...a,state:'À faire'})).filter(r=>r.state!=='Terminé'&&!r.archived);
+ h+=group('Mes 6 priorités · octobre 2026','<div class="eh-actions">'+(todo.length?todo.map(r=>'<div class="eh-action"><div><strong>'+esc(r.title)+'</strong><small>'+esc(r.module)+' · '+esc(r.state)+'</small><p style="margin:6px 0;color:#647268;font-size:13px">'+esc(r.note)+'</p></div><a class="eh-btn" href="'+esc(r.url)+'">Accéder →</a></div>').join(''):'<p>Les six priorités ont été terminées ou archivées.</p>')+'</div>','eloah-partenaire.html?rubrique=Mon%20Espace');
+ h+='<p class="eh-foot">Six priorités proposées à partir des travaux d’octobre 2026, enregistrées localement sans supprimer les éléments existants. Vue alimentée par les éléments enregistrés dans ce navigateur. La synchronisation externe, les notifications et les permissions avancées ne sont pas vérifiées ici. Les notes et outils existants sont conservés ci-dessous.</p>';
  section.innerHTML=h;
  section.querySelector('#eh-add').onclick=()=>document.getElementById('new')?.click();
  section.querySelectorAll('[data-edit-eloah]').forEach(b=>b.onclick=()=>{const target=document.querySelector('#list [data-edit="'+CSS.escape(b.dataset.editEloah)+'"]');if(target){target.click();return}const tab=document.querySelector('#tabs [data-view="Tous"]');tab?.click();document.querySelector('#list [data-edit="'+CSS.escape(b.dataset.editEloah)+'"]')?.click()});
