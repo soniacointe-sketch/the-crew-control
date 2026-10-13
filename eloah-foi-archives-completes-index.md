@@ -156,7 +156,7 @@ L'étude existante examine les témoignages sur l'inscription ἈΝΆΓΚΗ all�
 
 ## 07 · Registre des 22 premiers dossiers ELOAH / SCANNER LE SENS
 
-Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes marqués « Archive intégrale » ont été retrouvés et réinstallés. Quatorze autres dossiers ont reçu une **réédition documentée** distincte ; leurs textes originaux complets et leurs anciennes planches restent à retrouver. Les deux autres axes n'ont été retrouvés que partiellement.
+Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes marqués « Archive intégrale » ont été retrouvés et réinstallés depuis les fichiers de recherche. Quatorze autres dossiers ont reçu des **rééditions documentées distinctes** ; depuis, **13 de ces 14 textes ont aussi été récupérés depuis le site de publication original**. Les deux axes Jésus et Anges ont également été retrouvés sur le site. Le texte ancien de Bayeux et la collection complète des anciens scans restent à récupérer.
 
 | N° | Ancien dossier / sujet | État de récupération |
 |---|---|---|
@@ -187,7 +187,7 @@ Cet inventaire sert à ne **plus perdre les titres anciens**. Les six textes mar
 
 ### Sources anciennes retrouvées hors du site
 
-Deux illustrations de notre histoire de travail (« Le jardin, l'arbre et l'interdit » et « Reine de Saba, quête de sagesse ») ont été repérées dans la bibliothèque de fichiers, **mais pas leurs manuscrits textuels complets**. Leur existence ne suffit pas à reconstituer les textes au mot près.
+Quinze illustrations éditoriales originales ont finalement été retrouvées dans la bibliothèque des fichiers (dont le Jardin et la Reine de Saba) et empaquetées pour une restauration ultérieure. **Les textes originaux de ces deux sujets ont depuis été récupérés depuis les publications du site d'origine**, mais la galerie intégrale des anciens scans n'est pas encore réimportée dans GitHub Pages. Leur existence ne suffit pas à reconstituer les textes au mot près.
 
 ## 07 bis · Quatorze nouveaux chapitres reconstitués (13 octobre 2026)
 
@@ -216,7 +216,7 @@ Deux illustrations de notre histoire de travail (« Le jardin, l'arbre et l'inte
 
 - **6 textes sources retrouvés et recopiés sans suppression** dans le dépôt actuel.
 - **14 chapitres recréés comme études sourcées**, à comparer ultérieurement avec les anciens originaux.
-- **2 axes anciens représentés par des contenus partiels** : « Jésus — Le sens devenu chair » et « Les anges ».
+- **2 anciens axes dont la publication d'origine a aussi été retrouvée** : « Jésus — Le sens devenu chair » et « Les anges ». Leur texte est maintenant consultable directement.
 - **Textes historiques anciens et séries d'images annoncées lors des premières publications** : récupération non achevée.
 
 ## 08 · Méthode de bibliothèque : une fiche, des preuves et des images créditées
