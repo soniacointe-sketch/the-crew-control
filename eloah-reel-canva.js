@@ -42,9 +42,11 @@ const elementOptions={
 function elementsMarkup(){
  const search='<label class="ecs-sidelabel" for="ecs-element-search">Rechercher des éléments</label><div class="ecs-search"><span>⌕</span><input id="ecs-element-search" placeholder="Rechercher des éléments" autocomplete="off"><span aria-hidden="true">✦</span></div>';
  if(elementsCategory){
-  const c=elementCategories.find(x=>x[0]===elementsCategory),title=c?.[1]||'Éléments';
+  const c=elementCategories.find(x=>x[0]===elementsCategory),title=elementsCategory==='recent'?'Utilisés récemment':c?.[1]||'Éléments';
   let content='';
-  if(elementsCategory==='animations'){
+  if(elementsCategory==='recent'){
+    content=S.elements.length?'<div class="ecs-gallery">'+S.elements.slice().reverse().map(e=>'<button class="ecs-galleryitem" data-recent="'+e.id+'"><span class="ecs-galleryicon">'+(e.kind==='text'?'T':e.kind==='image'?'▧':e.kind==='chart'?'▥':'◈')+'</span><span>'+xss(e.kind==='text'?e.text.slice(0,35):e.kind)+'</span></button>').join('')+'</div>':'<p class="ecs-note">Pas encore d’éléments récents dans ce projet.</p>';
+  }else if(elementsCategory==='animations'){
     content='<p class="ecs-note">Sélectionne un texte, une illustration ou une forme dans ton Reel, puis applique un mouvement.</p><div class="ecs-list">'+[['none','Aucune animation'],['fade','Apparition douce'],['pop','Zoom dynamique'],['slide','Entrée latérale']].map(([key,label])=>'<button class="ecs-itembtn" data-animation="'+key+'">'+label+'</button>').join('')+'</div>';
   }else if(['audio','videos','photos'].includes(elementsCategory)){
     content='<p class="ecs-note">Importe un fichier depuis ton appareil pour l’utiliser dans ton Reel.</p><div class="ecs-list"><button class="ecs-itembtn" data-tab="'+elementsCategory+'">Ouvrir les outils '+title.toLowerCase()+' →</button></div>';
@@ -54,8 +56,8 @@ function elementsMarkup(){
   return '<button class="ecs-els-back" data-cat="overview">← Toutes les catégories</button><h3 class="ecs-panelheading">'+xss(title)+'</h3>'+content;
  }
  const recent=S.elements.slice(-4).reverse();
- const recentHtml=recent.length?recent.map((e,i)=>'<button class="ecs-recentitem" data-recent="'+e.id+'" title="Dupliquer cet élément"><span class="ecs-recentpreview r'+i+'">'+(e.kind==='text'?'T':e.kind==='image'?'▧':e.kind==='chart'?'▥':e.kind==='illustration'?'♥':'◈')+'</span></button>').join(''):'<button class="ecs-recentitem" data-action="rect" title="Ajouter un rectangle"><span class="ecs-recentpreview r0">▰</span></button><button class="ecs-recentitem" data-action="ellipse" title="Ajouter un cercle"><span class="ecs-recentpreview r1">●</span></button><button class="ecs-recentitem" data-action="star" title="Ajouter une étoile"><span class="ecs-recentpreview r2">★</span></button>';
- return search+'<div class="ecs-sectiontitle"><strong>Utilisés récemment</strong><span>Afficher tout</span></div><div class="ecs-recentgrid">'+recentHtml+'</div><h3 class="ecs-panelheading">Parcourir les catégories</h3><div class="ecs-categorygrid">'+elementCategories.map(c=>'<button class="ecs-category" data-cat="'+c[0]+'" data-search="'+(c[1]+' '+c[0]).toLowerCase()+'"><span class="ecs-categoryart '+c[3]+'">'+c[2]+'</span><span class="ecs-categorylabel">'+c[1]+'</span></button>').join('')+'</div><p class="ecs-note">Ta bibliothèque ELOAH : éléments intégrés et médias importés depuis ton appareil.</p>';
+ const recentHtml=recent.length?recent.map((e,i)=>'<button class="ecs-recentitem" data-recent="'+e.id+'" title="Dupliquer cet élément"><span class="ecs-recentpreview r'+i+'">'+(e.kind==='text'?'T':e.kind==='image'?'▧':e.kind==='chart'?'▥':e.kind==='illustration'?'♥':'◈')+'</span></button>').join(''):'<span class="ecs-note">Tes prochains éléments apparaîtront ici.</span>';
+ return search+'<div class="ecs-sectiontitle"><strong>Utilisés récemment</strong><button type="button" class="ecs-els-all" data-cat="recent">Afficher tout →</button></div><div class="ecs-recentgrid">'+recentHtml+'</div><h3 class="ecs-panelheading">Parcourir les catégories</h3><div class="ecs-categorygrid">'+elementCategories.map(c=>'<button class="ecs-category" data-cat="'+c[0]+'" data-search="'+(c[1]+' '+c[0]+' '+({illustrations:'cœur coeur fleur éclair eclair bulle dessin',relief:'3D cube sphère sphere',frames:'cadre contour photo',grids:'grille colonnes',mockups:'maquette téléphone telephone tablette',shapes:'forme rectangle cercle triangle étoile etoile ligne',charts:'graphiques barres diagramme camembert',animations:'fondu zoom glissement'}[c[0]]||'')).toLowerCase()+'"><span class="ecs-categoryart '+c[3]+'">'+c[2]+'</span><span class="ecs-categorylabel">'+c[1]+'</span></button>').join('')+'</div><p class="ecs-note">Ta bibliothèque ELOAH : éléments intégrés et médias importés depuis ton appareil.</p>';
 }
 const themes={
 crew:{bg:'#171717',color:'#e8c475',brand:'The Crew Orchies',title:'ON VIENT POUR DANSER'},
