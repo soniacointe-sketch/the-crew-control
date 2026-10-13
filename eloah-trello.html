@@ -85,7 +85,7 @@ async function establishSync(){if(!cloud)return;try{const {data:result,error}=aw
 if(!on){syncUser=null;syncRev=undefined;syncBaseline=null;syncStatus('Non connecté · données locales');return}
 if(syncUser?.id===u.id)return;syncUser=u;syncRev=undefined;syncBaseline=null;
 const remote=await readRemote();const markerKey='eloah-sync-baseline-'+u.id;const marker=localStorage.getItem(markerKey);
-if(remote){syncRev=remote.updated_at;if(marker===snapshot()){acceptRemote(remote);syncStatus('Synchronisé · '+u.email)}
+if(remote){syncRev=remote.updated_at;if(marker===snapshot()||JSON.stringify(remote.payload.boards)===snapshot()){acceptRemote(remote);localStorage.setItem(markerKey,snapshot());syncStatus('Synchronisé · '+u.email)}
 else{syncBaseline=marker;syncStatus('Données différentes sur cet appareil · choisir Sauvegarder ou Récupérer avant la synchronisation automatique')}}
 else{syncRev=null;syncBaseline=snapshot();syncStatus('Connecté · première sauvegarde en préparation');scheduleCloudSync()}
 }catch(e){syncStatus('Synchronisation indisponible : '+e.message)}}
@@ -98,7 +98,12 @@ $('cloudUpload').onclick=async()=>{if(!syncUser)return;if(!confirm('Conserver la
 $('cloudDownload').onclick=async()=>{if(!syncUser)return;try{const remote=await readRemote();if(!remote){alert('Aucune sauvegarde distante');return}if(!confirm('Remplacer les cartes locales par celles du cloud ? Pense à exporter tes cartes en JSON avant.'))return;acceptRemote(remote);localStorage.setItem('eloah-sync-baseline-'+syncUser.id,snapshot());syncStatus('Version distante récupérée · synchronisation activée')}catch(e){alert(e.message)}};
 $('cloudLogout').onclick=async()=>{clearTimeout(syncTimer);if(cloud)await cloud.auth.signOut();syncUser=null;syncRev=undefined;syncBaseline=null;establishSync()};
 if(cloud){cloud.auth.onAuthStateChange(()=>{setTimeout(establishSync,0)});establishSync()}
-document.addEventListener('visibilitychange',()=>{if(!document.hidden&&syncUser&&!syncBusy){readRemote().then(remote=>{if(remote?.updated_at!==syncRev){syncRev=remote?.updated_at||null;syncBaseline=null;syncStatus('Une version plus récente existe sur un autre appareil · choisir Récupérer')}}).catch(()=>{})}});
+async function checkCloudChanges(){if(!syncUser||syncBusy||syncRev===undefined)return;try{const remote=await readRemote();if(!remote||remote.updated_at===syncRev)return;const markerKey='eloah-sync-baseline-'+syncUser.id;if(syncBaseline!==null&&snapshot()===syncBaseline){acceptRemote(remote);localStorage.setItem(markerKey,snapshot());syncStatus('Mis à jour depuis un autre appareil · '+new Date().toLocaleTimeString('fr-FR'))}else{syncRev=remote.updated_at;syncBaseline=null;syncStatus('Conflit entre appareils · exporte tes cartes puis choisis la version à conserver')}}catch(e){syncStatus('Synchronisation à vérifier : '+e.message)}}
+document.addEventListener('visibilitychange',()=>{if(!document.hidden)void checkCloudChanges()});
+window.addEventListener('online',()=>void checkCloudChanges());
+window.addEventListener('focus',()=>void checkCloudChanges());
+window.setInterval(()=>{if(!document.hidden)void checkCloudChanges()},45000);
+
 render();
 const params=new URLSearchParams(location.search),targetBoard=params.get('board'),targetCard=params.get('card');
 if(targetBoard&&targetCard){const b=data.boards.find(x=>x.id===targetBoard),c=b?.cards?.find(x=>x.id===targetCard);if(b&&c){data.active=b.id;showArchive=!!c.archived;if(showArchive)$('archiveView').textContent='Cartes actives';$('search').value='';$('filterTag').value='';showingCalendar=false;save();render();openCard(c.id);history.replaceState(null,'',location.pathname)}} 
