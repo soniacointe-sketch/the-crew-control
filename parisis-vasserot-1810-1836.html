@@ -31,9 +31,12 @@ main{padding:20px clamp(14px,2vw,36px);max-width:1720px;margin:auto}.intro{max-w
 <p style="font-size:11px;color:#756d61"><b>Source :</b> ALPAGE · Anne-Laure Bethe (lignes) et Paul Rouet (surfaces) · licence ODbL. Le jeu ne doit pas être pris pour un itinéraire exact de 1482.</p></section>
 <section class="panel" id="vasserotComparaison"><div class="eyebrow">MESURES EXPÉRIMENTALES · DONNÉES AUTHENTIQUES SEULEMENT</div><h2>La Juiverie et la Barillerie, parcelle par parcelle</h2>
 <p>Une fois les polygones Vasserot chargés, PARISIS peut repérer automatiquement les parcelles <b>dont le centre est situé à 35 mètres ou moins</b> de nos deux corridors indicatifs. Elles deviennent des <b>candidates à inspecter</b>, coloriées sur la carte. Ce n'est pas une preuve d'alignement ou de survie du Moyen Âge.</p>
-<div class="archive-loader"><button id="compareParcel" type="button" class="primary">Comparer les deux corridors</button><a href="parisis-hugo-axes.html?v=analyse35m" target="_blank" rel="noopener">Agrandir et vérifier sur la carte ↗</a></div>
+<label for="parcelThreshold" style="display:block;margin-top:12px;font-size:12px"><b>Distance de prospection :</b> <output id="thresholdOutput">35 m</output></label>
+<input id="parcelThreshold" type="range" min="10" max="80" value="35" step="5" style="width:100%;accent-color:#355d51">
+<div class="archive-loader"><button id="compareParcel" type="button" class="primary">Comparer les deux corridors</button><button id="exportParcel" type="button" disabled>Exporter les parcelles candidates (GeoJSON)</button><a href="parisis-hugo-axes.html?v=analyse20261013" target="_blank" rel="noopener">Agrandir et vérifier sur la carte ↗</a></div>
+<p id="auditSensitivity" style="font-size:12px;color:#71685b">Pour tester la solidité d'un rapprochement, essaie plusieurs seuils : 15 m, 35 m et 70 m. Si les résultats changent fortement, l'interprétation dépend du réglage.</p>
 <div class="archive-state" id="compareStatus" role="status">Analyse non exécutée : les données cadastrales officielles doivent d'abord avoir été chargées.</div>
-<p style="font-size:11px;color:#756d61">Méthode déclarée : distance approximative entre le centre des enveloppes de parcelles et nos tracés de travail, seuil exploratoire de 35 m. Les résultats ne mesurent pas la position des façades médiévales, et ne prouvent pas le maintien d'un tracé depuis 1482.</p></section>
+<p style="font-size:11px;color:#756d61">Méthode déclarée : distance approximative entre le centre des enveloppes de parcelles et nos tracés de travail, seuil exploratoire modifiable de 10 à 80 m. Les résultats ne mesurent pas la position des façades médiévales, et ne prouvent pas le maintien d'un tracé depuis 1482.</p></section>
 <section class="panel" id="twoNeighbourhoods"><div class="eyebrow">DEUX SECTEURS · DEUX COTES D'ARCHIVES</div><h2>La Cité 1827 et le Palais 1828</h2>
 <p>Le catalogue de <em>La Fabrique numérique du passé</em> référence deux feuilles cadastrales différentes, indispensables à confronter pour notre enquête :</p>
 <div class="source"><strong>Quartier de la Cité — 1827</strong><small>38 îlots · 273 points de calage · F/31/90/01 à F/31/90/20</small><a target="_blank" rel="noopener" href="https://api.nakala.fr/data/10.34847/nkl.07886353/faa679f4fe04631eb8dca491a48e3f604bd1190c">Fichier numérisé original (JP2) ↗</a><p class="street-footnote">Piste prioritaire pour l'ancienne Juiverie, le Marché-Palu et la Lanterne.</p></div>
@@ -103,7 +106,7 @@ main{padding:20px clamp(14px,2vw,36px);max-width:1720px;margin:auto}.intro{max-w
 <tr><td><strong>1843</strong></td><td>Ordonnance de largeur à 15 m sur un tronçon de la rue de la Cité</td><td>Identifier les propriétés concernées et les éventuels retranchements.</td></tr></tbody></table>
 <p style="font-size:12px;color:#766a5c">Les dates et faits sont donnés par le dictionnaire de Lazare (1844). Une prescription n'est pas en elle-même la preuve que tous les travaux ont été exécutés.</p>
 </section>
-<article class="narrative" id="chapitre-trois-vasserot">
+<section class="panel" id="controle-robustesse" style="max-width:1140px;margin:20px auto"><div class="eyebrow">PROTOCOLE · HYPOTHÈSE CONTRE PREUVE</div><h2>Pourquoi comparer 15, 35 et 70 mètres ?</h2><p>Une recherche d'alignement dépend souvent de la tolérance choisie. Un seuil étroit retient moins de parcelles ; un seuil large en retient davantage. Ici, le corridor lui-même est une approximation moderne du parcours historique : il est essentiel de présenter les résultats à plusieurs distances et de ne pas annoncer un « alignement » sur la base du seul groupe le plus spectaculaire.</p><p>L'outil conserve, dans chaque GeoJSON exporté, le seuil utilisé, le nombre de parcelles examinées, la date du calcul, le corridor attribué et la distance estimée pour chaque parcelle candidate. <b>Aucun nombre n'est produit sans chargement d'un vrai fichier ALPAGE.</b></p></section><article class="narrative" id="chapitre-trois-vasserot">
 <div class="folio">PARISIS ENGINE · VOLUME I · CHAPITRE III · LES PARCELLES TÉMOINS</div>
 <h2>1827 : deux quartiers, deux cartes, une question</h2>
 <p class="opening">Il est tentant de croire que la ville ancienne se cache sous la ville moderne comme une page intacte sous un calque. Mais le temps ne conserve pas les plans : il les corrige sans cesse.</p>
@@ -201,21 +204,37 @@ roadImport.addEventListener('click',()=>roadFile.click());
 roadFile.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>25000000)throw Error('Fichier supérieur à 25 Mo.');await parseRoadBlob(file,file.name)}catch(err){roadSay('Lecture impossible : '+err.message,'warn')}finally{e.target.value=''}});
 roadCheck.addEventListener('change',()=>{try{roadsLayer().showRoads(roadCheck.checked)}catch(e){roadSay(e.message,'warn')}});
 const compareStatus=document.getElementById('compareStatus');
+const thresholdInput=document.getElementById('parcelThreshold');
+const thresholdOutput=document.getElementById('thresholdOutput');
+const exportButton=document.getElementById('exportParcel');
 function compareParcels(){
 try{
 const x=frame.contentWindow?.PARISIS_VASSEROT;
 if(!x?.analyze)throw Error('Carte indisponible, actualiser la page.');
-const counts=x.analyze();
+const counts=x.analyze(Number(thresholdInput.value));
 compareStatus.className='archive-state ok';
-compareStatus.textContent='Résultat provisoire sur '+counts.inspected+' parcelles réelles chargées : Juiverie '+counts.juiverie+' candidates, Barillerie '+counts.barillerie+' candidates (seuil de '+counts.thresholdMeters+' m). '+counts.method;
+compareStatus.textContent='Résultat calculé sur '+counts.inspected+' parcelles réelles chargées : Juiverie '+counts.juiverie+' candidates, Barillerie '+counts.barillerie+' candidates (seuil de '+counts.thresholdMeters+' m). '+counts.method;
+exportButton.disabled=false;
 return counts;
 }catch(e){
+exportButton.disabled=true;
 compareStatus.className='archive-state warn';
 compareStatus.textContent='Comparaison non exécutée : '+e.message;
 return null;
 }
 }
+thresholdInput.addEventListener('input',()=>{thresholdOutput.textContent=thresholdInput.value+' m';exportButton.disabled=true;compareStatus.className='archive-state';compareStatus.textContent='Seuil modifié : relance la comparaison pour recalculer les parcelles candidates.'});
 document.getElementById('compareParcel').addEventListener('click',compareParcels);
+exportButton.addEventListener('click',()=>{
+try{
+const result=frame.contentWindow?.PARISIS_VASSEROT?.exportAudit();
+if(!result)throw Error('Analyse indisponible.');
+if(Number(thresholdInput.value)!==result.properties.thresholdMeters)throw Error('Seuil modifié : relancer la comparaison.');
+const file=new Blob([JSON.stringify(result,null,2)],{type:'application/geo+json'});
+const href=URL.createObjectURL(file),a=document.createElement('a');
+a.href=href;a.download='parisis-vasserot-juiverie-barillerie-'+result.properties.thresholdMeters+'m.geojson';a.click();setTimeout(()=>URL.revokeObjectURL(href),1500);
+}catch(e){compareStatus.className='archive-state warn';compareStatus.textContent='Export impossible : '+e.message}
+});
 const status=document.getElementById('parcelStatus');
 const button=document.getElementById('loadParcels');
 const fileButton=document.getElementById('fileParcel');
