@@ -543,7 +543,7 @@ line('HUGO-AXE-'+r.key,r.name,'Hugo · tracé schématique',r.points.map(p=>[p[1
 for(const p of royalPoints)point('Fouquet · lieux royaux',p,p.id,p.name,p.url);
 for(const p of iconoPoints)point('Iconographie des trois martyrs',p,p.id,p.name,p.source);
 for(const p of panoramaSites)point('Dagobert · panorama et monuments',p,p.id,p.name,p.source);
-for(const p of riverPoints)point('Fortification fluviale médiévale',p,p.id,p.name,p.source);
+for(const p of riverPoints)point(p.id==='RS-03'?'Transformation architecturale XVIIe · collège Mazarin':'Fortification fluviale médiévale',p,p.id,p.name,p.source);
 for(const p of legacySites)point('Premiers tracés PARISIS',p,p.id,p.name,'parisis-cartography-lab.html');
 const roy=id=>royalPoints.find(p=>p.id===id),ico=id=>iconoPoints.find(p=>p.id===id),pan=id=>panoramaSites.find(p=>p.id===id),old=id=>legacySites.find(p=>p.id===id);
 function edge(id,name,group,a,b,status){if(a&&b)line(id,name,group,[pos(a),pos(b)],status);}
