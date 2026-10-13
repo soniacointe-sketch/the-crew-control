@@ -793,7 +793,7 @@ directSend.onclick=async()=>{
   const result=await invoke('single',{recipient:to,senderEmail:from,replyTo:reply,senderName:'Power & Glam (via The Crew Orchies)',subject,body,consentConfirmed:true});
   directStatus.textContent=result.message+' Référence : '+(result.id||'enregistrement Resend');
   directConsent.checked=false;
- }catch(e){directStatus.textContent='Envoi non confirmé : '+String(e.message||e)}
+ }catch(e){const error=String(e.message||e);directStatus.textContent='Envoi non confirmé : '+error;if(/Connecte|session|Session|authentif/i.test(error)){$('campaign-login-panel').hidden=false;$('campaign-login-email').focus()}}
  finally{busy=false;directSend.disabled=false}
 };
 
