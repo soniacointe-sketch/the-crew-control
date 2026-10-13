@@ -4,7 +4,12 @@
 function create(options){
  const ctx=options,lib=window.ELOAHImportLibrary||{items:[],folders:[],byId:new Map()};
  const state={tab:'images',domain:'all',album:'all',query:'',limit:48,preview:null,uploadDomain:'eloah',storage:'initialisation'};
- let db=null,items=[],opBusy=false,uploadInput=null;
+ let db=null,items=[],opBusy=false,uploadInput=null,recentIds=[];
+ try{recentIds=JSON.parse(localStorage.getItem('eloah_reel_import_recent')||'[]').filter(x=>typeof x==='string').slice(0,25)}catch{}
+ function rememberRecent(id){
+  recentIds=[id,...recentIds.filter(x=>x!==id)].slice(0,25);
+  try{localStorage.setItem('eloah_reel_import_recent',JSON.stringify(recentIds))}catch{}
+ }
  const objUrls=new Map();
  const domNames=new Map(lib.folders.map(f=>[f.id,f.name]));
  const esc=x=>ctx.xss(String(x??''));
@@ -75,7 +80,9 @@ function create(options){
  function head(){
   return '<div class="ecs-import-search"><span>⌕</span><input id="ecs-import-search" placeholder="Rechercher des mots-clés, des couleurs…" aria-label="Rechercher dans les médias" value="'+esc(state.query)+'"></div>'+
    '<div class="ecs-import-top-actions"><button type="button" data-import-upload>⇧ Importer des fichiers</button><button type="button" data-import-dossier title="Voir les dossiers">⋯</button></div>'+
-   '<p class="ecs-import-subline">Ta médiathèque ELOAH · '+lib.items.length+' visuels sélectionnés pour tes projets.</p>'+
+   '<div class="ecs-import-upload-pick"><label for="ecs-import-upload-folder">Dossier de destination</label><select id="ecs-import-upload-folder">'+
+ lib.folders.map(f=>'<option value="'+esc(f.id)+'" '+(state.uploadDomain===f.id?'selected':'')+'>'+esc(f.name)+'</option>').join('')+'</select></div>'+
+ '<p class="ecs-import-subline">Ta médiathèque ELOAH · '+lib.items.length+' visuels sélectionnés pour tes projets.</p>'+
    '<div class="ecs-import-tabs" role="tablist" aria-label="Type de média">'+[['images','Images'],['videos','Vidéos'],['audio','Audio'],['folders','Dossiers']].map(([id,name])=>
    '<button type="button" role="tab" aria-selected="'+(state.tab===id)+'" class="'+(state.tab===id?'selected':'')+'" data-import-tab="'+id+'">'+name+'</button>').join('')+'</div>';
  }
@@ -101,6 +108,8 @@ function create(options){
    const personal=localItems('image');
    let html='<h3 class="ecs-import-title">Images de tes univers</h3>'+folderCards();
    if(personal.length)html+=cardSection('Mes images importées',personal.slice(0,12),'personal','Images sauvegardées sur cet appareil.');
+   const recent=recentIds.map(get).filter(x=>x&&x.kind==='image').slice(0,12);
+   if(recent.length)html+=cardSection('Utilisés récemment',recent,null);
    const sorted=lib.folders.filter(f=>mediaCount(f.id)>0);
    for(const f of sorted)html+=cardSection(f.name,lib.items.filter(x=>x.domain===f.id&&isImage(x)).slice(0,12),f.id,
    f.id==='lion'?'Visuels graphiques originaux ; ils ne représentent pas des événements réels.':'');
@@ -161,9 +170,7 @@ function create(options){
   return '<div class="ecs-import-gallery">'+html+
    '<div class="ecs-import-footer"><p class="ecs-note">'+(state.storage==='ready'?'Tes propres fichiers importés sont sauvegardés sur cet appareil.':
      'Les fichiers ajoutés ici restent disponibles pendant la session ; la sauvegarde locale dépend du navigateur.')+
-   ' Pour les retrouver sur un autre appareil, conserve les fichiers originaux. Les visuels WordPress sont référencés, pas copiés.</p>'+
-   '<label class="ecs-sidelabel">Ranger mes prochains fichiers dans :</label><select id="ecs-import-upload-folder">'+
-   lib.folders.map(f=>'<option value="'+esc(f.id)+'" '+(state.uploadDomain===f.id?'selected':'')+'>'+esc(f.name)+'</option>').join('')+'</select></div></div>';
+   ' Pour les retrouver sur un autre appareil, conserve les fichiers originaux. Les visuels WordPress sont référencés, pas copiés.</p></div></div>';
  }
  function dismissPreview(){ctx.root.querySelector('.ecs-import-modal')?.remove();state.preview=null}
  function preview(id){
@@ -194,10 +201,17 @@ function create(options){
    if(item.local)blob=item.blob;
    else{
     const src=item.url;
-    const response=await fetch(src,{mode:'cors'});
-    if(!response.ok)throw Error('Téléchargement indisponible (HTTP '+response.status+')');
-    blob=await response.blob();
-    if(!blob.size)throw Error('Fichier vide');
+    let lastError=null;
+    for(const candidate of [src,item.thumb].filter((v,i,a)=>v&&a.indexOf(v)===i)){
+     try{
+      const response=await fetch(candidate,{mode:'cors'});
+      if(!response.ok)throw Error('HTTP '+response.status);
+      blob=await response.blob();
+      if(!blob.size||!blob.type.startsWith('image/')&&item.kind==='image')throw Error('Image indisponible');
+      break;
+     }catch(err){lastError=err;blob=null}
+    }
+    if(!blob)throw lastError||Error('Téléchargement impossible');
    }
    if(blob.size>65*1024*1024)throw Error('Fichier trop volumineux pour cet import.');
    const kind=item.kind;
@@ -208,7 +222,7 @@ function create(options){
    else if(kind==='video'){await ctx.loadVideo(file);success=true}
    else if(kind==='audio'){await ctx.loadAudio(file);success=true}
    if(success===false)throw Error('Ce média n’a pas pu être décodé.');
-   dismissPreview();
+   rememberRecent(id);dismissPreview();
    ctx.toast('Ajouté au Reel : '+item.title);
   }catch(e){
    ctx.toast('Impossible d’ajouter directement : '+e.message+'. Ouvre la source puis importe ton fichier si nécessaire.');
@@ -234,7 +248,7 @@ function create(options){
    if(!saved&&db){errors.push(file.name+' : sauvegarde indisponible, conservé pour cette session')}
    items.unshift(entry);objUrls.set(entry.id,URL.createObjectURL(file));ok++;
   }
-  if(ok){state.tab='images';state.domain='personal';state.album='all';state.query='';state.limit=48;ctx.toast(ok+' fichier(s) ajoutés à ELOAH.');update()}
+  if(ok){state.tab='images';state.domain='personal';state.album='all';state.query='';state.limit=48;ctx.toast(ok+' fichier(s) ajoutés à ELOAH. Les vidéos et audios se retrouvent dans leurs onglets.');update()}
   if(errors.length)ctx.toast(errors.slice(0,2).join(' ; '));
  }
  async function removeLocal(id){
@@ -245,7 +259,9 @@ function create(options){
   items=items.filter(x=>x.id!==id);dismissPreview();update();ctx.toast('Fichier retiré de la médiathèque locale.');
  }
  function switchDomain(id){
-  state.domain=id;state.tab='images';state.album='all';state.limit=48;state.query='';dismissPreview();update();
+  state.domain=id;state.tab='images';state.album='all';state.limit=48;state.query='';
+  if(id!=='all'&&id!=='personal')state.uploadDomain=id;
+  dismissPreview();update();
  }
  function handleClick(ev){
   const find=attr=>ev.target.closest('['+attr+']');
