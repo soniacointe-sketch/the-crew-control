@@ -68,7 +68,7 @@ function slots(item){
  if(l==='polaroid-wide')return [S(65,130,870,660,'rect')];
  if(l==='split-2')return [S(35,105,450,790,sh==='heart'?'heart':sh==='arch'?'arch':'round'),S(515,105,450,790,sh==='heart'?'heart':sh==='arch'?'arch':'round')];
  if(l==='split-3')return [S(25,160,300,680,sh==='heart'?'heart':sh==='arch'?'arch':'round'),S(350,160,300,680,sh==='heart'?'heart':sh==='arch'?'arch':'round'),S(675,160,300,680,sh==='heart'?'heart':sh==='arch'?'arch':'round')];
- if(l==='split-4')return Array.from({length:4},(_,i)=>S(22+i*250,180,230,640,'rect'));
+ if(l==='split-4')return Array.from({length:4},(_,i)=>S(18+i*246,180,226,640,'rect'));
  if(l==='vertical-2')return [S(135,20,730,455,sh),S(135,525,730,455,sh)];
  if(l==='vertical-3')return Array.from({length:3},(_,i)=>S(140,15+i*333,720,307,sh==='arch'?'arch':'round'));
  if(l==='stack-2')return [S(70,50,860,430,sh),S(70,520,860,430,sh)];
