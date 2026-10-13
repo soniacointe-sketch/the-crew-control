@@ -23,7 +23,7 @@ studio.append(dialog);
 const confirmText=dialog.querySelector('.erc-confirm-typing'),finalButton=dialog.querySelector('.erc-confirm-final');
 dialog.querySelector('.erc-cancel').onclick=()=>{if(!busy)dialog.close()};
 confirmText.addEventListener('input',()=>{finalButton.disabled=confirmText.value.trim()!=='ENVOYER'||busy});
-let authClient=null,busy=false,loading=false,loaded=false,serverCampaigns=new Map(),lastFailure=null;
+let authClient=null,busy=false,loading=false,loaded=false,serverCampaigns=new Map(),lastFailure=null,statusError='';
 const ENDPOINT='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-mailing-resend';
 const PUB='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const allowedKeys=new Set(fields);
@@ -53,11 +53,11 @@ function update(){
  let message='';
  if(changed)message='Modifications non synchronisées : le bouton est bloqué pour éviter d’envoyer une ancienne version. Restaure la version prête ou prépare un nouveau brouillon.';
  else if(loading)message='Vérification du brouillon dans Resend…';
- else if(!loaded)message='Statut non vérifié. Connecte-toi à ELOAH pour autoriser l’envoi.';
+ else if(!loaded)message=statusError||'Statut non vérifié. Connecte-toi à ELOAH pour autoriser l’envoi.';
  else if(!row)message='Cette newsletter ne possède pas encore de brouillon Resend autorisé.';
  else if(lastFailure?.id===model.id&&row.status==='draft')message='Dernier essai refusé : '+lastFailure.message+' · Aucun envoi confirmé.';
  else if(row.status==='draft')message='Brouillon prêt dans Resend. Clique pour envoyer cette version à la liste The Crew Orchies.';
- else if(row.status==='queued')message='Envoi déjà demandé. Resend traite la campagne : ne la renvoie pas.';
+ else if(row.status==='queued')message='Envoi déjà lancé. Le statut de livraison final est consultable dans Resend ; ne renvoie pas cette campagne.';
  else if(row.status==='submitting')message='Envoi en cours : ne clique pas une deuxième fois.';
  else message='Statut à vérifier dans Resend avant toute nouvelle tentative.';
  sendBtn.disabled=busy||loading||!loaded||changed||row?.status!=='draft'||lastFailure?.id===model.id;
@@ -84,8 +84,8 @@ async function refresh(){
    const data=await api('crew-impact-status');
    if(!Array.isArray(data.items))throw Error('Statuts absents de la réponse ELOAH.');
    serverCampaigns=new Map(data.items.map(x=>[x.templateId,x]));
-   loaded=true;
- }catch(e){loaded=false;serverCampaigns.clear();const message=e?.message||'Statuts indisponibles.';if(activeTemplate())setState(message);}
+   loaded=true;statusError='';
+ }catch(e){loaded=false;serverCampaigns.clear();statusError=e?.message||'Statuts indisponibles.';if(activeTemplate())setState(statusError);}
  finally{loading=false;update()}
 }
 function openDialog(){
