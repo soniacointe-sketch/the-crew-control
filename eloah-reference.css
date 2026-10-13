@@ -1,0 +1,53 @@
+/* ELOAH · présentation inspirée des captures de Sonia */
+:root{--bg:#f7f7f2;--accent:#3157b7;--muted:#777b73}
+body{background:#f7f7f2;color:#282c28}
+.layout{grid-template-columns:245px minmax(0,1fr)}
+aside{height:100vh;max-height:100vh;padding:27px 17px;background:#f1f2ed;border-right:1px solid #dedfd6;position:sticky;top:0}
+aside .brand{font:800 25px system-ui;letter-spacing:.13em;padding:0 14px 18px}
+.partner-nav{display:grid;gap:5px}
+.partner-nav a{border-radius:5px;padding:12px 14px!important;font:13px system-ui;color:#606860;min-height:44px}
+.partner-nav .active{border-left:3px solid #3157b7;background:#e7edf9;color:#3157b7}
+main{max-width:1650px;padding:24px clamp(25px,4.5vw,74px)}
+.partner-top{border-bottom:1px solid #dedfd7;min-height:42px;margin-bottom:42px}
+#eloah-reference-cockpit{width:100%;margin:0 auto 35px}
+#eloah-reference-cockpit header:not(.learning header){margin-bottom:42px}
+#cockpit-date{font:10px system-ui;letter-spacing:.17em;text-transform:uppercase;color:#92968b}
+#cockpit-greeting{font:400 clamp(44px,5.5vw,76px)/1.1 Georgia,serif;letter-spacing:-.035em;margin:13px 0 17px}
+#cockpit-greeting em{color:#3157b7;text-decoration:underline;text-decoration-color:#c9bfc0;text-underline-offset:11px;text-decoration-thickness:1px}
+.partner-intro{font:italic 16px/1.65 Georgia,serif;color:#62695e}
+#eloah-reference-cockpit .partner-grid{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-areas:"sites studio health" "sites studio calendar" "mail stripe vault" "personal program .";gap:13px}
+#eloah-reference-cockpit .cockpit-card{background:#fcfcf8;border:1px solid #dedfd4;border-radius:0;padding:27px;box-shadow:none;min-height:225px;text-align:left;position:relative}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=sites]{grid-area:sites;min-height:435px}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=studio]{grid-area:studio}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=health]{grid-area:health}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=calendar]{grid-area:calendar}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=mail]{grid-area:mail}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=stripe]{grid-area:stripe}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=vault]{grid-area:vault}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=personal]{grid-area:personal}
+#eloah-reference-cockpit .cockpit-card[data-cockpit=program]{grid-area:program}
+#eloah-reference-cockpit .cockpit-card:before{display:none}
+.reference-icon{height:36px;width:36px;display:grid;place-items:center;border:1px solid #d9ded2;color:#4664a7;margin-bottom:21px}
+.reference-icon svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4}
+#eloah-reference-cockpit .number{position:absolute;right:22px;top:23px;font:italic 13px Georgia;color:#939887}
+#eloah-reference-cockpit .cockpit-card h2{font:400 23px Georgia;margin:0 0 9px}
+#eloah-reference-cockpit .cockpit-card p{font:12px/1.6 system-ui;color:#737b70;margin:0 0 12px}
+#eloah-reference-cockpit .cockpit-state{border:0;padding:0;font:10px system-ui;color:#8a8f83}
+#eloah-reference-cockpit .open{font:9px system-ui;letter-spacing:.15em;color:#919989;text-transform:uppercase;margin-top:auto}
+#eloah-reference-cockpit .section-divider{display:flex;align-items:center;justify-content:center;gap:20px;font:italic 12px Georgia;letter-spacing:.15em;color:#a1a597;margin:35px 0}
+#eloah-reference-cockpit .section-divider:before,#eloah-reference-cockpit .section-divider:after{content:'';height:1px;width:70px;background:#e0e3d8}
+#eloah-reference-cockpit .learning{padding:27px 30px;border:1px solid #dedfd4;background:#fcfcf8}
+#eloah-reference-cockpit .learning h2{font:400 21px Georgia}
+#eloah-reference-cockpit .learning details{padding:17px 0;border-color:#e7e9df}
+#eloah-reference-cockpit .learning summary{font:400 16px Georgia}
+#eloah-reference-cockpit .learning summary small{font:italic 12px Georgia;color:#929987}
+#eloah-reference-cockpit .button.primary{background:#263029;color:#fff}
+#eloah-reference-cockpit .quick-actions button{border-radius:0;background:#fbfcf7;border-color:#dedfd4;font:12px system-ui;color:#606b5d}
+#eloah-reference-cockpit .guided{background:#fcfcf8;border:1px solid #dedfd4;align-items:center}
+#eloah-reference-cockpit textarea{background:#fff;color:#30372c;border-color:#d8ddcf;border-radius:0}
+#eloah-reference-search{margin:25px auto;border:1px solid #dedfd4;background:#fcfcf8}
+#eloah-reference-search>summary{padding:20px;cursor:pointer;color:#4c5a43;font:15px system-ui}
+#eloah-reference-search #eloah-home-v2{margin:0;padding:15px}
+@media(max-width:1150px){#eloah-reference-cockpit .partner-grid{grid-template-columns:2fr 1fr;grid-template-areas:"sites studio" "health calendar" "mail stripe" "vault personal" "program program"}}
+@media(max-width:1000px){.layout{grid-template-columns:1fr}aside{height:auto;position:relative;max-height:none}.partner-nav{display:flex;overflow:auto;flex-wrap:nowrap}.partner-nav details{display:block;min-width:150px}main{padding:22px}.partner-top{margin-bottom:25px}}
+@media(max-width:600px){#eloah-reference-cockpit .partner-grid{display:flex;flex-direction:column}#eloah-reference-cockpit .cockpit-card,#eloah-reference-cockpit .cockpit-card[data-cockpit=sites]{min-height:235px;padding:23px}#cockpit-greeting{font-size:43px}#eloah-reference-cockpit .learning{padding:20px}#eloah-reference-cockpit .learning header{align-items:flex-start}}
