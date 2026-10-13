@@ -148,6 +148,37 @@ canvas.addEventListener('pointermove',ev=>{if(!drag)return;const p=coords(ev),el
 canvas.addEventListener('pointerup',()=>{if(drag){drag=null;renderSide();saveLocal()}});
 canvas.addEventListener('dblclick',ev=>{const p=coords(ev),e=[...S.elements].reverse().find(x=>x.kind==='text'&&p.x>=x.x&&p.x<=x.x+x.w&&p.y>=x.y&&p.y<=x.y+x.h);if(e){const t=prompt('Modifier le texte',e.text);if(t!==null){snapshot();e.text=t;selected=e.id;setTab('properties');saveLocal()}}});
 document.addEventListener('keydown',ev=>{if(root.style.display==='none'||!root.contains(document.activeElement)&&!canvas.matches(':hover'))return;if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();action('delete')}if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='z'){ev.preventDefault();ev.shiftKey?redo():undo()}});
+// Montage manuel : glisser un clip pour le déplacer, tirer ses bords pour changer sa durée.
+one('#ecs-tracks').addEventListener('pointerdown',event=>{
+ const button=event.target.closest('.ecs-clip[data-select]');if(!button)return;
+ const clip=S.elements.find(e=>e.id===Number(button.dataset.select));if(!clip)return;
+ event.preventDefault();event.stopPropagation();
+ const r=button.getBoundingClientRect(),edge=Math.min(12,r.width/4),offset=event.clientX-r.left;
+ const mode=offset<=edge?'start':r.right-event.clientX<=edge?'end':'move';
+ const initialStart=clip.start,initialEnd=clip.end,initialX=event.clientX;
+ snapshot();selected=clip.id;
+ const applyDelta=ev=>{
+   const delta=(ev.clientX-initialX)/70;
+   if(mode==='start')clip.start=Math.max(0,Math.min(initialEnd-.1,initialStart+delta));
+   else if(mode==='end')clip.end=Math.min(S.duration,Math.max(initialStart+.1,initialEnd+delta));
+   else{
+     const length=initialEnd-initialStart;
+     clip.start=Math.min(Math.max(0,S.duration-length),Math.max(0,initialStart+delta));
+     clip.end=clip.start+length;
+   }
+   button.style.left=clip.start*70+'px';
+   button.style.width=Math.max(16,(clip.end-clip.start)*70)+'px';
+   seek(Math.max(clip.start,Math.min(S.time,clip.end)));
+ };
+ const endMove=()=>{
+   window.removeEventListener('pointermove',applyDelta);
+   window.removeEventListener('pointercancel',endMove);
+   renderTimeline();setTab('properties');saveLocal();
+ };
+ window.addEventListener('pointermove',applyDelta);
+ window.addEventListener('pointerup',endMove,{once:true});
+ window.addEventListener('pointercancel',endMove,{once:true});
+});
 const scroll=one('.ecs-timeline-scroll');
 scroll.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;const bounds=one('#ecs-tracks').getBoundingClientRect();if(!bounds.width)return;const point=ev.clientX-bounds.left;seek(point/70);const move=e=>seek((e.clientX-bounds.left)/70);scroll.addEventListener('pointermove',move);scroll.addEventListener('pointerup',()=>scroll.removeEventListener('pointermove',move),{once:true})});
 async function loadVideo(file){pause();if(media.videoUrl)URL.revokeObjectURL(media.videoUrl);media.videoUrl=URL.createObjectURL(file);video.src=media.videoUrl;video.dataset.filename=file.name;try{await new Promise((res,rej)=>{video.onloadedmetadata=res;video.onerror=()=>rej(new Error('Vidéo illisible'))});S.trimStart=0;S.duration=Math.min(60,Math.max(1,Math.round(video.duration*10)/10||5));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(0);renderTimeline();renderSide();toast('Vidéo ajoutée : '+file.name);saveLocal()}catch(e){toast('Impossible de lire la vidéo : '+e.message)}}
