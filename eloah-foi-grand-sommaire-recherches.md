@@ -43,6 +43,10 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 - [09 · Témoignages historiques](foi-control.html?file=eloah-foi-collection-09-temoignages-historiques.md)
 - [10 · Transmission et canon](foi-control.html?file=eloah-foi-collection-10-transmission-canon.md)
 
+## ALPHA-001 — Nouvelle fiche de synthèse
+
+[Lire ALPHA-001 · Jésus enfant et les lettres](foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md) — fiche de synthèse reconstituée, distincte d'un original non retrouvé.
+
 ## Enquêtes et manuscrits (13)
 
 - [Manuscrits sur Jésus enfant](foi-control.html?file=eloah-jesus-enfant-manuscrits.md)
@@ -122,5 +126,5 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 
 ## Recherches à vérifier dans la bibliothèque
 
-Certains chantiers mentionnés dans nos échanges ne sont pas des dossiers autonomes dans la liste du lecteur : ALPHA-001, le dossier complet sur les évangiles apocryphes, la synthèse comparative des traductions et un carnet de recherche chronologique. Il faudra vérifier leur présence réelle dans le dépôt avant de les annoncer comme publiés.
+Certains chantiers mentionnés dans nos échanges ne sont pas des dossiers autonomes dans la liste du lecteur : le dossier complet sur les évangiles apocryphes, la synthèse comparative des traductions et un carnet de recherche chronologique. Il faudra vérifier leur présence réelle dans le dépôt avant de les annoncer comme publiés.
 
