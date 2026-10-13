@@ -4,6 +4,16 @@
 
 ---
 
+## Deux images éditoriales de la publication d'origine
+
+![Babel : immense ziggourat inachevée au-dessus d'une cité de briques, image éditoriale et non plan archéologique](https://eloah-scanner.soniacointe.chatgpt.site/images/babel/tour-plaine.webp)
+
+*Babel, tour et plaine — image de la publication ELOAH Scanner d'origine. Évocation éditoriale, non reconstruction archéologique démontrée.*
+
+![Babel : tablette d'argile et chemins de langues, illustration symbolique ELOAH Scanner](https://eloah-scanner.soniacointe.chatgpt.site/images/babel/langues-chemins.webp)
+
+*Babel, langues et chemins — seconde illustration issue de la publication source. Les signes sont abstraits et ne reproduisent pas un alphabet ancien authentifié.*
+
 [ELOAH·](/)
 
 ELOAH · Langue & Pouvoir · I
