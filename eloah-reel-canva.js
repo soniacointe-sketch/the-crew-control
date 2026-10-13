@@ -167,20 +167,40 @@ function download(blob,name){const u=URL.createObjectURL(blob),a=document.create
 function drawPng(){const c=document.createElement('canvas');c.width=1080;c.height=1920;paint(c.getContext('2d'),S.time,false);c.toBlob(b=>b?download(b,'eloah-couverture.png'):toast('Impossible de créer le PNG.'),'image/png')}
 function saveProject(){S.name=one('#ecs-name').value||'Mon Reel';saveLocal();download(new Blob([JSON.stringify({version:2,...serial(),assetsNotIncluded:true},null,2)],{type:'application/json'}),'eloah-reel-projet.json');toast('Projet enregistré. Conserve les médias séparément.')}
 one('#ecs-project-input').addEventListener('change',async ev=>{const f=ev.target.files[0];if(!f)return;try{const s=JSON.parse(await f.text());if(!Array.isArray(s.elements))throw Error('Format inconnu');snapshot();apply({name:s.name||'Mon Reel',duration:Math.max(1,Math.min(60,s.duration||5)),trimStart:0,bg:s.bg||'#fffaf1',filter:s.filter||'none',brand:s.brand||'ELOAH',elements:s.elements.map(e=>({...e,id:nextId++}))});toast('Projet chargé. Réimporte les médias associés.');saveLocal()}catch(e){toast('Projet impossible à ouvrir : '+e.message)}ev.target.value=''});
+let exportMixer=null;
+async function connectExportAudio(stream){
+ const C=window.AudioContext||window.webkitAudioContext;
+ if(!C)throw Error('Web Audio non pris en charge');
+ if(!exportMixer){
+   const context=new C(),target=context.createMediaStreamDestination(),sources=[];
+   for(const player of [video,audio]){
+     const source=context.createMediaElementSource(player);
+     source.connect(target);
+     source.connect(context.destination);
+     sources.push(source);
+   }
+   exportMixer={context,target,sources};
+ }
+ await exportMixer.context.resume();
+ const audioTrack=exportMixer.target.stream.getAudioTracks()[0];
+ if(!audioTrack)throw Error('Pas de piste audio disponible');
+ stream.addTrack(audioTrack);
+ return true;
+}
 async function exportVideo(){
  if(busy)return;if(!window.MediaRecorder||!canvas.captureStream){toast('Export vidéo non pris en charge par ce navigateur. Utilise un navigateur compatible ou exporte la couverture PNG.');return}
  const mime=['video/mp4;codecs=avc1.42E01E,mp4a.40.2','video/mp4','video/webm;codecs=vp9,opus','video/webm;codecs=vp8,opus','video/webm'].find(x=>MediaRecorder.isTypeSupported(x));if(!mime){toast('Aucun format vidéo exportable sur ce navigateur.');return}
  const label=one('[data-action=export]');label.disabled=true;label.textContent='Export en cours…';busy=true;pause();seek(0);
  try{
   const stream=canvas.captureStream(30);let withSound=false;
-  try{const tracks=[];if(media.videoUrl&&typeof video.captureStream==='function')tracks.push(...video.captureStream().getAudioTracks());if(media.audioUrl&&typeof audio.captureStream==='function')tracks.push(...audio.captureStream().getAudioTracks());if(tracks.length===1){stream.addTrack(tracks[0]);withSound=true}}catch{}
+  if(media.videoUrl||media.audioUrl){try{withSound=await connectExportAudio(stream)}catch(e){console.warn('Audio non disponible dans cet export',e)}}
   const recorder=new MediaRecorder(stream,{mimeType:mime,videoBitsPerSecond:5500000});const chunks=[];
   recorder.ondataavailable=e=>{if(e.data?.size)chunks.push(e.data)};
   const done=new Promise((res,rej)=>{recorder.onstop=res;recorder.onerror=e=>rej(new Error('Enregistrement interrompu'))});
-  recorder.start(250);S.time=0;S.playing=true;if(media.videoUrl){video.currentTime=0;await video.play().catch(()=>{})}if(media.audioUrl){audio.currentTime=0;await audio.play().catch(()=>{})}
+  recorder.start(250);S.time=0;S.playing=true;if(media.videoUrl){video.currentTime=S.trimStart;await video.play().catch(()=>{})}if(media.audioUrl){audio.currentTime=0;await audio.play().catch(()=>{})}
   await new Promise(resolve=>{const end=performance.now()+S.duration*1000;const timer=setInterval(()=>{if(performance.now()>=end){clearInterval(timer);resolve()}},60)});
   pause();recorder.stop();await done;stream.getTracks().forEach(t=>t.stop());const blob=new Blob(chunks,{type:mime});
-  if(!blob.size)throw Error('Fichier vidéo vide');const ext=mime.startsWith('video/mp4')?'mp4':'webm';download(blob,'eloah-reel.'+ext);toast('Export '+ext.toUpperCase()+' terminé'+(withSound?' avec une piste audio détectée.':'. Son non garanti : vérifie le résultat.') );
+  if(!blob.size)throw Error('Fichier vidéo vide');const ext=mime.startsWith('video/mp4')?'mp4':'webm';download(blob,'eloah-reel.'+ext);toast('Export '+ext.toUpperCase()+' terminé'+(withSound?' avec piste audio. Vérifie sa lecture après export.':'. Export sans son : vérifie les autorisations du navigateur.') );
  }catch(e){toast('Export impossible : '+e.message)}
  finally{busy=false;label.disabled=false;label.textContent='⬇ Exporter vidéo';pause();seek(0)}
 }
