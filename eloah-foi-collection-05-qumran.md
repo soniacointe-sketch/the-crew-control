@@ -2,7 +2,7 @@
 
 **ELOAH · FOI & SPIRITUALITÉ · BIBLIOTHÈQUE DES TEXTES ANCIENS**
 
-[← Les 10 collections](foi-control.html?doc=10) · [Précédente](foi-control.html?doc=14) · [Suivante](foi-control.html?doc=16)
+[← Les 10 collections](foi-control.html?file=eloah-foi-collections-index.md) · [Précédente](foi-control.html?file=eloah-foi-collection-04-anges-cieux.md) · [Suivante](foi-control.html?file=eloah-foi-collection-06-passion-apotres.md)
 
 > Atlas critique des rouleaux, fragments et manuscrits de Qumrân.
 
@@ -63,4 +63,4 @@ Noter les contradictions, les sources absentes, les objections, les hypothèses 
 
 **Modèle de preuve ELOAH :** **A** lecture directe du témoin ; **B** édition savante convergente ; **C** datation / restitution proposée ; **D** tradition ou interprétation ; **H** hypothèse à vérifier. Ce classement est une convention interne, pas un label scientifique officiel.
 
-[◈ Revenir aux dix collections](foi-control.html?doc=10)
+[◈ Revenir aux dix collections](foi-control.html?file=eloah-foi-collections-index.md)
