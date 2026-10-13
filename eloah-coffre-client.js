@@ -1,5 +1,5 @@
-/* Coffre-fort: customer-facing references, not an encrypted vault.
-   Scoped to this route; uses the existing records, with no automatic writes. */
+/* Mes repères: public links and non-confidential notes, never a secret vault.
+   This view keeps the historical route and storage schema. No automatic writes. */
 (() => {
   'use strict';
   if (!location.pathname.endsWith('/eloah-partenaire.html') || new URLSearchParams(location.search).get('rubrique') !== 'Coffre-fort') return;
@@ -11,22 +11,23 @@
     const STATES = ['À faire', 'En cours', 'À vérifier', 'Terminé'];
     const normal = value => String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('fr');
     const own = row => row && typeof row === 'object' && row.module === MODULE && typeof row.id === 'string' && typeof row.title === 'string';
+    const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
+    const button = (label, fn, cls = '') => { const b = el('button', cls, label); b.type = 'button'; b.addEventListener('click', fn); return b; };
     function read() {
       let value;
       try { value = JSON.parse(localStorage.getItem(KEY) || '[]'); }
       catch { throw Error('Tes repères ne peuvent pas être lus dans ce navigateur. Aucune donnée n’a été remplacée.'); }
-      if (!Array.isArray(value)) throw Error('Le fichier de travail de ce navigateur est illisible. Aucune donnée n’a été remplacée.');
+      if (!Array.isArray(value)) throw Error('Les données de ce navigateur sont illisibles. Aucune donnée n’a été remplacée.');
       return value;
     }
     function write(value) {
       try { localStorage.setItem(KEY, JSON.stringify(value)); }
-      catch { throw Error('Enregistrement impossible : le stockage est plein ou indisponible. Garde le formulaire ouvert pour copier ton texte.'); }
-      // Refresh the hidden legacy model as well, without triggering any other view.
+      catch { throw Error('Impossible d’enregistrer sur cet appareil. Garde ta saisie ouverte et copie ton texte avant de fermer la page.'); }
       try { if (typeof rows !== 'undefined' && Array.isArray(rows)) rows = value; } catch {}
     }
     function safeURL(value) {
       if (!value) return '';
-      try { const url = new URL(value); return /^https?:$/.test(url.protocol) && !url.username && !url.password ? url.href : ''; }
+      try { const u = new URL(value); return /^https?:$/.test(u.protocol) && !u.username && !u.password ? u.href : ''; }
       catch { return ''; }
     }
     function validDate(value) {
@@ -35,12 +36,10 @@
       const d = new Date(value + 'T12:00:00Z');
       return Number.isFinite(d.getTime()) && d.toISOString().slice(0, 10) === value;
     }
-    const el = (tag, cls, text) => { const n = document.createElement(tag); if (cls) n.className = cls; if (text !== undefined) n.textContent = text; return n; };
-    const button = (label, fn, cls = '') => { const b = el('button', cls, label); b.type = 'button'; b.addEventListener('click', fn); return b; };
-    const root = el('section'); root.id = 'coffre-client-root';
+    const root = el('section'); root.id = 'coffre-client-root'; root.dataset.version = 'client2';
     root.innerHTML = `
       <header class="cr-hero">
-        <div class="cr-top"><span class="cr-eyebrow">ELOAH · COFFRE-FORT</span><a href="mes-univers.html">← Mon accueil</a></div>
+        <div class="cr-top"><span class="cr-eyebrow">ELOAH · MES REPÈRES</span><a href="mes-univers.html">← Mon accueil</a></div>
         <h1>Mes repères</h1>
         <p class="cr-intro">Garde les liens et les notes utiles à tes projets. Retrouve l’essentiel sans avoir à chercher partout.</p>
         <div class="cr-actions"><button type="button" class="cr-primary" id="cr-add">+ Ajouter un lien ou une note</button><a class="cr-btn" href="eloah-bibliotheque.html?type=fichiers">Ouvrir mes documents</a></div>
@@ -48,33 +47,46 @@
       <div class="cr-security" id="cr-security"><strong>Des repères, pas des secrets.</strong><p>Cet espace n’est ni chiffré ni verrouillé. Ajoute uniquement des liens publics et des notes non confidentielles : aucun mot de passe, code d’accès ou document sensible.</p></div>
       <p id="cr-error" class="cr-error" role="alert" hidden></p>
       <section class="cr-collection" aria-labelledby="cr-list-title">
-        <div class="cr-section-head"><h2 id="cr-list-title">Mes liens et notes</h2><div class="cr-switch" aria-label="Choisir les repères affichés"><button type="button" id="cr-active" aria-pressed="true">Mes repères</button><button type="button" id="cr-archived" aria-pressed="false">Mes archives</button></div></div>
+        <div class="cr-section-head"><h2 id="cr-list-title">Mes liens et notes</h2><div class="cr-switch" role="group" aria-label="Choisir les repères affichés"><button type="button" id="cr-active" aria-pressed="true">Mes repères</button><button type="button" id="cr-archived" aria-pressed="false">Mes archives</button></div></div>
         <div class="cr-filters"><label for="cr-search">Rechercher<input id="cr-search" type="search" placeholder="Un titre, un lien, un mot dans une note…" autocomplete="off" maxlength="200"></label><label for="cr-kind">Afficher<select id="cr-kind"><option value="all">Tous les repères</option><option value="links">Avec un lien</option><option value="notes">Notes sans lien</option></select></label><button type="button" id="cr-clear" hidden>Effacer les filtres</button></div>
+        <div id="cr-feedback" class="cr-feedback" hidden><p id="cr-status" role="status" aria-live="polite" aria-atomic="true"></p><button type="button" id="cr-undo" hidden>Annuler l’archivage</button></div>
         <p id="cr-count" class="cr-help" role="status" aria-live="polite"></p><div id="cr-list" class="cr-grid"></div>
-        <p id="cr-status" class="cr-status" role="status" aria-live="polite"></p>
       </section>
-      <details class="cr-details" id="cr-backup"><summary>Conserver ou récupérer mes repères</summary><div><p>Télécharge une copie de cette rubrique, archives comprises. L’import ajoute seulement les fiches absentes et laisse les fiches déjà présentes inchangées.</p><div class="cr-actions"><button type="button" id="cr-export">Télécharger mes repères</button><button type="button" id="cr-import">Importer une copie</button><input type="file" id="cr-file" accept=".json,application/json" hidden></div><p class="cr-help">Cette copie n’est pas chiffrée et ne contient pas les autres rubriques. Conserve le fichier dans un endroit sûr.</p></div></details>
+      <details class="cr-details" id="cr-backup"><summary>Conserver ou récupérer mes repères</summary><div><p>Télécharge une copie de cette rubrique, archives comprises. L’import ajoute seulement les fiches absentes et laisse les fiches déjà présentes inchangées.</p><div class="cr-actions"><button type="button" id="cr-export">Télécharger mes repères</button><button type="button" id="cr-import">Importer une copie</button><input type="file" id="cr-file" accept=".json,application/json" hidden></div><p id="cr-backup-status" class="cr-help" role="status" aria-live="polite"></p><p id="cr-backup-error" class="cr-error" role="alert" hidden></p><p class="cr-help">Cette copie n’est pas chiffrée et ne contient pas les autres rubriques. Conserve le fichier dans un endroit sûr.</p></div></details>
       <details class="cr-details" id="cr-help"><summary>Ce que je peux garder ici</summary><div class="cr-help-grid"><div><h3>Des ressources utiles</h3><p>Le site public d’un outil, une page à relire, une référence ou des instructions non confidentielles.</p></div><div><h3>Ce qui reste ailleurs</h3><p>Les mots de passe et codes d’accès restent dans un gestionnaire de mots de passe. Les documents confidentiels n’ont pas leur place ici.</p></div><div><h3>Sur cet appareil</h3><p>Les fiches restent dans ce navigateur et ne sont pas séparées par compte. Changer de compte ne les efface pas. Aucune synchronisation automatique n’est activée par cette rubrique.</p></div></div></details>
       <p class="cr-footer">Tes repères sont enregistrés dans ce navigateur. Pense à conserver une copie avant de changer d’appareil.</p>`;
     main.append(root);
     const $ = id => document.getElementById(id);
     const editor = el('dialog', 'cr-dialog'); editor.id = 'cr-editor'; editor.setAttribute('aria-labelledby', 'cr-editor-title'); editor.setAttribute('aria-describedby', 'cr-editor-help');
-    editor.innerHTML = `<div class="cr-section-head"><h2 id="cr-editor-title">Ajouter un repère</h2><button type="button" id="cr-close" aria-label="Fermer le formulaire">×</button></div><p class="cr-help" id="cr-editor-help">Un lien public ou une note non confidentielle. Aucun mot de passe ni code d’accès.</p><form id="cr-form"><label for="cr-title">Nom du repère<input id="cr-title" name="title" required maxlength="180" autocomplete="off" placeholder="Ex. Ressources pour mon prochain atelier"></label><label for="cr-url">Lien public <small>(facultatif)</small><input id="cr-url" name="url" type="url" maxlength="2048" placeholder="https://" autocomplete="off" aria-describedby="cr-url-help"></label><p class="cr-help" id="cr-url-help">Une adresse publique, sans identifiant ni code d’accès dans le lien.</p><label for="cr-note">Ma note <small>(facultative)</small><textarea id="cr-note" name="note" maxlength="12000" rows="6" placeholder="Ce que je souhaite retrouver ou retenir…"></textarea></label><details class="cr-details" id="cr-followup"><summary>Ajouter un suivi <small>(facultatif)</small></summary><div class="cr-form-grid"><label for="cr-state">Avancement<select id="cr-state" name="state"></select></label><label for="cr-date">Date à prévoir<input id="cr-date" name="date" type="date"></label></div><p class="cr-help">Cette date ne déclenche pas de rappel.</p></details><p id="cr-form-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="submit" class="cr-primary" id="cr-save">Enregistrer mon repère</button><button type="button" id="cr-cancel">Annuler</button></div></form>`;
-    const preview = el('dialog', 'cr-dialog'); preview.id = 'cr-preview'; preview.setAttribute('aria-labelledby', 'cr-preview-title');
-    preview.innerHTML = `<h2 id="cr-preview-title">Récupérer mes repères</h2><p id="cr-preview-summary"></p><p class="cr-help">Seule la rubrique Coffre-fort est importée. Les fiches existantes et les autres rubriques ne sont pas remplacées.</p><p id="cr-preview-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="button" class="cr-primary" id="cr-apply">Ajouter les repères manquants</button><button type="button" id="cr-import-cancel">Annuler</button></div>`;
-    document.body.append(editor, preview);
+    editor.innerHTML = `<div class="cr-section-head"><h2 id="cr-editor-title">Ajouter un repère</h2><button type="button" id="cr-close" aria-label="Fermer le formulaire">×</button></div><p class="cr-help" id="cr-editor-help">Un lien public ou une note non confidentielle. Aucun mot de passe ni code d’accès.</p><form id="cr-form" novalidate><label for="cr-title">Nom du repère<input id="cr-title" name="title" required maxlength="180" autocomplete="off" placeholder="Ex. Ressources pour mon prochain atelier" aria-describedby="cr-title-error"></label><p id="cr-title-error" class="cr-field-error" hidden></p><label for="cr-url">Lien public <small>(facultatif)</small><input id="cr-url" name="url" type="url" maxlength="2048" placeholder="https://" autocomplete="off" aria-describedby="cr-url-help cr-url-error"></label><p class="cr-help" id="cr-url-help">Une adresse publique, sans identifiant ni code d’accès dans le lien.</p><p id="cr-url-error" class="cr-field-error" hidden></p><label for="cr-note">Ma note <small>(facultative)</small><textarea id="cr-note" name="note" maxlength="12000" rows="6" placeholder="Ce que je souhaite retrouver ou retenir…" aria-describedby="cr-note-error"></textarea></label><p id="cr-note-error" class="cr-field-error" hidden></p><details class="cr-details" id="cr-followup"><summary>Ajouter un suivi <small>(facultatif)</small></summary><div class="cr-form-grid"><label for="cr-state">Avancement<select id="cr-state" name="state" aria-describedby="cr-form-error"></select></label><label for="cr-date">Date à prévoir<input id="cr-date" name="date" type="date" aria-describedby="cr-form-error"></label></div><p class="cr-help">Cette date ne déclenche pas de rappel.</p></details><p id="cr-form-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="submit" class="cr-primary" id="cr-save">Enregistrer mon repère</button><button type="button" id="cr-cancel">Annuler</button></div></form>`;
+    const preview = el('dialog', 'cr-dialog'); preview.id = 'cr-preview'; preview.setAttribute('aria-labelledby', 'cr-preview-title'); preview.setAttribute('aria-describedby', 'cr-preview-summary');
+    preview.innerHTML = `<h2 id="cr-preview-title">Récupérer mes repères</h2><p id="cr-preview-summary"></p><p class="cr-help">Seuls les repères de cette rubrique sont récupérés. Les fiches existantes et les autres rubriques ne sont pas remplacées.</p><p id="cr-preview-error" class="cr-error" role="alert" hidden></p><div class="cr-actions"><button type="button" class="cr-primary" id="cr-apply">Ajouter les repères manquants</button><button type="button" id="cr-import-cancel">Annuler</button></div>`;
+    const discard = el('dialog', 'cr-dialog'); discard.id = 'cr-discard'; discard.setAttribute('aria-labelledby', 'cr-discard-title'); discard.setAttribute('aria-describedby', 'cr-discard-help');
+    discard.innerHTML = `<h2 id="cr-discard-title">Quitter sans enregistrer ?</h2><p id="cr-discard-help">Les dernières modifications ne seront pas conservées. Ton repère déjà enregistré restera inchangé.</p><div class="cr-actions"><button type="button" class="cr-primary" id="cr-keep-editing" autofocus>Continuer la saisie</button><button type="button" id="cr-discard-confirm">Quitter sans enregistrer</button></div>`;
+    document.body.append(editor, preview, discard);
     for (const s of STATES) $('cr-state').add(new Option(s, s));
-    let archive = false, editing = null, baseline = null, dirty = false, pending = null, opener = null;
+    let archive = false, editing = null, baseline = null, dirty = false, pending = null, opener = null, undo = null, afterClose = null;
     function error(message) { $('cr-error').hidden = !message; $('cr-error').textContent = message || ''; }
-    function status(message) { $('cr-status').textContent = message; }
+    function status(message, reversible = null) {
+      undo = reversible; $('cr-status').textContent = message || ''; $('cr-feedback').hidden = !message;
+      $('cr-undo').hidden = !reversible;
+      if (reversible) $('cr-undo').textContent = reversible.next ? 'Annuler l’archivage' : 'Annuler la restauration';
+    }
+    function backupMessage(message = '', problem = '') {
+      $('cr-backup-status').textContent = message; $('cr-backup-error').hidden = !problem; $('cr-backup-error').textContent = problem;
+    }
     function setFormError(message) { $('cr-form-error').hidden = !message; $('cr-form-error').textContent = message || ''; }
+    function fieldError(name, message) {
+      const field = $('cr-' + name), hint = $('cr-' + name + '-error');
+      field.setAttribute('aria-invalid', String(!!message)); hint.hidden = !message; hint.textContent = message || '';
+    }
     function render() {
       let all;
       try { all = read(); error(''); $('cr-add').disabled = false; $('cr-export').disabled = false; }
       catch (e) { error(e.message); $('cr-add').disabled = true; $('cr-export').disabled = true; $('cr-list').replaceChildren(); $('cr-count').textContent = 'Lecture indisponible. Tes données n’ont pas été modifiées.'; return; }
       const q = normal($('cr-search').value.trim()), kind = $('cr-kind').value;
       const selected = all.filter(own).filter(r => !!r.archived === archive);
-      const filtered = selected.filter(r => (!q || normal([r.title, r.note, r.url].join(' ')).includes(q)) && (kind === 'all' || (kind === 'links' ? !!r.url : !r.url))).sort((a, b) => a.title.localeCompare(b.title, 'fr', {numeric: true}));
+      const filtered = selected.filter(r => (!q || normal([r.title, r.note, r.url].join(' ')).includes(q)) && (kind === 'all' || (kind === 'links' ? !!r.url : !r.url))).sort((a, b) => a.title.localeCompare(b.title, 'fr', {numeric:true}));
       $('cr-count').textContent = filtered.length + (filtered.length === 1 ? ' repère' : ' repères') + (archive ? ' dans les archives' : '') + (q || kind !== 'all' ? ' pour cette recherche' : '');
       $('cr-list-title').textContent = archive ? 'Mes archives' : 'Mes liens et notes';
       $('cr-active').setAttribute('aria-pressed', String(!archive)); $('cr-archived').setAttribute('aria-pressed', String(archive)); $('cr-clear').hidden = !q && kind === 'all';
@@ -85,52 +97,88 @@
         box.append(button(q || kind !== 'all' ? 'Effacer les filtres' : archive ? 'Retrouver mes repères' : '+ Ajouter mon premier repère', () => { if (q || kind !== 'all') clear(); else if (archive) { archive = false; render(); } else edit(); })); host.append(box); return;
       }
       for (const r of filtered) {
-        const card = el('article', 'cr-card'), url = safeURL(r.url), title = el('h3', '', r.title);
-        card.append(el('span', 'cr-tag', r.url ? (r.note ? 'LIEN ET NOTE' : 'LIEN') : 'NOTE'), title);
+        const card = el('article', 'cr-card'), url = safeURL(r.url); card.dataset.record = r.id;
+        card.append(el('span', 'cr-tag', r.url ? (r.note ? 'LIEN ET NOTE' : 'LIEN') : 'NOTE'), el('h3', '', r.title));
         if (r.note) { const detail = el('details', 'cr-note-details'); detail.append(el('summary', '', 'Lire ma note'), el('p', 'cr-full-note', String(r.note))); card.append(detail); }
-        if (url) { const a = el('a', 'cr-resource', new URL(url).hostname + ' ↗'); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; a.setAttribute('aria-label', 'Ouvrir le lien : ' + r.title + ' (nouvel onglet)'); card.append(a); }
-        else if (r.url) card.append(el('p', 'cr-help', 'Ce lien doit être corrigé avant de pouvoir être ouvert.'));
+        if (url) {
+          const a = el('a', 'cr-resource', 'Ouvrir le lien ↗'); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
+          a.setAttribute('aria-label', 'Ouvrir le lien : ' + r.title + ' (nouvel onglet)'); card.append(a, el('span', 'cr-domain', new URL(url).hostname));
+        } else if (r.url) card.append(el('p', 'cr-help', 'Ce lien doit être corrigé avant de pouvoir être ouvert.'));
         if (r.date && validDate(r.date)) card.append(el('p', 'cr-help', 'Date à prévoir : ' + new Date(r.date + 'T12:00:00').toLocaleDateString('fr-FR')));
         if (r.state && r.state !== 'À faire') card.append(el('p', 'cr-help', 'Avancement : ' + r.state));
         const actions = el('div', 'cr-actions');
-        const editButton = button('Modifier', () => edit(r.id)); editButton.setAttribute('aria-label', 'Modifier : ' + r.title);
+        const editButton = button('Modifier', () => edit(r.id)); editButton.setAttribute('aria-label', 'Modifier : ' + r.title); editButton.dataset.editRecord = r.id;
         const archiveButton = button(archive ? 'Restaurer' : 'Archiver', () => changeArchive(r.id, !archive)); archiveButton.setAttribute('aria-label', (archive ? 'Restaurer : ' : 'Archiver : ') + r.title);
         actions.append(editButton, archiveButton); card.append(actions); host.append(card);
       }
     }
     function clear() { $('cr-search').value = ''; $('cr-kind').value = 'all'; render(); $('cr-search').focus(); }
-    function uniqueRecord(all, id) { const matches = all.filter(r => r && r.id === id); if (matches.length !== 1 || !own(matches[0])) throw Error('Cette fiche ne peut pas être modifiée sans risque. Conserve une copie avant de poursuivre.'); return matches[0]; }
-    function changeArchive(id, next) {
-      try { const all = read(); const record = uniqueRecord(all, id); write(all.map(r => r === record ? {...r, archived: next, updated: new Date().toISOString()} : r)); render(); status(next ? 'Repère archivé. Tu peux le retrouver dans « Mes archives ».' : 'Repère restauré dans « Mes repères ».'); (archive ? $('cr-archived') : $('cr-active')).focus(); }
-      catch (e) { error(e.message); }
+    function showRecord(record) {
+      archive = !!record.archived; $('cr-search').value = ''; $('cr-kind').value = 'all'; render();
+      const card = [...$('cr-list').children].find(c => c.dataset.record === record.id);
+      if (card) { const target = card.querySelector('[data-edit-record]'); target?.focus({preventScroll:true}); card.scrollIntoView({block:'nearest'}); }
     }
+    function uniqueRecord(all, id) {
+      const matches = all.filter(r => r && r.id === id);
+      if (matches.length !== 1 || !own(matches[0])) throw Error('Cette fiche ne peut pas être modifiée sans risque. Conserve une copie avant de poursuivre.');
+      return matches[0];
+    }
+    function changeArchive(id, next) {
+      try {
+        const all = read(), previous = uniqueRecord(all, id), record = {...previous, archived:next, updated:new Date().toISOString()};
+        write(all.map(r => r === previous ? record : r)); render();
+        status(next ? 'Repère archivé. Il reste disponible dans « Mes archives ».' : 'Repère remis dans « Mes repères ».', {id, previous, next, snapshot:JSON.stringify(record)});
+        $('cr-undo').focus();
+      } catch (e) { error(e.message); }
+    }
+    $('cr-undo').onclick = () => {
+      if (!undo) return;
+      try {
+        const action = undo, all = read(), current = uniqueRecord(all, action.id);
+        if (JSON.stringify(current) !== action.snapshot) { status('Ce repère a changé depuis. Retrouve-le dans tes repères ou tes archives pour le modifier.'); render(); return; }
+        // Restore only this record; do not overwrite another tab's changes.
+        write(all.map(r => r === current ? action.previous : r)); showRecord(action.previous); status('Dernière action annulée. Ton repère est conservé.');
+      } catch (e) { error(e.message); }
+    };
     function edit(id = null) {
       try {
         const all = read(), record = id ? uniqueRecord(all, id) : null;
-        editing = id; baseline = record ? JSON.stringify(record) : null; dirty = false; opener = document.activeElement;
-        $('cr-form').reset(); setFormError(''); $('cr-title').setCustomValidity(''); $('cr-url').setCustomValidity('');
+        editing = id; baseline = record ? JSON.stringify(record) : null; dirty = false; afterClose = null; opener = document.activeElement;
+        $('cr-form').reset(); setFormError(''); ['title','url','note'].forEach(n => fieldError(n, ''));
         $('cr-editor-title').textContent = record ? 'Modifier mon repère' : 'Ajouter un repère';
-        for (const name of ['title', 'url', 'note', 'date', 'state']) $('cr-' + name).value = record?.[name] || (name === 'state' ? 'À faire' : '');
+        for (const name of ['title','url','note','date','state']) $('cr-' + name).value = record?.[name] || (name === 'state' ? 'À faire' : '');
         $('cr-followup').open = !!record?.date || (!!record?.state && record.state !== 'À faire');
         editor.showModal(); $('cr-title').focus();
       } catch (e) { error(e.message); }
     }
-    function closeEditor() { if (!dirty || confirm('Fermer sans enregistrer les modifications ?')) editor.close(); }
-    editor.addEventListener('cancel', e => { if (dirty && !confirm('Fermer sans enregistrer les modifications ?')) e.preventDefault(); });
-    editor.addEventListener('close', () => { dirty = false; (opener?.isConnected ? opener : $('cr-add')).focus(); });
-    $('cr-form').addEventListener('input', e => { dirty = true; e.target.setCustomValidity?.(''); });
+    function closeEditor() {
+      if (!dirty) { editor.close(); return; }
+      $('cr-discard-help').textContent = editing ? 'Les dernières modifications ne seront pas conservées. Ton repère déjà enregistré restera inchangé.' : 'Ce nouveau repère n’a pas encore été enregistré. Tu peux revenir à ta saisie pour le conserver.';
+      if (!discard.open) discard.showModal(); $('cr-keep-editing').focus();
+    }
+    editor.addEventListener('cancel', e => { e.preventDefault(); closeEditor(); });
+    editor.addEventListener('close', () => { dirty = false; if (afterClose) { const record = afterClose; afterClose = null; showRecord(record); } else (opener?.isConnected ? opener : $('cr-add')).focus(); });
+    $('cr-keep-editing').onclick = () => { discard.close(); $('cr-title').focus(); };
+    $('cr-discard-confirm').onclick = () => { dirty = false; discard.close(); editor.close(); };
+    discard.addEventListener('cancel', e => { e.preventDefault(); discard.close(); $('cr-title').focus(); });
+    $('cr-form').addEventListener('input', e => { dirty = true; if (['title','url','note'].includes(e.target.name)) fieldError(e.target.name, ''); });
+    $('cr-form').addEventListener('change', () => { dirty = true; });
     $('cr-form').addEventListener('submit', e => {
-      e.preventDefault(); setFormError('');
+      e.preventDefault(); setFormError(''); ['title','url','note'].forEach(n => fieldError(n, ''));
       const data = Object.fromEntries(new FormData(e.target)); data.title = data.title.trim(); data.url = data.url.trim();
-      if (!data.title) { $('cr-title').setCustomValidity('Donne un nom à ton repère.'); $('cr-title').reportValidity(); return; }
-      if (data.url && !safeURL(data.url)) { $('cr-url').setCustomValidity('Utilise une adresse http ou https, sans identifiant ni mot de passe dans le lien.'); $('cr-url').reportValidity(); return; }
-      if (!validDate(data.date) || !STATES.includes(data.state)) { setFormError('Vérifie la date et l’avancement de cette fiche.'); return; }
+      let first = '';
+      if (!data.title || data.title.length > 180) { fieldError('title', 'Donne un nom à ton repère, en 180 caractères maximum.'); first = 'title'; }
+      if (data.url.length > 2048 || (data.url && !safeURL(data.url))) { fieldError('url', 'Ajoute une adresse complète commençant par https:// ou http://, sans identifiant ni mot de passe dans le lien.'); first = first || 'url'; }
+      if (data.note.length > 12000) { fieldError('note', 'Raccourcis ta note à 12 000 caractères maximum.'); first = first || 'note'; }
+      if (first) { setFormError('Il reste un champ à vérifier. Les précisions sont indiquées sous ta saisie.'); $('cr-' + first).focus(); return; }
+      if (!validDate(data.date) || $('cr-date').validity.badInput || !STATES.includes(data.state)) { $('cr-followup').open = true; setFormError('Vérifie la date et l’avancement de cette fiche.'); $('cr-date').focus(); return; }
       try {
         const all = read(), previous = editing ? uniqueRecord(all, editing) : null;
         if (previous && JSON.stringify(previous) !== baseline) throw Error('Cette fiche a changé dans un autre onglet. Copie tes modifications, puis ferme et rouvre la fiche avant de réessayer.');
-        const record = {...previous, ...data, module: MODULE, id: editing || crypto.randomUUID(), updated: new Date().toISOString()};
+        const record = {...previous, ...data, module:MODULE, id:editing || crypto.randomUUID(), updated:new Date().toISOString()};
         write(previous ? all.map(r => r === previous ? record : r) : [...all, record]);
-        dirty = false; editor.close(); render(); status('Repère enregistré dans ce navigateur.'); $('cr-add').focus();
+        const resetFilters = $('cr-search').value.trim() || $('cr-kind').value !== 'all' || archive !== !!record.archived;
+        dirty = false; afterClose = record; editor.close(); status('Ton repère est enregistré sur cet appareil.' + (resetFilters ? ' Les filtres ont été effacés pour te le montrer.' : '')); 
       } catch (e) { setFormError(e.message); }
     });
     $('cr-add').onclick = () => edit(); $('cr-close').onclick = closeEditor; $('cr-cancel').onclick = closeEditor;
@@ -138,19 +186,20 @@
     $('cr-search').oninput = render; $('cr-kind').onchange = render; $('cr-clear').onclick = clear;
     $('cr-export').onclick = () => {
       try {
-        const records = read().filter(own), payload = {format: 'sonia-universe-v1', universe: 'itriia', scope: MODULE, exportedAt: new Date().toISOString(), records};
-        const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'}));
-        const a = el('a'); a.href = url; a.download = 'eloah-mes-reperes-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
-        status('Copie préparée : ' + records.length + ' repère(s), archives comprises. Vérifie le fichier dans tes téléchargements.');
-      } catch (e) { error(e.message); }
+        backupMessage();
+        const records = read().filter(own), payload = {format:'sonia-universe-v1', universe:'itriia', scope:MODULE, exportedAt:new Date().toISOString(), records};
+        const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'}));
+        const a = el('a'); a.href = url; a.download = 'eloah-mes-reperes-' + new Date().toISOString().slice(0,10) + '.json'; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
+        backupMessage('Copie préparée : ' + records.length + (records.length === 1 ? ' repère' : ' repères') + ', archives comprises. Vérifie le fichier dans tes téléchargements.');
+      } catch (e) { backupMessage('', e.message); }
     };
     function importRecord(r) {
-      if (!own(r) || !r.id || r.id.length > 200 || !r.title.trim() || r.title.length > 180 || !STATES.includes(r.state) || typeof (r.note || '') !== 'string' || (r.note || '').length > 12000 || typeof (r.url || '') !== 'string' || (r.url || '').length > 2048 || (r.url && !safeURL(r.url)) || !validDate(r.date || '')) throw Error('Une fiche à importer est invalide. Aucune donnée n’a été ajoutée.');
+      if (!own(r) || !r.id || r.id.length > 200 || !r.title.trim() || r.title.length > 180 || !STATES.includes(r.state) || typeof (r.note || '') !== 'string' || (r.note || '').length > 12000 || typeof (r.url || '') !== 'string' || (r.url || '').length > 2048 || (r.url && !safeURL(r.url)) || !validDate(r.date || '')) throw Error('Une fiche de cette copie est invalide. Aucun repère n’a été ajouté.');
       return {id:r.id, title:r.title, module:MODULE, state:r.state, note:r.note || '', url:r.url || '', date:r.date || '', archived:!!r.archived};
     }
     $('cr-import').onclick = () => $('cr-file').click();
     $('cr-file').onchange = async e => {
-      pending = null;
+      pending = null; backupMessage();
       try {
         const file = e.target.files[0]; if (!file) return;
         if (file.size > 8 * 1024 * 1024) throw Error('Choisis une copie de moins de 8 Mo.');
@@ -159,28 +208,29 @@
         const candidates = payload.records.filter(r => r && r.module === MODULE).map(importRecord);
         const seen = new Set(read().filter(r => r && typeof r.id === 'string').map(r => r.id));
         pending = candidates.filter(r => { if (seen.has(r.id)) return false; seen.add(r.id); return true; });
-        $('cr-preview-summary').textContent = candidates.length + ' fiche(s) de cette rubrique trouvée(s). ' + pending.length + ' à ajouter ; ' + (candidates.length - pending.length) + ' déjà présentes ou répétées, conservées sans changement.';
-        $('cr-preview-error').hidden = true; $('cr-apply').disabled = pending.length === 0; preview.showModal();
-      } catch (err) { error(err instanceof SyntaxError ? 'Ce fichier ne peut pas être lu. Choisis une copie ELOAH au format JSON.' : err.message); }
+        $('cr-preview-summary').textContent = !candidates.length ? 'Cette copie ne contient aucun repère de cette rubrique. Rien ne sera ajouté.' : !pending.length ? 'Tous les repères de cette copie sont déjà présents ou répétés. Rien ne sera remplacé.' : pending.length + (pending.length === 1 ? ' repère peut être ajouté.' : ' repères peuvent être ajoutés.') + ' ' + (candidates.length - pending.length) + ' déjà présents ou répétés seront ignorés.';
+        $('cr-preview-error').hidden = true; $('cr-apply').disabled = pending.length === 0; $('cr-import-cancel').textContent = pending.length ? 'Annuler' : 'Fermer'; preview.showModal();
+        (pending.length ? $('cr-apply') : $('cr-import-cancel')).focus();
+      } catch (err) { backupMessage('', err instanceof SyntaxError ? 'Ce fichier ne peut pas être lu. Choisis une copie téléchargée depuis ELOAH.' : err.message); }
       finally { e.target.value = ''; }
     };
     $('cr-apply').onclick = () => {
       if (!pending) return;
       try {
-        const all = read(), ids = new Set(all.filter(r => r && typeof r.id === 'string').map(r => r.id)), added = pending.filter(r => !ids.has(r.id));
+        const all = read(), ids = new Set(all.filter(r => r && typeof r.id === 'string').map(r => r.id)), added = pending.filter(r => { if (ids.has(r.id)) return false; ids.add(r.id); return true; });
         if (added.length) write([...all, ...added]);
-        preview.close(); pending = null; archive = false; render(); status(added.length + ' repère(s) récupéré(s). Les fiches déjà présentes sont conservées.');
+        preview.close(); pending = null; archive = false; $('cr-search').value = ''; $('cr-kind').value = 'all'; render();
+        const message = added.length + (added.length === 1 ? ' repère récupéré.' : ' repères récupérés.') + ' Les fiches déjà présentes sont conservées. Les fiches archivées restent dans « Mes archives ».';
+        status(message); backupMessage(message);
       } catch (e) { $('cr-preview-error').textContent = e.message; $('cr-preview-error').hidden = false; }
     };
     $('cr-import-cancel').onclick = () => preview.close(); preview.addEventListener('close', () => { pending = null; $('cr-import').focus(); });
-    window.addEventListener('storage', e => { if (!e.key || e.key === KEY) render(); });
-    window.addEventListener('focus', render);
-    // No account, password, network API, AI or encryption is introduced by this view.
+    window.addEventListener('storage', e => { if (!e.key || e.key === KEY) render(); }); window.addEventListener('focus', render);
     const css = el('style'); css.id = 'eloah-coffre-client-style'; css.textContent = `
     body.eloah-coffre-client .layout>main>:not(#coffre-client-root){display:none!important}
     body.eloah-coffre-client .layout>main{width:100%;max-width:1180px;margin:auto;padding:34px clamp(16px,3.2vw,40px) 55px!important}
-    #coffre-client-root,.cr-dialog{--cr-ink:#303530;--cr-muted:#666c62;--cr-line:#dedfd7;--cr-paper:#fffefa;--cr-accent:#7762af;color:var(--cr-ink);font:15px/1.6 system-ui,sans-serif}
-    #coffre-client-root *, .cr-dialog *{box-sizing:border-box}
+    #coffre-client-root,.cr-dialog{--cr-ink:#303530;--cr-muted:#666c62;--cr-line:#dedfd7;--cr-paper:#fffefa;color:var(--cr-ink);font:15px/1.6 system-ui,sans-serif}
+    #coffre-client-root *,.cr-dialog *{box-sizing:border-box}
     #coffre-client-root [hidden],.cr-dialog [hidden]{display:none!important}
     #coffre-client-root h1,#coffre-client-root h2,#coffre-client-root h3,.cr-dialog h2{font-family:Georgia,serif;font-weight:400;line-height:1.2;color:var(--cr-ink)!important}
     #coffre-client-root h1{font-size:clamp(36px,4.3vw,53px);margin:18px 0 13px}
@@ -218,9 +268,10 @@
     #coffre-client-root .cr-tag{font:650 10px/1.4 system-ui;letter-spacing:.13em;color:#827092}
     #coffre-client-root .cr-card .cr-actions{margin-top:auto;padding-top:18px}
     #coffre-client-root .cr-card .cr-actions button{font-size:13px;padding:8px 12px}
-    #coffre-client-root .cr-resource{display:inline-block;color:#69538d;font-size:13px;margin:12px 0 4px;overflow-wrap:anywhere}
+    #coffre-client-root .cr-resource{display:inline-flex;align-items:center;min-height:44px;color:#69538d;font-size:14px;font-weight:600;margin:8px 0 0;overflow-wrap:anywhere}
+    #coffre-client-root .cr-domain{font-size:12px;color:var(--cr-muted);overflow-wrap:anywhere}
     #coffre-client-root .cr-note-details{width:100%;margin:8px 0;border:0;padding:0}
-    #coffre-client-root .cr-note-details summary{cursor:pointer;min-height:40px;padding:8px 0;font-size:13px}
+    #coffre-client-root .cr-note-details summary{cursor:pointer;min-height:44px;padding:9px 0;font-size:13px}
     #coffre-client-root .cr-full-note{white-space:pre-wrap;font-size:14px;overflow-wrap:anywhere}
     #coffre-client-root .cr-empty{grid-column:1/-1;text-align:center;border:1px dashed #d3d7cc;background:#f5f4ed;border-radius:12px;padding:32px 20px}
     #coffre-client-root .cr-empty p{max-width:510px;margin:10px auto 20px;font-size:14px}
@@ -231,9 +282,12 @@
     #coffre-client-root .cr-help-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
     #coffre-client-root .cr-help-grid h3{font:600 14px system-ui}
     #coffre-client-root .cr-footer{font-size:12px;margin:24px 0 0;color:#73786e}
-    #coffre-client-root .cr-status:empty{display:none}
-    #coffre-client-root .cr-status{font-size:13px;background:#ece7f4;padding:12px 15px;border-radius:8px}
+    #coffre-client-root .cr-feedback{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;font-size:13px;background:#ece7f4;padding:12px 15px;border-radius:8px;margin:15px 0}
+    #coffre-client-root .cr-feedback p{flex:1;min-width:160px;margin:0;color:#534367}
+    #coffre-client-root .cr-feedback button{font-size:13px}
     #coffre-client-root .cr-error,.cr-dialog .cr-error{font-size:13px;background:#fceeed;color:#8d3442!important;border-left:3px solid #bd7e86;padding:12px 15px;border-radius:7px}
+    .cr-dialog .cr-field-error{font-size:13px;color:#8d3442!important;margin:6px 0}
+    .cr-dialog [aria-invalid=true]{border-color:#a74c5d!important}
     .cr-dialog{width:min(680px,calc(100vw - 28px));max-width:calc(100vw - 28px);max-height:90dvh;padding:26px;background:#fffefa!important;border:1px solid #dedfd7!important;border-radius:16px;overflow:auto;box-sizing:border-box}
     .cr-dialog::backdrop{background:#20252b80}
     .cr-dialog form>label{margin-top:18px}
@@ -246,6 +300,10 @@
     `;
     document.head.append(css); document.body.classList.add('eloah-coffre-client'); document.title = 'Mes repères · ELOAH';
     const wordmark = document.querySelector('.eloah-global-nav .eloah-wordmark'); if (wordmark) wordmark.textContent = 'ELOAH · MON ESPACE';
+    // Rename this page's existing menu entry; keep its destination and saved module names.
+    document.querySelectorAll('.eloah-global-nav a').forEach(a => {
+      try { const u = new URL(a.href); if (u.pathname.endsWith('/eloah-partenaire.html') && u.searchParams.get('rubrique') === MODULE) { a.textContent = 'Mes repères'; a.setAttribute('aria-current', 'page'); } } catch {}
+    });
     render();
   }
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, {once:true}); else start();
