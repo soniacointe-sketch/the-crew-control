@@ -33,6 +33,105 @@ function soundRow(t){
 function audioSection(title,items){
  return '<section class="ecs-audiosection" data-soundsection><div class="ecs-sectiontitle"><strong>'+xss(title)+'</strong><span>'+items.length+' sons</span></div>'+items.map(soundRow).join('')+'</section>';
 }
+function addSynthNote(context,at,duration,midi,wave='sine',volume=.11){
+ const freq=440*Math.pow(2,(midi-69)/12);
+ const o=context.createOscillator(),g=context.createGain();
+ o.type=wave;o.frequency.setValueAtTime(freq,at);
+ g.gain.setValueAtTime(0,at);
+ g.gain.linearRampToValueAtTime(volume,at+.023);
+ g.gain.exponentialRampToValueAtTime(.001,at+duration);
+ o.connect(g).connect(context.destination);o.start(at);o.stop(at+duration+.02);
+}
+function addSynthPercussion(context,at,volume=.065){
+ const o=context.createOscillator(),g=context.createGain();o.type='triangle';o.frequency.setValueAtTime(130,at);o.frequency.exponentialRampToValueAtTime(55,at+.12);
+ g.gain.setValueAtTime(volume,at);g.gain.exponentialRampToValueAtTime(.001,at+.17);
+ o.connect(g).connect(context.destination);o.start(at);o.stop(at+.18);
+}
+async function createSoundBlob(track){
+ const rate=22050,duration=track.duration;const C=window.OfflineAudioContext||window.webkitOfflineAudioContext;
+ if(!C)throw Error('Génération musicale indisponible dans ce navigateur');
+ const context=new C(1,rate*duration,rate);
+ const fast=['pulse','latin','summer'].includes(track.id);
+ const beat=fast?.42:.67,steps=Math.ceil(duration/beat);
+ for(let i=0;i<steps;i++){
+   const at=i*beat;if(at+beat*.9>=duration)break;
+   const midi=track.notes[i%track.notes.length];
+   addSynthNote(context,at,Math.min(.72,beat*.92),midi,track.id==='piano'?'sine':'triangle',fast?.11:.085);
+   if(i%2===0)addSynthNote(context,at,Math.min(.8,beat*1.4),midi-12,'sine',.09);
+   if(fast&&(i%2===0||track.id==='latin'&&i%3===2))addSynthPercussion(context,at,.05);
+ }
+ const rendered=await context.startRendering();
+ const ch=rendered.getChannelData(0),buffer=new ArrayBuffer(44+ch.length*2),dv=new DataView(buffer);
+ const str=(off,v)=>{for(let i=0;i<v.length;i++)dv.setUint8(off+i,v.charCodeAt(i))};
+ str(0,'RIFF');dv.setUint32(4,36+ch.length*2,true);str(8,'WAVE');str(12,'fmt ');dv.setUint32(16,16,true);
+ dv.setUint16(20,1,true);dv.setUint16(22,1,true);dv.setUint32(24,rate,true);dv.setUint32(28,rate*2,true);dv.setUint16(32,2,true);dv.setUint16(34,16,true);str(36,'data');dv.setUint32(40,ch.length*2,true);
+ for(let i=0;i<ch.length;i++){const x=Math.max(-1,Math.min(1,ch[i]));dv.setInt16(44+2*i,x<0?x*32768:x*32767,true)}
+ return new Blob([buffer],{type:'audio/wav'});
+}
+async function getSound(track){
+ if(soundCache.has(track.id))return soundCache.get(track.id);
+ const blob=await createSoundBlob(track),url=URL.createObjectURL(blob),value={blob,url};
+ soundCache.set(track.id,value);return value;
+}
+async function previewSound(id){
+ const track=soundLibrary.find(t=>t.id===id);if(!track)return;
+ if(audioPreview){audioPreview.pause();audioPreview.currentTime=0;audioPreview=null;if(audioPreviewId===id){audioPreviewId=null;renderSide();return}}
+ if(audioBusy)return;audioBusy=true;
+ try{
+   const item=await getSound(track);audioPreview=new Audio(item.url);audioPreviewId=id;
+   audioPreview.onended=()=>{audioPreview=null;audioPreviewId=null;if(activeTab==='audio')renderSide()};
+   await audioPreview.play();if(activeTab==='audio')renderSide();
+ }catch(e){audioPreviewId=null;toast('Écoute impossible : '+e.message)}
+ finally{audioBusy=false}
+}
+async function addSound(id){
+ const track=soundLibrary.find(t=>t.id===id);if(!track||audioBusy)return;audioBusy=true;
+ try{
+  if(audioPreview){audioPreview.pause();audioPreview=null;audioPreviewId=null}
+  const item=await getSound(track);
+  await loadAudio(new File([item.blob],track.name.replace(/[^a-z0-9-]/gi,'-')+'.wav',{type:'audio/wav'}));
+  recentSounds=[id,...recentSounds.filter(x=>x!==id)].slice(0,5);
+  try{localStorage.setItem('eloah_reel_recent_audio',JSON.stringify(recentSounds))}catch{}
+  if(activeTab==='audio')renderSide();
+  toast('♫ '+track.name+' ajouté à la timeline.');
+ }catch(e){toast('Ajout de musique impossible : '+e.message)}
+ finally{audioBusy=false}
+}
+async function startVoiceRecording(){
+ if(recording)return;
+ if(!navigator.mediaDevices?.getUserMedia||typeof MediaRecorder==='undefined'){recordStatus='Enregistrement non pris en charge par ce navigateur.';renderSide();return}
+ try{
+  const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true}});
+  const options=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'].find(m=>MediaRecorder.isTypeSupported(m));
+  const recorder=new MediaRecorder(stream,options?{mimeType:options}:undefined),chunks=[];
+  const rec={recorder,stream,chunks};recording=rec;
+  recorder.ondataavailable=e=>{if(e.data.size)chunks.push(e.data)};
+  recorder.onerror=()=>{recordStatus='Une erreur est survenue pendant l’enregistrement.';stream.getTracks().forEach(t=>t.stop());recording=null;renderSide()};
+  recorder.onstop=async()=>{
+    stream.getTracks().forEach(t=>t.stop());recording=null;
+    const type=recorder.mimeType||'audio/webm',ext=type.includes('mp4')?'m4a':type.includes('ogg')?'ogg':'webm';
+    const blob=new Blob(chunks,{type});
+    if(!blob.size){recordStatus='Aucun son enregistré.';renderSide();return}
+    const file=new File([blob],'Voix-off-'+new Date().toISOString().slice(0,19).replace(/[:T]/g,'-')+'.'+ext,{type});
+    await loadAudio(file);recordStatus='Voix enregistrée et ajoutée à la timeline.';renderSide();
+  };
+  recorder.start(250);recordStatus='Enregistrement en cours…';renderSide();
+ }catch(e){recordStatus=e.name==='NotAllowedError'?'Permission du microphone refusée. Autorise-le dans ton navigateur.':'Microphone indisponible : '+e.message;renderSide()}
+}
+function stopVoiceRecording(){if(recording?.recorder.state==='recording')recording.recorder.stop()}
+function synthPlay(){
+ if(!window.speechSynthesis){speechStatus='Lecture vocale non disponible sur cet appareil.';renderSide();return}
+ window.speechSynthesis.cancel();
+ const input=one('#ecs-tts-text');voiceText=input?.value?.trim()||voiceText;
+ if(!voiceText){speechStatus='Écris un texte à lire.';renderSide();return}
+ const say=new SpeechSynthesisUtterance(voiceText);say.lang='fr-FR';say.rate=voiceSpeed;
+ const voices=window.speechSynthesis.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr'));
+ say.voice=voices.find(v=>v.name===voiceSelection)||voices[0]||null;
+ say.onstart=()=>{speechStatus='Lecture en cours sur ton appareil.'};
+ say.onend=()=>{speechStatus='Lecture terminée. Pour un fichier audio, utilise la voix off enregistrée.'};
+ say.onerror=()=>{speechStatus='Cette voix est indisponible. Essaie une autre.'};
+ window.speechSynthesis.speak(say);speechStatus='Préparation de la lecture vocale…';renderSide();
+}
 function renderAudio(){
  if(audioView==='record')return '<button class="ecs-els-back" data-audio-view="home">← Audio</button><h3 class="ecs-panelheading">Enregistrer une voix off</h3><p class="ecs-note">Autorise ton microphone, parle, puis arrête. La prise sera placée dans la piste audio du montage.</p><div class="ecs-audio-rec"><span class="ecs-rec-mic">🎙</span><strong>'+(recording?'Enregistrement en cours…':'Microphone prêt')+'</strong><p class="ecs-note">Enregistre dans un endroit calme.</p>'+(recording?btn('recordStop','■ Arrêter l’enregistrement',true):btn('recordStart','● Enregistrer ma voix',true))+'</div><p class="ecs-note ecs-rec-status" role="status">'+xss(recordStatus||'Aucun enregistrement pour le moment.')+'</p>'+(media.audioUrl?'<p class="ecs-note">Piste actuelle : '+xss(audio.dataset.filename||'Audio')+'</p>':'')+btn('importAudio','Importer une voix enregistrée');
  if(audioView==='tts'){
@@ -240,6 +339,10 @@ function action(name){
  if(name==='importImage'){importKind='background';one('#ecs-image-input').click();return}
  if(name==='addImage'){importKind='element';one('#ecs-image-input').click();return}
  if(name==='importAudio'){one('#ecs-audio-input').click();return}
+ if(name==='recordStart'){startVoiceRecording();return}
+ if(name==='recordStop'){stopVoiceRecording();return}
+ if(name==='voicePlay'){synthPlay();return}
+ if(name==='voiceStop'){if(window.speechSynthesis)window.speechSynthesis.cancel();speechStatus='Lecture arrêtée.';renderSide();return}
  if(name==='removeAudio'){if(media.audioUrl)URL.revokeObjectURL(media.audioUrl);media.audioUrl=null;audio.removeAttribute('src');renderTimeline();renderSide();return}
  if(name==='removeVideo'){pause();if(media.videoUrl)URL.revokeObjectURL(media.videoUrl);media.videoUrl=null;S.trimStart=0;video.removeAttribute('src');renderTimeline();renderSide();saveLocal();return}
  if(name==='png'){drawPng();return}
@@ -249,6 +352,10 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const audioPanel=ev.target.closest('[data-audio-view]');
+ if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
+ const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
+ const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
  const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));toast('Élément dupliqué sur la page.')}return}
@@ -259,11 +366,15 @@ root.addEventListener('click',ev=>{
 });
 one('#ecs-name').addEventListener('change',e=>{S.name=e.target.value.slice(0,90)||'Mon Reel';saveLocal()});
 one('.ecs-sidebody').addEventListener('change',e=>{
+ if(e.target.id==='ecs-tts-speed'){voiceSpeed=Number(e.target.value);return}
+ if(e.target.id==='ecs-tts-voice'){const voices=window.speechSynthesis?.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr'))||[];voiceSelection=voices[Number(e.target.value)]?.name||'';return}
  const p=e.target.dataset.p,setting=e.target.dataset.setting;
  if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();return}
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(e.target.id==='ecs-audio-search'){const term=e.target.value.trim().toLocaleLowerCase('fr');all('.ecs-soundrow').forEach(row=>row.hidden=!row.dataset.search.includes(term));all('[data-soundsection]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-soundrow')].some(row=>!row.hidden)});return}
+ if(e.target.id==='ecs-tts-text'){voiceText=e.target.value;return}
  if(e.target.id==='ecs-element-search'){const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');all('.ecs-category').forEach(button=>{button.hidden=!button.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term)});return}
  const p=e.target.dataset.p;if(p==='text'||p==='values'){const el=S.elements.find(q=>q.id===selected);if(el){el[p]=e.target.value;draw()}}if(p==='color'||p==='bg'){if(p==='bg')S.bg=e.target.value;else{const el=S.elements.find(q=>q.id===selected);if(el)el.color=e.target.value}draw()}
 });
