@@ -7,7 +7,7 @@ main{padding:20px clamp(14px,2vw,36px);max-width:1720px;margin:auto}.intro{max-w
 @media(max-width:1100px){.layout{grid-template-columns:1fr}.viewer{position:static}.side{grid-template-columns:repeat(2,minmax(0,1fr))}.timeline{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:680px){.side{grid-template-columns:1fr}.timeline{grid-template-columns:1fr 1fr}iframe{height:550px}}
 .archive-loader{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.archive-loader button,.archive-loader a{padding:9px 11px;border:1px solid #cdbba2;border-radius:7px;background:#fffdf8;font-size:12px;color:#353b31;text-decoration:none;display:inline-block}.archive-loader button.primary{background:#355d51;color:#fff;border-color:#355d51}.archive-loader button:disabled{opacity:.52}.archive-state{font-size:12px;padding:12px;background:#f7f0e5;border-left:4px solid #ad8551;border-radius:6px;margin:10px 0}.archive-state.ok{background:#edf3e9;border-color:#598770}.archive-state.warn{background:#fff0e2;border-color:#c07f46}.narrative{max-width:1140px;margin:30px auto 0;background:#fffdf8;border:1px solid #d9cbba;padding:clamp(22px,4vw,44px);border-radius:13px}.narrative h2{font:clamp(28px,3.5vw,42px) Georgia,serif;margin:8px 0 21px}.narrative h3{font:25px Georgia,serif;margin:32px 0 13px}.narrative p{font-size:16px;line-height:1.94;margin:0 0 16px;max-width:920px}.narrative .opening{font:clamp(21px,2.6vw,28px)/1.55 Georgia,serif;color:#4f5146}.narrative .folio{color:#9b835d;font-size:11px;letter-spacing:.16em}.narrative blockquote{font:italic 22px/1.6 Georgia,serif;padding:12px 24px;margin:25px 0;border-left:3px solid #a8885e;background:#f8f1e6}.narrative .source-notes{font-size:12px;color:#776d60;border-top:1px solid #ded0bd;padding-top:16px}.narrative .source-notes a{color:#486b5d}@media(max-width:680px){.narrative p{font-size:15px}.narrative blockquote{font-size:19px}}</style></head><body>
-<header><div><div class="eyebrow">ELOAH / PARISIS ENGINE / RECHERCHE HISTORIQUE</div><h1>Vasserot · Le Paris des anciennes rues</h1><p>Notre-Dame de Paris (Hugo) · Plan de 1551 · Cadastre de 1810–1836</p><a class="btn primary" href="#enquete-juiverie-barillerie">Lire le nouveau chapitre ↘</a></div><nav><a class="btn" href="eloah-parisis.html">← PARISIS ENGINE</a> <a class="btn" href="parisis-hugo-1551-comparaison.html">Plan de 1551 ↗</a></nav></header>
+<header><div><div class="eyebrow">ELOAH / PARISIS ENGINE / RECHERCHE HISTORIQUE</div><h1>Vasserot · Le Paris des anciennes rues</h1><p>Notre-Dame de Paris (Hugo) · Plan de 1551 · Cadastre de 1810–1836</p><a class="btn primary" href="#chapitre-trois-vasserot">Lire le chapitre III ↘</a></div><nav><a class="btn" href="eloah-parisis.html">← PARISIS ENGINE</a> <a class="btn" href="parisis-hugo-1551-comparaison.html">Plan de 1551 ↗</a></nav></header>
 <main>
 <p class="intro"><strong>Nouvelle enquête VH-VAS-001.</strong> Je relie les six corridors des deux parcours de Victor Hugo aux archives cadastrales de Vasserot. Ce cadastre montre le Paris du début du XIXe siècle, avant une partie des transformations haussmanniennes. <strong>Il ne montre pas Paris en 1482.</strong> La géométrie des corridors dessinés reste pour le moment indicative, et non calculée sur les contours des parcelles cadastrales.</p>
 <div class="timeline"><div class="epoch"><strong>1482</strong><p>Époque du roman de Hugo, reconstruite littérairement.</p></div><div class="epoch"><strong>1551</strong><p>Plan de Truschet et Hoyau, géoréférencement externe à auditer.</p></div><div class="epoch"><strong>1810–1836</strong><p>Plans parcellaires Vasserot, sources cadastrales numérisées.</p></div><div class="epoch"><strong>2026</strong><p>Tracés de recherche PARISIS, non certifiés au mètre.</p></div></div>
@@ -29,6 +29,11 @@ main{padding:20px clamp(14px,2vw,36px);max-width:1720px;margin:auto}.intro{max-w
 <label style="display:flex;align-items:center;gap:8px;font-size:12px"><input type="checkbox" id="roadsVisible" checked> Montrer les rues historiques quand les données sont chargées</label>
 <div id="roadStatus" class="archive-state" role="status">Réseau ancien pas encore chargé : tentative de téléchargement à l'ouverture de la carte. Sinon, l'import du fichier d'origine reste disponible.</div>
 <p style="font-size:11px;color:#756d61"><b>Source :</b> ALPAGE · Anne-Laure Bethe (lignes) et Paul Rouet (surfaces) · licence ODbL. Le jeu ne doit pas être pris pour un itinéraire exact de 1482.</p></section>
+<section class="panel" id="vasserotComparaison"><div class="eyebrow">MESURES EXPÉRIMENTALES · DONNÉES AUTHENTIQUES SEULEMENT</div><h2>La Juiverie et la Barillerie, parcelle par parcelle</h2>
+<p>Une fois les polygones Vasserot chargés, PARISIS peut repérer automatiquement les parcelles <b>dont le centre est situé à 35 mètres ou moins</b> de nos deux corridors indicatifs. Elles deviennent des <b>candidates à inspecter</b>, coloriées sur la carte. Ce n'est pas une preuve d'alignement ou de survie du Moyen Âge.</p>
+<div class="archive-loader"><button id="compareParcel" type="button" class="primary">Comparer les deux corridors</button><a href="parisis-hugo-axes.html?v=analyse35m" target="_blank" rel="noopener">Agrandir et vérifier sur la carte ↗</a></div>
+<div class="archive-state" id="compareStatus" role="status">Analyse non exécutée : les données cadastrales officielles doivent d'abord avoir été chargées.</div>
+<p style="font-size:11px;color:#756d61">Méthode déclarée : distance approximative entre le centre des enveloppes de parcelles et nos tracés de travail, seuil exploratoire de 35 m. Les résultats ne mesurent pas la position des façades médiévales, et ne prouvent pas le maintien d'un tracé depuis 1482.</p></section>
 <section class="panel" id="twoNeighbourhoods"><div class="eyebrow">DEUX SECTEURS · DEUX COTES D'ARCHIVES</div><h2>La Cité 1827 et le Palais 1828</h2>
 <p>Le catalogue de <em>La Fabrique numérique du passé</em> référence deux feuilles cadastrales différentes, indispensables à confronter pour notre enquête :</p>
 <div class="source"><strong>Quartier de la Cité — 1827</strong><small>38 îlots · 273 points de calage · F/31/90/01 à F/31/90/20</small><a target="_blank" rel="noopener" href="https://api.nakala.fr/data/10.34847/nkl.07886353/faa679f4fe04631eb8dca491a48e3f604bd1190c">Fichier numérisé original (JP2) ↗</a><p class="street-footnote">Piste prioritaire pour l'ancienne Juiverie, le Marché-Palu et la Lanterne.</p></div>
@@ -98,7 +103,26 @@ main{padding:20px clamp(14px,2vw,36px);max-width:1720px;margin:auto}.intro{max-w
 <tr><td><strong>1843</strong></td><td>Ordonnance de largeur à 15 m sur un tronçon de la rue de la Cité</td><td>Identifier les propriétés concernées et les éventuels retranchements.</td></tr></tbody></table>
 <p style="font-size:12px;color:#766a5c">Les dates et faits sont donnés par le dictionnaire de Lazare (1844). Une prescription n'est pas en elle-même la preuve que tous les travaux ont été exécutés.</p>
 </section>
-<div class="log"><strong>Conclusion actuelle · Vasserot VH-VAS-001</strong> Des archives cadastrales vérifiables existent pour la Cité de 1827. Elles peuvent aider à contrôler Juiverie, Marché-Palu, Lanterne, Barillerie et Saint-Barthélemy. En revanche, les contours originaux des parcelles n'ont pas encore été extraits et comparés automatiquement aux trajets. Aucun nouveau tracé médiéval précis ne peut encore être déclaré « validé » sur cette base.</div>
+<article class="narrative" id="chapitre-trois-vasserot">
+<div class="folio">PARISIS ENGINE · VOLUME I · CHAPITRE III · LES PARCELLES TÉMOINS</div>
+<h2>1827 : deux quartiers, deux cartes, une question</h2>
+<p class="opening">Il est tentant de croire que la ville ancienne se cache sous la ville moderne comme une page intacte sous un calque. Mais le temps ne conserve pas les plans : il les corrige sans cesse.</p>
+<h3>I. Une île qui change de visage</h3>
+<p>Au début du XIXe siècle, les géomètres de Philibert Vasserot arpentent Paris. Ce qu'ils enregistrent n'est pas seulement la position d'une rue. Les parcelles et les propriétés dessinent le squelette des quartiers, là où les façades et les monuments donnent au promeneur une image plus immédiate de la ville.</p>
+<p>Deux ensembles documentaires attirent notre attention. Pour le quartier de la Cité, les plans de <strong>1827</strong> regroupent trente-huit îlots sous les cotes <strong>F/31/90/01 à F/31/90/20</strong>, avec 273 points de calage recensés par la Fabrique numérique du passé. Pour le quartier du Palais de Justice, c'est un relevé de <strong>1828</strong>, quatre îlots, sous les cotes <strong>F/31/94/01 à F/31/94/04</strong>, avec 55 points de calage. La Juiverie et la Barillerie doivent donc être cherchées dans deux secteurs documentaires voisins, et non confondues sur une carte unique.</p>
+<h3>II. Les parcelles ne parlent qu'avec prudence</h3>
+<p>Sur le cadastre, certains lots sont très étroits ; d'autres tournent autour d'une cour, d'une impasse ou d'un bâtiment massif. Là où les rues d'aujourd'hui semblent droites, les propriétés d'hier peuvent révéler un angle. La tentation serait de décréter : voilà la rue médiévale retrouvée.</p>
+<p>Ce serait aller trop vite. Le travail scientifique ALPAGE a vectorisé les parcelles de Vasserot à partir des plans d'îlots géoréférencés. C'est un outil précieux, mais ce sont les parcelles foncières de <strong>1810 à 1836</strong>. Une propriété de 1827 n'est pas une façade datée de 1482. Même lorsqu'une limite semble prolonger une rue ancienne, il faut rechercher une trace dans les documents et contrôler la précision du calage.</p>
+<p>Notre programme en tire désormais une opération reproductible : lorsque la couche authentique est chargée, il sélectionne les parcelles dont le centre se trouve à moins de <strong>35 mètres de nos corridors</strong>. Cette distance n'a rien de sacré. C'est un seuil de prospection choisi pour localiser des candidates à examiner, et non pour prouver un alignement. Les résultats ne sont affichés qu'après lecture effective du fichier original.</p>
+<h3>III. Deux mémoires différentes</h3>
+<p>À l'est du Palais, la mémoire de la <strong>Juiverie</strong> traverse le Marché-Palu et la Lanterne avant que les trois dénominations soient réunies en rue de la Cité en 1834. À l'ouest, la <strong>Barillerie</strong> suit les abords d'un Palais dont les transformations ont changé l'organisation des voies. Les deux axes servent de passage à travers l'île, mais ils ne racontent ni la même histoire ni la même géométrie.</p>
+<p>Une liaison peut donc être historique sans être un alignement géométrique. La traversée d'un pont à l'autre répond d'abord aux contraintes du fleuve, du pouvoir et de la circulation. Qu'une ligne traverse plusieurs siècles ne signifie pas qu'elle ait été tracée selon un projet symbolique unique.</p>
+<blockquote>Ce n'est pas la ligne parfaite qui fait la découverte, mais le document qui permet de comprendre pourquoi elle passe ici.</blockquote>
+<h3>IV. Le verdict de cette étape</h3>
+<p>Nous disposons maintenant de sources distinctes : deux quartiers cadastraux datés, des parcelles numérisées, un réseau des voies vectorisé et les anciens noms conservés dans le dictionnaire de 1844. L'étape décisive consistera à comparer les limites et les voies réellement chargées, puis à rechercher les changements entre les plans du XVIe siècle et ceux du XIXe siècle.</p>
+<p>Il nous manque encore la preuve d'une correspondance précise, continue et inchangée depuis 1482. L'enquête avance justement parce qu'elle ne prétend pas la posséder.</p>
+<div class="source-notes">Sources : <a href="https://www.fabriquenumeriquedupasse.fr/explore/assets/atlas-vasserot/explore/" target="_blank" rel="noopener">La Fabrique numérique du passé, Atlas Vasserot : quartier de la Cité (1827), Palais de Justice (1828)</a> · <a href="https://www.data.gouv.fr/datasets/vasserot-parcelles-1810-1836" target="_blank" rel="noopener">Parcelles ALPAGE, A.-L. Bethe</a> · <a href="https://geodata.lib.utexas.edu/catalog/stanford-db591kz1574" target="_blank" rel="noopener">Réseau viaire ALPAGE</a> · <a href="https://fr.wikisource.org/wiki/Dictionnaire_administratif_et_historique_des_rues_de_Paris_et_de_ses_monuments/Cit%C3%A9_(rue_de_la)" target="_blank" rel="noopener">Lazare, 1844 : Cité</a>.</div>
+</article><div class="log"><strong>Conclusion actuelle · Vasserot VH-VAS-001</strong> Des archives cadastrales vérifiables existent pour la Cité de 1827. Elles peuvent aider à contrôler Juiverie, Marché-Palu, Lanterne, Barillerie et Saint-Barthélemy. En revanche, les contours originaux des parcelles n'ont pas encore été extraits et comparés automatiquement aux trajets. Aucun nouveau tracé médiéval précis ne peut encore être déclaré « validé » sur cette base.</div>
 </main>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/shpjs/6.1.0/shp.min.js" integrity="sha512-cVRBoEiESB75FnwL2Kx/ZOsS1DM6i018SEF/Flp117oqC7vNSKP0XlzHN+pE12ga7TjDpS2LEOEP77tI/fvICQ==" crossorigin="anonymous"></script>
 <script>
@@ -176,6 +200,22 @@ roadsButton.addEventListener('click',remoteRoads);
 roadImport.addEventListener('click',()=>roadFile.click());
 roadFile.addEventListener('change',async e=>{const file=e.target.files?.[0];if(!file)return;try{if(file.size>25000000)throw Error('Fichier supérieur à 25 Mo.');await parseRoadBlob(file,file.name)}catch(err){roadSay('Lecture impossible : '+err.message,'warn')}finally{e.target.value=''}});
 roadCheck.addEventListener('change',()=>{try{roadsLayer().showRoads(roadCheck.checked)}catch(e){roadSay(e.message,'warn')}});
+const compareStatus=document.getElementById('compareStatus');
+function compareParcels(){
+try{
+const x=frame.contentWindow?.PARISIS_VASSEROT;
+if(!x?.analyze)throw Error('Carte indisponible, actualiser la page.');
+const counts=x.analyze();
+compareStatus.className='archive-state ok';
+compareStatus.textContent='Résultat provisoire sur '+counts.inspected+' parcelles réelles chargées : Juiverie '+counts.juiverie+' candidates, Barillerie '+counts.barillerie+' candidates (seuil de '+counts.thresholdMeters+' m). '+counts.method;
+return counts;
+}catch(e){
+compareStatus.className='archive-state warn';
+compareStatus.textContent='Comparaison non exécutée : '+e.message;
+return null;
+}
+}
+document.getElementById('compareParcel').addEventListener('click',compareParcels);
 const status=document.getElementById('parcelStatus');
 const button=document.getElementById('loadParcels');
 const fileButton=document.getElementById('fileParcel');
@@ -211,6 +251,7 @@ const result=api().load(collectionFrom(collection));
 api().visible(showParcels.checked);
 if(!result.count)throw new Error('Aucune parcelle dans le secteur. Vérifier la projection ou le contenu du fichier.');
 say(result.count+' contours historiques chargés (sur '+result.sourceCount+' entités du jeu '+source+'). Affichage réel issu des données ALPAGE · 1810–1836, pas une restitution de 1482.','ok');
+compareParcels();
 return result;
 }
 async function fromRemote(){
