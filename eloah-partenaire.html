@@ -299,7 +299,7 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 <div class="campaign-test-send"><label for="campaign-test-address">E-mail pour test</label><div class="campaign-inline-control"><input id="campaign-test-address" type="email" placeholder="adresse@exemple.fr"><button type="button" id="campaign-send-test">➤ Envoyer un essai réel</button></div><small>Clique pour demander un vrai envoi après confirmation. Le test est limité à ta boîte Power &amp; Glam ou à ton compte ELOAH.</small></div>
 <div class="campaign-schedule"><div class="campaign-schedule-mode" role="group" aria-label="Moment d'envoi"><button type="button" id="campaign-send-now" aria-pressed="true">Maintenant</button><button type="button" id="campaign-send-later" aria-pressed="false">Programmer</button></div><input id="campaign-schedule-mode" type="hidden" value="now"><label class="campaign-schedule-date" for="campaign-schedule-at"><span>Date et heure prévues</span><input type="datetime-local" id="campaign-schedule-at" disabled></label><button type="button" id="campaign-save-schedule">Préparer la programmation</button></div>
 </div>
-<div id="campaign-wordpress-mail" class="campaign-wordpress-mail"><div><strong>Messagerie Power &amp; Glam · WordPress Professional Email</strong><p>Boîte gérée via WordPress / Titan. Accès à la messagerie externe ; les campagnes restent gérées par Resend.</p></div><a href="https://wp.titan.email/login/" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir la messagerie Power et Glam dans Titan">✉ Ouvrir ma boîte mail ↗</a></div><section id="campaign-direct-send" class="campaign-direct-send"><div class="campaign-direct-head"><div><strong><span aria-hidden="true">✉</span> Envoi individuel · Power &amp; Glam</strong><p>Solution provisoire : expédition réelle depuis <code>newsletter@thecreworchies.blog</code>, avec réponses vers <code>soniacointe@powerglam.fr</code>. Le destinataire verra le domaine The Crew.</p></div><button id="campaign-activate-direct" type="button">Activer l'expéditeur vérifié</button></div><label>Adresse du destinataire<input id="campaign-direct-recipient" type="email" placeholder="destinataire@exemple.fr" autocomplete="off"></label><label class="campaign-direct-confirm"><input id="campaign-direct-consent" type="checkbox"> Je confirme que ce contact m'a demandé ce message, qu'il n'est pas désabonné ou bloqué et que j'assume cet envoi individuel.</label><button id="campaign-direct-send-button" type="button">Envoyer cet e-mail maintenant</button><p id="campaign-direct-status" role="status"></p><p class="campaign-direct-info">Envoi individuel uniquement (pas aux 127 contacts) · 5 messages/heure, 20/jour · e-mail HTML avec version texte · confirmation avant expédition.</p></section><div id="campaign-resend-connection" class="campaign-resend-connection"><span id="campaign-resend-status" role="status">Resend · connexion en cours de vérification…</span><button type="button" id="campaign-resend-check">↻ Vérifier Resend</button><button type="button" id="campaign-login-toggle">Connexion ELOAH</button><a href="https://resend.com/domains" target="_blank" rel="noopener noreferrer">Vérifier les domaines ↗</a></div><div id="campaign-login-panel" hidden><p>Connecte-toi avec ton compte ELOAH pour autoriser les e-mails tests. Aucun mot de passe n’est demandé ici.</p><label for="campaign-login-email">Adresse e-mail ELOAH<input id="campaign-login-email" type="email" placeholder="ton adresse de connexion" autocomplete="email"></label><button type="button" id="campaign-login-send">Recevoir un lien de connexion</button><p id="campaign-login-status" role="status"></p></div><p id="campaign-delivery-warning" class="campaign-delivery-warning">Resend est configuré pour les tests sur le domaine The Crew vérifié. Power &amp; Glam et La Voix d’Orchies ne peuvent pas encore envoyer ; la programmation de campagnes nécessite un domaine vérifié et une liste réellement synchronisée.</p>
+<div id="campaign-wordpress-mail" class="campaign-wordpress-mail"><div><strong>Messagerie Power &amp; Glam · WordPress Professional Email</strong><p>Boîte gérée via WordPress / Titan. Accès à la messagerie externe ; les campagnes restent gérées par Resend.</p></div><a href="https://wp.titan.email/login/" target="_blank" rel="noopener noreferrer" aria-label="Ouvrir la messagerie Power et Glam dans Titan">✉ Ouvrir ma boîte mail ↗</a></div><section id="campaign-direct-send" class="campaign-direct-send"><div class="campaign-direct-head"><div><strong><span aria-hidden="true">✉</span> Envoi individuel · Power &amp; Glam</strong><p>Solution provisoire : expédition réelle depuis <code>newsletter@thecreworchies.blog</code>, avec réponses vers <code>soniacointe@powerglam.fr</code>. Le destinataire verra le domaine The Crew.</p></div><button id="campaign-activate-direct" type="button">Activer l'expéditeur vérifié</button></div><label>Adresse du destinataire<input id="campaign-direct-recipient" type="email" placeholder="destinataire@exemple.fr" autocomplete="off"></label><label class="campaign-direct-confirm"><input id="campaign-direct-consent" type="checkbox"> Je confirme que ce contact m'a demandé ce message, qu'il n'est pas désabonné ou bloqué et que j'assume cet envoi individuel.</label><button id="campaign-direct-send-button" type="button">Envoyer cet e-mail maintenant</button><p id="campaign-direct-status" role="status"></p><p class="campaign-direct-info">Envoi individuel uniquement (pas aux 127 contacts) · 5 messages/heure, 20/jour · e-mail HTML avec version texte · confirmation avant expédition.</p></section><div id="campaign-resend-connection" class="campaign-resend-connection"><span id="campaign-resend-status" role="status">Resend · connexion en cours de vérification…</span><button type="button" id="campaign-resend-check">↻ Vérifier Resend</button><button type="button" id="campaign-login-toggle">Connexion ELOAH</button><a href="https://resend.com/domains" target="_blank" rel="noopener noreferrer">Vérifier les domaines ↗</a></div><div id="campaign-login-panel" hidden><p>Connecte-toi avec ton compte ELOAH pour autoriser les e-mails tests. Aucun mot de passe n’est demandé ici.</p><label for="campaign-login-email">Adresse e-mail ELOAH<input id="campaign-login-email" type="email" placeholder="ton adresse de connexion" autocomplete="email"></label><button type="button" id="campaign-login-send">Recevoir un lien de connexion</button><p id="campaign-login-status" role="status"></p></div><p id="campaign-delivery-warning" class="campaign-delivery-warning">Les essais individuels Power &amp; Glam et The Crew Orchies utilisent provisoirement le domaine The Crew vérifié. Le Lion Blanc n’a pas encore de domaine d’expédition vérifié. Aucun envoi groupé ni programmation automatique ne sont activés.</p>
 <div class="actions campaign-compose-actions"><button type="submit" id="campaign-save">Enregistrer le brouillon</button><button type="button" id="campaign-preview">Actualiser l’aperçu</button><button type="button" id="campaign-cancel">Fermer</button></div>
 </form>
 <dialog id="campaign-table-dialog" aria-labelledby="campaign-table-heading" aria-describedby="campaign-table-description">
@@ -529,6 +529,8 @@ function openCampaignById(id){
 function value(id){return $('campaign-'+id).value}function capture(){const d={};fields.forEach(k=>d[k]=value(k));return d}function fill(d){fields.forEach(k=>{if(d[k]!==undefined)$('campaign-'+k).value=k==='target'?renameLegacyMailingList(d[k]):d[k]});$('campaign-restored').hidden=!d.__local}function open(d=null){$('campaign-form').hidden=false;$('campaign-preview-output').hidden=true;$('campaign-form').reset();$('campaign-restored').hidden=true;if(d)fill(d);else{let previous=null;try{previous=JSON.parse(localStorage.getItem(scratch)||'null')}catch{}if(previous&&Object.values(previous).some(Boolean))fill(previous)}$('campaign-form').scrollIntoView({behavior:'smooth',block:'start'})}let campaignFilter=mailingBrands.includes(new URLSearchParams(location.search).get("liste"))?new URLSearchParams(location.search).get("liste"):"all";
 function setCampaignFilter(value,updateUrl=false){
  campaignFilter=mailingBrands.includes(value)?value:"all";
+ const exampleButton=$('campaign-demo-load');
+ if(exampleButton)exampleButton.textContent=campaignFilter==="all"||campaignFilter==="Power & Glam"?"✦ Charger la newsletter Power & Glam":"✦ Ouvrir une newsletter "+campaignFilter;
  document.querySelectorAll('[data-campaign-filter]').forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.campaignFilter===campaignFilter)));
  if(updateUrl){
   const link=new URL(location.href);link.searchParams.set("rubrique","Mailing");link.searchParams.delete("campagne");link.searchParams.delete("newsletter");
@@ -593,6 +595,10 @@ $('campaign-form').onsubmit=e=>{e.preventDefault();const d={...capture(),id:$('c
 $('campaign-ai').onclick=()=>{const msg='Rédige une newsletter originale de style '+value('template')+' destinée à '+value('target')+'. Sujet : '+value('subject')+'. Rends un objet accrocheur, un préheader, un corps avec appel à action, et un texte adapté au lectorat. Ne prétends pas envoyer la campagne.';window.open('https://chatgpt.com/?q='+encodeURIComponent(msg),'_blank','noopener');$('campaign-status').textContent='Demande d’aide à la rédaction ouverte dans ChatGPT. Aucun message envoyé.'};
 $('campaign-preview').onclick=()=>{const out=$('campaign-preview-output');out.hidden=false;out.replaceChildren();const h=document.createElement('h3');h.textContent=value('subject')||'Sans sujet';const p=document.createElement('p');p.style.whiteSpace='pre-wrap';p.textContent=value('body')||'Aucun contenu';out.append(h,p)};
 document.querySelectorAll('[data-format]').forEach(btn=>btn.onclick=()=>{const area=$('campaign-body'),type=btn.dataset.format;const a=area.selectionStart,b=area.selectionEnd,part=area.value.slice(a,b);let fragment=type==='bold'?'**'+(part||'texte')+'**':type==='italic'?'*'+(part||'texte')+'*':type==='heading'?'## '+(part||'Titre'):type==='list'?'- '+(part||'Élément'):type==='quote'?'> '+(part||'Citation'):type==='link'?'['+(part||'lien')+'](https://)':type==='separator'?'\n---\n':'';if(type==='undo'){document.execCommand('undo');return}area.setRangeText(fragment,a,b,'end');area.dispatchEvent(new Event('input'));area.focus()});document.querySelectorAll('[data-campaign-filter]').forEach(b=>b.addEventListener('click',()=>setCampaignFilter(b.dataset.campaignFilter,true)));
+document.addEventListener('eloah:mailing-first-example',e=>{
+ const brand=e.detail?.brand,entry=catalogue.find(t=>(t.brand||"Power & Glam")===brand);
+ if(entry)openCampaignById(entry.id);
+});
 document.addEventListener('eloah:mailing-open-campaigns',e=>{
  const brand=e.detail?.brand;
  setCampaignFilter(brand,true);
@@ -604,7 +610,7 @@ document.addEventListener('eloah:mailing-open-campaigns',e=>{
   open({target:brand||'Power & Glam',template:'Souverain','sender-name':settings.sender,'sender-email':settings.email,'reply-to':settings.reply});
   $('campaign-test-address').value='soniacointe@powerglam.fr';
  }else{$('campaign-form').hidden=true;}
- document.getElementById('campaign-title')?.scrollIntoView({behavior:'smooth',block:'start'});
+ (e.detail?.create?document.getElementById('campaign-form'):document.getElementById('campaign-title'))?.scrollIntoView({behavior:'smooth',block:'start'});
 });
 render();document.querySelectorAll('[data-campaign-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.campaignFilter===campaignFilter)));
 const requested=new URLSearchParams(location.search).get("campagne");
@@ -824,6 +830,14 @@ function scheduleRender(){
  requestAnimationFrame(()=>{renderQueued=false;if(form.hidden)return;
   frame.dataset.template=template.value;
   frame.dataset.brand=target.value==='The Crew Orchies'?'crew':target.value==='Le Lion Blanc'?'lion':'pg';
+  const pGOnly=target.value==='Power & Glam';
+  for(const id of ['campaign-wordpress-mail','campaign-direct-send','campaign-demo-reload']){const x=document.getElementById(id);if(x)x.hidden=!pGOnly}
+  const hint=document.getElementById('campaign-delivery-warning');
+  if(hint)hint.textContent=target.value==='Le Lion Blanc'?
+   'Le Lion Blanc : newsletter éditable et enregistrable. Le domaine expéditeur n’est pas encore vérifié ; test et diffusion désactivés.':
+   target.value==='The Crew Orchies'?
+   'The Crew Orchies : domaine vérifié pour les essais individuels, sans synchronisation des abonnés. Aucun envoi collectif ou programmation activés.':
+   'Power & Glam : essais individuels possibles via le domaine vérifié The Crew. Domaine powerglam.fr à vérifier avant tout envoi officiel. Aucun envoi collectif automatique.';
   templateLabel.textContent=template.value;
   count.textContent=body.value.length.toLocaleString('fr-FR')+' caractères';
   preview.click();
@@ -869,7 +883,7 @@ testButton.onclick=()=>{
 function updateOpen(){
  if(form.hidden)return;
  setScheduleMode(scheduleMode.value==='later'?'later':'now',false);
- warning.textContent='Resend est configuré pour les tests techniques The Crew. Pour les campagnes, vérifie les domaines et importe les audiences.';
+ warning.textContent='Essais individuels : domaine The Crew vérifié. Aucun envoi collectif automatique. Le Lion Blanc doit encore configurer un expéditeur.';
  scheduleRender();
 }
 new MutationObserver(updateOpen).observe(form,{attributes:true,attributeFilter:['hidden']});
@@ -1071,6 +1085,11 @@ const getDemo=()=>({
  ].join("\n")
 });
 function loadDemo(){
+ const preferred=new URLSearchParams(location.search).get('liste');
+ if(preferred==='The Crew Orchies'||preferred==='Le Lion Blanc'){
+  document.dispatchEvent(new CustomEvent('eloah:mailing-first-example',{detail:{brand:preferred}}));
+  return;
+ }
  document.querySelectorAll('[data-mail-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.mailTab==='campagnes')));
  document.querySelectorAll('[data-mail-panel]').forEach(p=>p.hidden=p.dataset.mailPanel!=='campagnes');
  const form=$('campaign-form');
