@@ -38,7 +38,7 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <label class="row"><input type="checkbox" id="showRiver" checked><span class="line" style="background:#32778d"></span> Afficher les 4 liaisons historiques et architecturales</label>
 <div class="actions"><button id="fitRiver" type="button">Voir les trois tours et le collège</button><a class="back" href="parisis-levau-1665-documentarium.html?v=registre014">Registre d’archives · 6 pièces ↗</a> <a class="back" href="parisis-nesle-coin-seine.html">Lire les documents de 1550 et 1665 ↗</a></div>
 <div class="notice">Brun : courtine Bois–Coin. Bleu acier : défense Coin–Nesle. Violet pointillé : remplacement du site par le collège. Vert : dialogue architectural voulu entre le Louvre et le collège. Aucun trait n’est une mesure d’époque. <a href="https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263" target="_blank" rel="noopener">Ville de Paris ↗</a></div>
-<div id="riverPointList" class="legend"></div></section><section class="panel" id="fouquet-panorama-points">
+<p class="legend"><a href="parisis-axe-014-levau-archives.html?v=20261013">AXE-014 · Ouvrir le nouveau chapitre d’archives ↗</a>. <b>Brun</b> : corridor de rempart ; <b>bleu</b> : défense fluviale ; <b>violet</b> : succession ; <b>vert</b> : vis-à-vis architecturé. Les segments restent schématiques.</p><p class="legend"><a href="parisis-axe-015-proces-fosse-nesle.html?v=20261013">AXE-015 · Dossier Godefroy, archives foncières et indemnités ↗</a> · Cette enquête documentaire ne crée aucun point fictif ; les 4 liaisons historiques demeurent visibles.</p><div id="riverPointList" class="legend"></div></section><section class="panel" id="fouquet-panorama-points">
 <div class="kicker">AXE-011 · BNF FR. 6465 · FOLIO 57</div><h2>4 sites associés au panorama de Dagobert</h2>
 <p>La notice Biblissima du folio cite le Palais de la Cité, le Louvre et la tour de Nesle. Notre-Dame est également visible dans le paysage selon l'observation iconographique. <b>Ces repères ne sont pas les positions des silhouettes sur l'image :</b> ce sont des localisations de travail sur le plan actuel.</p>
 <label class="row"><input id="showPanorama" type="checkbox" checked> Montrer les quatre repères reliés du panorama</label>
@@ -572,7 +572,22 @@ legacyLine('OLD-or',['OLD-05','OLD-04'],'Arc → Louvre','Comparaison de sites')
 line('OLD-axe-vert','Grand axe historique · points approximatifs','Tracé historique documenté',historicalAxis,'Corridor historique attesté, mesures indicatives');
 const longitude=2+20/60+14.025/3600;
 line('OLD-meridien','Méridien de Paris','Repère de référence',[[48.82,longitude],[48.9,longitude]],'Longitude conventionnelle de référence');
-historicalAxis.slice(1,-1).forEach((p,i)=>features.push({type:'Feature',geometry:{type:'Point',coordinates:[p[1],p[0]]},properties:{id:'OLD-AXE-'+(i+1),group:'Grand axe historique',name:['Carrousel','Tuileries','Concorde'][i],status:'Emplacement de travail'}}));
+historicalAxis.slice(1,-1).forEach((p,i)=>features.push({type:'Feature',geometry:{type:'Point',coordinates:[p[1],p[0]]},properties:{id:'OLD-AXE-'+(i+1),group:'Grand axe historique',name:['Carrousel','Tuileries','Concorde'][i],status:'Emplacement de travail'}})); // AXE-014: ajout non destructif de la provenance et des catégories de preuve.
+ const axe014Evidence={
+ 'RS-02':{period:'Enceinte Charles V, XIVe siècle',classification:'F0 lieu; coordonnées approximatives',accuracy:'Repère de travail, non relevé de fondation'},
+ 'RS-01':{period:'Enceinte Philippe Auguste, XIIIe siècle',classification:'F0 lieu; coordonnées approximatives',accuracy:'Repère de travail, non relevé de fondation'},
+ 'DP-04':{period:'XIIIe siècle; démolition généralement datée 1663',classification:'F0 site; coordonnées approximatives',accuracy:'Tour disparue; géoréférencement à faire',secondarySource:'https://www.bibliotheque-mazarine.fr/fr/evenements/la-tour-de-nesle'},
+ 'RS-03':{period:'Projet 1662; chantier XVIIe siècle',classification:'F0 bâtiment existant; position de la tour distincte',accuracy:'Point du bâtiment actuel',secondarySource:'https://catalogue.bnf.fr/ark:/12148/cb40271833p'},
+ 'DP-03':{period:'Louvre médiéval; relation avec collège XVIIe siècle',classification:'F0 site; coordonnées approximatives',accuracy:'Point général du musée'},
+ 'RIVER-BOIS-COIN':{classification:'F0 relation; RE géométrie indicative',relationNature:'Courtine et transformation des enceintes',color:'#8b6745',source:'https://mazarinum.bibliotheque-mazarine.fr/expositions-virtuelles/item/18071-fr'},
+ 'RIVER-NESLE-COIN':{classification:'F0 défense fluviale; RE géométrie indicative',relationNature:'Contrôle du fleuve',color:'#32778d',source:'https://www.paris.fr/pages/ces-lieux-disparus-qui-font-aussi-l-histoire-de-paris-17263'},
+ 'RIVER-NESLE-COLLEGE':{classification:'F0 succession du site; RE positions indicatives',relationNature:'Succession architecturale',color:'#846da2',source:'https://catalogue.bnf.fr/ark:/12148/cb40271832b'},
+ 'RIVER-COLLEGE-LOUVRE':{classification:'F0 relation architecturale; RE segment indicatif',relationNature:'Vis-à-vis formel XVIIe siècle',color:'#4f8262',source:'https://arts-graphiques.louvre.fr/detail/oeuvres/0/210375-Vue-du-College-des-Quatre-Nations'}
+ };
+ features.forEach(f=>{const evidence=axe014Evidence[f.properties.id];if(evidence)Object.assign(f.properties,evidence);});
+
+
+
 return {type:'FeatureCollection',name:'PARISIS ENGINE · Atlas complet · tous les points et traits conservés',properties:{generatedAt:stamp,projection:'EPSG:4326',version:'2026-10-13',notice:'Traits classés par nature ; superposition spatiale ne prouve aucune intention.'},features};
 }
 function downloadFullAtlas(){
