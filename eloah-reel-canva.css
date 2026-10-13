@@ -725,3 +725,16 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
  #eloah-canva-studio .ecs-sidebody:has(.ecs-brand-panel){max-height:calc(64dvh - 37px)}
  #eloah-canva-studio .ecs-brand-workspace{grid-template-columns:112px minmax(0,1fr)}
 }
+
+/* Marque : navigation horizontale compacte pour les petits téléphones */
+@media(max-width:490px){
+ #eloah-canva-studio .ecs-brand-workspace{display:flex;flex-direction:column;gap:8px;min-width:0}
+ #eloah-canva-studio .ecs-brand-nav{position:static;display:flex;flex-direction:row;flex-wrap:nowrap;gap:5px;width:100%;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;padding:2px 0 9px;scroll-snap-type:x proximity}
+ #eloah-canva-studio .ecs-brand-nav button{flex:0 0 auto;min-height:38px;white-space:nowrap;padding:8px 10px;border:1px solid #e3e4ed;scroll-snap-align:start;border-radius:9px;font-size:11px}
+ #eloah-canva-studio .ecs-brand-nav button.active{border-color:#c8b4e5}
+ #eloah-canva-studio .ecs-brand-content{width:100%;min-width:0}
+ #eloah-canva-studio .ecs-brand-kitbar{padding:10px}
+ #eloah-canva-studio .ecs-brand-hero{padding:20px 12px}
+ #eloah-canva-studio .ecs-brand-color-row>span{font-size:10px;max-width:75px}
+ #eloah-canva-studio .ecs-brand-mini-models{max-width:100%}
+}
