@@ -128,3 +128,8 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 
 Certains chantiers mentionnés dans nos échanges ne sont pas des dossiers autonomes dans la liste du lecteur : le dossier complet sur les évangiles apocryphes, la synthèse comparative des traductions et un carnet de recherche chronologique. Il faudra vérifier leur présence réelle dans le dépôt avant de les annoncer comme publiés.
 
+
+
+## Complément d'inventaire — recherches non encore intégrées
+
+[Consulter le registre des dossiers à retrouver et les accès vérifiés](foi-control.html?file=eloah-foi-registre-chantiers-retrouver.md).
