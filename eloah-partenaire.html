@@ -478,6 +478,10 @@ function templateDraft(t){
  ].join("\n")};
 }
 function openCampaignById(id){
+ // Open the tab explicitly for direct URLs during initial HTML parsing,
+ // before the global DOMContentLoaded tab listeners are registered.
+ document.querySelectorAll('[data-mail-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.mailTab==='campagnes')));
+ document.querySelectorAll('[data-mail-panel]').forEach(p=>p.hidden=p.dataset.mailPanel!=='campagnes');
  const t=catalogue.find(x=>x.id===id);
  const saved=drafts.find(x=>String(x.id)===String(id));
  if(!t&&!saved)return false;
@@ -992,6 +996,8 @@ const getDemo=()=>({
  ].join("\n")
 });
 function loadDemo(){
+ document.querySelectorAll('[data-mail-tab]').forEach(b=>b.setAttribute('aria-selected',String(b.dataset.mailTab==='campagnes')));
+ document.querySelectorAll('[data-mail-panel]').forEach(p=>p.hidden=p.dataset.mailPanel!=='campagnes');
  const form=$('campaign-form');
  if(!form)return;
  const hasCurrent=Boolean($('campaign-body').value.trim()||$('campaign-subject').value.trim());
