@@ -81,3 +81,8 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-clip[data-select]::before{left:6px}
 #eloah-canva-studio .ecs-clip[data-select]::after{right:6px}
 #eloah-canva-studio .ecs-clip:focus-visible{outline:3px solid #335ad0;outline-offset:1px}
+
+#eloah-canva-studio .ecs-itembtn[hidden]{display:none!important}
+#eloah-canva-studio .ecs-cardgrid .ecs-itembtn{min-height:80px;flex-wrap:wrap;justify-content:center;align-content:center;text-align:center;gap:4px;padding:9px}
+#eloah-canva-studio .ecs-cardgrid .ecs-itembtn .ecs-iconbig{width:100%;font-size:28px}
+#eloah-canva-studio #ecs-element-search{background:#f9fafb;border-color:#ced8e1}
