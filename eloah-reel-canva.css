@@ -73,3 +73,11 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-stagewrap.ecs-dragover{background:#b7ddf6}
 @media(max-width:920px){#eloah-canva-studio .ecs-layout{grid-template-columns:68px 245px minmax(0,1fr)}#eloah-canva-studio .ecs-top{gap:5px;padding:6px 7px}#eloah-canva-studio .ecs-top a{display:none}#eloah-canva-studio .ecs-brand{font-size:11px}}
 @media(max-width:690px){#eloah-canva-studio .ecs-layout{grid-template-columns:1fr;display:flex;flex-direction:column}#eloah-canva-studio .ecs-rail{order:0;flex-direction:row;max-height:none;min-height:66px;overflow-x:auto;flex-shrink:0;padding:3px 5px;border-bottom:1px solid #ddd}#eloah-canva-studio .ecs-railbtn{min-width:70px;min-height:62px}#eloah-canva-studio .ecs-sidebar{order:1;max-height:0;overflow:hidden;border:0}#eloah-canva-studio .ecs-sidebar.ecs-open{max-height:300px;border-bottom:1px solid #ddd}#eloah-canva-studio .ecs-sidebody{max-height:242px}#eloah-canva-studio .ecs-sidehead{padding:8px 16px;font-size:16px}#eloah-canva-studio .ecs-center{order:2}#eloah-canva-studio .ecs-stagewrap{min-height:440px;padding:16px}#eloah-canva-studio .ecs-stagebox{height:min(52dvh,480px)}#eloah-canva-studio .ecs-timeline{height:185px;padding:8px}#eloah-canva-studio .ecs-top .ecs-projectname{width:105px}#eloah-canva-studio .ecs-topspacer{flex:1}#eloah-canva-studio .ecs-toolbar{height:45px;padding:5px}#eloah-canva-studio .ecs-player{padding:4px}}
+
+/* Montage tactile : chaque clip est déplaçable et ajustable par ses extrémités. */
+#eloah-canva-studio .ecs-clip[data-select]{touch-action:none;cursor:grab;user-select:none;position:absolute;padding-inline:14px}
+#eloah-canva-studio .ecs-clip[data-select]:active{cursor:grabbing}
+#eloah-canva-studio .ecs-clip[data-select]::before,#eloah-canva-studio .ecs-clip[data-select]::after{content:"";position:absolute;top:4px;bottom:4px;width:3px;border-radius:2px;background:currentColor;opacity:.5}
+#eloah-canva-studio .ecs-clip[data-select]::before{left:6px}
+#eloah-canva-studio .ecs-clip[data-select]::after{right:6px}
+#eloah-canva-studio .ecs-clip:focus-visible{outline:3px solid #335ad0;outline-offset:1px}
