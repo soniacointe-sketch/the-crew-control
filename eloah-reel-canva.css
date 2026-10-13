@@ -175,3 +175,16 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-audio-buttons button{margin:0}
 @media(max-width:1100px){#eloah-canva-studio .ecs-layout{grid-template-columns:68px 320px minmax(0,1fr)}#eloah-canva-studio .ecs-voiceicon{flex-basis:62px;width:62px;height:65px}#eloah-canva-studio .ecs-audio-voicecards button{min-height:79px}}
 @media(max-width:690px){#eloah-canva-studio .ecs-layout{grid-template-columns:1fr}#eloah-canva-studio .ecs-sidebody:has(.ecs-audio-header){max-height:385px}}
+
+/* Bibliothèque de musiques complètes avec écoute et import */
+#eloah-canva-studio .ecs-freepd{border-top:1px solid #e6eaf0;padding-top:10px}
+#eloah-canva-studio .ecs-freepd>.ecs-sectiontitle{margin:13px 0 8px}
+#eloah-canva-studio .ecs-freepd>.ecs-sectiontitle strong{font-size:14px}
+#eloah-canva-studio .ecs-freepd .ecs-audiosection{margin:14px 0 19px}
+#eloah-canva-studio .ecs-freepd .ecs-audiosection .ecs-sectiontitle{background:#f5f7fa;border-radius:7px;padding:7px 9px}
+#eloah-canva-studio .ecs-music-source{font-size:12px;color:#17699d;text-decoration:underline;text-underline-offset:2px}
+#eloah-canva-studio .ecs-mixkit-track{min-height:64px}
+#eloah-canva-studio .ecs-mixkit-track .ecs-soundadd{font-size:17px;text-decoration:none}
+#eloah-canva-studio .ecs-mixkit-track .ecs-soundplay{display:block;text-decoration:none}
+#eloah-canva-studio .ecs-soundrow:focus-within{background:#eef7fb;border-radius:8px}
+#eloah-canva-studio .ecs-soundrow button:focus-visible,#eloah-canva-studio .ecs-soundrow a:focus-visible{outline:2px solid #1d6fbc;outline-offset:3px}
