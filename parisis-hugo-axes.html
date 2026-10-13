@@ -27,11 +27,11 @@ table{border-collapse:collapse;width:100%;font-size:12px}th,td{border-bottom:1px
 <div class="actions"><button id="fit">Voir les deux tracés</button><button id="export">Exporter GeoJSON</button></div>
 <div class="notice"><strong>Point de méthode :</strong> les portes au nord représentées par des arcs actuels datent de 1672 et 1674. Leurs emplacements correspondent aux anciennes portes de l'enceinte de Charles V, mais il ne s'agit pas des bâtiments du roman. Les ponts actuels ont aussi été reconstruits. Les coordonnées des portions de rues sont indicatives.</div>
 </section>
-<section class="panel" id="trois-martyrs-points"><div class="kicker">NOUVEAU · ÉPIGRAPHIE & ICONOGRAPHIE</div><h2>Le réseau des trois martyrs</h2>
-<p>Quatre lieux de conservation ou d'origine, distincts de la porte médiévale et de la basilique déjà présentes dans les sept points royaux. <b>Chaque point indique un bâtiment, pas une position exacte de statue dans ce bâtiment.</b></p>
-<label class="row"><input type="checkbox" id="showSaints"> Afficher les 4 points iconographiques</label>
-<div class="actions"><button type="button" id="fitSaints">Voir les quatre lieux sur la carte</button><a class="back" href="parisis-axe-spirituel-nord-sud.html#enquete-trois-martyrs">Lire l'analyse détaillée ↗</a></div>
-<div class="notice"><b>Violet foncé :</b> Notre-Dame (portail ancien) et musée de Cluny (fragment original). <b>Vert :</b> Saint-Germain-l'Auxerrois (statues du XIXe siècle). <b>Bleu :</b> Louvre (relief du XIVe siècle provenant de l'abbaye de Saint-Denis). Aucun trait géométrique ne relie automatiquement les œuvres : leur lien est <b>iconographique et documentaire</b>.</div>
+<section class="panel" id="trois-martyrs-points"><div class="kicker">NOUVEAU · ÉPIGRAPHIE & ICONOGRAPHIE</div><h2>Le réseau des trois martyrs et l’Estrée</h2>
+<p>Cinq lieux documentaires : quatre lieux de conservation ou d’origine des œuvres et l’église actuelle Saint-Denys-de-l’Estrée. <b>Chaque point identifie un site actuel, pas l’emplacement précis d’une sculpture ni la position exacte de la chapelle du VIIe siècle.</b></p>
+<label class="row"><input type="checkbox" id="showSaints"> Afficher les 5 points iconographiques</label>
+<div class="actions"><button type="button" id="fitSaints">Voir les cinq lieux sur la carte</button><a class="back" href="parisis-axe-spirituel-nord-sud.html#enquete-trois-martyrs">Lire l'analyse détaillée ↗</a></div>
+<div class="notice"><b>Violet foncé :</b> Notre-Dame (portail ancien) et musée de Cluny (fragment original). <b>Vert :</b> Saint-Germain-l'Auxerrois (statues du XIXe siècle). <b>Bleu :</b> Louvre (relief du XIVe siècle provenant de l'abbaye de Saint-Denis). <b>Ocre :</b> l’église actuelle de l’Estrée. Un trait ocre sur la carte relie cette église et la basilique selon l’axe de l’aménagement moderne, attesté par les Archives départementales. Il ne reconstitue aucun chemin mérovingien. Les autres œuvres ne sont pas reliées par des lignes artificielles.</div>
 <div id="saintsPointList"></div></section><section class="panel" id="fouquet-points">
 <div class="kicker">NOUVEAU · FOUQUET · BNF FR. 6465 F. 417R</div><h2>7 points du Paris royal</h2>
 <p><strong>Sept repères cartographiques</strong> pour distinguer les monuments représentés dans l'enluminure de Jean Fouquet, les anciennes portes successives et le lieu de sépulture royale. Une miniature <strong>n'est pas un relevé métrique</strong> : les points sont des localisations modernes de travail.</p>
@@ -151,13 +151,16 @@ const iconoPoints=[
 {id:'SP-01',name:'Notre-Dame · portail Saint-Étienne',lat:48.85308737345562,lng:2.349922147855014,kind:'origine',date:'1258–1265 · portail du transept sud',detail:'Les témoins anciens y situent Denis, Rustique et Éleuthère. Décor très mutilé puis déposé pendant la Révolution. Localisation du portail issue de la Base Théophile.',source:'https://www.musee-moyenage.fr/media/documents-pdf/dossiers-de-presse/dp-faire-parler-les-pierres.pdf'},
 {id:'SP-02',name:'Musée de Cluny · fragment de Notre-Dame',lat:48.85055,lng:2.34447,kind:'conservation',date:'Statue sculptée 1258–1265 · découverte 1839',detail:'Statue Cl. 18651 attribuée avec réserve à Rustique OU Éleuthère. Exhumée rue de la Santé en 1839, auparavant à Notre-Dame. Emplacement actuel représenté au niveau du musée, non de la vitrine.',source:'https://sculpturesmedievales-cluny.fr/notices/notice.php?id=55'},
 {id:'SP-03',name:'Église Saint-Germain-l’Auxerrois · trois statues',lat:48.85946,lng:2.34162,kind:'moderne',date:'Œuvres du XIXe siècle · notice PM75000126',detail:'Trois statues en pierre identifiées Denis, Rustique et Éleuthère dans la chapelle Saint-Denis. Ces statues datent du XIXe siècle et ne proviennent pas de la porte médiévale.',source:'https://pop.culture.gouv.fr/notice/palissy/PM75000126'},
-{id:'SP-04',name:'Musée du Louvre · relief des trois saints',lat:48.860611,lng:2.337644,kind:'collection',date:'Vers 1300–1325 · RF 462 A / RF 2614',detail:'Fragment de retable en marbre de l’abbaye de Saint-Denis, possiblement issu de son autel matutinal. Conservé au Louvre, salle 205, aile Richelieu ; collection et provenance ne coïncident pas.',source:'https://collections.louvre.fr/ark:/53355/cl010092986'}
+{id:'SP-04',name:'Musée du Louvre · relief des trois saints',lat:48.860611,lng:2.337644,kind:'collection',date:'Vers 1300–1325 · RF 462 A / RF 2614',detail:'Fragment de retable en marbre de l’abbaye de Saint-Denis, possiblement issu de son autel matutinal. Conservé au Louvre, salle 205, aile Richelieu ; collection et provenance ne coïncident pas.',source:'https://collections.louvre.fr/ark:/53355/cl010092986'},
+{id:'SP-05',name:'Saint-Denys-de-l’Estrée · église actuelle',lat:48.9366401,lng:2.3497945,kind:'estree',date:'Projet 1860 · construction 1864–1867',detail:'Église conçue par Viollet-le-Duc sur ou près du site de l’établissement ancien, le long de la Strata. L’édifice actuel ne représente pas le sanctuaire de l’époque de Dagobert. Située dans l’axe de la basilique au bout de la rue de la République.',source:'https://patrimoine.seinesaintdenis.fr/Eglise-Saint-Denis-de-l-Estree-2105'}
 ];
 const saintLayer=L.layerGroup();
 const saintMarkers={};
-const iconoColors={origine:'#5c3779',conservation:'#7c568e',moderne:'#448264',collection:'#4267a0'};
+const iconoColors={origine:'#5c3779',conservation:'#7c568e',moderne:'#448264',collection:'#4267a0',estree:'#ad772f'};
 function renderSaints(){
 saintLayer.clearLayers();
+const estree=iconoPoints.find(p=>p.id==='SP-05'),basilica=royalPoints.find(p=>p.id==='FQ-07');
+if(estree&&basilica){L.polyline([[estree.lat,estree.lng],[basilica.lat,basilica.lng]],{color:'#ad772f',weight:5,opacity:.9,dashArray:'10 7'}).bindTooltip('Axe urbain voulu au XIXe siècle, pas voie historique mérovingienne').addTo(saintLayer);}
 for(const p of iconoPoints){
 const marker=L.circleMarker([p.lat,p.lng],{radius:10,color:'#fffdfa',weight:3,fillColor:iconoColors[p.kind],fillOpacity:1}).addTo(saintLayer);
 marker.bindTooltip(p.id+' · '+p.name,{sticky:true});
@@ -167,6 +170,7 @@ saintMarkers[p.id]=marker;
 }
 function toggleSaints(){const checked=document.getElementById('showSaints').checked;if(checked){if(!map.hasLayer(saintLayer))saintLayer.addTo(map)}else map.removeLayer(saintLayer);}
 function zoomSaints(){document.getElementById('showSaints').checked=true;toggleSaints();map.fitBounds(L.latLngBounds(iconoPoints.map(p=>[p.lat,p.lng]).concat([[royalPoints[0].lat,royalPoints[0].lng]])).pad(.24),{maxZoom:14});}
+function zoomEstree(){document.getElementById('showSaints').checked=true;toggleSaints();const church=iconoPoints.find(p=>p.id==='SP-05'),basilica=royalPoints.find(p=>p.id==='FQ-07');map.fitBounds(L.latLngBounds([[church.lat,church.lng],[basilica.lat,basilica.lng]]).pad(.65),{maxZoom:16});}
 function renderSaintList(){
 const parent=document.getElementById('saintsPointList');parent.textContent='';
 for(const p of iconoPoints){
@@ -377,6 +381,6 @@ document.getElementById('showSaints').addEventListener('change',toggleSaints);
 document.getElementById('fitSaints').addEventListener('click',zoomSaints);
 document.addEventListener('click',e=>{const b=e.target.closest('button[data-saint-point]');if(!b)return;const p=iconoPoints.find(x=>x.id===b.dataset.saintPoint);if(!p)return;document.getElementById('showSaints').checked=true;toggleSaints();map.flyTo([p.lat,p.lng],16,{duration:.5});setTimeout(()=>saintMarkers[p.id]?.openPopup(),550)});
 renderSaints();renderSaintList();royalMapRender();renderRoyalList();renderStreetList();evidencePanel();render();
-if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
+if(new URLSearchParams(location.search).get('estree')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Vue Saint-Denis : plan de Paris 1551 masqué car hors couverture.';zoomEstree();}else if(new URLSearchParams(location.search).get('saints')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué dans l’étude des œuvres conservées.';zoomSaints();}else if(new URLSearchParams(location.search).get('royal')==='1'){oldToggle.checked=false;map.removeLayer(oldMapTiles);document.getElementById('histStatus').textContent='Plan 1551 masqué : il ne couvre pas la basilique de Saint-Denis.';zoomRoyal();}else fit();
 })();
 </script></body></html>
