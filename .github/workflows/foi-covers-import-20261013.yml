@@ -70,5 +70,15 @@ jobs:
           git add assets/foi-chapitres/photo-*.webp
           if ! git diff --cached --quiet; then
             git commit -m "Importer les dix couvertures photographiques ELOAH Foi"
-            git push
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main
+              if git push origin HEAD:main; then
+                echo "Les dix images ont été publiées."
+                exit 0
+              fi
+              sleep 3
+            done
+            echo "Impossible de publier après cinq tentatives."
+            exit 1
           fi
