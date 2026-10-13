@@ -95,7 +95,7 @@ function parse(text){
  return {labels:data.map(r=>String(r[0]).slice(0,25)),names,values:data.map(r=>Array.from({length:cols},(_,i)=>safeNum(r[i+1]??0)))};
 }
 function migrateLegacy(e){
- if(typeof e?.dataText==='string'&&e.dataText.trim())return e.dataText;
+ if(typeof e?.dataText==='string')return e.dataText;
  const values=String(e?.values||'35,55,25,45').split(/[,;\s]+/).map(Number).filter(Number.isFinite).slice(0,16);
  return 'Catégorie;Valeur\n'+(values.length?values:[35,55,25,45]).map((v,i)=>'Élément '+(i+1)+';'+v).join('\n');
 }
@@ -109,7 +109,7 @@ function settings(id){
 }
 function dataset(e){
  const d=parse(migrateLegacy(e)),def=template(e);
- if(!d.labels.length)return parse(DEFAULT_DATA);
+ if(!d.labels.length)return d;
  if(def.options.series===1)return {...d,names:d.names.slice(0,1),values:d.values.map(x=>x.slice(0,1))};
  return {...d,names:d.names.slice(0,3),values:d.values.map(x=>x.slice(0,3))};
 }
@@ -176,7 +176,7 @@ function drawBars(c,e,d,def,colorList){
     if(opts.lollipop){
      c.beginPath();c.moveTo(cx+cell*.34,zero);c.lineTo(cx+cell*.34,mapY(v));c.strokeStyle=color;c.lineWidth=5;c.stroke();
      c.fillStyle=color;c.beginPath();c.arc(cx+cell*.34,mapY(v),13,0,Math.PI*2);c.fill();
-    }else roundBar(c,cx,top,Math.max(7,cell*(opts.thin?.5:.78)),Math.max(1,h),color,opts.rounded?17:4);
+    }else roundBar(c,cx,top,Math.max(7,cell*(opts.thin ? .5 : .78)),Math.max(1,h),color,opts.rounded?17:4);
     if(e.chartShowValues&&(!opts.stacked||j===series-1))text(c,short(opts.stacked?orig:v),cx+cell*.4,Math.max(184,top-21),20,'#555e67');
    }else{
     const cy=230+i*gap+gap*.09+(grouped?j*cell:0);
@@ -274,6 +274,7 @@ function render(c,e){
  const width=Math.max(80,Number(e.w)||780),height=Math.max(80,Number(e.h)||580);
  c.translate(Number(e.x)||0,Number(e.y)||0);c.scale(width/1000,height/1000);
  c.fillStyle=e.chartBackground||'#ffffff';c.fillRect(0,0,1000,1000);
+ if(!d.labels.length){text(c,'Ajoute des données dans le panneau de gauche',500,510,28,'#63758a');c.restore();return}
  c.font='26px system-ui';c.textAlign='center';c.textBaseline='middle';
  if(e.chartShowTitle)text(c,String(e.chartTitle||'Graphique').slice(0,65),500,98,clamp(e.chartFontSize||34,20,65),'#25364a','center','750');
  if(def.type==='pie')drawPie(c,e,d,def,colorList);
