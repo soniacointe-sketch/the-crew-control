@@ -58,7 +58,7 @@ a{color:#805B2C}
  <h2 id="chatPromptTitle">Continuer mon travail avec ChatGPT</h2>
  <p class="muted">Le prompt est prêt pour le module ouvert. Tu peux le modifier avant de l’utiliser. Une commande de missions reprend uniquement leurs titres, univers, statuts et liens AAF. Aucun champ privé de contact ou de paiement n’est intégré.</p>
  <label for="chatPromptType" class="chat-prompt-label">Que veux-tu faire ?</label>
- <select class="field" id="chatPromptType"><option value="continue">Poursuivre le développement</option><option value="audit">Auditer et corriger</option><option value="mission">Construire une mission</option><option value="command">Commander les missions de la console</option><option value="routine">Commander les routines</option><option value="architecture">Faire évoluer toute l’architecture</option></select>
+ <select class="field" id="chatPromptType"><option value="continue">Poursuivre le développement</option><option value="audit">Auditer et corriger</option><option value="mission">Construire une mission</option><option value="command">Commander les missions de la console</option><option value="routine">Commander les routines</option><option value="program">Commander le Programme</option><option value="architecture">Faire évoluer toute l’architecture</option></select>
  <label for="chatPromptText" class="chat-prompt-label">Prompt à transmettre</label>
  <textarea class="field chat-prompt-text" id="chatPromptText" rows="11" spellcheck="true"></textarea>
  <div class="chat-prompt-actions">
@@ -81,7 +81,7 @@ const endpoint="https://voytsqyorhoveurnguxn.supabase.co",key="sb_publishable_Wr
 const auth=document.getElementById("authScreen"),app=document.getElementById("app");
 const sb=window.supabase?.createClient(endpoint,key);
 if(!sb){document.getElementById("authInfo").textContent="Connexion indisponible : vérifie la connexion Internet.";return;}
-let currentUser=null,view="overview",editId=null,scope="all",missionFilter="pack",assetType="all",assetState="all",routineFrequency="all",aafActionFilter="all",aafSearch="",securityArea="all",securitySearch="",programPhase="all",programPriority="all",programSearch="";
+let currentUser=null,view="overview",editId=null,scope="all",missionFilter="pack",assetType="all",assetState="all",routineFrequency="all",aafActionFilter="all",aafSearch="",securityArea="all",securitySearch="",programPhase="all",programPriority="all",programSearch="",chatProgramSelection=null,chatProgramRows=[];
 let prefix="sonia_os_command_center_v2_unset_";
 const configs={
 transactions:{title:"Finances",hint:"Encaissements confirmés, frais, remboursements et virements distincts",fields:[["date","Date","date"],["business","Business","business"],["source","Source","select:Stripe|Jetpack|HelloAsso|Manuel|Autre"],["external_id","Référence unique","text"],["type","Nature","select:vente|frais|remboursement|virement|dépense"],["status","Statut","select:confirmé|à vérifier|en attente|annulé"],["amount","Montant (€)","number"],["label","Description","text"]]},
@@ -372,7 +372,7 @@ else if(view==="roadmap"){
  '<p class="program-card-metric"><b>Indicateur :</b> '+esc(item.metric)+' · <b>cible :</b> '+esc(item.target??"À définir")+'</p>'+
  '<p class="muted"><b>Suivi :</b> '+esc(item.measure_status==="mesurée"?"Valeur actuelle renseignée : "+item.current:"À mesurer")+' · '+esc(item.status==="atteint"?"Déclaré atteint, preuve à contrôler":item.status==="en cours"?"En cours selon la fiche":"Projet à planifier ou confirmer")+'</p>'+
  '<p class="muted">'+esc(item.description||"Définir la méthode de mesure et les pièces attendues.")+'</p>'+
- '<div class="program-card-actions"><button type="button" class="btn" data-program-prompt="'+esc(item.id)+'">↗ Commander dans ChatGPT</button><button type="button" class="btn secondary" data-program-go="'+esc(item.module)+'">Module lié</button><button type="button" class="btn secondary" data-program-go="goals">Modifier l’objectif</button></div></article>').join("")+'</div></section>'+
+ '<div class="program-card-actions"><button type="button" class="btn" data-program-prompt="'+esc(item.id)+'">↗ Commander dans ChatGPT</button><button type="button" class="btn secondary" data-program-go="'+esc(item.module)+'">Module lié</button><button type="button" class="btn secondary" data-program-edit="'+esc(item.id)+'">Modifier l’objectif</button></div></article>').join("")+'</div></section>'+
  '<section class="panel"><details class="program-heritage"><summary>Voir les cinq jalons du programme initial SONIA OS</summary><p class="muted">Calendrier initial conservé à titre de référence. Ces jalons ne certifient pas un travail terminé.</p><div class="roadgrid">'+initialPlans.map(([tag,name,desc,module])=>'<article class="roadcard"><span class="pill">'+esc(tag)+'</span><h3>'+esc(name)+'</h3><p>'+esc(desc)+'</p><button class="btn secondary" data-program-go="'+esc(module)+'">Ouvrir le module →</button></article>').join("")+'</div></details></section>';
 }
 else if(view==="overview"){const s=stats();h='<div class="grid">'+[['Ventes confirmées',euro(s.sales)],['Frais confirmés',euro(s.fees)],['Événements',s.events],['Missions ouvertes',s.tasks]].map(x=>'<div class="kpi"><span class="muted">'+x[0]+'</span><strong>'+x[1]+'</strong></div>').join("")+'</div><div class="panel"><h2>Vos univers</h2><p>Power & Glam · Éditions, coaching, ventes et produits numériques</p><p>The Crew Orchies · Danse, adhésions, événements et bénévoles</p><p>SONIA OS · Missions, priorités et pilotage transverse</p></div><div class="notice">Les données de ces nouveaux modules sont locales à cet appareil. Les encaissements Stripe, Jetpack et HelloAsso ne sont pas synchronisés automatiquement. Un virement ne constitue jamais une deuxième vente.</div>'}
@@ -435,6 +435,18 @@ if(view==="members"&&(scope==="all"||scope==="crew")){
 }
 if(view==="overview"){h+='<div class="panel"><h2>Centre des opérations</h2><p class="muted">11 nouveaux registres intégrés aux sauvegardes et à la synchronisation cloud manuelle. Les automatismes sont des projets documentés, jamais des exécutions implicites.</p><div class="toolbar"><button class="btn secondary" data-road="projects">Projets & portefeuilles</button><button class="btn secondary" data-road="documents">Bibliothèque documentaire</button><button class="btn secondary" data-road="goals">Objectifs & indicateurs</button><button class="btn secondary" data-road="routines">Routines & procédures</button><button class="btn secondary" data-road="integrations">Connexions & services</button><button class="btn secondary" data-road="automationPlans">Automatisations & déclencheurs</button><button class="btn secondary" data-road="risks">Risques & incidents</button><button class="btn secondary" data-road="assets">Ressources & actifs</button><button class="btn secondary" data-road="procedures">Méthodes & règles</button><button class="btn secondary" data-road="journal">Journal des opérations</button><button class="btn secondary" data-road="backlog">Idées & laboratoire</button></div></div>';h+='<section class="panel"><h2>Ma maison numérique · Tous les univers</h2><div class="universe-grid">'+universes.map(([id,name,url,desc])=>'<a class="universe-card" href="./'+url+'"><b>'+esc(name)+'</b><small>'+esc(desc)+'</small><span>Ouvrir ↗</span></a>').join("")+'</div></section><section class="panel"><h2>Actions immédiates</h2><div class="toolbar"><button class="btn" data-road="missionDesk">Console AAF</button><button class="btn" data-road="tasks">Missions</button><button class="btn secondary" data-road="decisions">Validations AAF</button><button class="btn secondary" data-road="knowledge">Bibliothèque</button><button class="btn secondary" data-road="audits">Audits</button></div></section>';}
 if(view==="overview")h+="<div class=\"panel\"><h2>SONIA OS · Gouvernance et capacités</h2><div class=\"grid\"><div class=\"kpi\"><span class=\"muted\">Agents répertoriés</span><strong id=\"k-agents\">0</strong></div><div class=\"kpi\"><span class=\"muted\">Décisions à valider</span><strong id=\"k-decisions\">0</strong></div><div class=\"kpi\"><span class=\"muted\">Workflows testés</span><strong id=\"k-workflows\">0</strong></div><div class=\"kpi\"><span class=\"muted\">Audits ouverts</span><strong id=\"k-audits\">0</strong></div></div><div class=\"toolbar\"><button class=\"btn\" data-road=\"decisions\">Mes validations</button><button class=\"btn secondary\" data-road=\"agents\">Registre agents</button><button class=\"btn secondary\" data-road=\"roadmap\">Programme</button></div></div><div class=\"notice\">AAF · A0 observer · A1 analyser · A2 préparer · A3 exécuter uniquement avec un mandat explicite. Les niveaux sont documentaires, pas des contrôles techniques de permission.</div>";if(configs[view]&&view!=="transactions"&&view!=="contacts"&&view!=="members")h+='<div class="notice">Les entrées préremplies sont un inventaire de travail : les états et connexions doivent être vérifiés avant toute action réelle.</div>';document.getElementById("view").innerHTML=h;
+ if(view==="roadmap"){
+  const selectPeriod=document.getElementById("programPhase"),selectPriority=document.getElementById("programPriority"),search=document.getElementById("programSearch");
+  if(selectPeriod)selectPeriod.onchange=()=>{programPhase=selectPeriod.value;render()};
+  if(selectPriority)selectPriority.onchange=()=>{programPriority=selectPriority.value;render()};
+  if(search)search.oninput=()=>{programSearch=search.value;updateProgramSearch()};
+  const batch=document.getElementById("programChatAll");if(batch)batch.onclick=()=>openProgramPrompt();
+  document.querySelectorAll("[data-program-prompt]").forEach(button=>button.onclick=()=>openProgramPrompt([button.dataset.programPrompt]));
+  document.querySelectorAll("[data-program-go]").forEach(button=>button.onclick=()=>{const destination=button.dataset.programGo;if(labels[destination]){view=destination;render()}});
+  document.querySelectorAll("[data-program-edit]").forEach(button=>button.onclick=()=>{const id=button.dataset.programEdit;view="goals";render();if(db.goals.some(g=>g.id===id))openEditor(id)});
+  updateProgramSearch();
+ }
+
  if(view==="settings"){
  const reviewedKey=prefix+"security_control_read_v1";
  const readReviewed=()=>{try{const v=JSON.parse(localStorage.getItem(reviewedKey)||"{}");return v&&typeof v==="object"&&!Array.isArray(v)?v:{}}catch{return {}}};
@@ -855,7 +867,62 @@ function openRoutineOrder(ids){
  chatComposer.showModal();
 }
 
+
+function displayedProgramRows(){
+ const ids=new Set();
+ const q=normalizeProgramSearch(programSearch);
+ return programPlanRows().filter(row=>{
+  const fields=normalizeProgramSearch(row.title+" "+row.universe+" "+row.metric+" "+row.phase+" "+row.description);
+  const yes=(programPhase==="all"||row.phase===programPhase)&&(programPriority==="all"||row.priority===programPriority)&&(!q||fields.includes(q));
+  if(yes&&!ids.has(row.id)){ids.add(row.id);return true}
+  return false;
+ });
+}
+function updateProgramSearch(){
+ const q=normalizeProgramSearch(programSearch);
+ let shown=0;
+ document.querySelectorAll(".program-card").forEach(card=>{
+  const yes=!q||String(card.dataset.programIndex||"").includes(q);
+  card.hidden=!yes;if(yes)shown++;
+ });
+ const counter=document.getElementById("programShowing");
+ if(counter)counter.textContent=shown+" jalon(s) visible(s). Les échéances restent des dates cibles, non des résultats.";
+}
+function buildProgramChatPrompt(){
+ const rows=chatProgramRows||[];
+ const selected=chatProgramSelection?rows.filter(x=>chatProgramSelection.includes(x.id)):rows;
+ return [
+  "SONIA OS — PROGRAMME MULTI-UNIVERS · COMMANDE CHATGPT",
+  "Source : https://soniacointe-sketch.github.io/the-crew-control/sonia-os.html?section=roadmap",
+  "Nombre de jalons : "+selected.length,
+  "",
+  "MISSION : transformer les jalons suivants en programme de travail concret, ordonné, vérifiable et non destructif. Pour chaque ligne identifier dépendances, ressources utiles, pilote à confirmer, checklist, niveau d’autorité AAF, risque, livrable exact et indicateur. Donner des priorités réalistes selon les échéances, sans inventer de dates d’exécution, de dépenses ni de travaux déjà faits.",
+  "",
+  ...selected.map((x,i)=>[
+   (i+1)+". "+x.title+" — "+x.universe,
+   "Date cible : "+(x.due||"à définir")+" ; priorité : "+x.priority+" ; période : "+x.phase,
+   "Indicateur : "+x.metric+" ; cible indicative : "+String(x.target??"à définir")+" ; mesure actuelle : "+(x.measure_status==="mesurée"?String(x.current):"non mesurée"),
+   "Statut enregistré : "+x.status+" ; preuve de réussite à demander : résultat vérifié de cet indicateur.",
+   "Module lié : "+(labels[x.module]||x.module)
+  ].join("\n")),
+  "",
+  "GOUVERNANCE : Sonia conserve le contrôle A0 observer, A1 analyser, A2 préparer. Toute action externe A3 exige une autorisation technique et humaine spécifique ; cette demande ne publie, ne paie, ne contacte personne et n’autorise aucune suppression. En cas de dépendance aux données privées, ne pas en inventer le contenu. Vérifier GitHub/Supabase seulement si des outils sont réellement disponibles. Commencer par les jalons les plus urgents, puis fournir un tableau des résultats vérifiés, à confirmer et à faire."
+ ].join("\n");
+}
+function openProgramPrompt(ids){
+ chatProgramSelection=Array.isArray(ids)?ids.slice():null;
+ chatProgramRows=displayedProgramRows();
+ if(chatProgramSelection?.length)chatProgramRows=programPlanRows().filter(x=>chatProgramSelection.includes(x.id));
+ chatContextView="roadmap";chatContextScope=scope;
+ chatMode.value="program";
+ chatText.value=buildProgramChatPrompt();
+ chatInfo.textContent=chatProgramSelection?"Prompt pour un jalon prêt à relire.":"Programme filtré prêt à relire. Si le texte est long, le bouton d’ouverture le copie intégralement.";
+ chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
+ chatComposer.showModal();
+}
+
 function buildChatPrompt(mode){
+ if(mode==="program")return buildProgramChatPrompt();
  if(mode==="routine")return buildRoutineCommandPrompt();
  if(mode==="command")return buildMissionCommandPrompt();
  const universe=universes.find(u=>u[0]===chatContextScope)?.[1]||"Tous les univers";
@@ -878,11 +945,13 @@ function buildChatPrompt(mode){
  ].join("\n");
 }
 function openChatComposer(){
+ chatProgramSelection=null;
+ chatProgramRows=view==="roadmap"?displayedProgramRows():[];
  chatRoutineSelection=null;
  chatRoutineFrequency=routineFrequency;
  chatMissionSelection=null;
  chatMissionFilter=missionFilter;
- chatContextView=view;chatContextScope=scope;chatMode.value=view==="missionDesk"?"command":view==="routines"?"routine":"continue";
+ chatContextView=view;chatContextScope=scope;chatMode.value=view==="missionDesk"?"command":view==="routines"?"routine":view==="roadmap"?"program":"continue";
  chatText.value=buildChatPrompt(chatMode.value);
  chatInfo.textContent="";
  chatConversation.value=localStorage.getItem(prefix+"chat_thread_url")||"";
@@ -921,7 +990,7 @@ document.getElementById("chatOpenExisting").onclick=async()=>{
 document.getElementById("chatPromptClose").onclick=()=>chatComposer.close();
 document.getElementById("chatPromptCloseTop").onclick=()=>chatComposer.close();
 
-document.getElementById("openChatGPT").onclick=openChatComposer;document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;missionFilter=(scope==="all"||scope==="os")?"pack":"all";securityArea="all";securitySearch="";render()};
+document.getElementById("openChatGPT").onclick=openChatComposer;document.getElementById("cancel").onclick=()=>document.getElementById("editor").close();document.getElementById("newRecord").onclick=()=>openEditor();document.getElementById("scope").onchange=e=>{scope=e.target.value;missionFilter=(scope==="all"||scope==="os")?"pack":"all";securityArea="all";securitySearch="";programPhase="all";programPriority="all";programSearch="";render()};
 
 async function readCloud(){const all=[];for(let i=0;;i+=500){const {data,error}=await sb.from("sonia_command_records").select("id,module,payload,updated_at").eq("owner_id",currentUser.id).range(i,i+499);if(error)throw error;all.push(...(data||[]));if(!data||data.length<500)break;}return all}
 async function cloudPull(){
