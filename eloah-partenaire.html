@@ -212,12 +212,12 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 @media(max-width:1200px){#campaign-form .campaign-compose-workspace{grid-template-columns:1fr 1fr}#campaign-form #campaign-body{min-height:390px}#campaign-form .campaign-preview-frame{min-height:445px}}
 @media(max-width:950px){#campaign-form .campaign-compose-workspace{grid-template-columns:1fr}#campaign-form .campaign-compose-mainfields{grid-template-columns:1fr 1fr}#campaign-form #campaign-ai{grid-column:2}#campaign-form .campaign-preview-frame{max-height:540px}#campaign-form .campaign-compose-sender{grid-template-columns:1fr 1fr}}
 @media(max-width:600px){#campaign-form{padding:13px!important}#campaign-form .campaign-compose-mainfields{grid-template-columns:1fr}#campaign-form #campaign-ai{grid-column:auto}#campaign-form .campaign-compose-sender{grid-template-columns:1fr}#campaign-form .campaign-compose-footer{display:block}#campaign-form .campaign-schedule{justify-content:flex-start;margin-top:16px}#campaign-form #campaign-preview-output{padding:20px!important}}
-</style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header><section id="mailing-dashboard" hidden aria-label="Mailing & Newsletter"><nav class="mailing-nav" aria-label="Sections Mailing"><button type="button" data-mail-tab="listes" aria-selected="true">☷ Mes listes</button><button type="button" data-mail-tab="campagnes" aria-selected="false">✉ Campagnes</button><button type="button" data-mail-tab="quotas" aria-selected="false">▥ Quotas</button></nav><div class="mailing-content" data-mail-panel="listes"><div class="mailing-list-head"><h2 id="mailing-list-title">Mes listes (3)</h2><button type="button" id="mailing-new-list">＋ Nouvelle liste</button></div><p class="mailing-list-note">Effectifs de référence fournis pour la configuration ; aucune synchronisation des abonnés n'est encore connectée.</p><div id="mailing-list-cards"></div><div id="mailing-list-editor" hidden><h3>Nouvelle liste</h3><label>Nom de la liste<input id="mailing-list-name" maxlength="110"></label><label>Description<input id="mailing-list-desc" maxlength="220"></label><button type="button" id="mailing-list-save">Enregistrer la liste</button><button type="button" id="mailing-list-cancel">Annuler</button></div><div id="mailing-list-detail" hidden><button type="button" id="mailing-detail-back">← Mes listes</button><h3 id="mailing-detail-title"></h3><p id="mailing-detail-desc"></p><div id="mailing-contacts-area" hidden><div class="mailing-list-head"><h3 id="mail-contacts-title">Contacts (127)</h3><select id="mail-contact-filter" aria-label="Filtrer les contacts"><option value="all">Tous statuts</option><option value="enabled">Activés</option><option value="disabled">Désactivés</option><option value="blocklisted">Bloqués</option></select></div><div class="actions" style="margin:16px 0"><button type="button" id="mailing-export-contacts">⇩ Exporter</button><button type="button" id="mailing-import-csv">⇧ Importer</button><input id="mailing-import-file" type="file" accept=".csv,text/csv" hidden><button type="button" id="mail-history-btn">◷ Historique</button><button type="button" id="mail-show-add">＋ Ajouter</button></div><div id="mailing-contact-add-form" hidden><label>Adresse e-mail<input type="email" id="mailing-contact-email"></label><button type="button" id="mailing-contact-add">Enregistrer le contact</button></div><p id="mailing-import-result" role="status"></p><div class="mail-contact-table"><div class="mail-contact-head"><input type="checkbox" id="mail-select-all" aria-label="Sélectionner les contacts de cette page"><strong>Email</strong><strong>Statut</strong></div><div id="mailing-contacts-content"></div></div><div class="mailing-pager"><span><span id="mail-page-count">50 sur la page</span> · <span id="mail-selected-count">0 sélectionné(s)</span></span><div><button id="mail-prev" type="button">←</button><span id="mail-page">1 / 1</span><button id="mail-next" type="button">→</button></div></div><div id="mail-history-content" hidden><h4>Historique local</h4><p>Importations et modifications effectuées sur cet appareil.</p><div id="mail-history-list"></div></div></div><div id="mailing-compose-area" hidden><h4>Composer un message</h4><label>Objet<input id="mailing-compose-subject" maxlength="180"></label><label>Message<textarea id="mailing-compose-body" rows="7"></textarea></label><button type="button" id="mailing-compose-save">Enregistrer le brouillon</button><button type="button" id="mailing-compose-copy">Copier le message</button><p>Aucun envoi d'e-mail automatique n'est activé.</p></div><p id="mailing-action-status" role="status"></p></div></div><div class="mailing-content" data-mail-panel="campagnes" hidden><div class="mailing-list-head"><h2 id="campaign-title">Mes campagnes (18)</h2><button type="button" id="campaign-new">＋ Nouvelle campagne</button></div><p class="mailing-list-note">18 campagnes de référence · détails non synchronisés.</p><div id="campaign-list"><p>Aucune campagne importée dans ce navigateur.</p></div><form id="campaign-form" hidden aria-label="Composer une campagne"><div class="campaign-compose-top">
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script><style id="campaign-resend-css">#campaign-resend-connection{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:#f5f2fd;border:1px solid #d9cff3;border-radius:8px;padding:12px 15px;margin:10px 0}#campaign-resend-status{font:600 12px/1.5 system-ui;color:#615384;flex:1;min-width:190px}#campaign-resend-connection button{border:1px solid #d4c8f1;background:#fff;color:#7964bc;border-radius:7px;padding:9px 13px;font:600 12px system-ui;cursor:pointer}#campaign-resend-connection a{font:600 12px system-ui;color:#7d69b6;text-decoration:none}#campaign-form #campaign-send-test{border-color:#d8c8f3;background:#ece5fb;color:#6550a0;min-width:175px}</style></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header><section id="mailing-dashboard" hidden aria-label="Mailing & Newsletter"><nav class="mailing-nav" aria-label="Sections Mailing"><button type="button" data-mail-tab="listes" aria-selected="true">☷ Mes listes</button><button type="button" data-mail-tab="campagnes" aria-selected="false">✉ Campagnes</button><button type="button" data-mail-tab="quotas" aria-selected="false">▥ Quotas</button></nav><div class="mailing-content" data-mail-panel="listes"><div class="mailing-list-head"><h2 id="mailing-list-title">Mes listes (3)</h2><button type="button" id="mailing-new-list">＋ Nouvelle liste</button></div><p class="mailing-list-note">Effectifs de référence fournis pour la configuration ; aucune synchronisation des abonnés n'est encore connectée.</p><div id="mailing-list-cards"></div><div id="mailing-list-editor" hidden><h3>Nouvelle liste</h3><label>Nom de la liste<input id="mailing-list-name" maxlength="110"></label><label>Description<input id="mailing-list-desc" maxlength="220"></label><button type="button" id="mailing-list-save">Enregistrer la liste</button><button type="button" id="mailing-list-cancel">Annuler</button></div><div id="mailing-list-detail" hidden><button type="button" id="mailing-detail-back">← Mes listes</button><h3 id="mailing-detail-title"></h3><p id="mailing-detail-desc"></p><div id="mailing-contacts-area" hidden><div class="mailing-list-head"><h3 id="mail-contacts-title">Contacts (127)</h3><select id="mail-contact-filter" aria-label="Filtrer les contacts"><option value="all">Tous statuts</option><option value="enabled">Activés</option><option value="disabled">Désactivés</option><option value="blocklisted">Bloqués</option></select></div><div class="actions" style="margin:16px 0"><button type="button" id="mailing-export-contacts">⇩ Exporter</button><button type="button" id="mailing-import-csv">⇧ Importer</button><input id="mailing-import-file" type="file" accept=".csv,text/csv" hidden><button type="button" id="mail-history-btn">◷ Historique</button><button type="button" id="mail-show-add">＋ Ajouter</button></div><div id="mailing-contact-add-form" hidden><label>Adresse e-mail<input type="email" id="mailing-contact-email"></label><button type="button" id="mailing-contact-add">Enregistrer le contact</button></div><p id="mailing-import-result" role="status"></p><div class="mail-contact-table"><div class="mail-contact-head"><input type="checkbox" id="mail-select-all" aria-label="Sélectionner les contacts de cette page"><strong>Email</strong><strong>Statut</strong></div><div id="mailing-contacts-content"></div></div><div class="mailing-pager"><span><span id="mail-page-count">50 sur la page</span> · <span id="mail-selected-count">0 sélectionné(s)</span></span><div><button id="mail-prev" type="button">←</button><span id="mail-page">1 / 1</span><button id="mail-next" type="button">→</button></div></div><div id="mail-history-content" hidden><h4>Historique local</h4><p>Importations et modifications effectuées sur cet appareil.</p><div id="mail-history-list"></div></div></div><div id="mailing-compose-area" hidden><h4>Composer un message</h4><label>Objet<input id="mailing-compose-subject" maxlength="180"></label><label>Message<textarea id="mailing-compose-body" rows="7"></textarea></label><button type="button" id="mailing-compose-save">Enregistrer le brouillon</button><button type="button" id="mailing-compose-copy">Copier le message</button><p>Aucun envoi d'e-mail automatique n'est activé.</p></div><p id="mailing-action-status" role="status"></p></div></div><div class="mailing-content" data-mail-panel="campagnes" hidden><div class="mailing-list-head"><h2 id="campaign-title">Mes campagnes (18)</h2><button type="button" id="campaign-new">＋ Nouvelle campagne</button></div><p class="mailing-list-note">18 campagnes de référence · détails non synchronisés.</p><div id="campaign-list"><p>Aucune campagne importée dans ce navigateur.</p></div><form id="campaign-form" hidden aria-label="Composer une campagne"><div class="campaign-compose-top">
 <div class="campaign-compose-title"><span class="campaign-compose-symbol" aria-hidden="true">✉</span><h2>Composer une campagne</h2><span id="campaign-restored" hidden>✓ brouillon restauré</span></div>
 <p id="campaign-compose-note">Rédige et visualise ta newsletter avant de la sauvegarder ou de préparer son envoi.</p></div>
 <div class="campaign-compose-mainfields">
 <label>Sujet<input id="campaign-subject" maxlength="180" required placeholder="Sujet de ta newsletter"></label>
-<label>Liste destinataire<select id="campaign-target" required><option value="">— sélectionner —</option><option value="La Voix d'Orchies">La Voix d'Orchies (6)</option><option value="La Voix d'Orchies — Asso">La Voix d'Orchies — Asso (0)</option><option value="Power & Glam">Power &amp; Glam (127)</option></select></label>
+<label>Liste destinataire<select id="campaign-target" required><option value="">— sélectionner —</option><option value="La Voix d'Orchies">La Voix d'Orchies (6)</option><option value="La Voix d'Orchies — Asso">La Voix d'Orchies — Asso (0)</option><option value="Power & Glam">Power &amp; Glam (127)</option><option value="crew-test">The Crew Orchies · test technique (sans abonnés)</option></select></label>
 <label>Modèle<select id="campaign-template"><option>Souverain</option><option>Académique</option><option>Direct</option></select></label>
 <button type="button" id="campaign-ai" title="Aide à la rédaction dans ChatGPT">✧ IA</button>
 </div>
@@ -257,10 +257,10 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 </section>
 </div>
 <div class="campaign-compose-footer">
-<div class="campaign-test-send"><label for="campaign-test-address">E-mail pour test</label><div class="campaign-inline-control"><input id="campaign-test-address" type="email" placeholder="adresse@exemple.fr"><button type="button" id="campaign-send-test">➤ Préparer un test ↗</button></div><small>Ouvre ta messagerie pour validation, sans envoi automatique.</small></div>
+<div class="campaign-test-send"><label for="campaign-test-address">E-mail pour test</label><div class="campaign-inline-control"><input id="campaign-test-address" type="email" placeholder="adresse@exemple.fr"><button type="button" id="campaign-send-test">➤ Envoyer un test via Resend</button></div><small>Ouvre ta messagerie pour validation, sans envoi automatique.</small></div>
 <div class="campaign-schedule"><div class="campaign-schedule-mode" role="group" aria-label="Moment d'envoi"><button type="button" id="campaign-send-now" aria-pressed="true">Maintenant</button><button type="button" id="campaign-send-later" aria-pressed="false">Programmer</button></div><input id="campaign-schedule-mode" type="hidden" value="now"><label class="campaign-schedule-date" for="campaign-schedule-at"><span>Date et heure prévues</span><input type="datetime-local" id="campaign-schedule-at" disabled></label><button type="button" id="campaign-save-schedule">Préparer la programmation</button></div>
 </div>
-<p id="campaign-delivery-warning" class="campaign-delivery-warning">L’envoi et la programmation automatique ne sont pas connectés. Aucune campagne ne part sans action explicite dans un service d’envoi.</p>
+<div id="campaign-resend-connection" class="campaign-resend-connection"><span id="campaign-resend-status" role="status">Resend · connexion en cours de vérification…</span><button type="button" id="campaign-resend-check">↻ Vérifier Resend</button><a href="https://resend.com/domains" target="_blank" rel="noopener noreferrer">Vérifier les domaines ↗</a></div><p id="campaign-delivery-warning" class="campaign-delivery-warning">Resend est configuré pour les tests sur le domaine The Crew vérifié. Power &amp; Glam et La Voix d’Orchies ne peuvent pas encore envoyer ; la programmation de campagnes nécessite un domaine vérifié et une liste réellement synchronisée.</p>
 <div class="actions campaign-compose-actions"><button type="submit" id="campaign-save">Enregistrer le brouillon</button><button type="button" id="campaign-preview">Actualiser l’aperçu</button><button type="button" id="campaign-cancel">Fermer</button></div>
 </form>
 <dialog id="campaign-table-dialog" aria-labelledby="campaign-table-heading" aria-describedby="campaign-table-description">
@@ -698,12 +698,79 @@ testButton.onclick=()=>{
 function updateOpen(){
  if(form.hidden)return;
  setScheduleMode(scheduleMode.value==='later'?'later':'now',false);
- warning.textContent='Aucun fournisseur d’envoi connecté : les e-mails tests passent par ta messagerie et les dates programmées restent des brouillons locaux.';
+ warning.textContent='Resend est configuré pour les tests techniques The Crew. Pour les campagnes, vérifie les domaines et importe les audiences.';
  scheduleRender();
 }
 new MutationObserver(updateOpen).observe(form,{attributes:true,attributeFilter:['hidden']});
 new MutationObserver(updateOpen).observe(id('campaign-restored'),{attributes:true,attributeFilter:['hidden']});
 document.querySelector('[data-mail-tab="campagnes"]')?.addEventListener('click',()=>{if(!form.hidden)scheduleRender()});
 updateOpen();
+})();
+</script><script id="campaign-real-resend-transport">
+(()=>{'use strict';
+const f=document.getElementById('campaign-form');
+if(!f)return;
+const $=x=>document.getElementById(x);
+const endpoint='https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-mailing-resend';
+const pubKey="sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy";
+let sbClient=null,busy=false,ownerEmail='';
+function status(message){$('campaign-resend-status').textContent=message}
+function getClient(){
+ if(!window.supabase?.createClient)throw Error('Module Supabase indisponible');
+ if(!sbClient)sbClient=window.supabase.createClient('https://voytsqyorhoveurnguxn.supabase.co',pubKey,{auth:{persistSession:true,autoRefreshToken:true}});
+ return sbClient;
+}
+async function invoke(action,payload={}){
+ const client=getClient();
+ const auth=await client.auth.getSession();
+ const token=auth.data?.session?.access_token;
+ if(!token)throw Error('Connecte-toi avec ton compte ELOAH pour activer les envois sécurisés');
+ const response=await fetch(endpoint,{method:'POST',headers:{'Authorization':'Bearer '+token,'apikey':pubKey,'Content-Type':'application/json'},body:JSON.stringify({action,...payload})});
+ let data;try{data=await response.json()}catch{throw Error('Réponse invalide du serveur de mailing')}
+ if(!response.ok)throw Error(data.error||'Resend a refusé cette opération');
+ return data;
+}
+async function check(){
+ if(busy)return;
+ busy=true;status('Vérification de la passerelle Resend…');
+ try{
+  const r=await invoke('status');
+  ownerEmail=r.userEmail||'';
+  const domains=Array.isArray(r.verifiedDomains)?r.verifiedDomains:[];
+  if(!r.configured)status('Service non configuré');
+  else status('Resend raccordé · domaine autorisé : '+(domains.join(', ')||'aucun')+' · e-mail de test à confirmer');
+  if(ownerEmail&&!$('campaign-test-address').value)$('campaign-test-address').value=ownerEmail;
+ }catch(e){status(String(e.message||e))}
+ finally{busy=false}
+}
+const test=$('campaign-send-test');
+test.onclick=async()=>{
+ if(busy)return;
+ const target=$('campaign-target').value;
+ if(target!=='crew-test'){status('Cette liste ne possède pas encore de domaine validé. Choisis le mode test technique The Crew ou vérifie son domaine.');return}
+ const email=$('campaign-test-address').value.trim().toLowerCase();
+ const subj=$('campaign-subject').value.trim(),body=$('campaign-body').value.trim();
+ const from=$('campaign-sender-email').value.trim().toLowerCase();
+ if(!email||!subj||!body||!from){status('Renseigne l’adresse de test, le sujet, le texte et un expéditeur vérifié.');return}
+ if(!from.endsWith('@thecreworchies.blog')){status('Pour un test The Crew, utilise un expéditeur @thecreworchies.blog');return}
+ if(ownerEmail&&email!==ownerEmail.toLowerCase()){status('Utilise l’e-mail de ton compte ELOAH pour ce premier test.');return}
+ if(!window.confirm('Envoyer réellement un e-mail test à '+email+' depuis '+from+' ?'))return;
+ busy=true;test.disabled=true;status('Demande d’envoi réel en cours…');
+ try{
+   const result=await invoke('test',{listId:'crew',testEmail:email,senderEmail:from,senderName:$('campaign-sender-name').value,replyTo:$('campaign-reply-to').value,subject:subj,body});
+   status('Test accepté par Resend · '+(result.id?'référence '+result.id:'vérifie ta boîte de réception'));
+ }catch(e){status('Test non envoyé : '+String(e.message||e))}
+ finally{busy=false;test.disabled=false}
+};
+$('campaign-resend-check').onclick=check;
+$('campaign-target').addEventListener('change',()=>{
+ if($('campaign-target').value==='crew-test'){
+  const name=$('campaign-sender-name'),email=$('campaign-sender-email');
+  if(!name.value.trim())name.value='The Crew Orchies';
+  if(!email.value.trim())email.value='newsletter@thecreworchies.blog';
+  status('Mode technique The Crew : test vers le compte ELOAH uniquement.');
+ }else status('Vérification du domaine expéditeur nécessaire pour cette liste. Aucun envoi n’est déclenché.');
+});
+new MutationObserver(()=>{if(!f.hidden)check()}).observe(f,{attributes:true,attributeFilter:['hidden']});
 })();
 </script></body></html>
