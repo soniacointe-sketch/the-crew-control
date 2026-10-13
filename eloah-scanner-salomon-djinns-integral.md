@@ -2,6 +2,10 @@
 
 ---
 
+![Illustration de recherche — *Salomon et la reine de Saba*, manuscrit illustré du XIXe siècle conservé au Metropolitan Museum of Art : **illustration tardive du roi, pas preuve de l'existence des djinns**.](https://commons.wikimedia.org/wiki/Special:FilePath/Solomon_and_the_Queen_of_Sheba_MET_DP328565.jpg?width=1100)
+
+**Salomon et la reine de Saba*, manuscrit illustré du XIXe siècle conservé au Metropolitan Museum of Art : **illustration tardive du roi, pas preuve de l'existence des djinns**. [Notice et crédits Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Solomon_and_the_Queen_of_Sheba_MET_DP328565.jpg).*
+
 # ELOAH · SCANNER LE SENS · SÉRIE II
 
 # Les djinns de Salomon et ceux qui lui résistent
