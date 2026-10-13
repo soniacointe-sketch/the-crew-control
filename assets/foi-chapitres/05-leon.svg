@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1080" width="840" height="1080" role="img" aria-labelledby="title desc">
+<title id="title">Couverture ELOAH : LÉON XIV</title>
+<desc id="desc">Illustration vectorielle éditoriale créée pour le chapitre 05 du chemin spirituel ELOAH.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#3a2934"/><stop offset="100%" stop-color="#12151c"/></linearGradient>
+ <radialGradient id="halo"><stop offset="0%" stop-color="#e0be8d" stop-opacity=".22"/><stop offset="73%" stop-color="#e0be8d" stop-opacity=".05"/><stop offset="100%" stop-color="#e0be8d" stop-opacity="0"/></radialGradient>
+ <pattern id="dots" patternUnits="userSpaceOnUse" width="26" height="26"><circle cx="5" cy="6" r="1" fill="#e7d7d4" opacity=".13"/></pattern>
+ <pattern id="lines" patternUnits="userSpaceOnUse" width="45" height="45" patternTransform="rotate(39)"><path d="M0 0V45" stroke="#e7d7d4" stroke-width=".8" opacity=".06"/></pattern>
+</defs>
+<rect width="840" height="1080" fill="url(#bg)"/>
+<rect width="840" height="1080" fill="url(#dots)"/>
+<rect width="840" height="1080" fill="url(#lines)"/>
+<circle cx="430" cy="520" r="410" fill="url(#halo)"/>
+<rect x="36" y="35" width="768" height="1010" fill="none" stroke="#e0be8d" stroke-width="2" opacity=".55"/>
+<path d="M76 119H765M76 925H765" stroke="#e0be8d" stroke-width="2" opacity=".55"/>
+<text x="80" y="96" fill="#e7d7d4" font-size="20" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">ELOAH · FOI &amp; SPIRITUALITÉ</text>
+<g transform="translate(420 502)"><path d="M-205 140H205V265H-205Z" fill="#e1c7a2" opacity=".3"/><path d="M-190 135V-28Q-130-126 0-157Q130-126 190-28V135" fill="none" stroke="#e4c896" stroke-width="14"/><path d="M-150-27Q0-158 150-27M-100-100Q0-195 100-100" fill="none" stroke="#e4c896" stroke-width="8"/><path d="M0-275V-178M-34-242H34" stroke="#e4c896" stroke-width="10"/><path d="M-235 265H235M-230 180H230" stroke="#e4c896" stroke-width="9"/><path d="M-140 145V255M-45 145V255M45 145V255M140 145V255" stroke="#e4c896" stroke-width="9"/></g>
+<text x="78" y="980" fill="#e7d7d4" font-size="22" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">CHEMIN SPIRITUEL</text>
+<text x="770" y="1003" text-anchor="end" fill="#e0be8d" font-size="67" font-family="Georgia, serif" font-style="italic">05</text>
+</svg>
