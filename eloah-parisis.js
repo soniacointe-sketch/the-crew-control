@@ -537,6 +537,31 @@ const tools='<section class="panel mission-library"><div class="panel-header"><d
 const stats='<details class="panel mission-details"><summary>Inventaire de mes fiches de recherche</summary><p class="micro">Fiches sauvegardées localement sur cet appareil. Les enquêtes ci-dessus sont des dossiers éditoriaux et ne remplacent aucune note personnelle.</p><p><strong>'+total+'</strong> fiches conservées dans les modules, dont <strong>'+store.lieux.length+'</strong> lieux candidats et <strong>'+store.preuves.length+'</strong> fiches d’hypothèses et de preuve.</p><button data-nav="corpus" type="button">Ouvrir le corpus</button></details>';
 return lead+cards+compass+tools+stats+legacyPanel();
 }
+function renderModuleEditorial(moduleId){
+ const data=window.PARISIS_EDITORIAL_DATA;
+ const entry=data?.modules?.[moduleId];
+ if(!entry)return "";
+ const photo=data.images?.[entry.image];
+ const panel=(tag,txt)=>'<div class="pm-fact"><span>'+escape(tag)+'</span><p>'+escape(txt)+'</p></div>';
+ const cards=entry.items.map((item,i)=>'<article class="pm-case" id="pm-case-'+escape(item.id)+'">'+
+ '<div class="pm-case-top"><span class="pm-case-no">DOSSIER '+String(i+1).padStart(2,'0')+' / '+String(entry.items.length).padStart(2,'0')+'</span><span class="pm-case-tag">'+escape(item.category)+'</span></div>'+
+ '<h3>'+escape(item.title)+'</h3>'+
+ '<div class="pm-facts">'+panel("01 · POINT DE DÉPART",item.observation)+panel("02 · LIMITES ET OBJECTIONS",item.limits)+panel("03 · PROCHAINE VÉRIFICATION",item.next)+'</div>'+
+ '<div class="pm-card-actions"><a href="'+escape(item.href)+'" aria-label="Ouvrir '+escape(item.title)+'">'+escape(item.linkLabel)+' ↗</a>'+
+ '<button type="button" data-editorial-case="'+escape(item.id)+'">Préparer ma fiche +</button></div></article>').join('');
+ const fig=photo?'<figure class="pm-hero-image"><img src="'+escape(photo.src)+'" alt="'+escape(photo.credit)+'" loading="lazy" width="800" height="650"><figcaption>'+escape(photo.credit)+' · <a href="'+escape(photo.source)+'" target="_blank" rel="noopener noreferrer">Crédits ↗</a></figcaption></figure>':'';
+ return '<section class="pm-editorial" aria-label="Dossiers éditoriaux '+escape(entry.label)+'">'+
+ '<div class="pm-hero"><div class="pm-hero-copy"><span class="pm-kicker">PARISIS ENGINE · HUMANITIES LAB · DOSSIERS DOCUMENTAIRES</span>'+
+ '<h2>'+escape(entry.label)+'</h2><p class="pm-deck">'+escape(entry.intro)+'</p>'+
+ '<p class="pm-question"><strong>Question directrice :</strong> '+escape(entry.question)+'</p>'+
+ '<div class="pm-hero-actions"><a href="#pm-articles">Explorer les '+entry.items.length+' dossiers ↓</a><a href="#pm-personal">Mes fiches de recherche ↓</a></div></div>'+fig+'</div>'+
+ '<div class="pm-index"><span>01 · LIRE</span><span>02 · CONFRONTER</span><span>03 · VÉRIFIER</span><span>04 · CONSERVER</span></div>'+
+ '<div class="pm-section-heading" id="pm-articles"><div><span class="pm-kicker">BIBLIOTHÈQUE DE RECHERCHE</span><h2>Les enquêtes du module.</h2></div><p>'+entry.items.length+' dossiers commentés · sources et limites visibles</p></div>'+
+ '<div class="pm-case-grid">'+cards+'</div>'+
+ '<aside class="pm-method"><strong>Règle de méthode</strong><p>'+escape(data.notice)+' F0 = fait documenté, F1 = symbolisme attesté, F2 = mesure reproductible, H = hypothèse. Aucun de ces niveaux n’est validé automatiquement.</p>'+
+ '<p>Le bouton « Préparer ma fiche » préremplit un brouillon dans le module, sans enregistrer quoi que ce soit avant ta validation. Les fiches personnelles existantes restent intactes.</p></aside>'+
+ '<div class="pm-section-heading pm-personal" id="pm-personal"><div><span class="pm-kicker">ESPACE DE PILOTAGE PERSONNEL</span><h2>Mes fiches et vérifications.</h2></div><p>Créer, modifier, analyser, rechercher et exporter tes notes dans le même espace.</p></div></section>';
+}
 function layoutRecords(){
 const q=$('globalSearch').value.toLowerCase().trim();
 const arr=store[active].filter(x=>!q||JSON.stringify(x).toLowerCase().includes(q));
@@ -551,6 +576,7 @@ function render(){
 $('nav').innerHTML=views.map(v=>'<button type="button" class="'+(active===v.id?'active':'')+'" data-nav="'+v.id+'"><span>'+v.icon+'</span>'+v.title+'</button>').join('');
 $('newRecord').hidden=!cfg[active];
 let content=active==='overview'?overview():active==='settings'?settings():active==='corpus'?pageAtlas()+layoutRecords():active==='symboles'?atlas()+layoutRecords():active==='align'?geometry()+layoutRecords():active==='audit'?auditChecklist()+layoutRecords():layoutRecords();
+if(window.PARISIS_EDITORIAL_DATA?.modules?.[active])content=renderModuleEditorial(active)+content;
 $('view').innerHTML=content;
 const filter=$('statusFilter');if(filter)filter.onchange=()=>{const v=filter.value;document.querySelectorAll('#records .record').forEach(card=>{const id=card.querySelector('[data-edit]')?.dataset.edit;const rec=store[active].find(x=>x.id===id);card.hidden=!!v&&rec?.status!==v})};
 const form=$('geoForm');if(form)form.onsubmit=calculate;
@@ -594,7 +620,22 @@ for(const k of Object.keys(cfg))store[k]=data.modules[k].map(x=>({...x}));save()
 }
 $('nav').onclick=e=>{const b=e.target.closest('[data-nav]');if(b&&views.some(v=>v.id===b.dataset.nav)){active=b.dataset.nav;$('globalSearch').value='';render()}};
 $('view').onclick=e=>{const b=e.target.closest('button');if(!b)return;
-if(b.dataset.reviewPage!==undefined){reviewRelation(b)}
+if(b.dataset.editorialCase){
+ const source=window.PARISIS_EDITORIAL_DATA?.modules?.[active]?.items?.find(item=>item.id===b.dataset.editorialCase);
+ if(!source||!cfg[active])return;
+ const values={
+   title:source.title,
+   reference:source.href,
+   claim:source.observation+"\nQuestion à résoudre : "+source.limits,
+   notes:"Source à examiner : "+source.linkLabel+" ("+source.href+").\nContre-tests : "+source.limits+"\nProchaine vérification : "+source.next+"\nCette fiche reste une piste de travail non vérifiée automatiquement.",
+   status:active==="preuves"?"Non démontré":active==="sources"?"À vérifier":"À vérifier"
+ };
+ if(active==="preuves")values.level="H - Hypothèse";
+ if(active==="symboles")values.family="Autre";
+ if(active==="lieux")values.place=source.title;
+ openEditor(null,values);
+}
+else if(b.dataset.reviewPage!==undefined){reviewRelation(b)}
 else if(b.dataset.pageAudit!==undefined){auditPage(Number(b.dataset.pageAudit))}
 else if(b.dataset.relatedModule){active=b.dataset.relatedModule;render();const el=document.querySelector('[data-edit="'+CSS.escape(b.dataset.relatedId)+'"]');el?.closest(".record")?.scrollIntoView({behavior:"smooth",block:"center"});el?.closest(".record")?.classList.add("related-focus")}
 else if(b.dataset.pageChat!==undefined){const p=pagedCorpus[Number(b.dataset.pageChat)];if(p)chat({title:p.heading,claim:'Page '+p.page+'. '+p.claim+' Lieux : '+p.places.join(', ')+'. Symboles : '+p.symbols.join(', ')+'. À vérifier : '+p.checks,reference:p.ref})}
