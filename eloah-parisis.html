@@ -5,22 +5,30 @@
 <meta name="theme-color" content="#f4efe7">
 
 <title>ELOAH · PARISIS ENGINE</title>
-<link rel="stylesheet" href="eloah-parisis.css?v=3">
+<link rel="stylesheet" href="eloah-parisis.css?v=4">
 </head>
 <body>
 <div class="shell">
 <aside class="side">
+<div class="parisis-side-top">
 <a class="wordmark" href="eloah-partenaire.html?rubrique=Mon%20Espace">ELOAH</a>
+<button id="parisisMenuButton" class="parisis-menu-button" type="button" aria-controls="parisisMenuPanel" aria-expanded="false" aria-label="Ouvrir le menu PARISIS ENGINE"><span class="parisis-menu-glyph" aria-hidden="true">☰</span><span class="parisis-menu-caption">Menu</span></button>
+</div>
+<div id="parisisMenuPanel" class="parisis-menu-panel" aria-label="Navigation PARISIS ENGINE">
 <div class="brand-sub">ESPACE DE RECHERCHE</div>
 <a class="parent-link" href="mes-univers.html">← Mes univers</a>
 <div class="side-heading">PARISIS ENGINE</div>
 <nav id="nav" aria-label="Modules de PARISIS ENGINE"></nav>
+<div class="parisis-menu-links-title">DOSSIERS, CARTES & ENQUÊTES</div>
+<div class="parisis-menu-links" id="parisisMenuLinks"></div>
 <div class="side-bottom"><span class="small-chip">HUMANITIES LAB · HUM-002</span><p>Hypothèse ≠ preuve.<br>Alignement ≠ intention.</p></div>
+</div>
 </aside>
+<div class="parisis-menu-backdrop" id="parisisMenuBackdrop" hidden></div>
 <main class="main">
 <header class="top">
 <div><div class="eyebrow">ELOAH / Recherche historique & symbolique</div><h1>PARISIS <em>ENGINE</em></h1><p class="sub">Des faits, des cartes, des sources — et des questions auxquelles on peut réellement répondre.</p></div>
-<div class="top-actions"><a class="button-light" href="parisis-hugo-axes.html?all=1&amp;v=atlas-complet-20261013"><strong>CARTE COMPLÈTE · Tous les points et traits ↗</strong></a><a class="button-light" href="parisis-par-isis-002-ankh-atlas.html?v=ankh-20261013">PAR ISIS · ENQUÊTE 002 · Carte &amp; chronologie ↗</a><a class="button-light" href="parisis-par-isis-001.html?v=parisis001-20261013">PAR ISIS · ENQUÊTE 001 · Livre illustré ↗</a><a class="button-light" href="parisis-par-isis-001-photo.html?v=photo20261013">PAR ISIS · Voir la préface originale ↗</a><a class="button-light" href="parisis-fouquet-panoramas.html">FOUQUET · DEUX PANORAMAS · 4 MONUMENTS ↗</a><a class="button-light" href="parisis-dagobert-manuscrits-comparaison.html">DAGOBERT · 3 SIÈCLES · Images comparées ↗</a><a class="button-light" href="parisis-axe-spirituel-nord-sud.html#enquete-estree-dagobert">DAGOBERT · Deux manuscrits & l’Estrée ↗</a><a class="button-light" href="parisis-hugo-axes.html?estree=1&amp;v=estree20261013">CARTE · Saint-Denis-de-l’Estrée ↗</a><a class="button-light" href="parisis-axe-spirituel-nord-sud.html#enquete-trois-martyrs">LES TROIS MARTYRS · Nouvelle enquête ↗</a><a class="button-light" href="parisis-hugo-axes.html?saints=1&amp;v=iconographie20261013">CARTE · 4 lieux iconographiques ↗</a><a class="button-light" href="parisis-hugo-axes.html?royal=1&amp;v=fouquet7">CARTE FOUQUET · 7 points royaux ↗</a><a class="button-light" href="parisis-axe-spirituel-nord-sud.html">AXE NORD–SUD · Cardo, pèlerins & rois ↗</a><button id="askChat" class="primary" type="button">Travailler dans ChatGPT ↗</button><a class="button-light" href="parisis-vasserot-1810-1836.html?v=chapitre4#chapitre-quatre-la-distance">LIRE LE CHAPITRE IV · L’épreuve des distances ↗</a><a class="button-light" href="parisis-vasserot-1810-1836.html">ATLAS VASSEROT · Parcelles 1827 ↗</a><a class="button-light" href="parisis-hugo-1551-comparaison.html">PLAN 1551 · Comparaison historique ↗</a><a class="button-light" href="parisis-hugo-axes.html">VICTOR HUGO · Deux parcours tracés ↗</a><a class="button-light" href="parisis-cartography-lab.html?v=decouvertes">Cartes & tracés ↗</a><a class="button-light" href="foi-control.html#ananke-archives-1820-suite">Foi & spiritualité ↗</a></div>
+<span id="parisisActionsAnchor" hidden></span><div class="top-actions"><a class="button-light" href="parisis-hugo-axes.html?all=1&amp;v=atlas-complet-20261013"><strong>CARTE COMPLÈTE · Tous les points et traits ↗</strong></a><a class="button-light" href="parisis-par-isis-002-ankh-atlas.html?v=ankh-20261013">PAR ISIS · ENQUÊTE 002 · Carte &amp; chronologie ↗</a><a class="button-light" href="parisis-par-isis-001.html?v=parisis001-20261013">PAR ISIS · ENQUÊTE 001 · Livre illustré ↗</a><a class="button-light" href="parisis-par-isis-001-photo.html?v=photo20261013">PAR ISIS · Voir la préface originale ↗</a><a class="button-light" href="parisis-fouquet-panoramas.html">FOUQUET · DEUX PANORAMAS · 4 MONUMENTS ↗</a><a class="button-light" href="parisis-dagobert-manuscrits-comparaison.html">DAGOBERT · 3 SIÈCLES · Images comparées ↗</a><a class="button-light" href="parisis-axe-spirituel-nord-sud.html#enquete-estree-dagobert">DAGOBERT · Deux manuscrits & l’Estrée ↗</a><a class="button-light" href="parisis-hugo-axes.html?estree=1&amp;v=estree20261013">CARTE · Saint-Denis-de-l’Estrée ↗</a><a class="button-light" href="parisis-axe-spirituel-nord-sud.html#enquete-trois-martyrs">LES TROIS MARTYRS · Nouvelle enquête ↗</a><a class="button-light" href="parisis-hugo-axes.html?saints=1&amp;v=iconographie20261013">CARTE · 4 lieux iconographiques ↗</a><a class="button-light" href="parisis-hugo-axes.html?royal=1&amp;v=fouquet7">CARTE FOUQUET · 7 points royaux ↗</a><a class="button-light" href="parisis-axe-spirituel-nord-sud.html">AXE NORD–SUD · Cardo, pèlerins & rois ↗</a><button id="askChat" class="primary" type="button">Travailler dans ChatGPT ↗</button><a class="button-light" href="parisis-vasserot-1810-1836.html?v=chapitre4#chapitre-quatre-la-distance">LIRE LE CHAPITRE IV · L’épreuve des distances ↗</a><a class="button-light" href="parisis-vasserot-1810-1836.html">ATLAS VASSEROT · Parcelles 1827 ↗</a><a class="button-light" href="parisis-hugo-1551-comparaison.html">PLAN 1551 · Comparaison historique ↗</a><a class="button-light" href="parisis-hugo-axes.html">VICTOR HUGO · Deux parcours tracés ↗</a><a class="button-light" href="parisis-cartography-lab.html?v=decouvertes">Cartes & tracés ↗</a><a class="button-light" href="foi-control.html#ananke-archives-1820-suite">Foi & spiritualité ↗</a></div>
 </header>
 <section class="research-principle"><strong>Une piste n'est pas un résultat.</strong> La ressemblance d'un symbole, un tracé géométrique ou une date commune ne suffisent jamais à démontrer une intention historique. Les éléments préremplis sont des pistes d'étude, pas des découvertes validées.</section>
 <div class="toolbar">
@@ -50,6 +58,71 @@
 <div class="dialog-actions"><button type="button" id="cancelEditor">Annuler</button><button type="submit" class="primary">Enregistrer</button></div>
 </form></dialog>
 
+<script>
+(function () {
+  'use strict';
+  function setupParisisMenu() {
+    const trigger = document.getElementById('parisisMenuButton');
+    const panel = document.getElementById('parisisMenuPanel');
+    const backdrop = document.getElementById('parisisMenuBackdrop');
+    const links = document.getElementById('parisisMenuLinks');
+    const actions = document.querySelector('.top-actions');
+    const anchor = document.getElementById('parisisActionsAnchor');
+    if (!trigger || !panel || !backdrop || !links || !actions || !anchor) return;
+    const mobile = window.matchMedia('(max-width: 900px)');
+    let opened = false;
+    function closeMenu(restoreFocus) {
+      opened = false;
+      document.body.classList.remove('parisis-menu-open');
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.setAttribute('aria-label', 'Ouvrir le menu PARISIS ENGINE');
+      trigger.querySelector('.parisis-menu-glyph').textContent = '☰';
+      backdrop.hidden = true;
+      if (restoreFocus && mobile.matches) trigger.focus();
+    }
+    function openMenu() {
+      if (!mobile.matches) return;
+      opened = true;
+      document.body.classList.add('parisis-menu-open');
+      trigger.setAttribute('aria-expanded', 'true');
+      trigger.setAttribute('aria-label', 'Fermer le menu PARISIS ENGINE');
+      trigger.querySelector('.parisis-menu-glyph').textContent = '×';
+      backdrop.hidden = false;
+      const first = panel.querySelector('.parent-link, #nav button, a, button');
+      if (first) first.focus();
+    }
+    function syncLayout() {
+      closeMenu(false);
+      if (mobile.matches) {
+        if (actions.parentElement !== links) links.appendChild(actions);
+      } else {
+        if (actions.previousElementSibling !== anchor) anchor.after(actions);
+      }
+    }
+    trigger.addEventListener('click', () => opened ? closeMenu(true) : openMenu());
+    backdrop.addEventListener('click', () => closeMenu(true));
+    panel.addEventListener('click', e => {
+      if (e.target.closest('a, #nav button, #askChat')) closeMenu(false);
+    });
+    document.addEventListener('keydown', e => {
+      if (!opened) return;
+      if (e.key === 'Escape') { e.preventDefault(); closeMenu(true); }
+      if (e.key === 'Tab') {
+        const focusable = Array.from(panel.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),select:not([disabled])')).filter(el => el.getClientRects().length);
+        if (!focusable.length) return;
+        const first = focusable[0], last = focusable[focusable.length-1];
+        if (e.shiftKey && document.activeElement === first) {e.preventDefault(); last.focus();}
+        else if (!e.shiftKey && document.activeElement === last) {e.preventDefault(); first.focus();}
+      }
+    });
+    if (mobile.addEventListener) mobile.addEventListener('change', syncLayout);
+    else mobile.addListener(syncLayout);
+    syncLayout();
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',setupParisisMenu);
+  else setupParisisMenu();
+})();
+</script>
 <script src="eloah-parisis.js?v=15" defer></script>
 <dialog id="proofDialog" aria-labelledby="proofTitle"><form id="proofForm">
 <div class="dialog-top"><div><div class="eyebrow">PARISIS ENGINE · AUDIT DOCUMENTAIRE</div><h2 id="proofTitle">Fiche de preuve</h2></div><button type="button" id="closeProof" class="icon-btn" aria-label="Fermer">×</button></div>
