@@ -612,3 +612,8 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
  #eloah-canva-studio .ecs-type-add{opacity:1}
 }
 @media(max-width:350px){#eloah-canva-studio .ecs-type-grid{grid-template-columns:1fr}}
+
+/* La rubrique Texte utilise son propre accent violet. */
+#eloah-canva-studio .ecs-railbtn[data-tab="text"].active{background:#eee5fa;color:#7143c3;font-weight:750}
+#eloah-canva-studio .ecs-text-search input[type=search]::-webkit-search-cancel-button{cursor:pointer}
+#eloah-canva-studio .ecs-type-card .ecs-type-preview img{pointer-events:none}
