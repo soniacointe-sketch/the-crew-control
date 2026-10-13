@@ -1,0 +1,854 @@
+{
+  "title": "PARABOLES LAB · ELOAH",
+  "created": "2026-10-13",
+  "description": "Atlas des paraboles et images, lectures critiques sans surinterprétation ; certaines entrées sont des discours figurés, pas des paraboles narratives strictes.",
+  "count": 44,
+  "method": [
+    "Délimiter le texte et sa situation narrative",
+    "Lire les versions évangéliques séparément",
+    "Étudier le vocabulaire grec et les langues des traditions",
+    "Identifier le contexte juif, social, agricole et économique",
+    "Décrire actions et déplacements des personnages",
+    "Rechercher le point de tension ou de renversement",
+    "Comparer les explications conservées dans les évangiles",
+    "Vérifier les parallèles juifs et apocryphes sans les fusionner",
+    "Formuler plusieurs hypothèses hiérarchisées",
+    "Consigner les objections et l'usage spirituel personnel"
+  ],
+  "bibliography": [
+    {
+      "title": "Amy-Jill Levine, Short Stories by Jesus",
+      "url": "https://books.google.com/books/about/Short_Stories_by_Jesus.html?id=IPhNAgAAQBAJ"
+    },
+    {
+      "title": "Merz et Teugels, critique des lectures contemporaines",
+      "url": "https://doi.org/10.5117/NTT2017.71.169.MERZ"
+    },
+    {
+      "title": "AELF, Bible liturgique en français",
+      "url": "https://www.aelf.org/bible"
+    },
+    {
+      "title": "NASSCAL, e-Clavis Christian Apocrypha",
+      "url": "https://www.nasscal.com/e-clavis-christian-apocrypha/"
+    }
+  ],
+  "entries": [
+    {
+      "id": "PAR-001",
+      "title": "Le semeur",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mc 4,1-20",
+          "url": "https://www.aelf.org/bible/Mc/4"
+        },
+        {
+          "label": "Mt 13,1-23",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Lc 8,4-15",
+          "url": "https://www.aelf.org/bible/Lc/8"
+        }
+      ],
+      "problem": "Pourquoi une même semence ne produit-elle pas partout le même fruit ?",
+      "image": "Chemin, pierres, ronces, bonne terre et rendement.",
+      "reading": "L'explication conservée dans les évangiles rapporte la semence à la Parole et les sols à sa réception.",
+      "risk": "Éviter de classer définitivement les personnes en quatre catégories.",
+      "apocrypha": "Évangile selon Thomas, logion 9.",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-002",
+      "title": "La lampe et le boisseau",
+      "category": "Écoute et action",
+      "references": [
+        {
+          "label": "Mc 4,21-25",
+          "url": "https://www.aelf.org/bible/Mc/4"
+        },
+        {
+          "label": "Lc 8,16-18",
+          "url": "https://www.aelf.org/bible/Lc/8"
+        },
+        {
+          "label": "Mt 5,14-16",
+          "url": "https://www.aelf.org/bible/Mt/5"
+        }
+      ],
+      "problem": "Que fait-on d'une lumière reçue ?",
+      "image": "Lampe, récipient, mesure, dévoilement.",
+      "reading": "L'image conduit à la responsabilité d'entendre et de faire rayonner ; les contextes évangéliques diffèrent.",
+      "risk": "Ne pas imposer une signification identique à toutes les occurrences de la lampe.",
+      "apocrypha": "Évangile selon Thomas, logions 33 et 34 (rapprochements, pas identités).",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-003",
+      "title": "La semence qui grandit seule",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mc 4,26-29",
+          "url": "https://www.aelf.org/bible/Mc/4"
+        }
+      ],
+      "problem": "Qui fait croître ce qui a été semé ?",
+      "image": "Semeur, terre, nuit et jour, épi, moisson.",
+      "reading": "Le développement du Royaume peut échapper au contrôle conscient de l'homme ; le récit déplace l'attention vers le processus.",
+      "risk": "Ne pas transformer automatiquement chaque étape de croissance en époque historique.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-004",
+      "title": "La graine de moutarde",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mc 4,30-32",
+          "url": "https://www.aelf.org/bible/Mc/4"
+        },
+        {
+          "label": "Mt 13,31-32",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Lc 13,18-19",
+          "url": "https://www.aelf.org/bible/Lc/13"
+        }
+      ],
+      "problem": "Comment une origine minuscule peut-elle devenir un espace d'accueil ?",
+      "image": "Petite graine, croissance, branches, oiseaux.",
+      "reading": "Le contraste entre petitesse et ampleur relève d'une hyperbole narrative ; les descriptions botaniques ne sont pas un manuel de sciences.",
+      "risk": "Ne pas faire de la graine un chiffre secret.",
+      "apocrypha": "Évangile selon Thomas, logion 20.",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-005",
+      "title": "Le levain dans la pâte",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mt 13,33",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Lc 13,20-21",
+          "url": "https://www.aelf.org/bible/Lc/13"
+        }
+      ],
+      "problem": "Comment une transformation discrète peut-elle atteindre tout un ensemble ?",
+      "image": "Femme, levain, trois mesures de farine, pâte.",
+      "reading": "L'image décrit une transformation progressive et considérable ; le levain n'est pas automatiquement négatif.",
+      "risk": "Ne pas appliquer le même code « levain = mal » à tous les textes.",
+      "apocrypha": "Évangile selon Thomas, logion 96.",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-006",
+      "title": "Le bon grain et l'ivraie",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mt 13,24-30",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        },
+        {
+          "label": "Mt 13,36-43",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        }
+      ],
+      "problem": "Pourquoi le tri est-il différé ?",
+      "image": "Champ, ennemi, bonnes graines, herbes, moisson.",
+      "reading": "La narration retarde le jugement pour éviter de détruire le bon grain avec l'ivraie ; Matthieu fournit ensuite une lecture eschatologique.",
+      "risk": "Ne pas justifier des persécutions actuelles en attribuant des identités fixes au « mauvais grain ».",
+      "apocrypha": "Évangile selon Thomas, logion 57.",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-007",
+      "title": "Le trésor dans le champ",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mt 13,44",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        }
+      ],
+      "problem": "Que vaut une découverte qui réordonne toutes les priorités ?",
+      "image": "Champ, trésor, joie, vente des biens.",
+      "reading": "Le récit met en valeur le choix radical d'un bien considéré comme supérieur.",
+      "risk": "Éviter de lire l'achat du champ comme une règle juridique universelle.",
+      "apocrypha": "Évangile selon Thomas, logion 109 (récit différent).",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-008",
+      "title": "La perle de grand prix",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mt 13,45-46",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        }
+      ],
+      "problem": "Que change la découverte de ce qui vaut tout le reste ?",
+      "image": "Marchand, recherche, perle, vente des biens.",
+      "reading": "À la différence du trésor découvert, le marchand cherche activement : comparer les deux images.",
+      "risk": "Ne pas décréter que la richesse est en elle-même le Royaume.",
+      "apocrypha": "Évangile selon Thomas, logion 76.",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-009",
+      "title": "Le filet de pêche",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Mt 13,47-50",
+          "url": "https://www.aelf.org/bible/Mt/13"
+        }
+      ],
+      "problem": "Pourquoi le discernement intervient-il après la récolte ?",
+      "image": "Filet, poissons, rivage, séparation.",
+      "reading": "Matthieu associe explicitement la séparation à une interprétation du jugement final.",
+      "risk": "Ne pas confondre avec le récit différent du gros poisson de Thomas.",
+      "apocrypha": "Évangile selon Thomas, logion 8 (variante thématique).",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-010",
+      "title": "La maison bâtie sur le roc",
+      "category": "Écoute et action",
+      "references": [
+        {
+          "label": "Mt 7,24-27",
+          "url": "https://www.aelf.org/bible/Mt/7"
+        },
+        {
+          "label": "Lc 6,47-49",
+          "url": "https://www.aelf.org/bible/Lc/6"
+        }
+      ],
+      "problem": "Qu'est-ce qui distingue entendre d'agir ?",
+      "image": "Fondation, roche, sable, pluie, courant.",
+      "reading": "La solidité représente l'effet d'une parole mise en pratique, et non une simple adhésion de principe.",
+      "risk": "Éviter de surinterpréter chaque matériau architectural.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-011",
+      "title": "Le serviteur impitoyable",
+      "category": "Pardon et miséricorde",
+      "references": [
+        {
+          "label": "Mt 18,23-35",
+          "url": "https://www.aelf.org/bible/Mt/18"
+        }
+      ],
+      "problem": "Peut-on recevoir la remise d'une dette et refuser de remettre celle d'autrui ?",
+      "image": "Roi, dette gigantesque, petite dette, prison.",
+      "reading": "La disproportion numérique dramatise la contradiction entre miséricorde reçue et refusée.",
+      "risk": "Ne pas détourner cette parabole pour contraindre une victime à rester dans une relation violente.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-012",
+      "title": "Les ouvriers de la vigne",
+      "category": "Justice et argent",
+      "references": [
+        {
+          "label": "Mt 20,1-16",
+          "url": "https://www.aelf.org/bible/Mt/20"
+        }
+      ],
+      "problem": "Le juste salaire est-il toujours lié au temps travaillé ?",
+      "image": "Vigne, ouvriers, salaire égal, horaires.",
+      "reading": "La générosité du maître heurte les attentes d'équivalence : plusieurs lectures sur la justice et la grâce sont possibles.",
+      "risk": "Ne pas en déduire que des employeurs peuvent légitimement sous-payer leurs travailleurs.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-013",
+      "title": "Les deux fils",
+      "category": "Écoute et action",
+      "references": [
+        {
+          "label": "Mt 21,28-32",
+          "url": "https://www.aelf.org/bible/Mt/21"
+        }
+      ],
+      "problem": "Qui accomplit réellement une volonté : celui qui dit oui ou celui qui agit ?",
+      "image": "Père, deux réponses contraires, vigne.",
+      "reading": "Le contraste oppose parole déclarée et action effective.",
+      "risk": "Éviter de transformer les personnages en catégories ethniques ou religieuses figées.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-014",
+      "title": "Les vignerons meurtriers",
+      "category": "Conflit et autorité",
+      "references": [
+        {
+          "label": "Mc 12,1-12",
+          "url": "https://www.aelf.org/bible/Mc/12"
+        },
+        {
+          "label": "Mt 21,33-46",
+          "url": "https://www.aelf.org/bible/Mt/21"
+        },
+        {
+          "label": "Lc 20,9-19",
+          "url": "https://www.aelf.org/bible/Lc/20"
+        }
+      ],
+      "problem": "Que révèle le refus des envoyés et du fils ?",
+      "image": "Vigne, ouvriers, serviteurs, fils, héritage.",
+      "reading": "Le récit s'inscrit dans une polémique d'autorité et reprend l'imagerie biblique de la vigne.",
+      "risk": "Ne pas lire l'histoire comme un rejet du peuple juif entier.",
+      "apocrypha": "Évangile selon Thomas, logion 65.",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-015",
+      "title": "Le banquet de noces",
+      "category": "Invitation et royaume",
+      "references": [
+        {
+          "label": "Mt 22,1-14",
+          "url": "https://www.aelf.org/bible/Mt/22"
+        }
+      ],
+      "problem": "Pourquoi certains refusent-ils l'invitation au festin ?",
+      "image": "Roi, invitation, routes, salle remplie.",
+      "reading": "La fin violente et l'épisode du vêtement demandent une analyse critique propre à Matthieu.",
+      "risk": "Ne pas fusionner la version de Matthieu avec celle de Luc comme un texte identique.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-016",
+      "title": "Le vêtement de noces",
+      "category": "Invitation et royaume",
+      "references": [
+        {
+          "label": "Mt 22,11-14",
+          "url": "https://www.aelf.org/bible/Mt/22"
+        }
+      ],
+      "problem": "Que signifie appartenir au banquet sans en adopter l'exigence ?",
+      "image": "Convive, vêtement, question du roi.",
+      "reading": "Image singulière dans la finale matthéenne du banquet : les explications symboliques sont diverses.",
+      "risk": "Ne pas attribuer automatiquement une couleur ou un matériau mystique au vêtement.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-017",
+      "title": "Les dix jeunes filles",
+      "category": "Vigilance et jugement",
+      "references": [
+        {
+          "label": "Mt 25,1-13",
+          "url": "https://www.aelf.org/bible/Mt/25"
+        }
+      ],
+      "problem": "Que signifie être prêt sans connaître l'heure ?",
+      "image": "Dix lampes, huile, attente, retard, porte fermée.",
+      "reading": "La vigilance concerne la durée et la préparation ; le sens précis de l'huile demeure objet d'interprétations.",
+      "risk": "Ne pas affirmer « huile = Esprit saint » comme une définition donnée par la parabole.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-018",
+      "title": "Les talents confiés",
+      "category": "Justice et argent",
+      "references": [
+        {
+          "label": "Mt 25,14-30",
+          "url": "https://www.aelf.org/bible/Mt/25"
+        }
+      ],
+      "problem": "Comment répondre à une responsabilité confiée en l'absence du maître ?",
+      "image": "Sommes d'argent, intendants, maître, peur, rendement.",
+      "reading": "Le mot « talent » désigne ici une unité monétaire importante ; l'association à un don personnel est une relecture ultérieure.",
+      "risk": "Le maître de la parabole ne doit pas être supposé identique à Dieu sans discussion.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-019",
+      "title": "Les brebis et les boucs",
+      "category": "Vigilance et jugement",
+      "references": [
+        {
+          "label": "Mt 25,31-46",
+          "url": "https://www.aelf.org/bible/Mt/25"
+        }
+      ],
+      "problem": "Comment le traitement des plus vulnérables engage-t-il le jugement ?",
+      "image": "Deux groupes, faim, soif, étrangers, malades.",
+      "reading": "Cette scène de jugement emploie une image de séparation ; ce n'est pas une parabole narrative ordinaire.",
+      "risk": "Ne pas perdre les gestes concrets de solidarité au profit d'un code animalier.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-020",
+      "title": "Le figuier annonce la saison",
+      "category": "Vigilance et jugement",
+      "references": [
+        {
+          "label": "Mc 13,28-31",
+          "url": "https://www.aelf.org/bible/Mc/13"
+        },
+        {
+          "label": "Mt 24,32-35",
+          "url": "https://www.aelf.org/bible/Mt/24"
+        },
+        {
+          "label": "Lc 21,29-33",
+          "url": "https://www.aelf.org/bible/Lc/21"
+        }
+      ],
+      "problem": "Comment une image saisonnière aide-t-elle à discerner un changement ?",
+      "image": "Figuier, bourgeons, été.",
+      "reading": "Comparaison brève insérée dans des discours eschatologiques.",
+      "risk": "Ne pas calculer la date de la fin du monde à partir d'une image agricole.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-021",
+      "title": "Le bon Samaritain",
+      "category": "Pardon et miséricorde",
+      "references": [
+        {
+          "label": "Lc 10,25-37",
+          "url": "https://www.aelf.org/bible/Lc/10"
+        }
+      ],
+      "problem": "Qui devient le prochain de l'homme blessé ?",
+      "image": "Voyageur, prêtre, lévite, Samaritain, auberge.",
+      "reading": "Jésus renverse la question du juriste : au lieu d'identifier le prochain, il demande qui s'est comporté en prochain.",
+      "risk": "Ne pas présenter tous les prêtres ou tous les Juifs comme dépourvus de compassion.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-022",
+      "title": "Les deux débiteurs",
+      "category": "Pardon et miséricorde",
+      "references": [
+        {
+          "label": "Lc 7,41-43",
+          "url": "https://www.aelf.org/bible/Lc/7"
+        }
+      ],
+      "problem": "Qui aime le plus après une dette remise ?",
+      "image": "Prêteur, deux dettes, remise.",
+      "reading": "Dans le contexte d'une femme et d'un repas, la métaphore éclaire le rapport entre pardon et amour.",
+      "risk": "Ne pas confondre avec le serviteur impitoyable de Matthieu 18.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-023",
+      "title": "L'ami qui demande du pain la nuit",
+      "category": "Écoute et action",
+      "references": [
+        {
+          "label": "Lc 11,5-8",
+          "url": "https://www.aelf.org/bible/Lc/11"
+        }
+      ],
+      "problem": "Que fait la persévérance face à une demande d'hospitalité ?",
+      "image": "Ami, porte, pain, nuit.",
+      "reading": "Le récit conduit à une exhortation sur la demande et la prière ; l'hospitalité antique est importante.",
+      "risk": "Ne pas appliquer automatiquement l'attitude de l'ami réticent à Dieu.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-024",
+      "title": "Le riche insensé",
+      "category": "Justice et argent",
+      "references": [
+        {
+          "label": "Lc 12,16-21",
+          "url": "https://www.aelf.org/bible/Lc/12"
+        }
+      ],
+      "problem": "À quoi servent les greniers lorsque la vie n'est pas maîtrisable ?",
+      "image": "Récoltes, granges, biens, mort.",
+      "reading": "Le récit critique l'illusion de sécurité absolue procurée par l'accumulation.",
+      "risk": "Ne pas condamner toute épargne ni glorifier la précarité.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-025",
+      "title": "Les serviteurs qui veillent",
+      "category": "Vigilance et jugement",
+      "references": [
+        {
+          "label": "Lc 12,35-40",
+          "url": "https://www.aelf.org/bible/Lc/12"
+        }
+      ],
+      "problem": "Comment l'attente devient-elle disponibilité ?",
+      "image": "Ceinture, lampes, maître absent, retour.",
+      "reading": "L'inversion du maître qui sert les veilleurs mérite une attention particulière.",
+      "risk": "Éviter de confondre cet exemple avec les dix jeunes filles.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-026",
+      "title": "L'intendant fidèle",
+      "category": "Vigilance et jugement",
+      "references": [
+        {
+          "label": "Lc 12,42-48",
+          "url": "https://www.aelf.org/bible/Lc/12"
+        },
+        {
+          "label": "Mt 24,45-51",
+          "url": "https://www.aelf.org/bible/Mt/24"
+        }
+      ],
+      "problem": "Quel est l'usage responsable d'une charge confiée ?",
+      "image": "Intendant, maison, nourriture, délai.",
+      "reading": "Accent sur responsabilité, abus de pouvoir et vigilance dans le temps.",
+      "risk": "Ne pas justifier un pouvoir autoritaire sous prétexte d'un rôle de maître.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-027",
+      "title": "Le figuier sans fruits",
+      "category": "Royaume et croissance",
+      "references": [
+        {
+          "label": "Lc 13,6-9",
+          "url": "https://www.aelf.org/bible/Lc/13"
+        }
+      ],
+      "problem": "Quelle place est laissée au temps et au soin avant le jugement ?",
+      "image": "Vigne, figuier, jardinier, fumier, une année.",
+      "reading": "Le récit mêle délai et exigence de fécondité ; l'issue reste ouverte.",
+      "risk": "Ne pas prétendre que le texte raconte la fin de l'année supplémentaire.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-028",
+      "title": "Les premières places au repas",
+      "category": "Invitation et royaume",
+      "references": [
+        {
+          "label": "Lc 14,7-11",
+          "url": "https://www.aelf.org/bible/Lc/14"
+        }
+      ],
+      "problem": "Que révèle le choix de la place d'honneur ?",
+      "image": "Invités, places, maître du banquet.",
+      "reading": "L'histoire invite à examiner statut social et humilité en situation concrète.",
+      "risk": "Ne pas en réduire le sens à une technique pour gagner une meilleure place.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-029",
+      "title": "Le grand dîner",
+      "category": "Invitation et royaume",
+      "references": [
+        {
+          "label": "Lc 14,15-24",
+          "url": "https://www.aelf.org/bible/Lc/14"
+        }
+      ],
+      "problem": "Qui entre au banquet quand les invités initiaux se dérobent ?",
+      "image": "Invitation, excuses, rues, pauvres, routes.",
+      "reading": "Le tableau remet en question les logiques d'exclusion et d'honneur.",
+      "risk": "Ne pas supposer que les premiers invités désignent tous les Juifs.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-030",
+      "title": "Construire une tour et préparer une guerre",
+      "category": "Écoute et action",
+      "references": [
+        {
+          "label": "Lc 14,28-33",
+          "url": "https://www.aelf.org/bible/Lc/14"
+        }
+      ],
+      "problem": "Comment discerner le coût d'un engagement ?",
+      "image": "Tour, calcul du coût, roi en guerre.",
+      "reading": "Deux comparaisons successives sur le discernement nécessaire avant de suivre.",
+      "risk": "Ne pas les traiter comme une stratégie militaire prescrite par Jésus.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-031",
+      "title": "La brebis perdue",
+      "category": "Pardon et miséricorde",
+      "references": [
+        {
+          "label": "Lc 15,3-7",
+          "url": "https://www.aelf.org/bible/Lc/15"
+        },
+        {
+          "label": "Mt 18,12-14",
+          "url": "https://www.aelf.org/bible/Mt/18"
+        }
+      ],
+      "problem": "Que vaut une personne qui manque à un ensemble ?",
+      "image": "Cent brebis, une perdue, recherche et joie.",
+      "reading": "Matthieu et Luc l'insèrent dans des contextes différents ; comparer la fonction de la recherche.",
+      "risk": "Évangile selon Thomas, logion 107 : variante d'accentuation.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-032",
+      "title": "La pièce perdue",
+      "category": "Pardon et miséricorde",
+      "references": [
+        {
+          "label": "Lc 15,8-10",
+          "url": "https://www.aelf.org/bible/Lc/15"
+        }
+      ],
+      "problem": "Pourquoi se réjouir collectivement pour une petite pièce retrouvée ?",
+      "image": "Dix pièces, lampe, balai, fête.",
+      "reading": "Parallèle féminin de la recherche et de la joie, à lire avec brebis et fils perdus.",
+      "risk": "Ne pas minimiser le rôle de la femme dans la comparaison.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-033",
+      "title": "Le père et les deux fils",
+      "category": "Pardon et miséricorde",
+      "references": [
+        {
+          "label": "Lc 15,11-32",
+          "url": "https://www.aelf.org/bible/Lc/15"
+        }
+      ],
+      "problem": "Qui est réellement perdu et qui peut accueillir le retour ?",
+      "image": "Héritage, famine, retour, père, fils aîné.",
+      "reading": "Le récit se termine sur une réponse laissée ouverte chez le fils aîné : les deux fils comptent.",
+      "risk": "Ne pas conclure que le père cautionne tous les actes du cadet.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-034",
+      "title": "L'intendant habile",
+      "category": "Justice et argent",
+      "references": [
+        {
+          "label": "Lc 16,1-9",
+          "url": "https://www.aelf.org/bible/Lc/16"
+        }
+      ],
+      "problem": "Pourquoi un personnage moralement ambigu est-il donné en exemple ?",
+      "image": "Comptes, débiteurs, réduction de dettes, maître.",
+      "reading": "L'habileté dans une situation urgente est reconnue ; l'histoire demeure débattue sur l'éthique de la remise.",
+      "risk": "Éviter d'en faire un permis général de fraude ou de le simplifier en éloge du vol.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-035",
+      "title": "Le riche et Lazare",
+      "category": "Justice et argent",
+      "references": [
+        {
+          "label": "Lc 16,19-31",
+          "url": "https://www.aelf.org/bible/Lc/16"
+        }
+      ],
+      "problem": "Comment une richesse peut-elle aveugler à la souffrance visible ?",
+      "image": "Portail, table, mendiant, retournement après la mort.",
+      "reading": "Récit exemplaire utilisant l'imagerie de l'au-delà pour renverser les destins.",
+      "risk": "Ne pas transformer le tableau narratif en plan topographique prouvé de l'au-delà.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-036",
+      "title": "Le serviteur au retour des champs",
+      "category": "Écoute et action",
+      "references": [
+        {
+          "label": "Lc 17,7-10",
+          "url": "https://www.aelf.org/bible/Lc/17"
+        }
+      ],
+      "problem": "Que signifie servir sans réclamer un titre de gloire ?",
+      "image": "Serviteur, table, champs.",
+      "reading": "Comparaison insérée dans une exhortation à la fidélité et à l'humilité.",
+      "risk": "Ne pas instrumentaliser le récit pour excuser l'esclavage ou l'exploitation.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-037",
+      "title": "La veuve et le juge",
+      "category": "Pardon et miséricorde",
+      "references": [
+        {
+          "label": "Lc 18,1-8",
+          "url": "https://www.aelf.org/bible/Lc/18"
+        }
+      ],
+      "problem": "Comment une personne démunie obtient-elle justice ?",
+      "image": "Veuve, juge, insistance, protection.",
+      "reading": "L'introduction souligne la persévérance dans la prière ; le récit porte aussi une question de justice sociale.",
+      "risk": "Le juge injuste n'est pas un portrait direct de Dieu.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-038",
+      "title": "Le pharisien et le collecteur d'impôts",
+      "category": "Écoute et action",
+      "references": [
+        {
+          "label": "Lc 18,9-14",
+          "url": "https://www.aelf.org/bible/Lc/18"
+        }
+      ],
+      "problem": "Que produit la comparaison de sa vertu avec celle d'autrui ?",
+      "image": "Temple, prière, deux attitudes.",
+      "reading": "La critique vise l'autojustification, non le judaïsme ou les pharisiens en général.",
+      "risk": "Ne pas employer « pharisien » comme injure antijuive.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-039",
+      "title": "Les mines confiées",
+      "category": "Justice et argent",
+      "references": [
+        {
+          "label": "Lc 19,11-27",
+          "url": "https://www.aelf.org/bible/Lc/19"
+        }
+      ],
+      "problem": "Comment l'attente d'un royaume s'articule-t-elle aux responsabilités présentes ?",
+      "image": "Argent, noble, sujets, répartition.",
+      "reading": "Histoire différente des talents de Matthieu : détails royaux et violence finale à analyser.",
+      "risk": "Ne pas fusionner automatiquement talents et mines dans une seule version.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-040",
+      "title": "Les enfants sur la place",
+      "category": "Conflit et autorité",
+      "references": [
+        {
+          "label": "Mt 11,16-19",
+          "url": "https://www.aelf.org/bible/Mt/11"
+        },
+        {
+          "label": "Lc 7,31-35",
+          "url": "https://www.aelf.org/bible/Lc/7"
+        }
+      ],
+      "problem": "Pourquoi certains refusent-ils les invitations et les réponses contraires ?",
+      "image": "Enfants, flute, deuil, danse.",
+      "reading": "Petite comparaison sur le rejet simultané de Jean et de Jésus.",
+      "risk": "Ne pas l'utiliser pour caractériser tous les interlocuteurs juifs.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-041",
+      "title": "Le voleur dans la nuit",
+      "category": "Vigilance et jugement",
+      "references": [
+        {
+          "label": "Mt 24,43-44",
+          "url": "https://www.aelf.org/bible/Mt/24"
+        },
+        {
+          "label": "Lc 12,39-40",
+          "url": "https://www.aelf.org/bible/Lc/12"
+        }
+      ],
+      "problem": "Pourquoi la préparation importe-t-elle lorsque l'heure est inconnue ?",
+      "image": "Maison, maître, voleur, veille.",
+      "reading": "Comparaison très brève dans un discours d'attente.",
+      "risk": "Ne pas transformer cette image en méthode de prédiction des catastrophes.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-042",
+      "title": "Le portier et l'absence du maître",
+      "category": "Vigilance et jugement",
+      "references": [
+        {
+          "label": "Mc 13,33-37",
+          "url": "https://www.aelf.org/bible/Mc/13"
+        }
+      ],
+      "problem": "Quelle vigilance lorsque personne ne sait l'heure du retour ?",
+      "image": "Maison, tâches confiées, portier, nuit.",
+      "reading": "Le passage appelle à veiller plutôt qu'à calculer.",
+      "risk": "Ne pas lire les heures de la nuit comme calendrier secret de la fin des temps.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-043",
+      "title": "Le bon berger et la porte",
+      "category": "Images johanniques",
+      "references": [
+        {
+          "label": "Jn 10,1-18",
+          "url": "https://www.aelf.org/bible/Jn/10"
+        }
+      ],
+      "problem": "Comment reconnaître le berger et distinguer la relation de l'exploitation ?",
+      "image": "Berger, brebis, porte, voix, loups.",
+      "reading": "Discours symbolique du quatrième évangile, non parabole synoptique ordinaire.",
+      "risk": "Ne pas confondre avec la brebis perdue de Luc.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    },
+    {
+      "id": "PAR-044",
+      "title": "Le grain de blé qui meurt",
+      "category": "Images johanniques",
+      "references": [
+        {
+          "label": "Jn 12,24-26",
+          "url": "https://www.aelf.org/bible/Jn/12"
+        }
+      ],
+      "problem": "Comment la perte d'une graine peut-elle devenir fécondité ?",
+      "image": "Grain, terre, mourir, fruit.",
+      "reading": "Métaphore liée à la mort de Jésus dans le contexte johannique.",
+      "risk": "Ne pas lire la métaphore comme une injonction à rechercher sa propre mort.",
+      "apocrypha": "",
+      "studyStatus": "Fiche méthodologique, à compléter par une comparaison philologique des témoins."
+    }
+  ]
+}
