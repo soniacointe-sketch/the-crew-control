@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#f4efe7">
+<title>PARISIS ENGINE · PAR-ISIS-005 · SIG historique ALPAGE</title>
+<meta name="description" content="Laboratoire de mesures reproductibles sur le réseau historique de rues vectorisées d'après l'Atlas Vasserot (1810–1836), avec import GeoJSON, projection Lambert-93, longueurs et orientations sans prétendre démontrer des intentions.">
+<style>
+:root{--bg:#f4efe7;--paper:#fffdfa;--ink:#302b26;--muted:#726859;--line:#e1d5c5;--green:#345e52;--gold:#9e7a45}*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);margin:0;font:14px/1.7 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:var(--green);text-underline-offset:3px}button,input{font:inherit}
+header{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;align-items:center;background:#fffcf6;border-bottom:1px solid var(--line);padding:16px clamp(14px,3vw,40px)}
+.wordmark{font:27px Georgia,serif;letter-spacing:.09em}.wordmark em{font-style:normal;color:var(--gold)}.actions{display:flex;flex-wrap:wrap;gap:8px}.btn,button{display:inline-flex;align-items:center;gap:5px;text-decoration:none;border:1px solid #d3c4b2;border-radius:8px;padding:9px 12px;background:#fffcf7;color:#504434;cursor:pointer}
+button.primary{background:var(--green);border-color:var(--green);color:#fff}button:disabled{opacity:.5;cursor:not-allowed}
+main{max-width:1310px;margin:auto;padding:24px clamp(14px,3vw,40px)}.eyebrow{font-size:11px;color:#987447;letter-spacing:.16em;text-transform:uppercase;font-weight:750}h1,h2,h3{font-family:Georgia,serif;font-weight:400;line-height:1.22}
+h1{font-size:clamp(36px,5vw,64px);margin:11px 0 16px}h1 em{font-style:normal;color:#9b774d}h2{font-size:clamp(26px,2.8vw,36px);margin:4px 0 13px}h3{font-size:22px;margin:12px 0}
+.lead{font:clamp(19px,2.15vw,25px)/1.6 Georgia,serif;color:#504b40;max-width:1040px}.panel{background:var(--paper);border:1px solid var(--line);border-radius:13px;padding:clamp(18px,3vw,34px);margin:22px 0}
+.notice{border:1px solid #e3d2b7;border-left:3px solid var(--gold);padding:15px 17px;border-radius:7px;background:#faf1e3;font-size:13px;margin:17px 0}
+label{font-size:12px;color:#665a4b;font-weight:650;display:grid;gap:7px}input[type=file],input[type=number],select{width:100%;border:1px solid #dacebe;border-radius:7px;padding:9px;background:#fff}
+input[type=range]{width:200px;max-width:100%;accent-color:var(--green)}
+.flex{display:flex;flex-wrap:wrap;align-items:center;gap:12px}.sources{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:17px 0}.source{border:1px solid var(--line);padding:17px;border-radius:9px;background:#fcf8f2}.source strong{display:block;font-size:11px;color:#876a45;letter-spacing:.12em}.source h3{margin:8px 0}.source p{font-size:12px}
+.layout{display:grid;grid-template-columns:minmax(0,1.6fr) minmax(270px,1fr);gap:16px}.map{width:100%;background:#f5f0e5;border:1px solid var(--line);border-radius:10px;overflow:hidden}.map svg{display:block;width:100%;height:auto;max-height:660px}
+.chart{padding:15px;border:1px solid var(--line);background:#fcf9f3;border-radius:10px}.histrow{display:grid;grid-template-columns:60px minmax(0,1fr) 55px;gap:8px;align-items:center;font-size:11px;margin:10px 0}.bar{background:#ede1cc;height:13px;border-radius:4px;overflow:hidden}.bar span{height:100%;background:#547f70;display:block}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin:13px 0}.stat{border:1px solid var(--line);background:#faf6ee;border-radius:9px;padding:14px}.stat strong{display:block;font:27px Georgia,serif;color:#836239}.stat span{font-size:11px;color:var(--muted)}
+table{border-collapse:collapse;width:100%;font-size:12px;line-height:1.6}th,td{text-align:left;vertical-align:top;padding:10px 9px;border-bottom:1px solid var(--line)}th{background:#f3eade}.scroll{overflow:auto}.small{font-size:12px;color:var(--muted)}code{word-break:break-word}.status{min-height:37px;padding:10px 13px;border:1px solid #e6d9c8;background:#fbf7f0;border-radius:8px;font-size:12px}
+footer{border-top:1px solid var(--line);padding:20px 0 28px;font-size:12px;color:var(--muted)}
+@media(max-width:920px){.layout,.sources{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}}
+@media(max-width:580px){.stats{grid-template-columns:1fr}.panel{padding:18px 16px}.wordmark{font-size:22px}}
+</style></head><body>
+<header><div class="wordmark">PARISIS <em>ENGINE</em></div><nav class="actions"><a class="btn" href="eloah-parisis.html">← Bibliothèque</a><a class="btn" href="parisis-vasserot-feuilles-audit.html">4 feuilles Vasserot</a><a class="btn" href="parisis-par-isis-005-feuilles-vasserot.html">Enquête 005</a></nav></header>
+<main>
+<div class="eyebrow">PAR-ISIS-005 · LABORATOIRE SIG · 13 OCTOBRE 2026</div>
+<h1>Mesurer <em>les rues anciennes</em><br>sans inventer leur histoire</h1>
+<p class="lead">ALPAGE a vectorisé des rues de Paris d'après les plans Vasserot (1810–1836). Ce laboratoire permet d'ouvrir un export GeoJSON de cette couche, d'afficher les géométries autour de l'Opéra, puis de calculer des longueurs et orientations en projection Lambert-93. Il ne transforme pas une mesure en preuve d'intention.</p>
+<section class="panel" id="corpus"><div class="eyebrow">01 · CORPUS DOCUMENTÉ</div><h2>Les fichiers scientifiques retrouvés</h2>
+<div class="sources">
+<div class="source"><strong>ALPAGE · SIG LINÉAIRE · 2011</strong><h3>Réseau de rues Vasserot</h3><p>Numérisation vectorielle des voies de 1810–1836, Anne-Laure Bethe. Export GeoJSON proposé par les catalogues universitaires. Licence ODbL.</p><a href="https://geodiscovery.uwm.edu/catalog/stanford-db591kz1574" target="_blank" rel="noopener">Ouvrir le catalogue et Export GeoJSON ↗</a></div>
+<div class="source"><strong>ALPAGE · PARCELLES · 2007–2010</strong><h3>Parcellaire cadastral</h3><p>Vectorisation manuelle des limites de parcelles colorées de Vasserot, documentée par l'ANR. Jeu distinct du réseau de rues.</p><a href="https://www.data.gouv.fr/datasets/vasserot-parcelles-1810-1836" target="_blank" rel="noopener">Télécharger depuis data.gouv.fr ↗</a></div>
+<div class="source"><strong>ORIGINAUX · 1810–1836</strong><h3>Atlas manuscrit F/31</h3><p>La série F/31/73 à F/31/96 est conservée par les Archives nationales et consultable via les Archives de Paris : contrôle visuel et noms de voies indispensables.</p><a href="https://archives.paris.fr/archives-numerisees/documents-iconographiques/plans-parcellaires/accedez-aux-plans-de-paris-dans-ses-limites-avant-1860" target="_blank" rel="noopener">Consulter les originaux ↗</a></div>
+</div>
+<div class="notice"><strong>Deux niveaux de preuve.</strong> La géométrie du fichier ALPAGE est une restitution scientifique géoréférencée de sources anciennes ; elle n'est pas un mesurage de terrain effectué en 1825. Les couches originales peuvent avoir des orientations et échelles différentes. Les chiffres obtenus sont des mesures <em>du modèle SIG chargé</em>, pas une certification de chaque rue historique ni une preuve d'Ankh.</div>
+</section>
+<section class="panel" id="import"><div class="eyebrow">02 · CHARGER LE FICHIER VECTEUR</div><h2>Analyse géographique reproductible</h2>
+<p>Depuis le catalogue, utilisez l'option « Export GeoJSON », puis ouvrez ici le fichier obtenu. Les données ne sont pas transmises à un serveur par cette page : l'analyse est effectuée dans le navigateur.</p>
+<div class="flex" style="align-items:end">
+<label style="flex:2;min-width:260px" for="geojsonFile">Fichier GeoJSON du réseau de rues<input id="geojsonFile" type="file" accept=".geojson,.json,application/geo+json,application/json"></label>
+<label for="radius" style="min-width:170px">Rayon autour de l'Opéra<input id="radius" type="range" min="300" max="1400" step="100" value="700"><span id="radiusLabel" class="small">700 mètres</span></label>
+<button id="analyze" type="button" class="primary" disabled>Analyser le fichier</button>
+<button id="export" type="button" disabled>Exporter le rapport CSV</button>
+</div>
+<p id="status" class="status" role="status" aria-live="polite">Aucun fichier chargé. Aucun tracé historique n'est simulé.</p>
+<div class="stats">
+<div class="stat"><strong id="featureCount">—</strong><span>Objets de rue intersectant le cercle</span></div>
+<div class="stat"><strong id="lengthTotal">—</strong><span>Longueur cumulée des segments coupés (m)</span></div>
+<div class="stat"><strong id="validCount">—</strong><span>Géométries linéaires du fichier</span></div>
+</div>
+<div class="layout">
+<div class="map"><svg id="mapSvg" viewBox="0 0 700 700" role="img" aria-label="Schéma métrique du quartier, qui s'affichera après import de données ALPAGE"><rect width="700" height="700" fill="#f7f1e8"/><circle cx="350" cy="350" r="285" fill="none" stroke="#ccb38b" stroke-width="2" stroke-dasharray="8 7"/><path d="M350 56V644 M56 350H644" stroke="#d9c7ab" stroke-width="1"/><circle cx="350" cy="350" r="7" fill="#a67d43"/><text x="363" y="337" font-family="Georgia,serif" font-size="17" fill="#765e3e">Quartier de l'Opéra</text><text x="350" y="680" text-anchor="middle" font-size="14" fill="#756b5d">En attente d'une couche GeoJSON réelle</text></svg></div>
+<div class="chart"><h3>Orientation des segments</h3><p class="small">Histogramme pondéré par la longueur visible dans le cercle ; angles ramenés entre 0 et 180° (direction non orientée). Aucune orientation privilégiée n'est présupposée.</p><div id="hist"><p class="small">Importez la couche pour afficher les huit classes d'orientation.</p></div></div>
+</div>
+<div class="notice"><strong>Limite du compteur :</strong> un objet GeoJSON peut comporter plusieurs lignes. Les kilomètres additionnés peuvent compter deux fois des géométries qui se chevauchent ; aucune déduplication cadastrale n'est effectuée. Seules les portions des segments à l'intérieur du rayon choisi sont comptées.</div>
+</section>
+<section class="panel" id="audit"><div class="eyebrow">03 · AUDIT ET PROCHAINES MESURES</div><h2>Du réseau vectorisé au test d'un alignement</h2>
+<p>La mesure d'une couche géographique et le test d'une hypothèse géométrique sont deux opérations distinctes. Pour tester l'Ankh autour du Palais Garnier, il faut d'abord identifier dans le livre les tronçons exacts retenus par son auteur. Puis les confronter à l'époque des voies, aux noms figurant sur les feuilles et à des points de contrôle sélectionnés avant le calcul.</p>
+<div class="scroll"><table><thead><tr><th>Élément</th><th>Situation</th><th>Conséquence</th></tr></thead><tbody>
+<tr><td>Réseau SIG ALPAGE</td><td>Fichier linéaire repéré dans deux catalogues universitaires.</td><td>Géométrie calculable après import.</td></tr>
+<tr><td>Cotes F/31/75/26, 37, 38, 39</td><td>Références identifiées ; images pas encore collationnées sur les notices originales.</td><td>Toponymie locale et intersections non certifiées.</td></tr>
+<tr><td>Plan avant / après 1876</td><td>Sources historiques et géoréférencement postérieur repérés.</td><td>Superposition parcellaire de détail encore à effectuer.</td></tr>
+<tr><td>Figure du livre</td><td>Description textuelle connue, géométrie originale non fournie.</td><td>Il est interdit de sélectionner a posteriori les points pour « faire apparaître » l'Ankh.</td></tr>
+<tr><td>Preuve d'intention</td><td>Non attestée.</td><td>Aucune conclusion sur un code intentionnel.</td></tr>
+</tbody></table></div>
+<p><a href="parisis-vasserot-feuilles-audit.html">Ouvrir les quatre feuilles candidates et consigner des intersections vérifiées ↗</a></p>
+</section>
+<footer>PARISIS ENGINE · HUMANITIES LAB · PAR-ISIS-005. Analyse locale uniquement. Aucun tracé ni nombre de points de l'atlas central n'est modifié automatiquement. Données historiques ALPAGE : ODbL ; décrire précisément la couche et respecter sa licence en cas de redistribution.</footer>
+</main>
+<script>
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id);
+const status=$('status'),file=$('geojsonFile'),radius=$('radius'),btn=$('analyze'),exp=$('export');
+const EARTH={e:0.0818191910428158,n:0.725607765053267,C:11754255.426096,xs:700000,ys:12655612.049876,lon0:3*Math.PI/180};
+const lambert=(lat,lon)=>{
+const phi=lat*Math.PI/180,L=lon*Math.PI/180,e=EARTH.e;
+const v=Math.log(Math.tan(Math.PI/4+phi/2)*Math.pow((1-e*Math.sin(phi))/(1+e*Math.sin(phi)),e/2));
+const R=EARTH.C*Math.exp(-EARTH.n*v);
+return [EARTH.xs+R*Math.sin(EARTH.n*(L-EARTH.lon0)),EARTH.ys-R*Math.cos(EARTH.n*(L-EARTH.lon0))];
+};
+const center=lambert(48.8684,2.3335);
+let json=null,result=null,filename='';
+const f2=(n)=>Number(n).toLocaleString('fr-FR',{maximumFractionDigits:1});
+function coord(value){
+if(!Array.isArray(value)||value.length<2)return null;
+const a=Number(value[0]),b=Number(value[1]);
+if(!Number.isFinite(a)||!Number.isFinite(b))return null;
+if(a>2&&a<3&&b>48&&b<49)return lambert(b,a);
+if(a>550000&&a<850000&&b>6700000&&b<7100000)return [a,b];
+return null;
+}
+function lines(geometry){
+if(!geometry)return [];
+if(geometry.type==='LineString')return [geometry.coordinates||[]];
+if(geometry.type==='MultiLineString')return geometry.coordinates||[];
+if(geometry.type==='GeometryCollection')return (geometry.geometries||[]).flatMap(lines);
+return [];
+}
+// Coupe exactement un segment par un cercle : intervalle paramétrique autorisé.
+function circleClip(a,b,R){
+const dx=b[0]-a[0],dy=b[1]-a[1],Ax=a[0]-center[0],Ay=a[1]-center[1],A=dx*dx+dy*dy;
+if(A<=1e-12)return null;
+const B=2*(Ax*dx+Ay*dy),C=Ax*Ax+Ay*Ay-R*R,D=B*B-4*A*C;
+const breaks=[0,1];
+if(D>0){const sqrt=Math.sqrt(D);breaks.push((-B-sqrt)/(2*A),(-B+sqrt)/(2*A));}
+breaks.sort((x,y)=>x-y);
+for(let i=0;i<breaks.length-1;i++){
+const lo=Math.max(0,breaks[i]),hi=Math.min(1,breaks[i+1]);
+if(hi<=lo)continue;
+const mid=(lo+hi)/2,x=Ax+mid*dx,y=Ay+mid*dy;
+if(x*x+y*y<=R*R+1e-6)return [[a[0]+lo*dx,a[1]+lo*dy],[a[0]+hi*dx,a[1]+hi*dy]];
+}return null;
+}
+function generate(){
+if(!json)return;
+const R=Number(radius.value);
+let features=0,valid=0,length=0,nSegments=0;
+const histogram=Array(8).fill(0),draw=[];
+for(const feat of json.features){
+if(!feat||!feat.geometry)continue;
+const parts=lines(feat.geometry);
+if(!parts.length)continue;
+valid++;let touched=false;
+for(const part of parts){
+for(let i=1;i<part.length;i++){
+const a=coord(part[i-1]),b=coord(part[i]);if(!a||!b)continue;
+const cut=circleClip(a,b,R);if(!cut)continue;
+touched=true;const dx=cut[1][0]-cut[0][0],dy=cut[1][1]-cut[0][1],d=Math.hypot(dx,dy);
+if(d<0.01)continue;
+length+=d;nSegments++;
+const angle=(Math.atan2(dx,dy)*180/Math.PI+360)%180;
+histogram[Math.min(7,Math.floor(angle/22.5))]+=d;
+if(draw.length<6000)draw.push(cut);
+}
+}
+if(touched)features++;
+}
+result={radius:R,objects:features,valid,length,nSegments,histogram,draw,source:filename};
+$('featureCount').textContent=f2(features);
+$('lengthTotal').textContent=f2(length);
+$('validCount').textContent=f2(valid);
+const view=350,scale=285/R;
+const linePaths=draw.map(seg=>{
+const x1=(view+(seg[0][0]-center[0])*scale).toFixed(2),y1=(view-(seg[0][1]-center[1])*scale).toFixed(2),
+x2=(view+(seg[1][0]-center[0])*scale).toFixed(2),y2=(view-(seg[1][1]-center[1])*scale).toFixed(2);
+return 'M'+x1+' '+y1+'L'+x2+' '+y2;
+}).join(' ');
+$('mapSvg').innerHTML='<rect width="700" height="700" fill="#f7f1e8"/><circle cx="350" cy="350" r="285" fill="#fcf8f0" stroke="#b99d75" stroke-width="2"/><path d="M350 65V635 M65 350H635" stroke="#ded1bc" stroke-width="1"/><path d="'+linePaths+'" stroke="#365f55" stroke-width="1.7" fill="none" stroke-linecap="round"/><circle cx="350" cy="350" r="6" fill="#a67d43"/><text x="360" y="339" font-size="14" fill="#6b573f">Opéra · repère central</text><text x="350" y="680" text-anchor="middle" font-size="14" fill="#655a4b">Rayon '+R+' m · Lambert-93 · couches historiques importées</text>';
+const max=Math.max(...histogram,1);
+$('hist').innerHTML=histogram.map((v,i)=>'<div class="histrow"><span>'+(i*22.5)+'–'+((i+1)*22.5)+'°</span><div class="bar"><span style="width:'+((v/max)*100).toFixed(1)+'%"></span></div><span>'+f2(v)+' m</span></div>').join('');
+status.textContent=f2(features)+' objets intersectent le périmètre, '+f2(length)+' m de longueurs cumulées et '+nSegments+' segments découpés. Résultats de calcul du modèle importé ; aucune intention historique inférée.';
+exp.disabled=false;
+}
+file.addEventListener('change',async e=>{
+json=null;result=null;btn.disabled=true;exp.disabled=true;filename='';const f=e.target.files?.[0];if(!f)return;
+if(f.size>75*1024*1024){status.textContent='Fichier trop volumineux (limite 75 Mo). Préférez un export GeoJSON filtré.';return;}
+try{
+const parsed=JSON.parse(await f.text());
+if(parsed?.type!=='FeatureCollection'||!Array.isArray(parsed.features))throw new Error('Une FeatureCollection GeoJSON est nécessaire.');
+json=parsed;filename=f.name;btn.disabled=false;
+status.textContent='Fichier lu : '+f.name+' ; '+f2(json.features.length)+' objets. Cliquez sur Analyser pour calculer les géométries.';
+}catch(err){status.textContent='Import impossible : '+err.message;}
+});
+radius.addEventListener('input',()=>{$('radiusLabel').textContent=radius.value+' mètres';if(result)generate();});
+btn.addEventListener('click',generate);
+exp.addEventListener('click',()=>{
+if(!result)return;
+const info=[['source',result.source],['date_calcul',new Date().toISOString()],['source_reference','ALPAGE Vasserot 1810-1836 si fichier confirmé'],['rayon_m',result.radius],['objets_intersectant',result.objects],['geometries_lineaires',result.valid],['longueur_cumulee_m',result.length.toFixed(3)],['segments_calcules',result.nSegments],['precision','mesure modèle vectoriel, source cadastrale et intersections individuelles non auditées']];
+result.histogram.forEach((n,i)=>info.push(['orientation_'+(i*22.5)+'_'+((i+1)*22.5)+'_metres',n.toFixed(3)]));
+const csv='indicateur,valeur\r\n'+info.map(row=>row.map(v=>'"'+String(v).replace(/"/g,'""')+'"').join(',')).join('\r\n');
+const url=URL.createObjectURL(new Blob(['\ufeff',csv],{type:'text/csv;charset=utf-8'})),a=document.createElement('a');
+a.href=url;a.download='PARISIS-005-alpage-rapport-'+result.radius+'m.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+})();
+</script></body></html>
