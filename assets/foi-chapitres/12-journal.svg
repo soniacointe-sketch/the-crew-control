@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 840 1080" width="840" height="1080" role="img" aria-labelledby="title desc">
+<title id="title">Couverture ELOAH : MON JOURNAL DE DÉCOUVERTES</title>
+<desc id="desc">Illustration vectorielle éditoriale créée pour le chapitre 12 du chemin spirituel ELOAH.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#243546"/><stop offset="100%" stop-color="#12151c"/></linearGradient>
+ <radialGradient id="halo"><stop offset="0%" stop-color="#c9d1c1" stop-opacity=".22"/><stop offset="73%" stop-color="#c9d1c1" stop-opacity=".05"/><stop offset="100%" stop-color="#c9d1c1" stop-opacity="0"/></radialGradient>
+ <pattern id="dots" patternUnits="userSpaceOnUse" width="26" height="26"><circle cx="5" cy="6" r="1" fill="#edc996" opacity=".13"/></pattern>
+ <pattern id="lines" patternUnits="userSpaceOnUse" width="45" height="45" patternTransform="rotate(39)"><path d="M0 0V45" stroke="#edc996" stroke-width=".8" opacity=".06"/></pattern>
+</defs>
+<rect width="840" height="1080" fill="url(#bg)"/>
+<rect width="840" height="1080" fill="url(#dots)"/>
+<rect width="840" height="1080" fill="url(#lines)"/>
+<circle cx="430" cy="520" r="410" fill="url(#halo)"/>
+<rect x="36" y="35" width="768" height="1010" fill="none" stroke="#c9d1c1" stroke-width="2" opacity=".55"/>
+<path d="M76 119H765M76 925H765" stroke="#c9d1c1" stroke-width="2" opacity=".55"/>
+<text x="80" y="96" fill="#edc996" font-size="20" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">ELOAH · FOI &amp; SPIRITUALITÉ</text>
+<g transform="translate(420 502)"><path d="M-220-238H220V245H-220Z" fill="#eee6d4" opacity=".83" stroke="#b5aa91" stroke-width="8"/><path d="M-160-170H160M-160-116H160M-160-62H160M-160-8H160M-160 46H100M-160 100H130M-160 154H120" fill="none" stroke="#8a8a82" opacity=".4" stroke-width="6"/><path d="M-80 183Q-15 50 162-163" stroke="#634c41" fill="none" stroke-width="15" stroke-linecap="round"/><path d="M150-180Q250-251 173-81L85-9Q118-97 150-180Z" fill="#c0d5cf" opacity=".9"/><circle cx="-100" cy="-128" r="25" fill="none" stroke="#b4926d" stroke-width="5"/><path d="M-137-130l75 0M-100-167v75" stroke="#b4926d" stroke-width="3"/></g>
+<text x="78" y="980" fill="#edc996" font-size="22" font-family="Arial, sans-serif" letter-spacing="5" font-weight="700">CHEMIN SPIRITUEL</text>
+<text x="770" y="1003" text-anchor="end" fill="#c9d1c1" font-size="67" font-family="Georgia, serif" font-style="italic">12</text>
+</svg>
