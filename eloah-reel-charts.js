@@ -104,8 +104,13 @@ function template(e){
  return byId.get(e?.variant==='pie'?'eloah-chart-pie':'eloah-chart-vertical');
 }
 function settings(id){
- const def=byId.get(id)||catalogue[0];
- return {variant:def.id,kind:'chart',dataText:DEFAULT_DATA,chartPalette:'original',chartTitle:'Résultats',chartShowTitle:false,chartShowGrid:true,chartShowLegend:def.options.series>1,chartShowValues:false,chartBackground:'#ffffff',chartFontSize:24,values:'35,52,41,65,59'};
+ const def=byId.get(id)||catalogue[0],demo=parse(DEFAULT_DATA);
+ const count=def.type==='pie'?1:Math.min(3,Math.max(1,def.options.series||1));
+ const firstLabel=def.type==='scatter'?'X':'Catégorie';
+ const dataText=[[firstLabel,...demo.names.slice(0,count)].join(';'),...demo.labels.map((label,i)=>[
+  def.type==='scatter'?i+1:label,...demo.values[i].slice(0,count)
+ ].join(';'))].join('\n');
+ return {variant:def.id,kind:'chart',dataText,chartPalette:'original',chartTitle:'Résultats',chartShowTitle:false,chartShowGrid:true,chartShowLegend:count>1||def.type==='pie',chartShowValues:false,chartBackground:'#ffffff',chartFontSize:34,values:'35,52,41,65,59'};
 }
 function dataset(e){
  const d=parse(migrateLegacy(e)),def=template(e);
