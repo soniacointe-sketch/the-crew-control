@@ -859,7 +859,7 @@ function paint(c,t,mark=false){
     c.fillStyle=e.color||'#252b35';c.beginPath();c.roundRect(e.x+e.w*.38,e.y+pad*.95,e.w*.24,pad*.7,pad*.3);c.fill();c.restore();
   }
   if(e.kind==='chart'&&window.ELOAHCharts)window.ELOAHCharts.render(c,e);
-  if(e.kind==='text')drawText(c,e);
+  if(e.kind==='text'||e.kind==='textCombo'){if(window.ELOAHText)window.ELOAHText.draw(c,e,t);else drawText(c,e)}
   if(e.kind==='image'){const im=images.get(e.id);if(im?.complete)try{c.drawImage(im,e.x,e.y,e.w,e.h)}catch{}}
   if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
   if(e.kind==='sticker'&&window.ELOAHAnimations)window.ELOAHAnimations.render(c,e);
@@ -881,7 +881,7 @@ function seek(t){S.time=Math.max(0,Math.min(S.duration,t));if(media.videoUrl&&vi
 function renderTimeline(){
  const px=Math.max(720,S.duration*70+45),ruler=one('#ecs-timeruler'),tracks=one('#ecs-tracks');ruler.style.width=px+'px';
  ruler.innerHTML=Array.from({length:Math.floor(S.duration)+1},(_,i)=>'<span style="left:'+(i*70)+'px">'+clock(i)+'</span>').join('');
- const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'?e.text:e.kind==='shapeAsset'?(window.ELOAHShapes?.byId.get(e.variant)?.label||'Forme'):e.kind==='photoFrame'?(e.isGrid?'Grille · ':e.isMockup?'Maquette · ':'Cadre · ')+((window.ELOAHFrames?.byId.get(e.variant)?.label||window.ELOAHFrames?.byId.get(e.variant)?.name)||'Photos'):(e.kind==='image'?'Image':e.kind))+'</button>';
+ const clip=(e,kind)=>'<button class="ecs-clip '+kind+(selected===e.id?' selected':'')+'" data-select="'+e.id+'" style="left:'+(e.start*70)+'px;width:'+Math.max(16,(e.end-e.start)*70)+'px">'+xss(e.kind==='text'||e.kind==='textCombo'?e.text:e.kind==='shapeAsset'?(window.ELOAHShapes?.byId.get(e.variant)?.label||'Forme'):e.kind==='photoFrame'?(e.isGrid?'Grille · ':e.isMockup?'Maquette · ':'Cadre · ')+((window.ELOAHFrames?.byId.get(e.variant)?.label||window.ELOAHFrames?.byId.get(e.variant)?.name)||'Photos'):(e.kind==='image'?'Image':e.kind))+'</button>';
  let bg='<div class="ecs-track" style="width:'+px+'px"><button class="ecs-clip" data-tab="import" style="left:0;width:'+(S.duration*70)+'px">▧ '+(media.videoUrl?'Vidéo importée':media.bgImage?'Photo de fond':'Fond / scène')+'</button></div>';
  const els='<div class="ecs-track" style="width:'+px+'px">'+S.elements.map(e=>clip(e,'text')).join('')+'</div>';
  const au='<div class="ecs-track" style="width:'+px+'px">'+(media.audioUrl?'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px">♫ Piste audio</button>':'<button class="ecs-clip audio" data-tab="audio" style="left:0;width:'+(S.duration*70)+'px;opacity:.65">＋ Ajouter une piste audio</button>')+'</div>';
@@ -1087,7 +1087,7 @@ function renderSide(){
  one('.ecs-sidehead').textContent=titles[activeTab]||'Modifier';const box=one('.ecs-sidebody');let html='';
  if(activeTab==='models')html='<p class="ecs-note">Choisis un point de départ. Tu pourras modifier tous les éléments.</p><div class="ecs-cardgrid">'+Object.entries(themes).map(([key,t],i)=>'<button class="ecs-model m'+(i+1)+'" data-theme="'+key+'">'+xss(t.title)+'</button>').join('')+'</div><p class="ecs-note">Modèles originaux ELOAH, non issus de la bibliothèque Canva.</p>';
  if(activeTab==='elements')html=elementsMarkup();
- if(activeTab==='text')html='<p class="ecs-note">Clique pour ajouter un texte, puis déplace-le directement sur le Reel.</p><div class="ecs-list"><button class="ecs-itembtn" data-action="heading"><strong style="font-size:23px">Ajouter un titre</strong></button><button class="ecs-itembtn" data-action="subtitle">Ajouter un sous-titre</button><button class="ecs-itembtn" data-action="addText">Ajouter un texte simple</button></div>';
+ if(activeTab==='text')html=textPanel();
  if(activeTab==='brand')html='<label class="ecs-sidelabel">Univers</label><select data-setting="brand">'+['Power & Glam','The Crew Orchies','Sonia Velka','ELOAH','Le Lion Blanc','Autre'].map(x=>'<option '+(x===S.brand?'selected':'')+'>'+x+'</option>').join('')+'</select>'+color('Couleur du fond','bg',S.bg)+'<p class="ecs-note">Les modèles apportent des palettes adaptées à tes univers.</p>'+btn('brandLabel','Ajouter la signature');
  if(activeTab==='import')html='<div class="ecs-upload"><strong>Importe tes fichiers</strong><p class="ecs-note">Glisse tes fichiers directement sur la page ou choisis ci-dessous.</p>'+btn('importVideo','Vidéo',true)+btn('importImage','Photo')+btn('importAudio','Audio')+'</div><p class="ecs-note">Fichiers traités dans le navigateur. Les photos peuvent être un fond ou un élément mobile.</p>'+btn('addImage','Photo comme élément');
  if(activeTab==='tools')html=range('Durée du Reel (secondes)','duration',1,60,.5,S.duration)+color('Fond','bg',S.bg)+'<label class="ecs-sidelabel">Effet de couleur</label><select data-setting="filter">'+[['none','Naturel'],['cinema','Cinéma'],['gold','Lumière dorée'],['vivid','Couleurs intenses'],['mono','Noir et blanc']].map(([k,v])=>'<option value="'+k+'" '+(S.filter===k?'selected':'')+'>'+v+'</option>').join('')+'</select>'+btn('png','Exporter une image PNG')+'<p class="ecs-note">Les filtres modifient la vidéo et les photos de fond. Le son est conservé selon les capacités du navigateur à l’export.</p>';
@@ -1100,7 +1100,7 @@ function renderSide(){
   if(!e)html='<div class="ecs-empty">Sélectionne un texte, une forme ou une image sur le plan de travail.</div>';
   else{
    html='<p class="ecs-note">Fais glisser cet élément sur le Reel. Pour le redimensionner, tire le petit carré dans son angle inférieur droit.</p>';
-   if(e.kind==='text')html+='<label class="ecs-sidelabel">Texte</label><textarea rows="4" data-p="text">'+xss(e.text)+'</textarea>'+range('Taille des caractères','font',14,250,1,e.font);
+   if(e.kind==='text'||e.kind==='textCombo')html+=textProperties(e);
    if(e.kind==='photoFrame')html+=frameProperties(e);
    if(e.kind==='shapeAsset')html+=shapeProperties(e);
    if(e.kind==='chart')html+=chartProperties(e);
@@ -1132,7 +1132,7 @@ function action(name){
  if(name==='line'){add('line',{x:160,y:950,w:760,h:20,color:'#2479a7'});return}
  
  if(name==='star'){add('star',{x:360,y:780,w:360,h:360,color:'#d7ad46'});return}
- if(['heading','subtitle','addText','brandLabel'].includes(name)){add('text',name==='heading'?{text:'MON GRAND TITRE',font:90,y:770,h:310,color:'#2e2e2e'}:name==='subtitle'?{text:'Ton sous-titre ici',font:49,y:1100,h:160,color:'#303030'}:name==='brandLabel'?{text:S.brand.toUpperCase(),font:42,y:1700,h:140,color:'#c69b46'}:{text:'Écris ton texte',font:70,y:970,h:180});return}
+ if(['heading','subtitle','addText','brandLabel'].includes(name)){const k=name==='addText'?'simple':name==='brandLabel'?'simple':name;const e=createTextBlock(k);if(name==='brandLabel'){e.text=S.brand.toUpperCase();e.font=43;e.y=1700;e.h=130;e.color='#c69b46';saveLocal();draw()}return}
  if(name==='duplicate'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à dupliquer.');return}const {id:originalId,...copy}=e;const cloned=add(e.kind,{...copy,x:Math.min(Math.max(0,1080-e.w),e.x+36),y:Math.min(Math.max(0,1920-e.h),e.y+36)});if(e.kind==='image'&&images.has(e.id))images.set(cloned.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(cloned.id+':'+i,src)}saveFrameMediaLocal()}return}
  if(name==='delete'){let e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne un élément à supprimer.');return}snapshot();S.elements=S.elements.filter(x=>x.id!==selected);if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++)framePhotos.delete(e.id+':'+i);saveFrameMediaLocal()}selected=null;setTab('elements');renderTimeline();saveLocal();return}
  if(name==='forward'||name==='backward'){let i=S.elements.findIndex(x=>x.id===selected);if(i<0)return;snapshot();let e=S.elements.splice(i,1)[0];S.elements.splice(name==='forward'?S.elements.length:0,0,e);saveLocal();return}
@@ -1179,7 +1179,42 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
- const chartRowButton=ev.target.closest('[data-chart-add-row]');
+ const textViewBtn=ev.target.closest('[data-text-view]');
+ if(textViewBtn){textView=textViewBtn.dataset.textView;textSearch='';renderSide();return}
+ const textPresetBtn=ev.target.closest('[data-text-preset]');
+ if(textPresetBtn){createTextPreset(textPresetBtn.dataset.textPreset);return}
+ const textAdd=ev.target.closest('[data-text-add]');
+ if(textAdd){createTextBlock(textAdd.dataset.textAdd);return}
+ const textApp=ev.target.closest('[data-text-app]');
+ if(textApp){
+  const name=textApp.dataset.textApp;
+  if(name==='studio')textView='g0';
+  else if(name==='craft')textView='g5';
+  else if(name==='motion'){
+   const e=createTextBlock('simple');
+   e.text='LE TEXTE PREND VIE';e.color='#f0d877';e.textMode='typewriter';e.fontFamily='poster';
+   saveLocal();renderSide();draw();toast('MotionText : animation machine à écrire ajoutée.');
+   return;
+  }
+  activeTab='text';renderSide();return;
+ }
+ const magicGenerate=ev.target.closest('[data-text-magic-generate]');
+ if(magicGenerate){const idea=one('#ecs-magic-idea')?.value||textMagicInput;textMagicInput=idea;const tone=one('#ecs-magic-tone')?.value||textMagicTone;textMagicTone=tone;
+  textMagicSuggestions=magicSuggestions(idea,tone);
+  if(!textMagicSuggestions.length){toast('Écris une idée pour recevoir des suggestions.');return}
+  renderSide();return;
+ }
+ const magicAdd=ev.target.closest('[data-text-magic-add]');
+ if(magicAdd){
+  const i=Number(magicAdd.dataset.textMagicAdd);if(!Number.isInteger(i)||!textMagicSuggestions[i])return;
+  const e=createTextBlock('simple');e.text=textMagicSuggestions[i];e.font=58;e.w=950;e.x=65;e.h=400;
+  saveLocal();renderSide();draw();toast('Texte proposé ajouté. Tu peux encore le réécrire.');return;
+ }
+ const textAlign=ev.target.closest('[data-text-align]');
+ if(textAlign){const e=S.elements.find(x=>x.id===selected&&(x.kind==='text'||x.kind==='textCombo'));if(!e)return;
+  snapshot();e.align=textAlign.dataset.textAlign;saveLocal();renderSide();draw();return;
+ }
+  const chartRowButton=ev.target.closest('[data-chart-add-row]');
  if(chartRowButton){updateChartTable(d=>{if(d.labels.length>=24){toast('Maximum de 24 catégories.');return}d.labels.push('Catégorie '+(d.labels.length+1));d.values.push(d.names.map(()=>0))});return}
  const chartSeriesAdd=ev.target.closest('[data-chart-add-series]');
  if(chartSeriesAdd){updateChartTable(d=>{if(d.names.length>=3){toast('Maximum de 3 séries affichées.');return}d.names.push('Série '+(d.names.length+1));d.values.forEach(row=>row.push(0))});return}
@@ -1284,7 +1319,7 @@ root.addEventListener('click',ev=>{
  if(audioPanel){if(window.speechSynthesis)window.speechSynthesis.cancel();audioView=audioPanel.dataset.audioView;activeTab='audio';renderSide();return}
  const soundPreview=ev.target.closest('[data-preview-track]');if(soundPreview){previewSound(soundPreview.dataset.previewTrack);return}
  const soundAdd=ev.target.closest('[data-add-track]');if(soundAdd){addSound(soundAdd.dataset.addTrack);return}
- const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;chartView='home';chartSearch='';illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';mockupView='home';mockupSearch='';shapeView='home';shapeSearch='';activeTab='elements';renderSide();return}
+ const cat=ev.target.closest('[data-cat]');if(cat){elementsCategory=cat.dataset.cat==='overview'?null:cat.dataset.cat;textView='home';textSearch='';chartView='home';chartSearch='';illustrationView='home';illustrationSearch='';animationView='home';animationSearch='';frameView='home';frameSearch='';gridView='all';gridSearch='';mockupView='home';mockupSearch='';shapeView='home';shapeSearch='';activeTab='elements';renderSide();return}
  const animButton=ev.target.closest('[data-animation]');if(animButton){const e=S.elements.find(x=>x.id===selected);if(!e){toast('Sélectionne d’abord un élément sur le Reel.');return}snapshot();e.animation=animButton.dataset.animation;saveLocal();toast('Animation appliquée : '+animButton.textContent);return}
  const recent=ev.target.closest('[data-recent]');if(recent){const e=S.elements.find(x=>x.id===Number(recent.dataset.recent));if(e){const {id,...copy}=e;const clone=add(e.kind,{...copy,x:Math.min(1080-e.w,e.x+38),y:Math.min(1920-e.h,e.y+38)});if(e.kind==='image'&&images.has(e.id))images.set(clone.id,images.get(e.id));if(e.kind==='photoFrame'){for(let i=0;i<frameSlotCount(e);i++){const src=framePhotos.get(e.id+':'+i);if(src)framePhotos.set(clone.id+':'+i,src)}saveFrameMediaLocal()}toast('Élément dupliqué sur la page.')}return}
  const tb=ev.target.closest('[data-tab]');if(tb&&root.contains(tb)){setTab(tb.dataset.tab);return}
@@ -1294,6 +1329,20 @@ root.addEventListener('click',ev=>{
 });
 one('#ecs-name').addEventListener('change',e=>{S.name=e.target.value.slice(0,90)||'Mon Reel';saveLocal()});
 one('.ecs-sidebody').addEventListener('change',e=>{
+ if(e.target.id==='ecs-magic-tone'){textMagicTone=e.target.value;return}
+ if(e.target.dataset.textToggle){
+  const element=S.elements.find(x=>x.id===selected&&(x.kind==='text'||x.kind==='textCombo'));if(!element)return;
+  const kind=e.target.dataset.textToggle;
+  snapshot();
+  if(kind==='textBackground')element.backgroundColor=e.target.checked?'#171717':null;
+  else if(['italic','shadow'].includes(kind))element[kind]=e.target.checked;
+  saveLocal();renderSide();draw();return;
+ }
+ if(e.target.hasAttribute('data-text-transparent')){
+  const element=S.elements.find(x=>x.id===selected&&x.kind==='textCombo');if(!element)return;
+  snapshot();element.comboBackground=e.target.checked?'transparent':(window.ELOAHText?.byId.get(element.variant)?.back||'#fffdfa');
+  saveLocal();renderSide();draw();return;
+ }
  if(e.target.dataset.chartCell||e.target.dataset.chartSeries){
   const cell=e.target.dataset.chartCell,series=e.target.dataset.chartSeries;
   const value=e.target.value;
@@ -1313,10 +1362,22 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(e.target.id==='ecs-tts-speed'){voiceSpeed=Number(e.target.value);return}
  if(e.target.id==='ecs-tts-voice'){const voices=window.speechSynthesis?.getVoices().filter(v=>v.lang.toLowerCase().startsWith('fr'))||[];voiceSelection=voices[Number(e.target.value)]?.name||'';return}
  const p=e.target.dataset.p,setting=e.target.dataset.setting;
- if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion','lineStyle','lineCap','strokeColor','chartPalette','chartTitle','dataText','chartBackground'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();if(p==='chartPalette'||p==='dataText')renderSide();return}
+ if(p){const target=p==='bg'||p==='duration'||p==='trimStart'?S:S.elements.find(q=>q.id===selected);if(!target)return;snapshot();let val=['text','color','bg','values','animation','motion','lineStyle','lineCap','strokeColor','chartPalette','chartTitle','dataText','chartBackground','fontFamily','secondaryFont','subtext','eyebrow','textMode','align','outlineColor','backgroundColor','comboBackground','accentColor'].includes(p)?e.target.value:Number(e.target.value);if(!Number.isFinite(val)&&typeof val==='number')return;if(p==='duration'){val=Math.max(1,Math.min(media.videoUrl?Math.max(1,(video.duration||60)-S.trimStart):60,val));S.duration=val;S.elements.forEach(x=>x.end=Math.min(val,x.end));seek(S.time)}else if(p==='trimStart'){S.trimStart=Math.max(0,Math.min(val,Math.max(0,(video.duration||0)-1)));S.duration=Math.min(S.duration,Math.max(1,(video.duration||S.duration)-S.trimStart));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(S.time)}else if(p==='start')target.start=Math.max(0,Math.min(val,target.end-.1));else if(p==='end')target.end=Math.min(S.duration,Math.max(val,target.start+.1));else target[p]=val;if(p==='duration'||p==='trimStart'||p==='start'||p==='end')renderTimeline();saveLocal();draw();if(p==='chartPalette'||p==='dataText')renderSide();return}
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(e.target.id==='ecs-text-search'){
+  textSearch=e.target.value;
+  const needle=textSearch.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+  all('.ecs-type-card').forEach(card=>{card.hidden=!!needle&&!card.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(needle)});
+  all('[data-type-section]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-type-card')].some(card=>!card.hidden)});
+  return;
+ }
+ if(e.target.id==='ecs-magic-idea'){textMagicInput=e.target.value;return}
+ if(['text','subtext','eyebrow'].includes(e.target.dataset.p)){
+  const selectedText=S.elements.find(x=>x.id===selected&&(x.kind==='text'||x.kind==='textCombo'));
+  if(selectedText){selectedText[e.target.dataset.p]=e.target.value;saveLocal();draw()}return;
+ }
  if(e.target.id==='ecs-chart-search'){
   chartSearch=e.target.value;
   const query=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
