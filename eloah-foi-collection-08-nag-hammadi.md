@@ -68,3 +68,9 @@ Noter les contradictions, les sources absentes, les objections, les hypothèses 
 **[Le Livre secret de Jacques : lire l'enquête complète, les seize pages commentées, les cotes et les éditions critiques](foi-control.html?file=eloah-foi-apo-019-livre-secret-jacques.md)**.
 
 Texte classé dans **Nag Hammadi Codex I,2**, distinct des deux *Apocalypses de Jacques*. Vérifier dans [e-Clavis ECCA 495](https://www.nasscal.com/e-clavis-christian-apocrypha/apocryphon-of-james/).
+
+
+## Lire entièrement le Livre secret de Jacques
+
+- [Traduction française de lecture des seize pages, avec lacunes et notes](foi-control.html?file=eloah-foi-apo-019-traduction-integrale.md)
+- [Collation critique des pages 1–3, restitution du nom du destinataire, Malinine 1968 et Rouleau 1987](foi-control.html?file=eloah-foi-apo-019-collation-pages-1-3.md)
