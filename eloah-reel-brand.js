@@ -3,14 +3,14 @@
 /* Bibliothèque de marques ELOAH — identités propres, sans emprunt d'assets Canva. */
 const KEY='eloah_reel_brand_kits_v1';
 const defaults=[
- {id:'power-glam',name:'Power & Glam',tagline:'Maison éditoriale',colors:[['Crème','#F4EFE7'],['Noir','#111111'],['Rouge signature','#D32027'],['Amour','#A63D57'],['Beauté','#C98E9A'],['Argent','#28705A'],['Vie','#789477'],['Désir','#D7654F']],heading:'editorial',body:'sans',signature:'POWER & GLAM',voice:'Éditorial, naturel, adulte et nuancé. Dire les choses sans formules artificielles.',doText:'Photographies sensibles, titres précis, fond crème et hiérarchie simple.',dontText:'Éviter les textes publicitaires impersonnels et l’accumulation de slogans.'},
+ {id:'power-glam',name:'Power & Glam',tagline:'Maison éditoriale',colors:[['Crème','#F4EFE7'],['Noir','#111111'],['Rouge signature','#D32027'],['Amour','#A63D57'],['Beauté','#C98E9A'],['Argent','#28705A'],['Vie','#789477'],['Désir','#D7654F']],heading:'bodoni',body:'inter',accent:'caveat',signature:'POWER & GLAM',voice:'Éditorial, naturel, adulte et nuancé. Dire les choses sans formules artificielles.',doText:'Photographies sensibles, titres précis, fond crème et hiérarchie simple.',dontText:'Éviter les textes publicitaires impersonnels et l’accumulation de slogans.'},
  {id:'the-crew',name:'The Crew Orchies',tagline:'Danse et collectif',colors:[['Noir','#171717'],['Or','#D0AA56'],['Crème','#F6E9CF'],['Blanc','#FFFFFF'],['Gris','#555555']],heading:'poster',body:'sans',signature:'THE CREW ORCHIES',voice:'Naturel, chaleureux, énergique et accessible. Un message depuis le téléphone.',doText:'Dire les informations essentielles, rappeler que tous les niveaux sont accueillis.',dontText:'Ne pas présenter les cours comme de la Zumba et éviter les slogans empilés.'},
  {id:'sonia-velka',name:'Sonia Velka',tagline:'Identité artistique',colors:[['Prune','#401D32'],['Or','#C7A15E'],['Crème','#FFF0DC'],['Noir','#191619'],['Rose sombre','#A65A71']],heading:'poster',body:'classic',signature:'SONIA VELKA',voice:'Puissance, liberté, mystère et humour mordant. Direct, sans être lisse.',doText:'Privilégier les portraits authentiques et les textes qui ont une voix personnelle.',dontText:'Éviter les clichés tout faits et les portraits IA présentés comme réels.'},
  {id:'eloah',name:'ELOAH',tagline:'Studio et espace de création',colors:[['Bleu','#1688BE'],['Turquoise','#07999F'],['Marine','#203A61'],['Crème','#F4EFE7'],['Blanc','#FFFFFF']],heading:'sans',body:'sans',signature:'ELOAH STUDIO',voice:'Clair, utile et créatif. Privilégier des commandes compréhensibles.',doText:'Présenter les outils et leur résultat réel.',dontText:'Ne pas annoncer de fonctionnalités non branchées.'},
  {id:'lion-blanc',name:'Le Lion Blanc',tagline:'Association citoyenne',colors:[['Noir','#161616'],['Blanc','#FFFFFF'],['Rouge','#B63E43'],['Crème','#F3EDE5'],['Gris','#767676']],heading:'poster',body:'sans',signature:'LE LION BLANC',voice:'Citoyen, exigeant, humain, clair et factuel.',doText:'Des messages responsables et compréhensibles.',dontText:'Ne pas présenter une opinion comme un fait vérifié.'},
  {id:'parisis',name:'PARISIS Engine',tagline:'Enquêtes et patrimoine',colors:[['Encre','#21292D'],['Pierre','#C9BC9C'],['Parchemin','#F4F0E5'],['Bleu-gris','#597B8C'],['Or','#AA8A4D']],heading:'classic',body:'editorial',signature:'PARISIS ENGINE',voice:'Documenté, prudent, précis. Distinguer hypothèses et faits sourcés.',doText:'Nommer les archives, sources, datations et incertitudes.',dontText:'Ne pas transformer une correspondance en preuve sans vérification.'}
 ];
-const families=['sans','rounded','editorial','classic','poster','hand','mono','condensed'];
+const families=['sans','rounded','editorial','classic','poster','hand','mono','condensed','bodoni','inter','caveat'];
 const validColor=s=>/^#[0-9a-fA-F]{6}$/.test(String(s||''))?String(s).toUpperCase():null;
 const copy=o=>JSON.parse(JSON.stringify(o));
 const normalizeName=s=>String(s||'').trim().slice(0,80);
@@ -20,7 +20,7 @@ function normalize(raw,base=null){
  const baseData=base||{id:'user-'+slug(raw?.name||'Marque'),name:'Ma marque',tagline:'Identité personnalisée',colors:[['Principale','#171717'],['Secondaire','#F4EFE7'],['Accent','#D0AA56']],heading:'editorial',body:'sans',signature:'MA MARQUE',voice:'',doText:'',dontText:''};
  const out={...copy(baseData),id:String(raw?.id||baseData.id).slice(0,90),name:normalizeName(raw?.name||baseData.name),
  tagline:String(raw?.tagline??baseData.tagline).slice(0,125),signature:String(raw?.signature??baseData.signature).slice(0,110),
- heading:safeFamily(raw?.heading||baseData.heading),body:safeFamily(raw?.body||baseData.body),
+ heading:safeFamily(raw?.heading||baseData.heading),body:safeFamily(raw?.body||baseData.body),accent:safeFamily(raw?.accent||baseData.accent||'hand'),
  voice:String(raw?.voice??baseData.voice).slice(0,1400),doText:String(raw?.doText??baseData.doText).slice(0,1400),
  dontText:String(raw?.dontText??baseData.dontText).slice(0,1400)};
  const colors=Array.isArray(raw?.colors)?raw.colors:baseData.colors;
@@ -55,7 +55,7 @@ function all(){return kits}
 function edit(id,changes){const k=kits.find(x=>x.id===id);if(!k)return null;
  for(const [key,val] of Object.entries(changes||{})){
   if(['name','tagline','signature','voice','doText','dontText'].includes(key))k[key]=String(val||'').slice(0,key==='voice'||key==='doText'||key==='dontText'?1400:125);
-  if(['heading','body'].includes(key))k[key]=safeFamily(val);
+  if(['heading','body','accent'].includes(key))k[key]=safeFamily(val);
  }
  return save()
 }
