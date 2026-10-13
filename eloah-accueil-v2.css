@@ -52,3 +52,19 @@
 @media(max-width:1050px){#eloah-home-v2 .eloah-work-shortcuts{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:780px){#eloah-home-v2 .eloah-universe-grid{grid-template-columns:1fr}#eloah-home-v2 .eloah-web-links{grid-template-columns:1fr}#eloah-home-v2 .eloah-universe{padding:17px}#eloah-home-v2 .eloah-intro{padding:25px 18px}}
 @media(max-width:510px){#eloah-home-v2 .eloah-work-shortcuts{gap:8px}#eloah-home-v2 .eloah-shortcut{padding:11px 9px;gap:8px;min-height:69px;font-size:12px}#eloah-home-v2 .eloah-shortcut svg{width:21px;height:21px}#eloah-home-v2 .eloah-universe-links a{flex:1 1 39%;justify-content:center}#eloah-home-v2 h2{font-size:24px}}
+
+/* Catalogue conservé mais repliable, et anciens liens secondaires réunis */
+#maisons{max-width:1220px;margin:36px auto 12px!important;color:#28252c;font:500 29px Georgia,serif}
+#eloah-all-universes{max-width:1220px;margin:0 auto 23px;background:#fff;border:1px solid #e0dae2;border-radius:12px;padding:0 17px}
+#eloah-all-universes>summary{list-style:none;cursor:pointer;padding:18px 4px;color:#624878;font:650 14px system-ui}
+#eloah-all-universes>summary::-webkit-details-marker{display:none}
+#eloah-all-universes>summary:after{content:"⌄";float:right}
+#eloah-all-universes[open]>summary:after{transform:rotate(180deg)}
+#eloah-all-universes>:not(summary){margin-bottom:17px}
+#eloah-home-v2 .eloah-other-shortcuts{display:flex;flex-wrap:wrap;gap:8px;margin:19px 0 0;padding:15px 0 0;border-top:1px solid #e8e0e7}
+#eloah-home-v2 .eloah-other-shortcuts a{display:inline-flex!important;position:static!important;min-height:38px;margin:0!important;padding:9px 11px!important;background:#fff!important;color:#745883!important;border:1px solid #ddd2e2!important;border-radius:7px;text-decoration:none!important;font:600 11px/1.35 system-ui!important}
+#eloah-morning,#eloah-daily{max-width:1220px;margin:20px auto!important}
+#eloah-legacy-cockpit .partner-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+#eloah-legacy-cockpit .partner-top{margin-top:10px}
+#eloah-legacy-cockpit .learning{max-width:100%}
+@media(max-width:760px){#eloah-legacy-cockpit .partner-grid{grid-template-columns:1fr}#eloah-all-universes{padding:0 10px}}
