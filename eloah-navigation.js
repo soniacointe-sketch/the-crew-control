@@ -2,17 +2,18 @@
 (()=>{'use strict';
 if(document.querySelector('.eloah-global-nav'))return;
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
-const routes=[['Accueil','mes-univers.html'],['Mon Espace','eloah-partenaire.html?rubrique=Mon%20Espace'],['Assistant IA','eloah-projet.html?projet='+encodeURIComponent(page==='eloah-projet.html'?(query.get('projet')||'ELOAH'):'ELOAH')],['Projets','mes-univers.html#maisons'],['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Bases d’expertise','eloah-bibliotheque.html?type=bases'],['Notes & préparation','eloah-partenaire.html'],['Compte & sauvegardes','eloah-projet.html?projet=ELOAH&onglet=parametres&compte=1']];
+const routes=[["Accueil général","mes-univers.html"],["Mon Espace","eloah-partenaire.html?rubrique=Mon%20Espace"],["ELOAH Studio","eloah-partenaire.html?rubrique=ELOAH%20Studio"],["Coffre-fort","eloah-partenaire.html?rubrique=Coffre-fort"],["Entretiens","eloah-partenaire.html?rubrique=Entretiens"],["Mailing","eloah-partenaire.html?rubrique=Mailing"],["Documents","eloah-partenaire.html?rubrique=Documents"],["Mon abonnement","eloah-partenaire.html?rubrique=Mon%20abonnement"],["Crédits IA","eloah-partenaire.html?rubrique=Cr%C3%A9dits%20IA"],["Formations","eloah-partenaire.html?rubrique=Formations"],["Analytics","eloah-partenaire.html?rubrique=Analytics"],["Projets","eloah-partenaire.html?rubrique=Projets"],["Bases d’Expertise","eloah-partenaire.html?rubrique=Bases%20d%E2%80%99Expertise"],["Chroniques","eloah-partenaire.html?rubrique=Chroniques"],["Mon profil","eloah-partenaire.html?rubrique=Mon%20profil"]];
+const assistantRoute=['Assistant IA','eloah-projet.html?projet=ELOAH']; routes.push(assistantRoute)
 let universe=query.get('projet')||'';
 try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
 if(['eloah-the-crew.html','eloah-academy.html','eloah-import.html','index.html'].includes(page))universe='The Crew Orchies';
 if(page==='sonia-os.html')universe='SONIA OS';
 if(page==='power-glam-control.html')universe='Power & Glam';
 if(page==='eloah-maia.html')universe='MAIA';
-const assistant=routes.find(r=>r[0]==='Assistant IA');assistant[1]='eloah-projet.html?projet='+encodeURIComponent(universe||'ELOAH');
+const assistant=assistantRoute;assistant[1]='eloah-projet.html?projet='+encodeURIComponent(universe||'ELOAH');
 const nav=document.createElement('nav');nav.className='eloah-global-nav';nav.setAttribute('aria-label','Navigation commune ELOAH');
 function navLink(label,href,cls=''){const target=new URL(href,location.href);const current=target.pathname.split('/').pop()===page&&[...target.searchParams].every(([key,value])=>query.get(key)===value);return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
-nav.innerHTML=navLink('ELOAH · Accueil','mes-univers.html','eloah-wordmark')+navLink('Changer d’univers','mes-univers.html#maisons','eloah-switch')+'<div class="eloah-nav-shortcuts">'+[['Planning','eloah-pilotage.html'],['Documents','eloah-bibliotheque.html?type=fichiers'],['Notes & préparation','eloah-partenaire.html']].map(r=>navLink(...r)).join('')+'</div><details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>!['Accueil','Projets'].includes(r[0])).map(r=>navLink(...r)).join('')+'</div></details>';
+nav.innerHTML=navLink('ELOAH · Accueil','mes-univers.html','eloah-wordmark')+navLink('Changer d’univers','mes-univers.html#maisons','eloah-switch')+'<div class="eloah-nav-shortcuts">'+[['Mon Espace','eloah-partenaire.html?rubrique=Mon%20Espace'],['Mailing','eloah-partenaire.html?rubrique=Mailing'],['Documents','eloah-partenaire.html?rubrique=Documents']].map(r=>navLink(...r)).join('')+'</div><details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>r[0]!=='Accueil général').map(r=>navLink(...r)).join('')+'</div></details>';
 document.body.prepend(nav);
 document.body.classList.add('eloah-screen');
 document.body.dataset.eloahPage=page;
