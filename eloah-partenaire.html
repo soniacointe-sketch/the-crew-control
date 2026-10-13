@@ -1498,4 +1498,104 @@ copy.addEventListener('click',async()=>{
  try{await navigator.clipboard.writeText(text);copy.textContent='Copié ✓'}catch{copy.textContent='Copie indisponible'}
 });
 })();
+</script><script id="eloah-analytics-functional">
+(()=>{'use strict';
+const board=document.getElementById('eloah-analytics-board');
+if(!board)return;
+const $=id=>document.getElementById(id);
+const params=new URLSearchParams(location.search);
+const view=['dashboard','projets','couts'].includes(params.get('vue'))?params.get('vue'):'dashboard';
+board.querySelectorAll('[data-analytics-tab]').forEach(link=>{const active=link.dataset.analyticsTab===view;if(active)link.setAttribute('aria-current','page');else link.removeAttribute('aria-current')});
+board.querySelectorAll('[data-analytics-panel]').forEach(panel=>panel.hidden=panel.dataset.analyticsPanel!==view);
+const num=(sel,value)=>{const el=board.querySelector('[data-analytics-value="'+sel+'"]');if(el)el.textContent=String(value)};
+const localRead=(key)=>{try{return JSON.parse(localStorage.getItem(key)||'null')}catch{return null}};
+const rowsRaw=localRead('sonia-universe-v1-itriia');
+const rows=Array.isArray(rowsRaw)?rowsRaw.filter(x=>x&&typeof x==='object'):[];
+const dateNow=new Date().toLocaleDateString('en-CA');
+const active=rows.filter(r=>!r.archived);
+const done=active.filter(r=>r.state==='Terminé');
+const late=active.filter(r=>r.date&&typeof r.date==='string'&&r.date<dateNow&&r.state!=='Terminé');
+const localProjects=[];
+try{
+ for(let i=0;i<localStorage.length;i++){
+  const k=localStorage.key(i);
+  if(k?.startsWith('eloah-project-v1:')){
+   const label=k.slice('eloah-project-v1:'.length);
+   if(label)localProjects.push(label);
+  }
+ }
+}catch{}
+const distinctProjects=[...new Set(localProjects)].sort((a,b)=>a.localeCompare(b,'fr'));
+num('active',active.length);
+num('done',done.length);
+num('late',late.length);
+num('projects',distinctProjects.length);
+num('projects2',distinctProjects.length);
+const modules=new Map();
+for(const r of active){const name=String(r.module||'Sans rubrique');const item=modules.get(name)||{name,total:0,done:0};item.total++;if(r.state==='Terminé')item.done++;modules.set(name,item)}
+num('modules',modules.size);
+num('completion',active.length?Math.round(100*done.length/active.length)+' %':'—');
+const summary=$('eloah-analytics-summary');
+summary.textContent=active.length?
+ 'Ce navigateur contient '+active.length+' élément'+(active.length>1?'s':'')+' actif'+(active.length>1?'s':'')+
+ ', dont '+done.length+' terminé'+(done.length>1?'s':'')+' et '+late.length+' avec une échéance dépassée. Cela ne représente pas les statistiques de tes sites, ventes ou outils externes.':
+ 'Aucune note ou action active n’est enregistrée ici sur cet appareil. Commence par enregistrer une action dans ELOAH : les métriques se mettront à jour à ta prochaine visite.';
+const breakdown=$('eloah-analytics-breakdown');breakdown.replaceChildren();
+const group=[...modules.values()].sort((a,b)=>b.total-a.total);
+if(!group.length){const p=document.createElement('p');p.textContent='Pas encore d’éléments locaux par rubrique.';breakdown.append(p)}
+for(const entry of group){
+ const row=document.createElement('div');row.className='analytics-project-row';
+ const header=document.createElement('header');
+ const title=document.createElement('span');title.textContent=entry.name;
+ const amount=document.createElement('small');amount.textContent=entry.done+' / '+entry.total+' terminé(s)';
+ header.append(title,amount);
+ const bar=document.createElement('div');bar.className='analytics-progress-track';
+ bar.setAttribute('role','img');bar.setAttribute('aria-label',entry.name+' : '+entry.done+' sur '+entry.total+' terminés');
+ const fill=document.createElement('i');fill.style.width=(entry.total?entry.done/entry.total*100:0)+'%';bar.append(fill);
+ row.append(header,bar);breakdown.append(row);
+}
+const projectHost=$('eloah-analytics-projects');projectHost.replaceChildren();
+if(!distinctProjects.length){const p=document.createElement('p');p.textContent='Aucun espace projet local identifié. Les projets hébergés dans un service externe ne sont pas inclus.';projectHost.append(p)}
+else{
+ const p=document.createElement('p');p.textContent=distinctProjects.length+' espace(s) enregistré(s) sur cet appareil :';projectHost.append(p);
+ for(const item of distinctProjects.slice(0,30)){const div=document.createElement('div');div.className='analytics-project-row';div.textContent=item;projectHost.append(div)}
+ if(distinctProjects.length>30){const note=document.createElement('p');note.textContent='Liste limitée aux 30 premiers projets.';projectHost.append(note)}
+}
+const storageKey='eloah-analytics-manual-costs-v1';
+let costs=localRead(storageKey);if(!Array.isArray(costs))costs=[];
+costs=costs.filter(row=>row&&typeof row.id==='string'&&typeof row.date==='string'&&typeof row.label==='string'&&typeof row.amount==='number'&&Number.isFinite(row.amount)&&row.amount>0).slice(0,400);
+const euro=x=>new Intl.NumberFormat('fr-FR',{style:'currency',currency:'EUR'}).format(x);
+function renderCosts(){
+ const currentMonth=new Date().toLocaleDateString('en-CA').slice(0,7);
+ const total=costs.reduce((n,c)=>n+c.amount,0);
+ num('totalCosts',euro(total));num('monthCosts',euro(costs.filter(c=>c.date.slice(0,7)===currentMonth).reduce((n,c)=>n+c.amount,0)));num('costEntries',costs.length);
+ const host=$('eloah-analytics-costs-list');host.replaceChildren();
+ if(!costs.length){const p=document.createElement('p');p.textContent='Aucune dépense renseignée. Les montants ne seront pas déduits de Stripe ou d’un fournisseur IA.';host.append(p);return}
+ costs.slice().sort((a,b)=>b.date.localeCompare(a.date)).forEach(c=>{
+  const line=document.createElement('div');line.className='analytics-cost-line';
+  const text=document.createElement('div'),label=document.createElement('strong');label.textContent=c.label;
+  const subtitle=document.createElement('small');subtitle.textContent=c.date+' · '+(c.category||'Autre');text.append(label,subtitle);
+  const actions=document.createElement('aside'),price=document.createElement('strong');price.textContent=euro(c.amount);
+  const remove=document.createElement('button');remove.type='button';remove.className='analytics-cost-remove';remove.textContent='Supprimer';remove.setAttribute('aria-label','Supprimer la dépense '+c.label);
+  remove.onclick=()=>{
+   if(!confirm('Supprimer cette saisie du registre local ?'))return;
+   const remaining=costs.filter(row=>row.id!==c.id);
+   try{localStorage.setItem(storageKey,JSON.stringify(remaining));costs=remaining;renderCosts();$('analytics-cost-status').textContent='Dépense retirée du registre local.'}
+   catch{$('analytics-cost-status').textContent='Modification impossible dans ce navigateur.'}
+  };
+  actions.append(price,remove);line.append(text,actions);host.append(line);
+ });
+}
+const date=$('analytics-cost-date');date.value=new Date().toLocaleDateString('en-CA');
+$('eloah-analytics-cost-form').addEventListener('submit',e=>{
+ e.preventDefault();
+ const amount=Number($('analytics-cost-amount').value),label=$('analytics-cost-label').value.trim(),category=$('analytics-cost-category').value;
+ if(!date.value||label.length<2||!Number.isFinite(amount)||amount<=0||amount>999999){$('analytics-cost-status').textContent='Date, libellé et montant positif sont nécessaires.';return}
+ const entry={id:String(Date.now())+'-'+Math.random().toString(36).slice(2,9),date:date.value,label,category,amount:Math.round(amount*100)/100};
+ if(costs.length>=400){$('analytics-cost-status').textContent='Registre plein (400 dépenses maximum).';return}
+ try{const updated=[...costs,entry];localStorage.setItem(storageKey,JSON.stringify(updated));costs=updated;renderCosts();$('analytics-cost-status').textContent='Dépense enregistrée sur ce navigateur uniquement.';$('analytics-cost-label').value='';$('analytics-cost-amount').value=''}
+ catch{$('analytics-cost-status').textContent='Stockage du navigateur indisponible : aucune dépense enregistrée.'}
+});
+renderCosts();
+})();
 </script></body></html>
