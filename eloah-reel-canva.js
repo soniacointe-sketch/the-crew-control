@@ -714,7 +714,7 @@ function createTextPreset(presetId){
  const lib=window.ELOAHText,p=lib?.byId.get(presetId);if(!p)return;
  const el=add('textCombo',{variant:p.id,text:p.title,subtext:p.subtitle,eyebrow:p.eyebrow,
   x:100,y:630,w:880,h:550,font:p.defaultSize,fontFamily:p.font,secondaryFont:p.subFont,
-  fontWeight:800,color:p.ink,accentColor:p.accent,comboBackground:p.back,textMode:'none'});
+  fontWeight:800,shadow:p.layout==='poster',align:'center',color:p.ink,accentColor:p.accent,comboBackground:p.back,textMode:'none'});
  textRecentPresets=[p.id,...textRecentPresets.filter(x=>x!==p.id)].slice(0,15);
  try{localStorage.setItem('eloah_reel_recent_text_presets',JSON.stringify(textRecentPresets))}catch{}
  toast('Style "'+p.title+'" ajouté : textes modifiables dans le panneau.');
