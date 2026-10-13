@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="ELOAH : un espace de pilotage, des studios créatifs et des solutions pour associations. Découvre les offres et demande une présentation adaptée à ton projet.">
+<meta name="theme-color" content="#f5f1eb">
+<title>ELOAH — Nos solutions · Pilotage, Studio, Associations</title>
+<style>
+:root{color-scheme:light;--ink:#211f26;--muted:#68626b;--line:#e6dfdc;--paper:#f7f3ed;--white:#fffdfb;--violet:#7555b2;--rose:#a63d57;--green:#356756;--gold:#a77932}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.65 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
+button,input,select,textarea{font:inherit}button,a{touch-action:manipulation}
+a{color:inherit}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:3px solid #a483df;outline-offset:3px}
+.container{width:min(1170px,calc(100% - 40px));margin:auto}
+.sitebar{background:var(--white);border-bottom:1px solid var(--line);position:sticky;z-index:10;top:0}
+.nav{min-height:70px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{font:500 27px Georgia,"Times New Roman",serif;letter-spacing:.16em;text-decoration:none}.brand small{display:block;font:500 9px system-ui;letter-spacing:.19em;color:#846d7e}
+.navlinks{display:flex;align-items:center;gap:19px;flex-wrap:wrap}.navlinks>a:not(.btn){text-decoration:none;color:#59505e;font-size:13px}.navlinks>a:hover{text-decoration:underline}
+.btn{display:inline-flex;justify-content:center;align-items:center;gap:8px;border:1px solid #7555b2;background:#7555b2;color:white;text-decoration:none;border-radius:9px;padding:11px 18px;min-height:44px;font-size:13px;font-weight:650;cursor:pointer;transition:background .15s,transform .15s}
+.btn:hover{background:#5c3e9a;transform:translateY(-1px)}.btn.ghost{background:transparent;color:#6849a2}.btn.ghost:hover{background:#f0e9f9}.btn.light{background:#fff;color:#372c43;border-color:#dfd3e2}
+.hero{padding:85px 0 78px}.hero-inner{display:grid;grid-template-columns:1.14fr .86fr;gap:55px;align-items:center}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:.19em;font-weight:750;color:var(--rose);margin:0 0 17px}.hero h1{font:500 clamp(42px,6vw,76px)/1.04 Georgia,"Times New Roman",serif;letter-spacing:-.045em;margin:0 0 23px}.hero h1 em{color:var(--rose);font-style:italic}
+.hero-lead{max-width:640px;font-size:18px;line-height:1.72;color:#655962;margin:0 0 24px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:20px}.hero-note{font-size:12px;color:#857985;margin:0}
+.hero-visual{border:1px solid #e0d4cf;border-radius:20px;background:#f0e6df;min-height:420px;overflow:hidden;box-shadow:0 14px 42px #4b2e2414;padding:19px;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;gap:11px;transform:rotate(1deg)}
+.visual-panel{border:1px solid #ded0ce;background:#fffaf7;border-radius:13px;padding:20px;display:flex;flex-direction:column;justify-content:space-between}.visual-panel:first-child{grid-column:span 2;background:#2d2633;color:white;border-color:#2d2633}.visual-panel small{letter-spacing:.13em;text-transform:uppercase;font-size:10px;color:#b99bc5}.visual-panel:first-child small{color:#d2b8e0}.visual-panel h2{font:26px/1.15 Georgia,serif;margin:12px 0}.visual-panel p{font-size:12px;line-height:1.5;margin:0;color:inherit}.visual-panel:nth-child(2){background:#f6eee6}.visual-panel:nth-child(3){background:#eaf0ec}
+.section{padding:72px 0}.section.soft{background:#fffcfa;border-top:1px solid #ebe3df;border-bottom:1px solid #ebe3df}
+.section-title{margin:0 0 11px;font:500 clamp(32px,4.5vw,49px)/1.2 Georgia,serif;letter-spacing:-.025em}.section-intro{color:#6a616c;max-width:760px;margin:0 0 29px;font-size:16px}
+.pillar-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:19px}
+.pillar{border:1px solid #e5dcda;background:#fff;border-radius:17px;padding:29px;display:flex;flex-direction:column;min-width:0;box-shadow:0 5px 24px #271d2108}
+.pillar-number{color:var(--rose);font-size:12px;font-weight:750;letter-spacing:.18em}.pillar h3{font:500 29px/1.15 Georgia,serif;margin:15px 0 9px}.pillar .who{font-size:12px;color:#866f82;margin:0 0 16px}.pillar p{color:#665e65;margin:0 0 14px;font-size:14px}.pillar ul{padding-left:18px;color:#4d4850;font-size:13px;line-height:1.8;margin:0 0 20px}.pillar li{padding-left:2px}
+.pillar .bottom{margin-top:auto;padding-top:12px}.pillar .bottom .btn{width:100%}.pillar .micro{font-size:11px;color:#8b8188;display:block;margin:10px 0 0}
+.pillar:nth-child(1){border-top:4px solid #7253ad}.pillar:nth-child(2){border-top:4px solid #a65b75}.pillar:nth-child(3){border-top:4px solid #497b62}
+.pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:31px 0 16px}
+.price{border:1px solid #e4dae3;background:#fff;border-radius:13px;padding:24px;min-width:0}.price.feature{border:1.5px solid #7654b2;box-shadow:0 6px 25px #7654b214}
+.price h3{font:700 18px system-ui;margin:0 0 7px}.price .amount{font:700 33px/1.5 system-ui;margin:7px 0}.price .amount span{font:12px system-ui;color:#817986}.price p{font:13px/1.55 system-ui;color:#68606c;margin:0 0 12px}
+.detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}.detail{border-left:3px solid #8e70bf;padding:5px 15px}.detail h3{font-size:16px;margin:0 0 6px}.detail p{margin:0;font-size:13px;color:#66616c}.example{padding:23px 25px;background:#f5edf2;border:1px solid #eadce3;border-radius:14px;margin:24px 0}.example h3{font:500 25px Georgia,serif;margin:0 0 9px}.example p{color:#685760;margin:0}
+.process{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.step{border-top:2px solid #b8a0ca;padding-top:16px}.step b{font:700 12px system-ui;color:var(--violet)}.step h3{font:500 24px Georgia,serif;margin:7px 0}.step p{color:#625c64;margin:0;font-size:14px}
+.form-section{background:#24202b;color:#fff;padding:75px 0}.form-section .section-intro{color:#cfbfce}.form-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:50px;align-items:start}
+.form-panel{border:1px solid #524a5b;background:#312b39;padding:28px;border-radius:16px}
+.form-panel label{display:block;font-size:13px;font-weight:650;margin-bottom:18px;color:#ede6ed}
+.form-panel input,.form-panel select,.form-panel textarea{width:100%;border:1px solid #665969;border-radius:8px;background:#fff;color:#2b2331;padding:12px;margin-top:7px;min-height:45px}
+.form-panel textarea{min-height:125px;resize:vertical}.form-panel button{width:100%}.form-note{font-size:11px;color:#cbbed0;margin:13px 0 0}.form-status{font-size:13px;color:#d8cae5;min-height:20px}
+.footer{border-top:1px solid #e2d8d4;padding:26px 0;color:#79717a;font-size:12px}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
+@media(max-width:920px){.hero-inner{grid-template-columns:1fr;gap:25px}.hero-visual{min-height:280px;max-width:570px}.pillar-grid{grid-template-columns:1fr}.pillar{padding:25px}.pricing{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr;gap:20px}}
+@media(max-width:600px){.container{width:min(100% - 26px,1170px)}.nav{min-height:62px}.navlinks{gap:10px}.navlinks>a:not(.btn){display:none}.hero{padding:48px 0}.hero h1{font-size:44px}.hero-lead{font-size:16px}.hero-visual{min-height:260px}.section{padding:49px 0}.pricing,.detail-grid,.process{grid-template-columns:1fr}.form-section{padding:45px 0}.form-panel{padding:20px}.sitebar .btn{padding:9px 12px;font-size:12px}}
+</style>
+</head>
+<body>
+<header class="sitebar">
+  <div class="nav container">
+    <a class="brand" href="mes-univers.html" aria-label="ELOAH accueil">ELOAH<small>CRÉER · ORGANISER · AVANCER</small></a>
+    <nav class="navlinks" aria-label="Navigation de la page">
+      <a href="#solutions">Solutions</a><a href="#abonnements">Abonnements</a><a href="#processus">Comment ça marche</a>
+      <a class="btn" href="#contact">Parlons de ton projet <span aria-hidden="true">↗</span></a>
+    </nav>
+  </div>
+</header>
+<main>
+  <section class="hero" aria-labelledby="main-title">
+    <div class="container hero-inner">
+      <div>
+        <p class="eyebrow">ELOAH · DES OUTILS POUR LES IDÉES QUI AVANCENT</p>
+        <h1>Une idée. <em>Un espace.</em> Des possibilités.</h1>
+        <p class="hero-lead">Piloter ton activité, créer des contenus qui te ressemblent ou simplifier la vie de ton association : ELOAH réunit trois approches autour du même objectif. Te rendre du temps et de la clarté.</p>
+        <div class="hero-actions">
+          <a class="btn" href="#solutions">Découvrir les trois solutions ↗</a>
+          <a class="btn ghost" href="#contact">Demander une présentation</a>
+        </div>
+        <p class="hero-note">Présentation commerciale en préparation · fonctionnalités, accès et prestations à confirmer selon le projet.</p>
+      </div>
+      <div class="hero-visual" role="img" aria-label="Trois univers ELOAH : pilotage, studio créatif et associations">
+        <div class="visual-panel"><small>01 · Espace de pilotage</small><h2>Le bon endroit pour tout suivre.</h2><p>Projets · Documents · Communication · Activités</p></div>
+        <div class="visual-panel"><small>02 · Studio</small><h2>Créer avec une direction.</h2><p>Édito · Visuels · Newsletters</p></div>
+        <div class="visual-panel"><small>03 · Associations</small><h2>Faire vivre le collectif.</h2><p>Adhérents · Événements · Organisation</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="section soft" id="solutions">
+    <div class="container">
+      <p class="eyebrow">LES TROIS UNIVERS ELOAH</p>
+      <h2 class="section-title">Choisis ce dont ton projet a besoin.</h2>
+      <p class="section-intro">Un outil à utiliser, un travail créatif à confier, ou un espace adapté à ton association. Chaque solution répond à un besoin différent et peut évoluer.</p>
+      <div class="pillar-grid">
+        <article class="pillar" id="pilotage">
+          <span class="pillar-number">01 · ORGANISER</span>
+          <h3>ELOAH Pilotage</h3>
+          <p class="who">Indépendants · créateurs · petites activités</p>
+          <p>Une vue claire sur ce qui avance, ce qui attend et ce qui doit être traité. Moins d'informations dispersées, plus de suivi.</p>
+          <ul><li>Projets, étapes et tâches à suivre</li><li>Documents et références accessibles au même endroit</li><li>Calendrier éditorial et préparation des contenus</li><li>Contacts et activités organisés par besoin</li><li>Tableau de bord adapté à ton fonctionnement</li></ul>
+          <div class="bottom"><a class="btn ghost" href="#abonnements">Voir les formules envisagées ↗</a><span class="micro">Version SaaS en construction · démonstration guidée possible sur demande</span></div>
+        </article>
+        <article class="pillar" id="studio">
+          <span class="pillar-number">02 · CRÉER</span>
+          <h3>ELOAH Studios créatifs</h3>
+          <p class="who">Marques · artisans · projets éditoriaux · associations</p>
+          <p>Tu as la matière, les idées, l'intention. Nous t'aidons à en faire des supports cohérents et publiables.</p>
+          <ul><li>Newsletters écrites dans la voix de ta marque</li><li>Articles, dossiers et textes de présentation</li><li>Visuels et supports de communication</li><li>Carrousels, présentations, documents</li><li>Pack éditorial ou création sur mesure</li></ul>
+          <div class="bottom"><a class="btn ghost" href="#contact" data-select-offer="studio">Parler d'une création ↗</a><span class="micro">Prestations définies sur devis · contenu et droits d'utilisation précisés avant commande</span></div>
+        </article>
+        <article class="pillar" id="associations">
+          <span class="pillar-number">03 · RASSEMBLER</span>
+          <h3>ELOAH Associations</h3>
+          <p class="who">Associations locales · collectifs · petites structures</p>
+          <p>Les inscriptions, les événements et les messages ne devraient pas absorber toute l'énergie des bénévoles.</p>
+          <ul><li>Organisation des adhérents et contacts</li><li>Préparation des événements et ateliers</li><li>Suivi administratif et échéances</li><li>Communications aux membres et familles</li><li>Accompagnement au déploiement</li></ul>
+          <div class="bottom"><a class="btn ghost" href="#contact" data-select-offer="association">Imaginer mon espace associatif ↗</a><span class="micro">Mise en place sur devis · données et autorisations à valider avant utilisation réelle</span></div>
+        </article>
+      </div>
+    </div>
+  </section>
+  <section class="section" id="abonnements">
+    <div class="container">
+      <p class="eyebrow">01 · ELOAH PILOTAGE</p>
+      <h2 class="section-title">Un abonnement qui peut grandir avec toi.</h2>
+      <p class="section-intro">Voici les trois niveaux de prix envisagés pour le logiciel. Ils reprennent la maquette ELOAH ; ce ne sont pas encore des abonnements souscriptibles.</p>
+      <div class="pricing">
+        <article class="price"><h3>Découverte</h3><div class="amount">0 €</div><p>Pour explorer l'organisation d'un projet et découvrir la méthode.</p><a href="#contact" class="btn ghost" data-select-offer="pilotage-decouverte">Demander l'accès de démonstration ↗</a></article>
+        <article class="price"><h3>Entrée</h3><div class="amount">14,90 € <span>/ mois envisagé</span></div><p>Pour un usage régulier, un espace personnel et des projets à suivre.</p><a href="#contact" class="btn ghost" data-select-offer="pilotage-entree">Être informé du lancement ↗</a></article>
+        <article class="price feature"><h3>Partenaire</h3><div class="amount">69 € <span>/ mois envisagé</span></div><p>Pour piloter plusieurs activités et accéder à des outils créatifs avancés, sous réserve de disponibilité.</p><a href="#contact" class="btn" data-select-offer="pilotage-partenaire">Demander une présentation ↗</a></article>
+      </div>
+      <p class="section-intro" style="font-size:12px">Les quotas, fonctionnalités, garanties d'accès et conditions commerciales devront être vérifiés et publiés avant l'ouverture des ventes. Aucun paiement automatique n'est actif depuis cette page.</p>
+    </div>
+  </section>
+  <section class="section soft" id="prestations">
+    <div class="container">
+      <p class="eyebrow">02 · STUDIOS CRÉATIFS</p>
+      <h2 class="section-title">Tu apportes l'histoire. On construit sa forme.</h2>
+      <p class="section-intro">Trois portes d'entrée, selon le travail à faire. Chaque projet commence par un brief et se termine par des livrables définis ensemble.</p>
+      <div class="detail-grid">
+        <div class="detail"><h3>La lettre éditoriale</h3><p>Angle, objet, rédaction, révision et mise en page d'une newsletter dans la voix de la marque.</p></div>
+        <div class="detail"><h3>Le kit de communication</h3><p>Textes, publications, formats visuels et supports réunis autour d'une direction commune.</p></div>
+        <div class="detail"><h3>Le dossier ou la présentation</h3><p>Un document structuré : présentation d'activité, dossier thématique, brochure ou support de projet.</p></div>
+        <div class="detail"><h3>Le studio sur mesure</h3><p>Une combinaison adaptée aux besoins, au calendrier, aux validations et au budget disponible.</p></div>
+      </div>
+      <div class="example"><h3>Ce qu'on vend ici : un résultat livré.</h3><p>Pas une promesse floue d'intelligence artificielle. Un brief, une direction, un contenu travaillé, un nombre de corrections convenu et des fichiers utilisables. Les droits sur les images et les sources seront vérifiés dans le cadre de chaque prestation.</p></div>
+      <a href="#contact" class="btn" data-select-offer="studio">Demander un devis créatif ↗</a>
+    </div>
+  </section>
+  <section class="section" id="solution-association">
+    <div class="container">
+      <p class="eyebrow">03 · ELOAH ASSOCIATIONS</p>
+      <h2 class="section-title">Moins de gestion dispersée. Plus de temps pour l'association.</h2>
+      <p class="section-intro">Un accompagnement à construire autour des besoins réels : membres, événements, plannings, documents et communication. Les usages pilotes inspirent la méthode, mais chaque association a ses propres règles.</p>
+      <div class="detail-grid">
+        <div class="detail"><h3>Organisation</h3><p>Listes de tâches, responsabilités, calendrier des actions et documents utiles.</p></div>
+        <div class="detail"><h3>Vie des membres</h3><p>Suivi des inscriptions et informations de contact, avec autorisations d'accès adaptées.</p></div>
+        <div class="detail"><h3>Événements</h3><p>Fiches d'ateliers, participants, préparation des messages et suivi des échéances.</p></div>
+        <div class="detail"><h3>Communication</h3><p>Newsletters, annonces et contenus cohérents avec la personnalité du collectif.</p></div>
+      </div>
+      <div class="example"><h3>Une solution qui respecte les personnes.</h3><p>Avant toute mise en production, il faudra organiser les droits d'accès, le traitement des données personnelles, l'information des membres et, lorsque nécessaire, la gestion des consentements. Aucun fichier d'adhérents n'est automatiquement importé.</p></div>
+      <a href="#contact" class="btn" data-select-offer="association">Discuter d'un espace associatif ↗</a>
+    </div>
+  </section>
+  <section class="section soft" id="processus">
+    <div class="container">
+      <p class="eyebrow">TRAVAILLER ENSEMBLE</p>
+      <h2 class="section-title">Du premier échange à quelque chose d'utilisable.</h2>
+      <div class="process">
+        <div class="step"><b>01 / COMPRENDRE</b><h3>On parle du besoin.</h3><p>Ton activité, ce qui coince, ce qui existe déjà et ce qui mérite réellement d'être simplifié.</p></div>
+        <div class="step"><b>02 / CADRER</b><h3>On définit le livrable.</h3><p>Les fonctionnalités ou contenus, les délais, le budget, les accès nécessaires et la validation prévue.</p></div>
+        <div class="step"><b>03 / LIVRER</b><h3>On teste avant d'annoncer.</h3><p>On vérifie ce qui fonctionne, on remet les fichiers ou les accès convenus et on distingue le réalisé du restant.</p></div>
+      </div>
+    </div>
+  </section>
+  <section class="form-section" id="contact">
+    <div class="container form-grid">
+      <div>
+        <p class="eyebrow" style="color:#d2b0cf">PARLONS DE TON PROJET</p>
+        <h2 class="section-title">Et maintenant, on construit quoi ?</h2>
+        <p class="section-intro">Explique ce que tu veux organiser, créer ou développer. Tu peux demander une démonstration, un devis ou simplement poser une question sur les offres.</p>
+        <p style="font-size:13px;color:#d3bfd2">Ce formulaire prépare un e-mail dans ta messagerie. Il ne transmet aucune donnée à un serveur ELOAH et n'enregistre pas la demande.</p>
+      </div>
+      <form class="form-panel" id="eloah-contact-form">
+        <label for="lead-offer">Ce qui t'intéresse
+          <select id="lead-offer" name="offre" required>
+            <option value="pilotage-decouverte">ELOAH Pilotage · Découverte</option>
+            <option value="pilotage-entree">ELOAH Pilotage · Entrée</option>
+            <option value="pilotage-partenaire">ELOAH Pilotage · Partenaire</option>
+            <option value="studio">ELOAH Studios créatifs</option>
+            <option value="association">ELOAH Associations</option>
+          </select>
+        </label>
+        <label for="lead-name">Nom ou structure
+          <input id="lead-name" name="nom" required maxlength="120" autocomplete="organization" placeholder="Ton nom ou le nom du projet">
+        </label>
+        <label for="lead-email">Ton adresse e-mail
+          <input id="lead-email" name="email" type="email" required maxlength="254" autocomplete="email" placeholder="contact@exemple.fr">
+        </label>
+        <label for="lead-description">Ce que tu aimerais faire
+          <textarea id="lead-description" name="description" required maxlength="1600" placeholder="Parle-moi de ton projet, de ce qui te prend du temps et de ce que tu souhaites améliorer."></textarea>
+        </label>
+        <button class="btn" type="submit">Préparer ma demande par e-mail ↗</button>
+        <p class="form-note">Tu peux relire et modifier le message dans ton logiciel de messagerie avant de l'envoyer. Aucun paiement ni engagement.</p>
+        <p class="form-status" role="status" id="eloah-form-status"></p>
+      </form>
+    </div>
+  </section>
+</main>
+<footer class="footer"><div class="container footer-inner"><span>© ELOAH · Solutions en préparation</span><span>Les prix sont indicatifs et les fonctions encore en test ne sont pas vendues comme déjà opérationnelles.</span><a href="eloah-partenaire.html?rubrique=Mon%20abonnement">Mon abonnement ELOAH ↗</a></div></footer>
+<script>
+(()=>{'use strict';
+const labels={
+'pilotage-decouverte':'ELOAH Pilotage — Découverte',
+'pilotage-entree':'ELOAH Pilotage — Entrée',
+'pilotage-partenaire':'ELOAH Pilotage — Partenaire',
+'studio':'ELOAH Studios créatifs',
+'association':'ELOAH Associations'};
+const select=document.getElementById('lead-offer');
+document.querySelectorAll('[data-select-offer]').forEach(el=>el.addEventListener('click',()=>{const choice=el.getAttribute('data-select-offer');if(labels[choice])select.value=choice}));
+const params=new URLSearchParams(location.search),selected=params.get('offre');
+if(labels[selected])select.value=selected;
+const form=document.getElementById('eloah-contact-form');
+form.addEventListener('submit',e=>{
+ e.preventDefault();
+ if(!form.reportValidity())return;
+ const name=document.getElementById('lead-name').value.trim();
+ const email=document.getElementById('lead-email').value.trim();
+ const description=document.getElementById('lead-description').value.trim();
+ if(!name||!email||!description)return;
+ const offer=labels[select.value]||labels.studio;
+ const subject='Demande ELOAH — '+offer;
+ const body='Bonjour,\n\nJe souhaite échanger au sujet de : '+offer+'\n\nNom / structure : '+name+'\nE-mail de réponse : '+email+'\n\nMon besoin :\n'+description+'\n\nMerci de me recontacter.\n';
+ const url='mailto:soniacointe@powerglam.fr?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+ document.getElementById('eloah-form-status').textContent='Un brouillon de message est prêt dans ta messagerie. Vérifie-le et clique sur Envoyer : ELOAH ne l’a pas encore reçu.';
+ window.location.href=url;
+});
+})();
+</script>
+</body>
+</html>
