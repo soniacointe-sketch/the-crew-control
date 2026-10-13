@@ -497,6 +497,80 @@ async function importStockVideo(id){
  }finally{stockLoading=false}
 }
 
+// Photos Pexels soigneusement sélectionnées, chaque fiche renvoie à son photographe et sa source.
+const curatedPhotos=[{"id":"px-9259704","pexelsId":9259704,"name":"Vagues turquoise","category":"Eau & océan","photographer":"Jess Loiterton"},{"id":"px-36229964","pexelsId":36229964,"name":"Eau turquoise douce","category":"Eau & océan","photographer":"Jonathan Borba"},{"id":"px-7338890","pexelsId":7338890,"name":"Texture d'océan","category":"Eau & océan","photographer":"Gülşah PEHLİVAN"},{"id":"px-6573152","pexelsId":6573152,"name":"Rivage turquoise","category":"Eau & océan","photographer":"Ethan Tien"},{"id":"px-17137720","pexelsId":17137720,"name":"Lagune tropicale","category":"Eau & océan","photographer":"Francesco Ungaro"},{"id":"px-3654870","pexelsId":3654870,"name":"Littoral vu du ciel","category":"Eau & océan","photographer":"Griffin Wooldridge"},{"id":"px-16598628","pexelsId":16598628,"name":"Bleu profond","category":"Eau & océan","photographer":"Josh Withers"},{"id":"px-8732561","pexelsId":8732561,"name":"Hibiscus rouge","category":"Fleurs & été","photographer":"Arshan alam"},{"id":"px-9399998","pexelsId":9399998,"name":"Fleur tropicale","category":"Fleurs & été","photographer":"Engin Akyurt"},{"id":"px-12224493","pexelsId":12224493,"name":"Parasol rose","category":"Fleurs & été","photographer":"Nayla Charo"},{"id":"px-18888082","pexelsId":18888082,"name":"Parasol à la mer","category":"Fleurs & été","photographer":"Vika Glitter"},{"id":"px-5677563","pexelsId":5677563,"name":"Plage ensoleillée","category":"Fleurs & été","photographer":"Waldemar Brandt"},{"id":"px-7260252","pexelsId":7260252,"name":"Bougie et tissu","category":"Lifestyle","photographer":"gravity cut"},{"id":"px-8903657","pexelsId":8903657,"name":"Livres et bougie","category":"Lifestyle","photographer":"RDNE Stock project"},{"id":"px-9586204","pexelsId":9586204,"name":"Cocooning","category":"Lifestyle","photographer":"Esra Nur Kalay"},{"id":"px-27592573","pexelsId":27592573,"name":"Café et ordinateur","category":"Lifestyle","photographer":"Lisa Fotios"},{"id":"px-24877185","pexelsId":24877185,"name":"Casque et café","category":"Lifestyle","photographer":"Kadir Avşar"},{"id":"px-33686046","pexelsId":33686046,"name":"Lecture et chandelle","category":"Lifestyle","photographer":"fzaytt"},{"id":"px-6603477","pexelsId":6603477,"name":"Bureau sur le lit","category":"Lifestyle","photographer":"Hanna Pad"},{"id":"px-12260089","pexelsId":12260089,"name":"Matin minimaliste","category":"Lifestyle","photographer":"Alina Tomylko"},{"id":"px-12405483","pexelsId":12405483,"name":"Femme à la fenêtre","category":"Portraits","photographer":"RDNE Stock project"},{"id":"px-19201219","pexelsId":19201219,"name":"Portrait contemplatif","category":"Portraits","photographer":"esra demir"},{"id":"px-8151753","pexelsId":8151753,"name":"Yoga et lumière","category":"Portraits","photographer":"RDNE Stock project"},{"id":"px-6039237","pexelsId":6039237,"name":"Fougères tropicales","category":"Nature","photographer":"Enric Cruz López"},{"id":"px-12659294","pexelsId":12659294,"name":"Verdure forêt","category":"Nature","photographer":"Berke Can"},{"id":"px-17373428","pexelsId":17373428,"name":"Feuillage délicat","category":"Nature","photographer":"Diana"},{"id":"px-5114905","pexelsId":5114905,"name":"Fougère sombre","category":"Nature","photographer":"Diana"},{"id":"px-35038279","pexelsId":35038279,"name":"Forêt et lumière","category":"Nature","photographer":"Nguyễn Tiến Thịnh"},{"id":"px-5359307","pexelsId":5359307,"name":"Bougies et lecture","category":"Lifestyle","photographer":"cottonbro studio"},{"id":"px-27396422","pexelsId":27396422,"name":"Lecture à la fenêtre","category":"Lifestyle","photographer":"Esra Erdem"}];
+const curatedGroups=[
+ ['Recommandations magiques',['px-12224493','px-8732561','px-17137720','px-9259704','px-9399998','px-5677563']],
+ ['Tendances',['px-7260252','px-27592573','px-24877185','px-33686046','px-9586204','px-12405483','px-12260089','px-8903657','px-5359307','px-27396422']],
+ ['Eau & océan',curatedPhotos.filter(p=>p.category==='Eau & océan').map(p=>p.id)],
+ ['Fleurs & été',curatedPhotos.filter(p=>p.category==='Fleurs & été').map(p=>p.id)],
+ ['Portraits',curatedPhotos.filter(p=>p.category==='Portraits').map(p=>p.id)],
+ ['Nature',curatedPhotos.filter(p=>p.category==='Nature').map(p=>p.id)]
+];
+let photoView='home',photoSearch='',photoRecent=[];
+try{photoRecent=JSON.parse(localStorage.getItem('eloah_reel_recent_photos')||'[]').filter(id=>curatedPhotos.some(p=>p.id===id)).slice(0,16)}catch{}
+function photoURL(item,w=360){return 'https://images.pexels.com/photos/'+item.pexelsId+'/pexels-photo-'+item.pexelsId+'.jpeg?auto=compress&cs=tinysrgb&w='+w}
+function photoPage(item){return 'https://www.pexels.com/photo/'+item.pexelsId+'/'}
+function photoItem(id){return curatedPhotos.find(p=>p.id===id)}
+function photoTile(p){
+ return '<div class="ecs-photo-tile" data-photo-id="'+xss(p.id)+'" data-search="'+xss((p.name+' '+p.category+' '+p.photographer).toLocaleLowerCase('fr'))+'"><button class="ecs-photo-photo" data-photo-open="'+xss(p.id)+'" type="button" title="Voir '+xss(p.name)+'"><img src="'+photoURL(p,320)+'" alt="'+xss(p.name)+'" loading="lazy" decoding="async" onerror="this.closest(\'.ecs-photo-tile\').classList.add(\'ecs-photo-error\')"></button><button class="ecs-photo-add" type="button" data-photo-add="'+xss(p.id)+'" aria-label="Ajouter '+xss(p.name)+' au Reel">＋</button></div>';
+}
+function photoSection(title,items,slug,kind){
+ if(!items.length)return '';
+ return '<section class="ecs-photo-section" data-photo-section><div class="ecs-sectiontitle"><strong>'+xss(title)+'</strong><button type="button" data-photo-group="'+slug+'">Afficher tout →</button></div><div class="'+(kind==='masonry'?'ecs-photo-masonry':'ecs-photo-strip')+'">'+items.map(photoTile).join('')+'</div></section>';
+}
+function photoCatalog(){
+ const recent=photoRecent.map(photoItem).filter(Boolean);
+ const intro='<div class="ecs-audio-header"><button type="button" data-tab="elements" aria-label="Retour aux éléments">←</button><strong>Photos</strong></div><div class="ecs-search"><input id="ecs-photo-search" placeholder="Rechercher des photos" aria-label="Rechercher des photos" value="'+xss(photoSearch)+'"><span>⌕</span></div>';
+ if(photoView!=='home'){
+   const rec=photoView==='recent';
+   const ix=Number(photoView.slice(1)),group=curatedGroups[ix];
+   const photos=rec?recent:(group?.[1]||[]).map(photoItem).filter(Boolean);
+   return intro+'<button class="ecs-els-back" type="button" data-photo-group="home">← Toutes les photos</button><h3 class="ecs-panelheading">'+xss(rec?'Utilisés récemment':group?.[0]||'Photos')+'</h3><div class="ecs-photo-masonry ecs-photo-all">'+photos.map(photoTile).join('')+'</div>';
+ }
+ return intro+(recent.length?photoSection('Utilisés récemment',recent.slice(0,6),'recent'):'')+
+ curatedGroups.map(([title,ids],i)=>photoSection(title,ids.map(photoItem).filter(Boolean),'g'+i,i===1?'masonry':'strip')).join('')+
+ '<div class="ecs-photo-actions"><p class="ecs-note">Photographies réelles Pexels. Clique sur une photo pour la prévisualiser ou utilise ＋ pour la placer dans le Reel. Chaque image garde un lien vers son auteur.</p>'+
+ btn('addImage','＋ Importer mes photos',true)+btn('importImage','Définir un fond photo')+
+ '<p class="ecs-note"><a href="https://www.pexels.com/license/" target="_blank" rel="noopener noreferrer">Licence d’utilisation Pexels ↗</a> · Ne pas revendre les fichiers bruts.</p></div>';
+}
+function closePhotoModal(){root.querySelector('.ecs-photo-modal')?.remove()}
+function openPhoto(id){
+ const p=photoItem(id);if(!p)return;closePhotoModal();
+ const m=document.createElement('div');m.className='ecs-photo-modal';m.setAttribute('role','dialog');m.setAttribute('aria-modal','true');m.setAttribute('aria-label','Aperçu '+p.name);
+ m.innerHTML='<div class="ecs-photo-modalbox"><div class="ecs-photo-modalhead"><strong>'+xss(p.name)+'</strong><button type="button" data-photo-close aria-label="Fermer">✕</button></div><img src="'+photoURL(p,1100)+'" alt="'+xss(p.name)+'"><p class="ecs-note">Photo : '+xss(p.photographer)+' · Pexels</p><div class="ecs-photo-modalactions"><button type="button" data-photo-add="'+p.id+'">＋ Ajouter sur la page</button><button type="button" data-photo-background="'+p.id+'">Utiliser comme fond</button><a href="'+photoPage(p)+'" rel="noopener noreferrer" target="_blank">Voir la source ↗</a></div></div>';
+ m.addEventListener('click',e=>{if(e.target===m)closePhotoModal()});root.append(m);
+}
+function rememberPhoto(id){
+ photoRecent=[id,...photoRecent.filter(x=>x!==id)].slice(0,16);
+ try{localStorage.setItem('eloah_reel_recent_photos',JSON.stringify(photoRecent))}catch{}
+}
+let photoDownloading=false;
+async function usePhoto(id,asBackground=false){
+ const p=photoItem(id);if(!p||photoDownloading)return;
+ photoDownloading=true;toast('Chargement de la photo : '+p.name+'…');
+ try{
+  const response=await fetch(photoURL(p,1600),{mode:'cors'});
+  if(!response.ok)throw Error('Image inaccessible (HTTP '+response.status+')');
+  const blob=await response.blob();
+  if(!blob.size||!blob.type.startsWith('image/'))throw Error('Fichier reçu non reconnu comme image');
+  if(blob.size>15*1024*1024)throw Error('Image trop volumineuse');
+  const f=new File([blob],p.id+'.jpg',{type:blob.type});
+  const added=await loadImage(f,asBackground?'background':'element');
+  if(added===false)throw Error('Décodage de l’image impossible');
+  rememberPhoto(id);closePhotoModal();if(activeTab==='photos')renderSide();
+  toast(asBackground?'Fond photo installé : '+p.name:'Photo ajoutée sur le Reel : '+p.name);
+ }catch(e){
+  toast('Ajout direct impossible : '+e.message+'. Ouvre Pexels puis télécharge et importe la photo.');
+  const section=one('.ecs-sidebody');
+  if(section&&!section.querySelector('.ecs-photo-fallback')){
+   const note=document.createElement('p');note.className='ecs-photo-fallback ecs-note';
+   note.innerHTML='Cette image ne peut pas être importée directement. <a target="_blank" rel="noopener noreferrer" href="'+photoPage(p)+'">Télécharger la photo sur Pexels ↗</a>, puis utilise « Importer mes photos ».';
+   section.prepend(note);
+  }
+ }finally{photoDownloading=false}
+}
+
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
@@ -508,7 +582,7 @@ function renderSide(){
  if(activeTab==='import')html='<div class="ecs-upload"><strong>Importe tes fichiers</strong><p class="ecs-note">Glisse tes fichiers directement sur la page ou choisis ci-dessous.</p>'+btn('importVideo','Vidéo',true)+btn('importImage','Photo')+btn('importAudio','Audio')+'</div><p class="ecs-note">Fichiers traités dans le navigateur. Les photos peuvent être un fond ou un élément mobile.</p>'+btn('addImage','Photo comme élément');
  if(activeTab==='tools')html=range('Durée du Reel (secondes)','duration',1,60,.5,S.duration)+color('Fond','bg',S.bg)+'<label class="ecs-sidelabel">Effet de couleur</label><select data-setting="filter">'+[['none','Naturel'],['cinema','Cinéma'],['gold','Lumière dorée'],['vivid','Couleurs intenses'],['mono','Noir et blanc']].map(([k,v])=>'<option value="'+k+'" '+(S.filter===k?'selected':'')+'>'+v+'</option>').join('')+'</select>'+btn('png','Exporter une image PNG')+'<p class="ecs-note">Les filtres modifient la vidéo et les photos de fond. Le son est conservé selon les capacités du navigateur à l’export.</p>';
  if(activeTab==='projects')html='<p class="ecs-note">Sauvegarde ton projet en JSON pour retrouver les textes, positions et couleurs.</p>'+btn('save','Sauvegarder projet',true)+btn('load','Ouvrir un projet')+btn('reset','Nouveau projet')+'<p class="ecs-note">Les vidéos, photos et musiques ne sont pas intégrées au fichier JSON : conserve-les séparément et réimporte-les après ouverture.</p>';
- if(activeTab==='photos')html=btn('importImage','Importer une photo',true)+btn('addImage','Ajouter une photo déplaçable')+'<p class="ecs-note">Tu peux également déposer un JPEG, PNG ou WebP directement sur le plan de travail.</p>';
+ if(activeTab==='photos')html=photoCatalog();
  if(activeTab==='audio')html=renderAudio();
  if(activeTab==='videos')html=videoCatalog();
  if(activeTab==='properties'){
@@ -527,7 +601,7 @@ function renderSide(){
  box.innerHTML=html;
  if(activeTab==='videos')requestAnimationFrame(scheduleStockThumbnails);
 }
-function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
+function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}if(tab==='photos'){photoView='home';photoSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
 function action(name){
  if(name==='old'){pause();root.style.display='none';legacy.style.display='block';document.body.classList.add('ecs-legacy-open');const h=document.querySelector('body > header');if(h)h.style.display='flex';const back=document.createElement('button');back.textContent='↗ Retour à l’éditeur visuel';back.style.cssText='position:fixed;bottom:16px;right:16px;z-index:99;background:#147a9f;color:white;padding:13px;border-radius:9px';back.onclick=()=>{legacy.style.display='none';root.style.display='flex';back.remove();if(h)h.style.display='none'};document.body.append(back);return}
  if(name==='undo'){undo();return}if(name==='redo'){redo();return}
@@ -566,6 +640,11 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ const photoClose=ev.target.closest('[data-photo-close]');if(photoClose){closePhotoModal();return}
+ const photoGroup=ev.target.closest('[data-photo-group]');if(photoGroup){photoView=photoGroup.dataset.photoGroup;photoSearch='';renderSide();return}
+ const photoOpen=ev.target.closest('[data-photo-open]');if(photoOpen){openPhoto(photoOpen.dataset.photoOpen);return}
+ const photoAdd=ev.target.closest('[data-photo-add]');if(photoAdd){usePhoto(photoAdd.dataset.photoAdd,false);return}
+ const photoBackground=ev.target.closest('[data-photo-background]');if(photoBackground){usePhoto(photoBackground.dataset.photoBackground,true);return}
  const videoClose=ev.target.closest('[data-stock-close]');if(videoClose){closeStockPreview();return}
  const videoGroup=ev.target.closest('[data-stock-group]');if(videoGroup){stockView=videoGroup.dataset.stockGroup;stockSearch='';renderSide();return}
  const videoOpen=ev.target.closest('[data-stock-open]');if(videoOpen){openStockVideo(videoOpen.dataset.stockOpen);return}
@@ -594,6 +673,12 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(e.target.id==='ecs-photo-search'){
+   photoSearch=e.target.value;const v=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
+   all('.ecs-photo-tile').forEach(card=>{card.hidden=!!v&&!card.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(v)});
+   all('[data-photo-section]').forEach(section=>section.hidden=![...section.querySelectorAll('.ecs-photo-tile')].some(card=>!card.hidden));
+   return;
+ }
  if(e.target.id==='ecs-video-search'){
    const search=e.target.value.toLocaleLowerCase('fr').trim();stockSearch=search;
    all('.ecs-video-card').forEach(card=>card.hidden=!!search&&!card.dataset.search.includes(search));
@@ -618,7 +703,7 @@ canvas.addEventListener('pointermove',ev=>{if(!drag)return;const p=coords(ev),el
 });
 canvas.addEventListener('pointerup',()=>{if(drag){drag=null;renderSide();saveLocal()}});
 canvas.addEventListener('dblclick',ev=>{const p=coords(ev),e=[...S.elements].reverse().find(x=>x.kind==='text'&&p.x>=x.x&&p.x<=x.x+x.w&&p.y>=x.y&&p.y<=x.y+x.h);if(e){const t=prompt('Modifier le texte',e.text);if(t!==null){snapshot();e.text=t;selected=e.id;setTab('properties');saveLocal()}}});
-document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&stockPreview){closeStockPreview();return}if(root.style.display==='none'||!root.contains(document.activeElement)&&!canvas.matches(':hover'))return;if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();action('delete')}if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='z'){ev.preventDefault();ev.shiftKey?redo():undo()}});
+document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&root.querySelector('.ecs-photo-modal')){closePhotoModal();return}if(ev.key==='Escape'&&stockPreview){closeStockPreview();return}if(root.style.display==='none'||!root.contains(document.activeElement)&&!canvas.matches(':hover'))return;if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();action('delete')}if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='z'){ev.preventDefault();ev.shiftKey?redo():undo()}});
 // Montage manuel : glisser un clip pour le déplacer, tirer ses bords pour changer sa durée.
 one('#ecs-tracks').addEventListener('pointerdown',event=>{
  const button=event.target.closest('.ecs-clip[data-select]');if(!button)return;
@@ -653,10 +738,10 @@ one('#ecs-tracks').addEventListener('pointerdown',event=>{
 const scroll=one('.ecs-timeline-scroll');
 scroll.addEventListener('pointerdown',ev=>{if(ev.target.closest('button'))return;const bounds=one('#ecs-tracks').getBoundingClientRect();if(!bounds.width)return;const point=ev.clientX-bounds.left;seek(point/70);const move=e=>seek((e.clientX-bounds.left)/70);scroll.addEventListener('pointermove',move);scroll.addEventListener('pointerup',()=>scroll.removeEventListener('pointermove',move),{once:true})});
 async function loadVideo(file){pause();if(media.videoUrl)URL.revokeObjectURL(media.videoUrl);media.videoUrl=URL.createObjectURL(file);video.src=media.videoUrl;video.dataset.filename=file.name;try{await new Promise((res,rej)=>{video.onloadedmetadata=res;video.onerror=()=>rej(new Error('Vidéo illisible'))});S.trimStart=0;S.duration=Math.min(60,Math.max(1,Math.round(video.duration*10)/10||5));S.elements.forEach(x=>x.end=Math.min(S.duration,x.end));seek(0);renderTimeline();renderSide();toast('Vidéo ajoutée : '+file.name);saveLocal()}catch(e){toast('Impossible de lire la vidéo : '+e.message)}}
-async function loadImage(file,kind){const url=URL.createObjectURL(file);const im=new Image();im.src=url;try{await im.decode()}catch{URL.revokeObjectURL(url);toast('Image non lisible.');return}
+async function loadImage(file,kind){const url=URL.createObjectURL(file);const im=new Image();im.src=url;try{await im.decode()}catch{URL.revokeObjectURL(url);toast('Image non lisible.');return false}
  if(kind==='element'){const e=add('image',{x:140,y:490,w:790,h:790,sourceName:file.name});images.set(e.id,im)}
  else{if(media.imageUrl)URL.revokeObjectURL(media.imageUrl);media.imageUrl=url;media.bgImage=im;toast('Image de fond ajoutée : '+file.name)}
- draw();saveLocal()}
+ draw();saveLocal();return true}
 async function loadAudio(file){if(media.audioUrl)URL.revokeObjectURL(media.audioUrl);media.audioUrl=URL.createObjectURL(file);audio.src=media.audioUrl;audio.dataset.filename=file.name;audio.load();renderTimeline();renderSide();toast('Audio ajouté : '+file.name)}
 one('#ecs-video-input').addEventListener('change',e=>{if(e.target.files[0])loadVideo(e.target.files[0]);e.target.value=''});
 one('#ecs-audio-input').addEventListener('change',e=>{if(e.target.files[0])loadAudio(e.target.files[0]);e.target.value=''});
