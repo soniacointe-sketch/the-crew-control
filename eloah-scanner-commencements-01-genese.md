@@ -2,6 +2,10 @@
 
 ---
 
+![Illustration de recherche — Michel-Ange, *La Création d’Adam* (XVIe siècle) : interprétation artistique postérieure, **pas un document du texte biblique antique**.](https://commons.wikimedia.org/wiki/Special:FilePath/Michelangelo_-_The_Creation_of_Adam.jpg?width=1100)
+
+*Michel-Ange, *La Création d’Adam* (XVIe siècle) : interprétation artistique postérieure, **pas un document du texte biblique antique**. [Notice et crédits Wikimedia Commons](https://commons.wikimedia.org/wiki/File:Michelangelo_-_The_Creation_of_Adam.jpg).*
+
 # ELOAH · LES COMMENCEMENTS I
 
 # Genèse 1 — Le vide, les eaux, le souffle et la lumière
