@@ -297,6 +297,39 @@ body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral a{color:#7
 body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral img{height:auto;max-width:100%;border-radius:6px}
 body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral blockquote{border-left:3px solid #b79b6c;padding-left:17px;margin:22px 0;color:#6f5940}
 @media(max-width:650px){body.eloah-revue:has(#foi-texte-integral) .foi-dossier-guide{margin-top:35px}body.eloah-revue:has(#foi-texte-integral) .foi-dossier-texte-integral{padding:17px 13px}}
+</style><style id="foi-integral-editorial-style">
+/* Livre personnel : architecture des chapitres sans modifier la revue d'accueil. */
+#foi-texte-integral{position:relative}
+#foi-texte-integral>p:first-child{display:block;margin:0 0 6px!important}
+#foi-texte-integral>p:first-child strong{font:750 11px/1.5 system-ui!important;letter-spacing:.18em;color:#926a3d!important}
+#foi-texte-integral>p:nth-child(2) em{font:700 10px/1.6 system-ui;letter-spacing:.11em;color:#8c7258;text-transform:uppercase}
+#foi-texte-integral>h1:first-of-type{max-width:840px;font-size:clamp(37px,5.6vw,65px)!important;line-height:1.09!important;letter-spacing:-.035em!important;margin:24px 0 26px!important;color:#27231f!important}
+#foi-texte-integral>h1:first-of-type+p{font:normal clamp(19px,2.45vw,24px)/1.6 Georgia,serif!important;color:#4c4136!important;max-width:850px}
+#foi-texte-integral>h1:first-of-type~p{max-width:860px}
+#foi-texte-integral>blockquote:first-of-type{background:#f1e7d7!important;border-left:4px solid #a78050!important;margin:32px 0!important;padding:18px 22px!important;border-radius:0 8px 8px 0}
+#foi-texte-integral>blockquote:first-of-type p{font:italic 22px/1.5 Georgia,serif!important;color:#57432d!important;margin:0}
+#foi-texte-integral>h2{scroll-margin-top:50px}
+#foi-texte-integral .foi-integral-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:25px 0 12px}
+#foi-texte-integral .foi-integral-metric{background:#f2e9da;border:1px solid #d6c2a6;border-radius:9px;padding:22px 12px;text-align:center;min-height:112px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
+#foi-texte-integral .foi-integral-metric strong{font:500 clamp(29px,3.7vw,45px)/1.1 Georgia,serif;color:#714c27}
+#foi-texte-integral .foi-integral-metric span{font:650 11px/1.5 system-ui;color:#786452}
+#foi-texte-integral .foi-integral-chapter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:20px 0}
+#foi-texte-integral .foi-integral-chapter{display:flex;align-items:center;gap:13px;min-height:91px;padding:16px;border:1px solid #d9c7ab;background:#fffaf2;border-radius:9px;text-decoration:none;color:#3f362f;transition:background .16s,border-color .16s}
+#foi-texte-integral .foi-integral-chapter:hover,#foi-texte-integral .foi-integral-chapter:focus-visible{background:#f4e5ce;border-color:#aa885b}
+#foi-texte-integral .foi-integral-chapter-num{font:italic 24px/1 Georgia,serif;color:#ad8652;flex-shrink:0}
+#foi-texte-integral .foi-integral-chapter>span:nth-child(2){flex:1;min-width:0}
+#foi-texte-integral .foi-integral-chapter strong{display:block;font:600 15px/1.3 Georgia,serif;color:#3c3129}
+#foi-texte-integral .foi-integral-chapter small{display:block;font:12px/1.45 system-ui;color:#827367;margin-top:5px}
+#foi-texte-integral .foi-integral-chapter-arrow{font:19px system-ui;color:#977248}
+#foi-texte-integral .foi-integral-table-details{margin:10px 0 23px}
+#foi-texte-integral .foi-integral-table-details>summary{cursor:pointer;list-style:none;font:650 12px/1.55 system-ui;color:#84643c;text-decoration:underline;text-underline-offset:3px;padding:8px 0}
+#foi-texte-integral .foi-integral-table-details>summary::-webkit-details-marker{display:none}
+#foi-texte-integral .foi-integral-table-details[open]>summary{margin-bottom:11px}
+#foi-texte-integral .foi-integral-table-details table{width:100%;display:block;overflow-x:auto}
+#foi-texte-integral .foi-integral-table-details th{background:#e9dece;color:#463526}
+@media(max-width:760px){#foi-texte-integral .foi-integral-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}#foi-texte-integral .foi-integral-chapter-grid{grid-template-columns:1fr}#foi-texte-integral .foi-integral-chapter{min-height:75px;padding:14px}}
+@media(max-width:420px){#foi-texte-integral .foi-integral-metric{padding:15px 10px;min-height:96px}#foi-texte-integral .foi-integral-chapter strong{font-size:14px}}
+@media print{#foi-texte-integral .foi-integral-table-details{display:none!important}#foi-texte-integral .foi-integral-chapter{break-inside:avoid}}
 </style></head><body>
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
@@ -648,6 +681,82 @@ function renderPersonalDossierNavigation(i){
    }else heading.after(wrap);
  }else article.prepend(wrap);
 }
+
+function decoratePersonalIntegral(integral){
+ const tables=[...integral.querySelectorAll("table")];
+ const metrics=tables.find(t=>t.textContent.includes("Rubriques créées")&&t.textContent.includes("Questions à explorer"));
+ if(metrics){
+  const grid=document.createElement("div");
+  grid.className="foi-integral-metrics";
+  grid.setAttribute("aria-label","Les quatre repères du dossier");
+  for(const tr of metrics.querySelectorAll("tbody tr")){
+   const cells=tr.querySelectorAll("td");
+   if(cells.length<2)continue;
+   const card=document.createElement("div");
+   card.className="foi-integral-metric";
+   const value=document.createElement("strong");
+   value.textContent=cells[1].textContent.trim();
+   const label=document.createElement("span");
+   label.textContent=cells[0].textContent.trim();
+   card.append(value,label);grid.append(card);
+  }
+  const detail=document.createElement("details");
+  detail.className="foi-integral-table-details";
+  const summary=document.createElement("summary");
+  summary.textContent="Afficher les indicateurs en tableau";
+  metrics.before(grid);
+  detail.append(summary,metrics);
+  grid.after(detail);
+ }
+ const toc=tables.find(t=>t.textContent.includes("Ma foi et mes convictions")&&t.textContent.includes("Mon journal de découvertes"));
+ if(toc){
+  const grid=document.createElement("nav");
+  grid.className="foi-integral-chapter-grid";
+  grid.setAttribute("aria-label","Les douze rubriques du dossier");
+  let index=0;
+  for(const tr of toc.querySelectorAll("tbody tr")){
+   const cols=tr.querySelectorAll("td");
+   if(cols.length<3)continue;
+   const existing=cols[1].querySelector("a[href]");
+   if(!existing)continue;
+   const target=new URL(existing.href,location.href);
+   const filename=target.searchParams.get("file");
+   const i=DOCS.findIndex(d=>d[1]===filename);
+   if(i<0)continue;
+   const link=document.createElement("a");
+   link.className="foi-integral-chapter";
+   link.href="foi-control.html?file="+encodeURIComponent(filename);
+   const digit=document.createElement("span");
+   digit.className="foi-integral-chapter-num";
+   digit.textContent=String(++index).padStart(2,"0");
+   const body=document.createElement("span");
+   const title=document.createElement("strong");
+   title.textContent=existing.textContent.replace(/[→↗]\s*$/,"").trim();
+   const desc=document.createElement("small");
+   desc.textContent=cols[2].textContent.trim();
+   body.append(title,desc);
+   const arrow=document.createElement("span");
+   arrow.className="foi-integral-chapter-arrow";
+   arrow.textContent="↗";
+   arrow.setAttribute("aria-hidden","true");
+   link.append(digit,body,arrow);
+   link.addEventListener("click",event=>{
+    if(event.button!==0||event.ctrlKey||event.metaKey||event.shiftKey||event.altKey)return;
+    event.preventDefault();openDoc(i);
+   });
+   grid.append(link);
+  }
+  if(grid.children.length===12){
+   const detail=document.createElement("details");
+   detail.className="foi-integral-table-details";
+   const summary=document.createElement("summary");
+   summary.textContent="Afficher le sommaire en tableau";
+   toc.before(grid);
+   detail.append(summary,toc);
+   grid.after(detail);
+  }
+ }
+}
 function renderPersonalIndex(){
  if(current!==0&&DOCS[current]?.[1]!=="eloah-foi-dossier-personnel-complet.md")return;
  article.replaceChildren();
@@ -718,6 +827,7 @@ async function openDoc(i,section="",restore=false){const request=++busy;current=
  integral.className="foi-dossier-texte-integral";
  integral.setAttribute("aria-label","Texte intégral du dossier personnel");
  while(article.firstChild)integral.append(article.firstChild);
+ decoratePersonalIntegral(integral);
  renderPersonalIndex();
  const jump=document.createElement("div");
  jump.className="foi-dossier-guide";
