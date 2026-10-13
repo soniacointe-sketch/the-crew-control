@@ -381,6 +381,111 @@ function renderTimeline(){
 const btn=(action,label,primary=false)=>'<button type="button" data-action="'+action+'" class="ecs-pillbtn'+(primary?' primary':'')+'">'+label+'</button>';
 function range(label,key,min,max,step,val){return '<label class="ecs-sidelabel">'+label+'</label><input type="number" min="'+min+'" max="'+max+'" step="'+step+'" data-p="'+key+'" value="'+xss(val)+'">'}
 function color(label,key,val){return '<label class="ecs-sidelabel">'+label+'</label><input type="color" data-p="'+key+'" value="'+xss(val)+'">'}
+// Galerie de vidéos de stock. URLs publiées dans des exemples techniques Pexels,
+// chaque fiche renvoie aussi à la vidéo d'origine. La durée réelle est lue par le navigateur.
+const videoStock=[
+ {id:'pexels-17169505',name:'Plan vertical · Portrait 01',category:'people',size:'hd',url:'https://videos.pexels.com/video-files/17169505/17169505-hd_1080_1920_30fps.mp4',page:'https://www.pexels.com/video/17169505/',format:'vertical'},
+ {id:'pexels-8468212',name:'Plan vertical · Portrait 02',category:'people',size:'hd',url:'https://videos.pexels.com/video-files/8468212/8468212-hd_1080_1920_30fps.mp4',page:'https://www.pexels.com/video/8468212/',format:'vertical'},
+ {id:'pexels-9244375',name:'Scène verticale · Lifestyle',category:'people',size:'hd',url:'https://videos.pexels.com/video-files/9244375/9244375-hd_1080_1920_25fps.mp4',page:'https://www.pexels.com/video/9244375/',format:'vertical'},
+ {id:'pexels-35143877',name:'Plan vertical · Inspiration',category:'trends',size:'uhd',url:'https://videos.pexels.com/video-files/35143877/14887902_1440_2560_30fps.mp4',page:'https://www.pexels.com/video/35143877/',format:'vertical'},
+ {id:'pexels-5873605',name:'Portrait vertical · Cinématique',category:'trends',size:'uhd',url:'https://videos.pexels.com/video-files/5873605/5873605-uhd_2160_3840_24fps.mp4',page:'https://www.pexels.com/video/5873605/',format:'vertical'},
+ {id:'pexels-4188339',name:'Lever de soleil · Hawaï',category:'background',size:'uhd',url:'https://videos.pexels.com/video-files/4188339/4188339-uhd_4096_2160_24fps.mp4',page:'https://www.pexels.com/video/4188339/',format:'horizontal'},
+ {id:'pexels-36505810',name:'Falaises · Mer du Nord',category:'background',size:'sd',url:'https://videos.pexels.com/video-files/36505810/15479711_640_360_60fps.mp4',page:'https://www.pexels.com/video/dramatic-drone-view-of-north-sea-cliffs-36505810/',format:'horizontal'},
+ {id:'pexels-4977395',name:'Chats sur la pelouse',category:'trends',size:'hd',url:'https://videos.pexels.com/video-files/4977395/4977395-hd_1920_1080_24fps.mp4',page:'https://www.pexels.com/video/adorable-cats-on-the-lawn-4977395/',format:'horizontal'},
+ {id:'pexels-1409899',name:'Clip nature · Plan large',category:'background',size:'sd',url:'https://videos.pexels.com/video-files/1409899/1409899-sd_640_360_25fps.mp4',page:'https://www.pexels.com/video/1409899/',format:'horizontal'},
+ {id:'pexels-1192116',name:'Séquence · Plan large',category:'effects',size:'sd',url:'https://videos.pexels.com/video-files/1192116/1192116-sd_640_360_30fps.mp4',page:'https://www.pexels.com/video/1192116/',format:'horizontal'},
+ {id:'pexels-1918465',name:'Océan · Drone',category:'background',size:'uhd',url:'https://videos.pexels.com/video-files/1918465/1918465-uhd_3840_2160_24fps.mp4',page:'https://www.pexels.com/video/1918465/',format:'horizontal'},
+ {id:'pexels-20271094',name:'Fond marin · Cinématique',category:'background',size:'uhd',url:'https://videos.pexels.com/video-files/20271094/20271094-uhd_2560_1440_25fps.mp4',page:'https://www.pexels.com/video/20271094/',format:'horizontal'},
+ {id:'pexels-36505810-transition',name:'Mer · Transition panoramique',category:'effects',size:'sd',url:'https://videos.pexels.com/video-files/36505810/15479711_640_360_60fps.mp4',page:'https://www.pexels.com/video/dramatic-drone-view-of-north-sea-cliffs-36505810/',format:'horizontal'}
+];
+let stockView='home',stockSearch='',stockPreview=null,stockLoading=false,stockRecent=[];
+const stockDuration=new Map();
+try{stockRecent=JSON.parse(localStorage.getItem('eloah_reel_recent_videos')||'[]').filter(id=>videoStock.some(v=>v.id===id)).slice(0,12)}catch{}
+const stockGroup=[
+ ['Recommandations magiques',['pexels-17169505','pexels-4188339','pexels-4977395','pexels-8468212']],
+ ['Tendances',['pexels-35143877','pexels-5873605','pexels-4977395','pexels-9244375']],
+ ['People',['pexels-17169505','pexels-8468212','pexels-9244375']],
+ ['Arrière-plans',['pexels-4188339','pexels-36505810','pexels-1918465','pexels-20271094','pexels-1409899']],
+ ['Transitions et effets',['pexels-1192116','pexels-36505810-transition']]
+];
+function videoTile(c){
+ const d=stockDuration.get(c.id),duration=Number.isFinite(d)?audioDuration(d):'Vidéo';
+ return '<div class="ecs-video-card" data-stock="'+c.id+'" data-search="'+xss((c.name+' '+c.category+' '+c.format).toLowerCase())+'">'+
+ '<button type="button" class="ecs-video-open" data-stock-open="'+c.id+'" aria-label="Prévisualiser '+xss(c.name)+'"><video class="ecs-video-thumb" muted playsinline preload="none" data-thumb-src="'+xss(c.url)+'#t=0.5" aria-hidden="true"></video><span class="ecs-video-overlay">▶</span><span class="ecs-video-duration">'+duration+'</span></button>'+
+ '<div class="ecs-video-caption">'+xss(c.name)+'</div><button class="ecs-video-plus" type="button" data-stock-add="'+c.id+'" title="Ajouter cette vidéo dans le Reel">＋</button></div>';
+}
+function stockSection(title,clips,slug){
+ if(!clips.length)return '';
+ return '<section class="ecs-video-section" data-video-section><div class="ecs-sectiontitle"><strong>'+xss(title)+'</strong><button type="button" data-stock-group="'+xss(slug)+'">Afficher tout →</button></div><div class="ecs-video-row">'+clips.map(videoTile).join('')+'</div></section>';
+}
+function videoCatalog(){
+ const recent=stockRecent.map(id=>videoStock.find(v=>v.id===id)).filter(Boolean);
+ const header='<div class="ecs-audio-header"><button data-tab="elements" aria-label="Retour aux éléments">←</button><strong>Vidéos</strong></div>'+
+ '<div class="ecs-search"><input id="ecs-video-search" placeholder="Rechercher des vidéos" value="'+xss(stockSearch)+'" aria-label="Rechercher des vidéos"><span>⌕</span></div>';
+ if(stockView!=='home'){
+   const section=stockView==='recent'?recent:stockGroup.find((group,index)=>'g'+index===stockView)?.[1].map(id=>videoStock.find(v=>v.id===id)).filter(Boolean)||[];
+   const groupName=stockView==='recent'?'Utilisés récemment':stockGroup.find((group,index)=>'g'+index===stockView)?.[0]||'Vidéos';
+   return header+'<button type="button" class="ecs-els-back" data-stock-group="home">← Toutes les vidéos</button><h3 class="ecs-panelheading">'+xss(groupName)+'</h3><div class="ecs-video-grid">'+section.map(videoTile).join('')+'</div>';
+ }
+ return header+(recent.length?stockSection('Utilisés récemment',recent,'recent'):'')+
+ stockGroup.map(([title,ids],i)=>stockSection(title,ids.map(id=>videoStock.find(v=>v.id===id)).filter(Boolean),'g'+i)).join('')+
+ '<p class="ecs-note ecs-video-license">Sélection de vidéos Pexels pour tes montages. Les clips peuvent être utilisés et modifiés selon la licence Pexels. Les personnes et marques visibles restent protégées par leurs droits.</p>'+
+ '<div class="ecs-video-stocklinks"><a target="_blank" rel="noopener noreferrer" href="https://www.pexels.com/search/videos/dance/">Plus de danse ↗</a><a target="_blank" rel="noopener noreferrer" href="https://www.pexels.com/search/videos/people/">Plus de personnes ↗</a><a target="_blank" rel="noopener noreferrer" href="https://www.pexels.com/search/videos/background/">Plus de fonds ↗</a></div>'+
+ '<div class="ecs-video-actions">'+btn('importVideo','＋ Importer ma vidéo',true)+(media.videoUrl?'<p class="ecs-note">Montage actuel : '+xss(video.dataset.filename||'Vidéo')+'</p>':'')+'</div>';
+}
+function scheduleStockThumbnails(){
+ const el=one('.ecs-sidebody');if(!el||activeTab!=='videos')return;
+ const items=[...el.querySelectorAll('video[data-thumb-src]')];
+ if(!('IntersectionObserver' in window)){
+   items.slice(0,8).forEach(v=>{v.src=v.dataset.thumbSrc;v.preload='metadata';v.load()});return;
+ }
+ const observer=new IntersectionObserver(entries=>{
+   for(const entry of entries)if(entry.isIntersecting){const v=entry.target;if(!v.src){v.src=v.dataset.thumbSrc;v.preload='metadata';v.load()}observer.unobserve(v)}
+ },{root:el,rootMargin:'100px'});
+ items.forEach(item=>observer.observe(item));
+}
+function rememberStock(id){
+ stockRecent=[id,...stockRecent.filter(x=>x!==id)].slice(0,12);
+ try{localStorage.setItem('eloah_reel_recent_videos',JSON.stringify(stockRecent))}catch{}
+}
+function closeStockPreview(){
+ const modal=root.querySelector('.ecs-video-modal');if(modal)modal.remove();stockPreview=null;
+}
+function openStockVideo(id){
+ const c=videoStock.find(c=>c.id===id);if(!c)return;closeStockPreview();stockPreview=id;
+ const dialog=document.createElement('div');dialog.className='ecs-video-modal';dialog.setAttribute('role','dialog');dialog.setAttribute('aria-modal','true');dialog.setAttribute('aria-label','Prévisualisation vidéo');
+ dialog.innerHTML='<div class="ecs-video-modalbox"><div class="ecs-video-modalhead"><strong>'+xss(c.name)+'</strong><button type="button" data-stock-close aria-label="Fermer">✕</button></div><video controls playsinline preload="metadata" src="'+xss(c.url)+'"></video><p class="ecs-note">Source : Pexels · '+xss(c.format)+' · '+xss(c.size.toUpperCase())+'</p><div class="ecs-video-modalactions"><button type="button" data-stock-add="'+xss(c.id)+'">＋ Ajouter au Reel</button><a target="_blank" rel="noopener noreferrer" href="'+xss(c.page)+'">Voir la vidéo originale ↗</a></div><p class="ecs-note">Si la lecture ou l’importation sont bloquées, télécharge le MP4 depuis la page Pexels, puis importe-le dans ELOAH.</p></div>';
+ root.append(dialog);
+ const v=dialog.querySelector('video');
+ v.addEventListener('loadedmetadata',()=>{if(Number.isFinite(v.duration))stockDuration.set(c.id,v.duration)});
+ v.play().catch(()=>{});
+}
+async function importStockVideo(id){
+ const c=videoStock.find(c=>c.id===id);if(!c||stockLoading)return;stockLoading=true;
+ toast('Importation de '+c.name+'…');
+ try{
+   // Limite de taille pour conserver un éditeur réactif sur mobile et PC.
+   const response=await fetch(c.url);
+   if(!response.ok)throw Error('HTTP '+response.status);
+   if(Number(response.headers.get('content-length')||0)>55*1024*1024)throw Error('Fichier volumineux');
+   const blob=await response.blob();
+   if(!blob.size||blob.size>55*1024*1024)throw Error('Fichier trop volumineux');
+   const file=new File([blob],c.id+'.mp4',{type:'video/mp4'});
+   await loadVideo(file);
+   rememberStock(id);closeStockPreview();
+   toast('Vidéo ajoutée au montage : '+c.name+'. Tu peux la découper dans les réglages.');
+   if(activeTab==='videos')renderSide();
+ }catch(e){
+   toast('Import direct indisponible ('+e.message+'). Ouvre la fiche source pour télécharger, puis importe le MP4.');
+   const panel=one('.ecs-sidebody');
+   if(panel&&!panel.querySelector('.ecs-video-fallback')){
+     const box=document.createElement('p');box.className='ecs-video-fallback ecs-note';
+     box.innerHTML='Import direct bloqué. <a href="'+xss(c.page)+'" target="_blank" rel="noopener noreferrer">Télécharger cette vidéo sur Pexels ↗</a>, puis utiliser « Importer ma vidéo ».';
+     panel.prepend(box);
+   }
+ }finally{stockLoading=false}
+}
+
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
@@ -394,7 +499,7 @@ function renderSide(){
  if(activeTab==='projects')html='<p class="ecs-note">Sauvegarde ton projet en JSON pour retrouver les textes, positions et couleurs.</p>'+btn('save','Sauvegarder projet',true)+btn('load','Ouvrir un projet')+btn('reset','Nouveau projet')+'<p class="ecs-note">Les vidéos, photos et musiques ne sont pas intégrées au fichier JSON : conserve-les séparément et réimporte-les après ouverture.</p>';
  if(activeTab==='photos')html=btn('importImage','Importer une photo',true)+btn('addImage','Ajouter une photo déplaçable')+'<p class="ecs-note">Tu peux également déposer un JPEG, PNG ou WebP directement sur le plan de travail.</p>';
  if(activeTab==='audio')html=renderAudio();
- if(activeTab==='videos')html=btn('importVideo','Importer une vidéo',true)+'<p class="ecs-note">'+(media.videoUrl?'Vidéo chargée : '+xss(video.dataset.filename||'Vidéo'):'Aucune vidéo chargée.')+'<br>La vidéo apparaît dans le cadre vertical. Tu peux ajouter textes et formes dessus.</p>'+(media.videoUrl?range('Commencer la vidéo à (secondes)','trimStart',0,Math.max(0,Math.floor(video.duration*10)/10),.1,S.trimStart)+'<p class="ecs-note">Découpe l’extrait en réglant son point de départ. Sa durée se règle dans Outils.</p>'+btn('removeVideo','Retirer la vidéo'): '');
+ if(activeTab==='videos')html=videoCatalog();
  if(activeTab==='properties'){
   const e=S.elements.find(q=>q.id===selected);
   if(!e)html='<div class="ecs-empty">Sélectionne un texte, une forme ou une image sur le plan de travail.</div>';
@@ -409,8 +514,9 @@ function renderSide(){
   }
  }
  box.innerHTML=html;
+ if(activeTab==='videos')requestAnimationFrame(scheduleStockThumbnails);
 }
-function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
+function setTab(tab){if(tab==='elements')elementsCategory=null;if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
 function action(name){
  if(name==='old'){pause();root.style.display='none';legacy.style.display='block';document.body.classList.add('ecs-legacy-open');const h=document.querySelector('body > header');if(h)h.style.display='flex';const back=document.createElement('button');back.textContent='↗ Retour à l’éditeur visuel';back.style.cssText='position:fixed;bottom:16px;right:16px;z-index:99;background:#147a9f;color:white;padding:13px;border-radius:9px';back.onclick=()=>{legacy.style.display='none';root.style.display='flex';back.remove();if(h)h.style.display='none'};document.body.append(back);return}
  if(name==='undo'){undo();return}if(name==='redo'){redo();return}
@@ -449,7 +555,11 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
- const retry=ev.target.closest('[data-retry-music]');if(retry){publicMusic.error='';publicMusic.loaded=false;loadPublicMusic();return}
+ const videoClose=ev.target.closest('[data-stock-close]');if(videoClose){closeStockPreview();return}
+ const videoGroup=ev.target.closest('[data-stock-group]');if(videoGroup){stockView=videoGroup.dataset.stockGroup;stockSearch='';renderSide();return}
+ const videoOpen=ev.target.closest('[data-stock-open]');if(videoOpen){openStockVideo(videoOpen.dataset.stockOpen);return}
+ const videoAdd=ev.target.closest('[data-stock-add]');if(videoAdd){importStockVideo(videoAdd.dataset.stockAdd);return}
+  const retry=ev.target.closest('[data-retry-music]');if(retry){publicMusic.error='';publicMusic.loaded=false;loadPublicMusic();return}
  const publicPreview=ev.target.closest('[data-real-preview]');if(publicPreview){previewPublicMusic(publicPreview.dataset.realPreview);return}
  const publicAdd=ev.target.closest('[data-real-add]');if(publicAdd){addPublicMusic(publicAdd.dataset.realAdd);return}
  const audioPanel=ev.target.closest('[data-audio-view]');
@@ -473,7 +583,13 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
- if(e.target.id==='ecs-audio-search'){const term=e.target.value.trim().toLocaleLowerCase('fr');all('.ecs-soundrow').forEach(row=>row.hidden=!row.dataset.search.includes(term));all('[data-soundsection]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-soundrow')].some(row=>!row.hidden)});return}
+ if(e.target.id==='ecs-video-search'){
+   const search=e.target.value.toLocaleLowerCase('fr').trim();stockSearch=search;
+   all('.ecs-video-card').forEach(card=>card.hidden=!!search&&!card.dataset.search.includes(search));
+   all('[data-video-section]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-video-card')].some(card=>!card.hidden)});
+   return;
+ }
+  if(e.target.id==='ecs-audio-search'){const term=e.target.value.trim().toLocaleLowerCase('fr');all('.ecs-soundrow').forEach(row=>row.hidden=!row.dataset.search.includes(term));all('[data-soundsection]').forEach(section=>{section.hidden=![...section.querySelectorAll('.ecs-soundrow')].some(row=>!row.hidden)});return}
  if(e.target.id==='ecs-tts-text'){voiceText=e.target.value;return}
  if(e.target.id==='ecs-element-search'){const term=e.target.value.trim().toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');all('.ecs-category').forEach(button=>{button.hidden=!button.dataset.search.normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term)});return}
  const p=e.target.dataset.p;if(p==='text'||p==='values'){const el=S.elements.find(q=>q.id===selected);if(el){el[p]=e.target.value;draw()}}if(p==='color'||p==='bg'){if(p==='bg')S.bg=e.target.value;else{const el=S.elements.find(q=>q.id===selected);if(el)el.color=e.target.value}draw()}
