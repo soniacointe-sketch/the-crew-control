@@ -269,6 +269,15 @@ async function loadTasks(){
    choice.disabled=false;
   });
   label.append(choice);controls.append(label);
+  const remove=el('button','Supprimer','light');remove.type='button';
+  remove.addEventListener('click',async()=>{
+   if(!window.confirm('Supprimer définitivement cette action ?'))return;
+   remove.disabled=true;
+   const {error}=await getClient().from('eloah_customer_workspace_items').delete().eq('id',item.id).eq('workspace_id',requestedWorkspace).eq('owner_id',user.id);
+   if(error){status('task-status','Suppression impossible : '+errMessage(error));remove.disabled=false;return}
+   await loadTasks();status('task-status','Action supprimée.');
+  });
+  controls.append(remove);
   section.append(controls);list.append(section);
  }
 }
