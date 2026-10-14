@@ -280,13 +280,21 @@ function fillLists(){
  if(!filtered.length)main.append(node("div","empty","Aucun tableau trouvé."));
 }
 function cardButton(b,c){
- const card=button("","card",()=>openCard(b,c));if(c.tag)card.append(node("span","card-label",c.tag));
+ const card=button("","card",()=>openCard(b,c));
+ if(c.coverMediaId){
+  const picture=node("span","card-cover");picture.setAttribute("aria-hidden","true");
+  card.append(picture);scheduleCover(b,c,picture);
+ }else if(c.cover){
+  try{const cover=new URL(c.cover);if(cover.protocol==="https:"){const picture=node("span","card-cover");picture.style.backgroundImage="url("+JSON.stringify(cover.href)+")";picture.setAttribute("aria-hidden","true");card.append(picture)}}catch(e){}
+ }
+ if(c.tag)card.append(node("span","card-label",c.tag));
  const title=node("div","card-title");if(c.complete)title.classList.add("completed");title.append(node("span","circle-check","○"),node("span",null,c.title||"Sans titre"));card.append(title);
  const meta=node("div","card-meta");
  if(c.due)meta.append(node("span","due","◷ "+fmtDate(c.due)));
  if(c.description)meta.append(node("span",null,"≡ Description"));
  if(c.checks?.length)meta.append(node("span",null,"☑ "+c.checks.filter(x=>x.done).length+"/"+c.checks.length));
  if(c.thread?.length)meta.append(node("span",null,"● "+c.thread.length));
+ if(c.media?.length)meta.append(node("span",null,"▣ "+c.media.length));
  if(c.links?.length)meta.append(node("span",null,"⌁ "+c.links.length));
  if(meta.childElementCount)card.append(meta);return card;
 }
@@ -403,6 +411,67 @@ function latestCard(boardId,cardId){
  const b=state.boards.find(x=>x.id===boardId);
  return {board:b,card:b?.cards.find(x=>x.id===cardId)};
 }
+function appendMediaControls(sheet,b,c,after,error){
+ const section=node("section","media-section");
+ section.append(node("h3",null,"Photos et documents · "+(c.media?.length||0)));
+ const entries=Array.isArray(c.media)?c.media:[];
+ const requested=[];
+ for(const asset of entries){
+  const row=node("div","media-row");
+  const info=node("div","media-info");
+  info.append(node("strong",null,asset.name||"Fichier"));
+  info.append(node("small",null,asset.bytes?Math.max(1,Math.round(asset.bytes/1024))+" Ko · "+(asset.type||"Fichier"):"Fichier privé"));
+  row.append(info);
+  const actions=node("div","media-actions");
+  const link=node("a","media-link","Chargement…");link.setAttribute("aria-disabled","true");link.setAttribute("rel","noopener noreferrer");link.setAttribute("target","_blank");
+  actions.append(link);
+  const image=asset.type?.startsWith("image/");
+  const preview=image?node("img","media-preview"):null;
+  if(preview){preview.alt="Aperçu : "+(asset.name||"photo");preview.loading="lazy";row.append(preview)}
+  if(!state.readOnly){
+   if(image){
+    actions.append(button(c.coverMediaId===asset.id?"✓ Couverture":"Définir comme couverture","small-action",()=>void mutate({type:"set_cover_media",boardId:b.id,cardId:c.id,mediaId:asset.id},after,error)));
+   }
+   actions.append(button("Supprimer","small-action danger-action",()=>{
+    if(!confirm("Supprimer définitivement ce fichier ? Cette suppression ne pourra pas être annulée."))return;
+    void removeMedia(b,c,asset.id,error,after);
+   }));
+  }
+  row.append(actions);section.append(row);
+  requested.push({boardId:b.id,cardId:c.id,mediaId:asset.id,link,preview});
+ }
+ if(requested.length){
+  void signedUrls(requested.map(x=>({boardId:x.boardId,cardId:x.cardId,mediaId:x.mediaId})))
+   .then(urls=>{
+    for(const item of requested){
+     if(!item.link.isConnected)continue;
+     const href=urls.get(item.mediaId);
+     if(!href){item.link.textContent="Fichier indisponible";continue}
+     item.link.textContent="Ouvrir ↗";item.link.href=href;item.link.removeAttribute("aria-disabled");
+     if(item.preview)item.preview.src=href;
+    }
+   }).catch(()=>{for(const x of requested)if(x.link.isConnected)x.link.textContent="Fichier inaccessible";});
+ }
+ if(!state.readOnly){
+  const field=node("div","media-upload");
+  const label=node("label","editor-field");
+  label.append(node("span",null,"Ajouter depuis mon téléphone / ordinateur"));
+  const input=node("input");input.type="file";input.multiple=true;input.accept=".jpg,.jpeg,.png,.webp,.heic,.heif,.pdf,.docx,.xlsx,.pptx,.txt,.csv,.mp4,.mov,image/*,application/pdf";
+  label.append(input);field.append(label);
+  const coverLine=node("label","media-cover-option");
+  const coverCheckbox=node("input");coverCheckbox.type="checkbox";coverCheckbox.checked=false;
+  coverLine.append(coverCheckbox,node("span",null,"Utiliser la première photo comme couverture de la carte"));field.append(coverLine);
+  const upload=button("↥ Ajouter les fichiers","primary-action",async()=>{
+   if(!input.files?.length){error.textContent="Sélectionne une ou plusieurs photos ou documents.";input.focus();return}
+   upload.disabled=true;
+   const ok=await uploadFiles(b,c,input.files,coverCheckbox.checked,error,after);
+   if(!ok)upload.disabled=false;
+  });
+  field.append(upload,node("small",null,"Jusqu’à 10 fichiers par envoi, 20 Mo par fichier. Albums privés ELOAH. Formats courants acceptés."));
+  section.append(field);
+ }
+ sheet.append(section);
+}
 function openCard(b,c){
  const {sheet,close}=sheetDialog(c.title||"Détails de la carte");
  sheet.append(node("span","pill",b.name));
@@ -446,8 +515,9 @@ function openCard(b,c){
   sheet.append(row);
  }
  const links=(c.links||[]).map(cleanUrl).filter(Boolean);
- if(links.length){sheet.append(node("h3",null,"Documents"));const list=node("div","detail-links");
+ if(links.length){sheet.append(node("h3",null,"Documents liés"));const list=node("div","detail-links");
   for(const href of links){const link=node("a",null,"Ouvrir un document externe ↗");link.href=href;link.target="_blank";link.rel="noopener noreferrer";list.append(link)}sheet.append(list)}
+ appendMediaControls(sheet,b,c,after,error);
  if(!state.readOnly){
   const actions=node("div","sheet-actions");
   actions.append(button("✎ Modifier","primary-action",()=>{close();editCard(b,c)}));
