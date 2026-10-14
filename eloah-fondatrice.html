@@ -5,7 +5,7 @@
 <script>
 window.__eloahRecoveryContext=(function(){
  const search=new URLSearchParams(location.search),hash=new URLSearchParams(location.hash.substring(1));
- return {active:search.get('type')==='recovery'||hash.get('type')==='recovery',token:hash.get('access_token'),code:search.get('code'),error:search.get('error_description')||hash.get('error_description')};
+ return {active:search.get('type')==='recovery'||hash.get('type')==='recovery'||(search.has('code')&&search.get('type')==='recovery')||hash.has('error_description'),token:hash.get('access_token'),code:search.get('code'),error:search.get('error_description')||hash.get('error_description')};
 })();
 window.__eloahRecoveryActive=window.__eloahRecoveryContext.active;
 if(window.__eloahRecoveryActive){
@@ -15,6 +15,7 @@ if(window.__eloahRecoveryActive){
 }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js" onerror="document.getElementById('state').textContent='Le module de connexion ne se charge pas sur cet appareil. Vérifie le réseau ou recharge la page.'"></script><script>
+if (!window.__eloahRecoveryActive) {
 const URL='https://voytsqyorhoveurnguxn.supabase.co',KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy',OWNER='bd4b7197-6401-4a9a-a14e-c6adbdc0ed46';
 const $=id=>document.getElementById(id),client=window.supabase?.createClient(URL,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true,storageKey:'eloah-founder-auth-v1'}});
 const recoveryParams=new URLSearchParams(location.hash.substring(1)),recoveryQuery=new URLSearchParams(location.search);
@@ -83,4 +84,5 @@ window.addEventListener('error',e=>message('Erreur technique : '+(e.message||'sc
   }
 }
 boot();
+}
 </script><script src="eloah-recovery-handler.js"></script></body></html>
