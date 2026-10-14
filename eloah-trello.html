@@ -131,14 +131,13 @@ render();
 if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
  try{
   const raw=sessionStorage.getItem('eloah2040:board-handoff');
-  sessionStorage.removeItem('eloah2040:board-handoff');
   const incoming=raw?JSON.parse(raw):null;
   if(incoming&&incoming.version===1&&typeof incoming.title==='string'&&incoming.title.trim()&&incoming.title.length<=160&&typeof incoming.description==='string'&&incoming.description.length<=8000&&Number.isFinite(incoming.createdAt)&&incoming.createdAt<=Date.now()+60000&&Date.now()-incoming.createdAt<600000){
    const picker=document.createElement('dialog');
    picker.setAttribute('aria-label','Choisir le tableau de destination');
    picker.style.cssText='width:min(460px,calc(100vw - 30px));padding:23px;border-radius:14px;border:1px solid #a98b73;background:#241524;color:#fff;max-height:90vh';
    const heading=document.createElement('h2');heading.textContent='Choisir le tableau ELOAH';heading.style.cssText='font:26px Georgia,serif;margin:0 0 10px;color:#f0d7ab';
-   const note=document.createElement('p');note.textContent='Choisis ton tableau local. Tu pourras vérifier la colonne et le contenu avant toute sauvegarde.';note.style.cssText='font:14px/1.5 system-ui;color:#edd4e1';
+   const note=document.createElement('p');note.textContent='Choisis un tableau. Vérifie qu’il correspond au bon compte et que la synchronisation est terminée avant de continuer. Aucun enregistrement n’est automatique.';note.style.cssText='font:14px/1.5 system-ui;color:#edd4e1';
    const label=document.createElement('label');label.textContent='Tableau de destination';label.style.cssText='display:block;margin:12px 0 6px;font:13px system-ui';
    const select=document.createElement('select');select.style.cssText='width:100%;padding:12px;background:#140a16;color:white;border:1px solid #b68f83;border-radius:8px;font:14px system-ui';
    for(const item of data.boards){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;select.append(option)}
@@ -147,9 +146,11 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
    const cancel=document.createElement('button');cancel.type='button';cancel.textContent='Annuler';
    const confirm=document.createElement('button');confirm.type='button';confirm.textContent='Préparer la carte ↗';
    for(const button of [cancel,confirm])button.style.cssText='min-height:42px;padding:9px 14px;border-radius:8px;border:1px solid #bd9c81;background:#40283d;color:#f4d7b2;cursor:pointer';
-   cancel.addEventListener('click',()=>picker.close());
+   cancel.addEventListener('click',()=>{picker.close();alert('Brouillon conservé temporairement sur cet appareil. Reviens depuis ELOAH 2040 pour le préparer à nouveau.');});
    confirm.addEventListener('click',()=>{
     if(!data.boards.some(b=>b.id===select.value))return;
+    const cloudMessage=String(document.getElementById('cloudStatus')?.textContent||'');
+    if(/conflit|diffèrent|restauration|erreur|vérifie/i.test(cloudMessage)){alert('Synchronisation des tableaux à vérifier. Corrige le conflit dans Boards avant de créer la carte.');return;}
     data.active=select.value;
     render();
     picker.close();
@@ -158,11 +159,12 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
     $('description').value=incoming.description;
     $('tag').value='ELOAH 2040';
     $('dialogTitle').textContent='Brouillon ELOAH 2040 · vérifier puis enregistrer';
+    sessionStorage.removeItem('eloah2040:board-handoff');
    });
    actions.append(cancel,confirm);picker.append(heading,note,label,select,actions);
    picker.addEventListener('close',()=>picker.remove());
    document.body.append(picker);picker.showModal();
-  }else alert('Le brouillon ELOAH est absent ou expiré. Il n’a pas été enregistré.');
+  }else{sessionStorage.removeItem('eloah2040:board-handoff');alert('Le brouillon ELOAH est absent ou expiré. Il n’a pas été enregistré.');}
  }catch(e){alert('Impossible d’ouvrir le brouillon ELOAH. Aucune carte n’a été créée.');}
  history.replaceState(null,'',location.pathname);
 }
