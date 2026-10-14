@@ -116,7 +116,8 @@ function openBoard(id){
 function header(title,withSearch=true){
  const top=node("header","top"),line=node("div","top-line");line.append(node("h1",null,title));
  const actions=node("div","top-actions");actions.append(button("⌕","circle",()=>state.screen==="home"?top.querySelector("input")?.focus():navigate("all")));
- actions.append(button("↻","circle blue",load));line.append(actions);top.append(line);
+ if(!state.readOnly)actions.append(button("＋","circle blue",createBoard));
+ actions.append(button("↻","circle",load));line.append(actions);top.append(line);
  if(withSearch){
   const search=node("label","searchbox");
   search.append(node("span",null,"⌕"));
@@ -190,6 +191,15 @@ function renderRail(b,rail){
   const head=node("div","lane-header");head.append(node("span",null,lane.name),node("span","count",visible.length));col.append(head);
   for(const c of visible)col.append(cardButton(b,c));
   if(!visible.length)col.append(node("div","empty","Aucune carte pour ce filtre."));
+  if(!state.readOnly)col.append(button("＋ Ajouter une carte","lane-add",()=>editCard(b,null,lane.id)));
+  rail.append(col);
+ }
+ if(!state.readOnly){
+  const col=node("section","lane lane-new");
+  col.append(button("＋ Ajouter une liste","lane-add",()=>{
+   const name=prompt("Nom de la nouvelle liste");if(!name?.trim())return;
+   void mutate({type:"create_list",boardId:b.id,name:name.trim()});
+  }));
   rail.append(col);
  }
 }
@@ -199,7 +209,9 @@ function boardView(){
  const wall=node("div","board-wall");wall.style.backgroundImage=wallpaper(b);shell.append(wall);
  const head=node("header","board-head");head.append(button("×","back",()=>navigate("home")));
  const title=node("div","board-heading");title.append(node("div","board-name",b.name),node("div","board-detail",count(b)+" cartes · ELOAH"));head.append(title);
- head.append(button("⌕","circle",()=>shell.querySelector(".board-search input")?.focus()));shell.append(head);
+ head.append(button("⌕","circle",()=>shell.querySelector(".board-search input")?.focus()));
+ if(!state.readOnly)head.append(button("＋","circle blue",()=>editCard(b,null,b.lanes[0]?.id)));
+ shell.append(head);
 
  const search=node("div","board-search"),input=node("input");
  input.type="search";input.placeholder="Chercher parmi les cartes";input.value=state.boardSearch;
