@@ -51,4 +51,4 @@ else{view.innerHTML='<h2>Bibliothèque des sources</h2><p>Les références ci-de
 document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{current=Number(b.dataset.tab);render();window.scrollTo(0,0)});}
 render();renderPersonal();document.getElementById("personal-search").addEventListener("input",renderPersonal);document.getElementById("goto-dossiers").addEventListener("click",()=>{current=0;render();document.getElementById("view").scrollIntoView({behavior:"smooth"})});
 </script><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script>
-<script defer src="eloah-foi-audio.js?v=1"></script></body></html>
+<script defer src="eloah-foi-audio.js?v=1"></script><script src="eloah-music-dock.js" defer></script></body></html>
