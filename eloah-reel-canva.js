@@ -848,6 +848,7 @@ function paint(c,t,mark=false){
   if(e.kind==='vector'&&window.ELOAHIllustrations)window.ELOAHIllustrations.render(c,e);
   if(e.kind==='sticker'&&window.ELOAHAnimations)window.ELOAHAnimations.render(c,e);
   if(e.kind==='shapeAsset'&&window.ELOAHShapes)window.ELOAHShapes.draw(c,e);
+  if(e.kind==='inkStroke'&&window.ELOAHCanvasTools)window.ELOAHCanvasTools.draw(c,e);
   if(e.kind==='brandAsset')brandImage(c,e);
   if(e.kind==='photoFrame'&&e.isMockup&&window.ELOAHMockups)window.ELOAHMockups.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1,video);
   else if(e.kind==='photoFrame'&&window.ELOAHFrames)window.ELOAHFrames.draw(c,e,framePhotos,mark&&selected===e.id?activeFrameSlot:-1);
@@ -856,7 +857,7 @@ function paint(c,t,mark=false){
  }
  c.restore();
 }
-function draw(){paint(ctx,S.time,!busy)}
+function draw(){paint(ctx,S.time,!busy);if(inkDraft&&window.ELOAHCanvasTools)window.ELOAHCanvasTools.drawDraft(ctx,inkDraft)}
 function clock(t){let n=Math.max(0,Math.floor(t));return Math.floor(n/60)+':'+String(n%60).padStart(2,'0')}
 function tick(now){let dt=Math.min(.15,(now-lastFrame)/1000);lastFrame=now;if(S.playing){S.time+=dt;if(S.time>=S.duration){S.time=S.duration;pause()}if(media.videoUrl&&video.readyState>=2&&Math.abs(video.currentTime-(S.time+S.trimStart))>.25){try{video.currentTime=S.time+S.trimStart}catch{}}}
  draw();one('#ecs-clock').textContent=clock(S.time)+' / '+clock(S.duration);const ph=one('.ecs-playhead');if(ph)ph.style.left=(S.time*70)+'px';requestAnimationFrame(tick)}
@@ -1418,6 +1419,7 @@ function renderSide(){
    if(e.kind==='text'||e.kind==='textCombo')html+=textProperties(e);
    if(e.kind==='photoFrame')html+=frameProperties(e);
    if(e.kind==='shapeAsset')html+=shapeProperties(e);
+   if(e.kind==='inkStroke')html+='<p class="ecs-note">Trait dessiné · déplace-le ou modifie sa couleur et son épaisseur.</p>'+range('Épaisseur','inkWidth',2,70,1,e.inkWidth||14)+range('Opacité','inkOpacity',0,1,.05,e.inkOpacity??1);
    if(e.kind==='chart')html+=chartProperties(e);
    if(e.kind==='sticker')html+='<p class="ecs-note">Sticker animé : '+xss(window.ELOAHAnimations?.byId.get(e.variant)?.name||'Animation ELOAH')+'</p><label class="ecs-sidelabel">Mouvement</label><select data-p="motion">'+Object.entries(window.ELOAHAnimations?.motionNames||{}).map(([v,n])=>'<option value="'+v+'" '+((e.motion||'pulse')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>'+range('Vitesse (0,2× à 4×)','speed',.2,4,.1,e.speed||1);
    else html+='<label class="ecs-sidelabel">Animation</label><select data-p="animation">'+[['none','Aucune'],['fade','Apparition douce'],['pop','Zoom dynamique'],['slide','Entrée latérale'],['pulse','Pulsation'],['float','Flottement'],['bounce','Rebond'],['wobble','Oscillation'],['swing','Balancement'],['rotate','Rotation'],['twinkle','Clignotement'],['shake','Vibration']].map(([v,n])=>'<option value="'+v+'" '+((e.animation||'none')===v?'selected':'')+'>'+n+'</option>').join('')+'</select>';
