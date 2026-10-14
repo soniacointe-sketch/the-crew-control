@@ -1502,7 +1502,7 @@ async function restoreProjectFromLibrary(data,stored){
  snapshot();
  for(const url of [media.videoUrl,media.audioUrl,media.imageUrl])if(url)URL.revokeObjectURL(url);
  media.videoUrl=null;media.audioUrl=null;media.imageUrl=null;media.bgImage=null;
- video.pause();audio.pause();video.removeAttribute('src');audio.removeAttribute('src');
+ video.pause();audio.pause();video.removeAttribute('src');audio.removeAttribute('src');video.dataset.filename='';audio.dataset.filename='';
  images.clear();framePhotos.clear();brandEmbeddedImages.clear();brandImageCache.clear();
  const idMap=new Map();
  const elements=data.elements.slice(0,250).map(raw=>{
@@ -1661,7 +1661,7 @@ function action(name){
  if(name==='librarySave'){if(projectLibrary)projectLibrary.saveCurrent();else saveProject();return}
  if(name==='save'){saveProject();return}
  if(name==='load'){one('#ecs-project-input').click();return}
- if(name==='reset'){if(!confirm('Créer un nouveau projet ? Les modifications non exportées seront perdues.'))return false;snapshot();S.elements=[];S.bg='#fffaf1';S.duration=5;S.trimStart=0;S.time=0;S.filter='none';selected=null;pause();for(const url of [media.videoUrl,media.audioUrl,media.imageUrl])if(url)URL.revokeObjectURL(url);media.videoUrl=null;media.audioUrl=null;media.imageUrl=null;media.bgImage=null;video.removeAttribute('src');audio.removeAttribute('src');images.clear();try{localStorage.removeItem('eloah_reel_editor_image_assets')}catch{};framePhotos.clear();brandEmbeddedImages.clear();brandImageCache.clear();try{localStorage.removeItem('eloah_reel_editor_brand_assets')}catch{};for(const url of frameObjectUrls)URL.revokeObjectURL(url);frameObjectUrls.clear();try{localStorage.removeItem('eloah_reel_editor_frame_assets')}catch{};setTab('models');renderTimeline();saveLocal();return true}
+ if(name==='reset'){if(!confirm('Créer un nouveau projet ? Les modifications non exportées seront perdues.'))return false;snapshot();S.elements=[];S.bg='#fffaf1';S.duration=5;S.trimStart=0;S.time=0;S.filter='none';selected=null;pause();for(const url of [media.videoUrl,media.audioUrl,media.imageUrl])if(url)URL.revokeObjectURL(url);media.videoUrl=null;media.audioUrl=null;media.imageUrl=null;media.bgImage=null;video.removeAttribute('src');audio.removeAttribute('src');video.dataset.filename='';audio.dataset.filename='';images.clear();try{localStorage.removeItem('eloah_reel_editor_image_assets')}catch{};framePhotos.clear();brandEmbeddedImages.clear();brandImageCache.clear();try{localStorage.removeItem('eloah_reel_editor_brand_assets')}catch{};for(const url of frameObjectUrls)URL.revokeObjectURL(url);frameObjectUrls.clear();try{localStorage.removeItem('eloah_reel_editor_frame_assets')}catch{};setTab('models');renderTimeline();saveLocal();return true}
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
