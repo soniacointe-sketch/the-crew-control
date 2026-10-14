@@ -51,3 +51,7 @@ Inspection des contraintes PostgreSQL : jeton stocké en empreinte de 64 caract�
 ## Simulation des conditions de révocation — 14 octobre 2026
 
 Une requête SQL utilisant quatre scénarios calculés en mémoire (sans INSERT/UPDATE/DELETE) a vérifié le prédicat `revoked_at IS NULL AND expires_at > now()` : lien valide autorisé, lien expiré refusé, lien révoqué refusé, lien à la fois révoqué et expiré refusé. **4 scénarios sur 4 conformes.** Il s'agit d'un test logique et non d'un test HTTP bout en bout. Les deux liens existants sont restés inchangés. À tester ensuite : un jeton temporaire dédié via les fonctions `eloah-boards-private-edit` et `eloah-boards-private-media`, avant et après révocation ; attention, les URL de média déjà signées peuvent rester valides jusqu'à leur expiration (180 secondes actuellement).
+
+## Tentative de test HTTP des fonctions de partage
+
+Une tentative d'appel HTTP sans jeton valide vers `eloah-boards-private-edit` et `eloah-boards-private-media` n'a pas pu atteindre le service : l'environnement d'essai n'a pas résolu le nom du serveur Supabase (`Could not resolve host`). Aucun code HTTP n'a été obtenu. **Ne pas considérer ce test comme réussi ni échoué côté serveur.** La validation HTTP avec jeton temporaire, puis révocation, reste à effectuer dans un environnement ayant accès au réseau. Les liens existants sont inchangés. Les URL signées émises avant révocation nécessitent un contrôle distinct jusqu'à leur expiration.
