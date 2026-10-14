@@ -111,12 +111,12 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
  <div class="client-shell">
   <aside class="client-sidebar" aria-label="Navigation de mon espace ELOAH">
    <div class="client-side-brand"><span class="client-side-symbol">✦</span><span>ELOAH <small>MON ESPACE</small></span></div>
-   <nav class="client-side-nav"><a href="#client-welcome" class="client-nav-link">⌂ &nbsp; Accueil</a><a href="#client-workspaces" class="client-nav-link">▦ &nbsp; Mes projets</a><a href="#client-actions" class="client-nav-link">☑ &nbsp; Mes actions</a><a href="#client-account" class="client-nav-link">♙ &nbsp; Mon compte</a></nav>
+   <nav class="client-side-nav"><a href="#client-welcome" class="client-nav-link">⌂ &nbsp; Accueil</a><a href="#client-workspaces" class="client-nav-link">▦ &nbsp; Mes projets</a><a href="#client-actions" class="client-nav-link">☑ &nbsp; Mes actions</a><a href="#client-planning" class="client-nav-link">▤ &nbsp; Mon planning</a><a href="#client-documents" class="client-nav-link">▧ &nbsp; Mes documents</a><a href="#client-account" class="client-nav-link">♙ &nbsp; Mon compte</a></nav>
    <div class="client-side-note">Un espace privé par compte.<br>Vos données restent séparées de celles des autres membres.</div>
    <a class="client-side-offer" href="eloah-offres.html">Découvrir les offres ↗</a>
   </aside>
   <div class="client-main">
- <section class="client-overview" id="client-welcome" aria-labelledby="client-greeting"><div><div class="client-overline">MON TABLEAU DE BORD</div><h2 id="client-greeting">Bienvenue dans votre espace ELOAH.</h2><p>Vos projets et vos prochaines actions, réunis dans un espace personnel.</p></div><div class="client-metrics"><div><strong id="client-project-count">—</strong><span>Projets</span></div><div><strong id="client-action-count">—</strong><span>Actions du projet</span></div></div></section>
+ <section class="client-overview" id="client-welcome" aria-labelledby="client-greeting"><div><div class="client-overline">MON TABLEAU DE BORD</div><h2 id="client-greeting">Bienvenue dans votre espace ELOAH.</h2><p>Vos projets et vos prochaines actions, réunis dans un espace personnel.</p></div><div class="client-metrics"><div><strong id="client-project-count">—</strong><span>Projets</span></div><div><strong id="client-action-count">—</strong><span>Actions du projet</span></div><div><strong id="eloah-due-count">—</strong><span>À venir</span></div></div></section>
  <div class="panel" id="eloah-app-onboarding" style="border-color:#ca9bc3;background:#fff8fd">
   <div class="row" style="align-items:center;justify-content:space-between;gap:18px">
    <div><span class="overline">ELOAH SUR TON TÉLÉPHONE</span><h2 style="margin:6px 0">Ton espace, partout avec toi.</h2><p>Ton accès a été vérifié. Installe ELOAH sur ton écran d'accueil, puis connecte-toi avec ce même compte.</p></div>
@@ -144,6 +144,29 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
    <p id="task-status" class="status" role="status"></p>
   </div>
  </div>
+
+  <section class="client-module" id="client-planning" aria-labelledby="eloah-planning-title">
+    <div class="client-module-heading"><div><span class="client-module-kicker">ORGANISATION</span><h2 id="eloah-planning-title">Mon planning</h2><p>Les dates viennent des actions de vos projets ELOAH. Elles restent privées.</p></div><span class="client-module-mark" aria-hidden="true">◷</span></div>
+    <div class="client-calendar-layout">
+      <div class="client-calendar-panel">
+        <div class="client-calendar-toolbar"><button type="button" id="eloah-calendar-prev" aria-label="Mois précédent">←</button><strong id="eloah-calendar-month">Calendrier</strong><button type="button" id="eloah-calendar-next" aria-label="Mois suivant">→</button><button type="button" class="client-today" id="eloah-calendar-today">Aujourd'hui</button></div>
+        <div id="eloah-calendar-grid" class="client-calendar-grid" aria-label="Échéances du mois"></div>
+        <p id="eloah-calendar-status" class="client-module-status" role="status"></p>
+      </div>
+      <div class="client-agenda-panel"><h3 id="eloah-selected-day">Échéances du jour</h3><div id="eloah-day-actions" class="client-agenda-list"></div><h3 class="client-upcoming-title">Les prochaines échéances</h3><div id="eloah-upcoming-list" class="client-agenda-list"></div></div>
+    </div>
+  </section>
+  <section class="client-module" id="client-documents" aria-labelledby="eloah-documents-title">
+    <div class="client-module-heading"><div><span class="client-module-kicker">COFFRE PRIVÉ</span><h2 id="eloah-documents-title">Mes documents</h2><p>Ajoutez et retrouvez vos fichiers, accessibles uniquement depuis votre compte ELOAH actif.</p></div><span class="client-module-mark" aria-hidden="true">▧</span></div>
+    <form id="eloah-documents-form" class="client-document-form">
+      <label for="eloah-document-file">Choisir un document <small>PDF, Word, Excel, PowerPoint, texte ou image · 20 Mo maximum</small></label>
+      <div class="client-document-form-row"><input id="eloah-document-file" type="file" accept=".pdf,.docx,.xlsx,.pptx,.txt,.csv,.png,.jpg,.jpeg,.webp" required><button type="submit" id="eloah-document-submit">Ajouter au coffre</button></div>
+    </form>
+    <div class="client-document-heading"><h3>Mes fichiers</h3><button type="button" class="light" id="eloah-documents-refresh">Actualiser</button></div>
+    <div id="eloah-documents-list" class="client-documents-list"></div>
+    <p id="eloah-documents-status" class="client-module-status" role="status" aria-live="polite"></p>
+    <p class="client-documents-note">Les documents sont enregistrés dans un stockage privé séparé du cockpit personnel. Ils ne sont pas accessibles par lien public.</p>
+  </section>
  </div></div>
 </section>
 <section class="panel"><h2>Confidentialité et limites</h2>
@@ -152,6 +175,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
 </main>
 <footer>ELOAH · Espace privé pilote · Aucun abonnement vendu depuis cette page.</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+<script src="eloah-client-modules.js"></script>
 <script>
 (()=>{'use strict';
 const url='https://voytsqyorhoveurnguxn.supabase.co';
@@ -357,4 +381,4 @@ getClient().auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN'||event==='SI
 refresh();
 })();
 </script>
-<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script></body></html>
+<script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script></body></html>
