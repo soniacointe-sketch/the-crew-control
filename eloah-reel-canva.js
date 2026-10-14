@@ -1395,6 +1395,73 @@ function inkPalette(){
  canvas.style.cursor=inkMode==='select'?'default':inkMode==='eraser'?'cell':'crosshair';
 }
 
+
+function inkErase(pt){
+ const lib=window.ELOAHCanvasTools;
+ const target=[...S.elements].reverse().find(e=>e.kind==='inkStroke'&&S.time>=e.start&&S.time<=e.end&&lib.intersects(e,pt));
+ if(!target)return;
+ if(!inkEraseActive){snapshot();inkEraseActive=true}
+ S.elements=S.elements.filter(e=>e.id!==target.id);
+ if(selected===target.id)selected=null;
+ renderTimeline();draw();saveLocal();
+}
+function inkPlace(pt){
+ const x=Math.max(0,Math.min(850,pt.x-165)),y=Math.max(0,Math.min(1710,pt.y-85));
+ if(inkMode==='note'){
+  add('text',{text:'Ma note',x,y,w:440,h:245,font:56,fontFamily:'sans',fontWeight:700,color:'#4a3922',backgroundColor:'#ffe177',bgOpacity:.95,align:'center'});
+  toast('Note ajoutée. Modifie son texte dans les propriétés.');return true;
+ }
+ if(inkMode==='text'){
+  add('text',{text:'Ton texte',x,y,w:525,h:220,font:78,fontFamily:'sans',fontWeight:700,color:inkColor,align:'center'});
+  return true;
+ }
+ if(inkMode==='signature'){
+  const sig=prompt('Signature décorative à afficher dans la vidéo :','');
+  if(sig?.trim())add('text',{text:sig.trim().slice(0,95),x,y,w:670,h:230,font:92,fontFamily:'caveat',fontWeight:500,italic:true,color:inkColor});
+  return true;
+ }
+ return false;
+}
+function inkDown(ev,pt){
+ if(activeTab!=='tools'||inkMode==='select'||!window.ELOAHCanvasTools)return false;
+ ev.preventDefault();if(S.playing)pause();
+ if(window.ELOAHCanvasTools.isPlaceTool(inkMode))return inkPlace(pt);
+ inkPointer=ev.pointerId;try{canvas.setPointerCapture(ev.pointerId)}catch{}
+ if(inkMode==='eraser'){inkEraseActive=false;inkErase(pt);return true}
+ if(window.ELOAHCanvasTools.isDrawTool(inkMode)){
+  inkDraft={tool:inkMode,color:inkColor,width:inkWidth,points:[[pt.x,pt.y]],start:S.time,end:S.duration};
+  draw();return true;
+ }
+ return false;
+}
+function inkMove(ev,pt){
+ if(activeTab!=='tools'||inkPointer===null||ev.pointerId!==inkPointer)return false;
+ if(inkMode==='eraser'){inkErase(pt);return true}
+ if(!inkDraft)return true;
+ const pts=inkDraft.points,last=pts[pts.length-1];
+ if(['line','arrow'].includes(inkMode)){
+  if(pts.length===1)pts.push([pt.x,pt.y]);
+  else pts[pts.length-1]=[pt.x,pt.y];
+ }else if(pts.length<1750&&Math.hypot(pt.x-last[0],pt.y-last[1])>=2)pts.push([pt.x,pt.y]);
+ draw();return true;
+}
+function inkUp(ev,pt,cancel=false){
+ if(inkPointer===null||inkPointer!==ev.pointerId)return false;
+ inkPointer=null;try{canvas.releasePointerCapture(ev.pointerId)}catch{}
+ if(inkMode==='eraser'){inkEraseActive=false;return true}
+ if(inkDraft){
+  const draft=inkDraft;inkDraft=null;
+  if(!cancel){
+   const pts=draft.points,last=pts[pts.length-1];
+   if(pts.length===1||Math.hypot(pt.x-last[0],pt.y-last[1])>2)pts.push([pt.x,pt.y]);
+   const element=window.ELOAHCanvasTools.fromDraft(draft);
+   if(element){snapshot();element.id=nextId++;S.elements.push(element);selected=null;renderTimeline();saveLocal()}
+  }
+  draw();return true;
+ }
+ return true;
+}
+
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
