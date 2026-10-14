@@ -239,7 +239,7 @@ function renderAudio(){
  return '<div class="ecs-audio-header"><button data-tab="elements" aria-label="Retour aux éléments">←</button><strong>Audio</strong></div><div class="ecs-search"><input id="ecs-audio-search" placeholder="Rechercher des éléments" aria-label="Rechercher des sons"><span>⌕</span></div><div class="ecs-sectiontitle"><strong>Voix off</strong></div><div class="ecs-audio-voicecards"><button type="button" data-audio-view="record"><span class="ecs-voiceicon mic">♩</span><strong>Enregistrez une voix off</strong></button><button type="button" data-audio-view="tts"><span class="ecs-voiceicon ai">Aa</span><strong>Générez une voix de synthèse</strong></button></div>'+publicMusicMarkup()+mixkitMarkup()+audioSection('Utilisés récemment · Boucles ELOAH',recent.length?recent:[])+audioSection('Compositions ELOAH · 10 s',soundLibrary)+'<div class="ecs-audio-footer"><p class="ecs-note">Musiques originales ELOAH et pistes FreePD CC0 disponibles. Les pistes Mixkit s’importent après téléchargement sur leur site.</p>'+btn('importAudio','＋ Importer une musique',true)+(media.audioUrl?'<div class="ecs-audio-loaded"><strong>♫ Piste ajoutée</strong><span>'+xss(audio.dataset.filename||'Audio')+'</span>'+btn('removeAudio','Retirer la piste')+'</div>':'')+'</div>';
 }
 
-let images=new Map(),activeTab=new URLSearchParams(window.location.search).get('onglet')==='import'?'import':'models',elementsCategory=null,selected=null,nextId=1,drag=null,history=[],future=[],lastFrame=performance.now(),busy=false,toastTimer=0,importKind='background';
+let images=new Map(),activeTab=['import','tools','text','brand','elements'].includes(new URLSearchParams(window.location.search).get('onglet'))?new URLSearchParams(window.location.search).get('onglet'):'models',elementsCategory=null,selected=null,nextId=1,drag=null,history=[],future=[],lastFrame=performance.now(),busy=false,toastTimer=0,importKind='background';
 const S={name:'Mon Reel',duration:5,trimStart:0,time:0,playing:false,bg:'#fffaf1',filter:'none',brand:'Power & Glam',elements:[]};
 const elementCategories=[
  ['audio','Audio','♫','audio','audio'],
@@ -1374,6 +1374,7 @@ function inkButtons(compact=false){
  (compact?'':'<small>'+xss(item.label)+'</small>')+'</button>').join('');
 }
 function inkPanel(){
+ if(!window.ELOAHCanvasTools)return '<div class="ecs-ink-panel"><strong>Palette Outils indisponible.</strong><p class="ecs-note">Actualise la page pour charger les commandes de dessin.</p><a href="eloah-reel-studio.html?onglet=tools&v=2">↻ Recharger les outils</a></div>';
  return '<div class="ecs-ink-panel"><h3>Mes outils</h3><p class="ecs-note">Sélectionne un outil puis utilise le plan de travail pour dessiner, annoter ou ajouter du texte.</p>'+
  '<div class="ecs-ink-buttons">'+inkButtons()+'</div>'+
  '<div class="ecs-ink-settings"><label>Couleur <input type="color" data-ink-color value="'+inkColor+'"></label>'+
