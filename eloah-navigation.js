@@ -227,3 +227,32 @@ if(page==='mes-univers.html'){
   }`;
   document.head.appendChild(style);
 })();
+
+
+/* ELOAH HOME SIDEBAR PRUNE FIX 20261014 */
+(()=>{
+ if(location.pathname.split('/').pop()!=='mes-univers.html')return;
+ const el=document.createElement('style');
+ el.id='eloah-home-sidebar-prune';
+ el.textContent=`
+ @media(min-width:1001px){
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav{
+ background:linear-gradient(157deg,#170911 0%,#310f29 53%,#501944 100%)!important;
+ border-right:1px solid #e9c996!important;color:#f3dbad!important;box-shadow:6px 0 25px #17091155!important;
+ }
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-wordmark{color:#f3dbad!important;border-bottom:1px solid #c29a6e88!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-menu-links{background:transparent!important;border:0!important;box-shadow:none!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-menu-links>a{color:#f8e4ef!important;background:transparent!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-menu-links>a:hover{background:#75235f!important;color:#ffffff!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-menu-links>a[aria-current="page"],body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-menu-links>a[href="mes-univers.html"]{background:linear-gradient(90deg,#d52390,#8b2d76)!important;border-left:3px solid #f3dbad!important;color:white!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-switch{color:#f3dbad!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .home-nav-more>summary{color:#f8e4ef!important}
+ }
+ @media(max-width:1000px){
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav{background:linear-gradient(110deg,#170911,#501944)!important;color:#f3dbad!important;border-bottom:1px solid #e9c996!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav a,body.eloah-home-client.eloah-screen nav.eloah-global-nav summary{color:#f3dbad!important}
+ body.eloah-home-client.eloah-screen nav.eloah-global-nav .eloah-menu-links{background:#310f29!important}
+ }
+ `;
+ document.head.appendChild(el);
+})();
