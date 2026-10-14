@@ -52,3 +52,12 @@ body :is(aside,#tabs) a,body aside button{color:inherit}
 body :is(.notice,.empty-state,.home-status){background:#f2e6e2!important}
 body :is(a:not(.btn)):hover{color:#a63d57}
 @media(max-width:650px){body.eloah-home-client main{background:#f4efe7!important}}
+
+/* Corrections de contraste : texte toujours lisible */
+body :is(.choice,.project-link,.project-tile,.workspace-choice,.tool,.tasks,.task-card,.secondary,.secondary-panel,.search-results,.services article,.service,.ops-card,.pillar,.price,.detail-card,.card,.panel,.tile,.empty-state,.empty-project,.directory>a,.reassurance,.module,.module-card,.widget) :is(h1,h2,h3,h4,strong,b){color:#111!important}
+body :is(.choice,.project-link,.project-tile,.workspace-choice,.tool,.tasks,.task-card,.secondary,.secondary-panel,.search-results,.services article,.service,.ops-card,.pillar,.price,.detail-card,.card,.panel,.tile,.empty-state,.empty-project,.directory>a,.reassurance,.module,.module-card,.widget) :is(p,small,.muted,.desc){color:#625b56!important}
+body .eloah-global-nav :is(.eloah-wordmark,a,summary),body.eloah-home-client .eloah-global-nav :is(.eloah-wordmark,a,summary){color:#f4efe7!important}
+body .eloah-global-nav .eloah-menu-links :is(a,summary){color:#f4efe7!important}
+body:has(.eloah-home) aside :is(.brand,h1,h2,h3,a,button,summary,small,p){color:#f4efe7!important}
+body :is(.primary,.btn.primary,button.primary) :is(span,strong,b,small){color:#fff!important}
+body :is(.eloah-global-nav,.fallback-nav) :is(p,small,strong,b){color:#f4efe7!important}
