@@ -23,6 +23,35 @@ function create(config){
  const state={view:'all',folder:null,search:'',menu:null,loading:true,saving:false,flash:'',page:48,sort:'recent',storage:'initialisation'};
  let lastId=null;try{lastId=localStorage.getItem('eloah_active_reel_project')}catch{}
  let db=null,projects=[],folders=[],currentId=lastId,autosaveTimer=null,mutation=Promise.resolve(),busy=false;
+
+ const FALLBACK_KEY='eloah_reel_projects_fallback_v1',FALLBACK_LIMIT=3000000;
+ let fallbackDb={designs:[],folders:[]};
+ function loadFallback(){
+  try{
+   const raw=JSON.parse(localStorage.getItem(FALLBACK_KEY)||'null');
+   if(raw&&Array.isArray(raw.designs)&&Array.isArray(raw.folders)){
+    return {designs:raw.designs.filter(x=>x&&x.id&&Array.isArray(x.data?.elements)),
+      folders:raw.folders.filter(x=>x&&x.id&&x.name)};
+   }
+  }catch(e){console.warn('Bibliothèque de secours illisible',e)}
+  return {designs:[],folders:[]};
+ }
+ function saveFallback(){
+  try{
+   const text=JSON.stringify({
+    version:1,
+    designs:fallbackDb.designs.map(p=>({
+      ...p,videoBlob:null,audioBlob:null,
+      warnings:[...(p.warnings||[]).filter(x=>typeof x==='string').slice(0,12)]
+    })),
+    folders:fallbackDb.folders
+   });
+   if(text.length>FALLBACK_LIMIT)return false;
+   localStorage.setItem(FALLBACK_KEY,text);
+   return true;
+  }catch(e){console.warn('Stockage de secours saturé',e);return false}
+ }
+
  function recordActive(id){currentId=id;try{if(id)localStorage.setItem('eloah_active_reel_project',id);else localStorage.removeItem('eloah_active_reel_project')}catch{}}
  const currentProject=()=>projects.find(p=>p.id===currentId);
  const lookupFolder=id=>folders.find(f=>f.id===id);
@@ -64,7 +93,15 @@ function create(config){
   });
  }
  function dbWrite(store,verb,value){
-  if(!db)return Promise.resolve(false);
+  if(!db){
+   const old=fallbackDb[store]?.slice()||[];
+   if(!['designs','folders'].includes(store))return Promise.resolve(false);
+   if(verb==='delete')fallbackDb[store]=old.filter(v=>v.id!==value);
+   else fallbackDb[store]=[...old.filter(v=>v.id!==value.id),value];
+   const saved=saveFallback();
+   if(!saved)fallbackDb[store]=old;
+   return Promise.resolve(saved);
+  }
   return new Promise(resolve=>{
    try{
     const tx=db.transaction(store,'readwrite');
@@ -190,7 +227,9 @@ function create(config){
    '<button type="button" data-project-import-media title="Importer un visuel Canva exporté en image ou vidéo, sans ses calques">↑ Export Canva</button></div>'+
    (state.loading?'<div class="ecs-note">Ouverture des projets enregistrés…</div>':inner)+
    '<div class="ecs-project-note">'+
-   '<p>'+escapeHTML(state.storage==='ready'?'Sauvegarde locale sur cet appareil. L’enregistrement automatique reprend après avoir créé ou ouvert un projet.':'Stockage de projets indisponible : conserve une sauvegarde JSON sur ton appareil.')+
+   '<p>'+escapeHTML(state.storage==='ready'?'Sauvegarde automatique dans ce navigateur via IndexedDB. Les vidéos et audios restent soumis au quota de stockage.':
+ state.storage==='local'?'Sauvegarde de secours dans ce navigateur (projets légers seulement, sans vidéos ni pistes audio). Exporte un JSON régulièrement.':
+ 'Stockage de projets indisponible : conserve une sauvegarde JSON sur ton appareil.')+
    ' Les designs privés de Canva ne sont pas synchronisés : pour réutiliser l’image ou la vidéo d’un design, exporte-la depuis Canva puis importe le fichier ici.</p>'+
    '<button type="button" data-project-download-current>↓ Exporter le Reel en JSON</button>'+
    (state.flash?'<small>'+escapeHTML(state.flash)+'</small>':'')+'</div></div>';
@@ -215,7 +254,7 @@ function create(config){
    const index=projects.findIndex(p=>p.id===updated.id);
    if(index>=0)projects[index]=updated;else projects.unshift(updated);
    recordActive(updated.id);
-   if(!auto)notify(ok?'Projet « '+updated.name+' » enregistré.':'Stockage indisponible : projet disponible uniquement dans cette session. Exporte-le en JSON.');
+   if(!auto)notify(ok?(state.storage==='local'?'Projet « '+updated.name+' » enregistré dans ce navigateur (médias vidéo/audio non conservés).':'Projet « '+updated.name+' » enregistré.'):'Stockage saturé ou indisponible : projet conservé seulement dans cette session. Exporte-le en JSON.');
   }catch(e){if(!auto)notify('Enregistrement impossible : '+e.message)}
   finally{busy=false;state.saving=false;if(!auto)refresh()}
  }
@@ -321,15 +360,21 @@ function create(config){
   return false;
  }
  async function initialize(){
-  db=await dbOpen();state.storage=db?'ready':'session';
+  db=await dbOpen();
   if(db){
+   state.storage='ready';
    const [stored,listed]=await Promise.all([dbRead('designs'),dbRead('folders')]);
-   projects=stored.filter(p=>p&&p.id&&p.data?.elements).sort((a,b)=>b.updatedAt-a.updatedAt);
+   projects=stored.filter(p=>p&&p.id&&Array.isArray(p.data?.elements)).sort((a,b)=>b.updatedAt-a.updatedAt);
    folders=listed.filter(f=>f&&f.id&&f.name);
+  }else{
+   fallbackDb=loadFallback();
+   projects=fallbackDb.designs.slice().sort((a,b)=>b.updatedAt-a.updatedAt);
+   folders=fallbackDb.folders.slice();
+   state.storage=saveFallback()?'local':'session';
   }
   if(!folders.length){
    folders=DEFAULT_FOLDERS.map(([id,name,brand])=>({id,name,brand,createdAt:Date.now()}));
-   if(db)for(const f of folders)await dbWrite('folders','put',f);
+   for(const f of folders)await dbWrite('folders','put',f);
   }
   if(currentId&&!projects.some(p=>p.id===currentId))recordActive(null);
   state.loading=false;refresh();
