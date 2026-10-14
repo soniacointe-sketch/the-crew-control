@@ -1,0 +1,20 @@
+{
+  "id": "/the-crew-control/mes-univers.html",
+  "name": "ELOAH · Mon espace",
+  "short_name": "ELOAH",
+  "description": "Tes projets, tableaux, créations, documents et organisation dans ton espace ELOAH.",
+  "lang": "fr",
+  "start_url": "/the-crew-control/mes-univers.html",
+  "scope": "/the-crew-control/",
+  "display": "standalone",
+  "background_color": "#160912",
+  "theme_color": "#250d22",
+  "icons": [
+    {
+      "src": "/the-crew-control/eloah-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
