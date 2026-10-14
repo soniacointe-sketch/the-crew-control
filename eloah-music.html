@@ -19,7 +19,10 @@
 const $=id=>document.getElementById(id), defaults=['Power & Glam','The Crew','Sonia Velka','ELOAH Radio','Détente','Entraînement'],icons=['♛','✦','⚡','◉','☾','✺'];let playlists,likes,embeds;try{playlists=JSON.parse(localStorage.getItem('eloahMusicLists')||'null')||defaults.map((name,i)=>({id:'p'+i,name,ids:[]}));likes=JSON.parse(localStorage.getItem('eloahMusicLikes')||'[]');embeds=JSON.parse(localStorage.getItem('eloahMusicEmbeds')||'[]')}catch(e){playlists=defaults.map((name,i)=>({id:'p'+i,name,ids:[]}));likes=[];embeds=[]}let tracks=[],current=-1,activePlaylist=null,shuffle=false,repeatMode=0,queue=[],history=[];const audio=$('audio');audio.volume=.75;
 let lastListen=null;try{lastListen=JSON.parse(localStorage.getItem('eloahMusicLastListen')||'null')}catch(e){}
 let lastPersist=0;
-function rememberListening(force=false){if(current<0||!tracks[current])return;const now=Date.now();if(!force&&now-lastPersist<3000)return;lastPersist=now;const t=tracks[current];lastListen={id:t.id,path:t.cloud?t.path:null,title:t.title,position:Math.max(0,audio.currentTime||0),saved:now};try{localStorage.setItem('eloahMusicLastListen',JSON.stringify(lastListen))}catch(e){}}
+function rememberListening(force=false){if(current<0||!tracks[current])return;const now=Date.now();if(!force&&now-lastPersist<3000)return;lastPersist=now;const t=tracks[current];lastListen={id:t.id,path:t.cloud?t.path:null,title:t.title,position:Math.max(0,audio.currentTime||0),saved:now};try{localStorage.setItem('eloahMusicLastListen',JSON.stringify(lastListen))}catch(e){}scheduleProgressSync(force)}
+let progressSyncTimer=null;
+function scheduleProgressSync(force=false){if(!cloudUser||!cloud)return;clearTimeout(progressSyncTimer);progressSyncTimer=setTimeout(()=>{if(!cloudUser||!lastListen)return;const l=lastListen;cloud.rpc('eloah_save_listening_progress',{p_track_id:l.id,p_storage_path:l.path||'',p_title:l.title,p_position:l.position,p_saved_at:new Date(l.saved).toISOString()}).then(({error})=>{if(error)cloudStatus('Position locale conservée, synchronisation impossible : '+error.message)})},force?100:1500)}
+async function loadCloudProgress(){if(!cloudUser||!cloud)return;const {data,error}=await cloud.from('eloah_music_listening_progress').select('track_id,storage_path,title,position_seconds,saved_at').eq('user_id',cloudUser.id).maybeSingle();if(error){cloudStatus('Reprise cloud indisponible : '+error.message);return}if(!data)return;const saved=Date.parse(data.saved_at);if(!Number.isFinite(saved)||saved<=(lastListen?.saved||0))return;lastListen={id:data.track_id,path:data.storage_path||null,title:data.title,position:data.position_seconds||0,saved};try{localStorage.setItem('eloahMusicLastListen',JSON.stringify(lastListen))}catch(e){}updateResume()}
 function updateResume(){const b=$('resumeBtn');if(!b||!lastListen)return;const i=tracks.findIndex(t=>t.id===lastListen.id||(t.cloud&&lastListen.path&&t.path===lastListen.path));b.hidden=i<0;if(i>=0)b.textContent='▶ Reprendre : '+lastListen.title}
 $('resumeBtn').onclick=async()=>{if(!lastListen)return;const i=tracks.findIndex(t=>t.id===lastListen.id||(t.cloud&&lastListen.path&&t.path===lastListen.path));if(i<0)return;const position=lastListen.position||0;await playIndex(i);if(current===i){if(audio.readyState>=1&&Number.isFinite(audio.duration))audio.currentTime=Math.min(position,Math.max(0,audio.duration-1));else audio.addEventListener('loadedmetadata',()=>{if(current===i)audio.currentTime=Math.min(position,Math.max(0,audio.duration-1))},{once:true})}};
 window.addEventListener('pagehide',()=>rememberListening(true));
@@ -92,7 +95,7 @@ async function cloudSession(){
  if(!cloud)return cloudStatus('Connexion Supabase indisponible.');
  const {data,error}=await cloud.auth.getUser();
  cloudUser=error?null:data.user;
- if(cloudUser){await loadPreferences();await refreshCloud();}
+ if(cloudUser){await loadPreferences();await loadCloudProgress();await refreshCloud();}
  else cloudStatus('Cloud : connexion nécessaire');
 }
 $('cloudBtn').onclick=async()=>{
