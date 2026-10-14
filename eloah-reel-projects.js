@@ -20,7 +20,7 @@ const humanDate=timestamp=>{
  try{return new Date(timestamp).toLocaleDateString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}catch{return 'Récemment'}
 };
 function create(config){
- const state={view:'all',folder:null,search:'',menu:null,loading:true,saving:false,flash:'',page:48,sort:'recent',storage:'initialisation'};
+ const state={view:'all',folder:null,search:'',menu:null,moveProject:null,loading:true,saving:false,flash:'',page:48,sort:'recent',storage:'initialisation'};
  let lastId=null;try{lastId=localStorage.getItem('eloah_active_reel_project')}catch{}
  let db=null,projects=[],folders=[],currentId=lastId,autosaveTimer=null,mutation=Promise.resolve(),busy=false;
 
@@ -205,7 +205,30 @@ function create(config){
     (item.thumb?'<img src="'+escapeHTML(item.thumb)+'" loading="lazy" alt="">':'<span>▶</span>')+
     '<small>'+escapeHTML(item.title)+'</small></button>').join('')+'</div>':'<p class="ecs-note">Aucun média accessible dans cette rubrique. Importe tes propres fichiers dans Importer.</p>');
  }
- function panel(){
+ 
+ function movePicker(){
+  const p=projects.find(x=>x.id===state.moveProject);
+  if(!p)return '';
+  return '<div class="ecs-project-move" role="dialog" aria-modal="true" aria-label="Déplacer le design">'+
+   '<div class="ecs-project-move-box"><div class="ecs-project-move-head"><div><small>RANGER LE DESIGN</small><h3>'+escapeHTML(p.name)+'</h3></div>'+
+   '<button type="button" aria-label="Fermer" data-project-move-cancel>✕</button></div>'+
+   '<p class="ecs-note">Choisis le dossier dans lequel tu veux ranger ce projet.</p>'+
+   '<div class="ecs-project-move-folders">'+
+   '<button type="button" data-project-move-to="none" data-id="'+escapeHTML(p.id)+'"'+(!p.folderId?' class="selected"':'')+'>▤ Sans dossier '+(!p.folderId?'✓':'')+'</button>'+
+   folders.map(f=>'<button type="button" data-project-move-to="'+escapeHTML(f.id)+'" data-id="'+escapeHTML(p.id)+'"'+(p.folderId===f.id?' class="selected"':'')+
+    '>▣ '+escapeHTML(f.name)+(p.folderId===f.id?' ✓':'')+'</button>').join('')+'</div>'+
+   '<button type="button" class="ecs-project-move-cancel" data-project-move-cancel>Annuler</button></div></div>';
+ }
+ async function moveDesignTo(id,folderId){
+  const p=projects.find(x=>x.id===id);if(!p)return;
+  if(folderId!=='none'&&!lookupFolder(folderId))return notify('Ce dossier n’existe plus.');
+  p.folderId=folderId==='none'?null:folderId;p.updatedAt=Date.now();
+  const saved=await queueWrite(()=>dbWrite('designs','put',p));
+  state.moveProject=null;state.menu=null;
+  notify(saved?'Design rangé dans '+folderTitle(p.folderId)+'.':'Le rangement n’a pas pu être sauvegardé : exporte ton projet en JSON.');
+ }
+
+function panel(){
   const current=currentProject();
   const count=projects.length;
   let inner='';
@@ -232,7 +255,7 @@ function create(config){
  'Stockage de projets indisponible : conserve une sauvegarde JSON sur ton appareil.')+
    ' Les designs privés de Canva ne sont pas synchronisés : pour réutiliser l’image ou la vidéo d’un design, exporte-la depuis Canva puis importe le fichier ici.</p>'+
    '<button type="button" data-project-download-current>↓ Exporter le Reel en JSON</button>'+
-   (state.flash?'<small>'+escapeHTML(state.flash)+'</small>':'')+'</div></div>';
+   (state.flash?'<small>'+escapeHTML(state.flash)+'</small>':'')+'</div>'+movePicker()+'</div>';
  }
  async function saveCurrent({auto=false,forceNew=false,targetFolder=null}={}){
   if(busy||state.loading)return;
@@ -296,7 +319,7 @@ function create(config){
    folders=folders.filter(x=>x.id!==id);
    await queueWrite(()=>dbWrite('folders','delete',id));
    if(state.folder===id){state.view='folders';state.folder=null}
-   notify('Dossier supprimé, designs conservés.');
+   state.moveProject=null;notify('Dossier supprimé, designs conservés.');
   }
   state.menu=null;refresh();
  }
@@ -313,11 +336,7 @@ function create(config){
    const ok=await queueWrite(()=>dbWrite('designs','put',copy));projects.unshift(copy);state.menu=null;
    return notify(ok?'Copie du design créée.':'Copie disponible uniquement pour cette session.');
   }else if(action==='move'){
-   const options=folders.map((f,i)=>i+1+' · '+f.name).join('\n');
-   const choice=prompt('Déplacer ce design dans quel dossier ?\n0 · Sans dossier\n'+options,'0');
-   if(choice===null)return;
-   const idx=Number(choice);if(!Number.isInteger(idx)||idx<0||idx>folders.length)return notify('Dossier invalide.');
-   p.folderId=idx?folders[idx-1].id:null;
+   state.moveProject=p.id;state.menu=null;refresh();return;
   }else if(action==='remove'){
    if(!confirm('Supprimer définitivement le design « '+p.name+' » de ce navigateur ?'))return;
    const ok=await queueWrite(()=>dbWrite('designs','delete',id));projects=projects.filter(x=>x.id!==id);
@@ -327,6 +346,8 @@ function create(config){
  }
  function matches(rootEvent,attr){return rootEvent.target.closest('['+attr+']')}
  function click(ev){
+  const closeMove=matches(ev,'data-project-move-cancel');if(closeMove){state.moveProject=null;refresh();return true}
+  const moveTo=matches(ev,'data-project-move-to');if(moveTo){moveDesignTo(moveTo.dataset.id,moveTo.dataset.projectMoveTo);return true}
   const view=matches(ev,'data-project-view');if(view){state.view=view.dataset.projectView;state.folder=null;state.menu=null;state.page=48;refresh();return true}
   const folder=matches(ev,'data-project-folder');if(folder){state.folder=folder.dataset.projectFolder;state.view='folder';state.search='';state.menu=null;state.page=48;refresh();return true}
   const fav=matches(ev,'data-project-favorites');if(fav){state.view='favorites';state.folder=null;state.menu=null;refresh();return true}
