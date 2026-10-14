@@ -4,7 +4,20 @@ const APP=document.getElementById("app");
 const ENDPOINT="https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-boards-private-read";
 const params=new URLSearchParams(location.hash.replace(/^#/,""));
 const access=params.get("access")||"";
-const state={boards:[],total:0,updatedAt:"",screen:"home",boardId:null,search:"",boardSearch:"",recent:[]};
+const prefKey="eloah-private-board-prefs-v2";
+let stored={};
+try{stored=JSON.parse(localStorage.getItem(prefKey)||"{}")||{}}catch(e){}
+const state={boards:[],total:0,updatedAt:"",screen:"home",boardId:null,search:"",boardSearch:"",recent:Array.isArray(stored.recent)?stored.recent:[],favorites:Array.isArray(stored.favorites)?stored.favorites:[],globalQuery:"",globalScope:"all",globalOrder:"board",boardFilter:"",pageSize:60};
+function persistPrefs(){try{localStorage.setItem(prefKey,JSON.stringify({recent:state.recent.slice(0,8),favorites:state.favorites.slice(0,30)}))}catch(e){}}
+function isFavorite(id){return state.favorites.includes(id)}
+function toggleFavorite(id){
+ state.favorites=isFavorite(id)?state.favorites.filter(x=>x!==id):[id,...state.favorites];
+ persistPrefs();render();
+}
+function markRecent(id){
+ state.recent=[id,...state.recent.filter(x=>x!==id)].slice(0,8);
+ persistPrefs();
+}
 const node=(tag,cls,text)=>{const el=document.createElement(tag);if(cls)el.className=cls;if(text!==undefined)el.textContent=String(text);return el;};
 const button=(text,cls,fn)=>{const b=node("button",cls,text);b.type="button";if(fn)b.addEventListener("click",fn);return b;};
 const count=b=>(b.cards||[]).length;
@@ -53,12 +66,21 @@ function tabs(activeScreen){
  return nav;
 }
 function boardRow(b,showCount=true){
- const row=button("","board-entry",()=>openBoard(b.id));
+ const row=node("div","board-entry");
+ const main=button("","entry-open",()=>openBoard(b.id));
  const mini=node("span","mini");mini.style.backgroundImage=wallpaper(b);
  const txt=node("span","entry-body");txt.append(node("span","entry-title",b.name));
- if(showCount)txt.append(node("span","entry-sub",count(b)+" cartes"));row.append(mini,txt);return row;
+ if(showCount)txt.append(node("span","entry-sub",count(b)+" cartes"));
+ main.append(mini,txt);row.append(main);
+ const fav=button(isFavorite(b.id)?"★":"☆","favorite"+(isFavorite(b.id)?" selected":""),()=>toggleFavorite(b.id));
+ fav.setAttribute("aria-pressed",isFavorite(b.id)?"true":"false");
+ fav.setAttribute("aria-label",(isFavorite(b.id)?"Retirer des favoris : ":"Ajouter aux favoris : ")+b.name);
+ row.append(fav);return row;
 }
-function openBoard(id){state.boardId=id;state.boardSearch="";state.screen="board";state.recent=[id,...state.recent.filter(x=>x!==id)].slice(0,5);render()}
+function openBoard(id){
+ const b=state.boards.find(x=>x.id===id);if(!b)return;
+ state.boardId=id;state.boardSearch="";state.boardFilter="";state.screen="board";markRecent(id);render();
+}
 function header(title,withSearch=true){
  const top=node("header","top"),line=node("div","top-line");line.append(node("h1",null,title));
  const actions=node("div","top-actions");actions.append(button("⌕","circle",()=>state.screen==="home"?top.querySelector("input")?.focus():navigate("all")));
@@ -77,7 +99,23 @@ function home(){
  const stats=node("div","stats");
  for(const [num,label] of [[state.boards.length,"Tableaux ELOAH"],[state.total,"Cartes consultables"]]){const box=node("div","stat");box.append(node("strong",null,num),node("small",null,label));stats.append(box)}
  shell.append(stats);
- if(state.recent.length){shell.append(node("div","section-heading","◷  Tableaux récents"));const list=node("section","list");list.id="recentList";shell.append(list)}
+ const last=state.recent.map(id=>state.boards.find(b=>b.id===id)).find(Boolean);
+ if(last){
+  const resume=node("div","resume");
+  resume.append(node("div","resume-kicker","REPRENDRE MON PROJET"));
+  resume.append(node("strong",null,last.name));
+  resume.append(node("span","entry-sub",count(last)+" cartes"));
+  resume.append(button("Ouvrir →","resume-action",()=>openBoard(last.id)));
+  shell.append(resume);
+ }
+ if(state.favorites.some(id=>state.boards.some(b=>b.id===id))){
+  shell.append(node("div","section-heading","★  Mes tableaux favoris"));
+  const list=node("section","list");list.id="favList";shell.append(list);
+ }
+ if(state.recent.some(id=>state.boards.some(b=>b.id===id))){
+  shell.append(node("div","section-heading","◷  Tableaux récents"));
+  const list=node("section","list");list.id="recentList";shell.append(list);
+ }
  shell.append(node("div","workspace-label","MES ESPACES DE TRAVAIL"));
  shell.append(node("div","workspace-title","♧  Espace privé ELOAH"));
  const list=node("section","list");list.id="mainList";shell.append(list);
@@ -85,8 +123,10 @@ function home(){
 }
 function fillLists(){
  const filtered=state.boards.filter(b=>norm(b.name).includes(norm(state.search)));
+ const fav=document.getElementById("favList");
+ if(fav){fav.replaceChildren();state.favorites.map(id=>filtered.find(b=>b.id===id)).filter(Boolean).forEach(b=>fav.append(boardRow(b)))}
  const recent=document.getElementById("recentList");
- if(recent){recent.replaceChildren();state.recent.map(id=>filtered.find(b=>b.id===id)).filter(Boolean).forEach(b=>recent.append(boardRow(b)))}
+ if(recent){recent.replaceChildren();state.recent.map(id=>filtered.find(b=>b.id===id)).filter(Boolean).slice(0,5).forEach(b=>recent.append(boardRow(b)))}
  const main=document.getElementById("mainList");if(!main)return;main.replaceChildren();
  for(const b of filtered)main.append(boardRow(b));
  if(!filtered.length)main.append(node("div","empty","Aucun tableau trouvé."));
