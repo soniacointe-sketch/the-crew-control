@@ -1,0 +1,151 @@
+/* ELOAH · Mes entretiens — expérience cliente éditoriale.
+   Ne masque ni les limites d'utilisation ni les commandes existantes. */
+body.entretiens-premium{
+  --paper:#fffdfa;--bg:#f6f3ed;--ink:#292e2b;--muted:#646c65;--line:#deded7;--accent:#74619f;--tint:#f1ecf7;
+  background:var(--bg);color:var(--ink);
+}
+.entretiens-premium main{max-width:1280px;padding:28px clamp(16px,3.5vw,48px) 58px}
+.entretiens-premium h1,.entretiens-premium h2,.entretiens-premium h3{letter-spacing:-.025em}
+.entretiens-premium .hero.premium-hero{
+  display:grid;grid-template-columns:minmax(0,1.2fr) minmax(280px,.8fr);
+  gap:clamp(22px,3vw,46px);margin:0 0 28px;padding:clamp(26px,3.4vw,49px);
+  background:
+     radial-gradient(ellipse at 15% 4%,rgba(208,183,222,.14),transparent 54%),
+     linear-gradient(128deg,#222823 0%,#2b302d 75%,#3d3b42 100%);
+  color:#fffefa;border:1px solid #303733;border-radius:23px;box-shadow:0 18px 38px #262f2913;
+  overflow:hidden;position:relative;
+}
+.entretiens-premium .premium-hero-main,.entretiens-premium .premium-hero-side{min-width:0}
+.entretiens-premium .hero .top{gap:14px;align-items:flex-start;margin-bottom:28px}
+.entretiens-premium .hero .top a{color:#f0e9f0;font-size:12px;text-decoration:none;border-bottom:1px solid #ffffff57;padding-bottom:2px}
+.entretiens-premium .hero .top a:hover{text-decoration:underline}
+.entretiens-premium .hero .eyebrow{color:#e3d0d8;font-size:10px;line-height:1.6;letter-spacing:.16em}
+.entretiens-premium .premium-overline{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.17em;color:#d5bedb;margin:0 0 10px}
+.entretiens-premium .hero h1{font-size:clamp(39px,4.8vw,63px);line-height:1.1;letter-spacing:-.032em;max-width:630px;margin:7px 0 22px;color:#fffefa}
+.entretiens-premium .hero .intro{font-size:clamp(15px,1.4vw,18px);line-height:1.65;color:#e6e4de;max-width:600px;margin:0 0 26px}
+.entretiens-premium .hero .actions{gap:10px;align-items:stretch;margin:0}
+.entretiens-premium .hero .actions>button{min-height:50px;font-size:14px;font-weight:650;border-radius:10px;padding:11px 17px}
+.entretiens-premium .hero .actions .primary{background:#eee5db!important;border-color:#eee5db!important;color:#29302b!important}
+.entretiens-premium .hero .actions .primary:hover{background:#fff9f1!important;border-color:#fff9f1!important}
+.entretiens-premium #premium-prep-start{background:transparent!important;color:#fffefa!important;border-color:#b3aca9!important}
+.entretiens-premium #premium-prep-start:hover{background:#ffffff1b!important;border-color:#fff!important}
+.entretiens-premium .premium-hero-disclaimer{color:#dad8d4;font-size:12px;line-height:1.55;margin:17px 0 0;max-width:540px}
+.entretiens-premium .premium-hero-side{
+  background:#f5f0e9;color:#292f2b;border:1px solid #e8ded6;
+  border-radius:17px;padding:clamp(20px,2.6vw,33px);
+  display:flex;flex-direction:column;justify-content:center;position:relative;
+}
+.entretiens-premium .premium-hero-side:after{content:"";position:absolute;top:18px;right:18px;border:1px solid #c9b9d6;border-radius:999px;width:57px;height:57px;pointer-events:none;opacity:.55}
+.entretiens-premium .premium-side-kicker{font-size:10px;line-height:1.5;letter-spacing:.17em;text-transform:uppercase;color:#76617c;font-weight:700;margin:0 0 15px}
+.entretiens-premium .premium-hero-side h2{font:400 clamp(27px,2.6vw,37px)/1.16 Georgia,serif;letter-spacing:-.03em;max-width:290px;margin:0 0 22px}
+.entretiens-premium .premium-journey{list-style:none;margin:0;padding:0}
+.entretiens-premium .premium-journey li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;padding:14px 0;border-top:1px solid #ddd6cf}
+.entretiens-premium .premium-journey li:last-child{border-bottom:1px solid #ddd6cf}
+.entretiens-premium .premium-step-no{font:500 13px/1.55 Georgia,serif;color:#856f9c}
+.entretiens-premium .premium-journey strong{display:block;font-size:14px;color:#333732;font-weight:660}
+.entretiens-premium .premium-journey span:last-child{display:block;font-size:12px;line-height:1.6;color:#677169;margin-top:3px}
+.entretiens-premium .premium-side-footer{font-size:12px;color:#665d63;line-height:1.6;margin:18px 0 0}
+.entretiens-premium .premium-section-intro{display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin:28px 0 12px}
+.entretiens-premium .premium-section-intro p{margin:0;color:var(--muted);font-size:13px;max-width:730px}
+.entretiens-premium .premium-section-intro h2{font:400 30px/1.2 Georgia,serif;margin:0 0 8px}
+.entretiens-premium .tabs{gap:12px;margin:16px 0 25px;grid-template-columns:repeat(3,minmax(0,1fr))}
+.entretiens-premium .tabs>button{
+  display:flex;position:relative;min-height:164px;padding:22px 20px 21px;
+  background:#fffdfa;border:1px solid #e2dfd9;border-radius:15px;
+  box-shadow:0 5px 18px #403a3010;transition:box-shadow .2s,border-color .2s,transform .2s;
+}
+.entretiens-premium .tabs>button:hover{box-shadow:0 9px 20px #403a3021;transform:translateY(-2px)}
+.entretiens-premium .tabs>button.active,.entretiens-premium .tabs>button[aria-pressed="true"]{
+  background:#f0eaf7;border-color:#b6a3ce;box-shadow:0 0 0 1px #c5b8d5 inset;
+}
+.entretiens-premium .tabs .premium-tab-index{font:600 10px/1.5 system-ui;letter-spacing:.12em;text-transform:uppercase;color:#7b649d}
+.entretiens-premium .tabs strong{font-size:clamp(21px,2.1vw,26px);line-height:1.2;margin:5px 0}
+.entretiens-premium .tabs span:not(.premium-tab-index){font-size:13px;line-height:1.55;color:#68726a}
+.entretiens-premium .tabs>button:after{content:"↗";position:absolute;right:19px;top:16px;color:#79629d;font-size:16px;line-height:1}
+.entretiens-premium .section-actions{margin:0 0 16px;padding:6px 0;align-items:center}
+.entretiens-premium .section-actions .help{color:#666e66;font-size:12px}
+.entretiens-premium .secondary-tabs{flex-wrap:wrap}
+.entretiens-premium .secondary-tabs button{min-height:42px;border-color:#deddd7;background:#fbfaf6;border-radius:8px;font-size:13px}
+.entretiens-premium .secondary-tabs button.active{background:#eee8f5;border-color:#b8a7cc}
+.entretiens-premium .panel{background:#fffdfa;border:1px solid #e2dfd9;border-radius:17px;padding:clamp(21px,2.6vw,33px);box-shadow:0 7px 24px #393d3710;margin:19px 0}
+.entretiens-premium .panel>h2,.entretiens-premium .panel .top>h2,.entretiens-premium .panel .top>div>h2{font-size:clamp(27px,2.5vw,35px);line-height:1.17}
+.entretiens-premium #requests .intro-line,.entretiens-premium #prep>.top p,.entretiens-premium #followup>p:not(.help){font-size:14px;color:#677068;line-height:1.65;max-width:690px}
+.entretiens-premium .filters{padding:16px;background:#f7f5f0;border-radius:11px;border:1px solid #e7e5df;margin:20px 0}
+.entretiens-premium .filters label{margin:0}
+.entretiens-premium .filters input,.entretiens-premium .filters select,.entretiens-premium .relations-search input{min-height:46px;border:1px solid #dcdcd5;background:#fff;border-radius:9px}
+.entretiens-premium .item{padding:19px 0}
+.entretiens-premium .item strong{font-size:17px;font-weight:650}
+.entretiens-premium .item .actions>button{border-radius:8px}
+.entretiens-premium .item .actions>button:first-child{background:#f2edf6}
+.entretiens-premium .premium-empty-button{margin:13px 0 4px;font-size:13px;background:#f1ebf6;border-color:#c9b8d6}
+.entretiens-premium .prep-cards{gap:15px;margin:22px 0}
+.entretiens-premium .prep-card{background:#f8f5f0;border:1px solid #e2dfda;border-radius:12px;padding:24px}
+.entretiens-premium .prep-card .step{color:#76608b}
+.entretiens-premium .prep-card h3{font:400 24px/1.2 Georgia,serif;max-width:320px}
+.entretiens-premium .prep-card p{font-size:13px;line-height:1.6}
+.entretiens-premium #prep .note{border:1px solid #e5dded;border-left:3px solid #9279b2;border-radius:8px;background:#f5f1f8}
+.entretiens-premium #prep .note strong{font-size:14px}
+.entretiens-premium #prep-new{min-height:46px;font-weight:600;border-radius:9px}
+.entretiens-premium #followup #report-editor{background:#f8f5f0;border-color:#e3dfd9;box-shadow:none}
+.entretiens-premium #report-editor label{font-weight:600}
+.entretiens-premium #report-editor textarea{border-radius:8px;min-height:112px}
+.entretiens-premium #report-save{font-weight:600}
+.entretiens-premium .fold{border-radius:11px;background:#fffdfa;border-color:#e0ded9}
+.entretiens-premium .fold>summary{font-weight:560;min-height:52px}
+.entretiens-premium #comment-ca-marche,.entretiens-premium #copies{margin-top:14px}
+.entretiens-premium .premium-privacy-notice{margin:24px 0 10px;padding:16px 18px;border:1px solid #e2ded5;border-left:3px solid #b9a48e;border-radius:10px;background:#f6f0e7;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:13px 20px;align-items:center}
+.entretiens-premium .premium-privacy-notice strong{display:block;font-size:13px}
+.entretiens-premium .premium-privacy-notice p{font-size:12px;line-height:1.6;margin:3px 0;color:#605f56}
+.entretiens-premium .premium-privacy-notice a{font-size:12px;white-space:nowrap;color:#574875;text-decoration:underline}
+.entretiens-premium dialog{background:#fffdfa;border-color:#e0ddd9;border-radius:17px;box-shadow:0 30px 90px #28232a4a}
+.entretiens-premium dialog h2{font:400 31px/1.15 Georgia,serif}
+.entretiens-premium dialog label{font-size:13px;font-weight:600;color:#566259}
+.entretiens-premium dialog input,.entretiens-premium dialog select,.entretiens-premium dialog textarea{background:#fff;border:1px solid #d8dcd4;border-radius:9px}
+.entretiens-premium dialog .actions{gap:9px}
+.entretiens-premium dialog .actions button{border-radius:9px}
+.entretiens-premium dialog .primary{background:#302f34!important;border-color:#302f34!important}
+.entretiens-premium #prompt-text{min-height:150px}
+.entretiens-premium #relations .top{gap:20px}
+.entretiens-premium .relation-group{border-color:#e0ded9}
+.entretiens-premium .relation-empty{background:#f8f5f0;border:1px dashed #dad4db}
+.entretiens-premium .end-note{font-size:12px;padding:17px 0}
+@media(max-width:880px){
+ .entretiens-premium .hero.premium-hero{grid-template-columns:minmax(0,1fr)}
+ .entretiens-premium .premium-hero-side{max-width:none}
+ .entretiens-premium .tabs{gap:10px}
+ .entretiens-premium .tabs>button{padding:18px 16px}
+ .entretiens-premium .tabs strong{font-size:22px}
+}
+@media(max-width:650px){
+ .entretiens-premium main{padding:14px 10px 34px}
+ .entretiens-premium .hero.premium-hero{padding:26px 18px;gap:22px;border-radius:17px;margin:0 0 20px}
+ .entretiens-premium .hero .top{margin-bottom:20px}
+ .entretiens-premium .hero .top a{font-size:12px}
+ .entretiens-premium .hero h1{font-size:clamp(33px,9vw,46px);margin:8px 0 17px}
+ .entretiens-premium .hero .intro{font-size:15px;line-height:1.6;margin-bottom:20px}
+ .entretiens-premium .hero .actions{display:flex}
+ .entretiens-premium .hero .actions>button{width:100%;min-width:0;min-height:47px}
+ .entretiens-premium .premium-hero-side{padding:21px 19px}
+ .entretiens-premium .premium-hero-side h2{font-size:29px}
+ .entretiens-premium .premium-hero-side:after{width:42px;height:42px}
+ .entretiens-premium .premium-section-intro{margin-top:20px}
+ .entretiens-premium .premium-section-intro h2{font-size:27px}
+ .entretiens-premium .tabs{grid-template-columns:1fr;gap:9px;margin:13px 0 20px}
+ .entretiens-premium .tabs>button{min-height:0;padding:15px 19px;gap:4px}
+ .entretiens-premium .tabs strong{font-size:24px;margin:2px 0}
+ .entretiens-premium .tabs span:not(.premium-tab-index){font-size:13px}
+ .entretiens-premium .tabs>button:after{right:16px;top:18px}
+ .entretiens-premium .panel{padding:22px 16px;border-radius:14px}
+ .entretiens-premium .filters{padding:12px;display:block}
+ .entretiens-premium .filters label{margin:9px 0}
+ .entretiens-premium .secondary-tabs button{flex:1 1 calc(50% - 8px)}
+ .entretiens-premium .premium-privacy-notice{grid-template-columns:1fr;gap:8px}
+ .entretiens-premium .premium-privacy-notice a{white-space:normal}
+ .entretiens-premium .prep-cards{gap:10px}
+ .entretiens-premium .prep-card{padding:18px}
+ .entretiens-premium #prep>.top #prep-new{width:100%}
+ .entretiens-premium .calendar-scroll{scrollbar-width:thin}
+ .entretiens-premium dialog{padding:19px}
+ .entretiens-premium dialog .actions>*{flex:1 1 calc(50% - 8px)}
+}
+@media(prefers-reduced-motion:reduce){.entretiens-premium .tabs>button{transition:none}.entretiens-premium .tabs>button:hover{transform:none}}
