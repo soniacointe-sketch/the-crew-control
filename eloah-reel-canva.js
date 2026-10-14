@@ -1363,6 +1363,37 @@ const reelImporter=window.ELOAHReelImporter?.create({
  loadImage,loadVideo,loadAudio,openStockVideo,importStockVideo,previewSound,addSound,
  videoStock,soundLibrary
 })||null;
+
+let inkMode='select',inkColor='#d32027',inkWidth=14,inkDraft=null,inkPointer=null,inkEraseActive=false,inkPaletteOpen=true;
+try{const v=JSON.parse(localStorage.getItem('eloah_ink_prefs')||'null');if(v){if(window.ELOAHCanvasTools?.map.has(v.mode))inkMode=v.mode;if(/^#[0-9a-f]{6}$/i.test(v.color||''))inkColor=v.color;inkWidth=Math.min(70,Math.max(2,+v.width||14))}}catch{}
+function saveInkPrefs(){try{localStorage.setItem('eloah_ink_prefs',JSON.stringify({mode:inkMode,color:inkColor,width:inkWidth}))}catch{}}
+function inkButtons(compact=false){
+ return (window.ELOAHCanvasTools?.tools||[]).map(item=>
+ '<button type="button" data-ink-tool="'+item.id+'" aria-pressed="'+(inkMode===item.id)+'" title="'+xss(item.description)+'" aria-label="'+xss(item.label)+'"><span>'+item.icon+'</span>'+
+ (compact?'':'<small>'+xss(item.label)+'</small>')+'</button>').join('');
+}
+function inkPanel(){
+ return '<div class="ecs-ink-panel"><h3>Mes outils</h3><p class="ecs-note">Sélectionne un outil puis utilise le plan de travail pour dessiner, annoter ou ajouter du texte.</p>'+
+ '<div class="ecs-ink-buttons">'+inkButtons()+'</div>'+
+ '<div class="ecs-ink-settings"><label>Couleur <input type="color" data-ink-color value="'+inkColor+'"></label>'+
+ '<label>Épaisseur <input type="range" min="2" max="70" step="1" data-ink-width value="'+inkWidth+'"><output>'+inkWidth+' px</output></label></div>'+
+ '<button type="button" class="ecs-ink-palette-toggle" data-ink-palette-toggle>'+(inkPaletteOpen?'Masquer':'Afficher')+' la palette flottante</button>'+
+ '<button type="button" class="ecs-ink-clear" data-ink-clear>Effacer tous les tracés</button>'+
+ '<h3>Réglages du Reel</h3>'+range('Durée du Reel (secondes)','duration',1,60,.5,S.duration)+color('Fond','bg',S.bg)+
+ '<label class="ecs-sidelabel">Effet de couleur</label><select data-setting="filter">'+
+ [['none','Naturel'],['cinema','Cinéma'],['gold','Lumière dorée'],['vivid','Couleurs intenses'],['mono','Noir et blanc']].map(([a,b])=>
+ '<option value="'+a+'" '+(S.filter===a?'selected':'')+'>'+b+'</option>').join('')+'</select>'+
+ btn('png','Exporter une image PNG')+'<p class="ecs-note">Le stylo, le surligneur et les flèches restent dans ton projet et dans les exports. La gomme retire un tracé entier.</p></div>';
+}
+function inkPalette(){
+ const wrap=one('.ecs-stagewrap');if(!wrap)return;
+ let el=wrap.querySelector('.ecs-ink-float');
+ if(activeTab!=='tools'||!inkPaletteOpen){if(el)el.remove();canvas.style.cursor='default';return}
+ if(!el){el=document.createElement('div');el.className='ecs-ink-float';el.setAttribute('role','toolbar');el.setAttribute('aria-label','Outils de création ELOAH');wrap.append(el)}
+ el.innerHTML='<button class="ecs-ink-close" data-ink-palette-toggle aria-label="Fermer">×</button>'+inkButtons(true);
+ canvas.style.cursor=inkMode==='select'?'default':inkMode==='eraser'?'cell':'crosshair';
+}
+
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
@@ -1374,7 +1405,7 @@ function renderSide(){
  if(activeTab==='import')html=reelImporter?reelImporter.render():
  '<div class="ecs-import-error"><strong>La médiathèque n’a pas été chargée.</strong><p>Actualise cette page pour récupérer les images.</p>'+
  '<a href="eloah-reel-studio.html?onglet=import&vue=toutes&rechargement=1">↻ Recharger les images</a></div>';
- if(activeTab==='tools')html=range('Durée du Reel (secondes)','duration',1,60,.5,S.duration)+color('Fond','bg',S.bg)+'<label class="ecs-sidelabel">Effet de couleur</label><select data-setting="filter">'+[['none','Naturel'],['cinema','Cinéma'],['gold','Lumière dorée'],['vivid','Couleurs intenses'],['mono','Noir et blanc']].map(([k,v])=>'<option value="'+k+'" '+(S.filter===k?'selected':'')+'>'+v+'</option>').join('')+'</select>'+btn('png','Exporter une image PNG')+'<p class="ecs-note">Les filtres modifient la vidéo et les photos de fond. Le son est conservé selon les capacités du navigateur à l’export.</p>';
+ if(activeTab==='tools')html=inkPanel();
  if(activeTab==='projects')html='<p class="ecs-note">Sauvegarde ton projet en JSON pour retrouver les textes, positions et couleurs.</p>'+btn('save','Sauvegarder projet',true)+btn('load','Ouvrir un projet')+btn('reset','Nouveau projet')+'<p class="ecs-note">Les vidéos, photos et musiques ne sont pas intégrées au fichier JSON : conserve-les séparément et réimporte-les après ouverture.</p>';
  if(activeTab==='photos')html=photoCatalog();
  if(activeTab==='audio')html=renderAudio();
@@ -1397,6 +1428,7 @@ function renderSide(){
  }
  box.innerHTML=html;
  if(activeTab==='videos')requestAnimationFrame(scheduleStockThumbnails);
+ inkPalette();
 }
 function setTab(tab){if(tab==='elements'){elementsCategory=null;chartView='home';chartSearch=''}if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}if(tab==='photos'){photoView='home';photoSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
 function action(name){
