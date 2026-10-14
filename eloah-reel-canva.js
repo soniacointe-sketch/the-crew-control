@@ -1464,6 +1464,79 @@ function inkUp(ev,pt,cancel=false){
  return true;
 }
 
+
+/* Projets ELOAH : sauvegarde locale multi-designs, prévisualisation et médias associés. */
+async function captureCurrentForProjects({quick=false}={}){
+ const warnings=[];
+ const frames=captureFrameAssets(quick?1050:1400,quick?11000000:18000000);
+ const brand=captureBrandAssets(quick?12000000:19500000);
+ const photos=captureReelImages(quick?1200:1500,quick?12000000:16500000);
+ const data={version:6,...serial(),frameAssets:frames,brandAssets:brand.items,
+  imageAssets:photos.assets,backgroundImage:photos.background,
+  videoName:video.dataset.filename||null,audioName:audio.dataset.filename||null};
+ if(brand.skipped||photos.skipped)warnings.push('Certaines images trop lourdes ne sont pas incluses.');
+ const thumbCanvas=document.createElement('canvas');
+ thumbCanvas.width=230;thumbCanvas.height=409;
+ let thumbnail=null;
+ try{
+  const preview=thumbCanvas.getContext('2d');preview.scale(230/1080,409/1920);
+  paint(preview,S.time,false);
+  thumbnail=thumbCanvas.toDataURL('image/webp',.67);
+ }catch(e){console.warn('Aperçu du projet indisponible',e)}
+ async function captureBlob(url,label){
+  if(quick||!url)return null;
+  try{
+   const response=await fetch(url);if(!response.ok)throw Error('Lecture impossible');
+   const blob=await response.blob();
+   if(blob.size>65000000){warnings.push(label+' trop volumineux pour être intégré au projet (65 Mo maximum).');return null}
+   return blob;
+  }catch(e){warnings.push(label+' conservé séparément : '+e.message);return null}
+ }
+ const [videoBlob,audioBlob]=await Promise.all([captureBlob(media.videoUrl,'Vidéo'),captureBlob(media.audioUrl,'Musique')]);
+ return {data,thumbnail,videoBlob,audioBlob,warnings};
+}
+async function restoreProjectFromLibrary(data,stored){
+ if(!data||!Array.isArray(data.elements))throw Error('Ce projet n’a pas de composition valide.');
+ pause();
+ snapshot();
+ for(const url of [media.videoUrl,media.audioUrl,media.imageUrl])if(url)URL.revokeObjectURL(url);
+ media.videoUrl=null;media.audioUrl=null;media.imageUrl=null;media.bgImage=null;
+ video.pause();audio.pause();video.removeAttribute('src');audio.removeAttribute('src');
+ images.clear();framePhotos.clear();brandEmbeddedImages.clear();brandImageCache.clear();
+ const idMap=new Map();
+ const elements=data.elements.slice(0,250).map(raw=>{
+  const id=nextId++;idMap.set(String(raw.id),id);return {...raw,id};
+ });
+ apply({name:String(data.name||'Mon Reel').slice(0,90),duration:Math.max(1,Math.min(60,Number(data.duration)||5)),
+   trimStart:Math.max(0,Number(data.trimStart)||0),bg:data.bg||'#fffaf1',
+   filter:data.filter||'none',brand:data.brand||'ELOAH',elements});
+ if(stored?.videoBlob instanceof Blob&&stored.videoBlob.size){
+  media.videoUrl=URL.createObjectURL(stored.videoBlob);video.src=media.videoUrl;
+  video.dataset.filename=data.videoName||'Vidéo du projet';
+  video.load();
+ }
+ if(stored?.audioBlob instanceof Blob&&stored.audioBlob.size){
+  media.audioUrl=URL.createObjectURL(stored.audioBlob);audio.src=media.audioUrl;
+  audio.dataset.filename=data.audioName||'Audio du projet';audio.load();
+ }
+ const frameCount=await restoreFrameAssets(data.frameAssets,idMap);
+ const brandCount=restoreBrandAssets(data.brandAssets,idMap);
+ const imageCount=await restoreReelImages({images:data.imageAssets,background:data.backgroundImage},idMap);
+ S.playing=false;S.time=0;
+ saveLocal();saveFrameMediaLocal();saveBrandMediaLocal();saveReelImageAssetsLocal();
+ draw();renderTimeline();renderSide();
+ const absent=(data.videoName&&!stored?.videoBlob||data.audioName&&!stored?.audioBlob);
+ if(absent)toast('Projet ouvert. Une vidéo ou une musique doit être réimportée depuis ton appareil.');
+ return {frames:frameCount,brand:brandCount,images:imageCount};
+}
+function projectDownload(data,record){
+ if(!data){saveProject();return}
+ const text=JSON.stringify({...data,otherMediaNotIncluded:!!(record?.videoBlob||record?.audioBlob||data.videoName||data.audioName)},null,2);
+ const name=(record?.name||data.name||'eloah-projet').replace(/[^\p{L}\p{N}\- ]/gu,'').slice(0,60).trim().replace(/\s+/g,'-')||'eloah-projet';
+ download(new Blob([text],{type:'application/json;charset=utf-8'}),name+'.json');
+ toast('Projet exporté en JSON. Les grosses vidéos et pistes audio doivent rester séparées.');
+}
+
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
