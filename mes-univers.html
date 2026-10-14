@@ -475,7 +475,7 @@ refresh();filterDirectory();if(location.hash)revealHash();
 if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));
 const panel=document.getElementById('eloah-install'),action=document.getElementById('eloah-install-action'),hint=document.getElementById('eloah-install-text');
 const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
-if(standalone||sessionStorage.getItem('eloah-install-dismissed')==='yes')return;
+let dismissed=false;try{dismissed=sessionStorage.getItem('eloah-install-dismissed')==='yes'}catch(_){}if(standalone||dismissed)return;
 let installPrompt=null;
 const ios=/iPhone|iPad|iPod/.test(navigator.userAgent);
 const show=(message,canPrompt)=>{hint.textContent=message;action.hidden=!canPrompt;panel.hidden=false};
@@ -486,5 +486,5 @@ document.getElementById('eloah-install-dismiss').addEventListener('click',()=>{p
 if(ios)show("Sur iPhone : dans Safari, touche Partager puis « Sur l'écran d'accueil ».",false);
 })();
 </script>
-<script src="eloah-mobile-app.js" defer></script><a href="eloah-installer.html" id="eloah-install-link" aria-label="Installer ELOAH sur téléphone">Installer ELOAH ↗</a><style>#eloah-install-link{position:fixed;right:15px;bottom:15px;z-index:9900;background:#922763;color:#fff!important;border:1px solid #c35498;border-radius:100px;text-decoration:none;font:700 12px system-ui;padding:12px 17px;box-shadow:0 8px 22px #1609124d}@media(max-width:760px){#eloah-install-link{bottom:calc(18px + env(safe-area-inset-bottom));right:12px} @media(display-mode:standalone){#eloah-install-link{display:none}}}</style></body>
+<script src="eloah-mobile-app.js" defer></script><a href="eloah-installer.html" id="eloah-install-link" aria-label="Installer ELOAH sur téléphone">Installer ELOAH ↗</a><style>#eloah-install-link{position:fixed;right:15px;bottom:15px;z-index:9900;background:#922763;color:#fff!important;border:1px solid #c35498;border-radius:100px;text-decoration:none;font:700 12px system-ui;padding:12px 17px;box-shadow:0 8px 22px #1609124d}@media(max-width:760px){#eloah-install-link{bottom:calc(18px + env(safe-area-inset-bottom));right:12px}}@media(display-mode:standalone){#eloah-install-link{display:none}}</style></body>
 </html>
