@@ -199,3 +199,31 @@ if(page==='mes-univers.html'){
 
 /* Training cards use the existing editor, archive and export tools. */
 (()=>{if(location.pathname.endsWith('/eloah-partenaire.html')&&new URLSearchParams(location.search).get('rubrique')==='Formations'){const s=document.createElement('script');s.src='eloah-formations.js?v=1';document.head.appendChild(s)}})();
+
+
+/* ELOAH UNIVERSAL TYPOGRAPHY V1 */
+(()=>{
+  if(document.getElementById('eloah-universal-type'))return;
+  const style=document.createElement('style');
+  style.id='eloah-universal-type';
+  style.textContent=`
+  /* Unified premium type across ELOAH pages; controls and functional editors intact */
+  body.eloah-screen{font-family:Inter,"Segoe UI",Arial,sans-serif;text-rendering:optimizeLegibility;-webkit-font-smoothing:antialiased}
+  body.eloah-screen :is(h1,h2,h3,h4):not([contenteditable]):not(.cm-line){
+    font-family:"Bodoni Moda","Didot","Bodoni MT",Georgia,serif;
+    font-weight:500;line-height:1.15;letter-spacing:-.025em;overflow-wrap:anywhere;
+  }
+  body.eloah-screen h1{font-size:clamp(32px,3.2vw,54px);letter-spacing:-.04em}
+  body.eloah-screen h2{font-size:clamp(25px,2.25vw,38px)}
+  body.eloah-screen h3{font-size:clamp(21px,1.65vw,29px)}
+  body.eloah-screen h4{font-size:clamp(18px,1.3vw,24px)}
+  body.eloah-screen :is(.eyebrow,.overline,.kicker){letter-spacing:.11em}
+  body.eloah-screen :is(button,.btn,.button,nav a,summary){font-family:Inter,"Segoe UI",Arial,sans-serif}
+  body.eloah-screen :is(p,li){line-height:1.65}
+  @media(max-width:650px){
+    body.eloah-screen h1{font-size:clamp(29px,8vw,40px)}
+    body.eloah-screen h2{font-size:clamp(24px,6.7vw,32px)}
+    body.eloah-screen h3{font-size:clamp(20px,5.5vw,27px)}
+  }`;
+  document.head.appendChild(style);
+})();
