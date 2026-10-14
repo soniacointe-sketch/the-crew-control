@@ -42,3 +42,36 @@ body :is(.home-status,.example){background:#391731!important;color:#f8eef5!impor
 body :is(.section,.workspace-section,.task,.footer){border-color:rgba(202,125,170,.27)!important}
 body dialog{background:#24101f!important;color:#f8eef5!important;border-color:#85516c!important}
 @media(max-width:650px){body.eloah-home-client main{background:transparent!important}}
+
+
+/* ELOAH INTERIEUR — modules, sous-onglets, tableaux et formulaires */
+body:has(.eloah-home){--accent:#e5c28b!important;background:#160912!important;color:#f8eef5!important}
+body:has(.eloah-home) :is(.layout,main,aside,.eloah-home,.eloah-home section,.eloah-home article){color:#f8eef5!important}
+body:has(.eloah-home) aside,body :is(aside,.sidebar,.side-nav,#tabs,.tabs,.tabbar,.subnav,.toolbar,.topbar,.menu,.dropdown,.modal-content){
+ background:#24101f!important;color:#f8eef5!important;border-color:rgba(202,125,170,.3)!important
+}
+body:has(.eloah-home) :is(.brand,header h1,.eloah-home h2,.eloah-home h3,.eloah-home strong){color:#fff0f8!important}
+body:has(.eloah-home) .hero,body :is(.notice,.empty,.summary-card,.metric,.metrics>.panel,.module-card,.module,.item-card,.stat,.widget,.board,.board-column,.list-column,.kanban-column,.column,.ticket,.note,.record,.data-card,.form-panel,.table-wrap,.table-container){
+ background:linear-gradient(145deg,#35152d,#24101f)!important;
+ color:#f8eef5!important;border-color:rgba(202,125,170,.3)!important
+}
+body :is(.eloah-home p,.eloah-home .muted,.notice p,.card p,.panel p,.metrics p,.hint,.field-hint,td small){color:#ddc7d6!important}
+body :is(th,thead,thead tr){background:#3b1932!important;color:#e5c28b!important}
+body :is(td,tbody tr){background-color:#24101f;color:#f8eef5;border-color:rgba(202,125,170,.25)!important}
+body :is(tbody tr:nth-child(2n),.board-column:nth-child(2n)){background-color:#2d1428!important}
+body :is(.tabs button,#tabs button,.tab,.toolbar button,.filter button,aside button,aside a,.sidebar a){
+ color:#f8eef5!important;border-color:rgba(202,125,170,.28)!important
+}
+body :is(.tabs .active,.tab.active,.tab[aria-selected="true"],#tabs .active,#tabs button[aria-selected="true"],aside .active,aside a[aria-current="page"]){
+ background:#63264a!important;color:#fff0f8!important;border-color:#e5c28b!important
+}
+body :is(.modal,.popover,.dropdown-menu,[role="dialog"],[role="menu"],.menu-panel){
+ background:#24101f!important;color:#f8eef5!important;border-color:rgba(202,125,170,.35)!important
+}
+body :is(label,legend,summary,option){color:#f8eef5}
+body :is(select option,select optgroup){background:#311329!important;color:#fff0fa!important}
+body :is(input[type="checkbox"],input[type="radio"]){accent-color:#d8b07a}
+body :is(.badge,.chip,.tag,.pill,.status){border-color:rgba(229,194,139,.42);color:#e5c28b}
+body :is(.notice,.empty-state,.home-status){background:#35152d!important}
+body :is(hr,.divider){border-color:rgba(202,125,170,.28)!important}
+body :is(a:not(.btn)):hover{color:#ebc997}
