@@ -233,6 +233,7 @@ const publishableKey='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const $=id=>document.getElementById(id);
 const status=(id,message)=>{$(id).textContent=message};
 let client=null,user=null,workspaceId=null;
+let refreshSerial=0;
 const checkoutReturn=new URLSearchParams(location.search).get('checkout')==='retour';
 let accessCheckCount=0,accessCheckTimer=null;
 if(checkoutReturn)$('checkout-return').hidden=false;
@@ -243,17 +244,33 @@ function getClient(){
 }
 function el(tag,textContent,css){const node=document.createElement(tag);if(css)node.className=css;if(textContent!==undefined)node.textContent=String(textContent);return node}
 function errMessage(e){return (e&&typeof e.message==='string')?e.message:'Une erreur est survenue.'}
+function clearClientUI(){
+ workspaceId=null;
+ window.EloahClientModules?.reset();
+ ['workspace-list','task-list'].forEach(id=>$(id).replaceChildren());
+ $('workspace-heading').textContent='Mes actions';
+ $('workspace-hint').textContent='Choisissez votre projet pour retrouver ses actions.';
+ $('client-project-count').textContent='—';
+ $('client-action-count').textContent='—';
+ $('task-form').hidden=true;
+ $('signed-in-email').textContent='';
+ $('current-plan').textContent='';
+}
 async function refresh(){
+ const request=++refreshSerial;
  try{
   const {data,error}=await getClient().auth.getUser();
-  if(error||!data?.user){user=null;workspaceId=null;window.EloahClientModules?.reset();$('sign-in').hidden=false;$('private-area').hidden=true;$('access-pending').hidden=true;return}
+  if(request!==refreshSerial)return;
+  if(error||!data?.user){user=null;clearClientUI();$('sign-in').hidden=false;$('private-area').hidden=true;$('access-pending').hidden=true;return}
+  if(user?.id&&user.id!==data.user.id)clearClientUI();
   user=data.user;$('signed-in-email').textContent=user.email||'Compte connecté';
   $('client-greeting').textContent='Bienvenue dans votre espace ELOAH.';
   $('sign-in').hidden=true;
   const active=await loadPlan();
+  if(request!==refreshSerial)return;
   $('private-area').hidden=!active;
   $('access-pending').hidden=active;
-  if(!active){workspaceId=null;window.EloahClientModules?.reset();$('client-project-count').textContent='—';$('client-action-count').textContent='—';}
+  if(!active)clearClientUI();
   if(checkoutReturn){
     $('validation-status').textContent=active
       ? 'Abonnement confirmé côté serveur. Ton espace est accessible.'
@@ -264,11 +281,14 @@ async function refresh(){
       accessCheckTimer=setTimeout(()=>{if(user)refresh()},4000);
     }
   }
-  if(active){await loadWorkspaces();await window.EloahClientModules?.init(getClient(),user.id)}
+  if(active){const owner=user.id;await loadWorkspaces();if(request===refreshSerial&&user?.id===owner)await window.EloahClientModules?.init(getClient(),owner)}
  }catch(e){status('login-status',errMessage(e))}
 }
 async function loadPlan(){
- const {data,error}=await getClient().from('eloah_customer_entitlements').select('plan,status').eq('owner_id',user.id).maybeSingle();
+ const owner=user?.id;
+ if(!owner)return false;
+ const {data,error}=await getClient().from('eloah_customer_entitlements').select('plan,status').eq('owner_id',owner).maybeSingle();
+ if(!user||user.id!==owner)return false;
  const active=!error&&data?.status==='active';
  const msg=error?'Impossible de vérifier vos droits actuellement.':data?'Offre : '+data.plan+' · Statut : '+data.status:'Aucun abonnement actif associé à ce compte.';
  $('current-plan').textContent=msg;
@@ -284,7 +304,9 @@ function choose(ws){
  loadTasks();
 }
 async function loadWorkspaces(){
+ const owner=user?.id;if(!owner)return;
  const {data,error}=await getClient().from('eloah_customer_workspaces').select('id,title,category,created_at').order('created_at',{ascending:false}).limit(100);
+ if(!user||user.id!==owner)return;
  if(error){status('workspace-status','Lecture impossible : '+errMessage(error));return}
  window.EloahClientModules?.setWorkspaces(data);
  $('client-project-count').textContent=String(data.length);
@@ -315,12 +337,13 @@ async function loadWorkspaces(){
 }
 let sortTasksByDue=false;
 async function loadTasks(){
- if(!workspaceId)return;
+ if(!workspaceId||!user)return;
+ const owner=user.id;
  const requestedWorkspace=workspaceId;
  const {data,error}=await getClient().from('eloah_customer_workspace_items')
   .select('id,title,notes,status,due_date,created_at')
   .eq('workspace_id',requestedWorkspace).order('created_at',{ascending:false}).limit(100);
- if(requestedWorkspace!==workspaceId)return;
+ if(requestedWorkspace!==workspaceId||user?.id!==owner)return;
  if(error){status('task-status','Lecture impossible : '+errMessage(error));return}
  $('client-action-count').textContent=String(data.length);
  if(sortTasksByDue)data.sort((a,b)=>(a.due_date||'9999-12-31').localeCompare(b.due_date||'9999-12-31'));
@@ -404,7 +427,7 @@ if(new URLSearchParams(location.search).has('checkout')){
 $('pending-logout').addEventListener('click',async()=>{await getClient().auth.signOut();await refresh()});
 $('logout').addEventListener('click',async()=>{
  await getClient().auth.signOut();
- user=null;workspaceId=null;window.EloahClientModules?.reset();$('private-area').hidden=true;$('sign-in').hidden=false;
+ user=null;clearClientUI();$('private-area').hidden=true;$('sign-in').hidden=false;
  status('login-status','Compte ELOAH déconnecté sur ce navigateur.');
 });
 $('workspace-form').addEventListener('submit',async e=>{
