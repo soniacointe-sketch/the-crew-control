@@ -83,6 +83,13 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
 <section class="panel" id="checkout-return" hidden><h2>Retour de Stripe</h2><p>Le retour sur cette page ne confirme pas à lui seul le paiement. Les droits sont activés uniquement après vérification de l'abonnement par le serveur.</p><p id="validation-status" class="status" role="status">Vérification en cours…</p></section>
 <section class="panel" id="access-pending" hidden><h2>Votre espace se prépare.</h2><p id="access-message">Aucun abonnement actif n’est encore associé à ce compte.</p><div class="row"><a href="eloah-inscription.html?offre=entree">Choisir ma formule ↗</a><a href="eloah-decouvrir.html#contact">Contacter ELOAH ↗</a><button type="button" id="refresh-entitlement">Vérifier mon accès</button><button type="button" class="light" id="pending-logout">Changer de compte</button></div></section>
 <section id="private-area" hidden>
+ <div class="panel" id="eloah-app-onboarding" style="border-color:#ca9bc3;background:#fff8fd">
+  <div class="row" style="align-items:center;justify-content:space-between;gap:18px">
+   <div><span class="overline">ELOAH SUR TON TÉLÉPHONE</span><h2 style="margin:6px 0">Ton espace, partout avec toi.</h2><p>Ton accès a été vérifié. Installe ELOAH sur ton écran d'accueil, puis connecte-toi avec ce même compte.</p></div>
+   <a href="eloah-installer.html" style="display:inline-flex;padding:13px 18px;background:#842464;color:#fff;border-radius:10px;text-decoration:none;font-weight:700;min-height:48px;align-items:center">Installer ELOAH ↗</a>
+  </div>
+  <p style="font-size:12px;margin-bottom:0">L'installation ne transfère pas automatiquement les projets stockés uniquement dans un autre navigateur. Ton espace client privé conserve ses données dans Supabase.</p>
+ </div>
  <div class="panel"><div class="row" style="justify-content:space-between"><div><h2>Bienvenue dans ton espace</h2><p id="signed-in-email"></p><p id="current-plan"></p></div><button class="light" id="logout" type="button">Se déconnecter</button></div>
  <p class="notice">Portail client pilote : les éventuels paiements sont gérés uniquement par Stripe. Les accès sont activés après vérification des droits côté serveur Supabase.</p></div>
  <div class="grid">
