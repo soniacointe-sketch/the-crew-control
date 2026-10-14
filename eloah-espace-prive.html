@@ -80,10 +80,11 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
  <p class="login-small">Créer un compte ne déclenche aucun paiement et n’active pas d’abonnement. Vous venez de découvrir ELOAH ? <a href="eloah-decouvrir.html#contact">Demander un accès</a>.</p>
  </div>
 </section>
-<section class="panel" id="access-pending" hidden><h2>Votre espace se prépare.</h2><p id="access-message">Aucun abonnement actif n’est encore associé à ce compte.</p><div class="row"><a href="eloah-offres.html">Voir les offres ELOAH ↗</a><a href="eloah-decouvrir.html#contact">Contacter ELOAH ↗</a><button type="button" id="refresh-entitlement">Vérifier mon accès</button><button type="button" class="light" id="pending-logout">Changer de compte</button></div></section>
+<section class="panel" id="checkout-return" hidden><h2>Retour de Stripe</h2><p>Le retour sur cette page ne confirme pas à lui seul le paiement. Les droits sont activés uniquement après vérification de l'abonnement par le serveur.</p><p id="validation-status" class="status" role="status">Vérification en cours…</p></section>
+<section class="panel" id="access-pending" hidden><h2>Votre espace se prépare.</h2><p id="access-message">Aucun abonnement actif n’est encore associé à ce compte.</p><div class="row"><a href="eloah-inscription.html?offre=entree">Choisir ma formule ↗</a><a href="eloah-decouvrir.html#contact">Contacter ELOAH ↗</a><button type="button" id="refresh-entitlement">Vérifier mon accès</button><button type="button" class="light" id="pending-logout">Changer de compte</button></div></section>
 <section id="private-area" hidden>
  <div class="panel"><div class="row" style="justify-content:space-between"><div><h2>Bienvenue dans ton espace</h2><p id="signed-in-email"></p><p id="current-plan"></p></div><button class="light" id="logout" type="button">Se déconnecter</button></div>
- <p class="notice">Ce portail est une version pilote. Aucun abonnement ou paiement n'est activé ici. Les offres payantes requerront une vérification des droits côté serveur avant toute ouverture commerciale.</p></div>
+ <p class="notice">Portail client pilote : les éventuels paiements sont gérés uniquement par Stripe. Les accès sont activés après vérification des droits côté serveur Supabase.</p></div>
  <div class="grid">
   <div class="panel"><h2>Mes espaces</h2><div id="workspace-list" class="items"></div>
    <form id="workspace-form"><label for="workspace-title">Nouvel espace<input id="workspace-title" maxlength="120" minlength="2" placeholder="Ex. Mon association" required></label>
@@ -105,7 +106,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
 </section>
 <section class="panel"><h2>Confidentialité et limites</h2>
 <p>Le code de cette page est public parce qu'il est publié sur GitHub Pages. Seules les données enregistrées dans les tables Supabase de ce portail sont soumises aux règles privées du serveur. Les autres pages ELOAH publiées sur GitHub Pages, y compris leurs textes et leurs fichiers, ne sont pas rendues confidentielles par cette connexion.</p>
-<p>Les sauvegardes déjà enregistrées dans ton navigateur ne sont pas importées ici. Aucune donnée n'est envoyée automatiquement et aucun moyen de paiement n'est connecté.</p></section>
+<p>Les sauvegardes déjà enregistrées dans ton navigateur ne sont pas importées ici. Aucun numéro de carte bancaire n'est demandé dans cet espace : les paiements éventuels s'effectuent uniquement sur Stripe.</p></section>
 </main>
 <footer>ELOAH · Espace privé pilote · Aucun abonnement vendu depuis cette page.</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
@@ -116,6 +117,9 @@ const publishableKey='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const $=id=>document.getElementById(id);
 const status=(id,message)=>{$(id).textContent=message};
 let client=null,user=null,workspaceId=null;
+const checkoutReturn=new URLSearchParams(location.search).get('checkout')==='retour';
+let accessCheckCount=0,accessCheckTimer=null;
+if(checkoutReturn)$('checkout-return').hidden=false;
 function getClient(){
  if(!window.supabase?.createClient)throw Error('Bibliothèque Supabase indisponible.');
  if(!client)client=window.supabase.createClient(url,publishableKey,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
@@ -132,6 +136,16 @@ async function refresh(){
   const active=await loadPlan();
   $('private-area').hidden=!active;
   $('access-pending').hidden=active;
+  if(checkoutReturn){
+    $('validation-status').textContent=active
+      ? 'Abonnement confirmé côté serveur. Ton espace est accessible.'
+      : 'La confirmation de l’abonnement est en attente. Tu peux aussi utiliser « Vérifier mon accès ».';
+    if(accessCheckTimer){clearTimeout(accessCheckTimer);accessCheckTimer=null;}
+    if(!active&&accessCheckCount<8){
+      accessCheckCount++;
+      accessCheckTimer=setTimeout(()=>{if(user)refresh()},4000);
+    }
+  }
   if(active)await loadWorkspaces();
  }catch(e){status('login-status',errMessage(e))}
 }
