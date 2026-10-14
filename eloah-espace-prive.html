@@ -80,7 +80,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
  <p class="login-small">Créer un compte ne déclenche aucun paiement et n’active pas d’abonnement. Vous venez de découvrir ELOAH ? <a href="eloah-decouvrir.html#contact">Demander un accès</a>.</p>
  </div>
 </section>
-<section class="panel" id="access-pending" hidden><h2>Votre espace se prépare.</h2><p id="access-message">Aucun abonnement actif n’est encore associé à ce compte.</p><div class="row"><a href="eloah-offres.html">Voir les offres ELOAH ↗</a><a href="eloah-decouvrir.html#contact">Contacter ELOAH ↗</a><button type="button" class="light" id="pending-logout">Changer de compte</button></div></section>
+<section class="panel" id="access-pending" hidden><h2>Votre espace se prépare.</h2><p id="access-message">Aucun abonnement actif n’est encore associé à ce compte.</p><div class="row"><a href="eloah-offres.html">Voir les offres ELOAH ↗</a><a href="eloah-decouvrir.html#contact">Contacter ELOAH ↗</a><button type="button" id="refresh-entitlement">Vérifier mon accès</button><button type="button" class="light" id="pending-logout">Changer de compte</button></div></section>
 <section id="private-area" hidden>
  <div class="panel"><div class="row" style="justify-content:space-between"><div><h2>Bienvenue dans ton espace</h2><p id="signed-in-email"></p><p id="current-plan"></p></div><button class="light" id="logout" type="button">Se déconnecter</button></div>
  <p class="notice">Ce portail est une version pilote. Aucun abonnement ou paiement n'est activé ici. Les offres payantes requerront une vérification des droits côté serveur avant toute ouverture commerciale.</p></div>
@@ -221,6 +221,13 @@ $('signup-button').addEventListener('click',async()=>{
  }catch(e){status('login-status','Création du compte indisponible. Réessayez ou contactez ELOAH.')}
  finally{btn.disabled=false}
 });
+$('refresh-entitlement').addEventListener('click',async()=>{
+ const button=$('refresh-entitlement');button.disabled=true;
+ try{await refresh()}finally{button.disabled=false}
+});
+if(new URLSearchParams(location.search).has('checkout')){
+ status('login-status','Retour du paiement : votre accès sera confirmé uniquement après vérification sécurisée de l’abonnement.');
+}
 $('pending-logout').addEventListener('click',async()=>{await getClient().auth.signOut();await refresh()});
 $('logout').addEventListener('click',async()=>{
  await getClient().auth.signOut();
