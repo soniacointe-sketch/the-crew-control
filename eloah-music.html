@@ -99,6 +99,8 @@ $('cloudBtn').onclick=async()=>{
     if(upload.error)throw upload.error;
     const insert=await cloud.from('eloah_music_tracks').insert({user_id:cloudUser.id,title:t.title,artist:t.artist,storage_path:key});
     if(insert.error){await cloud.storage.from('eloah-music-private').remove([key]);throw insert.error}
+    const saved=await cloud.from('eloah_music_tracks').select('id').eq('user_id',cloudUser.id).eq('storage_path',key).single();
+    if(saved.data?.id){const cid='cloud-'+saved.data.id;playlists.forEach(p=>{if(p.ids.includes(t.id)&&!p.ids.includes(cid))p.ids.push(cid)});if(likes.includes(t.id)&&!likes.includes(cid))likes.push(cid);save()}
     ok++;
    }catch(e){failed++}
   }
