@@ -3,7 +3,12 @@
 /* Importer : galerie des médias publiés sur les domaines ELOAH et stockage local des propres fichiers. */
 function create(options){
  const ctx=options,lib=window.ELOAHImportLibrary||{items:[],folders:[],byId:new Map()};
- const state={tab:'images',domain:'all',album:'all',query:'',limit:48,preview:null,uploadDomain:'eloah',storage:'initialisation'};
+ const urlParams=new URLSearchParams(window.location.search);
+ const requestedFolder=urlParams.get('dossier');
+ const initialFolder=lib.folders.some(f=>f.id===requestedFolder)?requestedFolder:'all';
+ const state={tab:'images',domain:initialFolder,album:'all',query:'',limit:48,preview:null,
+  showAll:urlParams.get('vue')==='toutes'&&initialFolder==='all',
+  uploadDomain:initialFolder==='all'?'eloah':initialFolder,storage:'initialisation'};
  let db=null,items=[],opBusy=false,uploadInput=null,recentIds=[];
  try{recentIds=JSON.parse(localStorage.getItem('eloah_reel_import_recent')||'[]').filter(x=>typeof x==='string').slice(0,25)}catch{}
  function rememberRecent(id){
@@ -104,9 +109,11 @@ function create(options){
  function images(){
   const media=[...localItems('image'),...lib.items.filter(isImage)];
   const selected=media.filter(matches);
-  if(state.domain==='all'&&!state.query&&state.album==='all'){
+  if(state.domain==='all'&&!state.query&&state.album==='all'&&!state.showAll){
    const personal=localItems('image');
-   let html='<h3 class="ecs-import-title">Images de tes univers</h3>'+folderCards();
+   let html='<h3 class="ecs-import-title">Images de tes univers</h3>'+
+  '<button type="button" class="ecs-import-all-link" data-import-show-all>▧ Voir toutes les '+media.length+' images →</button>'+
+  folderCards();
    if(personal.length)html+=cardSection('Mes images importées',personal.slice(0,12),'personal','Images sauvegardées sur cet appareil.');
    const recent=recentIds.map(get).filter(x=>x&&x.kind==='image').slice(0,12);
    if(recent.length)html+=cardSection('Utilisés récemment',recent,null);
@@ -119,7 +126,7 @@ function create(options){
   const albums=state.domain!=='all'&&state.domain!=='personal'?
    '<select class="ecs-import-albums" id="ecs-import-album" aria-label="Filtrer par collection"><option value="all">Toutes les collections</option>'+
    albumTitles().map(v=>'<option value="'+esc(v)+'" '+(state.album===v?'selected':'')+'>'+esc(v)+'</option>').join('')+'</select>':'';
-  const header='<div class="ecs-import-heading"><button type="button" data-import-domain="all">←</button><div><h3>'+esc(state.domain==='all'?'Résultats de recherche':state.domain==='personal'?'Mes fichiers':summary(state.domain))+'</h3>'+
+  const header='<div class="ecs-import-heading"><button type="button" data-import-home>←</button><div><h3>'+esc(state.domain==='all'?(state.showAll?'Toutes les images':'Résultats de recherche'):state.domain==='personal'?'Mes fichiers':summary(state.domain))+'</h3>'+
    '<small>'+selected.length+' image(s)'+(state.query?' correspondent à la recherche':'')+'</small></div></div>';
   return domainChips()+header+albums+(page.length?'<div class="ecs-import-grid">'+page.map(renderCard).join('')+'</div>':
    '<p class="ecs-note ecs-import-empty">Aucune image trouvée dans ce dossier.</p>')+
@@ -259,13 +266,15 @@ function create(options){
   items=items.filter(x=>x.id!==id);dismissPreview();update();ctx.toast('Fichier retiré de la médiathèque locale.');
  }
  function switchDomain(id){
-  state.domain=id;state.tab='images';state.album='all';state.limit=48;state.query='';
+  state.domain=id;state.tab='images';state.album='all';state.limit=48;state.query='';state.showAll=false;
   if(id!=='all'&&id!=='personal')state.uploadDomain=id;
   dismissPreview();update();
  }
  function handleClick(ev){
   const find=attr=>ev.target.closest('['+attr+']');
   const tab=find('data-import-tab');if(tab){state.tab=tab.dataset.importTab;state.query='';state.limit=48;update();return true}
+  const allImages=find('data-import-show-all');if(allImages){state.tab='images';state.domain='all';state.showAll=true;state.query='';state.album='all';state.limit=48;update();return true}
+  const home=find('data-import-home');if(home){state.tab='images';state.domain='all';state.showAll=false;state.query='';state.album='all';state.limit=48;update();return true}
   const folders=find('data-import-dossier');if(folders){state.tab='folders';state.query='';update();return true}
   const uploadBtn=find('data-import-upload');if(uploadBtn){uploadInput?.click();return true}
   const domain=find('data-import-domain');if(domain){switchDomain(domain.dataset.importDomain);return true}
