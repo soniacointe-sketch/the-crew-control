@@ -614,7 +614,9 @@ body::selection{background:#9b3d73;color:#fff5fa}
       <div class="faq">
         <details><summary>ELOAH est-il déjà accessible ?</summary><p>ELOAH est en développement. Certaines rubriques existent, d'autres sont en préparation. Les modalités d'accès et les fonctionnalités utilisables sont expliquées lors de la présentation.</p></details>
         <details><summary>À qui s'adresse ELOAH ?</summary><p>Aux particuliers qui gèrent plusieurs projets, aux créateurs, indépendants, associations et petites équipes ayant besoin d'un espace central d'organisation.</p></details>
-        <details><summary>Quels sont les tarifs ?</summary><p>Les formules et tarifs définitifs ne sont pas encore publiés. Vous pouvez demander une présentation sans engagement et être informé lors de l'ouverture des offres.</p></details>
+        <details><summary>Quels sont les prix envisagés pour ELOAH ?</summary><p>Les formules Pilotage étudiées sont Découverte (0 €), Entrée (14,90 € par mois) et Partenaire (69 € par mois). Ce ne sont pas encore des prix contractuels ou des abonnements achetables. Studios créatifs et Associations font l'objet d'un devis individualisé.</p></details>
+        <details><summary>Est-ce que Découverte est accessible gratuitement aujourd'hui ?</summary><p>Le prix envisagé est de 0 €. L'ouverture d'un accès libre généralisé n'est pas encore confirmée. Tu peux demander une présentation et être informé de sa disponibilité.</p></details>
+        <details><summary>Puis-je payer ou souscrire un abonnement maintenant ?</summary><p>Non. La facturation, la gestion des accès, le périmètre des formules et les conditions commerciales restent à finaliser. Les boutons permettent uniquement de demander des informations par e-mail.</p></details>
         <details><summary>Mes données sont-elles hébergées en Europe ?</summary><p>Les fournisseurs, lieux d'hébergement et garanties contractuelles seront indiqués avant l'ouverture commerciale. Aucune promesse d'hébergement ou de chiffrement n'est faite sans vérification.</p></details>
         <details><summary>Que fait le bouton « Demander un accès » ?</summary><p>Il vous permet de préparer une demande par courriel. Aucun compte payant ni accès automatique ne sont créés en cliquant sur ce bouton.</p></details>
       </div>
@@ -628,11 +630,21 @@ body::selection{background:#9b3d73;color:#fff5fa}
       <p class="closing-copy">Parlez-nous de ce que vous imaginez. Nous vous présenterons ELOAH en fonction de vos besoins et de l'avancement réel des fonctionnalités.</p>
       <div class="hero-actions"><a class="button button-gold" href="mailto:soniacointe@powerglam.fr?subject=Pr%C3%A9sentation%20ELOAH">Écrire directement →</a><a class="button button-outline" href="eloah-offres.html">Voir toutes les solutions</a></div>
       <form class="contact-form" id="contact-form">
-        <h3>Demander ma présentation</h3>
+        <h3>Parlons de ton ELOAH</h3>
         <p>Complétez votre message : un brouillon s'ouvrira dans votre messagerie pour que vous puissiez l'envoyer vous-même.</p>
         <div class="fields">
           <div class="field"><label for="contact-name">Votre nom</label><input id="contact-name" type="text" autocomplete="name" maxlength="120" required placeholder="Comment vous appeler ?"></div>
           <div class="field"><label for="contact-email">Votre adresse e-mail</label><input id="contact-email" type="email" autocomplete="email" maxlength="200" required placeholder="vous@exemple.fr"></div>
+        </div>
+        <div class="field"><label for="contact-offer">Quelle offre t'intéresse ?</label>
+          <select id="contact-offer" name="offre" required>
+            <option value="">Choisis ce qui te correspond</option>
+            <option value="pilotage-decouverte">Pilotage · Découverte — 0 € envisagé</option>
+            <option value="pilotage-entree">Pilotage · Entrée — 14,90 €/mois envisagé</option>
+            <option value="pilotage-partenaire">Pilotage · Partenaire — 69 €/mois envisagé</option>
+            <option value="studio">Studios créatifs — sur devis</option>
+            <option value="association">ELOAH Associations — sur devis</option>
+          </select>
         </div>
         <div class="field"><label for="contact-profile">Vous êtes…</label><select id="contact-profile" required><option value="">Choisir votre profil</option><option>Particulier</option><option>Indépendant / créateur</option><option>Association / collectif</option><option>Autre projet</option></select></div>
         <div class="field"><label for="contact-needs">Que souhaitez-vous organiser avec ELOAH ?</label><textarea id="contact-needs" rows="4" maxlength="2500" required placeholder="Quelques mots sur votre activité et vos besoins…"></textarea></div>
@@ -649,7 +661,23 @@ body::selection{background:#9b3d73;color:#fff5fa}
   var menu=document.getElementById('mobile-menu');
   if(menu){menu.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){menu.open=false;});});}
   var form=document.getElementById('contact-form');
-  if(!form)return;
+  var select=document.getElementById('contact-offer');
+  if(!form||!select)return;
+  var offers={
+    'pilotage-decouverte':'ELOAH Pilotage · Découverte',
+    'pilotage-entree':'ELOAH Pilotage · Entrée',
+    'pilotage-partenaire':'ELOAH Pilotage · Partenaire',
+    'studio':'ELOAH Studios créatifs',
+    'association':'ELOAH Associations'
+  };
+  document.querySelectorAll('[data-eloah-offer]').forEach(function(link){
+    link.addEventListener('click',function(){
+      var choice=link.getAttribute('data-eloah-offer');
+      if(offers[choice])select.value=choice;
+    });
+  });
+  var urlOffer=new URLSearchParams(window.location.search).get('offre');
+  if(offers[urlOffer])select.value=urlOffer;
   form.addEventListener('submit',function(event){
     event.preventDefault();
     if(!form.reportValidity())return;
@@ -657,10 +685,11 @@ body::selection{background:#9b3d73;color:#fff5fa}
     var email=document.getElementById('contact-email').value.trim();
     var profile=document.getElementById('contact-profile').value;
     var needs=document.getElementById('contact-needs').value.trim();
-    if(!name||!email||!profile||!needs)return;
-    var subject='Demande de présentation ELOAH — '+name;
-    var body='Bonjour,\n\nJe souhaite découvrir ELOAH.\n\nNom : '+name+'\nAdresse e-mail : '+email+'\nProfil : '+profile+'\n\nMes besoins :\n'+needs+'\n\nMerci de me recontacter.';
-    document.getElementById('form-status').textContent='Votre message est préparé. Vérifiez le brouillon dans votre messagerie et cliquez sur Envoyer : la demande n’est pas encore transmise.';
+    var offer=offers[select.value];
+    if(!name||!email||!profile||!needs||!offer)return;
+    var subject='Demande ELOAH — '+offer+' — '+name;
+    var body='Bonjour,\n\nJe souhaite en savoir plus sur ELOAH.\n\nOffre envisagée : '+offer+'\nNom : '+name+'\nE-mail de réponse : '+email+'\nProfil : '+profile+'\n\nMon projet :\n'+needs+'\n\nJe comprends que les tarifs et les accès sont encore à valider, et qu’aucun abonnement ni paiement n’est activé par cette demande.\n\nMerci de me recontacter.';
+    document.getElementById('form-status').textContent='Le brouillon est prêt dans ta messagerie : vérifie-le et clique sur Envoyer. Ta demande n’a pas encore été transmise.';
     window.location.href='mailto:soniacointe@powerglam.fr?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
   });
 })();
