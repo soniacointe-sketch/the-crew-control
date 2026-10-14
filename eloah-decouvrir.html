@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#211811">
+  <meta name="theme-color" content="#160912">
   <meta name="description" content="Découvrez ELOAH, l'espace qui réunit vos projets, documents, idées, créations et organisation. Demandez une présentation adaptée à votre activité.">
   <meta property="og:title" content="ELOAH — Tout votre univers, au même endroit">
   <meta property="og:description" content="Projets, création, documents, organisation : découvrez l'écosystème ELOAH.">
@@ -45,60 +45,76 @@
   @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.feature,.button{transition:none}.feature:hover,.button:hover{transform:none}}
 
 
-/* ELOAH · Couleurs authentiques de l'accueil : crème, brun profond, bronze et ivoire.
-   La composition premium est conservée, sans la palette bleue du site de référence. */
+/* ELOAH — VIOLENT PRUNE · thème exclusif de la vitrine commerciale */
 :root{
-  --brand-espresso:#211811;
-  --brand-dark:#130e0d;
-  --brand-cream:#f5e9dc;
-  --brand-ivory:#fffaf3;
-  --brand-chocolate:#30231c;
-  --brand-bronze:#a67a43;
-  --brand-border:#dcc5a8;
+  color-scheme:dark;
+  --bg:#160912;--bg-deep:#0f0710;--navy:#24101f;--card:#35152c;
+  --text:#f8eef5;--soft:#e6cfdd;--muted:#cdaec2;
+  --gold:#d8b07a;--gold-strong:#ebc997;--line:rgba(204,123,168,.23);
+  --plum:#6f214f;--plum-bright:#9b3d73;--plum-soft:#c17aa0;
 }
-.site-header{background:rgba(33,24,17,.91);border-bottom-color:rgba(227,194,150,.2)}
-.wordmark{color:#fffaf3}
-.button-gold{background:linear-gradient(120deg,#ecd5af 0%,#f4dfb9 48%,#cba16c 100%);color:#30231c;box-shadow:0 6px 22px rgba(174,119,59,.20)}
-.button-gold:hover{box-shadow:0 10px 30px rgba(174,119,59,.29)}
-.hero{background:
-  radial-gradient(ellipse 56% 70% at 78% 57%,rgba(156,104,62,.25),transparent 73%),
-  radial-gradient(ellipse 80% 90% at 3% 82%,rgba(92,55,32,.36),transparent 76%),
-  linear-gradient(116deg,#150f0d 3%,#281b15 54%,#1b1512 100%)}
-.hero::before{background:repeating-linear-gradient(128deg,transparent 0 182px,rgba(229,198,160,.035) 184px 185px,transparent 187px 345px)}
-.hero::after{background:linear-gradient(180deg,rgba(13,9,7,.07) 40%,rgba(20,13,10,.55) 100%)}
-.hero-art .line{stroke:#dcc5a8}
-.hero-art .accent{stroke:#b98d52}
-.hero-scroll{color:#d9c5ad}
-.section-dark{background:linear-gradient(145deg,#211812 0%,#2c2018 56%,#1b1511 100%)}
-.section-heading p,.feature p,.offer p,.faq details p,.closing-copy{color:#e0cdb7}
-.feature{background:linear-gradient(150deg,rgba(103,74,49,.38),rgba(51,36,25,.64));border-color:rgba(220,197,166,.22)}
-.feature:hover{border-color:#b48a54}
-.offer{background:rgba(79,54,34,.39);border-color:rgba(225,198,164,.2)}
-.offer:nth-child(2){background:linear-gradient(145deg,rgba(99,68,43,.48),rgba(40,28,20,.75))}
-.statement{color:#30231c;background:
-  radial-gradient(ellipse at 50% 40%,rgba(255,250,243,.86),transparent 78%),
-  linear-gradient(180deg,#f7ede0 0%,#ead5bc 100%);border-top:1px solid #dcc5a8}
-.statement .section-label,.section-flat .section-label{color:#8d6337}
-.statement h2{color:#30231c}
-.statement p{color:#66513e}
-.statement .signature{color:#906739}
-.section-flat{background:#f5e9dc;color:#30231c}
-.section-flat .section-heading h2,.section-flat .step h3{color:#30231c}
-.section-flat .section-heading p,.section-flat .step p,.section-flat .showcase-list span{color:#66513e}
-.section-flat .showcase-list span::before,.section-flat .step-index{color:#a67a43}
-.section-flat .step{border-bottom-color:#dcc5a8}
-.dashboard{background:linear-gradient(145deg,#3b2a20,#211811);border-color:rgba(177,133,78,.52)}
-.dash-top,.dash-bottom{border-color:rgba(231,200,165,.22)}
-.dash-card{background:#523d2e;border-color:rgba(240,220,197,.13)}
-.dash-card p{color:#eddcc7}
-.dash-tag,.dash-bottom{color:#dfc9ae}
-.closing{background:
-  radial-gradient(ellipse at 50% 0%,rgba(177,122,62,.24),transparent 60%),
-  linear-gradient(180deg,#302119,#140f0c)}
-.contact-form{background:rgba(42,30,21,.79);border-color:rgba(211,170,116,.36)}
-.field input,.field textarea,.field select,.field select option{background:#30231c;border-color:rgba(219,189,153,.4);color:#fff9ed}
-.footer{background:#130e0d;border-top-color:rgba(221,192,156,.2)}
-@media(max-width:700px){.mobile-panel{background:#2b201a;border-color:#755734}}
+body{color:var(--text);background:radial-gradient(ellipse 70% 30% at 80% 3%,rgba(125,32,88,.22),transparent 75%),linear-gradient(180deg,#130710,#160912 46%,#0f0710)}
+body::selection{background:#9b3d73;color:#fff5fa}
+.site-header{background:rgba(18,6,16,.92);border-bottom-color:rgba(193,122,160,.22);box-shadow:0 7px 28px rgba(8,2,8,.17)}
+.wordmark{color:#fff2f8}.wordmark i{color:#d8b07a}
+.nav-links>a:not(.button){color:#f5e9f0}
+.nav-links>a:not(.button):hover,.footer-links a:hover{color:#ebc997}
+.button-gold{background:linear-gradient(118deg,#e0b780,#f0d4a7 49%,#d6a76d);color:#2b1025;border-color:rgba(244,211,163,.35);box-shadow:0 5px 23px rgba(208,125,164,.18)}
+.button-gold:hover{background:linear-gradient(118deg,#f0ca95,#ffe4b7 49%,#e4b681);box-shadow:0 10px 32px rgba(213,112,167,.27)}
+.button-outline{background:rgba(133,43,98,.13);border-color:rgba(210,150,185,.38);color:#fff4fa}
+.button-outline:hover{background:rgba(158,55,117,.24);border-color:#d8b07a}
+.hero{background:radial-gradient(ellipse 62% 78% at 81% 51%,rgba(166,47,109,.39),transparent 74%),radial-gradient(ellipse 67% 76% at 12% 86%,rgba(111,33,79,.3),transparent 73%),linear-gradient(119deg,#10070f 2%,#251020 47%,#160914 100%)}
+.hero::before{background:repeating-linear-gradient(128deg,transparent 0 182px,rgba(238,184,215,.05) 184px 185px,transparent 187px 345px)}
+.hero::after{background:linear-gradient(180deg,rgba(9,2,9,.015) 43%,rgba(8,2,8,.5) 100%)}
+.hero-art{opacity:.72}.hero-art .line{stroke:#b96b97;stroke-opacity:.42}.hero-art .accent{stroke:#e1b785;stroke-opacity:.56}.hero-art .face{fill:#67234f;fill-opacity:.15}
+.hero-mark{filter:drop-shadow(0 0 21px rgba(187,80,139,.29))}
+.hero-mark path{stroke:#e7bc84}.hero-mark text{fill:#f4d5a6}
+.eyebrow,.section-label,.offer-label{color:#ebc997}
+.eyebrow.pill{background:rgba(63,18,49,.56);border-color:rgba(222,176,126,.42);box-shadow:0 0 23px rgba(173,55,113,.14)}
+.eyebrow.pill::before{background:#dfb47e}
+.hero h1,.section-heading h2,.statement h2,.closing h2{color:#fff5fa}
+.gold{color:#ebc997}.hero-copy{color:#ebdce6}.hero-points{color:#ead9e4}.hero-points span::before{color:#d8b07a}.hero-scroll{color:#d8bbce}
+.section-line{border-top-color:rgba(203,124,168,.16)}
+.section-dark{background:radial-gradient(ellipse 40% 42% at 8% 82%,rgba(103,30,78,.16),transparent 95%),linear-gradient(145deg,#180a16,#261020 55%,#160912)}
+.section-heading p,.feature p,.offer p,.faq details p,.closing-copy,.statement p{color:#dfc7d6}
+.statement{color:#f8eef5;background:radial-gradient(ellipse 58% 63% at 50% 37%,rgba(138,40,99,.30),transparent 82%),linear-gradient(180deg,#260f20,#180a17);border-top:1px solid rgba(193,122,160,.2);border-bottom:1px solid rgba(193,122,160,.14)}
+.statement .section-label,.section-flat .section-label{color:#ebc997}
+.statement h2{color:#fff0f8}.statement p{color:#dfc7d6}.statement .signature{color:#ebc997}
+.section-flat{color:#f8eef5;background:radial-gradient(ellipse 48% 64% at 93% 2%,rgba(128,36,94,.22),transparent 85%),linear-gradient(150deg,#271123,#1a0c1b)}
+.section-flat .section-heading h2,.section-flat .step h3{color:#fff0f8}
+.section-flat .section-heading p,.section-flat .step p,.section-flat .showcase-list span{color:#e0c7d6}
+.section-flat .showcase-list span::before,.section-flat .step-index{color:#e0b780}
+.section-flat .step{border-bottom-color:rgba(207,145,181,.19)}
+.feature{background:linear-gradient(150deg,rgba(111,33,79,.34),rgba(36,16,31,.76));border-color:rgba(195,119,163,.25);box-shadow:inset 0 1px rgba(231,172,204,.03),0 15px 37px rgba(6,2,8,.13)}
+.feature h3{color:#fff0f7}.feature p{color:#e1cbda}
+.feature:hover{border-color:#d8b07a;box-shadow:0 18px 36px rgba(108,23,70,.25)}
+.feature-icon{color:#e9bd86}.section-footnote{color:#cfa8c1}
+.dashboard{background:linear-gradient(145deg,#401832,#190c1a);border-color:rgba(216,176,122,.32);box-shadow:0 25px 60px rgba(5,0,7,.5)}
+.dashboard::before{border-color:rgba(216,176,122,.34)}
+.dash-top,.dash-bottom{border-color:rgba(207,148,178,.23)}
+.dash-word,.dash-main h3{color:#f9edf5}.dash-tag,.dash-bottom{color:#d5acc5}
+.dash-main small{color:#eac18e}.dash-card{background:#4a1e3b;border-color:rgba(217,148,187,.21)}
+.dash-card b{color:#fff0f8}.dash-card p{color:#e3c8d8}
+.offer{background:linear-gradient(150deg,rgba(88,28,68,.42),rgba(32,13,29,.77));border-color:rgba(193,122,160,.23)}
+.offer:nth-child(2){background:linear-gradient(145deg,rgba(119,37,89,.48),rgba(39,15,34,.82));border-color:rgba(216,176,122,.55);box-shadow:0 12px 35px rgba(76,12,55,.19)}
+.offer h3{color:#fff1f8}.offer p,.step p{color:#e1c8d8}
+.faq details{border-bottom-color:rgba(210,145,180,.23)}
+.faq summary{color:#f9eefa}.faq summary::after{color:#ebc997}.faq details p{color:#dbc0d1}
+.closing{background:radial-gradient(ellipse 72% 78% at 50% 1%,rgba(139,36,95,.36),transparent 73%),linear-gradient(180deg,#2c1125,#100711)}
+.closing h2{color:#fff2f8}.closing-copy{color:#e2ceda}
+.contact-form{background:rgba(27,10,24,.88);border-color:rgba(216,176,122,.31);box-shadow:0 20px 45px rgba(4,0,6,.23)}
+.contact-form h3{color:#fff0f8}.contact-form>p,.form-hint{color:#cda9be}
+.field label{color:#eddae6}
+.field input,.field textarea,.field select,.field select option{background:#2c1226;border-color:rgba(195,115,162,.42);color:#f8eef5}
+.field input::placeholder,.field textarea::placeholder{color:#b98fa7}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:#e4ba86;outline:1px solid #e4ba86}
+.form-status{color:#ebc997}
+.footer{background:#0f0710;border-top-color:rgba(193,122,160,.19)}
+.footer p,.footer-links{color:#cbaec0}
+.mobile-panel{background:#281024;border-color:rgba(193,122,160,.34)}
+.mobile-panel a{color:#f8eef5}
+@media(max-width:700px){.site-header{background:rgba(18,6,16,.96)}.mobile-panel{background:#281024;border-color:#794064}}
+
 </style>
 </head>
 <body>
@@ -120,7 +136,7 @@
 <main>
   <section class="hero" id="accueil">
     <svg class="hero-art" viewBox="0 0 1440 830" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs><linearGradient id="hero-panel" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#866449" stop-opacity=".17"/><stop offset="1" stop-color="#4d3629" stop-opacity=".02"/></linearGradient></defs>
+      <defs><linearGradient id="hero-panel" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#7a2e5c" stop-opacity=".17"/><stop offset="1" stop-color="#2e1128" stop-opacity=".02"/></linearGradient></defs>
       <path d="M-70 56 260 218 597 59 264 -112Z" fill="url(#hero-panel)"/>
       <path class="line" stroke-opacity=".38" d="M-70 56 260 218 597 59M260 218l4 60M264 278 601 115"/>
       <path class="line" stroke-opacity=".29" d="M-140 354 148 480 516 282 281 180M148 480l4 28M152 508 520 310"/>
