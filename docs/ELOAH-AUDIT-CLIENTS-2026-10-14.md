@@ -37,3 +37,9 @@ Cette vérification structurelle est réussie. Elle ne remplace pas un test de c
 - Les fichiers placés sur GitHub Pages ne deviennent pas privés grâce aux réglages Supabase. Un test réel d'accès croisé, avec deux comptes autorisés, reste nécessaire.
 
 Aucun fichier ni droit de stockage n'a été modifié lors de ce contrôle.
+
+## Audit du partage Boards — contrôles du code serveur
+
+Examen de la fonction déployée `eloah-boards-private-edit` : un jeton de 43 caractères est requis, haché SHA-256 puis recherché en base. Lien absent, expiré ou révoqué : refus. La fonction vérifie `access_mode === 'edit'` avant une modification ; les liens de lecture seule n'autorisent que la consultation. L'écriture vérifie `expectedUpdatedAt` et passe par une fonction de commit pour éviter l'écrasement de modifications simultanées. Les contrôles sont présents dans le code mais n'ont pas fait l'objet de tests fonctionnels exhaustifs avec des liens réels.
+
+Points restant à tester : création de liens, durée maximale, révocation immédiate, transmission accidentelle du jeton, partage lecture seule/édition et validation complète du propriétaire dans les fonctions privilégiées.
