@@ -1,0 +1,44 @@
+/* ELOAH — Theme commun, référence : eloah-offres.html (octobre 2026).
+   Purement visuel : aucun script, lien, droit d'accès ou donnée modifié. */
+:root {
+ color-scheme:dark;
+ --bg:#160912;--paper:#160912;--background:#160912;
+ --panel:#24101f;--surface:#24101f;--white:#24101f;
+ --ink:#f8eef5;--text:#f8eef5;--muted:#ddc7d6;
+ --line:rgba(193,122,160,.30);--border:rgba(193,122,160,.30);
+ --purple:#bd84aa;--violet:#bd84aa;--rose:#e5c28b;
+ --gold:#e5c28b;--tint:#391731;--accent:#e5c28b;
+}
+html{color-scheme:dark}
+body,body.eloah-home-client{background:radial-gradient(ellipse at 92% 0%,rgba(120,27,84,.20),transparent 40%),#160912!important;color:#f8eef5!important}
+body.eloah-home-client main,body.eloah-screen main,.client-page main{background:transparent!important;color:#f8eef5!important;box-shadow:none!important}
+body :is(h1,h2,h3,h4,h5,h6){color:#fff0f8}
+body :is(p,small,.intro,.section-intro,.help,.desc,.muted,.subtitle){color:#ddc7d6}
+body :is(.eyebrow,.number,.pillar-number,.choice-top,.choice .number){color:#e5c28b!important}
+body :is(.choice,.project-link,.project-tile,.workspace-choice,.tool,.tasks,.task-card,.secondary,.secondary-panel,.search-results,.services article,.service,.ops-card,.pillar,.price,.detail-card,.card,.panel,.tile,.empty-state,.empty-project,.directory>a,.reassurance){
+ background:linear-gradient(155deg,rgba(97,34,75,.43),rgba(34,14,33,.84))!important;
+ border-color:rgba(202,125,170,.30)!important;
+ color:#f8eef5!important;
+ box-shadow:0 12px 30px rgba(5,1,8,.13);
+}
+body :is(.choice,.project-link,.project-tile,.workspace-choice,.tool,.directory>a):hover{
+ background:#391731!important;border-color:#e5c28b!important
+}
+body :is(button,.btn,.primary,input[type="submit"]){border-color:rgba(237,204,159,.45);color:#f8eef5}
+body :is(.primary,.btn.primary,button.primary){background:linear-gradient(118deg,#deb57c,#f0d6ae 50%,#d7aa6d)!important;border-color:#deb57c!important;color:#291022!important}
+body :is(input,select,textarea){background:#311329!important;color:#fff0fa!important;border-color:rgba(197,125,163,.43)!important}
+body :is(input,textarea)::placeholder{color:#bea4b4!important}
+body :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #e5c28b;outline-offset:3px}
+body :is(.eloah-global-nav,.fallback-nav){background:#170914!important;color:#f8eef5!important;border-color:rgba(214,148,184,.22)!important}
+body .eloah-global-nav :is(a,summary,.eloah-wordmark){color:#f8eef5!important}
+body .eloah-global-nav a:hover,body .eloah-global-nav a[aria-current]{background:#572542!important;color:#f8eef5!important}
+body .eloah-global-nav :is(.eloah-menu-links,.eloah-menu-links .home-nav-more>div){background:#24101f!important;border-color:rgba(214,148,184,.22)!important}
+body.eloah-home-client :is(h1,h2,h3,.eloah-universe-card strong){color:#fff0f8!important}
+body.eloah-home-client .home-hero{background:radial-gradient(ellipse at 80% 25%,rgba(155,50,110,.32),transparent 58%),linear-gradient(120deg,#170914,#32132b)!important;border-color:rgba(216,176,122,.33)!important}
+body.eloah-home-client :is(.intro,.choice .desc,.eloah-universe-card small){color:#ddc7d6!important}
+body.eloah-home-client :is(.tool .btn,.primary){background:linear-gradient(118deg,#deb57c,#f0d6ae 50%,#d7aa6d)!important;color:#291022!important;border-color:#deb57c!important}
+body.eloah-home-client .eloah-universe-portrait{border-color:#3c1a33;outline-color:#e5c28b}
+body :is(.home-status,.example){background:#391731!important;color:#f8eef5!important;border-color:rgba(202,125,170,.3)!important}
+body :is(.section,.workspace-section,.task,.footer){border-color:rgba(202,125,170,.27)!important}
+body dialog{background:#24101f!important;color:#f8eef5!important;border-color:#85516c!important}
+@media(max-width:650px){body.eloah-home-client main{background:transparent!important}}
