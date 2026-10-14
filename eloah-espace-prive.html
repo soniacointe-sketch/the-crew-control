@@ -84,7 +84,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
 #private-area #workspace-form{border-top:1px solid #e9dde7;margin-top:22px;padding-top:10px}
 @media(max-width:850px){#private-area .client-shell{grid-template-columns:1fr}#private-area .client-sidebar{position:static;min-height:0;gap:14px;padding:16px}#private-area .client-side-nav{display:flex;overflow-x:auto;gap:7px}#private-area .client-nav-link{flex:none;background:#ffffff0c;font-size:12px}#private-area .client-side-note,#private-area .client-side-offer{display:none}#private-area .grid{grid-template-columns:1fr}}
 @media(max-width:550px){#private-area .client-overview{padding:20px}#private-area .client-metrics{width:100%}#private-area .client-metrics>div{flex:1}#private-area .client-side-brand{font-size:20px}}
-</style><style id="eloah-customer-task-controls">#private-area .task-controls{display:flex;gap:10px;align-items:center;margin-top:10px}#private-area .task-controls label{font:600 11px system-ui;color:#65556a;margin:0}#private-area .task-controls select{display:block;margin:5px 0 0;padding:7px 10px;min-height:38px;font-size:12px;max-width:185px}#private-area .task{padding:14px 0}#private-area .task strong{font-size:15px}</style></head>
+</style><style id="eloah-customer-task-controls">#private-area .task-controls{display:flex;gap:10px;align-items:center;margin-top:10px}#private-area .task-controls label{font:600 11px system-ui;color:#65556a;margin:0}#private-area .task-controls select{display:block;margin:5px 0 0;padding:7px 10px;min-height:38px;font-size:12px;max-width:185px}#private-area .task{padding:14px 0}#private-area .task strong{font-size:15px}</style><style>#private-area .workspace-entry{display:flex;align-items:center;gap:6px;border-bottom:1px solid #e8dce8;padding:4px 0}#private-area .workspace-entry .workspace{flex:1;min-width:0}#private-area .workspace-entry button.light{font-size:11px;padding:7px;min-height:36px}</style></head>
 <body>
 <header><a class="wordmark" href="eloah-offres.html">ELOAH</a><nav class="row"><a href="eloah-offres.html">Offres publiques ↗</a><a href="eloah-inscription.html">Mon abonnement ↗</a></nav></header>
 <main>
@@ -218,7 +218,20 @@ async function loadWorkspaces(){
  for(const ws of data){
   const b=el('button',undefined,'workspace');b.type='button';b.dataset.id=ws.id;
   b.append(el('strong',ws.title),el('small',ws.category));
-  b.onclick=()=>choose(ws);list.append(b);
+  b.onclick=()=>choose(ws);
+  const rename=el('button','Renommer','light');rename.type='button';
+  rename.addEventListener('click',async()=>{
+   const proposed=window.prompt('Nouveau nom du projet',ws.title);
+   if(proposed===null)return;
+   const title=proposed.trim();
+   if(title.length<2||title.length>120){status('workspace-status','Le nom doit contenir entre 2 et 120 caractères.');return}
+   rename.disabled=true;
+   const {error}=await getClient().from('eloah_customer_workspaces').update({title}).eq('id',ws.id).eq('owner_id',user.id);
+   if(error)status('workspace-status','Renommage impossible : '+errMessage(error));
+   else{status('workspace-status','Projet renommé.');await loadWorkspaces()}
+   rename.disabled=false;
+  });
+  const wrap=el('div',undefined,'workspace-entry');wrap.append(b,rename);list.append(wrap);
  }
  const selected=data.find(w=>w.id===workspaceId);
  if(selected)choose(selected);
