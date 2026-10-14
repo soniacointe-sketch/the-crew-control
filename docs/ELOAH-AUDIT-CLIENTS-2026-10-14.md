@@ -20,3 +20,9 @@ Les abonnements ELOAH ne doivent pas être ouverts à la vente avant ces tests. 
 ## Simulations SQL effectuées le 14 octobre 2026
 
 Deux identifiants UUID fictifs différents ont été simulés avec le rôle `authenticated` dans des transactions annulées (`ROLLBACK`). Pour chacun, les requêtes sur `eloah_customer_entitlements`, `eloah_customer_workspaces` et `eloah_customer_workspace_items` ont retourné zéro ligne visible. Aucun utilisateur réel ni paiement n'a été créé. Ces simulations démontrent le refus de lecture pour deux identités dépourvues d'abonnement ; elles ne remplacent **pas** un test intercomptes A/B avec deux abonnements actifs et des données possédées distinctes, ni des tests d'écriture.
+
+## Vérification des liens entre espaces et actions
+
+La base impose une clé étrangère composite `(workspace_id, owner_id)` pour les actions, pointant vers `(id, owner_id)` des espaces. Elle empêche qu'une action soit rattachée à l'espace d'une autre personne avec un propriétaire différent, même si l'identifiant de l'espace est connu. La contrainte est gérée côté PostgreSQL, en complément des politiques RLS. Les espaces ont également une clé étrangère `owner_id` vers `auth.users(id)` et une contrainte d'unicité `(id, owner_id)`.
+
+Cette vérification structurelle est réussie. Elle ne remplace pas un test de connexion effectif avec deux comptes distincts.
