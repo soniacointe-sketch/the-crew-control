@@ -239,7 +239,7 @@ function renderAudio(){
  return '<div class="ecs-audio-header"><button data-tab="elements" aria-label="Retour aux éléments">←</button><strong>Audio</strong></div><div class="ecs-search"><input id="ecs-audio-search" placeholder="Rechercher des éléments" aria-label="Rechercher des sons"><span>⌕</span></div><div class="ecs-sectiontitle"><strong>Voix off</strong></div><div class="ecs-audio-voicecards"><button type="button" data-audio-view="record"><span class="ecs-voiceicon mic">♩</span><strong>Enregistrez une voix off</strong></button><button type="button" data-audio-view="tts"><span class="ecs-voiceicon ai">Aa</span><strong>Générez une voix de synthèse</strong></button></div>'+publicMusicMarkup()+mixkitMarkup()+audioSection('Utilisés récemment · Boucles ELOAH',recent.length?recent:[])+audioSection('Compositions ELOAH · 10 s',soundLibrary)+'<div class="ecs-audio-footer"><p class="ecs-note">Musiques originales ELOAH et pistes FreePD CC0 disponibles. Les pistes Mixkit s’importent après téléchargement sur leur site.</p>'+btn('importAudio','＋ Importer une musique',true)+(media.audioUrl?'<div class="ecs-audio-loaded"><strong>♫ Piste ajoutée</strong><span>'+xss(audio.dataset.filename||'Audio')+'</span>'+btn('removeAudio','Retirer la piste')+'</div>':'')+'</div>';
 }
 
-let images=new Map(),activeTab=['import','tools','text','brand','elements'].includes(new URLSearchParams(window.location.search).get('onglet'))?new URLSearchParams(window.location.search).get('onglet'):'models',elementsCategory=null,selected=null,nextId=1,drag=null,history=[],future=[],lastFrame=performance.now(),busy=false,toastTimer=0,importKind='background';
+let images=new Map(),activeTab=['import','tools','text','brand','elements','projects'].includes(new URLSearchParams(window.location.search).get('onglet'))?new URLSearchParams(window.location.search).get('onglet'):'models',elementsCategory=null,selected=null,nextId=1,drag=null,history=[],future=[],lastFrame=performance.now(),busy=false,toastTimer=0,importKind='background';
 const S={name:'Mon Reel',duration:5,trimStart:0,time:0,playing:false,bg:'#fffaf1',filter:'none',brand:'Power & Glam',elements:[]};
 let projectLibrary=null;
 const elementCategories=[
@@ -1542,6 +1542,7 @@ function projectDownload(data,record){
 projectLibrary=window.ELOAHReelProjects?.create({
  root,getName:()=>one('#ecs-name')?.value||S.name,getBrand:()=>S.brand,
  getActiveTab:()=>activeTab,refresh:()=>renderSide(),toast,
+ setName:value=>{S.name=value;one('#ecs-name').value=value;saveLocal()},
  capture:captureCurrentForProjects,open:restoreProjectFromLibrary,
  newProject:()=>action('reset'),
  exportJSON:projectDownload,
