@@ -5,6 +5,7 @@ function create(options){
  const ctx=options,lib=window.ELOAHImportLibrary||{items:[],folders:[],byId:new Map()};
  const urlParams=new URLSearchParams(window.location.search);
  const requestedFolder=urlParams.get('dossier');
+ const requestedImage=urlParams.get('image');
  const initialFolder=lib.folders.some(f=>f.id===requestedFolder)?requestedFolder:'all';
  const state={tab:'images',domain:initialFolder,album:'all',query:'',limit:48,preview:null,
   showAll:urlParams.get('vue')==='toutes'&&initialFolder==='all',
@@ -314,6 +315,9 @@ function create(options){
    for(const item of items)try{objUrls.set(item.id,URL.createObjectURL(item.blob))}catch{}
   }
   update();
+  if(requestedImage&&lib.byId.has(requestedImage)&&ctx.getActiveTab()==='import'){
+   preview(requestedImage);
+  }
  }
  function setup(){
   uploadInput=document.createElement('input');uploadInput.type='file';uploadInput.multiple=true;
