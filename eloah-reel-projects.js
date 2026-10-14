@@ -21,7 +21,9 @@ const humanDate=timestamp=>{
 };
 function create(config){
  const state={view:'all',folder:null,search:'',menu:null,loading:true,saving:false,flash:'',page:48,sort:'recent',storage:'initialisation'};
- let db=null,projects=[],folders=[],currentId=null,autosaveTimer=null,mutation=Promise.resolve(),busy=false;
+ let lastId=null;try{lastId=localStorage.getItem('eloah_active_reel_project')}catch{}
+ let db=null,projects=[],folders=[],currentId=lastId,autosaveTimer=null,mutation=Promise.resolve(),busy=false;
+ function recordActive(id){currentId=id;try{if(id)localStorage.setItem('eloah_active_reel_project',id);else localStorage.removeItem('eloah_active_reel_project')}catch{}}
  const currentProject=()=>projects.find(p=>p.id===currentId);
  const lookupFolder=id=>folders.find(f=>f.id===id);
  const folderTitle=id=>lookupFolder(id)?.name||'Sans dossier';
@@ -208,7 +210,7 @@ function create(config){
    const ok=await queueWrite(()=>dbWrite('designs','put',updated));
    const index=projects.findIndex(p=>p.id===updated.id);
    if(index>=0)projects[index]=updated;else projects.unshift(updated);
-   currentId=updated.id;
+   recordActive(updated.id);
    if(!auto)notify(ok?'Projet « '+updated.name+' » enregistré.':'Stockage indisponible : projet disponible uniquement dans cette session. Exporte-le en JSON.');
   }catch(e){if(!auto)notify('Enregistrement impossible : '+e.message)}
   finally{busy=false;state.saving=false;if(!auto)refresh()}
@@ -225,7 +227,7 @@ function create(config){
   try{
    if(autosaveTimer){clearTimeout(autosaveTimer);autosaveTimer=null}
    const okay=await config.open(p.data,p);
-   if(okay!==false){currentId=p.id;state.menu=null;notify('Projet « '+p.name+' » ouvert.')}
+   if(okay!==false){recordActive(p.id);state.menu=null;notify('Projet « '+p.name+' » ouvert.')}
   }catch(e){notify('Impossible d’ouvrir : '+e.message)}
   finally{busy=false}
  }
@@ -274,7 +276,7 @@ function create(config){
   }else if(action==='remove'){
    if(!confirm('Supprimer définitivement le design « '+p.name+' » de ce navigateur ?'))return;
    const ok=await queueWrite(()=>dbWrite('designs','delete',id));projects=projects.filter(x=>x.id!==id);
-   if(currentId===id)currentId=null;state.menu=null;return notify(ok?'Design supprimé.':'Design retiré de la session ; vérifie le stockage local.');
+   if(currentId===id)recordActive(null);state.menu=null;return notify(ok?'Design supprimé.':'Design retiré de la session ; vérifie le stockage local.');
   }else return;
   p.updatedAt=Date.now();await queueWrite(()=>dbWrite('designs','put',p));state.menu=null;notify('Design mis à jour.');
  }
@@ -290,7 +292,7 @@ function create(config){
   const designCmd=matches(ev,'data-project-action');if(designCmd){designAction(designCmd.dataset.id,designCmd.dataset.projectAction);return true}
   if(matches(ev,'data-project-save-current')){saveCurrent();return true}
   if(matches(ev,'data-project-new-folder')){makeFolder();return true}
-  if(matches(ev,'data-project-new')){if(config.newProject()!==false){currentId=null;state.view='all';refresh()}return true}
+  if(matches(ev,'data-project-new')){if(config.newProject()!==false){recordActive(null);state.view='all';refresh()}return true}
   if(matches(ev,'data-project-import')){config.importJSON();return true}
   if(matches(ev,'data-project-download-current')){config.exportJSON();return true}
   const more=matches(ev,'data-project-more');if(more){state.page+=48;refresh();return true}
@@ -321,11 +323,12 @@ function create(config){
    folders=DEFAULT_FOLDERS.map(([id,name,brand])=>({id,name,brand,createdAt:Date.now()}));
    if(db)for(const f of folders)await dbWrite('folders','put',f);
   }
+  if(currentId&&!projects.some(p=>p.id===currentId))recordActive(null);
   state.loading=false;refresh();
  }
  initialize().catch(e=>{state.loading=false;state.storage='session';notify('Chargement des projets indisponible : '+e.message)});
  return {render:panel,click,input,change,saveCurrent,openDesign,scheduleAutoSave,
-  clearCurrent:()=>{currentId=null;if(autosaveTimer)clearTimeout(autosaveTimer);autosaveTimer=null},
+  clearCurrent:()=>{recordActive(null);if(autosaveTimer)clearTimeout(autosaveTimer);autosaveTimer=null},
   getCurrentId:()=>currentId,count:()=>projects.length,
   state:()=>({...state,projects:projects.length,folders:folders.length})};
 }
