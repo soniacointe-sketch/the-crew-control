@@ -839,3 +839,14 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-import-upload-pick label{flex:0 0 auto;margin:0;font-size:10px;font-weight:750;color:#6d7890}
 #eloah-canva-studio .ecs-import-upload-pick select{flex:1;min-width:0;background:#fff;border:1px solid #dfe4eb;border-radius:8px;padding:7px 9px;font-size:11px;color:#3e5267}
 @media(max-width:390px){#eloah-canva-studio .ecs-import-upload-pick{flex-wrap:wrap}#eloah-canva-studio .ecs-import-upload-pick select{flex-basis:100%}}
+
+/* Accès direct à toutes les images, identifiable même lorsque le menu latéral est fermé */
+#eloah-canva-studio .ecs-top-import{display:inline-flex;align-items:center;justify-content:center;gap:5px;background:#6f43bd;color:#fff;border-radius:8px;padding:9px 10px;font-weight:780;white-space:nowrap;font-size:12px}
+#eloah-canva-studio .ecs-top-import:hover{background:#5934a3}
+#eloah-canva-studio .ecs-import-all-link{display:flex;align-items:center;justify-content:center;width:100%;background:#e7dbfa;color:#503189;border:1px solid #bfa8e0;border-radius:10px;padding:13px 12px;margin:10px 0 16px;font-weight:800;font-size:13px}
+#eloah-canva-studio .ecs-import-all-link:hover{background:#dbcaf5}
+#eloah-canva-studio .ecs-import-error{border:1px solid #e5bba5;background:#fff8f3;border-radius:10px;padding:16px;font-size:13px}
+#eloah-canva-studio .ecs-import-error strong{display:block;font-size:14px;color:#684539;margin-bottom:8px}
+#eloah-canva-studio .ecs-import-error p{margin:8px 0}
+#eloah-canva-studio .ecs-import-error a{display:block;background:#6442a4;color:#fff;border-radius:9px;padding:10px;text-align:center;text-decoration:none}
+@media(max-width:690px){#eloah-canva-studio .ecs-top-import{font-size:11px;padding:8px 9px}}
