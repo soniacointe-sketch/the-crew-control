@@ -43,3 +43,7 @@ Aucun fichier ni droit de stockage n'a été modifié lors de ce contrôle.
 Examen de la fonction déployée `eloah-boards-private-edit` : un jeton de 43 caractères est requis, haché SHA-256 puis recherché en base. Lien absent, expiré ou révoqué : refus. La fonction vérifie `access_mode === 'edit'` avant une modification ; les liens de lecture seule n'autorisent que la consultation. L'écriture vérifie `expectedUpdatedAt` et passe par une fonction de commit pour éviter l'écrasement de modifications simultanées. Les contrôles sont présents dans le code mais n'ont pas fait l'objet de tests fonctionnels exhaustifs avec des liens réels.
 
 Points restant à tester : création de liens, durée maximale, révocation immédiate, transmission accidentelle du jeton, partage lecture seule/édition et validation complète du propriétaire dans les fonctions privilégiées.
+
+## Contrôle des liens de partage — 14 octobre 2026
+
+Inspection des contraintes PostgreSQL : jeton stocké en empreinte de 64 caractères, clé primaire sur `token_hash`, accès limité aux modes `read` et `edit`, et propriétaire relié à `auth.users`. Lors de l'inspection, la table contenait **deux liens valides, aucun révoqué et aucun expiré**. Les liens n'ont pas été modifiés. La vérification des conditions de refus est statique (code + schéma) : la révocation effective d'un lien lors d'un appel API réel n'a pas encore été testée.
