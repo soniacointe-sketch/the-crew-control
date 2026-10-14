@@ -999,3 +999,20 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-project-move-folders button:hover,#eloah-canva-studio .ecs-project-move-folders button:focus-visible{background:#f1ebfa;border-color:#bb9fdb;color:#583a93}
 #eloah-canva-studio .ecs-project-move-folders button.selected{border-color:#b399d7;background:#e9def6;color:#583886;font-weight:800}
 #eloah-canva-studio .ecs-project-move-cancel{background:#f0f2f5;color:#5a6775;padding:10px 13px;border-radius:8px;font-size:12px}
+
+/* Liens Canva privés : seuls les noms/URL importés localement apparaissent dans cette vue */
+#eloah-canva-studio .ecs-canva-import-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;background:#ebe5f8;color:#613e96;font-size:11px;font-weight:700;border-radius:8px;padding:9px 11px;white-space:nowrap;cursor:pointer}
+#eloah-canva-studio .ecs-canva-import-btn:hover{background:#dcccfa}
+#eloah-canva-studio .ecs-canva-import-btn input{position:absolute;clip:rect(0,0,0,0);width:1px;height:1px;overflow:hidden}
+#eloah-canva-studio .ecs-canva-linked{margin:17px 0 23px}
+#eloah-canva-studio .ecs-canva-linked .ecs-sectiontitle{display:flex;justify-content:space-between;align-items:center;margin:0 0 9px}
+#eloah-canva-studio .ecs-canva-linked .ecs-sectiontitle>span{font-size:11px;color:#7b6c94}
+#eloah-canva-studio .ecs-canva-cards{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:10px 0}
+#eloah-canva-studio .ecs-canva-card{display:flex;flex-direction:column;gap:6px;border:1px solid #e3ddec;background:#fdfbff;border-radius:10px;padding:11px;min-width:0}
+#eloah-canva-studio .ecs-canva-card .ecs-canva-badge{font-size:9px;letter-spacing:.04em;font-weight:800;color:#8853b5}
+#eloah-canva-studio .ecs-canva-card>strong{font-size:12px;line-height:1.35;overflow-wrap:anywhere}
+#eloah-canva-studio .ecs-canva-card>small{font-size:10px;color:#69788d}
+#eloah-canva-studio .ecs-canva-card>div:last-child{display:flex;justify-content:space-between;align-items:center;gap:7px;margin-top:auto}
+#eloah-canva-studio .ecs-canva-card a{display:inline-block;background:#e7dff6;color:#6341a2;padding:8px;border-radius:8px;text-decoration:none;font-size:10px;font-weight:750}
+#eloah-canva-studio .ecs-canva-card button{border-radius:7px;background:#f6e5e9;color:#9d4d59;padding:8px 10px;font-size:14px}
+@media(max-width:450px){#eloah-canva-studio .ecs-canva-cards{grid-template-columns:1fr}}
