@@ -977,3 +977,12 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-project-sortbar select{border:1px solid #e0e5ec;border-radius:8px;padding:7px 7px;color:#455467;background:#fff;font-size:11px;max-width:130px}
 @media(max-width:790px){#eloah-canva-studio .ecs-top-projects{font-size:11px;padding:7px 8px}}
 @media(max-width:690px){#eloah-canva-studio .ecs-project-sortbar{margin:-3px 0 14px}}
+
+/* Barre du studio : les raccourcis Images et Projets restent accessibles sur petit écran. */
+#eloah-canva-studio .ecs-top{overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:thin}
+#eloah-canva-studio .ecs-top .ecs-top-projects{flex:0 0 auto}
+@media(max-width:690px){
+ #eloah-canva-studio .ecs-top{scrollbar-width:thin}
+ #eloah-canva-studio .ecs-top .ecs-topspacer{min-width:4px}
+ #eloah-canva-studio .ecs-top .ecs-top-projects{font-size:11px}
+}
