@@ -1,0 +1,36 @@
+name: ELOAH UI quality
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'eloah-2040*'
+      - 'eloah-platform.js'
+      - 'eloah-navigation.js'
+      - 'eloah-mobile-app.js'
+      - 'tests/eloah-static-check.py'
+      - '.github/workflows/eloah-ui-quality.yml'
+  pull_request:
+    paths:
+      - 'eloah-2040*'
+      - 'eloah-platform.js'
+      - 'eloah-navigation.js'
+      - 'eloah-mobile-app.js'
+      - 'tests/eloah-static-check.py'
+      - '.github/workflows/eloah-ui-quality.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check JavaScript, DOM identifiers and local routes
+        run: python tests/eloah-static-check.py

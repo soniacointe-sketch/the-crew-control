@@ -1,21 +1,70 @@
-/* Navigation compacte dédiée à ELOAH installé sur téléphone. */
-(()=>{'use strict';
-const mobile=matchMedia('(max-width: 760px)');const standalone=matchMedia('(display-mode: standalone)');
-if(!mobile.matches)return;
-const installed=standalone.matches||navigator.standalone===true;
-if(!installed){
-  const path=location.pathname.split('/').pop();
-  if(path!=='mes-univers.html'&&path!=='eloah-installer.html'&&path!=='eloah-diagnostic.html'){
-    const link=document.createElement('a');
-    link.href='eloah-installer.html';
-    link.textContent='Installer ELOAH';
-    link.setAttribute('aria-label','Installer ELOAH sur mon téléphone');
-    link.style.cssText='position:fixed;right:12px;bottom:max(12px,env(safe-area-inset-bottom));z-index:10000;background:#922763;color:#fff;text-decoration:none;border:1px solid #c35498;border-radius:30px;padding:12px 16px;font:700 12px system-ui;box-shadow:0 8px 22px #1609124d';
-    document.body.append(link);
+/* ELOAH 11 · navigation mobile sans changement de session ni de thème des pages. */
+(() => {
+  'use strict';
+  if (window.__eloahMobileDock) return;
+  window.__eloahMobileDock = true;
+  const mobile = matchMedia('(max-width: 760px)');
+  let dock = null;
+  const current = location.pathname.split('/').pop() || 'mes-univers.html';
+  const founder = current === 'eloah-2040.html' || current === 'eloah-fondatrice.html';
+  const icons = {
+    home:'<path d="m3 10 9-7 9 7v10H3zM9 20v-7h6v7"/>',
+    calendar:'<rect x="3" y="5" width="18" height="16" rx="2"/><path d="M7 3v4m10-4v4M3 11h18"/>',
+    boards:'<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 7v10m6-10v6"/>',
+    tools:'<circle cx="10" cy="10" r="6"/><path d="m15 15 6 6"/>',
+    account:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>'
+  };
+  function openTools(term) {
+    if (window.ELOAHPlatform) { window.ELOAHPlatform.openTools(term); return; }
+    location.assign(term === 'Comptes' ? (founder ? 'eloah-fondatrice.html' : 'eloah-espace-prive.html') : 'mes-univers.html');
   }
-  return;
-}
-const style=document.createElement('style');style.textContent=`#eloah-mobile-dock{position:fixed;bottom:0;left:0;right:0;z-index:20000;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));padding:8px 6px max(8px,env(safe-area-inset-bottom));background:#190a19;color:#f7eaf3;border-top:1px solid #633052;box-shadow:0 -5px 28px #180a1833;font:11px/1.3 system-ui,sans-serif}#eloah-mobile-dock a{min-width:0;min-height:48px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:3px;color:#d6b9cf;text-decoration:none;border-radius:10px;text-align:center}#eloah-mobile-dock a[aria-current=page]{color:#fff;background:#542044}#eloah-mobile-dock svg{height:21px;width:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}body{padding-bottom:calc(80px + env(safe-area-inset-bottom))!important}#eloah-mobile-dock a:focus-visible{outline:2px solid #f292cf;outline-offset:-2px}`;document.head.append(style);
-const links=[['Accueil','mes-univers.html','<path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 21v-8h6v8"/>'],['Projets','eloah-pilotage.html','<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M9 10v10"/>'],['Tableaux','eloah-trello.html','<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 7v10m6-10v6"/>'],['IA 2040','eloah-2040.html#assistant-reel','<circle cx="12" cy="12" r="4"/><path d="M12 2v3m0 14v3M2 12h3m14 0h3M5 5l2 2m10 10 2 2M5 19l2-2M17 7l2-2"/>'],['Compte','eloah-espace-prive.html','<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>']];
-const dock=document.createElement('nav');dock.id='eloah-mobile-dock';dock.setAttribute('aria-label','Navigation ELOAH mobile');const current=location.pathname.split('/').pop();links.forEach(([label,url,svg])=>{const a=document.createElement('a');a.href=url;if(url===current)a.setAttribute('aria-current','page');a.innerHTML='<svg viewBox="0 0 24 24" aria-hidden="true">'+svg+'</svg><span>'+label+'</span>';dock.append(a)});document.body.append(dock);
+  function editorFocused() {
+    const active = document.activeElement;
+    return !!active && (active.isContentEditable || ['INPUT','TEXTAREA','SELECT'].includes(active.tagName));
+  }
+  function syncKeyboard() { if (dock) dock.hidden = editorFocused(); }
+  function build() {
+    if (!mobile.matches) {
+      dock?.remove(); dock = null; document.body.classList.remove('eloah-has-mobile-dock'); return;
+    }
+    if (dock) return;
+    if (!document.getElementById('eloah-mobile-style')) {
+      const style = document.createElement('style'); style.id='eloah-mobile-style';
+      style.textContent=`
+      @media(max-width:760px){
+       body.eloah-has-mobile-dock{padding-bottom:calc(84px + env(safe-area-inset-bottom))!important}
+       #eloah-mobile-dock{box-sizing:border-box;position:fixed;inset:auto 0 0;z-index:20000;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:3px;padding:8px 6px max(9px,env(safe-area-inset-bottom));background:#171016;color:#f7ede5;border-top:1px solid #665052;box-shadow:0 -5px 24px #0003;font:11px/1.3 system-ui,sans-serif}
+       #eloah-mobile-dock[hidden]{display:none!important}
+       #eloah-mobile-dock :is(a,button){box-sizing:border-box;min-width:0;min-height:48px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5px;padding:4px 2px;margin:0;border:1px solid transparent;border-radius:10px;color:#d8c3cb;background:transparent;text-decoration:none;font:inherit;text-align:center;cursor:pointer}
+       #eloah-mobile-dock [aria-current="page"]{color:#ffe2b3;background:#442438;border-color:#755260}
+       #eloah-mobile-dock svg{width:21px;height:21px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+       #eloah-mobile-dock :is(a,button):focus-visible{outline:2px solid #efd5a9;outline-offset:-2px}
+       body.eloah-has-mobile-dock #eloah-music-dock{bottom:calc(78px + env(safe-area-inset-bottom))!important}
+      }`;
+      document.head.append(style);
+    }
+    dock=document.createElement('nav');dock.id='eloah-mobile-dock';dock.setAttribute('aria-label','Navigation ELOAH mobile');
+    const links=[
+      ['Accueil','mes-univers.html','home'],
+      ['Organisation','eloah-pilotage.html','calendar'],
+      ['Tableaux','eloah-trello.html','boards'],
+      ['Outils',null,'tools'],
+      [founder?'Fondatrice':'Compte',founder?'eloah-fondatrice.html':null,'account']
+    ];
+    for (const [label,href,icon] of links) {
+      const item=document.createElement(href?'a':'button');
+      if(href){item.href=href;if(href.split(/[?#]/)[0]===current)item.setAttribute('aria-current','page')}
+      else {item.type='button';item.setAttribute('aria-haspopup','dialog');item.addEventListener('click',()=>openTools(icon==='account'?'Comptes':''))}
+      item.innerHTML=`<svg viewBox="0 0 24 24" aria-hidden="true">${icons[icon]}</svg><span>${label}</span>`;
+      dock.append(item);
+    }
+    document.body.append(dock);document.body.classList.add('eloah-has-mobile-dock');syncKeyboard();
+  }
+  if(!window.ELOAHPlatform&&!document.querySelector('script[data-eloah-platform]')){
+    const script=document.createElement('script');script.src='eloah-platform.js?v=11.0';script.dataset.eloahPlatform='1';script.defer=true;document.head.append(script);
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',build,{once:true});else build();
+  mobile.addEventListener('change',build);
+  document.addEventListener('focusin',syncKeyboard);
+  document.addEventListener('focusout',()=>setTimeout(syncKeyboard,0));
 })();

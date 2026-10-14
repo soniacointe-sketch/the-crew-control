@@ -256,3 +256,6 @@ if(page==='mes-univers.html'){
  `;
  document.head.appendChild(el);
 })();
+
+/* ELOAH 11 · recherche commune, sans accès aux données privées. */
+(()=>{if(document.querySelector('script[data-eloah-platform]')||window.ELOAHPlatform)return;const script=document.createElement('script');script.src='eloah-platform.js?v=11.0';script.defer=true;script.dataset.eloahPlatform='1';document.head.append(script)})();
