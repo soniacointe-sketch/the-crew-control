@@ -1,13 +1,13 @@
 (() => {
 "use strict";
 const APP=document.getElementById("app");
-const ENDPOINT="https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-boards-private-read";
+const ENDPOINT="https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-boards-private-edit";
 const params=new URLSearchParams(location.hash.replace(/^#/,""));
 const access=params.get("access")||"";
 const prefKey="eloah-private-board-prefs-v2";
 let stored={};
 try{stored=JSON.parse(localStorage.getItem(prefKey)||"{}")||{}}catch(e){}
-const state={boards:[],total:0,updatedAt:"",screen:"home",boardId:null,search:"",boardSearch:"",recent:Array.isArray(stored.recent)?stored.recent:[],favorites:Array.isArray(stored.favorites)?stored.favorites:[],globalQuery:"",globalScope:"all",globalOrder:"board",boardFilter:"",pageSize:60};
+const state={boards:[],total:0,updatedAt:"",screen:"home",boardId:null,search:"",boardSearch:"",recent:Array.isArray(stored.recent)?stored.recent:[],favorites:Array.isArray(stored.favorites)?stored.favorites:[],globalQuery:"",globalScope:"all",globalOrder:"board",boardFilter:"",pageSize:60,readOnly:true,pending:false};
 function persistPrefs(){try{localStorage.setItem(prefKey,JSON.stringify({recent:state.recent.slice(0,8),favorites:state.favorites.slice(0,30)}))}catch(e){}}
 function isFavorite(id){return state.favorites.includes(id)}
 function toggleFavorite(id){
@@ -46,15 +46,47 @@ async function load(){
  if(!/^[A-Za-z0-9_-]{43}$/.test(access)){fail("Ouvre le lien privé complet, avec sa clé d’accès. Aucun e-mail n’est nécessaire.");return}
  spinner();
  try{
-  const response=await fetch(ENDPOINT,{method:"POST",headers:{"X-Eloah-Access":access,"Content-Type":"application/json"},body:"{}",cache:"no-store",credentials:"omit",referrerPolicy:"no-referrer"});
+  const response=await fetch(ENDPOINT,{method:"POST",headers:{"X-Eloah-Access":access,"Content-Type":"application/json"},body:JSON.stringify({action:"load"}),cache:"no-store",credentials:"omit",referrerPolicy:"no-referrer"});
   const payload=await response.json().catch(()=>({}));
   if(!response.ok)throw Error(response.status===401?"Ce lien privé est expiré ou révoqué. Demande son renouvellement.":payload.error||"Le chargement privé est momentanément indisponible.");
-  if(payload.readOnly!==true||!Array.isArray(payload.boards))throw Error("Le format des tableaux reçus est invalide.");
+  if(typeof payload.readOnly!=="boolean"||!Array.isArray(payload.boards))throw Error("Le format des tableaux reçus est invalide.");
+  state.readOnly=payload.readOnly;
   state.boards=payload.boards.filter(b=>b&&typeof b.id==="string"&&Array.isArray(b.lanes)&&Array.isArray(b.cards));
   state.total=Number(payload.totalCards)||sum();
   state.updatedAt=String(payload.updatedAt||"");
   render();
  }catch(e){fail(e instanceof Error?e.message:"Impossible de charger les tableaux.")}
+}
+async function mutate(operation,onSaved,errorNode){
+ if(state.readOnly){alert("Ce lien permet seulement la consultation. Ouvre le lien privé de modification.");return false}
+ if(state.pending){if(errorNode)errorNode.textContent="Une sauvegarde est déjà en cours.";return false}
+ state.pending=true;
+ if(errorNode)errorNode.textContent="Enregistrement dans ELOAH…";
+ try{
+  const response=await fetch(ENDPOINT,{method:"POST",headers:{"X-Eloah-Access":access,"Content-Type":"application/json"},body:JSON.stringify({action:"mutate",expectedUpdatedAt:state.updatedAt,operation}),cache:"no-store",credentials:"omit",referrerPolicy:"no-referrer"});
+  const result=await response.json().catch(()=>({}));
+  if(!response.ok){
+   if(response.status===409){if(errorNode)errorNode.textContent="Une version plus récente existe. Ton brouillon est conservé : actualise avant de réessayer.";else alert("Un autre appareil a modifié ces tableaux. Recharge pour consulter la dernière version.");return false}
+   throw Error(result.error||"Enregistrement impossible");
+  }
+  if(result.saved!==true||!result.board||!result.updatedAt)throw Error("Confirmation de sauvegarde invalide");
+  state.updatedAt=result.updatedAt;
+  const index=state.boards.findIndex(b=>b.id===result.board.id);
+  if(index>=0)state.boards[index]=result.board;else state.boards.push(result.board);
+  state.total=Number(result.totalCards)||sum();
+  if(typeof onSaved==="function")onSaved(result);else render();
+  return true;
+ }catch(e){
+  const msg=e instanceof Error?e.message:"Erreur de connexion";
+  if(errorNode)errorNode.textContent=msg+" · Rien n’a été perdu.";
+  else alert(msg);
+  return false;
+ }finally{state.pending=false}
+}
+function createBoard(){
+ if(state.readOnly)return;
+ const name=prompt("Nom du nouveau tableau ELOAH");if(!name?.trim())return;
+ void mutate({type:"create_board",name:name.trim()},result=>{state.boardId=result.board.id;state.screen="board";markRecent(result.board.id);render()});
 }
 function tabs(activeScreen){
  const nav=node("nav","bottom-tabs");nav.setAttribute("aria-label","Navigation ELOAH");
