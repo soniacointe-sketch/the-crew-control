@@ -83,6 +83,121 @@ async function mutate(operation,onSaved,errorNode){
   return false;
  }finally{state.pending=false}
 }
+const MEDIA_ENDPOINT="https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-boards-private-media";
+const mediaCache=new Map();
+const supportedMediaTypes=new Set(["image/jpeg","image/png","image/webp","image/heic","image/heif","application/pdf","application/vnd.openxmlformats-officedocument.wordprocessingml.document","application/vnd.openxmlformats-officedocument.spreadsheetml.sheet","application/vnd.openxmlformats-officedocument.presentationml.presentation","text/plain","text/csv","application/csv","video/mp4","video/quicktime"]);
+function applyMediaResult(result){
+ if(result.saved!==true||!result.board||!result.updatedAt)throw Error("Confirmation de sauvegarde manquante.");
+ state.updatedAt=result.updatedAt;
+ const idx=state.boards.findIndex(b=>b.id===result.board.id);
+ if(idx>=0)state.boards[idx]=result.board;
+ state.total=Number(result.totalCards)||sum();
+}
+async function mediaJSON(body){
+ const response=await fetch(MEDIA_ENDPOINT,{method:"POST",headers:{"X-Eloah-Access":access,"Content-Type":"application/json"},body:JSON.stringify(body),cache:"no-store",credentials:"omit",referrerPolicy:"no-referrer"});
+ const result=await response.json().catch(()=>({}));
+ if(!response.ok)throw Object.assign(new Error(result.error||"Média indisponible"),{code:response.status});
+ return result;
+}
+async function signedUrls(refs,download=false){
+ const valid=refs.filter(x=>x.boardId&&x.cardId&&x.mediaId).slice(0,40);
+ if(!valid.length)return new Map();
+ const want=[];
+ const cacheHits=new Map();
+ const now=Date.now();
+ for(const ref of valid){
+  const k=[ref.boardId,ref.cardId,ref.mediaId,download?"download":"view"].join("|");
+  const entry=mediaCache.get(k);
+  if(entry?.until>now+10000)cacheHits.set(ref.mediaId,entry.url);
+  else want.push({...ref,download});
+ }
+ if(want.length){
+  const reply=await mediaJSON({action:"signed",assets:want});
+  for(const item of reply.signed||[]){
+   try{
+    const url=new URL(item.url);
+    if(url.protocol!=="https:"||url.hostname!=="voytsqyorhoveurnguxn.supabase.co")continue;
+    const ref=want.find(x=>x.mediaId===item.id);
+    if(!ref)continue;
+    const k=[ref.boardId,ref.cardId,ref.mediaId,download?"download":"view"].join("|");
+    mediaCache.set(k,{url:url.href,until:Date.now()+140000});
+    cacheHits.set(item.id,url.href);
+   }catch(e){}
+  }
+ }
+ return cacheHits;
+}
+async function uploadFiles(b,c,files,asCover,errorNode,callback){
+ if(state.readOnly||state.pending)return false;
+ const chosen=Array.from(files||[]).slice(0,10);
+ if(!chosen.length)return false;
+ if(chosen.some(file=>file.size<=0||file.size>20*1024*1024||!supportedMediaTypes.has(file.type))){
+  errorNode.textContent="Format non accepté ou fichier dépassant 20 Mo. Photos, PDF et documents courants jusqu’à 20 Mo par fichier.";
+  return false;
+ }
+ state.pending=true;let success=0;
+ try{
+  for(let i=0;i<chosen.length;i++){
+   const file=chosen[i];
+   errorNode.textContent="Envoi du fichier "+(i+1)+"/"+chosen.length+" : "+file.name+"…";
+   const form=new FormData();
+   form.set("action","upload");form.set("boardId",b.id);form.set("cardId",c.id);
+   form.set("expectedUpdatedAt",state.updatedAt);
+   form.set("asCover",String(asCover&&i===0&&file.type.startsWith("image/")));
+   form.set("file",file,file.name);
+   const response=await fetch(MEDIA_ENDPOINT,{method:"POST",headers:{"X-Eloah-Access":access},body:form,cache:"no-store",credentials:"omit",referrerPolicy:"no-referrer"});
+   const result=await response.json().catch(()=>({}));
+   if(!response.ok){
+    if(response.status===409)throw Error("Les cartes ont changé sur un autre appareil. Tes autres fichiers n'ont pas été envoyés. Actualise et recommence.");
+    throw Error(result.error||"Échec du transfert.");
+   }
+   applyMediaResult(result);success++;
+  }
+  errorNode.textContent=success+" fichier(s) enregistrés dans ELOAH.";
+  if(typeof callback==="function")callback();
+  else render();
+  return true;
+ }catch(e){
+  errorNode.textContent=(e instanceof Error?e.message:"Erreur")+ (success?" · "+success+" déjà enregistré(s).":" · Aucun fichier ajouté.");
+  return false;
+ }finally{state.pending=false}
+}
+async function removeMedia(b,c,mediaId,errorNode,onSaved){
+ if(state.readOnly||state.pending)return;
+ state.pending=true;
+ try{
+  errorNode.textContent="Suppression en cours…";
+  const result=await mediaJSON({action:"remove",boardId:b.id,cardId:c.id,mediaId,expectedUpdatedAt:state.updatedAt});
+  applyMediaResult(result);
+  errorNode.textContent=result.warning||"Fichier supprimé.";
+  if(onSaved)onSaved();
+  else render();
+ }catch(e){errorNode.textContent=e instanceof Error?e.message:"Suppression impossible"}
+ finally{state.pending=false}
+}
+const pendingCovers=[];
+let coverTimer=null;
+function scheduleCover(b,c,element){
+ if(!c.coverMediaId)return;
+ const key=[b.id,c.id,c.coverMediaId,"view"].join("|");
+ const entry=mediaCache.get(key);
+ if(entry&&entry.until>Date.now()+5000){element.style.backgroundImage="url("+JSON.stringify(entry.url)+")";return}
+ pendingCovers.push({b,c,element});
+ if(coverTimer)return;
+ coverTimer=setTimeout(async()=>{
+  coverTimer=null;
+  const queue=pendingCovers.splice(0);
+  for(let at=0;at<queue.length;at+=30){
+   const sub=queue.slice(at,at+30);
+   try{
+    const urls=await signedUrls(sub.map(({b,c})=>({boardId:b.id,cardId:c.id,mediaId:c.coverMediaId})));
+    for(const item of sub){
+     if(item.element.isConnected&&urls.has(item.c.coverMediaId))item.element.style.backgroundImage="url("+JSON.stringify(urls.get(item.c.coverMediaId))+")";
+    }
+   }catch(e){}
+  }
+ },120);
+}
 function createBoard(){
  if(state.readOnly)return;
  const name=prompt("Nom du nouveau tableau ELOAH");if(!name?.trim())return;
