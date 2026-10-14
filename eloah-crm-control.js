@@ -108,7 +108,6 @@
     setMetric("metric-accounts",stats?state.accounts.length:null);
     setMetric("metric-workspaces",stats?.workspaces);
     setMetric("metric-active",stats?.active_entitlements);
-    setMetric("metric-items",stats?.workspace_items);
     el("metric-revenue").textContent="À relier";
     el("accounts-disclaimer").textContent=stats?
       "Comptes hors fondatrice affichés, y compris tests. Aucun chiffre ne prouve à lui seul une vente.":
