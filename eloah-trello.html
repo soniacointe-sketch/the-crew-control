@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="fr"><head><meta name="theme-color" content="#250d22"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ELOAH"><link rel="manifest" href="eloah.webmanifest"><link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="eloah-app-icon.svg"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>ELOAH Boards · Gestion de projets</title>
 <style>
 :root{--bg:#f4f2ee;--panel:#fffefa;--ink:#242a28;--muted:#6c716e;--line:#dddeda;--accent:#7560a7;--soft:#eae5f3}
@@ -128,4 +128,4 @@ render();
 
 const params=new URLSearchParams(location.search),targetBoard=params.get('board'),targetCard=params.get('card');
 if(targetBoard&&targetCard){const b=data.boards.find(x=>x.id===targetBoard),c=b?.cards?.find(x=>x.id===targetCard);if(b&&c){data.active=b.id;showArchive=!!c.archived;if(showArchive)$('archiveView').textContent='Cartes actives';$('search').value='';$('filterTag').value='';showingCalendar=false;save();render();openCard(c.id);history.replaceState(null,'',location.pathname)}} 
-</script><script src="eloah-boards-mobile.js?v=20261014-phone3"></script><script src="eloah-trello-client.js?v=20261014-cloudsync1"></script><script src="eloah-music-dock.js" defer></script></body></html>
+</script><script src="eloah-boards-mobile.js?v=20261014-phone3"></script><script src="eloah-trello-client.js?v=20261014-cloudsync1"></script><script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script></body></html>
