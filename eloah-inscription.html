@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#160912">
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Préparez votre compte ELOAH et découvrez les prochaines formules. Paiement sécurisé Stripe lors de l'ouverture commerciale.">
+  <title>ELOAH — Inscription & abonnement</title>
+  <link rel="icon" type="image/svg+xml" href="assets/eloah-logo-violent-prune.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root{color-scheme:dark;--dark:#110711;--plum:#24101f;--panel:#30172b;--rose:#9b3d73;--gold:#ebc997;--text:#f9edf5;--soft:#d9c2d0;--line:rgba(206,137,174,.25);--serif:"DM Serif Display",Georgia,serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(ellipse at 78% 2%,#552344 0%,transparent 34%),radial-gradient(ellipse at 9% 82%,#321329 0%,transparent 43%),#110711;color:var(--text);font:14px/1.7 Inter,system-ui,sans-serif;min-height:100dvh}
+    a{color:inherit;text-decoration:none}button,input{font:inherit}button{cursor:pointer}button:disabled{opacity:.58;cursor:default;transform:none!important}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+    .wrap{width:min(1080px,calc(100% - 34px));margin:auto}.bar{border-bottom:1px solid var(--line);background:#170916dd;backdrop-filter:blur(15px)}.nav{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:73px}.brand{font:normal 25px var(--serif);display:flex;align-items:center;gap:8px}.brand img{width:35px;height:35px;object-fit:cover;object-position:top;mix-blend-mode:screen}.nav a.return{font-size:12px;color:#ebc997}
+    main{padding:62px 0 95px}.intro{max-width:800px;margin:0 auto 46px;text-align:center}.eyebrow{display:block;font-size:10px;letter-spacing:.19em;color:var(--gold);text-transform:uppercase;font-weight:800;margin:0 0 12px}.intro h1{font:normal clamp(42px,5.8vw,68px)/1.08 var(--serif);letter-spacing:-.03em;margin:0 0 17px}.intro h1 span{color:var(--gold)}.intro p{color:var(--soft);font-size:16px;max-width:675px;margin:0 auto}.steps{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:12px;margin:35px 0 0}.steps span{font-size:11px;color:#f1d9e8}.steps b{color:var(--gold);font-weight:800;margin-right:6px}.steps i{font-style:normal;color:#8c5b7a}
+    .layout{display:grid;grid-template-columns:minmax(0,.92fr) minmax(0,1.08fr);gap:24px;align-items:start}.panel{background:linear-gradient(145deg,#3a1a32,#1e0d1d);border:1px solid var(--line);border-radius:18px;padding:30px;box-shadow:0 22px 55px #05000635}.panel h2{font:normal 30px/1.2 var(--serif);margin:0 0 12px}.panel p{color:var(--soft)}.offer-options{display:grid;gap:10px;margin:24px 0}.offer-option{width:100%;display:flex;justify-content:space-between;align-items:center;gap:18px;text-align:left;background:#1f0c1b;border:1px solid rgba(197,136,167,.24);border-radius:11px;padding:17px 18px;color:var(--text);transition:border-color .2s,background .2s}.offer-option:hover{border-color:#d9a776}.offer-option[aria-pressed="true"]{border:1px solid var(--gold);background:#4c1d3a;box-shadow:0 0 0 1px #eac48920}.offer-option b{display:block;font:normal 22px var(--serif)}.offer-option small{font-size:10px;display:block;color:#d2b4c6;margin-top:3px}.offer-price{font:normal 26px var(--serif);color:var(--gold);white-space:nowrap}.offer-price small{font:500 10px Inter,system-ui,sans-serif}
+    .choice-note{border-top:1px solid var(--line);padding-top:16px}.choice-note p{font-size:12px;line-height:1.8;margin:0}.fine{color:#ba96ae;font-size:11px;line-height:1.75}
+    .modes{display:flex;gap:9px;margin:21px 0}.mode-btn{border:1px solid rgba(202,133,172,.37);color:#eedbe6;background:transparent;border-radius:9px;min-height:41px;flex:1}.mode-btn[aria-pressed="true"]{background:#ad6d94;color:#130713;font-weight:750;border-color:#ad6d94}
+    label{display:block;font-weight:650;color:#f6e4ef;font-size:12px;margin:16px 0}.input{display:block;width:100%;margin:7px 0 0;background:#210e1f;border:1px solid rgba(201,138,172,.39);border-radius:9px;padding:13px 14px;color:#fff2fa;min-height:48px;font-size:15px}.input::placeholder{color:#a98da0}
+    .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-align:center;min-height:49px;border-radius:10px;border:1px solid #e1ba86;padding:12px 18px;background:linear-gradient(120deg,#dfb579,#f3d9ac,#d4a66b);color:#301128;font-weight:800;font-size:13px}.btn.full{width:100%}.btn:hover:not(:disabled){filter:brightness(1.08);transform:translateY(-1px)}.btn.ghost{border-color:rgba(203,139,174,.4);color:#f9e5f2;background:rgba(145,44,102,.13)}.btn.ghost:hover{background:rgba(145,44,102,.27)}.btn.link{background:none;border:0;min-height:36px;color:#f0d3ab;font-size:11px;text-decoration:underline;padding:7px 0}
+    .status{font-size:12px;line-height:1.7;color:#f3d4a2;min-height:20px;margin:13px 0}.status[hidden], [hidden]{display:none!important}
+    .logged-account{border:1px solid rgba(232,195,138,.29);background:#35182e;border-radius:10px;padding:17px;margin:18px 0}.logged-account strong{font-size:15px}.logged-account p{margin:7px 0;color:#ebd4e3;font-size:12px}
+    .payment-panel{border:1px solid rgba(213,147,182,.32);padding:20px;border-radius:12px;background:rgba(26,10,24,.8);margin-top:24px}.payment-panel h3{font:normal 26px var(--serif);margin:0 0 10px}.payment-panel p{font-size:12px;margin:9px 0}.payment-panel .btn{margin-top:11px}.payment-status{font-size:11px;color:#e7c9db;line-height:1.8}.status-marker{color:#eac38e;font-size:11px;font-weight:750;letter-spacing:.09em}
+    .help{max-width:1080px;margin:39px auto 0;padding:24px;border-top:1px solid var(--line);display:flex;justify-content:space-between;gap:16px;align-items:center}.help p{margin:0;color:#ceb1c4;font-size:12px}.help a{color:#f4d4a0;font-size:12px}.footer{text-align:center;color:#a77f9a;padding:0 15px 40px;font-size:11px}
+    @media(max-width:820px){main{padding:45px 0 60px}.layout{grid-template-columns:1fr}.intro{margin-bottom:31px}.panel{padding:26px}.steps{gap:8px}.steps span{font-size:10px}}
+    @media(max-width:530px){.intro h1{font-size:40px}.intro p{font-size:14px}.panel{padding:21px}.offer-option{padding:13px}.offer-option b{font-size:20px}.offer-price{font-size:22px}.help{flex-direction:column;align-items:flex-start}.steps i{display:none}}
+  </style>
+</head>
+<body>
+  <header class="bar"><div class="wrap nav"><a class="brand" href="eloah-decouvrir.html"><img src="assets/eloah-logo-violent-prune.svg" alt="" width="35" height="35">ELOAH</a><a class="return" href="eloah-decouvrir.html#offres">← Revoir les offres</a></div></header>
+  <main class="wrap">
+    <div class="intro"><span class="eyebrow">ELOAH · CRÉER MON COMPTE</span><h1>Un espace pour <span>ce que vous construisez.</span></h1><p>Choisissez votre formule, préparez votre compte et, lorsque les ventes seront ouvertes, finalisez l'abonnement sur Stripe. Vos projets vous attendront dans votre espace ELOAH.</p><div class="steps"><span><b>01</b> Mon offre</span><i>↗</i><span><b>02</b> Mon compte</span><i>↗</i><span><b>03</b> Paiement sécurisé</span><i>↗</i><span><b>04</b> Mon espace</span></div></div>
+    <div class="layout">
+      <section class="panel" aria-labelledby="choice-title">
+        <span class="eyebrow">01 · CHOISIR</span>
+        <h2 id="choice-title">La formule ELOAH</h2>
+        <p>Le point de départ dépend de vos besoins. Les tarifs restent des propositions jusqu'à l'ouverture commerciale.</p>
+        <div class="offer-options" role="group" aria-label="Choisir une formule">
+          <button type="button" class="offer-option" data-plan="decouverte" aria-pressed="false"><span><b>Découverte</b><small>Découvrir l'environnement</small></span><span class="offer-price">0 €</span></button>
+          <button type="button" class="offer-option" data-plan="entree" aria-pressed="false"><span><b>Entrée</b><small>Projets & organisation</small></span><span class="offer-price">14,90 €<small> / mois</small></span></button>
+          <button type="button" class="offer-option" data-plan="partenaire" aria-pressed="false"><span><b>Partenaire</b><small>Plusieurs activités</small></span><span class="offer-price">69 €<small> / mois</small></span></button>
+        </div>
+        <div class="choice-note"><p id="choice-description">Les fonctionnalités exactes et les conditions commerciales doivent être validées avant l'ouverture des abonnements.</p></div>
+      </section>
+
+      <section class="panel" aria-labelledby="account-title">
+        <span class="eyebrow">02 · CRÉER / RETROUVER</span>
+        <h2 id="account-title">Votre compte ELOAH</h2>
+        <div id="auth-pending"><p>Chargement de l'espace d'inscription…</p></div>
+        <div id="auth-form-area" hidden>
+          <p>Une adresse e-mail et un mot de passe suffisent pour préparer votre accès. Le compte ne déclenche aucun paiement.</p>
+          <div class="modes"><button type="button" class="mode-btn" id="mode-signup" aria-pressed="true">Créer mon compte</button><button type="button" class="mode-btn" id="mode-login" aria-pressed="false">J'ai déjà un compte</button></div>
+          <form id="member-form">
+            <label for="member-email">Adresse e-mail<input class="input" id="member-email" type="email" autocomplete="email" maxlength="254" placeholder="vous@exemple.fr" required></label>
+            <label for="member-password">Mot de passe<input class="input" id="member-password" type="password" autocomplete="new-password" placeholder="12 caractères minimum à l'inscription" required></label>
+            <button class="btn full" id="auth-submit" type="submit">Créer mon compte</button>
+          </form>
+          <button type="button" class="btn link" id="magic-link">Recevoir un lien de connexion par e-mail</button>
+          <p class="fine">La création de compte nécessite généralement une confirmation par e-mail. Elle ne garantit pas encore l'accès aux fonctions payantes.</p>
+        </div>
+        <div id="logged-in" hidden>
+          <div class="logged-account"><span class="status-marker">COMPTE CONNECTÉ</span><strong id="member-identity"></strong><p id="entitlement-line">Vérification de vos droits d'accès…</p><button type="button" class="btn link" id="logout">Me déconnecter</button></div>
+          <div class="payment-panel">
+            <span class="eyebrow">03 · PROCHAINE ÉTAPE</span>
+            <h3 id="payment-title">Préparer la suite</h3>
+            <p id="payment-description">Vérification de l'ouverture des paiements…</p>
+            <button type="button" class="btn full" id="checkout-btn" hidden>Continuer vers Stripe →</button>
+            <a class="btn ghost full" id="pending-contact" href="eloah-decouvrir.html#contact">Demander une présentation ↗</a>
+            <a class="btn ghost full" id="open-private" href="eloah-espace-prive.html" hidden>Accéder à mon espace ELOAH →</a>
+            <p class="payment-status" id="checkout-status" role="status" aria-live="polite"></p>
+          </div>
+        </div>
+        <p class="status" id="auth-status" role="status" aria-live="polite"></p>
+      </section>
+    </div>
+    <div class="help"><p>Les numéros de carte ne sont jamais demandés sur ELOAH. Les futurs paiements seront réalisés exclusivement sur Stripe, après activation du service.</p><a href="eloah-offres.html#abonnements">Détails des formules ↗</a></div>
+  </main>
+  <footer class="footer">ELOAH · Inscriptions pilotes · Prix indicatifs, aucune facturation depuis cette page avant l'ouverture commerciale.</footer>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+  <script>
+  (()=>{'use strict';
+    const SUPABASE_URL='https://voytsqyorhoveurnguxn.supabase.co';
+    const PUBLIC_KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
+    const $=id=>document.getElementById(id);
+    const offers={
+      decouverte:{name:'Découverte',detail:'Cette formule gratuite est encore au stade de présentation. Un accès généralisé sans paiement n’est pas encore ouvert.'},
+      entree:{name:'Entrée',detail:'14,90 € par mois envisagés pour organiser vos projets et vos documents. Vente non ouverte.'},
+      partenaire:{name:'Partenaire',detail:'69 € par mois envisagés pour piloter plusieurs activités et accéder à des fonctions avancées selon leur disponibilité.'}
+    };
+    const params=new URLSearchParams(location.search);
+    const incoming=params.get('offre')||'entree';
+    let selected={'pilotage-entree':'entree','pilotage-partenaire':'partenaire','pilotage-decouverte':'decouverte'}[incoming]|| (offers[incoming]?incoming:'entree');
+    let client=null,account=null,entitlement=null,salesOpen=false,mode='signup',refreshSerial=0;
+    const status=(message)=>{$('auth-status').textContent=message};
+    function setChoice(plan){
+      if(!offers[plan])return;
+      selected=plan;
+      document.querySelectorAll('[data-plan]').forEach(el=>el.setAttribute('aria-pressed',String(el.dataset.plan===plan)));
+      $('choice-description').textContent=offers[plan].detail;
+      history.replaceState(null,'',location.pathname+'?offre='+encodeURIComponent(plan));
+      if(account)drawPayment();
+    }
+    function setMode(next){
+      mode=next;
+      $('mode-signup').setAttribute('aria-pressed',String(mode==='signup'));
+      $('mode-login').setAttribute('aria-pressed',String(mode==='login'));
+      $('auth-submit').textContent=mode==='signup'?'Créer mon compte':'Me connecter';
+      $('member-password').autocomplete=mode==='signup'?'new-password':'current-password';
+    }
+    function errorText(e){return String(e?.message||'Erreur inconnue.')}
+    async function fetchSales(session){
+      try{
+        const r=await fetch(SUPABASE_URL+'/functions/v1/eloah-checkout',{
+          method:'GET',
+          headers:{'apikey':PUBLIC_KEY,'authorization':'Bearer '+session.access_token}
+        });
+        if(!r.ok)return false;
+        const info=await r.json();
+        return info.sales_open===true;
+      }catch{return false}
+    }
+    function drawPayment(){
+      const active=entitlement?.status==='active';
+      const free=selected==='decouverte';
+      $('open-private').hidden=!active;
+      $('checkout-btn').hidden=!(salesOpen&&!free&&!active);
+      $('pending-contact').hidden=active;
+      if(active){
+        $('payment-title').textContent='Votre accès est actif';
+        $('payment-description').textContent='Votre espace client a été activé après validation côté serveur. Vous pouvez vous y connecter.';
+      }else if(free){
+        $('payment-title').textContent='Découvrir ELOAH';
+        $('payment-description').textContent='La formule à 0 € n’ouvre pas encore de compte gratuit automatique. Demandez une présentation pour être informé de la disponibilité.';
+      }else if(!salesOpen){
+        $('payment-title').textContent='Paiement pas encore ouvert';
+        $('payment-description').textContent='Votre compte peut être préparé dès maintenant. Le paiement Stripe ne sera proposé qu’une fois les tarifs, les conditions de vente et les droits d’accès validés.';
+      }else{
+        $('payment-title').textContent='Passer au paiement sécurisé';
+        $('payment-description').textContent='Vous serez redirigé vers Stripe pour confirmer votre abonnement '+offers[selected].name+'. Vos droits seront ensuite activés automatiquement après confirmation vérifiée du paiement.';
+      }
+      $('pending-contact').textContent=free?'Demander une présentation ↗':'Être informé du lancement ↗';
+      $('pending-contact').href='eloah-decouvrir.html?offre='+encodeURIComponent(selected)+'#contact';
+    }
+    async function refresh(){
+      const call=++refreshSerial;
+      try{
+        const result=await client.auth.getUser();
+        if(call!==refreshSerial)return;
+        const user=result.data?.user;
+        account=!result.error&&user?user:null;
+        $('auth-pending').hidden=true;
+        $('auth-form-area').hidden=!!account;
+        $('logged-in').hidden=!account;
+        if(!account){entitlement=null;salesOpen=false;return;}
+        $('member-identity').textContent=account.email||'Compte ELOAH';
+        const [ent,sessionResult]=await Promise.all([
+          client.from('eloah_customer_entitlements').select('plan,status').eq('owner_id',account.id).maybeSingle(),
+          client.auth.getSession()
+        ]);
+        if(call!==refreshSerial)return;
+        entitlement=ent.error?null:ent.data;
+        $('entitlement-line').textContent=ent.error?'Droits temporairement indisponibles.':entitlement?'Formule '+entitlement.plan+' · État '+entitlement.status:'Aucun abonnement actif associé à ce compte.';
+        salesOpen=sessionResult.data?.session?await fetchSales(sessionResult.data.session):false;
+        if(call!==refreshSerial)return;
+        drawPayment();
+      }catch{
+        $('auth-pending').hidden=true;
+        $('auth-form-area').hidden=false;
+        status('La connexion au service est momentanément indisponible.');
+      }
+    }
+    document.querySelectorAll('[data-plan]').forEach(el=>el.addEventListener('click',()=>setChoice(el.dataset.plan)));
+    $('mode-signup').addEventListener('click',()=>setMode('signup'));
+    $('mode-login').addEventListener('click',()=>setMode('login'));
+    $('member-form').addEventListener('submit',async e=>{
+      e.preventDefault();
+      if(!$('member-form').reportValidity())return;
+      const email=$('member-email').value.trim(),password=$('member-password').value;
+      if(mode==='signup'&&password.length<12){status('Choisissez un mot de passe d’au moins 12 caractères.');return;}
+      const btn=$('auth-submit');btn.disabled=true;status('');
+      try{
+        if(mode==='signup'){
+          const redirectTo=location.origin+location.pathname+'?offre='+encodeURIComponent(selected);
+          const {data,error}=await client.auth.signUp({email,password,options:{emailRedirectTo:redirectTo}});
+          if(error)throw error;
+          status('Compte demandé. Vérifiez votre e-mail pour le confirmer. Aucun paiement et aucun abonnement n’ont été activés.');
+          if(data?.session)await refresh();
+        }else{
+          const {error}=await client.auth.signInWithPassword({email,password});
+          if(error)throw error;
+          status('Connexion réussie.');
+          await refresh();
+        }
+      }catch(error){
+        status(mode==='signup'?'Création de compte impossible pour le moment. Réessayez ou contactez ELOAH.':'Connexion impossible. Vérifiez vos identifiants ou demandez un lien par e-mail.');
+      }finally{btn.disabled=false}
+    });
+    $('magic-link').addEventListener('click',async()=>{
+      if(!$('member-email').checkValidity()){$('member-email').reportValidity();return;}
+      const btn=$('magic-link');btn.disabled=true;
+      try{
+        const email=$('member-email').value.trim();
+        const redirectTo=location.origin+location.pathname+'?offre='+encodeURIComponent(selected);
+        const {error}=await client.auth.signInWithOtp({email,options:{emailRedirectTo:redirectTo,shouldCreateUser:false}});
+        if(error)throw error;
+        status('Si un compte existe, un lien de connexion a été demandé. Vérifiez votre boîte e-mail.');
+      }catch{status('Envoi du lien momentanément indisponible.')}finally{btn.disabled=false}
+    });
+    $('logout').addEventListener('click',async()=>{await client.auth.signOut();account=null;entitlement=null;await refresh()});
+    $('checkout-btn').addEventListener('click',async()=>{
+      if(!account||!salesOpen||selected==='decouverte'||entitlement?.status==='active')return;
+      const btn=$('checkout-btn');btn.disabled=true;
+      $('checkout-status').textContent='Préparation du paiement sécurisé…';
+      try{
+        const result=await client.functions.invoke('eloah-checkout',{body:{plan:selected}});
+        if(result.error){
+          let code='';
+          try{code=(await result.error.context?.json())?.error||'';}catch{}
+          const known={sales_closed:'Les paiements ne sont pas encore ouverts.',price_mismatch:'La formule doit être vérifiée avant paiement.',subscription_already_active:'Votre abonnement est déjà actif.',sign_in_required:'Reconnectez-vous avant de continuer.',email_not_confirmed:'Confirmez votre e-mail avant de payer.',offer_not_available:'Cette formule n’est pas encore disponible.'};
+          $('checkout-status').textContent=known[code]||'Paiement indisponible pour le moment. Aucun débit n’a eu lieu ici.';
+          return;
+        }
+        if(typeof result.data?.url!=='string'||!result.data.url.startsWith('https://checkout.stripe.com/'))throw Error('invalid_checkout');
+        window.location.assign(result.data.url);
+      }catch{
+        $('checkout-status').textContent='La connexion à Stripe est indisponible. Aucun paiement n’a été démarré.';
+      }finally{btn.disabled=false}
+    });
+    if(params.get('paiement')==='annule')status('Le paiement a été interrompu. Aucun nouvel abonnement n’a été activé.');
+    setChoice(selected);setMode('signup');
+    if(!window.supabase?.createClient){
+      $('auth-pending').hidden=true;status('Service de connexion indisponible. Rechargez la page plus tard.');return;
+    }
+    client=window.supabase.createClient(SUPABASE_URL,PUBLIC_KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}});
+    client.auth.onAuthStateChange(event=>{if(event==='SIGNED_IN'||event==='SIGNED_OUT')setTimeout(refresh,0);});
+    refresh();
+  })();
+  </script>
+</body>
+</html>
