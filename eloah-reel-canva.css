@@ -967,3 +967,13 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
  #eloah-canva-studio .ecs-project-toolbar button{font-size:10px;padding:9px 8px}
 }
 @media(max-width:380px){#eloah-canva-studio .ecs-project-tabs{gap:12px}#eloah-canva-studio .ecs-project-scope{flex-wrap:wrap}}
+
+/* Projets : tri, favoris et accès direct */
+#eloah-canva-studio .ecs-top-projects{display:inline-flex;align-items:center;justify-content:center;white-space:nowrap;font-size:12px;font-weight:750;background:#ffffff2e}
+#eloah-canva-studio .ecs-top-projects:hover{background:#ffffff50}
+#eloah-canva-studio .ecs-project-sortbar{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:-6px 0 16px}
+#eloah-canva-studio .ecs-project-sortbar>button{color:#7358aa;background:#f4effb;border:1px solid #e5dcf3;border-radius:9px;padding:7px 10px;font-size:11px;font-weight:750;white-space:nowrap}
+#eloah-canva-studio .ecs-project-sortbar label{display:flex;align-items:center;gap:5px;font-size:10px;color:#647385;min-width:0}
+#eloah-canva-studio .ecs-project-sortbar select{border:1px solid #e0e5ec;border-radius:8px;padding:7px 7px;color:#455467;background:#fff;font-size:11px;max-width:130px}
+@media(max-width:790px){#eloah-canva-studio .ecs-top-projects{font-size:11px;padding:7px 8px}}
+@media(max-width:690px){#eloah-canva-studio .ecs-project-sortbar{margin:-3px 0 14px}}
