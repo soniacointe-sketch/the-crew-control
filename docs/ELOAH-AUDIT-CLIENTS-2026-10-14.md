@@ -26,3 +26,14 @@ Deux identifiants UUID fictifs différents ont été simulés avec le rôle `aut
 La base impose une clé étrangère composite `(workspace_id, owner_id)` pour les actions, pointant vers `(id, owner_id)` des espaces. Elle empêche qu'une action soit rattachée à l'espace d'une autre personne avec un propriétaire différent, même si l'identifiant de l'espace est connu. La contrainte est gérée côté PostgreSQL, en complément des politiques RLS. Les espaces ont également une clé étrangère `owner_id` vers `auth.users(id)` et une contrainte d'unicité `(id, owner_id)`.
 
 Cette vérification structurelle est réussie. Elle ne remplace pas un test de connexion effectif avec deux comptes distincts.
+
+## Audit du stockage et des médias (14 octobre 2026)
+
+- Les trois compartiments Supabase `eloah-private`, `eloah-music-private` et `eloah-boards-media` sont configurés comme **non publics**.
+- `eloah-private` et `eloah-music-private` disposent de règles Storage RLS qui exigent que le premier dossier du chemin corresponde à `auth.uid()` (opérations de lecture, ajout et suppression).
+- Le compartiment `eloah-boards-media` n'a pas de politique Storage RLS directe visible dans l'inventaire consulté : son accès est géré par la fonction `eloah-boards-private-media` utilisant un jeton de lien privé et un accès serveur privilégié.
+- Cette fonction vérifie un jeton aléatoire haché dans `eloah_private_view_links`, son expiration et sa révocation, puis l'identifiant propriétaire `user_id`. Les médias signés sont choisis depuis les cartes de cet utilisateur ; les URLs signées expirent après **180 secondes**. La modification nécessite le mode `edit`.
+- **Limite** : l'authentification par lien privé donne des droits à toute personne qui possède ce lien tant qu'il reste valide. Vérifier la durée, la portée, le mode d'édition, la révocation, et les fonctions privilégiées qui génèrent ces liens. Le contrôle d'origine du navigateur ne constitue pas une authentification.
+- Les fichiers placés sur GitHub Pages ne deviennent pas privés grâce aux réglages Supabase. Un test réel d'accès croisé, avec deux comptes autorisés, reste nécessaire.
+
+Aucun fichier ni droit de stockage n'a été modifié lors de ce contrôle.
