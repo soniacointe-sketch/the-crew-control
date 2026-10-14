@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr">
-<head><meta name="theme-color" content="#250d22"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ELOAH"><link rel="manifest" href="eloah.webmanifest"><link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="eloah-app-icon.svg">
+<head><meta name="theme-color" content="#250d22"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ELOAH Client"><link rel="manifest" href="eloah-client.webmanifest"><link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="eloah-app-icon.svg">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -169,11 +169,10 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
   <div class="client-main">
  <section class="client-overview" id="client-welcome" aria-labelledby="client-greeting"><div><div class="client-overline">MON TABLEAU DE BORD</div><h2 id="client-greeting">Bienvenue dans votre espace ELOAH.</h2><p>Vos projets et vos prochaines actions, réunis dans un espace personnel.</p></div><div class="client-metrics"><div><strong id="client-project-count">—</strong><span>Projets</span></div><div><strong id="client-action-count">—</strong><span>Actions du projet</span></div><div><strong id="eloah-due-count">—</strong><span>À venir</span></div></div></section>
  <div class="panel" id="eloah-app-onboarding" style="border-color:#ca9bc3;background:#fff8fd">
-  <div class="row" style="align-items:center;justify-content:space-between;gap:18px">
-   <div><span class="overline">ELOAH SUR TON TÉLÉPHONE</span><h2 style="margin:6px 0">Ton espace, partout avec toi.</h2><p>Ton accès a été vérifié. Installe ELOAH sur ton écran d'accueil, puis connecte-toi avec ce même compte.</p></div>
-   <a href="eloah-installer.html" style="display:inline-flex;padding:13px 18px;background:#842464;color:#fff;border-radius:10px;text-decoration:none;font-weight:700;min-height:48px;align-items:center">Installer ELOAH ↗</a>
-  </div>
-  <p style="font-size:12px;margin-bottom:0">L'installation ne transfère pas automatiquement les projets stockés uniquement dans un autre navigateur. Ton espace client privé conserve ses données dans Supabase.</p>
+  <span class="overline">ELOAH CLIENT SUR TÉLÉPHONE</span>
+  <h2 style="margin:9px 0">Votre espace, partout avec vous.</h2>
+  <p>Sur iPhone : ouvrez cette page dans Safari, touchez <strong>Partager</strong>, puis <strong>Sur l’écran d’accueil</strong>. Sur Android : utilisez le menu du navigateur et choisissez l’installation lorsque cette option est proposée.</p>
+  <p style="font-size:12px;margin-bottom:0">L’icône ELOAH Client démarre sur ce portail privé, et non sur l’espace personnel de la fondatrice. Une connexion et un abonnement actif restent nécessaires pour accéder aux données.</p>
  </div>
  <div class="panel" id="client-account"><div class="row" style="justify-content:space-between"><div><h2>Mon compte</h2><p id="signed-in-email"></p><p id="current-plan"></p></div><button class="light" id="logout" type="button">Se déconnecter</button></div>
  <p class="notice">Portail client pilote : les éventuels paiements sont gérés uniquement par Stripe. Les accès sont activés après vérification des droits côté serveur Supabase.</p></div>
@@ -224,7 +223,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
 <p>Le code de cette page est public parce qu'il est publié sur GitHub Pages. Seules les données enregistrées dans les tables Supabase de ce portail sont soumises aux règles privées du serveur. Les autres pages ELOAH publiées sur GitHub Pages, y compris leurs textes et leurs fichiers, ne sont pas rendues confidentielles par cette connexion.</p>
 <p>Les sauvegardes déjà enregistrées dans ton navigateur ne sont pas importées ici. Aucun numéro de carte bancaire n'est demandé dans cet espace : les paiements éventuels s'effectuent uniquement sur Stripe.</p></section>
 </main>
-<footer>ELOAH · Espace privé pilote · Aucun abonnement vendu depuis cette page.</footer>
+<footer>ELOAH · Espace client privé · Souscriptions commerciales en préparation.</footer>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <script src="eloah-client-modules.js"></script>
 <script>
