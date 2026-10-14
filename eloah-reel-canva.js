@@ -1547,6 +1547,7 @@ projectLibrary=window.ELOAHReelProjects?.create({
  newProject:()=>action('reset'),
  exportJSON:projectDownload,
  importJSON:()=>one('#ecs-project-input').click(),
+ importCanvaExport:()=>{setTab('import');reelImporter?.openUpload()},
  getMedia:kind=>kind==='image'?(reelImporter?.getItems('image')||[]).map(item=>({
   id:item.id,title:item.title||'Image',thumb:item.thumb||item.url||null,domain:item.domain||'',album:item.album||''
  })):[
