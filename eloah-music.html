@@ -14,9 +14,32 @@
 /* ELOAH Music : bannière compacte, proportions conservées */
 .header::before{height:clamp(180px,24vw,340px)!important;aspect-ratio:auto!important;background-size:contain!important;background-position:center center!important;background-color:#171311!important}
 @media(max-width:750px){.header::before{height:clamp(130px,31vw,200px)!important;background-size:contain!important;background-position:center!important}}
+
+/* ELOAH Music · nouvelle composition type lecteur Spotify */
+:root{background:#080808;color:#f9f9f9}
+.app{grid-template-columns:252px minmax(0,1fr);gap:8px;padding:8px 8px 110px}
+.side{background:#121212;border-radius:9px;padding:24px 13px}
+.main{background:linear-gradient(180deg,#232026 0,#181818 370px,#171717 620px);border-radius:9px}
+.brand{font-size:23px;letter-spacing:-.035em}.brand b{color:#e6b775}
+.nav{border-radius:6px;padding:12px 13px}.nav.active,.nav:hover{background:#282828}
+.header{display:grid!important;grid-template-columns:minmax(0,1.12fr) minmax(260px,.88fr);align-items:center;column-gap:clamp(18px,2.5vw,38px);padding:clamp(18px,2.6vw,38px)!important;background:transparent!important;min-height:0!important}
+.header::before{content:"";display:block;width:100%;height:auto!important;aspect-ratio:1672/941!important;border-radius:10px;background-image:url("assets/eloah-music/hero.webp")!important;background-position:center center!important;background-size:100% 100%!important;box-shadow:0 16px 38px #0007;background-color:#131012!important}
+.hero-tools{align-self:center;min-width:0}
+.hero-label{font-size:11px;letter-spacing:.19em;color:#d4b6a1;font-weight:800;margin-bottom:14px}
+.hero-caption{font-size:clamp(24px,2.6vw,37px);font-weight:800;line-height:1.1;letter-spacing:-.045em;max-width:330px;margin-bottom:19px}
+.header .action{display:inline-flex;align-items:center;justify-content:center;margin:5px 6px 5px 0!important;padding:10px 15px;border-radius:28px;background:#dfbd8c;color:#16110d;font-size:12px;line-height:1.25}
+.header .action.secondary{background:#2d2b2d;color:#f6f3f6;border:1px solid #474248}
+.header .action:hover{filter:brightness(1.13)}
+.header #cloudStatus{display:block;margin:10px 0;font-size:12px}
+.body{padding:8px clamp(18px,3vw,38px) 64px}
+.rowtitle h2{font-size:22px}.cards{grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:14px}
+.tile{background:#202020;border-radius:8px;transition:background .2s,transform .2s}.tile:hover{background:#2e2e2e;transform:translateY(-2px)}
+.art{border-radius:6px}.player{background:#111;border-top:1px solid #292929}
+@media(max-width:1050px){.header{grid-template-columns:minmax(0,1fr)!important;gap:18px}.header::before{max-width:790px}.hero-caption{max-width:none;font-size:25px}.hero-tools{padding:0 4px}}
+@media(max-width:750px){.app{display:block;padding:0 0 160px}.side{position:static;display:flex;height:auto;overflow-x:auto;border-radius:0;padding:9px}.main{border-radius:0}.header{display:block!important;padding:16px!important}.header::before{width:100%;height:auto!important;aspect-ratio:1672/941!important;background-size:100% 100%!important}.hero-tools{padding:17px 2px 0}.hero-label{margin-bottom:7px}.hero-caption{font-size:21px;margin-bottom:12px}.header .action{font-size:11px;padding:10px 12px}.body{padding:10px 14px 60px}.cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
-<main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ta musique.<br>Ton univers.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></header>
+<main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ta musique.<br>Ton univers.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">La musique qui accompagne tes envies.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
 <div class="body"><div id="home"><div class="rowtitle"><h2>Mes ambiances</h2><span class="muted">Des espaces à personnaliser</span></div><div class="cards" id="moods"></div><div class="rowtitle"><h2>Mes titres</h2><span class="muted" id="count"></span></div><div id="homeTracks"></div></div>
 <div id="search" class="hidden"><div class="rowtitle"><h2>Rechercher</h2></div><input id="query" class="search" placeholder="Rechercher un titre, artiste ou playlist…"><div id="results"></div></div>
 <div id="library" class="hidden"><div class="rowtitle"><h2>Ma bibliothèque</h2><button class="action" id="newPlaylist">+ Nouvelle playlist</button></div><div class="cards" id="playlistCards"></div><h2>Mes morceaux</h2><div class="music-filters"><button data-sort="all" class="action secondary">Tous</button><button data-sort="artist" class="action secondary">Artistes</button><button data-sort="album" class="action secondary">Albums</button><button data-sort="genre" class="action secondary">Genres</button></div><div id="libraryTracks"></div></div>
