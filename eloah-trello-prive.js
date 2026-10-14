@@ -370,6 +370,60 @@ function attachCardDrag(handle,card,b,c){
   void mutate({type:"reorder_card",boardId:b.id,cardId:c.id,laneId:c.lane,beforeCardId:before});
  });
 }
+function attachLaneDrag(handle,column,b,lane){
+ if(state.readOnly)return;
+ handle.addEventListener("pointerdown",event=>{
+  if(state.pending||event.button!==0)return;
+  const rail=column.closest(".rails");if(!rail)return;
+  event.preventDefault();event.stopPropagation();
+  const start=event.clientX;let moved=false,ghost=null,target=null,beforeLaneId=null,wasOver=false;
+  const cleanup=()=>{
+   try{handle.releasePointerCapture(event.pointerId)}catch(e){}
+   handle.removeEventListener("pointermove",move);handle.removeEventListener("pointerup",finish);
+   handle.removeEventListener("pointercancel",cancel);
+   ghost?.remove();target?.classList.remove("drop-target");column.style.opacity="";
+  };
+  const move=e=>{
+   const x=e.clientX;
+   if(!moved&&Math.abs(x-start)<9)return;
+   if(!moved){moved=true;ghost=node("div","lane-ghost",lane.name);document.body.append(ghost);column.style.opacity=".4"}
+   ghost.style.left=Math.max(10,Math.min(innerWidth-90,x-70))+"px";ghost.style.top=Math.max(10,e.clientY-25)+"px";
+   const r=rail.getBoundingClientRect();
+   if(x>r.right-35)rail.scrollLeft+=20;
+   else if(x<r.left+35)rail.scrollLeft-=20;
+   const found=document.elementFromPoint(x,e.clientY)?.closest(".lane[data-lane-id]");
+   target?.classList.remove("drop-target");target=null;wasOver=false;beforeLaneId=null;
+   if(found){
+    target=found;wasOver=true;target.classList.add("drop-target");
+    if(found.dataset.laneId===lane.id)return;
+    const rect=found.getBoundingClientRect();
+    if(x<rect.left+rect.width/2)beforeLaneId=found.dataset.laneId;
+    else{
+     const following=found.nextElementSibling;
+     beforeLaneId=following?.dataset.laneId||null;
+    }
+   }
+  };
+  const finish=()=>{
+   const scroll=rail.scrollLeft,ok=moved&&wasOver;
+   cleanup();if(!ok||beforeLaneId===lane.id)return;
+   void mutate({type:"reorder_list",boardId:b.id,laneId:lane.id,beforeLaneId},
+    ()=>{render();const next=APP.querySelector(".rails");if(next)next.scrollLeft=scroll});
+  };
+  const cancel=()=>cleanup();
+  handle.setPointerCapture(event.pointerId);
+  handle.addEventListener("pointermove",move);handle.addEventListener("pointerup",finish);handle.addEventListener("pointercancel",cancel);
+ });
+ handle.addEventListener("keydown",event=>{
+  if(!["ArrowLeft","ArrowRight"].includes(event.key)||state.pending)return;
+  const i=b.lanes.findIndex(x=>x.id===lane.id);
+  const next=i+(event.key==="ArrowLeft"?-1:1);
+  if(next<0||next>=b.lanes.length)return;
+  event.preventDefault();
+  const beforeId=event.key==="ArrowLeft"?b.lanes[next].id:(b.lanes[next+1]?.id||null);
+  void mutate({type:"reorder_list",boardId:b.id,laneId:lane.id,beforeLaneId:beforeId});
+ });
+}
 function cardButton(b,c){
  const card=node("article","card");
  card.dataset.cardId=c.id;
@@ -416,6 +470,7 @@ function renderRail(b,rail){
   });
   const col=node("section","lane");col.dataset.laneId=lane.id;
   const head=node("div","lane-header");head.append(node("span",null,lane.name),node("span","count",visible.length));
+  if(!state.readOnly){const grip=button("⠿","lane-grip");grip.setAttribute("aria-label","Maintenir pour réordonner la liste "+lane.name);head.append(grip);attachLaneDrag(grip,col,b,lane)}
   if(!state.readOnly)head.append(button("⋯","mini-menu",()=>{
    const next=prompt("Renommer cette liste",lane.name);if(!next?.trim()||next.trim()===lane.name)return;
    void mutate({type:"rename_list",boardId:b.id,laneId:lane.id,name:next.trim()});
