@@ -218,21 +218,32 @@ function boardView(){
  requestAnimationFrame(updatePosition);
 }
 function openCard(b,c){
- const overlay=node("div","scrim");overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
+ const overlay=node("div","scrim");
+ const previousFocus=document.activeElement;
+ const onEscape=e=>{if(e.key==="Escape")close()};
+ function close(){document.removeEventListener("keydown",onEscape);overlay.remove();previousFocus?.focus?.()}
+ overlay.addEventListener("click",e=>{if(e.target===overlay)close()});
+ document.addEventListener("keydown",onEscape);
  const sheet=node("section","sheet");sheet.setAttribute("role","dialog");sheet.setAttribute("aria-modal","true");sheet.setAttribute("aria-label",c.title||"Détails de la carte");
  const head=node("div","sheet-header");head.append(node("h2",null,c.title||"Sans titre"));
- head.append(button("×","close",()=>overlay.remove()));sheet.append(head);
+ head.append(button("×","close",close));sheet.append(head);
  sheet.append(node("span","pill",b.name));
  const lane=b.lanes.find(l=>l.id===c.lane);if(lane)sheet.append(node("span","pill",lane.name));
  if(c.tag)sheet.append(node("span","pill",c.tag));
  if(c.due)sheet.append(node("div",null,"📅 "+fmtDate(c.due)));
  if(c.description){sheet.append(node("h3",null,"Description"));sheet.append(node("p",null,c.description))}
- if(c.checks?.length){sheet.append(node("h3",null,"Checklist · "+c.checks.filter(x=>x.done).length+"/"+c.checks.length));for(const item of c.checks)sheet.append(node("div","check",(item.done?"☑":"□")+"  "+item.text))}
+ if(c.checks?.length){
+ const done=c.checks.filter(x=>x.done).length;
+ sheet.append(node("h3",null,"Checklist · "+done+"/"+c.checks.length));
+ const progress=node("progress");progress.max=c.checks.length;progress.value=done;
+ progress.setAttribute("aria-label","Avancement de la checklist");sheet.append(progress);
+ for(const item of c.checks)sheet.append(node("div","check",(item.done?"☑":"□")+"  "+item.text));
+}
  if(c.comments){sheet.append(node("h3",null,"Notes"));sheet.append(node("p",null,c.comments))}
  if(c.thread?.length){sheet.append(node("h3",null,"Commentaires"));for(const item of c.thread){const content=node("p",null,item.text||"");if(item.at)content.prepend(document.createTextNode(new Date(item.at).toLocaleString("fr-FR")+" — "));sheet.append(content)}}
  const links=(c.links||[]).map(cleanUrl).filter(Boolean);
  if(links.length){sheet.append(node("h3",null,"Documents"));const list=node("div","detail-links");for(const href of links){const link=node("a",null,"Ouvrir un document externe ↗");link.href=href;link.target="_blank";link.rel="noopener noreferrer";list.append(link)}sheet.append(list)}
- const status=node("p","notice","Cette carte est consultable ici sans connexion ni possibilité de modification.");
+ const status=node("p","notice","🔒 Lecture seule : cette page n’enregistre aucune modification des cartes.");
  sheet.append(status);overlay.append(sheet);APP.append(overlay);
 }
 function sectionScreen(title){
