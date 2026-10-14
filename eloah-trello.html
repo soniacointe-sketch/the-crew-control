@@ -177,10 +177,23 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
     render();
     picker.close();
     openCard(null);
+    // Suggestion non contraignante à partir du texte du brouillon.
+    const plain=(incoming.title+' '+incoming.description.slice(0,2000)).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+    const columnRules=[
+      {words:['a verifier','verifier','validation','controle','relire','corriger','audit'],label:'À vérifier'},
+      {words:['en cours','commence','progression','en preparation','actuellement'],label:'En cours'},
+      {words:['a faire','organiser','preparer','envoyer','publier','creer','planifier','contacter','inscrire'],label:'À faire'},
+      {words:['idee','inspiration','imaginer','concept','reflexion','explorer'],label:'Idées'}
+    ];
+    const candidate=columnRules.map(rule=>({...rule,score:rule.words.reduce((n,w)=>n+(plain.includes(w)?1:0),0)})).sort((a,b)=>b.score-a.score)[0];
+    const lanes=data.boards.find(b=>b.id===select.value)?.lanes||[];
+    const preferred=candidate?.score>0?lanes.find(l=>l.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()===candidate.label.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()):null;
+    if(preferred)$('laneChoice').value=preferred.id;
     $('title').value=incoming.title;
     $('description').value=incoming.description;
     $('tag').value='ELOAH 2040';
     $('dialogTitle').textContent='Brouillon ELOAH 2040 · vérifier puis enregistrer';
+    if(preferred)$('dialogTitle').textContent+=' · colonne suggérée : '+preferred.name;
     sessionStorage.removeItem('eloah2040:board-handoff');
    });
    actions.append(cancel,confirm);picker.append(heading,note,label,select,suggestionInfo,actions);
