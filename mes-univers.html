@@ -180,7 +180,7 @@ body.eloah-home-client #services .tool{min-height:205px;padding:22px}body.eloah-
 <div class="search-area"><label class="search-label" for="eloah-search-work">Que souhaites-tu retrouver ?</label><div class="search-line"><input id="eloah-search-work" type="search" maxlength="150" placeholder="Un projet, une action, un outil…" aria-controls="eloah-search-work-results" aria-describedby="eloah-search-work-help" autocomplete="off"><button type="button" id="home-search-clear" aria-label="Effacer la recherche" hidden>Effacer</button></div><p class="help" id="eloah-search-work-help">Recherche dans les outils de cette page et les titres de tes projets, actions et notes sur cet appareil.</p><div id="eloah-search-work-results" class="search-results" hidden><p id="home-search-status" role="status" aria-live="polite"></p><ul id="home-search-list" aria-label="Résultats de recherche"></ul></div></div>
 </header>
 <p id="home-storage-status" class="home-status" role="status" hidden></p>
-<section id="mes-projets" class="section" aria-labelledby="home-projects-title">
+<section id="mes-projets" class="section" hidden aria-hidden="true" aria-labelledby="home-projects-title">
 <div class="section-head"><div><h2 id="home-projects-title">Reprendre mes projets</h2><p>Accès à tes espaces essentiels et aux projets ouverts sur cet appareil.</p></div><a href="eloah-pilotage.html#mes-projets">Voir tous mes projets →</a></div>
 <div id="home-projects" class="project-grid" hidden></div>
 <div id="home-project-empty" class="empty-state"><div><strong>Ton premier projet commence ici.</strong><p>Un atelier à préparer, une idée à développer, un objectif personnel… Donne-lui un nom et commence à ton rythme.</p></div><button type="button" data-new-project>Créer mon premier projet</button></div>
@@ -190,7 +190,7 @@ body.eloah-home-client #services .tool{min-height:205px;padding:22px}body.eloah-
 <div id="home-tasks" class="tasks" hidden></div><div id="home-tasks-empty" class="empty-state"><div><strong>Une prochaine étape à noter ?</strong><p>Ajoute une première action dans ton planning. Elle apparaîtra ici pour t’aider à reprendre le fil.</p></div><a class="btn" href="eloah-pilotage.html#mon-organisation">Préparer mon planning</a></div>
 <p class="help">Les dates notées ici ne déclenchent pas de rappel automatique.</p>
 </section>
-<section id="services" class="section" aria-labelledby="home-tools-title">
+<section id="services" class="section" hidden aria-hidden="true" aria-labelledby="home-tools-title">
 <div class="section-head"><div><h2 id="home-tools-title">Les outils pour avancer</h2><p>Choisis simplement ce que tu souhaites faire.</p></div><a href="eloah-pilotage.html#services">Tous mes outils →</a></div>
 <div class="tools">
 <article class="tool"><h3>Retrouver mes documents</h3><p>Ouvre ta bibliothèque pour classer tes fichiers et reprendre tes textes.</p><a class="btn" data-search-tool="Documents fichiers bibliothèque textes" href="eloah-bibliotheque.html?type=fichiers">Ouvrir mes documents →</a></article>
