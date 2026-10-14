@@ -47,3 +47,7 @@ Points restant à tester : création de liens, durée maximale, révocation imm�
 ## Contrôle des liens de partage — 14 octobre 2026
 
 Inspection des contraintes PostgreSQL : jeton stocké en empreinte de 64 caractères, clé primaire sur `token_hash`, accès limité aux modes `read` et `edit`, et propriétaire relié à `auth.users`. Lors de l'inspection, la table contenait **deux liens valides, aucun révoqué et aucun expiré**. Les liens n'ont pas été modifiés. La vérification des conditions de refus est statique (code + schéma) : la révocation effective d'un lien lors d'un appel API réel n'a pas encore été testée.
+
+## Simulation des conditions de révocation — 14 octobre 2026
+
+Une requête SQL utilisant quatre scénarios calculés en mémoire (sans INSERT/UPDATE/DELETE) a vérifié le prédicat `revoked_at IS NULL AND expires_at > now()` : lien valide autorisé, lien expiré refusé, lien révoqué refusé, lien à la fois révoqué et expiré refusé. **4 scénarios sur 4 conformes.** Il s'agit d'un test logique et non d'un test HTTP bout en bout. Les deux liens existants sont restés inchangés. À tester ensuite : un jeton temporaire dédié via les fonctions `eloah-boards-private-edit` et `eloah-boards-private-media`, avant et après révocation ; attention, les URL de média déjà signées peuvent rester valides jusqu'à leur expiration (180 secondes actuellement).
