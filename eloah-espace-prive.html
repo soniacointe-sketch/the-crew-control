@@ -84,7 +84,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
 #private-area #workspace-form{border-top:1px solid #e9dde7;margin-top:22px;padding-top:10px}
 @media(max-width:850px){#private-area .client-shell{grid-template-columns:1fr}#private-area .client-sidebar{position:static;min-height:0;gap:14px;padding:16px}#private-area .client-side-nav{display:flex;overflow-x:auto;gap:7px}#private-area .client-nav-link{flex:none;background:#ffffff0c;font-size:12px}#private-area .client-side-note,#private-area .client-side-offer{display:none}#private-area .grid{grid-template-columns:1fr}}
 @media(max-width:550px){#private-area .client-overview{padding:20px}#private-area .client-metrics{width:100%}#private-area .client-metrics>div{flex:1}#private-area .client-side-brand{font-size:20px}}
-</style></head>
+</style><style id="eloah-customer-task-controls">#private-area .task-controls{display:flex;gap:10px;align-items:center;margin-top:10px}#private-area .task-controls label{font:600 11px system-ui;color:#65556a;margin:0}#private-area .task-controls select{display:block;margin:5px 0 0;padding:7px 10px;min-height:38px;font-size:12px;max-width:185px}#private-area .task{padding:14px 0}#private-area .task strong{font-size:15px}</style></head>
 <body>
 <header><a class="wordmark" href="eloah-offres.html">ELOAH</a><nav class="row"><a href="eloah-offres.html">Offres publiques ↗</a><a href="eloah-inscription.html">Mon abonnement ↗</a></nav></header>
 <main>
@@ -179,6 +179,7 @@ async function refresh(){
   const active=await loadPlan();
   $('private-area').hidden=!active;
   $('access-pending').hidden=active;
+  if(!active){workspaceId=null;$('client-project-count').textContent='—';$('client-action-count').textContent='—';}
   if(checkoutReturn){
     $('validation-status').textContent=active
       ? 'Abonnement confirmé côté serveur. Ton espace est accessible.'
@@ -222,7 +223,7 @@ async function loadWorkspaces(){
  const selected=data.find(w=>w.id===workspaceId);
  if(selected)choose(selected);
  else if(data.length)choose(data[0]);
- else {workspaceId=null;$('task-form').hidden=true;$('workspace-heading').textContent='Mes actions';$('task-list').replaceChildren()}
+ else {workspaceId=null;$('task-form').hidden=true;$('workspace-heading').textContent='Mes actions';$('client-action-count').textContent='0';$('task-list').replaceChildren();$('task-list').append(el('p','Créez votre premier projet pour y organiser vos actions.'))}
 }
 async function loadTasks(){
  if(!workspaceId)return;
@@ -240,7 +241,20 @@ async function loadTasks(){
   const meta=[item.status,item.due_date].filter(Boolean).join(' · ');
   if(meta)section.append(el('small',meta));
   if(item.notes)section.append(el('p',item.notes));
-  list.append(section);
+  const controls=el('div',undefined,'task-controls');
+  const label=el('label','État de l’action');
+  const choice=el('select');choice.setAttribute('aria-label','État de '+item.title);
+  [['a_faire','À faire'],['en_cours','En cours'],['termine','Terminée']].forEach(([value,name])=>{const option=el('option',name);option.value=value;choice.append(option)});
+  choice.value=item.status;
+  choice.addEventListener('change',async()=>{
+   const requested=workspaceId,old=item.status;choice.disabled=true;status('task-status','Enregistrement de l’état…');
+   const {error}=await getClient().from('eloah_customer_workspace_items').update({status:choice.value}).eq('id',item.id).eq('workspace_id',requested).eq('owner_id',user.id);
+   if(error){choice.value=old;status('task-status','Modification impossible : '+errMessage(error))}
+   else{item.status=choice.value;status('task-status','État enregistré dans votre espace privé.')}
+   choice.disabled=false;
+  });
+  label.append(choice);controls.append(label);
+  section.append(controls);list.append(section);
  }
 }
 $('login-form').addEventListener('submit',async e=>{
