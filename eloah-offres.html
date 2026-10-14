@@ -4,8 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="ELOAH : un espace de pilotage, des studios créatifs et des solutions pour associations. Découvre les offres et demande une présentation adaptée à ton projet.">
-<meta name="theme-color" content="#f5f1eb">
-<title>ELOAH — Nos solutions · Pilotage, Studio, Associations</title>
+<meta name="theme-color" content="#160912">
+<title>ELOAH — Offres et tarifs · Découverte, Entrée, Partenaire</title>
+<link rel="icon" type="image/svg+xml" href="assets/eloah-logo-violent-prune.svg">
 <style>
 :root{color-scheme:light;--ink:#211f26;--muted:#68626b;--line:#e6dfdc;--paper:#f7f3ed;--white:#fffdfb;--violet:#7555b2;--rose:#a63d57;--green:#356756;--gold:#a77932}
 *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font:15px/1.65 system-ui,-apple-system,"Segoe UI",Arial,sans-serif}
@@ -44,14 +45,69 @@ a{color:inherit}a:focus-visible,button:focus-visible,input:focus-visible,select:
 .footer{border-top:1px solid #e2d8d4;padding:26px 0;color:#79717a;font-size:12px}.footer-inner{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}
 @media(max-width:920px){.hero-inner{grid-template-columns:1fr;gap:25px}.hero-visual{min-height:280px;max-width:570px}.pillar-grid{grid-template-columns:1fr}.pillar{padding:25px}.pricing{grid-template-columns:1fr 1fr}.form-grid{grid-template-columns:1fr;gap:20px}}
 @media(max-width:600px){.container{width:min(100% - 26px,1170px)}.nav{min-height:62px}.navlinks{gap:10px}.navlinks>a:not(.btn){display:none}.hero{padding:48px 0}.hero h1{font-size:44px}.hero-lead{font-size:16px}.hero-visual{min-height:260px}.section{padding:49px 0}.pricing,.detail-grid,.process{grid-template-columns:1fr}.form-section{padding:45px 0}.form-panel{padding:20px}.sitebar .btn{padding:9px 12px;font-size:12px}}
+
+/* ELOAH COMMERCIAL — ALIGNEMENT VIOLENT PRUNE */
+:root{color-scheme:dark;--ink:#f8eef5;--muted:#ddc7d6;--line:rgba(193,122,160,.25);--paper:#160912;--white:#24101f;--violet:#9b3d73;--rose:#e5c28b;--green:#8d496c;--gold:#d8b07a}
+html{scroll-padding-top:86px}
+body{background:radial-gradient(ellipse at 90% 4%,rgba(120,27,84,.22),transparent 37%),linear-gradient(180deg,#170912,#120910 65%,#0f0710);color:var(--ink)}
+.sitebar{background:rgba(17,6,16,.92);border-bottom:1px solid rgba(214,148,184,.22);backdrop-filter:blur(16px)}
+.brand{position:relative;display:inline-block;padding-left:32px;font-size:22px;letter-spacing:.055em;color:#fff2f8}
+.brand::before{content:"";position:absolute;left:-4px;top:-4px;width:36px;height:39px;background:url("assets/eloah-logo-violent-prune.svg") center top /65px auto no-repeat;mix-blend-mode:screen}
+.brand small{font:600 8px/1.6 system-ui;letter-spacing:.17em;color:#e0ba87}
+.navlinks>a:not(.btn){color:#efdfeb}.navlinks>a:not(.btn):hover{color:#ebc997}
+.btn{border-color:rgba(237,204,159,.45);background:linear-gradient(118deg,#deb57c,#f0d6ae 50%,#d7aa6d);color:#291022;border-radius:8px;box-shadow:0 5px 19px rgba(182,61,127,.13)}
+.btn:hover{background:linear-gradient(118deg,#edc99a,#ffe1b9 50%,#e6ba7c);color:#291022;transform:translateY(-2px)}
+.btn.ghost{background:rgba(124,35,87,.17);border-color:rgba(208,145,179,.43);color:#f9e7f2;box-shadow:none}
+.btn.ghost:hover{background:rgba(157,50,108,.3);color:#fff1f9}
+.btn.light{background:#f2dfc7;color:#341128;border-color:#eed0ad}
+.hero{background:radial-gradient(ellipse at 82% 42%,rgba(155,50,110,.25),transparent 54%),radial-gradient(ellipse at 0 85%,rgba(106,24,72,.22),transparent 55%),linear-gradient(115deg,#110710,#271020 65%,#180915);border-bottom:1px solid var(--line)}
+.eyebrow{color:#ebc997;font-size:10px}
+.hero h1{color:#fff2f9}
+.hero h1 em{color:#ebc997}
+.hero-lead{color:#e1cbd9;font-size:17px}
+.hero-note{color:#c2a4b9}
+.hero-visual{border:1px solid rgba(216,176,122,.29);background:linear-gradient(150deg,#401a34,#1b0c1a);box-shadow:0 20px 65px rgba(6,1,8,.35);transform:rotate(.5deg)}
+.visual-panel{border-color:rgba(199,132,168,.29);background:#391731;color:#fff0f8}
+.visual-panel:first-child{background:linear-gradient(145deg,#63264a,#34152d);border-color:rgba(222,183,134,.39);color:#fff3f9}
+.visual-panel small,.visual-panel:first-child small{color:#e9c48b}
+.visual-panel:nth-child(2){background:#421c35}
+.visual-panel:nth-child(3){background:#29112a}
+.visual-panel p{color:#e4c9d9}
+.section{background:transparent}
+.section.soft{background:linear-gradient(150deg,#221020,#180a17);border-color:rgba(200,135,167,.17)}
+.section-title,.pillar h3,.detail h3,.example h3,.step h3{color:#fff0f8}
+.section-intro{color:#dfc9d7}
+.pillar,.price{background:linear-gradient(155deg,rgba(97,34,75,.43),rgba(34,14,33,.77));border:1px solid rgba(202,125,170,.27);box-shadow:0 14px 39px rgba(5,1,8,.16)}
+.pillar{border-radius:15px}.pillar:nth-child(1){border-top:3px solid #ebc997}.pillar:nth-child(2){border-top:3px solid #a65288}.pillar:nth-child(3){border-top:3px solid #bd84aa}
+.pillar-number,.pillar .who{color:#e4bc88}
+.pillar p,.pillar ul,.pillar .micro,.price p{color:#ddc4d3}
+.pillar .bottom .btn{width:100%}
+.custom-quote-tag{align-self:flex-start;margin:0 0 14px;color:#e9c38f;font-size:11px;font-weight:750;text-transform:uppercase;letter-spacing:.11em;border:1px solid rgba(221,176,115,.42);border-radius:99px;padding:3px 12px}
+.price.feature{border:1.5px solid rgba(231,187,126,.67);box-shadow:0 0 0 1px rgba(226,186,127,.09),0 18px 39px rgba(5,1,8,.23)}
+.price h3{color:#f9ebf4}.price .amount{color:#fff4f9}.price .amount span{color:#dabbd0}
+.detail{border-left-color:#e2bb83}.detail p{color:#d8c1d0}
+.example{background:rgba(86,29,68,.34);border-color:rgba(201,135,171,.26)}.example p{color:#e0cbd7}
+.step{border-color:#b77c9d}.step b{color:#e5c28b}.step p{color:#ddc7d6}
+.form-section{background:radial-gradient(ellipse at 0 0,rgba(116,26,78,.24),transparent 63%),linear-gradient(180deg,#2a1123,#100710);border-top:1px solid rgba(220,169,198,.19)}
+.form-section .section-intro{color:#dfc9d7}
+.form-panel{background:rgba(39,14,32,.87);border-color:rgba(221,178,123,.38);box-shadow:0 20px 45px rgba(5,0,6,.22)}
+.form-panel label{color:#f5e0ed}
+.form-panel input,.form-panel select,.form-panel textarea{background:#311329;border-color:rgba(197,125,163,.43);color:#fff0fa}
+.form-panel input::placeholder,.form-panel textarea::placeholder{color:#bba0b2}
+.form-panel select option{background:#311329}
+.form-note,.form-status{color:#dfc1d5}
+.footer{background:#0f0710;border-top:1px solid rgba(207,136,176,.23);color:#cbaec0}
+.footer a{color:#eccba1}.footer a:hover{text-decoration:underline}
+@media(max-width:600px){.brand{font-size:20px;padding-left:26px}.brand::before{width:32px;height:34px;background-size:59px auto}.hero-visual{transform:none}.btn{box-shadow:none}}
+
 </style>
 </head>
 <body>
 <header class="sitebar">
   <div class="nav container">
-    <a class="brand" href="mes-univers.html" aria-label="ELOAH accueil">ELOAH<small>CRÉER · ORGANISER · AVANCER</small></a>
+    <a class="brand" href="eloah-decouvrir.html" aria-label="ELOAH, vitrine commerciale">ELOAH<small>CRÉER · ORGANISER · AVANCER</small></a>
     <nav class="navlinks" aria-label="Navigation de la page">
-      <a href="#solutions">Solutions</a><a href="#abonnements">Abonnements</a><a href="#processus">Comment ça marche</a><a href="eloah-espace-prive.html" title="Connexion des comptes ELOAH déjà autorisés">Espace privé pilote ↗</a>
+      <a href="eloah-decouvrir.html">L'univers ELOAH</a><a href="#solutions">Solutions</a><a href="#abonnements">Abonnements</a><a href="#processus">Comment ça marche</a><a href="eloah-espace-prive.html" title="Connexion des comptes ELOAH déjà autorisés">Espace privé pilote ↗</a>
       <a class="btn" href="#contact">Parlons de ton projet <span aria-hidden="true">↗</span></a>
     </nav>
   </div>
@@ -92,7 +148,7 @@ a{color:inherit}a:focus-visible,button:focus-visible,input:focus-visible,select:
         </article>
         <article class="pillar" id="studio">
           <span class="pillar-number">02 · CRÉER</span>
-          <h3>ELOAH Studios créatifs</h3>
+          <h3>ELOAH Studios créatifs</h3><span class="custom-quote-tag">Sur devis</span>
           <p class="who">Marques · artisans · projets éditoriaux · associations</p>
           <p>Tu as la matière, les idées, l'intention. Nous t'aidons à en faire des supports cohérents et publiables.</p>
           <ul><li>Newsletters écrites dans la voix de ta marque</li><li>Articles, dossiers et textes de présentation</li><li>Visuels et supports de communication</li><li>Carrousels, présentations, documents</li><li>Pack éditorial ou création sur mesure</li></ul>
@@ -100,7 +156,7 @@ a{color:inherit}a:focus-visible,button:focus-visible,input:focus-visible,select:
         </article>
         <article class="pillar" id="associations">
           <span class="pillar-number">03 · RASSEMBLER</span>
-          <h3>ELOAH Associations</h3>
+          <h3>ELOAH Associations</h3><span class="custom-quote-tag">Sur devis</span>
           <p class="who">Associations locales · collectifs · petites structures</p>
           <p>Les inscriptions, les événements et les messages ne devraient pas absorber toute l'énergie des bénévoles.</p>
           <ul><li>Organisation des adhérents et contacts</li><li>Préparation des événements et ateliers</li><li>Suivi administratif et échéances</li><li>Communications aux membres et familles</li><li>Accompagnement au déploiement</li></ul>
