@@ -42,7 +42,24 @@ button.light{background:#fff;color:#7655a1;border-color:#d9c8e8}
 footer{padding:25px;text-align:center;color:#877c87;font:11px/1.7 system-ui}
 @media(max-width:690px){.grid{grid-template-columns:1fr}main{margin-top:22px}.panel{padding:19px}}
 </style>
-</head>
+<style id="eloah-member-login-design">
+body{background:#100711;color:#f8eff8}
+body>header{background:#180b19;border-color:#4d2849}body>header a{color:#f6e5f7!important}body>header .wordmark{color:#fff;font-family:Georgia,serif}
+main{width:min(1160px,calc(100% - 32px));margin:52px auto 75px}
+main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
+.login-stage{display:grid;grid-template-columns:1.05fr .95fr;min-height:590px;border:1px solid #63315d;border-radius:22px;overflow:hidden;background:#f9f5f8;box-shadow:0 30px 90px #0005}
+.login-art{position:relative;isolation:isolate;padding:48px 45px;background:radial-gradient(ellipse at 83% 66%,#b5228e90,transparent 38%),radial-gradient(ellipse at 8% 18%,#7c2a73aa,transparent 50%),linear-gradient(135deg,#1a0926,#310c34 65%,#18071e);color:#fff;display:flex;flex-direction:column;overflow:hidden}
+.login-art:after{content:"";position:absolute;width:440px;height:440px;border:1px solid #eaa4df33;border-radius:50%;bottom:-170px;right:-140px;box-shadow:0 0 0 60px #eaa4df0a,0 0 0 120px #eaa4df09;z-index:-1}
+.login-mini,.login-art-bottom,.login-card-top{font-size:10px;letter-spacing:.22em;font-weight:750}
+.login-mini{color:#e8b4db}.login-brand{font:500 clamp(47px,6vw,82px)/1.1 Georgia,serif;letter-spacing:.04em;margin:72px 0 31px}.login-brand span{color:#f67acb;font-size:.42em;vertical-align:top;margin-left:8px}
+.login-art h2{font:400 clamp(28px,3vw,43px)/1.17 Georgia,serif;margin:0 0 20px;color:#fff}.login-art p{max-width:320px;font-size:14px;line-height:1.8;color:#e9cae4}.login-orbit{position:absolute;right:14%;bottom:17%;font-size:100px;color:#ed7bcc;text-shadow:0 0 70px #ff4fc9}.login-art-bottom{margin-top:auto;color:#e9bbdd}
+.login-card{padding:clamp(30px,5vw,72px);display:flex;flex-direction:column;justify-content:center;color:#261b2a}.login-card-top{color:#8e397c}.login-card h2{font:400 clamp(32px,3vw,45px)/1.17 Georgia,serif;margin:18px 0 8px;color:#251329}.login-card .login-intro{font-size:14px;color:#736674;margin-bottom:28px}
+.login-card label{color:#473547;font-size:12px;margin:0 0 19px}.login-card input{margin-top:9px;min-height:50px;border:1px solid #d9c8d8;border-radius:9px;background:#fff;color:#251b28;padding:13px 14px}.login-card input:focus{border-color:#a63489}
+.login-card .login-primary{width:100%;display:flex;align-items:center;justify-content:space-between;min-height:51px;background:linear-gradient(105deg,#471348,#922c77);border:0;border-radius:9px;color:white;font-size:14px;padding:13px 19px}
+.login-card .login-alt{margin-top:13px;background:transparent;border:0;color:#86246f;font-size:12px;text-decoration:underline;text-underline-offset:3px;padding:10px}.login-card .login-small{font-size:11px;line-height:1.75;color:#776776;margin-top:24px}.login-card a{color:#8d2e79}.login-card .status{color:#8c3176}
+#private-area{color:#2d2431}#private-area .panel{background:#fffdfa}main>section.panel{background:#f9f3f8;color:#312534;border-color:#5c3858}footer{background:#100711;color:#bea6bc}
+@media(max-width:760px){main{margin:20px auto 45px}.login-stage{grid-template-columns:1fr}.login-art{min-height:230px;padding:26px}.login-brand{margin:22px 0 8px;font-size:43px}.login-art h2{font-size:27px;margin-bottom:5px}.login-art p,.login-orbit{display:none}.login-art-bottom{font-size:9px;margin-top:15px}.login-card{padding:30px 25px}}
+</style></head>
 <body>
 <header><a class="wordmark" href="eloah-offres.html">ELOAH</a><nav class="row"><a href="eloah-offres.html">Offres publiques ↗</a><a href="mes-univers.html">Mes univers ↗</a></nav></header>
 <main>
@@ -50,12 +67,18 @@ footer{padding:25px;text-align:center;color:#877c87;font:11px/1.7 system-ui}
 <h1>Un espace à toi, séparé des autres.</h1>
 <p class="lead">Ce portail de préparation utilise une connexion Supabase et des règles d'accès par propriétaire. Il n'affiche aucune donnée du cockpit personnel ni aucun dossier d'un autre utilisateur.</p>
 <div class="private-indicator">◈ Accès aux données contrôlé côté serveur (RLS)</div>
-<section class="panel" id="sign-in">
- <h2>Se connecter</h2>
- <p>Utilise une adresse e-mail déjà autorisée dans ELOAH. La création automatique de comptes n'est pas activée depuis ce formulaire.</p>
- <form id="login-form"><label for="auth-email">Adresse e-mail du compte ELOAH<input type="email" name="email" id="auth-email" autocomplete="email" required placeholder="toi@exemple.fr"></label>
- <button type="submit" id="login-submit">Recevoir un lien de connexion</button></form>
- <p id="login-status" class="status" role="status"></p>
+<section class="login-stage" id="sign-in">
+ <div class="login-art"><span class="login-mini">ELOAH · VOTRE NOUVEL ESPACE</span><div class="login-brand">ELOAH<span>✦</span></div><h2>Vos idées n'ont<br>plus de frontières.</h2><p>Vos projets, votre studio, vos ressources. Un seul espace pour tout faire avancer.</p><div class="login-orbit" aria-hidden="true">✦</div><div class="login-art-bottom">CRÉER · OSER · S'AFFRANCHIR</div></div>
+ <div class="login-card"><div class="login-card-top">ESPACE MEMBRE ELOAH</div><h2>Bienvenue chez vous.</h2><p class="login-intro">Connectez-vous à votre espace personnel.</p>
+ <form id="login-form">
+  <label for="auth-email">Identifiant <input type="email" name="email" id="auth-email" autocomplete="username" required placeholder="Votre adresse e-mail"></label>
+  <label for="auth-password">Mot de passe <input type="password" name="password" id="auth-password" autocomplete="current-password" placeholder="Votre mot de passe"></label>
+  <button type="submit" id="login-submit" class="login-primary">Se connecter <span aria-hidden="true">→</span></button>
+ </form>
+ <button type="button" id="login-magic" class="login-alt">Recevoir un lien de connexion par e-mail</button>
+ <p id="login-status" class="status" role="status" aria-live="polite"></p>
+ <p class="login-small">Un compte doit déjà avoir été créé et autorisé. Vous venez de découvrir ELOAH ? <a href="eloah-decouvrir.html#contact">Demander un accès</a>.</p>
+ </div>
 </section>
 <section id="private-area" hidden>
  <div class="panel"><div class="row" style="justify-content:space-between"><div><h2>Bienvenue dans ton espace</h2><p id="signed-in-email"></p><p id="current-plan"></p></div><button class="light" id="logout" type="button">Se déconnecter</button></div>
@@ -155,15 +178,27 @@ async function loadTasks(){
  }
 }
 $('login-form').addEventListener('submit',async e=>{
- e.preventDefault();
- const button=$('login-submit');button.disabled=true;
+ e.preventDefault();const button=$('login-submit');button.disabled=true;
  try{
-  const email=$('auth-email').value.trim();
+  const email=$('auth-email').value.trim(), password=$('auth-password').value;
+  if(!password){status('login-status','Saisissez votre mot de passe, ou demandez un lien de connexion.');return}
+  const {error}=await getClient().auth.signInWithPassword({email,password});
+  if(error)throw error;
+  status('login-status','Connexion réussie. Ouverture de votre espace…');
+  await refresh();
+ }catch(e){status('login-status','Connexion impossible. Vérifiez vos identifiants ou demandez un lien de connexion.')}
+ finally{button.disabled=false}
+});
+$('login-magic').addEventListener('click',async()=>{
+ const email=$('auth-email').value.trim(),button=$('login-magic');
+ if(!$('auth-email').checkValidity()){status('login-status','Indiquez votre adresse e-mail pour recevoir un lien.');$('auth-email').focus();return}
+ button.disabled=true;
+ try{
   const redirectTo=location.origin+location.pathname;
   const {error}=await getClient().auth.signInWithOtp({email,options:{emailRedirectTo:redirectTo,shouldCreateUser:false}});
   if(error)throw error;
-  status('login-status','Si ce compte est autorisé, un lien de connexion a été demandé. Consulte ta messagerie, sans partager le lien.');
- }catch(e){status('login-status','Connexion : '+errMessage(e))}
+  status('login-status','Si ce compte est autorisé, un lien a été demandé. Consultez votre boîte e-mail.');
+ }catch(e){status('login-status','Envoi du lien impossible. Réessayez ou contactez ELOAH.')}
  finally{button.disabled=false}
 });
 $('logout').addEventListener('click',async()=>{
