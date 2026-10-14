@@ -143,13 +143,21 @@ function cardButton(b,c){
  if(meta.childElementCount)card.append(meta);return card;
 }
 function renderRail(b,rail){
- rail.replaceChildren();const filter=norm(state.boardSearch);
+ rail.replaceChildren();
+ const filter=norm(state.boardSearch.trim());
  for(const lane of b.lanes){
-  const cards=b.cards.filter(c=>c.lane===lane.id&&!c.archived&&(!filter||norm(c.title+" "+c.description+" "+c.tag).includes(filter)));
+  const visible=(b.cards||[]).filter(c=>{
+   if(c.lane!==lane.id||c.archived)return false;
+   if(filter&&!norm([c.title,c.description,c.tag].join(" ")).includes(filter))return false;
+   if(state.boardFilter==="urgent"&&c.tag!=="Urgent")return false;
+   if(state.boardFilter==="important"&&c.tag!=="Important")return false;
+   if(state.boardFilter==="due"&&!c.due)return false;
+   return true;
+  });
   const col=node("section","lane");
-  const head=node("div","lane-header");head.append(node("span",null,lane.name),node("span","count",cards.length));col.append(head);
-  for(const c of cards)col.append(cardButton(b,c));
-  if(!cards.length)col.append(node("div","empty","Aucune carte dans cette liste."));
+  const head=node("div","lane-header");head.append(node("span",null,lane.name),node("span","count",visible.length));col.append(head);
+  for(const c of visible)col.append(cardButton(b,c));
+  if(!visible.length)col.append(node("div","empty","Aucune carte pour ce filtre."));
   rail.append(col);
  }
 }
@@ -157,14 +165,57 @@ function boardView(){
  const b=active();if(!b){navigate("home");return}
  const shell=node("div","screen board-view");
  const wall=node("div","board-wall");wall.style.backgroundImage=wallpaper(b);shell.append(wall);
- const header=node("header","board-head");header.append(button("×","back",()=>navigate("home")));
- const label=node("div","board-heading");label.append(node("div","board-name",b.name),node("div","board-detail",count(b)+" cartes · ELOAH"));header.append(label);
- header.append(button("⌕","circle",()=>shell.querySelector(".board-search input")?.focus()));shell.append(header);
- const search=node("div","board-search");const input=node("input");input.type="search";input.placeholder="Chercher parmi les cartes";input.value=state.boardSearch;input.addEventListener("input",()=>{state.boardSearch=input.value;renderRail(b,rail)});
+ const head=node("header","board-head");head.append(button("×","back",()=>navigate("home")));
+ const title=node("div","board-heading");title.append(node("div","board-name",b.name),node("div","board-detail",count(b)+" cartes · ELOAH"));head.append(title);
+ head.append(button("⌕","circle",()=>shell.querySelector(".board-search input")?.focus()));shell.append(head);
+
+ const search=node("div","board-search"),input=node("input");
+ input.type="search";input.placeholder="Chercher parmi les cartes";input.value=state.boardSearch;
  search.append(input);shell.append(search);
- const rail=node("main","rails");renderRail(b,rail);shell.append(rail);
- shell.append(node("div","readonly","🔒 Consultation privée · lecture seule"));
+ const filters=node("div","board-filters");
+ const options=[["","Toutes"],["urgent","Urgentes"],["important","Importantes"],["due","Avec date"]];
+ const rail=node("main","rails");
+ function updateFilterUI(){
+  filters.querySelectorAll("button").forEach((el,i)=>{
+   const selected=options[i][0]===state.boardFilter;
+   el.classList.toggle("active",selected);el.setAttribute("aria-pressed",String(selected));
+  });
+ }
+ for(const [value,label] of options){
+  const chip=button(label,"filter-chip",()=>{state.boardFilter=value;updateFilterUI();renderRail(b,rail);updatePosition()});
+  filters.append(chip);
+ }
+ shell.append(filters);updateFilterUI();
+ input.addEventListener("input",()=>{state.boardSearch=input.value;renderRail(b,rail);updatePosition()});
+
+ const navigation=node("div","board-navigation");
+ const label=node("label",null,"Aller à la liste");
+ const selector=node("select");selector.setAttribute("aria-label","Choisir la liste");
+ b.lanes.forEach((lane,i)=>{const option=node("option",null,(i+1)+". "+lane.name);option.value=String(i);selector.append(option)});
+ const position=node("span","position-count","1 / "+b.lanes.length);
+ label.append(selector);navigation.append(label,position);shell.append(navigation);
+ selector.addEventListener("change",()=>{
+  const child=rail.children[Number(selector.value)];
+  child?.scrollIntoView({behavior:"smooth",block:"nearest",inline:"start"});
+ });
+ const dots=node("div","board-dots");dots.setAttribute("aria-hidden","true");
+ for(let i=0;i<b.lanes.length;i++)dots.append(node("span","board-dot"+(i===0?" current":"")));
+ shell.append(rail,dots);
+ const touchStatus=node("div","readonly","🔒 Privé · lecture seule");
+ shell.append(touchStatus);
+ function updatePosition(){
+  const child=rail.children[0];
+  if(!child)return;
+  const step=child.getBoundingClientRect().width+13;
+  const idx=Math.min(Math.max(0,Math.round(rail.scrollLeft/Math.max(1,step))),Math.max(0,b.lanes.length-1));
+  selector.value=String(idx);
+  position.textContent=(idx+1)+" / "+b.lanes.length;
+  dots.querySelectorAll(".board-dot").forEach((e,i)=>e.classList.toggle("current",i===idx));
+ }
+ rail.addEventListener("scroll",updatePosition,{passive:true});
+ renderRail(b,rail);
  APP.replaceChildren(shell);
+ requestAnimationFrame(updatePosition);
 }
 function openCard(b,c){
  const overlay=node("div","scrim");overlay.addEventListener("click",e=>{if(e.target===overlay)overlay.remove()});
