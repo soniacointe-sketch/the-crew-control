@@ -211,5 +211,6 @@ const nav=document.querySelector('.eloah-global-nav');if(nav){const mark=nav.que
 refresh();filterDirectory();if(location.hash)revealHash();
 })();
 </script>
+<style id="eloah-music-launcher-style">.eloah-music-launcher{position:fixed;right:16px;bottom:18px;z-index:90;background:#1a1918;color:#fff;border:1px solid #d6ae77;border-radius:30px;padding:12px 17px;box-shadow:0 7px 25px #0004;font:700 13px system-ui;cursor:pointer}.eloah-music-launcher:hover{background:#34302a}@media(max-width:650px){.eloah-music-launcher{right:10px;bottom:12px;padding:12px}}</style><button class="eloah-music-launcher" id="musicLauncher" type="button" title="Ouvrir le lecteur musical indépendant">♫ Écouter ma musique ↗</button><script>document.getElementById('musicLauncher').addEventListener('click',()=>{const w=window.open('eloah-music.html','eloah_music_player','width=980,height=740,resizable=yes,scrollbars=yes');if(w)w.focus();else location.href='eloah-music.html'});</script>
 </body>
 </html>
