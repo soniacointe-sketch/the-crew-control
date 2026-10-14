@@ -136,7 +136,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
   <div class="panel" id="client-actions">
    <h2 id="workspace-heading">Mes actions</h2>
    <p id="workspace-hint">Choisis d'abord un espace à gauche.</p>
-   <div id="task-list" class="items"></div>
+   <div class="row" style="margin:12px 0"><button type="button" class="light" id="sort-tasks-due">Trier par échéance</button></div><div id="task-list" class="items"></div>
    <form id="task-form" hidden><label for="task-title">Nouvelle action<input id="task-title" maxlength="180" required placeholder="Une étape à réaliser"></label>
    <label for="task-notes">Notes facultatives<textarea id="task-notes" maxlength="8000"></textarea></label>
    <label for="task-date">Échéance facultative<input id="task-date" type="date"></label>
@@ -225,6 +225,7 @@ async function loadWorkspaces(){
  else if(data.length)choose(data[0]);
  else {workspaceId=null;$('task-form').hidden=true;$('workspace-heading').textContent='Mes actions';$('client-action-count').textContent='0';$('task-list').replaceChildren();$('task-list').append(el('p','Créez votre premier projet pour y organiser vos actions.'))}
 }
+let sortTasksByDue=false;
 async function loadTasks(){
  if(!workspaceId)return;
  const requestedWorkspace=workspaceId;
@@ -234,6 +235,7 @@ async function loadTasks(){
  if(requestedWorkspace!==workspaceId)return;
  if(error){status('task-status','Lecture impossible : '+errMessage(error));return}
  $('client-action-count').textContent=String(data.length);
+ if(sortTasksByDue)data.sort((a,b)=>(a.due_date||'9999-12-31').localeCompare(b.due_date||'9999-12-31'));
  const list=$('task-list');list.replaceChildren();
  if(!data.length)list.append(el('p','Aucune action dans cet espace.'));
  for(const item of data){
@@ -294,6 +296,7 @@ $('signup-button').addEventListener('click',async()=>{
  }catch(e){status('login-status','Création du compte indisponible. Réessayez ou contactez ELOAH.')}
  finally{btn.disabled=false}
 });
+$('sort-tasks-due').addEventListener('click',()=>{sortTasksByDue=!sortTasksByDue;$('sort-tasks-due').textContent=sortTasksByDue?'Trier par création':'Trier par échéance';if(workspaceId)loadTasks()});
 $('refresh-entitlement').addEventListener('click',async()=>{
  const button=$('refresh-entitlement');button.disabled=true;
  try{await refresh()}finally{button.disabled=false}
