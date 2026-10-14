@@ -188,7 +188,12 @@ function renderRail(b,rail){
    return true;
   });
   const col=node("section","lane");
-  const head=node("div","lane-header");head.append(node("span",null,lane.name),node("span","count",visible.length));col.append(head);
+  const head=node("div","lane-header");head.append(node("span",null,lane.name),node("span","count",visible.length));
+  if(!state.readOnly)head.append(button("⋯","mini-menu",()=>{
+   const next=prompt("Renommer cette liste",lane.name);if(!next?.trim()||next.trim()===lane.name)return;
+   void mutate({type:"rename_list",boardId:b.id,laneId:lane.id,name:next.trim()});
+  }));
+  col.append(head);
   for(const c of visible)col.append(cardButton(b,c));
   if(!visible.length)col.append(node("div","empty","Aucune carte pour ce filtre."));
   if(!state.readOnly)col.append(button("＋ Ajouter une carte","lane-add",()=>editCard(b,null,lane.id)));
@@ -210,7 +215,14 @@ function boardView(){
  const head=node("header","board-head");head.append(button("×","back",()=>navigate("home")));
  const title=node("div","board-heading");title.append(node("div","board-name",b.name),node("div","board-detail",count(b)+" cartes · ELOAH"));head.append(title);
  head.append(button("⌕","circle",()=>shell.querySelector(".board-search input")?.focus()));
- if(!state.readOnly)head.append(button("＋","circle blue",()=>editCard(b,null,b.lanes[0]?.id)));
+ if(!state.readOnly){
+  head.append(button("⋯","circle",()=>{
+   const next=prompt("Renommer ce tableau",b.name);
+   if(!next?.trim()||next.trim()===b.name)return;
+   void mutate({type:"rename_board",boardId:b.id,name:next.trim()});
+  }));
+  head.append(button("＋","circle blue",()=>editCard(b,null,b.lanes[0]?.id)));
+ }
  shell.append(head);
 
  const search=node("div","board-search"),input=node("input");
@@ -292,7 +304,15 @@ function openCard(b,c){
   const progress=node("progress");progress.max=c.checks.length;progress.value=done;progress.setAttribute("aria-label","Avancement de la checklist");sheet.append(progress);
   c.checks.forEach((item,index)=>{
    if(state.readOnly)sheet.append(node("div","check",(item.done?"☑":"□")+"  "+item.text));
-   else sheet.append(button((item.done?"☑":"□")+"  "+item.text,"check check-action",()=>void mutate({type:"set_check",boardId:b.id,cardId:c.id,index,done:!item.done},after,error)));
+   else{
+    const row=node("div","check-row");
+    row.append(button((item.done?"☑":"□")+"  "+item.text,"check check-action",()=>void mutate({type:"set_check",boardId:b.id,cardId:c.id,index,done:!item.done},after,error)));
+    const remove=button("×","check-remove",()=>{
+     if(!confirm("Retirer cette étape de la checklist ?"))return;
+     void mutate({type:"remove_check",boardId:b.id,cardId:c.id,index},after,error);
+    });
+    remove.setAttribute("aria-label","Supprimer l’étape : "+item.text);row.append(remove);sheet.append(row);
+   }
   });
  }
  if(!state.readOnly){
