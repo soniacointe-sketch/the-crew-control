@@ -41,9 +41,9 @@ body.entretiens-premium{
 .entretiens-premium .premium-journey{list-style:none;margin:0;padding:0}
 .entretiens-premium .premium-journey li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;padding:14px 0;border-top:1px solid #ddd6cf}
 .entretiens-premium .premium-journey li:last-child{border-bottom:1px solid #ddd6cf}
-.entretiens-premium .premium-step-no{font:500 13px/1.55 Georgia,serif;color:#856f9c}
+.entretiens-premium .premium-step-no{font:500 13px/1.55 Georgia,serif;color:#6a557f}
 .entretiens-premium .premium-journey strong{display:block;font-size:14px;color:#333732;font-weight:660}
-.entretiens-premium .premium-journey span:last-child{display:block;font-size:12px;line-height:1.6;color:#677169;margin-top:3px}
+.entretiens-premium .premium-journey span:last-child{display:block;font-size:12px;line-height:1.6;color:#566458;margin-top:3px}
 .entretiens-premium .premium-side-footer{font-size:12px;color:#665d63;line-height:1.6;margin:18px 0 0}
 .entretiens-premium .premium-section-intro{display:flex;align-items:flex-start;justify-content:space-between;gap:12px 20px;flex-wrap:wrap;margin:28px 0 12px}
 .entretiens-premium .premium-section-intro p{margin:0;color:var(--muted);font-size:13px;max-width:730px}
@@ -61,7 +61,7 @@ body.entretiens-premium{
 .entretiens-premium .tabs .premium-tab-index{font:600 10px/1.5 system-ui;letter-spacing:.12em;text-transform:uppercase;color:#7b649d}
 .entretiens-premium .tabs strong{font-size:clamp(21px,2.1vw,26px);line-height:1.2;margin:5px 0}
 .entretiens-premium .tabs span:not(.premium-tab-index){font-size:13px;line-height:1.55;color:#68726a}
-.entretiens-premium .tabs>button:after{content:"↗";position:absolute;right:19px;top:16px;color:#79629d;font-size:16px;line-height:1}
+.entretiens-premium .tabs>button:after{content:"↗";position:absolute;right:19px;top:16px;color:#665080;font-size:16px;line-height:1}
 .entretiens-premium .section-actions{margin:0 0 16px;padding:6px 0;align-items:center}
 .entretiens-premium .section-actions .help{color:#666e66;font-size:12px}
 .entretiens-premium .secondary-tabs{flex-wrap:wrap}
