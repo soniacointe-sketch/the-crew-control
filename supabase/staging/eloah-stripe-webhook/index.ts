@@ -32,14 +32,14 @@ Deno.serve(async req=>{
  if(typeof uid!=="string"||!(/^[a-f0-9-]{36}$/i).test(uid))return response(200,"unmapped subscription");
  // Prices are public identifiers, not secret keys. Only the exact ELOAH plan prices can activate access.
  const ids:Record<string,string>={
-  entree:"price_1UQPEnECEqtAYpIknr4D8aLI",
-  partenaire:"price_1UQPEuECEqtAYpIk9HCoQ6Sf",
+  entree:Deno.env.get("ELOAH_STRIPE_PRICE_ENTREE") || "",
+  partenaire:Deno.env.get("ELOAH_STRIPE_PRICE_PARTENAIRE") || "",
  };
  const subscriptionItems=sub.items?.data;
  if(!Array.isArray(subscriptionItems)||subscriptionItems.length!==1)return response(200,"unexpected items");
  const subscriptionPrice=subscriptionItems[0]?.price?.id;
  const plan=Object.keys(ids).find(k=>ids[k]===subscriptionPrice);
- if(!plan||sub.metadata?.eloah_plan!==plan)return response(200,"unknown plan");
+ if(!plan||!/^price_[A-Za-z0-9]+$/.test(ids[plan])||sub.metadata?.eloah_plan!==plan)return response(200,"unknown plan");
  const invoice=sub.latest_invoice;
  const paid=invoice&&typeof invoice==="object"&&invoice.status==="paid";
  const status=sub.status==="active"&&paid?"active":"inactive";
