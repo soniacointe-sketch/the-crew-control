@@ -1537,6 +1537,28 @@ function projectDownload(data,record){
  toast('Projet exporté en JSON. Les grosses vidéos et pistes audio doivent rester séparées.');
 }
 
+
+projectLibrary=window.ELOAHReelProjects?.create({
+ root,getName:()=>one('#ecs-name')?.value||S.name,getBrand:()=>S.brand,
+ getActiveTab:()=>activeTab,refresh:()=>renderSide(),toast,
+ capture:captureCurrentForProjects,open:restoreProjectFromLibrary,
+ newProject:()=>action('reset'),
+ exportJSON:projectDownload,
+ importJSON:()=>one('#ecs-project-input').click(),
+ getMedia:kind=>kind==='image'?(reelImporter?.getItems('image')||[]).map(item=>({
+  id:item.id,title:item.title||'Image',thumb:item.thumb||item.url||null,domain:item.domain||'',album:item.album||''
+ })):[
+  ...(reelImporter?.getItems('video')||[]).map(item=>({id:item.id,title:item.title||'Vidéo'})),
+  ...videoStock.map(item=>({id:item.id,title:item.name||'Vidéo'}))
+ ],
+ openMediaTab:kind=>{setTab('import');reelImporter?.showTab(kind)},
+ openMedia:(kind,id)=>{
+  if(kind==='image'){setTab('import');if(!reelImporter?.openById(id))toast('Visuel introuvable dans Importer.')}
+  else if(videoStock.some(item=>item.id===id)){setTab('videos');openStockVideo(id)}
+  else{setTab('import');if(!reelImporter?.openById(id))toast('Vidéo introuvable dans Importer.')}
+ }
+})||null;
+
 function renderSide(){
  all('.ecs-railbtn').forEach(b=>b.classList.toggle('active',b.dataset.tab===activeTab));
  const titles={models:'Modèles',elements:'Éléments',text:'Texte',brand:'Marque',import:'Importer',tools:'Outils de montage',projects:'Mes projets',photos:'Photos',audio:'Audio',videos:'Vidéos',properties:'Modifier l’élément'};
@@ -1549,7 +1571,7 @@ function renderSide(){
  '<div class="ecs-import-error"><strong>La médiathèque n’a pas été chargée.</strong><p>Actualise cette page pour récupérer les images.</p>'+
  '<a href="eloah-reel-studio.html?onglet=import&vue=toutes&rechargement=1">↻ Recharger les images</a></div>';
  if(activeTab==='tools')html=inkPanel();
- if(activeTab==='projects')html='<p class="ecs-note">Sauvegarde ton projet en JSON pour retrouver les textes, positions et couleurs.</p>'+btn('save','Sauvegarder projet',true)+btn('load','Ouvrir un projet')+btn('reset','Nouveau projet')+'<p class="ecs-note">Les vidéos, photos et musiques ne sont pas intégrées au fichier JSON : conserve-les séparément et réimporte-les après ouverture.</p>';
+ if(activeTab==='projects')html=projectLibrary?projectLibrary.render():'<div class="ecs-empty"><strong>Bibliothèque Projets indisponible.</strong><p>Recharge la page pour accéder à tes designs.</p></div>';
  if(activeTab==='photos')html=photoCatalog();
  if(activeTab==='audio')html=renderAudio();
  if(activeTab==='videos')html=videoCatalog();
@@ -1640,6 +1662,7 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+ if(projectLibrary?.click(ev))return;
 
  const chosenTool=ev.target.closest('[data-ink-tool]');
  if(chosenTool){
@@ -1884,6 +1907,7 @@ root.addEventListener('click',ev=>{
 });
 one('#ecs-name').addEventListener('change',e=>{S.name=e.target.value.slice(0,90)||'Mon Reel';saveLocal()});
 one('.ecs-sidebody').addEventListener('change',e=>{
+ if(projectLibrary?.change(e))return;
  if(reelImporter?.handleChange(e))return;
 
  if(e.target.id==='ecs-brand-kit'){
@@ -1943,6 +1967,7 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+ if(projectLibrary?.input(e))return;
 
  if(e.target.hasAttribute('data-ink-color')){
   if(/^#[0-9a-f]{6}$/i.test(e.target.value))inkColor=e.target.value;
