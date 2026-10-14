@@ -127,6 +127,23 @@ window.setInterval(()=>{if(!document.hidden)void checkCloudChanges()},45000);
 
 render();
 
+// Brouillon transféré depuis ELOAH 2040 dans ce même onglet : ouverture de l'éditeur, jamais sauvegarde silencieuse.
+if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
+ try{
+  const raw=sessionStorage.getItem('eloah2040:board-handoff');
+  sessionStorage.removeItem('eloah2040:board-handoff');
+  const incoming=raw?JSON.parse(raw):null;
+  if(incoming&&incoming.version===1&&typeof incoming.title==='string'&&incoming.title.trim()&&incoming.title.length<=160&&typeof incoming.description==='string'&&incoming.description.length<=8000&&Number.isFinite(incoming.createdAt)&&Date.now()-incoming.createdAt<600000){
+   openCard(null);
+   $('title').value=incoming.title;
+   $('description').value=incoming.description;
+   $('tag').value='ELOAH 2040';
+   $('dialogTitle').textContent='Brouillon ELOAH 2040 · vérifier puis enregistrer';
+  }else alert('Le brouillon ELOAH est absent ou expiré. Il n’a pas été enregistré.');
+ }catch(e){alert('Impossible d’ouvrir le brouillon ELOAH. Aucune carte n’a été créée.');}
+ history.replaceState(null,'',location.pathname);
+}
+
 const params=new URLSearchParams(location.search),targetBoard=params.get('board'),targetCard=params.get('card');
 if(targetBoard&&targetCard){const b=data.boards.find(x=>x.id===targetBoard),c=b?.cards?.find(x=>x.id===targetCard);if(b&&c){data.active=b.id;showArchive=!!c.archived;if(showArchive)$('archiveView').textContent='Cartes actives';$('search').value='';$('filterTag').value='';showingCalendar=false;save();render();openCard(c.id);history.replaceState(null,'',location.pathname)}} 
 </script><script src="eloah-boards-mobile.js?v=20261014-phone3"></script><script src="eloah-trello-client.js?v=20261014-cloudsync1"></script><script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script></body></html>
