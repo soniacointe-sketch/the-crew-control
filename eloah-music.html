@@ -10,6 +10,10 @@
 .header .action{margin:10px 0 4px 12px}
 .header #cloudStatus{display:inline-block;margin:10px 14px}
 @media(max-width:750px){.header{min-height:0!important;background:#171311!important}.header::before{background-position:center!important}.header .action{font-size:12px;padding:10px 13px}}
+
+/* ELOAH Music : bannière compacte, proportions conservées */
+.header::before{height:clamp(180px,24vw,340px)!important;aspect-ratio:auto!important;background-size:contain!important;background-position:center center!important;background-color:#171311!important}
+@media(max-width:750px){.header::before{height:clamp(130px,31vw,200px)!important;background-size:contain!important;background-position:center!important}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ta musique.<br>Ton univers.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></header>
