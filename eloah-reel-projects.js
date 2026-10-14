@@ -79,6 +79,7 @@ function create(config){
   const arr=projects.filter(p=>{
    if(state.view==='favorites'&&!p.favorite)return false;
    if(state.view==='folder'&&p.folderId!==state.folder)return false;
+   if(state.brandScope&&p.brand!==state.brandScope)return false;
    if(state.search&&!normalize(p.name+' '+folderTitle(p.folderId)+' '+p.brand).includes(normalize(state.search)))return false;
    return true;
   });
@@ -89,8 +90,8 @@ function create(config){
  function buttons(){
   return '<div class="ecs-project-top"><label for="ecs-project-search">⌕</label><input id="ecs-project-search" type="search" placeholder="Recherche dans votre contenu" aria-label="Rechercher dans mes créations et dossiers" value="'+escapeHTML(state.search)+'"></div>'+
    '<div class="ecs-project-scope"><span>◉ Vos projets ELOAH</span><select id="ecs-project-brand-scope" aria-label="Filtrer les projets par domaine">'+
-   '<option value="">Tous les univers</option>'+
-   [...new Set(projects.map(p=>p.brand).filter(Boolean))].map(name=>'<option value="'+escapeHTML(name)+'">'+escapeHTML(name)+'</option>').join('')+
+   '<option value="" '+(!state.brandScope?'selected':'')+'>Tous les univers</option>'+
+   [...new Set(projects.map(p=>p.brand).filter(Boolean))].map(name=>'<option value="'+escapeHTML(name)+'" '+(state.brandScope===name?'selected':'')+'>'+escapeHTML(name)+'</option>').join('')+
    '</select></div>'+
    '<div class="ecs-project-tabs" role="tablist" aria-label="Type de contenu">'+
    [['all','Tout'],['designs','Designs'],['folders','Dossiers'],['images','Images'],['videos','Vidéos']].map(([id,label])=>
@@ -289,7 +290,7 @@ function create(config){
   const designCmd=matches(ev,'data-project-action');if(designCmd){designAction(designCmd.dataset.id,designCmd.dataset.projectAction);return true}
   if(matches(ev,'data-project-save-current')){saveCurrent();return true}
   if(matches(ev,'data-project-new-folder')){makeFolder();return true}
-  if(matches(ev,'data-project-new')){config.newProject();currentId=null;state.view='all';refresh();return true}
+  if(matches(ev,'data-project-new')){if(config.newProject()!==false){currentId=null;state.view='all';refresh()}return true}
   if(matches(ev,'data-project-import')){config.importJSON();return true}
   if(matches(ev,'data-project-download-current')){config.exportJSON();return true}
   const more=matches(ev,'data-project-more');if(more){state.page+=48;refresh();return true}
@@ -306,7 +307,7 @@ function create(config){
   return true;
  }
  function change(ev){
-  if(ev.target.id==='ecs-project-brand-scope'){state.brandScope=ev.target.value;refresh();return true}
+  if(ev.target.id==='ecs-project-brand-scope'){state.brandScope=ev.target.value;state.page=48;refresh();return true}
   return false;
  }
  async function initialize(){
