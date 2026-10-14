@@ -191,7 +191,13 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
     if(preferred)$('laneChoice').value=preferred.id;
     $('title').value=incoming.title;
     $('description').value=incoming.description;
-    $('tag').value='ELOAH 2040';
+    // Priorité suggérée seulement si les termes sont explicites ; aucune date calculée.
+    const high=/\\b(urgent|urgence|immediat|priorite haute|critique)\\b/.test(plain);
+    const important=/\\b(important|prioritaire|priorite)\\b/.test(plain);
+    $('tag').value=high?'Urgent':important?'Important':'ELOAH 2040';
+    const explicitDate=(incoming.title+' '+incoming.description).match(/\\b(20\\d{2})-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01])\\b/);
+    if(explicitDate){const iso=explicitDate[0];const dateObj=new Date(iso+'T12:00:00Z');if(!Number.isNaN(dateObj.getTime())&&dateObj.toISOString().slice(0,10)===iso)$('due').value=iso;}
+    // Les dates formulées en langage naturel ne sont pas interprétées sans confirmation.
     $('dialogTitle').textContent='Brouillon ELOAH 2040 · vérifier puis enregistrer';
     if(preferred)$('dialogTitle').textContent+=' · colonne suggérée : '+preferred.name;
     sessionStorage.removeItem('eloah2040:board-handoff');
