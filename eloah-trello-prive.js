@@ -240,23 +240,88 @@ function sectionScreen(title){
 }
 function allCards(){
  const wrap=sectionScreen("Toutes mes cartes");
- wrap.append(node("p",null,state.total+" cartes dans "+state.boards.length+" tableaux. Recherche par titre, description ou univers."));
+ const summary=node("p","search-summary","Rechercher dans "+state.total+" cartes sur "+state.boards.length+" tableaux.");
+ wrap.append(summary);
+ const controls=node("div","global-controls");
  const search=node("label","searchbox");search.append(node("span",null,"⌕"));
- const input=node("input");input.type="search";input.placeholder="Rechercher une carte";input.value=state.search;search.append(input);wrap.append(search);
- const results=node("div");wrap.append(results);
- function fill(){results.replaceChildren();const q=norm(input.value.trim());const matches=state.boards.flatMap(b=>b.cards.filter(c=>!c.archived).filter(c=>!q||norm(c.title+" "+c.description+" "+c.tag+" "+b.name).includes(q)).map(c=>({b,c})));
- wrap.querySelector("p").textContent=matches.length+" résultats"+(q?" pour ta recherche":"")+" · "+state.total+" cartes disponibles";
- for(const item of matches.slice(0,200)){const btn=button("","result",()=>openCard(item.b,item.c));btn.append(node("strong",null,item.c.title||"Sans titre"),node("small",null,item.b.name+" · "+(item.b.lanes.find(l=>l.id===item.c.lane)?.name||"Sans liste")));results.append(btn)}
- if(matches.length>200)results.append(node("p","notice","Affichage des 200 premiers résultats. Précise ta recherche pour voir les suivants."));
- if(!matches.length)results.append(node("p","empty","Aucune carte correspondante."))}
- input.addEventListener("input",fill);fill();input.focus();
+ const input=node("input");input.type="search";input.placeholder="Titre, description, univers…";
+ input.setAttribute("aria-label","Rechercher toutes les cartes");
+ input.value=state.globalQuery;search.append(input);controls.append(search);
+ const row=node("div","control-row");
+ const scope=node("select");scope.setAttribute("aria-label","Filtrer les résultats");
+ const scopes=[["all","Cartes actives"],["urgent","Urgentes"],["due","Avec échéance"],["archived","Archivées"]];
+ scopes.forEach(([value,label])=>{const opt=node("option",null,label);opt.value=value;scope.append(opt)});
+ scope.value=state.globalScope;row.append(scope);
+ const sort=node("select");sort.setAttribute("aria-label","Trier les cartes");
+ const orders=[["board","Par tableau"],["title","Titre A–Z"],["due","Échéance la plus proche"]];
+ orders.forEach(([value,label])=>{const opt=node("option",null,label);opt.value=value;sort.append(opt)});
+ sort.value=state.globalOrder;row.append(sort);
+ controls.append(row);wrap.append(controls);
+ const results=node("div","global-results");wrap.append(results);
+ const more=node("button","show-more",()=>{state.pageSize+=60;fill()});more.type="button";more.textContent="Afficher 60 cartes supplémentaires";
+ wrap.append(more);
+ const source=state.boards.flatMap(b=>(b.cards||[]).map(c=>({b,c})));
+ function fill(){
+  results.replaceChildren();
+  const term=norm(input.value.trim());
+  const filtered=source.filter(({b,c})=>{
+   const archived=!!c.archived;
+   if(scope.value==="archived"?!archived:archived)return false;
+   if(scope.value==="urgent"&&c.tag!=="Urgent")return false;
+   if(scope.value==="due"&&!c.due)return false;
+   return !term||norm([c.title,c.description,c.tag,b.name,b.lanes.find(l=>l.id===c.lane)?.name].join(" ")).includes(term);
+  });
+  if(sort.value==="title")filtered.sort((a,b)=>(a.c.title||"").localeCompare(b.c.title||"","fr"));
+  else if(sort.value==="due")filtered.sort((a,b)=>(a.c.due||"9999-12-31").localeCompare(b.c.due||"9999-12-31"));
+  else filtered.sort((a,b)=>a.b.name.localeCompare(b.b.name,"fr"));
+  summary.textContent=filtered.length+" résultat"+(filtered.length!==1?"s":"")+" · "+state.total+" cartes dans ELOAH";
+  const subset=filtered.slice(0,state.pageSize);
+  for(const {b,c} of subset){
+   const btn=button("","result",()=>openCard(b,c));
+   btn.append(node("strong",null,c.title||"Sans titre"));
+   btn.append(node("small",null,b.name+" · "+(b.lanes.find(l=>l.id===c.lane)?.name||"Sans liste")));
+   const meta=node("div","result-meta");
+   if(c.tag)meta.append(node("span","card-label",c.tag));
+   if(c.due)meta.append(node("span",null,"📅 "+fmtDate(c.due)));
+   if(c.checks?.length)meta.append(node("span",null,"☑ "+c.checks.filter(x=>x.done).length+"/"+c.checks.length));
+   if(meta.children.length)btn.append(meta);
+   results.append(btn);
+  }
+  if(!filtered.length)results.append(node("p","empty","Aucune carte correspondante. Essaie un autre filtre."));
+  more.hidden=state.pageSize>=filtered.length;more.textContent="Afficher 60 autres cartes · "+subset.length+" / "+filtered.length;
+ }
+ input.addEventListener("input",()=>{state.globalQuery=input.value;state.pageSize=60;fill()});
+ scope.addEventListener("change",()=>{state.globalScope=scope.value;state.pageSize=60;fill()});
+ sort.addEventListener("change",()=>{state.globalOrder=sort.value;state.pageSize=60;fill()});
+ fill();
 }
 function agenda(){
  const wrap=sectionScreen("Échéances");
- const due=state.boards.flatMap(b=>b.cards.filter(c=>!c.archived&&c.due).map(c=>({b,c}))).sort((a,b)=>a.c.due.localeCompare(b.c.due));
- wrap.append(node("p",null,due.length+" cartes possèdent une échéance."));
- for(const {b,c} of due){const btn=button("","result",()=>openCard(b,c));btn.append(node("strong",null,c.title||"Sans titre"),node("small",null,fmtDate(c.due)+" · "+b.name));wrap.append(btn)}
- if(!due.length)wrap.append(node("p","empty","Aucune échéance enregistrée."));
+ const today=new Date();
+ const localDate=d=>d.getFullYear()+"-"+String(d.getMonth()+1).padStart(2,"0")+"-"+String(d.getDate()).padStart(2,"0");
+ const now=localDate(today);
+ const future=localDate(new Date(today.getFullYear(),today.getMonth(),today.getDate()+7));
+ const due=state.boards.flatMap(b=>b.cards.filter(c=>!c.archived&&!c.complete&&c.due).map(c=>({b,c})))
+  .sort((a,b)=>a.c.due.localeCompare(b.c.due));
+ const sections=[
+  ["En retard",due.filter(x=>x.c.due<now),"danger"],
+  ["Aujourd’hui",due.filter(x=>x.c.due===now),"today"],
+  ["Dans les 7 prochains jours",due.filter(x=>x.c.due>now&&x.c.due<=future),"soon"],
+  ["Plus tard",due.filter(x=>x.c.due>future),"later"]
+ ];
+ wrap.append(node("p","search-summary",due.length+" cartes avec échéance, dans tous les tableaux ELOAH."));
+ for(const [title,items,tone] of sections){
+  const section=node("section","agenda-section "+tone);
+  const heading=node("h2",null,title+" · "+items.length);section.append(heading);
+  for(const {b,c} of items){
+   const btn=button("","result",()=>openCard(b,c));
+   btn.append(node("strong",null,c.title||"Sans titre"));
+   btn.append(node("small",null,fmtDate(c.due)+" · "+b.name));
+   section.append(btn);
+  }
+  if(!items.length)section.append(node("p","agenda-empty","Aucune carte ici."));
+  wrap.append(section);
+ }
 }
 function accessInfo(){
  const wrap=sectionScreen("Mon accès privé");
