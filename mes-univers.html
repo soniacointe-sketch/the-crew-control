@@ -458,5 +458,33 @@ refresh();filterDirectory();if(location.hash)revealHash();
 })();
 </script>
 <script src="eloah-music-dock.js" defer></script>
+
+<style>
+#eloah-install{position:fixed;bottom:max(14px,env(safe-area-inset-bottom));right:14px;z-index:9990;width:min(350px,calc(100vw - 28px));padding:15px 17px;border-radius:16px;background:#250d22;color:#fff5fb;border:1px solid #844069;box-shadow:0 12px 42px #10061065;font:13px/1.5 system-ui,sans-serif}
+#eloah-install[hidden]{display:none!important}#eloah-install strong{display:block;color:#fff;font-size:15px;margin-bottom:4px}#eloah-install p{color:#eed8e7;margin:0 0 10px;font-size:12px}#eloah-install button{background:#b53283;color:#fff;border:none;border-radius:9px;padding:8px 12px;min-height:40px;cursor:pointer}#eloah-install button.eloah-dismiss{background:transparent;color:#e4c6da;text-decoration:underline}
+@media(min-width:800px){#eloah-install{right:24px;bottom:24px}}
+</style>
+<aside id="eloah-install" hidden aria-label="Installer ELOAH sur le téléphone">
+<strong>✦ ELOAH sur ton téléphone</strong>
+<p id="eloah-install-text">Installe ELOAH sur ton écran d'accueil.</p>
+<button id="eloah-install-action" type="button">Installer ELOAH</button>
+<button class="eloah-dismiss" id="eloah-install-dismiss" type="button">Plus tard</button>
+</aside>
+<script>
+(()=>{'use strict';
+if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));
+const panel=document.getElementById('eloah-install'),action=document.getElementById('eloah-install-action'),hint=document.getElementById('eloah-install-text');
+const standalone=window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+if(standalone||sessionStorage.getItem('eloah-install-dismissed')==='yes')return;
+let installPrompt=null;
+const ios=/iPhone|iPad|iPod/.test(navigator.userAgent);
+const show=(message,canPrompt)=>{hint.textContent=message;action.hidden=!canPrompt;panel.hidden=false};
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;show("Ouvre ELOAH comme une vraie application, directement depuis ton écran d'accueil.",true)});
+window.addEventListener('appinstalled',()=>{panel.hidden=true;installPrompt=null});
+action.addEventListener('click',async()=>{if(!installPrompt)return;const p=installPrompt;installPrompt=null;panel.hidden=true;try{await p.prompt()}catch(_){}});
+document.getElementById('eloah-install-dismiss').addEventListener('click',()=>{panel.hidden=true;try{sessionStorage.setItem('eloah-install-dismissed','yes')}catch(_){}});
+if(ios)show("Sur iPhone : dans Safari, touche Partager puis « Sur l'écran d'accueil ».",false);
+})();
+</script>
 </body>
 </html>
