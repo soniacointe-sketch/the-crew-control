@@ -142,7 +142,7 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
    const select=document.createElement('select');select.style.cssText='width:100%;padding:12px;background:#140a16;color:white;border:1px solid #b68f83;border-radius:8px;font:14px system-ui';
    for(const item of data.boards){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;select.append(option)}
    // Suggestion déterministe, sans transfert de contenu à un fournisseur tiers.
-   const normalized=(incoming.title+' '+incoming.description.slice(0,2000)).normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase();
+   const normalized=(incoming.title+' '+incoming.description.slice(0,2000)).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
    const suggestions=[
     {name:'The Crew Orchies',terms:['the crew','orchies','danse','adherent','choregraphie','atelier latino','flashmob']},
     {name:'Power & Glam',terms:['power & glam','power and glam','love journal','editorial','beaute','amour','desir']},
@@ -156,7 +156,7 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
    let best=null,score=0;
    for(const candidate of suggestions){
     const count=candidate.terms.reduce((n,term)=>n+(normalized.includes(term)?1:0),0);
-    const match=data.boards.find(b=>b.name.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase()===candidate.name.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase());
+    const match=data.boards.find(b=>b.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()===candidate.name.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase());
     if(match&&count>score){score=count;best=match;}
    }
    select.value=best?.id||data.active;
