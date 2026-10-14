@@ -186,11 +186,12 @@ function create(config){
   else if(state.view==='videos'){inner=mediaPanel('video')}
   return '<div class="ecs-projects-ui">'+buttons()+
    '<div class="ecs-project-toolbar"><button type="button" class="ecs-project-primary" data-project-save-current>▣ Enregistrer dans Projets</button>'+
-   '<button type="button" data-project-new>＋ Nouveau</button><button type="button" data-project-import>↑ Importer JSON</button></div>'+
+   '<button type="button" data-project-new>＋ Nouveau</button><button type="button" data-project-import>↑ Importer JSON</button>'+
+   '<button type="button" data-project-import-media title="Importer un visuel Canva exporté en image ou vidéo, sans ses calques">↑ Export Canva</button></div>'+
    (state.loading?'<div class="ecs-note">Ouverture des projets enregistrés…</div>':inner)+
    '<div class="ecs-project-note">'+
    '<p>'+escapeHTML(state.storage==='ready'?'Sauvegarde locale sur cet appareil. L’enregistrement automatique reprend après avoir créé ou ouvert un projet.':'Stockage de projets indisponible : conserve une sauvegarde JSON sur ton appareil.')+
-   ' Les designs privés de Canva ne sont pas importés automatiquement.</p>'+
+   ' Les designs privés de Canva ne sont pas synchronisés : pour réutiliser l’image ou la vidéo d’un design, exporte-la depuis Canva puis importe le fichier ici.</p>'+
    '<button type="button" data-project-download-current>↓ Exporter le Reel en JSON</button>'+
    (state.flash?'<small>'+escapeHTML(state.flash)+'</small>':'')+'</div></div>';
  }
@@ -299,6 +300,7 @@ function create(config){
   if(matches(ev,'data-project-new-folder')){makeFolder();return true}
   if(matches(ev,'data-project-new')){if(config.newProject()!==false){recordActive(null);state.view='all';refresh()}return true}
   if(matches(ev,'data-project-import')){config.importJSON();return true}
+  if(matches(ev,'data-project-import-media')){config.importCanvaExport?.();return true}
   if(matches(ev,'data-project-download-current')){config.exportJSON();return true}
   const more=matches(ev,'data-project-more');if(more){state.page+=48;refresh();return true}
   const media=matches(ev,'data-project-media');if(media){config.openMedia?.(media.dataset.mediaKind,media.dataset.projectMedia);return true}
