@@ -130,7 +130,7 @@ function navigate(next){state.screen=next;render()}
 function home(){
  const shell=node("div","screen");shell.append(header("Tableaux"));
  const stats=node("div","stats");
- for(const [num,label] of [[state.boards.length,"Tableaux ELOAH"],[state.total,"Cartes consultables"]]){const box=node("div","stat");box.append(node("strong",null,num),node("small",null,label));stats.append(box)}
+ for(const [num,label] of [[state.boards.length,"Tableaux ELOAH"],[state.total,"Cartes dans ELOAH"]]){const box=node("div","stat");box.append(node("strong",null,num),node("small",null,label));stats.append(box)}
  shell.append(stats);
  const last=state.recent.map(id=>state.boards.find(b=>b.id===id)).find(Boolean);
  if(last){
@@ -474,12 +474,17 @@ function agenda(){
 }
 function accessInfo(){
  const wrap=sectionScreen("Mon accès privé");
- wrap.append(node("h2",null,"Lien privé ELOAH"));
- wrap.append(node("p","notice","Tu consultes ici les cartes sans te connecter par e-mail. Ce lien est personnel : toute personne à qui tu le transmettras pourra lire tes tableaux jusqu’à son expiration ou sa révocation."));
- wrap.append(node("p",null,"Mode : lecture seule. Les modifications restent disponibles dans ELOAH Boards avec une session sécurisée."));
+ wrap.append(node("h2",null,"Mon espace ELOAH"));
+ if(state.readOnly){
+  wrap.append(node("p","notice","🔒 Consultation uniquement. Tu peux lire les tableaux, mais tu ne peux pas les modifier avec ce lien."));
+ }else{
+  wrap.append(node("p","notice","✓ Édition activée. Tes cartes et tes listes sont enregistrées directement dans la base ELOAH, sans passer par un e-mail."));
+ }
+ wrap.append(node("p",null,state.boards.length+" tableaux · "+state.total+" cartes disponibles."));
+ wrap.append(node("p",null,"Ce lien est personnel. Toute personne qui le possède peut "+(state.readOnly?"lire":"lire et modifier")+" tes données. Ne le partage pas."));
  wrap.append(node("p",null,"Expiration prévue : 12 janvier 2027."));
- wrap.append(node("p",null,"Dernière mise à jour enregistrée : "+(state.updatedAt?new Date(state.updatedAt).toLocaleString("fr-FR"):"non disponible")));
- wrap.append(button("Actualiser mes tableaux","result",load));
+ wrap.append(node("p",null,"Dernière mise à jour : "+(state.updatedAt?new Date(state.updatedAt).toLocaleString("fr-FR"):"non disponible")));
+ wrap.append(button("Actualiser depuis ELOAH","result",load));
 }
 function render(){
  if(!state.boards.length){fail("Aucun tableau disponible pour ce lien privé.");return}
