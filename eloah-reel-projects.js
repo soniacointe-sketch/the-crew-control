@@ -203,8 +203,8 @@ function create(config){
     createdAt:existing?.createdAt||Date.now(),updatedAt:Date.now(),
     thumbnail:record.thumbnail||existing?.thumbnail||null,
     data:record.data,
-    videoBlob:record.videoBlob||(auto?existing?.videoBlob:null)||null,
-    audioBlob:record.audioBlob||(auto?existing?.audioBlob:null)||null,
+    videoBlob:record.videoBlob||(auto&&record.data.videoName&&existing?.data?.videoName===record.data.videoName?existing.videoBlob:null)||null,
+    audioBlob:record.audioBlob||(auto&&record.data.audioName&&existing?.data?.audioName===record.data.audioName?existing.audioBlob:null)||null,
     warnings:record.warnings||[]};
    // L'enregistrement reste en mémoire en cas de blocage du navigateur ; avertir explicitement.
    const ok=await queueWrite(()=>dbWrite('designs','put',updated));
