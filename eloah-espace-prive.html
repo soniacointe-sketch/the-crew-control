@@ -84,7 +84,58 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
 #private-area #workspace-form{border-top:1px solid #e9dde7;margin-top:22px;padding-top:10px}
 @media(max-width:850px){#private-area .client-shell{grid-template-columns:1fr}#private-area .client-sidebar{position:static;min-height:0;gap:14px;padding:16px}#private-area .client-side-nav{display:flex;overflow-x:auto;gap:7px}#private-area .client-nav-link{flex:none;background:#ffffff0c;font-size:12px}#private-area .client-side-note,#private-area .client-side-offer{display:none}#private-area .grid{grid-template-columns:1fr}}
 @media(max-width:550px){#private-area .client-overview{padding:20px}#private-area .client-metrics{width:100%}#private-area .client-metrics>div{flex:1}#private-area .client-side-brand{font-size:20px}}
-</style><style id="eloah-customer-task-controls">#private-area .task-controls{display:flex;gap:10px;align-items:center;margin-top:10px}#private-area .task-controls label{font:600 11px system-ui;color:#65556a;margin:0}#private-area .task-controls select{display:block;margin:5px 0 0;padding:7px 10px;min-height:38px;font-size:12px;max-width:185px}#private-area .task{padding:14px 0}#private-area .task strong{font-size:15px}</style><style>#private-area .workspace-entry{display:flex;align-items:center;gap:6px;border-bottom:1px solid #e8dce8;padding:4px 0}#private-area .workspace-entry .workspace{flex:1;min-width:0}#private-area .workspace-entry button.light{font-size:11px;padding:7px;min-height:36px}</style></head>
+</style><style id="eloah-customer-task-controls">#private-area .task-controls{display:flex;gap:10px;align-items:center;margin-top:10px}#private-area .task-controls label{font:600 11px system-ui;color:#65556a;margin:0}#private-area .task-controls select{display:block;margin:5px 0 0;padding:7px 10px;min-height:38px;font-size:12px;max-width:185px}#private-area .task{padding:14px 0}#private-area .task strong{font-size:15px}</style><style>#private-area .workspace-entry{display:flex;align-items:center;gap:6px;border-bottom:1px solid #e8dce8;padding:4px 0}#private-area .workspace-entry .workspace{flex:1;min-width:0}#private-area .workspace-entry button.light{font-size:11px;padding:7px;min-height:36px}</style><style id="eloah-customer-planning-docs-style">
+#private-area .client-module{scroll-margin-top:20px;background:#fffbfe;border:1px solid #e7d7e5;color:#312336;border-radius:17px;padding:clamp(18px,3vw,27px);margin:0 0 19px;box-shadow:0 10px 30px #180b1d12}
+#private-area .client-module-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;margin-bottom:24px}
+#private-area .client-module-heading h2{font:400 clamp(29px,3vw,39px)/1.1 Georgia,serif;color:#28122f;margin:6px 0 8px}
+#private-area .client-module-heading p{font-size:12px;line-height:1.65;margin:0;max-width:540px;color:#756576}
+#private-area .client-module-kicker{font:800 10px/1.3 system-ui;letter-spacing:.19em;color:#aa368c}
+#private-area .client-module-mark{display:grid;place-items:center;width:47px;height:47px;border:1px solid #edcbe6;background:#f8edf6;color:#8f327b;border-radius:12px;font:24px Georgia,serif;flex-shrink:0}
+#private-area .client-calendar-layout{display:grid;grid-template-columns:minmax(0,1fr) minmax(220px,.78fr);gap:16px}
+#private-area .client-calendar-panel,#private-area .client-agenda-panel{background:#fff;border:1px solid #eee5ec;border-radius:14px;padding:18px;min-width:0}
+#private-area .client-calendar-toolbar{display:flex;gap:7px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:0 0 18px}
+#private-area .client-calendar-toolbar strong{font:600 16px Georgia,serif;color:#381e3e;text-transform:capitalize;margin-inline:auto}
+#private-area .client-calendar-toolbar button{min-height:34px;min-width:34px;padding:7px 9px;border-color:#dfc9dd;background:#f8f0f7;color:#562749;font-size:12px}
+#private-area .client-calendar-toolbar .client-today{background:#4d1b4c;color:#fff;border-color:#4d1b4c}
+#private-area .client-calendar-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px}
+#private-area .eloah-weekday{font:700 11px system-ui;text-align:center;color:#886e87;padding:8px 0}
+#private-area .eloah-calendar-blank{min-height:42px}
+#private-area .eloah-calendar-day{position:relative;display:flex;align-items:center;justify-content:center;min-width:0;min-height:42px;border-radius:8px;background:#faf6f9;color:#39233d;border:1px solid transparent;padding:7px 1px;font:600 12px system-ui}
+#private-area .eloah-calendar-day.has-tasks{background:#f5e3f0;color:#772d6b;border-color:#edd0e5}
+#private-area .eloah-calendar-day.is-today{border-color:#b34691}
+#private-area .eloah-calendar-day[aria-pressed=true]{background:#5f245e;color:#fff;border-color:#5f245e}
+#private-area .eloah-day-count{position:absolute;right:2px;top:1px;font:700 9px system-ui;color:inherit}
+#private-area .client-agenda-panel h3{font:400 22px Georgia,serif;color:#402044;margin:1px 0 12px}
+#private-area .client-agenda-panel .client-upcoming-title{border-top:1px solid #e9deea;padding-top:17px;margin:24px 0 12px}
+#private-area .client-agenda-list{display:grid;gap:9px}
+#private-area .eloah-due-card{display:flex;justify-content:space-between;align-items:center;gap:9px;border:1px solid #efdfed;border-left:3px solid #b45094;border-radius:9px;padding:10px 12px;background:#fffbfe;overflow-wrap:anywhere}
+#private-area .eloah-due-card>div{min-width:0}
+#private-area .eloah-due-card strong{display:block;font:650 12px/1.45 system-ui;color:#3d2a3e}
+#private-area .eloah-due-card small{display:block;font:11px/1.5 system-ui;color:#8a7188;margin-top:3px}
+#private-area .eloah-due-card button{min-height:34px;font:650 11px system-ui;padding:7px 10px;flex-shrink:0}
+#private-area .client-module-empty{font-size:12px;color:#857384;padding:12px;border:1px dashed #e5d8e4;border-radius:9px;background:#fdf9fc;margin:0}
+#private-area .client-module-status{font:11px/1.6 system-ui;color:#775d74;min-height:18px;margin:12px 0 0}
+#private-area .client-document-form{background:#f9eff7;border:1px solid #e8d5e4;border-radius:12px;padding:18px;margin:0 0 23px}
+#private-area .client-document-form label{font:700 12px system-ui;color:#483149;margin:0 0 10px}
+#private-area .client-document-form label small{display:block;font:11px/1.5 system-ui;color:#877483;margin:5px 0 0}
+#private-area .client-document-form-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+#private-area .client-document-form-row input{min-width:190px;flex:1;min-height:48px;padding:9px;font-size:12px;background:#fff}
+#private-area .client-document-form-row button{min-height:46px;background:linear-gradient(115deg,#512151,#9c397f);border:0;padding:10px 16px;font-size:12px;white-space:nowrap}
+#private-area .client-document-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 11px}
+#private-area .client-document-heading h3{font:400 23px Georgia,serif;color:#3c253f;margin:0}
+#private-area .client-document-heading button{min-height:36px;font-size:12px;padding:7px 12px}
+#private-area .client-documents-list{display:grid;gap:8px}
+#private-area .eloah-document-row{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 12px;background:#fff;border:1px solid #eee5ec;border-radius:10px;overflow-wrap:anywhere}
+#private-area .eloah-document-row>div:first-child{min-width:0}
+#private-area .eloah-document-row strong{display:block;color:#37263b;font:650 13px/1.45 system-ui;overflow-wrap:anywhere}
+#private-area .eloah-document-row small{display:block;color:#887783;font:11px/1.5 system-ui;margin-top:4px}
+#private-area .eloah-document-actions{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+#private-area .eloah-document-actions button{font-size:11px;min-height:36px;padding:7px 10px}
+#private-area .client-documents-note{font-size:11px;line-height:1.6;color:#867382;border-top:1px solid #eee1ec;padding-top:13px;margin:16px 0 0}
+@media(max-width:1120px){#private-area .client-calendar-layout{grid-template-columns:1fr}}
+@media(max-width:680px){#private-area .client-calendar-panel,#private-area .client-agenda-panel{padding:12px}#private-area .client-calendar-grid{gap:3px}#private-area .eloah-calendar-day{min-height:40px}#private-area .client-document-form-row{flex-direction:column;align-items:stretch}#private-area .client-document-form-row input{width:100%}#private-area .eloah-document-row{align-items:stretch;flex-direction:column}#private-area .eloah-document-actions{justify-content:flex-start}#private-area .client-overview .client-metrics>div{min-width:0;padding:9px 7px}}
+@media(prefers-reduced-motion:reduce){#private-area .eloah-calendar-day{transition:none}}
+</style></head>
 <body>
 <header><a class="wordmark" href="eloah-offres.html">ELOAH</a><nav class="row"><a href="eloah-offres.html">Offres publiques ↗</a><a href="eloah-inscription.html">Mon abonnement ↗</a></nav></header>
 <main>
