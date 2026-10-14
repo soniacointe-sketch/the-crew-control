@@ -334,6 +334,61 @@ body::selection{background:#9b3d73;color:#fff5fa}
   .site-header .brand-mark{width:24px;height:25px;background-size:49px auto}
   .hero-stage .eyebrow.pill{font-size:8px;letter-spacing:.045em;padding:6px 9px}
 }
+
+/* TARIFS ELOAH — carte commerciale Violent Prune, montants envisagés */
+.eloah-tarifs{padding-top:112px;padding-bottom:113px}
+.eloah-tarifs .section-heading{max-width:850px;margin-bottom:44px}
+.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
+.pricing-card{
+  position:relative;display:flex;flex-direction:column;min-width:0;
+  padding:34px 27px 27px;border-radius:17px;overflow:hidden;
+  border:1px solid rgba(198,125,165,.31);
+  background:linear-gradient(160deg,rgba(82,27,63,.61),rgba(26,11,25,.83));
+  box-shadow:0 17px 45px rgba(10,2,10,.16);
+  transition:transform .24s,border-color .24s,box-shadow .24s;
+}
+.pricing-card:hover{transform:translateY(-4px);border-color:rgba(232,190,137,.64);box-shadow:0 24px 49px rgba(11,1,12,.3)}
+.pricing-featured{border-color:rgba(229,186,129,.77);background:linear-gradient(146deg,rgba(115,41,86,.72),rgba(37,13,32,.93));box-shadow:0 0 0 1px rgba(226,175,110,.12),0 24px 52px rgba(10,1,11,.22)}
+.pricing-ribbon{position:absolute;right:0;top:0;padding:7px 16px 9px;border-radius:0 0 0 12px;background:#e9c993;color:#2f1426;font-size:10px;font-weight:800}
+.pricing-topline{font-size:10px;font-weight:750;letter-spacing:.13em;color:#ebc997;text-transform:uppercase}
+.pricing-card h3{font:normal 32px/1.16 var(--serif);margin:18px 0 6px;color:#fff2fa}
+.pricing-who{color:#dfbbd1;font-size:12px;line-height:1.7;min-height:42px}
+.pricing-amount{font-family:var(--serif);font-size:clamp(41px,4.1vw,58px);line-height:1.2;letter-spacing:-.035em;color:#fff5fa;margin:17px 0 0;white-space:nowrap}
+.pricing-amount>span{font-size:.77em}.pricing-amount small{font:500 13px/1.2 var(--sans);letter-spacing:0;color:#d7b9cd}
+.pricing-period{font-size:11px;color:#e0b986;min-height:39px;line-height:1.6;margin:5px 0}
+.pricing-divider{height:1px;background:linear-gradient(90deg,rgba(225,177,119,.49),rgba(196,123,163,.06));margin:14px 0 20px}
+.pricing-explain{font-size:13px;line-height:1.78;color:#e7d1df;min-height:96px}
+.pricing-list{margin:0 0 26px;padding:0;list-style:none;display:grid;gap:12px;color:#f1e0eb;font-size:12px}
+.pricing-list li{display:flex;gap:10px;align-items:flex-start}
+.pricing-list li::before{content:"✓";font-weight:800;color:#ebc997;flex:none}
+.pricing-action{width:100%;margin-top:auto;white-space:normal;min-height:47px}
+.pricing-disclaimer{max-width:920px;margin:20px auto 0;color:#d5b8ca;font-size:11px;line-height:1.8;text-align:center}
+.comparison{margin-top:80px;padding:32px;border-radius:16px;border:1px solid rgba(202,136,170,.22);background:rgba(24,8,24,.44)}
+.comparison-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}
+.comparison-head h3,.custom-heading h3{font:normal clamp(29px,3vw,40px)/1.18 var(--serif);margin:6px 0 0;color:#fff1f8}
+.comparison-head>a{font-size:12px;color:#edd0a5;white-space:nowrap}
+.comparison-scroll{overflow-x:auto;scrollbar-color:#a75d88 #261020}
+.comparison table{border-collapse:collapse;width:100%;min-width:690px;text-align:left;font-size:12px}
+.comparison th,.comparison td{padding:16px 13px;border-bottom:1px solid rgba(209,151,184,.2);vertical-align:top}
+.comparison thead th{font-size:12px;color:#ecd0a6;font-weight:750}
+.comparison tbody th{font-weight:650;color:#f8e6f0;min-width:175px;width:29%}
+.comparison tbody td{color:#e4cadb}
+.comparison tbody tr:last-child th,.comparison tbody tr:last-child td{border-bottom:0}
+.comparison-caption{color:#cdaec1;font-size:11px;line-height:1.7;margin:16px 0 0}
+.custom-heading{max-width:735px;margin:82px auto 28px;text-align:center}
+.custom-heading p{margin:14px auto 0;color:#dfc5d6;font-size:13px;line-height:1.85}
+.custom-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
+.custom-card{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;border-radius:15px;border:1px solid rgba(205,136,171,.28);padding:27px;background:linear-gradient(150deg,rgba(93,27,72,.4),rgba(29,12,28,.65))}
+.custom-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid rgba(229,184,123,.37);color:#ebc997;font:normal 31px var(--serif)}
+.custom-card h4{font:normal 28px var(--serif);color:#fff0f9;margin:8px 0}
+.custom-card p{color:#dfc7d6;font-size:12px;line-height:1.8;margin:0 0 15px}
+.custom-card a,.pricing-bottom-link a{color:#edcb9e;font-size:12px;font-weight:700;text-decoration:none}
+.custom-card a:hover,.pricing-bottom-link a:hover,.comparison-head>a:hover{text-decoration:underline}
+.pricing-bottom-link{text-align:center;margin:32px auto 0}
+@media(max-width:900px){.pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pricing-featured{grid-column:1/-1}.pricing-card{padding:29px 24px}.pricing-explain{min-height:0}}
+@media(max-width:650px){.eloah-tarifs{padding:78px 0}.pricing-grid,.custom-grid{grid-template-columns:1fr}.pricing-featured{grid-column:auto}.pricing-card{padding:28px 22px}.pricing-who,.pricing-period{min-height:0}.pricing-amount{font-size:49px}.pricing-action{margin-top:17px}.comparison{padding:21px 15px;margin-top:58px}.comparison-head{align-items:start;flex-direction:column;gap:10px}.comparison th,.comparison td{padding:12px 11px}.custom-heading{margin-top:58px}.custom-card{grid-template-columns:38px 1fr;gap:12px;padding:22px}.custom-mark{width:36px;height:36px}.custom-card h4{font-size:25px}}
+@media(prefers-reduced-motion:reduce){.pricing-card{transition:none}.pricing-card:hover{transform:none}}
+
 </style>
   <link rel="icon" type="image/svg+xml" href="assets/eloah-logo-violent-prune.svg">
   <link rel="preload" as="image" href="assets/eloah-enfants-boite.svg">
@@ -456,18 +511,89 @@ body::selection{background:#9b3d73;color:#fff5fa}
     </div>
   </section>
 
-  <section class="section section-dark section-line" id="offres">
+  <section class="section section-dark section-line eloah-tarifs" id="offres">
     <div class="container">
       <div class="section-heading">
-        <span class="section-label">LES POSSIBILITÉS</span>
-        <h2>Un espace. Plusieurs<br>manières de l'adopter.</h2>
-        <p>Indépendants, créateurs, structures associatives : la présentation est adaptée à votre façon de travailler. Formules et tarifs définitifs à venir.</p>
+        <span class="section-label">ELOAH PILOTAGE · TARIFS ENVISAGÉS</span>
+        <h2>Un prix pour commencer.<br><span class="gold">De la place pour grandir.</span></h2>
+        <p>Tu n'as pas besoin du même ELOAH si tu veux organiser une idée ou piloter plusieurs activités. Voici les trois formules étudiées pour le lancement du logiciel.</p>
       </div>
-      <div class="offer-grid">
-        <article class="offer"><span class="offer-label">01 · Personnel</span><h3>Mon Espace</h3><p>Pour rassembler ses projets personnels, documents, idées et tâches dans un même lieu.</p><a class="button button-outline" href="eloah-offres.html">Découvrir cette approche →</a></article>
-        <article class="offer"><span class="offer-label">02 · Activité</span><h3>ELOAH Pro</h3><p>Pour les indépendants et créateurs qui ont besoin de produire, organiser et développer leur activité.</p><a class="button button-gold" href="#contact">Demander une présentation →</a></article>
-        <article class="offer"><span class="offer-label">03 · Collectif</span><h3>Associations</h3><p>Pour structurer l'organisation, les événements et le travail d'une équipe autour d'un projet commun.</p><a class="button button-outline" href="eloah-offres.html">Explorer les solutions →</a></article>
+      <div class="pricing-grid">
+        <article class="pricing-card">
+          <span class="pricing-topline">01 · Pour découvrir</span>
+          <h3>Découverte</h3>
+          <p class="pricing-who">Tu veux comprendre comment ELOAH fonctionne.</p>
+          <div class="pricing-amount">0 €</div>
+          <p class="pricing-period">Découverte du concept · accès libre à confirmer</p>
+          <div class="pricing-divider"></div>
+          <p class="pricing-explain">La première porte pour explorer l'organisation de tes projets et voir l'approche ELOAH.</p>
+          <ul class="pricing-list">
+            <li>Présentation des espaces et de la méthode</li>
+            <li>Découverte du pilotage d'un projet</li>
+            <li>Démonstration selon disponibilité</li>
+          </ul>
+          <a class="button button-outline pricing-action" href="#contact" data-eloah-offer="pilotage-decouverte">Demander la découverte ↗</a>
+        </article>
+        <article class="pricing-card">
+          <span class="pricing-topline">02 · Pour s'organiser</span>
+          <h3>Entrée</h3>
+          <p class="pricing-who">Tu travailles sur tes projets au quotidien.</p>
+          <div class="pricing-amount">14<span>,90</span> €<small> / mois</small></div>
+          <p class="pricing-period">Tarif mensuel envisagé · non souscriptible</p>
+          <div class="pricing-divider"></div>
+          <p class="pricing-explain">Un espace personnel pour retrouver tes projets, tes documents et tes prochaines actions.</p>
+          <ul class="pricing-list">
+            <li>Organisation de projets personnels</li>
+            <li>Suivi des tâches et des ressources</li>
+            <li>Tableau de bord à ton rythme</li>
+          </ul>
+          <a class="button button-outline pricing-action" href="#contact" data-eloah-offer="pilotage-entree">Être informé du lancement ↗</a>
+        </article>
+        <article class="pricing-card pricing-featured">
+          <span class="pricing-ribbon">Pour plusieurs activités</span>
+          <span class="pricing-topline">03 · Pour aller plus loin</span>
+          <h3>Partenaire</h3>
+          <p class="pricing-who">Tu jongles entre plusieurs activités ou univers.</p>
+          <div class="pricing-amount">69 €<small> / mois</small></div>
+          <p class="pricing-period">Tarif mensuel envisagé · non souscriptible</p>
+          <div class="pricing-divider"></div>
+          <p class="pricing-explain">Un pilotage plus large et des outils créatifs avancés, selon leur disponibilité au lancement.</p>
+          <ul class="pricing-list">
+            <li>Suivi de plusieurs activités</li>
+            <li>Organisation et bases d'expertise</li>
+            <li>Studios avancés selon activation</li>
+          </ul>
+          <a class="button button-gold pricing-action" href="#contact" data-eloah-offer="pilotage-partenaire">Demander une présentation ↗</a>
+        </article>
       </div>
+      <p class="pricing-disclaimer">Prix à l'étude, non contractuels : niveaux d'accès, fonctionnalités effectivement incluses, fiscalité et conditions de facturation seront annoncés avant l'ouverture commerciale. Aucun abonnement ni paiement ne peut être souscrit sur cette page.</p>
+
+      <div class="comparison" id="comparatif">
+        <div class="comparison-head">
+          <div><span class="section-label">EN UN COUP D'ŒIL</span><h3>Quelle formule te ressemble ?</h3></div>
+          <a href="#contact">Une question sur les offres ↗</a>
+        </div>
+        <div class="comparison-scroll" role="region" aria-label="Comparaison des formules ELOAH" tabindex="0">
+          <table>
+            <thead><tr><th scope="col">Ton besoin</th><th scope="col">Découverte</th><th scope="col">Entrée</th><th scope="col">Partenaire</th></tr></thead>
+            <tbody>
+              <tr><th scope="row">Découvrir l'environnement</th><td>Oui, sur présentation</td><td>Prévu</td><td>Prévu</td></tr>
+              <tr><th scope="row">Organiser ses projets</th><td>Découverte</td><td>Usage principal envisagé</td><td>Multi-activités envisagé</td></tr>
+              <tr><th scope="row">Documents et ressources</th><td>À découvrir</td><td>Dans le périmètre étudié</td><td>Dans le périmètre étudié</td></tr>
+              <tr><th scope="row">Studios créatifs avancés</th><td>Non annoncé</td><td>Non annoncé</td><td>Selon activation</td></tr>
+              <tr><th scope="row">Ouverture d'un compte client</th><td colspan="3">En préparation — pas d'activation ni de prélèvement automatique</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="comparison-caption">Ce comparatif présente les usages envisagés, pas une liste de services déjà livrés. Le détail contractuel des offres reste à valider.</p>
+      </div>
+
+      <div class="custom-heading"><span class="section-label">UN PROJET PARTICULIER ?</span><h3>Et si tu avais besoin d'autre chose ?</h3><p>Les créations sur commande et les besoins des associations ne rentrent pas toujours dans un abonnement standard. On commence par parler du résultat attendu.</p></div>
+      <div class="custom-grid">
+        <article class="custom-card"><span class="custom-mark" aria-hidden="true">✧</span><div><span class="pricing-topline">CRÉATION · SUR DEVIS</span><h4>ELOAH Studios créatifs</h4><p>Articles, présentations, newsletters, visuels, supports éditoriaux : une prestation cadrée autour d'un brief et d'un livrable.</p><a href="#contact" data-eloah-offer="studio">Demander un devis créatif ↗</a></div></article>
+        <article class="custom-card"><span class="custom-mark" aria-hidden="true">◇</span><div><span class="pricing-topline">COLLECTIF · SUR DEVIS</span><h4>ELOAH Associations</h4><p>Une organisation adaptée aux membres, aux événements et au fonctionnement de ta structure, avec les accès et traitements de données à définir.</p><a href="#contact" data-eloah-offer="association">Parler de mon association ↗</a></div></article>
+      </div>
+      <div class="pricing-bottom-link"><a href="eloah-offres.html#abonnements">Explorer les solutions ELOAH en détail ↗</a></div>
     </div>
   </section>
 
