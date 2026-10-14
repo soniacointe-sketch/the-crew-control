@@ -75,9 +75,9 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
   <label for="auth-password">Mot de passe <input type="password" name="password" id="auth-password" autocomplete="current-password" placeholder="Votre mot de passe"></label>
   <button type="submit" id="login-submit" class="login-primary">Se connecter <span aria-hidden="true">→</span></button>
  </form>
- <button type="button" id="login-magic" class="login-alt">Recevoir un lien de connexion par e-mail</button>
+ <button type="button" id="login-magic" class="login-alt">Recevoir un lien de connexion par e-mail</button><button type="button" id="signup-button" class="login-alt">Créer mon compte ELOAH</button>
  <p id="login-status" class="status" role="status" aria-live="polite"></p>
- <p class="login-small">Un compte doit déjà avoir été créé et autorisé. Vous venez de découvrir ELOAH ? <a href="eloah-decouvrir.html#contact">Demander un accès</a>.</p>
+ <p class="login-small">Créer un compte ne déclenche aucun paiement et n’active pas d’abonnement. Vous venez de découvrir ELOAH ? <a href="eloah-decouvrir.html#contact">Demander un accès</a>.</p>
  </div>
 </section>
 <section class="panel" id="access-pending" hidden><h2>Votre espace se prépare.</h2><p id="access-message">Aucun abonnement actif n’est encore associé à ce compte.</p><div class="row"><a href="eloah-offres.html">Voir les offres ELOAH ↗</a><a href="eloah-decouvrir.html#contact">Contacter ELOAH ↗</a><button type="button" class="light" id="pending-logout">Changer de compte</button></div></section>
@@ -207,6 +207,19 @@ $('login-magic').addEventListener('click',async()=>{
   status('login-status','Si ce compte est autorisé, un lien a été demandé. Consultez votre boîte e-mail.');
  }catch(e){status('login-status','Envoi du lien impossible. Réessayez ou contactez ELOAH.')}
  finally{button.disabled=false}
+});
+$('signup-button').addEventListener('click',async()=>{
+ const email=$('auth-email').value.trim(),password=$('auth-password').value;
+ if(!$('auth-email').checkValidity()){status('login-status','Saisissez une adresse e-mail valide pour créer un compte.');$('auth-email').focus();return}
+ if(password.length<12){status('login-status','Choisissez un mot de passe de 12 caractères minimum.');$('auth-password').focus();return}
+ const btn=$('signup-button');btn.disabled=true;
+ try{
+  const {data,error}=await getClient().auth.signUp({email,password,options:{emailRedirectTo:location.origin+location.pathname}});
+  if(error)throw error;
+  status('login-status','Si cette adresse est admissible, consultez votre messagerie pour confirmer le compte. Aucun abonnement n’a été activé.');
+  if(data?.session)await refresh();
+ }catch(e){status('login-status','Création du compte indisponible. Réessayez ou contactez ELOAH.')}
+ finally{btn.disabled=false}
 });
 $('pending-logout').addEventListener('click',async()=>{await getClient().auth.signOut();await refresh()});
 $('logout').addEventListener('click',async()=>{
