@@ -1499,7 +1499,7 @@ function renderSide(){
  if(activeTab==='videos')requestAnimationFrame(scheduleStockThumbnails);
  inkPalette();
 }
-function setTab(tab){if(tab==='elements'){elementsCategory=null;chartView='home';chartSearch=''}if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}if(tab==='photos'){photoView='home';photoSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
+function setTab(tab){if(tab!=='tools'){inkDraft=null;inkPointer=null}if(tab==='elements'){elementsCategory=null;chartView='home';chartSearch=''}if(tab==='audio')audioView='home';if(tab==='videos'){stockView='home';stockSearch=''}if(tab==='photos'){photoView='home';photoSearch=''}activeTab=tab;renderSide();if(tab==='audio'&&!publicMusic.loaded&&!publicMusic.loading&&!publicMusic.error)loadPublicMusic();if(window.innerWidth<691)one('.ecs-sidebar').classList.add('ecs-open')}
 function action(name){
  if(name==='old'){pause();root.style.display='none';legacy.style.display='block';document.body.classList.add('ecs-legacy-open');const h=document.querySelector('body > header');if(h)h.style.display='flex';const back=document.createElement('button');back.textContent='↗ Retour à l’éditeur visuel';back.style.cssText='position:fixed;bottom:16px;right:16px;z-index:99;background:#147a9f;color:white;padding:13px;border-radius:9px';back.onclick=()=>{legacy.style.display='none';root.style.display='flex';back.remove();if(h)h.style.display='none'};document.body.append(back);return}
  if(name==='undo'){undo();return}if(name==='redo'){redo();return}
@@ -1868,6 +1868,16 @@ one('.ecs-sidebody').addEventListener('change',e=>{
  if(setting){snapshot();S[setting]=e.target.value;saveLocal();draw()}
 });
 one('.ecs-sidebody').addEventListener('input',e=>{
+
+ if(e.target.hasAttribute('data-ink-color')){
+  if(/^#[0-9a-f]{6}$/i.test(e.target.value))inkColor=e.target.value;
+  saveInkPrefs();return;
+ }
+ if(e.target.hasAttribute('data-ink-width')){
+  inkWidth=Math.max(2,Math.min(70,Number(e.target.value)||14));
+  const output=e.target.nextElementSibling;if(output?.tagName==='OUTPUT')output.textContent=inkWidth+' px';
+  saveInkPrefs();return;
+ }
  if(reelImporter?.handleInput(e))return;
 
  if(e.target.id==='ecs-brand-search'){
