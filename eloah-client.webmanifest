@@ -1,0 +1,34 @@
+{
+  "id": "/the-crew-control/eloah-client",
+  "name": "ELOAH · Espace client",
+  "short_name": "ELOAH Client",
+  "description": "Vos projets, échéances et documents dans votre espace privé ELOAH.",
+  "lang": "fr",
+  "start_url": "/the-crew-control/eloah-espace-prive.html",
+  "scope": "/the-crew-control/",
+  "display": "standalone",
+  "background_color": "#160912",
+  "theme_color": "#250d22",
+  "icons": [
+    {
+      "src": "/the-crew-control/eloah-app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Mes projets",
+      "url": "/the-crew-control/eloah-espace-prive.html#client-workspaces"
+    },
+    {
+      "name": "Mon planning",
+      "url": "/the-crew-control/eloah-espace-prive.html#client-planning"
+    },
+    {
+      "name": "Mes documents",
+      "url": "/the-crew-control/eloah-espace-prive.html#client-documents"
+    }
+  ]
+}
