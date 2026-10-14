@@ -141,7 +141,29 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
    const label=document.createElement('label');label.textContent='Tableau de destination';label.style.cssText='display:block;margin:12px 0 6px;font:13px system-ui';
    const select=document.createElement('select');select.style.cssText='width:100%;padding:12px;background:#140a16;color:white;border:1px solid #b68f83;border-radius:8px;font:14px system-ui';
    for(const item of data.boards){const option=document.createElement('option');option.value=item.id;option.textContent=item.name;select.append(option)}
-   select.value=data.active;
+   // Suggestion déterministe, sans transfert de contenu à un fournisseur tiers.
+   const normalized=(incoming.title+' '+incoming.description.slice(0,2000)).normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase();
+   const suggestions=[
+    {name:'The Crew Orchies',terms:['the crew','orchies','danse','adherent','choregraphie','atelier latino','flashmob']},
+    {name:'Power & Glam',terms:['power & glam','power and glam','love journal','editorial','beaute','amour','desir']},
+    {name:'PARISIS ENGINE',terms:['parisis','sainte-chapelle','notre-dame','manuscrit','cartographie']},
+    {name:'Foi & spiritualité',terms:['spiritualite','foi','priere','evangile']},
+    {name:'Sonia Velka',terms:['sonia velka','identite artistique','scene']},
+    {name:'Le Lion Blanc',terms:['lion blanc','citoyen','association citoyenne']},
+    {name:'SONIA OS',terms:['sonia os','agent','automation','automatisation']},
+    {name:'ELOAH',terms:['eloah','plateforme','espace client','supabase']}
+   ];
+   let best=null,score=0;
+   for(const candidate of suggestions){
+    const count=candidate.terms.reduce((n,term)=>n+(normalized.includes(term)?1:0),0);
+    const match=data.boards.find(b=>b.name.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase()===candidate.name.normalize('NFD').replace(/[\\u0300-\\u036f]/g,'').toLowerCase());
+    if(match&&count>score){score=count;best=match;}
+   }
+   select.value=best?.id||data.active;
+   const suggestionInfo=document.createElement('p');
+   suggestionInfo.style.cssText='margin:9px 0;color:#f0d7ab;font:12px/1.5 system-ui';
+   suggestionInfo.textContent=best?'Suggestion locale : '+best.name+' (à confirmer).':'Aucune suggestion fiable : choisis ton tableau.';
+   select.addEventListener('change',()=>{suggestionInfo.textContent='Tableau choisi manuellement : '+(data.boards.find(b=>b.id===select.value)?.name||'')});
    const actions=document.createElement('div');actions.style.cssText='display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap;margin-top:20px';
    const cancel=document.createElement('button');cancel.type='button';cancel.textContent='Annuler';
    const confirm=document.createElement('button');confirm.type='button';confirm.textContent='Préparer la carte ↗';
@@ -161,7 +183,7 @@ if(new URLSearchParams(location.search).get('eloahDraft')==='1'){
     $('dialogTitle').textContent='Brouillon ELOAH 2040 · vérifier puis enregistrer';
     sessionStorage.removeItem('eloah2040:board-handoff');
    });
-   actions.append(cancel,confirm);picker.append(heading,note,label,select,actions);
+   actions.append(cancel,confirm);picker.append(heading,note,label,select,suggestionInfo,actions);
    picker.addEventListener('close',()=>picker.remove());
    document.body.append(picker);picker.showModal();
   }else{sessionStorage.removeItem('eloah2040:board-handoff');alert('Le brouillon ELOAH est absent ou expiré. Il n’a pas été enregistré.');}
