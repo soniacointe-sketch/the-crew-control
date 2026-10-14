@@ -16,6 +16,7 @@
   get('login').hidden = true;
   get('home').hidden = true;
   formSection.hidden = true;
+  form.hidden = true;
   pending.hidden = false;
   let verifiedAccessToken = null;
   async function getVerifiedToken() {
@@ -51,6 +52,9 @@
       verifiedAccessToken = await getVerifiedToken();
       pending.hidden = true;
       formSection.hidden = false;
+      form.hidden = false;
+      get('recovery-description').textContent = 'Lien vérifié. Choisis un nouveau mot de passe de 12 caractères minimum.';
+      history.replaceState(null, '', location.pathname);
       get('state').textContent = 'Lien validé. Tu peux choisir ton nouveau mot de passe.';
     } catch (error) {
       message(error?.message || 'Lien non reconnu. Demande un nouveau lien de récupération.');
@@ -59,6 +63,7 @@
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     if (!verifiedAccessToken) return message('Le lien doit être validé avant de modifier ton mot de passe.');
+    if (get('new-password').value !== get('confirm-password').value) return message('Les deux mots de passe doivent être identiques.');
     const button = get('save-password');
     button.disabled = true;
     get('state').textContent = 'Enregistrement du nouveau mot de passe…';
@@ -78,13 +83,14 @@
       verifiedAccessToken = null;
       context.token = null;
       get('new-password').value = '';
+      get('confirm-password').value = '';
       history.replaceState(null, '', location.pathname);
       formSection.hidden = true;
       pending.hidden = false;
       const link = document.createElement('a');
-      link.href = 'eloah-controle.html';
+      link.href = 'eloah-fondatrice.html';
       link.className = 'launch';
-      link.textContent = 'Accéder au panneau ELOAH →';
+      link.textContent = 'Se connecter avec le nouveau mot de passe →';
       pending.appendChild(link);
       message('Ton mot de passe est modifié. Tu peux maintenant ouvrir ELOAH.');
     } catch (error) {
