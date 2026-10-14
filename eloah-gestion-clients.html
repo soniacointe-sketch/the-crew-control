@@ -1,13 +1,124 @@
-<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#230d27"><title>ELOAH · Administration clients</title><link rel="icon" href="eloah-app-icon.svg"><style>:root{font-family:Inter,system-ui,sans-serif;color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 90% 0%,#53204d,transparent 37%),#120815;color:#f8edf6}a{color:inherit;text-decoration:none}header{display:flex;gap:16px;justify-content:space-between;align-items:center;padding:24px clamp(18px,4vw,55px);border-bottom:1px solid #ffffff25}header strong{font:normal 27px Georgia,serif}header a{color:#eccfe5;font-size:12px}main{max-width:1160px;margin:auto;padding:48px 22px 85px}.eyebrow{font-size:11px;font-weight:750;color:#eab6db;letter-spacing:.18em}h1{font:normal clamp(38px,5vw,62px)/1.12 Georgia,serif;margin:13px 0}p{font-size:14px;line-height:1.8;color:#d7bed0;max-width:750px}.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin:35px 0}.metric,.panel{border:1px solid #794873;background:linear-gradient(145deg,#301331,#200f26);border-radius:15px;padding:25px}.metric span{font-size:12px;color:#e8c7dc}.metric strong{font:normal 49px Georgia,serif;display:block;margin:12px 0}.metric small{font-size:11px;color:#c9a4c0}.layout{display:grid;grid-template-columns:1fr 1fr;gap:17px}.panel h2{font:normal 28px Georgia,serif;margin:0 0 10px}.links{display:grid;gap:10px;margin-top:20px}.links a{padding:14px 16px;border-radius:9px;background:#f0c3e0;color:#351234;text-align:center;font-weight:750;font-size:13px}.links a.alt{background:#ffffff0b;color:#f5def0;border:1px solid #91668b}.notice{margin-top:22px;padding:18px 20px;border-left:3px solid #e19ccf;background:#ffffff08;font-size:12px;color:#dac5d4;line-height:1.7}.back{display:inline-block;margin-top:24px;font-size:13px;color:#f0c1e2}a:focus-visible{outline:2px solid #fff;outline-offset:4px}@media(max-width:760px){.metrics{grid-template-columns:1fr}.layout{grid-template-columns:1fr}.metric strong{font-size:38px}}</style></head><body><header><strong>ELOAH ✦</strong><a href="eloah-controle.html">← Panneau de contrôle</a></header><main><span class="eyebrow">ADMINISTRATION · ENVIRONNEMENT CLIENT</span><h1>Piloter les accès clients.</h1><p>Parcours de gestion : inscription → droits d’abonnement → accompagnement client.</p><p>Vue de préparation du service ELOAH : comptes, droits d’accès et espaces clients. La gestion effective des données privées reste réservée à l’administration sécurisée Supabase.</p><div class="metrics"><div class="metric"><span>Espaces clients enregistrés</span><strong>0</strong><small>État de la base vérifié le 14 octobre 2026</small></div><div class="metric"><span>Droits d’abonnement enregistrés</span><strong>0</strong><small>Aucun droit commercial attribué dans la table ELOAH</small></div><div class="metric"><span>Éléments d’espaces clients</span><strong>0</strong><small>Aucun élément client enregistré</small></div></div><div class="layout"><section class="panel"><h2>Comptes & accès</h2><p>Retrouver les identifiants des comptes et diagnostiquer les connexions. Les changements de droits doivent être effectués uniquement côté serveur.</p><div class="links"><a href="https://supabase.com/dashboard/project/voytsqyorhoveurnguxn/auth/users" target="_blank" rel="noopener noreferrer">Administrer les comptes ↗</a><a class="alt" href="https://supabase.com/dashboard/project/voytsqyorhoveurnguxn/auth/url-configuration" target="_blank" rel="noopener noreferrer">Redirections de connexion ↗</a><a class="alt" href="https://supabase.com/dashboard/project/voytsqyorhoveurnguxn/auth/smtp" target="_blank" rel="noopener noreferrer">Configurer les e-mails ↗</a></div></section><section class="panel"><h2>Clients & abonnements</h2><p>Contrôler les espaces ELOAH et les droits d’abonnement à partir des tables réelles. Aucun compte test ni abonnement fictif n’a été créé.</p><div class="links"><a href="https://supabase.com/dashboard/project/voytsqyorhoveurnguxn/editor" target="_blank" rel="noopener noreferrer">Consulter les tables ELOAH ↗</a><a class="alt" href="eloah-espace-prive.html">Tester le parcours client ↗</a><a class="alt" href="eloah-inscription.html">Voir les offres et inscriptions ↗</a></div></section></div><section class="panel" style="margin-top:24px"><h2>Tableau des clients en direct</h2><p>Cette vue nécessite une connexion administrateur Supabase. Les données privées ne sont jamais chargées sans vérification serveur.</p><p id="clients-live-status" role="status">Vérification de ta connexion fondatrice…</p><p id="clients-login-help" hidden><a class="back" href="eloah-fondatrice.html">Ouvrir ma connexion fondatrice →</a> puis reviens ici sur le même navigateur.</p><div id="clients-live" hidden><button id="clients-refresh" type="button">Actualiser</button><p id="clients-count"></p><div style="overflow:auto"><table style="width:100%;min-width:520px;text-align:left"><thead><tr><th>E-mail</th><th>Création</th><th>Formule</th><th>Statut</th></tr></thead><tbody id="clients-rows"></tbody></table></div></div></section><div class="notice">Les compteurs ci-dessus sont une photographie datée, pas des chiffres en direct. Cette page ne donne pas accès aux données personnelles d’un client : l’accès aux fiches privées exigera une autorisation administrateur vérifiée sur le serveur. Aucun lien public ne doit permettre de contourner cette vérification.</div><a class="back" href="eloah-controle.html">← Retour au panneau ELOAH</a></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script><script>
-(()=>{const q=id=>document.getElementById(id),status=t=>q('clients-live-status').textContent=t;
-const url='https://voytsqyorhoveurnguxn.supabase.co',key='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
-if(!window.supabase){status('Service de connexion indisponible.');return}
-const db=window.supabase.createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:'eloah-founder-auth-v1'}});
-async function load(){status('Vérification de ta session fondatrice…');const user=await db.auth.getUser();if(user.data?.user?.id!=='bd4b7197-6401-4a9a-a14e-c6adbdc0ed46'){q('clients-live').hidden=true;q('clients-login-help').hidden=false;status('Aucune session fondatrice reconnue dans ce navigateur. Les comptes clients restent protégés.');return}q('clients-login-help').hidden=true;status('Chargement des comptes…');
-const session=await db.auth.getSession();const accessToken=session.data?.session?.access_token;if(!accessToken){q('clients-login-help').hidden=false;throw Error('Session expirée : reconnecte-toi comme fondatrice.')}const response=await fetch(url+'/functions/v1/eloah-founder-clients',{headers:{apikey:key,Authorization:'Bearer '+accessToken}});
-const payload=await response.json();if(!response.ok)throw Error(payload.error||'Accès refusé');
-const body=q('clients-rows');body.replaceChildren();payload.accounts.forEach(a=>{const tr=document.createElement('tr');[a.email,new Date(a.created_at).toLocaleDateString('fr-FR'),a.entitlement?.plan||'Aucune',a.entitlement?.status||'Non actif'].forEach(v=>{const cell=document.createElement('td');cell.textContent=v;cell.style.padding='10px';tr.appendChild(cell)});body.appendChild(tr)});
-q('clients-count').textContent=payload.total+' autre(s) compte(s) enregistré(s) dans Supabase (y compris comptes de test).';q('clients-live').hidden=false;status('Données mises à jour. Aucun accès client n’a été modifié.')}
-q('clients-refresh').addEventListener('click',()=>load().catch(e=>status(e.message)));load().catch(e=>status('Impossible de charger les comptes : '+e.message));
-})();
-</script></body></html>
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#190b1e">
+<meta name="robots" content="noindex,nofollow">
+<meta name="description" content="Console fondatrice ELOAH pour le suivi des comptes, des droits et de l'accompagnement client.">
+<title>ELOAH · Pilotage clients</title>
+<link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="eloah-crm-control.css?v=20261014-1">
+<script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
+<script defer src="eloah-crm-control.js?v=20261014-1"></script>
+</head>
+<body>
+<a class="skip" href="#main">Aller au tableau de bord</a>
+<div class="shell">
+<aside class="sidebar">
+  <div class="brand-row"><div class="wordmark">ELOAH<span>✦</span></div><span class="side-tag">MISSION CONTROL · FONDATRICE</span></div>
+  <nav class="side-nav" aria-label="Rubriques administration clients">
+    <button type="button" class="tab active" data-tab="overview" aria-current="page"><span class="mark" aria-hidden="true">◈</span>Vue d’ensemble</button>
+    <button type="button" class="tab" data-tab="accounts"><span class="mark" aria-hidden="true">♧</span>Comptes & fiches</button>
+    <button type="button" class="tab" data-tab="entitlements"><span class="mark" aria-hidden="true">◇</span>Abonnements</button>
+    <button type="button" class="tab" data-tab="payments"><span class="mark" aria-hidden="true">€</span>Paiements</button>
+    <button type="button" class="tab" data-tab="followups"><span class="mark" aria-hidden="true">✎</span>Accompagnement</button>
+    <button type="button" class="tab" data-tab="settings"><span class="mark" aria-hidden="true">⚙</span>Réglages</button>
+  </nav>
+  <div class="side-foot">
+    <a href="eloah-controle.html">← Panneau de contrôle</a>
+    <a href="mes-univers.html">Mon ELOAH personnel ↗</a>
+    <a href="eloah-decouvrir.html">Vitrine ELOAH ↗</a>
+  </div>
+</aside>
+<div class="workspace">
+<header class="topbar">
+  <div><div class="breadcrumb">ELOAH / ADMINISTRATION CLIENTS</div><h2 id="section-title">Vue d’ensemble</h2></div>
+  <div class="top-actions"><span class="session" id="session-indicator">Vérification…</span><button class="button" type="button" id="refresh">↻ Actualiser</button></div>
+</header>
+<main id="main">
+<div class="hero"><span class="eyebrow">TON ACTIVITÉ ELOAH</span><h1>Clients. Offres. Suivi.</h1><p>Retrouve les comptes, leurs accès et tes prochaines actions. Les chiffres sont issus de Supabase ; aucun paiement n’est inventé.</p></div>
+<p id="notice" class="notice" role="status" aria-live="polite">Connexion sécurisée en cours…</p>
+<section class="auth-gate" id="auth-gate" hidden aria-labelledby="gate-heading"><span class="eyebrow">ACCÈS PROTÉGÉ</span><h2 id="gate-heading">Retrouve ta session fondatrice</h2><p id="auth-gate-text">Cet espace nécessite ta connexion ELOAH existante.</p><div class="actions"><a href="eloah-fondatrice.html" class="button primary">Ouvrir ma connexion fondatrice →</a><button type="button" class="button" id="auth-retry">Vérifier à nouveau</button></div></section>
+
+<section id="view-overview" aria-labelledby="overview-title">
+  <div class="view-header"><div><h2 id="overview-title">L’essentiel, ici.</h2><p id="updated-at" class="muted">En attente des données.</p></div><button class="button" type="button" data-go="accounts">Voir les comptes →</button></div>
+  <div class="metrics">
+    <div class="metric"><label>Comptes affichés</label><strong id="metric-accounts">—</strong><small>Hors fondatrice, tests compris</small></div>
+    <div class="metric"><label>Espaces clients</label><strong id="metric-workspaces">—</strong><small>Enregistrés dans Supabase</small></div>
+    <div class="metric"><label>Droits actifs</label><strong id="metric-active">—</strong><small>Ne prouvent pas un paiement</small></div>
+    <div class="metric featured"><label>Chiffre d’affaires ELOAH</label><strong id="metric-revenue">À relier</strong><small>Stripe non raccordé au suivi ELOAH</small></div>
+  </div>
+  <div class="grid2">
+    <section class="panel"><div class="panel-title"><div><h2>Derniers comptes</h2><p id="accounts-disclaimer">Chargement…</p></div><button class="button" type="button" data-go="accounts">Tous →</button></div><div id="recent-list" class="recent-list"></div></section>
+    <section class="panel"><h2>Ce qui compte ensuite</h2><div class="workflow">
+      <div class="workflow-item"><span class="workflow-index">01</span><div><strong>Accueillir</strong><p>Ouvre une fiche et ajoute la prochaine action.</p></div></div>
+      <div class="workflow-item"><span class="workflow-index">02</span><div><strong>Suivre les accès</strong><p id="entitlement-help">Les abonnements apparaîtront après connexion.</p></div></div>
+      <div class="workflow-item"><span class="workflow-index">03</span><div><strong>Vérifier les paiements</strong><p id="billing-state">Stripe à connecter.</p></div></div>
+    </div><div class="quick-actions"><button class="button primary" type="button" data-go="followups">Mes suivis →</button></div></section>
+  </div>
+  <p class="section-note">Cette console affiche des comptes d’authentification de ton projet Supabase, pas uniquement des clients payants. Les informations personnelles demeurent protégées par une vérification fondatrice côté serveur.</p>
+</section>
+
+<section id="view-accounts" hidden aria-labelledby="accounts-title">
+  <div class="view-header"><div><span class="eyebrow">01 · COMPTES</span><h2 id="accounts-title">Comptes & fiches clients</h2><p>Recherche une inscription, ouvre sa fiche et garde une trace de ce qui reste à faire.</p></div><span id="account-count" class="muted">—</span></div>
+  <div class="filters">
+    <label class="search-field">Rechercher un e-mail ou un identifiant<input type="search" id="account-search" autocomplete="off" placeholder="Rechercher un compte…"></label>
+    <label>Afficher<select id="account-filter"><option value="all">Tous les comptes</option><option value="without">Sans droits enregistrés</option><option value="active">Droits actifs</option><option value="attention">Suivis à traiter</option></select></label>
+  </div>
+  <div class="table-scroll"><table><thead><tr><th>E-mail</th><th>Inscription</th><th>Espaces</th><th>Formule</th><th>Suivi</th><th>Fiche</th></tr></thead><tbody id="account-rows"></tbody></table></div>
+  <div class="under-table"><span class="muted">Clique sur un compte pour consulter et modifier son suivi interne.</span><button class="button" id="next-page" type="button" hidden>Charger la suite</button></div>
+</section>
+
+<section id="view-entitlements" hidden aria-labelledby="entitlement-title">
+  <div class="view-header"><div><span class="eyebrow">02 · ACCÈS</span><h2 id="entitlement-title">Abonnements & droits</h2><p>Statuts enregistrés dans ELOAH. L’accès payé n’est confirmé qu’après validation de la facturation côté serveur.</p></div><span class="muted" id="entitlement-count">—</span></div>
+  <div class="table-scroll"><table><thead><tr><th>Compte</th><th>Formule</th><th>Statut</th><th>Mis à jour</th></tr></thead><tbody id="entitlement-rows"></tbody></table></div>
+  <p class="section-note">La table des droits n’est pas un registre de paiements. Aucun abonnement n’est créé, offert ou modifié par cet écran.</p>
+  <div class="quick-actions"><a class="button" href="eloah-inscription.html">Parcours d’inscription ↗</a><a class="button" href="eloah-espace-prive.html">Portail client ↗</a></div>
+</section>
+
+<section id="view-payments" hidden aria-labelledby="payments-title">
+  <div class="view-header"><div><span class="eyebrow">03 · FACTURATION</span><h2 id="payments-title">Paiements Stripe</h2><p>Un tableau fiable ne confond jamais « compte créé » et « commande encaissée ».</p></div></div>
+  <div class="billing-panel"><strong>RACCORDEMENT EN ATTENTE</strong><h2>Les paiements ELOAH ne remontent pas encore ici.</h2><p>Le compte Stripe connecté n’est pas automatiquement lié aux utilisateurs ELOAH. Il faut un rapprochement sécurisé entre les abonnements Stripe, le compte Supabase et les droits ELOAH avant d’afficher les ventes.</p><div class="billing-actions"><a class="button primary" href="https://dashboard.stripe.com/" target="_blank" rel="noopener noreferrer">Ouvrir Stripe ↗</a><a class="button" href="eloah-inscription.html">Voir les offres ELOAH ↗</a></div></div>
+  <div class="billing-dashes"><div><small>Paiements encaissés ELOAH</small><strong>—</strong></div><div><small>Chiffre d’affaires ELOAH</small><strong>—</strong></div><div><small>Revenus récurrents</small><strong>—</strong></div></div>
+  <p class="section-note">Aucun montant n’est calculé à partir de données d’une autre activité. L’ouverture des paiements devra prévoir un Checkout sécurisé, des webhooks vérifiés et la correspondance des clients.</p>
+</section>
+
+<section id="view-followups" hidden aria-labelledby="followups-title">
+  <div class="view-header"><div><span class="eyebrow">04 · ACCOMPAGNEMENT</span><h2 id="followups-title">Mes prochains suivis</h2><p>Une relation client concrète : un statut, une action, une note utile.</p></div><span class="muted" id="followups-count">—</span></div>
+  <div id="followup-list" class="follow-grid"></div>
+  <p class="section-note">Les notes sont internes et protégées côté serveur. Évite d’y conserver des mots de passe ou des données personnelles sensibles.</p>
+</section>
+
+<section id="view-settings" hidden aria-labelledby="settings-title">
+  <div class="view-header"><div><span class="eyebrow">05 · INFRASTRUCTURE</span><h2 id="settings-title">Réglages & outils</h2><p>Les configurations sensibles restent sur leurs plateformes sécurisées.</p></div></div>
+  <div class="grid2">
+    <section class="panel"><h3>Comptes & connexion</h3><div class="settings-links">
+      <a href="https://supabase.com/dashboard/project/voytsqyorhoveurnguxn/auth/users" target="_blank" rel="noopener noreferrer">Utilisateurs Supabase ↗</a>
+      <a href="https://supabase.com/dashboard/project/voytsqyorhoveurnguxn/auth/smtp" target="_blank" rel="noopener noreferrer">Configuration des e-mails ↗</a>
+      <a href="eloah-fondatrice.html">Mon accès fondatrice →</a>
+    </div></section>
+    <section class="panel"><h3>Vente & parcours client</h3><div class="settings-links">
+      <a href="eloah-decouvrir.html">Vitrine ELOAH →</a><a href="eloah-inscription.html">Inscription →</a><a href="eloah-espace-prive.html">Portail client →</a><a href="https://dashboard.stripe.com/" target="_blank" rel="noopener noreferrer">Tableau de bord Stripe ↗</a>
+    </div></section>
+  </div>
+  <p class="section-note">L’accès à cette console est lié à ta session fondatrice. Les droits de lecture et de modification des fiches sont vérifiés sur le serveur ; aucun secret d’administration n’est ajouté à GitHub Pages.</p>
+</section>
+</main></div></div>
+
+<div id="detail-overlay" class="drawer-overlay" hidden>
+  <aside class="drawer" aria-labelledby="detail-email" aria-label="Fiche client">
+    <div class="drawer-top"><div><span class="eyebrow">FICHE DE SUIVI ELOAH</span><h2 id="detail-email">Compte</h2></div><button class="button" type="button" id="detail-close">Fermer ×</button></div>
+    <p class="meta" id="detail-date">—</p>
+    <div class="drawer-info"><p id="detail-last">Dernière connexion : —</p><p id="detail-workspaces">—</p><p id="detail-plan">—</p></div>
+    <h3>Suivi interne</h3>
+    <form id="followup-form">
+      <label>Étape du dossier<select id="follow-stage"><option value="nouveau">Nouveau</option><option value="a_contacter">À contacter</option><option value="en_cours">En cours</option><option value="suivi">Suivi</option><option value="clos">Clos</option></select></label>
+      <label>Ma prochaine action<input id="follow-next" maxlength="280" placeholder="Ex. : répondre à sa demande"></label>
+      <label>Notes internes<textarea id="follow-notes" maxlength="2000" rows="5" placeholder="Un fait utile, une décision, le prochain suivi…"></textarea></label>
+      <p class="hint">Évite les mots de passe et les informations personnelles sensibles.</p>
+      <div class="drawer-actions"><button class="button primary" type="submit" id="follow-save">Enregistrer le suivi</button><span id="follow-status" class="status" role="status" aria-live="polite"></span></div>
+    </form>
+  </aside>
+</div>
+</body></html>
