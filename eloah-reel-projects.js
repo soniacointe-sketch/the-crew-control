@@ -93,11 +93,14 @@ function create(config){
   return '<div class="ecs-project-top"><label for="ecs-project-search">⌕</label><input id="ecs-project-search" type="search" placeholder="Recherche dans votre contenu" aria-label="Rechercher dans mes créations et dossiers" value="'+escapeHTML(state.search)+'"></div>'+
    '<div class="ecs-project-scope"><span>◉ Vos projets ELOAH</span><select id="ecs-project-brand-scope" aria-label="Filtrer les projets par domaine">'+
    '<option value="" '+(!state.brandScope?'selected':'')+'>Tous les univers</option>'+
-   [...new Set(projects.map(p=>p.brand).filter(Boolean))].map(name=>'<option value="'+escapeHTML(name)+'" '+(state.brandScope===name?'selected':'')+'>'+escapeHTML(name)+'</option>').join('')+
+   [...new Set([...folders.map(f=>f.brand),...projects.map(p=>p.brand)].filter(Boolean))].map(name=>'<option value="'+escapeHTML(name)+'" '+(state.brandScope===name?'selected':'')+'>'+escapeHTML(name)+'</option>').join('')+
    '</select></div>'+
    '<div class="ecs-project-tabs" role="tablist" aria-label="Type de contenu">'+
    [['all','Tout'],['designs','Designs'],['folders','Dossiers'],['images','Images'],['videos','Vidéos']].map(([id,label])=>
-    '<button type="button" role="tab" data-project-view="'+id+'" aria-selected="'+(state.view===id||state.view==='folder'&&id==='folders')+'" class="'+(state.view===id||state.view==='folder'&&id==='folders'?'active':'')+'">'+label+'</button>').join('')+'</div>';
+    '<button type="button" role="tab" data-project-view="'+id+'" aria-selected="'+(state.view===id||state.view==='folder'&&id==='folders')+'" class="'+(state.view===id||state.view==='folder'&&id==='folders'?'active':'')+'">'+label+'</button>').join('')+'</div>'+
+   '<div class="ecs-project-sortbar"><button type="button" data-project-favorites>☆ Favoris · '+projects.filter(p=>p.favorite).length+'</button>'+
+   '<label>Classer <select id="ecs-project-sort"><option value="recent" '+(state.sort==='recent'?'selected':'')+'>Plus récents</option>'+
+   '<option value="az" '+(state.sort==='az'?'selected':'')+'>Nom A → Z</option></select></label></div>';
  }
  function thumbnail(p){
   if(typeof p.thumbnail==='string'&&p.thumbnail.startsWith('data:image/'))return '<img src="'+p.thumbnail+'" alt="Aperçu de '+escapeHTML(p.name)+'" loading="lazy">';
@@ -312,6 +315,7 @@ function create(config){
  }
  function change(ev){
   if(ev.target.id==='ecs-project-brand-scope'){state.brandScope=ev.target.value;state.page=48;refresh();return true}
+  if(ev.target.id==='ecs-project-sort'){state.sort=ev.target.value==='az'?'az':'recent';state.page=48;refresh();return true}
   return false;
  }
  async function initialize(){
