@@ -51,98 +51,38 @@ body.eloah-home-client a:focus-visible,body.eloah-home-client button:focus-visib
 @media(prefers-reduced-motion:reduce){body.eloah-home-client .choice,body.eloah-home-client .project-link,body.eloah-home-client .tool{transition:none}}
 
 
-/* ELOAH — faithful interactive editorial dashboard, no image-only mockup */
-.eloah-vision{margin:0 0 38px;background:#f8f0e5;border:1px solid #d1baa0;box-shadow:0 19px 55px #39251a30;border-radius:16px;overflow:hidden;color:#2e221b}
-.eloah-vision a{text-decoration:none}
-.eloah-vision-shell{display:grid;grid-template-columns:176px minmax(0,1fr);min-height:660px}
-.eloah-vision-side{background:linear-gradient(150deg,#221a16,#130f0e);color:#f5e8d4;padding:27px 13px;display:flex;flex-direction:column}
-.eloah-vision-logo{text-align:center;font:37px/1 Georgia,serif;letter-spacing:-.05em;margin:5px 0 20px;color:#fff5e7}
-.eloah-vision-star{text-align:center;color:#cfaa6c;font:29px Georgia,serif;margin-bottom:25px}
-.eloah-vision-side nav{display:grid;gap:5px}
-.eloah-vision-side nav a{color:#eee0cf;border-radius:7px;padding:10px 12px;display:flex;align-items:center;gap:10px;font-size:12px}
-.eloah-vision-side nav a:hover,.eloah-vision-side nav a:first-child{background:#92714362}
-.eloah-vision-side nav a b{font-weight:400;color:#cea773;font-size:17px;width:20px}
-.eloah-vision-motto{margin:auto 4px 0;color:#d8b78c;font:italic 17px/1.5 Georgia,serif}
-.eloah-vision-main{position:relative;overflow:hidden;padding:19px clamp(12px,2.6vw,32px) 42px;background:linear-gradient(180deg,#fff8ee 0%,#f9ecdc 72%,#c39b7f 100%)}
-.eloah-vision-main:after{content:"";position:absolute;pointer-events:none;bottom:0;left:0;right:0;height:94px;background:linear-gradient(0deg,#5f433b77,transparent),url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1600&q=75') center 49%/cover;opacity:.52}
-.eloah-vision-main>*{position:relative;z-index:1}
-.eloah-vision-top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:10px;letter-spacing:.23em;color:#78624f;text-transform:uppercase}
-.eloah-vision-top a{font-size:12px;letter-spacing:0;text-transform:none;color:#594030}
-.eloah-vision-tagline{text-align:center;font:italic 13px Georgia,serif;color:#5b4031;margin:4px 0 22px}
-.eloah-vision-universes{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px;margin:17px 0 20px}
-.eloah-vision-universes a{min-width:0;text-align:center;color:#35251d;font:15px/1.2 Georgia,serif}
-.eloah-vision-universes a .round{display:flex;align-items:center;justify-content:center;width:clamp(50px,6.3vw,87px);height:clamp(50px,6.3vw,87px);border-radius:50%;margin:0 auto 10px;border:3px solid #fdf0df;outline:1px solid #c6a374;background-size:cover;background-position:center;box-shadow:0 6px 15px #59402b2a;color:#fcebd2;text-shadow:0 2px 8px #0007;font:29px Georgia,serif;transition:transform .2s}
-.eloah-vision-universes a:hover .round{transform:translateY(-4px)}
-.eloah-vision-universes small{display:block;margin-top:6px;font:8px/1.6 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#665445}
-.eloah-vision-universes a:nth-child(1) .round{background-image:linear-gradient(150deg,#40182077,#28151290),url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=250&q=75')}
-.eloah-vision-universes a:nth-child(2) .round{background-image:linear-gradient(150deg,#50302055,#170f1688),url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?w=250&q=75')}
-.eloah-vision-universes a:nth-child(3) .round{background-image:linear-gradient(150deg,#48332855,#170f1688),url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=250&q=75')}
-.eloah-vision-universes a:nth-child(4) .round{background-image:linear-gradient(150deg,#50302055,#170f1688),url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=250&q=75')}
-.eloah-vision-universes a:nth-child(5) .round{background-image:linear-gradient(150deg,#48332855,#170f1688),url('https://images.unsplash.com/photo-1603006905003-be475563bc59?w=250&q=75')}
-.eloah-vision-universes a:nth-child(6) .round{background-image:linear-gradient(150deg,#48332855,#170f1688),url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?w=250&q=75')}
-.eloah-vision-core{display:grid;grid-template-columns:minmax(0,1fr) minmax(200px,1.55fr) minmax(0,1fr);gap:clamp(10px,1.5vw,18px);align-items:center}
-.eloah-vision-cards{display:grid;gap:12px}
-.eloah-vision-cards a{display:flex;gap:10px;align-items:center;min-height:80px;padding:12px;background:#fff9f0e8;border:1px solid #e8d3b9;border-radius:10px;box-shadow:0 4px 14px #41251d15;color:#2c211d}
-.eloah-vision-cards a:hover{background:#fffdf7;border-color:#b38c57;transform:translateY(-2px)}
-.eloah-vision-icon{width:43px;height:43px;flex-shrink:0;display:grid;place-items:center;border-radius:7px;background:linear-gradient(135deg,#b08b62,#36221c);color:#fff1dd;font:22px Georgia,serif}
-.eloah-vision-cards strong{display:block;font:16px Georgia,serif}
-.eloah-vision-cards small{display:block;font:10px/1.3 system-ui,sans-serif;color:#79675a;margin-top:5px}
-.eloah-vision-center{text-align:center;min-width:0}
-.eloah-vision-glyph{color:#ba8c52;font:39px Georgia,serif}
-.eloah-vision-center h2{font:clamp(57px,8vw,115px)/1 Georgia,serif!important;letter-spacing:-.07em!important;color:#3b261d!important;margin:8px 0 5px}
-.eloah-vision-center .sub{font:clamp(16px,2vw,25px)/1.15 Georgia,serif;color:#35251e;margin:0 0 23px}
-.eloah-vision-center .keywords{font:9px/1.8 system-ui,sans-serif;letter-spacing:.15em;color:#76604f;text-transform:uppercase}
-.eloah-vision-center .closing{font:italic 14px/1.7 Georgia,serif;color:#6c4a39;margin-top:16px}
-.eloah-vision-bottom{position:relative;z-index:2;text-align:right;color:#fff4dc;text-shadow:0 1px 5px #31170d;font:10px/1.5 system-ui,sans-serif;letter-spacing:.2em;text-transform:uppercase;margin-top:24px}
-@media(max-width:1050px){.eloah-vision-shell{grid-template-columns:140px minmax(0,1fr)}.eloah-vision-side{padding:22px 8px}.eloah-vision-core{grid-template-columns:1fr 1.2fr}.eloah-vision-center{grid-column:1/-1;grid-row:1}.eloah-vision-cards{grid-row:2}.eloah-vision-cards a{min-height:65px}.eloah-vision-universes a{font-size:12px}}
-@media(max-width:650px){.eloah-vision-shell{display:block}.eloah-vision-side{padding:12px}.eloah-vision-logo{font-size:29px;margin:0}.eloah-vision-star,.eloah-vision-motto{display:none}.eloah-vision-side nav{display:flex;overflow:auto;gap:3px;margin-top:10px}.eloah-vision-side nav a{flex-shrink:0;white-space:nowrap;padding:8px;font-size:11px}.eloah-vision-side nav a b{display:none}.eloah-vision-main{padding:16px 12px 40px}.eloah-vision-top{font-size:8px;letter-spacing:.08em}.eloah-vision-tagline{margin-bottom:14px}.eloah-vision-universes{grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}.eloah-vision-universes a .round{width:65px;height:65px}.eloah-vision-core{grid-template-columns:1fr 1fr;gap:8px}.eloah-vision-center h2{font-size:73px!important}.eloah-vision-center .sub{font-size:19px}.eloah-vision-cards{gap:8px}.eloah-vision-cards a{padding:9px;min-height:65px}.eloah-vision-cards strong{font-size:14px}.eloah-vision-icon{display:none}.eloah-vision-cards small{font-size:9px}.eloah-vision-bottom{font-size:8px}}
 
-
-/* VISUAL REFINEMENT: accurate screen composition, photographs, editorial geometry */
-body.eloah-home-client{background:#17120f!important}
-body.eloah-home-client main{max-width:100%!important;padding:0 0 60px!important}
-body.eloah-home-client .eloah-vision{border:0;border-radius:0;margin:0;box-shadow:none;min-height:min(94vh,900px);background:linear-gradient(90deg,#2317117d,#fff0df14,#23171180),url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?w=1800&q=85') center/cover}
-body.eloah-home-client .eloah-vision-shell{width:min(1500px,96%);margin:0 auto;grid-template-columns:190px minmax(0,1fr);min-height:min(91vh,830px);border:11px solid #181311;border-top-width:16px;border-bottom-width:16px;border-radius:21px;box-shadow:0 26px 60px #080403b8;overflow:hidden}
-body.eloah-home-client .eloah-vision-side{padding:31px 18px;background:linear-gradient(180deg,#271d18,#16110f 90%)}
-body.eloah-home-client .eloah-vision-logo{font-size:43px;margin-bottom:20px}
-body.eloah-home-client .eloah-vision-side nav a{font-family:Georgia,serif;font-size:14px;padding:11px 12px}
-body.eloah-home-client .eloah-vision-main{background:linear-gradient(180deg,#fbf3e9 0%,#f6e7d5 76%,#d7b293 100%);padding:24px clamp(20px,2.5vw,45px) 45px}
-body.eloah-home-client .eloah-vision-main:after{height:125px;opacity:.65}
-body.eloah-home-client .eloah-vision-top{justify-content:center;position:relative;font-size:11px;letter-spacing:.23em}
-body.eloah-home-client .eloah-vision-top a{position:absolute;right:0;top:0}
-body.eloah-home-client .eloah-vision-universes{margin:26px 0 32px;gap:14px}
-body.eloah-home-client .eloah-vision-universes a{font-size:16px}
-body.eloah-home-client .eloah-vision-universes a .round{width:clamp(72px,7vw,111px);height:clamp(72px,7vw,111px);margin-bottom:13px;border-width:4px;outline:1px solid #bb8f58;box-shadow:0 10px 21px #59362235;font-size:0}
-body.eloah-home-client .eloah-vision-universes small{font-size:9px}
-body.eloah-home-client .eloah-vision-core{grid-template-columns:minmax(180px,1fr) minmax(290px,1.45fr) minmax(205px,1fr);gap:18px}
-body.eloah-home-client .eloah-vision-center h2{font-size:clamp(75px,9vw,143px)!important;line-height:.96}
-body.eloah-home-client .eloah-vision-glyph{font-size:46px}
-body.eloah-home-client .eloah-vision-center .sub{font-size:clamp(20px,2.1vw,30px)}
-body.eloah-home-client .eloah-vision-cards a{min-height:89px;padding:0;overflow:hidden;gap:0;background:#fff9f1;box-shadow:0 7px 18px #48312228}
-body.eloah-home-client .eloah-vision-cards a .eloah-vision-icon{width:42%;height:89px;border-radius:0;background-position:center;background-size:cover;font-size:0;box-shadow:inset 0 0 0 999px #3b221c10}
-body.eloah-home-client .eloah-vision-cards a span:last-child{padding:10px}
-body.eloah-home-client .eloah-vision-cards strong{font-size:18px}
-body.eloah-home-client .eloah-vision-cards small{font-size:10px}
-body.eloah-home-client .eloah-vision-cards:first-child a:nth-child(1) .eloah-vision-icon{background-image:url('https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&q=80')}
-body.eloah-home-client .eloah-vision-cards:first-child a:nth-child(2) .eloah-vision-icon{background-image:url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=400&q=80')}
-body.eloah-home-client .eloah-vision-cards:first-child a:nth-child(3) .eloah-vision-icon{background-image:url('https://images.unsplash.com/photo-1506784983877-45594efa4cbe?w=400&q=80')}
-body.eloah-home-client .eloah-vision-cards:last-child a:nth-child(1) .eloah-vision-icon{background-image:url('https://images.unsplash.com/photo-1499750310107-5fef28a66643?w=400&q=80')}
-body.eloah-home-client .eloah-vision-cards:last-child a:nth-child(2) .eloah-vision-icon{background-image:url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?w=400&q=80')}
-body.eloah-home-client .eloah-vision-cards:last-child a:nth-child(3) .eloah-vision-icon{background-image:url('https://images.unsplash.com/photo-1549465220-1a8b9238cd48?w=400&q=80')}
-body.eloah-home-client .eloah-vision-cards:last-child a:nth-child(4) .eloah-vision-icon{background-image:url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&q=80')}
-body.eloah-home-client .eloah-vision-bottom{margin-top:42px}
-body.eloah-home-client .home-hero,body.eloah-home-client main>.section,body.eloah-home-client main>.secondary,body.eloah-home-client main>.reassurance,body.eloah-home-client main>.footer,body.eloah-home-client main>.home-status{max-width:1160px;margin-left:auto;margin-right:auto}
-body.eloah-home-client .home-hero{margin-top:38px}
-body.eloah-home-client .section,body.eloah-home-client .secondary,body.eloah-home-client .footer{color:#f2e6d4}
-body.eloah-home-client .section h2,body.eloah-home-client .section h3,body.eloah-home-client .secondary h3{color:#fff4e8}
-body.eloah-home-client .section p,body.eloah-home-client .section-head>a,body.eloah-home-client .secondary>summary{color:#ebd7bd}
-body.eloah-home-client .secondary{background:#fff9ef}
-body.eloah-home-client .secondary>summary{color:#34251d}
-body.eloah-home-client .secondary-body{color:#34251d}
-body.eloah-home-client .tool h3{color:#372519!important}
-body.eloah-home-client .footer{padding-bottom:15px}
-@media(max-width:1100px){body.eloah-home-client .eloah-vision-shell{grid-template-columns:150px minmax(0,1fr)}body.eloah-home-client .eloah-vision-core{grid-template-columns:1fr 1fr}body.eloah-home-client .eloah-vision-center{grid-column:1/-1;grid-row:1}body.eloah-home-client .eloah-vision-universes a .round{width:75px;height:75px}body.eloah-home-client .eloah-vision-cards{grid-row:2}body.eloah-home-client .eloah-vision-cards a .eloah-vision-icon{height:70px}body.eloah-home-client .eloah-vision-cards a{min-height:70px}}
-@media(max-width:650px){body.eloah-home-client .eloah-vision{min-height:0}body.eloah-home-client .eloah-vision-shell{width:100%;display:block;min-height:0;border:0;border-radius:0}body.eloah-home-client .eloah-vision-side{padding:10px}body.eloah-home-client .eloah-vision-logo{font-size:31px;margin:0}body.eloah-home-client .eloah-vision-side nav{margin-top:12px}body.eloah-home-client .eloah-vision-main{padding:18px 10px 40px}body.eloah-home-client .eloah-vision-top{font-size:8px;letter-spacing:.07em;justify-content:flex-start}body.eloah-home-client .eloah-vision-top a{right:1px}body.eloah-home-client .eloah-vision-universes{grid-template-columns:repeat(3,1fr);margin:16px 0 19px;gap:10px}body.eloah-home-client .eloah-vision-universes a .round{width:69px;height:69px}body.eloah-home-client .eloah-vision-core{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}body.eloah-home-client .eloah-vision-center h2{font-size:79px!important}body.eloah-home-client .eloah-vision-cards a{min-height:72px}body.eloah-home-client .eloah-vision-cards a .eloah-vision-icon{height:72px;width:35%}body.eloah-home-client .eloah-vision-cards strong{font-size:14px}body.eloah-home-client .eloah-vision-cards small{font-size:9px}body.eloah-home-client .eloah-vision-bottom{margin-top:34px}body.eloah-home-client .home-hero,body.eloah-home-client main>.section,body.eloah-home-client main>.secondary,body.eloah-home-client main>.reassurance,body.eloah-home-client main>.footer,body.eloah-home-client main>.home-status{margin-left:12px;margin-right:12px}}
+/* ELOAH unified premium theme — presentation only */
+:root{--bg:#f1e4d5;--panel:#fff9f0;--ink:#2c211b;--muted:#726052;--line:#dfc9af;--purple:#ad8755;--tint:#f7e8d6}
+body.eloah-home-client{background:#241916;color:var(--ink)}
+body.eloah-home-client main{max-width:1220px;min-height:100vh;padding:30px 38px 60px;background:linear-gradient(155deg,#fff8ee 0%,#f3e4d2 70%,#e4c8a8 100%);box-shadow:0 0 70px #0007;border-inline:1px solid #a98459}
+body.eloah-home-client .home-hero{border:1px solid #dbc4a9;border-radius:13px;padding:34px;background:linear-gradient(135deg,#fffaf2,#e7cdb0);box-shadow:0 12px 28px #3621151c}
+body.eloah-home-client .home-hero:before{content:"✧";display:block;text-align:center;color:#ae854e;font:45px Georgia,serif}
+body.eloah-home-client .home-hero:after{display:none}
+body.eloah-home-client h1{font:normal clamp(43px,5.5vw,70px)/1.05 Georgia,serif;letter-spacing:-.04em;text-align:center;margin:14px 0 20px;color:#38261d}
+body.eloah-home-client h2,body.eloah-home-client h3{font-family:Georgia,serif;color:#35231c}
+body.eloah-home-client h2{font-size:clamp(29px,3.4vw,42px)}
+body.eloah-home-client .intro{text-align:center;margin:0 auto 21px;color:#705647}
+body.eloah-home-client .hero-actions{justify-content:center}
+body.eloah-home-client .eyebrow{letter-spacing:.21em;color:#a78250}
+body.eloah-home-client .primary{background:#241915;border-color:#241915;color:#fff7ed}
+body.eloah-home-client .primary:hover{background:#64452d}
+body.eloah-home-client .choices{gap:14px;margin:28px 0}
+body.eloah-home-client .choice,body.eloah-home-client .project-link,body.eloah-home-client .tool,body.eloah-home-client .tasks,body.eloah-home-client .secondary,body.eloah-home-client .search-results{border:1px solid #ddc4a8;background:#fffaf2;box-shadow:0 7px 19px #4b2b1812}
+body.eloah-home-client .choice{align-items:center;text-align:center;min-height:173px}
+body.eloah-home-client .choice .number,body.eloah-home-client .project-link span{color:#a17a48}
+body.eloah-home-client .choice strong{font:normal 27px Georgia,serif}
+body.eloah-home-client .choice:hover,body.eloah-home-client .project-link:hover,body.eloah-home-client .tool:hover{border-color:#ac8050;box-shadow:0 12px 22px #51311d26}
+body.eloah-home-client .section{border-color:#d7bc9f}
+body.eloah-home-client .project-link strong{font:normal 22px Georgia,serif}
+body.eloah-home-client .tool h3{font-size:24px}
+body.eloah-home-client .tool .btn{background:#2c211b;color:#fff6e9;border-color:#2c211b}
+body.eloah-home-client .tool .btn:hover{background:#65462f}
+body.eloah-home-client .secondary>summary{font:normal 22px Georgia,serif}
+body.eloah-home-client .directory>a{background:#f7e9d7;border-color:#dec6a8}
+body.eloah-home-client .reassurance{background:#e9d4ba;border-left-color:#a78455}
+body.eloah-home-client .footer{border-color:#d4ba9e}
+@media(max-width:650px){body.eloah-home-client{background:#f1e4d5}body.eloah-home-client main{padding:14px;box-shadow:none;border:0}body.eloah-home-client .home-hero{padding:20px}body.eloah-home-client .choice{text-align:left;align-items:stretch;min-height:0}body.eloah-home-client h1{font-size:45px}}
 
 </style>
 </head>
@@ -151,35 +91,6 @@ body.eloah-home-client .footer{padding-bottom:15px}
 <nav class="fallback-nav" aria-label="Accès principaux"><a href="mes-univers.html" aria-current="page"><strong>ELOAH</strong></a><a href="eloah-pilotage.html">Mon espace de travail</a><a href="eloah-bibliotheque.html?type=fichiers">Mes documents</a><a href="eloah-music.html">♫ ELOAH Music</a><a href="eloah-espace-prive.html">Me connecter</a></nav>
 <main id="contenu">
 
-<section class="eloah-vision" aria-label="Accueil interactif ELOAH">
-<div class="eloah-vision-shell">
-<aside class="eloah-vision-side"><div class="eloah-vision-logo">ELOAH</div><div class="eloah-vision-star" aria-hidden="true">✦</div>
-<nav aria-label="Raccourcis de mon espace"><a href="mes-univers.html"><b>⌂</b>Accueil</a><a href="eloah-partenaire.html?rubrique=Mon%20Espace"><b>▤</b>Notes</a><a href="#mes-projets"><b>▣</b>Projets</a><a href="#mon-organisation"><b>▦</b>Calendrier</a><a href="eloah-bibliotheque.html?type=fichiers"><b>▤</b>Documents</a><a href="eloah-reel-studio.html"><b>◈</b>Studio éditorial</a><a href="eloah-offres.html"><b>◇</b>Offres</a><a href="eloah-pilotage.html"><b>↗</b>Pilotage</a></nav>
-<p class="eloah-vision-motto">Plus qu'une organisation,<br>un art de vivre.</p></aside>
-<div class="eloah-vision-main">
-<div class="eloah-vision-top"><span>Clarté · Ambition · Alignement · Liberté</span><a href="eloah-espace-prive.html">Mon compte ↗</a></div>
-<p class="eloah-vision-tagline">Une vie intentionnelle, des projets qui comptent.</p>
-<nav class="eloah-vision-universes" aria-label="Mes univers">
-<a href="power-glam-control.html"><span class="round">P</span>Power &amp; Glam<small>Rayonner sans limites</small></a>
-<a href="index.html"><span class="round">C</span>The Crew<small>S'entourer · Élever ensemble</small></a>
-<a href="sonia-os.html"><span class="round">S</span>Sonia OS<small>Penser · Structurer</small></a>
-<a href="eloah-parisis.html"><span class="round">✧</span>PARISIS Engine<small>Bâtir · Déployer</small></a>
-<a href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md"><span class="round">✦</span>Foi &amp; spiritualité<small>Avancer avec sens</small></a>
-<a href="sonia-velka-control.html"><span class="round">V</span>Sonia Velka<small>Créer · Partager</small></a></nav>
-<div class="eloah-vision-core"><div class="eloah-vision-cards">
-<a href="eloah-partenaire.html?rubrique=Mon%20Espace"><span class="eloah-vision-icon">✎</span><span><strong>Notes</strong><small>Idées · Réflexions · Inspirations</small></span></a>
-<a href="#mes-projets"><span class="eloah-vision-icon">▣</span><span><strong>Projets</strong><small>De l'idée à l'impact</small></span></a>
-<a href="#mon-organisation"><span class="eloah-vision-icon">▦</span><span><strong>Calendrier</strong><small>Un temps pour chaque vision</small></span></a>
-</div>
-<div class="eloah-vision-center"><div class="eloah-vision-glyph">✧</div><h2>ELOAH</h2><p class="sub">Espace de pilotage personnel</p><p class="keywords">Notes · Projets · Temps · Ressources · Création · Offres · Vision</p><p class="closing">Tout ce qui compte.<br>Au même endroit. Pour la vie que je choisis.</p></div>
-<div class="eloah-vision-cards">
-<a href="eloah-bibliotheque.html?type=fichiers"><span class="eloah-vision-icon">▤</span><span><strong>Documents</strong><small>Tout à portée de main</small></span></a>
-<a href="eloah-reel-studio.html"><span class="eloah-vision-icon">◈</span><span><strong>Studio éditorial</strong><small>Créer un contenu qui marque</small></span></a>
-<a href="eloah-offres.html"><span class="eloah-vision-icon">◇</span><span><strong>Offres</strong><small>Mes univers, mes créations</small></span></a>
-<a href="eloah-pilotage.html"><span class="eloah-vision-icon">↗</span><span><strong>Pilotage</strong><small>Voir plus loin. Aller plus haut.</small></span></a>
-</div></div>
-<div class="eloah-vision-bottom">Discipline aujourd'hui · Liberté demain</div>
-</div></div></section>
 <header class="home-hero" id="eloah-home-v2">
 <div class="topline"><span class="eyebrow">ELOAH · MON ACCUEIL</span><a href="eloah-espace-prive.html">Me connecter à mon compte →</a></div>
 <h1>Bienvenue dans ton espace.</h1>
