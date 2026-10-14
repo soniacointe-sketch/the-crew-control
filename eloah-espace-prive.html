@@ -80,6 +80,7 @@ main>.overline,main>h1,main>.lead,main>.private-indicator{display:none}
  <p class="login-small">Un compte doit déjà avoir été créé et autorisé. Vous venez de découvrir ELOAH ? <a href="eloah-decouvrir.html#contact">Demander un accès</a>.</p>
  </div>
 </section>
+<section class="panel" id="access-pending" hidden><h2>Votre espace se prépare.</h2><p id="access-message">Aucun abonnement actif n’est encore associé à ce compte.</p><div class="row"><a href="eloah-offres.html">Voir les offres ELOAH ↗</a><a href="eloah-decouvrir.html#contact">Contacter ELOAH ↗</a><button type="button" class="light" id="pending-logout">Changer de compte</button></div></section>
 <section id="private-area" hidden>
  <div class="panel"><div class="row" style="justify-content:space-between"><div><h2>Bienvenue dans ton espace</h2><p id="signed-in-email"></p><p id="current-plan"></p></div><button class="light" id="logout" type="button">Se déconnecter</button></div>
  <p class="notice">Ce portail est une version pilote. Aucun abonnement ou paiement n'est activé ici. Les offres payantes requerront une vérification des droits côté serveur avant toute ouverture commerciale.</p></div>
@@ -125,16 +126,22 @@ function errMessage(e){return (e&&typeof e.message==='string')?e.message:'Une er
 async function refresh(){
  try{
   const {data,error}=await getClient().auth.getUser();
-  if(error||!data?.user){user=null;workspaceId=null;$('sign-in').hidden=false;$('private-area').hidden=true;return}
+  if(error||!data?.user){user=null;workspaceId=null;$('sign-in').hidden=false;$('private-area').hidden=true;$('access-pending').hidden=true;return}
   user=data.user;$('signed-in-email').textContent=user.email||'Compte connecté';
-  $('sign-in').hidden=true;$('private-area').hidden=false;
-  await loadPlan();await loadWorkspaces();
+  $('sign-in').hidden=true;
+  const active=await loadPlan();
+  $('private-area').hidden=!active;
+  $('access-pending').hidden=active;
+  if(active)await loadWorkspaces();
  }catch(e){status('login-status',errMessage(e))}
 }
 async function loadPlan(){
  const {data,error}=await getClient().from('eloah_customer_entitlements').select('plan,status').eq('owner_id',user.id).maybeSingle();
- const msg=error?'Droits d’abonnement indisponibles.':data?'Offre enregistrée : '+data.plan+' · État : '+data.status:'Aucun abonnement client activé.';
+ const active=!error&&data?.status==='active';
+ const msg=error?'Impossible de vérifier vos droits actuellement.':data?'Offre : '+data.plan+' · Statut : '+data.status:'Aucun abonnement actif associé à ce compte.';
  $('current-plan').textContent=msg;
+ $('access-message').textContent=msg+' Si vous venez de régler votre commande, contactez ELOAH pour faire vérifier son activation. Aucun paiement n’est débité depuis cet écran.';
+ return active;
 }
 function choose(ws){
  workspaceId=ws.id;
@@ -201,6 +208,7 @@ $('login-magic').addEventListener('click',async()=>{
  }catch(e){status('login-status','Envoi du lien impossible. Réessayez ou contactez ELOAH.')}
  finally{button.disabled=false}
 });
+$('pending-logout').addEventListener('click',async()=>{await getClient().auth.signOut();await refresh()});
 $('logout').addEventListener('click',async()=>{
  await getClient().auth.signOut();
  user=null;workspaceId=null;$('private-area').hidden=true;$('sign-in').hidden=false;
