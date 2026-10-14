@@ -72,6 +72,25 @@ body.eloah-home-client .footer{border-color:#c9ae8c}
 @media(max-width:650px){body.eloah-home-client main{padding:14px 12px 35px}body.eloah-home-client .home-hero{padding:20px 16px}body.eloah-home-client h1{font-size:44px}body.eloah-home-client .choice{min-height:0}body.eloah-home-client .project-grid,body.eloah-home-client .tools,body.eloah-home-client .directory{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){body.eloah-home-client .choice,body.eloah-home-client .project-link,body.eloah-home-client .tool{transition:none;transform:none}}
 
+
+/* Six univers ELOAH — portrait navigation; rest of home untouched */
+.eloah-six-univers{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:clamp(10px,1.5vw,22px);margin:30px 0 28px}
+.eloah-universe-card{display:flex;flex-direction:column;align-items:center;text-align:center;gap:9px;text-decoration:none;color:inherit;min-width:0;padding:10px 4px;border-radius:12px}
+.eloah-universe-portrait{display:block;width:clamp(86px,8.4vw,150px);aspect-ratio:1;border-radius:50%;border:4px solid #fbf1e6;outline:1px solid #ba915b;background-position:center;background-repeat:no-repeat;background-size:cover;box-shadow:0 10px 24px #42291c38;transition:transform .2s ease,box-shadow .2s ease}
+.eloah-universe-card strong{font:normal clamp(15px,1.35vw,20px)/1.2 Georgia,serif;color:#37261e}
+.eloah-universe-card small{font:11px/1.4 system-ui,sans-serif;color:#705d4f;max-width:175px}
+.eloah-universe-card:hover .eloah-universe-portrait{transform:translateY(-4px) scale(1.035);box-shadow:0 13px 26px #42291c55}
+.eloah-universe-card:focus-visible{outline:3px solid #9e754b;outline-offset:2px}
+.eloah-u-1{background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80')}
+.eloah-u-2{background-image:url('https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=400&q=80')}
+.eloah-u-3{background-image:url('https://images.unsplash.com/photo-1531123897727-8f129e1688ce?auto=format&fit=crop&w=400&q=80')}
+.eloah-u-4{background-image:url('https://images.unsplash.com/photo-1502602898657-3e91760cbb34?auto=format&fit=crop&w=400&q=80')}
+.eloah-u-5{background-image:url('https://images.unsplash.com/photo-1603006905003-be475563bc59?auto=format&fit=crop&w=400&q=80')}
+.eloah-u-6{background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=400&q=80')}
+@media(max-width:1100px){.eloah-six-univers{grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.eloah-universe-portrait{width:clamp(95px,14vw,145px)}}
+@media(max-width:650px){.eloah-six-univers{grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.eloah-universe-portrait{width:clamp(100px,28vw,135px)}.eloah-universe-card strong{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.eloah-universe-portrait{transition:none}}
+
 </style>
 </head>
 <body class="eloah-home-client">
@@ -84,6 +103,14 @@ body.eloah-home-client .footer{border-color:#c9ae8c}
 <h1>Bienvenue dans ton espace.</h1>
 <p class="intro">Retrouve tes projets, prépare ta prochaine étape et garde tes ressources à portée de main. Sur quoi as-tu envie d’avancer aujourd’hui ?</p>
 
+<nav class="eloah-six-univers" aria-label="Six univers ELOAH">
+<a class="eloah-universe-card" href="power-glam-control.html"><span class="eloah-universe-portrait eloah-u-1" aria-hidden="true"></span><strong>Power &amp; Glam</strong><small>Éditions, publications et contenus.</small></a>
+<a class="eloah-universe-card" href="index.html"><span class="eloah-universe-portrait eloah-u-2" aria-hidden="true"></span><strong>The Crew Orchies</strong><small>Danse, ateliers et vie de l’association.</small></a>
+<a class="eloah-universe-card" href="sonia-os.html"><span class="eloah-universe-portrait eloah-u-3" aria-hidden="true"></span><strong>SONIA OS</strong><small>Organisation des missions et des projets de Sonia.</small></a>
+<a class="eloah-universe-card" href="eloah-parisis.html"><span class="eloah-universe-portrait eloah-u-4" aria-hidden="true"></span><strong>PARISIS Engine</strong><small>Enquêtes sur Paris, cartes et sources.</small></a>
+<a class="eloah-universe-card" href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md"><span class="eloah-universe-portrait eloah-u-5" aria-hidden="true"></span><strong>Foi &amp; spiritualité</strong><small>Textes, prières et recherches.</small></a>
+<a class="eloah-universe-card" href="sonia-velka-control.html"><span class="eloah-universe-portrait eloah-u-6" aria-hidden="true"></span><strong>Sonia Velka</strong><small>Identité et créations de Sonia.</small></a>
+</nav>
 <div class="hero-actions"><button class="primary" type="button" data-new-project>+ Commencer un projet</button><a class="btn" href="eloah-pilotage.html">Ouvrir mon espace de travail</a></div>
 <nav class="choices" aria-label="Choisir une activité">
 <a class="choice" href="#mes-projets"><span class="number">01</span><strong>Mes projets</strong><span class="desc">Reprendre une idée là où je l’ai laissée.</span></a>
