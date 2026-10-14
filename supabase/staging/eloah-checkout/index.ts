@@ -16,13 +16,13 @@ function json(data, status = 200) {
 const planned = {
   entree: {
     amount: 1490,
-    priceId: "price_1UQPEnECEqtAYpIknr4D8aLI",
-    productId: "prod_VRHovD4qiIJcNz",
+    priceEnv: "ELOAH_STRIPE_PRICE_ENTREE",
+    productEnv: "ELOAH_STRIPE_PRODUCT_ENTREE",
   },
   partenaire: {
     amount: 6900,
-    priceId: "price_1UQPEuECEqtAYpIk9HCoQ6Sf",
-    productId: "prod_VRHo6BuSTO9pku",
+    priceEnv: "ELOAH_STRIPE_PRICE_PARTENAIRE",
+    productEnv: "ELOAH_STRIPE_PRODUCT_PARTENAIRE",
   },
 };
 function salesReady() {
@@ -31,10 +31,12 @@ function salesReady() {
     && /^sk_test_/.test(Deno.env.get("ELOAH_STRIPE_SECRET_KEY") || "")
     && !!ORIGIN && !!RETURN_ROOT && RETURN_ROOT.startsWith(ORIGIN)
     && Deno.env.get("ELOAH_SALES_ENABLED") === "true"
-    && Deno.env.get("ELOAH_TERMS_APPROVED") === "true"
-    && Deno.env.get("ELOAH_TAX_REVIEW_APPROVED") === "true"
     && !!Deno.env.get("ELOAH_STRIPE_SECRET_KEY")
     && !!Deno.env.get("ELOAH_STRIPE_WEBHOOK_SECRET")
+    && !!Deno.env.get("ELOAH_STRIPE_PRICE_ENTREE")
+    && !!Deno.env.get("ELOAH_STRIPE_PRICE_PARTENAIRE")
+    && !!Deno.env.get("ELOAH_STRIPE_PRODUCT_ENTREE")
+    && !!Deno.env.get("ELOAH_STRIPE_PRODUCT_PARTENAIRE")
     && !!Deno.env.get("SUPABASE_URL")
     && !!Deno.env.get("SUPABASE_ANON_KEY");
 }
@@ -89,7 +91,9 @@ Deno.serve(async (req) => {
   }
 
   const descriptor = planned[plan];
-  const priceId = descriptor.priceId;
+  const priceId = Deno.env.get(descriptor.priceEnv) || "";
+  const productId = Deno.env.get(descriptor.productEnv) || "";
+  if(!/^price_[A-Za-z0-9]+$/.test(priceId) || !/^prod_[A-Za-z0-9]+$/.test(productId)) return json({ error: "invalid_test_product_config" },503);
 
   // Never silently charge a plan at a price other than the approved proposal.
   const priceResponse = await fetch(
@@ -100,14 +104,14 @@ Deno.serve(async (req) => {
   const price = await priceResponse.json();
   // Block live sales while price taxation is still unspecified, even if flags were set.
   if (price.active !== true || price.currency !== "eur" || price.unit_amount !== descriptor.amount
-    || price.product !== descriptor.productId || price.tax_behavior === "unspecified"
+    || price.product !== productId || price.tax_behavior === "unspecified"
     || !["inclusive","exclusive"].includes(price.tax_behavior)
     || price.type !== "recurring" || price.recurring?.interval !== "month"
     || price.recurring?.interval_count !== 1) {
     return json({ error: "price_mismatch" }, 503);
   }
   const productResponse = await fetch(
-    "https://api.stripe.com/v1/products/" + encodeURIComponent(descriptor.productId),
+    "https://api.stripe.com/v1/products/" + encodeURIComponent(productId),
     { headers: { "authorization": "Bearer " + stripeSecret } },
   );
   if (!productResponse.ok) return json({ error: "product_check_unavailable" }, 503);
