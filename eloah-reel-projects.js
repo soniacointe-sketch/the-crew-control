@@ -222,6 +222,7 @@ function create(config){
  }
  async function openDesign(id){
   if(busy)return;
+  if(autosaveTimer){clearTimeout(autosaveTimer);autosaveTimer=null;await saveCurrent({auto:true})}
   const p=projects.find(x=>x.id===id);if(!p)return;
   busy=true;
   try{
@@ -262,6 +263,7 @@ function create(config){
   if(action==='download')return config.exportJSON(p.data,p);
   if(action==='rename'){
    const name=safeName(prompt('Nom du design :',p.name));if(!name)return;p.name=name;
+   if(id===currentId)config.setName?.(name);
   }else if(action==='favorite')p.favorite=!p.favorite;
   else if(action==='duplicate'){
    const copy={...p,id:unique('design-'),name:p.name+' · copie',createdAt:Date.now(),updatedAt:Date.now(),favorite:false};
