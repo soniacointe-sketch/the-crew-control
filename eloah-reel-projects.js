@@ -20,21 +20,22 @@ const humanDate=timestamp=>{
  try{return new Date(timestamp).toLocaleDateString('fr-FR',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}catch{return 'Récemment'}
 };
 function create(config){
- const state={view:'all',folder:null,search:'',menu:null,moveProject:null,loading:true,saving:false,flash:'',page:48,sort:'recent',storage:'initialisation'};
+ const state={view:'all',folder:null,search:'',menu:null,moveProject:null,canvaAll:false,loading:true,saving:false,flash:'',page:48,sort:'recent',storage:'initialisation'};
  let lastId=null;try{lastId=localStorage.getItem('eloah_active_reel_project')}catch{}
- let db=null,projects=[],folders=[],currentId=lastId,autosaveTimer=null,mutation=Promise.resolve(),busy=false;
+ let db=null,projects=[],folders=[],canvaLinks=[],currentId=lastId,autosaveTimer=null,mutation=Promise.resolve(),busy=false;
 
  const FALLBACK_KEY='eloah_reel_projects_fallback_v1',FALLBACK_LIMIT=3000000;
- let fallbackDb={designs:[],folders:[]};
+ let fallbackDb={designs:[],folders:[],canvaLinks:[]};
  function loadFallback(){
   try{
    const raw=JSON.parse(localStorage.getItem(FALLBACK_KEY)||'null');
    if(raw&&Array.isArray(raw.designs)&&Array.isArray(raw.folders)){
     return {designs:raw.designs.filter(x=>x&&x.id&&Array.isArray(x.data?.elements)),
-      folders:raw.folders.filter(x=>x&&x.id&&x.name)};
+      folders:raw.folders.filter(x=>x&&x.id&&x.name),
+      canvaLinks:Array.isArray(raw.canvaLinks)?raw.canvaLinks.filter(x=>x&&x.id&&x.editUrl).slice(0,500):[]};
    }
   }catch(e){console.warn('Bibliothèque de secours illisible',e)}
-  return {designs:[],folders:[]};
+  return {designs:[],folders:[],canvaLinks:[]};
  }
  function saveFallback(){
   try{
@@ -44,7 +45,7 @@ function create(config){
       ...p,videoBlob:null,audioBlob:null,
       warnings:[...(p.warnings||[]).filter(x=>typeof x==='string').slice(0,12)]
     })),
-    folders:fallbackDb.folders
+    folders:fallbackDb.folders,canvaLinks:fallbackDb.canvaLinks
    });
    if(text.length>FALLBACK_LIMIT)return false;
    localStorage.setItem(FALLBACK_KEY,text);
@@ -73,10 +74,11 @@ function create(config){
   if(!('indexedDB' in window))return Promise.resolve(null);
   return new Promise(resolve=>{
    try{
-    const request=indexedDB.open('eloah_reel_projects_v1',1);
+    const request=indexedDB.open('eloah_reel_projects_v1',2);
     request.onupgradeneeded=()=>{const database=request.result;
      if(!database.objectStoreNames.contains('designs'))database.createObjectStore('designs',{keyPath:'id'});
      if(!database.objectStoreNames.contains('folders'))database.createObjectStore('folders',{keyPath:'id'});
+     if(!database.objectStoreNames.contains('canvaLinks'))database.createObjectStore('canvaLinks',{keyPath:'id'});
     };
     request.onsuccess=()=>resolve(request.result);
     request.onerror=()=>resolve(null);
@@ -95,7 +97,7 @@ function create(config){
  function dbWrite(store,verb,value){
   if(!db){
    const old=fallbackDb[store]?.slice()||[];
-   if(!['designs','folders'].includes(store))return Promise.resolve(false);
+   if(!['designs','folders','canvaLinks'].includes(store))return Promise.resolve(false);
    if(verb==='delete')fallbackDb[store]=old.filter(v=>v.id!==value);
    else fallbackDb[store]=[...old.filter(v=>v.id!==value.id),value];
    const saved=saveFallback();
@@ -228,6 +230,65 @@ function create(config){
   notify(saved?'Design rangé dans '+folderTitle(p.folderId)+'.':'Le rangement n’a pas pu être sauvegardé : exporte ton projet en JSON.');
  }
 
+
+ function validCanvaUrl(raw){
+  try{
+   const url=new URL(String(raw||''));
+   if(url.protocol!=='https:'||!['www.canva.com','canva.com'].includes(url.hostname))return null;
+   if(url.username||url.password)return null;
+   return url.href.slice(0,1300);
+  }catch{return null}
+ }
+ function linkedCanvaCards(){
+  const list=canvaLinks.filter(x=>(!state.search||normalize(x.title+' '+x.folder).includes(normalize(state.search)))&&
+   (!state.brandScope||normalize(x.folder).includes(normalize(state.brandScope)))).sort((a,b)=>(b.modifiedAt||0)-(a.modifiedAt||0));
+  const selected=list.slice(0,state.canvaAll?list.length:12);
+  return '<section class="ecs-project-section ecs-canva-linked"><div class="ecs-sectiontitle"><strong>Créations Canva liées</strong><span>'+list.length+'</span></div>'+
+   '<p class="ecs-note">Ces liens sont privés dans ton navigateur. Les fichiers Canva restent dans Canva et ne sont pas synchronisés ni éditables dans ELOAH.</p>'+
+   '<div class="ecs-canva-cards">'+selected.map(item=>
+    '<article class="ecs-canva-card"><div class="ecs-canva-badge">CANVA · LIEN EXTERNE</div>'+
+    '<strong title="'+escapeHTML(item.title)+'">'+escapeHTML(item.title)+'</strong>'+
+    '<small>'+escapeHTML(item.folder||'Mes créations Canva')+'</small>'+
+    '<div><a href="'+escapeHTML(item.editUrl)+'" target="_blank" rel="noopener noreferrer">↗ Ouvrir dans Canva</a>'+
+    '<button type="button" data-project-canva-remove="'+escapeHTML(item.id)+'" aria-label="Retirer '+escapeHTML(item.title)+' des liens">×</button></div></article>').join('')+'</div>'+
+   (list.length>12?'<button class="ecs-project-more" data-project-canva-more>'+(state.canvaAll?'Voir moins':'Afficher tous les '+list.length+' liens Canva')+' →</button>':'')+'</section>';
+ }
+ async function importCanvaList(file){
+  if(!file)return;
+  if(file.size>1500000){notify('Fichier trop volumineux : 1,5 Mo maximum.');return}
+  let input;
+  try{input=JSON.parse(await file.text())}catch(e){notify('Fichier JSON illisible : '+e.message);return}
+  if(input?.kind!=='ELOAH_CANVA_LINKS'||!Array.isArray(input.designs)){
+   notify('Format inconnu. Utilise une liste Canva ELOAH (*.json).');return
+  }
+  const clean=new Map();
+  for(const raw of input.designs.slice(0,500)){
+   if(!raw||typeof raw!=='object')continue;
+   const editUrl=validCanvaUrl(raw.editUrl||raw.url),id=String(raw.id||'').slice(0,110);
+   if(!id||!editUrl)continue;
+   clean.set(id,{id,title:safeName(raw.title)||'Design Canva '+id,editUrl,
+    folder:safeName(raw.folder||'Mes créations Canva'),modifiedAt:Math.max(0,Number(raw.modifiedAt)||0)});
+  }
+  if(!clean.size){notify('Aucun lien Canva valide dans ce fichier.');return}
+  let saved=0,failed=0;
+  for(const item of clean.values()){
+   const ok=await queueWrite(()=>dbWrite('canvaLinks','put',item));
+   const idx=canvaLinks.findIndex(x=>x.id===item.id);
+   if(idx>=0)canvaLinks[idx]=item;else canvaLinks.push(item);
+   if(ok)saved++;else failed++;
+  }
+  state.canvaAll=true;state.view='designs';state.search='';refresh();
+  notify(clean.size+' lien(s) Canva ajouté(s) dans Projets ELOAH.'+
+   (failed?' '+failed+' lien(s) non conservé(s) après fermeture du navigateur.':''));
+ }
+ async function deleteCanvaLink(id){
+  const item=canvaLinks.find(x=>x.id===id);if(!item)return;
+  if(!confirm('Retirer « '+item.title+' » des liens ELOAH ? Le design original restera dans Canva.'))return;
+  const ok=await queueWrite(()=>dbWrite('canvaLinks','delete',id));
+  canvaLinks=canvaLinks.filter(x=>x.id!==id);
+  notify(ok?'Lien Canva retiré.':'Lien retiré seulement dans cette session.');
+ }
+
 function panel(){
   const current=currentProject();
   const count=projects.length;
@@ -239,15 +300,17 @@ function panel(){
     '<small>'+escapeHTML(config.getBrand())+' · '+(current?'Enregistré':'Non encore enregistré dans Projets')+'</small></div>'+
     '<button type="button" data-project-save-current>Enregistrer</button></div></section>'+
     (count?cardsSection('Designs',orderedDesigns().slice(0,6)):cardsSection('Designs',[]))+
+    (canvaLinks.length?linkedCanvaCards():'')+
     folderList();
-  }else if(state.view==='designs'||state.view==='folder'||state.view==='favorites'){inner=designList()}
+  }else if(state.view==='designs'||state.view==='folder'||state.view==='favorites'){inner=designList()+(canvaLinks.length&&state.view==='designs'?linkedCanvaCards():'')}
   else if(state.view==='folders'){inner=folderList()}
   else if(state.view==='images'){inner=mediaPanel('image')}
   else if(state.view==='videos'){inner=mediaPanel('video')}
   return '<div class="ecs-projects-ui">'+buttons()+
    '<div class="ecs-project-toolbar"><button type="button" class="ecs-project-primary" data-project-save-current>▣ Enregistrer dans Projets</button>'+
    '<button type="button" data-project-new>＋ Nouveau</button><button type="button" data-project-import>↑ Importer JSON</button>'+
-   '<button type="button" data-project-import-media title="Importer un visuel Canva exporté en image ou vidéo, sans ses calques">↑ Export Canva</button></div>'+
+   '<button type="button" data-project-import-media title="Importer un visuel Canva exporté en image ou vidéo, sans ses calques">↑ Export Canva</button>'+
+   '<label class="ecs-canva-import-btn" title="Relier des projets Canva via un fichier JSON personnel">♧ Lier Canva <input type="file" id="ecs-project-canva-json" accept=".json,application/json" aria-label="Importer mes liens privés Canva"></label></div>'+
    (state.loading?'<div class="ecs-note">Ouverture des projets enregistrés…</div>':inner)+
    '<div class="ecs-project-note">'+
    '<p>'+escapeHTML(state.storage==='ready'?'Sauvegarde automatique dans ce navigateur via IndexedDB. Les vidéos et audios restent soumis au quota de stockage.':
@@ -346,6 +409,8 @@ function panel(){
  }
  function matches(rootEvent,attr){return rootEvent.target.closest('['+attr+']')}
  function click(ev){
+  const canvaMore=matches(ev,'data-project-canva-more');if(canvaMore){state.canvaAll=!state.canvaAll;refresh();return true}
+  const canvaRemove=matches(ev,'data-project-canva-remove');if(canvaRemove){deleteCanvaLink(canvaRemove.dataset.projectCanvaRemove);return true}
   const closeMove=matches(ev,'data-project-move-cancel');if(closeMove){state.moveProject=null;refresh();return true}
   const moveTo=matches(ev,'data-project-move-to');if(moveTo){moveDesignTo(moveTo.dataset.id,moveTo.dataset.projectMoveTo);return true}
   const view=matches(ev,'data-project-view');if(view){state.view=view.dataset.projectView;state.folder=null;state.menu=null;state.page=48;refresh();return true}
@@ -376,6 +441,9 @@ function panel(){
   return true;
  }
  function change(ev){
+  if(ev.target.id==='ecs-project-canva-json'){
+   const file=ev.target.files?.[0];ev.target.value='';if(file)importCanvaList(file);return true
+  }
   if(ev.target.id==='ecs-project-brand-scope'){state.brandScope=ev.target.value;state.page=48;refresh();return true}
   if(ev.target.id==='ecs-project-sort'){state.sort=ev.target.value==='az'?'az':'recent';state.page=48;refresh();return true}
   return false;
@@ -384,13 +452,15 @@ function panel(){
   db=await dbOpen();
   if(db){
    state.storage='ready';
-   const [stored,listed]=await Promise.all([dbRead('designs'),dbRead('folders')]);
+   const [stored,listed,linked]=await Promise.all([dbRead('designs'),dbRead('folders'),dbRead('canvaLinks')]);
    projects=stored.filter(p=>p&&p.id&&Array.isArray(p.data?.elements)).sort((a,b)=>b.updatedAt-a.updatedAt);
    folders=listed.filter(f=>f&&f.id&&f.name);
+   canvaLinks=linked.filter(x=>x&&x.id&&x.editUrl);
   }else{
    fallbackDb=loadFallback();
    projects=fallbackDb.designs.slice().sort((a,b)=>b.updatedAt-a.updatedAt);
    folders=fallbackDb.folders.slice();
+   canvaLinks=fallbackDb.canvaLinks.slice();
    state.storage=saveFallback()?'local':'session';
   }
   if(!folders.length){
