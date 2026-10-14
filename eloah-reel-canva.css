@@ -850,3 +850,32 @@ body:has(#eloah-canva-studio)>main{max-width:none;margin:0;padding:0}
 #eloah-canva-studio .ecs-import-error p{margin:8px 0}
 #eloah-canva-studio .ecs-import-error a{display:block;background:#6442a4;color:#fff;border-radius:9px;padding:10px;text-align:center;text-decoration:none}
 @media(max-width:690px){#eloah-canva-studio .ecs-top-import{font-size:11px;padding:8px 9px}}
+
+/* ELOAH / OUTILS — palette latérale flottante inspirée du flux d'édition de la capture */
+#eloah-canva-studio .ecs-ink-panel{padding:8px 2px 22px}
+#eloah-canva-studio .ecs-ink-panel h3{font-size:15px;margin:9px 0 11px;font-weight:800}
+#eloah-canva-studio .ecs-ink-panel .ecs-note{font-size:12px;color:#697889;line-height:1.5}
+#eloah-canva-studio .ecs-ink-buttons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:14px 0 19px}
+#eloah-canva-studio .ecs-ink-buttons button{min-width:0;min-height:86px;border:1px solid #dfe5eb;border-radius:12px;background:#f8f9fb;color:#384b61;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:8px 4px}
+#eloah-canva-studio .ecs-ink-buttons button span{font-size:27px;line-height:1}
+#eloah-canva-studio .ecs-ink-buttons button small{font-size:10px;font-weight:650;text-align:center}
+#eloah-canva-studio .ecs-ink-buttons button[aria-pressed=true]{border-color:#74b8df;background:#e6f5fc;color:#126e99;box-shadow:inset 0 0 0 1px #98d0ed}
+#eloah-canva-studio .ecs-ink-buttons button:hover{border-color:#9ec5e3}
+#eloah-canva-studio .ecs-ink-settings{display:flex;flex-direction:column;gap:11px;padding:13px;border:1px solid #dce7f1;border-radius:12px;background:#f7fafc;margin-bottom:11px}
+#eloah-canva-studio .ecs-ink-settings label{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:12px;font-weight:700;color:#53657a}
+#eloah-canva-studio .ecs-ink-settings input[type=color]{height:34px;width:50px;border-radius:9px;cursor:pointer;flex:0 0 50px}
+#eloah-canva-studio .ecs-ink-settings input[type=range]{accent-color:#209cc4;flex:1;min-width:0}
+#eloah-canva-studio .ecs-ink-settings output{font-size:11px;color:#667889;min-width:38px}
+#eloah-canva-studio .ecs-ink-palette-toggle{display:block;width:100%;margin:10px 0;background:#e8f5fc;color:#245d80;font-size:12px;font-weight:800;padding:12px 8px;border-radius:9px}
+#eloah-canva-studio .ecs-ink-clear{display:block;width:100%;margin:6px 0 22px;background:#fbedea;color:#9e4b4a;font-size:12px;padding:10px 7px;border-radius:9px}
+#eloah-canva-studio .ecs-ink-float{position:absolute;top:24%;left:12px;z-index:16;width:60px;max-height:72%;padding:5px 5px 8px;display:flex;align-items:center;flex-direction:column;gap:4px;background:#fffdfde8;border:1px solid #dbe4eb;border-radius:24px;box-shadow:0 8px 24px #091a2e26;backdrop-filter:blur(10px);overflow-y:auto;scrollbar-width:thin}
+#eloah-canva-studio .ecs-ink-close{width:35px;min-height:33px;background:#ffffff;color:#596576;font-size:21px;padding:2px;border-radius:18px;flex:0 0 auto}
+#eloah-canva-studio .ecs-ink-float button[data-ink-tool]{width:41px;min-height:41px;border-radius:12px;background:transparent;color:#566a7f;display:flex;align-items:center;justify-content:center;padding:1px;flex:0 0 auto}
+#eloah-canva-studio .ecs-ink-float button[data-ink-tool] span{font-size:25px;line-height:1}
+#eloah-canva-studio .ecs-ink-float button[data-ink-tool]:hover{background:#edf4fc}
+#eloah-canva-studio .ecs-ink-float button[data-ink-tool][aria-pressed=true]{background:#e0f5ec;color:#228258;box-shadow:0 0 0 1px #aad8bc}
+#eloah-canva-studio .ecs-stagewrap:has(.ecs-ink-float){touch-action:none}
+#eloah-canva-studio #ecs-canvas{touch-action:none}
+@media(max-width:980px){#eloah-canva-studio .ecs-ink-float{top:17%;left:5px;width:53px}#eloah-canva-studio .ecs-ink-float button[data-ink-tool]{min-height:38px;width:38px}}
+@media(max-width:690px){#eloah-canva-studio .ecs-ink-float{top:8%;left:4px;width:48px;max-height:78%;padding:3px}#eloah-canva-studio .ecs-ink-float button[data-ink-tool]{min-height:35px;width:35px}#eloah-canva-studio .ecs-ink-float button[data-ink-tool] span{font-size:21px}#eloah-canva-studio .ecs-ink-buttons{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(prefers-reduced-motion:reduce){#eloah-canva-studio .ecs-ink-float button{transition:none!important}}
