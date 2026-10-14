@@ -1,0 +1,37 @@
+name: ELOAH private links smoke test
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  reject-unauthorized:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Check private Boards endpoints reject unauthorized requests
+        shell: bash
+        env:
+          SUPABASE_FUNCTION_BASE: https://voytsqyorhoveurnguxn.supabase.co/functions/v1
+          ELOAH_ORIGIN: https://soniacointe-sketch.github.io
+        run: |
+          set -euo pipefail
+          for function in eloah-boards-private-edit eloah-boards-private-media; do
+            for kind in missing malformed unknown; do
+              headers=(-H "Origin: ${ELOAH_ORIGIN}" -H "Content-Type: application/json")
+              if [[ "${kind}" == malformed ]]; then
+                headers+=(-H "X-Eloah-Access: bad-token")
+              elif [[ "${kind}" == unknown ]]; then
+                headers+=(-H "X-Eloah-Access: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
+              fi
+              code=$(curl --fail-with-body --silent --show-error --max-time 12 -o /tmp/eloah-response -w '%{http_code}' -X POST "${SUPABASE_FUNCTION_BASE}/${function}" "${headers[@]}" --data '{"action":"load"}') || {
+                rc=$?
+                if [[ "$rc" != 22 ]]; then echo "Network error for ${function}/${kind}"; exit 1; fi
+              }
+              echo "${function} / ${kind}: HTTP ${code}"
+              if [[ "${code}" != 401 ]]; then echo "Expected 401; got ${code}"; exit 1; fi
+            done
+          done
+          echo "All six unauthorized requests rejected."
