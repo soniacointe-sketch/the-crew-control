@@ -1565,6 +1565,23 @@ function action(name){
  if(name==='export'){exportVideo();return}
 }
 root.addEventListener('click',ev=>{
+
+ const chosenTool=ev.target.closest('[data-ink-tool]');
+ if(chosenTool){
+  inkMode=chosenTool.dataset.inkTool;inkDraft=null;inkPointer=null;
+  saveInkPrefs();if(activeTab!=='tools')activeTab='tools';renderSide();return;
+ }
+ const togglePalette=ev.target.closest('[data-ink-palette-toggle]');
+ if(togglePalette){inkPaletteOpen=!inkPaletteOpen;renderSide();return}
+ const clearDrawings=ev.target.closest('[data-ink-clear]');
+ if(clearDrawings){
+  const count=S.elements.filter(x=>x.kind==='inkStroke').length;
+  if(!count){toast('Aucun dessin à effacer.');return}
+  if(!confirm('Supprimer '+count+' tracé(s) de ce Reel ?'))return;
+  snapshot();S.elements=S.elements.filter(x=>x.kind!=='inkStroke');
+  selected=null;renderTimeline();renderSide();saveLocal();draw();
+  toast(count+' tracés supprimés.');return;
+ }
  if(reelImporter?.handleClick(ev))return;
 
  const brandViewBtn=ev.target.closest('[data-brand-view]');
@@ -1968,16 +1985,18 @@ one('.ecs-sidebody').addEventListener('input',e=>{
 });
 function coords(ev){const r=canvas.getBoundingClientRect();return {x:(ev.clientX-r.left)/r.width*1080,y:(ev.clientY-r.top)/r.height*1920}}
 canvas.addEventListener('pointerdown',ev=>{
- ev.preventDefault();const p=coords(ev),hit=[...S.elements].reverse().find(e=>S.time>=e.start&&S.time<=e.end&&p.x>=e.x&&p.x<=e.x+e.w&&p.y>=e.y&&p.y<=e.y+e.h);
+ const pt=coords(ev);if(inkDown(ev,pt))return;
+ ev.preventDefault();const p=pt,hit=[...S.elements].reverse().find(e=>S.time>=e.start&&S.time<=e.end&&p.x>=e.x&&p.x<=e.x+e.w&&p.y>=e.y&&p.y<=e.y+e.h);
  if(hit){selected=hit.id;if(hit.kind==='photoFrame')activeFrameSlot=frameSlotNumberAt(hit,p);snapshot();drag={id:hit.id,mode:p.x>hit.x+hit.w-60&&p.y>hit.y+hit.h-60?'resize':'move',px:p.x,py:p.y,x:hit.x,y:hit.y,w:hit.w,h:hit.h};canvas.setPointerCapture(ev.pointerId);setTab('properties')}else{selected=null;drag=null;renderSide()}
  renderTimeline();draw()
 });
-canvas.addEventListener('pointermove',ev=>{if(!drag)return;const p=coords(ev),el=S.elements.find(e=>e.id===drag.id);if(!el)return;const dx=p.x-drag.px,dy=p.y-drag.py;
+canvas.addEventListener('pointermove',ev=>{const pt=coords(ev);if(inkMove(ev,pt))return;if(!drag)return;const p=pt,el=S.elements.find(e=>e.id===drag.id);if(!el)return;const dx=p.x-drag.px,dy=p.y-drag.py;
  if(drag.mode==='move'){el.x=Math.max(0,Math.min(1080-el.w,drag.x+dx));el.y=Math.max(0,Math.min(1920-el.h,drag.y+dy))}
  else{el.w=Math.max(50,Math.min(1080-el.x,drag.w+dx));el.h=Math.max(45,Math.min(1920-el.y,drag.h+dy))}
  draw()
 });
-canvas.addEventListener('pointerup',()=>{if(drag){drag=null;renderSide();saveLocal()}});
+canvas.addEventListener('pointerup',ev=>{if(inkUp(ev,coords(ev)))return;if(drag){drag=null;renderSide();saveLocal()}});
+canvas.addEventListener('pointercancel',ev=>{inkUp(ev,coords(ev),true)});
 canvas.addEventListener('dblclick',ev=>{const p=coords(ev),e=[...S.elements].reverse().find(x=>x.kind==='text'&&p.x>=x.x&&p.x<=x.x+x.w&&p.y>=x.y&&p.y<=x.y+x.h);if(e){const t=prompt('Modifier le texte',e.text);if(t!==null){snapshot();e.text=t;selected=e.id;setTab('properties');saveLocal()}}});
 document.addEventListener('keydown',ev=>{if(ev.key==='Escape'&&root.querySelector('.ecs-photo-modal')){closePhotoModal();return}if(ev.key==='Escape'&&stockPreview){closeStockPreview();return}if(root.style.display==='none'||!root.contains(document.activeElement)&&!canvas.matches(':hover'))return;if(['INPUT','TEXTAREA','SELECT'].includes(document.activeElement?.tagName))return;if(ev.key==='Delete'||ev.key==='Backspace'){ev.preventDefault();action('delete')}if((ev.ctrlKey||ev.metaKey)&&ev.key.toLowerCase()==='z'){ev.preventDefault();ev.shiftKey?redo():undo()}});
 // Montage manuel : glisser un clip pour le déplacer, tirer ses bords pour changer sa durée.
