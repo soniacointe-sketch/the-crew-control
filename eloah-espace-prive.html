@@ -259,4 +259,4 @@ getClient().auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN'||event==='SI
 refresh();
 })();
 </script>
-<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script></body></html>
+<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script></body></html>
