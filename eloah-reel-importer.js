@@ -329,7 +329,10 @@ function create(options){
   loadSaved().catch(e=>{state.storage='session';ctx.toast('Bibliothèque locale momentanément indisponible.');update()});
  }
  setup();
- return {render,handleClick,handleInput,handleChange,selectedTab:()=>state.tab,getCount:()=>lib.items.length};
+ return {render,handleClick,handleInput,handleChange,selectedTab:()=>state.tab,getCount:()=>lib.items.length,
+  showTab:kind=>{state.tab=kind==='video'?'videos':kind==='audio'?'audio':'images';state.domain='all';state.album='all';state.query='';state.limit=48;update()},
+  openById:id=>{if(!get(id))return false;const item=get(id);state.tab=item.kind==='video'?'videos':item.kind==='audio'?'audio':'images';state.domain=item.domain||'all';state.album='all';state.query='';update();preview(id);return true},
+  getItems:kind=>[...items.filter(x=>x.kind===kind),...lib.items.filter(x=>x.kind===kind)]};
 }
 window.ELOAHReelImporter={create};
 })();
