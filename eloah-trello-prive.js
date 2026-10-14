@@ -295,6 +295,7 @@ function attachCardDrag(handle,card,b,c){
    const destination=found?.closest(".lane[data-lane-id]");
    if(!destination)return null;
    const near=found?.closest(".card[data-card-id]");
+   if(near?.dataset.cardId===c.id)return null;
    let anchor=null;
    if(near&&near.dataset.cardId!==c.id){
     const rect=near.getBoundingClientRect();
@@ -395,11 +396,12 @@ function attachLaneDrag(handle,column,b,lane){
    target?.classList.remove("drop-target");target=null;wasOver=false;beforeLaneId=null;
    if(found){
     target=found;wasOver=true;target.classList.add("drop-target");
-    if(found.dataset.laneId===lane.id)return;
+    if(found.dataset.laneId===lane.id){wasOver=false;return}
     const rect=found.getBoundingClientRect();
     if(x<rect.left+rect.width/2)beforeLaneId=found.dataset.laneId;
     else{
-     const following=found.nextElementSibling;
+     let following=found.nextElementSibling;
+     while(following&&(!following.dataset.laneId||following.dataset.laneId===lane.id))following=following.nextElementSibling;
      beforeLaneId=following?.dataset.laneId||null;
     }
    }
