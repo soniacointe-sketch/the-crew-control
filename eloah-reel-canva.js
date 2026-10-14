@@ -241,6 +241,7 @@ function renderAudio(){
 
 let images=new Map(),activeTab=['import','tools','text','brand','elements'].includes(new URLSearchParams(window.location.search).get('onglet'))?new URLSearchParams(window.location.search).get('onglet'):'models',elementsCategory=null,selected=null,nextId=1,drag=null,history=[],future=[],lastFrame=performance.now(),busy=false,toastTimer=0,importKind='background';
 const S={name:'Mon Reel',duration:5,trimStart:0,time:0,playing:false,bg:'#fffaf1',filter:'none',brand:'Power & Glam',elements:[]};
+let projectLibrary=null;
 const elementCategories=[
  ['audio','Audio','♫','audio','audio'],
  ['videos','Vidéos','▶','video','videos'],
@@ -794,7 +795,7 @@ function apply(a){Object.assign(S,a);S.elements=a.elements||[];selected=null;S.t
 function undo(){if(!history.length)return;future.push(JSON.stringify(serial()));apply(JSON.parse(history.pop()))}
 function redo(){if(!future.length)return;history.push(JSON.stringify(serial()));apply(JSON.parse(future.pop()))}
 function add(kind,extra={}){snapshot();const n={id:nextId++,kind,x:110,y:790,w:860,h:280,color:'#222222',text:'Nouveau texte',font:78,start:0,end:S.duration,...extra};S.elements.push(n);selected=n.id;activeTab='properties';renderSide();renderTimeline();draw();saveLocal();return n}
-function saveLocal(){try{localStorage.setItem('eloah_reel_editor',JSON.stringify(serial()))}catch{}}
+function saveLocal(){try{localStorage.setItem('eloah_reel_editor',JSON.stringify(serial()))}catch{};projectLibrary?.scheduleAutoSave()}
 function drawText(c,e){let txt=String(e.text||''),lines=txt.split('\n');c.fillStyle=e.color||'#222';c.textAlign='center';c.textBaseline='middle';let font=Math.min(250,Math.max(14,+e.font||68));c.font='800 '+font+'px system-ui,Arial';const out=[];for(const line of lines){const parts=line.split(/\s+/);let current='';for(const word of parts){if(c.measureText((current+' '+word).trim()).width>e.w-18&&current){out.push(current);current=word}else current=(current+' '+word).trim()}out.push(current)}const lineHeight=font*1.16,ty=e.y+e.h/2-(out.length-1)*lineHeight/2;out.forEach((line,i)=>c.fillText(line,e.x+e.w/2,ty+i*lineHeight,e.w-6))}
 function cover(c,img){if(!img || !(img.videoWidth||img.naturalWidth))return;const w=img.videoWidth||img.naturalWidth,h=img.videoHeight||img.naturalHeight;const k=Math.max(1080/w,1920/h);c.drawImage(img,(1080-w*k)/2,(1920-h*k)/2,w*k,h*k)}
 function paint(c,t,mark=false){
