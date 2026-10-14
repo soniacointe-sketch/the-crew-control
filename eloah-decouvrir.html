@@ -143,8 +143,186 @@ body::selection{background:#9b3d73;color:#fff5fa}
   .brand-mark{width:32px;height:34px;background-size:61px auto}
   .brand-link{gap:5px}
 }
+
+/* ELOAH — LE GRAND ÉCLAT · Les enfants sortent de la boîte */
+.hero{min-height:710px;padding:44px 0 66px;overflow:hidden}
+.hero .container.hero-stage{
+  position:relative;z-index:2;
+  width:min(1170px,calc(100% - 48px));
+  display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
+  align-items:center;gap:clamp(13px,3.4vw,61px);
+}
+.hero-stage .hero-inner{width:100%;max-width:570px;text-align:left;margin:0}
+.hero-stage .eyebrow.pill{margin-bottom:24px;letter-spacing:.11em}
+.hero-stage h1{
+  max-width:610px;
+  font-size:clamp(44px,4.7vw,72px);
+  line-height:1.085;text-wrap:balance;margin:0 0 22px;
+}
+.hero-stage .hero-copy{
+  max-width:530px;font-size:clamp(14px,1.18vw,17px);
+  color:#f0dae5;line-height:1.9;margin:0 0 27px;
+}
+.hero-stage .hero-actions{justify-content:flex-start;gap:11px;margin:0}
+.hero-stage .hero-actions .button{min-width:0;min-height:49px;padding:12px 18px}
+.hero-stage .hero-points{
+  margin-top:28px;justify-content:flex-start;gap:12px 21px;color:#e2c2d6;
+  font-size:11px
+}
+.portal-stage{
+  position:relative;isolation:isolate;
+  display:grid;place-items:center;
+  width:100%;min-width:0;min-height:625px;
+  transform:translateZ(0)
+}
+.portal-halo{
+  position:absolute;inset:11% -12% 5%;z-index:-2;border-radius:50%;
+  background:
+    radial-gradient(ellipse at 50% 49%,rgba(247,175,112,.27) 0,rgba(180,54,117,.37) 29%,rgba(94,19,76,.17) 49%,transparent 75%);
+  filter:blur(31px);opacity:.82;
+  animation:halo-breathe 7s ease-in-out infinite
+}
+.portal-ring{
+  position:absolute;width:96%;aspect-ratio:1;border-radius:50%;z-index:-1;
+  border:1px solid rgba(245,189,135,.13);
+  box-shadow:0 0 0 24px rgba(193,66,126,.022),0 0 95px rgba(173,55,115,.13);
+  transform:rotate(-18deg) scaleX(.83);
+}
+.portal-image{
+  position:relative;z-index:1;width:min(495px,100%);
+  aspect-ratio:420/525;display:grid;place-items:center;
+  -webkit-mask-image:radial-gradient(ellipse 70% 74% at 50% 50%,#000 72%,transparent 100%);
+  mask-image:radial-gradient(ellipse 70% 74% at 50% 50%,#000 72%,transparent 100%);
+  filter:drop-shadow(0 10px 27px rgba(240,95,164,.27));
+  transform-origin:50% 65%;
+}
+.portal-image img{width:100%;height:100%;object-fit:contain;display:block}
+.portal-flare{
+  position:absolute;z-index:3;left:50%;top:53%;width:330px;height:330px;
+  border-radius:50%;pointer-events:none;
+  transform:translate(-50%,-50%) scale(.2);opacity:0;
+  background:radial-gradient(circle,rgba(255,238,195,.8) 0,rgba(255,179,123,.45) 12%,rgba(249,113,172,.19) 36%,transparent 72%);
+  mix-blend-mode:screen;
+}
+.portal-shard{
+  position:absolute;z-index:4;left:50%;top:52%;
+  width:clamp(18px,4.7vw,42px);height:clamp(38px,7vw,80px);
+  opacity:0;pointer-events:none;
+  clip-path:polygon(50% 0,100% 29%,63% 100%,0 53%);
+  background:linear-gradient(135deg,#fff2cc 0%,#e6a8d2 21%,rgba(178,43,112,.65) 46%,rgba(58,5,44,.38) 68%,#edba82 96%);
+  box-shadow:0 0 11px rgba(245,167,197,.46)
+}
+.portal-shard:nth-of-type(even){clip-path:polygon(8% 0,100% 44%,67% 100%,0 58%)}
+.portal-ray{
+  position:absolute;z-index:3;left:50%;top:52%;height:2px;width:255px;
+  transform-origin:0 50%;pointer-events:none;opacity:0;
+  background:linear-gradient(90deg,rgba(255,228,176,.92),rgba(249,126,185,.3),transparent);
+  filter:drop-shadow(0 0 6px rgba(255,211,139,.55))
+}
+.ray-one{rotate:-27deg}.ray-two{rotate:37deg}.ray-three{rotate:163deg}
+.portal-spark{
+  position:absolute;z-index:4;width:6px;height:6px;
+  background:#f8daa1;border-radius:50%;
+  box-shadow:0 0 8px 3px rgba(247,155,173,.45);
+  animation:spark-drift 6s ease-in-out infinite alternate;pointer-events:none
+}
+.spark-one{top:12%;left:9%;animation-delay:.4s}
+.spark-two{top:25%;right:8%;animation-delay:1.6s}
+.spark-three{bottom:18%;left:5%;animation-delay:2.4s}
+.spark-four{bottom:11%;right:10%;animation-delay:3.1s}
+.portal-stage.is-opening .portal-image{animation:portal-emerge 1.7s cubic-bezier(.2,.86,.28,1) both}
+.portal-stage.is-opening .portal-halo{animation:halo-burst 2.1s ease-out both,halo-breathe 7s ease-in-out 2.1s infinite}
+.portal-stage.is-opening .portal-ring{animation:ring-release 1.8s ease-out both}
+.portal-stage.is-opening .portal-flare{animation:flare-burst 1.5s ease-out .35s both}
+.portal-stage.is-opening .portal-shard{animation:shard-release 1.85s cubic-bezier(.2,.68,.26,1) var(--lag) both}
+.portal-stage.is-opening .portal-ray{animation:ray-release 1.4s ease-out .22s both}
+@keyframes portal-emerge{
+  0%{opacity:.13;transform:translateY(66px) scale(.73);filter:brightness(.48) blur(13px)}
+  38%{opacity:.94;filter:brightness(1.2) blur(0)}
+  65%{transform:translateY(-15px) scale(1.065);filter:brightness(1.2)}
+  100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1)}
+}
+@keyframes halo-burst{
+  0%{opacity:.1;transform:scale(.55)}
+  34%{opacity:1;transform:scale(1.22)}
+  100%{opacity:.82;transform:scale(1)}
+}
+@keyframes halo-breathe{
+  0%,100%{transform:scale(.97);opacity:.65}
+  50%{transform:scale(1.045);opacity:.88}
+}
+@keyframes ring-release{
+  0%{opacity:0;transform:rotate(-18deg) scale(.48,.42)}
+  40%{opacity:.95}
+  100%{opacity:.44;transform:rotate(0) scale(.86)}
+}
+@keyframes flare-burst{
+  0%{opacity:0;transform:translate(-50%,-50%) scale(.15)}
+  33%{opacity:.94;transform:translate(-50%,-50%) scale(1.35)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(2.2)}
+}
+@keyframes shard-release{
+  0%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.26)}
+  21%{opacity:.98}
+  100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--spin)) scale(1.12)}
+}
+@keyframes ray-release{
+  0%{opacity:0;scale:.1 1}
+  25%{opacity:.9}
+  100%{opacity:0;scale:1.2 1}
+}
+@keyframes spark-drift{
+  0%{opacity:.18;transform:translate(0,8px) scale(.7)}
+  55%{opacity:.9}
+  100%{opacity:.3;transform:translate(10px,-14px) scale(1.15)}
+}
+.e-burst-btn{position:relative;overflow:hidden}
+.e-burst-btn:after{content:"";position:absolute;inset:0;transform:translateX(-150%) skewX(-25deg);width:46%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.33),transparent);transition:transform .8s}
+.e-burst-btn:hover:after{transform:translateX(350%) skewX(-25deg)}
+/* Rest of ELOAH: discreet entrance effects as the visitor scrolls. */
+.motion-ready .reveal-on-scroll{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
+.motion-ready .reveal-on-scroll.in-view{opacity:1;transform:translateY(0)}
+@media(max-width:900px){
+  .hero{min-height:0;padding:55px 0 76px}
+  .hero .container.hero-stage{grid-template-columns:1fr;gap:2px;width:min(650px,calc(100% - 32px))}
+  .hero-stage .hero-inner{max-width:620px;text-align:center;margin:0 auto}
+  .hero-stage .hero-actions,.hero-stage .hero-points{justify-content:center}
+  .hero-stage .hero-copy{margin:0 auto 24px}
+  .hero-stage .hero-inner h1{font-size:clamp(42px,8vw,65px)}
+  .portal-stage{min-height:540px}
+  .portal-image{width:min(455px,100%)}
+}
+@media(max-width:600px){
+  .hero{padding:38px 0 68px}
+  .hero-stage .hero-inner h1{font-size:clamp(39px,10.5vw,55px)}
+  .hero-stage .eyebrow.pill{font-size:9px;letter-spacing:.09em}
+  .hero-stage .hero-copy{font-size:14px;line-height:1.75}
+  .hero-stage .hero-actions{gap:10px}
+  .hero-stage .hero-actions .button{width:100%;max-width:340px}
+  .hero-stage .hero-points{font-size:10px;margin-top:18px;gap:9px 14px}
+  .portal-stage{min-height:465px;margin-top:-4px}
+  .portal-image{width:min(370px,100%)}
+  .portal-shard{width:23px;height:48px}
+  .portal-shard{--tx:calc(var(--tx) * .72);--ty:calc(var(--ty) * .72)}
+  .portal-ray{width:180px}
+  .portal-flare{width:220px;height:220px}
+}
+@media(prefers-reduced-motion:reduce){
+  .portal-stage *, .portal-stage.is-opening *, .e-burst-btn:after{
+    animation:none!important;transition:none!important;
+  }
+  .portal-image{opacity:1!important;transform:none!important;filter:none!important}
+  .portal-shard,.portal-ray,.portal-flare{display:none!important}
+  .portal-halo{opacity:.65!important}
+  .portal-ring{opacity:.44!important}
+  .motion-ready .reveal-on-scroll{opacity:1!important;transform:none!important}
+  .e-burst-btn{display:none}
+}
+
 </style>
   <link rel="icon" type="image/svg+xml" href="assets/eloah-logo-violent-prune.svg">
+  <link rel="preload" as="image" href="assets/eloah-enfants-boite.svg">
 </head>
 <body>
 <header class="site-header">
@@ -178,14 +356,39 @@ body::selection{background:#9b3d73;color:#fff5fa}
       <path class="line" stroke-opacity=".25" d="M1040 706 1283 595 1511 699M1283 595v33M1283 628l228 106"/>
       <path class="line" stroke-opacity=".18" d="M310 0 592 138 916 -15M704 830 1042 661 1303 793"/>
     </svg>
-    <div class="container">
+    <div class="container hero-stage">
       <div class="hero-inner">
-        <img class="hero-logo" src="assets/eloah-logo-violent-prune.svg" width="320" height="304" alt="Logo ELOAH champagne et prune" decoding="async" fetchpriority="high">
-        <div class="eyebrow pill">ELOAH · Votre espace de création et de pilotage</div>
-        <h1>Vos idées. Vos projets.<br><span class="gold">Tout votre univers,<br>au même endroit.</span></h1>
-        <p class="hero-copy">Projets, documents, tableaux, contenus, formations et organisation : un écosystème pensé pour relier vos activités et vous aider à avancer sans vous disperser.</p>
-        <div class="hero-actions"><a class="button button-gold" href="#contact">Demander un accès →</a><a class="button button-outline" href="#ecosysteme">Explorer ELOAH</a></div>
-        <div class="hero-points"><span>Un espace central</span><span>Plusieurs univers</span><span>Une organisation à votre image</span></div>
+        <div class="eyebrow pill">ELOAH · CRÉER · OSER · S'AFFRANCHIR</div>
+        <h1>On n'est pas faits pour <span class="gold">rester dans une boîte.</span></h1>
+        <p class="hero-copy">Les idées débordent. Les projets grandissent. On a besoin d'espace pour tout ce qu'on porte. ELOAH est là pour rassembler vos univers et leur donner de la place.</p>
+        <div class="hero-actions">
+          <button class="button button-gold e-burst-btn" type="button" id="e-burst-btn" aria-controls="e-portal">✦ Faire éclater la boîte</button>
+          <a class="button button-outline" href="#ecosysteme">Découvrir ELOAH →</a>
+        </div>
+        <div class="hero-points"><span>Créer sans se limiter</span><span>Relier ses projets</span><span>Avancer à sa manière</span></div>
+      </div>
+      <div class="portal-stage is-opening" id="e-portal">
+        <div class="portal-halo" aria-hidden="true"></div>
+        <div class="portal-ring" aria-hidden="true"></div>
+        <div class="portal-image">
+          <img src="assets/eloah-enfants-boite.svg" width="420" height="525" decoding="async" fetchpriority="high" alt="Cinq enfants jaillissent dans une explosion de lumière de la boîte ELOAH brisée en éclats prune et or.">
+        </div>
+        <span class="portal-flare" aria-hidden="true"></span>
+        <span class="portal-ray ray-one" aria-hidden="true"></span>
+        <span class="portal-ray ray-two" aria-hidden="true"></span>
+        <span class="portal-ray ray-three" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:-200px;--ty:-155px;--spin:-96deg;--lag:.03s" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:190px;--ty:-145px;--spin:83deg;--lag:.10s" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:-230px;--ty:5px;--spin:-135deg;--lag:.20s" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:222px;--ty:25px;--spin:107deg;--lag:.14s" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:-178px;--ty:182px;--spin:62deg;--lag:.19s" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:190px;--ty:155px;--spin:-69deg;--lag:.08s" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:-95px;--ty:-240px;--spin:115deg;--lag:.25s" aria-hidden="true"></span>
+        <span class="portal-shard" style="--tx:98px;--ty:-242px;--spin:-94deg;--lag:.16s" aria-hidden="true"></span>
+        <span class="portal-spark spark-one" aria-hidden="true"></span>
+        <span class="portal-spark spark-two" aria-hidden="true"></span>
+        <span class="portal-spark spark-three" aria-hidden="true"></span>
+        <span class="portal-spark spark-four" aria-hidden="true"></span>
       </div>
     </div>
     <a class="hero-scroll" href="#constat">Défiler</a>
@@ -322,5 +525,34 @@ body::selection{background:#9b3d73;color:#fff5fa}
   });
 })();
 </script>
+
+<script id="eloah-motion-script">
+(function(){
+  var stage=document.getElementById('e-portal');
+  var replay=document.getElementById('e-burst-btn');
+  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(stage && replay){
+    replay.addEventListener('click',function(){
+      if(reduce)return;
+      stage.classList.remove('is-opening');
+      void stage.offsetWidth;
+      stage.classList.add('is-opening');
+    });
+  }
+  if(reduce||!('IntersectionObserver' in window))return;
+  var targets=document.querySelectorAll('.section-heading,.feature,.offer,.step,.statement h2,.statement p,.dashboard');
+  targets.forEach(function(el){el.classList.add('reveal-on-scroll');});
+  document.documentElement.classList.add('motion-ready');
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(!entry.isIntersecting)return;
+      entry.target.classList.add('in-view');
+      observer.unobserve(entry.target);
+    });
+  },{rootMargin:'0px 0px -35px 0px',threshold:.09});
+  targets.forEach(function(el){observer.observe(el);});
+})();
+</script>
+
 </body>
 </html>
