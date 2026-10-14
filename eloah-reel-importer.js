@@ -87,7 +87,8 @@ function create(options){
    '<div class="ecs-import-top-actions"><button type="button" data-import-upload>⇧ Importer des fichiers</button><button type="button" data-import-dossier title="Voir les dossiers">⋯</button></div>'+
    '<div class="ecs-import-upload-pick"><label for="ecs-import-upload-folder">Dossier de destination</label><select id="ecs-import-upload-folder">'+
  lib.folders.map(f=>'<option value="'+esc(f.id)+'" '+(state.uploadDomain===f.id?'selected':'')+'>'+esc(f.name)+'</option>').join('')+'</select></div>'+
- '<p class="ecs-import-subline">Ta médiathèque ELOAH · '+lib.items.length+' visuels sélectionnés pour tes projets.</p>'+
+ '<p class="ecs-import-subline">Ta médiathèque ELOAH · '+lib.items.length+' visuels sélectionnés pour tes projets. '+
+ '<a href="eloah-reel-mes-images.html" target="_blank" rel="noopener noreferrer">Voir les 351 images dans une galerie indépendante ↗</a></p>'+
    '<div class="ecs-import-tabs" role="tablist" aria-label="Type de média">'+[['images','Images'],['videos','Vidéos'],['audio','Audio'],['folders','Dossiers']].map(([id,name])=>
    '<button type="button" role="tab" aria-selected="'+(state.tab===id)+'" class="'+(state.tab===id?'selected':'')+'" data-import-tab="'+id+'">'+name+'</button>').join('')+'</div>';
  }
