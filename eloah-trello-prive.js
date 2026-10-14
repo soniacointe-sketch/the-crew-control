@@ -166,7 +166,7 @@ function fillLists(){
 }
 function cardButton(b,c){
  const card=button("","card",()=>openCard(b,c));if(c.tag)card.append(node("span","card-label",c.tag));
- const title=node("div","card-title");title.append(node("span","circle-check","○"),node("span",null,c.title||"Sans titre"));card.append(title);
+ const title=node("div","card-title");if(c.complete)title.classList.add("completed");title.append(node("span","circle-check","○"),node("span",null,c.title||"Sans titre"));card.append(title);
  const meta=node("div","card-meta");
  if(c.due)meta.append(node("span","due","◷ "+fmtDate(c.due)));
  if(c.description)meta.append(node("span",null,"≡ Description"));
@@ -245,7 +245,7 @@ function boardView(){
  const dots=node("div","board-dots");dots.setAttribute("aria-hidden","true");
  for(let i=0;i<b.lanes.length;i++)dots.append(node("span","board-dot"+(i===0?" current":"")));
  shell.append(rail,dots);
- const touchStatus=node("div","readonly","🔒 Privé · lecture seule");
+ const touchStatus=node("div","readonly",state.readOnly?"🔒 Privé · lecture seule":"✓ Édition privée · sauvegarde Supabase");
  shell.append(touchStatus);
  function updatePosition(){
   const child=rail.children[0];
@@ -261,35 +261,129 @@ function boardView(){
  APP.replaceChildren(shell);
  requestAnimationFrame(updatePosition);
 }
-function openCard(b,c){
- const overlay=node("div","scrim");
- const previousFocus=document.activeElement;
- const onEscape=e=>{if(e.key==="Escape")close()};
- function close(){document.removeEventListener("keydown",onEscape);overlay.remove();previousFocus?.focus?.()}
+function sheetDialog(title){
+ const overlay=node("div","scrim");const oldFocus=document.activeElement;
+ const esc=e=>{if(e.key==="Escape")close()};
+ function close(){document.removeEventListener("keydown",esc);overlay.remove();oldFocus?.focus?.()}
  overlay.addEventListener("click",e=>{if(e.target===overlay)close()});
- document.addEventListener("keydown",onEscape);
- const sheet=node("section","sheet");sheet.setAttribute("role","dialog");sheet.setAttribute("aria-modal","true");sheet.setAttribute("aria-label",c.title||"Détails de la carte");
- const head=node("div","sheet-header");head.append(node("h2",null,c.title||"Sans titre"));
- head.append(button("×","close",close));sheet.append(head);
+ document.addEventListener("keydown",esc);
+ const sheet=node("section","sheet");sheet.setAttribute("role","dialog");sheet.setAttribute("aria-modal","true");
+ sheet.setAttribute("aria-label",title);const head=node("div","sheet-header");
+ head.append(node("h2",null,title),button("×","close",close));sheet.append(head);overlay.append(sheet);APP.append(overlay);
+ return {sheet,close};
+}
+function latestCard(boardId,cardId){
+ const b=state.boards.find(x=>x.id===boardId);
+ return {board:b,card:b?.cards.find(x=>x.id===cardId)};
+}
+function openCard(b,c){
+ const {sheet,close}=sheetDialog(c.title||"Détails de la carte");
  sheet.append(node("span","pill",b.name));
  const lane=b.lanes.find(l=>l.id===c.lane);if(lane)sheet.append(node("span","pill",lane.name));
  if(c.tag)sheet.append(node("span","pill",c.tag));
+ if(c.complete)sheet.append(node("span","pill","✓ Terminée"));
  if(c.due)sheet.append(node("div",null,"📅 "+fmtDate(c.due)));
  if(c.description){sheet.append(node("h3",null,"Description"));sheet.append(node("p",null,c.description))}
+ const error=node("p","edit-error");error.setAttribute("role","status");
+ const after=()=>{close();render();const current=latestCard(b.id,c.id);if(current.board&&current.card)openCard(current.board,current.card)};
  if(c.checks?.length){
- const done=c.checks.filter(x=>x.done).length;
- sheet.append(node("h3",null,"Checklist · "+done+"/"+c.checks.length));
- const progress=node("progress");progress.max=c.checks.length;progress.value=done;
- progress.setAttribute("aria-label","Avancement de la checklist");sheet.append(progress);
- for(const item of c.checks)sheet.append(node("div","check",(item.done?"☑":"□")+"  "+item.text));
-}
+  const done=c.checks.filter(x=>x.done).length;
+  sheet.append(node("h3",null,"Checklist · "+done+"/"+c.checks.length));
+  const progress=node("progress");progress.max=c.checks.length;progress.value=done;progress.setAttribute("aria-label","Avancement de la checklist");sheet.append(progress);
+  c.checks.forEach((item,index)=>{
+   if(state.readOnly)sheet.append(node("div","check",(item.done?"☑":"□")+"  "+item.text));
+   else sheet.append(button((item.done?"☑":"□")+"  "+item.text,"check check-action",()=>void mutate({type:"set_check",boardId:b.id,cardId:c.id,index,done:!item.done},after,error)));
+  });
+ }
+ if(!state.readOnly){
+  const addRow=node("div","inline-add");const input=node("input");input.placeholder="Nouvelle étape de checklist";input.maxLength=300;
+  addRow.append(input,button("Ajouter","small-action",()=>{const value=input.value.trim();if(!value){input.focus();return}void mutate({type:"add_check",boardId:b.id,cardId:c.id,text:value},after,error)}));
+  sheet.append(addRow);
+ }
  if(c.comments){sheet.append(node("h3",null,"Notes"));sheet.append(node("p",null,c.comments))}
- if(c.thread?.length){sheet.append(node("h3",null,"Commentaires"));for(const item of c.thread){const content=node("p",null,item.text||"");if(item.at)content.prepend(document.createTextNode(new Date(item.at).toLocaleString("fr-FR")+" — "));sheet.append(content)}}
+ if(c.thread?.length){
+  sheet.append(node("h3",null,"Commentaires"));
+  for(const item of c.thread){const content=node("p","comment-entry",item.text||"");if(item.at)content.prepend(document.createTextNode(new Date(item.at).toLocaleString("fr-FR")+" — "));sheet.append(content)}
+ }
+ if(!state.readOnly){
+  const row=node("div","inline-add");const input=node("input");input.placeholder="Ajouter un commentaire";input.maxLength=2000;
+  row.append(input,button("Publier","small-action",()=>{if(!input.value.trim()){input.focus();return}void mutate({type:"add_comment",boardId:b.id,cardId:c.id,text:input.value.trim()},after,error)}));
+  sheet.append(row);
+ }
  const links=(c.links||[]).map(cleanUrl).filter(Boolean);
- if(links.length){sheet.append(node("h3",null,"Documents"));const list=node("div","detail-links");for(const href of links){const link=node("a",null,"Ouvrir un document externe ↗");link.href=href;link.target="_blank";link.rel="noopener noreferrer";list.append(link)}sheet.append(list)}
- const status=node("p","notice","🔒 Lecture seule : cette page n’enregistre aucune modification des cartes.");
- sheet.append(status);overlay.append(sheet);APP.append(overlay);
+ if(links.length){sheet.append(node("h3",null,"Documents"));const list=node("div","detail-links");
+  for(const href of links){const link=node("a",null,"Ouvrir un document externe ↗");link.href=href;link.target="_blank";link.rel="noopener noreferrer";list.append(link)}sheet.append(list)}
+ if(!state.readOnly){
+  const actions=node("div","sheet-actions");
+  actions.append(button("✎ Modifier","primary-action",()=>{close();editCard(b,c)}));
+  actions.append(button("↔ Déplacer","small-action",()=>{close();moveCard(b,c)}));
+  actions.append(button(c.complete?"Remettre à faire":"✓ Terminer","small-action",()=>void mutate({type:"set_complete",boardId:b.id,cardId:c.id,complete:!c.complete},after,error)));
+  actions.append(button("Dupliquer","small-action",()=>void mutate({type:"duplicate_card",boardId:b.id,cardId:c.id},()=>{close();render()},error)));
+  actions.append(button(c.archived?"Restaurer":"Archiver","small-action",()=>{
+   if(!confirm(c.archived?"Restaurer cette carte ?":"Archiver cette carte ?"))return;
+   void mutate({type:"archive_card",boardId:b.id,cardId:c.id,archived:!c.archived},()=>{close();render()},error);
+  }));
+  sheet.append(actions);
+ }
+ sheet.append(error);
+ if(state.readOnly)sheet.append(node("p","notice","🔒 Consultation uniquement avec ce lien. Utilise ton lien de modification pour travailler sur les cartes."));
+ else sheet.append(node("p","notice","Les changements sont enregistrés directement dans ELOAH après confirmation du serveur."));
 }
+function moveCard(b,c){
+ const {sheet,close}=sheetDialog("Déplacer cette carte");
+ const label=node("label","editor-field", "Colonne de destination");
+ const choice=node("select");for(const lane of b.lanes){const o=node("option",null,lane.name);o.value=lane.id;choice.append(o)}choice.value=c.lane;label.append(choice);sheet.append(label);
+ const error=node("p","edit-error");error.setAttribute("role","status");
+ sheet.append(button("Déplacer et enregistrer","primary-action",()=>{
+  void mutate({type:"move_card",boardId:b.id,cardId:c.id,laneId:choice.value},()=>{close();render()},error);
+ }));
+ sheet.append(error);
+}
+function editCard(b,c,laneId){
+ if(state.readOnly)return;
+ if(!b?.lanes?.length){alert("Ajoute d'abord une liste à ce tableau.");return}
+ const creating=!c;const {sheet,close}=sheetDialog(creating?"Nouvelle carte":"Modifier la carte");
+ const form=node("form","edit-form");form.noValidate=true;
+ function field(labelText,control){
+  const label=node("label","editor-field");label.append(node("span",null,labelText),control);form.append(label);return control;
+ }
+ const title=node("input");title.type="text";title.maxLength=160;title.required=true;title.placeholder="Titre de la carte";title.value=c?.title||"";field("Titre",title);
+ const description=node("textarea");description.maxLength=8000;description.rows=5;description.value=c?.description||"";field("Description",description);
+ const tag=node("select");const tags=[...new Set(["","Urgent","Important","Création","Publication","Administratif","Suivi",...(c?.tag?[c.tag]:[])])];
+ for(const t of tags){const o=node("option",null,t||"Sans étiquette");o.value=t;tag.append(o)}tag.value=c?.tag||"";field("Étiquette",tag);
+ const due=node("input");due.type="date";due.value=c?.due||"";field("Échéance",due);
+ let cover,notes,links;
+ if(!creating){
+  cover=node("input");cover.type="url";cover.placeholder="https://…";cover.value=c?.cover||"";field("URL de couverture",cover);
+  notes=node("textarea");notes.rows=3;notes.maxLength=8000;notes.value=c?.comments||"";field("Notes",notes);
+  links=node("textarea");links.rows=3;links.placeholder="Un lien HTTPS par ligne";
+  const shown=(c.links||[]).filter(cleanUrl);links.value=shown.join("\n");field("Documents liés",links);
+ }
+ const error=node("p","edit-error");error.setAttribute("role","status");
+ const submit=button(creating?"Créer la carte":"Enregistrer les modifications","primary-action");
+ submit.type="submit";form.append(submit,error);
+ form.addEventListener("submit",async event=>{
+  event.preventDefault();if(state.pending)return;
+  const name=title.value.trim();if(!name){error.textContent="Ajoute un titre à la carte.";title.focus();return}
+  const values={title:name,description:description.value,tag:tag.value,due:due.value};
+  let op;
+  if(creating){
+   op={type:"create_card",boardId:b.id,laneId:laneId||b.lanes[0].id,...values};
+  }else{
+   const originalExternal=(c.links||[]).filter(cleanUrl).join("\n");
+   const retained=(c.links||[]).filter(v=>typeof v==="string"&&v.startsWith("https://")&&!cleanUrl(v));
+   const external=links.value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean);
+   const patch={...values,cover:cover.value,comments:notes.value};
+   if(external.join("\n")!==originalExternal)patch.links=[...retained,...external];
+   op={type:"update_card",boardId:b.id,cardId:c.id,patch};
+  }
+  submit.disabled=true;
+  const ok=await mutate(op,()=>{close();render()},error);
+  if(!ok)submit.disabled=false;
+ });
+ sheet.append(form);requestAnimationFrame(()=>title.focus());
+}
+
 function sectionScreen(title){
  const shell=node("div","screen");shell.append(header(title,false));const inner=node("section","section-page");shell.append(inner);APP.replaceChildren(shell,tabs(state.screen));return inner;
 }
