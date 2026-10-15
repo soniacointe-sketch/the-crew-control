@@ -467,6 +467,18 @@ body.stage2040-active{overflow:hidden!important}
 .dress26buttons button{flex:1 1 90px}.dress26buttons button[data-result="pass"]{border-color:#729b87}.dress26buttons button[data-result="fail"]{border-color:#b77a86}
 .dress26actions button{flex:1 1 190px}.dress26 .dress26note{color:#c9b6cc!important}
 @media(max-width:750px){.dress26body{padding:10px}.dress26buttons button{flex:1 1 43%;min-height:44px}.dress26 summary span:last-child{white-space:normal;text-align:right}}
+
+/* ELOAH MUSIC 2040 LIVE AUDIO STATUS V28 */
+.audio28{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.audio28-indicator{min-width:0;display:grid;grid-template-columns:10px minmax(0,1fr);column-gap:7px;row-gap:3px;align-items:center;background:#251830;border:1px solid #705178;border-radius:9px;padding:10px}
+.audio28-led{height:8px;width:8px;border-radius:50%;background:#958497;grid-row:span 2}
+.audio28-indicator strong{font-size:11px;color:#f8e5f6}
+.audio28-indicator small{font-size:11px;color:#cbb4cc;overflow-wrap:anywhere}
+.audio28-indicator[data-status="playing"] .audio28-led,.audio28-indicator[data-status="ready"] .audio28-led,.audio28-indicator[data-status="online"] .audio28-led{background:#83b59b}
+.audio28-indicator[data-status="loading"] .audio28-led{background:#e5bf7e}
+.audio28-indicator[data-status="error"] .audio28-led,.audio28-indicator[data-status="offline"] .audio28-led{background:#e78c9b}
+.audio28-hint{margin:0!important;font-size:11px!important;color:#cbb4cc!important;line-height:1.45!important}
+@media(max-width:500px){.audio28{grid-template-columns:repeat(2,minmax(0,1fr))}.audio28-indicator:last-child{grid-column:span 2}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <style id="eloah-music-visuals-v1">
 .music-artwork{display:block;width:100%;height:100%;border-radius:inherit}
@@ -749,6 +761,12 @@ body{background:#0c0a0f!important}
 <section class="show22" id="show22panel" aria-label="Mode opérateur et sécurité audio">
  <div class="show22-top"><div><span class="show22-label">ELOAH 2040 · OPÉRATEUR LIVE</span><strong>Contrôles de sécurité</strong></div><button type="button" id="show22toggle" aria-pressed="false">◉ Activer vue opérateur</button></div>
  <div class="show22-audit" id="show22audit" aria-live="polite">Contrôle de la setlist et des platines…</div>
+<div class="audio28" id="audio28" aria-label="État technique du son en temps réel">
+ <div class="audio28-indicator" data-audio28="a"><span class="audio28-led" aria-hidden="true"></span><strong>Platine A</strong><small id="audio28a">Aucun titre</small></div>
+ <div class="audio28-indicator" data-audio28="b"><span class="audio28-led" aria-hidden="true"></span><strong>Platine B</strong><small id="audio28b">Aucun titre</small></div>
+ <div class="audio28-indicator" data-audio28="net"><span class="audio28-led" aria-hidden="true"></span><strong>Réseau</strong><small id="audio28net">Non vérifié</small></div>
+</div>
+<p class="audio28-hint">Indicateurs du navigateur uniquement : une piste « prête » ne prouve pas que le son arrive sur les enceintes.</p>
  <div class="show22-actions">
   <button type="button" id="show22pause">⏸ Pause musique A + B</button>
   <button type="button" id="show22resume" disabled>▶ Reprendre A</button>
@@ -1288,6 +1306,33 @@ if(typeof djAudio.setSinkId==='function'&&navigator.mediaDevices?.selectAudioOut
 let stage2040Native=false,stage2040PreviousFocus=null,stage2040Index='';
 const stage2040Panel=$('dj2040stage');
 
+/* ELOAH MUSIC 2040 LIVE AUDIO STATUS V28 */
+function audio28Status(el,hasTrack){
+ if(!hasTrack||!el.src)return {key:'empty',label:'Aucun titre'};
+ if(el.error)return {key:'error',label:'Erreur de lecture'};
+ if(el.networkState===3)return {key:'error',label:'Source introuvable'};
+ if(el.readyState===0)return {key:'loading',label:'Chargement non confirmé'};
+ if(el.paused)return {key:'ready',label:'Prêt / en pause'};
+ return {key:'playing',label:'Lecture en cours'};
+}
+function audio28Refresh(){
+ if(stage2040Panel.hidden)return;
+ const a=audio28Status(audio,!!tracks[current]),b=audio28Status(djAudio,!!djTrackId&&tracks.some(t=>t.id===djTrackId));
+ const network=navigator.onLine===false?{key:'offline',label:'Hors ligne'}:{key:'online',label:'En ligne (débit non testé)'};
+ for(const [id,result] of [['a',a],['b',b],['net',network]]){
+  const box=document.querySelector('[data-audio28="'+id+'"]');
+  if(box)box.dataset.status=result.key;
+  const value=$('audio28'+id);if(value)value.textContent=result.label;
+ }
+}
+window.addEventListener('online',audio28Refresh);
+window.addEventListener('offline',audio28Refresh);
+audio.addEventListener('waiting',audio28Refresh);
+audio.addEventListener('canplay',audio28Refresh);
+djAudio.addEventListener('waiting',audio28Refresh);
+djAudio.addEventListener('canplay',audio28Refresh);
+
+
 /* ELOAH MUSIC 2040 DRESS REHEARSAL V26 */
 const dress26Cases=[
  {id:'setup',title:'01 · Setlist et diagnostic',desc:'Vérifier la playlist sélectionnée et les titres disponibles. Aucun son lancé.',action:'Analyser la setlist'},
@@ -1551,6 +1596,7 @@ function show22SetOperator(active){
 }
 function show22Sync(){
  if(stage2040Panel.hidden)return;
+ audio28Refresh();
  const cfg=show22StorageConfig();if(show22Scope!==cfg.scope)show22Load();
  const ids=stageSetlistAvailableIds(),currentTrack=tracks[current];
  const ready=ids.length>0, hasA=!!currentTrack&&!!audio.src,hasB=!!tracks.find(t=>t.id===djTrackId)&&!!djAudio.src;
@@ -2298,6 +2344,11 @@ djAudio.addEventListener('pause',stage2040Sync);
 /* ELOAH MUSIC 2040 V27 MEDIA ERRORS */
 function dj27MediaFailure(which,element){
  const err=element.error;
+ if(which==='A')preflight23Flags.a=false;
+ if(which==='B')preflight23Flags.b=false;
+ preflight23Flags.fade=false;
+ document.querySelectorAll('[data-preflight-confirm]').forEach(input=>{input.checked=!!preflight23Flags[input.dataset.preflightConfirm]});
+ audio28Refresh();
  const description=err?.code===1?'Lecture interrompue':err?.code===2?'Erreur réseau':err?.code===3?'Fichier audio illisible':err?.code===4?'Format ou source non pris en charge':'Échec du chargement';
  const message='Platine '+which+' : '+description+'. Vérifie la source et la sortie audio avant de reprendre.';
  djMessage(message);
