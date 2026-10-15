@@ -1,0 +1,1167 @@
+{
+  "format": "ELOAH-BIBLE-ALPHA/2-demo",
+  "reference": "Jean 14,6 · démonstration",
+  "source": {
+    "greek": "Ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή.",
+    "french": "Jésus lui dit: Je suis le chemin, la vérité, et la vie. Nul ne vient au Père que par moi.",
+    "greekComplete": false,
+    "warning": "Extrait grec limité à la première proposition de Jean 14,6, non au verset intégral."
+  },
+  "audit": {
+    "passed": 24,
+    "total": 24,
+    "tests": [
+      {
+        "name": "24 lettres grecques",
+        "pass": true
+      },
+      {
+        "name": "12 paires",
+        "pass": true
+      },
+      {
+        "name": "Chaque paire = 25 en rangs",
+        "pass": true
+      },
+      {
+        "name": "Les trois classes = 9,8,7",
+        "pass": true
+      },
+      {
+        "name": "7 voyelles pour sept degrés",
+        "pass": true
+      },
+      {
+        "name": "888 exact sur Jésus",
+        "pass": true
+      },
+      {
+        "name": "64 exact sur Vérité",
+        "pass": true
+      },
+      {
+        "name": "801 exact sur colombe",
+        "pass": true
+      },
+      {
+        "name": "Mot-clé Vérité réellement présent dans Jean 14,6",
+        "pass": true
+      },
+      {
+        "name": "12 couples comptés sur grec fourni",
+        "pass": true
+      },
+      {
+        "name": "Notes 24 paires réellement structurées",
+        "pass": true
+      },
+      {
+        "name": "Sept degrés réellement structurés",
+        "pass": true
+      },
+      {
+        "name": "Aucun 888 inventé si le mot Jésus absent",
+        "pass": true
+      },
+      {
+        "name": "Mode français ne simule pas des lettres grecques",
+        "pass": true
+      },
+      {
+        "name": "Pas de conversion alphabétique française A1Z26",
+        "pass": true
+      },
+      {
+        "name": "Mode structure 12 paires",
+        "pass": true
+      },
+      {
+        "name": "9|8|7 sert de grille rythmique réelle",
+        "pass": true
+      },
+      {
+        "name": "9|8|7 audible sans percussions",
+        "pass": true
+      },
+      {
+        "name": "8|8|8 audible sans percussions",
+        "pass": true
+      },
+      {
+        "name": "4|4|10|12 audible sans percussions",
+        "pass": true
+      },
+      {
+        "name": "Trois cellules harmoniques distinctes",
+        "pass": true
+      },
+      {
+        "name": "Partition reproductible",
+        "pass": true
+      },
+      {
+        "name": "Source grecque différente donne musique différente",
+        "pass": true
+      },
+      {
+        "name": "Pas de données externes requises pour une partition locale",
+        "pass": true
+      }
+    ]
+  },
+  "score": {
+    "version": "BIBLE-ALPHA/2.0.0",
+    "config": {
+      "input": "ΑΛΦΑ",
+      "sourceMode": "greek",
+      "mode": "mystic",
+      "scale": "dorian",
+      "root": 48,
+      "bpm": 76,
+      "bars": 2,
+      "swing": 0.09,
+      "variation": 0.42,
+      "drums": true,
+      "pad": true,
+      "volume": 0.45
+    },
+    "source": {
+      "kind": "bible-alpha",
+      "input": "Jean 14,6 · démonstration",
+      "normalized": "Jean 14,6 · démonstration",
+      "number": 1,
+      "isopsephy": null,
+      "tokens": []
+    },
+    "seed": 878857330,
+    "notes": [
+      {
+        "type": "lead",
+        "beat": 0.03333333333333333,
+        "step": 0,
+        "midi": 38,
+        "velocity": 0.43,
+        "duration": 0.43,
+        "wave": "sine",
+        "tag": "classe-9",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 0.0464516129032258,
+        "step": 0,
+        "midi": 64,
+        "velocity": 0.69,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Diaphragme",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 0.09333333333333332,
+        "step": 0,
+        "midi": 55,
+        "velocity": 0.33,
+        "duration": 0.45,
+        "wave": "sine",
+        "tag": "emission-4",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 0.19999999999999998,
+        "step": 0,
+        "midi": 62,
+        "velocity": 0.29,
+        "duration": 0.6,
+        "wave": "sine",
+        "tag": "ogdoade-1",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 0.30451612903225805,
+        "step": 1,
+        "midi": 62,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Épaules et mains",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 0.34285714285714286,
+        "step": 1,
+        "midi": 48,
+        "velocity": 0.19,
+        "duration": 0.55,
+        "wave": "sine",
+        "tag": "voyelle-Α",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 0.5625806451612904,
+        "step": 2,
+        "midi": 48,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Tête",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 0.8206451612903226,
+        "step": 3,
+        "midi": 64,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Diaphragme",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 1.0787096774193548,
+        "step": 4,
+        "midi": 68,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Genoux",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 1.16,
+        "step": 4,
+        "midi": 69,
+        "velocity": 0.33,
+        "duration": 0.45,
+        "wave": "sine",
+        "tag": "emission-4",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 1.336774193548387,
+        "step": 5,
+        "midi": 71,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Pieds",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 1.4857142857142858,
+        "step": 5,
+        "midi": 50,
+        "velocity": 0.19,
+        "duration": 0.55,
+        "wave": "sine",
+        "tag": "voyelle-Ε",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 1.5948387096774193,
+        "step": 6,
+        "midi": 68,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Genoux",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 1.8529032258064515,
+        "step": 7,
+        "midi": 66,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Ventre",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 2.1109677419354838,
+        "step": 8,
+        "midi": 57,
+        "velocity": 0.69,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Jambes",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 2.2266666666666666,
+        "step": 8,
+        "midi": 57,
+        "velocity": 0.33,
+        "duration": 0.45,
+        "wave": "sine",
+        "tag": "emission-10",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 2.3690322580645162,
+        "step": 9,
+        "midi": 63,
+        "velocity": 0.69,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Poitrine",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 2.6270967741935483,
+        "step": 10,
+        "midi": 57,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Jambes",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 2.6285714285714286,
+        "step": 10,
+        "midi": 51,
+        "velocity": 0.19,
+        "duration": 0.55,
+        "wave": "sine",
+        "tag": "voyelle-Η",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 2.8666666666666667,
+        "step": 11,
+        "midi": 63,
+        "velocity": 0.29,
+        "duration": 0.6,
+        "wave": "sine",
+        "tag": "ogdoade-2",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 2.8851612903225807,
+        "step": 11,
+        "midi": 54,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Ventre",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 3.033333333333333,
+        "step": 12,
+        "midi": 36,
+        "velocity": 0.43,
+        "duration": 0.43,
+        "wave": "sine",
+        "tag": "classe-8",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 3.1432258064516128,
+        "step": 12,
+        "midi": 69,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Jambes",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 3.4012903225806452,
+        "step": 13,
+        "midi": 60,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Tête",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 3.6593548387096773,
+        "step": 14,
+        "midi": 68,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Genoux",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 3.7714285714285714,
+        "step": 15,
+        "midi": 53,
+        "velocity": 0.19,
+        "duration": 0.55,
+        "wave": "sine",
+        "tag": "voyelle-Ι",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 3.9174193548387097,
+        "step": 15,
+        "midi": 66,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Ventre",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 4.175483870967742,
+        "step": 16,
+        "midi": 60,
+        "velocity": 0.69,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Tête",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 4.433548387096774,
+        "step": 17,
+        "midi": 70,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Chevilles",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 4.691612903225806,
+        "step": 18,
+        "midi": 66,
+        "velocity": 0.69,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Ventre",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 4.8933333333333335,
+        "step": 19,
+        "midi": 62,
+        "velocity": 0.33,
+        "duration": 0.45,
+        "wave": "sine",
+        "tag": "emission-12",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 4.914285714285714,
+        "step": 19,
+        "midi": 55,
+        "velocity": 0.19,
+        "duration": 0.55,
+        "wave": "sine",
+        "tag": "voyelle-Ο",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 4.949677419354838,
+        "step": 19,
+        "midi": 67,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Cuisses",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.006,
+        "step": 20,
+        "midi": 62,
+        "velocity": 0.72,
+        "duration": 0.3,
+        "wave": "sine",
+        "tag": "mot-ΖΩΗ-815",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.048,
+        "step": 20,
+        "midi": 70,
+        "velocity": 0.72,
+        "duration": 0.3,
+        "wave": "sine",
+        "tag": "mot-ΑΛΗΘΕΙΑ-64",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.207741935483871,
+        "step": 20,
+        "midi": 64,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Diaphragme",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.465806451612903,
+        "step": 21,
+        "midi": 68,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Genoux",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.533333333333334,
+        "step": 22,
+        "midi": 65,
+        "velocity": 0.29,
+        "duration": 0.6,
+        "wave": "sine",
+        "tag": "ogdoade-3",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.7,
+        "step": 22,
+        "midi": 46,
+        "velocity": 0.43,
+        "duration": 0.43,
+        "wave": "sine",
+        "tag": "classe-7",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.7059999999999995,
+        "step": 22,
+        "midi": 62,
+        "velocity": 0.72,
+        "duration": 0.3,
+        "wave": "sine",
+        "tag": "mot-ΖΩΗ-815",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.723870967741935,
+        "step": 22,
+        "midi": 60,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Tête",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.981333333333334,
+        "step": 23,
+        "midi": 67,
+        "velocity": 0.72,
+        "duration": 0.3,
+        "wave": "sine",
+        "tag": "mot-ΑΛΗΘΕΙΑ-64",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 5.981935483870967,
+        "step": 23,
+        "midi": 69,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Jambes",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 6.057142857142857,
+        "step": 24,
+        "midi": 58,
+        "velocity": 0.19,
+        "duration": 0.55,
+        "wave": "sine",
+        "tag": "voyelle-Ω",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 6.24,
+        "step": 24,
+        "midi": 60,
+        "velocity": 0.69,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Tête",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 6.406,
+        "step": 25,
+        "midi": 69,
+        "velocity": 0.72,
+        "duration": 0.3,
+        "wave": "sine",
+        "tag": "mot-ΖΩΗ-815",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 6.498064516129032,
+        "step": 25,
+        "midi": 68,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Genoux",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 6.756129032258064,
+        "step": 27,
+        "midi": 66,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Ventre",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 7.014193548387096,
+        "step": 28,
+        "midi": 65,
+        "velocity": 0.69,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Dos",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 7.272258064516129,
+        "step": 29,
+        "midi": 48,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Tête",
+        "verse": 6
+      },
+      {
+        "type": "lead",
+        "beat": 7.530322580645161,
+        "step": 30,
+        "midi": 66,
+        "velocity": 0.46,
+        "duration": 0.18133333333333335,
+        "wave": "sine",
+        "tag": "corps-Ventre",
+        "verse": 6
+      }
+    ],
+    "drumEvents": [
+      {
+        "type": "kick",
+        "beat": 0.03333333333333333,
+        "step": 0,
+        "velocity": 0.63,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 0.03333333333333333,
+        "step": 0,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 1.0333333333333334,
+        "step": 4,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 2.033333333333333,
+        "step": 8,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "kick",
+        "beat": 3.033333333333333,
+        "step": 12,
+        "velocity": 0.45,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 3.033333333333333,
+        "step": 12,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 4.033333333333333,
+        "step": 16,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "snare",
+        "beat": 4.033333333333333,
+        "step": 16,
+        "velocity": 0.3,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 5.033333333333333,
+        "step": 20,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "kick",
+        "beat": 5.7,
+        "step": 22,
+        "velocity": 0.45,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 5.7,
+        "step": 22,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 6.033333333333334,
+        "step": 24,
+        "velocity": 0.17,
+        "verse": 6
+      },
+      {
+        "type": "hat",
+        "beat": 7.033333333333334,
+        "step": 28,
+        "velocity": 0.17,
+        "verse": 6
+      }
+    ],
+    "chords": [
+      {
+        "type": "chord",
+        "beat": 0.04,
+        "duration": 2.5666666666666664,
+        "notes": [
+          36,
+          43,
+          48,
+          55
+        ],
+        "velocity": 0.15,
+        "verse": 6,
+        "tag": "ogdoade-1"
+      },
+      {
+        "type": "chord",
+        "beat": 2.7066666666666666,
+        "duration": 2.5666666666666664,
+        "notes": [
+          36,
+          43,
+          50,
+          57
+        ],
+        "velocity": 0.15,
+        "verse": 6,
+        "tag": "ogdoade-2"
+      },
+      {
+        "type": "chord",
+        "beat": 5.373333333333333,
+        "duration": 2.5666666666666664,
+        "notes": [
+          43,
+          43,
+          55,
+          55
+        ],
+        "velocity": 0.15,
+        "verse": 6,
+        "tag": "ogdoade-3"
+      }
+    ],
+    "chapters": [
+      {
+        "verse": 6,
+        "text": "Jésus lui dit: Je suis le chemin, la vérité, et la vie. Nul ne vient au Père que par moi.",
+        "greekText": "Ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή.",
+        "sourceMode": "greek-alpha",
+        "beats": 8,
+        "beatStart": 0,
+        "noteCount": 51,
+        "isopsephy": 2182,
+        "pairs": [
+          {
+            "pair": 1,
+            "body": "Tête",
+            "letterPair": "Α — Ω",
+            "rankSum": 25,
+            "occurrences": 6,
+            "complete": true
+          },
+          {
+            "pair": 2,
+            "body": "Cou",
+            "letterPair": "Β — Ψ",
+            "rankSum": 25,
+            "occurrences": 0,
+            "complete": false
+          },
+          {
+            "pair": 3,
+            "body": "Épaules et mains",
+            "letterPair": "Γ — Χ",
+            "rankSum": 25,
+            "occurrences": 1,
+            "complete": false
+          },
+          {
+            "pair": 4,
+            "body": "Poitrine",
+            "letterPair": "Δ — Φ",
+            "rankSum": 25,
+            "occurrences": 1,
+            "complete": false
+          },
+          {
+            "pair": 5,
+            "body": "Diaphragme",
+            "letterPair": "Ε — Υ",
+            "rankSum": 25,
+            "occurrences": 3,
+            "complete": false
+          },
+          {
+            "pair": 6,
+            "body": "Dos",
+            "letterPair": "Ζ — Τ",
+            "rankSum": 25,
+            "occurrences": 1,
+            "complete": false
+          },
+          {
+            "pair": 7,
+            "body": "Ventre",
+            "letterPair": "Η — Σ",
+            "rankSum": 25,
+            "occurrences": 6,
+            "complete": true
+          },
+          {
+            "pair": 8,
+            "body": "Cuisses",
+            "letterPair": "Θ — Ρ",
+            "rankSum": 25,
+            "occurrences": 1,
+            "complete": false
+          },
+          {
+            "pair": 9,
+            "body": "Genoux",
+            "letterPair": "Ι — Π",
+            "rankSum": 25,
+            "occurrences": 5,
+            "complete": false
+          },
+          {
+            "pair": 10,
+            "body": "Jambes",
+            "letterPair": "Κ — Ο",
+            "rankSum": 25,
+            "occurrences": 4,
+            "complete": true
+          },
+          {
+            "pair": 11,
+            "body": "Chevilles",
+            "letterPair": "Λ — Ξ",
+            "rankSum": 25,
+            "occurrences": 1,
+            "complete": false
+          },
+          {
+            "pair": 12,
+            "body": "Pieds",
+            "letterPair": "Μ — Ν",
+            "rankSum": 25,
+            "occurrences": 1,
+            "complete": false
+          }
+        ],
+        "vowels": [
+          {
+            "letter": "Α",
+            "sky": 1,
+            "count": 4,
+            "musicDegree": 0
+          },
+          {
+            "letter": "Ε",
+            "sky": 2,
+            "count": 3,
+            "musicDegree": 1
+          },
+          {
+            "letter": "Η",
+            "sky": 3,
+            "count": 5,
+            "musicDegree": 2
+          },
+          {
+            "letter": "Ι",
+            "sky": 4,
+            "count": 5,
+            "musicDegree": 3
+          },
+          {
+            "letter": "Ο",
+            "sky": 5,
+            "count": 2,
+            "musicDegree": 4
+          },
+          {
+            "letter": "Υ",
+            "sky": 6,
+            "count": 0,
+            "musicDegree": 5
+          },
+          {
+            "letter": "Ω",
+            "sky": 7,
+            "count": 2,
+            "musicDegree": 6
+          }
+        ],
+        "classes": [
+          {
+            "category": "Muettes",
+            "expected": 9,
+            "present": 5,
+            "letters": "ΠΚΤΒΓΔΦΧΘ"
+          },
+          {
+            "category": "Semi-voyelles",
+            "expected": 8,
+            "present": 4,
+            "letters": "ΛΜΝΡΣΖΞΨ"
+          },
+          {
+            "category": "Voyelles",
+            "expected": 7,
+            "present": 21,
+            "letters": "ΑΕΗΙΟΥΩ"
+          }
+        ],
+        "keyWords": [
+          {
+            "word": "ΑΛΗΘΕΙΑ",
+            "value": 64,
+            "rule": "Somme grecque des lettres"
+          },
+          {
+            "word": "ΖΩΗ",
+            "value": 815,
+            "rule": "Somme grecque des lettres"
+          }
+        ],
+        "notesPreview": [
+          {
+            "midi": 64,
+            "beat": 0.0464516129032258,
+            "tag": "corps-Diaphragme"
+          },
+          {
+            "midi": 62,
+            "beat": 0.30451612903225805,
+            "tag": "corps-Épaules et mains"
+          },
+          {
+            "midi": 48,
+            "beat": 0.5625806451612904,
+            "tag": "corps-Tête"
+          },
+          {
+            "midi": 64,
+            "beat": 0.8206451612903226,
+            "tag": "corps-Diaphragme"
+          },
+          {
+            "midi": 68,
+            "beat": 1.0787096774193548,
+            "tag": "corps-Genoux"
+          },
+          {
+            "midi": 71,
+            "beat": 1.336774193548387,
+            "tag": "corps-Pieds"
+          },
+          {
+            "midi": 68,
+            "beat": 1.5948387096774193,
+            "tag": "corps-Genoux"
+          },
+          {
+            "midi": 66,
+            "beat": 1.8529032258064515,
+            "tag": "corps-Ventre"
+          },
+          {
+            "midi": 57,
+            "beat": 2.1109677419354838,
+            "tag": "corps-Jambes"
+          },
+          {
+            "midi": 63,
+            "beat": 2.3690322580645162,
+            "tag": "corps-Poitrine"
+          }
+        ],
+        "sonicRules": [
+          {
+            "numbers": "24 = 12 × 2",
+            "operation": "12 paires du corps",
+            "audible": "12 positions chromatiques / registres opposés"
+          },
+          {
+            "numbers": "9 | 8 | 7",
+            "operation": "Trois classes des lettres",
+            "audible": "trois accents distincts même sans percussion"
+          },
+          {
+            "numbers": "8 | 8 | 8",
+            "operation": "Trois Ogdoades",
+            "audible": "trois appels de cloches et trois nappes d'accords"
+          },
+          {
+            "numbers": "4 | 4 | 10 | 12",
+            "operation": "Quatre émissions, total 30",
+            "audible": "quatre attaques qui découpent la phrase"
+          },
+          {
+            "numbers": "Α Ε Η Ι Ο Υ Ω",
+            "operation": "Sept cieux, sept voyelles",
+            "audible": "sept positions mélodiques documentées"
+          },
+          {
+            "numbers": "64 · 801 · 888",
+            "operation": "Valeurs isopséphiques connues",
+            "audible": "motif uniquement lorsque la graphie grecque correspondante apparaît"
+          }
+        ],
+        "explanation": "Lettres grecques → douze paires/parties du corps → 12 hauteurs, rangs opposés → registres, voyelles → sept degrés, chiffres 64/801/888 seulement si le mot grec est présent.",
+        "warning": "Valeurs isopséphiques uniquement sur graphies grecques effectivement disponibles ; composition musicale originale."
+      }
+    ],
+    "pattern": [],
+    "scaleNotes": [],
+    "beatSeconds": 0.7894736842105263,
+    "timelineLengthBeats": 8,
+    "durationSeconds": 6.315789473684211,
+    "stats": {
+      "bars": 2,
+      "steps": 32,
+      "notes": 51,
+      "drums": 13,
+      "chords": 3,
+      "bpm": 76,
+      "loopSeconds": 6.3
+    },
+    "scripture": {
+      "reference": "Jean 14,6 · démonstration",
+      "book": "John",
+      "chapter": 14,
+      "credit": "Louis Segond 1910, domaine public",
+      "provider": "Extrait local",
+      "greekSource": "Extrait grec partiel de Jean 14,6, contrôlé sur la tradition grecque",
+      "verseCount": 1,
+      "greekVerses": 1,
+      "structureOnlyVerses": 0,
+      "originalGreekComplete": true,
+      "disclaimer": null
+    },
+    "structure": {
+      "greekLetters": 24,
+      "pairs": 12,
+      "pairRankSum": 25,
+      "vowels": 7,
+      "classes": [
+        9,
+        8,
+        7
+      ],
+      "ogdoades": [
+        8,
+        8,
+        8
+      ],
+      "thirty": [
+        4,
+        4,
+        10,
+        12
+      ],
+      "numerals": {
+        "truth": 64,
+        "dove": 801,
+        "alphaOmega": 801,
+        "jesus": 888
+      },
+      "source": "Irénée, Contre les hérésies I,14–15"
+    },
+    "caution": "Les 24 lettres, leurs rangs et l'isopséphie sont documentés historiquement. Les hauteurs, durées et timbres attribués aux lettres sont de la création musicale NUMERA, pas la musique originelle des Écritures."
+  }
+}
