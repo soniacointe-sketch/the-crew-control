@@ -5,7 +5,6 @@
 "use strict";
 var filename=decodeURIComponent(location.pathname.split("/").pop()||"");
 if(!/^parisis-[a-z0-9-]+\.html$/i.test(filename))return;
-var css=String.raw; // Scoped CSS is inserted below, no dependency on a framework.
 function el(tag,cls,text){var x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=text;return x}
 function add(parent,child){parent.appendChild(child);return child}
 function safeHref(name){return /^parisis-[a-z0-9-]+\.html$/i.test(name)?name:"parisis-publications.html"}
