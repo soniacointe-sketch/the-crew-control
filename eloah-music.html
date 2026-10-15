@@ -58,10 +58,26 @@ body{background:radial-gradient(ellipse at 72% -12%,#452050 0,transparent 48%),r
 button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid #f7cfeb;outline-offset:3px}
 @media(max-width:750px){.side{background:#170e21;gap:4px}.side .nav{flex-shrink:0}.header::before{background-position:center!important}.brand{font-size:18px}}
 
+
+/* ELOAH 2040 cockpit v2 */
+.music2040{margin:18px 0 8px;padding:20px;background:linear-gradient(115deg,#2b1536,#180d23 70%);border:1px solid #76456f;border-radius:16px;box-shadow:0 14px 30px #09021170}
+.music2040-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}.music2040 h2{margin:0;font-size:21px}.music2040-kicker{display:block;color:#e8cba5;font-size:10px;letter-spacing:.2em;font-weight:800;margin-bottom:7px}
+.music2040-pill{border:1px solid #845d81;color:#efcdeb;padding:7px 11px;border-radius:22px;font-size:11px;background:#351d3f}
+.music2040-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.music2040-actions button{background:#3a2345;color:#fff0f8;border:1px solid #795077;border-radius:10px;padding:11px 15px;font-weight:650}.music2040-actions button:hover{background:#65315e}.music2040-actions button:focus-visible{outline:2px solid #f5c2e7}
+.music2040-search{display:flex;align-items:center;gap:10px;background:#100a19;border:1px solid #855682;border-radius:12px;margin-top:15px;padding:5px 13px}.music2040-search input{width:100%;border:0!important;background:transparent!important;color:white;padding:10px 0;outline:none}.music2040-search input::placeholder{color:#bda6be}
+.music2040-help{font-size:12px;color:#c9b4c9;margin:12px 0 0}
+@media(max-width:600px){.music2040{padding:15px}.music2040-actions button{flex:1 1 43%}.music2040 h2{font-size:19px}}
+
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
-<div class="body"><div id="home"><div class="rowtitle"><h2>Mes ambiances</h2><span class="muted">Des espaces à personnaliser</span></div><div class="cards" id="moods"></div><div class="rowtitle"><h2>Mes titres</h2><span class="muted" id="count"></span></div><div id="homeTracks"></div></div>
+<div class="body"><!-- ELOAH 2040 COCKPIT V2 -->
+<section class="music2040" aria-label="Cockpit ELOAH Music 2040">
+<div class="music2040-head"><div><span class="music2040-kicker">ELOAH 2040 · COMMANDE MUSICALE</span><h2>Ton cockpit sonore</h2></div><span class="music2040-pill">✦ Mode personnel</span></div>
+<label class="music2040-search" for="music2040query"><span aria-hidden="true">⌕</span><input id="music2040query" type="search" placeholder="Trouver un titre ou un artiste…" autocomplete="off" aria-label="Rechercher dans ma bibliothèque"></label>
+<div class="music2040-actions"><button type="button" data-music2040="library">♫ Ma bibliothèque</button><button type="button" data-music2040="favorites">♡ Mes favoris</button><button type="button" data-music2040="playlist">＋ Créer une playlist</button><button type="button" data-music2040="queue">☷ File d’attente</button><button type="button" data-music2040="cloud">☁ Mon cloud</button></div>
+<p class="music2040-help">Tes titres restent dans ta bibliothèque actuelle. La recherche utilise ton moteur existant, sans transmettre tes requêtes à un service d’IA.</p>
+</section><div id="home"><div class="rowtitle"><h2>Mes ambiances</h2><span class="muted">Des espaces à personnaliser</span></div><div class="cards" id="moods"></div><div class="rowtitle"><h2>Mes titres</h2><span class="muted" id="count"></span></div><div id="homeTracks"></div></div>
 <div id="search" class="hidden"><div class="rowtitle"><h2>Rechercher</h2></div><input id="query" class="search" placeholder="Rechercher un titre, artiste ou playlist…"><div id="results"></div></div>
 <div id="library" class="hidden"><div class="rowtitle"><h2>Ma bibliothèque</h2><button class="action" id="newPlaylist">+ Nouvelle playlist</button></div><div class="cards" id="playlistCards"></div><h2>Mes morceaux</h2><div class="music-filters"><button data-sort="all" class="action secondary">Tous</button><button data-sort="artist" class="action secondary">Artistes</button><button data-sort="album" class="action secondary">Albums</button><button data-sort="genre" class="action secondary">Genres</button></div><div id="libraryTracks"></div></div>
 <div id="favorites" class="hidden"><h2>Mes favoris ♡</h2><div id="favoriteTracks"></div></div>
@@ -199,5 +215,31 @@ $('cloudBtn').onclick=async()=>{
 };
 if(cloud){cloud.auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN')setTimeout(()=>cloudSession(),0)});cloudSession()}
 render();restoreAudio();updateResume();
+})();
+</script><script>
+/* ELOAH 2040 cockpit v2 · safe navigation adapter */
+(function(){
+'use strict';
+const q=document.getElementById('music2040query');
+const nav=view=>document.querySelector('.side [data-view="'+view+'"]')?.click();
+document.querySelectorAll('[data-music2040]').forEach(b=>b.addEventListener('click',()=>{
+const mode=b.dataset.music2040;
+if(mode==='library'||mode==='favorites')nav(mode);
+if(mode==='playlist')document.getElementById('newSide')?.click();
+if(mode==='queue')document.getElementById('queueBtn')?.click();
+if(mode==='cloud')document.getElementById('cloudBtn')?.click();
+}));
+q?.addEventListener('input',()=>{
+nav('search');
+const target=document.getElementById('query');
+if(!target)return;
+target.value=q.value;
+target.dispatchEvent(new Event('input',{bubbles:true}));
+});
+document.addEventListener('keydown',event=>{
+if((event.ctrlKey||event.metaKey)&&event.key.toLowerCase()==='k'){
+event.preventDefault();q?.focus();q?.select();
+}
+});
 })();
 </script></body></html>
