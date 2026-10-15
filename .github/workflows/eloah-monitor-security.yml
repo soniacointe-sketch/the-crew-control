@@ -48,7 +48,7 @@ jobs:
           # Premium 3.0 retains working metrics and session gates; no fictional stats.
           assert 'class="premium-hero"' in html
           assert 'class="hero-console"' in html
-          assert 'eloah-monitor-premium.css?v=3.0.0' in html
+          assert 'eloah-monitor-premium.css?v=3.0.1' in html
           assert 'Aperçu dynamique' in html
           for keep in ['metric-universes','metric-verified','metric-focus','metric-tools','health-caption']:
               assert html.count(f'id="{keep}"')==1, f"Metric lost or duplicated: {keep}"
