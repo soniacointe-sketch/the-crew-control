@@ -1,0 +1,85 @@
+name: ELOAH Monitor vitrine · qualité visuelle et liens
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'eloah-monitor-vitrine.html'
+      - 'eloah-monitor-vitrine.css'
+      - '.github/workflows/eloah-monitor-vitrine-quality.yml'
+  pull_request:
+    paths:
+      - 'eloah-monitor-vitrine.html'
+      - 'eloah-monitor-vitrine.css'
+      - '.github/workflows/eloah-monitor-vitrine-quality.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validate-vitrine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Validate links, disclosure, responsive CSS and HTML structure
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          from urllib.parse import urlsplit, unquote
+          import re
+
+          class Audit(HTMLParser):
+              def __init__(self):
+                  super().__init__(convert_charrefs=True)
+                  self.ids=[]
+                  self.links=[]
+                  self.errors=[]
+                  self.script=0
+                  self.csp=False
+                  self.sections=set()
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if 'id' in a:self.ids.append(a['id'])
+                  if 'href' in a:self.links.append(a['href'])
+                  if tag=='script':self.script+=1
+                  if tag=='meta' and a.get('http-equiv','').lower()=='content-security-policy':
+                      self.csp=True
+                  if tag=='section' and 'id' in a:self.sections.add(a['id'])
+
+          html=Path('eloah-monitor-vitrine.html').read_text(encoding='utf-8')
+          css=Path('eloah-monitor-vitrine.css').read_text(encoding='utf-8')
+          page=Audit()
+          page.feed(html)
+          assert len(page.ids)==len(set(page.ids)), 'Duplicate HTML ids'
+          assert page.script==0, 'Static vitrine must not load scripts'
+          assert page.csp, 'No content security policy'
+          assert 'script-src \'none\'' in html, 'Scripts must stay off on public showcase'
+          assert 'chiffres et graphiques fictifs' in html.lower(), 'Demo metrics must be disclosed'
+          assert 'aucun compte client affiché' in html.lower(), 'Demo should not imply client access'
+          required=['accueil','apercu','fonctionnalites','vue-globale','indicateurs','controle','multi-univers','tarifs','ressources','apropos']
+          # 'accueil' is top-of-page hero, no need to expose it as an ID.
+          for key in required[1:]:
+              assert key in page.ids, f'Missing section/anchor: {key}'
+          for href in page.links:
+              if href.startswith('#'):
+                  assert href[1:] in page.ids, f'Unresolved anchor {href}'
+              elif href.startswith('mailto:'):
+                  assert '@' in href, 'Email destination invalid'
+              elif href.startswith(('https://','http://')):
+                  continue
+              else:
+                  path=unquote(urlsplit(href).path)
+                  assert Path(path).is_file(), f'Missing internal file: {path}'
+          assert css.count('{')==css.count('}'), 'CSS brace mismatch'
+          for width in ['1190','850','620','360']:
+              assert f'@media(max-width:{width}px)' in css, f'No {width}px breakpoint'
+          for selector in ['.hero-inner','.screen-kpis','.screen-analysis','.donut-chart','.feature-card','.mobile-nav']:
+              assert selector in css, f'Missing visual system: {selector}'
+          assert 'Se connecter' in html and 'eloah-espace-prive.html' in html
+          assert 'Demander une démo' in html and '#tarifs' in html
+          print('Vitrine HTML, CSS, internal links, responsive breakpoints, and transparency checks passed.')
+          PY
