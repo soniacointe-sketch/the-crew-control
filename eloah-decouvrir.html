@@ -1,728 +1,183 @@
 <!doctype html>
 <html lang="fr">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#160912">
-  <meta name="description" content="Découvrez ELOAH, l'espace qui réunit vos projets, documents, idées, créations et organisation. Demandez une présentation adaptée à votre activité.">
-  <meta property="og:title" content="ELOAH — Tout votre univers, au même endroit">
-  <meta property="og:description" content="Projets, création, documents, organisation : découvrez l'écosystème ELOAH.">
-  <meta property="og:type" content="website">
-  <title>ELOAH — Tout votre univers, au même endroit</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-  :root{color-scheme:dark;--bg:#211811;--bg-deep:#130e0d;--navy:#2b201a;--card:#3b2c21;--gold:#b48a54;--gold-strong:#f0d5a7;--line:rgba(229,206,172,.17);--text:#fff7e9;--soft:#e8d7c2;--muted:#c1a992;--serif:"DM Serif Display",Georgia,"Times New Roman",serif;--sans:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
-  *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--text);font:15px/1.7 var(--sans);-webkit-font-smoothing:antialiased;overflow-x:hidden}body::selection{background:var(--gold);color:#261c17}
-  a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}a,button,summary{ -webkit-tap-highlight-color:transparent }a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:2px solid var(--gold-strong);outline-offset:4px}
-  .container{width:min(1080px,calc(100% - 44px));margin-inline:auto}.site-header{position:sticky;z-index:50;top:0;background:rgba(31,21,16,.84);border-bottom:1px solid rgba(244,228,206,.12);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
-  .nav{display:flex;justify-content:space-between;align-items:center;gap:26px;height:78px}.wordmark{font:normal 30px/1 var(--serif);letter-spacing:-.045em;color:#fff;white-space:nowrap}.wordmark i{color:var(--gold);font-style:normal}.nav-links{display:flex;align-items:center;gap:29px}.nav-links>a:not(.button){font-size:12px;font-weight:650;color:rgba(255,255,255,.87);transition:color .2s}.nav-links>a:not(.button):hover{color:var(--gold)}
-  .button{display:inline-flex;align-items:center;justify-content:center;min-height:43px;padding:11px 20px;border:1px solid transparent;border-radius:8px;font-size:12px;font-weight:750;line-height:1.3;text-align:center;transition:transform .22s,box-shadow .22s,background .22s,border-color .22s;cursor:pointer}
-  .button:hover{transform:translateY(-2px)}.button-gold{background:linear-gradient(120deg,#ead0a5 0%,#f5dfb8 48%,#b48a54 100%);color:#211a13;box-shadow:0 5px 27px rgba(178,122,64,.21)}.button-gold:hover{box-shadow:0 10px 32px rgba(178,122,64,.29)}
-  .button-outline{background:rgba(255,255,255,.045);border-color:rgba(244,228,206,.33);color:#fff7e9}.button-outline:hover{border-color:rgba(226,185,129,.65);background:rgba(226,185,129,.10)}
-  .mobile-menu{display:none;position:relative}.mobile-menu summary{list-style:none;display:grid;place-items:center;border:1px solid var(--line);border-radius:8px;background:rgba(255,255,255,.04);width:42px;height:42px;cursor:pointer}.mobile-menu summary::-webkit-details-marker{display:none}.mobile-menu summary svg{width:21px;height:21px;stroke:var(--text)}.mobile-panel{position:absolute;right:0;top:calc(100% + 15px);min-width:250px;background:#34271d;border:1px solid var(--line);padding:14px;border-radius:12px;box-shadow:0 20px 45px #0009}.mobile-panel a{display:block;padding:10px 11px;font-size:14px}.mobile-panel .button{margin-top:8px}
-  .hero{position:relative;isolation:isolate;display:flex;justify-content:center;align-items:center;text-align:center;min-height:min(790px,calc(100svh - 78px));padding:88px 0 82px;overflow:hidden;background:radial-gradient(ellipse 56% 70% at 75% 55%,rgba(126,84,53,.31),transparent 75%),radial-gradient(ellipse 80% 100% at 8% 80%,rgba(98,65,43,.40),transparent 73%),linear-gradient(116deg,#18110e 4%,#241a15 45%,#3b2b21 100%)}
-  .hero::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:.32;background:repeating-linear-gradient(128deg,transparent 0 182px,rgba(238,210,176,.045) 184px 185px,transparent 187px 345px)}
-  .hero::after{content:"";pointer-events:none;position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(13,9,7,.07) 40%,rgba(17,11,9,.51) 100%)}
-  .hero-art{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:-1;opacity:.75}.hero-art .line{fill:none;stroke:#dfc7a5;stroke-width:1;vector-effect:non-scaling-stroke}.hero-art .accent{fill:none;stroke:#c7a276;stroke-width:1;vector-effect:non-scaling-stroke}.hero-art .face{fill:#654832;fill-opacity:.11}
-  .hero-inner{position:relative;width:min(835px,100%);margin:auto}.hero-mark{width:80px;height:93px;display:block;margin:0 auto 30px;overflow:visible;filter:drop-shadow(0 0 16px rgba(183,136,74,.16))}.hero-mark path{stroke:var(--gold);stroke-width:1.8;fill:none}.hero-mark text{fill:var(--gold-strong);font:normal 27px var(--serif);letter-spacing:3px}
-  .eyebrow{display:inline-flex;align-items:center;justify-content:center;max-width:100%;color:var(--gold-strong);font-size:10px;font-weight:800;letter-spacing:.19em;text-transform:uppercase}.eyebrow.pill{border:1px solid rgba(199,161,108,.59);padding:7px 14px;border-radius:999px;background:rgba(45,31,22,.47);margin-bottom:23px}.eyebrow.pill::before{content:"";width:5px;height:5px;margin-right:8px;border-radius:50%;background:var(--gold)}
-  h1,h2,h3,p{margin-top:0}.hero h1,.section-heading h2,.statement h2,.closing h2{font-family:var(--serif);font-weight:400;letter-spacing:-.025em}.hero h1{font-size:clamp(43px,5.4vw,74px);line-height:1.10;margin:0 auto 22px;max-width:890px;text-wrap:balance}.gold{color:var(--gold-strong)}.hero-copy{font-size:clamp(14px,1.2vw,16px);line-height:1.92;max-width:620px;color:rgba(255,255,255,.88);margin:0 auto 27px}.hero-actions{display:flex;gap:11px;justify-content:center;flex-wrap:wrap}.hero-actions .button{min-width:182px;min-height:46px}
-  .hero-points{display:flex;justify-content:center;align-items:center;gap:23px;margin-top:30px;flex-wrap:wrap;font-size:11px;color:#f5e8d7}.hero-points span{display:inline-flex;align-items:center;gap:8px}.hero-points span::before{content:"✓";color:var(--gold);font-weight:800}.hero-scroll{position:absolute;bottom:23px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.54);font-size:10px;text-transform:uppercase;letter-spacing:.19em}.hero-scroll::after{content:"";display:block;width:1px;height:18px;background:linear-gradient(var(--gold),transparent);margin:8px auto 0}
-  .section{position:relative;padding:116px 0}.section-dark{background:linear-gradient(145deg,#1c1512 0%,#231913 62%,#33251e 100%)}.section-flat{background:#f5e9dc}.section-line{border-top:1px solid rgba(218,190,156,.10)}
-  .section-heading{text-align:center;max-width:820px;margin:0 auto 43px}.section-label{display:block;color:var(--gold-strong);font-size:10px;text-transform:uppercase;letter-spacing:.18em;font-weight:800;margin-bottom:15px}.section-label::before{content:"—";margin-right:9px}.section-heading h2{font-size:clamp(35px,4.25vw,56px);line-height:1.12;text-wrap:balance;margin-bottom:18px}.section-heading p{color:#e8d5bd;font-size:15px;line-height:1.95;max-width:690px;margin:0 auto}.statement{text-align:center;background:radial-gradient(ellipse at center,rgba(171,123,70,.12),transparent 67%),#f5e9dc;padding:119px 0 127px}.statement h2{font-size:clamp(37px,4.25vw,56px);line-height:1.15;max-width:780px;margin:0 auto 23px}.statement p{max-width:605px;margin:0 auto;font-size:15px;line-height:2.0;color:#e6d8c6}.statement .signature{margin-top:27px;color:var(--gold-strong);font:normal 26px var(--serif)}
-  .features{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;margin-top:46px}.feature{min-height:202px;padding:29px 27px 25px;border:1px solid rgba(226,198,160,.21);border-radius:16px;background:linear-gradient(155deg,rgba(98,71,47,.39),rgba(57,39,27,.31));box-shadow:inset 0 1px rgba(255,255,255,.025);transition:border-color .2s,transform .2s}.feature:hover{border-color:rgba(199,161,108,.63);transform:translateY(-3px)}.feature-icon{display:block;margin-bottom:20px;width:24px;height:24px;color:var(--gold)}.feature-icon svg{width:24px;height:24px;stroke:currentColor;stroke-width:1.65;fill:none;stroke-linecap:round;stroke-linejoin:round}.feature h3{font:normal 23px/1.15 var(--serif);letter-spacing:-.01em;margin-bottom:10px}.feature p{font-size:12px;line-height:1.8;color:#e8d7c2;margin:0}
-  .section-footnote{text-align:center;margin:22px auto 0;color:#bea991;font-size:11px}
-  .showcase{display:grid;grid-template-columns:.86fr 1.14fr;align-items:center;gap:72px}.showcase .section-heading{text-align:left;margin:0}.showcase .section-heading p{margin:0}.showcase-list{display:grid;gap:12px;margin-top:28px}.showcase-list span{display:flex;gap:13px;color:#efe1ce;font-size:13px}.showcase-list span::before{content:"—";font-size:14px;color:var(--gold)}
-  .dashboard{border:1px solid rgba(196,153,95,.32);border-radius:16px;background:linear-gradient(145deg,#50392b,#2d211b);box-shadow:0 25px 60px #0005;padding:14px;transform:perspective(1300px) rotateY(-4deg);position:relative}.dashboard::before{content:"";position:absolute;inset:-9px -9px auto auto;width:90px;height:90px;border-top:1px solid rgba(196,153,95,.39);border-right:1px solid rgba(196,153,95,.39);border-radius:0 18px 0 0;pointer-events:none}.dash-top{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding:11px 15px 19px}.dash-word{font:normal 24px var(--serif);letter-spacing:.05em}.dash-tag{font-size:10px;color:#d6c4af}.dash-main{padding:20px}.dash-main h3{font:normal 28px var(--serif);margin:6px 0 16px}.dash-main small{font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:.14em}.dash-cards{display:grid;grid-template-columns:1fr 1fr;gap:9px}.dash-card{min-height:99px;padding:15px;border-radius:8px;background:#55402f;border:1px solid rgba(244,244,244,.095)}.dash-card b{font:normal 18px var(--serif)}.dash-card p{font-size:10px;color:#decbb3;margin:8px 0 0}.dash-bottom{border-top:1px solid var(--line);padding:12px 5px 2px;font-size:10px;color:#d0bfa6}
-  .offer-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:45px}.offer{display:flex;flex-direction:column;border:1px solid rgba(224,201,171,.19);border-radius:15px;background:rgba(73,49,32,.32);padding:31px 26px;min-height:284px}.offer:nth-child(2){border-color:rgba(199,161,108,.57);background:linear-gradient(145deg,rgba(107,75,49,.32),rgba(43,30,23,.71))}.offer-label{color:var(--gold);font-size:10px;font-weight:750;letter-spacing:.15em;text-transform:uppercase}.offer h3{font:normal 30px var(--serif);margin:13px 0}.offer p{font-size:13px;color:#ddcbb6;line-height:1.8;flex:1}.offer .button{align-self:flex-start;margin-top:13px}
-  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:49px}.step-index{font:normal 52px/1 var(--serif);color:var(--gold)}.step h3{font:normal 27px var(--serif);margin:13px 0}.step p{font-size:13px;color:#ddc9af;line-height:1.85}
-  .faq{max-width:780px;margin:auto}.faq details{border-bottom:1px solid var(--line);padding:4px 0}.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:18px;padding:18px 0;font-size:14px;font-weight:650}.faq summary::-webkit-details-marker{display:none}.faq summary::after{content:"+";color:var(--gold);font-size:21px;font-weight:400;line-height:1}.faq details[open] summary::after{content:"−"}.faq details p{max-width:675px;color:#d4c2ad;font-size:13px;line-height:1.9;margin:0 0 17px}
-  .closing{padding:112px 0 97px;text-align:center;overflow:hidden;background:radial-gradient(ellipse at 50% 0%,rgba(122,97,53,.17),transparent 60%),linear-gradient(180deg,#382920,#1c1410)}.closing h2{font-size:clamp(40px,5vw,65px);line-height:1.11;max-width:800px;margin:0 auto 20px;text-wrap:balance}.closing-copy{max-width:620px;color:#e6d3bb;margin:0 auto 29px;font-size:15px;line-height:1.9}.contact-form{max-width:690px;margin:39px auto 0;text-align:left;background:rgba(42,29,22,.72);padding:29px;border:1px solid rgba(199,161,108,.29);border-radius:15px}.contact-form h3{font:normal 29px var(--serif);margin:0 0 6px}.contact-form>p{color:#d3c1aa;font-size:12px;margin:0 0 17px}.fields{display:grid;grid-template-columns:1fr 1fr;gap:15px}.field{display:flex;flex-direction:column;gap:6px;margin-bottom:15px}.field label{font-size:12px;color:#f5e8d7}.field input,.field textarea,.field select{border:1px solid rgba(232,212,180,.24);border-radius:7px;padding:11px 12px;background:#34271d;color:#fff9ed;min-height:43px;outline-color:var(--gold)}.field textarea{min-height:94px;resize:vertical}.field select option{background:#34271d}.contact-form .button{width:100%;font-size:13px}.form-hint{font-size:11px;color:#c8b49c;margin:12px 0 0}.form-status{min-height:22px;font-size:12px;color:#f0d5a7;margin:9px 0 0}.footer{background:#140e0c;border-top:1px solid rgba(255,255,255,.08);padding:28px 0}.footer-inner{display:flex;justify-content:space-between;align-items:center;gap:22px;flex-wrap:wrap}.footer .wordmark{font-size:24px}.footer p{margin:0;color:#bea68e;font-size:11px}.footer-links{display:flex;gap:20px;flex-wrap:wrap;font-size:11px;color:#cbb69e}.footer-links a:hover{color:var(--gold)}
-  @media(max-width:900px){.nav-links{gap:17px}.showcase{gap:30px}.offer{padding:26px 20px}}
-  @media(max-width:700px){html{scroll-padding-top:70px}.container{width:min(100% - 32px,1080px)}.nav{height:68px}.wordmark{font-size:27px}.nav-links{display:none}.mobile-menu{display:block}.hero{min-height:680px;padding:70px 0 80px}.hero-art{width:170%;left:-35%;opacity:.42}.hero-mark{width:70px;height:82px;margin-bottom:27px}.hero h1{font-size:clamp(41px,9.6vw,62px);line-height:1.09}.hero-copy{font-size:14px;line-height:1.83}.hero-points{gap:10px 18px;font-size:10px}.hero-scroll{bottom:13px}.section{padding:85px 0}.statement{padding:98px 0}.section-heading h2,.statement h2{font-size:clamp(34px,8.5vw,47px)}.section-heading p{font-size:14px}.features,.offer-grid,.steps{grid-template-columns:1fr}.features{gap:13px;margin-top:33px}.feature{min-height:0;padding:25px}.feature h3{font-size:23px}.showcase{grid-template-columns:1fr;gap:31px}.dashboard{transform:none}.offer{min-height:0}.steps{gap:21px}.step{padding-bottom:15px;border-bottom:1px solid var(--line)}.closing{padding:93px 0 77px}.fields{grid-template-columns:1fr;gap:0}.contact-form{padding:22px}.footer-inner{align-items:flex-start;flex-direction:column}}
-  @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.feature,.button{transition:none}.feature:hover,.button:hover{transform:none}}
-
-
-/* ELOAH — VIOLENT PRUNE · thème exclusif de la vitrine commerciale */
-:root{
-  color-scheme:dark;
-  --bg:#160912;--bg-deep:#0f0710;--navy:#24101f;--card:#35152c;
-  --text:#f8eef5;--soft:#e6cfdd;--muted:#cdaec2;
-  --gold:#d8b07a;--gold-strong:#ebc997;--line:rgba(204,123,168,.23);
-  --plum:#6f214f;--plum-bright:#9b3d73;--plum-soft:#c17aa0;
-}
-body{color:var(--text);background:radial-gradient(ellipse 70% 30% at 80% 3%,rgba(125,32,88,.22),transparent 75%),linear-gradient(180deg,#130710,#160912 46%,#0f0710)}
-body::selection{background:#9b3d73;color:#fff5fa}
-.site-header{background:rgba(18,6,16,.92);border-bottom-color:rgba(193,122,160,.22);box-shadow:0 7px 28px rgba(8,2,8,.17)}
-.wordmark{color:#fff2f8}.wordmark i{color:#d8b07a}
-.nav-links>a:not(.button){color:#f5e9f0}
-.nav-links>a:not(.button):hover,.footer-links a:hover{color:#ebc997}
-.button-gold{background:linear-gradient(118deg,#e0b780,#f0d4a7 49%,#d6a76d);color:#2b1025;border-color:rgba(244,211,163,.35);box-shadow:0 5px 23px rgba(208,125,164,.18)}
-.button-gold:hover{background:linear-gradient(118deg,#f0ca95,#ffe4b7 49%,#e4b681);box-shadow:0 10px 32px rgba(213,112,167,.27)}
-.button-outline{background:rgba(133,43,98,.13);border-color:rgba(210,150,185,.38);color:#fff4fa}
-.button-outline:hover{background:rgba(158,55,117,.24);border-color:#d8b07a}
-.hero{background:radial-gradient(ellipse 62% 78% at 81% 51%,rgba(166,47,109,.39),transparent 74%),radial-gradient(ellipse 67% 76% at 12% 86%,rgba(111,33,79,.3),transparent 73%),linear-gradient(119deg,#10070f 2%,#251020 47%,#160914 100%)}
-.hero::before{background:repeating-linear-gradient(128deg,transparent 0 182px,rgba(238,184,215,.05) 184px 185px,transparent 187px 345px)}
-.hero::after{background:linear-gradient(180deg,rgba(9,2,9,.015) 43%,rgba(8,2,8,.5) 100%)}
-.hero-art{opacity:.72}.hero-art .line{stroke:#b96b97;stroke-opacity:.42}.hero-art .accent{stroke:#e1b785;stroke-opacity:.56}.hero-art .face{fill:#67234f;fill-opacity:.15}
-.hero-mark{filter:drop-shadow(0 0 21px rgba(187,80,139,.29))}
-.hero-mark path{stroke:#e7bc84}.hero-mark text{fill:#f4d5a6}
-.eyebrow,.section-label,.offer-label{color:#ebc997}
-.eyebrow.pill{background:rgba(63,18,49,.56);border-color:rgba(222,176,126,.42);box-shadow:0 0 23px rgba(173,55,113,.14)}
-.eyebrow.pill::before{background:#dfb47e}
-.hero h1,.section-heading h2,.statement h2,.closing h2{color:#fff5fa}
-.gold{color:#ebc997}.hero-copy{color:#ebdce6}.hero-points{color:#ead9e4}.hero-points span::before{color:#d8b07a}.hero-scroll{color:#d8bbce}
-.section-line{border-top-color:rgba(203,124,168,.16)}
-.section-dark{background:radial-gradient(ellipse 40% 42% at 8% 82%,rgba(103,30,78,.16),transparent 95%),linear-gradient(145deg,#180a16,#261020 55%,#160912)}
-.section-heading p,.feature p,.offer p,.faq details p,.closing-copy,.statement p{color:#dfc7d6}
-.statement{color:#f8eef5;background:radial-gradient(ellipse 58% 63% at 50% 37%,rgba(138,40,99,.30),transparent 82%),linear-gradient(180deg,#260f20,#180a17);border-top:1px solid rgba(193,122,160,.2);border-bottom:1px solid rgba(193,122,160,.14)}
-.statement .section-label,.section-flat .section-label{color:#ebc997}
-.statement h2{color:#fff0f8}.statement p{color:#dfc7d6}.statement .signature{color:#ebc997}
-.section-flat{color:#f8eef5;background:radial-gradient(ellipse 48% 64% at 93% 2%,rgba(128,36,94,.22),transparent 85%),linear-gradient(150deg,#271123,#1a0c1b)}
-.section-flat .section-heading h2,.section-flat .step h3{color:#fff0f8}
-.section-flat .section-heading p,.section-flat .step p,.section-flat .showcase-list span{color:#e0c7d6}
-.section-flat .showcase-list span::before,.section-flat .step-index{color:#e0b780}
-.section-flat .step{border-bottom-color:rgba(207,145,181,.19)}
-.feature{background:linear-gradient(150deg,rgba(111,33,79,.34),rgba(36,16,31,.76));border-color:rgba(195,119,163,.25);box-shadow:inset 0 1px rgba(231,172,204,.03),0 15px 37px rgba(6,2,8,.13)}
-.feature h3{color:#fff0f7}.feature p{color:#e1cbda}
-.feature:hover{border-color:#d8b07a;box-shadow:0 18px 36px rgba(108,23,70,.25)}
-.feature-icon{color:#e9bd86}.section-footnote{color:#cfa8c1}
-.dashboard{background:linear-gradient(145deg,#401832,#190c1a);border-color:rgba(216,176,122,.32);box-shadow:0 25px 60px rgba(5,0,7,.5)}
-.dashboard::before{border-color:rgba(216,176,122,.34)}
-.dash-top,.dash-bottom{border-color:rgba(207,148,178,.23)}
-.dash-word,.dash-main h3{color:#f9edf5}.dash-tag,.dash-bottom{color:#d5acc5}
-.dash-main small{color:#eac18e}.dash-card{background:#4a1e3b;border-color:rgba(217,148,187,.21)}
-.dash-card b{color:#fff0f8}.dash-card p{color:#e3c8d8}
-.offer{background:linear-gradient(150deg,rgba(88,28,68,.42),rgba(32,13,29,.77));border-color:rgba(193,122,160,.23)}
-.offer:nth-child(2){background:linear-gradient(145deg,rgba(119,37,89,.48),rgba(39,15,34,.82));border-color:rgba(216,176,122,.55);box-shadow:0 12px 35px rgba(76,12,55,.19)}
-.offer h3{color:#fff1f8}.offer p,.step p{color:#e1c8d8}
-.faq details{border-bottom-color:rgba(210,145,180,.23)}
-.faq summary{color:#f9eefa}.faq summary::after{color:#ebc997}.faq details p{color:#dbc0d1}
-.closing{background:radial-gradient(ellipse 72% 78% at 50% 1%,rgba(139,36,95,.36),transparent 73%),linear-gradient(180deg,#2c1125,#100711)}
-.closing h2{color:#fff2f8}.closing-copy{color:#e2ceda}
-.contact-form{background:rgba(27,10,24,.88);border-color:rgba(216,176,122,.31);box-shadow:0 20px 45px rgba(4,0,6,.23)}
-.contact-form h3{color:#fff0f8}.contact-form>p,.form-hint{color:#cda9be}
-.field label{color:#eddae6}
-.field input,.field textarea,.field select,.field select option{background:#2c1226;border-color:rgba(195,115,162,.42);color:#f8eef5}
-.field input::placeholder,.field textarea::placeholder{color:#b98fa7}
-.field input:focus,.field textarea:focus,.field select:focus{border-color:#e4ba86;outline:1px solid #e4ba86}
-.form-status{color:#ebc997}
-.footer{background:#0f0710;border-top-color:rgba(193,122,160,.19)}
-.footer p,.footer-links{color:#cbaec0}
-.mobile-panel{background:#281024;border-color:rgba(193,122,160,.34)}
-.mobile-panel a{color:#f8eef5}
-@media(max-width:700px){.site-header{background:rgba(18,6,16,.96)}.mobile-panel{background:#281024;border-color:#794064}}
-
-
-/* Identité ELOAH — logo officiel Violent Prune */
-.brand-link{display:inline-flex;align-items:center;gap:7px;white-space:nowrap}
-.brand-mark{
-  display:inline-block;width:38px;height:39px;flex:none;
-  background-image:url("assets/eloah-logo-violent-prune.svg");
-  background-repeat:no-repeat;
-  background-size:69px auto;
-  background-position:center 0;
-  mix-blend-mode:screen;
-  filter:drop-shadow(0 0 8px rgba(193,122,160,.18));
-}
-.hero-logo{
-  display:block;
-  width:clamp(185px,19vw,230px);
-  height:auto;
-  margin:0 auto 12px;
-  object-fit:contain;
-  mix-blend-mode:screen;
-  filter:drop-shadow(0 0 17px rgba(161,52,109,.2));
-}
-.hero{padding-top:54px;padding-bottom:73px}
-@media(max-width:700px){
-  .hero-logo{width:clamp(185px,51vw,218px);margin-bottom:14px}
-  .hero{padding-top:45px;padding-bottom:64px}
-  .brand-mark{width:32px;height:34px;background-size:61px auto}
-  .brand-link{gap:5px}
-}
-
-/* ELOAH — LE GRAND ÉCLAT · Les enfants sortent de la boîte */
-.hero{min-height:710px;padding:44px 0 66px;overflow:hidden}
-.hero .container.hero-stage{
-  position:relative;z-index:2;
-  width:min(1170px,calc(100% - 48px));
-  display:grid;grid-template-columns:minmax(0,.94fr) minmax(0,1.06fr);
-  align-items:center;gap:clamp(13px,3.4vw,61px);
-}
-.hero-stage .hero-inner{width:100%;max-width:570px;text-align:left;margin:0}
-.hero-stage .eyebrow.pill{margin-bottom:24px;letter-spacing:.11em}
-.hero-stage h1{
-  max-width:610px;
-  font-size:clamp(44px,4.7vw,72px);
-  line-height:1.085;text-wrap:balance;margin:0 0 22px;
-}
-.hero-stage .hero-copy{
-  max-width:530px;font-size:clamp(14px,1.18vw,17px);
-  color:#f0dae5;line-height:1.9;margin:0 0 27px;
-}
-.hero-stage .hero-actions{justify-content:flex-start;gap:11px;margin:0}
-.hero-stage .hero-actions .button{min-width:0;min-height:49px;padding:12px 18px}
-.hero-stage .hero-points{
-  margin-top:28px;justify-content:flex-start;gap:12px 21px;color:#e2c2d6;
-  font-size:11px
-}
-.portal-stage{
-  position:relative;isolation:isolate;
-  display:grid;place-items:center;
-  width:100%;min-width:0;min-height:625px;
-  transform:translateZ(0)
-}
-.portal-halo{
-  position:absolute;inset:11% -12% 5%;z-index:-2;border-radius:50%;
-  background:
-    radial-gradient(ellipse at 50% 49%,rgba(247,175,112,.27) 0,rgba(180,54,117,.37) 29%,rgba(94,19,76,.17) 49%,transparent 75%);
-  filter:blur(31px);opacity:.82;
-  animation:halo-breathe 7s ease-in-out infinite
-}
-.portal-ring{
-  position:absolute;width:96%;aspect-ratio:1;border-radius:50%;z-index:-1;
-  border:1px solid rgba(245,189,135,.13);
-  box-shadow:0 0 0 24px rgba(193,66,126,.022),0 0 95px rgba(173,55,115,.13);
-  transform:rotate(-18deg) scaleX(.83);
-}
-.portal-image{
-  position:relative;z-index:1;width:min(495px,100%);
-  aspect-ratio:420/525;display:grid;place-items:center;
-  -webkit-mask-image:radial-gradient(ellipse 70% 74% at 50% 50%,#000 72%,transparent 100%);
-  mask-image:radial-gradient(ellipse 70% 74% at 50% 50%,#000 72%,transparent 100%);
-  filter:drop-shadow(0 10px 27px rgba(240,95,164,.27));
-  transform-origin:50% 65%;
-}
-.portal-image img{width:100%;height:100%;object-fit:contain;display:block}
-.portal-flare{
-  position:absolute;z-index:3;left:50%;top:53%;width:330px;height:330px;
-  border-radius:50%;pointer-events:none;
-  transform:translate(-50%,-50%) scale(.2);opacity:0;
-  background:radial-gradient(circle,rgba(255,238,195,.8) 0,rgba(255,179,123,.45) 12%,rgba(249,113,172,.19) 36%,transparent 72%);
-  mix-blend-mode:screen;
-}
-.portal-shard{
-  position:absolute;z-index:4;left:50%;top:52%;
-  width:clamp(18px,4.7vw,42px);height:clamp(38px,7vw,80px);
-  opacity:0;pointer-events:none;
-  clip-path:polygon(50% 0,100% 29%,63% 100%,0 53%);
-  background:linear-gradient(135deg,#fff2cc 0%,#e6a8d2 21%,rgba(178,43,112,.65) 46%,rgba(58,5,44,.38) 68%,#edba82 96%);
-  box-shadow:0 0 11px rgba(245,167,197,.46)
-}
-.portal-shard:nth-of-type(even){clip-path:polygon(8% 0,100% 44%,67% 100%,0 58%)}
-.portal-ray{
-  position:absolute;z-index:3;left:50%;top:52%;height:2px;width:255px;
-  transform-origin:0 50%;pointer-events:none;opacity:0;
-  background:linear-gradient(90deg,rgba(255,228,176,.92),rgba(249,126,185,.3),transparent);
-  filter:drop-shadow(0 0 6px rgba(255,211,139,.55))
-}
-.ray-one{rotate:-27deg}.ray-two{rotate:37deg}.ray-three{rotate:163deg}
-.portal-spark{
-  position:absolute;z-index:4;width:6px;height:6px;
-  background:#f8daa1;border-radius:50%;
-  box-shadow:0 0 8px 3px rgba(247,155,173,.45);
-  animation:spark-drift 6s ease-in-out infinite alternate;pointer-events:none
-}
-.spark-one{top:12%;left:9%;animation-delay:.4s}
-.spark-two{top:25%;right:8%;animation-delay:1.6s}
-.spark-three{bottom:18%;left:5%;animation-delay:2.4s}
-.spark-four{bottom:11%;right:10%;animation-delay:3.1s}
-.portal-stage.is-opening .portal-image{animation:portal-emerge 1.7s cubic-bezier(.2,.86,.28,1) both}
-.portal-stage.is-opening .portal-halo{animation:halo-burst 2.1s ease-out both,halo-breathe 7s ease-in-out 2.1s infinite}
-.portal-stage.is-opening .portal-ring{animation:ring-release 1.8s ease-out both}
-.portal-stage.is-opening .portal-flare{animation:flare-burst 1.5s ease-out .35s both}
-.portal-stage.is-opening .portal-shard{animation:shard-release 1.85s cubic-bezier(.2,.68,.26,1) var(--lag) both}
-.portal-stage.is-opening .portal-ray{animation:ray-release 1.4s ease-out .22s both}
-@keyframes portal-emerge{
-  0%{opacity:.13;transform:translateY(66px) scale(.73);filter:brightness(.48) blur(13px)}
-  38%{opacity:.94;filter:brightness(1.2) blur(0)}
-  65%{transform:translateY(-15px) scale(1.065);filter:brightness(1.2)}
-  100%{opacity:1;transform:translateY(0) scale(1);filter:brightness(1)}
-}
-@keyframes halo-burst{
-  0%{opacity:.1;transform:scale(.55)}
-  34%{opacity:1;transform:scale(1.22)}
-  100%{opacity:.82;transform:scale(1)}
-}
-@keyframes halo-breathe{
-  0%,100%{transform:scale(.97);opacity:.65}
-  50%{transform:scale(1.045);opacity:.88}
-}
-@keyframes ring-release{
-  0%{opacity:0;transform:rotate(-18deg) scale(.48,.42)}
-  40%{opacity:.95}
-  100%{opacity:.44;transform:rotate(0) scale(.86)}
-}
-@keyframes flare-burst{
-  0%{opacity:0;transform:translate(-50%,-50%) scale(.15)}
-  33%{opacity:.94;transform:translate(-50%,-50%) scale(1.35)}
-  100%{opacity:0;transform:translate(-50%,-50%) scale(2.2)}
-}
-@keyframes shard-release{
-  0%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.26)}
-  21%{opacity:.98}
-  100%{opacity:0;transform:translate(calc(-50% + var(--tx)),calc(-50% + var(--ty))) rotate(var(--spin)) scale(1.12)}
-}
-@keyframes ray-release{
-  0%{opacity:0;scale:.1 1}
-  25%{opacity:.9}
-  100%{opacity:0;scale:1.2 1}
-}
-@keyframes spark-drift{
-  0%{opacity:.18;transform:translate(0,8px) scale(.7)}
-  55%{opacity:.9}
-  100%{opacity:.3;transform:translate(10px,-14px) scale(1.15)}
-}
-.e-burst-btn{position:relative;overflow:hidden}
-.e-burst-btn:after{content:"";position:absolute;inset:0;transform:translateX(-150%) skewX(-25deg);width:46%;
-  background:linear-gradient(90deg,transparent,rgba(255,255,255,.33),transparent);transition:transform .8s}
-.e-burst-btn:hover:after{transform:translateX(350%) skewX(-25deg)}
-/* Rest of ELOAH: discreet entrance effects as the visitor scrolls. */
-.motion-ready .reveal-on-scroll{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s cubic-bezier(.16,1,.3,1)}
-.motion-ready .reveal-on-scroll.in-view{opacity:1;transform:translateY(0)}
-@media(max-width:900px){
-  .hero{min-height:0;padding:55px 0 76px}
-  .hero .container.hero-stage{grid-template-columns:1fr;gap:2px;width:min(650px,calc(100% - 32px))}
-  .hero-stage .hero-inner{max-width:620px;text-align:center;margin:0 auto}
-  .hero-stage .hero-actions,.hero-stage .hero-points{justify-content:center}
-  .hero-stage .hero-copy{margin:0 auto 24px}
-  .hero-stage .hero-inner h1{font-size:clamp(42px,8vw,65px)}
-  .portal-stage{min-height:540px}
-  .portal-image{width:min(455px,100%)}
-}
-@media(max-width:600px){
-  .hero{padding:38px 0 68px}
-  .hero-stage .hero-inner h1{font-size:clamp(39px,10.5vw,55px)}
-  .hero-stage .eyebrow.pill{font-size:9px;letter-spacing:.09em}
-  .hero-stage .hero-copy{font-size:14px;line-height:1.75}
-  .hero-stage .hero-actions{gap:10px}
-  .hero-stage .hero-actions .button{width:100%;max-width:340px}
-  .hero-stage .hero-points{font-size:10px;margin-top:18px;gap:9px 14px}
-  .portal-stage{min-height:465px;margin-top:-4px}
-  .portal-image{width:min(370px,100%)}
-  .portal-shard{width:23px;height:48px}
-  .portal-shard{width:22px;height:45px}
-  .portal-ray{width:180px}
-  .portal-flare{width:220px;height:220px}
-}
-@media(prefers-reduced-motion:reduce){
-  .portal-stage *, .portal-stage.is-opening *, .e-burst-btn:after{
-    animation:none!important;transition:none!important;
-  }
-  .portal-image{opacity:1!important;transform:none!important;filter:none!important}
-  .portal-shard,.portal-ray,.portal-flare{display:none!important}
-  .portal-halo{opacity:.65!important}
-  .portal-ring{opacity:.44!important}
-  .motion-ready .reveal-on-scroll{opacity:1!important;transform:none!important}
-  .e-burst-btn{display:none}
-}
-
-
-/* Ajustement demandé — signature ELOAH et mention Espace plus discrètes */
-.site-header .wordmark{font-size:21px;letter-spacing:-.025em}
-.site-header .brand-mark{width:27px;height:28px;background-size:54px auto}
-.footer .wordmark{font-size:20px}
-.footer .brand-mark{width:25px;height:27px;background-size:52px auto}
-.hero-stage .eyebrow.pill{font-size:9px;line-height:1.45;letter-spacing:.075em;padding:7px 12px}
-.dash-word{font-size:19px}
-.dash-tag{font-size:9px;letter-spacing:.08em}
-@media(max-width:700px){
-  .site-header .wordmark{font-size:19px}
-  .site-header .brand-mark{width:24px;height:25px;background-size:49px auto}
-  .hero-stage .eyebrow.pill{font-size:8px;letter-spacing:.045em;padding:6px 9px}
-}
-
-/* TARIFS ELOAH — carte commerciale Violent Prune, montants envisagés */
-.eloah-tarifs{padding-top:112px;padding-bottom:113px}
-.eloah-tarifs .section-heading{max-width:850px;margin-bottom:44px}
-.pricing-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;align-items:stretch}
-.pricing-card{
-  position:relative;display:flex;flex-direction:column;min-width:0;
-  padding:34px 27px 27px;border-radius:17px;overflow:hidden;
-  border:1px solid rgba(198,125,165,.31);
-  background:linear-gradient(160deg,rgba(82,27,63,.61),rgba(26,11,25,.83));
-  box-shadow:0 17px 45px rgba(10,2,10,.16);
-  transition:transform .24s,border-color .24s,box-shadow .24s;
-}
-.pricing-card:hover{transform:translateY(-4px);border-color:rgba(232,190,137,.64);box-shadow:0 24px 49px rgba(11,1,12,.3)}
-.pricing-featured{border-color:rgba(229,186,129,.77);background:linear-gradient(146deg,rgba(115,41,86,.72),rgba(37,13,32,.93));box-shadow:0 0 0 1px rgba(226,175,110,.12),0 24px 52px rgba(10,1,11,.22)}
-.pricing-ribbon{position:absolute;right:0;top:0;padding:7px 16px 9px;border-radius:0 0 0 12px;background:#e9c993;color:#2f1426;font-size:10px;font-weight:800}
-.pricing-topline{font-size:10px;font-weight:750;letter-spacing:.13em;color:#ebc997;text-transform:uppercase}
-.pricing-card h3{font:normal 32px/1.16 var(--serif);margin:18px 0 6px;color:#fff2fa}
-.pricing-who{color:#dfbbd1;font-size:12px;line-height:1.7;min-height:42px}
-.pricing-amount{font-family:var(--serif);font-size:clamp(41px,4.1vw,58px);line-height:1.2;letter-spacing:-.035em;color:#fff5fa;margin:17px 0 0;white-space:nowrap}
-.pricing-amount>span{font-size:.77em}.pricing-amount small{font:500 13px/1.2 var(--sans);letter-spacing:0;color:#d7b9cd}
-.pricing-period{font-size:11px;color:#e0b986;min-height:39px;line-height:1.6;margin:5px 0}
-.pricing-divider{height:1px;background:linear-gradient(90deg,rgba(225,177,119,.49),rgba(196,123,163,.06));margin:14px 0 20px}
-.pricing-explain{font-size:13px;line-height:1.78;color:#e7d1df;min-height:96px}
-.pricing-list{margin:0 0 26px;padding:0;list-style:none;display:grid;gap:12px;color:#f1e0eb;font-size:12px}
-.pricing-list li{display:flex;gap:10px;align-items:flex-start}
-.pricing-list li::before{content:"✓";font-weight:800;color:#ebc997;flex:none}
-.pricing-action{width:100%;margin-top:auto;white-space:normal;min-height:47px}
-.pricing-disclaimer{max-width:920px;margin:20px auto 0;color:#d5b8ca;font-size:11px;line-height:1.8;text-align:center}
-.comparison{margin-top:80px;padding:32px;border-radius:16px;border:1px solid rgba(202,136,170,.22);background:rgba(24,8,24,.44)}
-.comparison-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:22px}
-.comparison-head h3,.custom-heading h3{font:normal clamp(29px,3vw,40px)/1.18 var(--serif);margin:6px 0 0;color:#fff1f8}
-.comparison-head>a{font-size:12px;color:#edd0a5;white-space:nowrap}
-.comparison-scroll{overflow-x:auto;scrollbar-color:#a75d88 #261020}
-.comparison table{border-collapse:collapse;width:100%;min-width:690px;text-align:left;font-size:12px}
-.comparison th,.comparison td{padding:16px 13px;border-bottom:1px solid rgba(209,151,184,.2);vertical-align:top}
-.comparison thead th{font-size:12px;color:#ecd0a6;font-weight:750}
-.comparison tbody th{font-weight:650;color:#f8e6f0;min-width:175px;width:29%}
-.comparison tbody td{color:#e4cadb}
-.comparison tbody tr:last-child th,.comparison tbody tr:last-child td{border-bottom:0}
-.comparison-caption{color:#cdaec1;font-size:11px;line-height:1.7;margin:16px 0 0}
-.custom-heading{max-width:735px;margin:82px auto 28px;text-align:center}
-.custom-heading p{margin:14px auto 0;color:#dfc5d6;font-size:13px;line-height:1.85}
-.custom-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:17px}
-.custom-card{display:grid;grid-template-columns:48px 1fr;gap:18px;align-items:start;border-radius:15px;border:1px solid rgba(205,136,171,.28);padding:27px;background:linear-gradient(150deg,rgba(93,27,72,.4),rgba(29,12,28,.65))}
-.custom-mark{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;border:1px solid rgba(229,184,123,.37);color:#ebc997;font:normal 31px var(--serif)}
-.custom-card h4{font:normal 28px var(--serif);color:#fff0f9;margin:8px 0}
-.custom-card p{color:#dfc7d6;font-size:12px;line-height:1.8;margin:0 0 15px}
-.custom-card a,.pricing-bottom-link a{color:#edcb9e;font-size:12px;font-weight:700;text-decoration:none}
-.custom-card a:hover,.pricing-bottom-link a:hover,.comparison-head>a:hover{text-decoration:underline}
-.pricing-bottom-link{text-align:center;margin:32px auto 0}
-@media(max-width:900px){.pricing-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.pricing-featured{grid-column:1/-1}.pricing-card{padding:29px 24px}.pricing-explain{min-height:0}}
-@media(max-width:650px){.eloah-tarifs{padding:78px 0}.pricing-grid,.custom-grid{grid-template-columns:1fr}.pricing-featured{grid-column:auto}.pricing-card{padding:28px 22px}.pricing-who,.pricing-period{min-height:0}.pricing-amount{font-size:49px}.pricing-action{margin-top:17px}.comparison{padding:21px 15px;margin-top:58px}.comparison-head{align-items:start;flex-direction:column;gap:10px}.comparison th,.comparison td{padding:12px 11px}.custom-heading{margin-top:58px}.custom-card{grid-template-columns:38px 1fr;gap:12px;padding:22px}.custom-mark{width:36px;height:36px}.custom-card h4{font-size:25px}}
-@media(prefers-reduced-motion:reduce){.pricing-card{transition:none}.pricing-card:hover{transform:none}}
-
-</style>
-  <link rel="icon" type="image/svg+xml" href="assets/eloah-logo-violent-prune.svg">
-  <link rel="preload" as="image" href="assets/eloah-enfants-boite.svg">
-<link rel="stylesheet" href="eloah-theme-global.css?v=20261014-pg2">
-</head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#120b1a">
+<meta name="description" content="ELOAH : une tour de contrôle pour réunir vos univers, vos projets, vos indicateurs et vos outils de pilotage. Découvrez la présentation et demandez une démonstration.">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'self'; img-src 'self' data:; font-src 'self'; script-src 'none'; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta property="og:title" content="ELOAH — La tour de contrôle de tous vos univers">
+<meta property="og:description" content="Une vision claire de vos projets, indicateurs et outils. Présentation du concept ELOAH et demande de démonstration.">
+<meta property="og:type" content="website">
+<link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="eloah-monitor-vitrine.css?v=1.0.0">
+<title>ELOAH — La tour de contrôle de tous vos univers</title>
+<link rel="canonical" href="https://soniacointe-sketch.github.io/the-crew-control/eloah-decouvrir.html"></head>
 <body>
-<header class="site-header">
-  <div class="container nav">
-    <a class="wordmark brand-link" href="#accueil" aria-label="ELOAH, accueil"><span class="brand-mark" aria-hidden="true"></span><span>ELOAH<i>·</i></span></a>
-    <nav class="nav-links" aria-label="Navigation principale">
-      <a href="#ecosysteme">Écosystème</a><a href="#demonstration">Découvrir</a><a href="eloah-monitor-vitrine.html">ELOAH Monitor ✦</a><a href="#offres">Les offres</a><a href="#contact">Contact</a>
-      <a href="eloah-espace-prive.html" class="button button-outline">Se connecter</a><a class="button button-gold" href="eloah-inscription.html?offre=entree">Créer mon compte</a>
-    </nav>
-    <details class="mobile-menu" id="mobile-menu">
-      <summary aria-label="Ouvrir le menu"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></summary>
-      <nav class="mobile-panel" aria-label="Navigation mobile">
-        <a href="#ecosysteme">Écosystème</a><a href="#demonstration">Découvrir</a><a href="eloah-monitor-vitrine.html">ELOAH Monitor ✦</a><a href="#offres">Les offres</a><a href="#contact">Contact</a><a href="eloah-espace-prive.html" class="button button-outline">Se connecter</a><a class="button button-gold" href="eloah-inscription.html?offre=entree">Créer mon compte</a>
-      </nav>
-    </details>
+<a class="skip" href="#contenu">Aller au contenu</a>
+<div class="page-shell">
+<header class="site-header" id="haut">
+  <a class="brand" href="#haut" aria-label="ELOAH — accueil">
+    <span class="brand-main">ELOAH</span>
+    <span class="brand-sub">CRÉER · ORGANISER · AVANCER</span>
+  </a>
+  <nav class="desktop-nav" aria-label="Navigation principale">
+    <a href="#fonctionnalites">Fonctionnalités</a>
+    <a href="eloah-offres.html">Solutions & offres</a>
+    <a href="eloah-offres.html#solutions">Solutions</a>
+    <a href="#apropos">À propos</a>
+  </nav>
+  <div class="header-actions">
+    <a class="search-icon" href="#fonctionnalites" aria-label="Explorer les fonctionnalités">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+    </a>
+    <span class="header-rule" aria-hidden="true"></span>
+    <a class="signin" href="eloah-espace-prive.html">Se connecter</a>
+    <a class="btn btn-gold top-demo" href="mailto:soniacointe@powerglam.fr?subject=Demande%20de%20d%C3%A9monstration%20ELOAH%20Monitor">Demander une démo <span aria-hidden="true">↗</span></a>
   </div>
+  <details class="mobile-nav">
+    <summary aria-label="Ouvrir le menu mobile"><span></span><span></span><span></span><b>Menu</b></summary>
+    <nav aria-label="Navigation mobile">
+      <a href="#fonctionnalites">Fonctionnalités</a>
+      <a href="eloah-offres.html">Solutions & offres</a>
+      <a href="eloah-offres.html#solutions">Solutions</a>
+      <a href="#apropos">À propos</a>
+      <a href="eloah-espace-prive.html">Se connecter</a>
+      <a href="mailto:soniacointe@powerglam.fr?subject=Demande%20de%20d%C3%A9monstration%20ELOAH%20Monitor">Demander une démo ↗</a>
+    </nav>
+  </details>
 </header>
-<main>
-  <section class="hero" id="accueil">
-    <svg class="hero-art" viewBox="0 0 1440 830" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
-      <defs><linearGradient id="hero-panel" x1="0" x2="1" y1="0" y2="1"><stop offset="0" stop-color="#7a2e5c" stop-opacity=".17"/><stop offset="1" stop-color="#2e1128" stop-opacity=".02"/></linearGradient></defs>
-      <path d="M-70 56 260 218 597 59 264 -112Z" fill="url(#hero-panel)"/>
-      <path class="line" stroke-opacity=".38" d="M-70 56 260 218 597 59M260 218l4 60M264 278 601 115"/>
-      <path class="line" stroke-opacity=".29" d="M-140 354 148 480 516 282 281 180M148 480l4 28M152 508 520 310"/>
-      <path class="accent" stroke-opacity=".45" d="M15 377 242 476M273 465 410 396"/>
-      <path d="M910 125 1239 -42 1540 107 1210 278Z" fill="url(#hero-panel)"/>
-      <path class="line" stroke-opacity=".34" d="M910 125 1210 278 1540 107M1210 278v52M1210 330 1540 156"/>
-      <path class="line" stroke-opacity=".22" d="M1102 340 1284 251 1540 386M1102 340l4 30 182 -87"/>
-      <path class="accent" stroke-opacity=".42" d="M969 96 1280 -61M1067 342 1301 460"/>
-      <path class="line" stroke-opacity=".27" d="M-68 656 264 486 559 632M264 486v39M264 525 567 678"/>
-      <path class="line" stroke-opacity=".25" d="M1040 706 1283 595 1511 699M1283 595v33M1283 628l228 106"/>
-      <path class="line" stroke-opacity=".18" d="M310 0 592 138 916 -15M704 830 1042 661 1303 793"/>
-    </svg>
-    <div class="container hero-stage">
-      <div class="hero-inner">
-        <div class="eyebrow pill">ELOAH · CRÉER · OSER · S'AFFRANCHIR</div>
-        <h1>On n'est pas faits pour <span class="gold">rester dans une boîte.</span></h1>
-        <p class="hero-copy">Les idées débordent. Les projets grandissent. On a besoin d'espace pour tout ce qu'on porte. ELOAH est là pour rassembler vos univers et leur donner de la place.</p>
-        <div class="hero-actions">
-          <button class="button button-gold e-burst-btn" type="button" id="e-burst-btn" aria-controls="e-portal">✦ Faire éclater la boîte</button>
-          <a class="button button-outline" href="#ecosysteme">Découvrir ELOAH →</a>
+<main id="contenu">
+<section class="hero" aria-labelledby="hero-title">
+  <div class="planet-glow" aria-hidden="true"></div>
+  <div class="planet-arc" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <div class="hero-copy">
+      <p class="eyebrow">CLARTÉ <span>·</span> CONTRÔLE <span>·</span> IMPACT</p>
+      <h1 id="hero-title"><span>ELOAH</span></h1>
+      <p class="hero-statement">La tour de contrôle<br>de tous vos univers.</p>
+      <p class="hero-description">Centralisez vos projets, vos univers et vos indicateurs dans un espace pensé pour mieux décider.<br>Plus de clarté. Plus de contrôle. Plus loin, ensemble.</p>
+      <div class="hero-cta">
+        <a class="btn btn-gold btn-hero" href="mailto:soniacointe@powerglam.fr?subject=Demande%20de%20d%C3%A9monstration%20ELOAH%20Monitor">Demander une démo <span aria-hidden="true">→</span></a>
+        <a class="btn btn-outline btn-hero" href="#apercu">Découvrir la plateforme</a>
+      </div>
+      <ul class="hero-proof" aria-label="Intentions de conception">
+        <li><span aria-hidden="true">✓</span> Vision unifiée</li>
+        <li><span aria-hidden="true">✓</span> Accès organisés</li>
+        <li><span aria-hidden="true">✓</span> Conception évolutive</li>
+      </ul>
+      <blockquote>« Des idées plus loin.<br>Des univers mieux orchestrés. »</blockquote>
+    </div>
+    <div class="hero-visual" id="apercu">
+      <div class="visual-glow" aria-hidden="true"></div>
+      <div class="product-frame">
+        <div class="screen">
+          <aside class="screen-side" aria-label="Rubriques du tableau de bord illustratif">
+            <div class="screen-brand">ELOAH <span>SUPERVISION</span></div>
+            <div class="screen-nav">
+              <span class="screen-nav-active"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m3 11 9-7 9 7M5 10v10h14V10M9 20v-7h6v7"/></svg>Vue d'ensemble</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8"/><ellipse cx="12" cy="12" rx="4" ry="8"/></svg>Univers</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h7l2 3h9v10H3z"/></svg>Projets</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 19V9m7 10V4m7 15v-7"/></svg>Indicateurs</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2 5 5v6c0 5 3 8 7 11 4-3 7-6 7-11V5zM9 12l2 2 4-5"/></svg>Sécurité</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 10h18v10H3zM8 10V5h8v5"/></svg>Déploiement</span>
+              <span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 3h14v18H5zM9 8h6m-6 4h6m-6 4h4"/></svg>Notes à reprendre</span>
+            </div>
+            <div class="screen-side-bottom">UNE VISION. UN PILOTAGE.</div>
+          </aside>
+          <div class="screen-content">
+            <div class="screen-topbar">
+              <span class="screen-breadcrumb">TABLEAU DE BORD <span>/</span> VUE GLOBALE</span>
+              <div class="screen-top-icons" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9M10 20h4"/></svg>
+                <span class="screen-avatar">EM</span>
+              </div>
+            </div>
+            <div class="screen-body">
+              <div class="screen-greeting"><div><p class="screen-eyebrow">VOTRE POSTE DE PILOTAGE</p><h2>Bonjour,</h2><p>Votre tour de contrôle, en un regard.</p></div><span class="screen-chip">APERÇU</span></div>
+              <div class="screen-kpis">
+                <div class="screen-kpi kpi-violet"><div class="kpi-heading"><span class="kpi-glyph">◎</span><small>Univers</small></div><strong>6</strong><span>Actifs</span></div>
+                <div class="screen-kpi kpi-pink"><div class="kpi-heading"><span class="kpi-glyph">▱</span><small>Projets</small></div><strong>12</strong><span>En cours</span></div>
+                <div class="screen-kpi kpi-amber"><div class="kpi-heading"><span class="kpi-glyph">▥</span><small>Indicateurs</small></div><strong>142</strong><span>Illustratifs</span></div>
+                <div class="screen-kpi kpi-teal"><div class="kpi-heading"><span class="kpi-glyph">⬡</span><small>Contrôles</small></div><strong>4/5</strong><span>Exemple</span></div>
+              </div>
+              <div class="screen-analysis">
+                <section class="chart-panel" aria-label="Exemple fictif de courbe d'activité">
+                  <div class="panel-title"><h3>Activité globale</h3><span>6 derniers mois <b aria-hidden="true">⌄</b></span></div>
+                  <div class="chart-area">
+                    <svg class="line-chart" viewBox="0 0 460 196" preserveAspectRatio="none" role="img" aria-label="Courbe fictive montant puis descendant sur six mois">
+                      <defs>
+                        <linearGradient id="lineFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d84c9e" stop-opacity=".28"/><stop offset="1" stop-color="#d84c9e" stop-opacity="0"/></linearGradient>
+                      </defs>
+                      <path class="chart-grid" d="M0 36 H460 M0 73 H460 M0 110 H460 M0 147 H460 M58 0V177 M142 0V177 M226 0V177 M310 0V177 M394 0V177"/>
+                      <path class="chart-fill" d="M4 135 C30 133 41 79 68 91 S119 106 137 67 S180 88 201 56 S238 86 260 24 S309 128 339 136 S391 115 424 134 S453 128 458 131 V181 H4Z"/>
+                      <path class="chart-stroke" d="M4 135 C30 133 41 79 68 91 S119 106 137 67 S180 88 201 56 S238 86 260 24 S309 128 339 136 S391 115 424 134 S453 128 458 131"/>
+                      <circle cx="260" cy="24" r="4.5" fill="#ff8eb9"/>
+                    </svg>
+                    <span class="chart-tooltip">+42 % <small>Simulation</small></span>
+                  </div>
+                  <div class="chart-months"><span>Jan</span><span>Fév</span><span>Mar</span><span>Avr</span><span>Mai</span><span>Jun</span></div>
+                </section>
+                <section class="donut-panel" aria-label="Exemple fictif de répartition par univers">
+                  <div class="panel-title"><h3>Répartition par univers</h3><span>Exemple</span></div>
+                  <div class="donut-inner"><div class="donut-chart"><span><strong>6</strong><small>univers</small></span></div><div class="donut-legend"><span><i class="legend-a"></i>Marketing <b>28 %</b></span><span><i class="legend-b"></i>Produit <b>22 %</b></span><span><i class="legend-c"></i>Client <b>18 %</b></span><span><i class="legend-d"></i>R&amp;D <b>14 %</b></span><span><i class="legend-e"></i>Interne <b>10 %</b></span><span><i class="legend-f"></i>Autre <b>8 %</b></span></div></div>
+                </section>
+              </div>
+              <div class="screen-bottom">
+                <div class="mini-panel"><div class="mini-icon gold">◷</div><div><small>Déploiement</small><strong>3 <span>scénarios</span></strong></div><div class="mini-progress"><span></span></div></div>
+                <div class="mini-panel"><div class="mini-icon pink">▤</div><div><small>Notes à reprendre</small><strong>5 <span>éléments</span></strong></div><div class="mini-lines" aria-hidden="true"><i></i><i></i><i></i></div></div>
+                <div class="mini-panel mini-quote">« Un meilleur pilotage aujourd'hui, de nouvelles possibilités demain. »</div>
+              </div>
+            </div>
+          </div>
         </div>
-        <div class="hero-points"><span>Créer sans se limiter</span><span>Relier ses projets</span><span>Avancer à sa manière</span></div>
       </div>
-      <div class="portal-stage is-opening" id="e-portal">
-        <div class="portal-halo" aria-hidden="true"></div>
-        <div class="portal-ring" aria-hidden="true"></div>
-        <div class="portal-image">
-          <img src="assets/eloah-enfants-boite.svg" width="420" height="525" decoding="async" fetchpriority="high" alt="Cinq enfants jaillissent dans une explosion de lumière de la boîte ELOAH brisée en éclats prune et or.">
-        </div>
-        <span class="portal-flare" aria-hidden="true"></span>
-        <span class="portal-ray ray-one" aria-hidden="true"></span>
-        <span class="portal-ray ray-two" aria-hidden="true"></span>
-        <span class="portal-ray ray-three" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:-200px;--ty:-155px;--spin:-96deg;--lag:.03s" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:190px;--ty:-145px;--spin:83deg;--lag:.10s" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:-230px;--ty:5px;--spin:-135deg;--lag:.20s" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:222px;--ty:25px;--spin:107deg;--lag:.14s" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:-178px;--ty:182px;--spin:62deg;--lag:.19s" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:190px;--ty:155px;--spin:-69deg;--lag:.08s" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:-95px;--ty:-240px;--spin:115deg;--lag:.25s" aria-hidden="true"></span>
-        <span class="portal-shard" style="--tx:98px;--ty:-242px;--spin:-94deg;--lag:.16s" aria-hidden="true"></span>
-        <span class="portal-spark spark-one" aria-hidden="true"></span>
-        <span class="portal-spark spark-two" aria-hidden="true"></span>
-        <span class="portal-spark spark-three" aria-hidden="true"></span>
-        <span class="portal-spark spark-four" aria-hidden="true"></span>
-      </div>
+      <p class="mock-disclaimer">Maquette d'illustration · chiffres et graphiques fictifs · aucun compte client affiché</p>
     </div>
-    <a class="hero-scroll" href="#constat">Défiler</a>
-  </section>
+  </div>
+  <div class="hero-features" id="fonctionnalites">
+    <a class="feature-card" href="#vue-globale"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M2 16s5.5-9 14-9 14 9 14 9-5.5 9-14 9S2 16 2 16Z"/><circle cx="16" cy="16" r="4.5"/></svg></span><span class="feature-copy"><strong>Vue fondatrice</strong><small>Une vision claire de vos différents univers.</small></span><span class="feature-arrow" aria-hidden="true">↗</span></a>
+    <a class="feature-card" href="#indicateurs"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><path d="M5 27V17M13 27V8M21 27V13M29 27V4"/></svg></span><span class="feature-copy"><strong>Indicateurs utiles</strong><small>Une lecture plus simple des données disponibles.</small></span><span class="feature-arrow" aria-hidden="true">↗</span></a>
+    <a class="feature-card" href="#controle"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><rect x="7" y="14" width="18" height="15" rx="2"/><path d="M11 14V9a5 5 0 0 1 10 0v5M16 20v4"/></svg></span><span class="feature-copy"><strong>Contrôle des pages</strong><small>Identifiez les pages publiques accessibles.</small></span><span class="feature-arrow" aria-hidden="true">↗</span></a>
+    <a class="feature-card" href="#multi-univers"><span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 32 32"><circle cx="7" cy="7" r="4"/><circle cx="25" cy="7" r="4"/><circle cx="16" cy="25" r="4"/><path d="M10 10l4 11M22 10l-4 11M11 7h10"/></svg></span><span class="feature-copy"><strong>Pilotage multi-univers</strong><small>Tous vos espaces depuis un point d'entrée.</small></span><span class="feature-arrow" aria-hidden="true">↗</span></a>
+  </div>
+  <div class="hero-finish"><span></span><p>UN SEUL ENDROIT · TOUS VOS UNIVERS</p><span></span></div>
+</section>
 
-  <section class="statement" id="constat">
-    <div class="container">
-      <span class="section-label">I — LE CONSTAT</span>
-      <h2>Pourquoi faut-il dix outils<br>pour faire avancer<br>une seule idée ?</h2>
-      <p>Les projets sont dans un onglet. Les fichiers dans un autre. Les messages s'accumulent. Les idées s'éparpillent. Et au milieu de tout ça, il faudrait encore trouver le temps de créer.</p>
-      <p class="signature">Nous avons imaginé un autre espace.</p>
-    </div>
-  </section>
+<section class="editorial-section" id="vue-globale" aria-labelledby="vue-title">
+  <div class="section-heading"><p class="section-kicker">LA VISION ELOAH</p><h2 id="vue-title">Ne plus chercher partout.<br><em>Tout voir au même endroit.</em></h2><p>Quand les projets, les outils et les informations se multiplient, la clarté devient un avantage. ELOAH réunit les repères qui aident à reprendre le fil.</p></div>
+  <div class="editorial-grid">
+    <article class="editorial-card" id="indicateurs"><span class="editorial-number">01 / MESURER</span><h3>Les indicateurs qui comptent</h3><p>Retrouvez les informations disponibles depuis vos outils connectés et distinguez les chiffres vérifiés des exemples ou des données manquantes.</p><span class="editorial-line"></span></article>
+    <article class="editorial-card" id="multi-univers"><span class="editorial-number">02 / ORGANISER</span><h3>Plusieurs univers. Une direction.</h3><p>Projets, marques, activités : des accès regroupés pour conserver une vue d'ensemble et retrouver chaque espace rapidement.</p><span class="editorial-line"></span></article>
+    <article class="editorial-card" id="controle"><span class="editorial-number">03 / CONTRÔLER</span><h3>Voir l'essentiel, sans confondre les signaux</h3><p>Un contrôle HTTP permet de repérer les pages joignables. Les diagnostics de fonctionnement et de sécurité nécessitent des vérifications complémentaires.</p><span class="editorial-line"></span></article>
+  </div>
+</section>
 
-  <section class="section section-dark section-line" id="ecosysteme">
-    <div class="container">
-      <div class="section-heading">
-        <span class="section-label">L'ÉCOSYSTÈME</span>
-        <h2>Un espace qui relie<br>ce que vous construisez.</h2>
-        <p>ELOAH rassemble les outils nécessaires à votre quotidien, avec des rubriques pour retrouver vos idées, suivre vos projets et créer vos contenus.</p>
-      </div>
-      <div class="features">
-        <article class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M3 5h18v14H3zM3 10h18M9 10v9"/></svg></span><h3>Tableaux & projets</h3><p>Un espace pour vos priorités, vos étapes, vos idées et vos prochaines actions, projet par projet.</p></article>
-        <article class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></svg></span><h3>Bases d'expertise</h3><p>Des ressources, des recherches et des documents organisés autour de vos domaines d'activité.</p></article>
-        <article class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24"><path d="m12 2 9 5v10l-9 5-9-5V7l9-5ZM3 7l9 5 9-5M12 12v10"/></svg></span><h3>Studio de création</h3><p>Des espaces pour préparer articles, visuels, publications et supports liés à vos projets.</p></article>
-        <article class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 4h9l3 4h4v12H4zM7 12h10M7 16h7"/></svg></span><h3>Documents & coffre-fort</h3><p>Pour retrouver vos fichiers, notes importantes et ressources sans chercher dans dix dossiers.</p></article>
-        <article class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24"><circle cx="5" cy="12" r="2"/><circle cx="19" cy="5" r="2"/><circle cx="19" cy="19" r="2"/><path d="M7 11l10-5M7 13l10 5"/></svg></span><h3>Connecteurs & outils</h3><p>Des passerelles et fonctionnalités en développement pour mieux faire travailler vos outils ensemble.</p></article>
-        <article class="feature"><span class="feature-icon"><svg viewBox="0 0 24 24"><path d="M4 5h7c2 0 3 1 3 3v12c0-2-1-3-3-3H4zM20 5h-4c-2 0-2 1-2 3v12c0-2 1-3 3-3h3z"/></svg></span><h3>Offres & formations</h3><p>Un cadre pour structurer votre savoir-faire, vos prestations et vos futurs parcours de formation.</p></article>
-      </div>
-      <p class="section-footnote">ELOAH évolue : la disponibilité de chaque fonction est précisée lors de la présentation.</p>
-    </div>
-  </section>
+<section class="how-section" id="ressources" aria-labelledby="how-title">
+  <div class="how-copy"><p class="section-kicker">DERRIÈRE LE VISUEL</p><h2 id="how-title">Un beau tableau de bord.<br><em>Et surtout, un cadre clair.</em></h2><p>ELOAH existe aujourd'hui comme cockpit personnel et prototype de supervision. Nous travaillons à en faire une solution plus largement déployable, avec une gestion des accès adaptée à chaque structure.</p><a href="mailto:soniacointe@powerglam.fr?subject=Pr%C3%A9sentation%20du%20prototype%20ELOAH%20Monitor" class="inline-link">Échanger sur votre besoin <span aria-hidden="true">↗</span></a></div>
+  <div class="how-list">
+    <div><span>01</span><p><strong>Rassembler</strong> Organiser les univers, les projets et les chemins d'accès.</p></div>
+    <div><span>02</span><p><strong>Visualiser</strong> Consulter les indicateurs effectivement disponibles.</p></div>
+    <div><span>03</span><p><strong>Prioriser</strong> Mettre en avant les activités à suivre et les prochaines actions.</p></div>
+    <div><span>04</span><p><strong>Vérifier</strong> Distinguer les contrôles simples des audits approfondis.</p></div>
+  </div>
+</section>
 
-  <section class="section section-flat section-line" id="demonstration">
-    <div class="container showcase">
-      <div class="section-heading">
-        <span class="section-label">VOTRE ENVIRONNEMENT</span>
-        <h2>Votre travail.<br><span class="gold">Votre rythme.</span><br>Votre ELOAH.</h2>
-        <p>Que vous développiez une activité, pilotiez une association ou meniez plusieurs projets de front, ELOAH vous aide à garder une vue d'ensemble.</p>
-        <div class="showcase-list"><span>Reprenez vos projets là où vous en étiez.</span><span>Retrouvez vos ressources au bon endroit.</span><span>Gardez une prochaine étape visible.</span></div>
-      </div>
-      <div class="dashboard" aria-label="Aperçu illustratif de l'organisation ELOAH">
-        <div class="dash-top"><span class="dash-word">ELOAH<span class="gold">·</span></span><span class="dash-tag">MON ESPACE</span></div>
-        <div class="dash-main"><small>Tableau de bord · aperçu illustratif</small><h3>Bienvenue dans votre espace.</h3><div class="dash-cards">
-          <div class="dash-card"><b>Mes projets</b><p>Un projet, sa prochaine étape</p></div>
-          <div class="dash-card"><b>Mon organisation</b><p>Une vue claire sur mes priorités</p></div>
-          <div class="dash-card"><b>Studio de création</b><p>Des idées aux contenus</p></div>
-          <div class="dash-card"><b>Mes documents</b><p>Les bonnes ressources au bon endroit</p></div>
-        </div><div class="dash-bottom">ELOAH · Imaginez un espace qui vous ressemble.</div></div>
-      </div>
-    </div>
-  </section>
+<section class="pricing-section" id="tarifs"><div><p class="section-kicker">LES SOLUTIONS ELOAH</p><h2>Organiser. Créer.<br><em>Faire vivre le collectif.</em></h2><p>Pilotage pour vos projets, Studio pour vos contenus, Associations pour votre collectif. Retrouvez les prestations et les formules envisagées sur une seule page.</p></div><div class="pricing-card"><strong>Choisir sa solution</strong><p>Les abonnements logiciels payants ne sont pas encore ouverts. Présentation et prestations sur demande.</p><a class="btn btn-gold" href="eloah-offres.html">Voir les solutions et offres →</a></div></section>
+<section class="about-section" id="apropos" aria-labelledby="about-title">
+  <div class="about-symbol" aria-hidden="true">E</div>
+  <div><p class="section-kicker">L'UNIVERS ELOAH</p><h2 id="about-title">L'ambition d'un cockpit.<br><em>La précision d'un outil.</em></h2><p>Chaque espace a ses objectifs, ses documents et ses décisions. ELOAH cherche à réunir les repères, sans mélanger les données ni faire croire qu'une page publique est un espace privé.</p><p class="about-small">Cette vitrine présente un concept et des fonctions de la version actuelle. La démonstration visuelle contient des données fictives. La plateforme personnelle est séparée des futurs espaces commerciaux.</p></div>
+</section>
 
-  <section class="section section-dark section-line eloah-tarifs" id="offres">
-    <div class="container">
-      <div class="section-heading">
-        <span class="section-label">ELOAH PILOTAGE · TARIFS ENVISAGÉS</span>
-        <h2>Un prix pour commencer.<br><span class="gold">De la place pour grandir.</span></h2>
-        <p>Tu n'as pas besoin du même ELOAH si tu veux organiser une idée ou piloter plusieurs activités. Voici les trois formules étudiées pour le lancement du logiciel.</p>
-      </div>
-      <div class="pricing-grid">
-        <article class="pricing-card">
-          <span class="pricing-topline">01 · Pour découvrir</span>
-          <h3>Découverte</h3>
-          <p class="pricing-who">Tu veux comprendre comment ELOAH fonctionne.</p>
-          <div class="pricing-amount">0 €</div>
-          <p class="pricing-period">Découverte du concept · accès libre à confirmer</p>
-          <div class="pricing-divider"></div>
-          <p class="pricing-explain">La première porte pour explorer l'organisation de tes projets et voir l'approche ELOAH.</p>
-          <ul class="pricing-list">
-            <li>Présentation des espaces et de la méthode</li>
-            <li>Découverte du pilotage d'un projet</li>
-            <li>Démonstration selon disponibilité</li>
-          </ul>
-          <a class="button button-outline pricing-action" href="eloah-inscription.html?offre=decouverte">Préparer ma découverte ↗</a>
-        </article>
-        <article class="pricing-card">
-          <span class="pricing-topline">02 · Pour s'organiser</span>
-          <h3>Entrée</h3>
-          <p class="pricing-who">Tu travailles sur tes projets au quotidien.</p>
-          <div class="pricing-amount">14<span>,90</span> €<small> / mois</small></div>
-          <p class="pricing-period">Tarif mensuel envisagé · non souscriptible</p>
-          <div class="pricing-divider"></div>
-          <p class="pricing-explain">Un espace personnel pour retrouver tes projets, tes documents et tes prochaines actions.</p>
-          <ul class="pricing-list">
-            <li>Organisation de projets personnels</li>
-            <li>Suivi des tâches et des ressources</li>
-            <li>Tableau de bord à ton rythme</li>
-          </ul>
-          <a class="button button-outline pricing-action" href="eloah-inscription.html?offre=entree">Créer mon compte ELOAH ↗</a>
-        </article>
-        <article class="pricing-card pricing-featured">
-          <span class="pricing-ribbon">Pour plusieurs activités</span>
-          <span class="pricing-topline">03 · Pour aller plus loin</span>
-          <h3>Partenaire</h3>
-          <p class="pricing-who">Tu jongles entre plusieurs activités ou univers.</p>
-          <div class="pricing-amount">69 €<small> / mois</small></div>
-          <p class="pricing-period">Tarif mensuel envisagé · non souscriptible</p>
-          <div class="pricing-divider"></div>
-          <p class="pricing-explain">Un pilotage plus large et des outils créatifs avancés, selon leur disponibilité au lancement.</p>
-          <ul class="pricing-list">
-            <li>Suivi de plusieurs activités</li>
-            <li>Organisation et bases d'expertise</li>
-            <li>Studios avancés selon activation</li>
-          </ul>
-          <a class="button button-gold pricing-action" href="eloah-inscription.html?offre=partenaire">Préparer mon accès ↗</a>
-        </article>
-      </div>
-      <p class="pricing-disclaimer">Montants finaux prévus pour les clientes : 14,90 € ou 69 € par mois, sans TVA ajoutée au paiement (TVA comprise si elle est applicable). Les modalités fiscales, les fonctionnalités et les conditions de vente restent à valider. Les abonnements ne sont pas encore ouverts.</p>
-
-      <div class="comparison" id="comparatif">
-        <div class="comparison-head">
-          <div><span class="section-label">EN UN COUP D'ŒIL</span><h3>Quelle formule te ressemble ?</h3></div>
-          <a href="#contact">Une question sur les offres ↗</a>
-        </div>
-        <div class="comparison-scroll" role="region" aria-label="Comparaison des formules ELOAH" tabindex="0">
-          <table>
-            <thead><tr><th scope="col">Ton besoin</th><th scope="col">Découverte</th><th scope="col">Entrée</th><th scope="col">Partenaire</th></tr></thead>
-            <tbody>
-              <tr><th scope="row">Découvrir l'environnement</th><td>Oui, sur présentation</td><td>Prévu</td><td>Prévu</td></tr>
-              <tr><th scope="row">Organiser ses projets</th><td>Découverte</td><td>Usage principal envisagé</td><td>Multi-activités envisagé</td></tr>
-              <tr><th scope="row">Documents et ressources</th><td>À découvrir</td><td>Dans le périmètre étudié</td><td>Dans le périmètre étudié</td></tr>
-              <tr><th scope="row">Studios créatifs avancés</th><td>Non annoncé</td><td>Non annoncé</td><td>Selon activation</td></tr>
-              <tr><th scope="row">Ouverture d'un compte client</th><td colspan="3">En préparation — pas d'activation ni de prélèvement automatique</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <p class="comparison-caption">Ce comparatif présente les usages envisagés, pas une liste de services déjà livrés. Le détail contractuel des offres reste à valider.</p>
-      </div>
-
-      <div class="custom-heading"><span class="section-label">UN PROJET PARTICULIER ?</span><h3>Et si tu avais besoin d'autre chose ?</h3><p>Les créations sur commande et les besoins des associations ne rentrent pas toujours dans un abonnement standard. On commence par parler du résultat attendu.</p></div>
-      <div class="custom-grid">
-        <article class="custom-card"><span class="custom-mark" aria-hidden="true">✧</span><div><span class="pricing-topline">CRÉATION · SUR DEVIS</span><h4>ELOAH Studios créatifs</h4><p>Articles, présentations, newsletters, visuels, supports éditoriaux : une prestation cadrée autour d'un brief et d'un livrable.</p><a href="#contact" data-eloah-offer="studio">Demander un devis créatif ↗</a></div></article>
-        <article class="custom-card"><span class="custom-mark" aria-hidden="true">◇</span><div><span class="pricing-topline">COLLECTIF · SUR DEVIS</span><h4>ELOAH Associations</h4><p>Une organisation adaptée aux membres, aux événements et au fonctionnement de ta structure, avec les accès et traitements de données à définir.</p><a href="#contact" data-eloah-offer="association">Parler de mon association ↗</a></div></article>
-      </div>
-      <div class="pricing-bottom-link"><a href="eloah-offres.html#abonnements">Explorer les solutions ELOAH en détail ↗</a></div>
-    </div>
-  </section>
-
-  <section class="section section-flat section-line" id="fonctionnement">
-    <div class="container">
-      <div class="section-heading"><span class="section-label">COMMENT ÇA MARCHE</span><h2>Le bon outil commence<br>par une vraie conversation.</h2></div>
-      <div class="steps">
-        <div class="step"><span class="step-index">01</span><h3>Vous racontez</h3><p>Votre activité, ce que vous construisez et les difficultés que vous rencontrez au quotidien.</p></div>
-        <div class="step"><span class="step-index">02</span><h3>On vous montre</h3><p>Les espaces ELOAH qui peuvent vous correspondre, avec une démonstration des fonctions disponibles.</p></div>
-        <div class="step"><span class="step-index">03</span><h3>On prépare la suite</h3><p>Les besoins, les conditions d'accès et les fonctions encore à développer sont précisés avant toute décision.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <section class="section section-dark section-line" id="questions">
-    <div class="container">
-      <div class="section-heading"><span class="section-label">QUESTIONS FRÉQUENTES</span><h2>Avant d'aller plus loin.</h2></div>
-      <div class="faq">
-        <details><summary>ELOAH est-il déjà accessible ?</summary><p>ELOAH est en développement. Certaines rubriques existent, d'autres sont en préparation. Les modalités d'accès et les fonctionnalités utilisables sont expliquées lors de la présentation.</p></details>
-        <details><summary>À qui s'adresse ELOAH ?</summary><p>Aux particuliers qui gèrent plusieurs projets, aux créateurs, indépendants, associations et petites équipes ayant besoin d'un espace central d'organisation.</p></details>
-        <details><summary>Quels sont les prix envisagés pour ELOAH ?</summary><p>Les formules étudiées sont Découverte (0 €), Entrée (14,90 € par mois) et Partenaire (69 € par mois). Les deux tarifs payants sont configurés comme montants finaux, TVA incluse si elle s’applique. Aucune TVA supplémentaire ne sera ajoutée au prix annoncé lors de l'ouverture commerciale. Les ventes ne sont pas encore actives. Studios créatifs et Associations restent sur devis.</p></details>
-        <details><summary>Est-ce que Découverte est accessible gratuitement aujourd'hui ?</summary><p>Le prix envisagé est de 0 €. L'ouverture d'un accès libre généralisé n'est pas encore confirmée. Tu peux demander une présentation et être informé de sa disponibilité.</p></details>
-        <details><summary>Puis-je payer ou souscrire un abonnement maintenant ?</summary><p>Non. La facturation, la gestion des accès, le périmètre des formules et les conditions commerciales restent à finaliser. Les boutons permettent uniquement de demander des informations par e-mail.</p></details>
-        <details><summary>Mes données sont-elles hébergées en Europe ?</summary><p>Les fournisseurs, lieux d'hébergement et garanties contractuelles seront indiqués avant l'ouverture commerciale. Aucune promesse d'hébergement ou de chiffrement n'est faite sans vérification.</p></details>
-        <details><summary>Que se passe-t-il lorsque je crée mon compte ?</summary><p>La page d’inscription prépare un compte ELOAH via Supabase. Les abonnements restent fermés jusqu’à leur ouverture officielle. Le paiement, lorsqu’il sera disponible, se fera sur Stripe et les droits seront vérifiés côté serveur avant de permettre l’accès.</p></details>
-      </div>
-    </div>
-  </section>
-
-  <section class="closing" id="contact">
-    <div class="container">
-      <span class="section-label">DÉCOUVRIR ELOAH</span>
-      <h2>Et si votre prochain projet<br>avait enfin <span class="gold">sa place ?</span></h2>
-      <p class="closing-copy">Parlez-nous de ce que vous imaginez. Nous vous présenterons ELOAH en fonction de vos besoins et de l'avancement réel des fonctionnalités.</p>
-      <div class="hero-actions"><a class="button button-gold" href="mailto:soniacointe@powerglam.fr?subject=Pr%C3%A9sentation%20ELOAH">Écrire directement →</a><a class="button button-outline" href="eloah-inscription.html?offre=entree">Créer mon compte ELOAH</a></div>
-      <form class="contact-form" id="contact-form">
-        <h3>Parlons de ton ELOAH</h3>
-        <p>Complétez votre message : un brouillon s'ouvrira dans votre messagerie pour que vous puissiez l'envoyer vous-même.</p>
-        <div class="fields">
-          <div class="field"><label for="contact-name">Votre nom</label><input id="contact-name" type="text" autocomplete="name" maxlength="120" required placeholder="Comment vous appeler ?"></div>
-          <div class="field"><label for="contact-email">Votre adresse e-mail</label><input id="contact-email" type="email" autocomplete="email" maxlength="200" required placeholder="vous@exemple.fr"></div>
-        </div>
-        <div class="field"><label for="contact-offer">Quelle offre t'intéresse ?</label>
-          <select id="contact-offer" name="offre" required>
-            <option value="">Choisis ce qui te correspond</option>
-            <option value="pilotage-decouverte">Pilotage · Découverte — 0 € envisagé</option>
-            <option value="pilotage-entree">Pilotage · Entrée — 14,90 €/mois envisagé</option>
-            <option value="pilotage-partenaire">Pilotage · Partenaire — 69 €/mois envisagé</option>
-            <option value="studio">Studios créatifs — sur devis</option>
-            <option value="association">ELOAH Associations — sur devis</option>
-          </select>
-        </div>
-        <div class="field"><label for="contact-profile">Vous êtes…</label><select id="contact-profile" required><option value="">Choisir votre profil</option><option>Particulier</option><option>Indépendant / créateur</option><option>Association / collectif</option><option>Autre projet</option></select></div>
-        <div class="field"><label for="contact-needs">Que souhaitez-vous organiser avec ELOAH ?</label><textarea id="contact-needs" rows="4" maxlength="2500" required placeholder="Quelques mots sur votre activité et vos besoins…"></textarea></div>
-        <button class="button button-gold" type="submit">Préparer ma demande →</button>
-        <p class="form-status" id="form-status" role="status" aria-live="polite"></p>
-        <p class="form-hint">Aucune donnée n'est transmise par ce formulaire avant l'envoi volontaire depuis votre application de messagerie.</p>
-      </form>
-    </div>
-  </section>
+<section class="closing-cta" aria-labelledby="closing-title">
+  <p class="section-kicker">CLARTÉ · CONTRÔLE · IMPACT</p>
+  <h2 id="closing-title">Et si tout devenait<br><em>plus simple à piloter ?</em></h2>
+  <a class="btn btn-gold" href="mailto:soniacointe@powerglam.fr?subject=Demande%20de%20d%C3%A9monstration%20ELOAH%20Monitor">Demander une démo <span aria-hidden="true">→</span></a>
+</section>
 </main>
-<footer class="footer"><div class="container" style="padding-top:18px;text-align:right"><a href="eloah-fondatrice.html" style="font-size:11px;color:inherit;opacity:.75;text-decoration:underline;text-underline-offset:4px">Accès fondatrice ELOAH</a></div><div class="container footer-inner"><div><a class="wordmark brand-link" href="#accueil"><span class="brand-mark" aria-hidden="true"></span><span>ELOAH<i>·</i></span></a><p>Un espace pour ce que vous avez envie de construire.</p></div><nav class="footer-links" aria-label="Liens de pied de page"><a href="#ecosysteme">Écosystème</a><a href="eloah-offres.html">Solutions ELOAH</a><a href="eloah-inscription.html?offre=entree">Inscription</a> · <a href="eloah-espace-prive.html">Espace membre</a><a href="#contact">Contact</a></nav></div></footer>
-<script>
-(function(){
-  var menu=document.getElementById('mobile-menu');
-  if(menu){menu.querySelectorAll('a').forEach(function(link){link.addEventListener('click',function(){menu.open=false;});});}
-  var form=document.getElementById('contact-form');
-  var select=document.getElementById('contact-offer');
-  if(!form||!select)return;
-  var offers={
-    'pilotage-decouverte':'ELOAH Pilotage · Découverte',
-    'pilotage-entree':'ELOAH Pilotage · Entrée',
-    'pilotage-partenaire':'ELOAH Pilotage · Partenaire',
-    'studio':'ELOAH Studios créatifs',
-    'association':'ELOAH Associations'
-  };
-  document.querySelectorAll('[data-eloah-offer]').forEach(function(link){
-    link.addEventListener('click',function(){
-      var choice=link.getAttribute('data-eloah-offer');
-      if(offers[choice])select.value=choice;
-    });
-  });
-  var urlOffer=new URLSearchParams(window.location.search).get('offre');
-  if(offers[urlOffer])select.value=urlOffer;
-  form.addEventListener('submit',function(event){
-    event.preventDefault();
-    if(!form.reportValidity())return;
-    var name=document.getElementById('contact-name').value.trim();
-    var email=document.getElementById('contact-email').value.trim();
-    var profile=document.getElementById('contact-profile').value;
-    var needs=document.getElementById('contact-needs').value.trim();
-    var offer=offers[select.value];
-    if(!name||!email||!profile||!needs||!offer)return;
-    var subject='Demande ELOAH — '+offer+' — '+name;
-    var body='Bonjour,\n\nJe souhaite en savoir plus sur ELOAH.\n\nOffre envisagée : '+offer+'\nNom : '+name+'\nE-mail de réponse : '+email+'\nProfil : '+profile+'\n\nMon projet :\n'+needs+'\n\nJe comprends que les tarifs et les accès sont encore à valider, et qu’aucun abonnement ni paiement n’est activé par cette demande.\n\nMerci de me recontacter.';
-    document.getElementById('form-status').textContent='Le brouillon est prêt dans ta messagerie : vérifie-le et clique sur Envoyer. Ta demande n’a pas encore été transmise.';
-    window.location.href='mailto:soniacointe@powerglam.fr?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
-  });
-})();
-</script>
-
-<script id="eloah-motion-script">
-(function(){
-  var stage=document.getElementById('e-portal');
-  var replay=document.getElementById('e-burst-btn');
-  var reduce=window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  if(stage && replay){
-    replay.addEventListener('click',function(){
-      if(reduce)return;
-      stage.classList.remove('is-opening');
-      void stage.offsetWidth;
-      stage.classList.add('is-opening');
-    });
-  }
-  if(reduce||!('IntersectionObserver' in window))return;
-  var targets=document.querySelectorAll('.section-heading,.feature,.offer,.step,.statement h2,.statement p,.dashboard');
-  targets.forEach(function(el){el.classList.add('reveal-on-scroll');});
-  document.documentElement.classList.add('motion-ready');
-  var observer=new IntersectionObserver(function(entries){
-    entries.forEach(function(entry){
-      if(!entry.isIntersecting)return;
-      entry.target.classList.add('in-view');
-      observer.unobserve(entry.target);
-    });
-  },{rootMargin:'0px 0px -35px 0px',threshold:.09});
-  targets.forEach(function(el){observer.observe(el);});
-})();
-</script>
-
+<footer class="site-footer"><a href="#haut" class="footer-brand">ELOAH <span>SUPERVISION</span></a><p>Une vision pour relier tous vos univers.</p><div><a href="#fonctionnalites">Fonctionnalités</a><a href="eloah-offres.html">Solutions & offres</a><a href="eloah-espace-prive.html">Connexion client</a><a href="eloah-fondatrice.html">Accès fondatrice</a><a href="mailto:soniacointe@powerglam.fr?subject=Contact%20ELOAH%20Monitor">Contact</a></div><a href="eloah-decouvrir-archive.html">Présentation précédente · archive</a><small>© 2026 ELOAH · Concept en évolution</small></footer>
+</div>
 </body>
 </html>

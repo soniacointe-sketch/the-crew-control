@@ -21,6 +21,14 @@ body.client-page .pilotage-film-controls{display:flex;align-items:center;gap:14p
 body.client-page .pilotage-film-controls a{font-size:10px;color:#d9bdd0}
 @media(max-width:650px){body.client-page #mes-projets{padding:18px 14px}}
 @media print{#pilotage-ambient,.pilotage-film-controls,body.client-page::before{display:none!important}}
+</style><style>
+body.client-page .client-hero{padding:22px;margin-bottom:16px}
+body.client-page .pilotage-hero-inner{padding:15px 0;gap:24px}
+body.client-page .pilotage-hero-copy h1{font-size:clamp(30px,3vw,44px)}
+body.client-page .pilotage-hero-proof,body.client-page .client-hero .workspace-choices{display:none}
+body.client-page .pilotage-panel{padding:16px}
+body.client-page .pilotage-panel-lead{font-size:11px}
+body.client-page .client-local-note{margin:12px 0 0;font-size:11px}
 </style></head>
 <body class="client-page">
 <video id="pilotage-ambient" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
@@ -36,7 +44,7 @@ body.client-page .pilotage-film-controls a{font-size:10px;color:#d9bdd0}
   <div class="client-hero-actions">
    <button id="client-quick-add" type="button" class="primary">＋ Noter une action</button>
    <a class="btn" href="#mes-projets">Ouvrir mes projets →</a>
-   <a class="btn" href="eloah-monitor.html">ELOAH Monitor ↗</a>
+   <a class="btn" href="eloah-monitor.html">Supervision ↗</a>
   </div>
   <ul class="pilotage-hero-proof" aria-label="Ce que permet cet espace">
    <li>Priorités plus claires</li><li>Planning accessible</li><li>Projets au même endroit</li>
@@ -163,7 +171,7 @@ body.client-page .pilotage-film-controls a{font-size:10px;color:#d9bdd0}
 <footer class="client-page-end"><span>ELOAH · PILOTAGE · Les données de cet appareil, sans synchronisation automatique.</span><a href="eloah-monitor.html">Revenir à la tour de contrôle ↗</a></footer>
 </main>
 <dialog id="client-new-project" aria-labelledby="new-project-heading"><div class="section-head"><h2 id="new-project-heading">Mon nouveau projet</h2><button type="button" id="client-project-close" aria-label="Fermer">×</button></div><form id="client-project-form"><label>Nom de mon projet<input id="client-project-name" name="project" required maxlength="100" placeholder="Ex. Préparer mon prochain atelier"></label><p>Ce projet sera enregistré dans ce navigateur. Tu pourras ensuite y retrouver tes conversations, notes et documents.</p><p id="client-project-error" role="alert"></p><button type="submit" class="primary">Ouvrir mon projet</button></form></dialog>
-<script src="eloah-navigation.js?v=20261013-sidebar1"></script>
+<script src="eloah-navigation.js?v=20261015-parcours"></script>
 <!-- No personal starter tasks are inserted on a new device. Existing browser data is retained. -->
 <script src="eloah-workspace.js?v=1"></script>
 <script>
