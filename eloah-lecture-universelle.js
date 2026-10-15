@@ -55,6 +55,7 @@ window.addEventListener('pagehide',stop);
   document.body.classList.add('power-glam-2040');
   const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute('content','#160912');
   const link=document.createElement('link');link.id='power-glam-2040-theme';link.rel='stylesheet';link.href='power-glam-2040.css?v=20261015';document.head.append(link);
+  const cockpit=document.createElement('link');cockpit.id='power-glam-2040-cockpit-theme';cockpit.rel='stylesheet';cockpit.href='power-glam-2040-cockpit.css?v=20261015';document.head.append(cockpit);
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
 })();
