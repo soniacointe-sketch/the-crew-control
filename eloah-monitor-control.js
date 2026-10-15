@@ -57,7 +57,7 @@ async function boot(){
  $('#today').textContent=new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'});
  if(!window.supabase?.createClient){showAuth('Le module de connexion est indisponible. Vérifie ta connexion Internet.');return;}
  client=window.supabase.createClient(AUTH_URL,ANON,{auth:{storageKey:'eloah-founder-auth-v1',persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}});
- client.auth.onAuthStateChange(evt=>{if(evt==='SIGNED_OUT'){revision++;showAuth('Ta session est terminée. Reconnecte-toi.');}else if(evt==='SIGNED_IN'||evt==='TOKEN_REFRESHED')setTimeout(verify,0);});
+ client.auth.onAuthStateChange((evt,session)=>{if(evt==='SIGNED_OUT'||(evt==='SIGNED_IN'&&session?.user?.id!==FOUNDER)){revision++;showAuth('Aucune session fondatrice active pour ce compte. Reconnecte-toi.');}else if(evt==='SIGNED_IN'||evt==='TOKEN_REFRESHED')setTimeout(verify,0);});
  await verify();
 }
 function metrics(){const num=[...checks.values()].filter(x=>x==='ok').length;const total=universes.length;
@@ -91,7 +91,7 @@ function renderQuick(){$('#quick-grid').innerHTML=tools.map(t=>'<a class="shortc
 function renderActivity(){if(!$('#activity-list'))return;$('#activity-list').innerHTML=events.length?events.map(x=>'<div class="activity-entry"><small>'+stamp(x.when)+'</small><strong>'+esc(x.text)+'</strong></div>').join(''):'<div class="empty">Aucune activité dans cette session.</div>';}
 function renderExternal(){const el=$('#external-checks');if(!external){el.textContent='Aucun rapport automatisé chargé.';return;}const date=Date.parse(external.checked_at);const rows=(external.sites||[]).filter(x=>['ELOAH','The Crew','Power & Glam'].includes(x.name));el.innerHTML='<p class="timestamp">Dernier rapport publié : '+(Number.isFinite(date)?stamp(date):'date inconnue')+'. Ce contrôle est historique, pas en direct.</p>'+rows.map(x=>'<div class="audit-row"><div><strong>'+esc(x.name)+'</strong><small>Contrôle externe archivé</small></div><span class="state" data-state="'+(x.ok?'ok':'fail')+'"><i class="dot '+(x.ok?'good':'bad')+'"></i>'+(x.ok?'Accessible au dernier test':'Échec au dernier test')+'</span></div>').join('');}
 function renderAll(){renderQuick();renderAudit();cards();renderActivity();renderExternal();metrics();}
-async function verifyPublic(){if(!authorized||checking)return;checking=true;$('#check-btn').disabled=true;const thisRevision=revision;
+async function verifyPublic(){if(!authorized||checking)return;checking=true;$('#check-btn').disabled=true;/* Les tests publics continuent si une revalidation sans changement de compte a lieu. */
  for(const u of universes)checks.set(u.id,'checking');
  renderAudit();cards();event('Contrôle de présence des pages publiques lancé.');
  // HEAD uniquement sur des chemins fixés par l’application, sans cookies ni jetons.
@@ -101,7 +101,7 @@ async function verifyPublic(){if(!authorized||checking)return;checking=true;$('#
  try{const r=await fetch(url.href,{method:'HEAD',credentials:'omit',cache:'no-store',redirect:'follow',signal:controller.signal});return [u.id,r.ok?'ok':'fail'];}finally{clearTimeout(timer);}
  }catch{return [u.id,'fail'];}
  }));
- if(!authorized||revision!==thisRevision)return;
+ if(!authorized){checking=false;return;}
  for(const [id,value] of results)checks.set(id,value);
  checking=false;lastCheck=Date.now();renderAudit();cards();event('Test terminé : '+results.filter(x=>x[1]==='ok').length+' pages joignables sur '+universes.length+'.');
 }
