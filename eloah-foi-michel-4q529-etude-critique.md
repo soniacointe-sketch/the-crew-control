@@ -4,6 +4,8 @@
 
 [← Grand sommaire](foi-control.html?file=eloah-foi-grand-sommaire-recherches.md) · [Collection anges](foi-control.html?file=eloah-foi-collection-04-anges-cieux.md)
 
+**Enquête croisée :** [ALPHA-012 · Aleph, les noms divins et Michel — comparaison avec P.Vindob. G 328](parisis-alpha-012-noms-divins-michel.html). Cette recherche ne postule pas de lien direct entre Qumrân et le papyrus grec.
+
 ## 01 · Fiche du témoin matériel
 
 | Champ | Information |
