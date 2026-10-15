@@ -4,11 +4,13 @@ on:
     branches: [main]
     paths:
       - 'eloah-monitor-vitrine.html'
+      - 'eloah-decouvrir.html'
       - 'eloah-monitor-vitrine.css'
       - '.github/workflows/eloah-monitor-vitrine-quality.yml'
   pull_request:
     paths:
       - 'eloah-monitor-vitrine.html'
+      - 'eloah-decouvrir.html'
       - 'eloah-monitor-vitrine.css'
       - '.github/workflows/eloah-monitor-vitrine-quality.yml'
   workflow_dispatch:
@@ -50,7 +52,7 @@ jobs:
                       self.csp=True
                   if tag=='section' and 'id' in a:self.sections.add(a['id'])
 
-          html=Path('eloah-monitor-vitrine.html').read_text(encoding='utf-8')
+          html=Path('eloah-decouvrir.html').read_text(encoding='utf-8')
           css=Path('eloah-monitor-vitrine.css').read_text(encoding='utf-8')
           page=Audit()
           page.feed(html)
@@ -80,6 +82,8 @@ jobs:
           for selector in ['.hero-inner','.screen-kpis','.screen-analysis','.donut-chart','.feature-card','.mobile-nav']:
               assert selector in css, f'Missing visual system: {selector}'
           assert 'Se connecter' in html and 'eloah-espace-prive.html' in html
-          assert 'Demander une démo' in html and '#tarifs' in html
+          assert 'Demander une démo' in html and 'eloah-offres.html' in html
+          redirect=Path('eloah-monitor-vitrine.html').read_text()
+          assert "location.replace('eloah-decouvrir.html'+location.hash)" in redirect, 'Legacy showcase must redirect to canonical page'
           print('Vitrine HTML, CSS, internal links, responsive breakpoints, and transparency checks passed.')
           PY
