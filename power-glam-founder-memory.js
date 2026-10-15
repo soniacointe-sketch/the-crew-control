@@ -36,7 +36,8 @@ export function createFounderMemory({shadow,isVerified,onChange}) {
   function node(tag,text){const el=document.createElement(tag);if(text!==undefined)el.textContent=text;return el;}
   function allowed(){return !!client&&!!owner&&isVerified();}
   function changed(message){selection.textContent='';onChange(message);}
-  function clear(){epoch++;saving=false;controller?.abort();controller=null;loading=null;ready=false;client=null;owner=null;cards=[];personal.checked=false;list.replaceChildren();q('founder-memory-search').value='';q('founder-memory-manager').open=false;status.textContent='Mémoire retirée de cet écran. Connexion fondatrice à vérifier.';selection.textContent='';}
+  function setSaving(value){saving=value;personal.disabled=value;q('founder-memory-refresh').disabled=value;}
+  function clear(){epoch++;setSaving(false);controller?.abort();controller=null;loading=null;ready=false;client=null;owner=null;cards=[];personal.checked=false;list.replaceChildren();q('founder-memory-search').value='';q('founder-memory-manager').open=false;status.textContent='Mémoire retirée de cet écran. Connexion fondatrice à vérifier.';selection.textContent='';}
   function resetPersonal(){
     personal.checked=false;cards=cards.filter(c=>c.sensitivity!=='personal');selection.textContent='';
     if(loading){epoch++;controller?.abort();controller=null;loading=null;ready=false;status.textContent='Actualise la mémoire pour reprendre sans repères personnels.';}
@@ -59,7 +60,7 @@ export function createFounderMemory({shadow,isVerified,onChange}) {
       button.addEventListener('click',async()=>{
         if(saving)return;if(!allowed()){info.textContent='Reconnecte-toi avant de modifier la mémoire.';return;}
         const value=body.value.trim(),label=title.value.trim();if(!value||value.length>4000||!label||label.length>140){info.textContent='Indique un titre et un texte de 1 à 4 000 caractères.';return;}
-        const ticket=epoch,currentOwner=owner;button.disabled=true;saving=true;changed('Correction de mémoire : ancien échange retiré du contexte.');info.textContent='Enregistrement dans ta base privée…';
+        const ticket=epoch,currentOwner=owner;button.disabled=true;setSaving(true);changed('Correction de mémoire : ancien échange retiré du contexte.');info.textContent='Enregistrement dans ta base privée…';
         const abort=new AbortController(),timer=setTimeout(()=>abort.abort(),15000);
         try{
           const {data,error}=await client.from(TABLE).update({title:label,body:value,enabled:enabled.checked}).eq('owner_id',currentOwner).eq('slug',card.slug).eq('revision',card.revision).select(FIELDS).abortSignal(abort.signal).maybeSingle();
@@ -67,7 +68,7 @@ export function createFounderMemory({shadow,isVerified,onChange}) {
           if(error||!safeCard(data)){info.textContent='Correction non confirmée. Actualise la mémoire avant de réessayer : la fiche a peut-être changé.';return;}
           cards=cards.map(c=>c.slug===data.slug?data:c);changed('Mémoire corrigée : nouvelle conversation prête.');draw();status.textContent='Correction enregistrée dans ta mémoire privée. Elle sera utilisée pour les prochaines demandes.';
         }catch{if(ticket===epoch&&allowed())info.textContent='Enregistrement non confirmé. Actualise pour vérifier avant de réessayer.';}
-        finally{clearTimeout(timer);if(ticket===epoch){button.disabled=false;saving=false;}}
+        finally{clearTimeout(timer);if(ticket===epoch){button.disabled=false;setSaving(false);}}
       });
     });
   }
