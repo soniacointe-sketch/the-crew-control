@@ -116,6 +116,17 @@ body{background:#1b1c1f;color:#f5f0e6}
 @media(max-width:650px){.parisis-editorial-paths{grid-template-columns:1fr}.parisis-editorial-paths a{border-right:0;border-bottom:1px solid #6d624f;padding:18px 20px}.parisis-editorial-paths a:last-child{border-bottom:0}.parisis-chapter-grid{grid-template-columns:1fr}.parisis-cover{height:240px}.parisis-library .parisis-atlas-card,.parisis-library .parisis-reading-card{padding:13px}.parisis-library .parisis-atlas-card iframe{height:360px}.parisis-workspace{padding:13px}.parisis-heritage-sources{margin-top:18px}.parisis-top-link-list .parisis-folder-links{max-height:none}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 </style><link rel="stylesheet" href="eloah-theme-global.css?v=20261014-pg2">
+<link rel="stylesheet" href="parisis-home-parcours.css?v=20261015-v1">
+<style>
+/* L'accueil met le parcours avant l'index et évite un héros trop haut. */
+.top > div:first-child{padding:clamp(24px,3vw,44px) clamp(22px,3vw,43px) 10px}
+.top h1{font-size:clamp(49px,5.7vw,78px)!important;margin:10px 0 13px}
+.top .sub{font-size:clamp(17px,1.9vw,23px)}
+.top-actions{padding:0 clamp(22px,3vw,43px) clamp(24px,3vw,35px)}
+.parisis-hero-art img{min-height:320px}
+@media(max-width:900px){.top .parisis-hero-art img{min-height:160px;max-height:170px}.top > .top-actions{padding:17px 20px 20px}.top > div:first-child{padding:26px 21px 16px}.top h1{font-size:clamp(44px,9vw,65px)!important}.top .sub{font-size:18px}}
+@media(max-width:550px){.top > .top-actions>*{flex:1 1 100%;text-align:center}.top .parisis-hero-note{font-size:11px}}
+</style>
 </head>
 <body>
 <div class="shell">
@@ -138,16 +149,50 @@ body{background:#1b1c1f;color:#f5f0e6}
 </aside>
 <main class="main">
 <header class="top">
-<div><div class="eyebrow">ELOAH · HISTOIRE · CARTOGRAPHIE · ARCHIVES</div><h1>PARISIS <em>ENGINE.</em></h1><p class="sub">Paris ne se résume pas à ses monuments. Ses plans, ses manuscrits et ses disparitions racontent une autre histoire.</p><p class="parisis-hero-note">Une revue d’enquêtes où chaque hypothèse se confronte aux dates, aux plans et aux sources. Aucun alignement n’est une preuve d’intention à lui seul.</p></div>
-<span id="parisisActionsAnchor" hidden></span><div class="top-actions"><a class="button-light" href="parisis-alpha-010-marcus-aletheia.html">ΑΩ Cycle ALPHA ↗</a><a class="button-light" href="parisis-reseau-indices.html">↔ Réseau des indices ↗</a><a class="button-light" href="parisis-fil-enquetes.html">⟶ Suivre le fil des enquêtes ↗</a><a class="button-light" href="parisis-hugo-axes.html?all=1&amp;v=atlas-complet-20261013">🗺 Atlas complet ↗</a><a class="button-light" href="parisis-axe-016-paris-disparu-nesle.html">📖 AXE-016 · Paris disparu ↗</a><a class="button-light" href="parisis-publications.html">▤ Toutes les enquêtes ↗</a><a class="button-light" href="parisis-cartography-lab.html?v=decouvertes">📐 Cartographie ↗</a><button id="askChat" class="primary" type="button">Travailler dans ChatGPT ↗</button></div>
+<div><div class="eyebrow">ELOAH · HISTOIRE · CARTOGRAPHIE · ARCHIVES</div><h1>PARISIS <em>ENGINE.</em></h1><p class="sub">Toutes les enquêtes se suivent. Pars d’un indice, ouvre le chapitre suivant et retrouve les sources sans perdre le fil.</p><p class="parisis-hero-note">Une revue d’enquêtes où chaque hypothèse se confronte aux dates, aux plans et aux sources. Aucun alignement n’est une preuve d’intention à lui seul.</p></div>
+<span id="parisisActionsAnchor" hidden></span><div class="top-actions"><a class="button-light" href="#peHomeGuide">→ Choisir ou reprendre une enquête</a><a class="button-light" href="parisis-fil-enquetes.html">▤ Voir toutes les étapes ↗</a><button id="askChat" class="primary" type="button">Travailler dans ChatGPT ↗</button></div>
 <figure class="parisis-hero-art"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Plan_de_Turgot_detail.jpg/960px-Plan_de_Turgot_detail.jpg" alt="Détail du plan de Paris dit plan de Turgot, Louis Bretez, 1739" width="1100" height="980" loading="eager"><figcaption>PARIS · PLAN DE TURGOT, 1739 · <a href="https://commons.wikimedia.org/wiki/File:Plan%20de%20Turgot%20detail.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons, source ↗</a></figcaption></figure>
 </header>
-<nav class="parisis-editorial-paths" aria-label="Les chemins de l’enquête">
+<section class="pe-home-guide" id="peHomeGuide" aria-labelledby="peHomeHeading">
+<div class="pe-guide-header">
+<div class="pe-guide-intro"><div class="pe-kicker">PARISIS ENGINE · TON FIL DE RECHERCHE</div>
+<h2 id="peHomeHeading">Reprendre le fil. <em>Découvrir la suite.</em></h2>
+<p>Une enquête ouvre un chapitre, puis un autre. Choisis un parcours, lis les étapes dans l'ordre, et retrouve ton dernier chapitre ouvert sans chercher parmi tous les dossiers.</p></div>
+<aside class="pe-last-card" id="peLastOpened" aria-label="Dernier chapitre ouvert"><div class="pe-kicker">MA DERNIÈRE OUVERTURE</div><h3>Reprendre un chapitre</h3><p>Cette fonction gardera ton dernier chapitre ouvert sur cet appareil.</p><a href="parisis-fil-enquetes.html">Voir les parcours →</a></aside></div>
+<div class="pe-guide-choose-head"><h3>01 / Choisis une enquête</h3><p>5 séries documentaires · 21 jalons de lecture</p></div>
+<div class="pe-journeys" id="peJourneys" aria-label="Sélectionner une enquête">
+<a href="parisis-fil-enquetes.html#alpha"><span class="pe-tiny">DERNIÈRE SÉRIE</span><span class="pe-journey-title">ALPHA</span><span class="pe-tiny-count">3 jalons</span></a>
+<a href="parisis-fil-enquetes.html#par-isis"><span class="pe-tiny">CYCLE URBAIN</span><span class="pe-journey-title">PAR ISIS</span><span class="pe-tiny-count">5 étapes</span></a>
+<a href="parisis-fil-enquetes.html#nesle"><span class="pe-tiny">CYCLE ARCHIVES</span><span class="pe-journey-title">NESLE</span><span class="pe-tiny-count">5 étapes</span></a>
+<a href="parisis-fil-enquetes.html#oeil"><span class="pe-tiny">CYCLE SYMBOLES</span><span class="pe-journey-title">L’ŒIL</span><span class="pe-tiny-count">4 étapes</span></a>
+<a href="parisis-fil-enquetes.html#nostradamus"><span class="pe-tiny">CYCLE TEXTES</span><span class="pe-journey-title">NOSTRADAMUS</span><span class="pe-tiny-count">4 étapes</span></a>
+</div>
+<div class="pe-journey-main" id="peJourneyPanel">
+<div class="pe-journey-steps"><div class="pe-kicker">02 / SUIVRE LES ÉTAPES DANS L'ORDRE</div>
+<h3 id="peCycleHeading">Jésus enfant, les lettres et les sept cieux</h3>
+<p id="peCycleDescription">Du corpus ALPHA-001 aux lettres de Marcus et aux sept voyelles.</p>
+<ol class="pe-step-list" id="peJourneySteps">
+<li><span class="pe-step-n">01</span><div class="pe-step-copy"><span>ALPHA-001</span><a href="foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md">Le dossier maître : Jésus enfant et les lettres ↗</a><small>La question de départ et les textes du corpus.</small></div></li>
+<li><span class="pe-step-n">02</span><div class="pe-step-copy"><span>ALPHA-010</span><a href="parisis-alpha-010-marcus-aletheia.html">Les 24 lettres et le corps de la Vérité ↗</a><small>Irénée et les représentations des lettres.</small></div></li>
+<li><span class="pe-step-n">03</span><div class="pe-step-copy"><span>ALPHA-011</span><a href="parisis-alpha-011-sept-voyelles-apocalypse.html">Sept voyelles, sept cieux et Apocalypse ↗</a><small>Comparer les sources et les dates.</small></div></li>
+</ol><p id="peJourneyLoadError" hidden></p></div>
+<aside class="pe-next-card" id="peJourneyNext" aria-label="La prochaine étape">
+<div class="pe-kicker">03 / LIRE CE CHAPITRE</div><span class="pe-step-code">ÉTAPE 01 / 03 · ALPHA-001</span>
+<h3>Le dossier maître</h3><p>Commencer par la recherche qui a ouvert le cycle ALPHA.</p>
+<div class="pe-next-actions"><a class="pe-start" href="foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md">Commencer le parcours ↗</a>
+<a class="pe-secondary" href="parisis-fil-enquetes.html#alpha">Voir le fil ALPHA →</a></div>
+<p class="pe-method">Les dossiers ALPHA-002 à ALPHA-009 restent conservés dans les archives.</p>
+</aside></div>
+<footer class="pe-guide-footer"><p>La dernière ouverture est mémorisée uniquement sur ce navigateur. Une ressemblance n'est pas une preuve.</p><div class="pe-guide-links"><a href="parisis-fil-enquetes.html">Toutes les étapes ↗</a><a href="parisis-reseau-indices.html">Indices reliés ↗</a><a href="parisis-publications.html">Archives complètes ↗</a></div></footer>
+</section>
+<details class="pe-supplemental"><summary>Explorer autrement : cartes, manuscrits, atlas et archives</summary>
+<nav class="parisis-editorial-paths" aria-label="Les autres chemins de l’enquête">
 <a href="parisis-axe-016-paris-disparu-nesle.html"><em>01</em><strong>Le Paris disparu</strong><span>Nesle, les travaux, les archives et les contradictions à examiner</span></a>
 <a href="parisis-hugo-axes.html?all=1&amp;v=atlas-complet-20261013"><em>02</em><strong>L’atlas des lieux</strong><span>Points, liaisons et géométrie, sans conclusions automatiques</span></a>
 <a href="parisis-par-isis-001.html?v=parisis001-20261013"><em>03</em><strong>Paris &amp; ses symboles</strong><span>Le cycle PAR ISIS, ses sources et ses contre-tests</span></a>
 <a href="parisis-dagobert-manuscrits-comparaison.html"><em>04</em><strong>Manuscrits &amp; images</strong><span>Enluminures, témoins historiques et traditions représentées</span></a>
 </nav>
+</details>
 <div class="parisis-heritage-sources" style="margin:16px 0 30px"><strong>Bibliothèque des enquêtes PARISIS.</strong> Les séries historiques et les laboratoires de recherche disposent maintenant d’une navigation commune. <a href="parisis-publications.html">Explorer les pages et filtrer par thème ↗</a>. Les atlas, les fiches et les archives existants n’ont pas été remplacés.</div>
 
 <section class="parisis-library" aria-labelledby="libraryTitle">
@@ -281,4 +326,5 @@ body{background:#1b1c1f;color:#f5f0e6}
 <label class="wide"><strong>Conclusion et limites</strong><textarea class="field" name="notes"></textarea></label>
 </div><p class="micro">Évaluation manuelle : aucune certification scientifique automatique.</p>
 <div class="dialog-actions"><button type="button" id="cancelProof">Annuler</button><button class="primary" type="submit">Enregistrer la fiche de preuve</button></div>
-</form></dialog><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script><script src="eloah-music-dock.js" defer></script></body></html>
+</form></dialog><script defer src="eloah-navigation.js?v=20261013-sidebar1"></script><script src="eloah-music-dock.js" defer></script><script defer src="parisis-home-parcours.js?v=20261015-v1"></script>
+</body></html>
