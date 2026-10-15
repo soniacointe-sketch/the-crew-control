@@ -2179,7 +2179,7 @@ function field(t,key){if(details[t.id]?.[key])return details[t.id][key];if(key==
 function groupedTracks(){if(librarySort==='all')return rows(tracks);const map=new Map();for(const t of tracks){const name=field(t,librarySort);if(!map.has(name))map.set(name,[]);map.get(name).push(t)}return [...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],'fr')).map(([name,items])=>'<h3 class="music-group">'+safe(name)+'</h3>'+rows(items)).join('')||'<div class="empty">Aucun morceau pour le moment.</div>'}
 document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{librarySort=b.dataset.sort;document.querySelectorAll('[data-sort]').forEach(x=>x.style.borderColor=x===b?'#ddb57e':'');render()});
 let coverTarget=null;let covers={};try{covers=JSON.parse(localStorage.getItem('eloahMusicCovers')||'{}')}catch(e){covers={}}
-const defaultCovers={'p0':'assets/eloah-music/power-glam.svg','p1':'assets/eloah-music/the-crew.svg','p2':'assets/eloah-music/sonia-velka.svg','p3':'assets/eloah-music/eloah-radio.svg'};
+const defaultCovers={'p0':'assets/eloah-music/power-glam-photo-v1.svg','p1':'assets/eloah-music/the-crew-photo-v1.svg','p2':'assets/eloah-music/sonia-velka-photo-v1.svg','p3':'assets/eloah-music/eloah-radio-photo-v1.svg'};
 function musicArtwork(id){
  const item=tracks.find(t=>t.id===id)||playlists.find(p=>p.id===id),name=item?.title||item?.name||'ELOAH';
  let hash=0;for(const c of String(id))hash=(hash*31+c.charCodeAt(0))>>>0;
