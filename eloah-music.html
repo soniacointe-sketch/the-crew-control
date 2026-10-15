@@ -1984,12 +1984,32 @@ $('cloudBtn').onclick=async()=>{
  if(!cloud)return modal('Cloud indisponible','<p>Le module de connexion est indisponible.</p>');
  await cloudSession();
  if(!cloudUser){
-  modal('Connexion au cloud musical','<p>Entre ton adresse e-mail pour recevoir un lien sécurisé de connexion.</p><input class="field" type="email" id="cloudEmail" placeholder="Adresse e-mail"><button class="action" id="cloudLogin">Recevoir mon lien</button><p class="muted" id="cloudMessage"></p>');
-  $('cloudLogin').onclick=async()=>{
-    const email=$('cloudEmail').value.trim();if(!email)return;
-    const {error}=await cloud.auth.signInWithOtp({email,options:{emailRedirectTo:location.origin+location.pathname}});
-    $('cloudMessage').textContent=error?error.message:'Vérifie ta messagerie, puis reviens sur ELOAH Music.';
-  };return;
+  modal('Connexion à ELOAH Music','<form id="musicLoginForm"><label for="cloudEmail">Adresse e-mail</label><input class="field" type="email" id="cloudEmail" autocomplete="username" placeholder="ton@email.fr" required><label for="cloudPassword">Mot de passe</label><input class="field" type="password" id="cloudPassword" autocomplete="current-password" placeholder="Ton mot de passe ELOAH" required><button class="action" type="submit" id="cloudPasswordLogin">Se connecter</button><button class="action secondary" type="button" id="cloudLogin">Recevoir un lien par e-mail</button><p class="muted" id="cloudMessage" role="status" aria-live="polite"></p></form>');
+  const form=$('musicLoginForm'),emailInput=$('cloudEmail'),passwordInput=$('cloudPassword'),message=$('cloudMessage'),submit=$('cloudPasswordLogin'),link=$('cloudLogin');
+  let busy=false;
+  form.onsubmit=async(event)=>{
+    event.preventDefault();if(busy||!form.reportValidity())return;
+    busy=true;submit.disabled=true;link.disabled=true;submit.textContent='Connexion…';message.textContent='';
+    try{
+      const {data,error}=await cloud.auth.signInWithPassword({email:emailInput.value.trim(),password:passwordInput.value});
+      if(error){message.textContent=error.code==='email_not_confirmed'?'Confirme ton adresse e-mail avant de te connecter.':'Connexion impossible. Vérifie ton e-mail et ton mot de passe, puis réessaie.';return}
+      if(!data?.user)throw new Error('no_user');
+      passwordInput.value='';cloudUser=data.user;$('musicAccountLogin').textContent='Mon compte';
+      $('modal').close();cloudStatus('Connectée à ELOAH Music.');
+      cloudSession().catch(()=>cloudStatus('Connectée. Actualise le cloud pour charger tes titres.'));
+    }catch(error){message.textContent='Connexion indisponible. Vérifie ta connexion Internet et réessaie.'}
+    finally{busy=false;submit.disabled=false;link.disabled=false;submit.textContent='Se connecter'}
+  };
+  link.onclick=async()=>{
+    if(busy||!emailInput.reportValidity())return;
+    busy=true;link.disabled=true;submit.disabled=true;message.textContent='Envoi du lien…';
+    try{
+      const {error}=await cloud.auth.signInWithOtp({email:emailInput.value.trim(),options:{emailRedirectTo:location.origin+location.pathname}});
+      message.textContent=error?'Envoi impossible : '+error.message:'Vérifie ta messagerie pour ouvrir ton lien de connexion.';
+    }catch(error){message.textContent='Envoi impossible. Vérifie ta connexion Internet.'}
+    finally{busy=false;link.disabled=false;submit.disabled=false}
+  };
+  emailInput.focus();return;
  }
  modal('Ma bibliothèque cloud','<p>Connectée : '+safe(cloudUser.email||'Compte ELOAH')+'</p><p>Les titres envoyés sont privés et accessibles depuis tes appareils connectés au même compte.</p><button class="action" id="cloudUpload">Envoyer mes titres locaux dans le cloud</button><button class="action secondary" id="cloudRefresh">Actualiser</button><button class="action secondary" id="cloudLogout">Déconnexion</button><p class="muted" id="cloudMessage"></p>');
  $('cloudRefresh').onclick=async()=>{await refreshCloud();$('cloudMessage').textContent='Bibliothèque actualisée.'};
