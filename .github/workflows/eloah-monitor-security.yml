@@ -75,3 +75,30 @@ jobs:
             fi
           done
           echo "Unauthorized requests rejected; no metrics exposed."
+      - name: Verify forbidden origin and preflight response
+        shell: bash
+        env:
+          FN_URL: https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-monitor-founder-metrics
+          MONITOR_ORIGIN: https://soniacointe-sketch.github.io
+          PUBLIC_KEY: sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy
+        run: |
+          set -euo pipefail
+          # An unauthorized origin must never receive any metrics, even without credentials.
+          status=$(curl -sS --max-time 20 -o /tmp/monitor-forbidden-body -w '%{http_code}' \
+            -X POST "$FN_URL" -H "Origin: https://unauthorized.example" \
+            -H "Content-Type: application/json" -H "apikey: $PUBLIC_KEY" --data '{}')
+          echo "Wrong origin -> HTTP $status"
+          [[ "$status" == 403 ]] || exit 1
+          ! grep -Eq '"measures"|"nextEvents"' /tmp/monitor-forbidden-body || exit 1
+
+          # Browser preflight must allow ONLY the existing ELOAH origin.
+          status=$(curl -sS --max-time 20 -D /tmp/monitor-preflight-headers \
+            -o /tmp/monitor-preflight-body -w '%{http_code}' \
+            -X OPTIONS "$FN_URL" -H "Origin: $MONITOR_ORIGIN" \
+            -H "Access-Control-Request-Method: POST" \
+            -H "Access-Control-Request-Headers: authorization,apikey,content-type")
+          echo "Allowed preflight -> HTTP $status"
+          [[ "$status" == 204 ]] || exit 1
+          grep -qiF "access-control-allow-origin: $MONITOR_ORIGIN" /tmp/monitor-preflight-headers || exit 1
+          ! grep -Eq '"measures"|"nextEvents"' /tmp/monitor-preflight-body || exit 1
+          echo "Origin and preflight checks passed."
