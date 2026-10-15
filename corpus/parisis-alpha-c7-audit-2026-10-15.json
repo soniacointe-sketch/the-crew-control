@@ -1,0 +1,485 @@
+{
+  "title": "PARISIS ALPHA-C7 · audit historique calculé",
+  "date_edition": "2026-10-15",
+  "engine_version": "ALPHA-C7/1.0.0",
+  "engine_file": "parisis-alpha-engine.js",
+  "engine_blob_sha": "5ae147a0e741634df72864ecd784251563058c3e",
+  "corpus_limitation": "Corpus fixe de sources contrôlées manuellement, pas une collecte web en direct",
+  "interpretation_warning": "Les opérations valident la cohérence du corpus décrit et des calculs, pas l'exactitude indépendante ni un lien causal.",
+  "report": {
+    "engine": "ALPHA-C7/1.0.0",
+    "asOf": "2026-10-15",
+    "sources": 7,
+    "checks": 21,
+    "passed": 21,
+    "failed": 0,
+    "hypotheses": 5,
+    "unproven": 5,
+    "datedPairs": 4,
+    "issues": 2
+  },
+  "checks": [
+    {
+      "id": "PAIR-01",
+      "method": "ALPHABET",
+      "label": "Tête: Α–Ω",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-02",
+      "method": "ALPHABET",
+      "label": "Cou: Β–Ψ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-03",
+      "method": "ALPHABET",
+      "label": "Épaules et mains: Γ–Χ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-04",
+      "method": "ALPHABET",
+      "label": "Poitrine: Δ–Φ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-05",
+      "method": "ALPHABET",
+      "label": "Diaphragme: Ε–Υ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-06",
+      "method": "ALPHABET",
+      "label": "Dos: Ζ–Τ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-07",
+      "method": "ALPHABET",
+      "label": "Ventre: Η–Σ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-08",
+      "method": "ALPHABET",
+      "label": "Cuisses: Θ–Ρ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-09",
+      "method": "ALPHABET",
+      "label": "Genoux: Ι–Π",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-10",
+      "method": "ALPHABET",
+      "label": "Jambes: Κ–Ο",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-11",
+      "method": "ALPHABET",
+      "label": "Chevilles: Λ–Ξ",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "PAIR-12",
+      "method": "ALPHABET",
+      "label": "Pieds: Μ–Ν",
+      "actual": 25,
+      "expected": 25,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "LEN-24",
+      "method": "CORPUS",
+      "label": "Nombre de lettres grecques",
+      "actual": 24,
+      "expected": 24,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "VOWELS-7",
+      "method": "PHONÉ",
+      "label": "Nombre de voyelles grecques distinctes",
+      "actual": 7,
+      "expected": 7,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "VOWELS-ORDER",
+      "method": "PHONÉ",
+      "label": "Séquence rapportée par Irénée",
+      "actual": "ΑΕΗΙΟΥΩ",
+      "expected": "ΑΕΗΙΟΥΩ",
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "CAT-24",
+      "method": "CORPUS",
+      "label": "9 muettes + 8 semi-voyelles + 7 voyelles",
+      "actual": 24,
+      "expected": 24,
+      "ok": true,
+      "source": "irenee-14"
+    },
+    {
+      "id": "NUM-ΙΗΣΟΥΣ",
+      "method": "ARITHMOS",
+      "label": "Isopséphie de ΙΗΣΟΥΣ",
+      "actual": 888,
+      "expected": 888,
+      "ok": true,
+      "source": "irenee-15"
+    },
+    {
+      "id": "NUM-ΑΩ",
+      "method": "ARITHMOS",
+      "label": "Isopséphie de ΑΩ",
+      "actual": 801,
+      "expected": 801,
+      "ok": true,
+      "source": "irenee-15"
+    },
+    {
+      "id": "NUM-ΠΕΡΙΣΤΕΡΑ",
+      "method": "ARITHMOS",
+      "label": "Isopséphie de ΠΕΡΙΣΤΕΡΑ",
+      "actual": 801,
+      "expected": 801,
+      "ok": true,
+      "source": "irenee-15"
+    },
+    {
+      "id": "PAPYRUS-49",
+      "method": "ARITHMOS",
+      "label": "7 lignes × 7 voyelles",
+      "actual": 49,
+      "expected": 49,
+      "ok": true,
+      "source": "papyrus-g328"
+    },
+    {
+      "id": "MICHEL-REDUC",
+      "method": "ALPHABET",
+      "label": "Schéma de réduction du nom de Michel",
+      "actual": true,
+      "expected": true,
+      "ok": true,
+      "source": "papyrus-g328"
+    }
+  ],
+  "hypotheses": [
+    {
+      "id": "H1",
+      "name": "Les sept tonnerres sont les sept voyelles",
+      "status": "NON DÉMONTRÉ",
+      "sourceA": "Apocalypse 10,3–4",
+      "sourceB": "Irénée I,14",
+      "sourceIds": [
+        "apocalypse-tonnerres",
+        "irenee-14"
+      ],
+      "shared": [
+        "7",
+        "son"
+      ],
+      "distinctiveShared": [],
+      "criticalMotifMissing": true,
+      "chronology": "compatible (ne prouve pas l'emprunt)",
+      "objection": "Apocalypse 10,4 ne transcrit pas leurs paroles",
+      "sourceURLs": [
+        "https://www.biblegateway.com/passage/?search=Revelation%2010%3A3-4&version=ESV",
+        "https://www.newadvent.org/fathers/0103114.htm"
+      ]
+    },
+    {
+      "id": "H2",
+      "name": "L'Apocalypse est la source directe de Marcus",
+      "status": "NON DÉMONTRÉ",
+      "sourceA": "Apocalypse 1,8 ; 21,6 ; 22,13",
+      "sourceB": "Irénée I,15",
+      "sourceIds": [
+        "apocalypse-aomega",
+        "irenee-15"
+      ],
+      "shared": [
+        "alpha-omega"
+      ],
+      "distinctiveShared": [
+        "alpha-omega"
+      ],
+      "criticalMotifMissing": false,
+      "chronology": "compatible (ne prouve pas l'emprunt)",
+      "objection": "Absence de citation ou de chaîne de transmission explicite dans les pièces examinées",
+      "sourceURLs": [
+        "https://www.biblegateway.com/passage/?search=Revelation%201%3A8%3B21%3A6%3B22%3A13&version=ESV",
+        "https://www.newadvent.org/fathers/0103115.htm"
+      ]
+    },
+    {
+      "id": "H3",
+      "name": "Le chant des voyelles d'Égypte a été repris directement par Marcus",
+      "status": "NON DÉMONTRÉ",
+      "sourceA": "Pseudo-Démétrios §71",
+      "sourceB": "Irénée I,14",
+      "sourceIds": [
+        "demetrios-71",
+        "irenee-14"
+      ],
+      "shared": [
+        "7",
+        "sept-voyelles",
+        "son"
+      ],
+      "distinctiveShared": [
+        "sept-voyelles"
+      ],
+      "criticalMotifMissing": false,
+      "chronology": "indéterminée",
+      "objection": "Datation du traité incertaine ; communauté du motif ≠ filiation",
+      "sourceURLs": [
+        "https://www.attalus.org/old/demetr2.html",
+        "https://www.newadvent.org/fathers/0103114.htm"
+      ]
+    },
+    {
+      "id": "H4",
+      "name": "La réduction de Michel reproduit la méthode de Marcus",
+      "status": "NON DÉMONTRÉ",
+      "sourceA": "Irénée I,14",
+      "sourceB": "P.Vindob. G 328",
+      "sourceIds": [
+        "irenee-14",
+        "papyrus-g328"
+      ],
+      "shared": [
+        "sept-voyelles",
+        "7",
+        "nom-lettres"
+      ],
+      "distinctiveShared": [
+        "sept-voyelles"
+      ],
+      "criticalMotifMissing": false,
+      "chronology": "compatible (ne prouve pas l'emprunt)",
+      "objection": "Réduction d'un nom versus expansion des noms des lettres",
+      "sourceURLs": [
+        "https://www.newadvent.org/fathers/0103114.htm",
+        "https://www.onb.ac.at/mehr/blogs/detail/magie-der-erzengel-michael-und-maennerliebe"
+      ]
+    },
+    {
+      "id": "H5",
+      "name": "Le récit Alpha/Bêta prouve la transmission par Jésus historique",
+      "status": "NON DÉMONTRÉ",
+      "sourceA": "Irénée I,20",
+      "sourceB": "Irénée I,14",
+      "sourceIds": [
+        "irenee-20",
+        "irenee-14"
+      ],
+      "shared": [
+        "nom-lettres"
+      ],
+      "distinctiveShared": [],
+      "criticalMotifMissing": false,
+      "chronology": "compatible (ne prouve pas l'emprunt)",
+      "objection": "Témoignage tardif sur une lecture marcosienne, pas une preuve biographique",
+      "sourceURLs": [
+        "https://www.newadvent.org/fathers/0103120.htm",
+        "https://www.newadvent.org/fathers/0103114.htm"
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "id": "GAP-H1",
+      "type": "lacune",
+      "text": "Les sept tonnerres sont les sept voyelles : le motif nécessaire n'est pas attesté dans les deux témoins."
+    },
+    {
+      "id": "DATE-H3",
+      "type": "datation",
+      "text": "Le chant des voyelles d'Égypte a été repris directement par Marcus : datation insuffisante pour établir l'ordre."
+    }
+  ],
+  "sources": [
+    {
+      "id": "irenee-14",
+      "short": "Irénée I,14",
+      "title": "Contre les hérésies I,14, §§3,5,7",
+      "url": "https://www.newadvent.org/fathers/0103114.htm",
+      "date": {
+        "min": 170,
+        "max": 190
+      },
+      "kind": "témoignage polémique",
+      "motifs": [
+        "24-lettres",
+        "corps-verite",
+        "sept-voyelles",
+        "sept-cieux",
+        "son",
+        "7",
+        "nom-lettres"
+      ],
+      "directTransmissionEvidence": []
+    },
+    {
+      "id": "irenee-15",
+      "short": "Irénée I,15",
+      "title": "Contre les hérésies I,15",
+      "url": "https://www.newadvent.org/fathers/0103115.htm",
+      "date": {
+        "min": 170,
+        "max": 190
+      },
+      "kind": "témoignage polémique",
+      "motifs": [
+        "isopsephie",
+        "alpha-omega",
+        "colombe",
+        "jesus-nom"
+      ],
+      "directTransmissionEvidence": []
+    },
+    {
+      "id": "irenee-20",
+      "short": "Irénée I,20",
+      "title": "Contre les hérésies I,20",
+      "url": "https://www.newadvent.org/fathers/0103120.htm",
+      "date": {
+        "min": 170,
+        "max": 190
+      },
+      "kind": "témoignage polémique",
+      "motifs": [
+        "alpha-beta",
+        "jesus-enfant",
+        "nom-lettres"
+      ],
+      "directTransmissionEvidence": []
+    },
+    {
+      "id": "apocalypse-aomega",
+      "short": "Apocalypse 1,8 ; 21,6 ; 22,13",
+      "title": "Alpha et Oméga dans l'Apocalypse",
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%201%3A8%3B21%3A6%3B22%3A13&version=ESV",
+      "date": {
+        "min": 85,
+        "max": 110
+      },
+      "kind": "texte religieux",
+      "motifs": [
+        "alpha-omega",
+        "commencement-fin"
+      ],
+      "directTransmissionEvidence": []
+    },
+    {
+      "id": "apocalypse-tonnerres",
+      "short": "Apocalypse 10,3–4",
+      "title": "Les paroles des sept tonnerres scellées",
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%2010%3A3-4&version=ESV",
+      "date": {
+        "min": 85,
+        "max": 110
+      },
+      "kind": "texte religieux",
+      "motifs": [
+        "7",
+        "son",
+        "sept-tonnerres",
+        "paroles-scellées"
+      ],
+      "directTransmissionEvidence": []
+    },
+    {
+      "id": "demetrios-71",
+      "short": "Pseudo-Démétrios §71",
+      "title": "Sur le style, §71 : prêtres égyptiens et voyelles",
+      "url": "https://www.attalus.org/old/demetr2.html",
+      "date": {
+        "min": null,
+        "max": null
+      },
+      "kind": "témoignage littéraire, datation discutée",
+      "motifs": [
+        "7",
+        "sept-voyelles",
+        "son",
+        "chant"
+      ],
+      "directTransmissionEvidence": []
+    },
+    {
+      "id": "papyrus-g328",
+      "short": "P.Vindob. G 328",
+      "title": "Papyrus de Vienne : plinthion vocalique et nom de Michel",
+      "url": "https://www.onb.ac.at/mehr/blogs/detail/magie-der-erzengel-michael-und-maennerliebe",
+      "date": {
+        "min": 200,
+        "max": 399
+      },
+      "kind": "objet matériel ; notice institutionnelle",
+      "motifs": [
+        "7",
+        "sept-voyelles",
+        "nom-lettres",
+        "michel",
+        "reduction-nom"
+      ],
+      "directTransmissionEvidence": []
+    }
+  ],
+  "methods": [
+    "CORPUS",
+    "ALPHABET",
+    "PHONÉ",
+    "ARITHMOS",
+    "CHRONOS",
+    "STEMMA",
+    "AUDIT"
+  ]
+}
