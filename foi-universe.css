@@ -71,3 +71,5 @@ body.foi-universe{color:var(--ink)!important;background-color:var(--bg)!importan
 .foi-universe .discovery a{background:var(--paper)!important;color:var(--ink)!important;border-color:var(--line)!important}
 .foi-universe .discovery a p{color:var(--sub)!important;font-size:16px}
 .foi-universe .side-link.current{background:#EAE4D8!important;color:var(--foi-blue)!important;border-color:var(--line)!important}
+.foi-universe .eloah-menu-links{background:var(--paper)!important;color:var(--ink)!important}
+.foi-universe .eloah-menu-links a{color:var(--foi-blue)!important}
