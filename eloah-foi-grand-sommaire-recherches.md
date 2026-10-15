@@ -47,6 +47,10 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 
 [Lire ALPHA-001 · Jésus enfant et les lettres](foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md) — fiche de synthèse reconstituée, distincte d'un original non retrouvé.
 
+## LOURDES-002 — Enquête documentaire complémentaire (15 octobre 2026)
+
+- [Lire l'étude des textes originaux du cantique, des Nornes, du pape Léon XIV et de Champion](foi-control.html?file=eloah-foi-lourdes-002-sources-cantique-nornes-pape.md) — vérification des numéros de couplets, gestes du pape à la grotte, boue et cygnes de l'Edda, incendie de Peshtigo, étymologies et questions non résolues.
+
 ## Vidéos étudiées — restitutions et vérifications
 
 - [VIDÉO-001 · Lourdes au cœur de l'Apocalypse : restitution minutée et analyse critique](foi-control.html?file=eloah-foi-video-lourdes-apocalypse-oleg-2026.md) — discours du 8 octobre 2026, chants, apparitions, Green Bay, Peshtigo, Edda, Nornes, Excalibur et vérification des sources.
