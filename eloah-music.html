@@ -1070,4 +1070,45 @@ event.preventDefault();q?.focus();q?.select();
 }
 });
 })();
+</script>
+<script>
+/* ELOAH YouTube library + optional private MP3 service */
+(()=>{
+'use strict';
+const $=id=>document.getElementById(id), key='eloahMusicYouTubeV1';
+let items=[];try{items=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(items))items=[];items=items.filter(x=>x&&/^[\w-]{11}$/.test(x.id)&&typeof x.title==='string')}catch(e){}
+let resultUrl=null, serviceToken='';
+const button=document.createElement('button');button.type='button';button.textContent='▶ YouTube · écouter / MP3';document.querySelector('.music2040-actions').append(button);
+const panel=document.createElement('section');panel.className='music2040';panel.hidden=true;
+panel.innerHTML='<div class="music2040-head"><h2>Ma sélection YouTube</h2><button type="button" class="action secondary" id="ytClose">Fermer</button></div><p class="muted">Enregistre tes liens et écoute-les ici avec une connexion Internet. Ils sont conservés sur cet appareil.</p><label for="ytUrl">Lien YouTube</label><input class="field" type="url" id="ytUrl" placeholder="https://www.youtube.com/watch?v=…"><label for="ytTitle">Nom du morceau</label><input class="field" id="ytTitle" maxlength="120" placeholder="Titre ou artiste"><div class="music2040-actions"><button type="button" id="ytSave">Ajouter à ma sélection</button></div><p id="ytStatus" class="muted" role="status"></p><div id="ytPlayer"></div><div id="ytList"></div><details style="margin-top:16px"><summary>Récupérer un MP3</summary><p class="muted">Pour tes créations ou les contenus dont le téléchargement est autorisé. Le service de conversion privé doit être raccordé pour activer cette fonction.</p><label for="ytService">Adresse du service privé (HTTPS)</label><input class="field" type="url" id="ytService" placeholder="https://mon-service.example"><label for="ytToken">Clé privée du service</label><input class="field" type="password" autocomplete="off" id="ytToken"><p class="muted">La clé reste uniquement en mémoire jusqu’à la fermeture de cette page. Utilise seulement ton propre service.</p><button type="button" class="action secondary" id="ytConnect">Raccorder le service</button><p class="muted" id="ytServiceStatus">Conversion MP3 indisponible : service non raccordé.</p><button type="button" class="action" id="ytConvert" disabled>Préparer le MP3 du lien ci-dessus</button><div id="ytResult"></div></details>';
+document.querySelector('.music2040').after(panel);
+const status=text=>$('ytStatus').textContent=text;
+function idFrom(raw){try{const u=new URL(raw);if(u.protocol!=='https:'||u.username||u.password||u.port)return null;let id;if(u.hostname==='youtu.be')id=u.pathname.slice(1);else if(['youtube.com','www.youtube.com','m.youtube.com','music.youtube.com'].includes(u.hostname)){id=u.pathname==='/watch'?u.searchParams.get('v'):u.pathname.match(/^\/(?:shorts|embed|live)\/([\w-]+)\/?$/)?.[1]}return /^[\w-]{11}$/.test(id||'')?id:null}catch(e){return null}}
+function persist(){try{localStorage.setItem(key,JSON.stringify(items));return true}catch(e){status('Stockage indisponible : cette sélection ne sera pas conservée.');return false}}
+function stop(){ $('ytPlayer').replaceChildren() }
+function play(id){document.querySelectorAll('audio').forEach(a=>a.pause());stop();const frame=document.createElement('iframe');frame.src='https://www.youtube-nocookie.com/embed/'+id;frame.title='Lecteur YouTube';frame.allow='encrypted-media; fullscreen; picture-in-picture';frame.referrerPolicy='strict-origin-when-cross-origin';frame.allowFullscreen=true;frame.style.cssText='width:100%;aspect-ratio:16/9;min-height:200px;border:0;border-radius:10px';$('ytPlayer').append(frame);status('Appuie sur lecture. Si YouTube bloque cette vidéo intégrée, ouvre-la sur YouTube.')}
+function render(){const list=$('ytList');list.replaceChildren();for(const item of items){const row=document.createElement('div');row.style.cssText='display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 0;border-bottom:1px solid #624160';const title=document.createElement('strong');title.textContent=item.title;title.style.cssText='flex:1 1 180px;overflow-wrap:anywhere';row.append(title);for(const [label,fn] of [['Écouter',()=>play(item.id)],['Choisir pour MP3',()=>{$('ytUrl').value='https://www.youtube.com/watch?v='+item.id;$('ytTitle').value=item.title;panel.querySelector('details').open=true}],['Retirer',()=>{items=items.filter(x=>x.id!==item.id);persist();render()}]]){const b=document.createElement('button');b.className='action secondary';b.textContent=label;b.onclick=fn;row.append(b)}const a=document.createElement('a');a.textContent='Ouvrir YouTube ↗';a.href='https://www.youtube.com/watch?v='+item.id;a.target='_blank';a.rel='noopener noreferrer';row.append(a);list.append(row)}if(!items.length)list.textContent='Aucun lien enregistré pour le moment.'}
+button.onclick=()=>{panel.hidden=false;panel.scrollIntoView({behavior:'smooth',block:'start'});$('ytUrl').focus()};
+$('ytClose').onclick=()=>{stop();panel.hidden=true;button.focus()};
+document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',stop));
+$('ytSave').onclick=()=>{const id=idFrom($('ytUrl').value.trim());if(!id)return status('Colle le lien d’une vidéo YouTube valide.');if(items.some(x=>x.id===id))return status('Ce lien est déjà dans ta sélection.');if(items.length>=500)return status('Sélection limitée à 500 liens.');items.push({id,title:$('ytTitle').value.trim()||'YouTube · '+id});const saved=persist();render();if(saved)status('Lien enregistré sur cet appareil.');};
+let service='';
+$('ytConnect').onclick=()=>{try{const u=new URL($('ytService').value.trim());if(u.protocol!=='https:'||u.username||u.password||u.search||u.hash)throw Error();if(!$('ytToken').value.trim())throw Error();service=u.href.replace(/\/$/,'');serviceToken=$('ytToken').value.trim();$('ytToken').value='';$('ytConvert').disabled=false;$('ytServiceStatus').textContent='Adresse configurée. La connexion sera vérifiée lors de la conversion.'}catch(e){service='';serviceToken='';$('ytConvert').disabled=true;$('ytServiceStatus').textContent='Renseigne une adresse HTTPS et la clé de ton service privé.'}};
+$('ytConvert').onclick=async()=>{
+ const id=idFrom($('ytUrl').value.trim());if(!id)return status('Colle d’abord un lien YouTube valide.');
+ const b=$('ytConvert');b.disabled=true;$('ytResult').replaceChildren();if(resultUrl){URL.revokeObjectURL(resultUrl);resultUrl=null}
+ $('ytServiceStatus').textContent='Conversion en cours… Cela peut prendre quelques minutes.';
+ try{
+ const response=await fetch(service+'/convert',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+serviceToken},body:JSON.stringify({video_id:id}),signal:AbortSignal.timeout(200000),credentials:'omit',redirect:'error'});
+ if(!response.ok){let detail='Conversion impossible ('+response.status+').';try{detail=(await response.json()).detail||detail}catch(e){}throw Error(detail)}
+ if(!(response.headers.get('content-type')||'').startsWith('audio/mpeg'))throw Error('Le service n’a pas renvoyé de fichier MP3.');
+ const blob=await response.blob();if(!blob.size||blob.size>50*1024*1024)throw Error('Fichier vide ou trop volumineux.');
+ const title=($('ytTitle').value.trim()||'YouTube-'+id).replace(/[<>:"/\\|?*\x00-\x1f]/g,'_').slice(0,100);
+ resultUrl=URL.createObjectURL(blob);const a=document.createElement('a');a.href=resultUrl;a.download=title+'.mp3';a.className='action';a.textContent='Télécharger le MP3';$('ytResult').append(a);
+ const add=document.createElement('button');add.className='action secondary';add.textContent='Ajouter à ma bibliothèque ELOAH';add.onclick=()=>{try{const transfer=new DataTransfer();transfer.items.add(new File([blob],title+'.mp3',{type:'audio/mpeg'}));$('files').files=transfer.files;$('files').dispatchEvent(new Event('change',{bubbles:true}));add.disabled=true;add.textContent='Import demandé — voir le statut de la bibliothèque'}catch(e){$('ytServiceStatus').textContent='Télécharge le MP3 puis utilise Importer mes titres.'}};$('ytResult').append(add);
+ $('ytServiceStatus').textContent='MP3 prêt. Tu peux le télécharger et l’ajouter à ELOAH.';
+ }catch(e){$('ytServiceStatus').textContent=e.name==='TimeoutError'?'Le service a dépassé le délai. Réessaie plus tard.':e.message||'Service inaccessible.'}finally{b.disabled=!service}
+};
+render();
+})();
 </script></body></html>
