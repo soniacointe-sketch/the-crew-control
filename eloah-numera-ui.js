@@ -124,7 +124,6 @@ function renderReadout(){
  const s=comp.source;
  $("heroValue").textContent=s.normalized.slice(0,30);
  $("heroType").textContent=E.modes[comp.config.mode].name.toUpperCase()+" · "+s.kind.toUpperCase()+" → MUSIQUE";
- $("pieceTitle").textContent="Composition « "+s.originalOrValue?.slice?.(0,20)??""; // replaced below for straightforward title
  $("pieceTitle").textContent="Composition "+s.normalized.slice(0,35);
  $("kNotes").textContent=comp.stats.notes;
  $("kTempo").textContent=comp.config.bpm;
