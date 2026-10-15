@@ -46,7 +46,7 @@ Ces fichiers sont originaux, conçus à partir des éléments numériques histor
 ## Sources et limites
 1. [Irénée, *Contre les hérésies* Livre I, chapitre 14](https://www.newadvent.org/fathers/0103114.htm).
 2. [Irénée, Livre I, chapitre 15](https://www.newadvent.org/fathers/0103115.htm).
-3. [PARISIS ALPHA — chaîne des Éons et Épisémon](parisis-alpha-016-chaine-eons-episemon.md) dans le dossier de recherche.
+3. [PARISIS ALPHA — chaîne des Éons et Épisémon](../corpus/parisis-alpha-016-chaine-eons-episemon.md) dans le dossier de recherche.
 4. [ALPHA-019 — sources derrière les sources](../corpus/parisis-alpha-019-sources-derriere-sources.md).
 
 **Précaution :** ces passages sont transmis essentiellement par un adversaire de Marcus. L'oeuvre ne démontre aucune relation acoustique causale entre la structure des lettres, des phénomènes cosmologiques et la foi.
