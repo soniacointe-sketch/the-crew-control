@@ -30,6 +30,7 @@ Bereshit Rabbah, Talmud Shabbat 104a, lectures des lettres.
 
 - [ALPHA-010 · Irénée et Marcus : les 24 lettres du corps de la Vérité](foi-control.html?file=eloah-alpha-010-marcus-24-lettres.md)
 - [ALPHA-011 · Les sept voyelles, les sept cieux et l'Apocalypse](foi-control.html?file=eloah-alpha-011-sept-voyelles-apocalypse.md)
+- [ALPHA-012 · Aleph, noms divins et Michel (nouvelle enquête)](parisis-alpha-012-noms-divins-michel.html)
 - [Parcours PARISIS ENGINE : fil ALPHA](parisis-fil-enquetes.html#alpha)
 
 Ces enquêtes prolongent ALPHA-001 à ALPHA-009 sans remplacer les versions anciennes. Les sources historiques rapportent des traditions, elles ne démontrent pas à elles seules une transmission directe depuis Jésus.
