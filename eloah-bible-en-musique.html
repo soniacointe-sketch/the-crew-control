@@ -62,6 +62,29 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 @media(max-width:1270px){main{grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr)}.right{grid-column:1/-1}.output{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:830px){main{grid-template-columns:1fr}.right{grid-column:auto}.player{aspect-ratio:16/9}.output{grid-template-columns:1fr 1fr}}
 @media(max-width:510px){.preset-list,.output{grid-template-columns:1fr}.hero h1{font-size:45px}.player{aspect-ratio:4/3}.meta{grid-template-columns:repeat(2,1fr)}}
+
+/* ALPHA · partition authentiquement issue des règles 24/12/7/9–8–7 */
+#alphaInspector{border:1px solid #876178;border-top:3px solid #f0cd9a;background:#241b2c;border-radius:12px;padding:clamp(14px,2.4vw,24px);margin:18px 0;min-width:0}
+#alphaInspector h3{font:normal 22px Georgia,serif;margin:14px 0 8px;color:#f8dfb2}
+#alphaInspector .eyebrow{color:#f3ce92}
+#alphaInspector .alpha-greek{padding:13px;background:#312438;border:1px solid #6d5370;font:clamp(17px,2vw,24px)/1.8 Georgia,serif;color:#fff0d7;overflow-wrap:anywhere;margin:13px 0}
+#alphaInspector .alpha-classes{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:12px 0}
+#alphaInspector .alpha-class{background:#392e40;border:1px solid #786174;text-align:center;padding:11px 6px}
+#alphaInspector .alpha-class strong{font:30px Georgia,serif;color:#f7d2a2;display:block}
+#alphaInspector .alpha-class small{color:#d6c3ce;font-size:10px;display:block}
+#alphaInspector .alpha-pairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px}
+#alphaInspector .alpha-pair{border:1px solid #5b4961;padding:9px 7px;background:#2b2233;min-width:0;display:grid;gap:2px}
+#alphaInspector .alpha-pair.present{background:#55344c;border-color:#c58f92}
+#alphaInspector .alpha-pair strong{font:23px Georgia,serif;color:#f6d1a2}
+#alphaInspector .alpha-pair small{font-size:10px;color:#d9c5ca}
+#alphaInspector .alpha-vowels{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:10px 0}
+#alphaInspector .alpha-vowel{background:#3f2b46;border:1px solid #806477;text-align:center;padding:9px 2px;min-width:0}
+#alphaInspector .alpha-vowel b{font:27px Georgia,serif;color:#f3d7aa;display:block}
+#alphaInspector .alpha-vowel small{font-size:9px;display:block;color:#dec9c8}
+#alphaInspector .alpha-key{display:inline-flex;gap:7px;align-items:center;flex-wrap:wrap;border:1px solid #b08783;background:#4b3048;padding:8px 11px;margin:4px;color:#f9e3c9;font-size:12px}
+#alphaInspector .alpha-key strong{color:#ffe0a8}
+#alphaInspector .alpha-warning{margin-top:14px;padding:12px 14px;border-left:3px solid #dab68a;background:#3a2c3b;color:#eed6c9;font-size:11px}
+@media(max-width:560px){#alphaInspector .alpha-pairs{grid-template-columns:repeat(2,minmax(0,1fr))}#alphaInspector .alpha-vowels{gap:2px}#alphaInspector .alpha-vowel b{font-size:22px}#alphaInspector .alpha-vowel small{font-size:8px}}
 </style></head>
 <body>
 <header class="top"><div class="wrap"><a href="mes-univers.html" class="logo">ELOAH <span>✦ BIBLE MUSIC</span></a>
@@ -87,8 +110,8 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 <select id="style"><option value="ambient">Céleste · Ambient</option><option value="mystic">Mystique · Doux</option><option value="cinematic">Cinématique</option><option value="electro">Électro</option></select>
 <div class="smallgrid"><div><label for="scale">Gamme</label><select id="scale"><option value="dorian">Dorienne</option><option value="pentatonic">Pentatonique</option><option value="minor">Mineure</option><option value="major">Majeure</option><option value="phrygian">Phrygienne</option></select></div>
 <div><label for="musicLanguage">Source des notes</label>
-<select id="musicLanguage"><option value="fr">Le texte français lu</option><option value="greek">Le texte grec du Nouveau Testament (Textus Receptus)</option></select>
-<p class="smalldesc" id="languageStatus">Le français est transformé en musique selon les règles créatives de NUMERA.</p>
+<select id="musicLanguage"><option value="fr">Structure ALPHA seule (sans grec d’origine)</option><option value="greek" selected>Les lettres grecques réelles · 24 lettres / 12 paires / 7 voyelles</option></select>
+<p class="smalldesc" id="languageStatus">Le Nouveau Testament utilise le grec transmis lorsqu’il est disponible. Sans texte grec, la partition suit les structures ALPHA sans inventer des lettres.</p>
 <label for="bpm">Tempo (BPM)</label><input type="number" id="bpm" min="45" max="180" value="76"></div></div>
 <label for="readSpeed">Vitesse de voix : <output id="speedOutput">0,9×</output></label>
 <input type="range" id="readSpeed" min="55" max="140" value="90">
@@ -116,7 +139,7 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 <div class="progress" aria-label="Progression de lecture"><span id="progressBar"></span></div>
 <div class="track"><span id="currentVerse">Prêt pour le premier verset</span><span id="readProgress">0 / 0</span></div>
 <div id="status" class="status" role="status" aria-live="polite">Choisis un passage et charge son texte.</div>
-<h3>Le texte de la Bible</h3>
+<div class="status" id="alphaEngineStatus" role="status" aria-live="polite">Préparation du moteur ALPHA · 24 lettres / 12 paires / 7 voyelles.</div><section id="alphaInspector" aria-label="Analyse du texte par le code des lettres ALPHA" aria-live="polite"></section><h3>Le texte de la Bible</h3>
 <div id="verses" class="read-passage" role="group" aria-label="Versets cliquables pour lire depuis une position"></div>
 <p class="smalldesc" id="copyright">Louis Segond 1910 · Domaine public. Les versets conservent leur référence et leur numéro.</p>
 </div></section>
@@ -126,8 +149,8 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 <div class="sidebox"><strong>La règle créative</strong>En mode grec, les valeurs isopséphiques viennent des lettres du Texte Reçu identifié ; pour le français, les lettres sont converties en degrés musicaux selon une convention de composition. Les numéros des versets influencent également le motif ; il ne s'agit pas de fréquences bibliques originelles.</div>
 <h3>Exporter</h3>
 <div class="output">
-<button class="btn" type="button" id="wav">↓ WAV · musique instrumentale</button>
-<button class="btn" type="button" id="midi">↓ MIDI · notes et accords</button>
+<button class="btn" type="button" id="wav">↓ WAV · partition ALPHA</button>
+<button class="btn" type="button" id="midi">↓ MIDI · lettres et nombres</button>
 <button class="btn" type="button" id="json">↓ Projet · textes et partition JSON</button>
 <button class="btn" type="button" id="png">↓ Image musicale PNG</button></div>
 <div class="status" id="exportStatus" role="status" aria-live="polite">L'export WAV/MIDI contient la musique. La voix du navigateur n'est pas incluse dans ces fichiers.</div>
@@ -144,5 +167,8 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 <script src="eloah-numera-engine.js?v=20261015-a1" defer></script>
 <script src="eloah-numera-audio.js?v=20261015-a2" defer></script>
 <script src="eloah-bible-music-engine.js?v=20261016-b2" defer></script>
-<script src="eloah-bible-music-ui.js?v=20261016-b2" defer></script>
+<script src="parisis-alpha-text-reader.js?v=20261015-r1" defer></script>
+<script src="parisis-alpha-marcus-chaine.js?v=20261015-c16" defer></script>
+<script src="eloah-bible-alpha-sonification.js?v=20261016-alpha2" defer></script>
+<script src="eloah-bible-music-ui.js?v=20261016-alpha2" defer></script>
 </body></html>
