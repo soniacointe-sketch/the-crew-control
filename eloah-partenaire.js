@@ -1470,3 +1470,24 @@ if(missing.length)$('#status').textContent='170 nouveaux briefs ajoutés : la co
   };
   save([...rows,fiche]);
 })();
+
+
+// Accès direct à la fiche reportée via ?rubrique=Mon%20Espace&fiche=...
+// Aucune date, aucun nouveau rappel et aucun duplicata de fiche.
+(function ouvrirDirectementLaFicheReportee(){
+  const search=new URLSearchParams(location.search);
+  const id='eloah-securite-supabase-a-reprendre-20261015';
+  if(cfg.id!=='itriia'||search.get('rubrique')!=='Mon Espace'||search.get('fiche')!==id)return;
+  const fiche=rows.find(r=>r.id===id);
+  const input=$('#search');
+  if(!fiche||!input)return;
+  input.value='À reprendre plus tard · Sécurité Supabase';
+  render();
+  const button=$('#list')?.querySelector('[data-edit="'+id+'"]');
+  const card=button?.closest('article.row');
+  if(!card)return;
+  card.id='eloah-note-securite-supabase';
+  card.style.cssText+=';border:2px solid #a63d57;border-radius:10px;box-shadow:0 7px 18px #24141412;';
+  card.setAttribute('aria-label','Note à reprendre plus tard : Sécurité Supabase');
+  requestAnimationFrame(()=>card.scrollIntoView({block:'center',behavior:'instant'}));
+})();
