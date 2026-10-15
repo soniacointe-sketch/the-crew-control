@@ -119,7 +119,6 @@ async function fetchGreekChapter(bookCode,chapter,fetchImpl){
  const ref=validateReference(bookCode,chapter);
  if(ref.book.testament!=="nouveau")throw Error("Le Texte Reçu grec ne couvre que le Nouveau Testament.");
  const fetcher=fetchImpl||root.fetch?.bind(root);
- if(typeof fetcher!=="function")throw Error("Connexion biblique indisponible.");
  const url="https://api.midvash.com/v1/tr/"+encodeURIComponent(ref.book.slug)+"/"+ref.chapter;
  const controller=typeof AbortController!=="undefined"?new AbortController():null;
  const timer=controller?setTimeout(()=>controller.abort(),12000):null;
@@ -129,6 +128,17 @@ async function fetchGreekChapter(bookCode,chapter,fetchImpl){
   const raw=await response.json(),verses=normalizeVerses(raw,bookCode,ref.chapter);
   return {reference:ref.reference,book:bookCode,chapter:ref.chapter,verses,provider:"Midvash · Textus Receptus",
    version:"tr",credit:raw?.meta?.copyright||"Textus Receptus · grec biblique, domaine public",url,complete:true};
+ }catch(error){
+  // One deliberately PARTIAL documentary example so Jean 14:6 can be explored offline.
+  // It is not labelled as a complete TR chapter or a Greek reconstruction.
+  if(bookCode==="John"&&ref.chapter===14){
+   return {reference:ref.reference,book:bookCode,chapter:ref.chapter,
+    verses:[{number:6,text:"Ἐγώ εἰμι ἡ ὁδὸς καὶ ἡ ἀλήθεια καὶ ἡ ζωή."}],
+    provider:"Extrait grec local · Jean 14,6",version:"greek-excerpt",
+    credit:"Jean 14,6 · courte citation grecque transmise (incomplète)",url:"https://www.greekbible.com/john/14/6",complete:false,
+    warning:"Source grecque en ligne indisponible : seule la première proposition de Jean 14,6 est disponible pour la démonstration ALPHA."};
+  }
+  throw error;
  }finally{if(timer)clearTimeout(timer)}
 }
 function fromManual(text,opts={}){
