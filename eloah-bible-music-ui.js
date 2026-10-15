@@ -100,9 +100,10 @@ function renderDoc(){
  $("duration").textContent=asTime(musicScore.durationSeconds);
  $("copyright").textContent=(doc.credit||"Louis Segond 1910")+" · "+(doc.complete?"Chapitre complet":"Extraits / plage chargée")+". "+(doc.warning||"");
  $("sourceCredit").textContent=(doc.credit||"Source non précisée")+(doc.provider?" · "+doc.provider:"")+(greekDoc&&$("musicLanguage").value==="greek"?" · Musique : "+greekDoc.credit:"");
+ $("alphaEngineStatus").textContent="ALPHA · "+musicScore.scripture.greekVerses+"/"+musicScore.scripture.verseCount+" versets en grec réellement analysés, "+musicScore.scripture.structureOnlyVerses+" en mode structure · "+musicScore.stats.notes+" notes composées sur 12 paires, 7 voyelles, 9|8|7, 8|8|8, 4|4|10|12.";
  $("languageStatus").textContent=$("musicLanguage").value==="greek"?
-   (greekDoc?"Notes calculées sur le grec du Textus Receptus, voix lue en français. Éditions distinctes.":"Grec indisponible : les notes sont créées à partir du français."):
-   "Le texte français est converti en musique selon la convention artistique de NUMERA.";
+   (greekDoc?"Notes calculées sur le grec transmis ; les 24 lettres, rangs et valeurs ALPHA agissent dans la partition. La voix lit le français.":"Grec indisponible : structure ALPHA 12/24/7 sans déchiffrage alphabétique du français."):
+   "Mode structure ALPHA : rythmes 9|8|7, Ogdoades 8|8|8 et douze paires, sans isopséphie inventée du français.";
  $("verses").innerHTML=doc.verses.map((v,i)=>
   '<button type="button" class="verse" data-index="'+i+'" aria-pressed="false" aria-label="Lire à partir du verset '+v.number+'"><strong>'+v.number+'</strong>'+esc(v.text)+'</button>'
  ).join("");
