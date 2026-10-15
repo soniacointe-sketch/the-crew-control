@@ -20,9 +20,59 @@ function connectGraph(ctx,comp){
  compressor.threshold.value=-15;compressor.knee.value=13;compressor.ratio.value=3;compressor.attack.value=.003;compressor.release.value=.16;
  gain.gain.value=comp.config.volume*.65;
  gain.connect(compressor);compressor.connect(ctx.destination);
- return {input:gain,compressor};
+ // Moderate room-like echo only for ALPHA's gentle narrated arrangement.
+ if(comp.version==="BIBLE-ALPHA-ARRANGEUR/3.0.0"&&ctx.createDelay){
+  const echo=ctx.createDelay(.6),feedback=ctx.createGain(),wet=ctx.createGain();
+  echo.delayTime.value=.23;feedback.gain.value=.17;wet.gain.value=.13;
+  gain.connect(echo);echo.connect(feedback);feedback.connect(echo);
+  echo.connect(wet);wet.connect(compressor);
+ }
+ return {input:gain,compressor,gain,baseVolume:comp.config.volume*.65};
+}
+/* NUMERA tonal instruments — gentle, layered tones for ALPHA Bible v3.
+ * Additive synthesis uses Web Audio oscillators, not a commercial soundfont.
+ */
+function musicalTone(ctx,dest,evt,base,beatTime){
+ const time=base+evt.beat*beatTime,duration=Math.min(evt.duration*beatTime,5.5);
+ const midi=midiHz(evt.midi),instrument=evt.instrument||"piano",v=clamp(evt.velocity||.4,.05,.9);
+ const partials=instrument==="bell"?[[1,.54,3.2],[2.01,.18,2.1],[3.96,.075,1.4]]:
+  instrument==="bass"?[[1,.65,2.8],[2,.14,1.3]]:
+  instrument==="pad"?[[1,.43,2.4],[1.003,.29,2.0],[2,.055,.9]]:
+  [[1,.48,1.85],[2,.16,.95],[3,.045,.54]];
+ const bus=ctx.createGain();
+ const output=typeof ctx.createStereoPanner==="function"?ctx.createStereoPanner():null;
+ if(output){
+  output.pan.setValueAtTime(instrument==="bell"?.18:instrument==="piano"?-.12:0,time);
+  bus.connect(output);output.connect(dest);
+ }else bus.connect(dest);
+ const attack=instrument==="pad"?.48:instrument==="bass"?.03:.009;
+ const natural=instrument==="bell"?Math.min(3.4,duration+2.0):
+   instrument==="pad"?Math.min(5.2,duration+1.7):instrument==="bass"?duration+.35:Math.min(2.5,duration+1.05);
+ const cutoff=time+natural;
+ const voices=[];
+ for(let i=0;i<partials.length;i++){
+  const [ratio,amp,decay]=partials[i];
+  const o=ctx.createOscillator(),g=ctx.createGain();
+  o.type="sine";o.frequency.setValueAtTime(Math.max(24,midi*ratio),time);
+  const amount=Math.max(.0002,v*amp*(instrument==="pad"?.14:instrument==="bell"?.17:instrument==="bass"?.24:.25));
+  g.gain.setValueAtTime(.0001,time);
+  g.gain.linearRampToValueAtTime(amount,time+attack);
+  const sustain=instrument==="pad"?duration:Math.min(duration*.95,decay);
+  if(instrument==="pad"){
+   g.gain.setValueAtTime(amount*.76,time+Math.max(attack+.03,sustain));
+   g.gain.exponentialRampToValueAtTime(.0001,cutoff);
+  }else{
+   const decayEnd=Math.min(cutoff-.05,time+Math.max(.06,decay));
+   g.gain.exponentialRampToValueAtTime(Math.max(.00012,amount*.12),decayEnd);
+   g.gain.exponentialRampToValueAtTime(.0001,cutoff);
+  }
+  o.connect(g);g.connect(bus);
+  o.start(time);o.stop(cutoff+.035);voices.push(o);
+ }
+ return voices;
 }
 function melodic(ctx,dest,evt,base,beatTime,mode,soft=false){
+ if(evt.instrument)return musicalTone(ctx,dest,evt,base,beatTime);
  const time=base+evt.beat*beatTime,duration=Math.min(evt.duration*beatTime,4.8);
  const osc=ctx.createOscillator(),env=ctx.createGain(),filter=ctx.createBiquadFilter();
  const attack=soft?.09:.008,release=soft?.48:.13;
@@ -43,7 +93,7 @@ function chord(ctx,dest,c,base,beatTime,mode){
  const time=base+c.beat*beatTime,sec=c.duration*beatTime;
  const output=[];
  for(const midi of c.notes){
-  const event={beat:c.beat,duration:c.duration,midi,velocity:Math.min(.85,c.velocity*2.3),wave:mode.accompaniment==="pulse"?"triangle":"sine"};
+  const event={beat:c.beat,duration:c.duration,midi,velocity:Math.min(.85,c.velocity*2.3),wave:mode.accompaniment==="pulse"?"triangle":"sine",instrument:c.instrument||null};
   output.push(melodic(ctx,dest,event,base,beatTime,mode,true));
  }
  return output;
@@ -103,6 +153,14 @@ function stop(){
  if(current){
   const ctx=current.ctx;current=null;try{ctx.close()}catch{}
  }
+}
+function setNarrationActive(isSpeaking){
+ if(!current?.graph?.gain)return false;
+ const g=current.graph.gain.gain,t=current.ctx.currentTime;
+ // Music is subdued under the spoken Bible, and rises again for instrumental-only.
+ const level=current.graph.baseVolume*(isSpeaking?.55:1);
+ g.setTargetAtTime(level,t,isSpeaking?.18:.42);
+ return true;
 }
 function isPlaying(){return Boolean(current)}
 function getProgress(){
@@ -173,7 +231,7 @@ function midiBytes(comp){
    ...ascii("MTrk"),...be32(track.length),...track]);
 }
 function renderMIDI(comp){return new Blob([midiBytes(comp)],{type:"audio/midi"})}
-const api=Object.freeze({start,stop,isPlaying,getProgress,renderWAV,renderMIDI,midiBytes,wavBytes});
+const api=Object.freeze({start,stop,isPlaying,setNarrationActive,getProgress,renderWAV,renderMIDI,midiBytes,wavBytes});
 if(typeof module!=="undefined"&&module.exports)module.exports=api;
 if(root)root.ELOAH_NUMERA_AUDIO=api;
 })(typeof window!=="undefined"?window:(typeof globalThis!=="undefined"?globalThis:null));
