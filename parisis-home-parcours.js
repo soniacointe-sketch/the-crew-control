@@ -18,6 +18,7 @@ function stored(k){try{return JSON.parse(localStorage.getItem(k))}catch(e){retur
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 function safeHref(value){return /^([a-z0-9-]+\.html|foi-control\.html)(?:\?[^#"]*)?(?:#[a-z0-9-]+)?$/i.test(value)?value:"parisis-fil-enquetes.html"}
 function cycle(id){return cycles.find(function(c){return c.id===id})}
+function readerHref(c,i){return 'parisis-lecteur.html?cycle='+encodeURIComponent(c.id)+'&step='+(i+1)}
 function getLast(){var data=stored(key);if(!data)return null;var c=cycle(data.cycle);if(!c||!c.steps[data.index])return null;return{cycle:c,index:data.index,step:c.steps[data.index],time:data.time}}
 function track(c,i){save(key,{cycle:c.id,index:i,time:Date.now()});render()}
 function renderLast(){
@@ -32,7 +33,7 @@ add(last,make("h3","",info.step.code+" · "+info.step.title));
 add(last,make("p","", "Dernier chapitre ouvert sur cet appareil. Ce repère ne signifie pas qu'il a été lu ou terminé."));
 var index=Math.min(info.index+1,info.cycle.steps.length-1),target=info.cycle.steps[index];
 var finishedKnownSteps=info.index>=info.cycle.steps.length-1;
-var link=add(last,make("a","",finishedKnownSteps?"Explorer les pistes ouvertes →":"Continuer avec "+target.code+" →"));link.href=safeHref(finishedKnownSteps?info.cycle.network:target.href);
+var link=add(last,make("a","",finishedKnownSteps?"Explorer les pistes ouvertes →":"Continuer avec "+target.code+" →"));link.href=safeHref(finishedKnownSteps?info.cycle.network:readerHref(info.cycle,index));
 if(!finishedKnownSteps)link.addEventListener("click",function(){track(info.cycle,index)});
 }
 function renderButtons(){
@@ -55,7 +56,7 @@ li.dataset.current=String(current);
 add(li,make("span","pe-step-n",String(i+1).padStart(2,"0")));
 var body=add(li,make("div","pe-step-copy"));
 add(body,make("span","",s.code));
-var a=add(body,make("a","",s.title+" ↗"));a.href=safeHref(s.href);a.addEventListener("click",function(){track(c,i)});
+var a=add(body,make("a","",s.title+" ↗"));a.href=safeHref(readerHref(c,i));a.addEventListener("click",function(){track(c,i)});
 add(body,make("small","",s.note));
 if(current)add(li,make("span","pe-step-state","Dernier ouvert"));
 });
@@ -71,7 +72,7 @@ add(next,make("span","pe-step-code","ÉTAPE "+String(targetIndex+1).padStart(2,"
 add(next,make("h3","",target.title));
 add(next,make("p","",target.note));
 var actions=add(next,make("div","pe-next-actions"));
-var btn=add(actions,make("a","pe-start",lastKnown?"Voir les questions encore ouvertes →":same&&targetIndex>progress.index?"Ouvrir l'étape suivante →":"Ouvrir ce chapitre ↗"));btn.href=safeHref(lastKnown?c.network:target.href);if(!lastKnown)btn.addEventListener("click",function(){track(c,targetIndex)});
+var btn=add(actions,make("a","pe-start",lastKnown?"Voir les questions encore ouvertes →":same&&targetIndex>progress.index?"Ouvrir l'étape suivante →":"Ouvrir ce chapitre ↗"));btn.href=safeHref(lastKnown?c.network:readerHref(c,targetIndex));if(!lastKnown)btn.addEventListener("click",function(){track(c,targetIndex)});
 var full=add(actions,make("a","pe-secondary","Voir tout le fil de cette enquête →"));full.href=safeHref(c.trail);
 add(next,make("p","pe-method","À garder en tête : "+c.method));
 }
