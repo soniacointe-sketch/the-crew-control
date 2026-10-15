@@ -9,6 +9,8 @@
 
 > **Précaution.** Ce rapport distingue systématiquement les **propos du créateur**, les **faits ou textes attestés**, les **analogies symboliques** et les **allégations sans preuve**. L'interprétation d'une vidéo ne constitue pas une révélation confirmée ni une prédiction fiable de catastrophes imminentes.
 
+**Suite documentaire :** [LOURDES-002 — comparaisons sur documents originaux : cantique, Léon XIV, Edda, Champion](foi-control.html?file=eloah-foi-lourdes-002-sources-cantique-nornes-pape.md). Comprend une correction de méthode : les 60 couplets du centenaire sont attribués au chanoine Maurice Le Bas et les livrets de chant utilisent des sélections renumérotées.
+
 ## I — Déroulé détaillé, de 00:00 à 29:54
 
 ### [00:00–03:00] Lourdes comme « point de bascule » et annonce de tribulations
