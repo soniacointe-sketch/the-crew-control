@@ -120,6 +120,24 @@ body.client-page .workspace-section{scroll-margin-top:130px!important}
 }
 </style>
 <link rel="stylesheet" href="eloah-prune-lumiere.css?v=20261016-2">
+<style id="pilotage-readable-surfaces">
+/* Critical contrast pairs are delivered with the page, independent of cached CSS. */
+html#eloah-prune-lumiere body.client-page main#contenu{background:#F5EFE7!important;color:#302334!important}
+html#eloah-prune-lumiere body.client-page main#contenu :is(.workspace-section,.focus-main,.focus-aside,.client-next,.client-next-card,.client-next-empty,.empty-project,.services article,.secondary-panel,.storage-note,.client-project-tools,.focus-stat,.focus-empty){background:#FFFCF8!important;color:#302334!important;border-color:#D8C7CE!important}
+html#eloah-prune-lumiere body.client-page main#contenu :is(.workspace-section,.focus-main,.focus-aside,.client-next,.services,.secondary-panel,.storage-note) :is(h2,h3,p,small,strong,b,span,summary,label,.quiet-count){color:#302334!important;-webkit-text-fill-color:currentColor!important}
+html#eloah-prune-lumiere body.client-page main#contenu :is(.storage-note,.pilotage-film-controls,.section-head) a{color:#633D62!important;-webkit-text-fill-color:currentColor!important}
+html#eloah-prune-lumiere body.client-page main#contenu .client-hero{background:linear-gradient(125deg,#241329,#432A49)!important}
+html#eloah-prune-lumiere body.client-page main#contenu .client-hero :is(h1,h2,h3,p,span,small,strong,b,em,a,.eyebrow){color:#FFF4ED!important;-webkit-text-fill-color:currentColor!important}
+html#eloah-prune-lumiere body.client-page main#contenu .client-hero :is(.pilotage-panel,.pilotage-kpi){background:#432A49!important;border-color:#795B78!important}
+html#eloah-prune-lumiere body.client-page main#contenu .client-hero .client-local-note{background:#FFFCF8!important;color:#302334!important}
+html#eloah-prune-lumiere body.client-page main#contenu :is(.btn,button,.focus-open,.focus-aside-cta a){background:#432A49!important;color:#FFF8F1!important;-webkit-text-fill-color:#FFF8F1!important;border-color:#795B78!important}
+html#eloah-prune-lumiere body.client-page main#contenu :is(.btn,button,.focus-open,.focus-aside-cta a) :is(span,strong,b,small){color:#FFF8F1!important;-webkit-text-fill-color:#FFF8F1!important}
+html#eloah-prune-lumiere body.client-page main#contenu .client-hero .primary{background:#DFC6A5!important;color:#302334!important;-webkit-text-fill-color:#302334!important}
+html#eloah-prune-lumiere body.client-page main#contenu #mes-projets{background:#FFFCF8!important;border-color:#D8C7CE!important}
+html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches :is(.storage-note,.demarches-domain,.services article){background:#FFFCF8!important;color:#302334!important;border-color:#D8C7CE!important}
+html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches :is(input,select){background:#FFFCF8!important;color:#302334!important;-webkit-text-fill-color:#302334!important;border-color:#A58B9B!important}
+html#eloah-prune-lumiere body.client-page main#contenu #demarches-directory summary::after{color:#633D62!important}
+</style>
 </head>
 <body data-prune-lumiere class="client-page">
 <video id="pilotage-ambient" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
