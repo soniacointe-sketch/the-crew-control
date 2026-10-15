@@ -44,7 +44,7 @@ var styles=Array.from(source.head.querySelectorAll("style")).map(function(el){re
 var links=Array.from(source.head.querySelectorAll('link[rel="stylesheet"]')).filter(function(el){return !/universal-v4|navigation|home-studio/i.test(el.getAttribute("href")||"")}).map(function(el){return '<link rel="stylesheet" href="'+esc(new URL(el.getAttribute("href"),url.href).href)+'">'}).join("");
 var dark=/color-scheme\s*:\s*dark|--bg\s*:\s*#(?:1[0-9a-f]|2[0-9a-f])|background\s*:\s*#(?:1[0-9a-f]|2[0-9a-f])/i.test(styles);
 var bg=dark?"#221d29":"#fffdfa",fg=dark?"#f6eee5":"#322b35";
-return '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+esc(url.href)+'">'+links+'<style>'+styles+'</style><style>'+css+'</style><style>body.pe-extract{background:'+bg+'!important;color:'+fg+'!important}</style><link rel="stylesheet" href="parisis-universal-v4.css?v=encre-pierre-20261016"></head><body class="pe-extract"><div class="pe-doc-label">PARISIS ENGINE · VERSION DE LECTURE · <a href="'+esc(url.href)+'" target="_blank" rel="noopener noreferrer">Voir le document original et les outils ↗</a></div>'+main.outerHTML+'</body></html>';
+return '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><base href="'+esc(url.href)+'">'+links+'<style>'+styles+'</style><style>'+css+'</style><style>body.pe-extract{background:'+bg+'!important;color:'+fg+'!important}</style><link rel="stylesheet" href="parisis-universal-v4.css?v=encre-pierre-final"></head><body class="pe-extract"><div class="pe-doc-label">PARISIS ENGINE · VERSION DE LECTURE · <a href="'+esc(url.href)+'" target="_blank" rel="noopener noreferrer">Voir le document original et les outils ↗</a></div>'+main.outerHTML+'</body></html>';
 }
 function mdHtml(raw){
 var out=[],parts=[],list=false;
@@ -59,7 +59,7 @@ function markdownPage(url){
 var name=url.searchParams.get("file");
 if(!name||!/^[a-z0-9-]+\.md$/i.test(name))throw Error("Texte non disponible");
 return fetch(name,{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("Source non trouvée");return r.text()}).then(function(md){
-return '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>'+css+'</style><link rel="stylesheet" href="parisis-universal-v4.css?v=encre-pierre-20261016"></head><body class="pe-extract pe-md"><div class="pe-doc-label">PARISIS ENGINE · VERSION DE LECTURE · <a target="_blank" rel="noopener noreferrer" href="'+esc(url.href)+'">Original ↗</a></div><main>'+mdHtml(md)+'</main></body></html>';
+return '<!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>'+css+'</style><link rel="stylesheet" href="parisis-universal-v4.css?v=encre-pierre-final"></head><body class="pe-extract pe-md"><div class="pe-doc-label">PARISIS ENGINE · VERSION DE LECTURE · <a target="_blank" rel="noopener noreferrer" href="'+esc(url.href)+'">Original ↗</a></div><main>'+mdHtml(md)+'</main></body></html>';
 });
 }
 function message(text){return '<!doctype html><html lang="fr"><meta charset="utf-8"><body style="background:#fffdfa;color:#45364a;font:14px/1.8 system-ui;padding:45px 25px;text-align:center">'+esc(text)+'</body></html>'}
