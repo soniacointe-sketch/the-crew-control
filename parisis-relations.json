@@ -1,0 +1,366 @@
+{
+  "version": 1,
+  "updated": "2026-10-15",
+  "title": "PARISIS ENGINE — Registre des liens d'enquête",
+  "method": "Ces relations documentent des correspondances entre recherches existantes, et non une chaîne causale historique. Toute attribution non collationnée reste à vérifier.",
+  "types": {
+    "progression": "Suite éditoriale",
+    "source": "Source ou fonds commun",
+    "motif": "Motif iconographique",
+    "tension": "Tension documentaire",
+    "contretest": "Contre-vérification",
+    "methode": "Méthode analogue"
+  },
+  "nodes": [
+    {
+      "id": "isis001",
+      "title": "Paris & Isis — aux origines",
+      "series": "PAR ISIS",
+      "href": "parisis-par-isis-001.html",
+      "summary": "Hypothèses sur les origines et l'iconographie de Paris.",
+      "code": "PAR ISIS 001"
+    },
+    {
+      "id": "isis004",
+      "title": "Paris 1825–1877 : avant / après",
+      "series": "PAR ISIS",
+      "href": "parisis-par-isis-004-atlas-avant-apres.html",
+      "summary": "Tracés urbains, rues disparues et comparaison de plans.",
+      "code": "PAR ISIS 004"
+    },
+    {
+      "id": "isis005",
+      "title": "Leymonnerye et feuilles Vasserot",
+      "series": "PAR ISIS",
+      "href": "parisis-par-isis-005-feuilles-vasserot.html",
+      "summary": "Croquis de 1877 et archives cadastrales, secteurs à distinguer.",
+      "code": "PAR ISIS 005"
+    },
+    {
+      "id": "vasserot",
+      "title": "Cadastre Vasserot et ALPAGE",
+      "series": "ATLAS",
+      "href": "parisis-vasserot-1810-1836.html",
+      "summary": "Sources parcellaires du début du XIXe siècle et limites du géoréférencement.",
+      "code": "VH-VAS-001"
+    },
+    {
+      "id": "atlas",
+      "title": "Atlas historique des axes",
+      "series": "ATLAS",
+      "href": "parisis-hugo-axes.html",
+      "summary": "Carte de synthèse et traits de comparaison non interprétés comme preuves d'intention.",
+      "code": "ATLAS"
+    },
+    {
+      "id": "nesle12",
+      "title": "Les deux tours de la Seine",
+      "series": "NESLE",
+      "href": "parisis-nesle-coin-seine.html",
+      "summary": "Fortifications, Nesle, la porte et les dessins anciens.",
+      "code": "AXE-012"
+    },
+    {
+      "id": "nesle14",
+      "title": "Le Vau 1663–1665",
+      "series": "NESLE",
+      "href": "parisis-axe-014-levau-archives.html",
+      "summary": "Plan BnF daté du 23 juin 1665 et alternatives de lecture.",
+      "code": "AXE-014"
+    },
+    {
+      "id": "nesle15",
+      "title": "Le procès du fossé de Nesle",
+      "series": "NESLE",
+      "href": "parisis-axe-015-proces-fosse-nesle.html",
+      "summary": "Pièces foncières, indemnités et sources pas toutes collationnées.",
+      "code": "AXE-015"
+    },
+    {
+      "id": "nesle16",
+      "title": "Le Paris disparu : contre-enquête",
+      "series": "NESLE",
+      "href": "parisis-axe-016-paris-disparu-nesle.html",
+      "summary": "Conflit apparent entre la date de destruction et un plan postérieur.",
+      "code": "AXE-016"
+    },
+    {
+      "id": "oeil1789",
+      "title": "L'œil et l'ouroboros en 1789",
+      "series": "SYMBOLES",
+      "href": "parisis-oeil-triangle-ouroboros-1789.html",
+      "summary": "Iconographie de la Déclaration, triangle rayonnant et serpent circulaire.",
+      "code": "ŒIL 001"
+    },
+    {
+      "id": "oeil1770",
+      "title": "Médaille néerlandaise de 1770",
+      "series": "SYMBOLES",
+      "href": "parisis-oeil-triangle-archives-1770.html",
+      "summary": "Objet du Rijksmuseum antérieur aux projets de 1776.",
+      "code": "ŒIL 002"
+    },
+    {
+      "id": "oeil1665",
+      "title": "L'œil triangulaire avant 1770",
+      "series": "SYMBOLES",
+      "href": "parisis-oeil-triangle-origines-1624-1665.html",
+      "summary": "Gravures et imprimés datés de 1624, 1655 et 1665.",
+      "code": "ŒIL 003"
+    },
+    {
+      "id": "nostra1",
+      "title": "Nostradamus : le texte avant la légende",
+      "series": "NOSTRADAMUS",
+      "href": "parisis-nostradamus-enquete.html",
+      "summary": "Contrôle des éditions et des interprétations rétrospectives.",
+      "code": "NOSTRA 001"
+    },
+    {
+      "id": "nostra2",
+      "title": "Nostradamus et Catherine de Médicis",
+      "series": "NOSTRADAMUS",
+      "href": "parisis-nostradamus-catherine-medicis.html",
+      "summary": "La cour des Valois et la différence entre documents et récits postérieurs.",
+      "code": "NOSTRA 002"
+    },
+    {
+      "id": "nostra3",
+      "title": "La rencontre royale de 1564",
+      "series": "NOSTRADAMUS",
+      "href": "parisis-nostradamus-valois-archives-1564.html",
+      "summary": "Chronologie de Salon et sources de la rencontre rapportée.",
+      "code": "NOSTRA 003"
+    },
+    {
+      "id": "nostra4",
+      "title": "Lettre datée du 22 décembre 1565",
+      "series": "NOSTRADAMUS",
+      "href": "parisis-nostradamus-lettre-1566-analyse.html",
+      "summary": "Examen de l'imprimé lyonnais de 1566 et de ses limites interprétatives.",
+      "code": "NOSTRA 004"
+    }
+  ],
+  "links": [
+    {
+      "id": "R01",
+      "from": "isis001",
+      "to": "isis004",
+      "type": "progression",
+      "label": "Suite de recherche",
+      "why": "Du dossier initial aux transformations vérifiables de la ville.",
+      "caution": "Ordre de progression éditoriale ; le lien n'établit pas une filiation historique.",
+      "evidence": "Le dossier initial et la comparaison des plans.",
+      "next": "Quelle hypothèse initiale est testée par un document daté ?"
+    },
+    {
+      "id": "R02",
+      "from": "isis004",
+      "to": "isis005",
+      "type": "source",
+      "label": "Plans d'avant / après",
+      "why": "Les deux études analysent les transformations du secteur de l'Opéra et mobilisent des documents graphiques du XIXe siècle.",
+      "caution": "Les pièces présentées ne sont pas identiques : confronter la couverture spatiale et les échelles.",
+      "evidence": "Plans Picquet/Motteroz, croquis Leymonnerye et feuilles Vasserot cités dans les dossiers.",
+      "next": "Peut-on identifier un même îlot sur deux états vérifiés ?"
+    },
+    {
+      "id": "R03",
+      "from": "isis005",
+      "to": "vasserot",
+      "type": "source",
+      "label": "Fonds Vasserot",
+      "why": "Les deux enquêtes exploitent des séries du cadastre Vasserot, mais sur des zones de Paris distinctes.",
+      "caution": "Identité de famille documentaire, pas identité de feuille ni de quartier.",
+      "evidence": "Séries cadastrales F/31 et données ALPAGE mentionnées dans les dossiers.",
+      "next": "Vérifier feuille, îlot, date et emplacement avant superposition."
+    },
+    {
+      "id": "R04",
+      "from": "isis004",
+      "to": "vasserot",
+      "type": "methode",
+      "label": "Comparaison cartographique",
+      "why": "Les deux recherches testent la transformation urbaine par les cartes et les archives cadastrales.",
+      "caution": "Un trait reporté d'un plan à l'autre n'est pas automatiquement précis.",
+      "evidence": "Cartes XIXe siècle et cadastre 1810–1836 cités dans les chapitres.",
+      "next": "Mesurer les erreurs de calage et les différences d'échelle."
+    },
+    {
+      "id": "R05",
+      "from": "nesle12",
+      "to": "nesle14",
+      "type": "source",
+      "label": "Plan Le Vau 1665",
+      "why": "Les deux chapitres consultent la tradition documentaire relative au plan de Le Vau de 1665.",
+      "caution": "Le plan doit être confronté à ses inscriptions et aux dessins du recueil BnF.",
+      "evidence": "Plan BnF Robert de Cotte 2581 mentionné dans la série Nesle.",
+      "next": "Le plan représente-t-il un état construit ou un projet ?"
+    },
+    {
+      "id": "R06",
+      "from": "nesle14",
+      "to": "nesle15",
+      "type": "source",
+      "label": "Le Vau 2581 et terrains",
+      "why": "Le dossier foncier retrouve le plan du 23 juin 1665 déjà étudié pour la tour.",
+      "caution": "La citation du procès-verbal ne signifie pas que le procès-verbal intégral a été consulté.",
+      "evidence": "Référence BnF Robert de Cotte 2581 dans les deux chapitres.",
+      "next": "Identifier et collationner le procès-verbal et les marchés."
+    },
+    {
+      "id": "R07",
+      "from": "nesle14",
+      "to": "nesle16",
+      "type": "tension",
+      "label": "1662 / 1665 : dates à départager",
+      "why": "Une notice d'estampe situe la destruction en 1662 ; un dessin de Le Vau est daté de 1665.",
+      "caution": "Différence de dates, pas démonstration que la tour était encore debout en 1665.",
+      "evidence": "Notice BnF Silvestre et recueil Le Vau 1665, cités dans AXE-016.",
+      "next": "Distinguer état antérieur, projet, destruction progressive et erreur de datation."
+    },
+    {
+      "id": "R08",
+      "from": "nesle15",
+      "to": "nesle16",
+      "type": "contretest",
+      "label": "Procès foncier et chronologie",
+      "why": "Le procès et les indemnisations peuvent éclairer l'ordre des démolitions.",
+      "caution": "Pièces primaires non toutes relues ; le lien reste une piste documentaire.",
+      "evidence": "Bibliographies Cordier/Franklin et références du dossier AXE-015.",
+      "next": "Le texte original précise-t-il quel bâtiment a été démoli et quand ?"
+    },
+    {
+      "id": "R09",
+      "from": "nesle16",
+      "to": "atlas",
+      "type": "methode",
+      "label": "Nesle sur l'atlas",
+      "why": "L'atlas sert de support aux repères Nesle, Collège Mazarin et Louvre.",
+      "caution": "Traits schématiques : ni mesure précise ni alignement délibéré démontré.",
+      "evidence": "Atlas des axes PARISIS et chapitre AXE-016.",
+      "next": "Comparer les coordonnées et l'incertitude historique."
+    },
+    {
+      "id": "R10",
+      "from": "isis005",
+      "to": "nesle16",
+      "type": "methode",
+      "label": "Lire les plans sans les confondre",
+      "why": "Les deux dossiers interrogent ce que dessine un plan, à des époques et quartiers différents.",
+      "caution": "Ce parallèle est seulement méthodologique ; il n'existe ici aucune source primaire commune.",
+      "evidence": "Croquis Leymonnerye (1877) et dessins Le Vau (1665).",
+      "next": "Comment signaler les états projetés, disparus ou superposés ?"
+    },
+    {
+      "id": "R11",
+      "from": "oeil1789",
+      "to": "oeil1770",
+      "type": "motif",
+      "label": "Œil dans un triangle",
+      "why": "Le motif iconographique de l'œil rayonnant apparaît dans l'image de 1789 et la médaille datée de 1770.",
+      "caution": "Le motif partagé ne démontre aucune copie ni commanditaire commun.",
+      "evidence": "Musée Carnavalet P708/P809 et fiche de médaille du Rijksmuseum cités.",
+      "next": "Retrouver les relais de diffusion entre ces objets, s'ils existent."
+    },
+    {
+      "id": "R12",
+      "from": "oeil1770",
+      "to": "oeil1665",
+      "type": "motif",
+      "label": "Antériorité iconographique",
+      "why": "Le dossier de 1770 renvoie aux images datées de 1624, 1655 et 1665.",
+      "caution": "Chronologie d'occurrences, pas généalogie du symbole.",
+      "evidence": "Rijksmuseum 1770 ; Pia desideria (1624) ; Arithmologia (1665).",
+      "next": "Identifier les reprises effectivement documentées."
+    },
+    {
+      "id": "R13",
+      "from": "oeil1789",
+      "to": "oeil1665",
+      "type": "contretest",
+      "label": "Providence, justice et Révolution",
+      "why": "Comparer les usages politiques et religieux du regard omnivoyant.",
+      "caution": "Une même forme iconographique change de sens selon son contexte.",
+      "evidence": "Dossiers Kircher, Vierschaar et Déclaration des droits.",
+      "next": "Que disent les légendes et les notices contemporaines de chaque œuvre ?"
+    },
+    {
+      "id": "R14",
+      "from": "nostra1",
+      "to": "nostra2",
+      "type": "progression",
+      "label": "Du quatrain à la cour",
+      "why": "L'enquête générale mène à la place de Nostradamus à la cour des Valois.",
+      "caution": "La postérité a pu modifier le récit des événements.",
+      "evidence": "Éditions des Prophéties et travaux historiques mentionnés.",
+      "next": "Dater la première interprétation de chaque prédiction."
+    },
+    {
+      "id": "R15",
+      "from": "nostra2",
+      "to": "nostra3",
+      "type": "source",
+      "label": "Catherine, Charles IX, 1564",
+      "why": "Les dossiers confrontent les récits de la rencontre royale et les sources de la cour.",
+      "caution": "La rencontre rapportée doit être distinguée des citations originales encore à retrouver.",
+      "evidence": "Synthèses patrimoniales et archives répertoriées dans NOSTRA 003.",
+      "next": "Retrouver le récit contemporain daté du passage à Salon."
+    },
+    {
+      "id": "R16",
+      "from": "nostra3",
+      "to": "nostra4",
+      "type": "source",
+      "label": "Imprimé lyonnais de 1566",
+      "why": "L'enquête 1564 conduit à l'analyse de la lettre datée intérieurement du 22 décembre 1565 et imprimée en 1566.",
+      "caution": "Écriture, publication et événement envisagé sont trois dates à distinguer.",
+      "evidence": "Bibliothèque Paul-Arbaud, R 734 ; édition Benoist Rigaud 1566 mentionnée.",
+      "next": "Contrôler les transcriptions et les ambiguïtés de caractères."
+    },
+    {
+      "id": "R17",
+      "from": "nostra2",
+      "to": "nostra4",
+      "type": "contretest",
+      "label": "Promesses et paix annoncée",
+      "why": "La lettre sert à éprouver l'interprétation rétrospective des prédictions à Catherine.",
+      "caution": "Une anticipation politique générale n'est pas une prédiction précise réalisée.",
+      "evidence": "Paraphrase des pages 3 à 6 de l'imprimé analysé.",
+      "next": "Comparer les formulations avec les événements postérieurs sans sélection opportuniste."
+    },
+    {
+      "id": "R18",
+      "from": "nostra1",
+      "to": "oeil1789",
+      "type": "methode",
+      "label": "Interpréter sans projeter",
+      "why": "La même discipline critique s'applique à des vers obscurs et à des images symboliques.",
+      "caution": "Lien de méthode seulement : aucun lien historique direct entre Nostradamus et l'image de 1789 n'est affirmé.",
+      "evidence": "Dossiers méthodologiques des deux enquêtes.",
+      "next": "Chercher interprétations contemporaines, variantes et contre-exemples."
+    },
+    {
+      "id": "R19",
+      "from": "atlas",
+      "to": "vasserot",
+      "type": "methode",
+      "label": "Atlas, calage et parcelles",
+      "why": "L'atlas et les études cadastrales mettent en relation les repères et les plans historiques.",
+      "caution": "Le trajet littéraire de 1482 ne se déduit pas d'un cadastre du XIXe siècle.",
+      "evidence": "Atlas Victor Hugo et étude Vasserot / ALPAGE.",
+      "next": "Comparer repères littéraires, date des sources et incertitude de localisation."
+    },
+    {
+      "id": "R20",
+      "from": "isis001",
+      "to": "oeil1789",
+      "type": "methode",
+      "label": "Motif ancien et contexte moderne",
+      "why": "Ces deux recherches partent d'une lecture de motifs visuels et interrogent leurs usages historiques.",
+      "caution": "Simple passerelle de méthode, sans rapport historique direct prouvé.",
+      "evidence": "Études PAR ISIS 001 et de l'iconographie de 1789.",
+      "next": "Peut-on attribuer une intention grâce à une source d'époque plutôt qu'à une ressemblance ?"
+    }
+  ]
+}
