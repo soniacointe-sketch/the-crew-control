@@ -86,7 +86,10 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 <label for="style">Univers musical</label>
 <select id="style"><option value="ambient">Céleste · Ambient</option><option value="mystic">Mystique · Doux</option><option value="cinematic">Cinématique</option><option value="electro">Électro</option></select>
 <div class="smallgrid"><div><label for="scale">Gamme</label><select id="scale"><option value="dorian">Dorienne</option><option value="pentatonic">Pentatonique</option><option value="minor">Mineure</option><option value="major">Majeure</option><option value="phrygian">Phrygienne</option></select></div>
-<div><label for="bpm">Tempo (BPM)</label><input type="number" id="bpm" min="45" max="180" value="76"></div></div>
+<div><label for="musicLanguage">Source des notes</label>
+<select id="musicLanguage"><option value="fr">Le texte français lu</option><option value="greek">Le texte grec du Nouveau Testament (Textus Receptus)</option></select>
+<p class="smalldesc" id="languageStatus">Le français est transformé en musique selon les règles créatives de NUMERA.</p>
+<label for="bpm">Tempo (BPM)</label><input type="number" id="bpm" min="45" max="180" value="76"></div></div>
 <label for="readSpeed">Vitesse de voix : <output id="speedOutput">0,9×</output></label>
 <input type="range" id="readSpeed" min="55" max="140" value="90">
 <div class="readings"><label><input id="withVoice" type="checkbox" checked> Lire les versets à voix haute</label>
@@ -120,7 +123,7 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 <aside class="panel right"><div class="pad">
 <div class="eyebrow">03 · CRÉER ET CONSERVER</div><h2>Le texte devient partition.</h2>
 <p class="smalldesc">Chaque verset génère une cellule musicale. Quand la voix passe au verset suivant, NUMERA fait évoluer l'accompagnement.</p>
-<div class="sidebox"><strong>La règle créative</strong>Pour le français, les lettres sont converties en degrés musicaux selon une convention de composition. Les numéros des versets influencent également le motif ; il ne s'agit pas de fréquences bibliques originelles.</div>
+<div class="sidebox"><strong>La règle créative</strong>En mode grec, les valeurs isopséphiques viennent des lettres du Texte Reçu identifié ; pour le français, les lettres sont converties en degrés musicaux selon une convention de composition. Les numéros des versets influencent également le motif ; il ne s'agit pas de fréquences bibliques originelles.</div>
 <h3>Exporter</h3>
 <div class="output">
 <button class="btn" type="button" id="wav">↓ WAV · musique instrumentale</button>
