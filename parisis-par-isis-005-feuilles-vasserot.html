@@ -183,4 +183,5 @@ footer{padding:19px 0 32px;border-top:1px solid var(--border);font-size:12px;col
 <script>
 (()=>{'use strict';const slider=document.getElementById('zoomCroquis'),img=document.getElementById('croquisImage'),label=document.getElementById('zoomLabel'),scroller=document.getElementById('croquisScroll'),reset=document.getElementById('resetZoom');const sync=()=>{img.style.width=slider.value+'%';label.textContent=slider.value+' %'};slider.addEventListener('input',sync);reset.addEventListener('click',()=>{slider.value='100';sync();scroller.scrollTo({top:0,left:0,behavior:'auto'})});sync()})();
 </script>
-<script defer src="eloah-navigation.js?v=20261013-sidebar1"></script><script defer src="parisis-editorial-shared.js?v=20261013"></script></body></html>
+<script defer src="eloah-navigation.js?v=20261013-sidebar1"></script><script defer src="parisis-editorial-shared.js?v=20261013"></script><script defer src="parisis-relations-bridge.js"></script>
+</body></html>
