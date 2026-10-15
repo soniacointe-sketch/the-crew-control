@@ -175,7 +175,7 @@ $("alphaFile").addEventListener("change",async function(){
 $("alphaCsv").addEventListener("click",()=>{if(report)download(A.exportCSV(report),"ALPHA-LECTEUR-mots.csv","text/csv;charset=utf-8")});
 $("alphaJson").addEventListener("click",()=>{if(report)download(JSON.stringify({generated:new Date().toISOString(),engine:A.version,...report},null,2),"ALPHA-LECTEUR-analyse.json","application/json;charset=utf-8")});
 document.querySelectorAll("button[data-example]").forEach(b=>b.addEventListener("click",()=>{
- const x=examples[b.dataset.example];if(x!=null){$("alphaMode").value="greek";$("alphaInput").value=x;run();}
+ const x=examples[b.dataset.example];if(x!=null){$("alphaMode").value=b.dataset.example==="french"?"latin-experiment":"greek";$("alphaInput").value=x;run();}
 }));
 window.addEventListener("pagehide",()=>{if("speechSynthesis" in window)window.speechSynthesis.cancel()});
 renderAlphabet();run();
