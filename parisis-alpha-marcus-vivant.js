@@ -64,6 +64,21 @@ function prepare(opts={}){
 function expand(letter,depth=2){
  return M.expand(letter,depth,5000);
 }
+function expandWholeName(raw,depth=1){
+ const parsed=R.greekLetters(raw,false);
+ if(!parsed.letters.length||parsed.unknown.length||parsed.letters.length>80)throw Error("Nom grec invalide.");
+ if(!Number.isInteger(depth)||depth<1||depth>3)throw Error("Profondeur de nom entre 1 et 3.");
+ const rows=parsed.letters.map((letter,index)=>{
+  const stream=M.expand(letter,depth,8000);
+  const final=stream.stages[stream.stages.length-1];
+  return {index:index+1,letter,level:final.level,
+   finalLength:final.length,preview:final.preview,truncated:stream.truncated};
+ });
+ const total=rows.reduce((n,x)=>n+(x.finalLength||0),0);
+ return {name:parsed.normalized,originalLength:parsed.letters.length,depth,
+  rows,totalGeneratedLetters:total,truncated:rows.some(x=>x.truncated),
+  warning:"Développement moderne des noms de lettres, inspiré du raisonnement rapporté par Irénée I,14,2. La chaîne complète n'est pas attestée en ces graphies."};
+}
 function fullRun(opts={}){
  const data=prepare(opts);
  const selected=opts.expansionLetter||[...data.input][0];
@@ -85,7 +100,7 @@ function audit(){
  verify("Aucune association inventée",r.verdict.notEstablished.includes("ne démontre pas"));
  return {passed:tests.filter(x=>x.pass).length,total:tests.length,tests};
 }
-const api=Object.freeze({version:"ALPHA-015/1.0.0",prepare,expand,fullRun,audit,sources:SOURCES});
+const api=Object.freeze({version:"ALPHA-015/1.1.0",prepare,expand,expandWholeName,fullRun,audit,sources:SOURCES});
 if(typeof module!=="undefined"&&module.exports)module.exports=api;
 if(root)root.PARISIS_ALPHA_VIVANT=api;
 })(typeof window!=="undefined"?window:(typeof globalThis!=="undefined"?globalThis:null));
