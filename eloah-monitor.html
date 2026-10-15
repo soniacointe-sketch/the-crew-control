@@ -9,10 +9,10 @@
 <meta name="description" content="ELOAH Monitor · Tour de contrôle fondatrice, navigation entre univers et vérification des pages publiques.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; connect-src 'self' https://voytsqyorhoveurnguxn.supabase.co; img-src 'self' data:; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml">
-<link rel="stylesheet" href="eloah-monitor-control.css?v=2.0.0">
+<link rel="stylesheet" href="eloah-monitor-control.css?v=2.0.0">\n<link rel="stylesheet" href="eloah-monitor-data.css?v=2.1.0">
 <title>ELOAH Monitor · Tour de contrôle</title>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
-<script defer src="eloah-monitor-control.js?v=2.0.0"></script>
+<script defer src="eloah-monitor-control.js?v=2.0.0"></script>\n<script defer src="eloah-monitor-data.js?v=2.1.0"></script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au tableau de bord</a>
@@ -36,7 +36,7 @@
 <nav aria-label="Sections de la tour de contrôle">
 <p class="nav-caption">CENTRE DE COMMANDE</p>
 <a href="#main" class="nav-link" aria-current="page"><span class="ic" aria-hidden="true">◈</span> Vue d’ensemble</a>
-<a href="#univers" class="nav-link"><span class="ic" aria-hidden="true">◇</span> Mes univers</a>
+<a href="#indicateurs-reels" class="nav-link"><span class="ic" aria-hidden="true">↗</span> Indicateurs réels</a>\n<a href="#univers" class="nav-link"><span class="ic" aria-hidden="true">◇</span> Mes univers</a>
 <a href="#controle" class="nav-link"><span class="ic" aria-hidden="true">⌁</span> État des pages</a>
 <a href="#raccourcis" class="nav-link"><span class="ic" aria-hidden="true">▦</span> Mes outils</a>
 <a href="#securite" class="nav-link"><span class="ic" aria-hidden="true">♢</span> Sécurité</a>
@@ -59,7 +59,7 @@
 <section class="hero" aria-labelledby="hero-title">
 <p class="eyebrow">ELOAH MONITOR · CENTRE DE COMMANDE</p>
 <h1 id="hero-title">Tous tes univers.<br>Un seul horizon.</h1>
-<p class="lede">Retrouve tes espaces, choisis tes priorités et contrôle que leurs pages publiques répondent. Les données privées restent dans chaque outil.</p>
+<p class="lede">Retrouve tes espaces et tes priorités, consulte des indicateurs réels agrégés et contrôle tes pages publiques. Les données personnelles restent protégées dans chaque outil.</p>
 <div class="hero-actions">
 <a class="btn btn-primary" href="#univers">Explorer mes univers <span aria-hidden="true">→</span></a>
 <a class="btn" href="#controle">Voir les contrôles</a>
@@ -71,6 +71,33 @@
 <article class="metric"><small>Univers prioritaires</small><strong id="metric-focus">—</strong><span class="hint">Classement manuel, sur cet appareil</span></article>
 <article class="metric"><small>Outils directs</small><strong id="metric-tools">—</strong><span class="hint">Accès rapides à ELOAH</span></article>
 </div>
+<section class="section" id="indicateurs-reels" aria-labelledby="real-title">
+<div class="section-heading">
+  <div><p class="eyebrow">01 · SUPERVISION RÉELLE · ACCÈS FONDATRICE</p><h2 id="real-title">Mes indicateurs réels</h2>
+  <p>Comptages issus de Supabase, consultés sur demande et jamais copiés dans Monitor.</p></div>
+  <button type="button" class="btn btn-sm" id="real-refresh">↻ Actualiser mes indicateurs</button>
+</div>
+<div class="real-tools">
+  <span class="real-status" id="real-status" data-status="pending" role="status" aria-live="polite">En attente de la vérification fondatrice…</span>
+  <span class="timestamp" id="real-checked">Aucune donnée affichée</span>
+</div>
+<div id="real-results" hidden>
+<div class="real-metrics" aria-label="Chiffres clés provenant de la base de données">
+  <article class="real-card"><span class="label">Missions SONIA OS</span><strong class="number" data-real="osMissions">—</strong><span class="source">Enregistrées sur ton compte</span></article>
+  <article class="real-card"><span class="label">Projets The Crew</span><strong class="number" data-real="crewProjects">—</strong><span class="source">Projets créatifs non archivés</span></article>
+  <article class="real-card"><span class="label">Événements The Crew</span><strong class="number" data-real="crewEvents">—</strong><span class="source">Événements enregistrés</span></article>
+  <article class="real-card"><span class="label">Articles Power & Glam</span><strong class="number" data-real="pgArticles">—</strong><span class="source">Signalés comme publics dans la base</span></article>
+</div>
+<div class="real-details">
+ <article class="real-detail"><h3>SONIA OS & ELOAH</h3><div class="real-line"><span>Tâches SONIA OS</span><strong data-real="osTasks">—</strong></div><div class="real-line"><span>Sauvegardes de projets du compte</span><strong data-real="projectBackups">—</strong></div><p class="real-help">Les textes des missions et les fichiers de sauvegarde ne sont jamais transmis à cette page.</p><a class="btn btn-sm" href="sonia-os.html">Ouvrir SONIA OS ↗</a></article>
+ <article class="real-detail"><h3>The Crew</h3><div class="real-line"><span>Adhérents enregistrés</span><strong data-real="crewMembers">—</strong></div><div class="real-line"><span>Inscriptions événements brutes</span><strong data-real="crewEventRegistrations">—</strong></div><div class="real-line"><span>Tâches associatives</span><strong data-real="crewTasks">—</strong></div><p class="real-help">Les noms et coordonnées ne sont pas chargés ici. Les inscriptions peuvent inclure des annulations.</p><a class="btn btn-sm" href="eloah-the-crew.html">Ouvrir The Crew ↗</a></article>
+ <article class="real-detail"><h3>Power & Glam</h3><div class="real-line"><span>Offres ouvertes à la vente</span><strong data-real="pgOffersOpen">—</strong></div><div class="real-line"><span>Éléments en distribution</span><strong data-real="pgDistributionQueue">—</strong></div><p class="real-help">Les chiffres proviennent de la base P&G et ne représentent pas les ventes encaissées en direct.</p><a class="btn btn-sm" href="power-glam-control.html">Ouvrir Power & Glam ↗</a></article>
+ <article class="real-detail"><h3>Finances The Crew</h3><div class="real-line"><span>Paiements avec dates de versement et vérification</span><strong data-real="crewPaymentsVerified">—</strong></div><div class="real-line"><span>Commandes événements avec date de règlement</span><strong data-real="crewEventOrdersPaid">—</strong></div><div class="real-line"><span>Écritures manuelles non archivées</span><strong data-real="crewFinanceEntries">—</strong></div><p class="real-help">Compteurs distincts. Aucun montant bancaire ni total de recettes n’est calculé ; les paiements peuvent nécessiter un rapprochement.</p></article>
+ <article class="real-detail"><h3>Prochains événements</h3><div id="real-events" aria-label="Événements à venir enregistrés"></div><p class="real-help">Dates et capacités enregistrées, non validées avec la billetterie en temps réel.</p><a class="btn btn-sm" href="eloah-the-crew.html">Organiser un événement ↗</a></article>
+</div>
+</div>
+<p class="real-note">Données réelles en lecture seule · accès serveur limité au compte fondatrice · valeurs indisponibles représentées par « — ». Les autres comptes ELOAH n’ont pas accès à ces indicateurs.</p>
+</section>
 <section class="section" id="univers" aria-labelledby="univers-title">
 <div class="section-heading"><div><p class="eyebrow">01 · MA CARTE DE TRAVAIL</p><h2 id="univers-title">Mes univers</h2><p>Accède directement à tes espaces et indique lesquels suivre en priorité.</p></div><input id="search-univers" class="search" type="search" placeholder="Rechercher un univers…" aria-label="Rechercher dans mes univers" maxlength="90"></div>
 <div class="chips" role="group" aria-label="Filtrer les univers">
@@ -102,8 +129,8 @@
 </section>
 <section class="section" id="raccourcis"><div class="section-heading"><div><p class="eyebrow">03 · MES COMMANDES</p><h2>Mes outils de travail</h2><p>Ouvre directement le bon écran, sans passer par plusieurs menus.</p></div></div><div class="quick-grid" id="quick-grid"></div></section>
 <section class="section"><div class="section-heading"><div><p class="eyebrow">04 · ÉTAT EXTERNE</p><h2>Dernier contrôle publié</h2><p>Rapport historique existant des sites ELOAH, The Crew et Power & Glam.</p></div></div><div class="panel" id="external-checks">Lecture du dernier rapport…</div></section>
-<div class="notice"><strong>Mode de fonctionnement :</strong> centre de navigation et contrôle de présence HTTP des pages publiques. Il ne lit aucun compte client, ne lance aucune commande sur les sites et ne surveille rien en continu. Pour voir les chiffres réels de projets, paiements ou inscriptions, ouvre leurs outils autorisés.</div>
-<footer class="footer"><span>ELOAH Monitor 2.0 · Tour de contrôle fondatrice<br>Fichiers publics uniquement · Les données métiers restent séparées.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
+<div class="notice"><strong>Mode de fonctionnement :</strong> centre de navigation, contrôle HTTP et statistiques réelles agrégées réservées à la fondatrice. Il ne lit aucun dossier client, ne lance aucune commande sur les sites et ne surveille rien en continu. Les détails restent dans les outils autorisés.</div>
+<footer class="footer"><span>ELOAH Monitor 2.0 · Tour de contrôle fondatrice<br>Navigation publique + statistiques fondatrice agrégées · Comptes clients séparés.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
 </main>
 </div>
 </div>
