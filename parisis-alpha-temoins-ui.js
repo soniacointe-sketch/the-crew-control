@@ -78,7 +78,7 @@ function showCase(id){
  '<h3>'+esc(c.title)+'</h3><p style="font:25px Georgia,serif;color:#f5d69f">'+esc(c.greek)+'</p>'+
  '<p>'+esc(c.words)+'</p><div class="t-step"><b>OBSERVABLE :</b> '+esc(c.claim)+'</div>'+
  '<div class="t-step"><b>CONTRE-LECTURE :</b> '+esc(c.critical)+'</div>'+
- '<div class="t-actions"><a href="https://www.sophiascriptura.com/fathers/epiphanius-panarion/34-9-1/#p-34-'+esc(c.epiph.split("–")[0].split(".").join("-"))+'" target="_blank" rel="noopener noreferrer">Voir le passage grec d'Épiphane ↗</a><a href="https://www.newadvent.org/fathers/0103115.htm" target="_blank" rel="noopener noreferrer">Consulter Irénée ↗</a></div>'+
+ '<div class="t-actions"><a href="https://www.sophiascriptura.com/fathers/epiphanius-panarion/34-9-1/#p-34-'+esc(c.epiph.split("–")[0].replace(/^34\./,"").replace(/\./g,"-"))+'" target="_blank" rel="noopener noreferrer">Voir le passage grec d’Épiphane ↗</a><a href="https://www.newadvent.org/fathers/0103115.htm" target="_blank" rel="noopener noreferrer">Consulter Irénée ↗</a></div>'+
  '<small>STATUT : '+esc(c.status)+' · même tradition textuelle principalement transmise, non deux témoins marcosiens autonomes.</small>';
  $("tStatus").textContent="Extrait "+c.epiph+" · "+c.title+" · origine documentaire contrôlée.";
 }
