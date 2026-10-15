@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1e1224">
+<meta name="theme-color" content="#120a19">
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="ELOAH Monitor · Tour de contrôle fondatrice, navigation entre univers et vérification des pages publiques.">
@@ -13,7 +13,8 @@
 <link rel="stylesheet" href="eloah-monitor-data.css?v=2.1.0">
 <link rel="stylesheet" href="eloah-monitor-audit.css?v=2.2.0">
 <link rel="stylesheet" href="eloah-monitor-ops.css?v=2.3.0">
-<title>ELOAH Monitor 2.3 · Tour de contrôle</title>
+<link rel="stylesheet" href="eloah-monitor-premium.css?v=3.0.0">
+<title>ELOAH Monitor 3.0 · Tour de contrôle</title>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <script defer src="eloah-monitor-control.js?v=2.0.0"></script>
 <script defer src="eloah-monitor-data.js?v=2.1.0"></script>
@@ -38,7 +39,7 @@
 </section>
 <div class="layout" id="app" hidden>
 <aside class="side" id="side" aria-label="Menu ELOAH Monitor">
-<a class="brand" href="mes-univers.html"><span class="mark" aria-hidden="true">e</span><span><b>ELOAH</b><small>MONITOR · 2.0</small></span></a>
+<a class="brand" href="mes-univers.html"><span class="mark" aria-hidden="true">e</span><span><b>ELOAH</b><small>MONITOR · 3.0</small></span></a>
 <nav aria-label="Sections de la tour de contrôle">
 <p class="nav-caption">CENTRE DE COMMANDE</p>
 <a href="#main" class="nav-link" aria-current="page"><span class="ic" aria-hidden="true">◈</span> Vue d’ensemble</a>
@@ -48,7 +49,7 @@
 <a href="#audit-securite" class="nav-link"><span class="ic" aria-hidden="true">♢</span> Sécurité & déploiement</a>
 <a href="#controle" class="nav-link"><span class="ic" aria-hidden="true">⌁</span> État des pages</a>
 <a href="#raccourcis" class="nav-link"><span class="ic" aria-hidden="true">▦</span> Mes outils</a>
-<a href="#securite" class="nav-link"><span class="ic" aria-hidden="true">♢</span> Sécurité</a>
+
 <p class="nav-caption">ACCÈS RAPIDES</p>
 <a href="eloah-pilotage.html" class="nav-link"><span class="ic" aria-hidden="true">◷</span> Mon organisation</a>
 <a href="eloah-trello.html" class="nav-link"><span class="ic" aria-hidden="true">▤</span> ELOAH Boards</a>
@@ -65,21 +66,71 @@
 <div class="main">
 <header class="topbar"><div class="actions"><button type="button" class="mobile-menu" id="menu" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="side">☰</button><span class="crumb">MON ESPACE / <strong>TOUR DE CONTRÔLE</strong></span></div><div class="top-right"><span id="today"></span><a href="mes-univers.html" class="mini-link">Mon accueil ↗</a></div></header>
 <main id="main" class="wrap">
-<section class="hero" aria-labelledby="hero-title">
-<p class="eyebrow">ELOAH MONITOR · CENTRE DE COMMANDE</p>
-<h1 id="hero-title">Tous tes univers.<br>Un seul horizon.</h1>
-<p class="lede">Retrouve tes espaces et tes priorités, consulte des indicateurs réels agrégés et contrôle tes pages publiques. Les données personnelles restent protégées dans chaque outil.</p>
-<div class="hero-actions">
-<a class="btn btn-primary" href="#univers">Explorer mes univers <span aria-hidden="true">→</span></a>
-<a class="btn" href="#controle">Voir les contrôles</a>
-<a class="btn btn-quiet" href="eloah-monitor-lab.html">Ancien Monitor frigorifique ↗</a>
-</div></section>
-<div class="metrics" aria-label="Indicateurs du catalogue et des liens">
-<article class="metric"><small>Univers recensés</small><strong id="metric-universes">—</strong><span class="hint">Raccourcis vers les espaces existants</span></article>
-<article class="metric"><small>Pages HTTP joignables</small><strong id="metric-verified">—</strong><span class="hint" id="health-caption">Test non exécuté</span></article>
-<article class="metric"><small>Univers prioritaires</small><strong id="metric-focus">—</strong><span class="hint">Classement manuel, sur cet appareil</span></article>
-<article class="metric"><small>Outils directs</small><strong id="metric-tools">—</strong><span class="hint">Accès rapides à ELOAH</span></article>
+<section class="premium-hero" aria-labelledby="hero-title">
+<div class="hero-grid">
+  <div class="hero-copy">
+    <p class="eyebrow">CLARTÉ &nbsp;·&nbsp; CONTRÔLE &nbsp;·&nbsp; IMPACT</p>
+    <p class="brandline"><em>ELOAH</em> Monitor</p>
+    <h1 id="hero-title">La tour de contrôle de tous tes univers.</h1>
+    <p class="lede">Une vision unifiée de tes projets, tes indicateurs et tes outils de pilotage. Retrouve l'essentiel, prends tes décisions et avance depuis un seul espace.</p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="#monitor-operations">Piloter mon activité <span aria-hidden="true">→</span></a>
+      <a class="btn" href="#indicateurs-reels">Voir mes indicateurs</a>
+    </div>
+    <div class="hero-footpoints" aria-label="Fonctionnalités de la version actuelle">
+      <span><i aria-hidden="true">✓</i> Multi-univers</span>
+      <span><i aria-hidden="true">✓</i> Contrôle des pages</span>
+      <span><i aria-hidden="true">✓</i> Données fondatrice protégées</span>
+    </div>
+    <p class="hero-quote">« Tes idées plus loin. Tes univers mieux orchestrés. »</p>
+  </div>
+  <div class="hero-console-wrap">
+    <div class="hero-console" aria-label="Aperçu dynamique de ton ELOAH Monitor">
+      <div class="hero-console-header">
+        <span class="console-brand"><span class="console-brand-mark" aria-hidden="true">e</span> ELOAH <small>MONITOR</small></span>
+        <span class="console-label"><i aria-hidden="true"></i> ESPACE FONDATRICE</span>
+      </div>
+      <div class="console-body">
+        <div class="console-intro">
+          <div><h2>Vue d'ensemble</h2><p>Les chiffres affichés ci-dessous proviennent de ton espace actuel.</p></div>
+          <span class="console-round" aria-hidden="true">✦</span>
+        </div>
+        <div class="metrics" aria-label="Indicateurs du catalogue et du suivi HTTP, non indicateurs financiers">
+          <article class="metric"><small>Univers</small><strong id="metric-universes">—</strong><span class="hint">Espaces répertoriés</span></article>
+          <article class="metric"><small>Pages HTTP joignables</small><strong id="metric-verified">—</strong><span class="hint" id="health-caption">Non testé</span></article>
+          <article class="metric"><small>Univers prioritaires</small><strong id="metric-focus">—</strong><span class="hint">Choisis sur cet appareil</span></article>
+          <article class="metric"><small>Outils de travail</small><strong id="metric-tools">—</strong><span class="hint">Accès directs ELOAH</span></article>
+        </div>
+        <div class="console-bottom">
+          <div class="console-network">
+            <h3>Univers connectés dans une même vision</h3>
+            <div class="console-network-graphic" role="img" aria-label="Illustration symbolique du pilotage multi-univers, sans données de performance">
+              <span class="orbit-ring" aria-hidden="true"></span><span class="orbit-ring inner" aria-hidden="true"></span>
+              <span class="orbit-node n1" aria-hidden="true"></span><span class="orbit-node n2" aria-hidden="true"></span>
+              <span class="orbit-node n3" aria-hidden="true"></span><span class="orbit-node n4" aria-hidden="true"></span>
+              <span class="orbit-core" aria-hidden="true">e</span>
+            </div>
+            <small>Schéma d'orientation illustratif · Aucun suivi temps réel sous-jacent.</small>
+          </div>
+          <div class="console-shortcuts">
+            <h3>Accès immédiats</h3>
+            <a href="eloah-pilotage.html">Organisation <span aria-hidden="true">↗</span></a>
+            <a href="eloah-trello.html">Boards &amp; projets <span aria-hidden="true">↗</span></a>
+            <a href="#audit-securite">Sécurité &amp; déploiement <span aria-hidden="true">↗</span></a>
+            <small>Les données détaillées restent dans chaque outil.</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+</section>
+<nav class="premium-value-strip" aria-label="Les quatre piliers de la plateforme">
+ <a class="value-card" href="#monitor-operations"><span class="value-icon" aria-hidden="true">◎</span><span class="value-text"><strong>Vue de pilotage</strong><small>Priorités et décisions accessibles.</small></span><span class="value-arrow" aria-hidden="true">↗</span></a>
+ <a class="value-card" href="#indicateurs-reels"><span class="value-icon" aria-hidden="true">▥</span><span class="value-text"><strong>Indicateurs réels</strong><small>Chiffres réservés à la fondatrice.</small></span><span class="value-arrow" aria-hidden="true">↗</span></a>
+ <a class="value-card" href="#controle"><span class="value-icon" aria-hidden="true">◉</span><span class="value-text"><strong>Contrôle des pages</strong><small>Disponibilité HTTP de tes espaces.</small></span><span class="value-arrow" aria-hidden="true">↗</span></a>
+ <a class="value-card" href="#univers"><span class="value-icon" aria-hidden="true">◇</span><span class="value-text"><strong>Pilotage multi-univers</strong><small>Tous tes outils, un seul point d'entrée.</small></span><span class="value-arrow" aria-hidden="true">↗</span></a>
+</nav>
 <section class="monitor-ops" id="monitor-operations" aria-labelledby="ops-heading">
 <div class="monitor-ops-head">
  <div><p class="eyebrow">MON COCKPIT · ACTIONS IMMÉDIATES</p><h2 id="ops-heading">Mes priorités, au même endroit.</h2><p>Décide quoi ouvrir, vérifie les pages, puis reprends ton travail. Les statuts sont personnels à ce navigateur.</p></div>
@@ -212,7 +263,7 @@
  <nav id="monitor-command-results" class="monitor-command-body" aria-label="Résultats des outils ELOAH"></nav>
  <div class="monitor-command-foot">Entre pour ouvrir le premier résultat · Échap pour fermer · Raccourcis internes uniquement</div>
 </dialog>
-<footer class="footer"><span>ELOAH Monitor 2.3 · Tour de contrôle fondatrice<br>Navigation publique + statistiques fondatrice agrégées · Comptes clients séparés.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
+<footer class="footer"><span>ELOAH Monitor 3.0 · Tour de contrôle fondatrice<br>Navigation publique + statistiques fondatrice agrégées · Comptes clients séparés.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
 </main>
 </div>
 </div>
