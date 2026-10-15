@@ -104,6 +104,9 @@ Un modèle des **sept planètes antiques** pouvait informer certaines cosmologie
 9. [Apocalypse 10,3–4](https://www.biblegateway.com/passage/?search=Revelation%2010%3A3-4&version=LSG) — sept tonnerres et ordre de sceller.
 10. [Paul, 2 Corinthiens 12,2–4](https://www.biblegateway.com/passage/?search=2%20Corinthians%2012%3A2-4&version=LSG) — troisième ciel.
 
+## Annexe de méthode — ALPHA-C7
+Sept contrôles (proposition testable, témoin, quatre dates, fonction, calcul, contre-exemple, verdict) sont désormais documentés dans le [protocole critique des sources](parisis-alpha-011-protocole-critique-des-sources.md). [Ouvrir l'atelier sur le site](../parisis-alpha-011-protocole.html). Cette annexe n'altère pas la conclusion historique de l'enquête.
+
 ## 11. Conclusion et suite
 **Lien documentaire solide :** Irénée atteste l'association marcosienne des lettres, voyelles, calculs Alpha-Oméga et épisode de Jésus enfant. **Comparaison ouverte :** les usages gréco-égyptiens des sons, les cosmologies à plusieurs cieux et les figures de l'Apocalypse. **Transmission directe :** non établie à ce stade.
 
