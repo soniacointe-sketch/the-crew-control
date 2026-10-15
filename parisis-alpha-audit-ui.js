@@ -103,7 +103,7 @@
     else if(a.date.min>b.date.max)chrono="ordre défavorable à une transmission A vers B";
     else if(a.date.max!=null&&b.date.min!=null&&a.date.max<b.date.min)chrono="antériorité compatible";
     else chrono="périodes qui se chevauchent ou bornes insuffisantes";
-    byId("aaCompared").textContent="Motifs communs : "+(shared.join(", ")||"aucun")+". Motifs distinctifs partagés : "+(informative.join(", ")||"aucun").+". Chronologie : "+chrono+". Verdict : COMPARAISON POSSIBLE, EMPRUNT NON DÉMONTRÉ. Un témoin indépendant ou une citation directe manque.";
+    byId("aaCompared").textContent="Motifs communs : "+(shared.join(", ")||"aucun")+". Motifs distinctifs partagés : "+(informative.join(", ")||"aucun")+". Chronologie : "+chrono+". Verdict : COMPARAISON POSSIBLE, EMPRUNT NON DÉMONTRÉ. Un témoin indépendant ou une citation directe manque.";
   });
   byId("aaCompute").addEventListener("click",function(){
     const raw=byId("aaGreek").value;
