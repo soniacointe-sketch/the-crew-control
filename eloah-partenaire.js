@@ -1449,3 +1449,24 @@ localStorage.setItem(marker,'installed');
 if(missing.length)$('#status').textContent='170 nouveaux briefs ajoutés : la collection ELOAH Studio compte 300 fiches. Recherche un univers ou un type de livrable.';
 }catch(e){$('#status').textContent='Ajout des briefs impossible : vérifie le stockage du navigateur.';}
 })();
+
+
+// ELOAH · Note ajoutée à la demande de la fondatrice le 15/10/2026.
+// Ajout non destructif : ne crée aucun rappel daté ni engagement de paiement.
+(function ajouterNoteSecuritePlusTard(){
+  if(!storageReadable||cfg.id!=='itriia'||!cfg.modules.includes('Mon Espace'))return;
+  const id='eloah-securite-supabase-a-reprendre-20261015';
+  if(rows.some(r=>r.id===id))return;
+  const fiche={
+    id,
+    title:'À reprendre plus tard · Sécurité Supabase / ELOAH',
+    module:'Mon Espace',
+    domain:'Qualité & sauvegardes',
+    state:'À faire',
+    date:'',
+    note:'DÉCISION DU 15/10/2026 : on reporte le renforcement des paramètres Supabase. Ne pas changer de forfait ni engager de dépense pour le moment.\n\nÀ REVOIR PLUS TARD :\n• Vérifier les options de sécurité disponibles avec Supabase Free.\n• Étudier la protection contre les mots de passe compromis (fonctionnalité payante selon le forfait) avant toute évolution vers Pro.\n• Réexaminer les avertissements du Security Advisor : extension pg_net et fonctions SQL SECURITY DEFINER, avec tests des droits d’accès ; ne rien désactiver à l’aveugle.\n• Refaire un audit des accès clientes et une vérification ELOAH Monitor avant une mise en production plus large.\n\nSTATUT : en attente, aucune échéance choisie. Aucune modification des comptes clientes, aucun abonnement souscrit.',
+    url:'https://soniacointe-sketch.github.io/the-crew-control/eloah-monitor.html',
+    archived:false
+  };
+  save([...rows,fiche]);
+})();
