@@ -110,6 +110,25 @@ function renderDoc(){
  $("currentVerse").textContent="Passage prêt · clique sur un verset pour commencer à cet endroit";
  highlight(-1);showAlpha(0);draw(0);
 }
+function showAlpha(index){
+ const scene=musicScore?.chapters?.[index],node=$("alphaInspector");
+ if(!scene||!node)return;
+ const greek=scene.sourceMode==="greek-alpha";
+ const classes=scene.classes.map(g=>'<div class="alpha-class"><strong>'+g.expected+'</strong><small>'+esc(g.category)+'</small><small>'+(greek?g.present+" dans le verset":"référence historique")+'</small></div>').join("");
+ const pairs=scene.pairs.map(p=>'<div class="alpha-pair '+(greek&&p.occurrences?"present":"")+'"><strong>'+esc(p.letterPair)+'</strong><small>'+esc(p.body)+'</small><small>'+p.rankSum+' = rangs · '+(greek?p.occurrences+" occurrences":"modèle")+'</small></div>').join("");
+ const vowels=scene.vowels.map(v=>'<div class="alpha-vowel"><b>'+esc(v.letter)+'</b><small>Ciel '+v.sky+'</small><small>'+(greek?v.count+"×":"degré "+v.sky)+'</small></div>').join("");
+ const anchors=scene.keyWords.map(w=>'<div class="alpha-key">'+esc(w.word)+' = <strong>'+w.value+'</strong><small> · '+esc(w.rule)+'</small></div>').join("");
+ node.innerHTML='<div class="eyebrow">ALPHA · ANALYSE MUSICALE DU VERSET '+scene.verse+'</div>'+
+  '<h3>'+ (greek?"24 lettres grecques : le passage devient musique":"Structure ALPHA : sans grec inventé")+'</h3>'+
+  '<p class="smalldesc">'+esc(scene.explanation)+'</p>'+
+  (greek?'<div class="alpha-greek">'+esc(scene.greekText)+'</div>':
+    '<div class="alpha-warning">Texte grec absent pour ce verset : aucune isopséphie française inventée. Les 12 paires et les groupes 9|8|7 structurent réellement la partition.</div>')+
+  '<div class="alpha-classes">'+classes+'</div>'+
+  '<h3>Les 12 paires · 1+24 jusqu’à 12+13 = 25</h3><div class="alpha-pairs">'+pairs+'</div>'+
+  '<h3>Les sept voyelles · sept degrés musicaux</h3><div class="alpha-vowels">'+vowels+'</div>'+
+  '<h3>Mots grecs et valeurs reconnus</h3><div class="alpha-keys">'+(anchors||'<span class="smalldesc">Aucun des motifs 64 / 801 / 888 n’est attesté dans ce verset sous les formes analysées : aucun n’est inventé.</span>')+'</div>'+
+  '<div class="alpha-warning">Les rangs, les valeurs grecques et les familles 9–8–7 viennent du corpus ALPHA. Leur transformation en notes, rythmes et registres est une composition moderne, pas une fréquence biblique cachée.</div>';
+}
 function highlight(index){
  if(!doc)return;
  const v=doc.verses[index];
