@@ -81,3 +81,5 @@ body.foi-universe{color:var(--ink)!important;background-color:var(--bg)!importan
 
 .foi-universe .foi-photo-credits{display:none}
 .foi-universe .foi-breathing-photo img{filter:none}
+
+@media(max-width:760px){.foi-universe .eloah-global-nav{flex-wrap:wrap!important}}

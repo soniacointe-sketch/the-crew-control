@@ -29,7 +29,7 @@ function selectPhoto(img){
  if(img.closest('.rev-article-visual'))title=document.querySelector('#article h1,article h1,.reader h1')?.textContent||title;
  if(img.closest('.hero-image'))return 'bibliotheque';
  if(img.closest('.atlas-hero-visual'))return 'nag';
- const context=(file||title).toLowerCase().normalize('NFC');
+ const context=(img.dataset.foiDocument||card?.dataset.foiDocument||file||title).toLowerCase().normalize('NFC');
  return rules.find(([re,key])=>photos[key]&&re.test(context))?.[1]||'livre';
 }
 function dress(img){
@@ -44,7 +44,10 @@ function dress(img){
  else if(card&&!card.querySelector('.foi-image-credit')){const cap=document.createElement('span');cap.className='foi-image-credit';cap.textContent=text;const body=card.querySelector('.pub-info,.collection-body,.collection-info,.publication-info,.study-info,.atlas-family-body,.shelf-main,.rev-story-info')||card;body.append(cap);}
  else if(img.closest('.hero-image')){const cap=img.closest('.hero-image').querySelector('.hero-image-label');if(cap){cap.classList.add('foi-image-credit');cap.textContent=text;creditLink(cap);}}
 }
-function scan(node){if(node.nodeType!==1)return;if(node.matches(selector))dress(node);node.querySelectorAll(selector).forEach(dress);}
+function scan(node){if(node.nodeType!==1)return;
+ const heroes=node.matches('.rev-model-hero')?[node]:[...node.querySelectorAll('.rev-model-hero')];
+ for(const hero of heroes){if(!hero.querySelector('.rev-model-cover')){const fig=document.createElement('figure');fig.className='rev-model-cover';const img=document.createElement('img');img.loading='lazy';fig.append(img);hero.append(fig);hero.classList.add('has-image');}}
+if(node.matches(selector))dress(node);node.querySelectorAll(selector).forEach(dress);}
 scan(document.body);
 new MutationObserver(records=>{for(const record of records)for(const node of record.addedNodes)scan(node)}).observe(document.body,{childList:true,subtree:true});
 const main=document.querySelector('main');

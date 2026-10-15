@@ -391,8 +391,8 @@ body.eloah-revue .rev-personal-image-note{margin:21px 0 0;font:11px/1.7 system-u
 @media(max-width:900px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:repeat(2,minmax(0,260px))!important}}
 @media(max-width:560px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:minmax(0,260px)!important}body.eloah-revue #foi-mon-chemin .rev-chapter-story .rev-story-info strong{font-size:22px!important}}
 </style><link rel="stylesheet" href="foi-pierre-lumiere.css?v=20261016-univers1">
-<link rel="stylesheet" href="foi-universe.css?v=20261016-sujets2">
-<script defer src="foi-universe.js?v=20261016-sujets2"></script>
+<link rel="stylesheet" href="foi-universe.css?v=20261016-sujets3">
+<script defer src="foi-universe.js?v=20261016-sujets3"></script>
 </head><body class="foi-universe">
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
@@ -608,7 +608,7 @@ function renderArticleFrame(i){
  if(sourceHeaders.length)nav.append(a("#rev-model-sources","Les sources"));
  nav.append(a("eloah-foi-publications.html","Toutes les publications ↗"));
  root.append(nav);
- const hero=el("header","rev-model-hero");hero.dataset.noaudio="1";
+ const hero=el("header","rev-model-hero");hero.dataset.noaudio="1";hero.dataset.foiDocument=doc[1];
  const copy=el("div","rev-model-copy");
  copy.append(el("span","rev-model-kicker",group+" · ELOAH"));
  if(title.parentElement)title.remove();
@@ -859,7 +859,7 @@ function renderPersonalIndex(){
  ["TEXTES APOCRYPHES","Le Livre secret de Jacques","Un codex, des lacunes et la transmission du texte.","eloah-foi-apo-019-livre-secret-jacques.md"],
  ["TRADITIONS COMPARÉES","Bible et Coran","Comparer les récits des commencements sans les confondre.","eloah-scanner-commencements-03-bible-coran.md"],
  ["ARCHIVES · RECHERCHES","Archives intégrales","Textes retrouvés, reconstitutions et recherches conservées.","eloah-foi-archives-completes-index.md"]];
- entries.forEach(([cat,title,desc,file],index)=>{const b=section("button","rev-story");b.type="button";const img=photoImage(["manuscrit","pierre","cloitre","livre","manuscrit","livre"][index]);const info=section("div","rev-story-info");info.append(section("small","",cat),section("strong","",title),section("span","",desc),section("em","","LIRE LE DOSSIER ↗"));b.append(img,info);b.onclick=()=>jump(file);stories.append(b)});pubs.append(stories);article.append(pubs);
+ entries.forEach(([cat,title,desc,file],index)=>{const b=section("button","rev-story");b.type="button";const img=photoImage(["manuscrit","pierre","cloitre","livre","manuscrit","livre"][index]);img.dataset.foiDocument=file;const info=section("div","rev-story-info");info.append(section("small","",cat),section("strong","",title),section("span","",desc),section("em","","LIRE LE DOSSIER ↗"));b.append(img,info);b.onclick=()=>jump(file);stories.append(b)});pubs.append(stories);article.append(pubs);
  const journey=section("section","rev-pubs rev-spiritual-chapters");
  journey.id="foi-mon-chemin";
  journey.setAttribute("aria-label","Mon chemin spirituel · Douze chapitres illustrés");
@@ -878,7 +878,7 @@ function renderPersonalIndex(){
   card.href="foi-control.html?file="+encodeURIComponent(d[1]);
   card.setAttribute("aria-label","Lire le chapitre "+String(j+1).padStart(2,"0")+" : "+d[0]);
   const key=["aube","livre","cloitre","pierre","cloitre","aube","livre","manuscrit","pierre","manuscrit","cloitre","aube"][j];
-  const cover=photoImage(key);
+  const cover=photoImage(key);cover.dataset.foiDocument=d[1];
   const info=section("div","rev-story-info");
   info.append(
    section("small","",category),
