@@ -1501,11 +1501,28 @@ $('show21start').onclick=async()=>{
  if(!confirm((scene25Complete()?'':'Attention : parcours de contrôle V25 incomplet. Teste la sono réelle avant la représentation.\n')+'Lancer le spectacle depuis le premier morceau « '+t.title+' » ? Le chronomètre démarrera si nécessaire.'))return;
  if(djTransitioning){$('show21status').textContent='Une transition est déjà en cours.';return}
  playbackPlaylistId=stageSetlistId;history.length=0;updatePlaybackContext();
- if(!stageRegieRunning)$('stage2040timerToggle').click();
  const i=tracks.findIndex(item=>item.id===t.id);
  await playIndex(i);
- $('show21status').textContent='Spectacle lancé : '+t.title+'.';
- show21Sync();
+ if(current!==i||!audio.src||audio.src!==tracks[i]?.url){
+  $('show21status').textContent='Spectacle non démarré : le morceau initial n’a pas été chargé.';
+  show21Sync();return;
+ }
+ let deadline;
+ try{
+  await Promise.race([
+   audio.play(),
+   new Promise((_,reject)=>{deadline=setTimeout(()=>reject(Error('Démarrage audio trop long')),6000)})
+  ]);
+  if(current!==i||audio.paused)throw Error('Lecture non confirmée');
+  if(!stageRegieRunning)$('stage2040timerToggle').click();
+  $('show21status').textContent='Spectacle lancé et lecture confirmée : '+t.title+'.';
+ }catch(err){
+  if(current===i)audio.pause();
+  $('show21status').textContent='Lecture non confirmée : '+err.message+'. Le chronomètre n’a pas été démarré automatiquement.';
+ }finally{
+  clearTimeout(deadline);
+  show21Sync();
+ }
 };
 $('show21prepare').onclick=async()=>{
  const next=stageSetlistUpcomingIds()[0];
