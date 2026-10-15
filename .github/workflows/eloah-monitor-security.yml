@@ -7,6 +7,8 @@ on:
       - 'eloah-monitor-data.js'
       - 'eloah-monitor-control.js'
       - 'eloah-monitor-data.css'
+      - 'eloah-monitor-audit.js'
+      - 'eloah-monitor-audit.css'
       - '.github/workflows/eloah-monitor-security.yml'
   workflow_dispatch:
 permissions:
@@ -24,13 +26,14 @@ jobs:
         run: |
           node --check eloah-monitor-control.js
           node --check eloah-monitor-data.js
+          node --check eloah-monitor-audit.js
       - name: Verify founder data isolation and assets
         run: |
           python3 - <<'PY'
           import pathlib, re
           html=pathlib.Path('eloah-monitor.html').read_text()
           js=pathlib.Path('eloah-monitor-data.js').read_text()
-          required=['eloah-monitor-data.js','eloah-monitor-data.css','eloah-monitor-control.js','eloah-monitor-control.css','eloah-monitor-lab.html']
+          required=['eloah-monitor-data.js','eloah-monitor-data.css','eloah-monitor-control.js','eloah-monitor-control.css','eloah-monitor-lab.html','eloah-monitor-audit.js','eloah-monitor-audit.css']
           for path in required:
               assert pathlib.Path(path).is_file(), f'Missing file: {path}'
               assert path in html, f'Missing HTML reference: {path}'
@@ -38,6 +41,15 @@ jobs:
           assert 'data-real="osMissions"' in html
           assert 'data-real="crewMembers"' in html
           assert 'data-real="pgArticles"' in html
+          audit=pathlib.Path('eloah-monitor-audit.js').read_text()
+          assert 'id="audit-securite"' in html
+          assert 'https://api.github.com' in html
+          assert 'eloah-monitor-security.yml' in audit and 'pages.yml' in audit
+          assert '.from(' not in audit and 'localStorage' not in audit and 'sessionStorage' not in audit
+          assert 'SERVICE_ROLE_KEY' not in audit
+          audit_ids=set(re.findall(r"\$\('([a-z0-9-]+)'\)", audit))
+          missing_audit={key for key in audit_ids if f'id="{key}"' not in html}
+          assert not missing_audit, f'Missing audit identifiers: {missing_audit}'
           assert '.from(' not in js, 'Direct database access from public JS is forbidden'
           assert 'SERVICE_ROLE_KEY' not in js, 'Service key name must not be referenced in public JS'
           assert 'sessionStorage.setItem(' not in js and 'localStorage.setItem(' not in js, 'Never persist private metrics'
