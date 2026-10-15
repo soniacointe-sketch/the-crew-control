@@ -32,4 +32,4 @@ main{padding:40px 0 90px}.section{padding:36px 0;border-bottom:1px solid var(--l
  document.querySelectorAll("[data-vowel]").forEach(function(b){b.addEventListener("click",function(){document.querySelectorAll("[data-vowel]").forEach(function(el){el.classList.remove("active");el.setAttribute("aria-pressed","false")});b.classList.add("active");b.setAttribute("aria-pressed","true");document.getElementById("vowelResult").textContent="Ciel "+b.dataset.sky+" — "+b.dataset.vowel+". Attribution rapportée par Irénée I,14,7. Aucun équivalent musical ou planétaire n'est affirmé.";});b.setAttribute("aria-pressed","false")});
  document.querySelectorAll("[data-calc]").forEach(function(b){b.addEventListener("click",function(){var e=document.getElementById("calc"+b.dataset.calc);e.hidden=!e.hidden;b.textContent=e.hidden?"Afficher le calcul":"Masquer le calcul";b.setAttribute("aria-expanded",String(!e.hidden))});b.setAttribute("aria-expanded","false")});
 })();
-</script></body></html>
+</script><script src="parisis-alpha-engine.js" defer></script><script src="parisis-alpha-audit-ui.js" defer></script></body></html>
