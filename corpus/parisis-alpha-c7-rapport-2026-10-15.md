@@ -40,3 +40,11 @@
 **Méthodes exécutées :** CORPUS · ALPHABET · PHONÉ · ARITHMOS · CHRONOS · STEMMA · AUDIT.
 
 **À investiguer ensuite :** H1 (les sept tonnerres) : chercher une identification antique explicite ; H3 (chant égyptien et Marcus) : préciser la chronologie du traité *Sur le style* ; H4 (Michel) : distinguer réduction rituelle et noms de lettres expansifs.
+
+## Quatre croisements distinctifs détectés automatiquement
+- **Irénée I,14 ↔ Pseudo-Démétrios §71** : sept-voyelles. *Ressemblance attestée, filiation non démontrée.*
+- **Irénée I,14 ↔ P.Vindob. G 328** : sept-voyelles. *Ressemblance attestée, filiation non démontrée.*
+- **Irénée I,15 ↔ Apocalypse 1,8 ; 21,6 ; 22,13** : alpha-omega. *Ressemblance attestée, filiation non démontrée.*
+- **Pseudo-Démétrios §71 ↔ P.Vindob. G 328** : sept-voyelles. *Ressemblance attestée, filiation non démontrée.*
+
+Le moteur compare toutes les paires de sources de ce corpus, pas seulement les cinq hypothèses présélectionnées. Les motifs « 7 », « son » et « nom-lettres » seuls sont jugés trop génériques pour signaler une connexion distinctive.
