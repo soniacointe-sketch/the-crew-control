@@ -294,6 +294,31 @@ body.stage2040-active{overflow:hidden!important}
 .stage2040-conductorActions button[data-show-launch]{background:#8d5470;border-color:#dba3bb}
 .stage2040-conductorBottom{margin:10px 0 0!important;color:#e9c99d!important}
 @media(max-width:750px){.stage2040-conductorBody{padding:9px}.stage2040-conductorItem{padding:10px}.stage2040-conductorActions button{min-height:42px}}
+
+/* ELOAH MUSIC 2040 STAGE REGIE V18 */
+.stage2040-regie{border:1px solid #80547a;background:linear-gradient(150deg,#21142b,#130b1c);border-radius:14px;overflow:hidden}
+.stage2040-regie summary{display:flex;align-items:center;gap:12px;padding:13px 15px;font-size:13px;font-weight:800;color:#fff2f8;cursor:pointer;list-style:none}
+.stage2040-regie summary::-webkit-details-marker{display:none}
+.stage2040-regie summary::before{content:"▸";color:#ebd0a6}.stage2040-regie[open] summary::before{content:"▾"}
+.stage2040-regie-caption{margin-left:auto;font-size:11px;color:#ceb5d0;font-weight:500}
+.stage2040-regie-inner{border-top:1px solid #704774;padding:12px}
+.stage2040-regie-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.stage2040-regie-card{min-width:0;border:1px solid #624165;border-radius:11px;background:#2b1935;padding:13px;display:flex;flex-direction:column;gap:10px}
+.stage2040-regie-kicker{color:#eacda6;font-size:10px;font-weight:800;letter-spacing:.13em}
+.stage2040-regie-clock{font-size:clamp(28px,3.3vw,46px);letter-spacing:.04em;font-weight:800;font-variant-numeric:tabular-nums;color:#fff4fa}
+.stage2040-regie-buttons,.stage2040-lightChoices{display:flex;gap:7px;flex-wrap:wrap}
+.stage2040-regie button{font:700 11px Inter,system-ui,sans-serif;min-height:39px;background:#47264f;border:1px solid #865780;border-radius:9px;color:#fff2fa;padding:9px 11px;touch-action:manipulation}
+.stage2040-regie button:hover:not(:disabled){background:#6b396a}
+.stage2040-regie button:disabled{opacity:.38;cursor:not-allowed}
+.stage2040-regie button[aria-pressed="true"]{border-color:#e9c9a3;background:#80517b}
+.stage2040-regie .stage2040-lightChoices button{flex:1 1 21%;min-width:70px}
+.stage2040-regie-label{font-size:11px;color:#e5d2e6;font-weight:700}
+.stage2040-regie textarea{width:100%;min-height:66px;resize:vertical;background:#150c20;border:1px solid #825584;border-radius:9px;color:#fff2f9;padding:10px;font:500 12px Inter,system-ui,sans-serif}
+.stage2040-regie-cue{font-size:16px;color:#fff3fb;overflow-wrap:anywhere}
+.stage2040-regie-small{color:#d0b9d1!important;font-size:11px!important;line-height:1.45!important;margin:0!important}
+.stage2040-regie-status{margin:12px 0 0!important;color:#efd2a9!important;font-size:12px!important}
+.stage2040-regie #stage2040pushTalk.talking{background:#a2447b;border-color:#f5d0e6}
+@media(max-width:750px){.stage2040-regie-grid{grid-template-columns:1fr}.stage2040-regie-inner{padding:9px}.stage2040-regie-card{padding:11px}.stage2040-regie button{min-height:44px}.stage2040-regie-clock{font-size:32px}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
@@ -419,6 +444,49 @@ body.stage2040-active{overflow:hidden!important}
   <p class="stage2040-conductorPrivacy" id="stage2040conductorPrivacy">Les notes du spectacle restent sur cet appareil et ne sont pas envoyées au cloud.</p>
   <div id="stage2040conductorRows" class="stage2040-conductorRows"><p class="stage2040-setlistEmpty">Choisis d’abord une playlist dans « Setlist en direct ».</p></div>
   <p class="stage2040-conductorBottom" id="stage2040conductorStatus" role="status" aria-live="polite"></p>
+ </div>
+</details>
+
+<details class="stage2040-regie" id="stage2040regie" open>
+ <summary><span>◉ Régie de spectacle</span><span class="stage2040-regie-caption">Chrono · Micro · Entrées · Lumières</span></summary>
+ <div class="stage2040-regie-inner">
+  <div class="stage2040-regie-grid">
+   <section class="stage2040-regie-card">
+    <span class="stage2040-regie-kicker">CHRONOMÈTRE · SPECTACLE</span>
+    <output id="stage2040showClock" class="stage2040-regie-clock" role="timer" aria-label="Durée du spectacle">00:00:00</output>
+    <div class="stage2040-regie-buttons"><button type="button" id="stage2040timerToggle">▶ Démarrer</button><button type="button" id="stage2040timerReset">⟲ Remettre à zéro</button></div>
+    <p class="stage2040-regie-small">Chronomètre de régie, indépendant de la musique. Réinitialisation après confirmation.</p>
+   </section>
+   <section class="stage2040-regie-card">
+    <span class="stage2040-regie-kicker">ANNONCES · MICRO</span>
+    <label for="stage2040announcement" class="stage2040-regie-label">Texte de l’annonce</label>
+    <textarea id="stage2040announcement" maxlength="360" rows="2" placeholder="Bienvenue au spectacle The Crew…"></textarea>
+    <div class="stage2040-regie-buttons"><button type="button" id="stage2040speak">◖ Lire l’annonce</button><button type="button" id="stage2040speechStop">■ Stop annonce</button></div>
+    <div class="stage2040-regie-buttons"><button type="button" id="stage2040micEnable">🎙 Autoriser micro</button><button type="button" id="stage2040pushTalk" disabled>Maintenir pour parler</button><button type="button" id="stage2040micStop" disabled>Couper micro</button></div>
+    <p class="stage2040-regie-small">Le micro n’enregistre pas : maintien pour parler après autorisation. Attention au retour sonore si les enceintes sont proches. La voix de synthèse dépend du navigateur.</p>
+   </section>
+   <section class="stage2040-regie-card">
+    <span class="stage2040-regie-kicker">ENTRÉE DES GROUPES</span>
+    <strong id="stage2040groupNow" class="stage2040-regie-cue">Aucun groupe sélectionné</strong>
+    <p id="stage2040groupCue" class="stage2040-regie-small">Indique un groupe dans le conducteur d’un passage.</p>
+    <div class="stage2040-regie-buttons"><button type="button" id="stage2040groupTop" disabled>↗ TOP entrée groupe</button></div>
+    <span id="stage2040groupLast" class="stage2040-regie-small">Aucune entrée signalée</span>
+   </section>
+   <section class="stage2040-regie-card">
+    <span class="stage2040-regie-kicker">REPÈRES LUMIÈRE</span>
+    <strong id="stage2040lightNow" class="stage2040-regie-cue">Aucun repère sélectionné</strong>
+    <div class="stage2040-lightChoices">
+     <button type="button" data-regie-light="Noir">● Noir</button>
+     <button type="button" data-regie-light="Ambre">◉ Ambre</button>
+     <button type="button" data-regie-light="Fuchsia">✦ Fuchsia</button>
+     <button type="button" data-regie-light="Blanc">◯ Blanc</button>
+    </div>
+    <div class="stage2040-regie-buttons"><button type="button" id="stage2040lightTop" disabled>✦ TOP lumière</button></div>
+    <span id="stage2040lightLast" class="stage2040-regie-small">Aucun TOP lumière</span>
+    <p class="stage2040-regie-small">Ces boutons marquent les consignes de régie ; ils ne pilotent pas de projecteurs physiques.</p>
+   </section>
+  </div>
+  <p class="stage2040-regie-status" role="status" aria-live="polite" id="stage2040regieStatus">Régie prête. Choisis un passage dans le conducteur.</p>
  </div>
 </details>
 <footer class="stage2040-footer"><span>THE CREW · LIVE MUSIC CONTROL</span><span>Échap ou Quitter pour revenir à ELOAH Music</span></footer>
@@ -724,6 +792,133 @@ if(typeof djAudio.setSinkId==='function'&&navigator.mediaDevices?.selectAudioOut
 let stage2040Native=false,stage2040PreviousFocus=null,stage2040Index='';
 const stage2040Panel=$('dj2040stage');
 
+/* ELOAH MUSIC 2040 STAGE REGIE V18 */
+let stageRegieAccumulated=0,stageRegieStartedAt=0,stageRegieRunning=false,stageRegieTicker=null;
+let stageRegieSelectedLight='',stageRegieLastGroup='',stageRegieLastLight='';
+const regieStatus=text=>{$('stage2040regieStatus').textContent=text;};
+function regieElapsed(){return stageRegieAccumulated+(stageRegieRunning?performance.now()-stageRegieStartedAt:0)}
+function regieFormat(milliseconds){
+ const s=Math.floor(Math.max(0,milliseconds)/1000);
+ return String(Math.floor(s/3600)).padStart(2,'0')+':'+String(Math.floor((s%3600)/60)).padStart(2,'0')+':'+String(s%60).padStart(2,'0');
+}
+function regieRenderTime(){
+ $('stage2040showClock').textContent=regieFormat(regieElapsed());
+ $('stage2040timerToggle').textContent=stageRegieRunning?'⏸ Pause chrono':'▶ Démarrer';
+}
+function regieTick(){if(stage2040Panel.hidden)return;regieRenderTime();}
+$('stage2040timerToggle').onclick=()=>{
+ if(stageRegieRunning){stageRegieAccumulated=regieElapsed();stageRegieRunning=false;clearInterval(stageRegieTicker);stageRegieTicker=null;regieStatus('Chronomètre en pause.');}
+ else{stageRegieStartedAt=performance.now();stageRegieRunning=true;stageRegieTicker=setInterval(regieTick,250);regieStatus('Chronomètre du spectacle démarré.');}
+ regieRenderTime();
+};
+$('stage2040timerReset').onclick=()=>{
+ if(!confirm('Remettre le chronomètre du spectacle à zéro ?'))return;
+ stageRegieAccumulated=0;stageRegieStartedAt=performance.now();regieRenderTime();regieStatus('Chronomètre remis à zéro.');
+};
+function regieCurrentPassage(){
+ const id=tracks[current]?.id;
+ if(!id||!stageSetlistAvailableIds().includes(id))return null;
+ return {id,record:conductorNotes[id]||{},track:tracks[current]};
+}
+function regieRefreshCues(){
+ if(stage2040Panel.hidden)return;
+ const currentPassage=regieCurrentPassage();
+ const g=currentPassage?.record.group?.trim()||'Aucun groupe défini pour ce passage';
+ const light=currentPassage?.record.light?.trim()||'Aucun repère défini pour ce passage';
+ $('stage2040groupNow').textContent=g;
+ $('stage2040groupCue').textContent=currentPassage?.record.cue||'Ajoute tes consignes dans le conducteur.';
+ $('stage2040lightNow').textContent=light;
+ $('stage2040groupTop').disabled=!currentPassage;
+ $('stage2040lightTop').disabled=!currentPassage&&!stageRegieSelectedLight;
+ $('stage2040groupLast').textContent=stageRegieLastGroup||'Aucune entrée signalée';
+ $('stage2040lightLast').textContent=stageRegieLastLight||'Aucun TOP lumière';
+ document.querySelectorAll('[data-regie-light]').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.regieLight===stageRegieSelectedLight)));
+}
+$('stage2040groupTop').onclick=()=>{
+ const p=regieCurrentPassage();if(!p)return;
+ const group=p.record.group?.trim()||p.track.title;
+ stageRegieLastGroup='TOP entrée : '+group+' · '+regieFormat(regieElapsed());
+ regieRefreshCues();regieStatus('Entrée signalée pour '+group+'.');
+};
+document.querySelectorAll('[data-regie-light]').forEach(b=>b.onclick=()=>{
+ stageRegieSelectedLight=b.dataset.regieLight;regieRefreshCues();
+ regieStatus('Lumière préparée : '+stageRegieSelectedLight+'.');
+});
+$('stage2040lightTop').onclick=()=>{
+ const p=regieCurrentPassage();
+ const light=stageRegieSelectedLight||p?.record.light?.trim();
+ if(!light)return;
+ stageRegieLastLight='TOP lumière : '+light+' · '+regieFormat(regieElapsed());
+ regieRefreshCues();regieStatus('Consigne lumière signalée : '+light+'. Aucun projecteur commandé.');
+};
+let regieSpeech=null;
+$('stage2040speak').onclick=()=>{
+ const message=$('stage2040announcement').value.trim();
+ if(!message){regieStatus('Écris le texte à annoncer.');return;}
+ if(!('speechSynthesis' in window)||!('SpeechSynthesisUtterance' in window)){regieStatus('Synthèse vocale indisponible sur ce navigateur.');return;}
+ window.speechSynthesis.cancel();
+ const u=new SpeechSynthesisUtterance(message);u.lang='fr-FR';u.rate=.96;u.volume=1;
+ u.onstart=()=>regieStatus('Annonce vocale en cours…');
+ u.onend=()=>regieStatus('Annonce vocale terminée.');
+ u.onerror=()=>regieStatus('Annonce vocale interrompue ou indisponible.');
+ regieSpeech=u;window.speechSynthesis.speak(u);
+};
+$('stage2040speechStop').onclick=()=>{if('speechSynthesis' in window)window.speechSynthesis.cancel();regieStatus('Annonce arrêtée.');};
+let regieMicStream=null,regieMicContext=null,regieMicGain=null,regieMicSource=null;
+function regieMicMute(){if(regieMicGain)regieMicGain.gain.value=0;$('stage2040pushTalk').classList.remove('talking');$('stage2040pushTalk').setAttribute('aria-pressed','false');}
+async function regieMicOff(){
+ regieMicMute();
+ if(regieMicStream){regieMicStream.getTracks().forEach(t=>t.stop());regieMicStream=null;}
+ if(regieMicSource){try{regieMicSource.disconnect()}catch(e){}regieMicSource=null;}
+ if(regieMicGain){try{regieMicGain.disconnect()}catch(e){}regieMicGain=null;}
+ const ctx=regieMicContext;regieMicContext=null;if(ctx)try{await ctx.close()}catch(e){}
+ $('stage2040pushTalk').disabled=true;$('stage2040micStop').disabled=true;$('stage2040micEnable').disabled=false;
+}
+$('stage2040micEnable').onclick=async()=>{
+ if(!navigator.mediaDevices?.getUserMedia){regieStatus('Le microphone nécessite un navigateur compatible et une connexion HTTPS.');return;}
+ $('stage2040micEnable').disabled=true;
+ try{
+  const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false});
+  if(stage2040Panel.hidden){stream.getTracks().forEach(t=>t.stop());$('stage2040micEnable').disabled=false;return;}
+  const AudioCtor=window.AudioContext||window.webkitAudioContext;
+  if(!AudioCtor)throw Error('AudioContext indisponible');
+  const ctx=new AudioCtor();await ctx.resume();
+  regieMicStream=stream;regieMicContext=ctx;regieMicSource=ctx.createMediaStreamSource(stream);
+  regieMicGain=ctx.createGain();regieMicGain.gain.value=0;
+  regieMicSource.connect(regieMicGain);regieMicGain.connect(ctx.destination);
+  $('stage2040pushTalk').disabled=false;$('stage2040micStop').disabled=false;
+  regieStatus('Micro autorisé. Maintiens « Parler » pour diffuser, puis relâche pour couper. Risque de larsen près des enceintes.');
+ }catch(e){
+  if(regieMicStream)await regieMicOff();
+  $('stage2040micEnable').disabled=false;
+  regieStatus('Micro non autorisé ou indisponible. Vérifie les permissions du navigateur.');
+ }
+};
+$('stage2040micStop').onclick=()=>{regieMicOff();regieStatus('Micro désactivé.');};
+const talk=$('stage2040pushTalk');
+function talkOn(event){
+ if(talk.disabled||!regieMicGain)return;
+ if(event?.cancelable)event.preventDefault();
+ regieMicGain.gain.value=.8;
+ talk.classList.add('talking');talk.setAttribute('aria-pressed','true');
+ regieStatus('MICRO OUVERT — relâche le bouton pour couper.');
+}
+talk.addEventListener('pointerdown',event=>{if(event.pointerType==='mouse'&&event.button!==0)return;talkOn(event);try{talk.setPointerCapture(event.pointerId)}catch(e){}});
+talk.addEventListener('pointerup',regieMicMute);
+talk.addEventListener('pointercancel',regieMicMute);
+talk.addEventListener('lostpointercapture',regieMicMute);
+talk.addEventListener('keydown',event=>{if(!event.repeat&&(event.key===' '||event.key==='Enter'))talkOn(event)});
+talk.addEventListener('keyup',event=>{if(event.key===' '||event.key==='Enter')regieMicMute()});
+talk.addEventListener('blur',regieMicMute);
+window.addEventListener('pagehide',()=>{regieMicOff();});
+window.addEventListener('blur',regieMicMute);
+function regieStageClose(){
+ regieMicOff();
+ if('speechSynthesis' in window)window.speechSynthesis.cancel();
+ if(stageRegieRunning){stageRegieAccumulated=regieElapsed();stageRegieRunning=false;clearInterval(stageRegieTicker);stageRegieTicker=null;}
+}
+
+
 /* ELOAH MUSIC 2040 SHOW CONDUCTOR V17 */
 let conductorScope='',conductorSignature='',conductorNotes=Object.create(null);
 function conductorStorage(){
@@ -769,6 +964,8 @@ function conductorRender(){
   info.append(number,track,artist,live);head.append(info);
   article.append(head);
   article.append(conductorField('Numéro / chorégraphie',state.name,t.title,id,'name',90));
+  article.append(conductorField('Groupe / entrée',state.group,'Ex. KIDS, ADOS, adultes, familles…',id,'group',80));
+  article.append(conductorField('Lumière / repère technique',state.light,'Ex. Spot ambre, extinction, fuchsia…',id,'light',100));
   article.append(conductorField('Repère ou consigne de scène',state.cue,'Ex. Entrée enfants, ballons, final, lumières…',id,'cue',180));
   const actions=document.createElement('div');actions.className='stage2040-conductorActions';
   const status=document.createElement('button');status.type='button';status.dataset.showStatus='';status.dataset.conductorId=id;
@@ -810,10 +1007,10 @@ $('stage2040conductorRows').addEventListener('input',event=>{
  const el=event.target.closest('[data-conductor-field]');
  if(!el)return;
  const id=el.dataset.conductorId,field=el.dataset.conductorField;
- if(!stageSetlistAvailableIds().includes(id)||!['name','cue'].includes(field))return;
+ if(!stageSetlistAvailableIds().includes(id)||!['name','cue','group','light'].includes(field))return;
  const record=conductorNotes[id]&&typeof conductorNotes[id]==='object'?conductorNotes[id]:{};
- record[field]=el.value.slice(0,field==='name'?90:180);conductorNotes[id]=record;
- conductorSave();
+ record[field]=el.value.slice(0,field==='name'?90:field==='group'?80:field==='light'?100:180);conductorNotes[id]=record;
+ conductorSave();regieRefreshCues();
 });
 $('stage2040conductorRows').addEventListener('click',async event=>{
  const btn=event.target.closest('button[data-conductor-id]');
@@ -920,6 +1117,7 @@ function stage2040Sync(){
  if(stage2040Panel.hidden)return;
  stageSetlistSync();
  conductorSync();
+ regieRefreshCues();
  const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
  $('stage2040titleA').textContent=a?.title||'Aucun titre sélectionné';
  $('stage2040artistA').textContent=a?.artist||'Lecture principale';
@@ -956,13 +1154,14 @@ function stage2040Sync(){
 async function stage2040Open(){
  stage2040PreviousFocus=document.activeElement;
  stage2040Panel.hidden=false;document.body.classList.add('stage2040-active');
- stage2040Sync();$('stage2040heading').focus();
+ stage2040Sync();regieRenderTime();$('stage2040heading').focus();
  if(stage2040Panel.requestFullscreen){
   try{await stage2040Panel.requestFullscreen();stage2040Native=document.fullscreenElement===stage2040Panel}
   catch(e){stage2040Native=false}
  }
 }
 function stage2040Close(){
+ regieStageClose();
  stage2040Panel.hidden=true;document.body.classList.remove('stage2040-active');
  $('stage2040discA').classList.remove('spinning');$('stage2040discB').classList.remove('spinning');
  if(document.fullscreenElement===stage2040Panel)document.exitFullscreen().catch(()=>{});
