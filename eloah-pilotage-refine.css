@@ -1,0 +1,147 @@
+/* ELOAH Pilotage — édition affinée 2.0 · UX focus et densité visuelle.
+   Non destructif : les classes des outils/exports existants sont conservées. */
+body.client-page{--platinum:#f1dfcf;--signal:#ebb7a3;background:
+ radial-gradient(ellipse 820px 470px at 86% -6%,#6c3c5a73,transparent 68%),
+ radial-gradient(ellipse 740px 710px at -8% 29%,#582c4550,transparent 72%),#110b19}
+body.client-page .client-hero{border:1px solid #9f6c87a1;
+ background:radial-gradient(ellipse 68% 88% at 91% -10%,#71405b90,transparent 75%),linear-gradient(114deg,#301c36,#1c1127 64%,#25162c);
+ box-shadow:0 32px 90px #07020e7c,inset 0 1px #ffd6f321}
+body.client-page .client-hero:after{content:"";position:absolute;pointer-events:none;right:-9%;top:-57%;height:570px;width:570px;border-radius:50%;border:1px solid #d6a4b168;box-shadow:0 0 0 90px #b66d9020,0 0 0 180px #a24f7a0a;z-index:0}
+body.client-page .pilotage-hero-copy h1{font-size:clamp(39px,4.55vw,66px)}
+body.client-page .pilotage-hero-copy>p{font-size:14px;line-height:1.78}
+body.client-page .pilotage-panel{box-shadow:0 27px 85px #0009,0 0 0 4px #c1809a14;border-color:#c092a4a1}
+body.client-page .pilotage-panel-top{align-items:center}
+body.client-page .pilotage-kpi{position:relative;border-radius:11px;transition:border-color .18s,transform .18s;box-shadow:inset 0 1px #ffffff14}
+body.client-page .pilotage-kpi:hover{transform:translateY(-2px);border-color:#dcaa94aa}
+body.client-page .pilotage-kpi:nth-child(1) .pilotage-kpi-icon{color:#dfb3e7}
+body.client-page .pilotage-kpi:nth-child(2) .pilotage-kpi-icon{color:#ffb9d4}
+body.client-page .pilotage-kpi:nth-child(3) .pilotage-kpi-icon{color:#eac2a0}
+body.client-page .pilotage-kpi:nth-child(4) .pilotage-kpi-icon{color:#aee7cc;background:#23524c}
+body.client-page .workspace-choice{position:relative;overflow:hidden;transition:transform .17s,border-color .17s,box-shadow .17s}
+body.client-page .workspace-choice:after{position:absolute;content:"→";font:30px Georgia,serif;color:#e1b79d;right:17px;top:22px;opacity:.9}
+body.client-page .workspace-choice:hover{box-shadow:0 17px 40px #b16b8448}
+body.client-page main#contenu{max-width:1620px}
+body.client-page .pilotage-anchors{position:sticky;top:0;z-index:12;display:flex;align-items:center;gap:5px;padding:6px;margin:16px 0 26px;background:#21152bec;border:1px solid #7b5379;border-radius:13px;backdrop-filter:blur(19px);box-shadow:0 10px 28px #08020b6b;overflow-x:auto;scrollbar-width:thin}
+body.client-page .pilotage-anchors a{flex:1 0 auto;min-height:40px;padding:9px 13px;border-radius:8px;display:inline-flex;justify-content:center;align-items:center;gap:8px;color:#e2d0df;font-size:11px;text-decoration:none;white-space:nowrap;transition:background .17s}
+body.client-page .pilotage-anchors a:hover,body.client-page .pilotage-anchors a:focus-visible{background:#644064;color:#fff}
+body.client-page .pilotage-anchors a b{font-size:14px;font-weight:400;color:#e5bdac}
+body.client-page .pilotage-anchors a:last-child{color:#f1d2ae}
+body.client-page #pilotage-focus{margin:18px 0 39px;scroll-margin-top:80px}
+body.client-page .focus-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:18px}
+body.client-page .focus-heading .eyebrow{margin:0 0 4px}
+body.client-page .focus-heading h2{font:400 clamp(28px,3vw,39px)/1.2 Georgia,serif;margin:0 0 7px;color:#fff6fa;letter-spacing:-.025em}
+body.client-page .focus-heading h2 em{font-style:normal;color:#f4d2af}
+body.client-page .focus-heading p{font-size:12px;color:#cfb9cb;margin:0}
+body.client-page .focus-heading button{color:#271522;background:linear-gradient(125deg,#f8dcb7,#d3a181);border-color:#f2d1a6;font-weight:720;flex:none}
+body.client-page .focus-heading button:hover{background:#ffeacf;color:#271522}
+body.client-page .focus-layout{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(280px,.75fr);gap:17px}
+body.client-page .focus-main,body.client-page .focus-aside{min-width:0;border-radius:15px;border:1px solid #735172;background:linear-gradient(145deg,#2e1e37,#1d1428 90%);padding:22px;box-shadow:0 13px 35px #0005,inset 0 1px #fff1}
+body.client-page .focus-bar{display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:14px}
+body.client-page .focus-bar h3{font:400 23px Georgia,serif;color:#f6e5f1;margin:0}
+body.client-page #pilotage-focus-count{font-size:11px;color:#d9b7cd}
+body.client-page .focus-filters{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 16px;padding:5px;border:1px solid #634761;border-radius:10px;background:#251832}
+body.client-page .focus-filters button{min-height:36px;border:1px solid transparent;border-radius:7px;padding:8px 13px;background:transparent;color:#d9c1d4;font-size:11px;font-weight:580}
+body.client-page .focus-filters button[aria-pressed="true"]{border-color:#a9799c;background:#5b3855;color:#fff7fb;box-shadow:0 3px 13px #07020945}
+body.client-page .focus-filters button:hover{background:#4c304a;border-color:#785776;color:#fff}
+body.client-page .focus-list{display:grid;gap:10px}
+body.client-page .focus-item{display:flex;align-items:center;gap:12px;padding:14px;border:1px solid #624a68;border-radius:11px;background:#281b33;min-width:0;box-shadow:inset 0 1px #ffffff09}
+body.client-page .focus-item:hover{border-color:#c791b0;background:#33213c}
+body.client-page .focus-item-mark{display:grid;place-items:center;border-radius:9px;background:#4d2c4c;border:1px solid #906387;color:#edc09f;font:25px Georgia,serif;width:40px;height:40px;flex:none}
+body.client-page .focus-item-copy{min-width:0;flex:1}
+body.client-page .focus-item-title{display:block;overflow-wrap:anywhere;font-weight:670;font-size:13px;line-height:1.4;color:#fff4fb}
+body.client-page .focus-item-meta{display:flex;flex-wrap:wrap;gap:6px 12px;margin-top:7px;align-items:center}
+body.client-page .focus-item-project,body.client-page .focus-item-state{color:#c4b0c5;font-size:10px}
+body.client-page .focus-due{display:inline-flex;align-items:center;padding:3px 7px;border-radius:5px;border:1px solid #725776;color:#f1d9e7;background:#3b2943;font-size:10px;white-space:nowrap}
+body.client-page .focus-due.late{background:#663340;border-color:#a85b68;color:#ffcfcb}
+body.client-page .focus-due.today{background:#624a30;border-color:#b28d5e;color:#ffe2b1}
+body.client-page .focus-due.soon{background:#294a44;border-color:#587a70;color:#caeddc}
+body.client-page .focus-open{flex:none;background:#412b49;border:1px solid #8e638a;color:#f6dbbd;font-size:11px;min-height:37px;padding:7px 11px}
+body.client-page .focus-open:hover{background:#664264;border-color:#d4a88e}
+body.client-page .focus-empty{padding:25px;border:1px dashed #886b86;border-radius:11px;background:#281b33;color:#e3cfdf;line-height:1.55}
+body.client-page .focus-empty strong{display:block;color:#f7e4ed;font-size:15px}
+body.client-page .focus-empty p{font-size:12px;margin:8px 0 12px}
+body.client-page .focus-empty .focus-action-btn{border-color:#e6bd9c;background:#e7c29e;color:#291926;font-weight:700}
+body.client-page .focus-list-foot{color:#c8b0c3;font-size:11px;margin:10px 0 0}
+body.client-page .focus-aside{background:radial-gradient(ellipse at 93% 3%,#53364b9c,transparent 70%),linear-gradient(150deg,#34223c,#22152b)}
+body.client-page .focus-aside .eyebrow{font-size:9px;color:#f2caad}
+body.client-page .focus-aside h3{font:400 27px Georgia,serif;margin:11px 0 17px;color:#fff4f7}
+body.client-page .focus-aside .focus-progress-numbers{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+body.client-page .focus-stat{padding:15px;background:#392844;border:1px solid #745775;border-radius:10px}
+body.client-page .focus-stat small{font-size:10px;color:#d5bccc}
+body.client-page .focus-stat strong{display:block;font:400 32px Georgia,serif;color:#fbe3c7;margin-top:7px}
+body.client-page .focus-progress{height:7px;background:#593f59;border:1px solid #6b526b;border-radius:100px;overflow:hidden;margin:22px 0 9px}
+body.client-page .focus-progress>span{display:block;height:100%;max-width:100%;width:0;background:linear-gradient(90deg,#b45f9e,#e9b996);border-radius:100px;transition:width .28s}
+body.client-page #pilotage-progress-meta{font-size:11px;color:#d2b8cc;margin:0 0 22px}
+body.client-page .focus-aside-cta{border-top:1px solid #735370;padding-top:17px;display:grid;gap:10px}
+body.client-page .focus-aside-cta p{font-size:12px;color:#d5bdcd;line-height:1.6;margin:0}
+body.client-page .focus-aside-cta a{min-height:40px;display:flex;justify-content:space-between;align-items:center;color:#fadbb7;background:#482b48;border:1px solid #926d8e;border-radius:8px;padding:10px 12px;font-size:11px;font-weight:650}
+body.client-page .focus-aside-cta a:hover{background:#5b3c5a;color:#fff}
+body.client-page #mon-organisation,body.client-page #mes-projets,body.client-page #services{scroll-margin-top:85px}
+body.client-page .workspace-section{border-top-color:#795673;padding-top:39px}
+body.client-page .section-head h2{font-size:clamp(27px,2.8vw,39px)}
+body.client-page .section-head p{font-size:12px;line-height:1.68}
+body.client-page .client-next>.client-next-card{min-height:113px;box-shadow:0 13px 29px #07030b50;background:linear-gradient(133deg,#372342,#271b34)}
+body.client-page #ops-calendar{box-shadow:0 24px 55px #05020b77;border-color:#98708d;padding:clamp(16px,2vw,28px)}
+body.client-page #ops-calendar .ops-head{margin-bottom:7px}
+body.client-page #ops-calendar>.ops-head h2{font-size:27px}
+body.client-page #ops-calendar .ops-actions{gap:10px}
+body.client-page #ops-calendar .ops-scroll th{position:sticky;top:0;z-index:1;white-space:nowrap}
+body.client-page #ops-calendar .ops-scroll td{max-width:290px;overflow-wrap:anywhere}
+body.client-page #ops-calendar .ops-scroll td:first-child{min-width:180px}
+body.client-page #ops-calendar .ops-scroll tbody tr:hover td{background:#3c2842}
+body.client-page #ops-calendar .ops-day{min-height:82px}
+body.client-page .project-grid{gap:14px}
+body.client-page .project-tile{position:relative;min-height:136px;padding:23px;border-radius:13px;background:linear-gradient(143deg,#352442,#26192f)}
+body.client-page .project-tile:before{content:"▱";font:24px Georgia,serif;color:#f5c7b6;display:block}
+body.client-page .project-tile span{margin-top:auto;font-weight:600;font-size:11px}
+body.client-page .project-tile:hover{box-shadow:0 16px 40px #6c305a40;transform:translateY(-3px)}
+body.client-page .services{gap:15px}
+body.client-page .services article{min-height:180px;box-shadow:0 11px 27px #07020c33;border-radius:13px}
+body.client-page .services article:hover{border-color:#b78498}
+body.client-page .services h3{font-size:24px}
+body.client-page .service-links{margin-top:auto}
+body.client-page .secondary-panel>summary{font-size:13px}
+body.client-page .client-page-end{border-top-color:#806080}
+@media(max-width:1080px){
+ body.client-page .focus-layout{grid-template-columns:1fr}
+ body.client-page .focus-aside{display:grid;grid-template-columns:1fr 1fr;column-gap:22px;align-items:center}
+ body.client-page .focus-aside>.eyebrow,body.client-page .focus-aside>h3{grid-column:1/-1}
+ body.client-page .focus-aside .focus-progress-numbers{align-self:start}
+ body.client-page .focus-aside-cta{grid-column:2;grid-row:3/6}
+ body.client-page #pilotage-progress-meta{grid-column:1}
+ body.client-page .focus-progress{grid-column:1}
+}
+@media(max-width:750px){
+ body.client-page .pilotage-anchors{margin:10px 0 22px}
+ body.client-page .focus-heading{align-items:flex-start}
+ body.client-page .focus-heading h2{font-size:30px}
+ body.client-page .focus-main,body.client-page .focus-aside{padding:16px}
+ body.client-page .focus-aside{display:block}
+ body.client-page .focus-aside .focus-progress-numbers{grid-template-columns:1fr 1fr}
+ body.client-page .focus-item{padding:12px}
+ body.client-page .focus-item-mark{width:34px;height:34px;font-size:20px}
+ body.client-page .focus-item-meta{gap:5px 8px}
+ body.client-page .focus-item-title{font-size:12px}
+ body.client-page .focus-open{padding:6px 9px;min-height:35px}
+ body.client-page .workspace-section{padding-top:27px}
+ body.client-page .project-tile{min-height:110px}
+}
+@media(max-width:430px){
+ body.client-page .pilotage-anchors a{padding:8px 12px;font-size:10px}
+ body.client-page .focus-heading button{width:100%;min-height:43px}
+ body.client-page .focus-filters{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:4px}
+ body.client-page .focus-filters button{font-size:10px;padding:6px 5px}
+ body.client-page .focus-item{align-items:flex-start;flex-wrap:wrap}
+ body.client-page .focus-item-copy{flex-basis:calc(100% - 50px)}
+ body.client-page .focus-open{margin-left:46px;flex:none}
+ body.client-page .focus-aside h3{font-size:24px}
+ body.client-page .focus-stat strong{font-size:28px}
+}
+@media(prefers-reduced-motion:reduce){
+ body.client-page .focus-progress>span,body.client-page .project-tile,body.client-page .pilotage-anchors a{transition:none}
+}
+@media print{
+ body.client-page .pilotage-anchors,body.client-page .focus-open,body.client-page .focus-heading button,body.client-page .focus-filters{display:none!important}
+ body.client-page .focus-main,body.client-page .focus-aside,body.client-page .focus-item,body.client-page .focus-stat{background:#fff;color:#222;border-color:#999;box-shadow:none}
+ body.client-page .focus-item :is(strong,span),body.client-page .focus-aside :is(h3,strong,small,p){color:#222}
+}
