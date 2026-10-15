@@ -279,7 +279,7 @@ if(v==="tasks"){
  body.innerHTML="Chargement des actions…";
  try{
   const d=await privateDetail("tasks");
-  body.innerHTML='<div class="panel"><h3>À FAIRE</h3>'+(d.filter(x=>x.status==="open"||x.status==="doing").map(x=>'<div class="item"><div class="grow"><b>'+txt(x.title)+'</b><div class="muted">'+fdate(x.due_date)+' · '+txt(x.description||"")+'</div></div><span class="pill">'+txt(x.priority||"normal")+'</span><button class="actionbtn" style="width:auto;margin:0 0 0 8px;padding:8px 12px" data-taskdone="'+txt(x.id)+'">FAIT ✓</button></div>').join("")||'<div class="muted">Aucune action ouverte.</div>')+'</div>';
+  body.innerHTML='<div class="panel"><h3>À FAIRE</h3>'+(d.filter(x=>x.status==="open"||x.status==="doing").map(x=>'<div class="item"><div class="grow"><b>'+txt(x.title)+'</b><div class="muted">'+fdate(x.due_date)+' · '+txt(x.description||"")+'</div></div><span class="pill">'+txt(({high:"Priorité haute",normal:"Priorité normale",low:"Priorité basse"})[x.priority]||x.priority||"À traiter")+'</span><button class="actionbtn" style="width:auto;margin:0 0 0 8px;padding:8px 12px" data-taskdone="'+txt(x.id)+'">FAIT ✓</button></div>').join("")||'<div class="muted">Aucune action ouverte.</div>')+'</div>';
   document.querySelectorAll("[data-taskdone]").forEach(btn=>btn.onclick=async()=>{
    btn.disabled=true;btn.textContent="…";
    try{await controlAction({action:"complete_task",id:btn.dataset.taskdone});document.querySelector('[data-view="tasks"]').click();loadPrivateHome()}
@@ -1008,4 +1008,48 @@ const observer=new MutationObserver(()=>{if(root.querySelector('.crew-finance-v2
 observer.observe(root,{childList:true,subtree:true});
 if(root.querySelector('.crew-finance-v22'))init();
 })();
-</script><script src="finance-v24.js?v=241010" defer></script><script src="projects-v1.js?v=4" defer></script><script src="eloah-navigation.js?v=20261013-sidebar1"></script></body></html>
+</script><script src="finance-v24.js?v=241010" defer></script><script src="projects-v1.js?v=4" defer></script><script src="eloah-navigation.js?v=20261013-sidebar1"></script><style id="crew-opened-workspaces">/* The Crew: every workspace opened from the dashboard. */
+body.crew-dashboard #drawer{background:#f5f2e9!important;color:#211d15!important;z-index:110!important;padding:0 clamp(16px,4vw,54px) 50px!important;isolation:isolate;overscroll-behavior:contain}
+body.crew-dashboard #drawer:before{content:"THE CREW ORCHIES · ESPACE SONIA";display:block;margin:0 calc(-1 * clamp(16px,4vw,54px));padding:25px clamp(16px,4vw,54px);background:#090909;color:#d8b96e;font:700 11px/1.5 Inter,Arial,sans-serif;letter-spacing:.15em;border-bottom:2px solid #d8b96e}
+body.crew-dashboard #drawer #close{position:sticky;top:12px;float:right;margin-top:-52px;z-index:10;background:#d8b96e!important;color:#211d15!important;border:1px solid #d8b96e;padding:12px 18px;min-height:42px;border-radius:30px;font:700 12px Inter,Arial,sans-serif;cursor:pointer;box-shadow:0 2px 10px #0002}
+body.crew-dashboard #drawerTitle{color:#211d15!important;font-family:'Bebas Neue',Impact,sans-serif!important;font-size:clamp(32px,5vw,48px)!important;max-width:1180px;margin:30px auto 18px!important;line-height:1.1}
+body.crew-dashboard #drawerBody{background:transparent!important;border:0!important;padding:0!important;max-width:1180px;box-shadow:none;color:#211d15!important;font:14px/1.6 Inter,Arial,sans-serif}
+body.crew-dashboard #drawerBody :is(div,section,article,p,span,small,strong,b,label,h2,h3,h4,em,td,th){color:inherit}
+body.crew-dashboard #drawerBody :is(h2,h3,h4){font-family:'Bebas Neue',Impact,sans-serif!important;font-weight:400!important;letter-spacing:.02em;color:#211d15!important;line-height:1.2}
+body.crew-dashboard #drawerBody h2{font-size:34px}body.crew-dashboard #drawerBody h3{font-size:27px}body.crew-dashboard #drawerBody h4{font-size:23px}
+body.crew-dashboard #drawerBody :is(p,small,label,.muted,[class$='-note'],[class$='-meta'],[class$='-intro'],[class$='-muted'],[class$='-explain'],[class$='-footer']){color:#655d4f!important}
+body.crew-dashboard #drawerBody :is(.panel,.card,.readbox,.crew-member-row,#crew-member-card,.crew-entry-form,.crew-pay-card,.crew-membership-form,.crew-history,.crew-family-card,.crew-workshop,.cec-row,.cec-form,.cep-details,.crew-proj-card,.crew-proj-detail-panel,.c24-panel,.c24-stat,.c24-form,.c24-tile,.cf-input-panel,.cf-input-form,.cf-input-row){background:#fffdf8!important;color:#211d15!important;border:1px solid #ded5c3!important;border-radius:14px;box-shadow:0 3px 12px #392c1105}
+body.crew-dashboard #drawerBody :is(.crew-field,.readbox,.c24-notice,.c24-tag,.pill,.crew-proj-badge,.cf-warning){background:#eee7d7!important;color:#66512c!important;border-color:#d9ccb1!important}
+body.crew-dashboard #drawerBody :is(.crew-proj-dashboard,.crew-proj-detail,#crew-finance-workspace){color:#211d15!important}
+body.crew-dashboard #drawerBody :is(.crew-proj-card p,.crew-proj-banner p,.crew-proj-detail p,.c24-top p,.c24-stat em,.c24-tile small,.crew-family-tag,.crew-member-row small){color:#655d4f!important}
+body.crew-dashboard #drawerBody :is(input:not([type=checkbox]):not([type=radio]),select,textarea),body.crew-dashboard #drawer .crew-detail-search{background:#fffdf8!important;color:#211d15!important;border:1px solid #bcb099!important;border-radius:9px;font:16px/1.4 Inter,Arial,sans-serif;padding:12px;min-width:0;max-width:100%;color-scheme:light}
+body.crew-dashboard #drawer :is(input,textarea)::placeholder{color:#786f60;opacity:1}
+body.crew-dashboard #drawer input:is([type=checkbox],[type=radio]){accent-color:#86672e}
+body.crew-dashboard #drawerBody button,body.crew-dashboard #drawer .crew-detail-tabs button{background:#eee7d7!important;color:#302619!important;border:1px solid #cfc0a2!important;border-radius:9px;padding:11px 15px;min-height:42px;font-family:Inter,Arial,sans-serif;font-weight:600;cursor:pointer;line-height:1.4}
+body.crew-dashboard #drawerBody :is(.actionbtn,.crew-entry-btn,.crew-projects-btn,.c24-primary,button[type=submit]),body.crew-dashboard #drawerBody button:is(.active,.selected,[aria-selected=true]),body.crew-dashboard #drawer .crew-detail-tabs button[aria-current=page]{background:#d8b96e!important;color:#211d15!important;border-color:#c6a355!important;font-weight:750}
+body.crew-dashboard #drawerBody button.crew-member-row{padding:18px;text-align:left;background:#fffdf8!important;margin:10px 0}
+body.crew-dashboard #drawerBody .crew-member-row>span:last-child{color:#765923!important}
+body.crew-dashboard #drawerBody button:hover,body.crew-dashboard #drawer .crew-detail-tabs button:hover{border-color:#86672e!important;box-shadow:0 2px 8px #86672e19}
+body.crew-dashboard #drawer :is(button,a,input,select,textarea):focus-visible{outline:3px solid #86672e;outline-offset:3px}
+body.crew-dashboard #drawer button:disabled{opacity:.5;cursor:wait}
+body.crew-dashboard #drawerBody a{color:#765923!important;text-underline-offset:3px}
+body.crew-dashboard #drawerBody a[style*='background'],body.crew-dashboard #drawerBody .crew-workshop a{background:#d8b96e!important;color:#211d15!important;border-color:#c6a355!important}
+body.crew-dashboard #drawerBody :is(.item,.crew-family-person,.crew-history-item,.crew-attendance-person,.crew-proj-step,.c24-alert){border-color:#ded5c3!important;padding-top:16px;padding-bottom:16px}
+body.crew-dashboard #drawerBody :is(.bar,.crew-proj-bar,.c24-bar){background:#e2dccc!important}
+body.crew-dashboard #drawerBody :is(.bar i,.crew-proj-bar b,.c24-bar b){background:#9c7a32!important}
+body.crew-dashboard #drawerBody :is(.c24-tablewrap,.cf-tablewrap){background:#fffdf8!important;border-color:#d5c9af!important}
+body.crew-dashboard #drawerBody table{background:#fffdf8!important;color:#211d15!important}
+body.crew-dashboard #drawerBody th{background:#eae2d0!important;color:#514023!important;border-color:#cbbd9f!important}
+body.crew-dashboard #drawerBody td{color:#302a20!important;border-color:#e2d9c7!important}
+body.crew-dashboard #drawerBody tr:nth-child(even) td{background:#f6f2e8}
+body.crew-dashboard #drawerBody tr:hover td{background:#eee7d7!important}
+body.crew-dashboard #drawerBody :is(.ok,.good,.crew-history-status.present){color:#246144!important}
+body.crew-dashboard #drawerBody :is(.bad,.c24-danger,.crew-history-status.absent){color:#9b3f2e!important}
+body.crew-dashboard #drawerBody :is(.warn,.c24-formmsg,.crew-proj-message,.crew-attendance-msg){color:#7b581e!important}
+body.crew-dashboard #drawer .crew-detail-toolbar{max-width:1180px;margin:0 auto 24px;padding:0 0 20px;border-bottom:1px solid #d8cdb7}
+body.crew-dashboard #drawer .crew-detail-tabs{gap:8px}
+body.crew-dashboard #drawerBody .crew-proj-ideas-cta{background:#eee7d7!important;border-color:#d0bc8a!important;color:#211d15!important}
+body.crew-dashboard #drawerBody .crew-proj-ideas-cta strong{color:#654d20!important}
+body.crew-dashboard #drawerBody .crew-proj-card img{min-height:200px}
+@media(max-width:600px){body.crew-dashboard #drawer:before{font-size:9px;letter-spacing:.04em;padding-top:22px;padding-bottom:22px}body.crew-dashboard #drawer #close{font-size:11px;padding:9px 12px;margin-top:-48px}body.crew-dashboard #drawerTitle{margin-top:23px!important;padding-top:0;font-size:32px!important}body.crew-dashboard #drawer .crew-detail-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.crew-dashboard #drawerBody .crew-member-row{align-items:flex-start;gap:10px}body.crew-dashboard #drawerBody .crew-member-row>span:last-child{white-space:normal;max-width:75px}body.crew-dashboard #drawerBody .c24-nav{flex-wrap:wrap;overflow:visible}body.crew-dashboard #drawerBody .c24-nav button{flex:1 1 42%;font-size:12px}body.crew-dashboard #drawerBody .crew-proj-card img{min-height:0}body.crew-dashboard #drawerBody .item .grow{min-width:0;flex-basis:60%}}
+</style></body></html>
