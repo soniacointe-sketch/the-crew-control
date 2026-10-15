@@ -37,6 +37,7 @@ function drawStage(){
    '<div class="mv-inline"><label>Lettre<select id="mvLetterInline">'+R.alphabet.map(l=>'<option value="'+l+'"'+(l===letter?" selected":"")+'>'+l+'</option>').join("")+'</select></label>'+
    '<label>Profondeur<select id="mvDepthInline">'+[1,2,3,4].map(x=>'<option value="'+x+'"'+(x===depth?" selected":"")+'>'+x+'</option>').join("")+'</select></label>'+
    '<button id="mvExpand" type="button">Engendrer les noms</button></div>'+
+   '<div class="mv-feature" id="mvCascade" role="status"></div>'+ 
    '<div id="mvExpansion" class="mv-expansion" role="status"></div>'+
    '<p class="mv-small">L’algorithme emploie des noms grecs modernes standardisés. Les résultats après ΔΕΛΤΑ sont des simulations modernes, non des transcriptions attribuables à Marcus.</p>';
  }else if(step===2){
@@ -90,6 +91,9 @@ function start(){
 function renderExpansion(){
  const box=$("mvExpansion");if(!box)return;
  try{
+  const all=E.expandWholeName(state.input,2);
+  const container=$("mvCascade");
+  if(container)container.innerHTML="<b>Le nom entier engendre des noms de lettres · niveau 2 : "+all.totalGeneratedLetters+" caractères</b><div class=\"mv-expansion\">"+all.rows.map(r=>"<div>"+esc(r.letter)+" → "+esc(r.preview)+" ("+r.finalLength+" lettres)</div>").join("")+"</div><small>"+esc(all.warning)+"</small>";
   const rs=E.expand(letter,depth);
   box.innerHTML=rs.stages.map(s=>'<div><span>Niveau '+s.level+'</span>'+
     '<strong>'+esc(s.length==null?"limite atteinte":s.length+" caractères")+'</strong>'+
