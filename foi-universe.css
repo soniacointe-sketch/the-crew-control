@@ -1,0 +1,73 @@
+/* Shared across the seven Foi entry points. */
+:root{color-scheme:light;--dark:#F3EFE6;--black:#263B4A;--panel:#FCFAF5;--panel2:#EAE4D8;--strip:#FCFAF5;--cream:#F3EFE6;--goldbright:#806A3E;--soft:#EAE4D8;--muted:#605E58;--border:#D8D0C2;--accent:#806A3E;--sidebar:#EAE4D8}
+body.foi-universe{color:var(--ink)!important;background-color:var(--bg)!important;font:18px/1.7 var(--foi-sans)!important}
+.foi-universe :is(button,input,select,textarea,p,li,small,label,nav,a,summary,figcaption,span,table){font-family:var(--foi-sans)!important}
+.foi-universe :is(h1,h2,h3,h4,h5,.logo,.wordmark,.brand,.signature,blockquote,blockquote p,.par-card strong,.shelf-main strong,.atlas-family strong){font-family:var(--foi-serif)!important}
+.foi-universe :is(h1,h2,h3,h4){color:var(--foi-blue);font-weight:500;line-height:1.14}
+.foi-universe :is(.site-header,.site-nav,header,.top,.atlas-headline,.section-header,.catalog-head,.catalog,.viewtools,footer){border-color:var(--line)!important}
+.foi-universe :is(.site-header,.site-nav,body>header,.top,.sidebar,.side,.index){background:var(--bg)!important;color:var(--ink)!important}
+.foi-universe :is(.header-links,.nav-links,.sidebar,.side,.index) a{color:var(--foi-blue)!important;font-size:15px}
+.foi-universe :is(.header-links,.nav-links){gap:14px}
+.foi-universe :is(.pub-card,.pub-info,.publication-card,.publication-info,.collection-card,.collection-info,.shelf-card,.entry,.atlas-highlight,.study-info,.atlas-family,.atlas-family-body,.stat,.kpi,.card,.lesson,.method-step,.par-card,.detail,dialog,.manuscript,.search-panel,.search-wrap,.toolbar,.study-summary,.atlas-sources,.notice,.atlas-note,.noresults,#none,.review-note,.discovery,.section,.prayer){background:var(--paper)!important;color:var(--ink)!important;border-color:var(--line)!important;border-radius:3px!important;box-shadow:none!important}
+.foi-universe :is(.pub-card,.publication-card,.collection-card,.shelf-card,.entry,.atlas-highlight,.atlas-family,.par-card):hover{background:#EDE6D8!important;border-color:var(--gold)!important}
+.foi-universe :is(.pub-info,.publication-info,.collection-info,.shelf-main,.entry,.study-info,.atlas-family,.stat,.kpi,.card,.lesson,.par-card,.detail,dialog,.manuscript,.study-summary,.atlas-sources,.notice,.atlas-note,.review-note,.discovery,.section,.prayer) :is(h2,h3,strong,b,div){color:var(--ink)}
+.foi-universe :is(.pub-info,.publication-info,.collection-info,.shelf-main,.entry,.study-info,.atlas-family,.stat,.kpi,.card,.lesson,.par-card,.detail,dialog,.manuscript,.study-summary,.atlas-sources,.notice,.atlas-note,.review-note,.discovery,.section,.prayer) :is(p,small,span){color:var(--sub);font-size:16px;line-height:1.6}
+.foi-universe :is(.section-header,.atlas-headline,.catalog-head,.catalog-results-head,footer,.intro) :is(p,small),.foi-universe :is(.helptext,.intro,.count,.meta,.small,.source){color:var(--sub)!important}
+.foi-universe :is(.section-header,.atlas-headline,.catalog-head) :is(h2,h3){color:var(--foi-blue)!important;font-size:clamp(30px,3vw,42px);font-weight:500;text-transform:none;letter-spacing:0}
+.foi-universe :is(.eyebrow,.overline,.micro-label,.pub-category,.control-label,.toolbar label,.search-panel label,.search-wrap label,.detail-row small){color:#806A3E!important}
+.foi-universe :is(button,.btn,.button,.cta,.load-more,.entry-actions a,.entry-actions button){color:var(--foi-blue)!important;background:var(--paper)!important;border:1px solid var(--line);border-radius:3px!important;min-height:44px;font-family:var(--foi-sans)!important;font-size:15px}
+.foi-universe :is(button,.btn,.button,.cta,.entry-actions a):hover{background:#EAE4D8!important;color:var(--foi-blue)!important}
+.foi-universe :is(.primary,button.active,button.is-selected,button[aria-pressed="true"]){background:var(--foi-blue)!important;color:var(--paper)!important;border-color:var(--foi-blue)!important}
+.foi-universe :is(.primary,button.active,button.is-selected,button[aria-pressed="true"]):hover{background:#365364!important;color:var(--paper)!important}
+.foi-universe :is(input,textarea,select){background:var(--paper)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:3px!important;font-size:17px!important}
+.foi-universe :is(a,.entry-actions a,.source-list a,.notice a,.atlas-note a,.atlas-sources a,footer a){color:var(--foi-blue)}
+.foi-universe .tag{background:#EAE4D8!important;color:#605139!important;border-color:var(--line)!important}
+.foi-universe :is(.hero,.atlas-hero){background:var(--foi-blue)!important;color:var(--paper)!important;border-color:var(--line)!important}
+.foi-universe :is(.hero,.atlas-hero) h1{color:var(--paper)!important;font-size:clamp(43px,5.3vw,74px);font-weight:500}
+.foi-universe :is(.hero,.atlas-hero) h1 em{color:#D9C49A!important}
+.foi-universe :is(.hero,.atlas-hero) :is(.lead,.hero-lead,.hero-sub,.atlas-hero-description){color:#E1E6E5!important;font-size:18px}
+.foi-universe :is(.hero,.atlas-hero) :is(.eyebrow,.overline){color:#D9C49A!important}
+.foi-universe :is(.hero,.atlas-hero) .cta,.foi-universe .atlas-hero-actions a{color:var(--paper)!important;background:transparent!important;border-color:#A58A55!important}
+.foi-universe :is(.hero,.atlas-hero) .cta.primary{background:#D9C49A!important;color:var(--foi-blue)!important}
+.foi-universe .hero-image::after,.foi-universe .atlas-hero-visual::after,.foi-universe .atlas-highlight .art::after{display:none}
+.foi-universe :is(.hero-image,.atlas-hero-visual){background:var(--foi-blue)!important}
+.foi-universe :is(.hero-image,.atlas-hero-visual) img{height:420px;min-height:0;max-height:480px;object-fit:cover}
+.foi-universe :is(.hero-image-label,.atlas-hero-visual figcaption){position:static!important;display:block!important;padding:12px 16px!important;background:#203440!important;color:#E1E6E5!important;letter-spacing:0!important;font:12px/1.5 var(--foi-sans)!important}
+.foi-universe :is(.metric-strip,.atlas-metrics){background:#EAE4D8!important;border-color:var(--line)!important}
+.foi-universe :is(.metric,.atlas-metrics div){border-color:var(--line)!important;background:transparent!important}
+.foi-universe :is(.metric,.atlas-metrics) :is(b,strong){color:#806A3E!important;font-family:var(--foi-serif)!important}
+.foi-universe :is(.metric,.atlas-metrics) span{color:var(--sub)!important}
+.foi-universe :is(.pub-cover,.publication-cover,.atlas-highlight .art){aspect-ratio:16/10;background:#EAE4D8!important}
+.foi-universe img[data-foi-photo]{filter:saturate(.73) contrast(.94)}
+.foi-universe .foi-image-credit{display:block;font:12px/1.55 var(--foi-sans)!important;color:var(--sub)!important;padding:12px 0 0;letter-spacing:0!important;text-transform:none!important;margin-top:auto}
+.foi-universe .rev-model-cover .foi-image-credit{color:#D8DFDF!important}
+.foi-universe .pub-card .foi-image-credit{border-top:1px solid var(--line);margin-top:16px}
+.foi-universe :is(.pub-info h2,.publication-info h3,.collection-info h3,.entry h3,.atlas-highlight h3){color:var(--foi-blue)!important;font-weight:500;font-size:28px}
+.foi-universe :is(.pub-info p,.publication-info p,.collection-info p,.study-info p,.par-card span){font-size:17px;line-height:1.6}
+.foi-universe :is(.pub-open,.entry-link,.family-open,.shelf-read,.atlas-highlight .action){color:var(--foi-blue)!important;border-color:var(--line)!important;font-size:13px!important}
+.foi-universe :is(.rev-model-text,#book){background:var(--paper)!important;color:var(--ink)!important}
+.foi-universe #book{padding:clamp(20px,3vw,38px);border:1px solid var(--line)}
+.foi-universe :is(#book,.rev-model-text) :is(p,li){font-size:18px!important;line-height:1.8!important}
+.foi-universe :is(.rev-model-text,#book) blockquote{background:#F3EFE6!important;border-color:var(--gold)!important;color:var(--ink)!important}
+.foi-universe :is(th,td,.detail-row,.critique){border-color:var(--line)!important}
+.foi-universe th{background:#EAE4D8!important;color:var(--ink)!important}
+.foi-universe .foi-universe-credits{margin:40px 0 24px;border-top:1px solid var(--line);padding-top:20px;color:var(--sub);font:14px/1.7 var(--foi-sans)}
+.foi-universe .foi-universe-credits summary{min-height:44px;cursor:pointer;font-weight:600;color:var(--foi-blue)}
+.foi-universe .foi-universe-credits p{font-size:14px}.foi-universe-credits li{margin:8px 0}
+.foi-breathing-photo{margin:24px 0 30px;background:var(--paper);border:1px solid var(--line)}
+.foi-breathing-photo img{display:block;width:100%;height:220px;max-height:220px;object-fit:cover;object-position:center 45%;margin:0;border-radius:0;filter:saturate(.73) contrast(.94)}
+.foi-breathing-photo figcaption{font:12px/1.5 var(--foi-sans);padding:10px 15px;color:var(--sub)}
+.foi-universe .wrapper .hero{padding:36px;border-radius:3px;margin:26px 0}
+.foi-universe .wrapper .hero p,.foi-universe .wrapper .hero .intro{color:#E1E6E5!important}
+.foi-universe .main>.hero{padding:26px}.foi-universe .main>.hero>.small{color:#E1E6E5!important}
+.foi-universe dialog::backdrop{background:#152a38aa}
+.foi-universe :is(.rev-model-reference,.rev-model-thematic){color:var(--paper)!important}
+.foi-universe :is(.rev-model-reference,.rev-model-thematic) a{color:#E3D2B0!important}
+@media(max-width:760px){.foi-universe :is(.hero,.atlas-hero) h1{font-size:44px!important}.foi-universe :is(.hero-image,.atlas-hero-visual) img{height:240px!important;min-height:0!important}.foi-universe :is(.hero-copy,.atlas-hero-copy){padding:28px 24px!important}.foi-universe :is(main,.main){min-width:0}.foi-universe .foi-breathing-photo img{height:180px}.foi-universe .wrapper .hero{padding:26px 22px}.foi-universe .main>.hero{padding:22px}.foi-universe .catalog{grid-template-columns:1fr}.foi-universe #book{padding:20px 16px}.foi-universe .top-actions{gap:8px}}
+@media print{.foi-universe-credits,.foi-breathing-photo{display:none!important}.foi-universe :is(.hero,.atlas-hero){background:white!important;color:black!important}.foi-universe :is(.hero,.atlas-hero) h1{color:black!important}}
+.foi-universe .collection-body{background:var(--paper);color:var(--ink)}
+.foi-universe .collection-body h3{color:var(--foi-blue)!important;font-size:26px;font-weight:500}
+.foi-universe .collection-body p{color:var(--sub)!important;font-size:17px}
+.foi-universe .discovery a{background:var(--paper)!important;color:var(--ink)!important;border-color:var(--line)!important}
+.foi-universe .discovery a p{color:var(--sub)!important;font-size:16px}
+.foi-universe .side-link.current{background:#EAE4D8!important;color:var(--foi-blue)!important;border-color:var(--line)!important}

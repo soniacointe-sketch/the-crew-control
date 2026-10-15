@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#f4efe7"><title>ELOAH · Atlas des apocryphes</title>
+<meta name="theme-color" content="#263B4A"><title>ELOAH · Atlas des apocryphes</title>
 <meta name="description" content="Catalogue documentaire de plus de 600 références aux textes apocryphes chrétiens, à Nag Hammadi, aux pseudépigraphes et aux traditions bibliques comparées.">
 <style>
 :root{--bg:#f4efe7;--paper:#fffdf9;--side:#eee6da;--line:#dcd0c0;--ink:#30291f;--muted:#716557;--gold:#95744a;--soft:#f8f1e7;--focus:#8b714c}
@@ -158,7 +158,10 @@ dialog h2{color:#fff9e9}
 .atlas-family .family-open{font:800 11px system-ui;color:#f0cb81;border-top:1px solid #7a6a51;padding-top:11px;margin-top:auto}
 @media(max-width:1050px){.atlas-families{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:520px){.atlas-families{grid-template-columns:1fr}.atlas-family{display:grid;grid-template-columns:minmax(105px,38%) minmax(0,1fr)}.atlas-family img{height:100%;min-height:173px}.atlas-family-body{padding:15px}.atlas-family small{margin-bottom:5px}}
-</style></head><body>
+</style><link rel="stylesheet" href="foi-pierre-lumiere.css?v=20261016-univers1">
+<link rel="stylesheet" href="foi-universe.css?v=20261016-1">
+<script defer src="foi-universe.js?v=20261016-1"></script>
+</head><body class="foi-universe">
 <div class="layout">
 <aside class="sidebar">
 <a class="brand" href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md">ELOAH</a>
@@ -184,7 +187,7 @@ dialog h2{color:#fff9e9}
 </div>
 </div>
 <figure class="atlas-hero-visual">
-<img src="assets/foi-archives/eloah-archive-08.webp" alt="Illustration éditoriale du papyrus, création ELOAH et non photographie d'un manuscrit authentifié" width="680" height="760">
+<img src="assets/foi-matieres/manuscrit.webp" alt="Notre Père en grec dans le Codex Sinaiticus — image de contexte" width="680" height="760">
 <figcaption>ÉCRITURES · TÉMOINS · TRANSMISSION</figcaption>
 </figure>
 </section>
@@ -200,15 +203,15 @@ dialog h2{color:#fff9e9}
 </div>
 <div class="atlas-highlights">
 <a class="atlas-highlight" href="foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md">
-<div class="art"><img src="assets/foi-publications/alpha-aleph.webp" alt="Couverture illustrée, Alpha et Aleph" loading="lazy" width="480" height="600"></div>
+<div class="art"><img src="assets/foi-matieres/manuscrit.webp" alt="Notre Père en grec dans le Codex Sinaiticus — image de contexte" loading="lazy" width="480" height="600"></div>
 <div class="study-info"><small>JÉSUS ENFANT · ALPHA-001</small><h3>Enfance, alphabets et traditions.</h3><p>Interroger l'école de Zachée, les récits d'enfance et la transmission des lettres.</p><span class="action">Lire l'enquête ↗</span></div>
 </a>
 <a class="atlas-highlight" href="foi-control.html?file=eloah-foi-apo-019-livre-secret-jacques.md">
-<div class="art"><img src="assets/foi-publications/livre-secret-jacques.webp" alt="Couverture illustrée du Livre secret de Jacques" loading="lazy" width="480" height="600"></div>
+<div class="art"><img src="assets/foi-matieres/livre.webp" alt="Codex Sinaiticus ouvert à la British Library — image de contexte" loading="lazy" width="480" height="600"></div>
 <div class="study-info"><small>NAG HAMMADI · APO-019</small><h3>Le Livre secret de Jacques.</h3><p>Lire un codex copte, ses lacunes, son récit et ses éditions critiques.</p><span class="action">Lire le dossier ↗</span></div>
 </a>
 <a class="atlas-highlight" href="foi-control.html?file=eloah-foi-magdalena-008-pierre-autorite.md">
-<div class="art"><img src="assets/foi-publications/marie-madeleine-sept.webp" alt="Couverture éditoriale sur Marie-Madeleine, image générée" loading="lazy" width="480" height="600"></div>
+<div class="art"><img src="assets/foi-matieres/cloitre.webp" alt="Cloître de l’abbaye de Fontenay — image de contexte" loading="lazy" width="480" height="600"></div>
 <div class="study-info"><small>MARIE-MADELEINE · AUTORITÉ</small><h3>Marie, Pierre, André et Lévi.</h3><p>Étudier les tensions de transmission et d'autorité dans l'Évangile de Marie.</p><span class="action">Lire l'étude ↗</span></div>
 </a>
 </div>
@@ -216,10 +219,10 @@ dialog h2{color:#fff9e9}
 <section aria-labelledby="familiesTitle">
 <div class="atlas-headline"><div><small>QUATRE FAMILLES DOCUMENTAIRES</small><h2 id="familiesTitle">Choisir une tradition.</h2></div><p>Chaque famille correspond à un ensemble du corpus. Les regroupements ne suppriment pas les recouvrements entre œuvres et versions.</p></div>
 <div class="atlas-families">
-<button class="atlas-family" data-family-jump="Apocryphes chrétiens · e-Clavis" disabled><img src="assets/foi-publications/livre-secret-jacques.webp" alt="Illustration ELOAH, livre ancien" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">450 notices</span><strong>Apocryphes chrétiens</strong><small>Évangiles, actes, lettres, traditions et textes de la Passion.</small><span class="family-open">Explorer les notices ↗</span></span></button>
-<button class="atlas-family" data-family-jump="Nag Hammadi et codex de Berlin · Brill" disabled><img src="assets/foi-archives/eloah-archive-08.webp" alt="Illustration ELOAH, papyrus et codices" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">55 notices</span><strong>Codices coptes</strong><small>Écrits de Nag Hammadi et du codex de Berlin.</small><span class="family-open">Explorer les notices ↗</span></span></button>
-<button class="atlas-family" data-family-jump="Pseudépigraphes et écrits juifs / traditions connexes" disabled><img src="assets/foi-publications/michel-4q529.webp" alt="Illustration ELOAH, fragments et écritures anciennes" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">74 notices</span><strong>Pseudépigraphes et traditions</strong><small>Écrits juifs anciens, visions et corpus connexes.</small><span class="family-open">Explorer les notices ↗</span></span></button>
-<button class="atlas-family" data-family-jump="Deutérocanoniques · réception variable selon traditions" disabled><img src="assets/foi-archives/eloah-archive-01.webp" alt="Illustration ELOAH, cabinet d'archives et textes anciens" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">21 notices</span><strong>Livres deutérocanoniques</strong><small>Canons et réceptions variables selon les traditions.</small><span class="family-open">Explorer les notices ↗</span></span></button>
+<button class="atlas-family" data-family-jump="Apocryphes chrétiens · e-Clavis" disabled><img src="assets/foi-matieres/livre.webp" alt="Codex Sinaiticus ouvert à la British Library — image de contexte" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">450 notices</span><strong>Apocryphes chrétiens</strong><small>Évangiles, actes, lettres, traditions et textes de la Passion.</small><span class="family-open">Explorer les notices ↗</span></span></button>
+<button class="atlas-family" data-family-jump="Nag Hammadi et codex de Berlin · Brill" disabled><img src="assets/foi-matieres/manuscrit.webp" alt="Notre Père en grec dans le Codex Sinaiticus — image de contexte" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">55 notices</span><strong>Codices coptes</strong><small>Écrits de Nag Hammadi et du codex de Berlin.</small><span class="family-open">Explorer les notices ↗</span></span></button>
+<button class="atlas-family" data-family-jump="Pseudépigraphes et écrits juifs / traditions connexes" disabled><img src="assets/foi-matieres/livre.webp" alt="Codex Sinaiticus ouvert à la British Library — image de contexte" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">74 notices</span><strong>Pseudépigraphes et traditions</strong><small>Écrits juifs anciens, visions et corpus connexes.</small><span class="family-open">Explorer les notices ↗</span></span></button>
+<button class="atlas-family" data-family-jump="Deutérocanoniques · réception variable selon traditions" disabled><img src="assets/foi-matieres/manuscrit.webp" alt="Notre Père en grec dans le Codex Sinaiticus — image de contexte" loading="lazy" width="360" height="180"><span class="atlas-family-body"><span class="family-count">21 notices</span><strong>Livres deutérocanoniques</strong><small>Canons et réceptions variables selon les traditions.</small><span class="family-open">Explorer les notices ↗</span></span></button>
 </div>
 </section>
 <div class="atlas-note"><strong>Attention au mot « apocryphe ».</strong> Les 600 entrées réunissent œuvres, notices, fragments ou versions, avec recouvrements possibles. Les études détaillées ne couvrent pas encore tout ce corpus. <a href="eloah-foi-grande-bibliotheque.html">Revenir aux dix collections ↗</a></div>
