@@ -11,6 +11,12 @@
 
 **Suite documentaire :** [LOURDES-002 — comparaisons sur documents originaux : cantique, Léon XIV, Edda, Champion](foi-control.html?file=eloah-foi-lourdes-002-sources-cantique-nornes-pape.md). Comprend une correction de méthode : les 60 couplets du centenaire sont attribués au chanoine Maurice Le Bas et les livrets de chant utilisent des sélections renumérotées.
 
+## Mise à jour factuelle — 32 frênes identifiés le 15 octobre 2026
+
+L'affirmation de la vidéo sur l'existence de **32 frênes** est **confirmée par des documents de 2015** : un article de *La Dépêche du Midi* du 26 mars 2015 signale explicitement **32 frênes plantés en quatre rangées**, et les archives d'INCA Architectes / Fondation Giorgio Tesi expliquent l'origine du **Jardin d'Ombre**. Cela **corrige les anciennes mentions « non vérifiée » dans l'analyse ci-dessous**, conservées pour transparence. Ces arbres ont été plantés **en mars 2015**, non au temps de Bernadette ; **aucune intention odinique documentée** n'a été retrouvée.
+
+**Lire la preuve, la chronologie et les sources :** [LOURDES-003 — Les 32 frênes, archives et Nornes](foi-control.html?file=eloah-foi-lourdes-003-32-frenes-archives-nornes.md).
+
 ## I — Déroulé détaillé, de 00:00 à 29:54
 
 ### [00:00–03:00] Lourdes comme « point de bascule » et annonce de tribulations
