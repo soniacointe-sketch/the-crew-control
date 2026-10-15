@@ -56,6 +56,8 @@ window.addEventListener('pagehide',stop);
   const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute('content','#160912');
   const link=document.createElement('link');link.id='power-glam-2040-theme';link.rel='stylesheet';link.href='power-glam-2040.css?v=20261015';document.head.append(link);
   const cockpit=document.createElement('link');cockpit.id='power-glam-2040-cockpit-theme';cockpit.rel='stylesheet';cockpit.href='power-glam-2040-cockpit.css?v=20261015';document.head.append(cockpit);
+  const polish=document.createElement('link');polish.rel='stylesheet';polish.href='power-glam-2040-workspace.css?v=20261015-2';document.head.append(polish);
+  const controls=document.createElement('script');controls.src='power-glam-2040-workspace.js?v=20261015-2';controls.defer=true;document.head.append(controls);
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
 })();

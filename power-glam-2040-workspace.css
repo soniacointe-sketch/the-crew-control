@@ -1,0 +1,93 @@
+/* Power & Glam 2040 · editorial workspace refinement, page-scoped. */
+body.power-glam-2040{--pg-copy:#eadde6;--pg-soft:#d1bbca}
+body.power-glam-2040 [hidden]{display:none!important}
+body.power-glam-2040 #view{padding-bottom:70px}
+body.power-glam-2040 :is(button,a,summary){touch-action:manipulation}
+body.power-glam-2040 :is(.cockpitcard,.learncard){transition:transform .16s ease,border-color .16s ease,background-color .16s ease}
+body.power-glam-2040>main>header{gap:10px 16px;min-height:76px}
+body.power-glam-2040>main>header>a{color:#efd5a9!important;text-underline-offset:4px}
+body.power-glam-2040 #pg2040-display{display:flex;gap:6px;flex-wrap:wrap;margin-left:auto}
+body.power-glam-2040 #pg2040-display button{font-size:11px;min-height:40px;padding:9px 12px;background:#21101f;border:1px solid #715667;color:#e7d0df}
+body.power-glam-2040 #pg2040-display button[aria-pressed=true]{background:#4a293e;color:#ffead0;border-color:#ae8694}
+body.power-glam-2040 #pg2040-display button:disabled{opacity:.7;cursor:default}
+body.power-glam-2040 #pg2040-menu-search{padding:2px 8px 12px}
+body.power-glam-2040 #pg2040-menu-search label{margin:3px 0 8px;color:#ddc7d6;font:500 11px/1.4 system-ui}
+body.power-glam-2040 #pg2040-menu-query{width:100%;min-height:43px;padding:10px;font:12px/1.5 system-ui;background:#160a16!important;border:1px solid #7d5e70!important;color:#fff1ee!important}
+body.power-glam-2040 #pg2040-menu-count{display:inline-block;font:11px/1.5 system-ui;color:#c7acbd;padding-top:8px}
+body.power-glam-2040 #pg2040-menu-reset{display:block;margin-top:8px;padding:8px 10px;min-height:38px;font-size:11px;color:#efd5a9;border-color:#735568}
+body.power-glam-2040 #nav a{position:relative}
+body.power-glam-2040 #nav a.active::after{content:'';width:5px;height:5px;flex:0 0 5px;border-radius:50%;margin-left:auto;background:#efd5a9;box-shadow:0 0 12px #d9ad7880}
+body.power-glam-2040 #pg-resources-panel{margin-top:18px;border-color:#584151!important;box-shadow:none!important}
+body.power-glam-2040 .cockpitintro{min-height:285px;padding:66px 38px 28px!important;background:radial-gradient(ellipse at 80% 48%,#aa61792c,transparent 48%),linear-gradient(120deg,#261024,#140916)!important;box-shadow:inset 0 1px #ffe5c418,0 16px 50px #0003}
+body.power-glam-2040 .cockpitintro::before{left:36px;top:23px;font-size:9px;letter-spacing:.17em;border-color:#b4957859}
+body.power-glam-2040 .cockpitintro::after{right:9%;font-size:270px;opacity:.52;-webkit-text-stroke:1px #efd5a963;text-shadow:0 0 50px #e6af8f40;z-index:0}
+body.power-glam-2040 .cockpitintro h1{font-size:clamp(40px,4.4vw,61px)!important;line-height:1.15;letter-spacing:-.03em;margin:13px 0 12px;max-width:72%;background:linear-gradient(100deg,#fff3dd,#dfbb9a 80%);-webkit-background-clip:text;background-clip:text}
+body.power-glam-2040 .cockpitintro>p{font:14px/1.75 system-ui;max-width:570px;color:#e3cdda!important}
+body.power-glam-2040 .cockpitintro>.fine{display:block;font:11px/1.7 system-ui;color:#c7acbd!important;margin-top:12px}
+body.power-glam-2040 .cockpitintro>.smallcaps{font:10px/1.6 system-ui;letter-spacing:.15em;max-width:70%}
+body.power-glam-2040 .cockpitintro>.pg2040-halo{position:absolute;inset:0 0 0 62%;max-width:none;z-index:0;pointer-events:none;opacity:.72}
+.pg2040-halo i{position:absolute;display:block;border:1px solid #efd5a94d;border-radius:50%;width:265px;height:265px;top:50%;left:50%;transform:translate(-50%,-50%);box-shadow:0 0 22px #efbd9430,inset 0 0 40px #dba27f1a;animation:pg2040-orbit 22s linear infinite}
+.pg2040-halo i:nth-child(2){width:315px;height:95px;animation-direction:reverse;animation-duration:30s}
+.pg2040-halo i:nth-child(3){width:325px;height:135px;animation-duration:36s;opacity:.5}
+@keyframes pg2040-orbit{from{transform:translate(-50%,-50%) rotate(-22deg)}to{transform:translate(-50%,-50%) rotate(338deg)}}
+body.power-glam-2040 .cockpitintro>.pg2040-hero-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:23px;max-width:85%}
+body.power-glam-2040 .pg2040-hero-actions :is(a,button){font:500 12px/1.5 system-ui;display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:11px 14px;border:1px solid #ad889064;border-radius:10px;color:#f5ddc3;background:#1b0b1ddd;text-decoration:none}
+body.power-glam-2040 .pg2040-hero-actions .pg2040-main-action{background:linear-gradient(120deg,#f0d8b2,#d9b68b)!important;border-color:#e4c49d;color:#291427!important;box-shadow:0 5px 20px #efd5a91a;font-weight:650}
+body.power-glam-2040 .pg2040-hero-actions :is(a,button):hover{filter:brightness(1.1);border-color:#efd5a9}
+body.power-glam-2040 .pg2040-space-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:25px 0 13px}
+.pg2040-filters{display:flex;gap:5px;flex-wrap:wrap}
+body.power-glam-2040 .pg2040-filters button{font:12px/1.4 system-ui;padding:9px 13px;min-height:42px;background:#1b0d1b;color:#d9c4d2;border-color:#604357;border-radius:24px}
+body.power-glam-2040 .pg2040-filters button[aria-pressed=true]{background:#57304a;color:#fff1dc;border-color:#be9887}
+body.power-glam-2040 #pg2040-card-count{font:11px/1.5 system-ui;color:#cbb4c3}
+body.power-glam-2040 .cockpitgrid{margin-top:0;gap:13px;grid-template-columns:repeat(3,minmax(0,1fr))}
+body.power-glam-2040 .cockpitcard{padding:22px!important;min-height:215px;display:flex;flex-direction:column;background:radial-gradient(ellipse at 100% 0,#74395f28,transparent 64%),linear-gradient(130deg,#2d172c,#180c1c)!important;box-shadow:inset 0 1px #fff1,0 8px 22px #0002!important}
+body.power-glam-2040 .cockpitcard .roman{font:italic 15px/1 Georgia,serif;color:#e0b7cd!important;display:inline-block;margin-bottom:9px}
+body.power-glam-2040 .cockpitcard h2{font:400 23px/1.2 Georgia,serif;letter-spacing:-.025em;margin:8px 0 12px}
+body.power-glam-2040 .cockpitcard p{font:12px/1.7 system-ui;color:#d0bbca!important;margin:0 0 18px;flex:1}
+body.power-glam-2040 .cockpitcard .cardfoot{display:flex;align-items:center;gap:7px;flex-wrap:wrap;border-top:1px solid #cda58622;margin-top:auto;padding-top:12px;font-size:11px}
+body.power-glam-2040 .statepill{font-size:10px;line-height:1.5;padding:4px 8px;white-space:normal}
+body.power-glam-2040 .cockpitcard:hover{transform:translateY(-3px);border-color:#be9986!important}
+body.power-glam-2040 .cockpitcard:focus-visible{transform:none;outline-offset:3px}
+body.power-glam-2040 :is(.space,.guidance){padding:24px;margin-top:24px}
+body.power-glam-2040 .learning{gap:10px}
+body.power-glam-2040 .learncard{padding:19px!important}
+body.power-glam-2040 .learncard h3{font-size:20px;margin:10px 0}
+body.power-glam-2040 .learncard p{font-size:12px;line-height:1.65}
+body.power-glam-2040 .learncard button{font-size:12px;min-height:44px}
+body.power-glam-2040 .pg2040-work-note{font-size:12px;color:#d7b9cc}
+/* Controls and messages in existing editors must stay readable, not just the hero. */
+body.power-glam-2040 :is(.toolbar,label) :is(input:not([type=checkbox]):not([type=radio]),textarea,select){border-color:#a5829899!important}
+body.power-glam-2040 :is(input,textarea)::placeholder{color:#c5aebb!important;opacity:1}
+body.power-glam-2040 :is(.projectText,.projectWelcome p,.projectWelcome small,.projectSidebar p){color:#e2cfdb!important}
+body.power-glam-2040 :is(.projectTop,.projectTabs){background:#241022!important;color:#f1dcbf;border-color:#745164!important}
+body.power-glam-2040 .projectTabs button[aria-selected=true]{background:#68405a!important;color:#fff0dd!important}
+body.power-glam-2040 .projectTop h1{color:#fff1e7!important}
+body.power-glam-2040 :is(.sitecard,.statuscard,.threadcard,.locked){background:linear-gradient(135deg,#2d182b,#1b0e1d)!important;color:#eadde6!important;border-color:#765568!important}
+body.power-glam-2040 :is(.sitecard,.statuscard,.threadcard,.locked) :is(p,small){color:#d1bbca!important}
+body.power-glam-2040 #eloahReadOpen{background:#331a31;color:#f1d4b0;border-color:#927180}
+body.power-glam-2040 #eloahReadBox{background:#201021;color:#f6e8ed;border-color:#927180}
+body.power-glam-2040 #eloahReadBox :is(h2,label,small,p){color:#f0dfd6!important}
+body.power-glam-2040 .eloah-reader-highlight{background:#4a2940!important;color:#fff1dc!important}
+/* Mode travail is temporary: no saved preferences, no deleted/hidden business content. */
+body.power-glam-2040.pg2040-work .cockpitintro{min-height:0;padding:60px 30px 23px!important;box-shadow:none}
+body.power-glam-2040.pg2040-work .cockpitintro h1{font-size:36px!important}
+body.power-glam-2040.pg2040-work .cockpitintro>.pg2040-halo,body.power-glam-2040.pg2040-work .cockpitintro::after{display:none}
+body.power-glam-2040.pg2040-work .cockpitcard{min-height:185px;padding:18px!important;box-shadow:none!important;backdrop-filter:none}
+body.power-glam-2040.pg2040-work .cockpitcard h2{font-size:21px}
+body.power-glam-2040.pg2040-paused .pg2040-halo i,body.power-glam-2040.pg2040-work .pg2040-halo i{animation-play-state:paused}
+@media(max-width:1100px){body.power-glam-2040 .cockpitgrid{grid-template-columns:repeat(2,minmax(0,1fr))}body.power-glam-2040 .cockpitintro>.pg2040-halo{inset:0 0 0 66%;opacity:.38}body.power-glam-2040 .cockpitintro h1{max-width:85%}}
+@media(max-width:900px){body.power-glam-2040 #pg2040-menu-search{padding:12px 8px 4px}body.power-glam-2040 #pg2040-menu-query{font-size:16px}body.power-glam-2040 .cockpitintro::before{left:25px}body.power-glam-2040 .cockpitintro{padding:60px 26px 25px!important}}
+@media(max-width:700px){body.power-glam-2040>main>header{gap:7px;padding:11px 0}body.power-glam-2040 #pg2040-display{width:100%;margin:0}body.power-glam-2040 #pg2040-display button{min-height:44px;flex:1;font-size:11px}body.power-glam-2040 .cockpitintro{padding:56px 20px 22px!important;min-height:240px}body.power-glam-2040 .cockpitintro::before{left:20px;top:20px;font-size:8px;letter-spacing:.11em}body.power-glam-2040 .cockpitintro::after{opacity:.23;right:-25px;font-size:200px}body.power-glam-2040 .cockpitintro h1{font-size:clamp(35px,9vw,48px)!important;max-width:100%;margin:12px 0}body.power-glam-2040 .cockpitintro>p{font:13px/1.7 system-ui;max-width:100%}body.power-glam-2040 .cockpitintro>.pg2040-halo{inset:0 -40px 0 56%;opacity:.26}body.power-glam-2040 .cockpitintro>.pg2040-hero-actions{max-width:100%;margin-top:17px;gap:7px}body.power-glam-2040 .pg2040-hero-actions :is(a,button){font-size:11px;padding:10px 12px;flex:1 1 auto}body.power-glam-2040 .pg2040-hero-actions .pg2040-main-action{flex-basis:100%}body.power-glam-2040 .pg2040-space-bar{gap:8px;margin-top:18px}.pg2040-filters{gap:5px}body.power-glam-2040 .pg2040-filters button{font-size:11px;min-height:44px;padding:9px 11px}body.power-glam-2040 .cockpitgrid{grid-template-columns:1fr!important}body.power-glam-2040 .cockpitcard{min-height:172px;padding:21px!important}body.power-glam-2040 .cockpitcard h2{font-size:24px}body.power-glam-2040 .cockpitcard p{font-size:13px}body.power-glam-2040 .cockpitcard .roman{font-size:14px;margin-bottom:5px}body.power-glam-2040 :is(.space,.guidance){padding:20px 17px}body.power-glam-2040 #pg-resources-panel>summary{font-size:12px}body.power-glam-2040 #pg-resources-panel>summary small{font-size:11px}body.power-glam-2040 .pg2040-space-bar{justify-content:flex-start}body.power-glam-2040 :is(input:not([type=checkbox]):not([type=radio]),select,textarea){font-size:16px!important}}
+@media(prefers-reduced-motion:reduce){body.power-glam-2040 .pg2040-halo i{animation:none}body.power-glam-2040 :is(.cockpitcard,.learncard){transition:none;transform:none}}
+/* Phone: keep the first meaningful action above the fold. */
+@media(max-width:700px){
+ body.power-glam-2040.pg-control-one-menu>aside{padding:13px!important}
+ body.power-glam-2040 .pg-menu-access{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:7px;margin:10px 0!important}
+ body.power-glam-2040 .pg-menu-access :is(a,button){padding:9px 10px!important;font-size:11px!important;min-height:44px!important}
+ body.power-glam-2040 #pg-menu-sections>summary{padding:9px 11px!important;font-size:12px!important;min-height:48px}
+ body.power-glam-2040 #pg-menu-current{font-size:10px!important;margin-top:3px!important}
+ body.power-glam-2040 #pg-other-spaces{margin-top:5px!important;padding-top:2px!important}
+ body.power-glam-2040 #pg-other-spaces>summary{padding:9px 11px!important;min-height:38px!important;font-size:11px!important}
+ body.power-glam-2040 #pg-resources-panel>summary small{display:none}
+ body.power-glam-2040 #pg-resources-panel>summary{min-height:48px;padding:12px 15px}
+}
