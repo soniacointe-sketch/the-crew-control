@@ -408,6 +408,29 @@ body.stage2040-active{overflow:hidden!important}
 .show22-disclaimer{font-size:11px!important;color:#d7bed3!important;line-height:1.5!important;margin:0!important}
 .stage2040.operator22 .stage2040-setlist,.stage2040.operator22 .stage2040-conductor,.stage2040.operator22 .stage20,.stage2040.operator22 .stage2040-regie{display:none!important}
 @media(max-width:750px){.show22{padding:10px}.show22-actions button{flex:1 1 43%;min-height:47px}.show22 .show22-silence{flex-basis:100%}}
+
+/* ELOAH MUSIC 2040 PREFLIGHT V23 */
+.preflight23{border:1px solid #816087;background:#1b1125;border-radius:11px;overflow:hidden}
+.preflight23 summary{padding:12px;display:flex;align-items:center;justify-content:space-between;gap:10px;list-style:none;cursor:pointer;font-size:11px;color:#f1deef;font-weight:800;letter-spacing:.06em}
+.preflight23 summary::-webkit-details-marker{display:none}
+.preflight23 summary span:last-child{color:#dcc8dd;font-size:11px;font-weight:500;letter-spacing:0;text-align:right}
+.preflight23body{padding:11px;border-top:1px solid #63446a;display:flex;flex-direction:column;gap:10px}
+.preflight23body>p{margin:0!important;color:#d7c2db!important;font-size:11px!important;line-height:1.5!important}
+.preflight23-actions{display:flex;flex-wrap:wrap;gap:8px}
+.preflight23-actions button{min-height:41px;flex:1 1 140px;font:700 11px Inter,system-ui,sans-serif}
+.preflight23-actions #preflight23Stop{background:#6d303d;border-color:#cc7989}
+.preflight23-results{display:grid;gap:6px;font-size:11px;color:#f1e1f1}
+.preflight23-result{display:flex;align-items:flex-start;gap:9px;border:1px solid #634769;border-radius:8px;background:#24162e;padding:8px;line-height:1.45}
+.preflight23-result[data-status="ok"]{border-color:#688978}
+.preflight23-result[data-status="warn"]{border-color:#9c8069}
+.preflight23-result strong{white-space:nowrap;font-size:11px}
+.preflight23-checks{display:grid;gap:9px;border:1px solid #6d4e6f;border-radius:10px;padding:11px;min-width:0}
+.preflight23-checks legend{color:#e9cda5;padding:0 6px;font-weight:800;font-size:11px}
+.preflight23-checks label{display:flex;align-items:flex-start;gap:9px;line-height:1.4;font-size:11px;color:#f0e1ee;cursor:pointer}
+.preflight23-checks input{width:16px;height:16px;flex-shrink:0;accent-color:#cf75af}
+.preflight23-verdict{padding:10px;border:1px solid #846387;border-radius:8px;background:#34203e;color:#f4d8ad;font-size:12px;font-weight:750}
+.preflight23-disclaimer{color:#c6b2cc!important}
+@media(max-width:750px){.preflight23-actions button{flex-basis:42%;min-height:44px}.preflight23 summary{align-items:flex-start}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <style id="eloah-music-visuals-v1">
 .music-artwork{display:block;width:100%;height:100%;border-radius:inherit}
@@ -622,7 +645,30 @@ body.stage2040-active{overflow:hidden!important}
   <button type="button" id="show22resume" disabled>▶ Reprendre A</button>
   <button type="button" id="show22silence" class="show22-silence">■ SILENCE IMMÉDIAT</button>
  </div>
- <details class="show22-incidents" id="show22incidents"><summary>☷ Journal des imprévus <span id="show22incidentCount">0 note</span></summary>
+ 
+<details class="preflight23" id="preflight23panel" open>
+ <summary><span>✦ CONTRÔLE AVANT SPECTACLE</span><span id="preflight23summary">Tests non effectués</span></summary>
+ <div class="preflight23body">
+  <p>Le diagnostic inspecte le navigateur et les titres disponibles, <strong>sans lancer de musique</strong>. Les vérifications sonores nécessitent ton intervention sur la véritable installation.</p>
+  <div class="preflight23-actions">
+   <button type="button" id="preflight23scan">⌕ Vérifier la configuration</button>
+   <button type="button" id="preflight23A">▶ Essayer la platine A</button>
+   <button type="button" id="preflight23B">▶ Essayer la platine B</button>
+   <button type="button" id="preflight23Cross">↗ Essayer le fondu</button>
+   <button type="button" id="preflight23Stop">■ Tester l’arrêt audio</button>
+  </div>
+  <div id="preflight23technical" class="preflight23-results" aria-live="polite">Appuie sur « Vérifier la configuration » pour lancer les contrôles techniques.</div>
+  <fieldset class="preflight23-checks"><legend>Vérifications à confirmer sur place</legend>
+   <label><input type="checkbox" data-preflight-confirm="a"> J’entends correctement la platine A sur la bonne sortie</label>
+   <label><input type="checkbox" data-preflight-confirm="b"> J’entends correctement la platine B sur la sortie prévue</label>
+   <label><input type="checkbox" data-preflight-confirm="fade"> J’ai vérifié la transition A → B sans coupure indésirable</label>
+   <label><input type="checkbox" data-preflight-confirm="stop"> J’ai vérifié que la commande Silence coupe bien le son ELOAH</label>
+  </fieldset>
+  <div class="preflight23-verdict" id="preflight23verdict" role="status" aria-live="polite">Validation scénique en attente : 0/4 vérifications confirmées.</div>
+  <p class="preflight23-disclaimer">Ce contrôle ne peut pas certifier la sono physique, le réseau, les lecteurs Spotify intégrés ou les autres applications. Faire une répétition avec le matériel réel avant l'accueil du public.</p>
+ </div>
+</details>
+<details class="show22-incidents" id="show22incidents"><summary>☷ Journal des imprévus <span id="show22incidentCount">0 note</span></summary>
   <div class="show22-incident-body">
    <label for="show22incidentText">Noter un incident ou une modification de scène</label>
    <textarea id="show22incidentText" rows="2" maxlength="250" placeholder="Ex. Groupe KIDS en attente, 30 s de retard, micro à vérifier…"></textarea>
@@ -1063,6 +1109,88 @@ if(typeof djAudio.setSinkId==='function'&&navigator.mediaDevices?.selectAudioOut
 /* ELOAH MUSIC 2040 STAGE MODE V15 */
 let stage2040Native=false,stage2040PreviousFocus=null,stage2040Index='';
 const stage2040Panel=$('dj2040stage');
+
+/* ELOAH MUSIC 2040 PREFLIGHT V23 */
+let preflight23ScanDone=false,preflight23Key='',preflight23Issues=0;
+const preflight23Flags={a:false,b:false,fade:false,stop:false};
+function preflight23Reset(){
+ preflight23Key=stageSetlistId||'';
+ preflight23ScanDone=false;preflight23Issues=0;
+ for(const k of Object.keys(preflight23Flags))preflight23Flags[k]=false;
+ document.querySelectorAll('[data-preflight-confirm]').forEach(input=>{input.checked=false});
+ $('preflight23technical').textContent='Configuration non vérifiée. Lance le diagnostic pour actualiser les résultats.';
+ preflight23Display();
+}
+function preflight23Display(){
+ if(stage2040Panel.hidden)return;
+ const confirmed=Object.values(preflight23Flags).filter(Boolean).length;
+ const canValidate=!!stageSetlistAvailableIds().length&&preflight23ScanDone&&preflight23Issues===0&&confirmed===4;
+ const message=canValidate?'Contrôles déclarés terminés sur cet appareil. Vérifie aussi la sono et les systèmes externes.':
+  !stageSetlistAvailableIds().length?'Préparation incomplète : ajoute des titres à la setlist.':
+  !preflight23ScanDone?'Configuration à vérifier. '+confirmed+'/4 confirmations sonores.':
+  preflight23Issues?'Diagnostic technique : '+preflight23Issues+' point(s) bloquant(s). '+confirmed+'/4 confirmations sonores.':
+  confirmed+'/4 confirmations sonores. Ne lance pas un spectacle sans test de la sono.';
+ $('preflight23verdict').textContent=message;
+ $('preflight23summary').textContent=canValidate?'Vérifications déclarées terminées':confirmed+'/4 tests audio confirmés';
+}
+function preflight23Scan(){
+ const list=stageSetlistAvailableIds();
+ const available=list.map(id=>tracks.find(t=>t.id===id)).filter(Boolean);
+ const results=[];
+ const mark=(status,title,detail)=>{results.push({status,title,detail})};
+ if(available.length)mark('ok','Setlist',available.length+' titre(s) disponibles sur cet appareil.');
+ else mark('error','Setlist','Aucun titre disponible. Importe tes morceaux et sélectionne une playlist.');
+ const a=tracks[current];
+ if(a&&audio.src&&!audio.error)mark('ok','Platine A',audio.readyState>=1?'Fichier chargé, métadonnées reconnues.':'Source présente. Chargement non encore vérifié.');
+ else mark('warn','Platine A','Charge un titre puis utilise « Essayer la platine A ».');
+ const b=tracks.find(t=>t.id===djTrackId);
+ if(b&&djAudio.src&&!djAudio.error)mark('ok','Platine B','Source préparée. Préécoute sonore à confirmer.');
+ else mark('warn','Platine B','Charge un titre sur B, puis confirme la préécoute.');
+ if(navigator.onLine===false)mark('warn','Connexion','Navigateur hors ligne. Les titres cloud peuvent ne pas fonctionner.');
+ else mark('ok','Connexion','Navigateur en ligne (le débit n’est pas testé).');
+ if(!window.isSecureContext)mark('warn','Contexte sécurisé','HTTPS nécessaire pour l’accès au microphone.');
+ else mark('ok','Navigateur','Contexte sécurisé disponible.');
+ if(typeof djAudio.setSinkId!=='function')mark('warn','Sortie casque B','Sélection séparée non disponible : écoute via sortie commune.');
+ else mark('ok','Sortie casque B','Sélection possible selon navigateur et périphériques.');
+ if(!navigator.mediaDevices?.getUserMedia)mark('warn','Micro','Accès microphone indisponible ; utiliser une régie micro externe.');
+ else mark('ok','Micro','API disponible ; autorisation et son non testés.');
+ const errors=results.filter(item=>item.status==='error').length;
+ preflight23ScanDone=true;preflight23Issues=errors;
+ const area=$('preflight23technical');area.replaceChildren();
+ for(const r of results){
+  const row=document.createElement('div');row.className='preflight23-result';row.dataset.status=r.status;
+  const head=document.createElement('strong');head.textContent=r.status==='ok'?'✓ '+r.title:r.status==='warn'?'! '+r.title:'× '+r.title;
+  const desc=document.createElement('span');desc.textContent=r.detail;row.append(head,desc);area.append(row);
+ }
+ preflight23Display();
+}
+$('preflight23scan').onclick=preflight23Scan;
+$('preflight23A').onclick=async()=>{
+ if(current<0||!audio.src){show22Status('Charge d’abord un morceau sur A.');return}
+ try{if(audio.paused)await audio.play();show22Status('Lecture A demandée. Confirme manuellement que tu l’entends sur la bonne sortie.')}
+ catch(e){show22Status('La lecture A a échoué : vérifie le fichier ou les autorisations.')}
+};
+$('preflight23B').onclick=()=>{
+ if(!djTrackId||!djAudio.src){show22Status('Charge d’abord un titre sur la platine B.');return}
+ $('dj2040preview').click();
+ show22Status('Commande de préécoute B envoyée. Écoute et confirme la sortie.');
+};
+$('preflight23Cross').onclick=()=>{
+ if(!audio.src||!djTrackId||!djAudio.src){show22Status('Charge des morceaux sur A et B avant de tester la transition.');return}
+ if(!confirm('Tester maintenant une vraie transition sonore de 3 secondes entre A et B ? Cette action modifiera la lecture en cours.'))return;
+ $('dj2040auto').click();
+ show22Status('Transition demandée : vérifie à l’oreille et coche la validation si elle fonctionne.');
+};
+$('preflight23Stop').onclick=()=>{
+ $('show22silence').click();
+ show22Status('Arrêt audio ELOAH demandé. Confirme à l’oreille que les sorties concernées sont coupées.');
+};
+document.querySelectorAll('[data-preflight-confirm]').forEach(input=>input.onchange=()=>{
+ const key=input.dataset.preflightConfirm;
+ if(!Object.prototype.hasOwnProperty.call(preflight23Flags,key))return;
+ preflight23Flags[key]=input.checked;preflight23Display();
+});
+
 
 /* ELOAH MUSIC 2040 OPERATOR SAFETY V22 */
 let show22Operator=false,show22Scope='',show22Incidents=[];
@@ -1727,6 +1855,7 @@ function stage2040Sync(){
  regieRefreshCues();
  show21Sync();
  show22Sync();
+ if(preflight23Key!==(stageSetlistId||''))preflight23Reset();
  const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
  $('stage2040titleA').textContent=a?.title||'Aucun titre sélectionné';
  $('stage2040artistA').textContent=a?.artist||'Lecture principale';
@@ -1763,7 +1892,7 @@ function stage2040Sync(){
 async function stage2040Open(){
  stage2040PreviousFocus=document.activeElement;
  stage2040Panel.hidden=false;document.body.classList.add('stage2040-active');
- stage2040Sync();regieRenderTime();$('stage2040heading').focus();
+ stage2040Sync();preflight23Reset();regieRenderTime();$('stage2040heading').focus();
  if(stage2040Panel.requestFullscreen){
   try{await stage2040Panel.requestFullscreen();stage2040Native=document.fullscreenElement===stage2040Panel}
   catch(e){stage2040Native=false}
