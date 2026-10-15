@@ -1050,6 +1050,7 @@ syncMixButtons();
 /* ELOAH MUSIC 2040 DUAL DECK V13 */
 const djAudio=$('dj2040audio');
 let djTrackId=null,djLoading=0,djAnimating=0,djTransitioning=false,djPreviewMode=false,djSafetySequence=0;
+/* ELOAH MUSIC 2040 RECOVERY V27 */
 /* ELOAH MUSIC 2040 STABILITY V24 */
 const djMaster=()=>Math.max(0,Math.min(1,Number($('volume').value)/100));
 const djGain=()=>Math.max(0,Math.min(1,Number($('dj2040gain').value)/100));
@@ -1128,13 +1129,14 @@ function djSync(){
  }
 }
 function djClear(){
- djCancelAnimation();djLoading++;
+ djSafetySequence++;djCancelAnimation();djLoading++;
  djAudio.pause();djAudio.removeAttribute('src');djAudio.load();
  djTrackId=null;djPreviewMode=false;djUpdateTimers();
  $('dj2040fader').value='0';restoreMixVolume();djSync();
 }
 async function djLoadB(id){
  const request=++djLoading;
+ djSafetySequence++;
  djCancelAnimation();
  const t=tracks.find(t=>t.id===id);
  if(!t){djMessage('Sélectionne un morceau de ta bibliothèque.');return;}
@@ -1168,6 +1170,7 @@ $('dj2040cue').onclick=()=>{
 };
 $('dj2040stop').onclick=()=>{djClear();djMessage('Platine B vidée.');};
 $('dj2040reset').onclick=()=>{
+ djSafetySequence++;djLoading++;
  djCancelAnimation();djPreviewMode=false;$('dj2040fader').value='0';djAudio.pause();
  restoreMixVolume();djAudio.volume=0;djSync();djMessage('Mix réinitialisé. Le lecteur principal conserve sa piste.');
 };
@@ -1178,6 +1181,22 @@ $('dj2040fader').oninput=()=>{
  djSetMasterLevels();
  if(djTrackId&&djPercent()>0&&djAudio.paused)djAudio.play().then(djSync).catch(()=>djMessage('Lecture B impossible.'));
 };
+function dj27RestoreCanceledTake(sequence,ix,src,previous){
+ if(sequence===djSafetySequence)return false;
+ const currentSource=audio.currentSrc||audio.src;
+ if(current===ix&&(currentSource===src||audio.src===src)){
+  audio.pause();
+  current=previous.index;
+  if(previous.src){audio.src=previous.src;audio.load();try{audio.currentTime=previous.position||0}catch(e){}}
+  else{audio.removeAttribute('src');audio.load();}
+  restoreMixVolume();
+  const previousTrack=tracks[previous.index];
+  $('nowName').textContent=previousTrack?.title||'Aucun titre sélectionné';
+  $('nowArtist').textContent=previousTrack?.artist||'Choisis une musique';
+  updateHeart();updateCoverPlayer();announceMusic();djSync();
+ }
+ return true;
+}
 async function djTakeB(){
  if(!djTrackId||djTransitioning)return;
  const t=tracks.find(t=>t.id===djTrackId);
@@ -1208,11 +1227,11 @@ async function djTakeB(){
     if(audio.readyState>=1){cleanup();resolve();}
    });
   }
-  if(sequence!==djSafetySequence){djTransitioning=false;return;}
+  if(dj27RestoreCanceledTake(sequence,ix,src,previous))return;
   if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=Math.min(bPosition,Math.max(0,audio.duration-.1));
   else audio.currentTime=bPosition;
   await audio.play();
-  if(sequence!==djSafetySequence){audio.pause();djTransitioning=false;return;}
+  if(dj27RestoreCanceledTake(sequence,ix,src,previous))return;
   djAudio.pause();djAudio.removeAttribute('src');djAudio.load();
   djTrackId=null;djPreviewMode=false;$('dj2040fader').value='0';djUpdateTimers();
   djTransitioning=false;restoreMixVolume();djSync();
@@ -1220,7 +1239,7 @@ async function djTakeB(){
   updateHeart();updateCoverPlayer();refreshMediaSession();announceMusic();rememberListening(true);updateResume();
   djMessage('Passage de B vers A effectué.');
  }catch(e){
-  if(sequence!==djSafetySequence)return;
+  if(dj27RestoreCanceledTake(sequence,ix,src,previous))return;
   audio.pause();djTransitioning=false;
   current=previous.index;
   if(previous.src){audio.src=previous.src;audio.load();try{audio.currentTime=previous.position||0}catch(err){}}
@@ -2161,6 +2180,7 @@ $('stage2040setlistRows').addEventListener('click',async event=>{
 });
 $('stage2040stopBoth').onclick=()=>{
  if(!confirm('Mettre les deux platines en pause ? Aucun titre ne sera supprimé.'))return;
+ djSafetySequence++;djLoading++;
  djCancelAnimation();cancelMixFade();
  audio.pause();djAudio.pause();djPreviewMode=false;
  $('dj2040fader').value='0';djAudio.volume=0;restoreMixVolume();
@@ -2273,6 +2293,25 @@ audio.addEventListener('play',stage2040Sync);
 audio.addEventListener('pause',stage2040Sync);
 djAudio.addEventListener('play',stage2040Sync);
 djAudio.addEventListener('pause',stage2040Sync);
+
+
+/* ELOAH MUSIC 2040 V27 MEDIA ERRORS */
+function dj27MediaFailure(which,element){
+ const err=element.error;
+ const description=err?.code===1?'Lecture interrompue':err?.code===2?'Erreur réseau':err?.code===3?'Fichier audio illisible':err?.code===4?'Format ou source non pris en charge':'Échec du chargement';
+ const message='Platine '+which+' : '+description+'. Vérifie la source et la sortie audio avant de reprendre.';
+ djMessage(message);
+ if(!stage2040Panel.hidden){
+  show22Status(message);
+  preflight23ScanDone=false;
+  preflight23Display();
+ }
+}
+audio.addEventListener('error',()=>dj27MediaFailure('A',audio));
+djAudio.addEventListener('error',()=>dj27MediaFailure('B',djAudio));
+window.addEventListener('offline',()=>{
+ if(!stage2040Panel.hidden)show22Status('Connexion réseau perdue. Les titres locaux peuvent rester disponibles ; les fichiers cloud peuvent échouer.');
+});
 
 let lastListen=null;try{lastListen=JSON.parse(localStorage.getItem('eloahMusicLastListen')||'null')}catch(e){}
 let lastPersist=0;
