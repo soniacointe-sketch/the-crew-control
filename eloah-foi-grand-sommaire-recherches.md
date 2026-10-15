@@ -47,6 +47,10 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 
 [Lire ALPHA-001 · Jésus enfant et les lettres](foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md) — fiche de synthèse reconstituée, distincte d'un original non retrouvé.
 
+## Lourdes, apocalypse et conversion — nouveau dossier (15 octobre 2026)
+
+- [LOURDES · Grande épreuve, cantique nouveau, apparitions et épée dans la pierre](foi-control.html?file=eloah-foi-lourdes-apocalypse-cantique-nouveau.md) — repères historiques, parallèles bibliques, Durandal/Excalibur, indices « Green Day », « 165 » et « 167 » restant à identifier.
+
 ## Enquêtes et manuscrits (13)
 
 - [Manuscrits sur Jésus enfant](foi-control.html?file=eloah-jesus-enfant-manuscrits.md)
