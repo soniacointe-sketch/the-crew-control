@@ -879,11 +879,12 @@ $('stage2040micEnable').onclick=async()=>{
  $('stage2040micEnable').disabled=true;
  try{
   const stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:true,noiseSuppression:true},video:false});
-  if(stage2040Panel.hidden){stream.getTracks().forEach(t=>t.stop());$('stage2040micEnable').disabled=false;return;}
+  regieMicStream=stream;
+  if(stage2040Panel.hidden){await regieMicOff();return;}
   const AudioCtor=window.AudioContext||window.webkitAudioContext;
   if(!AudioCtor)throw Error('AudioContext indisponible');
-  const ctx=new AudioCtor();await ctx.resume();
-  regieMicStream=stream;regieMicContext=ctx;regieMicSource=ctx.createMediaStreamSource(stream);
+  const ctx=new AudioCtor();regieMicContext=ctx;await ctx.resume();
+  regieMicSource=ctx.createMediaStreamSource(stream);
   regieMicGain=ctx.createGain();regieMicGain.gain.value=0;
   regieMicSource.connect(regieMicGain);regieMicGain.connect(ctx.destination);
   $('stage2040pushTalk').disabled=false;$('stage2040micStop').disabled=false;
