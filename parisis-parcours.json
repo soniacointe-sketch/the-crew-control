@@ -1,0 +1,193 @@
+{
+  "version": 1,
+  "updated": "2026-10-15",
+  "description": "Séquences de lecture et navigation — non chronologie causale",
+  "cycles": [
+    {
+      "id": "alpha",
+      "kicker": "DERNIÈRE SÉRIE",
+      "title": "Jésus enfant, les lettres et les sept cieux",
+      "short": "ALPHA",
+      "description": "Du corpus sur Jésus enfant aux lettres d'Alètheia et aux sept voyelles : trois jalons pour reprendre une enquête plus vaste.",
+      "method": "Les jalons 001, 010 et 011 ne remplacent pas les dossiers ALPHA-002 à 009, qui restent dans les archives.",
+      "steps": [
+        {
+          "code": "ALPHA-001",
+          "title": "Le dossier maître : Jésus enfant et les lettres",
+          "href": "foi-control.html?file=eloah-alpha-001-jesus-enfant-lettres.md",
+          "note": "Revenir à la question de départ et aux sources du dossier maître."
+        },
+        {
+          "code": "ALPHA-010",
+          "title": "Les 24 lettres et le corps de la Vérité",
+          "href": "parisis-alpha-010-marcus-aletheia.html",
+          "note": "Irénée, Marcus et le langage symbolique des lettres."
+        },
+        {
+          "code": "ALPHA-011",
+          "title": "Sept voyelles, sept cieux et Apocalypse",
+          "href": "parisis-alpha-011-sept-voyelles-apocalypse.html",
+          "note": "Chronologie des traditions et distinction entre attestations et hypothèses."
+        }
+      ],
+      "network": "parisis-reseau-indices.html",
+      "trail": "parisis-fil-enquetes.html#alpha"
+    },
+    {
+      "id": "par-isis",
+      "kicker": "CYCLE URBAIN",
+      "title": "PAR ISIS : de la question aux plans de Paris",
+      "short": "PAR ISIS",
+      "description": "Suivre la question initiale, les motifs, les transformations urbaines et enfin les documents cadastraux.",
+      "method": "Les correspondances visuelles ou topographiques ne suffisent pas à prouver une intention symbolique.",
+      "steps": [
+        {
+          "code": "PAR ISIS 001",
+          "title": "Aux origines",
+          "href": "parisis-par-isis-001.html",
+          "note": "Poser la question historique et relever les premières sources."
+        },
+        {
+          "code": "PAR ISIS 002",
+          "title": "L'Ânkh, atlas des motifs",
+          "href": "parisis-par-isis-002-ankh-atlas.html",
+          "note": "Comparer les formes sans affirmer de filiation."
+        },
+        {
+          "code": "PAR ISIS 003",
+          "title": "Les deux opéras",
+          "href": "parisis-par-isis-003-opera-disparu.html",
+          "note": "Distinguer bâtiments, lieux et époques."
+        },
+        {
+          "code": "PAR ISIS 004",
+          "title": "Paris avant et après",
+          "href": "parisis-par-isis-004-atlas-avant-apres.html",
+          "note": "Comparer les plans et les rues documentées."
+        },
+        {
+          "code": "PAR ISIS 005",
+          "title": "Les feuilles Vasserot",
+          "href": "parisis-par-isis-005-feuilles-vasserot.html",
+          "note": "Retrouver les cotes et les limites des documents."
+        }
+      ],
+      "network": "parisis-reseau-indices.html?d=isis005",
+      "trail": "parisis-fil-enquetes.html#par-isis"
+    },
+    {
+      "id": "nesle",
+      "kicker": "CYCLE ARCHIVES",
+      "title": "Nesle : la tour, Le Vau et les pièces manquantes",
+      "short": "NESLE",
+      "description": "Une suite d'archives à confronter, des deux tours de la Seine jusqu'aux contradictions de datation.",
+      "method": "La date du dessin de 1665 ne démontre pas que la tour était encore debout cette année-là.",
+      "steps": [
+        {
+          "code": "AXE-012",
+          "title": "Les deux tours de la Seine",
+          "href": "parisis-nesle-coin-seine.html",
+          "note": "Contexte topographique et références."
+        },
+        {
+          "code": "AXE-013",
+          "title": "Trois tours et deux murs",
+          "href": "parisis-nesle-coin-seine.html#enquete-trois-tours-1665",
+          "note": "Confronter les représentations du site."
+        },
+        {
+          "code": "AXE-014",
+          "title": "Le Vau et le plan de 1665",
+          "href": "parisis-axe-014-levau-archives.html",
+          "note": "Examiner le plan, son titre et ses conventions."
+        },
+        {
+          "code": "AXE-015",
+          "title": "Le procès du fossé",
+          "href": "parisis-axe-015-proces-fosse-nesle.html",
+          "note": "Poursuivre les archives foncières et les indemnités."
+        },
+        {
+          "code": "AXE-016",
+          "title": "Le Paris disparu",
+          "href": "parisis-axe-016-paris-disparu-nesle.html",
+          "note": "Départager les scénarios 1662 et 1665."
+        }
+      ],
+      "network": "parisis-reseau-indices.html?d=nesle16",
+      "trail": "parisis-fil-enquetes.html#nesle"
+    },
+    {
+      "id": "oeil",
+      "kicker": "CYCLE SYMBOLES",
+      "title": "L'œil, le triangle et l'ouroboros",
+      "short": "L'ŒIL",
+      "description": "Partir de l'image de 1789 et remonter vers les représentations anciennes, en vérifiant chaque attribution.",
+      "method": "Le parcours remonte le temps des sources : une image plus ancienne n'est pas la preuve d'un emprunt direct.",
+      "steps": [
+        {
+          "code": "ENQUÊTE 001",
+          "title": "L'œil au sommet : 1789",
+          "href": "parisis-oeil-triangle-ouroboros-1789.html",
+          "note": "L'œil, le triangle et le serpent circulaire sur la Déclaration."
+        },
+        {
+          "code": "ENQUÊTE 002",
+          "title": "La médaille de 1770",
+          "href": "parisis-oeil-triangle-archives-1770.html",
+          "note": "Une attestation antérieure à 1776."
+        },
+        {
+          "code": "ENQUÊTE 003",
+          "title": "Images de 1624, 1655 et 1665",
+          "href": "parisis-oeil-triangle-origines-1624-1665.html",
+          "note": "Œil divin, justice et frontispice de Kircher."
+        },
+        {
+          "code": "ENQUÊTE 004",
+          "title": "Le vitrail de l'Escalade",
+          "href": "parisis-oeil-triangle-vitrail-escalade-1603.html",
+          "note": "Une piste plus ancienne, avec réserves sur la datation et la restauration."
+        }
+      ],
+      "network": "parisis-reseau-indices.html?d=oeil1665",
+      "trail": "parisis-fil-enquetes.html#oeil"
+    },
+    {
+      "id": "nostradamus",
+      "kicker": "CYCLE TEXTES",
+      "title": "Nostradamus : du texte à la lettre de 1566",
+      "short": "NOSTRADAMUS",
+      "description": "Lire les éditions et les archives avant de tester les récits de prophétie.",
+      "method": "Une lettre imprimée atteste la publication d'un texte, pas l'accomplissement d'une prédiction.",
+      "steps": [
+        {
+          "code": "ENQUÊTE 001",
+          "title": "Le texte avant la légende",
+          "href": "parisis-nostradamus-enquete.html",
+          "note": "Éditions des quatrains et critères de lecture."
+        },
+        {
+          "code": "ENQUÊTE 002",
+          "title": "Catherine de Médicis",
+          "href": "parisis-nostradamus-catherine-medicis.html",
+          "note": "Séparer sources et légendes de la cour."
+        },
+        {
+          "code": "ENQUÊTE 003",
+          "title": "La rencontre de 1564",
+          "href": "parisis-nostradamus-valois-archives-1564.html",
+          "note": "Vérifier le passage royal et les témoignages."
+        },
+        {
+          "code": "ENQUÊTE 004",
+          "title": "La lettre publiée en 1566",
+          "href": "parisis-nostradamus-lettre-1566-analyse.html",
+          "note": "Comparer le fac-similé, sa transcription et les éditions anciennes."
+        }
+      ],
+      "network": "parisis-reseau-indices.html?d=nostra4",
+      "trail": "parisis-fil-enquetes.html#nostradamus"
+    }
+  ]
+}
