@@ -448,6 +448,25 @@ body.stage2040-active{overflow:hidden!important}
 .scene25 #scene25message{color:#f0d6b5!important}
 .scene25 .scene25caution{color:#cdb7d2!important}
 @media(max-width:750px){.scene25{padding:10px}.scene25actions button{flex:1 1 44%;min-height:44px}}
+
+/* ELOAH MUSIC 2040 DRESS REHEARSAL V26 */
+.dress26{border:1px solid #836389;border-radius:12px;background:linear-gradient(135deg,#30203a,#1d122a);overflow:hidden}
+.dress26 summary{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px;cursor:pointer;list-style:none;font-size:11px;font-weight:800;color:#f9e7f7;letter-spacing:.05em}
+.dress26 summary::-webkit-details-marker{display:none}.dress26 summary span:last-child{color:#e5cda9;font-weight:600;letter-spacing:0;white-space:nowrap}
+.dress26body{border-top:1px solid #6d4d73;padding:12px;display:flex;flex-direction:column;gap:11px}
+.dress26body p{font-size:11px!important;line-height:1.5!important;color:#dfc9df!important;margin:0!important}
+.dress26steps{display:grid;gap:9px}
+.dress26step{display:grid;gap:7px;background:#24162f;border:1px solid #6e4a71;border-radius:10px;padding:12px}
+.dress26step[data-state="pass"]{border-color:#64937d}.dress26step[data-state="fail"]{border-color:#bd7c83}
+.dress26steptop{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.dress26steptop strong{color:#fff4fc;font-size:12px}.dress26badge{font-size:10px;color:#e7cfad}
+.dress26step p{color:#cdb7ce!important}
+.dress26buttons,.dress26actions{display:flex;gap:7px;flex-wrap:wrap}
+.dress26 button{border:1px solid #876081;border-radius:8px;background:#4f2e56;color:#fff1fb;min-height:39px;padding:9px 12px;font:700 11px Inter,system-ui,sans-serif}
+.dress26 button:hover:not(:disabled){background:#724476}.dress26 button:disabled{opacity:.4;cursor:not-allowed}
+.dress26buttons button{flex:1 1 90px}.dress26buttons button[data-result="pass"]{border-color:#729b87}.dress26buttons button[data-result="fail"]{border-color:#b77a86}
+.dress26actions button{flex:1 1 190px}.dress26 .dress26note{color:#c9b6cc!important}
+@media(max-width:750px){.dress26body{padding:10px}.dress26buttons button{flex:1 1 43%;min-height:44px}.dress26 summary span:last-child{white-space:normal;text-align:right}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <style id="eloah-music-visuals-v1">
 .music-artwork{display:block;width:100%;height:100%;border-radius:inherit}
@@ -766,7 +785,15 @@ body{background:#0c0a0f!important}
  <p id="scene25message" role="status" aria-live="polite">Les confirmations sont propres à cette session et ne sont pas envoyées au cloud.</p>
  <p class="scene25caution">Un bilan complet signifie uniquement que l'opérateur a déclaré les tests effectués. Il ne constitue ni une certification audio ni une garantie de sécurité.</p>
 </div>
-  <p class="preflight23-disclaimer">Ce contrôle ne peut pas certifier la sono physique, le réseau, les lecteurs Spotify intégrés ou les autres applications. Faire une répétition avec le matériel réel avant l'accueil du public.</p>
+  <details id="dress26" class="dress26"><summary><span>◉ RÉPÉTITION GÉNÉRALE GUIDÉE</span><span id="dress26count">0 / 6 tests validés</span></summary>
+<div class="dress26body">
+<p>Chaque étape agit sur la régie réelle uniquement si tu appuies sur son bouton. Après écoute ou vérification, indique <strong>Réussi</strong> ou <strong>Problème</strong>. Aucune validation automatique de la sonorisation.</p>
+<div id="dress26steps" class="dress26steps"></div>
+<div class="dress26actions"><button type="button" id="dress26export">↓ Exporter le bilan de répétition</button><button type="button" id="dress26reset">⟲ Recommencer le parcours</button></div>
+<p id="dress26status" role="status" aria-live="polite">Choisis une setlist avant de lancer la répétition générale.</p>
+<p class="dress26note">Tests sonores réels à volume raisonnable. Évite la transition et le test Silence pendant une prestation devant le public. Le rapport ne contient ni morceaux audio, ni compte, ni adresse e-mail.</p>
+</div></details>
+<p class="preflight23-disclaimer">Ce contrôle ne peut pas certifier la sono physique, le réseau, les lecteurs Spotify intégrés ou les autres applications. Faire une répétition avec le matériel réel avant l'accueil du public.</p>
  </div>
 </details>
 <details class="show22-incidents" id="show22incidents"><summary>☷ Journal des imprévus <span id="show22incidentCount">0 note</span></summary>
@@ -1239,6 +1266,101 @@ if(typeof djAudio.setSinkId==='function'&&navigator.mediaDevices?.selectAudioOut
 /* ELOAH MUSIC 2040 STAGE MODE V15 */
 let stage2040Native=false,stage2040PreviousFocus=null,stage2040Index='';
 const stage2040Panel=$('dj2040stage');
+
+/* ELOAH MUSIC 2040 DRESS REHEARSAL V26 */
+const dress26Cases=[
+ {id:'setup',title:'01 · Setlist et diagnostic',desc:'Vérifier la playlist sélectionnée et les titres disponibles. Aucun son lancé.',action:'Analyser la setlist'},
+ {id:'a',title:'02 · Première musique sur A',desc:'Lancer le premier titre et écouter sur la sortie principale.',action:'Tester la platine A'},
+ {id:'b',title:'03 · Prochain morceau sur B',desc:'Charger le titre suivant. Préécoute B ensuite avec le lecteur de la platine B.',action:'Préparer B'},
+ {id:'fade',title:'04 · Transition musicale',desc:'Faire une véritable transition de 3 s entre A et B, puis vérifier le niveau.',action:'Tester le fondu'},
+ {id:'stop',title:'05 · Silence et arrêt',desc:'Arrêter A, B, les annonces ELOAH et le micro, puis confirmer à l’oreille.',action:'Déclencher Silence'},
+ {id:'resume',title:'06 · Reprise contrôlée',desc:'Reprendre explicitement la platine A, vérifier le son et le volume.',action:'Reprendre A'}
+];
+let dress26States=Object.create(null),dress26Scope='';
+function dress26Status(s){$('dress26status').textContent=s;}
+function dress26CurrentScope(){return (typeof cloudUser!=='undefined'&&cloudUser?.id?'user:'+cloudUser.id:'session')+':'+(stageSetlistId||'none');}
+function dress26ResetState(force){
+ const scope=dress26CurrentScope();
+ if(!force&&scope===dress26Scope)return;
+ dress26Scope=scope;dress26States=Object.create(null);
+ dress26Build();
+}
+function dress26Build(){
+ const host=$('dress26steps');host.replaceChildren();
+ for(const test of dress26Cases){
+  const section=document.createElement('section');section.className='dress26step';section.dataset.test=test.id;section.dataset.state=dress26States[test.id]?.result||'todo';
+  const top=document.createElement('div');top.className='dress26steptop';
+  const title=document.createElement('strong');title.textContent=test.title;
+  const state=document.createElement('span');state.className='dress26badge';
+  state.textContent=section.dataset.state==='pass'?'✓ Réussi':section.dataset.state==='fail'?'! Problème':'À tester';
+  top.append(title,state);
+  const intro=document.createElement('p');intro.textContent=test.desc;
+  const actions=document.createElement('div');actions.className='dress26buttons';
+  for(const [kind,label] of [['action',test.action],['pass','✓ Réussi'],['fail','! Problème']]){
+   const button=document.createElement('button');button.type='button';button.dataset.test=test.id;button.dataset.result=kind;button.textContent=label;
+   actions.append(button);
+  }
+  section.append(top,intro,actions);host.append(section);
+ }
+ dress26Refresh();
+}
+function dress26Refresh(){
+ if(stage2040Panel.hidden)return;
+ const passed=dress26Cases.filter(t=>dress26States[t.id]?.result==='pass').length;
+ const failed=dress26Cases.filter(t=>dress26States[t.id]?.result==='fail').length;
+ $('dress26count').textContent=passed+' / 6 réussis'+(failed?' · '+failed+' problème(s)':'');
+ for(const test of dress26Cases){
+  const e=$('dress26steps').querySelector('[data-test="'+test.id+'"].dress26step');
+  if(!e)continue;
+  const result=dress26States[test.id]?.result||'todo';e.dataset.state=result;
+  e.querySelector('.dress26badge').textContent=result==='pass'?'✓ Réussi':result==='fail'?'! Problème':'À tester';
+  const button=e.querySelector('button[data-result="action"]');
+  button.disabled=!stageSetlistAvailableIds().length||(test.id==='fade'&&(!audio.src||!djTrackId))||(test.id==='resume'&&!audio.src);
+ }
+}
+async function dress26Run(id){
+ const ids=stageSetlistAvailableIds();
+ if(!ids.length){dress26Status('Choisis d’abord une playlist contenant des morceaux.');return;}
+ if(id==='setup'){preflight23Scan();dress26Status('Diagnostic lancé. Consulte les résultats puis confirme manuellement le test.');return;}
+ if(id==='a'){
+  const index=tracks.findIndex(t=>t.id===ids[0]);if(index<0)return;
+  await playIndex(index);
+  dress26Status('Lecture A demandée. Écoute et confirme sur ta sono avant de marquer Réussi.');return;
+ }
+ if(id==='b'){
+  const currentId=tracks[current]?.id;
+  const index=ids.indexOf(currentId),next=ids[index>=0?Math.min(index+1,ids.length-1):0];
+  if(!next||next===currentId){dress26Status('Ajoute un deuxième morceau à la playlist pour préparer B.');return;}
+  await stagePrepareTrack(next);
+  dress26Status('B préparée. Lance sa préécoute avec le bouton de la platine B et confirme à l’oreille.');return;
+ }
+ if(id==='fade'){
+  if(!audio.src||!djTrackId){dress26Status('Charge A et B avant la transition.');return;}
+  if(!confirm('Tester maintenant une vraie transition A → B de 3 secondes ?'))return;
+  $('dj2040auto').click();dress26Status('Transition demandée. Confirme après avoir entendu le fondu.');return;
+ }
+ if(id==='stop'){$('show22silence').click();dress26Status('Silence demandé. Vérifie les sorties ELOAH avant de déclarer le test réussi.');return;}
+ if(id==='resume'){$('show22resume').click();dress26Status('Reprise A demandée. Vérifie le retour du son et confirme.');}
+}
+$('dress26steps').addEventListener('click',async e=>{
+ const b=e.target.closest('button[data-test]');if(!b)return;
+ const id=b.dataset.test,kind=b.dataset.result;if(!dress26Cases.some(t=>t.id===id))return;
+ if(kind==='action'){b.disabled=true;try{await dress26Run(id)}catch(err){dress26Status('Test interrompu : '+err.message)}finally{dress26Refresh()}return;}
+ dress26States[id]={result:kind,time:new Date().toISOString()};
+ dress26Build();dress26Status(kind==='pass'?'Résultat confirmé manuellement.':'Problème noté. Corrige-le avant d’utiliser la régie en public.');
+});
+$('dress26reset').onclick=()=>{
+ if(Object.keys(dress26States).length&&!confirm('Recommencer le parcours de répétition générale ?'))return;
+ dress26ResetState(true);dress26Status('Nouveau parcours prêt : aucun essai audio lancé.');
+};
+$('dress26export').onclick=()=>{
+ const results=dress26Cases.map(t=>({step:t.id,label:t.title,result:dress26States[t.id]?.result||'not_tested',recorded_at:dress26States[t.id]?.time||null}));
+ const report={format:'eloah-general-rehearsal',version:1,generated_at:new Date().toISOString(),result_summary:{passed:results.filter(r=>r.result==='pass').length,failed:results.filter(r=>r.result==='fail').length,not_tested:results.filter(r=>r.result==='not_tested').length},steps:results,disclaimer:'Déclarations manuelles, non-certification du matériel et des sorties physiques.'};
+ const url=URL.createObjectURL(new Blob([JSON.stringify(report,null,2)],{type:'application/json'}));
+ const link=document.createElement('a');link.href=url;link.download='eloah-repetition-generale-'+new Date().toISOString().slice(0,10)+'.json';document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);
+ dress26Status('Bilan JSON créé sur cet appareil, sans données de compte ni fichiers musicaux.');
+};
+
 
 /* ELOAH MUSIC 2040 SCENE TEST REPORT V25 */
 const scene25Checks={sono:false,power:false,backup:false};
@@ -2052,6 +2174,7 @@ function stage2040Sync(){
  show21Sync();
  show22Sync();
  if(preflight23Key!==(stageSetlistId||''))preflight23Reset();
+ dress26ResetState(false);
  const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
  $('stage2040titleA').textContent=a?.title||'Aucun titre sélectionné';
  $('stage2040artistA').textContent=a?.artist||'Lecture principale';
@@ -2088,7 +2211,7 @@ function stage2040Sync(){
 async function stage2040Open(){
  stage2040PreviousFocus=document.activeElement;
  stage2040Panel.hidden=false;document.body.classList.add('stage2040-active');
- stage2040Sync();preflight23Reset();regieRenderTime();$('stage2040heading').focus();
+ stage2040Sync();preflight23Reset();dress26ResetState(true);regieRenderTime();$('stage2040heading').focus();
  if(stage2040Panel.requestFullscreen){
   try{await stage2040Panel.requestFullscreen();stage2040Native=document.fullscreenElement===stage2040Panel}
   catch(e){stage2040Native=false}
