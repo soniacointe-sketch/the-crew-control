@@ -5,8 +5,8 @@
  */
 (function(){
 "use strict";
-const B=window.ELOAH_BIBLE_MUSIC,N=window.ELOAH_NUMERA_ENGINE,A=window.ELOAH_NUMERA_AUDIO;
-if(!B||!N||!A)return;
+const B=window.ELOAH_BIBLE_MUSIC,N=window.ELOAH_NUMERA_ENGINE,A=window.ELOAH_NUMERA_AUDIO,S=window.ELOAH_BIBLE_ALPHA;
+if(!B||!N||!A||!S)return;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const asTime=sec=>{const n=Math.max(0,Math.round(sec));return String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0")};
@@ -25,7 +25,8 @@ function voices(){
 }
 const engineOptions=()=>({mode:$("style").value,scale:$("scale").value,bpm:Number($("bpm").value),
  greekVerses:$("musicLanguage").value==="greek"&&greekDoc?Object.fromEntries(greekDoc.verses.map(v=>[v.number,v.text])):null,
- root:48,volume:.44,drums:$("drums").checked,pad:$("pad").checked,variation:.3,barsPerVerse:1});
+ preferGreek:$("musicLanguage").value==="greek",
+ root:48,volume:.44,drums:$("drums").checked,pad:$("pad").checked,variation:.3,barsPerVerse:2});
 function stop(opts={}){
  epoch++;
  playing=false;paused=false;voiceMode=false;
@@ -51,7 +52,7 @@ function applySelection(){
  const last=endInput===""?null:Number(endInput);
  try{
   doc=B.selectRange(chapterDoc,first,last);
-  musicScore=B.deriveMusic(doc,engineOptions());
+  musicScore=S.compose(doc,engineOptions());
   renderDoc();
   say((doc.complete?"Passage chargé":"Extrait partiel chargé")+" : "+doc.reference+" · "+doc.verses.length+" verset(s). "+(doc.warning||"Clique sur Lire."));
  }catch(e){say("Plage impossible : "+e.message)}
@@ -79,14 +80,14 @@ function loadManual(){
  greekDoc=null;
  try{
   chapterDoc=B.fromManual($("manualText").value,{reference:"Texte biblique collé"});
-  doc=chapterDoc;musicScore=B.deriveMusic(doc,engineOptions());renderDoc();
+  doc=chapterDoc;musicScore=S.compose(doc,engineOptions());renderDoc();
   say("Texte personnel prêt : "+doc.verses.length+" lignes · création musicale générée sans requête externe.");
  }catch(e){say("Impossible de composer le passage : "+e.message)}
 }
 function rebuildMusic(){
  if(!doc)return;
  stop({silent:true});
- try{musicScore=B.deriveMusic(doc,engineOptions());renderDoc();say("Accompagnement musical recalculé. Lance la lecture pour l'entendre.");}
+ try{musicScore=S.compose(doc,engineOptions());renderDoc();say("Accompagnement musical recalculé. Lance la lecture pour l'entendre.");}
  catch(e){say("Génération impossible : "+e.message)}
 }
 function renderDoc(){
@@ -107,7 +108,7 @@ function renderDoc(){
  ).join("");
  $("readProgress").textContent="0 / "+doc.verses.length;
  $("currentVerse").textContent="Passage prêt · clique sur un verset pour commencer à cet endroit";
- highlight(-1);draw(0);
+ highlight(-1);showAlpha(0);draw(0);
 }
 function highlight(index){
  if(!doc)return;
@@ -116,6 +117,7 @@ function highlight(index){
   const yes=Number(el.dataset.index)===index;el.classList.toggle("playing",yes);el.setAttribute("aria-pressed",String(yes));
  });
  if(v){
+  showAlpha(index);
   $("currentVerse").textContent=doc.reference.replace(/:.*/,"")+" · verset "+v.number;
   $("readProgress").textContent=(index+1)+" / "+doc.verses.length;
   $("progressBar").style.width=(100*(index+1)/doc.verses.length)+"%";
@@ -126,7 +128,7 @@ function highlight(index){
 function singleVerseScore(index){
  const v=doc.verses[index];
  const pass={...doc,verses:[v]};
- return B.deriveMusic(pass,engineOptions());
+ return S.compose(pass,engineOptions());
 }
 function selectedVoice(){
  const list=availableVoices(),value=$("voice").value;
@@ -161,7 +163,7 @@ function finish(){
 }
 function musicOnly(index,session){
  const pass=index>0?{...doc,verses:doc.verses.slice(index)}:doc;
- const score=index>0?B.deriveMusic(pass,engineOptions()):musicScore;
+ const score=index>0?S.compose(pass,engineOptions()):musicScore;
  A.start(score,{loop:false,onEnd:()=>{if(epoch===session&&playing)finish();}})
   .then(()=>{if(epoch!==session)return;voiceMode=false;
    say("Lecture instrumentale en cours · "+asTime(score.durationSeconds)+" de musique composée à partir des versets.");
