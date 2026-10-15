@@ -101,7 +101,7 @@ function renderDoc(){
  $("duration").textContent=asTime(musicScore.durationSeconds);
  $("copyright").textContent=(doc.credit||"Louis Segond 1910")+" · "+(doc.complete?"Chapitre complet":"Extraits / plage chargée")+". "+(doc.warning||"");
  $("sourceCredit").textContent=(doc.credit||"Source non précisée")+(doc.provider?" · "+doc.provider:"")+(greekDoc&&$("musicLanguage").value==="greek"?" · Musique : "+greekDoc.credit:"");
- $("alphaEngineStatus").textContent="ALPHA · "+musicScore.scripture.greekVerses+"/"+musicScore.scripture.verseCount+" versets en grec réellement analysés, "+musicScore.scripture.structureOnlyVerses+" en mode structure · "+musicScore.stats.notes+" notes arrangées en mélodie, accords, basse et cloches, à partir du code ALPHA.";
+ $("alphaEngineStatus").textContent="ALPHA Musical V3 · "+musicScore.scripture.greekVerses+"/"+musicScore.scripture.verseCount+" versets grecs · "+musicScore.stats.notes+" notes · "+musicScore.stats.chords+" accords · piano, nappes et basse. Les rangs ALPHA créent des thèmes, pas des bips lettre par lettre.";
  $("languageStatus").textContent=$("musicLanguage").value==="greek"?
    (greekDoc?(greekDoc.complete?"Notes calculées sur le grec transmis ; 24 lettres, 12 paires et rangs ALPHA dirigent la partition. La voix lit le français.":"DÉMONSTRATION PARTIELLE : seul un extrait grec est disponible. Les autres versets suivent la structure ALPHA sans leur attribuer de lettres grecques."):"Grec indisponible : structure ALPHA 12/24/7 sans déchiffrage alphabétique du français."):
    "Mode structure ALPHA : rythmes 9|8|7, Ogdoades 8|8|8 et douze paires, sans isopséphie inventée du français.";
@@ -122,7 +122,9 @@ function showAlpha(index){
  const anchors=scene.keyWords.map(w=>'<div class="alpha-key">'+esc(w.word)+' = <strong>'+w.value+'</strong><small> · '+esc(w.rule)+'</small></div>').join("");
  node.innerHTML='<div class="eyebrow">ALPHA · ANALYSE MUSICALE DU VERSET '+scene.verse+'</div>'+
   '<h3>'+ (greek?"24 lettres grecques : le passage devient musique":"Structure ALPHA : sans grec inventé")+'</h3>'+
-  '<p class="smalldesc">'+esc(scene.explanation)+'</p>'+
+  '<p class="smalldesc">'+esc(scene.arrangement?
+   (scene.arrangement.melodySource+" · "+scene.arrangement.harmony+" · "+scene.arrangement.accents):
+    scene.explanation)+'</p>'+
   (greek?'<div class="alpha-greek">'+esc(scene.greekText)+'</div>':
     '<div class="alpha-warning">Texte grec absent pour ce verset : aucune isopséphie française inventée. Les 12 paires et les groupes 9|8|7 structurent réellement la partition.</div>')+
   '<div class="alpha-classes">'+classes+'</div>'+
