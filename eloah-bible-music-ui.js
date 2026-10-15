@@ -5,8 +5,8 @@
  */
 (function(){
 "use strict";
-const B=window.ELOAH_BIBLE_MUSIC,N=window.ELOAH_NUMERA_ENGINE,A=window.ELOAH_NUMERA_AUDIO,S=window.ELOAH_BIBLE_ALPHA;
-if(!B||!N||!A||!S)return;
+const B=window.ELOAH_BIBLE_MUSIC,N=window.ELOAH_NUMERA_ENGINE,A=window.ELOAH_NUMERA_AUDIO,S=window.ELOAH_BIBLE_ALPHA,ARR=window.ELOAH_BIBLE_ARRANGER;
+if(!B||!N||!A||!S||!ARR)return;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const asTime=sec=>{const n=Math.max(0,Math.round(sec));return String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0")};
@@ -27,7 +27,7 @@ const engineOptions=()=>({mode:$("style").value,scale:$("scale").value,bpm:Numbe
  greekVerses:$("musicLanguage").value==="greek"&&greekDoc?Object.fromEntries(greekDoc.verses.map(v=>[v.number,v.text])):null,
  preferGreek:$("musicLanguage").value==="greek",
  greekEdition:greekDoc?.provider||"Aucune édition grecque disponible",
- root:48,volume:.44,drums:$("drums").checked,pad:$("pad").checked,variation:.3,barsPerVerse:2});
+ root:48,volume:.37,drums:$("drums").checked,pad:$("pad").checked,variation:.24,barsPerVerse:4});
 function stop(opts={}){
  epoch++;
  playing=false;paused=false;voiceMode=false;
@@ -53,7 +53,7 @@ function applySelection(){
  const last=endInput===""?null:Number(endInput);
  try{
   doc=B.selectRange(chapterDoc,first,last);
-  musicScore=S.compose(doc,engineOptions());
+  musicScore=ARR.compose(doc,engineOptions());
   renderDoc();
   say((doc.complete?"Passage chargé":"Extrait partiel chargé")+" : "+doc.reference+" · "+doc.verses.length+" verset(s). "+(doc.warning||"Clique sur Lire."));
  }catch(e){say("Plage impossible : "+e.message)}
@@ -81,14 +81,14 @@ function loadManual(){
  greekDoc=null;
  try{
   chapterDoc=B.fromManual($("manualText").value,{reference:"Texte biblique collé"});
-  doc=chapterDoc;musicScore=S.compose(doc,engineOptions());renderDoc();
+  doc=chapterDoc;musicScore=ARR.compose(doc,engineOptions());renderDoc();
   say("Texte personnel prêt : "+doc.verses.length+" lignes · création musicale générée sans requête externe.");
  }catch(e){say("Impossible de composer le passage : "+e.message)}
 }
 function rebuildMusic(){
  if(!doc)return;
  stop({silent:true});
- try{musicScore=S.compose(doc,engineOptions());renderDoc();say("Accompagnement musical recalculé. Lance la lecture pour l'entendre.");}
+ try{musicScore=ARR.compose(doc,engineOptions());renderDoc();say("Accompagnement musical recalculé. Lance la lecture pour l'entendre.");}
  catch(e){say("Génération impossible : "+e.message)}
 }
 function renderDoc(){
@@ -101,7 +101,7 @@ function renderDoc(){
  $("duration").textContent=asTime(musicScore.durationSeconds);
  $("copyright").textContent=(doc.credit||"Louis Segond 1910")+" · "+(doc.complete?"Chapitre complet":"Extraits / plage chargée")+". "+(doc.warning||"");
  $("sourceCredit").textContent=(doc.credit||"Source non précisée")+(doc.provider?" · "+doc.provider:"")+(greekDoc&&$("musicLanguage").value==="greek"?" · Musique : "+greekDoc.credit:"");
- $("alphaEngineStatus").textContent="ALPHA · "+musicScore.scripture.greekVerses+"/"+musicScore.scripture.verseCount+" versets en grec réellement analysés, "+musicScore.scripture.structureOnlyVerses+" en mode structure · "+musicScore.stats.notes+" notes composées sur 12 paires, 7 voyelles, 9|8|7, 8|8|8, 4|4|10|12.";
+ $("alphaEngineStatus").textContent="ALPHA · "+musicScore.scripture.greekVerses+"/"+musicScore.scripture.verseCount+" versets en grec réellement analysés, "+musicScore.scripture.structureOnlyVerses+" en mode structure · "+musicScore.stats.notes+" notes arrangées en mélodie, accords, basse et cloches, à partir du code ALPHA.";
  $("languageStatus").textContent=$("musicLanguage").value==="greek"?
    (greekDoc?(greekDoc.complete?"Notes calculées sur le grec transmis ; 24 lettres, 12 paires et rangs ALPHA dirigent la partition. La voix lit le français.":"DÉMONSTRATION PARTIELLE : seul un extrait grec est disponible. Les autres versets suivent la structure ALPHA sans leur attribuer de lettres grecques."):"Grec indisponible : structure ALPHA 12/24/7 sans déchiffrage alphabétique du français."):
    "Mode structure ALPHA : rythmes 9|8|7, Ogdoades 8|8|8 et douze paires, sans isopséphie inventée du français.";
@@ -149,7 +149,7 @@ function highlight(index){
 function singleVerseScore(index){
  const v=doc.verses[index];
  const pass={...doc,verses:[v]};
- return S.compose(pass,engineOptions());
+ return ARR.compose(pass,engineOptions());
 }
 function selectedVoice(){
  const list=availableVoices(),value=$("voice").value;
@@ -160,7 +160,9 @@ function beginVoiceVerse(session){
  if(verseIndex>=doc.verses.length){finish();return}
  const v=doc.verses[verseIndex];highlight(verseIndex);
  if($("withMusic").checked){
-  try{A.start(singleVerseScore(verseIndex),{loop:true}).catch(e=>say("Musique indisponible : "+e.message+" ; la lecture vocale continue."));}
+  try{A.start(singleVerseScore(verseIndex),{loop:true})
+    .then(()=>{if(session===epoch&&playing)A.setNarrationActive(true);})
+    .catch(e=>say("Musique indisponible : "+e.message+" ; la lecture vocale continue."));}
   catch(e){say("Accompagnement musical indisponible : "+e.message)}
  }else A.stop();
  const utterance=new SpeechSynthesisUtterance(v.text);
@@ -184,7 +186,7 @@ function finish(){
 }
 function musicOnly(index,session){
  const pass=index>0?{...doc,verses:doc.verses.slice(index)}:doc;
- const score=index>0?S.compose(pass,engineOptions()):musicScore;
+ const score=index>0?ARR.compose(pass,engineOptions()):musicScore;
  A.start(score,{loop:false,onEnd:()=>{if(epoch===session&&playing)finish();}})
   .then(()=>{if(epoch!==session)return;voiceMode=false;
    say("Lecture instrumentale en cours · "+asTime(score.durationSeconds)+" de musique composée à partir des versets.");
@@ -214,7 +216,9 @@ function pause(){
   if(voiceMode){
    if("speechSynthesis" in window)window.speechSynthesis.resume();
    if($("withMusic").checked){
-    A.start(singleVerseScore(verseIndex),{loop:true}).catch(e=>say("Musique indisponible à la reprise : "+e.message));
+    A.start(singleVerseScore(verseIndex),{loop:true})
+      .then(()=>{if(playing)A.setNarrationActive(true);})
+      .catch(e=>say("Musique indisponible à la reprise : "+e.message));
    }
   }else{
    // Music-only playback cannot resume sample-accurately with this WebAudio engine.
