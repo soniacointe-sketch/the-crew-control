@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#222226">
-<title>Le Grand Livre des enquêtes · PARISIS ENGINE · ELOAH</title>
+<meta name="theme-color" content="#211a28">
+<title>Le Grand Livre | PARISIS ENGINE · ELOAH</title>
 <meta name="description" content="Bibliothèque de lecture PARISIS ENGINE : enquêtes suivies, sommaires, chapitre précédent et suivant, notes personnelles et sources originales.">
 <style>
 :root{--black:#1e2025;--dark:#27282d;--gold:#dcb77b;--champagne:#ebdcc4;--paper:#f5eee2;--ink:#332b22;--muted:#6d6050;--edge:#d7c9b5;--forest:#546d5d}
@@ -78,35 +78,37 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.progress-value{transition:none}}
 </style>
 <link rel="stylesheet" href="parisis-universal-v4.css?v=20261015-4">
+<link rel="stylesheet" href="parisis-lecteur-pro.css?v=20261015-5">
 </head>
 <body>
-<header class="topbar"><a class="brand" href="eloah-parisis.html">PARISIS <em>ENGINE</em></a><div class="breadcrumb">ELOAH · LE GRAND LIVRE DES ENQUÊTES</div><div class="toplinks"><a href="eloah-parisis.html">Accueil PARISIS</a><a href="parisis-reseau-indices.html">Réseau des indices</a><a href="parisis-publications.html">Toutes les archives</a><a href="mes-univers.html">ELOAH</a></div></header>
+<header class="topbar"><a class="brand" href="eloah-parisis.html">PARISIS <em>ENGINE</em></a><div class="breadcrumb">ELOAH / HUMANITIES LAB / GRAND LIVRE</div><div class="toplinks"><a href="eloah-parisis.html">Accueil PARISIS</a><a href="parisis-reseau-indices.html">Réseau des indices</a><a href="parisis-publications.html">Toutes les archives</a><a href="mes-univers.html">ELOAH</a></div></header>
 <div class="mobile-bar"><strong>Bibliothèque des enquêtes</strong><button type="button" id="toggleMenu" aria-expanded="false" aria-controls="sidebar">☰ Les chapitres</button></div>
 <div class="shell">
 <aside class="sidebar" id="sidebar" aria-label="Sommaire des séries d'enquêtes">
 <div class="overline">BIBLIOTHÈQUE INTELLIGENTE · LIVRE VIVANT</div>
-<h2 class="sidebar-title">Mes enquêtes.</h2>
+<h2 class="sidebar-title">Sommaire.</h2>
 <label class="overline" for="search">Rechercher un chapitre</label><input class="search" id="search" type="search" placeholder="Alpha, Nesle, 1665, manuscrits…">
 <div id="seriesList"><p>Chargement des enquêtes…</p></div>
 <p class="sidebar-footer">Chaque série rassemble les chapitres dans l'ordre de la recherche. <a href="parisis-fil-enquetes.html">Voir la chronologie complète ↗</a></p>
 </aside>
 <main class="main" id="main">
-<div class="intro"><div><div class="overline">PARISIS ENGINE · HUMANITIES LAB</div><h1>Une enquête.<br><em>Un livre vivant.</em></h1><p>Choisis une collection, suis ses chapitres et passe d'un document au suivant. Les originaux restent disponibles, avec toutes leurs sources et leurs outils.</p></div><div class="book-icon" aria-hidden="true">¶</div></div>
+<div class="intro"><div><div class="overline">HUMANITIES LAB · BIBLIOTHÈQUE DES ENQUÊTES</div><h1>Le Grand <em>Livre.</em></h1><p>Une lecture continue, un seul sommaire et tous les documents originaux préservés.</p></div></div>
+<nav class="pe-reader-spine" aria-label="Chemin de lecture"><a href="eloah-parisis.html">PARISIS</a><span>›</span><a href="parisis-fil-enquetes.html">Enquêtes</a><span>›</span><strong>Grand Livre</strong></nav>
 <div class="guide"><h2 class="guide-title" id="seriesTitle">Le cycle des enquêtes</h2><div class="meta" id="counter" aria-live="polite">Chargement…</div></div>
-<div class="chapter-shell"><div class="chapter-banner"><div class="chapter-tag" id="chapterCode">CHAPITRE</div><h2 id="chapterTitle">Ouvrir un chapitre</h2><p id="chapterSummary">Chaque lecture conserve son document d'origine.</p><div class="source"><a id="original" href="parisis-fil-enquetes.html" target="_blank" rel="noopener">Ouvrir le document original ↗</a><a id="references" href="parisis-reseau-indices.html">Sources et contre-tests ↗</a><button id="focus" type="button" aria-pressed="false">Mode lecture</button></div></div>
+<div class="chapter-shell"><div class="chapter-banner"><div class="chapter-tag" id="chapterCode">CHAPITRE</div><h2 id="chapterTitle">Ouvrir un chapitre</h2><p id="chapterSummary">Chaque lecture conserve son document d'origine.</p><div class="source"><a id="original" href="parisis-fil-enquetes.html" target="_blank" rel="noopener">Ouvrir le document original ↗</a><a id="references" href="parisis-reseau-indices.html">Sources et contre-tests ↗</a><button id="focus" type="button" aria-pressed="false">Plein écran de lecture</button><button id="openNotebook" type="button" aria-expanded="false" aria-controls="tools">Mes notes et sommaire ↗</button></div></div>
 <div class="progress-bar"><div class="progress-value" id="progressBar"></div></div>
-<iframe class="reading-frame" id="chapterFrame" title="Lecture du chapitre dans son document original" loading="eager" referrerpolicy="same-origin" src="about:blank"></iframe>
+<iframe class="reading-frame" id="chapterFrame" title="Lecture du chapitre, sans navigation supplémentaire" loading="eager" referrerpolicy="same-origin" src="about:blank" scrolling="no"></iframe>
 <div class="pager"><button id="prev" type="button">← Chapitre précédent</button><button id="next" class="primary" type="button">Chapitre suivant →</button></div>
 </div>
-<p class="footer-notice">Le lecteur ouvre les documents originaux dans un cadre intégré. Pour utiliser toute la page, les cartes ou les outils avancés, clique sur « Ouvrir le document original ». Le dernier chapitre ouvert sur cet appareil est mémorisé ; ce n'est pas une validation des conclusions historiques.</p>
+<p class="footer-notice">Les textes, images et cartes restent dans leurs fichiers historiques. Certaines fonctions interactives nécessitent « Ouvrir le document original ». Dernier chapitre ouvert : mémorisé sur cet appareil seulement, sans validation automatique.</p>
 </main>
-<aside class="tools" id="tools" aria-label="Outils de lecture">
+<aside class="tools" id="tools" aria-label="Carnet et sommaire de lecture"><button class="pe-notes-close" id="closeNotebook" type="button">← Revenir à la lecture</button>
 <div class="overline">OUTILS DE LECTURE</div><h2>Mon carnet.</h2>
 <section class="panel"><h3>Sommaire du chapitre</h3><small>Les titres du document chargé.</small><nav class="toc" id="toc" aria-label="Sommaire du chapitre"><span class="helper">Le sommaire apparaît après l'ouverture du chapitre.</span></nav></section>
 <section class="panel"><h3>Mes notes</h3><small>Notes personnelles enregistrées sur ce navigateur, séparées pour chaque chapitre.</small><label class="overline" for="notes">Carnet de lecture</label><textarea class="notes" id="notes" placeholder="Source à consulter, question, objection, nouvelle piste…"></textarea><p class="notes-state" id="notesState" aria-live="polite">Aucune note enregistrée.</p></section>
 <section class="panel context"><h3>Enquêtes reliées</h3><div id="related"><p>Les correspondances seront affichées ici.</p></div></section>
 </aside>
-</div>
+</div><button id="notesBackdrop" class="pe-notes-screen" type="button" aria-label="Fermer le carnet de lecture"></button>
 <script>
 (function(){
 "use strict";
@@ -154,7 +156,58 @@ if(!count)add(root,node("p","helper","Aucun chapitre correspondant. Efface la re
 function makeToc(){
 var root=$("toc");root.replaceChildren();add(root,node("span","helper","Sommaire en cours de chargement…"));
 }
+
+var readerFrameObserver=null;
+function prepareEmbeddedFrame(frame){
+  if(readerFrameObserver){try{readerFrameObserver.disconnect()}catch(e){}readerFrameObserver=null}
+  var doc=frame.contentDocument;
+  if(!doc||!doc.documentElement||!doc.body||doc.location.href==="about:blank")return;
+  doc.documentElement.classList.add("pe-reader-embedded");
+  doc.body.classList.add("pe-reader-embedded");
+  if(!doc.getElementById("peReaderEmbeddedStyle")){
+    var st=doc.createElement("style");st.id="peReaderEmbeddedStyle";
+    st.textContent=[
+      "html,body{overflow-x:hidden!important;margin:0!important;max-width:100%!important}",
+      "body > header,body > .topbar,body > .mast,body > .site-header,body > nav,body > .pe-universal-bar,body > .pe-universal-toc,body > .pe-v4-reading-footer,body > footer,.pe-reader-nav,.parisis-related{display:none!important}",
+      "body > .layout > nav.toc,body > .layout > aside,body > .wrap.layout > aside,body > .shell > aside,body > .full > nav.quick,body > .toc,.layout > nav[aria-label='Sommaire du dossier'],.layout > aside[aria-label='Sommaire du dossier']{display:none!important}",
+      ".layout:not(.images){display:block!important;grid-template-columns:1fr!important;max-width:100%!important}",
+      ".shell{display:block!important;grid-template-columns:1fr!important}",
+      ".wrap.layout,.layout.wrap{display:block!important;max-width:100%!important;width:100%!important}",
+      ".layout > main,.wrap.layout > main,.shell > main{display:block!important;min-width:0!important;width:100%!important;max-width:100%!important;margin:0 auto!important}",
+      "main,.main,article{min-width:0!important;overflow-wrap:anywhere}",
+      "body > section.hero .herolinks,body > section.hero nav{display:none!important}",
+      ".full > nav.quick{display:none!important}",
+      ".topnav,.topnav.links,.header-nav{display:none!important}",
+      "img,video,svg,canvas{max-width:100%}",
+      "body > main,body > article{padding-left:clamp(15px,3.4vw,40px)!important;padding-right:clamp(15px,3.4vw,40px)!important}",
+      "a:focus-visible,button:focus-visible{outline:3px solid #b38b57;outline-offset:3px}"
+    ].join("\n");
+    doc.head.appendChild(st);
+  }
+  // Other documents should open independently, never silently replace the current frame.
+  doc.querySelectorAll("a[href]").forEach(function(a){
+    var raw=a.getAttribute("href")||"";
+    if(!raw||raw.charAt(0)==="#"||raw.startsWith("javascript:")||raw.startsWith("mailto:"))return;
+    try{var target=new URL(raw,doc.location.href);if(target.pathname!==doc.location.pathname||target.origin!==doc.location.origin){a.target="_blank";a.rel="noopener noreferrer"}}catch(e){}
+  });
+  var adjust=function(){
+    if(!frame.isConnected)return;
+    try{
+      var docBody=doc.body,root=doc.documentElement;
+      var h=Math.max(docBody.scrollHeight,root.scrollHeight,docBody.offsetHeight,860)+26;
+      h=Math.min(Math.max(h,860),24000);
+      var old=parseInt(frame.style.height,10)||0;
+      if(Math.abs(old-h)>28)frame.style.height=h+"px";
+    }catch(e){}
+  };
+  frame.style.height="860px";
+  adjust();
+  doc.querySelectorAll("img").forEach(function(img){if(!img.complete)img.addEventListener("load",adjust,{once:true})});
+  try{readerFrameObserver=new ResizeObserver(adjust);readerFrameObserver.observe(doc.body)}catch(e){}
+}
+
 function onFrameLoad(){
+try{prepareEmbeddedFrame($("chapterFrame"))}catch(e){}
 var root=$("toc");root.replaceChildren();
 try{
 var doc=$("chapterFrame").contentDocument;
@@ -205,12 +258,24 @@ makeSidebar();makeToc();renderNotes();renderRelations();
 var href=safe(s.href);
 if($("chapterFrame").getAttribute("src")!==href)$("chapterFrame").setAttribute("src",href);
 }
-$("prev").addEventListener("click",function(){if(currentIndex>0)select(currentCycle,currentIndex-1,false)});
-$("next").addEventListener("click",function(){if(currentIndex<selected().steps.length-1)select(currentCycle,currentIndex+1,false)});
+$("prev").addEventListener("click",function(){if(currentIndex>0){select(currentCycle,currentIndex-1,false);$("chapterTitle").scrollIntoView({block:"start"})}});
+$("next").addEventListener("click",function(){if(currentIndex<selected().steps.length-1){select(currentCycle,currentIndex+1,false);$("chapterTitle").scrollIntoView({block:"start"})}});
 $("chapterFrame").addEventListener("load",onFrameLoad);
 $("search").addEventListener("input",makeSidebar);
 $("toggleMenu").addEventListener("click",function(){var open=$("sidebar").classList.toggle("open");this.setAttribute("aria-expanded",String(open))});
-$("focus").addEventListener("click",function(){focus=!focus;$("sidebar").hidden=focus;$("tools").hidden=focus;this.setAttribute("aria-pressed",String(focus));this.textContent=focus?"Quitter le mode lecture":"Mode lecture"});
+$("focus").addEventListener("click",function(){focus=!focus;document.body.classList.toggle("pe-reader-focus",focus);this.setAttribute("aria-pressed",String(focus));this.textContent=focus?"Afficher le sommaire":"Plein écran de lecture"});
+function notebook(open){
+  $("tools").classList.toggle("pe-notes-open",open);
+  $("notesBackdrop").classList.toggle("active",open);
+  $("openNotebook").setAttribute("aria-expanded",String(open));
+  document.body.style.overflow=open?"hidden":"";
+  if(open)$("closeNotebook").focus();else $("openNotebook").focus();
+}
+$("openNotebook").addEventListener("click",function(){notebook(true)});
+$("closeNotebook").addEventListener("click",function(){notebook(false)});
+$("notesBackdrop").addEventListener("click",function(){notebook(false)});
+document.addEventListener("keydown",function(e){if(e.key==="Escape"&&$("tools").classList.contains("pe-notes-open"))notebook(false)});
+
 $("notes").addEventListener("input",function(){
 if(!data)return;var s=step(),k=currentCycle+"/"+s.code,notes=read(savedNotes,{});notes[k]=$("notes").value;store(savedNotes,notes);
 $("notesState").textContent="Note enregistrée sur cet appareil.";
