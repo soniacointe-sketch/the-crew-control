@@ -64,6 +64,12 @@ async function load(){
  try{
   chapterDoc=await B.fetchChapter(book,chapter);
   if(epoch!==stamp)return;
+  greekDoc=null;
+  if($("musicLanguage").value==="greek"&&B.books.find(x=>x.code===book)?.testament==="nouveau"){
+   try{greekDoc=await B.fetchGreekChapter(book,chapter);}
+   catch(err){$("languageStatus").textContent="Texte grec non accessible ; la musique utilisera le français. "+err.message;}
+  }
+  if(epoch!==stamp)return;
   applySelection();
  }catch(e){say("Lecture en ligne indisponible : "+e.message+" Tu peux coller un passage dans la zone de texte.");}
  finally{busy=false;$("loadChapter").disabled=false}
