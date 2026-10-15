@@ -107,12 +107,12 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 <div class="section">
 <h3>Créer l'ambiance</h3>
 <label for="style">Univers musical</label>
-<select id="style"><option value="ambient">Céleste · Ambient</option><option value="mystic">Mystique · Doux</option><option value="cinematic">Cinématique</option><option value="electro">Électro</option></select>
-<div class="smallgrid"><div><label for="scale">Gamme</label><select id="scale"><option value="dorian">Dorienne</option><option value="pentatonic">Pentatonique</option><option value="minor">Mineure</option><option value="major">Majeure</option><option value="phrygian">Phrygienne</option></select></div>
+<select id="style"><option value="ambient">Céleste · Ambient</option><option value="mystic">Mystique · Doux</option><option value="cinematic" selected>Cinématique · piano</option><option value="electro">Électro</option></select>
+<div class="smallgrid"><div><label for="scale">Gamme</label><select id="scale"><option value="dorian">Dorienne</option><option value="pentatonic">Pentatonique</option><option value="minor" selected>Mineure · émotion</option><option value="major">Majeure</option><option value="phrygian">Phrygienne</option></select></div>
 <div><label for="musicLanguage">Source des notes</label>
 <select id="musicLanguage"><option value="fr">Structure ALPHA seule (sans grec d’origine)</option><option value="greek" selected>Les lettres grecques réelles · 24 lettres / 12 paires / 7 voyelles</option></select>
 <p class="smalldesc" id="languageStatus">Le Nouveau Testament utilise le grec transmis lorsqu’il est disponible. Sans texte grec, la partition suit les structures ALPHA sans inventer des lettres.</p>
-<label for="bpm">Tempo (BPM)</label><input type="number" id="bpm" min="45" max="180" value="76"></div></div>
+<label for="bpm">Tempo (BPM)</label><input type="number" id="bpm" min="45" max="180" value="72"></div></div>
 <label for="readSpeed">Vitesse de voix : <output id="speedOutput">0,9×</output></label>
 <input type="range" id="readSpeed" min="55" max="140" value="90">
 <div class="readings"><label><input id="withVoice" type="checkbox" checked> Lire les versets à voix haute</label>
@@ -165,10 +165,11 @@ footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:
 </main>
 <footer><div class="wrap">ELOAH NUMERA · Bible en musique · Lecture vocale moderne et composition artistique originale. Les textes sont crédités selon leur édition. Aucune affirmation de musique ancienne cachée ou de fréquence sacrée révélée par calcul.</div></footer>
 <script src="eloah-numera-engine.js?v=20261015-a1" defer></script>
-<script src="eloah-numera-audio.js?v=20261015-a2" defer></script>
+<script src="eloah-numera-audio.js?v=20261016-musical3" defer></script>
 <script src="eloah-bible-music-engine.js?v=20261016-b2" defer></script>
 <script src="parisis-alpha-text-reader.js?v=20261015-r1" defer></script>
 <script src="parisis-alpha-marcus-chaine.js?v=20261015-c16" defer></script>
 <script src="eloah-bible-alpha-sonification.js?v=20261016-alpha2" defer></script>
-<script src="eloah-bible-music-ui.js?v=20261016-alpha2" defer></script>
+<script src="eloah-bible-alpha-arranger.js?v=20261016-musical3" defer></script>
+<script src="eloah-bible-music-ui.js?v=20261016-musical3" defer></script>
 </body></html>
