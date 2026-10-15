@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="fr">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#130d1b">
+<meta name="description" content="ELOAH NUMERA · ALPHA OPUS : l'œuvre musicale originale composée à partir des 24 lettres, des 12 paires, des sept voyelles, 801, 888 et des recherches ALPHA.">
+<title>ELOAH NUMERA · ALPHA OPUS — De la lettre à la voix</title>
+<style>
+:root{color-scheme:dark;--bg:#0b0911;--panel:#17131f;--panel2:#211a2c;--ink:#fff7e9;--sub:#cbbecb;--line:#634c67;--gold:#f2d19b;--pink:#d782b4;--plum:#4c284b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.6 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--gold);text-underline-offset:3px}
+button,input,select{font:inherit}
+button{cursor:pointer}button:disabled{cursor:not-allowed;opacity:.45}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{width:min(1380px,calc(100% - clamp(28px,5vw,68px)));margin:auto}
+.sitehead{border-bottom:1px solid #4b344f;background:#110c18}
+.sitehead .wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:15px 0}
+.logo{font:24px Georgia,serif;letter-spacing:.07em;color:var(--ink);text-decoration:none}.logo b{color:var(--gold);font-weight:normal}
+.nav{display:flex;gap:15px;flex-wrap:wrap;font-size:12px}
+.nav a{text-decoration:none;color:#e0cbdd}.nav a[aria-current]{color:var(--gold)}
+.eyebrow{color:var(--gold);letter-spacing:.18em;font-size:10px;font-weight:850;text-transform:uppercase}
+.hero{padding:clamp(32px,5vw,70px) 0 32px;background:radial-gradient(ellipse at 77% 0%,#6a356052,transparent 45%),radial-gradient(ellipse at 5% 100%,#4a28504c,transparent 50%)}
+h1,h2,h3,h4{font-family:Georgia,serif;font-weight:normal}
+h1{font-size:clamp(46px,6.2vw,100px);line-height:1.02;letter-spacing:-.045em;margin:13px 0}
+h1 em{color:var(--gold);font-style:normal}
+.hero p{font:clamp(16px,1.7vw,21px)/1.68 Georgia,serif;max-width:860px;color:#e3d2d9}
+.badges{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}
+.badges span{border:1px solid #85677a;background:#291a30;border-radius:99px;padding:6px 12px;font-size:11px;color:#efdfd9}
+.main{display:grid;grid-template-columns:minmax(0,1.18fr) minmax(295px,.82fr);gap:17px;padding-top:22px;padding-bottom:95px}
+.card{background:var(--panel);border:1px solid #4b3a52;border-radius:16px;overflow:hidden;min-width:0}
+.pad{padding:clamp(16px,2.5vw,26px)}
+.cover{aspect-ratio:16/9;min-height:320px;position:relative;background:radial-gradient(circle at 50% 45%,#542e55 0,#1b1428 45%,#0c0a14 100%);overflow:hidden}
+#opusArt{width:100%;height:100%;display:block}
+.overlay{position:absolute;inset:auto 20px 21px;pointer-events:none;display:flex;align-items:end;justify-content:space-between;gap:16px}
+.overlay .album{font:clamp(17px,2.1vw,29px) Georgia,serif;color:#ffecd0}
+.overlay .scene{font-size:11px;color:#efd0e0;max-width:50%;text-align:right}
+h2{font-size:clamp(25px,3vw,36px);margin:4px 0 10px}
+h3{font-size:24px;margin:14px 0 10px}
+.minor{color:var(--sub);font-size:12px;line-height:1.65}
+.transport{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin:15px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:44px;padding:10px 15px;color:#f9ebd8;background:#422c43;border:1px solid #977487;border-radius:10px;text-align:center;font-weight:800;font-size:12px}
+.btn:hover{background:#684364}.btn.primary{background:var(--gold);color:#241725;border-color:var(--gold)}.btn.primary:hover{background:#ffdfb2}.btn:disabled{opacity:.4}
+.range{width:100%;height:6px;background:#493650;border-radius:99px;overflow:hidden}
+.range>span{display:block;width:0;height:100%;background:linear-gradient(90deg,#f2d4a0,#d27bb4);transition:width .15s linear}
+.time{display:flex;justify-content:space-between;gap:10px;margin-top:7px;font-size:11px;color:#cdb9cf}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:15px 0}
+.kpi{background:#241b2d;border:1px solid #56405b;border-radius:10px;padding:12px}
+.kpi strong{display:block;color:var(--gold);font:clamp(20px,2.6vw,31px) Georgia,serif}
+.kpi small{display:block;font-size:10px;color:#cab8c9}
+.status{padding:12px 14px;border-left:3px solid var(--gold);background:#302238;color:#f1dfe1;font-size:12px;margin-top:12px}
+.tracks{display:grid;gap:7px;margin:12px 0}
+.track{width:100%;text-align:left;background:#1e1827;border:1px solid #503b57;border-radius:10px;display:grid;grid-template-columns:39px minmax(0,1fr) auto;align-items:center;gap:9px;color:#f4e9e4;padding:11px 12px}
+.track:hover,.track[aria-pressed=true]{border-color:#e6bf94;background:#3b293c}
+.track strong{display:block;font-size:13px;font-weight:750}
+.track .roman{font:20px Georgia,serif;color:var(--gold)}
+.track small{display:block;color:#d0b8c5;font-size:10px}
+.track .length{font-size:11px;color:#e2c5bc}
+.track.current{background:#52334b;border-color:#f4d29b}
+.details{min-height:210px;border-left:3px solid var(--gold);background:#251c2f;padding:15px 17px;border-radius:0 10px 10px 0}
+.details strong{color:var(--gold)}.details p{margin:9px 0 13px;color:#eadbe1;font-size:13px}
+.details .line{font-size:11px;color:#ceb7c9;margin-top:9px}
+.settings{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}
+.settings label{display:block;color:#f0d7da;font-size:12px;font-weight:750}
+.settings input[type=range]{width:100%;accent-color:#d98abf}
+.settings select{width:100%;background:#120d1a;color:#fff1e7;border:1px solid #795e79;min-height:40px;padding:9px;border-radius:8px;margin:7px 0}
+.settings .toggle{display:flex;gap:8px;align-items:center;font-weight:600}.toggle input{accent-color:#d98abf}
+.settings output{display:inline;font-size:11px;color:var(--gold)}
+.exportbar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin:12px 0}
+.exportbar .btn{width:100%}
+.rule{border-top:1px solid #4d3b52;margin:20px 0}
+.song-note{background:#251e2f;border:1px solid #5a435d;padding:15px;border-radius:10px;color:#d8c4d4;font-size:12px}
+.song-note strong{display:block;color:#f3d6ae;font-size:12px;margin-bottom:7px}
+.finale{color:#f2d6a8;font:22px Georgia,serif}
+.pills{display:flex;flex-wrap:wrap;gap:7px}
+.pills span{border-radius:99px;padding:6px 10px;background:#35253f;border:1px solid #6a4967;color:#f1d4e5;font-size:10px}
+footer{border-top:1px solid #46374d;padding:25px 0 40px;font-size:11px;color:#c8b7c3}
+@media(max-width:990px){.main{grid-template-columns:1fr}.cover{aspect-ratio:16/9;min-height:260px}.kpis{grid-template-columns:repeat(4,1fr)}}
+@media(max-width:580px){.wrap{width:calc(100% - 28px)}.hero{padding-top:28px}h1{font-size:49px}.cover{min-height:220px;aspect-ratio:4/3}.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.settings{grid-template-columns:1fr}.overlay{inset:auto 13px 13px}.overlay .scene{font-size:10px}}
+@media(prefers-reduced-motion:reduce){.range>span{transition:none}html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="sitehead"><div class="wrap"><a class="logo" href="mes-univers.html">ELOAH <b>✦ NUMERA</b></a><nav class="nav" aria-label="Navigation"><a href="mes-univers.html">ELOAH</a><a href="eloah-music.html">Music</a><a href="eloah-numera.html">Studio NUMERA</a><a href="parisis-alpha-marcus-vivant.html">Enquêtes ALPHA</a><a aria-current="page" href="eloah-alpha-opus.html">ALPHA OPUS</a></nav></div></header>
+<section class="hero"><div class="wrap">
+<div class="eyebrow">ELOAH NUMERA · ŒUVRE NUMÉRIQUE ORIGINALE · PARTITION EN DOUZE TABLEAUX</div>
+<h1>ALPHA <em>OPUS.</em></h1>
+<p>De la lettre à la voix. Une suite sonore entièrement composée à partir des structures de nos enquêtes : ΑΩ, les douze paires, les sept voyelles, la Tétrade, 801, 888, les paroles, la connaissance et le retour au silence.</p>
+<div class="badges"><span>12 TABLEAUX</span><span>♫ AUDIO SYNTHÉTISÉ</span><span>24 LETTRES · 7 VOYELLES</span><span>WAV + MIDI</span><span>COMPOSITION MODIFIABLE</span></div>
+</div></section>
+<main class="wrap main">
+<section class="card">
+<div class="cover">
+<canvas id="opusArt" role="img" aria-label="Œuvre graphique de la partition en douze mouvements"></canvas>
+<div class="overlay"><span class="album">De la lettre à la voix</span><span class="scene" id="coverLabel">Douze thèmes, une seule œuvre</span></div>
+</div>
+<div class="pad">
+<div class="eyebrow">LA SUITE COMPLÈTE · NUMERA × HUMANITIES LAB</div>
+<h2>Écoute l'histoire des lettres.</h2>
+<p class="minor">Une création instrumentale originale. L'architecture vient des recherches historiques ; les notes, instruments, tempos et couleurs sont des choix artistiques d'ELOAH.</p>
+<div class="transport"><button type="button" class="btn primary" id="opusPlay">▶ Écouter les 12 tableaux</button><button type="button" class="btn" id="opusStop">■ Arrêter</button><button type="button" class="btn" id="opusScenePlay">▶ Écouter le tableau choisi</button></div>
+<div class="range" role="progressbar" aria-label="Progression de l'œuvre" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="opusProgress" tabindex="-1"><span id="opusProgressBar"></span></div>
+<div class="time"><span id="elapsed">00:00</span><span id="totalTime">—</span></div>
+<div class="kpis"><div class="kpi"><strong id="totalChapters">12</strong><small>Tableaux</small></div><div class="kpi"><strong id="opusDuration">—</strong><small>Durée</small></div><div class="kpi"><strong id="opusNotes">—</strong><small>Notes</small></div><div class="kpi"><strong id="opusBpm">—</strong><small>BPM</small></div></div>
+<div id="opusStatus" class="status" role="status" aria-live="polite">Ton œuvre se compose localement. Appuie sur Écouter pour activer le son du navigateur.</div>
+<h3>La partition · Douze tableaux</h3>
+<div id="movements" class="tracks" aria-label="Choisir un tableau musical"></div>
+<div class="details" id="movementDetails" aria-live="polite">Sélectionne une scène pour voir comment les données ALPHA sont devenues musique.</div>
+</div></section>
+<aside class="card"><div class="pad">
+<div class="eyebrow">CONSOLE DE PRODUCTION</div><h2>Ton œuvre, tes règles.</h2><p class="minor">Recompose l'ensemble ou ouvre seulement un tableau. Le même réglage reproduit la même partition.</p>
+<div class="settings">
+<label for="format">Longueur<select id="format"><option value="essentiel">Essentielle · 2 mesures par tableau</option><option value="grand">Développée · 4 mesures par tableau</option></select></label>
+<label for="root">Tonalité<select id="root"><option value="43">Sol 2</option><option value="45">La 2</option><option value="48" selected>Do 3</option><option value="50">Ré 3</option><option value="53">Fa 3</option><option value="55">Sol 3</option><option value="57">La 3</option><option value="60">Do 4</option></select></label>
+<label for="bpm">Tempo · <output id="bpmLabel">106 BPM</output><input type="range" id="bpm" min="65" max="155" value="106" step="1"></label>
+<label for="density">Mouvement · <output id="densityLabel">58 %</output><input type="range" id="density" min="0" max="100" value="58" step="1"></label>
+<label for="volume">Volume · <output id="volumeLabel">70 %</output><input type="range" id="volume" min="12" max="100" value="70" step="1"></label>
+<label class="toggle"><input type="checkbox" id="percussion" checked> Percussions rythmiques</label>
+<label class="toggle"><input type="checkbox" id="harmonies" checked> Nappes et accords</label>
+</div>
+<div class="transport"><button type="button" class="btn primary" style="width:100%" id="recompose">✦ Recomposer l'Opus</button></div>
+<div class="rule"></div>
+<h3>Exporter l'œuvre</h3>
+<p class="minor">WAV = vrai fichier audio ; MIDI = partition pour un logiciel musical. Les formats sont générés à partir des notes actuelles.</p>
+<div class="exportbar"><button class="btn" id="wavFull">↓ WAV complet</button><button class="btn" id="midiFull">↓ MIDI complet</button><button class="btn" id="wavScene">↓ WAV tableau</button><button class="btn" id="midiScene">↓ MIDI tableau</button><button class="btn" id="jsonScore">↓ Livret JSON</button><button class="btn" id="pngCover">↓ Pochette PNG</button></div>
+<div class="status" id="exportStatus" role="status" aria-live="polite">Les exports sont fabriqués sur ton appareil. La version développée peut consommer davantage de mémoire pour le WAV.</div>
+<div class="rule"></div>
+<h3>Pourquoi ces sons ?</h3>
+<div class="song-note"><strong>LE CODE DES SOURCES</strong>
+Le corps d'Alètheia donne les 12 questions-réponses musicales. Les 9–8–7 lettres deviennent trois figures rythmiques. Les 7 voyelles deviennent une montée. 801 et 888 deviennent des thèmes récurrents. Les paroles et la connaissance servent d'images compositionnelles, pas d'enregistrements de voix antiques.
+</div>
+<div class="pills" style="margin:14px 0"><span>ALPHA-010</span><span>ALPHA-011</span><span>ALPHA-013 à 021</span><span>PARISIS ENGINE</span></div>
+<p class="minor">Précision : les manuscrits de Nag Hammadi conservés en copte ne sont pas transformés en prétendus originaux grecs. Le tableau XI utilise le numéro du dossier ALPHA-021 comme graine artistique.</p>
+<div class="rule"></div><h3>Documents historiques</h3>
+<p class="minor"><a href="https://www.newadvent.org/fathers/0103114.htm" target="_blank" rel="noopener noreferrer">Irénée I,14</a> · <a href="https://www.newadvent.org/fathers/0103115.htm" target="_blank" rel="noopener noreferrer">Irénée I,15</a> · <a href="https://www.gospels.net/truth" target="_blank" rel="noopener noreferrer">Évangile de Vérité</a> · <a href="parisis-alpha-marcus-vivant.html">PARISIS : parcours ALPHA</a>.</p>
+</div></aside>
+</main>
+<footer><div class="wrap">ELOAH NUMERA · ALPHA OPUS · 2026. Composition artistique originale à partir de structures documentaires, et non reconstitution d'une musique marcosienne antique. Aucun compte ELOAH ni fichier privé n'est lu par le programme.</div></footer>
+<script src="eloah-numera-engine.js?v=20261015-a1" defer></script>
+<script src="eloah-numera-audio.js?v=20261015-a2" defer></script>
+<script src="parisis-alpha-text-reader.js?v=20261015-r1" defer></script>
+<script src="parisis-alpha-marcus-methode.js?v=20261015-m14" defer></script>
+<script src="parisis-alpha-marcus-chaine.js?v=20261015-c16" defer></script>
+<script src="parisis-alpha-paroles.js?v=20261015-j1" defer></script>
+<script src="eloah-alpha-oratorio-engine.js?v=20261015-opus1" defer></script>
+<script src="eloah-alpha-oratorio-ui.js?v=20261015-opus1" defer></script>
+</body></html>
