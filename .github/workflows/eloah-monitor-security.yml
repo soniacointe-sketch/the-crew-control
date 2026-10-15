@@ -11,6 +11,7 @@ on:
       - 'eloah-monitor-audit.css'
       - 'eloah-monitor-ops.js'
       - 'eloah-monitor-ops.css'
+      - 'eloah-monitor-premium.css'
       - '.github/workflows/eloah-monitor-security.yml'
   workflow_dispatch:
 permissions:
@@ -36,7 +37,7 @@ jobs:
           import pathlib, re
           html=pathlib.Path('eloah-monitor.html').read_text()
           js=pathlib.Path('eloah-monitor-data.js').read_text()
-          required=['eloah-monitor-data.js','eloah-monitor-data.css','eloah-monitor-control.js','eloah-monitor-control.css','eloah-monitor-lab.html','eloah-monitor-audit.js','eloah-monitor-audit.css','eloah-monitor-ops.js','eloah-monitor-ops.css']
+          required=['eloah-monitor-data.js','eloah-monitor-data.css','eloah-monitor-control.js','eloah-monitor-control.css','eloah-monitor-lab.html','eloah-monitor-audit.js','eloah-monitor-audit.css','eloah-monitor-ops.js','eloah-monitor-ops.css','eloah-monitor-premium.css']
           for path in required:
               assert pathlib.Path(path).is_file(), f'Missing file: {path}'
               assert path in html, f'Missing HTML reference: {path}'
@@ -44,6 +45,21 @@ jobs:
           assert 'data-real="osMissions"' in html
           assert 'data-real="crewMembers"' in html
           assert 'data-real="pgArticles"' in html
+          # Premium 3.0 retains working metrics and session gates; no fictional stats.
+          assert 'class="premium-hero"' in html
+          assert 'class="hero-console"' in html
+          assert 'eloah-monitor-premium.css?v=3.0.0' in html
+          assert 'Aperçu dynamique' in html
+          for keep in ['metric-universes','metric-verified','metric-focus','metric-tools','health-caption']:
+              assert html.count(f'id="{keep}"')==1, f"Metric lost or duplicated: {keep}"
+          for section in ['monitor-operations','indicateurs-reels','univers','controle','audit-securite','raccourcis']:
+              assert html.count(f'id="{section}"')==1, f"Missing/duplicate section {section}"
+          assert '100 %' not in html and 'Conforme' not in html, "Do not fabricate compliance claims"
+          premium=pathlib.Path('eloah-monitor-premium.css').read_text()
+          assert '@media(max-width:720px)' in premium
+          assert '@media(max-width:400px)' in premium
+          assert 'hero-console .metrics' in premium
+
           assert 'id="monitor-operations"' in html
           assert 'id="monitor-command"' in html
           assert 'eloah-monitor-ops.js' in html
