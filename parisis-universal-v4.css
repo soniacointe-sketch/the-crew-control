@@ -65,3 +65,24 @@ body.pe-v4-ready a.pe-universal-focus{scroll-margin-top:75px}
 @media(max-width:520px){.pe-universal-bar .pe-universal-brand strong{font-size:18px}.pe-universal-label{display:none}}
 @media print{.pe-universal-bar,.pe-universal-skip,.pe-v4-reading-footer{display:none!important}body.pe-skin-editorial{background:white!important;color:black!important}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+
+/* Compact per-document table of contents, derived from existing headings */
+.pe-universal-toc{background:#f8f3ec;border-bottom:1px solid #d8cbbd;color:#403543;padding:7px clamp(15px,3.5vw,55px);min-height:42px;display:flex;align-items:center;gap:17px;justify-content:space-between;font:11px/1.4 system-ui;position:relative;z-index:78}
+.pe-legacy-dark .pe-universal-toc{background:#302735;color:#f5e7d2;border-color:#68566f}
+.pe-universal-toc-label{font-weight:850;letter-spacing:.12em;color:#8d6c51;font-size:10px}
+.pe-legacy-dark .pe-universal-toc-label{color:#d9bd91}
+.pe-universal-toc-details{position:relative}
+.pe-universal-toc-details summary{cursor:pointer;list-style:none;border:1px solid #c4b19e;padding:7px 12px;border-radius:4px;font-size:11px;font-weight:800;min-width:175px;text-align:center}
+.pe-universal-toc-details summary::-webkit-details-marker{display:none}
+.pe-universal-toc-details summary:after{content:"⌄";margin-left:9px}
+.pe-legacy-dark .pe-universal-toc-details summary{border-color:#796783;color:#f4e6d1}
+.pe-universal-toc-links{position:absolute;top:calc(100% + 8px);right:0;display:grid;gap:2px;max-height:min(480px,65vh);overflow-y:auto;width:min(420px,88vw);padding:11px;background:#fffdfa;border:1px solid #d6c4b3;border-radius:5px;box-shadow:0 20px 36px #25162826;z-index:95}
+.pe-universal-toc-links a{font:12px/1.45 system-ui;color:#342937!important;padding:9px 11px;border-radius:3px;text-decoration:none!important;overflow-wrap:anywhere}
+.pe-universal-toc-links a:hover{background:#ede3ed;color:#2d2535!important}
+.pe-universal-toc-links .pe-universal-toc-sub{padding-left:23px}
+.pe-legacy-dark .pe-universal-toc-links{background:#31283a;border-color:#75607b}
+.pe-legacy-dark .pe-universal-toc-links a{color:#f3e3d1!important}
+.pe-legacy-dark .pe-universal-toc-links a:hover{background:#4b3c55;color:#fff!important}
+@media(max-width:520px){.pe-universal-toc-label{letter-spacing:.04em}.pe-universal-toc-details summary{min-width:0}.pe-universal-toc-links{right:-6px}}
+@media print{.pe-universal-toc{display:none!important}}
