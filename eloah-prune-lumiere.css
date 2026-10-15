@@ -39,3 +39,17 @@ html#eloah-prune-lumiere body :is(nav.eloah-global-nav,.eloah-menu-links,.fallba
 html#eloah-prune-lumiere body :is(nav.eloah-global-nav,.ec-sidebar,.side,.client-sidebar) :is(a[aria-current],a:hover,button.active,.client-nav-link.active){background:#5A3860!important;color:#FFF4ED!important}
 html#eloah-prune-lumiere body :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #986C8D!important;outline-offset:3px!important}
 @media(prefers-reduced-motion:reduce){html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) *{scroll-behavior:auto!important}}
+
+/* Keep dark banners and action labels above legacy ID-based workspace rules. */
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) :is(.client-hero,.premium-hero,.login-art,.hero-console) :is(h1,h2,h3,p,a,span,small,strong,b,em,div,.eyebrow){color:#FFF4ED!important;-webkit-text-fill-color:currentColor!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) :is(.client-hero .pilotage-panel,.client-hero .pilotage-kpi){background:#432A49!important;border-color:#795B78!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) .client-hero .client-local-note{background:#FFFCF8!important;color:#302334!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) .client-hero .client-local-note *{color:#302334!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) :is(button,.btn,.button,.focus-open,.focus-aside-cta a,.studio-wayfinding a){color:#FFF8F1!important;-webkit-text-fill-color:currentColor!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) :is(button,.btn,.button,.focus-open,.focus-aside-cta a) :is(span,strong,b,small){color:inherit!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) :is(.client-hero,.premium-hero) :is(.primary,.btn-primary){color:#302334!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) :is(main,#contenu,.main,dialog) :is(.client-hero,.premium-hero) :is(.primary,.btn-primary) *{color:#302334!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view)>header :is(a,strong,span,small){color:#432A49!important;-webkit-text-fill-color:currentColor!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view)>footer{background:#F5EFE7!important;color:#685769!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) .auth-card{background:#FFFCF8!important;border-color:#D8C7CE!important}
+html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) .auth-card :is(h1,p,small,.symbol){color:#302334!important}
