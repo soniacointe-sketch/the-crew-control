@@ -199,3 +199,22 @@ body{background:#eeebe7!important;color:var(--pe-text)!important;letter-spacing:
 .parisis-library .parisis-atlas-card iframe{height:310px!important;max-height:none}
 }
 @media(prefers-reduced-motion:reduce){.pe-news-card{transition:none;transform:none!important}html{scroll-behavior:auto}}
+
+
+/* Les anciens encarts restent en archive, mais retrouvent la même lisibilité éditoriale. */
+.pe-archive-inner>section[style],.pe-archive-inner>div[style],.pe-archive-inner .parisis-chapters>div[style]{
+ background:#f9f6f1!important;border:1px solid #e0d5c9!important;color:#372d37!important;
+ box-shadow:none!important;padding:clamp(16px,2.3vw,24px)!important
+}
+.pe-archive-inner>section[style] :is(h2,h3,p),
+.pe-archive-inner>div[style] :is(h2,h3,p),
+.pe-archive-inner .parisis-chapters>div[style] :is(h2,h3,p){color:#3e3440!important}
+.pe-archive-inner>section[style] :is(a.button-light,a[href]),
+.pe-archive-inner>div[style] :is(a.button-light,a[href]),
+.pe-archive-inner .parisis-chapters>div[style] :is(a.button-light,a[href]){
+ color:#543e5e!important;border:1px solid #b9a6bc!important;
+ border-radius:4px;text-decoration:none;background:transparent!important
+}
+.pe-archive-inner>section[style] :is(a.button-light,a[href]):hover,
+.pe-archive-inner>div[style] :is(a.button-light,a[href]):hover,
+.pe-archive-inner .parisis-chapters>div[style] :is(a.button-light,a[href]):hover{background:#e9e0eb!important}
