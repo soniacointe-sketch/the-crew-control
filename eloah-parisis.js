@@ -422,6 +422,178 @@ function seedAlphaResearch20261012(){
  catch(e){console.warn('ALPHA-001 non persisté dans ce navigateur',e)}
 }
 seedAlphaResearch20261012();
+// ALPHA-010 et ALPHA-011 — fiches additives. N'écrase jamais le travail déjà stocké localement.
+const alphaNewResearch20261015={
+  "corpus": [
+    {
+      "id": "alpha-010-marcus-corpus",
+      "title": "ALPHA-010 · Marcus, les 24 lettres et le corps de la Vérité",
+      "author": "HUMANITIES LAB · PARISIS ENGINE",
+      "pages": "Irénée, Contre les hérésies I,14–15 ; I,20",
+      "reference": "https://soniacointe-sketch.github.io/the-crew-control/parisis-alpha-010-marcus-aletheia.html",
+      "claim": "Douze membres du corps d'Alètheia associés aux vingt-quatre lettres grecques ; voyelles, 888 et 801 ; motifs Alpha-Bêta chez les marcosiens.",
+      "status": "Documenté",
+      "notes": "Texte d'Irénée polémique ; ne prouve pas que Jésus historique ait enseigné ce système. Corpus complet : corpus/parisis-alpha-010-marcus-aletheia-24-lettres.md."
+    },
+    {
+      "id": "alpha-011-voyelles-corpus",
+      "title": "ALPHA-011 · Sept voyelles, sept cieux et Apocalypse",
+      "author": "HUMANITIES LAB · PARISIS ENGINE",
+      "pages": "Irénée I,14,7 ; Apocalypse 1,8, 10,3–4, 21,6, 22,13 ; P.Vindob. G 328",
+      "reference": "https://soniacointe-sketch.github.io/the-crew-control/parisis-alpha-011-sept-voyelles-apocalypse.html",
+      "claim": "Comparer chant des voyelles, cosmologies à cieux multiples et symbolisme biblique de l'Alpha et l'Oméga, sans fusionner les traditions.",
+      "status": "Documenté",
+      "notes": "Dates de composition et de témoins matériels distinguées. Corpus complet : corpus/parisis-alpha-011-sept-voyelles-sept-cieux-apocalypse.md."
+    }
+  ],
+  "sources": [
+    {
+      "id": "alpha-010-src-irenaeus-14",
+      "title": "Irénée I,14 · Corps de la Vérité et voyelles",
+      "author": "Irénée de Lyon, Contre les hérésies",
+      "date": "Vers 180",
+      "pages": "Livre I, chapitre 14, §§2–7",
+      "url": "https://www.newadvent.org/fathers/0103114.htm",
+      "status": "Consulté",
+      "notes": "Source polémique contre Marcus : 24 lettres, corps d'Alètheia, 9/8/7, sept cieux."
+    },
+    {
+      "id": "alpha-010-src-irenaeus-15",
+      "title": "Irénée I,15 · Alpha et Oméga, 801 et 888",
+      "author": "Irénée de Lyon",
+      "date": "Vers 180",
+      "pages": "Livre I, chapitre 15, §§1–2",
+      "url": "https://www.newadvent.org/fathers/0103115.htm",
+      "status": "Consulté",
+      "notes": "Isopséphie attribuée aux marcosiens : ne constitue pas une preuve d'origine secrète."
+    },
+    {
+      "id": "alpha-010-src-irenaeus-20",
+      "title": "Irénée I,20 · Jésus enfant Alpha-Bêta",
+      "author": "Irénée de Lyon",
+      "date": "Vers 180",
+      "pages": "Livre I, chapitre 20, §1",
+      "url": "https://www.newadvent.org/fathers/0103120.htm",
+      "status": "Consulté",
+      "notes": "Attestation précoce du motif scolaire, pas de l'ensemble de la recension médiévale."
+    },
+    {
+      "id": "alpha-011-src-demetr",
+      "title": "Pseudo-Démétrios · Sur le style §71",
+      "author": "Auteur grec non identifié, traité Sur le style",
+      "date": "Datation débattue",
+      "pages": "§71",
+      "url": "https://www.attalus.org/old/demetr2.html",
+      "status": "Consulté",
+      "notes": "Témoigne de chants des sept voyelles attribués à des prêtres d'Égypte ; ne décrit pas la cosmologie de Marcus."
+    },
+    {
+      "id": "alpha-011-src-vienna",
+      "title": "Papyrus P.Vindob. G 328 · Sept voyelles et Michel",
+      "author": "Österreichische Nationalbibliothek",
+      "date": "Papyrus IIIe–IVe siècles ; nouvelle lecture publiée en 2020",
+      "pages": "P.Vindob. G 328",
+      "url": "https://www.onb.ac.at/mehr/blogs/detail/magie-der-erzengel-michael-und-maennerliebe",
+      "status": "Consulté",
+      "notes": "Éléments textuels distincts : plinthion vocalique et schéma diminuant le nom de Michel ; interprétation révisée."
+    },
+    {
+      "id": "alpha-011-src-revelation",
+      "title": "Apocalypse 1,8 ; 10,3–4 ; 21,6 ; 22,13",
+      "author": "Apocalypse de Jean",
+      "date": "Fin du Ier siècle, date conventionnelle discutée",
+      "pages": "Passages Alpha-Oméga et sept tonnerres",
+      "url": "https://www.biblegateway.com/passage/?search=Revelation%201%3A8%3B21%3A6%3B22%3A13&version=SBLGNT",
+      "status": "À vérifier",
+      "notes": "Conserver les variantes du texte critique ; l'Apocalypse ne donne pas aux sept tonnerres les noms des voyelles."
+    }
+  ],
+  "symboles": [
+    {
+      "id": "alpha-010-symbol-aletheia",
+      "title": "ALPHA-010 · Corps d'Alètheia, 12 paires",
+      "family": "Chiffres / lettres",
+      "place": "Irénée I,14,3",
+      "reference": "https://www.newadvent.org/fathers/0103114.htm",
+      "claim": "24 lettres réparties sur 12 membres ; chaque paire de rangs alphabétiques totalise 25.",
+      "status": "Documenté",
+      "notes": "Personnification décrite textuellement ; 25 est un calcul, pas forcément une exégèse de Marcus."
+    },
+    {
+      "id": "alpha-011-symbol-vowels",
+      "title": "ALPHA-011 · Sept voyelles des sept cieux",
+      "family": "Chiffres / lettres",
+      "place": "Irénée I,14,7",
+      "reference": "https://www.newadvent.org/fathers/0103114.htm",
+      "claim": "Α Ε Η Ι Ο Υ Ω : sept sons et sept cieux chez les marcosiens.",
+      "status": "Documenté",
+      "notes": "Ne pas confondre avec les sept tonnerres de l'Apocalypse."
+    }
+  ],
+  "chronos": [
+    {
+      "id": "alpha-010-date-irenaeus",
+      "title": "ALPHA-010 · Irénée atteste les motifs alphabétiques",
+      "date": "Vers 180 de notre ère",
+      "reference": "Contre les hérésies I,14–15 ; I,20",
+      "claim": "Témoignage antique sur les marcosiens et le récit scolaire de Jésus.",
+      "status": "Documenté",
+      "notes": "La date du témoin ne date pas à elle seule la formation initiale de chaque motif."
+    },
+    {
+      "id": "alpha-011-date-vienna",
+      "title": "ALPHA-011 · P.Vindob. G 328, témoin matériel",
+      "date": "IIIe–IVe siècle (support) ; réédition critique en 2020",
+      "reference": "Österreichische Nationalbibliothek, P.Vindob. G 328",
+      "claim": "Voyelles et nom de Michel sur un fragment papyrologique conservé.",
+      "status": "Documenté",
+      "notes": "Ne pas déduire la date d'origine des pratiques de celle du manuscrit."
+    }
+  ],
+  "preuves": [
+    {
+      "id": "alpha-010-proof-25",
+      "title": "ALPHA-010 · Les 12 paires de lettres font 25",
+      "level": "F2 - Structure mesurée",
+      "reference": "Irénée I,14,3 ; alphabet grec 24 lettres",
+      "claim": "Rangs 1+24 jusqu'à 12+13 : 12 sommes valent 25.",
+      "status": "Corroboré",
+      "notes": "Calcul reproductible ; signification mystique originelle du nombre non attestée."
+    },
+    {
+      "id": "alpha-011-proof-thunder",
+      "title": "ALPHA-011 · Sept tonnerres = sept voyelles ?",
+      "level": "H - Hypothèse",
+      "reference": "Apocalypse 10,3–4 ; Irénée I,14,7",
+      "claim": "Équivalence des sept tonnerres et des sept voyelles alléguée mais absente des textes examinés.",
+      "status": "Non démontré",
+      "notes": "Les deux séries appartiennent à des contextes distincts."
+    },
+    {
+      "id": "alpha-011-proof-sources",
+      "title": "ALPHA-011 · Tradition commune directe ?",
+      "level": "H - Hypothèse",
+      "reference": "Pseudo-Démétrios §71 ; Irénée I,14 ; P.Vindob. G 328",
+      "claim": "Une chaîne de transmission directe entre tous les corpus antiques n'est pas documentée.",
+      "status": "Non démontré",
+      "notes": "Comparer langue, date, manuscrit, milieu, et citations explicites."
+    }
+  ]
+};
+function seedAlphaNewResearch20261015(){
+ const marker=KEY+'-alpha-010-011-20261015-v1';
+ if(localStorage.getItem(marker))return;
+ let changed=false;
+ for(const [module,rows] of Object.entries(alphaNewResearch20261015)){
+  if(!Array.isArray(store[module]))continue;
+  const seen=new Set(store[module].map(row=>row.id));
+  for(const row of rows){if(seen.has(row.id))continue;store[module].push({...row});seen.add(row.id);changed=true}
+ }
+ try{if(changed)localStorage.setItem(KEY,JSON.stringify(store));localStorage.setItem(marker,'1')}
+ catch(e){console.warn('Fiches ALPHA-010/011 non enregistrées dans ce navigateur',e)}
+}
+seedAlphaNewResearch20261015();
+
 function save(){try{localStorage.setItem(KEY,JSON.stringify(store));render();return true}catch(e){alert('Enregistrement local impossible. Exporte une sauvegarde.');return false}}
 function current(){return cfg[active]}
 function schemaOptions(spec){return spec.slice(7).split('|')}
