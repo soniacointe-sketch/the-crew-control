@@ -640,7 +640,7 @@ body{background:#0c0a0f!important}
 .side .nav.active{background:#28202e;box-shadow:inset 0 2px #c6a1c2}
 .player{border-radius:10px 10px 0 0}
 }
-</style></head><body>
+</style><style id="eloah-hidden-state-fix">[hidden]{display:none!important}</style></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><div class="music-account-bar"><span>ELOAH MUSIC · MON COMPTE</span><button type="button" id="musicAccountLogin" aria-haspopup="dialog">Se connecter</button></div><div class="mobile-music-top"><strong>ELOAH MUSIC</strong><a href="mes-univers.html">Mes univers ↗</a></div><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Toute ta musique, au même endroit.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
 <div class="body"><!-- ELOAH 2040 COCKPIT V2 -->
@@ -2304,7 +2304,7 @@ function field(t,key){if(details[t.id]?.[key])return details[t.id][key];if(key==
 function groupedTracks(){if(librarySort==='all')return rows(tracks);const map=new Map();for(const t of tracks){const name=field(t,librarySort);if(!map.has(name))map.set(name,[]);map.get(name).push(t)}return [...map.entries()].sort((a,b)=>a[0].localeCompare(b[0],'fr')).map(([name,items])=>'<h3 class="music-group">'+safe(name)+'</h3>'+rows(items)).join('')||'<div class="empty">Aucun morceau pour le moment.</div>'}
 document.querySelectorAll('[data-sort]').forEach(b=>b.onclick=()=>{librarySort=b.dataset.sort;document.querySelectorAll('[data-sort]').forEach(x=>x.style.borderColor=x===b?'#ddb57e':'');render()});
 let coverTarget=null;let covers={};try{covers=JSON.parse(localStorage.getItem('eloahMusicCovers')||'{}')}catch(e){covers={}}
-const defaultCovers={'p0':'assets/eloah-music/power-glam-photo-v1.svg','p1':'assets/eloah-music/the-crew-photo-v1.svg','p2':'assets/eloah-music/sonia-velka-photo-v1.svg','p3':'assets/eloah-music/eloah-radio-photo-v1.svg'};
+const defaultCovers={'p0':'assets/eloah-music/power-glam-photo-v1.svg','p1':'assets/eloah-music/the-crew-photo-v1.svg','p2':'assets/eloah-music/sonia-velka-photo-v1.svg','p3':'assets/eloah-music/eloah-radio-photo-v1.svg','p4':'assets/eloah-music/detente-photo-v1.svg','p5':'assets/eloah-music/training-photo-v1.svg'};
 function musicArtwork(id){
  const item=tracks.find(t=>t.id===id)||playlists.find(p=>p.id===id),name=item?.title||item?.name||'ELOAH';
  let hash=0;for(const c of String(id))hash=(hash*31+c.charCodeAt(0))>>>0;
@@ -2313,7 +2313,7 @@ function musicArtwork(id){
  return '<svg class="music-artwork" viewBox="0 0 240 240" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><rect width="240" height="240" fill="'+base+'"/><path d="M-20 190L190-20M20 260L260 20" stroke="'+ink+'" stroke-width="40" opacity=".12"/><circle cx="139" cy="108" r="89" fill="#130f20"/><g fill="none" stroke="'+ink+'" opacity=".25"><circle cx="139" cy="108" r="79"/><circle cx="139" cy="108" r="70"/><circle cx="139" cy="108" r="61"/><circle cx="139" cy="108" r="52"/></g><circle cx="139" cy="108" r="34" fill="'+ink+'"/><circle cx="139" cy="108" r="6" fill="'+base+'"/><text x="18" y="211" fill="#fff8ee" font-family="sans-serif" font-size="32" font-weight="700">'+safe(initials)+'</text><path d="M182 200h5v20h-5zm10-12h5v32h-5zm10 7h5v25h-5zm10-17h5v42h-5z" fill="'+ink+'"/></svg>';
 }
 const imageHtml=(id,cls='cover-art')=>{
- const p=playlists.find(x=>x.id===id),known=({'Power & Glam':'p0','The Crew':'p1','Sonia Velka':'p2','ELOAH Radio':'p3'})[p?.name];
+ const p=playlists.find(x=>x.id===id),known=({'Power & Glam':'p0','The Crew':'p1','Sonia Velka':'p2','ELOAH Radio':'p3','Détente':'p4','Entraînement':'p5'})[p?.name];
  const src=covers[id]||defaultCovers[id]||defaultCovers[known];
  return src?'<img class="'+cls+'" src="'+safe(src)+'" alt="Pochette" loading="lazy" style="width:100%;height:100%;object-fit:cover;border-radius:inherit">':musicArtwork(id);
 };
