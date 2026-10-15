@@ -20,6 +20,10 @@
    Recherche comparative autour d'Alpha, Aleph, des traditions rabbiniques et du Sefer Yetsirah.
 
 
+5. **15 octobre 2026 — Lourdes, Apocalypse et cantique nouveau**
+
+   Nouvelle [enquête sur les apparitions, la conversion et la grande épreuve](foi-control.html?file=eloah-foi-lourdes-apocalypse-cantique-nouveau.md). Comparaison avec Apocalypse 5, 7, 12 et 21 ; distinction entre Excalibur, Durandal et Lourdes. Les mentions « Green Day », « 165 » et « 167 » restent des indices ouverts.
+
 
 ---
 
