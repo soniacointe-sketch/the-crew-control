@@ -29,6 +29,20 @@ body.client-page .pilotage-hero-proof,body.client-page .client-hero .workspace-c
 body.client-page .pilotage-panel{padding:16px}
 body.client-page .pilotage-panel-lead{font-size:11px}
 body.client-page .client-local-note{margin:12px 0 0;font-size:11px}
+</style><style id="eloah-workspace-polish">
+body.client-page .pilotage-hero-inner{grid-template-columns:1fr;gap:18px;padding:12px 0}
+body.client-page .pilotage-hero-copy>p{margin-bottom:16px;max-width:760px}
+body.client-page .pilotage-panel{padding:14px 18px;border-radius:12px}
+body.client-page .pilotage-kpis{grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+body.client-page .pilotage-kpi{padding:12px;min-height:0}
+body.client-page .pilotage-kpi strong{font-size:30px;margin:4px 0}
+body.client-page .pilotage-panel-lead{margin:6px 0 10px}
+body.client-page .pilotage-panel-foot{margin:8px 0 0}
+body.client-page .client-hero .eyebrow{margin:0 0 8px}
+body.client-page .client-hero .pilotage-hero-proof,body.client-page .client-hero .workspace-choices{display:none!important}
+body.client-page #eloah-tools-trigger{color:#f3e3ef!important;background:#302039!important;border:1px solid #8b6684!important}
+body.client-page .client-hero-actions a,body.client-page .client-hero-actions button{min-height:44px}
+@media(max-width:650px){body.client-page .client-hero{padding:16px}body.client-page .pilotage-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}body.client-page .pilotage-panel{padding:12px}body.client-page .client-hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.client-page .client-hero-actions>*{text-align:center;padding:10px 8px;font-size:12px}}
 </style></head>
 <body class="client-page">
 <video id="pilotage-ambient" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
@@ -40,7 +54,7 @@ body.client-page .client-local-note{margin:12px 0 0;font-size:11px}
  <div class="pilotage-hero-copy">
   <p class="eyebrow">CLARTÉ · ORGANISATION · ACTION</p>
   <h1 id="pilotage-title">Mon <em>organisation.</em></h1>
-  <p>Un endroit pour garder le fil. Retrouve tes prochaines étapes, prépare tes dates et avance dans tes projets, sans chercher partout.</p>
+  <p>Tes priorités, ton planning et tes projets. Choisis une action et reprends le fil.</p>
   <div class="client-hero-actions">
    <button id="client-quick-add" type="button" class="primary">＋ Noter une action</button>
    <a class="btn" href="#mes-projets">Ouvrir mes projets →</a>
@@ -52,7 +66,7 @@ body.client-page .client-local-note{margin:12px 0 0;font-size:11px}
   </ul>
  </div>
  <section class="pilotage-panel" aria-label="Aperçu réel du travail conservé sur cet appareil">
-  <div class="pilotage-panel-top"><strong class="pilotage-panel-title">Mon cockpit</strong><span>Vue personnelle</span></div>
+  <div class="pilotage-panel-top"><strong class="pilotage-panel-title">En un regard</strong><span>Vue personnelle</span></div>
   <p class="pilotage-panel-lead">Les compteurs ci-dessous viennent de ce navigateur et ne représentent pas des données fictives ou synchronisées.</p>
   <div class="pilotage-kpis">
    <div class="pilotage-kpi"><span class="pilotage-kpi-label"><span class="pilotage-kpi-icon" aria-hidden="true">◇</span> Projets</span><strong id="pilotage-count-projects">—</strong><small>Enregistrés ici</small></div>
