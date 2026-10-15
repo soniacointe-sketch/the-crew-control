@@ -9,6 +9,8 @@ if(!document.body)return;
 try{if(window.self!==window.top)return}catch(e){return}
 var file=decodeURIComponent((location.pathname.split("/").pop()||"").toLowerCase());
 if(!/^parisis-[a-z0-9-]+\.html$/.test(file))return;
+/* Le Grand Livre possède déjà son en-tête et son sommaire : aucun second menu. */
+if(file==="parisis-lecteur.html")return;
 var tool=/^(?:parisis-(?:005-alpage-sig|alpha-laboratoire|cartography-lab|control|ghost-trace|hugo-axes|hum-002-atlas|text-atlas|reseau-indices|vasserot-1810-1836|vasserot-feuilles-audit))\.html$/.test(file);
 var hub=/^parisis-(?:fil-enquetes|publications|lecteur)\.html$/.test(file);
 var mode=tool?"tool":hub?"hub":"editorial";
