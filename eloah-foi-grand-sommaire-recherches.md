@@ -51,6 +51,10 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 
 - [Lire l'enquête documentaire sur les 32 frênes, le Jardin d'Ombre, les archives et l'iconographie des Nornes](foi-control.html?file=eloah-foi-lourdes-003-32-frenes-archives-nornes.md) — reportage du 26 mars 2015, INCA Architectes, Fondation Giorgio Tesi, photos anciennes, source de l'Edda et illustrations des années 1780.
 
+## LOURDES-003 — Les 32 frênes et les archives (15 octobre 2026)
+
+- [Lire LOURDES-003 : origine des 32 frênes plantés en 2015, documents de chantier, photos anciennes et authentique mention du Christ dans l'Edda](foi-control.html?file=eloah-foi-lourdes-003-32-frenes-archives-edda.md) — pièces sourcées, dates, grille de fiabilité et pistes de vérification complémentaires.
+
 ## LOURDES-002 — Enquête documentaire complémentaire (15 octobre 2026)
 
 - [Lire l'étude des textes originaux du cantique, des Nornes, du pape Léon XIV et de Champion](foi-control.html?file=eloah-foi-lourdes-002-sources-cantique-nornes-pape.md) — vérification des numéros de couplets, gestes du pape à la grotte, boue et cygnes de l'Edda, incendie de Peshtigo, étymologies et questions non résolues.
