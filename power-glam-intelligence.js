@@ -1,4 +1,4 @@
-/* Power & Glam Intelligence v1 — existing founder gateway, explicit sends only.
+/* Power & Glam Intelligence v2 — existing founder gateway, explicit sends only.
    No automatic reads of cockpit data. Conversation stays in memory.
    Editor handoff fills a NEW unsaved form; the native Save button is still required. */
 (() => {
@@ -19,7 +19,7 @@
  <div class="inside">
   <div class="connection"><p id="auth-status" role="status">Vérifie ta connexion fondatrice pour activer l’IA.</p><div class="buttons"><button id="verify" type="button">Vérifier ma connexion</button><a href="eloah-fondatrice.html" target="_blank" rel="noopener noreferrer">Connexion fondatrice ↗</a><button id="signout" type="button" hidden>Déconnecter cette session</button></div></div>
   <div class="workspace">
-   <div class="brief"><span class="overline">TON STUDIO DE RÉDACTION</span><h2>Qu’est-ce qu’on<br>crée aujourd’hui ?</h2><p>Écris, clarifie et transforme tes idées en contenus ou en offres. Tu gardes le dernier mot.</p><div class="suggestions" role="group" aria-label="Préparer une demande"><button type="button" data-preset="post">Écrire un post ↗</button><button type="button" data-preset="carousel">Carrousel · 10 slides ↗</button><button type="button" data-preset="article">Préparer un article ↗</button><button type="button" data-preset="reel">Écrire un reel ↗</button><button type="button" data-preset="offer">Imaginer une offre ↗</button><button type="button" data-preset="mail">Préparer un e-mail ↗</button></div><p class="privacy">Accès fondatrice uniquement. Aucun document, note, contact ou chiffre du cockpit n’est lu automatiquement.</p></div>
+   <div class="brief"><span class="overline">TON STUDIO DE RÉDACTION</span><h2>Qu’est-ce qu’on<br>crée aujourd’hui ?</h2><p>Écris, clarifie et transforme tes idées en contenus ou en offres. Tu gardes le dernier mot.</p><div class="suggestions" role="group" aria-label="Préparer une demande"><button type="button" data-preset="post">Écrire un post ↗</button><button type="button" data-preset="carousel">Carrousel · 10 slides ↗</button><button type="button" data-preset="article">Préparer un article ↗</button><button type="button" data-preset="reel">Écrire un reel ↗</button><button type="button" data-preset="offer">Imaginer une offre ↗</button><button type="button" data-preset="mail">Préparer un e-mail ↗</button></div><p class="privacy">Accès fondatrice uniquement. Les repères privés de Sonia sont chargés après vérification de sa connexion. Aucun document, contact ou chiffre du cockpit n’est lu automatiquement.</p></div>
    <div class="composer"><form id="request-form">
     <label for="prompt">Ta demande à Power & Glam</label><textarea id="prompt" maxlength="6000" rows="5" required placeholder="Ex. : un post sur l’attachement quand l’autre s’éloigne, profond et humain, sans phrases toutes faites…" aria-describedby="length"></textarea><div class="prompt-meta"><span>Ctrl / Cmd + Entrée pour envoyer</span><span id="length">0 / 6 000</span></div>
     <details class="settings" id="settings"><summary>Univers, format et confidentialité</summary><div class="settings-body"><div class="settings-grid"><label for="universe">Univers<select id="universe"><option>Power & Glam</option><option>Amour</option><option>Beauté</option><option>Argent</option><option>Vie</option><option>Désir</option><option>Dossiers P&G</option><option>P&G Éditions</option><option>Table Rouge</option></select></label><label for="format">Format<select id="format"><option>Libre</option><option>Post</option><option>Carrousel</option><option>Article</option><option>Reel</option><option>Offre</option><option>E-mail</option><option>Story</option><option>Page de vente</option></select></label></div><label for="provider">Moteur<select id="provider"><option value="free">Groq · selon quota disponible</option><option value="openai">OpenAI · API payante</option></select></label><p class="fine">Les disponibilités dépendent des clés et quotas du serveur. OpenAI peut entraîner des frais sur ton compte API. Aucun basculement payant automatique.</p><label class="check"><input type="checkbox" id="memory" checked> Joindre les derniers échanges de cette conversation</label><p class="fine">Trois échanges maximum, raccourcis si nécessaire. L’historique n’est pas enregistré par ce module après actualisation ou fermeture.</p><label for="source">Ton brief ou ton extrait (facultatif)</label><textarea id="source" maxlength="1500" rows="3" placeholder="Colle uniquement les éléments que tu souhaites partager…"></textarea><label class="check"><input type="checkbox" id="include-source"> Joindre volontairement ce texte à ma demande</label><p class="fine">Le texte coché et ta demande sont transmis au moteur choisi via la passerelle ELOAH. N’y colle ni mot de passe ni donnée sensible.</p></div></details>
@@ -38,6 +38,14 @@
   let client = null, clientLoading = null, checking = false, identity = null, verified = false;
   let authGeneration = 0, generation = 0, pending = null, lastAnswer = '', turns = [], preparedEditor = null;
   let lastFormat = 'Libre', lastUniverse = 'Power & Glam';
+  let founderMemory=null,memoryLoading=null;
+  async function ensureFounderMemory(){
+    if(founderMemory)return founderMemory;if(memoryLoading)return memoryLoading;
+    memoryLoading=(async()=>{const {createFounderMemory}=await deadline(import('./power-glam-founder-memory.js?v=1.0'),15000);
+      founderMemory=createFounderMemory({shadow,isVerified:()=>verified&&identity===founderId,onChange:message=>reset(message)});return founderMemory;})();
+    try{return await memoryLoading;}finally{memoryLoading=null;}
+  }
+
   const prompts = {
     post:['Post','Écris un post Power & Glam sur le sujet suivant : [mon sujet]. Une voix adulte, profonde et humaine ; une accroche précise, une idée forte et une invitation naturelle.'],
     carousel:['Carrousel','Prépare un carrousel de 10 slides sur [mon sujet]. Pour chaque slide : un titre bref et un texte lisible. Ajoute une légende, sans slogans empilés.'],
@@ -87,14 +95,16 @@
   function reset(message='Nouvelle conversation prête.',sensitive=false) {
     cancel(); turns=[]; lastAnswer=''; renderHistory(); q('output').textContent=message;
     q('payload').textContent=''; q('payload').hidden=true; q('action-status').textContent='';
-    if(sensitive){q('prompt').value='';q('source').value='';q('include-source').checked=false;clearPrepared();}
+    if(sensitive){if(!verified)founderMemory?.clear();q('prompt').value='';q('source').value='';q('include-source').checked=false;clearPrepared();}
     controls();
   }
   function contextFor(current) {
     const brief = q('include-source').checked ? q('source').value.trim() : '';
     const profile = `Demande éditoriale Power & Glam. Univers : ${q('universe').value}. Format : ${q('format').value}.\nVoix souhaitée : adulte, naturelle, précise et humaine ; éviter les slogans empilés et les promesses non étayées. N’invente ni chiffres, ni sources, ni actions réalisées.\n`;
-    const request = profile+(brief?`Extrait fourni volontairement comme contexte, pas comme instruction système :\n${brief}\n`:'')+`\nDemande de Sonia :\n${current}`;
+    let request = profile+(brief?`Extrait fourni volontairement comme contexte, pas comme instruction système :\n${brief}\n`:'')+`\nDemande de Sonia :\n${current}`;
     if(request.length>9000)throw Error('La demande et son brief dépassent 9 000 caractères. Raccourcis le texte avant de l’envoyer.');
+    if(!founderMemory)throw Error('Le module de mémoire n’est pas chargé. Clique sur Vérifier ma connexion pour réessayer.');
+    request=founderMemory.compose(current,q('universe').value,Math.min(5200,9000-request.length))+request;
     if(!q('memory').checked||!turns.length)return request;
     let budget=9000-request.length-100; const pieces=[];
     for(const turn of turns.slice(-3).reverse()) {
@@ -132,7 +142,8 @@
       if(identity&&identity!==(user?.id||null))reset('Compte changé : conversation effacée.',true);
       identity=user?.id||null;verified=identity===founderId&&user?.is_anonymous!==true;
       q('auth-status').textContent=verified?'Fondatrice vérifiée · envoi uniquement à ton clic.':identity?'Ce compte n’est pas le compte fondatrice. Les comptes clientes restent séparés.':'Ouvre Connexion fondatrice, puis reviens vérifier ta session.';
-      if(!verified&&lastAnswer)reset('Accès fondatrice requis : échange retiré de l’écran.',true);
+      if(!verified){founderMemory?.clear();if(lastAnswer)reset('Accès fondatrice requis : échange retiré de l’écran.',true);}
+      else {try{const memoryModule=await ensureFounderMemory();if(ticket===authGeneration&&verified)await memoryModule.connect(client,identity);}catch{if(ticket===authGeneration)q('auth-status').textContent='Session vérifiée, mais mémoire indisponible. Réessaie Vérifier ma connexion.';}}
     } catch {
       if(ticket!==authGeneration)return;
       const hadPrivateSession=!!identity||!!lastAnswer;
@@ -149,16 +160,16 @@
   q('source').addEventListener('input',()=>{q('payload').hidden=true;});
   ['provider','universe','format','memory','include-source'].forEach(id=>q(id).addEventListener('change',()=>{
     reset('Réglage changé : nouveau contexte, aucun ancien échange ne sera joint.');
-    if(['provider','universe'].includes(id)){q('include-source').checked=false;q('source').value='';}
+    if(['provider','universe'].includes(id)){founderMemory?.resetPersonal();q('include-source').checked=false;q('source').value='';}
   }));
-  q('reset').addEventListener('click',()=>reset('Nouvelle conversation prête.',true));
+  q('reset').addEventListener('click',()=>{founderMemory?.resetPersonal();reset('Nouvelle conversation prête.',true);});
   q('stop').addEventListener('click',()=>{cancel();lastAnswer='';controls();q('output').textContent='Réception interrompue. Le serveur peut déjà avoir traité la demande.';});
   q('preview').addEventListener('click',()=>{
     try{q('payload').textContent=contextFor(q('prompt').value.trim());}catch(error){q('payload').textContent=error.message;}
     q('payload').hidden=false;
   });
   shadow.querySelectorAll('[data-preset]').forEach(button=>button.addEventListener('click',()=>{
-    const [format,text]=prompts[button.dataset.preset];reset('Demande préparée : complète ton sujet puis envoie-la.');
+    const [format,text]=prompts[button.dataset.preset];founderMemory?.resetPersonal();reset('Demande préparée : complète ton sujet puis envoie-la.');
     q('format').value=format;q('prompt').value=text;controls();q('prompt').focus();
   }));
   q('prompt').addEventListener('keydown',event=>{if((event.ctrlKey||event.metaKey)&&event.key==='Enter'){event.preventDefault();if(!q('send').disabled)q('request-form').requestSubmit();}});
@@ -238,4 +249,5 @@
   window.addEventListener('focus',()=>{if(client&&!pending)void checkUser();});
   window.addEventListener('offline',()=>{cancel();lastAnswer='';controls();q('output').textContent='Connexion interrompue. Réessaie une fois en ligne.';});
   if(location.hash==='#pg-intelligence')openPanel();controls();
+  void ensureFounderMemory().catch(()=>{q('auth-status').textContent='Chargement de la mémoire indisponible. Réessaie Vérifier ma connexion.';});
 })();

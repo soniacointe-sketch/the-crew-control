@@ -13,7 +13,7 @@ assert '/functions/v1/eloah-2040-founder-ai' in js
 assert "scope:'local'" in js
 assert 'ticket!==generation' in js and 'authGeneration' in js
 assert "window.openEditor(type)" in js
-assert 'power-glam-intelligence.js?v=1.0' in loader
+assert 'power-glam-intelligence.js?v=2.0' in loader
 assert ':host' in css and 'prefers-reduced-motion' in css
 for forbidden in ('localStorage.getItem', 'localStorage.setItem', 'sessionStorage.', 'client.from(', 'service_role', 'sk-proj-', '.submit()'):
     assert forbidden not in js, forbidden
@@ -24,3 +24,9 @@ for name in re.findall(r"q\('([a-z-]+)'\)", js):
 for name in ('eloah-fondatrice.html','eloah-power-glam-article-studio.html','power-glam-control.html'):
     assert (ROOT / name).is_file(), 'Missing destination '+name
 print('Power & Glam Intelligence: syntax, scope, gateway, DOM and local destinations OK.')
+
+memory = (ROOT / "power-glam-founder-memory.js").read_text(encoding="utf-8")
+subprocess.run(["node", "--input-type=module", "--check"], input=memory, text=True, check=True)
+assert "eloah_editorial_memory" in memory and "sensitivity" in memory
+assert "localStorage" not in memory and "sessionStorage" not in memory
+assert "eq('owner_id',currentOwner)" in memory
