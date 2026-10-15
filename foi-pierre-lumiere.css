@@ -1,0 +1,133 @@
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/foi-matieres/font-0.woff) format('woff');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/foi-matieres/font-1.woff) format('woff');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/foi-matieres/font-2.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(assets/foi-matieres/font-3.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(assets/foi-matieres/font-4.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(assets/foi-matieres/font-5.woff) format('woff');
+}
+@font-face {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(assets/foi-matieres/font-6.woff) format('woff');
+}
+/* Pierre, encre & lumière — style local à Foi, 16 octobre 2026. */
+:root{--bg:#F3EFE6;--paper:#FCFAF5;--side:#EAE4D8;--line:#D8D0C2;--ink:#252421;--sub:#605E58;--gold:#A58A55;--foi-blue:#263B4A;--foi-serif:'Cormorant Garamond',Georgia,serif;--foi-sans:'Source Sans 3',sans-serif}
+body,body.eloah-revue,body.eloah-article{background-color:var(--bg)!important;color:var(--ink)!important;font-family:var(--foi-sans)!important;font-size:18px;line-height:1.7;background-image:radial-gradient(#a58a550c .7px,transparent .7px);background-size:5px 5px}
+body button,body input,body textarea,body select,body .reader p,body .reader li,body .reader small,body .reader span,body .reader a,body .reader figcaption,body .reader table,body .eloah-global-nav a,body .eloah-global-nav summary{font-family:var(--foi-sans)!important}
+body .reader h1,body .reader h2,body .reader h3,body .reader h4,body .reader blockquote,body .reader blockquote p,body .rev-axis strong,body .rev-story strong,body .rev-chapters strong,body .rev-axis em,body .rev-model-thematic strong,body .collection-card strong{font-family:var(--foi-serif)!important}
+body.eloah-screen .eloah-global-nav{background:var(--bg)!important;border-color:var(--line)!important;color:var(--foi-blue)!important}
+body.eloah-screen .eloah-global-nav a,body.eloah-screen .eloah-global-nav summary{color:var(--foi-blue)!important;font-size:15px!important}
+body.eloah-screen .eloah-global-nav a:hover,body.eloah-screen .eloah-global-nav a[aria-current]{background:#e4ded2!important;color:var(--foi-blue)!important}
+body .eloah-menu-links{background:var(--paper)!important}
+body.eloah-revue main{max-width:1440px!important;padding:0 clamp(20px,3.2vw,54px) 64px!important}
+body.eloah-revue .top,body.eloah-article .top{background:transparent!important;border-bottom:1px solid var(--line)!important;padding:18px 0!important;gap:16px}
+body.eloah-revue .top .eyebrow{color:var(--foi-blue)!important;font-size:11px!important;letter-spacing:.14em!important}
+body.eloah-revue .top .small{color:var(--sub)!important;font-size:14px}
+body.eloah-revue .top .action,body .action{background:var(--paper)!important;border:1px solid var(--line)!important;color:var(--foi-blue)!important;border-radius:3px!important;min-height:44px;font-size:14px!important}
+body.eloah-revue .top .action:hover{background:var(--foi-blue)!important;color:var(--paper)!important}
+body.eloah-revue #search{background:var(--paper)!important;border-color:var(--line)!important;border-radius:3px!important;font-size:17px;margin:20px 0!important;padding:12px 16px!important}
+body.eloah-revue .rev-hero{display:grid;grid-template-columns:1.1fr 1fr;background:var(--foi-blue)!important;padding:0!important;overflow:hidden}
+.foi-hero-copy{padding:clamp(26px,3.6vw,56px);align-self:center;min-width:0}
+body.eloah-revue .rev-hero small{color:#D9C49A!important;font-size:11px;letter-spacing:.15em}
+body.eloah-revue .rev-hero h1{font-family:var(--foi-serif)!important;font-size:clamp(45px,5.2vw,76px)!important;font-weight:500;line-height:.98!important;letter-spacing:-.035em;margin:24px 0!important;color:var(--paper)!important}
+body.eloah-revue .rev-lede{font:400 23px/1.45 var(--foi-serif)!important;color:#F3EFE6!important}
+body.eloah-revue .rev-note{font-size:16px!important;line-height:1.65!important;color:#D8DFDF!important;margin-bottom:0}
+.reader .foi-photo{margin:0;min-width:0;display:flex;flex-direction:column;background:var(--paper)}
+.reader .foi-photo img{display:block;width:100%;height:100%;min-height:0;max-height:none;margin:0;border-radius:0;object-fit:cover;filter:saturate(.73) contrast(.94)}
+.reader .foi-photo figcaption{font-size:12px;line-height:1.5;padding:11px 14px;color:var(--sub);background:var(--paper);margin:0}
+.reader .foi-photo figcaption a{color:var(--foi-blue);text-underline-offset:3px}
+.reader .foi-hero-photo img{height:430px;flex:1;object-position:50% 48%}
+.reader .foi-hero-photo figcaption{background:#203440;color:#D8DFDF}
+.reader .foi-hero-photo figcaption a{color:#E3D2B0}
+body.eloah-revue .rev-bar{border-bottom:1px solid var(--line)!important;margin:48px 0 22px!important;padding-bottom:14px!important;align-items:center}
+body.eloah-revue .rev-bar h2{font-size:clamp(30px,3vw,42px)!important;font-weight:500!important;color:var(--foi-blue)!important;line-height:1.1}
+body.eloah-revue .rev-bar span{color:#6C604B!important;font-weight:600!important;font-size:11px}
+body.eloah-revue .rev-axes{gap:16px!important;border:0!important}
+.foi-path{min-width:0;background:var(--paper);border:1px solid var(--line)}
+body.eloah-revue .rev-axis{width:100%;min-height:0!important;padding:0 0 20px!important;gap:8px;background:var(--paper)!important;border:0!important;color:var(--ink)!important;transition:background .2s}
+body.eloah-revue .rev-axis:hover{background:#EDE6D8!important}
+.reader .rev-axis img{width:100%;height:154px;object-fit:cover;margin:0 0 8px;max-height:none;border-radius:0;filter:saturate(.73) contrast(.94)}
+body.eloah-revue .rev-axis em,body.eloah-revue .rev-axis strong,body.eloah-revue .rev-axis small{margin-left:18px;margin-right:18px}
+body.eloah-revue .rev-axis em{font-size:21px!important;color:#806A3E!important}
+body.eloah-revue .rev-axis strong{font-weight:500!important;color:var(--foi-blue)!important;font-size:30px!important}
+body.eloah-revue .rev-axis small{font-size:17px!important;line-height:1.4;color:var(--sub)!important}
+.foi-path-credit{display:block;padding:10px 18px 14px;border-top:1px solid var(--line);font-size:12px;line-height:1.5;color:var(--sub)}
+.foi-path-credit a{color:var(--foi-blue)}
+body.eloah-revue .rev-feature{grid-template-columns:1fr 1fr!important;border:1px solid var(--line)!important;background:var(--paper)!important}
+body.eloah-revue .rev-feature-copy{background:var(--paper)!important;padding:32px!important;align-self:center}
+body.eloah-revue .rev-feature-copy h3{color:var(--foi-blue)!important;font-weight:500!important;font-size:40px!important}
+body.eloah-revue .rev-feature-copy p{color:var(--sub)!important;font-size:18px}
+body.eloah-revue .rev-art{background:#e7ddcd!important;min-height:0!important;display:flex!important;flex-direction:column;justify-content:center}
+body.eloah-revue .rev-art img{height:auto!important;min-height:0!important;object-fit:contain!important;filter:none}
+body.eloah-revue .rev-read{font-size:17px;color:var(--foi-blue)!important;border:0!important;border-bottom:1px solid var(--gold)!important;min-height:44px}
+body.eloah-revue .rev-overline{color:#79643B!important}
+body.eloah-revue .rev-pubs{background:transparent!important;color:var(--ink)!important;border:0!important;padding:0!important;margin-top:50px}
+body.eloah-revue .rev-pubhead{flex-wrap:wrap;gap:15px}
+body.eloah-revue .rev-pubhead h2{font:500 clamp(30px,3vw,42px)/1.1 var(--foi-serif)!important;color:var(--foi-blue)!important;text-transform:none;letter-spacing:0}
+body.eloah-revue .rev-pubhead i{height:1px;background:var(--line)}
+body.eloah-revue .rev-catalogue-link{color:var(--foi-blue)!important;border-color:var(--line)!important;background:transparent!important;font-size:14px;min-height:44px;display:inline-flex;align-items:center}
+body.eloah-revue .rev-story{background:var(--paper)!important;color:var(--ink)!important;border:1px solid var(--line)!important;border-radius:3px!important;min-height:0!important;box-shadow:none!important}
+body.eloah-revue .rev-story:hover{background:#EDE6D8!important;border-color:var(--gold)!important}
+body.eloah-revue .rev-story img{aspect-ratio:16/10!important;width:100%!important;height:auto!important;max-height:240px!important;min-height:0!important;object-fit:cover!important;filter:saturate(.73) contrast(.94)}
+body.eloah-revue .rev-story-info{background:transparent!important;padding:22px!important}
+body.eloah-revue .rev-story-info strong{color:var(--foi-blue)!important;font-size:29px!important;font-weight:500!important}
+body.eloah-revue .rev-story-info small{color:#79643B!important;font-size:11px!important}
+body.eloah-revue .rev-story-info span{color:var(--sub)!important;font-size:17px!important;line-height:1.5}
+body.eloah-revue .rev-story-info em{color:var(--foi-blue)!important;font:600 12px/1.5 var(--foi-sans)!important}
+body.eloah-revue .rev-personal-lead,body.eloah-revue .rev-personal-image-note{color:var(--sub)!important;font-size:17px!important;max-width:760px}
+body.eloah-revue .rev-footer{border-top:1px solid var(--line)!important}
+body.eloah-revue .rev-footer a{color:var(--foi-blue)!important;font-size:16px}
+.foi-photo-credits{margin-top:40px;padding-top:20px;border-top:1px solid var(--line);font-size:14px;color:var(--sub)}
+.foi-photo-credits summary{cursor:pointer;min-height:44px;color:var(--foi-blue);font-weight:600}
+.foi-photo-credits ul{padding-left:20px}.foi-photo-credits li{margin:12px 0}.foi-photo-credits a{color:var(--foi-blue)}
+body .rev-model-hero,body .rev-model-hero:not(.has-image),body .rev-model-reference{background:var(--foi-blue)!important}
+body .rev-model-thematic{background:#304958!important;border-color:var(--gold)}
+body .rev-model-text{font:18px/1.8 var(--foi-sans)!important;background:var(--paper);border-color:var(--line)}
+body .rev-model-text p,body .rev-model-text li{font-size:18px;line-height:1.8}
+body .rev-model-toc{background:#EAE4D8;border-top-color:var(--gold)}
+body .rev-model-text a,body .rev-model-nav a,body .rev-model-toc a{color:var(--foi-blue)}
+body .rev-model-text blockquote{background:#F3EFE6;border-left-color:var(--gold)}
+body .rev-model-related-grid a,body .notes{background:var(--paper);border-color:var(--line)}
+body :focus-visible{outline:3px solid #98783F!important;outline-offset:4px!important}
+@media(max-width:1100px){body.eloah-revue .rev-axes{grid-template-columns:repeat(2,minmax(0,1fr))!important}body.eloah-revue .rev-hero{grid-template-columns:1fr 0.8fr}.foi-hero-copy{padding:30px}body.eloah-revue .rev-hero h1{font-size:55px!important}}
+@media(max-width:760px){body.eloah-revue .rev-hero{grid-template-columns:1fr}.reader .foi-hero-photo img{height:220px;flex:auto;object-position:50% 42%}body.eloah-revue .rev-feature{grid-template-columns:1fr!important}body.eloah-revue .rev-hero h1{font-size:48px!important;margin:16px 0!important}body.eloah-revue .rev-lede{font-size:23px!important}.foi-hero-copy{padding:28px}body.eloah-revue .top{flex-wrap:wrap}body.eloah-revue .top .tools{gap:6px}body.eloah-revue .rev-stories{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media(max-width:560px){body,body.eloah-revue{font-size:17px}body.eloah-revue main{padding:0 16px 40px!important}body.eloah-revue .rev-hero h1{font-size:44px!important}.foi-hero-copy{padding:26px 24px}body.eloah-revue .rev-axes,body.eloah-revue .rev-stories{grid-template-columns:1fr!important}body.eloah-revue .rev-axis{border:0!important}body.eloah-revue .rev-axis img{height:180px}body.eloah-revue .rev-bar{margin-top:35px!important}body.eloah-revue .rev-bar span{display:none}body.eloah-revue .rev-feature-copy{padding:25px!important}body.eloah-revue .rev-feature-copy h3{font-size:33px!important}body .rev-model-text{padding:22px 18px!important;font-size:18px!important}body .rev-model-hero h1{font-size:36px!important}body .top .tools{width:100%;justify-content:flex-start!important}body.eloah-revue .top .action{font-size:13px!important;padding:8px 10px!important}.reader .foi-photo figcaption{font-size:12px}}
+@media print{body{background:#fff!important}body.eloah-screen{padding-left:0!important}.foi-photo-credits{display:none}}
+body.eloah-revue .rev-art img{max-height:480px!important;width:100%!important;object-fit:contain!important}
