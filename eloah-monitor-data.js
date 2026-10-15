@@ -14,7 +14,7 @@ if(!root||!gate||!status||!button)return;
 const KEYS=['osMissions','osTasks','crewProjects','crewTasks','crewMembers','crewEvents','crewEventRegistrations','crewPaymentsVerified','crewEventOrdersPaid','crewFinanceEntries','pgArticles','pgOffersOpen','pgDistributionQueue','projectBackups'];
 let client=null,revision=0,busy=false,checkedAt=0;
 function message(str,state='pending'){status.textContent=str;status.dataset.status=state;}
-function wipe(reason='Reconnexion nécessaire.'){revision++;$('#real-results').hidden=true;for(const key of KEYS){const e=$('[data-real="'+key+'"]');if(e)e.textContent='—';}$('#real-events').replaceChildren();$('#real-checked').textContent='Aucune donnée affichée';message(reason,'error');}
+function wipe(reason='Reconnexion nécessaire.'){revision++;busy=false;button.disabled=false;$('#real-results').hidden=true;for(const key of KEYS){const e=$('[data-real="'+key+'"]');if(e)e.textContent='—';}$('#real-events').replaceChildren();$('#real-checked').textContent='Aucune donnée affichée';message(reason,'error');}
 function show(rows){
  for(const key of KEYS){const el=$('[data-real="'+key+'"]');if(!el)continue;const v=rows.measures?.[key];el.textContent=Number.isSafeInteger(v)&&v>=0?new Intl.NumberFormat('fr-FR').format(v):'—';}
  const container=$('#real-events');container.replaceChildren();
@@ -70,7 +70,7 @@ async function refresh(force=false){
  }catch(err){
    if(ticket!==revision)return;
    if(err.message==='auth')wipe('Compte fondatrice non vérifié. Ouvre ELOAH Fondatrice puis réessaie.');
-   else{message('Connexion aux indicateurs indisponible. Les autres outils restent accessibles.','error');$('#real-checked').textContent='Indicateurs non actualisés';}
+   else{$('#real-results').hidden=true;message('Connexion aux indicateurs indisponible. Les autres outils restent accessibles.','error');$('#real-checked').textContent='Indicateurs non actualisés';}
  }finally{
    if(ticket===revision){busy=false;button.disabled=false;}
    else busy=false;
