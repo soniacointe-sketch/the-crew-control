@@ -8,7 +8,6 @@ const Engine=root?.ELOAH_NUMERA_ENGINE;
 if(!Engine)return;
 const midiHz=n=>440*Math.pow(2,(n-69)/12);
 const clamp=(v,min,max)=>Math.max(min,Math.min(max,v));
-const encoder=new TextEncoder();
 function noiseBuffer(ctx,seed,seconds=.45){
  const length=Math.max(1024,Math.floor(ctx.sampleRate*seconds));
  const buf=ctx.createBuffer(1,length,ctx.sampleRate),ch=buf.getChannelData(0);
