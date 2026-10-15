@@ -63,7 +63,7 @@ panel.innerHTML=`
 <div class="r-actions"><button id="rAudit" type="button">Exécuter l'audit</button><button id="rExport" type="button">Exporter le registre JSON</button></div>
 <div class="r-alert" id="rStatus" role="status" aria-live="polite">La parole est attestée comme composante de certains rites rapportés ; la récitation des douze paires reste non démontrée.</div>
 <div class="r-sources" id="rSources"></div>
-<p><a href="https://github.com/soniacointe-sketch/the-crew-control/blob/main/corpus/parisis-alpha-020-voix-redeption.md" target="_blank" rel="noopener noreferrer">Lire ALPHA-020 · Dossier critique et citations ↗</a></p>
+<p><a href="https://github.com/soniacointe-sketch/the-crew-control/blob/main/corpus/parisis-alpha-020-voix-redemption.md" target="_blank" rel="noopener noreferrer">Lire ALPHA-020 · Dossier critique et citations ↗</a></p>
 <p class="r-small">Étude historique. Aucune initiation proposée, aucun nom secret attribué arbitrairement à Marcus, aucune donnée privée ELOAH consultée.</p>
 `;
 const after=main.querySelector("#alpha-provenance")||main.querySelector("#alpha-temoins")||main.querySelector(".mv-work");
@@ -110,7 +110,7 @@ $("rCompare").addEventListener("click",()=>{
 $("rAudit").addEventListener("click",()=>{$("rStatus").textContent=doc.audit.passed+" / "+doc.audit.total+" tests du moteur réussis ; ils vérifient les distinctions encodées, pas l'historicité indépendante des rites."});
 $("rExport").addEventListener("click",()=>{
  const blob=new Blob([JSON.stringify({generatedAt:new Date().toISOString(),...E.report()},null,2)],{type:"application/json;charset=utf-8"});
- const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="PARISIS-ALPHA-020-redeption.json";
+ const u=URL.createObjectURL(blob),a=document.createElement("a");a.href=u;a.download="PARISIS-ALPHA-020-redemption.json";
  document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),2000);
 });
 show("water");hypothesis("H6");
