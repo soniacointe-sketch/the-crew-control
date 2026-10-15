@@ -319,6 +319,18 @@ body.stage2040-active{overflow:hidden!important}
 .stage2040-regie-status{margin:12px 0 0!important;color:#efd2a9!important;font-size:12px!important}
 .stage2040-regie #stage2040pushTalk.talking{background:#a2447b;border-color:#f5d0e6}
 @media(max-width:750px){.stage2040-regie-grid{grid-template-columns:1fr}.stage2040-regie-inner{padding:9px}.stage2040-regie-card{padding:11px}.stage2040-regie button{min-height:44px}.stage2040-regie-clock{font-size:32px}}
+
+/* ELOAH MUSIC 2040 SHOW ARCHIVE V19 */
+.stage2040-archive{padding:12px;margin:11px 0;border:1px solid #80577c;border-radius:11px;background:linear-gradient(130deg,#39213e,#24172e)}
+.stage2040-archiveHeader{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:9px;margin-bottom:10px}
+.stage2040-archiveHeader strong{font:800 10px Inter,system-ui,sans-serif;color:#ead0a9;letter-spacing:.14em}
+.stage2040-archiveHeader span{font-size:11px;color:#d6c1d6}
+.stage2040-archiveButtons{display:flex;flex-wrap:wrap;gap:8px}
+.stage2040-archiveButtons button{flex:1 1 150px;border:1px solid #97658c;background:#502d52;color:#fff2fc;border-radius:9px;padding:11px;font:700 12px Inter,system-ui,sans-serif;min-height:42px}
+.stage2040-archiveButtons button:hover:not(:disabled){background:#70436a}
+.stage2040-archiveButtons button:focus-visible{outline:2px solid #f4d2ed;outline-offset:3px}
+.stage2040-archiveHint{color:#d9bdd6!important;font-size:11px!important;margin:9px 0 0!important;line-height:1.5}
+@media(max-width:750px){.stage2040-archive{padding:10px}.stage2040-archiveButtons button{flex:1 1 45%;font-size:11px}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
@@ -442,6 +454,19 @@ body.stage2040-active{overflow:hidden!important}
  <div class="stage2040-conductorBody">
   <p class="stage2040-conductorHelp">Prépare chaque numéro : nom de la chorégraphie, consignes de scène et état de préparation. Les boutons <strong>Lancer A</strong> et <strong>Préparer B</strong> agissent sur les platines existantes.</p>
   <p class="stage2040-conductorPrivacy" id="stage2040conductorPrivacy">Les notes du spectacle restent sur cet appareil et ne sont pas envoyées au cloud.</p>
+<div class="stage2040-archive" aria-label="Sauvegarder et imprimer le conducteur">
+ <div class="stage2040-archiveHeader">
+  <strong>ARCHIVES · CONDUCTEUR</strong>
+  <span>Copie locale · Transportable</span>
+ </div>
+ <div class="stage2040-archiveButtons">
+  <button id="stage2040exportShow" type="button">↓ Exporter JSON</button>
+  <button id="stage2040importShow" type="button">↑ Importer conducteur</button>
+  <button id="stage2040printShow" type="button">▤ Fiche imprimable / PDF</button>
+  <input id="stage2040importFile" type="file" accept=".json,application/json" hidden>
+ </div>
+ <p class="stage2040-archiveHint">La sauvegarde contient les noms de morceaux et les consignes, jamais les fichiers audio. En important sur un autre appareil, les morceaux doivent déjà exister dans la bibliothèque ; aucune playlist ni musique ne sera remplacée.</p>
+</div>
   <div id="stage2040conductorRows" class="stage2040-conductorRows"><p class="stage2040-setlistEmpty">Choisis d’abord une playlist dans « Setlist en direct ».</p></div>
   <p class="stage2040-conductorBottom" id="stage2040conductorStatus" role="status" aria-live="polite"></p>
  </div>
@@ -922,6 +947,102 @@ function regieStageClose(){
 
 /* ELOAH MUSIC 2040 SHOW CONDUCTOR V17 */
 let conductorScope='',conductorSignature='',conductorNotes=Object.create(null);
+
+/* ELOAH MUSIC 2040 SHOW ARCHIVE V19 */
+function showArchiveMessage(s){$('stage2040conductorStatus').textContent=s;}
+function showArchiveClean(s,max=180){return String(s??'').slice(0,max);}
+function showArchiveRecord(row){
+ const notes=conductorNotes[row.id]||{};
+ return {
+  source_id:showArchiveClean(row.id,120),
+  title:showArchiveClean(row.title,250),
+  artist:showArchiveClean(row.artist,250),
+  number:row.number,
+  name:showArchiveClean(notes.name,90),
+  cue:showArchiveClean(notes.cue,180),
+  group:showArchiveClean(notes.group,80),
+  light:showArchiveClean(notes.light,100),
+  status:['ready','done'].includes(notes.status)?notes.status:'todo'
+ };
+}
+function showArchiveRows(){
+ const ids=stageSetlistAvailableIds();
+ return ids.map((id,index)=>{const t=tracks.find(x=>x.id===id);return t?{id,title:t.title,artist:t.artist||'',number:index+1}:null}).filter(Boolean);
+}
+function showArchivePayload(){
+ const p=playlists.find(x=>x.id===stageSetlistId);
+ if(!p)return null;
+ return {format:'eloah-show-conductor',version:1,exported_at:new Date().toISOString(),playlist_name:p.name,entries:showArchiveRows().map(showArchiveRecord)};
+}
+function showArchiveDownload(name,contents,type){
+ const blob=new Blob([contents],{type});
+ const url=URL.createObjectURL(blob),a=document.createElement('a');
+ a.href=url;a.download=name;document.body.append(a);a.click();a.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),30000);
+}
+function showArchiveName(p){
+ return showArchiveClean(p?.playlist_name||'spectacle',50).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9-]+/g,'-').replace(/^-+|-+$/g,'')||'spectacle';
+}
+$('stage2040exportShow').onclick=()=>{
+ const payload=showArchivePayload();
+ if(!payload||!payload.entries.length){showArchiveMessage('Choisis une playlist contenant des morceaux avant de sauvegarder.');return}
+ try{
+  showArchiveDownload('eloah-conducteur-'+showArchiveName(payload)+'-'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(payload,null,2),'application/json;charset=utf-8');
+  showArchiveMessage('Copie JSON générée. Conserve-la dans un dossier privé : elle contient tes consignes de spectacle.');
+ }catch(e){showArchiveMessage('Impossible de générer le fichier : '+e.message)}
+};
+$('stage2040importShow').onclick=()=>{
+ if(!stageSetlistAvailableIds().length){showArchiveMessage('Sélectionne d’abord la playlist de destination dans la setlist.');return}
+ $('stage2040importFile').click();
+};
+$('stage2040importFile').onchange=async event=>{
+ const file=event.target.files?.[0];event.target.value='';
+ if(!file)return;
+ if(file.size>1024*1024){showArchiveMessage('Fichier trop volumineux (maximum 1 Mo).');return}
+ let payload;
+ try{payload=JSON.parse(await file.text())}catch(e){showArchiveMessage('Ce fichier JSON est illisible.');return}
+ if(!payload||payload.format!=='eloah-show-conductor'||payload.version!==1||!Array.isArray(payload.entries)||payload.entries.length>300){
+  showArchiveMessage('Format incompatible : sauvegarde de conducteur ELOAH V1 requise (300 passages maximum).');return;
+ }
+ const currentPlaylist=playlists.find(p=>p.id===stageSetlistId);
+ if(!currentPlaylist){showArchiveMessage('Sélectionne une playlist de destination.');return}
+ const titleKey=(t,a)=>[String(t||'').trim().toLocaleLowerCase('fr'),String(a||'').trim().toLocaleLowerCase('fr')].join('\u0001');
+ const candidates=showArchiveRows(),matches=[],missing=[];
+ const used=new Set();
+ for(const raw of payload.entries){
+  if(!raw||typeof raw!=='object'||typeof raw.title!=='string'||typeof raw.artist!=='string'){missing.push('Entrée invalide');continue}
+  const key=titleKey(raw.title,raw.artist);
+  const options=candidates.filter(row=>titleKey(row.title,row.artist)===key&&!used.has(row.id));
+  // Titles and artists must match uniquely: never associate notes with an ambiguous title.
+  if(options.length!==1){missing.push(showArchiveClean(raw.title,80));continue}
+  const candidate=options[0];used.add(candidate.id);
+  const entry={};
+  for(const [field,max] of [['name',90],['cue',180],['group',80],['light',100]]){
+   entry[field]=typeof raw[field]==='string'?raw[field].slice(0,max):'';
+  }
+  entry.status=['ready','done'].includes(raw.status)?raw.status:'todo';
+  matches.push({id:candidate.id,data:entry});
+ }
+ if(!matches.length){showArchiveMessage('Aucune correspondance unique. Importe d’abord les mêmes titres et artistes sur cet appareil.');return}
+ const sameName=String(payload.playlist_name||'').trim()===currentPlaylist.name.trim();
+ const warning='Importer '+matches.length+' passage(s) dans « '+currentPlaylist.name+' » ?\n'+missing.length+' titre(s) non retrouvés ou ambigus, ignorés.\n'+(!sameName?'Attention : le nom de la playlist source est différent.\n':'')+'Les notes correspondantes seront remplacées. Les musiques et playlists restent intactes.';
+ if(!confirm(warning)){showArchiveMessage('Importation annulée.');return}
+ for(const match of matches){conductorNotes[match.id]={...(conductorNotes[match.id]||{}),...match.data};}
+ conductorSave();conductorRender();regieRefreshCues();
+ showArchiveMessage(matches.length+' passage(s) importé(s), '+missing.length+' non retrouvés ou ambigus. Aucun fichier audio modifié.');
+};
+$('stage2040printShow').onclick=()=>{
+ const payload=showArchivePayload();
+ if(!payload||!payload.entries.length){showArchiveMessage('Choisis une playlist contenant des morceaux avant de créer la fiche.');return}
+ const esc=s=>String(s??'').replace(/[&<>"']/g,ch=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch]));
+ const w=window.open('','_blank','width=1000,height=800,scrollbars=yes,resizable=yes');
+ if(!w){showArchiveMessage('La fenêtre imprimable a été bloquée. Autorise les fenêtres surgissantes pour ce site.');return}
+ const rows=payload.entries.map(row=>'<tr><td>'+esc(String(row.number).padStart(2,'0'))+'</td><td><strong>'+esc(row.name||row.title)+'</strong><small>'+esc(row.title)+' — '+esc(row.artist)+'</small></td><td>'+esc(row.group||'—')+'</td><td>'+esc(row.cue||'—')+'</td><td>'+esc(row.light||'—')+'</td><td>'+esc(row.status==='done'?'Terminé':row.status==='ready'?'Prêt':'À faire')+'</td></tr>').join('');
+ const documentHtml='<!doctype html><html lang="fr"><head><meta charset="utf-8"><title>Conducteur ELOAH · '+esc(payload.playlist_name)+'</title><style>body{font:12px Arial,sans-serif;color:#181018;margin:25px}h1{font-size:24px;margin:0 0 6px}p{color:#555;margin:0 0 18px}table{width:100%;border-collapse:collapse}th,td{border:1px solid #aaa;padding:8px;vertical-align:top;text-align:left}th{background:#eee;font-size:11px}td small{display:block;color:#555;margin-top:5px}tr{break-inside:avoid}button{padding:12px;background:#321837;color:white;border:0;border-radius:6px;margin-bottom:16px}@page{size:A4 landscape;margin:12mm}@media print{button{display:none}body{margin:0}}</style></head><body><button onclick="window.print()">Imprimer / Enregistrer en PDF</button><h1>CONDUCTEUR DE SPECTACLE</h1><p>'+esc(payload.playlist_name)+' · ELOAH 2040 · '+esc(new Date().toLocaleDateString('fr-FR'))+'</p><table><thead><tr><th>N°</th><th>Chorégraphie / musique</th><th>Groupe</th><th>Consignes de scène</th><th>Lumière</th><th>État</th></tr></thead><tbody>'+rows+'</tbody></table></body></html>';
+ w.document.open();w.document.write(documentHtml);w.document.close();w.focus();
+ showArchiveMessage('Fiche imprimable ouverte. Utilise « Imprimer / Enregistrer en PDF » dans la nouvelle fenêtre.');
+};
+
 function conductorStorage(){
  const loggedIn=typeof cloudUser!=='undefined'&&cloudUser?.id;
  const scope=loggedIn?'user:'+cloudUser.id:'session';
