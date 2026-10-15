@@ -80,6 +80,17 @@ body:is(.client-page,.eloah-home-pro) :is(a,button,input,select,textarea,summary
 body:is(.client-page,.eloah-home-pro) #contenu .pilotage-anchors{background:#1d1227!important;border-color:#6e506c!important}
 body:is(.client-page,.eloah-home-pro) #contenu .client-local-note{background:#2d1d32!important;border-color:#a08291!important;color:#e4d0df!important}
 @media(prefers-reduced-motion:reduce){body:is(.client-page,.eloah-home-pro) *{transition:none!important}}
+</style><style id="eloah-card-text-contrast">
+/* Override legacy light-theme descendant colors on the dark home cards. */
+body.eloah-home-pro #contenu :is(.tasks,.task,.choice,.secondary,.project-link,.tool,.empty-state,.directory,.eloah-account-card,.eloah-sites-card,.eloah-dev-card) :is(strong,b,h2,h3,h4){color:#fff4ed!important;-webkit-text-fill-color:#fff4ed!important}
+body.eloah-home-pro #contenu :is(.tasks,.task,.choice,.secondary,.project-link,.tool,.empty-state,.directory) :is(p,small,.desc,.muted){color:#dacbda!important;-webkit-text-fill-color:#dacbda!important}
+body.eloah-home-pro #contenu :is(.task a,.secondary-body>a,.section-head>a,.footer a,.choice .number){color:#f2d5a9!important;-webkit-text-fill-color:#f2d5a9!important}
+body.eloah-home-pro #contenu :is(.choice,.project-link,.tool,.directory>a,.eloah-account-card,.eloah-sites-card,.eloah-dev-card):is(:hover,:focus-visible){background:#38243f!important;border-color:#d9b98e!important}
+body.eloah-home-pro #contenu .task a{padding:8px 12px;background:#38243f!important;border:1px solid #9d7897;border-radius:8px;font-weight:650}
+body.eloah-home-pro #contenu .task strong{font-size:15px;line-height:1.5}
+body.eloah-home-pro #contenu .task small{font-size:12px;line-height:1.6}
+body.eloah-home-pro #contenu :is(.eloah-account-card,.eloah-sites-card,.eloah-dev-card)>strong{background:#24162d!important;padding:16px;line-height:1.45}
+@media(max-width:650px){body.eloah-home-pro #contenu .task{align-items:flex-start;flex-wrap:wrap}body.eloah-home-pro #contenu .task>div{flex:1 1 100%}body.eloah-home-pro #contenu .task a{min-height:44px}}
 </style></head>
 <body class="eloah-home-client eloah-home-pro">
 <a class="skip-link" href="#contenu">Aller à mon accueil</a>
