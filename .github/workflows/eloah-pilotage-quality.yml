@@ -6,6 +6,8 @@ on:
       - 'eloah-pilotage.html'
       - 'eloah-pilotage-premium.css'
       - 'eloah-pilotage-overview.js'
+      - 'eloah-pilotage-focus.js'
+      - 'eloah-pilotage-refine.css'
       - '.github/workflows/eloah-pilotage-quality.yml'
   workflow_dispatch:
 permissions:
@@ -20,7 +22,9 @@ jobs:
         with:
           node-version: '22'
       - name: Syntaxe du cockpit
-        run: node --check eloah-pilotage-overview.js
+        run: |
+          node --check eloah-pilotage-overview.js
+          node --check eloah-pilotage-focus.js
       - name: Contrôler les fonctions existantes et la présentation premium
         shell: bash
         run: |
@@ -49,6 +53,23 @@ jobs:
           for name in ['eloah-navigation.js','eloah-workspace.js','eloah-pilotage-client.js','eloah-pilotage-organisation.js','eloah-pilotage-overview.js']:
               assert any(name in s for s in page.scripts), f'Script existant manquant : {name}'
           assert 'eloah-pilotage-premium.css?v=1.0.0' in html
+          assert 'eloah-pilotage-refine.css?v=2.0.0' in html
+          assert 'eloah-pilotage-focus.js?v=2.0.0' in html
+          assert Path('eloah-pilotage-focus.js').is_file()
+          assert Path('eloah-pilotage-refine.css').is_file()
+          for anchor in ['pilotage-focus','pilotage-focus-list','pilotage-focus-count','pilotage-focus-add','pilotage-progress-total','pilotage-progress-done','pilotage-progress-bar','pilotage-progress-meta']:
+              assert anchor in page.ids, f'Focus element missing: {anchor}'
+          refine=Path('eloah-pilotage-refine.css').read_text(encoding='utf-8')
+          assert refine.count('{')==refine.count('}'), 'Refined CSS brace mismatch'
+          assert '.focus-layout' in refine and '.focus-item' in refine
+          for width in ['1080','750','430']:
+              assert f'@media(max-width:{width}px)' in refine, 'Missing mobile breakpoint'
+          focus=Path('eloah-pilotage-focus.js').read_text(encoding='utf-8')
+          assert 'eloah-planning-v1' in focus and 'data-task-edit' in focus
+          assert 'localStorage.setItem' not in focus, 'Focus must remain read-only'
+          assert 'fetch(' not in focus and '.from(' not in focus, 'Focus cannot call remote sources'
+          assert 'Aucune tâche de démonstration' in html
+
           assert 'eloah-theme-global.css' not in html, 'Ancien thème écrasant le visuel'
           for key in ['.pilotage-hero-inner','.pilotage-panel','.workspace-choice','#ops-calendar','.client-next','.services article','dialog#client-new-project']:
               assert key in css, f'Style critique absent : {key}'
