@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#1d1923">
+<meta name="theme-color" content="#182321">
 
 <title>ELOAH · PARISIS ENGINE</title>
 <link rel="stylesheet" href="eloah-parisis.css?v=20261013-modules">
@@ -130,8 +130,55 @@ body{background:#1b1c1f;color:#f5f0e6}
 @media(max-width:550px){.top > .top-actions>*{flex:1 1 100%;text-align:center}.top .parisis-hero-note{font-size:11px}}
 </style>
 <link rel="stylesheet" href="parisis-home-studio.css?v=20261015-v3">
-</head>
-<body>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style id="parisis-encre-pierre">
+body#parisis-identity{--bg:#182321;--panel:#354B43;--text:#F2EBDD;--muted:#C9BEAC;--gold:#B39359;background:#182321!important;color:#F2EBDD!important;font-family:"Source Sans 3",system-ui,sans-serif!important;line-height:1.6}
+body#parisis-identity :is(button,input,select,textarea,.button-light){font-family:"Source Sans 3",system-ui,sans-serif!important}
+body#parisis-identity :is(h1,h2,h3,.wordmark,.parisis-cover strong,.parisis-editorial-paths strong){font-family:"Libre Baskerville",Georgia,serif!important}
+body#parisis-identity .side{background:#182321!important;border-color:#6C7565!important}
+body#parisis-identity .side :is(.wordmark,button){color:#F2EBDD!important}
+body#parisis-identity .side #nav button:is(.active,:hover){background:#354B43!important;border-color:#B39359!important;color:#F2EBDD!important}
+body#parisis-identity .top{background:#182321!important;border-color:#B39359!important}
+body#parisis-identity .top h1{font-size:clamp(36px,5vw,68px)!important;line-height:1.12!important;letter-spacing:-.035em!important;color:#F2EBDD!important}
+body#parisis-identity .top h1 em{color:#D9BD85!important}
+body#parisis-identity .top .sub{font:400 clamp(17px,1.8vw,23px)/1.6 "Libre Baskerville",Georgia,serif!important;color:#E4DBCC!important}
+body#parisis-identity :is(.eyebrow,.parisis-card-heading){color:#D9BD85!important}
+body#parisis-identity :is(.parisis-hero-note,.parisis-atlas-foot,.parisis-visual-credit,.parisis-chapters-head p,.parisis-library-heading p){color:#D8D0C2!important}
+body#parisis-identity .parisis-hero-art{background:#354B43}
+body#parisis-identity :is(.parisis-hero-art img,.parisis-cover img){filter:none!important}
+body#parisis-identity .parisis-hero-art:after{background:linear-gradient(0deg,#182321e8,transparent 35%)!important}
+body#parisis-identity :is(.parisis-editorial-paths a,.parisis-atlas-card,.parisis-reading-card){background:#354B43!important;border-color:#738176!important;color:#F2EBDD!important}
+body#parisis-identity .parisis-editorial-paths a:hover{background:#41594F!important}
+body#parisis-identity :is(.parisis-editorial-paths strong,.parisis-editorial-paths span){color:#F2EBDD!important}
+body#parisis-identity .parisis-editorial-paths em{color:#D9BD85!important}
+body#parisis-identity :is(.parisis-library-heading h2,.parisis-chapters-head h2,.parisis-editorial-separator h2){font-size:clamp(25px,2.7vw,36px)!important;color:#F2EBDD!important;line-height:1.3!important}
+body#parisis-identity :is(.parisis-library-heading,.parisis-chapters-head,.parisis-editorial-separator){border-color:#B39359!important}
+body#parisis-identity .parisis-chapter{background:#F2EBDD!important;border-color:#C9BEAC!important}
+body#parisis-identity .parisis-chapter-body{color:#182321!important}
+body#parisis-identity .parisis-chapter-body h3{color:#182321!important;font-size:22px!important}
+body#parisis-identity .parisis-chapter-body p{color:#465047!important;font-size:15px!important;line-height:1.65!important}
+body#parisis-identity .parisis-chapter-links a{background:#E6DECE!important;border-color:#B4A58D!important;color:#182321!important;font-size:13px!important}
+body#parisis-identity .parisis-chapter-links a:hover{background:#354B43!important;color:#F2EBDD!important}
+body#parisis-identity .parisis-cover strong{font-size:clamp(25px,3vw,36px)!important;color:#FFF8EB!important;line-height:1.2!important}
+body#parisis-identity .parisis-visual-credit{background:#253730!important}
+body#parisis-identity :is(.parisis-visual-credit a,.parisis-hero-art figcaption a,.parisis-card-heading a,.parisis-heritage-sources a){color:#E3C891!important}
+body#parisis-identity :is(.parisis-chapter-note,.parisis-heritage-sources){background:#253730!important;color:#E4DBCC!important;border-left-color:#B39359!important}
+body#parisis-identity .parisis-library .parisis-folder{background:#253730!important;border-color:#738176!important}
+body#parisis-identity .parisis-library .parisis-folder summary{color:#F2EBDD!important}
+body#parisis-identity .parisis-library .parisis-folder summary span{background:#F2EBDD!important;color:#354B43!important}
+body#parisis-identity .parisis-library .parisis-folder-links .button-light{background:#354B43!important;color:#F2EBDD!important;border-color:#738176!important}
+body#parisis-identity .parisis-library-shortcuts a{background:#354B43!important;color:#F2EBDD!important;border-color:#B39359!important}
+body#parisis-identity .top-actions :is(button,.button-light){background:#354B43!important;color:#F2EBDD!important;border-color:#B39359!important}
+body#parisis-identity :is(.top-actions button.primary,.parisis-library-heading .button-light){background:#B39359!important;color:#182321!important;border-color:#B39359!important}
+body#parisis-identity .parisis-workspace{background:#F2EBDD!important;color:#182321!important;border-color:#C9BEAC!important;border-top-color:#743D45!important}
+body#parisis-identity .parisis-workspace :is(.panel,.record,.inspector-card){background:#FFFCF5!important;color:#182321!important}
+body#parisis-identity :is(.field,.parisis-collection-search){background:#FFFCF5!important;color:#182321!important;border-color:#968B78!important}
+body#parisis-identity :is(input,select,textarea){color:#182321!important}
+body#parisis-identity :is(button,a,input,textarea,select,summary):focus-visible{outline:3px solid #B39359!important;outline-offset:3px!important}
+@media(max-width:900px){body#parisis-identity .side .parisis-menu-panel{background:#182321!important}body#parisis-identity .side .parisis-menu-panel #nav button{background:#354B43!important}}
+@media(max-width:600px){body#parisis-identity .top>div:first-child{padding:28px 20px 18px}body#parisis-identity .parisis-chapter-body{padding:18px}}
+</style></head>
+<body id="parisis-identity">
 <div class="shell">
 <aside class="side">
 <input id="parisisMenuToggle" class="parisis-menu-toggle" type="checkbox" aria-label="Afficher les rubriques et enquêtes PARISIS ENGINE">
