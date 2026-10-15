@@ -1,0 +1,62 @@
+name: ELOAH Pilotage · visuel et fonctions
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'eloah-pilotage.html'
+      - 'eloah-pilotage-premium.css'
+      - 'eloah-pilotage-overview.js'
+      - '.github/workflows/eloah-pilotage-quality.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  pilotage-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntaxe du cockpit
+        run: node --check eloah-pilotage-overview.js
+      - name: Contrôler les fonctions existantes et la présentation premium
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          from html.parser import HTMLParser
+          from pathlib import Path
+          import re
+
+          class Tags(HTMLParser):
+              def __init__(self):
+                  super().__init__();self.ids=[];self.links=[];self.scripts=[]
+              def handle_starttag(self,tag,attrs):
+                  data=dict(attrs)
+                  if 'id' in data:self.ids.append(data['id'])
+                  if 'href' in data:self.links.append(data['href'])
+                  if tag=='script' and 'src' in data:self.scripts.append(data['src'])
+          html=Path('eloah-pilotage.html').read_text(encoding='utf-8')
+          css=Path('eloah-pilotage-premium.css').read_text(encoding='utf-8')
+          js=Path('eloah-pilotage-overview.js').read_text(encoding='utf-8')
+          page=Tags();page.feed(html)
+          assert len(set(page.ids))==len(page.ids), 'ID dupliqué'
+          keep=['contenu','client-quick-add','mon-organisation','client-next','ops-calendar','mes-projets','client-project-list','client-project-empty','services','client-core-tools','ops-cloud-login','ops-cloud-save','planning-backup','planning-restore','ops-transfer-preview','ops-transfer-go','client-new-project','client-project-form']
+          for key in keep: assert key in page.ids, f'Fonction existante disparue : {key}'
+          counters=['pilotage-count-projects','pilotage-count-open','pilotage-count-soon','pilotage-count-late','pilotage-count-status']
+          for key in counters: assert key in page.ids, f'Compteur manquant : {key}'
+          for name in ['eloah-navigation.js','eloah-workspace.js','eloah-pilotage-client.js','eloah-pilotage-organisation.js','eloah-pilotage-overview.js']:
+              assert any(name in s for s in page.scripts), f'Script existant manquant : {name}'
+          assert 'eloah-pilotage-premium.css?v=1.0.0' in html
+          assert 'eloah-theme-global.css' not in html, 'Ancien thème écrasant le visuel'
+          for key in ['.pilotage-hero-inner','.pilotage-panel','.workspace-choice','#ops-calendar','.client-next','.services article','dialog#client-new-project']:
+              assert key in css, f'Style critique absent : {key}'
+          for width in ['1100','850','650']:
+              assert f'@media(max-width:{width}px)' in css
+          assert css.count('{')==css.count('}'), 'Accolades CSS non équilibrées'
+          assert "localStorage.setItem" not in js and "sessionStorage.setItem" not in js, 'Les compteurs doivent être en lecture seule'
+          assert "fetch(" not in js and ".from(" not in js, 'Aucune donnée privée n’est envoyée'
+          assert "eloah-planning-v1" in js and "eloah-project-v1:" in js
+          print('ELOAH Pilotage : structure, fonctions, liens, CSS et lecture locale préservés.')
+          PY
