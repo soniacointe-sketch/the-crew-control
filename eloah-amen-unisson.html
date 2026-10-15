@@ -1,0 +1,123 @@
+<!doctype html><html lang="fr"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#130c1b">
+<meta name="description" content="ELOAH · AMEN L'Unisson : du Silence à la Voix, des 24 lettres au son commun. Écoute une création originale inspirée des textes sur Marcus, modifie et exporte en WAV.">
+<title>ELOAH · AMEN — L'Unisson</title>
+<style>
+:root{color-scheme:dark;--black:#0d0912;--plum:#201323;--raised:#291b30;--cream:#fcf1e4;--gold:#f2d19e;--pale:#d9c4d6;--pink:#c774a4;--line:#6f4b6f}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--black);color:var(--cream);font:14px/1.65 Inter,system-ui,Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.42;cursor:not-allowed}
+:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+a{color:var(--gold);text-underline-offset:3px}
+.container{width:min(1320px,calc(100% - clamp(26px,4.5vw,76px)));margin:0 auto}
+.top{background:#160d1d;border-bottom:1px solid #513a54}.top .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:15px;padding:15px 0}
+.logo{font:25px Georgia,serif;color:white;text-decoration:none;letter-spacing:.04em}.logo b{color:var(--gold);font-weight:normal}
+.nav{display:flex;flex-wrap:wrap;gap:15px;font-size:12px}.nav a{text-decoration:none;color:#dcc5d4}
+main{padding-bottom:54px}
+.hero{background:radial-gradient(ellipse at 77% 3%,#63375885,transparent 52%),linear-gradient(130deg,#181022,#26162b);padding:clamp(29px,4.7vw,62px) 0 31px;border-bottom:1px solid #6b4560}
+.eyebrow{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:800}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}
+h1{font-size:clamp(51px,8vw,117px);letter-spacing:-.06em;line-height:.99;margin:12px 0 14px}
+h1 em{color:var(--gold);font-style:normal}
+.hero p{font:clamp(16px,1.8vw,23px)/1.56 Georgia,serif;color:#efdde5;max-width:910px}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:19px}.tags span{padding:7px 11px;border:1px solid #8a6681;background:#34203b;border-radius:99px;color:#f6dfe9;font-size:10px}
+.layout{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(310px,.6fr);gap:16px;align-items:start;padding-top:19px}
+.panel{border:1px solid #5b425f;border-radius:15px;background:#1c1424;overflow:hidden}
+.pad{padding:clamp(16px,2.6vw,26px)}
+.stage{aspect-ratio:16/9;min-height:270px;background:radial-gradient(circle at 50% 50%,#4d2a52,#180f24 60%,#0a0812);position:relative;overflow:hidden;border-bottom:1px solid #644366}
+.stage canvas{width:100%;height:100%;display:block}
+.stage-label{position:absolute;inset:auto 20px 19px;display:flex;justify-content:space-between;align-items:end;gap:10px;pointer-events:none}
+.stage-label strong{font:clamp(25px,3.5vw,43px) Georgia,serif;color:#ffebcf;text-shadow:0 3px 12px #140b15}
+.stage-label small{color:#dfc5da;font-size:11px;text-align:right;max-width:45%}
+h2{font-size:clamp(25px,2.7vw,36px);margin:4px 0 10px}
+h3{font-size:clamp(20px,2.2vw,28px);margin:10px 0}
+p{color:#e7d2df}.muted{color:#c8b6c6;font-size:12px;line-height:1.6}
+.controls{display:flex;gap:9px;flex-wrap:wrap;margin:17px 0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;border:1px solid #a27c91;border-radius:9px;background:#4b2e4a;color:#ffeddf;padding:10px 16px;font-size:12px;font-weight:800}
+.btn:hover{background:#724365}.btn.primary{background:var(--gold);color:#2d172b;border-color:var(--gold)}
+.btn.primary:hover{background:#ffe3bd}
+.btn:disabled{cursor:not-allowed}
+.progress{height:6px;border-radius:99px;background:#513651;overflow:hidden;margin:12px 0 8px}
+.progress span{height:100%;display:block;width:0;background:linear-gradient(90deg,#edcf9c,#d784b8)}
+.timing{display:flex;justify-content:space-between;color:#d2bdd0;font-size:11px}
+.status{background:#34263b;border-left:3px solid #eecb9c;padding:12px;margin:14px 0;color:#f5dfe2;font-size:12px}
+.phases{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:15px 0}
+.phase{background:#2c2033;color:#f7e2df;border:1px solid #5d465e;border-radius:9px;padding:12px 9px;text-align:left;min-width:0}
+.phase:hover,.phase.active{background:#694363;border-color:#ecc78e}
+.phase .symbol{font:30px Georgia,serif;color:var(--gold);display:block}
+.phase strong{font-size:12px;display:block;margin:5px 0}
+.phase small{display:block;font-size:10px;color:#d4c1cb}
+.block{background:#291c2e;border:1px solid #674964;border-radius:11px;padding:15px;margin:12px 0}
+.block strong{color:var(--gold)}.block p{font-size:12px;margin:7px 0}
+.pairs{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px;margin:12px 0}
+.pair{border:1px solid #634c64;border-radius:6px;background:#302035;padding:9px 5px;text-align:center}
+.pair b{display:block;font:22px Georgia,serif;color:#f4d2a3}.pair small{font-size:9px;color:#d3bfd1}
+.vowels{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:5px;margin:11px 0}
+.vowel{padding:11px 5px;text-align:center;border:1px solid #866788;background:#34263b;border-radius:7px}
+.vowel b{display:block;font:27px Georgia,serif;color:#f0d2a2}.vowel small{font-size:9px;color:#dbbfd2}
+.settings{display:grid;gap:12px}
+label{display:block;font-size:12px;font-weight:700;color:#edd9db}
+select{display:block;width:100%;background:#130f1c;color:#f9ecea;border:1px solid #7c5872;border-radius:8px;padding:10px;margin:7px 0}
+input[type=range]{width:100%;accent-color:#d28bbb;cursor:pointer}
+.slider{display:flex;justify-content:space-between;gap:7px}
+.slider output{color:var(--gold)}
+.checkbox{display:flex;align-items:center;gap:8px}.checkbox input{accent-color:#d18dbb}
+.scar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.scar div{background:#34263b;border:1px solid #634663;border-radius:8px;padding:10px}
+.scar strong{font:26px Georgia,serif;color:var(--gold);display:block}.scar small{font-size:10px;color:#d2bfc9}
+footer{border-top:1px solid #47394e;padding:26px 0 42px;color:#c4adbd;font-size:11px}
+@media(max-width:910px){.layout{grid-template-columns:1fr}.stage{aspect-ratio:16/9}}
+@media(max-width:600px){h1{font-size:59px}.stage{aspect-ratio:4/3}.phases{grid-template-columns:repeat(2,minmax(0,1fr))}.pairs{grid-template-columns:repeat(3,1fr)}.controls .btn{flex:1}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head><body>
+<header class="top"><div class="container"><a class="logo" href="mes-univers.html">ELOAH <b>✦ AMEN</b></a>
+<nav class="nav" aria-label="Navigation ELOAH"><a href="mes-univers.html">Accueil</a><a href="eloah-music.html">ELOAH Music</a><a href="eloah-numera.html">NUMERA</a><a href="eloah-alpha-opus.html">ALPHA OPUS</a><a href="parisis-alpha-marcus-vivant.html">PARISIS</a></nav></div></header>
+<section class="hero"><div class="container"><div class="eyebrow">NUMERA · EXPÉRIENCE SONORE · PARISIS ENGINE</div>
+<h1>AMEN <em>· L’Unisson.</em></h1>
+<p>Entendre une idée : au commencement, le silence. Puis une voix, les voix qui se multiplient en vingt-quatre éléments, et enfin leur réunion en un seul son.</p>
+<div class="tags"><span>78 SECONDES</span><span>24 LETTRES · 12 PAIRES</span><span>9 + 8 + 7</span><span>7 COULEURS VOCALES</span><span>UNISSON FINAL</span></div></div></section>
+<main class="container layout">
+<section class="panel"><div class="stage"><canvas id="amenVisual" aria-label="Cercles de voix qui se multiplient puis convergent" role="img"></canvas>
+<div class="stage-label"><strong id="phaseCover">Le Silence</strong><small id="phaseSubtitle">Une respiration avant le premier son</small></div></div>
+<div class="pad">
+<div class="eyebrow">ŒUVRE ORIGINALE · NUMÉRA / PARISIS</div>
+<h2>Écouter la naissance d’un son.</h2>
+<p class="muted">Les vingt-quatre lettres deviennent des entrées vocales ; les sept voyelles sont des timbres. À la fin, elles rejoignent une même hauteur. Aucun son antique n’est prétendument reconstitué.</p>
+<div class="controls"><button type="button" class="btn primary" id="play">▶ Écouter l’expérience</button><button type="button" class="btn" id="pause">Ⅱ Pause</button><button type="button" class="btn" id="stop">■ Arrêter</button></div>
+<div class="progress" role="progressbar" aria-label="Progression de l’expérience" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="amenProgress"><span id="amenProgressBar"></span></div>
+<div class="timing"><span id="timeNow">00:00</span><span>01:18</span></div>
+<div class="status" id="status" role="status" aria-live="polite">Appuie sur Écouter. Les premières secondes sont volontairement presque silencieuses.</div>
+<h3>Quatre mouvements</h3><div class="phases" id="amenPhases" role="group" aria-label="Écouter à partir d’un mouvement"></div>
+<div class="block" id="movementInfo" aria-live="polite"></div>
+<h3>Le corps des douze paires</h3><p class="muted">Chaque paire réunit deux extrémités de l’alphabet : leurs rangs totalisent toujours 25. Les douze paires donnent vingt-quatre entrées sonores.</p>
+<div class="pairs" id="amenPairs"></div>
+<h3>Les sept voix du ciel</h3><div class="vowels" id="amenVowels"></div>
+</div></section>
+<aside class="panel"><div class="pad">
+<div class="eyebrow">CONSOLE DE CRÉATION</div><h2>Sculpter l’unisson.</h2>
+<p class="muted">Modifie les couleurs, la densité des voix et la résonance. Les quatre mouvements et les calculs ALPHA restent intacts.</p>
+<div class="settings">
+<label for="root">La note finale commune<select id="root"><option value="A3">La 3 · chaude</option><option value="G3">Sol 3 · profonde</option><option value="D3">Ré 3 · grave</option><option value="C3">Do 3 · très grave</option></select></label>
+<label for="voices">Voix qui se rejoignent<select id="voices"><option value="24">24 voix · le modèle complet</option><option value="16">16 voix · ensemble réduit</option><option value="12">12 voix · ensemble léger</option></select></label>
+<label for="intensity"><span class="slider">Intensité globale <output id="intensityValue">72 %</output></span><input type="range" id="intensity" min="20" max="100" value="72"></label>
+<label class="checkbox"><input type="checkbox" id="reverb" checked> Résonance spatiale</label>
+<button class="btn primary" type="button" id="recompose">✦ Recomposer avec ces réglages</button>
+</div>
+<h3>Exporter ta création</h3>
+<div class="controls"><button type="button" class="btn" id="wav">↓ Audio WAV</button><button type="button" class="btn" id="json">↓ Partition JSON</button></div>
+<div class="status" id="exportStatus" aria-live="polite">Export produit par synthèse locale dans ton navigateur. La version WAV peut être volumineuse sur mobile.</div>
+<h3>Les nombres qui organisent les voix</h3>
+<div class="scar"><div><strong>24</strong><small>Lettres</small></div><div><strong>12</strong><small>Paires</small></div><div><strong>7</strong><small>Voyelles</small></div></div>
+<div class="block"><strong>9 · 8 · 7</strong><p>Trois familles de lettres, devenues trois vagues d’entrées vocales.</p>
+<strong>8 · 8 · 8</strong><p>Trois Ogdoades, transposées en arches harmoniques.</p>
+<strong>4 · 4 · 10 · 12</strong><p>Quatre émissions, utilisées comme subdivisions compositionnelles dans nos recherches.</p>
+<strong>AMEN</strong><p>Un dernier son commun : une interprétation artistique de l’unité, et non une prononciation rituelle conservée.</p></div>
+<p class="muted">Le récit de Marcus est connu surtout par son adversaire Irénée. Ce studio ne prétend pas découvrir une fréquence divine, un chant antique ou une partition de Jésus.</p>
+<p class="muted"><a href="https://www.newadvent.org/fathers/0103114.htm" target="_blank" rel="noopener noreferrer">Source historique : Irénée I,14 ↗</a></p>
+<p class="muted"><a href="parisis-alpha-marcus-vivant.html">Explorer les preuves et limites de PARISIS ↗</a></p>
+</div></aside>
+</main>
+<footer><div class="container">ELOAH NUMERA · AMEN / L’Unisson · 2026. Œuvre sonore contemporaine fondée sur un scénario symbolique antique. Les sons, les fréquences et les timbres sont des choix artistiques ; aucune voix réelle ni donnée privée ELOAH n’est utilisée.</div></footer>
+<script src="eloah-amen-unisson-engine.js?v=20261016-a1" defer></script>
+<script src="eloah-amen-unisson-ui.js?v=20261016-a1" defer></script>
+</body></html>
