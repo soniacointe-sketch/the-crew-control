@@ -49,5 +49,6 @@ Comment les récits de l'enfance de Jésus associent-ils l'apprentissage des let
 
 - [ALPHA-010 · Les 24 lettres et le corps de la Vérité : Marcus selon Irénée](foi-control.html?file=eloah-alpha-010-marcus-24-lettres.md)
 - [ALPHA-011 · Sept voyelles, sept cieux et Alpha-Oméga dans l'Apocalypse](foi-control.html?file=eloah-alpha-011-sept-voyelles-apocalypse.md)
+- [ALPHA-012 · Aleph, noms divins, Michel et manuscrits](parisis-alpha-012-noms-divins-michel.html)
 
 **Méthode :** la mention des marcosiens chez Irénée atteste un usage ancien des motifs alphabétiques, mais pas l'historicité de la scène rapportée sur Jésus enfant. [Voir la suite des dossiers dans PARISIS ENGINE](parisis-fil-enquetes.html#alpha).
