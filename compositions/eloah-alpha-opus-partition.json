@@ -1,0 +1,4171 @@
+{
+  "format": "eloah-alpha-opus-score-v1",
+  "title": "ALPHA · De la lettre à la voix",
+  "version": "ALPHA-OPUS/1.0.0",
+  "description": "Partition instrumentale originale des 12 tableaux issue des enquêtes ALPHA, réglages 106 BPM.",
+  "config": {
+    "format": "essentiel",
+    "bpm": 106,
+    "root": 48,
+    "density": 0.58,
+    "volume": 0.7,
+    "percussion": true,
+    "harmonies": true
+  },
+  "sourceData": {
+    "classes": [
+      9,
+      8,
+      7
+    ],
+    "ogdoades": [
+      8,
+      8,
+      8
+    ],
+    "heavens": [
+      {
+        "letter": "Α",
+        "heaven": 1,
+        "present": 0
+      },
+      {
+        "letter": "Ε",
+        "heaven": 2,
+        "present": 0
+      },
+      {
+        "letter": "Η",
+        "heaven": 3,
+        "present": 1
+      },
+      {
+        "letter": "Ι",
+        "heaven": 4,
+        "present": 1
+      },
+      {
+        "letter": "Ο",
+        "heaven": 5,
+        "present": 1
+      },
+      {
+        "letter": "Υ",
+        "heaven": 6,
+        "present": 1
+      },
+      {
+        "letter": "Ω",
+        "heaven": 7,
+        "present": 0
+      }
+    ],
+    "body": [
+      {
+        "first": "Α",
+        "last": "Ω",
+        "number": 1,
+        "body": "Tête",
+        "ranks": [
+          1,
+          24
+        ]
+      },
+      {
+        "first": "Β",
+        "last": "Ψ",
+        "number": 2,
+        "body": "Cou",
+        "ranks": [
+          2,
+          23
+        ]
+      },
+      {
+        "first": "Γ",
+        "last": "Χ",
+        "number": 3,
+        "body": "Épaules et mains",
+        "ranks": [
+          3,
+          22
+        ]
+      },
+      {
+        "first": "Δ",
+        "last": "Φ",
+        "number": 4,
+        "body": "Poitrine",
+        "ranks": [
+          4,
+          21
+        ]
+      },
+      {
+        "first": "Ε",
+        "last": "Υ",
+        "number": 5,
+        "body": "Diaphragme",
+        "ranks": [
+          5,
+          20
+        ]
+      },
+      {
+        "first": "Ζ",
+        "last": "Τ",
+        "number": 6,
+        "body": "Dos",
+        "ranks": [
+          6,
+          19
+        ]
+      },
+      {
+        "first": "Η",
+        "last": "Σ",
+        "number": 7,
+        "body": "Ventre",
+        "ranks": [
+          7,
+          18
+        ]
+      },
+      {
+        "first": "Θ",
+        "last": "Ρ",
+        "number": 8,
+        "body": "Cuisses",
+        "ranks": [
+          8,
+          17
+        ]
+      },
+      {
+        "first": "Ι",
+        "last": "Π",
+        "number": 9,
+        "body": "Genoux",
+        "ranks": [
+          9,
+          16
+        ]
+      },
+      {
+        "first": "Κ",
+        "last": "Ο",
+        "number": 10,
+        "body": "Jambes",
+        "ranks": [
+          10,
+          15
+        ]
+      },
+      {
+        "first": "Λ",
+        "last": "Ξ",
+        "number": 11,
+        "body": "Chevilles",
+        "ranks": [
+          11,
+          14
+        ]
+      },
+      {
+        "first": "Μ",
+        "last": "Ν",
+        "number": 12,
+        "body": "Pieds",
+        "ranks": [
+          12,
+          13
+        ]
+      }
+    ],
+    "truthIsopsephy": 64,
+    "jesusIsopsephy": 888,
+    "doveIsopsephy": 801,
+    "alphaOmegaIsopsephy": 801,
+    "deltaExpansion": [
+      1,
+      5,
+      24
+    ]
+  },
+  "movements": [
+    {
+      "id": "silence",
+      "roman": "I",
+      "title": "Le Silence",
+      "subtitle": "Le nom encore imprononcé",
+      "alpha": "ALPHA-014",
+      "input": "441012",
+      "sourceMode": "number",
+      "mode": "mystic",
+      "scale": "phrygian",
+      "rootOffset": -7,
+      "code": "4 + 4 + 10 + 12 = 30",
+      "evidence": "Quatre émissions du Nom · Irénée I,14,1",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#9276b5",
+      "story": "Une note naît dans le silence : les quatre émissions du Nom forment le premier souffle.",
+      "index": 1,
+      "startBeat": 0,
+      "endBeat": 8,
+      "startSeconds": 0,
+      "durationSeconds": 4.528301886792453,
+      "notes": 4,
+      "drums": 0,
+      "chords": 2,
+      "sourceSum": 441012
+    },
+    {
+      "id": "body",
+      "roman": "II",
+      "title": "Le corps d’Alètheia",
+      "subtitle": "Douze réponses, vingt-quatre lettres",
+      "alpha": "ALPHA-010",
+      "input": "ΑΩΒΨΓΧΔΦΕΥΖΤΗΣΘΡΙΠΚΟΛΞΜΝ",
+      "sourceMode": "greek",
+      "mode": "cinematic",
+      "scale": "minor",
+      "rootOffset": 0,
+      "code": "12 paires · 24 lettres · rangs complémentaires = 25",
+      "evidence": "Corps alphabétique de la Vérité · Irénée I,14,3",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#f0c88a",
+      "story": "Chaque paire chante et lui répond, de Α–Ω jusqu’aux deux lettres centrales Μ–Ν.",
+      "index": 2,
+      "startBeat": 8,
+      "endBeat": 16,
+      "startSeconds": 4.528301886792453,
+      "durationSeconds": 4.528301886792453,
+      "notes": 24,
+      "drums": 0,
+      "chords": 2,
+      "sourceSum": 3999
+    },
+    {
+      "id": "aeons",
+      "roman": "III",
+      "title": "Les Éons",
+      "subtitle": "Neuf · Huit · Sept",
+      "alpha": "ALPHA-016",
+      "input": "987",
+      "sourceMode": "number",
+      "mode": "electro",
+      "scale": "phrygian",
+      "rootOffset": -2,
+      "code": "9 muettes + 8 semi-voyelles + 7 voyelles = 24",
+      "evidence": "Classification selon Irénée I,14,5",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#df6a9c",
+      "story": "Trois pulsations de tailles différentes se répondent : 9, puis 8, puis 7.",
+      "index": 3,
+      "startBeat": 16,
+      "endBeat": 24,
+      "startSeconds": 9.056603773584905,
+      "durationSeconds": 4.528301886792453,
+      "notes": 24,
+      "drums": 30,
+      "chords": 2,
+      "sourceSum": 987
+    },
+    {
+      "id": "ogdoades",
+      "roman": "IV",
+      "title": "Les Trois Ogdoades",
+      "subtitle": "L’équilibre de l’Octave",
+      "alpha": "ALPHA-016",
+      "input": "888",
+      "sourceMode": "number",
+      "mode": "electro",
+      "scale": "dorian",
+      "rootOffset": 2,
+      "code": "8 + 8 + 8 = 24",
+      "evidence": "Égalisation symbolique en trois octades · Irénée I,14,5",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#d47ae3",
+      "story": "Trois cycles de huit impulsions dessinent une nouvelle symétrie.",
+      "index": 4,
+      "startBeat": 24,
+      "endBeat": 32,
+      "startSeconds": 13.584905660377359,
+      "durationSeconds": 4.528301886792453,
+      "notes": 24,
+      "drums": 34,
+      "chords": 2,
+      "sourceSum": 888
+    },
+    {
+      "id": "delta",
+      "roman": "V",
+      "title": "La lettre qui engendre",
+      "subtitle": "Δ devient ΔΕΛΤΑ",
+      "alpha": "ALPHA-014",
+      "input": "ΔΕΛΤΑ",
+      "sourceMode": "greek",
+      "mode": "electro",
+      "scale": "minor",
+      "rootOffset": 5,
+      "code": "Δ → ΔΕΛΤΑ → noms des lettres de ΔΕΛΤΑ",
+      "evidence": "Expansion des noms de lettres · Irénée I,14,2",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#eb8fa0",
+      "story": "Un motif simple se déploie et revient, comme la lettre donnant naissance à son nom.",
+      "index": 5,
+      "startBeat": 32,
+      "endBeat": 40,
+      "startSeconds": 18.11320754716981,
+      "durationSeconds": 4.528301886792453,
+      "notes": 24,
+      "drums": 32,
+      "chords": 2,
+      "sourceSum": 340
+    },
+    {
+      "id": "vowels",
+      "roman": "VI",
+      "title": "Les Sept Cieux",
+      "subtitle": "Α · Ε · Η · Ι · Ο · Υ · Ω",
+      "alpha": "ALPHA-011",
+      "input": "ΑΕΗΙΟΥΩ",
+      "sourceMode": "greek",
+      "mode": "ambient",
+      "scale": "dorian",
+      "rootOffset": 7,
+      "code": "7 voyelles dans leur ordre rapporté",
+      "evidence": "Correspondance des sept cieux · Irénée I,14,7",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#95b9ed",
+      "story": "Sept hauteurs créées par NUMERA : une mélodie ascendante de ciel en ciel, sans prétention d'intonation antique.",
+      "index": 6,
+      "startBeat": 40,
+      "endBeat": 48,
+      "startSeconds": 22.641509433962263,
+      "durationSeconds": 4.528301886792453,
+      "notes": 14,
+      "drums": 0,
+      "chords": 2,
+      "sourceSum": 1294
+    },
+    {
+      "id": "dove",
+      "roman": "VII",
+      "title": "La Colombe",
+      "subtitle": "Alpha et Oméga · 801",
+      "alpha": "ALPHA-016",
+      "input": "ΠΕΡΙΣΤΕΡΑ",
+      "sourceMode": "greek",
+      "mode": "ambient",
+      "scale": "pentatonic",
+      "rootOffset": 9,
+      "code": "Α(1) + Ω(800) = ΠΕΡΙΣΤΕΡΑ = 801",
+      "evidence": "Rapprochement isopséphique · Irénée I,14,6",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#d8d8f3",
+      "story": "Deux notes extrêmes se répondent, puis leur thème s’élève en une mélodie lumineuse.",
+      "index": 7,
+      "startBeat": 48,
+      "endBeat": 56,
+      "startSeconds": 27.169811320754718,
+      "durationSeconds": 4.528301886792453,
+      "notes": 18,
+      "drums": 0,
+      "chords": 2,
+      "sourceSum": 801
+    },
+    {
+      "id": "jesus",
+      "roman": "VIII",
+      "title": "Le Nom",
+      "subtitle": "Ἰησοῦς · 888",
+      "alpha": "ALPHA-017",
+      "input": "ΙΗΣΟΥΣ",
+      "sourceMode": "greek",
+      "mode": "cinematic",
+      "scale": "major",
+      "rootOffset": 7,
+      "code": "ΙΗΣΟΥΣ = 888 ; 8 + 80 + 800 = 888",
+      "evidence": "Deux constructions du nombre · Irénée I,15,2",
+      "source": "https://www.newadvent.org/fathers/0103115.htm",
+      "accent": "#f5d5a7",
+      "story": "Le thème 888 devient une fanfare mélodique et un retour de l’Ogdóade, sans reproduire un chant chrétien ancien.",
+      "index": 8,
+      "startBeat": 56,
+      "endBeat": 64,
+      "startSeconds": 31.69811320754717,
+      "durationSeconds": 4.528301886792453,
+      "notes": 53,
+      "drums": 35,
+      "chords": 2,
+      "sourceSum": 888
+    },
+    {
+      "id": "truth",
+      "roman": "IX",
+      "title": "La Vérité",
+      "subtitle": "Ἀλήθεια · 64",
+      "alpha": "ALPHA-013",
+      "input": "ΑΛΗΘΕΙΑ",
+      "sourceMode": "greek",
+      "mode": "cinematic",
+      "scale": "minor",
+      "rootOffset": 0,
+      "code": "ΑΛΗΘΕΙΑ = 64 ; six régions du corps",
+      "evidence": "Jean 14,6 et le corps d’Alètheia · Irénée I,14,3–4",
+      "source": "https://www.greekbible.com/john/14/6",
+      "accent": "#e8a8d3",
+      "story": "Le mot Vérité recompose, note par note, les fragments déjà entendus du corps alphabétique.",
+      "index": 9,
+      "startBeat": 64,
+      "endBeat": 72,
+      "startSeconds": 36.22641509433962,
+      "durationSeconds": 4.528301886792453,
+      "notes": 7,
+      "drums": 0,
+      "chords": 2,
+      "sourceSum": 64
+    },
+    {
+      "id": "answer",
+      "roman": "X",
+      "title": "L’Appel et la Réponse",
+      "subtitle": "La parole partagée",
+      "alpha": "ALPHA-020",
+      "input": "ΟΝΟΜΑ",
+      "sourceMode": "greek",
+      "mode": "cinematic",
+      "scale": "dorian",
+      "rootOffset": 2,
+      "code": "Une voix · une réponse · une assemblée",
+      "evidence": "Formules dialoguées attribuées à des groupes valentiniens · Irénée I,21",
+      "source": "https://www.newadvent.org/fathers/0103121.htm",
+      "accent": "#d694bc",
+      "story": "Une phrase mélodique reçoit un écho, puis une réponse plus grave. C’est une composition originale, non un rite reconstitué.",
+      "index": 10,
+      "startBeat": 72,
+      "endBeat": 80,
+      "startSeconds": 40.75471698113208,
+      "durationSeconds": 4.528301886792453,
+      "notes": 10,
+      "drums": 37,
+      "chords": 2,
+      "sourceSum": 231
+    },
+    {
+      "id": "gnosis",
+      "roman": "XI",
+      "title": "Les Lettres de la Vérité",
+      "subtitle": "Nag Hammadi · le Nom et la connaissance",
+      "alpha": "ALPHA-021",
+      "input": "21",
+      "sourceMode": "number",
+      "mode": "mystic",
+      "scale": "pentatonic",
+      "rootOffset": 5,
+      "code": "NHC I,3 · II,3 · XI,2 · dossier ALPHA-021",
+      "evidence": "Textes coptes : Vérité, Nom, onction, union ; comparaisons sans filiation prouvée",
+      "source": "https://www.gospels.net/truth",
+      "accent": "#a4cbbb",
+      "story": "Les lettres deviennent une image de la connaissance. La source musicale est le numéro 21 du dossier, PAS une fausse translittération grecque du copte.",
+      "index": 11,
+      "startBeat": 80,
+      "endBeat": 88,
+      "startSeconds": 45.283018867924525,
+      "durationSeconds": 4.528301886792453,
+      "notes": 8,
+      "drums": 0,
+      "chords": 2,
+      "sourceSum": 21
+    },
+    {
+      "id": "amen",
+      "roman": "XII",
+      "title": "Une seule voix",
+      "subtitle": "Amen · retour au silence",
+      "alpha": "ALPHA-014",
+      "input": "ΑΜΗΝ",
+      "sourceMode": "greek",
+      "mode": "ambient",
+      "scale": "major",
+      "rootOffset": 0,
+      "code": "Πολλαί φωναί → Ἀμήν (image éditoriale)",
+      "evidence": "Convergence des voix dans la doctrine rapportée · Irénée I,14,2",
+      "source": "https://www.newadvent.org/fathers/0103114.htm",
+      "accent": "#f4dbb2",
+      "story": "Les thèmes convergent vers un accord final. Le dernier temps revient au silence.",
+      "index": 12,
+      "startBeat": 88,
+      "endBeat": 96,
+      "startSeconds": 49.81132075471698,
+      "durationSeconds": 4.528301886792453,
+      "notes": 6,
+      "drums": 0,
+      "chords": 1,
+      "sourceSum": 99
+    }
+  ],
+  "audio": {
+    "version": "ALPHA-OPUS/1.0.0",
+    "config": {
+      "input": "ΑΛΦΑ",
+      "sourceMode": "greek",
+      "mode": "cinematic",
+      "scale": "minor",
+      "root": 48,
+      "bpm": 106,
+      "bars": 8,
+      "swing": 0.09,
+      "variation": 0.42,
+      "drums": true,
+      "pad": true,
+      "volume": 0.7
+    },
+    "source": {
+      "kind": "alpha-opus",
+      "normalized": "ALPHA OPUS",
+      "input": "12 TABLEAUX",
+      "number": 24,
+      "isopsephy": null,
+      "tokens": []
+    },
+    "seed": 3220332357,
+    "notes": [
+      {
+        "type": "lead",
+        "step": 16,
+        "beat": 4,
+        "duration": 0.275,
+        "midi": 49,
+        "velocity": 0.6390436375653371,
+        "wave": "sine",
+        "section": 0
+      },
+      {
+        "type": "lead",
+        "step": 20,
+        "beat": 5,
+        "duration": 0.275,
+        "midi": 60,
+        "velocity": 0.7004014010448009,
+        "wave": "sine",
+        "section": 0
+      },
+      {
+        "type": "lead",
+        "step": 24,
+        "beat": 6,
+        "duration": 0.275,
+        "midi": 41,
+        "velocity": 0.7974505311483516,
+        "wave": "sine",
+        "section": 0
+      },
+      {
+        "type": "lead",
+        "step": 28,
+        "beat": 7,
+        "duration": 0.275,
+        "midi": 49,
+        "velocity": 0.6623946800967678,
+        "wave": "sine",
+        "section": 0
+      },
+      {
+        "type": "lead",
+        "beat": 8.333333333333334,
+        "step": 33,
+        "midi": 60,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 8.583333333333334,
+        "step": 34,
+        "midi": 51,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 9,
+        "step": 36,
+        "midi": 62,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 9.25,
+        "step": 37,
+        "midi": 50,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 9.666666666666666,
+        "step": 38,
+        "midi": 63,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 9.916666666666666,
+        "step": 39,
+        "midi": 48,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 10.333333333333334,
+        "step": 41,
+        "midi": 65,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 10.583333333333334,
+        "step": 42,
+        "midi": 58,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 11,
+        "step": 44,
+        "midi": 67,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 11.25,
+        "step": 45,
+        "midi": 56,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 11.666666666666666,
+        "step": 46,
+        "midi": 68,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 11.916666666666666,
+        "step": 47,
+        "midi": 55,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 12.333333333333332,
+        "step": 49,
+        "midi": 70,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 12.583333333333332,
+        "step": 50,
+        "midi": 53,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 13,
+        "step": 52,
+        "midi": 60,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 13.25,
+        "step": 53,
+        "midi": 51,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 13.666666666666668,
+        "step": 54,
+        "midi": 62,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 13.916666666666668,
+        "step": 55,
+        "midi": 50,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 14.333333333333332,
+        "step": 57,
+        "midi": 63,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 14.583333333333332,
+        "step": 58,
+        "midi": 48,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 15,
+        "step": 60,
+        "midi": 65,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 15.25,
+        "step": 61,
+        "midi": 58,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 15.666666666666668,
+        "step": 62,
+        "midi": 67,
+        "velocity": 0.55,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 15.916666666666668,
+        "step": 63,
+        "midi": 56,
+        "velocity": 0.48,
+        "duration": 0.2,
+        "wave": "sine",
+        "section": 1
+      },
+      {
+        "type": "lead",
+        "beat": 16.066666666666666,
+        "step": 64,
+        "midi": 46,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 16.4,
+        "step": 65,
+        "midi": 47,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 16.733333333333334,
+        "step": 66,
+        "midi": 49,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 17.066666666666666,
+        "step": 68,
+        "midi": 51,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 17.4,
+        "step": 69,
+        "midi": 53,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 17.733333333333334,
+        "step": 70,
+        "midi": 54,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 18.066666666666666,
+        "step": 72,
+        "midi": 56,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 18.4,
+        "step": 73,
+        "midi": 46,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 18.733333333333334,
+        "step": 74,
+        "midi": 47,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 19.066666666666666,
+        "step": 76,
+        "midi": 61,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 19.4,
+        "step": 77,
+        "midi": 63,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 19.733333333333334,
+        "step": 78,
+        "midi": 65,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 20.066666666666666,
+        "step": 80,
+        "midi": 66,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 20.4,
+        "step": 81,
+        "midi": 68,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 20.733333333333334,
+        "step": 82,
+        "midi": 58,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 21.066666666666666,
+        "step": 84,
+        "midi": 59,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 21.4,
+        "step": 85,
+        "midi": 61,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sawtooth",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 21.733333333333334,
+        "step": 86,
+        "midi": 53,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sine",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 22.066666666666666,
+        "step": 88,
+        "midi": 54,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sine",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 22.4,
+        "step": 89,
+        "midi": 56,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sine",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 22.733333333333334,
+        "step": 90,
+        "midi": 46,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sine",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 23.066666666666666,
+        "step": 92,
+        "midi": 47,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sine",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 23.4,
+        "step": 93,
+        "midi": 49,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sine",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 23.733333333333334,
+        "step": 94,
+        "midi": 51,
+        "velocity": 0.63,
+        "duration": 0.14,
+        "wave": "sine",
+        "section": 2
+      },
+      {
+        "type": "lead",
+        "beat": 24.05,
+        "step": 96,
+        "midi": 50,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 24.383333333333333,
+        "step": 97,
+        "midi": 52,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 24.716666666666665,
+        "step": 98,
+        "midi": 53,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 25.05,
+        "step": 100,
+        "midi": 55,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 25.383333333333333,
+        "step": 101,
+        "midi": 57,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 25.71666666666667,
+        "step": 102,
+        "midi": 59,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 26.05,
+        "step": 104,
+        "midi": 60,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 26.383333333333333,
+        "step": 105,
+        "midi": 50,
+        "velocity": 0.57,
+        "duration": 0.18,
+        "wave": "triangle",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 26.71666666666667,
+        "step": 106,
+        "midi": 52,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 27.05,
+        "step": 108,
+        "midi": 53,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 27.383333333333333,
+        "step": 109,
+        "midi": 55,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 27.71666666666667,
+        "step": 110,
+        "midi": 57,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 28.05,
+        "step": 112,
+        "midi": 59,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 28.383333333333333,
+        "step": 113,
+        "midi": 60,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 28.71666666666667,
+        "step": 114,
+        "midi": 50,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 29.05,
+        "step": 116,
+        "midi": 52,
+        "velocity": 0.6399999999999999,
+        "duration": 0.18,
+        "wave": "sawtooth",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 29.383333333333333,
+        "step": 117,
+        "midi": 65,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 29.716666666666665,
+        "step": 118,
+        "midi": 67,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 30.05,
+        "step": 120,
+        "midi": 69,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 30.383333333333333,
+        "step": 121,
+        "midi": 71,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 30.716666666666665,
+        "step": 122,
+        "midi": 72,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 31.05,
+        "step": 124,
+        "midi": 62,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 31.383333333333333,
+        "step": 125,
+        "midi": 64,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 31.716666666666665,
+        "step": 126,
+        "midi": 65,
+        "velocity": 0.71,
+        "duration": 0.18,
+        "wave": "sine",
+        "section": 3
+      },
+      {
+        "type": "lead",
+        "beat": 32.04,
+        "step": 128,
+        "midi": 60,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 32.373333333333335,
+        "step": 129,
+        "midi": 63,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 32.70666666666666,
+        "step": 130,
+        "midi": 60,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 33.04,
+        "step": 132,
+        "midi": 56,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 33.373333333333335,
+        "step": 133,
+        "midi": 61,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 33.70666666666666,
+        "step": 134,
+        "midi": 58,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 34.04,
+        "step": 136,
+        "midi": 63,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 34.373333333333335,
+        "step": 137,
+        "midi": 58,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 34.70666666666666,
+        "step": 138,
+        "midi": 58,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 35.04,
+        "step": 140,
+        "midi": 56,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 35.373333333333335,
+        "step": 141,
+        "midi": 60,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 35.70666666666666,
+        "step": 142,
+        "midi": 63,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 36.04,
+        "step": 144,
+        "midi": 75,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 36.373333333333335,
+        "step": 145,
+        "midi": 72,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 36.70666666666666,
+        "step": 146,
+        "midi": 68,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 37.04,
+        "step": 148,
+        "midi": 73,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 37.373333333333335,
+        "step": 149,
+        "midi": 70,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 37.70666666666666,
+        "step": 150,
+        "midi": 68,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 38.04,
+        "step": 152,
+        "midi": 73,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 38.373333333333335,
+        "step": 153,
+        "midi": 75,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 38.70666666666666,
+        "step": 154,
+        "midi": 65,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 39.04,
+        "step": 156,
+        "midi": 68,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "sawtooth",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 39.373333333333335,
+        "step": 157,
+        "midi": 72,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 39.70666666666666,
+        "step": 158,
+        "midi": 70,
+        "velocity": 0.55,
+        "duration": 0.16,
+        "wave": "triangle",
+        "section": 4
+      },
+      {
+        "type": "lead",
+        "beat": 40.285714285714285,
+        "step": 161,
+        "midi": 67,
+        "velocity": 0.66,
+        "duration": 1.0285714285714285,
+        "wave": "sine",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 40.465714285714284,
+        "step": 161,
+        "midi": 55,
+        "velocity": 0.22,
+        "duration": 0.8,
+        "wave": "triangle",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 41.42857142857143,
+        "step": 165,
+        "midi": 69,
+        "velocity": 0.66,
+        "duration": 1.0285714285714285,
+        "wave": "sine",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 41.60857142857143,
+        "step": 166,
+        "midi": 57,
+        "velocity": 0.22,
+        "duration": 0.8,
+        "wave": "triangle",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 42.57142857142857,
+        "step": 170,
+        "midi": 70,
+        "velocity": 0.66,
+        "duration": 1.0285714285714285,
+        "wave": "sine",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 42.75142857142857,
+        "step": 171,
+        "midi": 58,
+        "velocity": 0.22,
+        "duration": 0.8,
+        "wave": "triangle",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 43.714285714285715,
+        "step": 174,
+        "midi": 72,
+        "velocity": 0.66,
+        "duration": 1.0285714285714285,
+        "wave": "sine",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 43.894285714285715,
+        "step": 175,
+        "midi": 60,
+        "velocity": 0.22,
+        "duration": 0.8,
+        "wave": "triangle",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 44.857142857142854,
+        "step": 179,
+        "midi": 74,
+        "velocity": 0.66,
+        "duration": 1.0285714285714285,
+        "wave": "sine",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 45.037142857142854,
+        "step": 180,
+        "midi": 62,
+        "velocity": 0.22,
+        "duration": 0.8,
+        "wave": "triangle",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 46,
+        "step": 184,
+        "midi": 76,
+        "velocity": 0.66,
+        "duration": 1.0285714285714285,
+        "wave": "sine",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 46.18,
+        "step": 184,
+        "midi": 64,
+        "velocity": 0.22,
+        "duration": 0.8,
+        "wave": "triangle",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 47.142857142857146,
+        "step": 188,
+        "midi": 77,
+        "velocity": 0.66,
+        "duration": 1.0285714285714285,
+        "wave": "sine",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 47.322857142857146,
+        "step": 189,
+        "midi": 65,
+        "velocity": 0.22,
+        "duration": 0.8,
+        "wave": "triangle",
+        "section": 5
+      },
+      {
+        "type": "lead",
+        "beat": 48.05,
+        "step": 192,
+        "midi": 57,
+        "velocity": 0.8,
+        "duration": 1.7,
+        "wave": "triangle",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 48.1,
+        "step": 192,
+        "midi": 57,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 48.6,
+        "step": 194,
+        "midi": 72,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 49.1,
+        "step": 196,
+        "midi": 74,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 49.6,
+        "step": 198,
+        "midi": 76,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 50.1,
+        "step": 200,
+        "midi": 79,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 50.6,
+        "step": 202,
+        "midi": 69,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 51.1,
+        "step": 204,
+        "midi": 72,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 51.6,
+        "step": 206,
+        "midi": 74,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 52.1,
+        "step": 208,
+        "midi": 57,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 52.4,
+        "step": 209,
+        "midi": 81,
+        "velocity": 0.58,
+        "duration": 1.55,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 52.6,
+        "step": 210,
+        "midi": 72,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 53.1,
+        "step": 212,
+        "midi": 74,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 53.6,
+        "step": 214,
+        "midi": 76,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 54.1,
+        "step": 216,
+        "midi": 79,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 54.6,
+        "step": 218,
+        "midi": 69,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 55.1,
+        "step": 220,
+        "midi": 72,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "beat": 55.6,
+        "step": 222,
+        "midi": 74,
+        "velocity": 0.47,
+        "duration": 0.37,
+        "wave": "sine",
+        "section": 6
+      },
+      {
+        "type": "lead",
+        "step": 224,
+        "beat": 56,
+        "duration": 0.305,
+        "midi": 74,
+        "velocity": 0.7853134078346193,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 56.03333333333333,
+        "step": 224,
+        "midi": 55,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 225,
+        "beat": 56.255,
+        "duration": 0.305,
+        "midi": 71,
+        "velocity": 0.577736133672297,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 56.36666666666667,
+        "step": 225,
+        "midi": 57,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 226,
+        "beat": 56.5,
+        "duration": 0.305,
+        "midi": 62,
+        "velocity": 0.6606796604441478,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 56.7,
+        "step": 226,
+        "midi": 59,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 227,
+        "beat": 56.755,
+        "duration": 0.305,
+        "midi": 69,
+        "velocity": 0.4814629057748243,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 228,
+        "beat": 57,
+        "duration": 0.305,
+        "midi": 59,
+        "velocity": 0.70820328890346,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 57.03333333333333,
+        "step": 228,
+        "midi": 60,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 229,
+        "beat": 57.255,
+        "duration": 0.305,
+        "midi": 64,
+        "velocity": 0.6982723961910232,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 57.36666666666667,
+        "step": 229,
+        "midi": 62,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 230,
+        "beat": 57.5,
+        "duration": 0.305,
+        "midi": 62,
+        "velocity": 0.6620463603036478,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 57.7,
+        "step": 230,
+        "midi": 64,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 231,
+        "beat": 57.755,
+        "duration": 0.305,
+        "midi": 64,
+        "velocity": 0.4990448513394222,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 232,
+        "beat": 58,
+        "duration": 0.305,
+        "midi": 69,
+        "velocity": 0.8124768532952293,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 58.03333333333333,
+        "step": 232,
+        "midi": 66,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 233,
+        "beat": 58.255,
+        "duration": 0.305,
+        "midi": 62,
+        "velocity": 0.45736518000252546,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 58.36666666666667,
+        "step": 233,
+        "midi": 55,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 234,
+        "beat": 58.5,
+        "duration": 0.305,
+        "midi": 76,
+        "velocity": 0.5813647549925373,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 58.7,
+        "step": 234,
+        "midi": 55,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 235,
+        "beat": 58.755,
+        "duration": 0.305,
+        "midi": 66,
+        "velocity": 0.6958893371839076,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 236,
+        "beat": 59,
+        "duration": 0.305,
+        "midi": 57,
+        "velocity": 0.7840616444498301,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 59.03333333333333,
+        "step": 236,
+        "midi": 57,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 237,
+        "beat": 59.255,
+        "duration": 0.305,
+        "midi": 66,
+        "velocity": 0.5745965356566012,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 59.36666666666667,
+        "step": 237,
+        "midi": 59,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 238,
+        "beat": 59.5,
+        "duration": 0.305,
+        "midi": 71,
+        "velocity": 0.7286919699842109,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 59.7,
+        "step": 238,
+        "midi": 60,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 240,
+        "beat": 60,
+        "duration": 0.305,
+        "midi": 76,
+        "velocity": 0.672726111127995,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 60.03333333333333,
+        "step": 240,
+        "midi": 62,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 241,
+        "beat": 60.255,
+        "duration": 0.305,
+        "midi": 72,
+        "velocity": 0.6893434427771716,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 60.36666666666667,
+        "step": 241,
+        "midi": 64,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 242,
+        "beat": 60.5,
+        "duration": 0.305,
+        "midi": 71,
+        "velocity": 0.6073241277923808,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 60.7,
+        "step": 242,
+        "midi": 66,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 243,
+        "beat": 60.755,
+        "duration": 0.305,
+        "midi": 67,
+        "velocity": 0.5845894783362746,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 244,
+        "beat": 61,
+        "duration": 0.305,
+        "midi": 59,
+        "velocity": 0.834671278009191,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 61.03333333333333,
+        "step": 244,
+        "midi": 55,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 245,
+        "beat": 61.255,
+        "duration": 0.305,
+        "midi": 76,
+        "velocity": 0.5115957948705181,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 61.36666666666667,
+        "step": 245,
+        "midi": 67,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 246,
+        "beat": 61.5,
+        "duration": 0.305,
+        "midi": 64,
+        "velocity": 0.5583834838913754,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 61.7,
+        "step": 246,
+        "midi": 69,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 248,
+        "beat": 62,
+        "duration": 0.305,
+        "midi": 74,
+        "velocity": 0.7631586421886459,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 62.03333333333333,
+        "step": 248,
+        "midi": 71,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 249,
+        "beat": 62.255,
+        "duration": 0.305,
+        "midi": 74,
+        "velocity": 0.5267159615270793,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 62.36666666666667,
+        "step": 249,
+        "midi": 72,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 250,
+        "beat": 62.5,
+        "duration": 0.305,
+        "midi": 66,
+        "velocity": 0.6603135282266884,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 62.7,
+        "step": 250,
+        "midi": 74,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 252,
+        "beat": 63,
+        "duration": 0.305,
+        "midi": 57,
+        "velocity": 0.6417200479097664,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 63.03333333333333,
+        "step": 252,
+        "midi": 76,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 253,
+        "beat": 63.255,
+        "duration": 0.305,
+        "midi": 64,
+        "velocity": 0.650932034952566,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 63.36666666666667,
+        "step": 253,
+        "midi": 78,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 254,
+        "beat": 63.5,
+        "duration": 0.305,
+        "midi": 62,
+        "velocity": 0.6061703298334032,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 63.7,
+        "step": 254,
+        "midi": 67,
+        "velocity": 0.34,
+        "duration": 0.12,
+        "wave": "sawtooth",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "step": 255,
+        "beat": 63.755,
+        "duration": 0.305,
+        "midi": 59,
+        "velocity": 0.4951254586316646,
+        "wave": "triangle",
+        "section": 7
+      },
+      {
+        "type": "lead",
+        "beat": 64.25142857142858,
+        "step": 257,
+        "midi": 62,
+        "velocity": 0.66,
+        "duration": 0.45,
+        "wave": "triangle",
+        "section": 8
+      },
+      {
+        "type": "lead",
+        "beat": 65.39428571428572,
+        "step": 261,
+        "midi": 68,
+        "velocity": 0.66,
+        "duration": 0.45,
+        "wave": "triangle",
+        "section": 8
+      },
+      {
+        "type": "lead",
+        "beat": 66.53714285714285,
+        "step": 266,
+        "midi": 63,
+        "velocity": 0.66,
+        "duration": 0.45,
+        "wave": "triangle",
+        "section": 8
+      },
+      {
+        "type": "lead",
+        "beat": 67.68,
+        "step": 270,
+        "midi": 67,
+        "velocity": 0.66,
+        "duration": 0.45,
+        "wave": "triangle",
+        "section": 8
+      },
+      {
+        "type": "lead",
+        "beat": 68.82285714285715,
+        "step": 275,
+        "midi": 63,
+        "velocity": 0.66,
+        "duration": 0.45,
+        "wave": "triangle",
+        "section": 8
+      },
+      {
+        "type": "lead",
+        "beat": 69.96571428571428,
+        "step": 279,
+        "midi": 60,
+        "velocity": 0.66,
+        "duration": 0.45,
+        "wave": "triangle",
+        "section": 8
+      },
+      {
+        "type": "lead",
+        "beat": 71.10857142857142,
+        "step": 284,
+        "midi": 60,
+        "velocity": 0.66,
+        "duration": 0.45,
+        "wave": "triangle",
+        "section": 8
+      },
+      {
+        "type": "lead",
+        "beat": 72.16,
+        "step": 288,
+        "midi": 62,
+        "velocity": 0.61,
+        "duration": 0.26,
+        "wave": "triangle",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 72.41,
+        "step": 289,
+        "midi": 50,
+        "velocity": 0.4,
+        "duration": 0.33,
+        "wave": "sine",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 73.49333333333334,
+        "step": 293,
+        "midi": 64,
+        "velocity": 0.61,
+        "duration": 0.26,
+        "wave": "triangle",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 73.74333333333334,
+        "step": 294,
+        "midi": 52,
+        "velocity": 0.4,
+        "duration": 0.33,
+        "wave": "sine",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 74.82666666666667,
+        "step": 299,
+        "midi": 62,
+        "velocity": 0.61,
+        "duration": 0.26,
+        "wave": "triangle",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 75.07666666666667,
+        "step": 300,
+        "midi": 50,
+        "velocity": 0.4,
+        "duration": 0.33,
+        "wave": "sine",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 76.16,
+        "step": 304,
+        "midi": 71,
+        "velocity": 0.61,
+        "duration": 0.26,
+        "wave": "triangle",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 76.41,
+        "step": 305,
+        "midi": 59,
+        "velocity": 0.4,
+        "duration": 0.33,
+        "wave": "sine",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 77.49333333333334,
+        "step": 309,
+        "midi": 64,
+        "velocity": 0.61,
+        "duration": 0.26,
+        "wave": "triangle",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "beat": 77.74333333333334,
+        "step": 310,
+        "midi": 52,
+        "velocity": 0.4,
+        "duration": 0.33,
+        "wave": "sine",
+        "section": 9
+      },
+      {
+        "type": "lead",
+        "step": 326,
+        "beat": 81.5,
+        "duration": 0.55,
+        "midi": 63,
+        "velocity": 0.63946158695966,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "step": 329,
+        "beat": 82.255,
+        "duration": 0.55,
+        "midi": 58,
+        "velocity": 0.5666631092643366,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "step": 333,
+        "beat": 83.255,
+        "duration": 0.55,
+        "midi": 53,
+        "velocity": 0.500289063793607,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "step": 337,
+        "beat": 84.255,
+        "duration": 0.55,
+        "midi": 56,
+        "velocity": 0.49224125504028055,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "step": 340,
+        "beat": 85,
+        "duration": 0.55,
+        "midi": 68,
+        "velocity": 0.6700024326471612,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "step": 343,
+        "beat": 85.755,
+        "duration": 0.55,
+        "midi": 58,
+        "velocity": 0.5560333784297109,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "step": 346,
+        "beat": 86.5,
+        "duration": 0.55,
+        "midi": 56,
+        "velocity": 0.6227399411937221,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "step": 349,
+        "beat": 87.255,
+        "duration": 0.55,
+        "midi": 65,
+        "velocity": 0.5550145396590234,
+        "wave": "sine",
+        "section": 10
+      },
+      {
+        "type": "lead",
+        "beat": 88.15,
+        "step": 352,
+        "midi": 60,
+        "velocity": 0.44,
+        "duration": 0.55,
+        "wave": "sine",
+        "section": 11
+      },
+      {
+        "type": "lead",
+        "beat": 89.15,
+        "step": 356,
+        "midi": 62,
+        "velocity": 0.44,
+        "duration": 0.55,
+        "wave": "sine",
+        "section": 11
+      },
+      {
+        "type": "lead",
+        "beat": 90.15,
+        "step": 360,
+        "midi": 64,
+        "velocity": 0.44,
+        "duration": 0.55,
+        "wave": "sine",
+        "section": 11
+      },
+      {
+        "type": "lead",
+        "beat": 91.15,
+        "step": 364,
+        "midi": 65,
+        "velocity": 0.44,
+        "duration": 0.55,
+        "wave": "sine",
+        "section": 11
+      },
+      {
+        "type": "lead",
+        "beat": 92.15,
+        "step": 368,
+        "midi": 67,
+        "velocity": 0.44,
+        "duration": 0.55,
+        "wave": "sine",
+        "section": 11
+      },
+      {
+        "type": "lead",
+        "beat": 93.15,
+        "step": 372,
+        "midi": 69,
+        "velocity": 0.44,
+        "duration": 0.55,
+        "wave": "sine",
+        "section": 11
+      }
+    ],
+    "drumEvents": [
+      {
+        "type": "kick",
+        "step": 64,
+        "beat": 16,
+        "velocity": 0.85,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 64,
+        "beat": 16,
+        "velocity": 0.2682669590529986,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 66,
+        "beat": 16.5,
+        "velocity": 0.36247532318346204,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 68,
+        "beat": 17,
+        "velocity": 0.68,
+        "section": 2
+      },
+      {
+        "type": "snare",
+        "step": 68,
+        "beat": 17,
+        "velocity": 0.53,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 68,
+        "beat": 17,
+        "velocity": 0.3668464136030525,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 70,
+        "beat": 17.5,
+        "velocity": 0.3595411401195452,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 72,
+        "beat": 18,
+        "velocity": 0.68,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 72,
+        "beat": 18,
+        "velocity": 0.35468463248806076,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 73,
+        "beat": 18.2675,
+        "velocity": 0.28612861334811895,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 74,
+        "beat": 18.5,
+        "velocity": 0.337300623843912,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 76,
+        "beat": 19,
+        "velocity": 0.68,
+        "section": 2
+      },
+      {
+        "type": "snare",
+        "step": 76,
+        "beat": 19,
+        "velocity": 0.53,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 76,
+        "beat": 19,
+        "velocity": 0.24769935302436352,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 78,
+        "beat": 19.5,
+        "velocity": 0.2369789843633771,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 80,
+        "beat": 20,
+        "velocity": 0.85,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 80,
+        "beat": 20,
+        "velocity": 0.2358157940278761,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 82,
+        "beat": 20.5,
+        "velocity": 0.32489664990687744,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 84,
+        "beat": 21,
+        "velocity": 0.68,
+        "section": 2
+      },
+      {
+        "type": "snare",
+        "step": 84,
+        "beat": 21,
+        "velocity": 0.53,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 84,
+        "beat": 21,
+        "velocity": 0.3762495141429827,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 85,
+        "beat": 21.2675,
+        "velocity": 0.27955458415206524,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 86,
+        "beat": 21.5,
+        "velocity": 0.32372850785730406,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 88,
+        "beat": 22,
+        "velocity": 0.68,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 88,
+        "beat": 22,
+        "velocity": 0.29615848829969765,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 90,
+        "beat": 22.5,
+        "velocity": 0.2995920007536188,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 92,
+        "beat": 23,
+        "velocity": 0.68,
+        "section": 2
+      },
+      {
+        "type": "snare",
+        "step": 92,
+        "beat": 23,
+        "velocity": 0.53,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 92,
+        "beat": 23,
+        "velocity": 0.33276413479587064,
+        "section": 2
+      },
+      {
+        "type": "hat",
+        "step": 94,
+        "beat": 23.5,
+        "velocity": 0.26502902468899264,
+        "section": 2
+      },
+      {
+        "type": "kick",
+        "step": 96,
+        "beat": 24,
+        "velocity": 0.85,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 96,
+        "beat": 24,
+        "velocity": 0.2968909097206779,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 98,
+        "beat": 24.5,
+        "velocity": 0.3191321515198797,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 100,
+        "beat": 25,
+        "velocity": 0.68,
+        "section": 3
+      },
+      {
+        "type": "snare",
+        "step": 100,
+        "beat": 25,
+        "velocity": 0.53,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 100,
+        "beat": 25,
+        "velocity": 0.29337049345020205,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 102,
+        "beat": 25.5,
+        "velocity": 0.30227490193909035,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 103,
+        "beat": 25.7675,
+        "velocity": 0.2989666111022234,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 104,
+        "beat": 26,
+        "velocity": 0.68,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 104,
+        "beat": 26,
+        "velocity": 0.2857778696063906,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 105,
+        "beat": 26.2675,
+        "velocity": 0.30577899937750774,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 106,
+        "beat": 26.5,
+        "velocity": 0.3253491513500921,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 108,
+        "beat": 27,
+        "velocity": 0.68,
+        "section": 3
+      },
+      {
+        "type": "snare",
+        "step": 108,
+        "beat": 27,
+        "velocity": 0.53,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 108,
+        "beat": 27,
+        "velocity": 0.2684107307996601,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 109,
+        "beat": 27.2675,
+        "velocity": 0.3288498565275222,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 110,
+        "beat": 27.5,
+        "velocity": 0.32600152395432813,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 111,
+        "beat": 27.7675,
+        "velocity": 0.3263971493300051,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 112,
+        "beat": 28,
+        "velocity": 0.85,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 112,
+        "beat": 28,
+        "velocity": 0.3295414142496884,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 114,
+        "beat": 28.5,
+        "velocity": 0.28993822619784626,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 115,
+        "beat": 28.7675,
+        "velocity": 0.23364054954843597,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 116,
+        "beat": 29,
+        "velocity": 0.68,
+        "section": 3
+      },
+      {
+        "type": "snare",
+        "step": 116,
+        "beat": 29,
+        "velocity": 0.53,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 116,
+        "beat": 29,
+        "velocity": 0.26089441468473523,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 118,
+        "beat": 29.5,
+        "velocity": 0.25444359220098706,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 120,
+        "beat": 30,
+        "velocity": 0.68,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 120,
+        "beat": 30,
+        "velocity": 0.30748950032982975,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 122,
+        "beat": 30.5,
+        "velocity": 0.3138144988520071,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 124,
+        "beat": 31,
+        "velocity": 0.68,
+        "section": 3
+      },
+      {
+        "type": "snare",
+        "step": 124,
+        "beat": 31,
+        "velocity": 0.53,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 124,
+        "beat": 31,
+        "velocity": 0.3499145998689346,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 125,
+        "beat": 31.2675,
+        "velocity": 0.27036234505474566,
+        "section": 3
+      },
+      {
+        "type": "hat",
+        "step": 126,
+        "beat": 31.5,
+        "velocity": 0.23979648277861998,
+        "section": 3
+      },
+      {
+        "type": "kick",
+        "step": 128,
+        "beat": 32,
+        "velocity": 0.85,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 128,
+        "beat": 32,
+        "velocity": 0.2465772116975859,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 129,
+        "beat": 32.255,
+        "velocity": 0.3798953051748686,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 130,
+        "beat": 32.5,
+        "velocity": 0.374584377692081,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 132,
+        "beat": 33,
+        "velocity": 0.68,
+        "section": 4
+      },
+      {
+        "type": "snare",
+        "step": 132,
+        "beat": 33,
+        "velocity": 0.53,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 132,
+        "beat": 33,
+        "velocity": 0.3550912601593882,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 133,
+        "beat": 33.255,
+        "velocity": 0.3263857937022112,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 134,
+        "beat": 33.5,
+        "velocity": 0.3661533437506296,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 135,
+        "beat": 33.755,
+        "velocity": 0.3417047397303395,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 136,
+        "beat": 34,
+        "velocity": 0.68,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 136,
+        "beat": 34,
+        "velocity": 0.3300726951751858,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 138,
+        "beat": 34.5,
+        "velocity": 0.24616480631055312,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 140,
+        "beat": 35,
+        "velocity": 0.68,
+        "section": 4
+      },
+      {
+        "type": "snare",
+        "step": 140,
+        "beat": 35,
+        "velocity": 0.53,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 140,
+        "beat": 35,
+        "velocity": 0.2423678882722743,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 142,
+        "beat": 35.5,
+        "velocity": 0.24892455107299613,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 144,
+        "beat": 36,
+        "velocity": 0.85,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 144,
+        "beat": 36,
+        "velocity": 0.3597349008731544,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 146,
+        "beat": 36.5,
+        "velocity": 0.35959626726806165,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 148,
+        "beat": 37,
+        "velocity": 0.68,
+        "section": 4
+      },
+      {
+        "type": "snare",
+        "step": 148,
+        "beat": 37,
+        "velocity": 0.53,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 148,
+        "beat": 37,
+        "velocity": 0.23781743556726725,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 150,
+        "beat": 37.5,
+        "velocity": 0.2500525772292167,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 152,
+        "beat": 38,
+        "velocity": 0.68,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 152,
+        "beat": 38,
+        "velocity": 0.32138540371786806,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 154,
+        "beat": 38.5,
+        "velocity": 0.26400873459177093,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 156,
+        "beat": 39,
+        "velocity": 0.68,
+        "section": 4
+      },
+      {
+        "type": "snare",
+        "step": 156,
+        "beat": 39,
+        "velocity": 0.53,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 156,
+        "beat": 39,
+        "velocity": 0.33437437006039544,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 157,
+        "beat": 39.255,
+        "velocity": 0.26937028147047387,
+        "section": 4
+      },
+      {
+        "type": "hat",
+        "step": 158,
+        "beat": 39.5,
+        "velocity": 0.2636654622340575,
+        "section": 4
+      },
+      {
+        "type": "kick",
+        "step": 224,
+        "beat": 56,
+        "velocity": 0.85,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 224,
+        "beat": 56,
+        "velocity": 0.33955344737740234,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 225,
+        "beat": 56.255,
+        "velocity": 0.3276136173121631,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 226,
+        "beat": 56.5,
+        "velocity": 0.2663089082646184,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 228,
+        "beat": 57,
+        "velocity": 0.68,
+        "section": 7
+      },
+      {
+        "type": "snare",
+        "step": 228,
+        "beat": 57,
+        "velocity": 0.53,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 228,
+        "beat": 57,
+        "velocity": 0.36024593855952847,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 229,
+        "beat": 57.255,
+        "velocity": 0.25930793593404816,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 230,
+        "beat": 57.5,
+        "velocity": 0.3483424289920367,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 232,
+        "beat": 58,
+        "velocity": 0.68,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 232,
+        "beat": 58,
+        "velocity": 0.2370031507173553,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 233,
+        "beat": 58.255,
+        "velocity": 0.3088475614623167,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 234,
+        "beat": 58.5,
+        "velocity": 0.30530408916063606,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 236,
+        "beat": 59,
+        "velocity": 0.68,
+        "section": 7
+      },
+      {
+        "type": "snare",
+        "step": 236,
+        "beat": 59,
+        "velocity": 0.53,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 236,
+        "beat": 59,
+        "velocity": 0.3062831547181122,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 237,
+        "beat": 59.255,
+        "velocity": 0.244718656858895,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 238,
+        "beat": 59.5,
+        "velocity": 0.2384246900281869,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 239,
+        "beat": 59.755,
+        "velocity": 0.23611298481235282,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 240,
+        "beat": 60,
+        "velocity": 0.85,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 240,
+        "beat": 60,
+        "velocity": 0.2830543381930329,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 241,
+        "beat": 60.255,
+        "velocity": 0.3654759077890776,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 242,
+        "beat": 60.5,
+        "velocity": 0.2814425791683607,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 244,
+        "beat": 61,
+        "velocity": 0.68,
+        "section": 7
+      },
+      {
+        "type": "snare",
+        "step": 244,
+        "beat": 61,
+        "velocity": 0.53,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 244,
+        "beat": 61,
+        "velocity": 0.28062004275387153,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 246,
+        "beat": 61.5,
+        "velocity": 0.24505993662867695,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 248,
+        "beat": 62,
+        "velocity": 0.68,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 248,
+        "beat": 62,
+        "velocity": 0.35413817018968985,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 249,
+        "beat": 62.255,
+        "velocity": 0.37317148529225963,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 250,
+        "beat": 62.5,
+        "velocity": 0.29584560425253587,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 252,
+        "beat": 63,
+        "velocity": 0.68,
+        "section": 7
+      },
+      {
+        "type": "snare",
+        "step": 252,
+        "beat": 63,
+        "velocity": 0.53,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 252,
+        "beat": 63,
+        "velocity": 0.24538780465489254,
+        "section": 7
+      },
+      {
+        "type": "hat",
+        "step": 254,
+        "beat": 63.5,
+        "velocity": 0.35035405652131885,
+        "section": 7
+      },
+      {
+        "type": "kick",
+        "step": 288,
+        "beat": 72,
+        "velocity": 0.85,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 288,
+        "beat": 72,
+        "velocity": 0.253936111794319,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 290,
+        "beat": 72.5,
+        "velocity": 0.2772758248448372,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 291,
+        "beat": 72.755,
+        "velocity": 0.2906443954631686,
+        "section": 9
+      },
+      {
+        "type": "kick",
+        "step": 292,
+        "beat": 73,
+        "velocity": 0.68,
+        "section": 9
+      },
+      {
+        "type": "snare",
+        "step": 292,
+        "beat": 73,
+        "velocity": 0.53,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 292,
+        "beat": 73,
+        "velocity": 0.2566018662950955,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 293,
+        "beat": 73.255,
+        "velocity": 0.27196978352265433,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 294,
+        "beat": 73.5,
+        "velocity": 0.2995654149982147,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 295,
+        "beat": 73.755,
+        "velocity": 0.36835417566588147,
+        "section": 9
+      },
+      {
+        "type": "kick",
+        "step": 296,
+        "beat": 74,
+        "velocity": 0.68,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 296,
+        "beat": 74,
+        "velocity": 0.3484458132716827,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 297,
+        "beat": 74.255,
+        "velocity": 0.3367180156009272,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 298,
+        "beat": 74.5,
+        "velocity": 0.27987373133189974,
+        "section": 9
+      },
+      {
+        "type": "kick",
+        "step": 300,
+        "beat": 75,
+        "velocity": 0.68,
+        "section": 9
+      },
+      {
+        "type": "snare",
+        "step": 300,
+        "beat": 75,
+        "velocity": 0.53,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 300,
+        "beat": 75,
+        "velocity": 0.2918985510314815,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 301,
+        "beat": 75.255,
+        "velocity": 0.2822651560604572,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 302,
+        "beat": 75.5,
+        "velocity": 0.2520486252103001,
+        "section": 9
+      },
+      {
+        "type": "kick",
+        "step": 304,
+        "beat": 76,
+        "velocity": 0.85,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 304,
+        "beat": 76,
+        "velocity": 0.2451548902853392,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 305,
+        "beat": 76.255,
+        "velocity": 0.2638673803606071,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 306,
+        "beat": 76.5,
+        "velocity": 0.3392609653715044,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 307,
+        "beat": 76.755,
+        "velocity": 0.37414250914705915,
+        "section": 9
+      },
+      {
+        "type": "kick",
+        "step": 308,
+        "beat": 77,
+        "velocity": 0.68,
+        "section": 9
+      },
+      {
+        "type": "snare",
+        "step": 308,
+        "beat": 77,
+        "velocity": 0.53,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 308,
+        "beat": 77,
+        "velocity": 0.33016720190178606,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 309,
+        "beat": 77.255,
+        "velocity": 0.3531517402920872,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 310,
+        "beat": 77.5,
+        "velocity": 0.30603003842523324,
+        "section": 9
+      },
+      {
+        "type": "kick",
+        "step": 312,
+        "beat": 78,
+        "velocity": 0.68,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 312,
+        "beat": 78,
+        "velocity": 0.30036214339314027,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 314,
+        "beat": 78.5,
+        "velocity": 0.2699192577810027,
+        "section": 9
+      },
+      {
+        "type": "kick",
+        "step": 316,
+        "beat": 79,
+        "velocity": 0.68,
+        "section": 9
+      },
+      {
+        "type": "snare",
+        "step": 316,
+        "beat": 79,
+        "velocity": 0.53,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 316,
+        "beat": 79,
+        "velocity": 0.3434283492807299,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 318,
+        "beat": 79.5,
+        "velocity": 0.28014604151947425,
+        "section": 9
+      },
+      {
+        "type": "hat",
+        "step": 319,
+        "beat": 79.755,
+        "velocity": 0.27811493989545855,
+        "section": 9
+      }
+    ],
+    "chords": [
+      {
+        "type": "chord",
+        "beat": 0,
+        "duration": 3.85,
+        "notes": [
+          36,
+          39,
+          43
+        ],
+        "velocity": 0.21,
+        "section": 0
+      },
+      {
+        "type": "chord",
+        "beat": 4,
+        "duration": 3.85,
+        "notes": [
+          30,
+          33,
+          37
+        ],
+        "velocity": 0.21,
+        "section": 0
+      },
+      {
+        "type": "chord",
+        "beat": 8,
+        "duration": 3.85,
+        "notes": [
+          38,
+          41,
+          45
+        ],
+        "velocity": 0.21,
+        "section": 1
+      },
+      {
+        "type": "chord",
+        "beat": 12,
+        "duration": 3.85,
+        "notes": [
+          38,
+          41,
+          45
+        ],
+        "velocity": 0.21,
+        "section": 1
+      },
+      {
+        "type": "chord",
+        "beat": 16,
+        "duration": 3.85,
+        "notes": [
+          37,
+          40,
+          44
+        ],
+        "velocity": 0.12,
+        "section": 2
+      },
+      {
+        "type": "chord",
+        "beat": 20,
+        "duration": 3.85,
+        "notes": [
+          39,
+          42,
+          46
+        ],
+        "velocity": 0.12,
+        "section": 2
+      },
+      {
+        "type": "chord",
+        "beat": 24,
+        "duration": 3.85,
+        "notes": [
+          40,
+          43,
+          47
+        ],
+        "velocity": 0.12,
+        "section": 3
+      },
+      {
+        "type": "chord",
+        "beat": 28,
+        "duration": 3.85,
+        "notes": [
+          41,
+          44,
+          48
+        ],
+        "velocity": 0.12,
+        "section": 3
+      },
+      {
+        "type": "chord",
+        "beat": 32,
+        "duration": 3.85,
+        "notes": [
+          48,
+          51,
+          55
+        ],
+        "velocity": 0.12,
+        "section": 4
+      },
+      {
+        "type": "chord",
+        "beat": 36,
+        "duration": 3.85,
+        "notes": [
+          41,
+          44,
+          48
+        ],
+        "velocity": 0.12,
+        "section": 4
+      },
+      {
+        "type": "chord",
+        "beat": 40,
+        "duration": 3.85,
+        "notes": [
+          45,
+          48,
+          52
+        ],
+        "velocity": 0.21,
+        "section": 5
+      },
+      {
+        "type": "chord",
+        "beat": 44,
+        "duration": 3.85,
+        "notes": [
+          50,
+          53,
+          57
+        ],
+        "velocity": 0.21,
+        "section": 5
+      },
+      {
+        "type": "chord",
+        "beat": 48,
+        "duration": 3.85,
+        "notes": [
+          45,
+          48,
+          52
+        ],
+        "velocity": 0.21,
+        "section": 6
+      },
+      {
+        "type": "chord",
+        "beat": 52,
+        "duration": 3.85,
+        "notes": [
+          48,
+          51,
+          55
+        ],
+        "velocity": 0.21,
+        "section": 6
+      },
+      {
+        "type": "chord",
+        "beat": 56,
+        "duration": 3.85,
+        "notes": [
+          48,
+          52,
+          55
+        ],
+        "velocity": 0.21,
+        "section": 7
+      },
+      {
+        "type": "chord",
+        "beat": 60,
+        "duration": 3.85,
+        "notes": [
+          45,
+          49,
+          52
+        ],
+        "velocity": 0.21,
+        "section": 7
+      },
+      {
+        "type": "chord",
+        "beat": 64,
+        "duration": 3.85,
+        "notes": [
+          38,
+          41,
+          45
+        ],
+        "velocity": 0.21,
+        "section": 8
+      },
+      {
+        "type": "chord",
+        "beat": 68,
+        "duration": 3.85,
+        "notes": [
+          41,
+          44,
+          48
+        ],
+        "velocity": 0.21,
+        "section": 8
+      },
+      {
+        "type": "chord",
+        "beat": 72,
+        "duration": 3.85,
+        "notes": [
+          38,
+          41,
+          45
+        ],
+        "velocity": 0.21,
+        "section": 9
+      },
+      {
+        "type": "chord",
+        "beat": 76,
+        "duration": 3.85,
+        "notes": [
+          48,
+          51,
+          55
+        ],
+        "velocity": 0.21,
+        "section": 9
+      },
+      {
+        "type": "chord",
+        "beat": 80,
+        "duration": 3.85,
+        "notes": [
+          46,
+          49,
+          53
+        ],
+        "velocity": 0.21,
+        "section": 10
+      },
+      {
+        "type": "chord",
+        "beat": 84,
+        "duration": 3.85,
+        "notes": [
+          46,
+          49,
+          53
+        ],
+        "velocity": 0.21,
+        "section": 10
+      },
+      {
+        "type": "chord",
+        "beat": 91.6,
+        "duration": 2.4,
+        "notes": [
+          36,
+          43,
+          48,
+          52,
+          55
+        ],
+        "velocity": 0.17,
+        "section": 11
+      }
+    ],
+    "pattern": [],
+    "scaleNotes": [],
+    "beatSeconds": 0.5660377358490566,
+    "timelineLengthBeats": 96,
+    "durationSeconds": 54.339622641509436,
+    "stats": {
+      "bars": 24,
+      "steps": 384,
+      "notes": 216,
+      "drums": 168,
+      "chords": 23,
+      "bpm": 106,
+      "loopSeconds": 54.3
+    },
+    "explanation": "ALPHA Opus : composition originale en douze tableaux, inspirée des structures textuelles documentées par PARISIS. Ni chant antique ni protocole sacré reconstitués."
+  },
+  "notice": "Les chiffres antiques structurent une création actuelle ; les sons et leurs fréquences sont inventés par ELOAH NUMERA. Les manuscrits coptes ne sont pas rétro-traduits en grec."
+}
