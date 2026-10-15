@@ -16,7 +16,7 @@ var css=[
 "body.pe-extract main h3{font-size:clamp(19px,2vw,26px)!important;line-height:1.3!important}",
 "body.pe-extract main :is(.shell,.layout,.wrap,.full){max-width:100%!important}",
 "body.pe-extract main .layout:not(.images){display:block!important;grid-template-columns:1fr!important}",
-"body.pe-extract main :is(nav,aside,footer,form,button,input,textarea,select,dialog){display:none!important}",
+"body.pe-extract main :is(nav,form,button,input,textarea,select,dialog){display:none!important}",
 ".pe-doc-label{padding:11px clamp(18px,4vw,54px);background:#f5efe7;border-bottom:1px solid #d3c6b9;color:#664e67;font:700 11px/1.5 system-ui}",
 ".pe-doc-label a{color:#604266}",
 "body.pe-md{background:#fffdfa!important;color:#342936!important;font:16px/1.8 system-ui,sans-serif}",
