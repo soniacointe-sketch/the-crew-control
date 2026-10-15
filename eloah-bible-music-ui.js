@@ -196,7 +196,13 @@ function pause(){
 function animate(){
  if(raf)cancelAnimationFrame(raf);
  function frame(){
-  draw(A.isPlaying()?A.getProgress():0);
+  const progress=A.isPlaying()?A.getProgress():0;
+  if(playing&&!voiceMode&&!paused&&doc?.verses?.length){
+   const base=verseIndex;
+   const visible=Math.min(doc.verses.length-1,base+Math.floor(progress*(doc.verses.length-base)));
+   if(visible!==completed){completed=visible;highlight(visible);}
+  }
+  draw(progress);
   if(playing)raf=requestAnimationFrame(frame);else raf=0;
  }
  raf=requestAnimationFrame(frame);
