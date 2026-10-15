@@ -116,3 +116,18 @@ html body :is(blockquote,.notice,.callout),body :is(blockquote,.notice,.callout)
 html body :is(.pe-cover-image img,.cover img),body :is(.pe-cover-image img,.cover img){filter:none!important}
 html body :is(a,button,input,select,textarea,summary):focus-visible,body :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #96723B!important;outline-offset:3px!important}
 @media print{html body,body{background:white!important;color:black!important}}
+
+/* Reading surfaces and dark instruments: explicit contrast pairs. */
+html:root body :is(main,article.reader,.container,.wrap){color:#182321}
+html:root body.pe-extract,html:root body.pe-extract main{background:#F2EBDD!important;color:#182321!important}
+html:root body.pe-extract main :is(section,article,header,.card,.panel,.box){background:#F2EBDD!important;color:#182321!important}
+html:root body.pe-extract main :is(h1,h2,h3,p,li,strong,b,em,a,span){color:#182321!important}
+html:root body .chapter-banner h2{font-family:"Libre Baskerville",Georgia,serif!important}
+html:root body :is(.intro h1 em,.wordmark em){color:#354B43!important}
+html:root body .sidebar .series-items button[aria-current="page"]{background:#DFE5DB!important;color:#182321!important;border-left-color:#743D45!important}
+html:root body #original{background:#354B43!important;color:#F2EBDD!important;border-color:#354B43!important}
+html:root body :is(.panel-head,.network-scroller){background:#182321!important;color:#F2EBDD!important}
+html:root body .panel-head :is(h2,p,span,strong,div){color:#F2EBDD!important}
+html:root body .network-scroller .graph-node circle{fill:#354B43}
+html:root body .network-scroller .graph-node.selected circle{fill:#743D45}
+html:root body :is(.notice,.callout,blockquote) :is(strong,b,span,p){color:#182321!important}
