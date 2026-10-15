@@ -21,6 +21,7 @@ body dialog::backdrop{background:#130c19cc}
 body :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #ead4b4!important;outline-offset:3px}
 body button:disabled{opacity:.55;cursor:not-allowed}
 body .library-wayfinding{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px}
+body #conversion-tools:not(:has(#conversion)){display:none}
 body #conversion-tools #conversion{margin:18px 0 0;border:0!important;padding:0}
 body .grid{grid-template-columns:repeat(auto-fit,minmax(min(270px,100%),1fr))}
 @media(max-width:600px){body main{padding:24px 16px 170px}body .toolbar>*{width:100%;min-width:0}body #conversion .cv-layout{grid-template-columns:1fr}}
