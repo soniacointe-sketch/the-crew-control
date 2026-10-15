@@ -66,6 +66,25 @@ footer{border-top:1px solid #64515d;padding:23px 0 40px;color:#c9babb;font-size:
 @media(max-width:1050px){.layout{grid-template-columns:1fr}.alphabet{grid-template-columns:repeat(8,minmax(0,1fr))}}
 @media(max-width:590px){.stats{grid-template-columns:repeat(2,1fr)}.parts{grid-template-columns:1fr}.alphabet{grid-template-columns:repeat(6,minmax(0,1fr))}h1{font-size:40px}.mast nav{gap:9px}.panel{padding:14px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* ALPHA 2040 · Comparaison et concordance du corpus */
+.alpha-compare-panel{margin:14px 0 36px;border:1px solid #88707a;background:#24232c;padding:clamp(15px,2.8vw,26px)}
+.alpha-compare-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}
+.alpha-compare-panel textarea{min-height:145px;font-size:13px}
+.alpha-compare-panel h2{font:normal clamp(26px,3.2vw,38px) Georgia,serif;margin:7px 0}
+.alpha-compare-panel h3{font:normal 23px Georgia,serif}
+.alpha-compare-kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:14px 0}
+.alpha-compare-kpis>div{background:#38303e;padding:12px;border:1px solid #69545e}
+.alpha-compare-kpis strong{display:block;color:#f7d6a2;font:29px Georgia,serif}
+.alpha-compare-kpis small{color:#d3c1b3;font-size:11px}
+.alpha-compare-panel .scroll{margin:18px 0;max-height:380px;overflow:auto}
+.alpha-compare-panel input[type=search]{max-width:350px;margin:0 0 10px}
+.alpha-compare-panel input[type=file]{font-size:12px;max-width:100%;margin:6px 0 9px}
+.alpha-compare-panel .concordance{margin-top:15px;background:#302c37;padding:15px;border:1px solid #76636a}
+.alpha-compare-panel .concordance ol{padding-left:23px}.alpha-compare-panel .concordance li{margin:7px 0;color:#e8d7c7;font-size:12px}
+.alpha-compare-panel #alphaCompareStatus{margin:13px 0}
+@media(max-width:760px){.alpha-compare-grid{grid-template-columns:1fr}.alpha-compare-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
 </style></head>
 <body>
 <header class="mast"><div class="wrap"><a class="wordmark" href="eloah-parisis.html">ELOAH <span>· PARISIS</span></a>
@@ -73,7 +92,7 @@ footer{border-top:1px solid #64515d;padding:23px 0 40px;color:#c9babb;font-size:
 <section class="hero"><div class="wrap"><div class="kicker">HUMANITIES LAB · ALPHA-010 · PROGRAMME DE LECTURE</div>
 <h1>Les mots deviennent une <em>carte de lettres.</em></h1>
 <p>Lis un mot, une phrase ou un texte grec. Pour chaque lettre, retrouve son rang de 1 à 24, sa lettre opposée et sa place dans les douze parties du corps d’Alètheia. Compare ensuite les fréquences et les valeurs numériques.</p>
-<div class="links"><a href="#lecture">Analyser un texte ↓</a><a href="#corps">Voir les douze parties ↓</a><a href="https://www.newadvent.org/fathers/0103114.htm" target="_blank" rel="noopener noreferrer">Irénée I,14 · Source antique ↗</a></div></div></section>
+<div class="links"><a href="#lecture">Analyser un texte ↓</a><a href="#corps">Voir les douze parties ↓</a><a href="#comparaison">Comparer deux textes ↓</a><a href="https://www.newadvent.org/fathers/0103114.htm" target="_blank" rel="noopener noreferrer">Irénée I,14 · Source antique ↗</a></div></div></section>
 <main class="wrap">
 <div class="layout" id="lecture">
  <section class="panel">
@@ -135,10 +154,38 @@ footer{border-top:1px solid #64515d;padding:23px 0 40px;color:#c9babb;font-size:
  <div class="notice" id="alphaWarnings">Le lecteur étudie les lettres selon un témoignage polémique d’Irénée ; il ne traduit pas le sens des mots, et les résultats numériques ne prouvent pas un code intentionnel.</div>
  </section>
 </div>
+
+<section class="alpha-compare-panel" id="comparaison" aria-labelledby="alphaCompareTitle">
+ <div class="kicker">ALPHA · STEMMA + PHONÉ + ARITHMOS · OUTIL LOCAL</div>
+ <h2 id="alphaCompareTitle">05 · Comparer deux textes.</h2>
+ <p class="sub">Copie deux passages grecs, ou charge des fichiers TXT/MD/CSV. Le programme retrouve les mots communs, leurs occurrences et les douze correspondances du corps de la Vérité. Une ressemblance ne démontre pas une transmission historique.</p>
+ <div class="alpha-compare-grid">
+  <div><label for="alphaCompareA">Texte A</label><textarea id="alphaCompareA" spellcheck="false" maxlength="120000" placeholder="Premier passage grec à analyser…"></textarea><label for="alphaCompareFileA">Fichier du texte A</label><input type="file" id="alphaCompareFileA" accept=".txt,.md,.csv,text/plain,text/markdown,text/csv"></div>
+  <div><label for="alphaCompareB">Texte B</label><textarea id="alphaCompareB" spellcheck="false" maxlength="120000" placeholder="Second passage grec à confronter…"></textarea><label for="alphaCompareFileB">Fichier du texte B</label><input type="file" id="alphaCompareFileB" accept=".txt,.md,.csv,text/plain,text/markdown,text/csv"></div>
+ </div>
+ <div class="actions">
+  <button class="btn primary" id="alphaCompareRun" type="button">Comparer les deux passages</button>
+  <button class="btn secondary" id="alphaCompareCurrent" type="button">Reprendre le texte du lecteur</button>
+  <button class="btn secondary" id="alphaCompareSample" type="button">Charger deux exemples</button>
+  <button class="btn secondary" id="alphaCompareCsv" type="button">Exporter CSV</button>
+  <button class="btn secondary" id="alphaCompareJson" type="button">Exporter JSON</button>
+ </div>
+ <div class="notice" role="status" aria-live="polite" id="alphaCompareStatus">Deux documents peuvent être analysés séparément ; aucun texte n’est transmis à un service externe.</div>
+ <div id="alphaCompareResults"><p class="sub">Saisis deux passages, puis lance la comparaison.</p></div>
+ <div class="concordance">
+  <h3>06 · Rechercher un mot dans les deux textes</h3>
+  <label for="alphaCompareQuery">Mot grec recherché (même forme après suppression des accents)</label>
+  <div class="actions"><input type="search" id="alphaCompareQuery" spellcheck="false" placeholder="Ex. ἀλήθεια"><button class="btn" id="alphaCompareSearch" type="button">Afficher les occurrences</button></div>
+  <div id="alphaConcordanceResults" aria-live="polite" class="sub">Le concordancier montre les mots voisins et la position dans chaque passage.</div>
+ </div>
+ <p class="legend">Limite : l'outil compare les formes écrites, sans traduction automatique, analyse des flexions ni attribution d'un auteur. L'ensemble fonctionne dans ce navigateur et ne touche pas aux espaces clients.</p>
+</section>
+
 </main>
 <footer><div class="wrap">ELOAH · PARISIS ENGINE · HUMANITIES LAB · Reconstitution analytique contemporaine à partir d’Irénée, <em>Contre les hérésies</em> I,14,3. La lecture vocale utilise la voix moderne installée sur l’appareil, non une restitution phonétique du IIe siècle. Aucun texte saisi n'est envoyé à un serveur par cet outil.</div></footer>
 <script src="parisis-alpha-text-reader.js?v=20261015-r1" defer></script>
 <script src="parisis-alpha-text-reader-ui.js?v=20261015-r2" defer></script>
 <script src="parisis-alpha-lexique.js?v=20261015-lex1" defer></script>
 <script src="parisis-alpha-lexique-ui.js?v=20261015-lex2" defer></script>
+<script src="parisis-alpha-comparateur.js?v=20261015-1" defer></script><script src="parisis-alpha-comparateur-ui.js?v=20261015-1" defer></script>
 </body></html>
