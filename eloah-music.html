@@ -405,6 +405,7 @@ body.stage2040-active{overflow:hidden!important}
 .show22-incident-body p{font-size:11px!important;color:#c9b4c9!important;margin:0!important}
 .show22-incident-list{display:flex;flex-direction:column;gap:6px;max-height:190px;overflow:auto}
 .show22-incident-list p{border-left:3px solid #bd83a7;background:#2c1c35;padding:8px 10px}
+.show22-disclaimer{font-size:11px!important;color:#d7bed3!important;line-height:1.5!important;margin:0!important}
 .stage2040.operator22 .stage2040-setlist,.stage2040.operator22 .stage2040-conductor,.stage2040.operator22 .stage20,.stage2040.operator22 .stage2040-regie{display:none!important}
 @media(max-width:750px){.show22{padding:10px}.show22-actions button{flex:1 1 43%;min-height:47px}.show22 .show22-silence{flex-basis:100%}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
@@ -630,7 +631,7 @@ body.stage2040-active{overflow:hidden!important}
    <p>Journal conservé localement par compte ELOAH connecté et par playlist. Sans connexion, uniquement pour cet onglet. Aucun envoi au cloud.</p>
   </div>
  </details>
- <p id="show22status" class="show22-status" role="status" aria-live="polite">Mode opérateur prêt. Le bouton Silence arrête immédiatement les deux lecteurs et coupe le micro.</p>
+ <p id="show22status" class="show22-status" role="status" aria-live="polite">Mode opérateur prêt. Le bouton Silence arrête les deux lecteurs ELOAH et coupe le micro.</p><p class="show22-disclaimer">Sécurité : cette commande ne contrôle pas Spotify intégré, les autres onglets ni la sonorisation externe. Teste le circuit audio avant tout spectacle.</p>
 </section>
 <div class="stage2040-decks">
    <section class="stage2040-deck stage2040-deck-a" aria-label="Platine A, musique principale">
