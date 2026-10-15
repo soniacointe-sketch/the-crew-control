@@ -51,6 +51,44 @@ Attention : la composition est **postérieure aux apparitions de 1858** ; ne pas
 
 **Lecture symbolique proposée, non attestée comme doctrine :** *la roche → l’épreuve → la découverte → la transformation*. À Lourdes, la source est découverte ; dans le récit arthurien, une épée est révélée. Ce parallèle est littéraire, pas une preuve de secret partagé.
 
+## Complément documentaire — le chiffre 12 et les cantiques (15 octobre 2026)
+
+### A — La précision sur « elle avait 12 ans »
+
+Trois réalités différentes sont à séparer :
+
+1. **Bernadette Soubirous a 14 ans** en février 1858, fait historique confirmé par le Sanctuaire et le Vatican.
+2. **L'apparition était décrite comme très jeune**, « une petite demoiselle », d'âge voisin de celui de Bernadette ; certaines synthèses parlent d'une apparence de **fillette d'environ 12 ans**, mais cela reste **une description rapportée**, non l'âge historique de Marie. Les archives patrimoniales des Vallées des Gaves indiquent que Bernadette trouvait la statue de Fabisch trop âgée.
+3. Dans le **Protévangile de Jacques, chapitre VIII**, texte chrétien *apocryphe* de la fin du IIe siècle, **Marie a 12 ans** lorsque des prêtres délibèrent de la faire quitter le Temple. Ce détail n'est **pas indiqué par les Évangiles canoniques**, et son historicité n'est pas prouvée.
+
+Le chapitre **Apocalypse 12,1** évoque la Femme **couronnée de 12 étoiles**. Dans une homélie prononcée à **Lourdes le 13 septembre 2008**, **Benoît XVI rapproche explicitement Marie de cette Femme**, expliquant les 12 étoiles par les 12 tribus d'Israël et le peuple de Dieu. C'est un **lien théologique documenté** ; il ne démontre pas une équivalence entre l'âge de Marie et le nombre des étoiles.
+
+### B — Un pont textuel concret : le Cantique-récit de Lourdes (Jean Gaignet, 1875)
+
+Le texte historique de l'abbé Jean Gaignet comporte **six dizaines de strophes**. Il ne parle pas d'un code apocalyptique à décoder, mais met en scène plusieurs motifs :
+
+- **III, 8 :** prier pour les pécheurs.
+- **IV, 4 :** « Il faut que l’orage éprouve la foi » ; une épreuve comme traversée spirituelle.
+- **V, 1–4 :** la fontaine, la terre et la **fontaine de vie**.
+- **V, 9–10 :** l'identification de l'Immaculée Conception.
+- **VI, 8–10 :** le pèlerinage, le passage et l'espérance.
+
+Ces motifs se lisent en parallèle avec :
+- **Apocalypse 5,9 et 14,3 :** « cantique nouveau », chant de louange.
+- **Apocalypse 7,14-17 :** sortie de la grande épreuve et sources des eaux de la vie.
+- **Apocalypse 21,1–6 :** ciel nouveau, terre nouvelle et eau donnée gratuitement.
+
+**Lecture symbolique proposée :** *épreuve → conversion → eau / purification → chant nouveau → vie renouvelée*. Le cantique de Gaignet, composé près de vingt ans **après** Lourdes, n'est pas le texte de l'Apocalypse et ne constitue pas une prophétie.
+
+### C — Sources documentaires ajoutées
+
+- [Benoît XVI, Lourdes, 13 septembre 2008 — lien explicite à Apocalypse 12](https://www.vatican.va/content/benedict-xvi/fr/homilies/2008/documents/hf_ben-xvi_hom_20080913_lourdes-processione.html)
+- [Patrimoine des Vallées des Gaves — Fabisch et la description jeune de l'apparition](https://www.patrimoines-lourdes-gavarnie.fr/patrimoines-materiels/patrimoine-artistique/62-patrimoine-artistique)
+- [Protévangile de Jacques VIII, texte (Wikisource)](https://fr.wikisource.org/wiki/Prot%C3%A9vangile_de_Jacques/%C3%89dition_Garnier)
+- [BnF — Notice du Protévangile de Jacques : apocryphe de la fin du IIe siècle](https://catalogue.bnf.fr/ark:/12148/cb120692728.public)
+- [J. Gaignet, *Cantique-récit de Lourdes*, 1875, six dizaines de strophes](https://fr.wikisource.org/wiki/Cantique-r%C3%A9cit_de_l%27apparition_de_N.-D._de_Lourdes)
+- [Apocalypse 5 (AELF)](https://www.aelf.org/bible/Ap/5) · [Apocalypse 7](https://www.aelf.org/bible/Ap/7) · [Apocalypse 12](https://www.aelf.org/bible/Ap/12) · [Apocalypse 14](https://www.aelf.org/bible/Ap/14) · [Apocalypse 21](https://www.aelf.org/bible/Ap/21)
+
 ## 5 — Pistes notées, à identifier
 
 La recherche a été enrichie par les indications suivantes, **recopiées sans interprétation arbitraire** :
