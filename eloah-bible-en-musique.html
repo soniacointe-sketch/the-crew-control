@@ -1,0 +1,145 @@
+<!doctype html><html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#140b1c">
+<meta name="description" content="ELOAH Bible en musique : choisir un livre et un chapitre de la Bible Segond 1910, écouter une voix française avec une composition musicale générée d'après les versets, exporter WAV et MIDI.">
+<title>ELOAH NUMERA · La Bible en musique</title>
+<style>
+:root{color-scheme:dark;--bg:#0d0913;--dark:#17121e;--card:#211827;--raised:#2f2233;--ink:#fff2e6;--muted:#cebbc9;--gold:#efd0a0;--pink:#e18bbf;--line:#664e63}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.64 Inter,system-ui,Arial,sans-serif}
+a{color:var(--gold)}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.5;cursor:not-allowed}
+:focus-visible{outline:3px solid #f0d2a6;outline-offset:3px}
+.wrap{max-width:1460px;padding:0 clamp(16px,3vw,46px);margin:0 auto}
+.top{border-bottom:1px solid var(--line);background:#160d1d}.top .wrap{padding-top:14px;padding-bottom:14px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.logo{font:26px Georgia,serif;color:#fff4e2;letter-spacing:.06em;text-decoration:none}.logo span{color:var(--gold)}
+nav{display:flex;flex-wrap:wrap;gap:13px;font-size:12px}nav a{text-decoration:none;color:#e8d6e1}
+.hero{background:radial-gradient(ellipse at 75% 22%,#7b3b6a52,transparent 50%),linear-gradient(110deg,#150d1c,#27172c);border-bottom:1px solid #624360;padding:clamp(30px,5vw,65px) 0}
+.eyebrow{font-weight:850;font-size:10px;letter-spacing:.17em;text-transform:uppercase;color:var(--gold)}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}
+h1{font-size:clamp(38px,5.6vw,74px);letter-spacing:-.035em;line-height:1.08;margin:12px 0}h1 em{font-style:normal;color:var(--gold)}
+.hero p{font:clamp(15px,1.55vw,20px)/1.55 Georgia,serif;color:#efdae6;max-width:890px}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}.tags span{color:#f1d6e7;background:#30203b;border:1px solid #755472;border-radius:99px;padding:7px 10px;font-size:11px}
+main{display:grid;grid-template-columns:minmax(290px,340px) minmax(0,1fr) minmax(245px,300px);gap:14px;padding-top:22px;padding-bottom:42px;align-items:start}
+.panel{background:var(--dark);border:1px solid #614960;border-radius:15px;min-width:0;overflow:hidden}
+.pad{padding:clamp(16px,2.2vw,25px)}h2{font-size:26px;margin:3px 0 10px}h3{font-size:21px;margin:15px 0 7px}
+label{display:block;font-size:12px;font-weight:750;color:#ecd3c9;margin:12px 0 5px}
+input[type=number],select,textarea,input[type=text]{display:block;width:100%;min-height:40px;background:#100d18;border:1px solid #815977;border-radius:8px;padding:10px 12px;color:#fff2e7}
+textarea{min-height:125px;resize:vertical}
+input[type=range]{width:100%;accent-color:#dd84b4}
+.smallgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}
+.smalldesc{font-size:12px;color:var(--muted);line-height:1.65}
+.flex{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-align:center;gap:7px;border-radius:8px;border:1px solid #9a6c88;background:#50334a;color:#ffe6e1;padding:10px 14px;min-height:41px;font-weight:750;font-size:12px}
+.btn:hover{background:#794a67}.btn.primary{background:var(--gold);color:#281828;border-color:var(--gold)}.btn.primary:hover{background:#ffe5bd}
+.buttons{display:flex;flex-wrap:wrap;gap:8px;margin:13px 0}.buttons .btn{flex:1}
+.section{border-top:1px solid #523e56;padding-top:14px;margin-top:18px}
+.preset-list{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin:12px 0}
+.preset-list button{padding:9px;background:#2c2233;border:1px solid #725071;color:#f4dddf;border-radius:7px;text-align:left;font-size:11px}
+.preset-list button:hover{background:#56384c}
+.player{background:radial-gradient(circle at 45% 42%,#6c315d50,#1e1228 45%,#0e0b17);aspect-ratio:16/9;min-height:240px;border-bottom:1px solid #593956;position:relative}
+.player canvas{width:100%;height:100%;display:block}
+.player .plate{position:absolute;inset:auto 15px 15px;display:flex;justify-content:space-between;gap:12px;align-items:end;pointer-events:none}
+.player .plate .name{font:clamp(22px,3vw,36px) Georgia,serif;color:#ffe6ca}
+.player .plate .ref{font-size:11px;color:#e3c6d9;text-align:right}
+.status{margin:12px 0;padding:12px 14px;border-left:3px solid var(--gold);background:#302438;color:#f5dfdd;font-size:12px;min-height:45px}
+.read-passage{display:grid;gap:9px;max-height:540px;overflow:auto;padding:5px 0}
+.verse{background:#231a2c;border:1px solid #59435b;padding:13px 15px;border-radius:9px;color:#f4e5e4;text-align:left;line-height:1.65}
+.verse:hover,.verse[aria-pressed=true]{background:#49304a;border-color:#e0bc8d}
+.verse.playing{background:#5c3350;box-shadow:inset 4px 0 0 var(--gold);border-color:#e5be9a}
+.verse strong{font:18px Georgia,serif;color:var(--gold);padding-right:9px}
+.meta{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:7px;margin:13px 0}
+.meta div{padding:10px;border:1px solid #5d465d;border-radius:9px;background:#271d2d}
+.meta strong{display:block;font:24px Georgia,serif;color:var(--gold)}.meta small{font-size:10px;color:#ceb9c8}
+.progress{height:5px;background:#49384d;border-radius:99px;margin:13px 0 5px;overflow:hidden}.progress>span{display:block;width:0;height:100%;background:linear-gradient(90deg,#f2cb9a,#db6ba8)}
+.track{display:flex;justify-content:space-between;gap:7px;font-size:11px;color:#ceb6c7}
+.readings{display:grid;gap:7px;margin:12px 0}
+.readings label{margin:0;display:flex;gap:8px;align-items:center;cursor:pointer}
+.readings input{accent-color:#d991c5}
+.sidebox{border:1px solid #574060;border-radius:10px;background:#2b2132;padding:13px;margin:12px 0;color:#e8d9dc;font-size:12px}
+.sidebox strong{display:block;color:#f0d09b;margin-bottom:6px}
+.output{display:grid;gap:9px}
+.output .btn{width:100%;justify-content:space-between}
+footer{border-top:1px solid #4b3750;color:#cdb9c7;padding:22px 0 40px;font-size:12px}
+@media(max-width:1270px){main{grid-template-columns:minmax(260px,.75fr) minmax(0,1.25fr)}.right{grid-column:1/-1}.output{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:830px){main{grid-template-columns:1fr}.right{grid-column:auto}.player{aspect-ratio:16/9}.output{grid-template-columns:1fr 1fr}}
+@media(max-width:510px){.preset-list,.output{grid-template-columns:1fr}.hero h1{font-size:45px}.player{aspect-ratio:4/3}.meta{grid-template-columns:repeat(2,1fr)}}
+</style></head>
+<body>
+<header class="top"><div class="wrap"><a href="mes-univers.html" class="logo">ELOAH <span>✦ BIBLE MUSIC</span></a>
+<nav aria-label="Navigation ELOAH"><a href="mes-univers.html">Accueil</a><a href="eloah-music.html">ELOAH Music</a><a href="eloah-numera.html">NUMERA</a><a href="eloah-alpha-opus.html">ALPHA OPUS</a><a href="eloah-parisis.html">PARISIS</a></nav>
+</div></header>
+<section class="hero"><div class="wrap"><div class="eyebrow">ELOAH NUMERA · ÉCRITURES · CRÉATION MUSICALE</div>
+<h1>La Bible, <em>en musique.</em></h1>
+<p>Une voix française lit les versets pendant qu'une musique originale, créée à partir du texte, les accompagne. Choisis un livre et un chapitre, règle l'ambiance et écoute la lecture, verset après verset.</p>
+<div class="tags"><span>66 LIVRES</span><span>LOUIS SEGOND 1910</span><span>VOIX FRANÇAISE + MUSIQUE</span><span>LECTURE PAR VERSET</span><span>WAV / MIDI INSTRUMENTAUX</span></div>
+</div></section>
+<main class="wrap">
+<section class="panel"><div class="pad">
+<div class="eyebrow">01 · CHOISIR LE PASSAGE</div><h2>Quelle parole écouter ?</h2>
+<div class="smallgrid"><div><label for="book">Livre</label><select id="book"></select></div><div><label for="chapter">Chapitre</label><select id="chapter"></select></div></div>
+<div class="smallgrid"><div><label for="startVerse">Début au verset</label><input id="startVerse" type="number" min="1" max="200" value="1"></div>
+<div><label for="endVerse">Jusqu'au verset (facultatif)</label><input id="endVerse" type="number" min="1" max="200" placeholder="Fin du chapitre"></div></div>
+<button id="loadChapter" type="button" class="btn primary" style="width:100%;margin-top:13px">↓ Charger les versets</button>
+<div class="preset-list" id="bookPresets" aria-label="Passages bibliques à explorer"></div>
+<p class="smalldesc">Texte : Louis Segond 1910, domaine public, chargé depuis une source biblique publique. Si Internet échoue, tu peux toujours coller ton passage ci-dessous.</p>
+<div class="section">
+<h3>Créer l'ambiance</h3>
+<label for="style">Univers musical</label>
+<select id="style"><option value="ambient">Céleste · Ambient</option><option value="mystic">Mystique · Doux</option><option value="cinematic">Cinématique</option><option value="electro">Électro</option></select>
+<div class="smallgrid"><div><label for="scale">Gamme</label><select id="scale"><option value="dorian">Dorienne</option><option value="pentatonic">Pentatonique</option><option value="minor">Mineure</option><option value="major">Majeure</option><option value="phrygian">Phrygienne</option></select></div>
+<div><label for="bpm">Tempo (BPM)</label><input type="number" id="bpm" min="45" max="180" value="76"></div></div>
+<label for="readSpeed">Vitesse de voix : <output id="speedOutput">0,9×</output></label>
+<input type="range" id="readSpeed" min="55" max="140" value="90">
+<div class="readings"><label><input id="withVoice" type="checkbox" checked> Lire les versets à voix haute</label>
+<label><input id="withMusic" type="checkbox" checked> Accompagner par une musique originale</label>
+<label><input id="drums" type="checkbox"> Ajouter des percussions</label>
+<label><input id="pad" type="checkbox" checked> Ajouter des nappes / accords</label></div>
+</div>
+<div class="section"><h3>Importer ou coller un passage</h3>
+<label for="manualText">Un verset par ligne (avec numéro facultatif)</label>
+<textarea id="manualText" spellcheck="false" maxlength="30000" placeholder="1 Au commencement, Dieu créa les cieux et la terre.&#10;2 La terre était informe et vide..."></textarea>
+<div class="buttons"><button id="useManual" class="btn" type="button">✦ Composer ce texte</button>
+<button id="clearManual" class="btn" type="button">Effacer</button></div>
+<p class="smalldesc">Ce mode n'envoie pas le texte collé à un serveur. Vérifie les droits d'usage de toute autre traduction que tu importes.</p></div>
+</div></section>
+<section class="panel">
+<div class="player"><canvas id="visual" aria-label="Animation de la musique issue des versets" role="img"></canvas>
+<div class="plate"><div class="name" id="coverTitle">Jean 14</div><div class="ref" id="coverSub">LA PAROLE DEVIENT MUSIQUE</div></div></div>
+<div class="pad">
+<div class="eyebrow">02 · ÉCOUTER LA PAROLE</div><h2 id="readingTitle">Bible musicale</h2>
+<div class="meta"><div><strong id="countVerses">—</strong><small>Versets chargés</small></div><div><strong id="countNotes">—</strong><small>Notes générées</small></div><div><strong id="duration">—</strong><small>Durée instrumentale</small></div></div>
+<div class="buttons"><button class="btn primary" type="button" id="readAll">▶ Lire avec la musique</button>
+<button class="btn" type="button" id="pause">Ⅱ Pause</button>
+<button class="btn" type="button" id="stop">■ Arrêter</button></div>
+<div class="progress" aria-label="Progression de lecture"><span id="progressBar"></span></div>
+<div class="track"><span id="currentVerse">Prêt pour le premier verset</span><span id="readProgress">0 / 0</span></div>
+<div id="status" class="status" role="status" aria-live="polite">Choisis un passage et charge son texte.</div>
+<h3>Le texte de la Bible</h3>
+<div id="verses" class="read-passage" role="group" aria-label="Versets cliquables pour lire depuis une position"></div>
+<p class="smalldesc" id="copyright">Louis Segond 1910 · Domaine public. Les versets conservent leur référence et leur numéro.</p>
+</div></section>
+<aside class="panel right"><div class="pad">
+<div class="eyebrow">03 · CRÉER ET CONSERVER</div><h2>Le texte devient partition.</h2>
+<p class="smalldesc">Chaque verset génère une cellule musicale. Quand la voix passe au verset suivant, NUMERA fait évoluer l'accompagnement.</p>
+<div class="sidebox"><strong>La règle créative</strong>Pour le français, les lettres sont converties en degrés musicaux selon une convention de composition. Les numéros des versets influencent également le motif ; il ne s'agit pas de fréquences bibliques originelles.</div>
+<h3>Exporter</h3>
+<div class="output">
+<button class="btn" type="button" id="wav">↓ WAV · musique instrumentale</button>
+<button class="btn" type="button" id="midi">↓ MIDI · notes et accords</button>
+<button class="btn" type="button" id="json">↓ Projet · textes et partition JSON</button>
+<button class="btn" type="button" id="png">↓ Image musicale PNG</button></div>
+<div class="status" id="exportStatus" role="status" aria-live="polite">L'export WAV/MIDI contient la musique. La voix du navigateur n'est pas incluse dans ces fichiers.</div>
+<h3>Voix disponibles</h3>
+<label for="voice">Choisir la voix française</label><select id="voice"><option value="">Voix française du navigateur</option></select>
+<p class="smalldesc">La voix est produite sur ton appareil. Si la synthèse vocale est désactivée, le mode instrumental reste disponible.</p>
+<div class="section"><h3>Aller plus loin dans NUMERA</h3>
+<p class="smalldesc">Tu peux utiliser les chiffres d'ALPHA, les lettres grecques ou ton propre texte pour créer d'autres pièces.</p>
+<div class="buttons"><a class="btn" href="eloah-numera.html">Studio NUMERA ↗</a><a class="btn" href="eloah-alpha-opus.html">ALPHA OPUS ↗</a></div></div>
+<div class="sidebox"><strong>Crédit biblique</strong><span id="sourceCredit">Louis Segond 1910 · Domaine public</span><p><a href="https://api.midvash.com/fr" target="_blank" rel="noopener noreferrer">Source Bible API Midvash ↗</a></p></div>
+</div></aside>
+</main>
+<footer><div class="wrap">ELOAH NUMERA · Bible en musique · Lecture vocale moderne et composition artistique originale. Les textes sont crédités selon leur édition. Aucune affirmation de musique ancienne cachée ou de fréquence sacrée révélée par calcul.</div></footer>
+<script src="eloah-numera-engine.js?v=20261015-a1" defer></script>
+<script src="eloah-numera-audio.js?v=20261015-a2" defer></script>
+<script src="eloah-bible-music-engine.js?v=20261016-b1" defer></script>
+<script src="eloah-bible-music-ui.js?v=20261016-b1" defer></script>
+</body></html>
