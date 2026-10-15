@@ -1,0 +1,49 @@
+/* THE CREW ORCHIES — shared identity, sourced from the official site. */
+@font-face{font-family:'Crew Inter';src:url('https://thecreworchies.blog/wp-content/themes/assembler/assets/fonts/inter/InterVariable.woff2') format('woff2');font-weight:100 800;font-display:swap}
+@font-face{font-family:'Crew Bebas';src:url('https://thecreworchies.blog/wp-content/uploads/fonts/JTUSjIg69CK48gW7PXooxWtrygbi49c.woff2') format('woff2');font-weight:400;font-display:swap}
+:root{--crew-night:#090909;--crew-paper:#f5f2e9;--crew-ink:#211d15;--crew-gold:#d8b96e;--crew-bronze:#86672e;--crew-border:#d9cfbd;--crew-photo:url('https://thecreworchies.blog/wp-content/uploads/2026/09/ChatGPT-Image-23-sept.-2026-10_47_35.png');--crew-real:url('https://thecreworchies.blog/wp-content/uploads/2026/09/818353583_122143518020998689_3918491565860901327_n2.jpg')}
+html body.crew-identity{font-family:'Crew Inter',Arial,sans-serif!important;background:var(--crew-paper)!important;color:var(--crew-ink)!important;color-scheme:light;padding-left:0!important}
+html body.crew-identity :is(h1,h2,h3,h4){font-family:'Crew Bebas',Impact,sans-serif!important;font-weight:400!important;font-style:normal!important;letter-spacing:.025em!important;line-height:1.1}
+html body.crew-identity :is(button,input,textarea,select){font-family:'Crew Inter',Arial,sans-serif}
+.crew-identity .eloah-global-nav{display:none!important}
+.crew-brand-nav{display:flex;align-items:center;gap:24px;padding:12px clamp(16px,4vw,60px);background:var(--crew-night);color:#f5f2e9;border-bottom:1px solid #d8b96e44;position:relative;z-index:2}
+.crew-brand-nav>a{display:flex;align-items:center;gap:12px;color:#f5f2e9!important;text-decoration:none;flex-shrink:0;font:23px/1 'Crew Bebas',Impact,sans-serif;letter-spacing:.04em}
+.crew-brand-nav img{width:55px;height:55px;object-fit:contain}.crew-brand-nav nav{display:flex;gap:8px;overflow-x:auto;min-width:0;margin-left:auto;padding:5px 0;scrollbar-width:thin}
+.crew-brand-nav nav a{display:block;white-space:nowrap;color:#eee6d5!important;text-decoration:none;font:16px 'Crew Bebas',Impact,sans-serif;letter-spacing:.05em;padding:10px 12px;border-bottom:2px solid transparent}
+.crew-brand-nav nav a:hover,.crew-brand-nav a[aria-current=page]{color:#e6ce8a!important;border-bottom-color:var(--crew-gold)}
+.crew-identity :where(button,a,input,select,textarea,summary):focus-visible{outline:2px solid #af863b;outline-offset:4px}
+.crew-photo-lead{min-height:245px;padding:45px 24px;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:14px;text-align:center;color:#fff8eb;background:linear-gradient(#09090975,#09090985),var(--crew-photo) center 42%/cover;border-bottom:2px solid var(--crew-gold)}
+.crew-photo-lead span{font-size:10px;letter-spacing:.22em;text-transform:uppercase}.crew-photo-lead strong{font:clamp(38px,5vw,64px)/1 'Crew Bebas',Impact,sans-serif;font-weight:400;letter-spacing:.02em}.crew-photo-lead p{color:#f2e6cf!important;font-size:12px;letter-spacing:.1em;margin:0}
+.crew-paper :is(.panel,.card,.stat,.metric,.crew-bridge){background:#fffdf7!important;color:var(--crew-ink)!important;border-color:var(--crew-border)!important;border-radius:12px;box-shadow:0 3px 14px #3c2d1205}
+.crew-paper :is(h1,h2,h3,h4){color:var(--crew-ink)}
+.crew-paper :is(.muted,.note,.quiet,.source,.cardsource,.card .id,.stat span,label){color:#655b4b!important}
+.crew-paper :is(.eyebrow,.ey,.num,.brand){color:var(--crew-bronze)}
+.crew-paper :is(input,select,textarea){color:#211d15!important;background:#fffdf8!important;border:1px solid #b7a98e!important;border-radius:8px;font-size:16px;min-width:0}
+.crew-paper :is(.btn,.primary,.dark){background:linear-gradient(110deg,#d8b96e,#eedda7,#c9a454)!important;color:#21190b!important;border:1px solid #ad8c48!important;border-radius:24px;min-height:44px}
+.crew-paper :is(.secondary,.btn.alt){background:transparent!important;color:#715423!important;border:1px solid #b4a17b!important}
+.crew-paper :is(.warning,.notice,.flag){background:#eee6d4!important;color:#574422!important;border-left-color:#ac863d}
+.crew-paper :is(.tag,.chip,.pill-crew){background:#eee5d2!important;color:#695021!important;border-color:#ccbb98!important}
+.crew-paper :is(.message,.fileLink){background:#eee8dc!important;color:#30271a!important}
+.crew-paper :is(.tabs button.active,.side-link.current){background:#e9ddc4!important;color:#5d441c!important;border-color:#a68037!important}
+.crew-paper a{color:#775b25}.crew-paper :is(th,td,.line,.item,.step){border-color:#ddd2bd}.crew-paper th{color:#685b47}
+.crew-paper .green{color:#28613f}.crew-paper .alert{color:#875408}
+.crew-paper .wrap>header{background:#100f0c;color:#f5f2e9;padding:18px 22px;border-radius:12px;gap:16px;flex-wrap:wrap}.crew-paper .wrap>header :is(a,.brand,.brand small){color:#ead5a0}
+.crew-community .layout{grid-template-columns:minmax(0,1fr)!important}.crew-community .layout>aside{display:none!important}.crew-community main{max-width:1280px;width:100%;margin:auto}.crew-community .head{padding:0;min-height:100px}.crew-community .hero-crew{display:none}.crew-community .logo{background:#090909!important;color:#d8b96e!important}
+.crew-invitations{max-width:none!important;padding:0!important}.crew-invitations>.crew-tool-wrap{max-width:1050px;margin:auto;padding:25px 22px 70px}
+.crew-payments main{padding-top:28px}.crew-academy .grid,.crew-reference .cards{grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr))}
+/* Studio: keep authored artwork, unify surrounding surfaces. */
+.crew-studio .studio-layout{grid-template-columns:minmax(0,1fr)}.crew-studio .studio-sidebar{height:auto;position:relative;flex-direction:row;align-items:center;overflow-x:auto;padding:10px 22px;background:#100e0a}.crew-studio .studio-sidebar .studio-logo,.crew-studio .studio-sidebar .slogan{display:none}.crew-studio .studio-sidebar a{white-space:nowrap;padding:10px;font-size:12px}
+.crew-studio .studio-main>header{min-height:300px;background:linear-gradient(#09090980,#09090990),var(--crew-photo) center/cover;padding:48px 20px;color:#fff4dc}
+.crew-studio .studio-main>header:before,.crew-studio .hero-script,.crew-studio .hero-dancer{display:none}
+.crew-studio .studio-main>header h1{font-size:clamp(44px,6vw,76px);color:#f8f3e7!important;background:none;text-shadow:none;line-height:1}.crew-studio .studio-main>header h1 span{display:block;color:#e5cd87;font-size:.65em;margin-top:12px}
+.crew-studio main>.grid .card{background:#fffdf7!important;border:1px solid #d9cfbd!important;box-shadow:0 4px 18px #2c220c08;color:#211d15!important}
+.crew-studio :is(main p,main .muted,.card p){color:#655b4b!important}.crew-studio main .card strong{color:#211d15!important}.crew-studio .num{color:#86672e!important}.crew-studio .result{color:#775b25}
+/* Magazine: black photographic cover, warm paper reading surfaces. */
+.crew-magazine{--bg:#f5f2e9;--panel:#fffdf7;--ivory:#211d15;--gold:#d8b96e;--gold2:#86672e;--muted:#655b4b;--line:#d9cfbd;--pink:#86672e}
+.crew-magazine .header,.crew-magazine .topline{display:none}.crew-magazine .masthead{background:#090909;color:#f5f2e9}.crew-magazine .hero-intro{background:#090909}.crew-magazine .hero-intro h1{color:#fff5df;font-size:clamp(42px,5vw,72px)}.crew-magazine .hero-intro h1 em{font-style:normal;color:#e4cb80}
+.crew-magazine :is(.article-card,.mag-sidebar-block,.newsletter,.story-content,.featured,.mag-card){background:#fffdf7;color:#211d15;border-color:#d9cfbd}
+.crew-magazine :is(.story-content p,.article-card p,.mag-sidebar-note,.mag-caption){color:#655b4b}.crew-magazine :is(.category,.kicker,.read-link){color:#86672e}
+.crew-magazine .hero-image img{object-position:center}.crew-magazine .hero-kicker{color:#e4cb80}
+.crew-magazine .masthead :is(.kicker,.meta){color:#e4cb80}.crew-magazine .masthead p{color:#e9dfcb}
+@media(max-width:700px){.crew-brand-nav{gap:12px;padding:10px 14px;flex-wrap:wrap}.crew-brand-nav>a{font-size:22px}.crew-brand-nav img{width:42px;height:42px}.crew-brand-nav nav{width:100%;margin:0;gap:4px}.crew-brand-nav nav a{font-size:15px;padding:8px 10px}.crew-photo-lead{min-height:205px;padding:30px 18px}.crew-paper .wrap{max-width:100%}.crew-community .head{gap:12px}.crew-community .head h1{font-size:34px}.crew-studio .studio-main>header{min-height:240px}.crew-studio .studio-sidebar{gap:2px}.crew-invitations>.crew-tool-wrap{padding:20px 14px 50px}}
+@media(prefers-reduced-motion:reduce){.crew-identity *{scroll-behavior:auto!important;transition:none!important}}
