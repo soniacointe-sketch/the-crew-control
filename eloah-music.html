@@ -508,9 +508,9 @@ body.stage2040-active{overflow:hidden!important}
 #ytList{grid-template-columns:1fr}
 #ytList .action{min-height:44px}
 }
-</style></head><body>
+</style><style id="music-account-access">.music-account-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:#1d1028;border-bottom:1px solid #67415f}.music-account-bar>span{font-size:11px;letter-spacing:.08em;color:#e7d1a6}.music-account-bar button{min-height:44px;padding:10px 16px;border-radius:10px;background:#e7d1a6;color:#24142e;font-size:13px;font-weight:750;flex-shrink:0}@media(max-width:750px){.music-account-bar{padding:10px 12px}.music-account-bar>span{font-size:10px}}</style></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
-<main class="main"><div class="mobile-music-top"><strong>ELOAH MUSIC</strong><a href="mes-univers.html">Mes univers ↗</a></div><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
+<main class="main"><div class="music-account-bar"><span>ELOAH MUSIC · MON COMPTE</span><button type="button" id="musicAccountLogin" aria-haspopup="dialog">Se connecter</button></div><div class="mobile-music-top"><strong>ELOAH MUSIC</strong><a href="mes-univers.html">Mes univers ↗</a></div><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
 <div class="body"><!-- ELOAH 2040 COCKPIT V2 -->
 <section class="music2040" aria-label="Cockpit ELOAH Music 2040">
 <div class="music2040-head"><div><span class="music2040-kicker">ELOAH 2040 · COMMANDE MUSICALE</span><h2>Ton cockpit sonore</h2></div><span class="music2040-pill">✦ Mode personnel</span></div>
@@ -1976,6 +1976,7 @@ async function cloudSession(){
  if(!cloud)return cloudStatus('Connexion Supabase indisponible.');
  const {data,error}=await cloud.auth.getUser();
  cloudUser=error?null:data.user;
+ $('musicAccountLogin').textContent=cloudUser?'Mon compte':'Se connecter';
  if(cloudUser){await loadPreferences();await loadCloudProgress();await refreshCloud();}
  else cloudStatus('Cloud : connexion nécessaire');
 }
@@ -1992,7 +1993,7 @@ $('cloudBtn').onclick=async()=>{
  }
  modal('Ma bibliothèque cloud','<p>Connectée : '+safe(cloudUser.email||'Compte ELOAH')+'</p><p>Les titres envoyés sont privés et accessibles depuis tes appareils connectés au même compte.</p><button class="action" id="cloudUpload">Envoyer mes titres locaux dans le cloud</button><button class="action secondary" id="cloudRefresh">Actualiser</button><button class="action secondary" id="cloudLogout">Déconnexion</button><p class="muted" id="cloudMessage"></p>');
  $('cloudRefresh').onclick=async()=>{await refreshCloud();$('cloudMessage').textContent='Bibliothèque actualisée.'};
- $('cloudLogout').onclick=async()=>{await cloud.auth.signOut();cloudUser=null;tracks=tracks.filter(t=>!t.cloud);cloudStatus('Cloud déconnecté');$('modal').close();render()};
+ $('cloudLogout').onclick=async()=>{await cloud.auth.signOut();cloudUser=null;$('musicAccountLogin').textContent='Se connecter';tracks=tracks.filter(t=>!t.cloud);cloudStatus('Cloud déconnecté');$('modal').close();render()};
  $('cloudUpload').onclick=async()=>{
   const local=tracks.filter(t=>!t.cloud);
   if(!local.length){$('cloudMessage').textContent='Importe d’abord tes fichiers musicaux.';return}
@@ -2016,6 +2017,7 @@ $('cloudBtn').onclick=async()=>{
   await refreshCloud();
  };
 };
+$('musicAccountLogin').onclick=()=>{$('cloudBtn').click()};
 if(cloud){cloud.auth.onAuthStateChange((event)=>{if(event==='SIGNED_IN')setTimeout(()=>cloudSession(),0);if(event==='SIGNED_OUT'&&tracks.find(t=>t.id===djTrackId)?.cloud)djClear()});cloudSession()}
 render();restoreAudio();updateResume();
 })();
