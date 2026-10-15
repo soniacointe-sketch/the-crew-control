@@ -49,6 +49,37 @@ body.eloah-home-pro #contenu .directory>a{transition:border-color .15s}
 body.eloah-home-pro #contenu .directory>a:hover{border-color:#b78da6}
 @media(max-width:850px){body.eloah-home-pro #contenu .eloah-six-univers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){body.eloah-home-pro #contenu .eloah-welcome-film{padding:20px 16px}body.eloah-home-pro #contenu .eloah-six-univers{gap:10px}body.eloah-home-pro #contenu .eloah-universe-card{display:flex;flex-direction:column;align-items:flex-start;padding:14px;gap:10px}body.eloah-home-pro #contenu .eloah-universe-portrait{width:100%;height:95px}body.eloah-home-pro #contenu .eloah-universe-card strong{font-size:18px}body.eloah-home-pro #contenu .hero-actions{display:grid;grid-template-columns:1fr 1fr}body.eloah-home-pro #contenu .hero-actions>*{text-align:center;min-height:44px}}
+</style><style id="eloah-unified-workspace-colors">
+/* Shared ELOAH workspace palette, scoped to these two pages. */
+body:is(.client-page,.eloah-home-pro){
+--home-paper:#130c19;--home-card:#24162d;--home-ink:#fff4ed;--home-muted:#d5c3d4;--home-line:#6e506c;--home-prune:#38203e;--home-champagne:#ead4b4;--home-accent:#ead4b4;
+--bg:#130c19;--panel:#24162d;--ink:#fff4ed;--muted:#d5c3d4;--line:#6e506c;--purple:#ead4b4;--tint:#38203e;
+background:#130c19!important;color:#fff4ed!important;color-scheme:dark}
+body:is(.client-page,.eloah-home-pro) main#contenu{background:transparent!important;color:#fff4ed!important}
+body:is(.client-page,.eloah-home-pro) #contenu :is(h1,h2,h3,h4){color:#fff4ed!important}
+body:is(.client-page,.eloah-home-pro) #contenu :is(p,small,.help,.desc){color:#d5c3d4!important}
+body:is(.client-page,.eloah-home-pro) #contenu :is(.eyebrow,.choice-top,.number){color:#ead4b4!important}
+body:is(.client-page,.eloah-home-pro) #contenu :is(.search-area,.search-results,.choice,.ec-cards a,.secondary,.project-link,.project-tile,.tool,.task,.empty-state,.reassurance,.home-status,.directory>a,.eloah-account-card,.eloah-sites-card,.eloah-dev-card,.focus-main,.focus-aside,.pilotage-panel,.pilotage-kpi,.client-next,#ops-calendar,.secondary-panel,.services article){background:#24162d!important;border-color:#6e506c!important;color:#fff4ed!important;box-shadow:0 8px 24px #00000020!important}
+body:is(.client-page,.eloah-home-pro) #contenu :is(.home-hero,.client-hero){background:linear-gradient(135deg,#2d1934,#190f23)!important;border-color:#6e506c!important}
+body:is(.client-page,.eloah-home-pro) #contenu :is(.secondary>summary,.section-head,.topline){border-color:#6e506c!important}
+body:is(.client-page,.eloah-home-pro) :is(input:not([type=range]):not([type=checkbox]),select,textarea){background:#180f20!important;color:#fff4ed!important;border-color:#8d6a87!important}
+body:is(.client-page,.eloah-home-pro) input::placeholder,body:is(.client-page,.eloah-home-pro) textarea::placeholder{color:#bfaabd!important;opacity:1}
+body:is(.client-page,.eloah-home-pro) #contenu :is(button,.btn){background:#38203e!important;color:#fff4ed!important;border:1px solid #8d6a87!important;border-radius:9px}
+body:is(.client-page,.eloah-home-pro) #contenu :is(button,.btn):hover{background:#4a2d50!important;border-color:#ead4b4!important}
+body:is(.client-page,.eloah-home-pro) #contenu :is(.primary,button[aria-pressed=true]){background:#ead4b4!important;color:#241329!important;border-color:#ead4b4!important}
+body:is(.client-page,.eloah-home-pro) #contenu a:not(.btn){text-decoration-color:#ad89a3}
+body:is(.client-page,.eloah-home-pro) #contenu :is(.directory strong,.eloah-universe-card strong,.ec-cards strong){color:#ead4b4!important}
+body:is(.client-page,.eloah-home-pro) #contenu .ec-cards small{color:#d5c3d4!important}
+body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav{background:#180e20!important;color:#fff4ed!important;border-right:1px solid #6e506c!important}
+body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav :is(a,summary){color:#f2e3ee!important}
+body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav .eloah-menu-links{background:#180e20!important}
+body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav a[aria-current]{background:#38203e!important;color:#ead4b4!important;border-left:2px solid #ead4b4!important}
+body:is(.client-page,.eloah-home-pro) #eloah-tools-trigger{background:#24162d!important;color:#f2e3ee!important;border:1px solid #8d6a87!important}
+body:is(.client-page,.eloah-home-pro) dialog{background:#24162d!important;color:#fff4ed!important;border-color:#8d6a87!important}
+body:is(.client-page,.eloah-home-pro) :is(a,button,input,select,textarea,summary):focus-visible{outline:2px solid #ead4b4!important;outline-offset:4px}
+body:is(.client-page,.eloah-home-pro) #contenu .pilotage-anchors{background:#1d1227!important;border-color:#6e506c!important}
+body:is(.client-page,.eloah-home-pro) #contenu .client-local-note{background:#2d1d32!important;border-color:#a08291!important;color:#e4d0df!important}
+@media(prefers-reduced-motion:reduce){body:is(.client-page,.eloah-home-pro) *{transition:none!important}}
 </style></head>
 <body class="eloah-home-client eloah-home-pro">
 <a class="skip-link" href="#contenu">Aller à mon accueil</a>
