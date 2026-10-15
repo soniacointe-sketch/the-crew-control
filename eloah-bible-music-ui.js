@@ -10,7 +10,7 @@ if(!B||!N||!A)return;
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const asTime=sec=>{const n=Math.max(0,Math.round(sec));return String(Math.floor(n/60)).padStart(2,"0")+":"+String(n%60).padStart(2,"0")};
-let chapterDoc=null,doc=null,musicScore=null,playing=false,paused=false,voiceMode=false,verseIndex=0,epoch=0,
+let chapterDoc=null,doc=null,greekDoc=null,musicScore=null,playing=false,paused=false,voiceMode=false,verseIndex=0,epoch=0,
 currentVoice=null,busy=false,raf=0,completed=0;
 const canvas=$("visual"),canvasCtx=canvas.getContext("2d"),defaultVerse=6;
 const say=t=>{$("status").textContent=t},exportSay=t=>{$("exportStatus").textContent=t};
@@ -24,6 +24,7 @@ function voices(){
  $("voice").value=prior&&list[Number(prior)]?prior:"";
 }
 const engineOptions=()=>({mode:$("style").value,scale:$("scale").value,bpm:Number($("bpm").value),
+ greekVerses:$("musicLanguage").value==="greek"&&greekDoc?Object.fromEntries(greekDoc.verses.map(v=>[v.number,v.text])):null,
  root:48,volume:.44,drums:$("drums").checked,pad:$("pad").checked,variation:.3,barsPerVerse:1});
 function stop(opts={}){
  epoch++;
@@ -69,6 +70,7 @@ async function load(){
 }
 function loadManual(){
  stop({silent:true});
+ greekDoc=null;
  try{
   chapterDoc=B.fromManual($("manualText").value,{reference:"Texte biblique collé"});
   doc=chapterDoc;musicScore=B.deriveMusic(doc,engineOptions());renderDoc();
