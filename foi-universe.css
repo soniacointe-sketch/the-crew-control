@@ -73,3 +73,11 @@ body.foi-universe{color:var(--ink)!important;background-color:var(--bg)!importan
 .foi-universe .side-link.current{background:#EAE4D8!important;color:var(--foi-blue)!important;border-color:var(--line)!important}
 .foi-universe .eloah-menu-links{background:var(--paper)!important;color:var(--ink)!important}
 .foi-universe .eloah-menu-links a{color:var(--foi-blue)!important}
+
+.foi-universe img[data-foi-photo]{filter:none!important}
+.foi-universe .rev-story .foi-image-credit{font-size:11px!important;line-height:1.5!important;padding-top:12px;color:var(--sub)!important}
+.foi-universe .rev-art .foi-image-credit a{color:inherit!important}
+.foi-universe .rev-model-cover .foi-image-credit a{color:#E3D2B0!important}
+
+.foi-universe .foi-photo-credits{display:none}
+.foi-universe .foi-breathing-photo img{filter:none}

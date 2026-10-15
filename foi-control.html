@@ -391,8 +391,8 @@ body.eloah-revue .rev-personal-image-note{margin:21px 0 0;font:11px/1.7 system-u
 @media(max-width:900px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:repeat(2,minmax(0,260px))!important}}
 @media(max-width:560px){body.eloah-revue #foi-mon-chemin .rev-personal-stories{grid-template-columns:minmax(0,260px)!important}body.eloah-revue #foi-mon-chemin .rev-chapter-story .rev-story-info strong{font-size:22px!important}}
 </style><link rel="stylesheet" href="foi-pierre-lumiere.css?v=20261016-univers1">
-<link rel="stylesheet" href="foi-universe.css?v=20261016-1">
-<script defer src="foi-universe.js?v=20261016-1"></script>
+<link rel="stylesheet" href="foi-universe.css?v=20261016-sujets2">
+<script defer src="foi-universe.js?v=20261016-sujets2"></script>
 </head><body class="foi-universe">
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
@@ -895,7 +895,7 @@ function renderPersonalIndex(){
   chapters.append(card);
  });
  journey.append(chapters);
- journey.append(section("p","rev-personal-image-note","Photographies de lieux et de matières : des images d’ambiance, sans représentation des personnages ni valeur de preuve pour les dossiers. Leurs légendes, auteurs et sources figurent dans les crédits photographiques ci-dessous."));
+ journey.append(section("p","rev-personal-image-note","Chaque chapitre possède une couverture liée à son sujet : objets, lieux, œuvres anciennes et documents. Les légendes et les sources précisent ce que chaque image représente."));
  article.append(journey);
  const credits=section("details","foi-photo-credits");credits.id="foi-credits-photos";credits.append(section("summary","","Photographies · lieux, documents & crédits"));
  const creditList=section("ul","");Object.keys(FOI_PHOTOS).forEach(key=>{const li=section("li","");li.append(photoCaption(key,"div"));creditList.append(li)});credits.append(creditList,section("p","","Cadrages adaptés à l’écran, couleurs légèrement désaturées pour les vues d’ambiance. La reproduction du Notre Père (British Library / CSNTM) est redimensionnée au format WebP, sous CC BY-SA 4.0 ; elle conserve ses couleurs à la une. Les photographies sont hébergées ici ; les liens conduisent aux notices originales."));article.append(credits);
