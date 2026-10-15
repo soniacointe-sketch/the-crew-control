@@ -286,6 +286,19 @@
  const reduction=data.papyrus.michael.every((term,i,all)=>i===0 || term===[...all[i-1]].slice(1).join(""));
  push("MICHEL-REDUC","ALPHABET","Schéma de réduction du nom de Michel",reduction,true,"papyrus-g328");
  const sourceMap=new Map(data.sources.map(s=>[s.id,s]));
+ const connections=[];
+ for(let i=0;i<data.sources.length;i++){
+  for(let j=i+1;j<data.sources.length;j++){
+   const a=data.sources[i],b=data.sources[j];
+   const shared=a.motifs.filter(m=>b.motifs.includes(m));
+   const distinctive=shared.filter(m=>!["7","son","nom-lettres"].includes(m));
+   if(distinctive.length){
+    connections.push({a:a.id,b:b.id,sourceA:a.short,sourceB:b.short,shared,distinctive,
+     classification:"coïncidence de motifs documentés, transmission NON DÉMONTRÉE"});
+   }
+  }
+ }
+ connections.sort((a,b)=>b.distinctive.length-a.distinctive.length||a.sourceA.localeCompare(b.sourceA));
  const hypotheses=data.hypotheses.map(h=>{
   const a=sourceMap.get(h.a),b=sourceMap.get(h.b);
   const shared=a.motifs.filter(m=>b.motifs.includes(m));
@@ -301,8 +314,8 @@
   if(h.chronology==="indéterminée") issues.push({id:"DATE-"+h.id,type:"datation",text:h.name+" : datation insuffisante pour établir l'ordre."});
  }
  const datedPairs=hypotheses.filter(x=>x.chronology!=="indéterminée").length;
- const report={engine:data.version,asOf:data.asOf,sources:data.sources.length,checks:checks.length,passed:checks.filter(c=>c.ok).length,failed:checks.filter(c=>!c.ok).length,hypotheses:hypotheses.length,unproven:hypotheses.filter(h=>h.status==="NON DÉMONTRÉ").length,datedPairs,issues:issues.length};
- return {report,checks,hypotheses,issues,sources:data.sources,methods:["CORPUS","ALPHABET","PHONÉ","ARITHMOS","CHRONOS","STEMMA","AUDIT"]};
+ const report={engine:data.version,asOf:data.asOf,sources:data.sources.length,checks:checks.length,passed:checks.filter(c=>c.ok).length,failed:checks.filter(c=>!c.ok).length,hypotheses:hypotheses.length,unproven:hypotheses.filter(h=>h.status==="NON DÉMONTRÉ").length,datedPairs,issues:issues.length,automaticConnections:connections.length};
+ return {report,checks,hypotheses,issues,connections,sources:data.sources,methods:["CORPUS","ALPHABET","PHONÉ","ARITHMOS","CHRONOS","STEMMA","AUDIT"]};
 };
  const api = Object.freeze({version:DATA.version,corpus:DATA,run:function(){return auditAlpha(DATA);},audit:auditAlpha});
  if (typeof module!=="undefined" && module.exports) module.exports=api;
