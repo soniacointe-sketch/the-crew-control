@@ -68,7 +68,7 @@ div.innerHTML=`
 <div id="jResult" class="j-result">
 <div class="j-source"><strong id="jRef"></strong><a id="jSourceLink" href="https://www.greekbible.com/john/14/6" target="_blank" rel="noopener noreferrer">Contrôler le grec à la source ↗</a></div>
 <div id="jGreek" class="j-greek"></div><p id="jFrench"></p>
-<div class="j-stats" id="jStats"></div>
+<div class="j-stats" id="jStats"></div><div class="j-alert" id="jFocusInsight"></div>
 <h3>Le code, mot par mot</h3>
 <div class="j-words" id="jWords" role="group" aria-label="Sélectionner un mot grec"></div>
 <div class="j-detail" id="jWordDetail" aria-live="polite">Choisis un mot du texte grec.</div>
@@ -107,12 +107,14 @@ function render(result){
  [result.stats.wordValueSum??"—","Somme isopséphique"],[result.completePairs+"/12","Paires présentes"]
  ];
  $("jStats").innerHTML=metrics.map(x=>'<div><strong>'+esc(x[0])+'</strong><small>'+esc(x[1])+'</small></div>').join("");
+ const focus=R.analyzeWord(result.focus||"");
+ $("jFocusInsight").textContent=result.focus&&focus.length?"MOT CLÉ · "+result.focus+" : "+focus.length+" lettres, valeur grecque "+focus.isopsephy+", rangs cumulés "+focus.alphabetRanksTotal+". Ce calcul dépend de cette graphie grecque et ne prouve pas un code secret voulu par le personnage historique.":"Analyse par mot : aucune signification cachée déduite automatiquement.";
  $("jWords").innerHTML=result.words.map((w,i)=>
  '<button type="button" data-i="'+i+'" aria-pressed="'+String(i===0)+'"><strong>'+esc(w.input)+'</strong><small>Σ '+esc(w.isopsephy)+'</small></button>'
  ).join("");
  $("jPairs").innerHTML=result.pairs.map(p=>'<div class="j-pair"><strong>'+esc(p.first)+' — '+esc(p.last)+'</strong><span>'+esc(p.body)+'</span><span>'+p.ranks.join(" + ")+' = 25 · '+p.count+' lettre(s) observée(s)</span></div>').join("");
  $("jContext").textContent=result.context||result.caveat;
- if(result.words.length)renderWord(0);
+ if(result.words.length){const preferred=result.words.findIndex(w=>w.normalized===result.focus);renderWord(preferred>=0?preferred:0);}
 }
 function fromGreek(text){
  const a=R.analyzeText(text,{mode:"greek"});
