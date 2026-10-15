@@ -178,4 +178,5 @@ $("chStop").addEventListener("click",()=>{window.speechSynthesis?.cancel();$("ch
 $("chWord").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();run()}});
 window.addEventListener("pagehide",()=>window.speechSynthesis?.cancel());
 run();
+if(location.hash==="#alpha-chain"){el.scrollIntoView({behavior:"auto",block:"start"});}
 })();
