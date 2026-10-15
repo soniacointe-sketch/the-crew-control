@@ -1695,15 +1695,13 @@ $('ytSave').onclick=()=>{const id=idFrom($('ytUrl').value.trim());if(!id)return 
 
 /* ELOAH external converter shortcut */
 const externalTools=document.createElement('div');externalTools.className='music2040-actions';
-const externalLink=document.createElement('a');externalLink.className='action secondary';externalLink.textContent='Convertisseur MP3 ↗';externalLink.href='https://yout.com/?lang=fr';externalLink.target='_blank';externalLink.rel='noopener noreferrer';externalLink.referrerPolicy='no-referrer';
+const externalLink=document.createElement('a');externalLink.className='action secondary';externalLink.textContent='EasyConv · MP3 ↗';externalLink.href='https://easyconv.com/fr/tools/youtube-to-mp3';externalLink.target='_blank';externalLink.rel='noopener noreferrer';externalLink.referrerPolicy='no-referrer';
+const copyLink=document.createElement('button');copyLink.type='button';copyLink.className='action secondary';copyLink.textContent='Copier le lien YouTube';copyLink.onclick=async()=>{const id=idFrom($('ytUrl').value.trim());if(!id){status('Colle d’abord un lien YouTube valide dans le champ ci-dessus.');$('ytUrl').focus();return}try{await navigator.clipboard.writeText('https://www.youtube.com/watch?v='+id);status('Lien copié. Ouvre EasyConv et colle-le dans son champ URL.')}catch(e){$('ytUrl').focus();$('ytUrl').select();status('Copie manuellement le lien sélectionné, puis colle-le dans EasyConv.')}};
 const importDownloaded=document.createElement('button');importDownloaded.type='button';importDownloaded.className='action secondary';importDownloaded.textContent='Importer le MP3 téléchargé';importDownloaded.onclick=()=>document.getElementById('files')?.click();
-externalTools.append(externalLink,importDownloaded);
-const externalHelp=document.createElement('p');externalHelp.className='muted';externalHelp.textContent='Ouvre Yout.com, choisis MP3, puis importe le fichier ici. Si tu renseignes une vidéo ci-dessus, son lien sera transmis à Yout uniquement au clic. Service externe avec ses propres limites ; pour les contenus dont le téléchargement est autorisé.';
+externalTools.append(copyLink,externalLink,importDownloaded);
+const externalHelp=document.createElement('p');externalHelp.className='muted';externalHelp.textContent='Copie ton lien, ouvre EasyConv, colle-le et choisis MP3. Après téléchargement, importe le fichier ici. EasyConv annonce un accès gratuit sans compte, une vidéo à la fois, de 3 heures maximum. Service externe ; pour les contenus dont le téléchargement est autorisé.';
 $('ytStatus').after(externalTools,externalHelp);
-function refreshExternalLink(){const id=idFrom($('ytUrl').value.trim());externalLink.href=id?'https://yout.com/https://www.youtube.com/watch?v='+id:'https://yout.com/?lang=fr'}
-$('ytUrl').addEventListener('input',refreshExternalLink);
-externalLink.addEventListener('click',refreshExternalLink);
-const quickExternal=externalLink.cloneNode(true);quickExternal.id='ytExternalConverter';quickExternal.href='https://yout.com/?lang=fr';quickExternal.addEventListener('click',()=>{const id=idFrom($('ytUrl').value.trim());quickExternal.href=id?'https://yout.com/https://www.youtube.com/watch?v='+id:'https://yout.com/?lang=fr'});
+const quickExternal=externalLink.cloneNode(true);quickExternal.id='ytExternalConverter';
 document.querySelector('.music2040-actions').append(quickExternal);
 
 let service='';
