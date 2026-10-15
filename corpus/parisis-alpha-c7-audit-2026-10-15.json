@@ -1,11 +1,9 @@
 {
-  "title": "PARISIS ALPHA-C7 · audit historique calculé",
+  "title": "PARISIS ALPHA-C7 · rapport calculé",
   "date_edition": "2026-10-15",
-  "engine_version": "ALPHA-C7/1.0.0",
   "engine_file": "parisis-alpha-engine.js",
-  "engine_blob_sha": "5ae147a0e741634df72864ecd784251563058c3e",
-  "corpus_limitation": "Corpus fixe de sources contrôlées manuellement, pas une collecte web en direct",
-  "interpretation_warning": "Les opérations valident la cohérence du corpus décrit et des calculs, pas l'exactitude indépendante ni un lien causal.",
+  "engine_sha": "c3301b8a43415ce1c5285ae85a8b2f407b6a5f48",
+  "limite": "Le programme contrôle les données encodées ; cela ne prouve pas la véracité historique ni une filiation.",
   "report": {
     "engine": "ALPHA-C7/1.0.0",
     "asOf": "2026-10-15",
@@ -16,7 +14,8 @@
     "hypotheses": 5,
     "unproven": 5,
     "datedPairs": 4,
-    "issues": 2
+    "issues": 2,
+    "automaticConnections": 4
   },
   "checks": [
     {
@@ -342,6 +341,65 @@
       "id": "DATE-H3",
       "type": "datation",
       "text": "Le chant des voyelles d'Égypte a été repris directement par Marcus : datation insuffisante pour établir l'ordre."
+    }
+  ],
+  "connections": [
+    {
+      "a": "irenee-14",
+      "b": "demetrios-71",
+      "sourceA": "Irénée I,14",
+      "sourceB": "Pseudo-Démétrios §71",
+      "shared": [
+        "sept-voyelles",
+        "son",
+        "7"
+      ],
+      "distinctive": [
+        "sept-voyelles"
+      ],
+      "classification": "coïncidence de motifs documentés, transmission NON DÉMONTRÉE"
+    },
+    {
+      "a": "irenee-14",
+      "b": "papyrus-g328",
+      "sourceA": "Irénée I,14",
+      "sourceB": "P.Vindob. G 328",
+      "shared": [
+        "sept-voyelles",
+        "7",
+        "nom-lettres"
+      ],
+      "distinctive": [
+        "sept-voyelles"
+      ],
+      "classification": "coïncidence de motifs documentés, transmission NON DÉMONTRÉE"
+    },
+    {
+      "a": "irenee-15",
+      "b": "apocalypse-aomega",
+      "sourceA": "Irénée I,15",
+      "sourceB": "Apocalypse 1,8 ; 21,6 ; 22,13",
+      "shared": [
+        "alpha-omega"
+      ],
+      "distinctive": [
+        "alpha-omega"
+      ],
+      "classification": "coïncidence de motifs documentés, transmission NON DÉMONTRÉE"
+    },
+    {
+      "a": "demetrios-71",
+      "b": "papyrus-g328",
+      "sourceA": "Pseudo-Démétrios §71",
+      "sourceB": "P.Vindob. G 328",
+      "shared": [
+        "7",
+        "sept-voyelles"
+      ],
+      "distinctive": [
+        "sept-voyelles"
+      ],
+      "classification": "coïncidence de motifs documentés, transmission NON DÉMONTRÉE"
     }
   ],
   "sources": [
