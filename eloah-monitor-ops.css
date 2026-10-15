@@ -1,0 +1,44 @@
+/* ELOAH Monitor 2.3 · cockpit opérationnel, compléments isolés */
+.monitor-ops{margin:23px 0 25px}
+.monitor-ops-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:13px;flex-wrap:wrap}
+.monitor-ops-head h2{margin:0;font:normal clamp(23px,2.5vw,29px)/1.25 Georgia,serif}
+.monitor-ops-head p{font-size:11px;color:var(--muted);margin:4px 0 0}
+.monitor-ops-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(270px,.82fr) minmax(255px,.83fr);gap:13px;align-items:stretch}
+.monitor-ops-panel{border:1px solid var(--line);background:linear-gradient(140deg,#2c1a34,#211429);border-radius:12px;padding:19px;min-width:0}
+.monitor-ops-panel h3{font-size:13px;margin:0 0 12px;font-weight:680}
+.monitor-ops-eyebrow{font-size:9px;letter-spacing:1.4px;color:var(--champ);text-transform:uppercase;margin:0 0 6px}
+.monitor-ops-status{display:inline-flex;align-items:center;gap:7px;padding:4px 9px;border:1px solid #756077;border-radius:7px;font-size:10px;color:var(--sub)}
+.monitor-ops-status[data-type="priority"]{border-color:#b79076;color:#f0d5b2}
+.monitor-ops-status[data-type="active"]{border-color:#638a7b;color:#a4e1c4}
+.monitor-ops-items{display:grid;gap:9px}
+.monitor-ops-item{border:1px solid #614b68;border-radius:9px;display:flex;gap:10px;align-items:center;justify-content:space-between;padding:10px 11px;background:#2a1c32}
+.monitor-ops-item .monitor-ops-item-title{display:block;font-size:12px;font-weight:650;color:var(--ink)}
+.monitor-ops-item small{display:block;margin-top:3px;font-size:10px;color:var(--muted)}
+.monitor-ops-item a{font-size:11px;white-space:nowrap;color:var(--champ);padding:7px 0;text-decoration:underline;text-underline-offset:3px}
+.monitor-ops-empty{color:var(--sub);font-size:12px;line-height:1.55;padding:14px;border:1px dashed #756177;border-radius:9px}
+.monitor-ops-alert{padding:11px 12px;border-radius:8px;border:1px solid #67516c;background:#36263d;font-size:11px;color:#e8dbea;line-height:1.6}
+.monitor-ops-alert[data-tone="attention"]{border-color:#9c6a64;background:#44282f;color:#ffddd7}
+.monitor-ops-small{font-size:10px;color:var(--muted);margin:12px 0 0;line-height:1.6}
+.monitor-ops-actions{display:grid;gap:9px}
+.monitor-ops-actions button,.monitor-ops-actions a{display:flex;align-items:center;justify-content:space-between;gap:9px;text-align:left;background:#38263f;color:#fff2f4;border:1px solid #6d5674;border-radius:8px;padding:10px 12px;font-size:11px;min-height:40px;text-decoration:none}
+.monitor-ops-actions button:hover,.monitor-ops-actions a:hover{background:#4a3152;color:white}
+.monitor-ops-actions .ops-gold{background:#f0d5b2;color:#2a192d;border-color:#f0d5b2;font-weight:700}
+.monitor-ops-actions .ops-gold:hover{background:#fbe9d0;color:#2a192d}
+.monitor-ops-quick{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-size:11px;color:var(--muted);margin-top:12px}
+.monitor-ops-quick kbd{display:inline-block;font:10px system-ui;background:#3a2b41;border:1px solid #795f7d;padding:3px 7px;border-radius:4px;color:#ffecf4}
+#monitor-command{border:1px solid #886987;border-radius:15px;padding:0;background:#221529;color:#fff2f3;width:min(610px,calc(100vw - 26px));max-height:min(75dvh,680px);box-shadow:0 25px 95px #05030a9e;overflow:hidden}
+#monitor-command::backdrop{background:#0b0612bb;backdrop-filter:blur(5px)}
+.monitor-command-header{padding:16px;border-bottom:1px solid #5e465e;display:flex;align-items:center;gap:8px}
+#monitor-command-input{flex:1;min-width:0;background:#31203a;border:1px solid #765e7b;border-radius:8px;padding:11px 12px;font-size:14px;color:#fff}
+#monitor-command-input::placeholder{color:#cab5cc}
+.monitor-command-close{background:transparent;border:1px solid #68536a;border-radius:6px;color:#fff;width:36px;min-height:36px}
+.monitor-command-body{overflow-y:auto;max-height:440px;padding:10px}
+.monitor-command-link{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:11px 13px;text-decoration:none;border-radius:8px}
+.monitor-command-link:hover,.monitor-command-link:focus-visible{background:#4e3654;color:#fff}
+.monitor-command-link strong{font-size:12px;color:#fff;display:block}
+.monitor-command-link small{font-size:10px;color:#bea9c5;display:block}
+.monitor-command-foot{font-size:10px;color:#c5b1c5;padding:11px 15px;background:#301e36;border-top:1px solid #5e465e}
+@media(max-width:1300px){.monitor-ops-grid{grid-template-columns:minmax(0,1.4fr) minmax(265px,.8fr)}.monitor-ops-panel:last-child{grid-column:1/-1}.monitor-ops-actions{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:880px){.monitor-ops-grid{grid-template-columns:1fr}.monitor-ops-panel:last-child{grid-column:auto}.monitor-ops-actions{grid-template-columns:1fr}}
+@media(max-width:720px){.monitor-ops{margin:20px 0}.monitor-ops-panel{padding:15px}.monitor-ops-head h2{font-size:23px}.monitor-command-header{padding:11px}}
+@media print{.monitor-ops-panel{background:white;color:#222;border:1px solid #ccc}.monitor-ops-item{background:#fff;color:#111;border-color:#bbb}.monitor-ops-item .monitor-ops-item-title,.monitor-ops-item small{color:#111}.monitor-ops-actions,#monitor-command,.monitor-ops-quick{display:none!important}}
