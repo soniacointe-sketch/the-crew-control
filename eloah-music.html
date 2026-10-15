@@ -331,6 +331,24 @@ body.stage2040-active{overflow:hidden!important}
 .stage2040-archiveButtons button:focus-visible{outline:2px solid #f4d2ed;outline-offset:3px}
 .stage2040-archiveHint{color:#d9bdd6!important;font-size:11px!important;margin:9px 0 0!important;line-height:1.5}
 @media(max-width:750px){.stage2040-archive{padding:10px}.stage2040-archiveButtons button{flex:1 1 45%;font-size:11px}}
+/* ELOAH MUSIC 2040 REPETITION V20 */
+.stage20{border:1px solid #84517f;border-radius:13px;background:linear-gradient(130deg,#261631,#130b1b);overflow:hidden}
+.stage20 summary{display:flex;justify-content:space-between;gap:10px;padding:13px 15px;cursor:pointer;color:#fff1f8;font-size:13px;font-weight:800;list-style:none}
+.stage20 summary::-webkit-details-marker{display:none}.stage20 summary span{font-size:11px;font-weight:500;color:#d8bdd7}
+.stage20-inner{padding:13px;border-top:1px solid #6b476f;display:flex;flex-direction:column;gap:10px}
+.stage20-inner>label,.stage20-card label{font-size:11px;color:#e7d0e5;font-weight:700}
+.stage20 select,.stage20 textarea{background:#180f21;border:1px solid #885786;color:#fff5fb;border-radius:9px;padding:10px;font:500 12px Inter,system-ui,sans-serif}
+.stage20 select{min-height:43px}.stage20 textarea{width:100%;resize:vertical}
+.stage20-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.stage20-card{display:flex;flex-direction:column;gap:10px;min-width:0;padding:13px;border:1px solid #715072;border-radius:12px;background:#301c3b}
+.stage20-kicker{font-size:10px;letter-spacing:.15em;font-weight:800;color:#e8caa1}
+#stage20time{font-size:clamp(30px,3.5vw,48px);font-weight:800;color:#fff4fa;font-variant-numeric:tabular-nums}
+.stage20-actions{display:flex;flex-wrap:wrap;gap:7px}
+.stage20-actions button{flex:1 1 38%;background:#55315a;border:1px solid #92698d;color:#fff1f8;border-radius:9px;min-height:41px;padding:8px;font:700 11px Inter,system-ui,sans-serif}
+.stage20-actions button:disabled{opacity:.36;cursor:not-allowed}.stage20-actions button:hover:not(:disabled){background:#7c4675}
+.stage20 p{font-size:11px!important;color:#dbc5dd!important;line-height:1.5!important;margin:0!important}
+.stage20 .stage20-message{font-size:12px!important;color:#f1d3a8!important}
+@media(max-width:750px){.stage20-grid{grid-template-columns:1fr}.stage20-card{padding:11px}.stage20-inner{padding:9px}.stage20-actions button{min-height:44px}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
@@ -469,6 +487,27 @@ body.stage2040-active{overflow:hidden!important}
 </div>
   <div id="stage2040conductorRows" class="stage2040-conductorRows"><p class="stage2040-setlistEmpty">Choisis d’abord une playlist dans « Setlist en direct ».</p></div>
   <p class="stage2040-conductorBottom" id="stage2040conductorStatus" role="status" aria-live="polite"></p>
+ </div>
+</details>
+
+<details class="stage20" id="stage20panel" open>
+ <summary>✦ Mode Répétition <span id="stage20counter">Chronos · Corrections · Validation</span></summary>
+ <div class="stage20-inner">
+  <label for="stage20select">Chorégraphie à répéter</label>
+  <select id="stage20select"><option value="">Choisir un passage</option></select>
+  <div class="stage20-grid">
+   <section class="stage20-card"><span class="stage20-kicker">CHRONO · CHORÉGRAPHIE</span>
+    <output id="stage20time" role="timer">00:00.0</output>
+    <div class="stage20-actions"><button id="stage20toggle" type="button" disabled>▶ Démarrer</button><button id="stage20save" type="button" disabled>✓ Enregistrer l’essai</button><button id="stage20reset" type="button" disabled>⟲ Recommencer</button></div>
+    <p id="stage20stats">Choisis un morceau de la setlist.</p>
+    <div class="stage20-actions"><button id="stage20playA" type="button" disabled>▶ Musique sur A</button><button id="stage20prepareB" type="button" disabled>↓ Préparer sur B</button></div>
+   </section>
+   <section class="stage20-card">
+    <label for="stage20corrections">Corrections de chorégraphie</label><textarea id="stage20corrections" rows="5" maxlength="500" placeholder="Ex. Entrée enfants à 00:42, travailler le final…" disabled></textarea>
+    <div class="stage20-actions"><button id="stage20ready" type="button" disabled>✓ Valider pour le spectacle</button><button id="stage20final" type="button">▤ Conducteur final (PDF)</button></div>
+    <p>Les essais et corrections sont enregistrés avec les notes locales du conducteur et peuvent être exportés.</p>
+   </section>
+  </div><p class="stage20-message" id="stage20message" role="status" aria-live="polite">Choisis une chorégraphie pour commencer.</p>
  </div>
 </details>
 
@@ -1043,6 +1082,71 @@ $('stage2040printShow').onclick=()=>{
  showArchiveMessage('Fiche imprimable ouverte. Utilise « Imprimer / Enregistrer en PDF » dans la nouvelle fenêtre.');
 };
 
+
+/* ELOAH MUSIC 2040 REPETITION V20 */
+let r20Id=null,r20Elapsed=0,r20Started=0,r20Running=false,r20Interval=null,r20Signature='';
+const r20Ms=()=>r20Elapsed+(r20Running?performance.now()-r20Started:0);
+function r20Fmt(ms){const n=Math.floor(Math.max(0,ms)/100);return String(Math.floor(n/600)).padStart(2,'0')+':'+String(Math.floor(n/10)%60).padStart(2,'0')+'.'+n%10}
+function r20Clock(){$('stage20time').textContent=r20Fmt(r20Ms());$('stage20toggle').textContent=r20Running?'⏸ Pause':'▶ Démarrer';$('stage20save').disabled=!r20Id||r20Ms()<1000}
+function r20Pause(){if(r20Running){r20Elapsed=r20Ms();r20Running=false}if(r20Interval){clearInterval(r20Interval);r20Interval=null}r20Clock()}
+function r20Data(id){
+ const obj=conductorNotes[id]&&typeof conductorNotes[id]==='object'?conductorNotes[id]:(conductorNotes[id]={});
+ if(!obj.rehearsal||typeof obj.rehearsal!=='object')obj.rehearsal={attempts:[],corrections:''};
+ if(!Array.isArray(obj.rehearsal.attempts))obj.rehearsal.attempts=[];
+ return obj.rehearsal;
+}
+function r20Stats(){
+ const ids=stageSetlistAvailableIds(),count=ids.filter(id=>conductorNotes[id]?.rehearsal?.attempts?.length).length;
+ $('stage20counter').textContent=ids.length+' passages · '+count+' répétés';
+ const attempts=r20Id?r20Data(r20Id).attempts.filter(x=>Number.isFinite(x?.ms)&&x.ms>=1000):[];
+ const last=attempts.length?attempts[attempts.length-1].ms:null,best=attempts.length?Math.min(...attempts.map(x=>x.ms)):null;
+ $('stage20stats').textContent=attempts.length+' essai(s) · Dernier '+(last?r20Fmt(last):'—')+' · Meilleur '+(best?r20Fmt(best):'—');
+ $('stage20ready').textContent=r20Id&&['ready','done'].includes(conductorNotes[r20Id]?.status)?'✓ Déjà prêt':'✓ Valider pour le spectacle';
+}
+function r20Choose(id,forced=false){
+ if(!stageSetlistAvailableIds().includes(id))id=null;
+ if(!forced&&id!==r20Id&&r20Ms()>0&&!confirm('Changer de passage sans enregistrer le chrono ?')){$('stage20select').value=r20Id||'';return}
+ r20Pause();r20Elapsed=0;r20Id=id;
+ for(const name of ['stage20toggle','stage20reset','stage20playA','stage20prepareB','stage20ready'])$(name).disabled=!id;
+ $('stage20corrections').disabled=!id;$('stage20corrections').value=id?String(r20Data(id).corrections||''):'';
+ $('stage20select').value=id||'';r20Clock();r20Stats();
+ $('stage20message').textContent=id?'Démarre le chrono puis enregistre cet essai.':'Choisis un passage.';
+}
+function r20Sync(){
+ if(stage2040Panel.hidden)return;
+ const ids=stageSetlistAvailableIds(),sig=[stageSetlistId||'',...ids,...ids.map(id=>tracks.find(t=>t.id===id)?.title||'')].join('§');
+ if(r20Signature!==sig){
+  r20Signature=sig;const select=$('stage20select');select.replaceChildren(new Option('Choisir un passage',''));
+  ids.forEach((id,i)=>{const t=tracks.find(t=>t.id===id);if(t)select.add(new Option(String(i+1).padStart(2,'0')+' · '+t.title,id))});
+  r20Choose(ids.includes(r20Id)?r20Id:ids[0],true);
+ }
+ r20Stats();
+}
+$('stage20select').onchange=e=>r20Choose(e.target.value);
+$('stage20toggle').onclick=()=>{
+ if(!r20Id)return;
+ if(r20Running)r20Pause();else{r20Started=performance.now();r20Running=true;r20Interval=setInterval(r20Clock,100)}
+ r20Clock();$('stage20message').textContent=r20Running?'Répétition en cours…':'Chronomètre en pause.';
+};
+$('stage20reset').onclick=()=>{
+ if(r20Ms()>0&&!confirm('Remettre ce chrono à zéro ? Les essais enregistrés restent conservés.'))return;
+ r20Pause();r20Elapsed=0;r20Clock();$('stage20message').textContent='Chrono réinitialisé.';
+};
+$('stage20save').onclick=()=>{
+ if(!r20Id)return;r20Pause();const ms=Math.round(r20Ms());if(ms<1000)return;
+ const d=r20Data(r20Id);d.attempts.push({ms,at:new Date().toISOString()});d.attempts=d.attempts.slice(-30);
+ conductorSave();r20Elapsed=0;r20Clock();r20Stats();$('stage20message').textContent='Essai '+r20Fmt(ms)+' enregistré.';
+};
+$('stage20corrections').oninput=e=>{if(!r20Id)return;r20Data(r20Id).corrections=e.target.value.slice(0,500);conductorSave()};
+$('stage20ready').onclick=()=>{
+ if(!r20Id)return;
+ const d=conductorNotes[r20Id];if(d.status!=='done')d.status='ready';
+ conductorSave();conductorUpdateLive();r20Stats();$('stage20message').textContent='Passage marqué prêt pour le spectacle.';
+};
+$('stage20playA').onclick=async()=>{const i=tracks.findIndex(t=>t.id===r20Id);if(i<0)return;playbackPlaylistId=stageSetlistId;updatePlaybackContext();await playIndex(i);$('stage20message').textContent='Morceau lancé sur A.';};
+$('stage20prepareB').onclick=async()=>{if(!r20Id)return;await stagePrepareTrack(r20Id);$('stage20message').textContent='Préparation de B demandée.';};
+$('stage20final').onclick=()=>{if(!stageSetlistAvailableIds().length){$('stage20message').textContent='Ajoute des morceaux à une setlist.';return;}$('stage2040printShow').click()};
+
 function conductorStorage(){
  const loggedIn=typeof cloudUser!=='undefined'&&cloudUser?.id;
  const scope=loggedIn?'user:'+cloudUser.id:'session';
@@ -1239,6 +1343,7 @@ function stage2040Sync(){
  if(stage2040Panel.hidden)return;
  stageSetlistSync();
  conductorSync();
+ r20Sync();
  regieRefreshCues();
  const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
  $('stage2040titleA').textContent=a?.title||'Aucun titre sélectionné';
@@ -1283,6 +1388,7 @@ async function stage2040Open(){
  }
 }
 function stage2040Close(){
+ r20Pause();
  regieStageClose();
  stage2040Panel.hidden=true;document.body.classList.remove('stage2040-active');
  $('stage2040discA').classList.remove('spinning');$('stage2040discB').classList.remove('spinning');
