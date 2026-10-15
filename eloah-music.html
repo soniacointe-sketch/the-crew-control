@@ -417,9 +417,69 @@ body.stage2040-active{overflow:hidden!important}
 }
 @media(prefers-reduced-motion:reduce){.tile,.music-card-play{transition:none!important}.tile:hover{transform:none}}
 </style>
-</head><body>
+<style id="eloah-mobile-app-v1">
+.mobile-music-top{display:none}
+@media(max-width:750px){
+:root{--mobile-nav:64px}
+.app{padding:0 0 calc(218px + env(safe-area-inset-bottom))!important}
+.main{border:0;border-radius:0}
+.mobile-music-top{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;background:#160d20;color:#e7d1a6}
+.mobile-music-top strong{font-size:15px;letter-spacing:.08em}
+.mobile-music-top a{font-size:12px;min-height:44px;display:flex;align-items:center}
+.side{position:fixed!important;inset:auto 0 0!important;z-index:20;height:calc(var(--mobile-nav) + env(safe-area-inset-bottom))!important;display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr));gap:3px;padding:5px 6px calc(5px + env(safe-area-inset-bottom))!important;border-radius:0;border:0;border-top:1px solid #644060;background:#160d20!important;overflow:visible}
+.side .brand,.side .section-title,.side #sidebarPlaylists,.side .sidecreate{display:none!important}
+.side .nav{display:flex;justify-content:center;align-items:center;min-width:0;width:100%;padding:5px 2px!important;font-size:10px!important;white-space:normal;text-align:center;line-height:1.3!important}
+.side .nav.active{box-shadow:inset 0 3px #dc4dac;background:#3a2043}
+.header{padding:0 12px 10px!important}
+.header::before{border-radius:12px;box-shadow:none!important}
+.hero-tools{padding:10px 0 0;display:flex;flex-wrap:wrap;gap:6px}
+.hero-label{display:none}
+.hero-caption{width:100%;font-size:17px!important;margin:2px 0 4px}
+.header .action{flex:1 1 42%;min-height:44px;margin:0!important;padding:9px!important}
+.header #cloudStatus{width:100%;margin:2px 0;font-size:11px!important}
+.body{padding:0 12px 24px!important}
+.music2040{padding:12px;margin:10px 0}
+.music2040-pill{display:none}
+.music2040 h2{font-size:18px!important}
+.music2040-search input,.search,.field,.dialog input,.dialog select,.dialog textarea{font-size:16px!important}
+.music2040-actions{display:flex;flex-wrap:nowrap;overflow-x:auto;padding:3px 0 8px;scroll-snap-type:x proximity}
+.music2040-actions button,.music2040-actions>a{flex:0 0 auto!important;min-height:44px;scroll-snap-align:start}
+.music2040-help{font-size:11px!important}
+.rowtitle{flex-wrap:wrap;gap:6px;margin-top:18px}
+.rowtitle h2{font-size:18px!important;margin:6px 0}
+.rowtitle>.muted{font-size:11px!important}
+#moods{display:flex;overflow-x:auto;gap:10px;scroll-snap-type:x mandatory;padding:2px 0 12px}
+#moods .tile{flex:0 0 43%;min-width:0;scroll-snap-align:start}
+#playlistCards{grid-template-columns:repeat(2,minmax(0,1fr))}
+.tile strong{overflow-wrap:anywhere}
+.track:has([data-play]),.track:has(.music2040-checkbox){display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:4px;padding:10px 8px;margin:8px 0;background:#25152f;border:1px solid #51314f;border-radius:12px}
+.track button[data-play]{grid-column:1;grid-row:1;width:44px!important;height:44px!important;justify-self:center}
+.track:has([data-play])>div{grid-column:2 / -1;grid-row:1;min-width:0}
+.track:has(.music2040-checkbox)>div{grid-column:2 / 5}
+.track .music2040-checkbox{grid-column:5;grid-row:1;justify-self:center;width:22px;height:22px}
+.track>button:not([data-play]){grid-row:2;min-width:0;min-height:44px;border-radius:8px;background:#341e3d;font-size:18px;padding:5px}
+.player{bottom:calc(var(--mobile-nav) + env(safe-area-inset-bottom));left:0;right:0;z-index:19;height:146px;display:grid;grid-template-columns:1fr;grid-template-rows:44px 70px;gap:5px;padding:10px 12px!important;border-radius:16px 16px 0 0}
+.player .playing{justify-content:flex-start;gap:10px}
+.player .playing>div:nth-child(2){flex:1}
+.player .cover{width:40px;height:40px}
+#music2040context{display:none}
+.player #heart{min-width:44px;min-height:44px}
+.player .controls>div{display:flex;justify-content:space-between;align-items:center}
+.player .controls button{width:44px;height:44px;margin:0;font-size:20px}
+.player #play{border-radius:50%;background:#e7d1a6;color:#24142e!important}
+.player .progress{display:block;height:22px;margin:1px 0 0}
+.player .right{display:none}
+.dialog{max-height:85dvh;overflow:auto;padding:18px}
+.dialog button{min-height:44px}
+.music-filters{display:flex;overflow:auto}
+.music-filters button{flex-shrink:0;min-height:44px}
+.music2040-bulk{flex-wrap:wrap}
+#ytList{grid-template-columns:1fr}
+#ytList .action{min-height:44px}
+}
+</style></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
-<main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
+<main class="main"><div class="mobile-music-top"><strong>ELOAH MUSIC</strong><a href="mes-univers.html">Mes univers ↗</a></div><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
 <div class="body"><!-- ELOAH 2040 COCKPIT V2 -->
 <section class="music2040" aria-label="Cockpit ELOAH Music 2040">
 <div class="music2040-head"><div><span class="music2040-kicker">ELOAH 2040 · COMMANDE MUSICALE</span><h2>Ton cockpit sonore</h2></div><span class="music2040-pill">✦ Mode personnel</span></div>
