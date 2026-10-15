@@ -48,6 +48,23 @@ links(mobile);
 var first=document.body.firstChild;
 document.body.insertBefore(skip,first);
 document.body.insertBefore(bar,first);
+if(mode==="editorial"){
+var headings=Array.from(document.querySelectorAll("main h2,main h3,article h2,article h3,.wrap h2,.wrap h3,.container h2,.container h3"));
+var seen=new Set();headings=headings.filter(function(h){if(seen.has(h)||!h.textContent.trim())return false;seen.add(h);return true}).slice(0,32);
+if(headings.length>=3){
+var toc=mk("div","pe-universal-toc");
+add(toc,mk("span","pe-universal-toc-label","LECTURE · "+headings.length+" SECTIONS"));
+var toggle=add(toc,mk("details","pe-universal-toc-details"));add(toggle,mk("summary","","Sommaire du dossier"));
+var list=add(toggle,mk("nav","pe-universal-toc-links"));list.setAttribute("aria-label","Sections de l'enquête");
+headings.forEach(function(h,i){
+if(!h.id)h.id="pe-v4-section-"+String(i+1);
+var a=add(list,mk("a","",h.textContent.trim().slice(0,96)));
+a.href="#"+encodeURIComponent(h.id);if(h.tagName==="H3")a.classList.add("pe-universal-toc-sub");
+a.addEventListener("click",function(){toggle.open=false});
+});
+document.body.insertBefore(toc,first);
+}
+}
 var content=(document.querySelector("main")||document.querySelector("article")||document.querySelector(".container")||document.querySelector(".wrap")||document.querySelector(".shell")||document.body);
 if(!content.id)content.id="peUniversalContent";
 else skip.href="#"+content.id;
