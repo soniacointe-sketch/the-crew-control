@@ -119,3 +119,8 @@ Le présent dossier **ALPHA-001** est maintenu intact dans ses neuf sections d'o
 [Fil de la série ALPHA](https://soniacointe-sketch.github.io/the-crew-control/parisis-fil-enquetes.html#alpha) · [Bibliothèque PARISIS](https://soniacointe-sketch.github.io/the-crew-control/parisis-publications.html)
 
 **Avertissement :** concordance symbolique n'est pas filiation historique démontrée. Les manuscrits, datations, traductions et sources sont conservés séparément.
+
+
+### 11. Enquête ALPHA-012 — suite documentaire
+
+[ALPHA-012 · Aleph, les noms divins et Michel](https://soniacointe-sketch.github.io/the-crew-control/parisis-alpha-012-noms-divins-michel.html) confronte 4Q529, 11QPsᵃ et P.Vindob. G 328, en distinguant langue, date du témoin et absence de filiation établie. Les sections antérieures restent inchangées.
