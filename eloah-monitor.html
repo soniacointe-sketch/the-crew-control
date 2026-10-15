@@ -12,11 +12,13 @@
 <link rel="stylesheet" href="eloah-monitor-control.css?v=2.0.0">
 <link rel="stylesheet" href="eloah-monitor-data.css?v=2.1.0">
 <link rel="stylesheet" href="eloah-monitor-audit.css?v=2.2.0">
-<title>ELOAH Monitor 2.2 · Tour de contrôle</title>
+<link rel="stylesheet" href="eloah-monitor-ops.css?v=2.3.0">
+<title>ELOAH Monitor 2.3 · Tour de contrôle</title>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <script defer src="eloah-monitor-control.js?v=2.0.0"></script>
 <script defer src="eloah-monitor-data.js?v=2.1.0"></script>
 <script defer src="eloah-monitor-audit.js?v=2.2.0"></script>
+<script defer src="eloah-monitor-ops.js?v=2.3.0"></script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au tableau de bord</a>
@@ -41,6 +43,7 @@
 <p class="nav-caption">CENTRE DE COMMANDE</p>
 <a href="#main" class="nav-link" aria-current="page"><span class="ic" aria-hidden="true">◈</span> Vue d’ensemble</a>
 <a href="#indicateurs-reels" class="nav-link"><span class="ic" aria-hidden="true">↗</span> Indicateurs réels</a>
+<a href="#monitor-operations" class="nav-link"><span class="ic" aria-hidden="true">◎</span> Mes priorités</a>
 <a href="#univers" class="nav-link"><span class="ic" aria-hidden="true">◇</span> Mes univers</a>
 <a href="#audit-securite" class="nav-link"><span class="ic" aria-hidden="true">♢</span> Sécurité & déploiement</a>
 <a href="#controle" class="nav-link"><span class="ic" aria-hidden="true">⌁</span> État des pages</a>
@@ -77,6 +80,35 @@
 <article class="metric"><small>Univers prioritaires</small><strong id="metric-focus">—</strong><span class="hint">Classement manuel, sur cet appareil</span></article>
 <article class="metric"><small>Outils directs</small><strong id="metric-tools">—</strong><span class="hint">Accès rapides à ELOAH</span></article>
 </div>
+<section class="monitor-ops" id="monitor-operations" aria-labelledby="ops-heading">
+<div class="monitor-ops-head">
+ <div><p class="eyebrow">MON COCKPIT · ACTIONS IMMÉDIATES</p><h2 id="ops-heading">Mes priorités, au même endroit.</h2><p>Décide quoi ouvrir, vérifie les pages, puis reprends ton travail. Les statuts sont personnels à ce navigateur.</p></div>
+ <button class="btn btn-sm" type="button" id="ops-command-open" aria-haspopup="dialog" aria-controls="monitor-command">⌕ Rechercher un outil <span aria-hidden="true">⌘ K</span></button>
+</div>
+<div class="monitor-ops-grid">
+ <article class="monitor-ops-panel" aria-label="Univers prioritaires et en cours">
+  <p class="monitor-ops-eyebrow">01 · ORIENTATION</p><h3>À ouvrir en premier</h3>
+  <p id="ops-count" class="monitor-ops-small" aria-live="polite">Chargement du suivi…</p>
+  <div id="ops-focus" class="monitor-ops-items" aria-live="polite"></div>
+  <p class="monitor-ops-small"><a href="#univers">Gérer mes priorités dans les univers →</a></p>
+ </article>
+ <article class="monitor-ops-panel" aria-label="État opérationnel du contrôle des pages">
+  <p class="monitor-ops-eyebrow">02 · CONTRÔLE</p><h3>Ce qui demande vérification</h3>
+  <p id="ops-signal" class="monitor-ops-alert" role="status" aria-live="polite">En attente du contrôle des pages publiques.</p>
+  <p class="monitor-ops-small">Une page joignable ne garantit pas le fonctionnement des services ou des comptes.</p>
+  <div class="monitor-ops-actions" style="margin-top:13px"><button id="ops-check" type="button">Lancer un test HTTP <span aria-hidden="true">↗</span></button></div>
+ </article>
+ <article class="monitor-ops-panel" aria-label="Actions rapides">
+  <p class="monitor-ops-eyebrow">03 · REPRENDRE</p><h3>Actions rapides</h3>
+  <div class="monitor-ops-actions">
+   <button id="ops-refresh" type="button" class="ops-gold">Actualiser les chiffres réels <span aria-hidden="true">↗</span></button>
+   <a href="eloah-pilotage.html">Reprendre mon organisation <span aria-hidden="true">↗</span></a>
+   <a href="eloah-partenaire.html?rubrique=Mon%20Espace&amp;fiche=eloah-securite-supabase-a-reprendre-20261015">Mes notes à reprendre <span aria-hidden="true">↗</span></a>
+  </div>
+  <div class="monitor-ops-quick"><kbd>Ctrl</kbd> + <kbd>K</kbd> recherche rapide · <span>aucune donnée privée transmise</span></div>
+ </article>
+</div>
+</section>
 <section class="section" id="indicateurs-reels" aria-labelledby="real-title">
 <div class="section-heading">
   <div><p class="eyebrow">01 · SUPERVISION RÉELLE · ACCÈS FONDATRICE</p><h2 id="real-title">Mes indicateurs réels</h2>
@@ -175,7 +207,12 @@
 <section class="section" id="raccourcis"><div class="section-heading"><div><p class="eyebrow">03 · MES COMMANDES</p><h2>Mes outils de travail</h2><p>Ouvre directement le bon écran, sans passer par plusieurs menus.</p></div></div><div class="quick-grid" id="quick-grid"></div></section>
 <section class="section"><div class="section-heading"><div><p class="eyebrow">04 · ÉTAT EXTERNE</p><h2>Dernier contrôle publié</h2><p>Rapport historique existant des sites ELOAH, The Crew et Power & Glam.</p></div></div><div class="panel" id="external-checks">Lecture du dernier rapport…</div></section>
 <div class="notice"><strong>Mode de fonctionnement :</strong> centre de navigation, contrôle HTTP et statistiques réelles agrégées réservées à la fondatrice. Il ne lit aucun dossier client, ne lance aucune commande sur les sites et ne surveille rien en continu. Les détails restent dans les outils autorisés.</div>
-<footer class="footer"><span>ELOAH Monitor 2.2 · Tour de contrôle fondatrice<br>Navigation publique + statistiques fondatrice agrégées · Comptes clients séparés.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
+<dialog id="monitor-command" aria-label="Recherche rapide dans mes univers et outils ELOAH">
+ <div class="monitor-command-header"><input id="monitor-command-input" aria-label="Rechercher un univers ou un outil" type="search" autocomplete="off" maxlength="90" placeholder="Quel univers ou quel outil ouvrir ?"><button id="monitor-command-close" class="monitor-command-close" type="button" aria-label="Fermer la recherche">×</button></div>
+ <nav id="monitor-command-results" class="monitor-command-body" aria-label="Résultats des outils ELOAH"></nav>
+ <div class="monitor-command-foot">Entre pour ouvrir le premier résultat · Échap pour fermer · Raccourcis internes uniquement</div>
+</dialog>
+<footer class="footer"><span>ELOAH Monitor 2.3 · Tour de contrôle fondatrice<br>Navigation publique + statistiques fondatrice agrégées · Comptes clients séparés.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
 </main>
 </div>
 </div>
