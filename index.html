@@ -352,7 +352,7 @@ const names={members:'♙ ADHÉRENTS',events:'□ COURS & ÉVÉNEMENTS',payments
 Object.entries(names).forEach(([k,v])=>{const a=find(k);if(a)a.textContent=v});
 const primary=['members','events','payments','whatsapp','tasks'];
 const allOthers=anchors.filter(a=>a!==home&&!primary.includes(a.dataset.view));
-const submenu=document.createElement('details');const sum=document.createElement('summary');sum.textContent='☰ TOUS LES OUTILS';submenu.appendChild(sum);allOthers.forEach(a=>submenu.appendChild(a));
+const submenu=document.createElement('details');const sum=document.createElement('summary');sum.textContent='☰ TOUS LES OUTILS';submenu.appendChild(sum);const toolsPanel=document.createElement('div');toolsPanel.className='crew-tools-popover';allOthers.forEach(a=>toolsPanel.appendChild(a));submenu.appendChild(toolsPanel);submenu.addEventListener('click',e=>{if(e.target.closest('a'))submenu.open=false});document.addEventListener('click',e=>{if(!submenu.contains(e.target))submenu.open=false});submenu.addEventListener('keydown',e=>{if(e.key==='Escape'){submenu.open=false;sum.focus()}});
 primary.forEach(k=>{const a=find(k);if(a)nav.appendChild(a)});nav.appendChild(submenu);
 const q=document.createElement('div');q.className='quicknav';q.setAttribute('aria-label','Accès rapide');
 [['♙ Adhérents','members'],['□ Événements','events'],['▤ Paiements','payments'],['◉ Messages','whatsapp'],['✓ À faire','tasks']].forEach(([label,v])=>{const b=document.createElement('button');b.type='button';b.textContent=label;b.addEventListener('click',()=>find(v)?.click());q.appendChild(b)});
@@ -1050,4 +1050,17 @@ body.crew-dashboard #drawerBody .crew-proj-ideas-cta{background:#eee7d7!importan
 body.crew-dashboard #drawerBody .crew-proj-ideas-cta strong{color:#654d20!important}
 body.crew-dashboard #drawerBody .crew-proj-card img{min-height:200px}
 @media(max-width:600px){body.crew-dashboard #drawer:before{font-size:9px;letter-spacing:.04em;padding-top:22px;padding-bottom:22px}body.crew-dashboard #drawer #close{font-size:11px;padding:9px 12px;margin-top:-48px}body.crew-dashboard #drawerTitle{margin-top:23px!important;padding-top:0;font-size:32px!important}body.crew-dashboard #drawer .crew-detail-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.crew-dashboard #drawerBody .crew-member-row{align-items:flex-start;gap:10px}body.crew-dashboard #drawerBody .crew-member-row>span:last-child{white-space:normal;max-width:75px}body.crew-dashboard #drawerBody .c24-nav{flex-wrap:wrap;overflow:visible}body.crew-dashboard #drawerBody .c24-nav button{flex:1 1 42%;font-size:12px}body.crew-dashboard #drawerBody .crew-proj-card img{min-height:0}body.crew-dashboard #drawerBody .item .grow{min-width:0;flex-basis:60%}}
+</style><style id="crew-tools-placement">/* Stable tools entry, separate dropdown without moving the main links. */
+html body.crew-dashboard .side{position:relative!important;z-index:40!important;overflow:visible!important}
+html body.crew-dashboard .side .nav{padding-right:175px!important;position:static!important;min-width:0}
+html body.crew-dashboard .side .nav details,html body.crew-dashboard .side .nav details[open]{position:absolute!important;right:clamp(16px,4vw,55px);top:16px;width:162px;min-width:0;display:block!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;flex:none!important}
+html body.crew-dashboard .side .nav details>summary{display:flex;align-items:center;justify-content:center;white-space:nowrap;background:#d8b96e!important;color:#211d15!important;border:1px solid #d8b96e;border-radius:25px!important;min-height:42px}
+html body.crew-dashboard .side .nav details[open]>summary{background:#f1d998!important}
+html body.crew-dashboard .side .nav .crew-tools-popover{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;position:absolute;right:0;top:52px;width:min(540px,calc(100vw - 32px));max-height:70vh;overflow-y:auto;padding:15px;background:#fffdf8;border:1px solid #d4c49f;border-radius:14px;box-shadow:0 15px 45px #0005}
+html body.crew-dashboard .side .nav details:not([open])>.crew-tools-popover{display:none!important}
+html body.crew-dashboard .side .nav details .crew-tools-popover a{display:flex!important;margin:0!important;padding:12px!important;background:#f3eee2;color:#302619!important;border:1px solid #e0d5bf;border-radius:8px!important;font-size:12px!important;line-height:1.4;white-space:normal;min-height:44px;align-items:center}
+html body.crew-dashboard .side .nav details .crew-tools-popover a:hover{background:#e9d8ae;border-color:#a88a47}
+html body.crew-dashboard .side .nav summary:focus-visible{outline:3px solid #fff;outline-offset:3px}
+@media(max-width:700px){html body.crew-dashboard .side{flex-wrap:wrap!important;gap:8px!important}html body.crew-dashboard .side .logo{display:block!important;margin:0!important}html body.crew-dashboard .side .nav{flex:1 0 100%!important;width:100%;padding-right:0!important}html body.crew-dashboard .side .nav details{top:23px}html body.crew-dashboard .side .nav .crew-tools-popover{max-height:65vh}}
+@media(max-width:380px){html body.crew-dashboard .side .nav .crew-tools-popover{grid-template-columns:1fr}}
 </style></body></html>
