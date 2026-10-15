@@ -377,6 +377,36 @@ body.stage2040-active{overflow:hidden!important}
 .show21-actions button:disabled{opacity:.38;cursor:not-allowed}
 .show21-status{margin:0!important;font-size:11px!important;color:#eed0af!important}
 @media(max-width:750px){.show21{padding:11px;gap:9px}.show21-stats{grid-template-columns:repeat(3,minmax(0,1fr))}.show21-stats>div{padding:9px}.show21-stats strong{font-size:19px}.show21-stats #show21clock{font-size:16px}.show21-passes{grid-template-columns:1fr}.show21-actions button{flex:1 1 43%;min-height:44px}.show21-onair{font-size:9px;padding:7px}}
+
+/* ELOAH MUSIC 2040 OPERATOR SAFETY V22 */
+.show22{display:flex;flex-direction:column;gap:10px;padding:13px;border:1px solid #855b81;border-radius:13px;background:linear-gradient(110deg,#261730,#171020);font:12px Inter,system-ui,sans-serif}
+.show22-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.show22-top>div{display:flex;flex-direction:column;gap:4px}
+.show22-label{color:#e6c9a2;font-size:10px;font-weight:800;letter-spacing:.14em}
+.show22-top strong{color:#fff0f8;font-size:17px}
+.show22 button{background:#492b50;border:1px solid #8b6585;border-radius:9px;color:#fff3f9;min-height:43px;padding:10px 13px;font:700 12px Inter,system-ui,sans-serif;touch-action:manipulation}
+.show22 button:hover:not(:disabled){background:#68416a}
+.show22 button:disabled{opacity:.42;cursor:not-allowed}
+.show22 button[aria-pressed="true"]{background:#7a4d71;border-color:#efd1bb}
+.show22 button:focus-visible,.show22 textarea:focus-visible{outline:2px solid #f4d2ec;outline-offset:3px}
+.show22-audit{padding:9px 11px;border-radius:9px;background:#1c1226;border:1px solid #644763;color:#e3cfe3;font-size:11px;line-height:1.5}
+.show22-actions{display:flex;flex-wrap:wrap;gap:8px}
+.show22-actions button{flex:1 1 145px}
+.show22 .show22-silence{background:#88323b;border:1px solid #ec8792;color:white;font-size:13px;font-weight:800}
+.show22 .show22-silence:hover{background:#b1464f}
+.show22-status{color:#e6c9a2!important;font-size:11px!important;margin:0!important}
+.show22-incidents{border:1px solid #5c405e;border-radius:9px;overflow:hidden}
+.show22-incidents summary{padding:10px;cursor:pointer;list-style:none;font-size:12px;font-weight:750;display:flex;justify-content:space-between;gap:10px}
+.show22-incidents summary::-webkit-details-marker{display:none}
+.show22-incidents summary span{font-weight:500;color:#cbb3cc}
+.show22-incident-body{border-top:1px solid #5c405e;padding:10px;display:flex;flex-direction:column;gap:8px}
+.show22-incident-body label{font-size:11px;color:#e8cda9;font-weight:700}
+.show22-incident-body textarea{background:#140e1c;border:1px solid #885985;color:#fff3f9;padding:10px;border-radius:9px;font:500 12px Inter,system-ui,sans-serif;resize:vertical}
+.show22-incident-body p{font-size:11px!important;color:#c9b4c9!important;margin:0!important}
+.show22-incident-list{display:flex;flex-direction:column;gap:6px;max-height:190px;overflow:auto}
+.show22-incident-list p{border-left:3px solid #bd83a7;background:#2c1c35;padding:8px 10px}
+.stage2040.operator22 .stage2040-setlist,.stage2040.operator22 .stage2040-conductor,.stage2040.operator22 .stage20,.stage2040.operator22 .stage2040-regie{display:none!important}
+@media(max-width:750px){.show22{padding:10px}.show22-actions button{flex:1 1 43%;min-height:47px}.show22 .show22-silence{flex-basis:100%}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <style id="eloah-music-visuals-v1">
 .music-artwork{display:block;width:100%;height:100%;border-radius:inherit}
@@ -581,6 +611,26 @@ body.stage2040-active{overflow:hidden!important}
   <button type="button" id="show21print" disabled>▤ Fiche finale</button>
  </div>
  <p id="show21status" class="show21-status" role="status" aria-live="polite">Sélectionne une setlist. Aucun titre ne sera lancé automatiquement.</p>
+</section>
+
+<section class="show22" id="show22panel" aria-label="Mode opérateur et sécurité audio">
+ <div class="show22-top"><div><span class="show22-label">ELOAH 2040 · OPÉRATEUR LIVE</span><strong>Contrôles de sécurité</strong></div><button type="button" id="show22toggle" aria-pressed="false">◉ Activer vue opérateur</button></div>
+ <div class="show22-audit" id="show22audit" aria-live="polite">Contrôle de la setlist et des platines…</div>
+ <div class="show22-actions">
+  <button type="button" id="show22pause">⏸ Pause musique A + B</button>
+  <button type="button" id="show22resume" disabled>▶ Reprendre A</button>
+  <button type="button" id="show22silence" class="show22-silence">■ SILENCE IMMÉDIAT</button>
+ </div>
+ <details class="show22-incidents" id="show22incidents"><summary>☷ Journal des imprévus <span id="show22incidentCount">0 note</span></summary>
+  <div class="show22-incident-body">
+   <label for="show22incidentText">Noter un incident ou une modification de scène</label>
+   <textarea id="show22incidentText" rows="2" maxlength="250" placeholder="Ex. Groupe KIDS en attente, 30 s de retard, micro à vérifier…"></textarea>
+   <div class="show22-actions"><button type="button" id="show22addIncident">＋ Ajouter au journal</button><button type="button" id="show22clearIncidents">Effacer le journal</button></div>
+   <div id="show22incidentList" class="show22-incident-list"></div>
+   <p>Journal conservé localement par compte ELOAH connecté et par playlist. Sans connexion, uniquement pour cet onglet. Aucun envoi au cloud.</p>
+  </div>
+ </details>
+ <p id="show22status" class="show22-status" role="status" aria-live="polite">Mode opérateur prêt. Le bouton Silence arrête immédiatement les deux lecteurs et coupe le micro.</p>
 </section>
 <div class="stage2040-decks">
    <section class="stage2040-deck stage2040-deck-a" aria-label="Platine A, musique principale">
@@ -1013,6 +1063,85 @@ if(typeof djAudio.setSinkId==='function'&&navigator.mediaDevices?.selectAudioOut
 let stage2040Native=false,stage2040PreviousFocus=null,stage2040Index='';
 const stage2040Panel=$('dj2040stage');
 
+/* ELOAH MUSIC 2040 OPERATOR SAFETY V22 */
+let show22Operator=false,show22Scope='',show22Incidents=[];
+function show22StorageConfig(){
+ const account=typeof cloudUser!=='undefined'&&cloudUser?.id?'user:'+cloudUser.id:'session';
+ return {scope:account+':'+(stageSetlistId||'none'),storage:account==='session'?sessionStorage:localStorage,key:'eloahMusicIncidentsV22:'+account+':'+(stageSetlistId||'none')};
+}
+function show22Load(){
+ const cfg=show22StorageConfig();show22Scope=cfg.scope;
+ try{
+  const parsed=JSON.parse(cfg.storage.getItem(cfg.key)||'[]');
+  show22Incidents=Array.isArray(parsed)?parsed.filter(x=>x&&typeof x.text==='string').slice(-60).map(x=>({text:x.text.slice(0,250),time:String(x.time||'').slice(0,24),elapsed:Number.isFinite(x.elapsed)?Math.max(0,x.elapsed):0})):[];
+ }catch(e){show22Incidents=[];}
+ show22RenderIncidents();
+}
+function show22Save(){
+ const cfg=show22StorageConfig();
+ try{cfg.storage.setItem(cfg.key,JSON.stringify(show22Incidents));}catch(e){$('show22status').textContent='Journal non enregistré : stockage local indisponible.';}
+}
+function show22RenderIncidents(){
+ $('show22incidentCount').textContent=show22Incidents.length+' note(s)';
+ const area=$('show22incidentList');area.replaceChildren();
+ for(const event of [...show22Incidents].reverse()){
+  const p=document.createElement('p');
+  p.textContent='['+regieFormat(event.elapsed)+'] '+event.text;
+  area.append(p);
+ }
+ if(!show22Incidents.length){const p=document.createElement('p');p.textContent='Aucun imprévu enregistré.';area.append(p);}
+}
+function show22Status(message){$('show22status').textContent=message;}
+function show22SetOperator(active){
+ show22Operator=!!active;
+ stage2040Panel.classList.toggle('operator22',show22Operator);
+ $('show22toggle').setAttribute('aria-pressed',String(show22Operator));
+ $('show22toggle').textContent=show22Operator?'↗ Afficher la régie complète':'◉ Activer vue opérateur';
+ show22Status(show22Operator?'Vue opérateur : seules les commandes essentielles restent visibles.':'Régie complète restaurée.');
+}
+function show22Sync(){
+ if(stage2040Panel.hidden)return;
+ const cfg=show22StorageConfig();if(show22Scope!==cfg.scope)show22Load();
+ const ids=stageSetlistAvailableIds(),currentTrack=tracks[current];
+ const ready=ids.length>0, hasA=!!currentTrack&&!!audio.src,hasB=!!tracks.find(t=>t.id===djTrackId)&&!!djAudio.src;
+ const mic=!!regieMicStream;
+ $('show22audit').textContent=(ready?'Setlist : '+ids.length+' titre(s) disponibles':'Setlist : aucune piste disponible')+' · A : '+(hasA?(audio.paused?'en pause':'en lecture'):'non chargée')+' · B : '+(hasB?'chargée':'non chargée')+' · Micro : '+(mic?'autorisé':'coupé')+' · Test audio réel avant spectacle recommandé';
+ $('show22resume').disabled=!hasA||!audio.paused;
+}
+function show22CutAudio(isEmergency){
+ djCancelAnimation();cancelMixFade();
+ audio.pause();djAudio.pause();djPreviewMode=false;
+ $('dj2040fader').value='0';djAudio.volume=0;
+ regieMicMute();
+ if('speechSynthesis' in window)window.speechSynthesis.cancel();
+ restoreMixVolume();
+ djSync();show22Sync();
+ show22Status(isEmergency?'SILENCE : A + B en pause, micro coupé et annonce vocale arrêtée. Les pistes sont conservées.':'Musique A + B en pause. Micro momentanément coupé. Reprise A possible.');
+}
+$('show22toggle').onclick=()=>show22SetOperator(!show22Operator);
+$('show22pause').onclick=()=>show22CutAudio(false);
+$('show22silence').onclick=()=>show22CutAudio(true);
+$('show22resume').onclick=async()=>{
+ if(current<0||!audio.src){show22Status('Aucune piste disponible sur A.');return;}
+ try{await audio.play();show22Status('Lecture A reprise. La platine B et le micro restent coupés.');}catch(e){show22Status('Reprise impossible : vérifie le fichier et la sortie audio.');}
+ show22Sync();
+};
+$('show22addIncident').onclick=()=>{
+ const input=$('show22incidentText'),note=input.value.trim();
+ if(!stageSetlistId){show22Status('Choisis d’abord une playlist de spectacle.');return;}
+ if(!note){input.focus();return;}
+ show22Incidents.push({text:note.slice(0,250),time:new Date().toISOString(),elapsed:Math.round(regieElapsed())});
+ show22Incidents=show22Incidents.slice(-60);
+ show22Save();show22RenderIncidents();input.value='';
+ show22Status('Imprévu ajouté au journal local.');
+};
+$('show22clearIncidents').onclick=()=>{
+ if(!show22Incidents.length)return;
+ if(!confirm('Effacer les notes d’imprévus de cette playlist sur cet appareil ?'))return;
+ show22Incidents=[];show22Save();show22RenderIncidents();show22Status('Journal des imprévus vidé pour cette playlist.');
+};
+
+
 /* ELOAH MUSIC 2040 SHOW DIRECTOR V21 */
 const show21Panel=$('show21panel');
 function show21Clock(){
@@ -1080,6 +1209,7 @@ $('show21timer').onclick=()=>{$('stage2040timerToggle').click();show21Sync()};
 $('show21print').onclick=()=>{$('stage2040printShow').click()};
 show21Panel.querySelectorAll('[data-show21-target]').forEach(button=>button.onclick=()=>{
  const target=$(button.dataset.show21Target);if(!target)return;
+ if(show22Operator)show22SetOperator(false);
  target.open=true;target.scrollIntoView({behavior:'smooth',block:'start'});
  const summary=target.querySelector('summary');if(summary)summary.focus();
 });
@@ -1594,6 +1724,7 @@ function stage2040Sync(){
  r20Sync();
  regieRefreshCues();
  show21Sync();
+ show22Sync();
  const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
  $('stage2040titleA').textContent=a?.title||'Aucun titre sélectionné';
  $('stage2040artistA').textContent=a?.artist||'Lecture principale';
@@ -1637,6 +1768,7 @@ async function stage2040Open(){
  }
 }
 function stage2040Close(){
+ show22SetOperator(false);
  r20Pause();
  regieStageClose();
  stage2040Panel.hidden=true;document.body.classList.remove('stage2040-active');
