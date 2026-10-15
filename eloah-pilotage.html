@@ -9,8 +9,21 @@
 .client-hero-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 18px}.client-hero-actions>*{min-width:175px}.client-page .workspace-choices{margin:19px 0 22px}.client-local-note{font-size:13px!important;line-height:1.6!important;border-left:3px solid #bbaed2;padding:9px 13px;margin:18px 0 26px!important;background:#f1eef7;border-radius:5px}.client-next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}.client-next>.client-next-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:7px;overflow-wrap:anywhere}.client-next-card strong{font-size:14px}.client-next-card small{color:var(--muted);font-size:12px}.client-next-card button{align-self:flex-start;min-height:40px;margin-top:auto;font-size:12px}.client-next-empty{grid-column:1/-1;border:1px dashed var(--line);background:var(--panel);border-radius:12px;padding:19px}.client-next-empty p{margin:5px 0!important;font-size:14px}.client-next-heading{grid-column:1/-1;font:400 21px/1.3 Georgia,serif;margin:0}.client-next-description{grid-column:1/-1;margin:0!important;font-size:13px!important}.client-project-tools{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:15px 18px;display:flex;align-items:center;gap:12px 22px;flex-wrap:wrap;margin:17px 0}.client-project-tools label{display:grid;gap:7px;flex:0 1 285px;font-size:13px;color:#596257}.client-project-tools select{font-size:14px;width:100%;min-width:0}.client-project-tools p{flex:1 1 240px;font-size:12px!important}.client-page a[data-project-link][data-unavailable="1"]{opacity:.85;border-style:dashed}.client-page #client-project-error:empty{display:none}.client-page #client-project-error:not(:empty){color:#a34249;font-size:13px}.client-page #client-core-tools{margin-bottom:8px}.client-page #client-more-tools{margin-top:14px}.client-page #client-more-tools>.secondary-content{padding-top:0}.client-page #client-more-tools .services{margin-bottom:0}@media(max-width:850px){.client-next{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.client-hero-actions>*{flex:1 1 100%}.client-next{grid-template-columns:1fr}.client-next-empty{grid-column:1}.client-project-tools{display:block;padding:14px}.client-project-tools label{display:grid;width:100%}.client-page #client-core-tools{grid-template-columns:1fr}.client-page #client-more-tools .services{grid-template-columns:1fr}}</style>
 <link rel="stylesheet" href="eloah-pilotage-premium.css?v=1.0.0">
 <link rel="stylesheet" href="eloah-pilotage-refine.css?v=2.0.0">
-</head>
+<style id="pilotage-video-style">
+body.client-page{isolation:isolate}
+body.client-page #pilotage-ambient{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;pointer-events:none;opacity:.62}
+body.client-page::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(110deg,#100819e8,#1d0929a8 65%,#210b28b8)}
+body.client-page .client-hero{background:linear-gradient(110deg,#26132bd9,#180d23a6)!important}
+body.client-page #mes-projets{position:relative;background:#1b1028a6;border:1px solid #8e6085;border-radius:18px;padding:26px;margin:28px 0}
+body.client-page #mes-projets .section-head p{color:#e1cddd}
+body.client-page #pilotage-film-toggle{font-size:11px;min-height:44px;background:#2e1838;color:#f9e5ef;border:1px solid #ae83a2}
+body.client-page .pilotage-film-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+body.client-page .pilotage-film-controls a{font-size:10px;color:#d9bdd0}
+@media(max-width:650px){body.client-page #mes-projets{padding:18px 14px}}
+@media print{#pilotage-ambient,.pilotage-film-controls,body.client-page::before{display:none!important}}
+</style></head>
 <body class="client-page">
+<video id="pilotage-ambient" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
 <a class="skip-link" href="#contenu">Aller à mon espace</a>
 <main id="contenu">
 <header class="client-hero" aria-labelledby="pilotage-title">
@@ -102,6 +115,7 @@
 <p class="storage-note">Ton travail est conservé dans ce navigateur. <a href="#compte-et-sauvegardes">Conserve une sauvegarde</a> pour le retrouver sur un autre appareil.</p>
 </section>
 <section id="mes-projets" class="workspace-section" aria-labelledby="projects-heading">
+<div class="pilotage-film-controls"><button type="button" id="pilotage-film-toggle">▶ Animer le fond</button><a href="https://www.pexels.com/video/purple-abstract-background-7101912/" target="_blank" rel="noopener noreferrer">Vidéo · Eugene Vasilevich / Pexels</a></div>
 <div class="section-head"><div><h2 id="projects-heading">Mes projets</h2><p>Retrouve tes projets enregistrés dans ce navigateur.</p></div><button type="button" class="primary" data-new-project>+ Créer un projet</button></div>
 <p id="client-project-count" class="quiet-count"></p><div id="client-project-list" class="project-grid"></div>
 <div id="client-project-empty" class="empty-project"><div><strong>Ton premier projet commence ici.</strong><p>Un objectif personnel, un contenu à préparer, une activité à développer… Donne-lui un nom pour commencer.</p></div><button type="button" data-new-project>Commencer mon projet</button></div>
@@ -260,5 +274,18 @@ if(client)who().then(u=>{status(u?'Connectée au compte ELOAH.':'Connecte-toi po
 <script src="eloah-pilotage-organisation.js?v=20261014-client1"></script>
 <script src="eloah-pilotage-overview.js?v=1.0.0" defer></script>
 <script src="eloah-pilotage-focus.js?v=2.0.0" defer></script>
-<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script></body>
+<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script><script>
+(()=>{'use strict';
+const v=document.getElementById('pilotage-ambient'),b=document.getElementById('pilotage-film-toggle'),reduce=matchMedia('(prefers-reduced-motion: reduce)');
+let stopped=reduce.matches||Boolean(navigator.connection&&navigator.connection.saveData);
+const label=()=>{b.textContent=v.paused?'▶ Animer le fond':'Ⅱ Mettre le fond en pause';};
+function play(){if(!v.src)v.src=matchMedia('(max-width:650px)').matches?'https://videos.pexels.com/video-files/7101912/7101912-sd_640_360_25fps.mp4':'https://videos.pexels.com/video-files/7101912/7101912-sd_960_540_25fps.mp4';v.muted=true;v.play().catch(label);}
+b.addEventListener('click',()=>{stopped=!v.paused;if(stopped)v.pause();else play();});
+v.addEventListener('pause',label);v.addEventListener('play',label);
+v.addEventListener('error',()=>{b.textContent='Vidéo indisponible';b.disabled=true;});
+document.addEventListener('visibilitychange',()=>{if(document.hidden)v.pause();else if(!stopped)play();});
+reduce.addEventListener('change',()=>{if(reduce.matches){stopped=true;v.pause();}});
+label();if(!stopped)play();
+})();
+</script></body>
 </html>
