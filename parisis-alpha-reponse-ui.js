@@ -38,6 +38,7 @@ root.innerHTML=`
 <h3 id="jAnswerHeading">Jusqu'à la réponse.</h3>
 <p>Le programme confronte les résultats du code à la source évangélique et au témoignage d'Irénée. Il ne transforme pas automatiquement une correspondance numérique en preuve historique.</p>
 <div id="jAnswerSummary" role="status" aria-live="polite">Choisis un passage référencé pour lancer la recherche historique.</div>
+<p><a href="https://github.com/soniacointe-sketch/the-crew-control/blob/main/corpus/parisis-alpha-013-reponse-jean14-aletheia.md" target="_blank" rel="noopener noreferrer">Consulter l’enquête ALPHA-013 complète et ses références ↗</a></p>
 <div class="j-actions"><button type="button" id="jAnswerMarkdown">↓ Rapport Markdown</button><button type="button" id="jAnswerJSON">↓ Preuves JSON</button></div>
 `;
 const result=document.getElementById("jResult");
