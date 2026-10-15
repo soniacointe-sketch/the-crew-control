@@ -107,3 +107,15 @@ Le dossier maître ALPHA-001 reste conservé sans altération des sections préc
 - [**ALPHA-011 — Sept voyelles, sept cieux et Apocalypse**](parisis-alpha-011-sept-voyelles-sept-cieux-apocalypse.md) : Irénée, textes bibliques, P.Vindob. G 328, traditions gréco-égyptiennes, chronologie comparée.
 
 Ces prolongements sont des enquêtes distinctes et non des preuves d'une doctrine secrète commune.
+
+
+### 10. Enquêtes ALPHA-010 et ALPHA-011 (suite du 15 octobre 2026)
+
+Le présent dossier **ALPHA-001** est maintenu intact dans ses neuf sections d'origine. Deux enquêtes liées documentent ensuite les usages alphabétiques dans le milieu marcosien, l'Apocalypse et les pratiques vocaliques de l'Antiquité :
+
+- [ALPHA-010 — Les 24 lettres grecques et le corps d'Alètheia](https://soniacointe-sketch.github.io/the-crew-control/parisis-alpha-010-marcus-aletheia.html) : Irénée, *Contre les hérésies* I,14–15 et I,20 ; paires alphabétiques, symboles et niveaux de preuve.
+- [ALPHA-011 — Sept voyelles, sept cieux et l'Apocalypse](https://soniacointe-sketch.github.io/the-crew-control/parisis-alpha-011-sept-voyelles-apocalypse.html) : traditions gréco-égyptiennes, papyrus, Ap 1,8 ; 10,3–4 ; 21,6 ; 22,13, chronologie et objections.
+
+[Fil de la série ALPHA](https://soniacointe-sketch.github.io/the-crew-control/parisis-fil-enquetes.html#alpha) · [Bibliothèque PARISIS](https://soniacointe-sketch.github.io/the-crew-control/parisis-publications.html)
+
+**Avertissement :** concordance symbolique n'est pas filiation historique démontrée. Les manuscrits, datations, traductions et sources sont conservés séparément.
