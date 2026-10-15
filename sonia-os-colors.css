@@ -1,0 +1,146 @@
+/* SONIA OS: colour-only alignment. Existing dimensions, routes, auth and data are untouched. */
+body.sonia-os-colors{color-scheme:light;--os-paper:#f4efe7;--os-card:#fffcf8;--os-ink:#291c27;--os-muted:#665665;--os-line:#dfd3dd;--os-prune:#35152f;--os-dark:#190c18;--os-champagne:#ead4b4;--os-accent:#63344f;--bg:var(--os-paper);--panel:var(--os-card);--line:var(--os-line);--gold:var(--os-accent);--muted:var(--os-muted);--white:var(--os-ink);background:var(--os-paper);color:var(--os-ink)}
+body.sonia-os-colors .side{background:#f2e9ed;border-right-color:#dfd3dd}
+body.sonia-os-colors .brand,body.sonia-os-colors .top h1{color:#63344f}
+body.sonia-os-colors .nav button{color:#291c27}
+body.sonia-os-colors .nav button:hover,body.sonia-os-colors .nav button:focus-visible{background:#f2e9ed}
+body.sonia-os-colors .nav button.active{background:#35152f}
+body.sonia-os-colors .kpi,body.sonia-os-colors .panel{box-shadow:0 5px 22px rgba(38,15,33,.035)}
+body.sonia-os-colors .kpi strong{color:#63344f}
+body.sonia-os-colors .btn{background:#35152f}
+body.sonia-os-colors .btn.secondary{background:#f2e9ed;color:#291c27;border:1px solid #dfd3dd}
+body.sonia-os-colors .field{color:#291c27;border:1px solid #dfd3dd}
+body.sonia-os-colors .field:focus-visible,body.sonia-os-colors .btn:focus-visible,body.sonia-os-colors .universe-card:focus-visible{outline:3px solid #927186}
+body.sonia-os-colors th{background:#f2e9ed;color:#665665}
+body.sonia-os-colors tr:hover td{background:#f2e9ed}
+body.sonia-os-colors .pill{border-color:#927186;color:#63344f;background:#f2e9ed}
+body.sonia-os-colors .notice{background:#f2e9ed;color:#291c27;border-left:3px solid #927186}
+body.sonia-os-colors #authScreen{background:#f2e9ed}
+body.sonia-os-colors dialog{background:#fffcf8;color:#291c27;border-color:#dfd3dd}
+body.sonia-os-colors .universe-card{background:#f2e9ed!important;border-color:#dfd3dd!important;color:#291c27!important;box-shadow:0 3px 14px rgba(38,15,33,.05)}
+body.sonia-os-colors .universe-card b,body.sonia-os-colors .universe-card span{color:#63344f!important}
+body.sonia-os-colors .universe-card small{color:#665665!important}
+body.sonia-os-colors .universe-card:hover{background:#f2e9ed!important}
+body.sonia-os-colors a{color:#63344f}
+body.sonia-os-colors .nav-group h3{color:#665665}
+body.sonia-os-colors .result-link{border:1px solid #dfd3dd;background:#fffcf8;color:#291c27}
+body.sonia-os-colors .result-link:hover{background:#f2e9ed}
+body.sonia-os-colors .result-link span{color:#665665}
+body.sonia-os-colors .chat-entry{background:#35152f;border:1px solid #927186;box-shadow:0 3px 12px rgba(38,15,33,.12)}
+body.sonia-os-colors #chatPromptDialog h2{color:#63344f}
+body.sonia-os-colors .chat-prompt-label{color:#665665}
+body.sonia-os-colors .chat-prompt-existing summary{color:#63344f}
+body.sonia-os-colors .mission-order-main{background:#35152f;box-shadow:0 3px 14px rgba(38,15,33,.15)}
+body.sonia-os-colors .command-status{border-left:3px solid #927186;background:#f2e9ed}
+body.sonia-os-colors .mission-pack-summary{background:#f2e9ed;border:1px solid #dfd3dd}
+body.sonia-os-colors .mission-pack-summary strong{color:#63344f}
+body.sonia-os-colors .mission-pack-summary span{color:#665665}
+body.sonia-os-colors .mission-filterbar label{color:#665665}
+body.sonia-os-colors .crew-linked-kpi{background:#f2e9ed;border:1px solid #dfd3dd}
+body.sonia-os-colors .crew-linked-kpi span{color:#665665}
+body.sonia-os-colors .crew-linked-kpi strong{color:#63344f}
+body.sonia-os-colors .crew-linked-detail-card{border:1px solid #dfd3dd;background:#f2e9ed}
+body.sonia-os-colors .assets-metrics>div{background:#f2e9ed;border:1px solid #dfd3dd}
+body.sonia-os-colors .assets-metrics span{color:#665665}
+body.sonia-os-colors .assets-metrics strong{color:#63344f}
+body.sonia-os-colors .assets-filters label{color:#665665}
+body.sonia-os-colors .asset-purpose{color:#665665}
+body.sonia-os-colors .aaf-kpis>div{background:#f2e9ed;border:1px solid #dfd3dd}
+body.sonia-os-colors .aaf-kpis strong{color:#63344f}
+body.sonia-os-colors .aaf-kpis span{color:#665665}
+body.sonia-os-colors .aaf-editor{background:#f2e9ed;border:1px solid #dfd3dd}
+body.sonia-os-colors .aaf-library-filters label{color:#665665}
+body.sonia-os-colors .aaf-template{border:1px solid #dfd3dd;background:#fffcf8}
+body.sonia-os-colors .aaf-template-meta{color:#63344f}
+body.sonia-os-colors .security-kpis>div{border:1px solid #dfd3dd;background:#f2e9ed}
+body.sonia-os-colors .security-kpis strong{color:#63344f}
+body.sonia-os-colors .security-kpis span{color:#665665}
+body.sonia-os-colors .security-live{border:1px solid #dfd3dd;background:#fffcf8}
+body.sonia-os-colors .security-live-grid>div{border-left:3px solid #927186;background:#f2e9ed}
+body.sonia-os-colors .security-live-grid span{color:#665665}
+body.sonia-os-colors .security-principles article{border:1px solid #dfd3dd;background:#fffcf8}
+body.sonia-os-colors .security-principles h3{color:#63344f}
+body.sonia-os-colors .security-filters label{color:#665665}
+body.sonia-os-colors .security-control{border:1px solid #dfd3dd;background:#fffcf8}
+body.sonia-os-colors .security-control h3{color:#63344f}
+body.sonia-os-colors .security-read{color:#665665}
+body.sonia-os-colors .security-control-foot span{color:#665665}
+body.sonia-os-colors .program-stats>div{border:1px solid #dfd3dd;background:#f2e9ed}
+body.sonia-os-colors .program-stats strong{color:#63344f}
+body.sonia-os-colors .program-stats span{color:#665665}
+body.sonia-os-colors .program-filters label{color:#665665}
+body.sonia-os-colors .program-card{border:1px solid #dfd3dd;background:#fffcf8}
+body.sonia-os-colors .program-card h3{color:#63344f}
+body.sonia-os-colors .program-priority{color:#63344f}
+body.sonia-os-colors .program-card-dates span{color:#665665}
+body.sonia-os-colors .program-card-metric{color:#665665}
+body.sonia-os-colors .program-heritage summary{color:#63344f}
+body.sonia-os-colors .program-heritage .roadcard{background:#f2e9ed}
+body.sonia-os-colors .connect-stats>div{background:#f2e9ed;border:1px solid #dfd3dd}
+body.sonia-os-colors .connect-stats strong{color:#63344f}
+body.sonia-os-colors .connect-stats span{color:#665665}
+body.sonia-os-colors .connect-filters label{color:#665665}
+body.sonia-os-colors .connect-card{background:#fffcf8;border:1px solid #dfd3dd}
+body.sonia-os-colors .connect-card h3{color:#63344f}
+body.sonia-os-colors .connect-state,body.sonia-os-colors .connect-card-category{color:#63344f}
+body.sonia-os-colors .connect-card details summary{color:#63344f}
+body.sonia-os-colors .autom-stats>div{background:#f2e9ed;border:1px solid #dfd3dd}
+body.sonia-os-colors .autom-stats strong{color:#63344f}
+body.sonia-os-colors .autom-stats span{color:#665665}
+body.sonia-os-colors .autom-filters label{color:#665665}
+body.sonia-os-colors .autom-card{border:1px solid #dfd3dd;background:#fffcf8}
+body.sonia-os-colors .autom-card h3{color:#63344f}
+body.sonia-os-colors .autom-card-state{color:#63344f}
+body.sonia-os-colors .autom-card details summary{color:#63344f}
+body.sonia-os-colors .workflow-stats>div{border:1px solid #dfd3dd;background:#f2e9ed}
+body.sonia-os-colors .workflow-stats strong{color:#63344f}
+body.sonia-os-colors .workflow-stats span{color:#665665}
+body.sonia-os-colors .workflow-filters label{color:#665665}
+body.sonia-os-colors .workflow-card{border:1px solid #dfd3dd;background:#fffcf8}
+body.sonia-os-colors .workflow-card h3{color:#63344f}
+body.sonia-os-colors .workflow-state{color:#63344f}
+body.sonia-os-colors .workflow-steps{background:#f2e9ed}
+body.sonia-os-colors .workflow-card details summary{color:#63344f}
+/* Main work surface. Champagne is reserved for dark backgrounds. */
+body.sonia-os-colors .main{background:var(--os-paper)}
+body.sonia-os-colors :is(.panel,.kpi,dialog){background:var(--os-card);color:var(--os-ink);border-color:var(--os-line);box-shadow:0 5px 22px #260f2109}
+body.sonia-os-colors :is(.top h1,.brand,.kpi strong){color:var(--os-prune)}
+body.sonia-os-colors .btn:not(.secondary):not(.danger){background:var(--os-prune);color:#fff5eb;border-color:var(--os-prune)}
+body.sonia-os-colors .btn.secondary{background:#f2e9ed;color:#422336;border-color:#c8b5c1}
+body.sonia-os-colors .btn.danger{background:#963f48;color:#fff}
+body.sonia-os-colors :is(.field,input,select,textarea){color-scheme:light;accent-color:var(--os-prune)}
+body.sonia-os-colors .field{background:#fffdfb;color:var(--os-ink);border-color:#b7a2b0}
+body.sonia-os-colors .field::placeholder{color:#776773}
+body.sonia-os-colors :is(.muted,.empty,.form label){color:var(--os-muted)}
+body.sonia-os-colors :is(.notice,.command-status,.mission-pack-summary){background:#f2e9ed;color:#422336;border-color:#c3a8b8}
+body.sonia-os-colors th{background:#eee4e9;color:#503a49}
+body.sonia-os-colors td{color:var(--os-ink)}
+body.sonia-os-colors tr:hover td{background:#f6eef2}
+body.sonia-os-colors .pill{background:#f2e9ed;color:#63344f;border-color:#bca0b0}
+body.sonia-os-colors .universe-card{background:var(--os-card)!important;color:var(--os-ink)!important;border-color:var(--os-line)!important}
+body.sonia-os-colors .universe-card :is(b,span){color:var(--os-prune)!important}
+body.sonia-os-colors .universe-card small{color:var(--os-muted)!important}
+body.sonia-os-colors .universe-card:hover{background:#f2e9ed!important}
+body.sonia-os-colors dialog::backdrop{background:#190c18b3}
+body.sonia-os-colors :is(button,a,input,select,textarea,summary):focus-visible{outline-color:var(--os-accent)}
+/* SONIA navigation, including the shared ELOAH menu on this page only. */
+body.sonia-os-colors :is(.side,.eloah-global-nav){--gold:var(--os-champagne);--white:#f6e9f0;--muted:#dbc5d4;background:linear-gradient(165deg,#190c18,#301329)!important;color:#f6e9f0;border-color:#614052!important;box-shadow:none}
+body.sonia-os-colors .side :is(.brand,.nav-group h3){color:var(--os-champagne)}
+body.sonia-os-colors .side :is(a,.sub,.muted){color:#e2cddd}
+body.sonia-os-colors .side .nav button{background:transparent;color:#f4e5ef}
+body.sonia-os-colors .side .nav button:is(:hover,:focus-visible){background:#4c2940;color:#fff3e7}
+body.sonia-os-colors .side .nav button.active{background:#ead4b4;color:#301329}
+body.sonia-os-colors .eloah-global-nav :is(a,summary){color:#f4e5ef}
+body.sonia-os-colors .eloah-global-nav .eloah-wordmark{color:var(--os-champagne);background:transparent}
+body.sonia-os-colors .eloah-global-nav :is(.eloah-menu,.eloah-menu-links){background:#261122;color:#f4e5ef;border-color:#725065}
+body.sonia-os-colors .eloah-global-nav :is(a:hover,a[aria-current],summary:hover,.eloah-nav-analytics[open]>summary){background:#50283e;color:#fff3e7}
+body.sonia-os-colors .eloah-global-nav .eloah-menu>summary{background:#3f2239;color:#f4e5ef;border-color:#80546e}
+body.sonia-os-colors .eloah-global-nav .eloah-menu summary{background:#3f2239;color:#f4e5ef;border-color:#80546e}
+body.sonia-os-colors .eloah-global-nav .eloah-nav-analytics-entries{border-color:#80546e}
+body.sonia-os-colors #eloah-tools-trigger{background:#311b2d!important;color:#f4e5ef!important;border-color:#80546e!important}
+body.sonia-os-colors :is(.side,.eloah-global-nav) :is(button,a,summary):focus-visible{outline-color:var(--os-champagne)}
+/* Private login: only appearance changes; the existing gate is kept intact. */
+body.sonia-os-colors #authScreen{background:radial-gradient(ellipse at 78% 12%,#48213c,transparent 55%),#190c18}
+body.sonia-os-colors #authScreen .panel{background:var(--os-card);color:var(--os-ink);border-color:#b193a3;box-shadow:0 24px 65px #10071166}
+body.sonia-os-colors #authScreen .brand{color:var(--os-prune)}
+body.sonia-os-colors #authScreen a{color:var(--os-accent)}
