@@ -1567,6 +1567,20 @@ button.onclick=()=>{panel.hidden=false;panel.scrollIntoView({behavior:'smooth',b
 $('ytClose').onclick=()=>{stop();panel.hidden=true;button.focus()};
 document.querySelectorAll('audio').forEach(a=>a.addEventListener('play',stop));
 $('ytSave').onclick=()=>{const id=idFrom($('ytUrl').value.trim());if(!id)return status('Colle le lien d’une vidéo YouTube valide.');if(items.some(x=>x.id===id))return status('Ce lien est déjà dans ta sélection.');if(items.length>=500)return status('Sélection limitée à 500 liens.');items.push({id,title:$('ytTitle').value.trim()||'YouTube · '+id});const saved=persist();render();if(saved)status('Lien enregistré sur cet appareil.');};
+
+/* ELOAH external converter shortcut */
+const externalTools=document.createElement('div');externalTools.className='music2040-actions';
+const externalLink=document.createElement('a');externalLink.className='action secondary';externalLink.textContent='Convertisseur MP3 ↗';externalLink.href='https://yout.com/?lang=fr';externalLink.target='_blank';externalLink.rel='noopener noreferrer';externalLink.referrerPolicy='no-referrer';
+const importDownloaded=document.createElement('button');importDownloaded.type='button';importDownloaded.className='action secondary';importDownloaded.textContent='Importer le MP3 téléchargé';importDownloaded.onclick=()=>document.getElementById('files')?.click();
+externalTools.append(externalLink,importDownloaded);
+const externalHelp=document.createElement('p');externalHelp.className='muted';externalHelp.textContent='Ouvre Yout.com, choisis MP3, puis importe le fichier ici. Si tu renseignes une vidéo ci-dessus, son lien sera transmis à Yout uniquement au clic. Service externe avec ses propres limites ; pour les contenus dont le téléchargement est autorisé.';
+$('ytStatus').after(externalTools,externalHelp);
+function refreshExternalLink(){const id=idFrom($('ytUrl').value.trim());externalLink.href=id?'https://yout.com/https://www.youtube.com/watch?v='+id:'https://yout.com/?lang=fr'}
+$('ytUrl').addEventListener('input',refreshExternalLink);
+externalLink.addEventListener('click',refreshExternalLink);
+const quickExternal=externalLink.cloneNode(true);quickExternal.id='ytExternalConverter';quickExternal.href='https://yout.com/?lang=fr';quickExternal.addEventListener('click',()=>{const id=idFrom($('ytUrl').value.trim());quickExternal.href=id?'https://yout.com/https://www.youtube.com/watch?v='+id:'https://yout.com/?lang=fr'});
+document.querySelector('.music2040-actions').append(quickExternal);
+
 let service='';
 $('ytConnect').onclick=()=>{try{const u=new URL($('ytService').value.trim());if(u.protocol!=='https:'||u.username||u.password||u.search||u.hash)throw Error();if(!$('ytToken').value.trim())throw Error();service=u.href.replace(/\/$/,'');serviceToken=$('ytToken').value.trim();$('ytToken').value='';$('ytConvert').disabled=false;$('ytServiceStatus').textContent='Adresse configurée. La connexion sera vérifiée lors de la conversion.'}catch(e){service='';serviceToken='';$('ytConvert').disabled=true;$('ytServiceStatus').textContent='Renseigne une adresse HTTPS et la clé de ton service privé.'}};
 $('ytConvert').onclick=async()=>{
