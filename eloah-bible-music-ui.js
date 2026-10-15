@@ -310,6 +310,20 @@ $("pause").addEventListener("click",pause);
 $("wav").addEventListener("click",exportWav);$("midi").addEventListener("click",exportMidi);
 $("json").addEventListener("click",exportJson);$("png").addEventListener("click",exportPng);
 $("readSpeed").addEventListener("input",()=>{$("speedOutput").textContent=(Number($("readSpeed").value)/100).toLocaleString("fr-FR",{maximumFractionDigits:2})+"×";});
+$("musicLanguage").addEventListener("change",async()=>{
+ if(!chapterDoc){say("Charge un chapitre avant de choisir la source musicale.");return}
+ greekDoc=null;
+ if($("musicLanguage").value==="greek"){
+   if(!chapterDoc.book||B.books.find(x=>x.code===chapterDoc.book)?.testament!=="nouveau"){
+     say("Le Texte Reçu grec concerne le Nouveau Testament : ce passage sera composé à partir du français.");
+   }else{
+     say("Chargement du texte grec pour la partition…");
+     try{greekDoc=await B.fetchGreekChapter(chapterDoc.book,chapterDoc.chapter);}
+     catch(e){say("Texte grec indisponible : "+e.message+". La musique française reste possible.");}
+   }
+ }
+ rebuildMusic();
+});
 ["style","scale","bpm","drums","pad"].forEach(id=>$(id).addEventListener("change",rebuildMusic));
 voices();if("speechSynthesis" in window)window.speechSynthesis.addEventListener?.("voiceschanged",voices);
 window.addEventListener("pagehide",()=>stop({silent:true}));
