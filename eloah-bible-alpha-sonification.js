@@ -32,7 +32,8 @@ function normalizeOptions(options={}){
   drums:options.drums===true,
   barsPerVerse:clamp(Math.round(Number(options.barsPerVerse)||2),1,4),
   greekVerses:options.greekVerses&&typeof options.greekVerses==="object"?options.greekVerses:null,
-  preferGreek:options.preferGreek===true||Boolean(options.greekVerses)
+  preferGreek:options.preferGreek===true||Boolean(options.greekVerses),
+  greekEdition:String(options.greekEdition||"Édition grecque fournie").slice(0,160)
  };
 }
 function profile(original){
@@ -226,7 +227,7 @@ function compose(doc,options={}){
   stats:{bars:beat/4,steps:beat*4,notes:notes.length,drums:drumEvents.length,chords:chords.length,
     bpm:opt.bpm,loopSeconds:Math.round(time*10)/10},
   scripture:{reference:doc.reference,book:doc.book,chapter:doc.chapter,credit:doc.credit,
-    provider:doc.provider,version:doc.version,greekSource:greekCount?"Textus Receptus transmis; vérifier la variante exacte":null,
+    provider:doc.provider,version:doc.version,greekSource:greekCount?opt.greekEdition:null,
     verseCount:scenes.length,greekVerses:greekCount,structureOnlyVerses:missing,
     originalGreekComplete:greekCount===scenes.length,
     disclaimer:missing?"Certains versets n'ont pas de grec attesté dans la source chargée : analyse de lettres grecques désactivée pour eux.":null},
