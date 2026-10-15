@@ -115,6 +115,22 @@ async function fetchChapter(bookCode,chapter,fetchImpl){
   throw Error("Impossible de charger le chapitre (service principal : "+(lastError?.message||"erreur")+" ; alternative : "+error.message+"). Tu peux coller son texte manuellement.");
  }
 }
+async function fetchGreekChapter(bookCode,chapter,fetchImpl){
+ const ref=validateReference(bookCode,chapter);
+ if(ref.book.testament!=="nouveau")throw Error("Le Texte Reçu grec ne couvre que le Nouveau Testament.");
+ const fetcher=fetchImpl||root.fetch?.bind(root);
+ if(typeof fetcher!=="function")throw Error("Connexion biblique indisponible.");
+ const url="https://api.midvash.com/v1/tr/"+encodeURIComponent(ref.book.slug)+"/"+ref.chapter;
+ const controller=typeof AbortController!=="undefined"?new AbortController():null;
+ const timer=controller?setTimeout(()=>controller.abort(),12000):null;
+ try{
+  const response=await fetcher(url,{method:"GET",signal:controller?.signal,headers:{Accept:"application/json"}});
+  if(!response.ok)throw Error("HTTP "+response.status);
+  const raw=await response.json(),verses=normalizeVerses(raw,bookCode,ref.chapter);
+  return {reference:ref.reference,book:bookCode,chapter:ref.chapter,verses,provider:"Midvash · Textus Receptus",
+   version:"tr",credit:raw?.meta?.copyright||"Textus Receptus · grec biblique, domaine public",url,complete:true};
+ }finally{if(timer)clearTimeout(timer)}
+}
 function fromManual(text,opts={}){
  const str=String(text||"").trim();
  if(!str)throw Error("Colle un texte biblique.");
@@ -149,20 +165,23 @@ function deriveMusic(doc,options={}){
  const useVerses=doc.verses.slice(0,120);
  for(let i=0;i<useVerses.length;i++){
   const v=useVerses[i];
-  const c=N.compose({input:String(v.number)+" "+v.text.slice(0,900),sourceMode:"text",mode,scale,root:rootMidi,bpm,bars,
+  const greek=options.greekVerses?.[v.number];
+  const useGreek=typeof greek==="string"&&/[\u0370-\u03ff\u1f00-\u1fff]/u.test(greek);
+  const musicInput=useGreek?greek.slice(0,900):String(v.number)+" "+v.text.slice(0,900);
+  const c=N.compose({input:musicInput,sourceMode:useGreek?"greek":"text",mode,scale,root:rootMidi,bpm,bars,
    variation:Math.max(.1,Math.min(.87,Number(options.variation)??.35)),swing:.045,drums,pad,volume});
   const noteEvents=c.notes.map(n=>({...n,beat:n.beat+offset,verse:v.number}));
   const chordEvents=c.chords.map(n=>({...n,beat:n.beat+offset,verse:v.number}));
   const drumEvents=c.drumEvents.map(n=>({...n,beat:n.beat+offset,verse:v.number}));
   allNotes.push(...noteEvents);allChords.push(...chordEvents);allDrums.push(...drumEvents);
-  chapters.push({verse:v.number,text:v.text,beatStart:offset,beats:bars*4,noteCount:c.notes.length,sourceValue:c.source.number,
+  chapters.push({verse:v.number,text:v.text,greekText:useGreek?greek:null,sourceMode:useGreek?"greek":"text",beatStart:offset,beats:bars*4,noteCount:c.notes.length,sourceValue:c.source.number,
    previewNotes:c.notes.slice(0,8).map(x=>x.midi)});
   offset+=bars*4;
  }
  const duration=offset*60/bpm;
  return {
-  version:"BIBLE-MUSIC/1.0.0",scripture:{reference:doc.reference,book:doc.book,chapter:doc.chapter,credit:doc.credit,
-   provider:doc.provider,url:doc.url,complete:doc.complete,verseCount:useVerses.length},
+  version:"BIBLE-MUSIC/1.1.0",scripture:{reference:doc.reference,book:doc.book,chapter:doc.chapter,credit:doc.credit,
+   provider:doc.provider,url:doc.url,complete:doc.complete,verseCount:useVerses.length,greekSource:options.greekVerses?"Textus Receptus · Midvash (si verset disponible)":null},
   config:{...N.settings({input:"BIBLE",sourceMode:"text",mode,scale,root:rootMidi,bpm,bars:8,volume,drums,pad}),volume},
   source:{kind:"bible-text",normalized:doc.reference,input:doc.reference,number:useVerses.length,isopsephy:null,tokens:[]},
   seed:N.fnv1a(doc.reference+":"+useVerses.map(v=>v.text).join("|").slice(0,2000)),
