@@ -56,3 +56,5 @@ html#eloah-prune-lumiere body:is([data-prune-lumiere],.studio-view) .auth-card :
 
 html#eloah-prune-lumiere body[data-prune-lumiere] main :is(details,.summary){background:#FFFCF8!important;color:#302334!important;-webkit-text-fill-color:currentColor!important;border-color:#D8C7CE!important}
 html#eloah-prune-lumiere body[data-prune-lumiere] main details summary{color:#302334!important;-webkit-text-fill-color:currentColor!important}
+
+html#eloah-prune-lumiere body[data-prune-lumiere] #mes-projets{background:#FFFCF8!important;border-color:#D8C7CE!important}
