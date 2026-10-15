@@ -16,5 +16,6 @@ try{const d=JSON.parse(localStorage.getItem(displayKey)||'{}');if(d.focus===true
 $('#focus-toggle').addEventListener('click',saveDisplay);$('#motion-toggle').addEventListener('click',saveDisplay);
 function stopVoice(){if(recognizer)try{recognizer.abort()}catch{}updateVoice(false)}
 window.addEventListener('pagehide',stopVoice);document.addEventListener('visibilitychange',()=>{if(document.hidden)stopVoice()});
+function syncLocalNav(){const target=location.hash==='#assistant-reel'?'#assistant-reel':'#main';for(const a of document.querySelectorAll('.sidebar .navigation a[href^="#"]')){if(a.getAttribute('href')===target)a.setAttribute('aria-current','location');else a.removeAttribute('aria-current')}}window.addEventListener('hashchange',syncLocalNav);syncLocalNav();
 for(const a of document.querySelectorAll('.workspace-sections a'))a.addEventListener('click',()=>{document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:scrollBehavior(),block:'start'})});
 })();
