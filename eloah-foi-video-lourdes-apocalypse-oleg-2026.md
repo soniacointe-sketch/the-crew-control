@@ -171,6 +171,8 @@ Les rapprochements entre Marie, Urðr, les eaux, la boue et la source sont féco
 - [Vatican — Prière à Massabielle, 26 septembre 2026](https://www.vatican.va/content/leo-xiv/fr/prayers/documents/20260926-preghiera-massabielle.html)
 - [Vatican — Homélie du 27 septembre 2026](https://press.vatican.va/content/leo-xiv/fr/homilies/2026/documents/20260927-francia-messa-lourdes.html)
 
+**Contre-enquête sur les 32 frênes :** [LOURDES-003](foi-control.html?file=eloah-foi-lourdes-003-32-frenes-archives-edda.md) établit leur plantation en mars 2015, avec quatre rangées, provenance italienne, puis examine un vers réel de l'Edda associant le Christ au puits d'Urðr. Il faut donc remplacer la mention initiale « non vérifié » par ce résultat documentaire plus récent.
+
 ## VIII — Conclusions et prochaines pistes
 
 **Établi :** deux apparitions rapportées historiquement dans le catholicisme (Lourdes 1858, Champion 1859), incendie de 1871, cantiques authentiques, Edda avec Nornes et puits, nombreuses analogies autour de l'eau, de la pénitence et de l'épreuve.
