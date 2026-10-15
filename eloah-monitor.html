@@ -7,14 +7,16 @@
 <meta name="robots" content="noindex,nofollow">
 <meta name="referrer" content="no-referrer">
 <meta name="description" content="ELOAH Monitor · Tour de contrôle fondatrice, navigation entre univers et vérification des pages publiques.">
-<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; connect-src 'self' https://voytsqyorhoveurnguxn.supabase.co; img-src 'self' data:; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' https://cdn.jsdelivr.net; style-src 'self'; connect-src 'self' https://voytsqyorhoveurnguxn.supabase.co https://api.github.com; img-src 'self' data:; font-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
 <link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="eloah-monitor-control.css?v=2.0.0">
 <link rel="stylesheet" href="eloah-monitor-data.css?v=2.1.0">
-<title>ELOAH Monitor · Tour de contrôle</title>
+<link rel="stylesheet" href="eloah-monitor-audit.css?v=2.2.0">
+<title>ELOAH Monitor 2.2 · Tour de contrôle</title>
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
 <script defer src="eloah-monitor-control.js?v=2.0.0"></script>
 <script defer src="eloah-monitor-data.js?v=2.1.0"></script>
+<script defer src="eloah-monitor-audit.js?v=2.2.0"></script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au tableau de bord</a>
@@ -40,6 +42,7 @@
 <a href="#main" class="nav-link" aria-current="page"><span class="ic" aria-hidden="true">◈</span> Vue d’ensemble</a>
 <a href="#indicateurs-reels" class="nav-link"><span class="ic" aria-hidden="true">↗</span> Indicateurs réels</a>
 <a href="#univers" class="nav-link"><span class="ic" aria-hidden="true">◇</span> Mes univers</a>
+<a href="#audit-securite" class="nav-link"><span class="ic" aria-hidden="true">♢</span> Sécurité & déploiement</a>
 <a href="#controle" class="nav-link"><span class="ic" aria-hidden="true">⌁</span> État des pages</a>
 <a href="#raccourcis" class="nav-link"><span class="ic" aria-hidden="true">▦</span> Mes outils</a>
 <a href="#securite" class="nav-link"><span class="ic" aria-hidden="true">♢</span> Sécurité</a>
@@ -130,10 +133,45 @@
 <section class="panel" style="margin-top:16px"><div class="panel-head"><div><p class="eyebrow">JOURNAL · CETTE SESSION</p><h3>Ce qui a été fait ici</h3></div></div><div id="activity-list" class="activity" aria-live="polite"></div></section>
 </div>
 </section>
+<section class="section" id="audit-securite" aria-labelledby="audit-securite-title">
+<div class="section-heading">
+ <div><p class="eyebrow">SÉCURITÉ & DÉPLOIEMENT · SUIVI TECHNIQUE</p><h2 id="audit-securite-title">Mon centre de vérification</h2>
+ <p>Statuts issus des workflows publics GitHub ; conseils de sécurisation Supabase à appliquer séparément.</p></div>
+ <button class="btn btn-sm" type="button" id="monitor-audit-refresh">↻ Rafraîchir les contrôles</button>
+</div>
+<p class="timestamp" id="audit-last-check" aria-live="polite">Aucun contrôle GitHub consulté.</p>
+<div class="monitor-audit-layout" style="margin-top:14px">
+ <article class="monitor-audit-card">
+ <div class="monitor-audit-head"><div><h3>Contrôles de sécurité Monitor</h3><p>Syntaxe des scripts, séparation des données et refus des requêtes non autorisées.</p></div><span class="monitor-audit-state" id="audit-monitor-state" data-kind="unknown">Non vérifié</span></div>
+ <div class="monitor-audit-meta" id="audit-monitor-meta">Le résultat est chargé après vérification de la session fondatrice.</div>
+ <div class="monitor-audit-refs"><a id="audit-monitor-details" href="https://github.com/soniacointe-sketch/the-crew-control/actions/workflows/eloah-monitor-security.yml" rel="noopener noreferrer" target="_blank">Consulter le test sur GitHub ↗</a></div>
+ </article>
+ <article class="monitor-audit-card">
+ <div class="monitor-audit-head"><div><h3>Publication du site</h3><p>Dernière exécution de déploiement GitHub Pages, sans déduire le bon fonctionnement des comptes.</p></div><span class="monitor-audit-state" id="audit-pages-state" data-kind="unknown">Non vérifié</span></div>
+ <div class="monitor-audit-meta" id="audit-pages-meta">Le résultat est chargé après vérification de la session fondatrice.</div>
+ <div class="monitor-audit-refs"><a id="audit-pages-details" href="https://github.com/soniacointe-sketch/the-crew-control/actions/workflows/pages.yml" rel="noopener noreferrer" target="_blank">Consulter le déploiement ↗</a></div>
+ </article>
+</div>
+<div class="section-heading" style="margin-top:23px">
+<div><h2 style="font-size:22px">Sécurité Supabase · actions à confirmer</h2><p>Vérifications identifiées lors de l’audit ; ce panneau ne modifie pas les paramètres de production.</p></div>
+</div>
+<div class="monitor-security-checklist">
+ <article class="monitor-security-check"><small>01 · AUTHENTIFICATION</small><h3>Protection contre les mots de passe compromis</h3>
+ <p>Vérifie l’activation dans Supabase Auth. Elle n’était pas activée lors du dernier audit ; le tableau de bord ne vérifie pas son état en temps réel.</p>
+ <a href="https://supabase.com/docs/guides/auth/password-security#password-strength-and-leaked-password-protection" target="_blank" rel="noopener noreferrer">Documentation officielle ↗</a></article>
+ <article class="monitor-security-check"><small>02 · BASE DE DONNÉES</small><h3>Extension SQL à examiner</h3>
+ <p>Une extension est signalée dans le schéma public. Elle n’est pas déplaçable directement : aucun déplacement automatique ni révocation risquée.</p>
+ <a href="https://supabase.com/docs/guides/database/database-linter?lint=0014_extension_in_public" target="_blank" rel="noopener noreferrer">Comprendre l’avertissement ↗</a></article>
+ <article class="monitor-security-check"><small>03 · AUTORISATIONS</small><h3>Fonctions privilégiées et règles RLS</h3>
+ <p>Des fonctions authentifiées sont signalées et leurs contrôles d’identité ont été examinés. Les tables sans politique RLS restent fermées par défaut ; ne change pas les droits sans tests métier.</p>
+ <a href="https://supabase.com/docs/guides/api/securing-your-api" target="_blank" rel="noopener noreferrer">Revoir les bonnes pratiques ↗</a></article>
+</div>
+<p class="monitor-security-disclaimer"><strong>Important :</strong> un test GitHub réussi ne prouve pas la sécurité complète du site ou de ses comptes. Une protection mot de passe marquée « à vérifier » n’est pas déclarée corrigée ici. Aucun accès n’est ouvert aux clientes depuis Monitor.</p>
+</section>
 <section class="section" id="raccourcis"><div class="section-heading"><div><p class="eyebrow">03 · MES COMMANDES</p><h2>Mes outils de travail</h2><p>Ouvre directement le bon écran, sans passer par plusieurs menus.</p></div></div><div class="quick-grid" id="quick-grid"></div></section>
 <section class="section"><div class="section-heading"><div><p class="eyebrow">04 · ÉTAT EXTERNE</p><h2>Dernier contrôle publié</h2><p>Rapport historique existant des sites ELOAH, The Crew et Power & Glam.</p></div></div><div class="panel" id="external-checks">Lecture du dernier rapport…</div></section>
 <div class="notice"><strong>Mode de fonctionnement :</strong> centre de navigation, contrôle HTTP et statistiques réelles agrégées réservées à la fondatrice. Il ne lit aucun dossier client, ne lance aucune commande sur les sites et ne surveille rien en continu. Les détails restent dans les outils autorisés.</div>
-<footer class="footer"><span>ELOAH Monitor 2.0 · Tour de contrôle fondatrice<br>Navigation publique + statistiques fondatrice agrégées · Comptes clients séparés.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
+<footer class="footer"><span>ELOAH Monitor 2.2 · Tour de contrôle fondatrice<br>Navigation publique + statistiques fondatrice agrégées · Comptes clients séparés.</span><span><a href="mes-univers.html">Accueil ELOAH</a> · <a href="eloah-monitor-lab.html">Simulateur conservé</a></span></footer>
 </main>
 </div>
 </div>
