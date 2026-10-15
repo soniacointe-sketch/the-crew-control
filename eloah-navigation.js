@@ -267,3 +267,59 @@ if(page==='mes-univers.html'){
  const link=document.createElement('link');link.id='sonia-os-palette-20261015';link.rel='stylesheet';link.href='sonia-os-colors.css?v=20261015';
  document.head.append(link);
 })();
+/* SONIA OS: one native menu. Move existing links, never copy business data or change auth. */
+(()=>{
+ 'use strict';
+ if(location.pathname.split('/').pop()!=='sonia-os.html'||document.getElementById('sonia-os-menu-sections'))return;
+ const side=document.querySelector('#app > .side'),local=document.getElementById('nav');
+ const global=document.querySelector('body > .eloah-global-nav'),links=global?.querySelector('.eloah-menu-links');
+ if(!side||!local||!side.contains(local)||!global||!links)return;
+ const style=document.createElement('style');style.id='sonia-os-single-menu-style';
+ style.textContent=`
+ body.eloah-screen.sonia-os-one-menu{padding-left:0!important}
+ body.sonia-os-one-menu #app.layout{grid-template-columns:250px minmax(0,1fr)}
+ body.sonia-os-one-menu #app>.side{min-width:0;padding:20px 14px}
+ body.sonia-os-one-menu .os-menu-access{display:grid;gap:8px;margin:16px 0}
+ body.sonia-os-one-menu .os-menu-access>a,body.sonia-os-one-menu [data-sonia-tools]{display:flex;align-items:center;min-height:44px;width:100%;padding:10px 12px;margin:0;border:1px solid #76546a;border-radius:8px;background:transparent;color:#f4e5ef;font:13px/1.4 system-ui;text-decoration:none;cursor:pointer;text-align:left}
+ body.sonia-os-one-menu .os-menu-access>a:hover,body.sonia-os-one-menu [data-sonia-tools]:hover{background:#4c2940}
+ body.sonia-os-one-menu #sonia-os-menu-sections,body.sonia-os-one-menu #sonia-os-other-spaces{min-width:0;margin:0;padding:0;border:0;background:transparent}
+ body.sonia-os-one-menu #sonia-os-menu-sections>summary,body.sonia-os-one-menu #sonia-os-other-spaces>summary{padding:12px;min-height:46px;color:#ead4b4;font:600 13px/1.5 system-ui;cursor:pointer;overflow-wrap:anywhere}
+ body.sonia-os-one-menu #sonia-os-menu-sections>summary{display:none}
+ body.sonia-os-one-menu #sonia-os-menu-current{display:block;font:11px/1.5 system-ui;color:#dbc5d4;font-weight:400;margin-top:3px}
+ body.sonia-os-one-menu #sonia-os-other-spaces{border-top:1px solid #614052;margin-top:12px;padding-top:6px}
+ body.sonia-os-one-menu #sonia-os-other-spaces .eloah-menu-links{position:static!important;width:100%!important;max-height:none!important;overflow:visible!important;background:transparent!important;border:0!important;box-shadow:none!important;padding:0 4px!important;white-space:normal}
+ body.sonia-os-one-menu #sonia-os-other-spaces .eloah-menu-links a{display:flex;align-items:center;min-height:44px;padding:10px 12px;text-decoration:none;color:#f4e5ef;border-radius:8px;font:13px/1.4 system-ui}
+ body.sonia-os-one-menu #sonia-os-other-spaces .eloah-menu-links a:hover{background:#4c2940;color:#fff3e7}
+ body.sonia-os-one-menu #sonia-os-other-spaces .eloah-nav-analytics>summary{background:transparent;color:#ead4b4;border:0;min-height:44px}
+ body.sonia-os-one-menu .side :is(button,a,summary):focus-visible{outline:2px solid #ead4b4;outline-offset:2px}
+ @media(min-width:901px){body.sonia-os-one-menu #app>.side{position:sticky;top:0;height:100dvh;overflow:auto}}
+ @media(max-width:900px){
+  body.sonia-os-one-menu #app.layout{grid-template-columns:minmax(0,1fr)}
+  body.sonia-os-one-menu #app>.side{height:auto;position:static;padding:14px}
+  body.sonia-os-one-menu .os-menu-access{grid-template-columns:repeat(2,minmax(0,1fr));margin:12px 0;gap:8px}
+  body.sonia-os-one-menu #sonia-os-menu-sections>summary{display:list-item;border:1px solid #76546a;border-radius:8px;list-style-position:inside}
+  body.sonia-os-one-menu #sonia-os-menu-sections>.nav{padding-top:10px}
+  body.sonia-os-one-menu #sonia-os-other-spaces{margin-top:8px}
+ }
+ `;
+ const sections=document.createElement('details');sections.id='sonia-os-menu-sections';
+ const summary=document.createElement('summary');summary.append(document.createTextNode('Menu SONIA OS'));
+ const current=document.createElement('span');current.id='sonia-os-menu-current';summary.append(current);
+ local.before(sections);sections.append(summary,local);local.setAttribute('aria-label','Rubriques SONIA OS');
+ const others=document.createElement('details');others.id='sonia-os-other-spaces';
+ const otherSummary=document.createElement('summary');otherSummary.textContent='Autres espaces ELOAH';
+ others.append(otherSummary,links);sections.after(others);
+ const access=document.createElement('div');access.className='os-menu-access';
+ const home=document.createElement('a');home.href='mes-univers.html';home.textContent='← Accueil ELOAH';
+ let tools=links.querySelector('#eloah-tools-trigger');
+ if(!tools){tools=document.createElement('button');tools.type='button';tools.textContent='⌕ Rechercher un outil';tools.addEventListener('click',()=>{if(window.ELOAHPlatform)window.ELOAHPlatform.openTools();else{others.open=true;otherSummary.focus()}})}
+ tools.dataset.soniaTools='1';tools.setAttribute('aria-haspopup','dialog');access.append(home,tools);sections.before(access);
+ document.head.append(style);document.body.classList.add('sonia-os-one-menu');global.remove();
+ const mobile=matchMedia('(max-width:900px)');
+ function sync(){sections.open=!mobile.matches}
+ function activeLabel(){const selected=local.querySelector('[data-go].active');current.textContent=selected?.textContent||'Choisir une rubrique';local.querySelectorAll('[data-go]').forEach(button=>{if(button===selected)button.setAttribute('aria-current','page');else button.removeAttribute('aria-current')})}
+ sync();activeLabel();mobile.addEventListener('change',sync);
+ new MutationObserver(activeLabel).observe(local,{childList:true,subtree:true});
+ local.addEventListener('click',event=>{if(!event.target.closest('[data-go]')||!mobile.matches)return;sections.open=false;const heading=document.getElementById('pageTitle');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}});
+ sections.addEventListener('keydown',event=>{if(event.key==='Escape'&&mobile.matches&&sections.open){event.preventDefault();sections.open=false;summary.focus()}});
+})();
