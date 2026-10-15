@@ -211,7 +211,7 @@ function audit(){
  push("Format chapitre normalisé",normalizeVerses({data:{verses:[{number:1,text:"Début"},{number:2,text:"Suite"}]}},"Gen",1).length===2);
  return {passed:tests.filter(t=>t.pass).length,total:tests.length,checks:tests};
 }
-const api=Object.freeze({version:"BIBLE-MUSIC/1.0.0",books,specials:SPECIAL,validateReference,normalizeVerses,fetchChapter,fromManual,selectRange,deriveMusic,audit,builtIn:BIBLICAL_SAMPLES});
+const api=Object.freeze({version:"BIBLE-MUSIC/1.1.0",books,specials:SPECIAL,validateReference,normalizeVerses,fetchChapter,fetchGreekChapter,fromManual,selectRange,deriveMusic,audit,builtIn:BIBLICAL_SAMPLES});
 if(typeof module!=="undefined"&&module.exports)module.exports=api;
 if(root)root.ELOAH_BIBLE_MUSIC=api;
 })(typeof window!=="undefined"?window:(typeof globalThis!=="undefined"?globalThis:null));
