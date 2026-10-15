@@ -1236,7 +1236,9 @@ $('dj2040auto').onclick=async()=>{
  cancelMixFade();mixLoopEnabled=false;syncMixButtons();
  djCancelAnimation();djPreviewMode=false;
  djAudio.volume=0;
+ const safetyAtStart=djSafetySequence;
  try{if(djAudio.paused)await djAudio.play()}catch(e){djMessage('Lecture B impossible.');djSync();return;}
+ if(safetyAtStart!==djSafetySequence){djAudio.pause();djMessage('Transition annulée par une commande de sécurité.');return;}
  djTransitioning=true;$('dj2040fader').value='0';
  const master=djMaster(),gain=djGain(),started=performance.now();
  djMessage('Transition A → B en cours…');
