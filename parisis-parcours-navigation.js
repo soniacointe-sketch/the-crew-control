@@ -53,7 +53,7 @@ else{add(next,make("span","","FIN DES ÉTAPES ACTUELLES →"));next.appendChild(
 var tools=add(bar,make("nav","pe-reader-tools"));tools.setAttribute("aria-label","Autres outils de ce dossier");
 var full=add(tools,make("a","","Toutes les étapes de cette enquête ↗"));full.href=safe(c.trail);
 var home=add(tools,make("a","","Retour à l'accueil guidé ↗"));home.href="eloah-parisis.html#peHomeGuide";
-var net=add(tools,make("a","","Correspondances et contre-tests ↗"));net.href=safe(c.network);
+var net=add(tools,make("a","",c.id==="alpha"?"Explorer les autres jalons ALPHA ↗":"Correspondances et contre-tests ↗"));net.href=safe(c.network);
 }
 fetch("parisis-parcours.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(function(d){if(!d||!Array.isArray(d.cycles))return;data=d;render();window.addEventListener("hashchange",render)}).catch(function(){/* Original chapter remains readable if guide unavailable. */});
 })();
