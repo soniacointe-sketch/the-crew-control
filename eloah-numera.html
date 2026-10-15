@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#120b1d"><meta name="description" content="ELOAH NUMERA — transforme tes nombres, tes mots et les lettres grecques en musique originale. Écoute, modifie et exporte en WAV ou MIDI.">
+<title>ELOAH NUMERA · Le studio de création par les chiffres</title>
+<style>
+:root{color-scheme:dark;--bg:#0c0813;--panel:#1a1224;--panel2:#231a2e;--cream:#fff4e8;--muted:#c5b5c8;--border:#604661;--champagne:#f3d2a2;--magenta:#df6cb4;--rose:#ad427e}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--cream);font:14px/1.55 Inter,system-ui,-apple-system,"Segoe UI",sans-serif}
+button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+a{color:var(--champagne);text-underline-offset:3px}button:focus-visible,input:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--champagne);outline-offset:3px}
+.shell{max-width:1600px;margin:auto;padding:0 clamp(15px,2.7vw,38px)}
+.topbar{border-bottom:1px solid #513653;background:rgba(13,8,21,.94);position:relative;z-index:3}
+.topbar .shell{display:flex;justify-content:space-between;gap:18px;align-items:center;flex-wrap:wrap;padding-top:15px;padding-bottom:15px}
+.logo{font:28px Georgia,serif;letter-spacing:.06em;color:white;text-decoration:none}.logo span{color:var(--champagne)}.topnav{display:flex;flex-wrap:wrap;gap:17px;font-size:12px}.topnav a{text-decoration:none;color:#dcccd8}.topnav a[aria-current]{color:var(--champagne);font-weight:800}
+.intro{padding:clamp(28px,4vw,58px) 0 32px;background:radial-gradient(ellipse at 81% 20%,#54214d70 0,transparent 48%),radial-gradient(ellipse at 40% 0%,#39244350,transparent 60%)}
+.overline{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--champagne);font-weight:850}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(40px,5.5vw,82px);line-height:1.06;letter-spacing:-.035em;margin:12px 0 18px}h1 em{font-style:normal;color:var(--champagne)}
+.intro p{font-size:clamp(14px,1.5vw,18px);color:#e6d8df;max-width:860px}
+.intro .tagrow{display:flex;flex-wrap:wrap;gap:7px;margin-top:19px}.intro .tagrow span{padding:7px 11px;border:1px solid #70516b;border-radius:99px;color:#e8d1de;font-size:11px;background:#2c173a}
+.main{display:grid;grid-template-columns:minmax(270px,325px) minmax(0,1fr) minmax(250px,320px);gap:14px;align-items:start;padding-top:15px;padding-bottom:55px}
+.panel{background:var(--panel);border:1px solid #553b5b;border-radius:15px;min-width:0;overflow:hidden}
+.panel-inner{padding:clamp(17px,2.2vw,24px)}
+.panel h2{font-size:25px;margin:2px 0 12px}.panel h3{font-size:21px;margin:16px 0 8px}.fine{color:var(--muted);font-size:12px;line-height:1.65}
+label{display:block;color:#e9d5e1;font-size:12px;font-weight:750;margin:11px 0 4px}
+label strong{color:var(--champagne)}
+input[type=text],input[type=number],select{display:block;width:100%;min-height:42px;background:#110e1c;border:1px solid #775475;color:var(--cream);padding:11px 12px;border-radius:8px;outline-offset:3px}
+input[type=range]{accent-color:#e6a4cb;width:100%;cursor:pointer}
+.preset{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 17px}
+.preset button{padding:8px 10px;border-radius:7px;border:1px solid #76516e;color:#f8d9de;background:#382039;font-weight:800;font-size:11px}
+.preset button:hover{background:#68375b}
+.smallgrid{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.setting{margin-top:15px}
+.setting-head{display:flex;justify-content:space-between;gap:6px;align-items:center}
+.setting-head label{margin:0}.setting-head output{color:var(--champagne);font:17px Georgia,serif}
+.settings-checks{display:flex;gap:14px;flex-wrap:wrap;margin:19px 0}
+.settings-checks label{display:inline-flex;align-items:center;gap:7px;margin:0;cursor:pointer}
+.settings-checks input{accent-color:#e4a4d0}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-align:center;background:#38253b;border:1px solid #916b8b;border-radius:9px;padding:11px 15px;color:#fceee9;font-weight:800;font-size:12px;min-height:42px}
+.btn:hover{background:#5c355a}.btn.primary{background:var(--champagne);border-color:var(--champagne);color:#251522}
+.btn.primary:hover{background:#ffe2bd}.btn.magenta{background:#a83d82;border-color:#b65d9c;color:white}
+.btn:disabled{cursor:not-allowed}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}
+.actions .btn{flex:1}
+.canvaswrap{position:relative;background:radial-gradient(ellipse at 50% 40%,#49204785,#180e2b 58%,#120b1d 90%);aspect-ratio:16/9;min-height:250px;overflow:hidden;border-bottom:1px solid #513857}
+.canvaswrap canvas{width:100%;height:100%;display:block}
+.stage-copy{position:absolute;inset:auto 0 16px;text-align:center;pointer-events:none}
+.stage-copy .word{font:clamp(23px,3.5vw,49px) Georgia,serif;color:#ffead2;text-shadow:0 4px 24px #0c0716}
+.stage-copy .desc{font-size:11px;color:#e2c4ce}
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:13px 0}
+.kpi{background:#251b31;border:1px solid #4d3654;border-radius:9px;padding:11px}
+.kpi strong{display:block;color:var(--champagne);font:clamp(21px,2.8vw,32px) Georgia,serif}
+.kpi small{color:#cdb7d0;font-size:10px}
+.progress{width:100%;height:5px;background:#47334e;border-radius:99px;overflow:hidden;margin:15px 0}
+.progress span{display:block;height:100%;width:0;background:linear-gradient(90deg,#edc397,#dd69b4);transition:width .12s linear}
+.status{margin:12px 0;background:#271b32;border-left:3px solid var(--champagne);padding:11px 14px;color:#f0d8de;font-size:12px;min-height:43px}
+.legend{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin:13px 0;color:#cfb7c8;font-size:11px}
+.piano-grid{display:grid;grid-template-columns:repeat(16,minmax(0,1fr));gap:4px}
+.step{min-width:0;border:1px solid #6b4974;background:#30223f;color:#f7dfe3;border-radius:4px;height:49px;display:flex;align-items:center;justify-content:center;position:relative;padding:0;font-size:9px}
+.step.active{background:linear-gradient(180deg,#b75497,#642957);color:white}
+.step.rest{opacity:.35}
+.step[data-beat="0"]{border-left:2px solid var(--champagne)}
+.step.playing{outline:2px solid #f1ca8a;outline-offset:1px}
+.step:focus-visible{outline:3px solid var(--champagne)}
+.step small{display:block;font-size:9px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.step .stepbar{position:absolute;bottom:0;left:0;right:0;height:3px;background:#eac991}
+.timeline-scroll{max-height:250px;overflow:auto}
+.outcards{display:grid;gap:8px}
+.outcard{display:flex;justify-content:space-between;gap:10px;align-items:center;padding:13px;background:#251b32;border-radius:10px;border:1px solid #513657}
+.outcard strong{font-size:13px;color:#f8e4dc}.outcard small{display:block;color:#beaac3;font-size:11px}
+.outcard button{flex-shrink:0}
+.readout{display:grid;grid-template-columns:1fr auto;gap:8px;border-bottom:1px solid #584258;padding:9px 0;font-size:12px}
+.readout b{color:var(--champagne);font-family:monospace;text-align:right;max-width:160px;overflow-wrap:anywhere}
+.codebox{word-break:break-word;color:#e3cddd;background:#100d19;border:1px solid #5d4164;padding:14px;border-radius:8px;font:12px/1.75 ui-monospace,monospace;max-height:235px;overflow:auto}
+.output-foot{color:#c4b2bd;font-size:11px}
+footer{border-top:1px solid #463047;color:#cab4c1;padding:22px 0 44px;font-size:12px}
+footer a{color:var(--champagne)}
+@media(max-width:1250px){.main{grid-template-columns:minmax(285px,.7fr) minmax(0,1.3fr)}.right-panel{grid-column:1/-1}.right-panel .outcards{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:860px){.main{grid-template-columns:1fr}.right-panel{grid-column:auto}.right-panel .outcards{grid-template-columns:1fr}.canvaswrap{aspect-ratio:16/9}.kpis{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.topnav{gap:10px;font-size:11px}.intro{padding-top:25px}h1{font-size:48px}.piano-grid{gap:2px}.step{height:36px;font-size:8px;border-radius:3px}.step small{font-size:8px}.panel-inner{padding:14px}}
+@media(prefers-reduced-motion:reduce){.progress span{transition:none}html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="topbar"><div class="shell"><a class="logo" href="mes-univers.html">ELOAH <span>✦ NUMERA</span></a><nav class="topnav" aria-label="Navigation ELOAH"><a href="mes-univers.html">Accueil</a><a href="eloah-music.html">ELOAH Music</a><a href="parisis-alpha-marcus-vivant.html">PARISIS ALPHA</a><a aria-current="page" href="eloah-numera.html">Studio NUMERA</a></nav></div></header>
+<section class="intro"><div class="shell">
+<div class="overline">ELOAH 2040 · LABORATOIRE DE CRÉATION NUMÉRIQUE</div>
+<h1>Les chiffres ont <em>leur musique.</em></h1>
+<p>Un nombre, un mot, une lettre grecque. NUMERA en fait un motif musical original, puis une œuvre sonore que tu peux écouter, modifier et exporter. Ici, tu crées : tu ne cherches pas un prétendu code cosmique.</p>
+<div class="tagrow"><span>♫ SYNTHÈSE AUDIO RÉELLE</span><span>ΑΩ · GREC &amp; ISOPSÉPHIE</span><span>16 À 128 PAS</span><span>WAV + MIDI + PROJET</span><span>VISUEL RÉACTIF</span></div>
+</div></section>
+<main class="shell main">
+ <section class="panel" aria-label="Réglages et méthode de création">
+  <div class="panel-inner">
+   <div class="overline">01 / TA MATIÈRE PREMIÈRE</div><h2>Donne une valeur.</h2>
+   <label for="source">Chiffre, mot ou texte court</label><input type="text" id="source" value="888" maxlength="1200" spellcheck="false" placeholder="888, ΑΛΗΘΕΙΑ, ELOAH…">
+   <div class="preset" id="presets" aria-label="Choisir un point de départ">
+    <button data-preset="888" type="button">888</button><button data-preset="801" type="button">801</button><button data-preset="64" type="button">64</button><button data-preset="ΑΛΗΘΕΙΑ" type="button">ΑΛΗΘΕΙΑ</button><button data-preset="ΙΗΣΟΥΣ" type="button">ΙΗΣΟΥΣ</button><button data-preset="ELOAH" type="button">ELOAH</button>
+   </div>
+   <label for="sourceMode">Comment interpréter l’entrée</label>
+   <select id="sourceMode"><option value="auto">Détection automatique</option><option value="number">Suite de chiffres</option><option value="greek">Lettres grecques</option><option value="text">Mot / alphabet latin</option></select>
+   <div class="overline" style="margin-top:27px">02 / TON IDENTITÉ SONORE</div>
+   <div class="smallgrid">
+    <div><label for="style">Univers</label><select id="style"><option value="electro">Électro</option><option value="ambient">Ambient</option><option value="cinematic">Cinématique</option><option value="mystic">Mystique</option></select></div>
+    <div><label for="scale">Gamme</label><select id="scale"><option value="minor">Mineure</option><option value="major">Majeure</option><option value="pentatonic">Pentatonique</option><option value="dorian">Dorienne</option><option value="phrygian">Phrygienne</option></select></div>
+    <div><label for="root">Note fondamentale</label><select id="root"><option value="48">Do 3</option><option value="50">Ré 3</option><option value="53">Fa 3</option><option value="55" selected>Sol 3</option><option value="57">La 3</option><option value="60">Do 4</option></select></div>
+    <div><label for="bars">Longueur</label><select id="bars"><option value="1">1 mesure</option><option value="2">2 mesures</option><option value="4" selected>4 mesures</option><option value="8">8 mesures</option></select></div>
+   </div>
+   <div class="setting"><div class="setting-head"><label for="bpm">Tempo</label><output id="bpmOut" for="bpm">110 BPM</output></div><input id="bpm" type="range" min="45" max="220" step="1" value="110"></div>
+   <div class="setting"><div class="setting-head"><label for="variation">Variation mélodique</label><output id="variationOut" for="variation">42 %</output></div><input id="variation" type="range" min="0" max="100" step="1" value="42"></div>
+   <div class="setting"><div class="setting-head"><label for="swing">Swing</label><output id="swingOut" for="swing">9 %</output></div><input id="swing" type="range" min="0" max="44" step="1" value="9"></div>
+   <div class="setting"><div class="setting-head"><label for="volume">Volume</label><output id="volumeOut" for="volume">65 %</output></div><input id="volume" type="range" min="5" max="100" value="65"></div>
+   <div class="settings-checks"><label><input type="checkbox" id="drums" checked> Batterie</label><label><input type="checkbox" id="pad" checked> Nappes / accords</label><label><input type="checkbox" id="loop"> Boucle</label></div>
+   <button class="btn primary" id="generate" type="button" style="width:100%">✦ Générer une nouvelle composition</button>
+   <p class="fine">La même entrée et les mêmes réglages reproduisent la même composition. Change une valeur pour obtenir une nouvelle variation.</p>
+  </div>
+ </section>
+ <section class="panel" aria-label="Lecteur et partition NUMERA">
+  <div class="canvaswrap"><canvas id="art" aria-label="Visualisation graphique du motif musical généré" role="img"></canvas><div class="stage-copy"><div class="word" id="heroValue">888</div><div class="desc" id="heroType">LES CHIFFRES DEVIENNENT DES NOTES</div></div></div>
+  <div class="panel-inner">
+   <div class="overline">03 / ÉCOUTER &amp; SCULPTER</div><h2 id="pieceTitle">Composition 888</h2>
+   <div class="kpis"><div class="kpi"><strong id="kNotes">—</strong><small>Notes</small></div><div class="kpi"><strong id="kTempo">—</strong><small>Tempo</small></div><div class="kpi"><strong id="kDuration">—</strong><small>Durée</small></div><div class="kpi"><strong id="kValue">—</strong><small>Valeur calculée</small></div></div>
+   <div class="progress" aria-label="Progression de la lecture"><span id="progressBar"></span></div>
+   <div class="actions">
+    <button class="btn magenta" type="button" id="play">▶ Écouter ma création</button>
+    <button class="btn" type="button" id="stop">■ Arrêter</button>
+   </div>
+   <div class="status" id="status" role="status" aria-live="polite">Moteur prêt. Active le son en cliquant sur Écouter.</div>
+   <div class="legend"><span>PARTITION ALGORITHMIQUE · 16 PAS PAR MESURE</span><span>Appuie sur une case pour activer / couper une note</span></div>
+   <div class="timeline-scroll"><div class="piano-grid" id="steps" role="group" aria-label="Partition éditable"></div></div>
+   <h3>Les notes de ta gamme</h3><div class="codebox" id="scaleNotes">—</div>
+   <p class="fine" id="explanation">Chacun de ces sons est calculé en local, sans appel à un service d'IA externe.</p>
+  </div>
+ </section>
+ <section class="panel right-panel" aria-label="Exporter et comprendre la composition">
+  <div class="panel-inner">
+   <div class="overline">04 / GARDER TA CRÉATION</div><h2>Une vraie production.</h2>
+   <p class="fine">Les fichiers sont fabriqués à partir du motif que tu viens de créer, sans téléchargement d’une musique déjà existante.</p>
+   <div class="outcards">
+    <div class="outcard"><div><strong>WAV · Audio</strong><small>Un vrai son, prêt à écouter</small></div><button type="button" id="wav" class="btn">↓ WAV</button></div>
+    <div class="outcard"><div><strong>MIDI · Notes</strong><small>À reprendre dans un logiciel musical</small></div><button type="button" id="midi" class="btn">↓ MIDI</button></div>
+    <div class="outcard"><div><strong>Projet · JSON</strong><small>Réglages et partition à conserver</small></div><button type="button" id="project" class="btn">↓ Projet</button></div>
+    <div class="outcard"><div><strong>Visuel · PNG</strong><small>Image de la composition</small></div><button type="button" id="png" class="btn">↓ Image</button></div>
+   </div>
+   <label for="projectFile" class="fine" style="margin-top:17px">Réouvrir un projet NUMERA</label><input type="file" id="projectFile" accept=".json,application/json" style="font-size:11px;max-width:100%">
+   <h3>Le code expliqué</h3>
+   <div class="readout"><span>Type de source</span><b id="codeType">—</b></div>
+   <div class="readout"><span>Somme des valeurs</span><b id="codeValue">—</b></div>
+   <div class="readout"><span>Graine numérique</span><b id="codeSeed">—</b></div>
+   <div class="readout"><span>Structure</span><b id="codeStructure">—</b></div>
+   <div class="readout"><span>Notes utilisées</span><b id="codeNoteCount">—</b></div>
+   <h3>Règle de transformation</h3>
+   <div class="codebox" id="codeDetails">Crée une première composition pour voir comment les chiffres deviennent une gamme et un rythme.</div>
+   <p class="output-foot">Les valeurs grecques sont historiques. Leur traduction en notes, rythmes et couleurs est une invention musicale NUMERA. Ni l’effet sur le corps ni une fréquence cachée de Marcus ne sont revendiqués.</p>
+   <p class="output-foot">Aucun micro, aucune donnée personnelle ELOAH lue. Les fichiers restent dans ton navigateur jusqu’à leur export ; l’audio fonctionne après une interaction, comme l’exigent les navigateurs.</p>
+  </div>
+ </section>
+</main>
+<footer><div class="shell">ELOAH · NUMERA · Atelier sonore original · <a href="mes-univers.html">Retour à mon espace</a> · <a href="eloah-music.html">Ouvrir ELOAH Music</a> · <a href="parisis-alpha-marcus-vivant.html">Origine des recherches ALPHA</a>.</div></footer>
+<script src="eloah-numera-engine.js?v=20261015-a1" defer></script>
+<script src="eloah-numera-audio.js?v=20261015-a2" defer></script>
+<script src="eloah-numera-ui.js?v=20261015-a1" defer></script>
+</body></html>
