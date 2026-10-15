@@ -130,6 +130,29 @@ function makeVerse(v,opts,beatOffset){
    addNote(beat,pitch,.72,.30,"mot-"+a.word+"-"+number);
   }
  }
+ // 9|8|7 : three audible accents anchored to the historical ancient classes.
+ // Even without percussion the listener hears these three cells in the lead.
+ const classBoundaries=[0,9,17],classLengths=[9,8,7];
+ for(let g=0;g<3;g++){
+  const beat=(classBoundaries[g]+.1)*beats/24;
+  addNote(beat,base-12+scale[(classLengths[g]-1)%scale.length],.43,.43,
+    "classe-"+classLengths[g]);
+ }
+ // Three Ogdoades of eight = three airy chimes; this is a CREATIVE analogy,
+ // not a literal transcription of an ancient ritual melody.
+ for(let g=0;g<3;g++){
+  const beat=(g*8+.6)*beats/24;
+  addNote(beat,base+scale[(8+g)%scale.length]+12,.29,.6,"ogdoade-"+(g+1));
+ }
+ // Four emissions 4+4+10+12=30 define four phrase starts.
+ // They are a known Marcosian number structure, used here only as musical timing.
+ const emissions=[4,4,10,12];let emitted=0;
+ for(let i=0;i<emissions.length;i++){
+  const beat=(emitted+.35)*beats/30;
+  addNote(beat,base+scale[(emissions[i]+i)%scale.length]+(i%2?12:0),.33,.45,
+    "emission-"+emissions[i]);
+  emitted+=emissions[i];
+ }
  if(opts.drums){
   // The 24-pulse cycle is articulated in three groups 9|8|7, never claimed to
   // be an ancient historical rhythm.
@@ -143,8 +166,12 @@ function makeVerse(v,opts,beatOffset){
  }
  if(opts.pad){
   const roots=[base-12,base-5,base,base+scale[4%scale.length]].map(x=>clamp(x,32,84));
-  chords.push({type:"chord",beat:beatOffset+.05,duration:Math.max(1,beats-.22),
-   notes:roots,velocity:opts.mode==="electro"?.12:.18,verse:v.number});
+  // 8|8|8 harmonic cells: the accompaniment shifts every third of the verse.
+  for(let g=0;g<3;g++){
+   const local=beats*g/3+.04,notes=roots.map((n,i)=>clamp(n+(g===1&&i>1?2:g===2&&i%2===0?7:0),32,90));
+   chords.push({type:"chord",beat:beatOffset+local,duration:Math.max(.2,beats/3-.1),
+    notes,velocity:opts.mode==="electro"?.11:.15,verse:v.number,tag:"ogdoade-"+(g+1)});
+  }
  }
  const countsByBody=profileData.pairs.map(p=>({
   pair:p.number,body:p.body,letterPair:p.first+" — "+p.last,rankSum:p.complement,
@@ -160,6 +187,14 @@ function makeVerse(v,opts,beatOffset){
   pairs:countsByBody,vowels:profileData.vowels,classes:profileData.groups,
   keyWords:profileData.anchors,
   notesPreview:lead.slice(0,10).map(n=>({midi:n.midi,beat:n.beat,tag:n.tag})),
+  sonicRules:[
+   {numbers:"24 = 12 × 2",operation:"12 paires du corps",audible:"12 positions chromatiques / registres opposés"},
+   {numbers:"9 | 8 | 7",operation:"Trois classes des lettres",audible:"trois accents distincts même sans percussion"},
+   {numbers:"8 | 8 | 8",operation:"Trois Ogdoades",audible:"trois appels de cloches et trois nappes d'accords"},
+   {numbers:"4 | 4 | 10 | 12",operation:"Quatre émissions, total 30",audible:"quatre attaques qui découpent la phrase"},
+   {numbers:"Α Ε Η Ι Ο Υ Ω",operation:"Sept cieux, sept voyelles",audible:"sept positions mélodiques documentées"},
+   {numbers:"64 · 801 · 888",operation:"Valeurs isopséphiques connues",audible:"motif uniquement lorsque la graphie grecque correspondante apparaît"}
+  ],
   explanation:originalGreek?
     "Lettres grecques → douze paires/parties du corps → 12 hauteurs, rangs opposés → registres, voyelles → sept degrés, chiffres 64/801/888 seulement si le mot grec est présent.":
     "Texte grec absent : composition fondée sur la structure ALPHA 12 paires, groupes 9–8–7 et sept degrés ; aucun chiffre isopséphique n'est attribué au français.",
@@ -222,6 +257,10 @@ function audit(){
  verify("Pas de conversion alphabétique française A1Z26",fallback.chapters[0].keyWords.length===0);
  verify("Mode structure 12 paires",fallback.chapters[0].pairs.length===12);
  verify("9|8|7 sert de grille rythmique réelle",compose(verse,{drums:true}).drumEvents.some(x=>x.step>=0));
+ verify("9|8|7 audible sans percussions",fallback.notes.filter(n=>n.tag.startsWith("classe-")).length===3);
+ verify("8|8|8 audible sans percussions",fallback.notes.filter(n=>n.tag.startsWith("ogdoade-")).length===3);
+ verify("4|4|10|12 audible sans percussions",fallback.notes.filter(n=>n.tag.startsWith("emission-")).length===4);
+ verify("Trois cellules harmoniques distinctes",fallback.chords.length===3);
  verify("Partition reproductible",JSON.stringify(score.notes)===JSON.stringify(compose(verse,opts).notes));
  verify("Source grecque différente donne musique différente",JSON.stringify(score.notes)!==JSON.stringify(compose(verse,{greekVerses:{6:"Ἰησοῦς"}}).notes));
  verify("Pas de données externes requises pour une partition locale",Boolean(fallback.notes.length));
