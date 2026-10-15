@@ -8,6 +8,12 @@
 
 > **Avertissement de méthode :** les documents sont des textes religieux, des récits d'apparitions ou des témoignages officiels. Leurs croyances peuvent être analysées historiquement et théologiquement. La proximité de symboles ne suffit pas à démontrer un code volontaire ni à prédire une catastrophe.
 
+## Mise à jour documentaire — découverte des 32 frênes, 15 octobre 2026
+
+La mention « non vérifiée » relative aux **32 frênes** dans le texte initial ci-dessous est désormais **périmée** : l'article *Des frênes à la grotte* de **La Dépêche du Midi (26 mars 2015)** atteste leur plantation en **quatre lignes en mars 2015**. La documentation d'**INCA Architectes** et celle du **diocèse de Pistoia / Fondation Giorgio Tesi** éclairent le réaménagement et le don. Le nombre d'arbres plantés est établi ; une volonté cachée de citer Yggdrasil ne l'est pas, et le **nombre de sujets encore vivants en 2026 reste à contrôler**.
+
+[Voir l'enquête complète LOURDES-003, les archives et l'iconographie des Nornes](foi-control.html?file=eloah-foi-lourdes-003-32-frenes-archives-nornes.md).
+
 ## Résultat A — Il n'existe pas une seule numérotation immuable de l'Ave Maria de Lourdes
 
 Dans la vidéo, l'auteur présente **« à l'heure dernière »**, **« la terre est en fête »** et **« aux grâces nouvelles »** comme des strophes consécutives autour des numéros **10 à 12**, et leur succession est utilisée pour faire un lien entre fin des temps et conversion vers une religion nouvelle.
