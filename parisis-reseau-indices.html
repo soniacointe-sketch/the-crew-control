@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1d1e21">
+<title>Réseau des indices · PARISIS ENGINE · ELOAH</title>
+<meta name="description" content="Explorer les liens entre enquêtes PARISIS ENGINE : sources communes, motifs, contradictions documentaires et contre-vérifications.">
+<style>
+:root{color-scheme:dark;--bg:#1d1e21;--panel:#292b30;--panel2:#222429;--line:#655b4d;--ink:#fff5e5;--muted:#d1c3b0;--gold:#edc987}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.63 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select{font:inherit}button{cursor:pointer}a{color:var(--gold)}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+.wrap{max-width:1520px;margin:auto;padding:0 clamp(14px,3vw,44px) 80px}
+.bar{display:flex;align-items:center;justify-content:space-between;gap:15px;border-bottom:1px solid var(--line);padding:25px 0;flex-wrap:wrap}
+.wordmark{font:normal 29px Georgia,serif;letter-spacing:.08em;color:var(--ink);text-decoration:none}.wordmark em{font-style:normal;color:var(--gold)}.navlinks{display:flex;gap:15px;flex-wrap:wrap}.navlinks a{font-size:12px;color:#ebd9b9}
+.hero{padding:clamp(40px,6vw,85px) 0 34px;max-width:1040px}.eyebrow{color:var(--gold);font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase}.hero h1{font:normal clamp(46px,6.4vw,80px)/1.04 Georgia,serif;letter-spacing:-.038em;margin:18px 0}.hero h1 em{font-style:normal;color:var(--gold)}.hero p{font:clamp(17px,2vw,22px)/1.5 Georgia,serif;color:#e0d1bd;max-width:940px}
+.proofline{border-left:3px solid var(--gold);background:#2b2926;padding:16px 22px;color:#e7d8c2;margin:0 0 29px}.proofline strong{color:var(--gold)}
+.controls{display:flex;gap:14px;align-items:end;flex-wrap:wrap;background:#282a2f;border:1px solid var(--line);padding:18px;margin:0 0 18px}.control{display:flex;flex-direction:column;gap:6px;flex:1 1 175px;min-width:0}.control:first-child{flex:2 1 260px}.control label{font-size:11px;text-transform:uppercase;color:var(--gold);font-weight:800;letter-spacing:.08em}.control input,.control select{width:100%;min-height:44px;border:1px solid #91816b;border-radius:0;background:#fff7e8;color:#19191b;padding:9px 12px}.reset{border:1px solid var(--gold);background:transparent;color:var(--gold);min-height:44px;padding:8px 13px}.reset:hover{background:#3a342b}
+.metrics{font-size:12px;color:var(--muted);margin:7px 0 22px}
+.workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(320px,.8fr);gap:17px;align-items:start}.box{background:var(--panel2);border:1px solid var(--line);min-width:0}.panel-head{display:flex;gap:12px;align-items:baseline;justify-content:space-between;padding:18px 20px;border-bottom:1px solid var(--line);flex-wrap:wrap}.panel-head h2{font:normal 27px/1.2 Georgia,serif;margin:0}.panel-head span{font-size:11px;color:var(--muted)}
+.network-scroller{overflow-x:auto;overscroll-behavior-x:contain;padding:12px 6px;background:radial-gradient(circle at 50% 40%,#38332d 0%,#222429 70%)}.network-svg{display:block;width:100%;min-width:920px;height:auto;aspect-ratio:1220/570}.edge{transition:opacity .12s}.graph-node{cursor:pointer;transition:opacity .12s}.graph-node circle{fill:#292a2d;stroke-width:2;transition:fill .15s,stroke-width .15s}.graph-node.selected circle{fill:#3a3227;stroke-width:4}.graph-node text{fill:#fcf0db;font:700 10px system-ui;pointer-events:none;text-anchor:middle}.graph-node .node-sub{font:normal 11px system-ui;fill:#efe1ca}.graph-node:focus-visible{outline:none}.graph-node:focus-visible circle{stroke-width:6;stroke:#fff}.network-legend{padding:13px 18px;display:flex;flex-wrap:wrap;gap:10px 19px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)}.legend-key:before{content:"";display:inline-block;width:19px;height:3px;vertical-align:middle;margin-right:7px;background:var(--kind);border-radius:2px}
+.details{min-height:490px;padding:22px}.details-head{font-size:11px;color:var(--gold);font-weight:800;letter-spacing:.1em}.details h2{font:normal clamp(27px,2.4vw,36px)/1.12 Georgia,serif;margin:8px 0 13px}.details .intro{color:var(--muted);margin:0 0 18px}.open-original{display:inline-block;background:var(--gold);color:#171717;text-decoration:none;padding:9px 13px;font-size:12px;font-weight:800;margin-bottom:20px}.details h3{font:normal 20px Georgia,serif;border-top:1px solid var(--line);padding-top:16px}.micro{font-size:12px;color:var(--muted)}
+.relation-mini{border:1px solid #655a49;margin:0 0 10px;padding:13px;background:#303034}.relation-mini .rt{font-weight:750;font-size:14px}.relation-mini .badge{color:var(--gold);font-size:10px;text-transform:uppercase;font-weight:800;letter-spacing:.05em}.relation-mini p{font-size:12px;margin:6px 0;color:var(--muted)}.relation-mini a{font-size:12px}
+.section-title{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2px solid #bd995c;padding-bottom:17px;margin:60px 0 21px;gap:15px;flex-wrap:wrap}.section-title h2{font:normal clamp(31px,4vw,47px)/1.15 Georgia,serif;margin:0}.section-title p{color:var(--muted);font-size:12px;margin:0}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 19px}.chip{background:#33343a;color:#f1e2ca;border:1px solid #827259;padding:9px 12px;font-size:11px}.chip.active,.chip:hover{background:var(--gold);color:#201b15;border-color:var(--gold)}
+.registry{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.registry article{border:1px solid var(--line);background:var(--panel);padding:20px;min-width:0}.registry article h3{font:normal 23px/1.19 Georgia,serif;margin:9px 0}.registry .type{color:var(--gold);letter-spacing:.07em;font-size:10px;font-weight:800;text-transform:uppercase}.registry p{color:var(--muted);font-size:13px;margin:10px 0}.registry strong{color:#f0d19c}.registry .r-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:15px}.registry .r-links button{background:none;color:#f2d6a9;border:1px solid #877657;padding:7px 10px;font-size:12px}.registry .r-links button:hover{background:#494031}.registry .r-links a{display:inline-flex;align-items:center;color:#f3d6a6;font-size:12px;margin:auto 0}
+.empty{color:#dfcfb9;padding:25px;border:1px dashed #907b58}
+.footer{padding:25px 0 0;margin-top:50px;border-top:1px solid var(--line);color:#cfc2b0;font-size:12px}.footer a{margin-right:14px}
+@media(max-width:1050px){.workspace{grid-template-columns:1fr}.details{min-height:0}.network-svg{width:1100px;max-width:none}.registry{grid-template-columns:1fr}}
+@media(max-width:580px){.bar{align-items:flex-start}.hero h1{font-size:46px}.hero{padding:47px 0 20px}.panel-head h2{font-size:23px}.details{padding:18px}.controls{padding:12px}.network-scroller{padding:2px}.relation-mini{padding:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.edge,.graph-node{transition:none}}
+</style>
+</head>
+<body><div class="wrap">
+<header class="bar"><a class="wordmark" href="eloah-parisis.html">PARISIS <em>ENGINE</em></a><nav class="navlinks" aria-label="Navigation"><a href="eloah-parisis.html">Accueil</a><a href="parisis-fil-enquetes.html">Fil chronologique</a><a href="parisis-publications.html">Bibliothèque</a><a href="mes-univers.html">ELOAH</a></nav></header>
+<main>
+<div class="hero"><div class="eyebrow">ELOAH · HUMANITIES LAB · CARTOGRAPHIE DOCUMENTAIRE</div><h1>Le réseau <em>des indices.</em></h1><p>Un document renvoie à une autre enquête. Une image soulève une question. Deux dates paraissent se contredire. Explore les liens, retrouve les sources et poursuis les vérifications.</p></div>
+<div class="proofline"><strong>Règle d'enquête :</strong> une source commune, un motif similaire ou une méthode partagée ne prouve pas une intention commune. Les réserves et contre-tests restent visibles avec chaque lien.</div>
+<section class="controls" aria-label="Explorer le réseau">
+<div class="control"><label for="search">Rechercher un indice ou une enquête</label><input id="search" type="search" placeholder="1665, Vasserot, 1789, Catherine…" autocomplete="off"></div>
+<div class="control"><label for="series">Famille de recherche</label><select id="series"><option value="all">Toutes les familles</option><option value="PAR ISIS">PAR ISIS</option><option value="ATLAS">Atlas &amp; cartes</option><option value="NESLE">Nesle &amp; Le Vau</option><option value="SYMBOLES">Symboles</option><option value="NOSTRADAMUS">Nostradamus</option></select></div>
+<div class="control"><label for="relationType">Nature du lien</label><select id="relationType"><option value="all">Toutes les relations</option><option value="source">Sources / fonds communs</option><option value="motif">Motifs iconographiques</option><option value="tension">Tensions documentaires</option><option value="contretest">Contre-vérifications</option><option value="methode">Méthodes analogues</option><option value="progression">Progression éditoriale</option></select></div>
+<button class="reset" id="clear" type="button">Tout afficher</button>
+</section>
+<p class="metrics" id="metrics" role="status" aria-live="polite">Chargement du registre…</p>
+<div class="workspace">
+<section class="box" aria-labelledby="map-heading"><header class="panel-head"><h2 id="map-heading">Carte des correspondances</h2><span>Toucher un point pour ouvrir sa fiche · défilement horizontal sur téléphone</span></header><div class="network-scroller"><svg class="network-svg" id="network" viewBox="0 0 1220 570" role="group" aria-label="Réseau interactif des enquêtes"></svg></div><div class="network-legend"><span class="legend-key" style="--kind:#e7bc72">Source commune</span><span class="legend-key" style="--kind:#d89cab">Motif</span><span class="legend-key" style="--kind:#f18d78">Tension</span><span class="legend-key" style="--kind:#abd6b4">Contre-test</span><span class="legend-key" style="--kind:#92a8bf">Méthode</span><span class="legend-key" style="--kind:#bca2da">Progression</span></div></section>
+<aside class="box details" id="details" aria-label="Enquête sélectionnée" aria-live="polite"><p>Chargement…</p></aside>
+</div>
+<section aria-labelledby="registry-heading"><div class="section-title"><h2 id="registry-heading">Le registre des relations</h2><p>Sources citées dans les dossiers · réserves · prochain contre-test</p></div><div class="chips" id="quick" aria-label="Filtres rapides"></div><div class="registry" id="registry" aria-live="polite"></div></section>
+</main>
+<footer class="footer">PARISIS ENGINE · Chaque nouvelle relation doit conserver sa provenance, ses limites et son test possible.<p><a href="parisis-fil-enquetes.html">Lire les séquences ↗</a><a href="parisis-publications.html">Retrouver tous les dossiers ↗</a><a href="parisis-relations.json">Consulter le registre structuré (JSON) ↗</a></p></footer>
+</div>
+<script>
+(function(){
+"use strict";
+var root=document.getElementById("network"),detail=document.getElementById("details"),registry=document.getElementById("registry"),quick=document.getElementById("quick"),metrics=document.getElementById("metrics");
+var search=document.getElementById("search"),series=document.getElementById("series"),relationType=document.getElementById("relationType"),clear=document.getElementById("clear");
+var colors={source:"#e7bc72",motif:"#d89cab",tension:"#f18d78",contretest:"#abd6b4",methode:"#92a8bf",progression:"#bca2da"};
+var familyColor={"PAR ISIS":"#efc985","ATLAS":"#a0cad7","NESLE":"#f1bc92","SYMBOLES":"#d89cab","NOSTRADAMUS":"#c7afe8"};
+var coords={isis001:[110,130],isis004:[110,265],isis005:[110,400],vasserot:[355,260],atlas:[355,402],nesle12:[590,120],nesle14:[590,235],nesle15:[590,350],nesle16:[590,465],oeil1789:[830,180],oeil1770:[830,305],oeil1665:[830,425],nostra1:[1075,105],nostra2:[1075,220],nostra3:[1075,335],nostra4:[1075,450]};
+var state={selected:"nesle16",data:null};
+var ns="http://www.w3.org/2000/svg";
+function el(tag,cls,text){var x=document.createElement(tag);if(cls)x.className=cls;if(text!==undefined)x.textContent=text;return x}
+function add(parent,child){parent.appendChild(child);return child}
+function sEl(tag,attrs){var x=document.createElementNS(ns,tag);Object.keys(attrs||{}).forEach(function(k){x.setAttribute(k,String(attrs[k]))});return x}
+function nById(id){return state.data.nodes.find(function(n){return n.id===id})}
+function chapterHref(n){return /^[a-z0-9-]+\.html$/i.test(n.href)?n.href:"parisis-publications.html"}
+function normalized(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
+function selectedLinks(){return state.data.links.filter(function(r){return r.from===state.selected||r.to===state.selected})}
+function showLink(r){var word=normalized(search.value.trim()),a=nById(r.from),b=nById(r.to);return(relationType.value==="all"||r.type===relationType.value)&&(series.value==="all"||a.series===series.value||b.series===series.value)&&(!word||normalized([a.title,b.title,a.code,b.code,r.label,r.why,r.evidence,r.caution,r.next].join(" ")).includes(word))}
+function choose(id,scroll){if(!nById(id))return;state.selected=id;try{var url=new URL(location.href);url.searchParams.set("d",id);history.replaceState(null,"",url.pathname+url.search+url.hash)}catch(e){}draw();if(scroll&&window.innerWidth<1050)detail.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
+function graph(){
+root.replaceChildren();
+var defs=add(root,sEl("defs"));var mark=add(defs,sEl("marker",{id:"end-dot",markerWidth:6,markerHeight:6,refX:3,refY:3}));add(mark,sEl("circle",{cx:3,cy:3,r:2,fill:"#d0b889"}));
+var headings=[["PAR ISIS",110],["ATLAS",355],["NESLE",590],["SYMBOLES",830],["NOSTRADAMUS",1075]];
+headings.forEach(function(h){var tx=add(root,sEl("text",{x:h[1],y:31,"text-anchor":"middle",fill:familyColor[h[0]],"font-size":"15","font-family":"Georgia,serif"}));tx.textContent=h[0]});
+var visible=state.data.links.filter(showLink),neighbors=new Set([state.selected]);
+visible.forEach(function(r){if(r.from===state.selected)neighbors.add(r.to);if(r.to===state.selected)neighbors.add(r.from)});
+state.data.links.forEach(function(r){var p=coords[r.from],q=coords[r.to],matches=visible.indexOf(r)!==-1,attached=r.from===state.selected||r.to===state.selected;var line=add(root,sEl("line",{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:colors[r.type], "stroke-width":attached&&matches?3:1.45, "stroke-dasharray":r.type==="methode"?"7 5":r.type==="contretest"?"3 5":"none",opacity:matches?(attached?0.96:0.39):0.05,class:"edge"}));add(line,sEl("title")).textContent=state.data.types[r.type]+" : "+r.label});
+state.data.nodes.forEach(function(n){
+var p=coords[n.id],chosen=n.id===state.selected,inFamily=series.value==="all"||n.series===series.value,word=normalized(search.value.trim()),matches=!word||normalized(n.title+" "+n.summary+" "+n.code).includes(word)||visible.some(function(r){return r.from===n.id||r.to===n.id});
+var faded=!(inFamily&&matches)||(!neighbors.has(n.id)&&state.selected!=="");
+var g=add(root,sEl("g",{class:"graph-node"+(chosen?" selected":""),tabindex:"0",role:"button","aria-label":"Consulter "+n.title,opacity:chosen?1:faded?0.42:1}));
+add(g,sEl("circle",{cx:p[0],cy:p[1],r:31,stroke:familyColor[n.series]}));
+var code=add(g,sEl("text",{x:p[0],y:p[1]+4}));code.textContent=n.code.length>13?n.code.slice(0,13):n.code;
+var label=add(g,sEl("text",{x:p[0],y:p[1]+50,class:"node-sub"}));label.textContent=n.title.length>27?n.title.slice(0,25)+"…":n.title;
+add(g,sEl("title")).textContent=n.title;
+g.addEventListener("click",function(){choose(n.id,true)});
+g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();choose(n.id,true)}});
+});
+}
+function detailView(){
+var n=nById(state.selected);detail.replaceChildren();if(!n)return;
+add(detail,el("div","details-head",n.series+" · "+n.code));
+add(detail,el("h2","",n.title));
+add(detail,el("p","intro",n.summary));
+var open=add(detail,el("a","open-original","Lire le dossier original ↗"));open.href=chapterHref(n);
+var head=add(detail,el("h3","",selectedLinks().length+" relations à examiner"));
+add(detail,el("p","micro","Les extraits et questions ci-dessous résument les recherches de PARISIS. Ils ne remplacent pas les documents primaires."));
+var relevant=selectedLinks().filter(showLink);if(!relevant.length){add(detail,el("p","micro","Aucune relation de cette enquête ne correspond aux filtres."));return}
+relevant.forEach(function(r){var other=nById(r.from===n.id?r.to:r.from),card=add(detail,el("section","relation-mini"));add(card,el("div","badge",state.data.types[r.type]));add(card,el("div","rt",r.label));add(card,el("p","",r.why));var cap=add(card,el("p",""));add(cap,el("strong","", "Réserve : "));cap.appendChild(document.createTextNode(r.caution));var link=add(card,el("a","","→ "+other.title));link.href=chapterHref(other);link.title="Lire "+other.title;
+var b=add(card,el("button","chip","Sélectionner cette enquête"));b.type="button";b.style.marginLeft="9px";b.addEventListener("click",function(){choose(other.id,false)});
+});
+}
+function registryView(){
+registry.replaceChildren();var matches=state.data.links.filter(showLink);
+metrics.textContent=state.data.nodes.length+" enquêtes • "+state.data.links.length+" liens enregistrés • "+matches.length+" relations dans la sélection";
+if(!matches.length){add(registry,el("div","empty","Aucun lien ne correspond aux critères. Essaie une autre famille ou efface les filtres."));return}
+matches.forEach(function(r){
+var a=nById(r.from),b=nById(r.to),card=add(registry,el("article",""));
+add(card,el("div","type",r.id+" · "+state.data.types[r.type]));
+add(card,el("h3","",r.label));
+add(card,el("p","",r.why));
+var p1=add(card,el("p",""));add(p1,el("strong","","Pièces citées : "));p1.appendChild(document.createTextNode(r.evidence));
+var p2=add(card,el("p",""));add(p2,el("strong","","Limite : "));p2.appendChild(document.createTextNode(r.caution));
+var p3=add(card,el("p",""));add(p3,el("strong","","À vérifier : "));p3.appendChild(document.createTextNode(r.next));
+var buttons=add(card,el("div","r-links"));
+[a,b].forEach(function(n){var bt=add(buttons,el("button","",n.code+" · "+n.title));bt.type="button";bt.addEventListener("click",function(){choose(n.id,false);detail.scrollIntoView({block:"start",behavior:"smooth"})})});
+});
+}
+function chipsView(){quick.replaceChildren();var options=[["all","Tous les liens"],["source","Sources communes"],["tension","Tensions"],["contretest","Contre-tests"],["motif","Motifs"],["methode","Méthodes"],["progression","Suites"]];
+options.forEach(function(opt){var btn=add(quick,el("button","chip"+(relationType.value===opt[0]?" active":""),opt[1]));btn.type="button";btn.setAttribute("aria-pressed",relationType.value===opt[0]?"true":"false");btn.addEventListener("click",function(){relationType.value=opt[0];draw()})});
+}
+function draw(){if(!state.data)return;graph();detailView();registryView();chipsView()}
+[search,series,relationType].forEach(function(x){x.addEventListener(x===search?"input":"change",draw)});
+clear.addEventListener("click",function(){search.value="";series.value="all";relationType.value="all";choose("nesle16",false)});
+fetch("parisis-relations.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(function(d){
+if(!d||!Array.isArray(d.nodes)||!Array.isArray(d.links)||!d.types)throw Error("Registre incomplet");
+state.data=d;var requested=new URLSearchParams(location.search).get("d");if(requested&&nById(requested))state.selected=requested;draw()
+}).catch(function(err){metrics.textContent="Le registre n'a pas pu être chargé ("+err.message+").";detail.replaceChildren();add(detail,el("p","", "Les dossiers restent accessibles depuis la bibliothèque."));var a=add(detail,el("a","","Ouvrir les enquêtes ↗"));a.href="parisis-publications.html";add(registry,el("p","empty","Le registre relationnel est indisponible. Vérifie la présence du fichier parisis-relations.json."))
+});
+})();
+</script>
+</body></html>
