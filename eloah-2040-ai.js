@@ -1,4 +1,4 @@
-import {mountPilot} from './eloah-ai-pilot.js?v=1';
+import {mountPilot} from './eloah-ai-pilot.js?v=memory-1';
 
 /* ELOAH 2040 · session fondatrice, réponses temporaires et annulation. */
 const el=id=>document.getElementById(id);
