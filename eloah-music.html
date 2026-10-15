@@ -241,6 +241,30 @@ body.stage2040-active{overflow:hidden!important}
 @media(max-width:750px){.stage2040-shell{gap:8px;padding:9px;padding-top:max(9px,env(safe-area-inset-top));padding-bottom:max(15px,env(safe-area-inset-bottom))}.stage2040-decks{grid-template-columns:1fr}.stage2040-deck{padding:11px;gap:6px}.stage2040-deck-top{font-size:10px}.stage2040-disc{width:95px;border-width:3px}.stage2040-deck strong{font-size:16px}.stage2040-controls button{min-height:42px}.stage2040-mixer{padding:11px}.stage2040-header h2{font-size:21px}.stage2040-live{display:none}.stage2040-mixrow{gap:7px}.stage2040-mixrow label{font-size:10px;flex-direction:column;align-items:stretch}.stage2040-footer{font-size:9px;flex-wrap:wrap}}
 @media(max-height:700px) and (min-width:751px){.stage2040-disc{width:min(10vw,120px)}.stage2040-deck{gap:5px}.stage2040-shell{gap:8px}.stage2040-deck p{font-size:11px!important}}
 @media(orientation:landscape) and (max-width:900px){.stage2040-decks{grid-template-columns:repeat(2,minmax(0,1fr))}.stage2040-disc{width:80px}.stage2040-deck{gap:4px}.stage2040-deck select{min-height:35px}.stage2040-actions button{padding:8px}}
+
+/* ELOAH MUSIC 2040 LIVE SETLIST V16 */
+.stage2040-setlist{border:1px solid #704874;border-radius:13px;background:#190e25;overflow:hidden}
+.stage2040-setlist summary{display:flex;align-items:center;gap:12px;justify-content:space-between;padding:12px 15px;cursor:pointer;list-style:none;font-size:13px;font-weight:800;color:#f8e8f7}
+.stage2040-setlist summary::-webkit-details-marker{display:none}
+.stage2040-setlist summary::before{content:"▸";color:#efd2a6}
+.stage2040-setlist[open] summary::before{content:"▾"}
+.stage2040-setlistHint{margin-left:auto;font-size:11px;color:#dbc0dc;font-weight:500}
+.stage2040-setlistInner{border-top:1px solid #684069;padding:12px}
+.stage2040-setlistToolbar{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.stage2040-setlistToolbar label{font-size:11px;font-weight:700;color:#e7cba7}
+.stage2040-setlistToolbar select{background:#261530;color:#fff3fc;border:1px solid #825581;border-radius:9px;padding:10px;min-height:42px;flex:1 1 210px;font:600 12px Inter,system-ui,sans-serif;min-width:0}
+.stage2040-setlistRows{display:flex;gap:7px;overflow-x:auto;padding:10px 0;scroll-snap-type:x proximity}
+.stage2040-setlistRows button{flex:0 0 clamp(150px,18vw,230px);display:flex;flex-direction:column;align-items:flex-start;text-align:left;gap:4px;background:#30203b;scroll-snap-align:start;min-height:75px}
+.stage2040-setlistRows button[aria-current="true"]{background:#5f3264;border-color:#d297c8}
+.stage2040-setlistRows button .stage2040-order{font-size:10px;letter-spacing:.1em;color:#e8caa0}
+.stage2040-setlistRows button .stage2040-song{font-size:12px;font-weight:750;max-width:100%;overflow-wrap:anywhere}
+.stage2040-setlistRows button .stage2040-songArtist{font-size:11px;font-weight:500;color:#d4bcd4}
+.stage2040-setlistEmpty{margin:0;padding:13px;font-size:12px!important;color:#cdb3cc!important}
+.stage2040-shortcuts{color:#bea6c2!important;font-size:11px!important;margin:5px 0 0}
+.stage2040-shortcuts kbd{display:inline-block;border:1px solid #6f486f;border-radius:4px;padding:1px 5px;font:600 10px Inter,system-ui,sans-serif;color:#ead7e9}
+.stage2040-actions .stage2040-stop{background:#4a243a;border-color:#9c527d;color:#ffd6e1}
+.stage2040-actions .stage2040-stop:hover{background:#70314c}
+@media(max-width:750px){.stage2040-setlistInner{padding:9px}.stage2040-setlistToolbar{gap:8px}.stage2040-setlistToolbar label{width:100%}.stage2040-setlistToolbar button{flex:1}.stage2040-setlistRows button{flex-basis:160px}.stage2040-shortcuts{font-size:10px!important}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
@@ -314,7 +338,7 @@ body.stage2040-active{overflow:hidden!important}
 <section class="stage2040" id="dj2040stage" role="dialog" aria-modal="true" aria-labelledby="stage2040heading" hidden>
  <div class="stage2040-shell">
   <header class="stage2040-header">
-   <div><span class="stage2040-kicker">ELOAH 2040 · THE CREW · DJ MODE</span><h2 id="stage2040heading">DJ STAGE</h2></div>
+   <div><span class="stage2040-kicker">ELOAH 2040 · THE CREW · DJ MODE</span><h2 id="stage2040heading" tabindex="-1">DJ STAGE</h2></div>
    <div class="stage2040-header-actions"><span class="stage2040-live" id="stage2040live">● PRÊT</span><button type="button" id="stage2040close" aria-label="Fermer le mode scène">✕ Quitter</button></div>
   </header>
   <div class="stage2040-decks">
@@ -342,10 +366,23 @@ body.stage2040-active{overflow:hidden!important}
     <label>Volume général <input id="stage2040master" type="range" min="0" max="100" value="75" aria-label="Volume général"></label>
     <label>Niveau B <input id="stage2040gainB" type="range" min="0" max="100" value="65" aria-label="Niveau de la platine B"></label>
    </div>
-   <div class="stage2040-actions"><button id="stage2040auto" type="button" disabled>↗ Transition 3 s</button><button id="stage2040take" type="button" disabled>→ B devient A</button><button id="stage2040reset" type="button">⟲ Réinitialiser le mix</button></div>
+   <div class="stage2040-actions"><button id="stage2040auto" type="button" disabled>↗ Transition 3 s</button><button id="stage2040take" type="button" disabled>→ B devient A</button><button id="stage2040reset" type="button">⟲ Réinitialiser le mix</button><button id="stage2040stopBoth" type="button" class="stage2040-stop">■ Stop A + B</button></div>
    <p id="stage2040status" aria-live="polite" role="status">Charge un titre B pour préparer la transition.</p>
   </section>
-  <footer class="stage2040-footer"><span>THE CREW · LIVE MUSIC CONTROL</span><span>Échap ou Quitter pour revenir à ELOAH Music</span></footer>
+  
+<details class="stage2040-setlist" id="stage2040setlist" open>
+ <summary><span>♫ Setlist en direct</span><span class="stage2040-setlistHint" id="stage2040setlistCount">Choisir une playlist</span></summary>
+ <div class="stage2040-setlistInner">
+  <div class="stage2040-setlistToolbar">
+   <label for="stage2040setlistChoose">Playlist de la soirée</label>
+   <select id="stage2040setlistChoose" aria-label="Choisir la setlist"><option value="">Choisir une playlist</option></select>
+   <button type="button" id="stage2040prepareNext" disabled>↓ Préparer le prochain sur B</button>
+  </div>
+  <div class="stage2040-setlistRows" id="stage2040setlistRows" aria-label="Morceaux suivants"><p class="stage2040-setlistEmpty">Choisis une playlist pour préparer tes morceaux.</p></div>
+  <p class="stage2040-shortcuts">Raccourcis (hors champs de saisie) : <kbd>Espace</kbd> Lecture/Pause · <kbd>N</kbd> Suivant · <kbd>P</kbd> Précédent · <kbd>B</kbd> Préparer B · <kbd>T</kbd> Transition · <kbd>Échap</kbd> Quitter</p>
+ </div>
+</details>
+<footer class="stage2040-footer"><span>THE CREW · LIVE MUSIC CONTROL</span><span>Échap ou Quitter pour revenir à ELOAH Music</span></footer>
  </div>
 </section>
 <dialog id="modal" class="dialog"><button class="close" id="closeModal">×</button><h2 id="modalTitle">Ajouter</h2><div id="modalBody"></div></dialog>
@@ -647,8 +684,88 @@ if(typeof djAudio.setSinkId==='function'&&navigator.mediaDevices?.selectAudioOut
 /* ELOAH MUSIC 2040 STAGE MODE V15 */
 let stage2040Native=false,stage2040PreviousFocus=null,stage2040Index='';
 const stage2040Panel=$('dj2040stage');
+
+/* ELOAH MUSIC 2040 LIVE SETLIST V16 */
+let stageSetlistId=null,stageSetlistSignature='',stageSetlistOptionsSignature='';
+function stageSetlistAvailableIds(){
+ const playlist=playlists.find(p=>p.id===stageSetlistId);
+ return playlist?playlist.ids.filter(id=>tracks.some(t=>t.id===id)):[];
+}
+function stageSetlistUpcomingIds(){
+ const ids=stageSetlistAvailableIds(),index=ids.indexOf(tracks[current]?.id);
+ return ids.slice(index>=0?index+1:0);
+}
+function stageSetlistSync(){
+ if(stage2040Panel.hidden)return;
+ const select=$('stage2040setlistChoose');
+ const candidates=playlists.filter(p=>p.ids.some(id=>tracks.some(t=>t.id===id)));
+ const optSignature=candidates.map(p=>p.id+':'+p.name+':'+p.ids.length).join('|');
+ if(stageSetlistOptionsSignature!==optSignature){
+  stageSetlistOptionsSignature=optSignature;
+  select.replaceChildren(new Option('Choisir une playlist',''));
+  for(const p of candidates)select.add(new Option(p.name+' · '+p.ids.length+' titre(s)',p.id));
+ }
+ if(!candidates.some(p=>p.id===stageSetlistId)){
+  const matching=candidates.find(p=>p.id===playbackPlaylistId)||candidates.find(p=>p.id===activePlaylist)||candidates[0];
+  stageSetlistId=matching?.id||null;
+ }
+ select.value=stageSetlistId||'';
+ const all=stageSetlistAvailableIds(),upcoming=stageSetlistUpcomingIds();
+ $('stage2040prepareNext').disabled=!upcoming.length||djTransitioning;
+ $('stage2040setlistCount').textContent=stageSetlistId?all.length+' titres · '+upcoming.length+' à suivre':'Aucune playlist disponible';
+ const signature=[stageSetlistId||'',tracks[current]?.id||'',djTrackId||'',upcoming.join(','),all.map(id=>tracks.find(t=>t.id===id)?.title).join('|')].join('§');
+ if(stageSetlistSignature===signature)return;
+ stageSetlistSignature=signature;
+ const host=$('stage2040setlistRows');
+ host.replaceChildren();
+ if(!stageSetlistId||!all.length){
+  const p=document.createElement('p');p.className='stage2040-setlistEmpty';p.textContent='Ajoute des titres dans une playlist pour préparer ta setlist.';host.append(p);return;
+ }
+ if(!upcoming.length){
+  const p=document.createElement('p');p.className='stage2040-setlistEmpty';p.textContent='Fin de la setlist. Tu peux choisir une autre playlist ou répéter la lecture.';host.append(p);return;
+ }
+ for(const [index,id] of upcoming.entries()){
+  const t=tracks.find(t=>t.id===id);if(!t)continue;
+  const b=document.createElement('button');b.type='button';b.dataset.stagePrepare=id;
+  b.setAttribute('aria-label','Charger '+t.title+' sur la platine B');
+  if(id===djTrackId)b.setAttribute('aria-current','true');
+  const order=document.createElement('span');order.className='stage2040-order';order.textContent=String(index+1).padStart(2,'0')+(id===djTrackId?' · CHARGÉ EN B':' · PROCHAIN');
+  const title=document.createElement('span');title.className='stage2040-song';title.textContent=t.title;
+  const artist=document.createElement('span');artist.className='stage2040-songArtist';artist.textContent=t.artist||'Musique ELOAH';
+  b.append(order,title,artist);host.append(b);
+ }
+}
+$('stage2040setlistChoose').onchange=e=>{stageSetlistId=e.target.value||null;stageSetlistSignature='';stageSetlistSync();};
+async function stagePrepareTrack(id){
+ if(djTransitioning){$('stage2040status').textContent='Attends la fin de la transition avant de charger B.';return;}
+ if(!tracks.some(t=>t.id===id))return;
+ if(djTrackId&&djTrackId!==id&&!djAudio.paused){
+  if(!confirm('La platine B joue déjà. Remplacer ce morceau ?'))return;
+ }
+ $('dj2040select').value=id;
+ await djLoadB(id);
+ stage2040Sync();
+}
+$('stage2040prepareNext').onclick=async()=>{
+ const next=stageSetlistUpcomingIds()[0];
+ if(!next){$('stage2040status').textContent='Aucun prochain titre disponible dans la setlist.';return;}
+ await stagePrepareTrack(next);
+};
+$('stage2040setlistRows').addEventListener('click',async event=>{
+ const b=event.target.closest('button[data-stage-prepare]');
+ if(b)await stagePrepareTrack(b.dataset.stagePrepare);
+});
+$('stage2040stopBoth').onclick=()=>{
+ if(!confirm('Mettre les deux platines en pause ? Aucun titre ne sera supprimé.'))return;
+ djCancelAnimation();cancelMixFade();
+ audio.pause();djAudio.pause();djPreviewMode=false;
+ $('dj2040fader').value='0';djAudio.volume=0;restoreMixVolume();
+ djSync();djMessage('A et B en pause. Aucun morceau supprimé.');
+};
+
 function stage2040Sync(){
  if(stage2040Panel.hidden)return;
+ stageSetlistSync();
  const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
  $('stage2040titleA').textContent=a?.title||'Aucun titre sélectionné';
  $('stage2040artistA').textContent=a?.artist||'Lecture principale';
@@ -685,7 +802,7 @@ function stage2040Sync(){
 async function stage2040Open(){
  stage2040PreviousFocus=document.activeElement;
  stage2040Panel.hidden=false;document.body.classList.add('stage2040-active');
- stage2040Sync();$('stage2040close').focus();
+ stage2040Sync();$('stage2040heading').focus();
  if(stage2040Panel.requestFullscreen){
   try{await stage2040Panel.requestFullscreen();stage2040Native=document.fullscreenElement===stage2040Panel}
   catch(e){stage2040Native=false}
@@ -706,6 +823,12 @@ document.addEventListener('fullscreenchange',()=>{
 });
 stage2040Panel.addEventListener('keydown',event=>{
  if(event.key==='Escape'){event.preventDefault();stage2040Close();return}
+ const target=event.target,tag=target?.tagName;
+ if(!event.repeat&&!event.ctrlKey&&!event.altKey&&!event.metaKey&&!['BUTTON','INPUT','SELECT','TEXTAREA'].includes(tag)&&!target?.isContentEditable){
+  const key=event.key.toLowerCase();
+  const action=key===' '?()=> $('stage2040play').click():key==='n'?()=> $('stage2040next').click():key==='p'?()=> $('stage2040prev').click():key==='b'?()=> $('stage2040prepareNext').click():key==='t'?()=> $('stage2040auto').click():null;
+  if(action){event.preventDefault();action();return}
+ }
  if(event.key==='Tab'){
   const nodes=[...stage2040Panel.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled])')];
   if(!nodes.length)return;
