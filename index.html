@@ -1050,17 +1050,28 @@ body.crew-dashboard #drawerBody .crew-proj-ideas-cta{background:#eee7d7!importan
 body.crew-dashboard #drawerBody .crew-proj-ideas-cta strong{color:#654d20!important}
 body.crew-dashboard #drawerBody .crew-proj-card img{min-height:200px}
 @media(max-width:600px){body.crew-dashboard #drawer:before{font-size:9px;letter-spacing:.04em;padding-top:22px;padding-bottom:22px}body.crew-dashboard #drawer #close{font-size:11px;padding:9px 12px;margin-top:-48px}body.crew-dashboard #drawerTitle{margin-top:23px!important;padding-top:0;font-size:32px!important}body.crew-dashboard #drawer .crew-detail-tabs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.crew-dashboard #drawerBody .crew-member-row{align-items:flex-start;gap:10px}body.crew-dashboard #drawerBody .crew-member-row>span:last-child{white-space:normal;max-width:75px}body.crew-dashboard #drawerBody .c24-nav{flex-wrap:wrap;overflow:visible}body.crew-dashboard #drawerBody .c24-nav button{flex:1 1 42%;font-size:12px}body.crew-dashboard #drawerBody .crew-proj-card img{min-height:0}body.crew-dashboard #drawerBody .item .grow{min-width:0;flex-basis:60%}}
-</style><style id="crew-tools-placement">/* Stable tools entry, separate dropdown without moving the main links. */
-html body.crew-dashboard .side{position:relative!important;z-index:40!important;overflow:visible!important}
-html body.crew-dashboard .side .nav{padding-right:175px!important;position:static!important;min-width:0}
-html body.crew-dashboard .side .nav details,html body.crew-dashboard .side .nav details[open]{position:absolute!important;right:clamp(16px,4vw,55px);top:16px;width:162px;min-width:0;display:block!important;margin:0!important;padding:0!important;border:0!important;background:transparent!important;flex:none!important}
-html body.crew-dashboard .side .nav details>summary{display:flex;align-items:center;justify-content:center;white-space:nowrap;background:#d8b96e!important;color:#211d15!important;border:1px solid #d8b96e;border-radius:25px!important;min-height:42px}
-html body.crew-dashboard .side .nav details[open]>summary{background:#f1d998!important}
-html body.crew-dashboard .side .nav .crew-tools-popover{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px;position:absolute;right:0;top:52px;width:min(540px,calc(100vw - 32px));max-height:70vh;overflow-y:auto;padding:15px;background:#fffdf8;border:1px solid #d4c49f;border-radius:14px;box-shadow:0 15px 45px #0005}
-html body.crew-dashboard .side .nav details:not([open])>.crew-tools-popover{display:none!important}
-html body.crew-dashboard .side .nav details .crew-tools-popover a{display:flex!important;margin:0!important;padding:12px!important;background:#f3eee2;color:#302619!important;border:1px solid #e0d5bf;border-radius:8px!important;font-size:12px!important;line-height:1.4;white-space:normal;min-height:44px;align-items:center}
-html body.crew-dashboard .side .nav details .crew-tools-popover a:hover{background:#e9d8ae;border-color:#a88a47}
-html body.crew-dashboard .side .nav summary:focus-visible{outline:3px solid #fff;outline-offset:3px}
-@media(max-width:700px){html body.crew-dashboard .side{flex-wrap:wrap!important;gap:8px!important}html body.crew-dashboard .side .logo{display:block!important;margin:0!important}html body.crew-dashboard .side .nav{flex:1 0 100%!important;width:100%;padding-right:0!important}html body.crew-dashboard .side .nav details{top:23px}html body.crew-dashboard .side .nav .crew-tools-popover{max-height:65vh}}
-@media(max-width:380px){html body.crew-dashboard .side .nav .crew-tools-popover{grid-template-columns:1fr}}
-</style></body></html>
+</style><style id="crew-tools-placement">html body.crew-dashboard .side .nav{padding-right:0!important}
+html body.crew-dashboard .side .nav>details{display:none!important}
+.crew-dashboard .crew-pilotage-tools{margin-top:18px;border-top:1px solid #ded5c3;padding-top:15px}
+.crew-dashboard .crew-pilotage-tools>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;background:#d8b96e;color:#211d15;border:1px solid #c6a355;border-radius:9px;padding:13px 16px;font:700 12px/1.4 Inter,Arial,sans-serif}
+.crew-dashboard .crew-pilotage-tools>summary::-webkit-details-marker{display:none}
+.crew-dashboard .crew-pilotage-tools>summary:after{content:'＋';font-size:18px}
+.crew-dashboard .crew-pilotage-tools[open]>summary:after{content:'−'}
+.crew-dashboard .crew-pilotage-tools .crew-tools-popover{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}
+.crew-dashboard .crew-pilotage-tools:not([open]) .crew-tools-popover{display:none}
+.crew-dashboard .crew-pilotage-tools a{display:flex;align-items:center;padding:12px;background:#f3eee2;border:1px solid #ded5c3;border-radius:8px;color:#302619;text-decoration:none;font:600 12px/1.4 Inter,Arial,sans-serif;min-height:44px}
+.crew-dashboard .crew-pilotage-tools a:hover{background:#eadbb9;border-color:#a88a47}
+.crew-dashboard .crew-pilotage-tools :is(a,summary):focus-visible{outline:3px solid #86672e;outline-offset:3px}
+@media(max-width:380px){.crew-dashboard .crew-pilotage-tools .crew-tools-popover{grid-template-columns:1fr}}
+</style><script id="crew-tools-in-pilotage">
+(function(){
+const source=document.querySelector('.nav>details'),panel=document.querySelector('#crew-controls .cp-panel');if(!source||!panel)return;
+source.open=false;
+const menu=document.createElement('details');menu.className='crew-pilotage-tools';
+const heading=document.createElement('summary');heading.textContent='☰ Tous les outils';menu.appendChild(heading);
+const list=document.createElement('div');list.className='crew-tools-popover';
+source.querySelectorAll('a').forEach(original=>{const a=document.createElement('a');a.textContent=original.textContent;a.href=original.getAttribute('href')||'#';if(original.target)a.target=original.target;if(original.rel)a.rel=original.rel;if(a.getAttribute('href')==='#')a.addEventListener('click',e=>{e.preventDefault();original.click()});list.appendChild(a)});
+menu.appendChild(list);panel.appendChild(menu);
+menu.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.open=false;heading.focus()}});
+})();
+</script></body></html>
