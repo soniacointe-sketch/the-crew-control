@@ -248,8 +248,8 @@
     {
       "id": "H4",
       "name": "La réduction de Michel reproduit la méthode de Marcus",
-      "a": "papyrus-g328",
-      "b": "irenee-14",
+      "a": "irenee-14",
+      "b": "papyrus-g328",
       "claimed": "emprunt",
       "criticalMotif": "nom-lettres",
       "counter": "Réduction d'un nom versus expansion des noms des lettres"
