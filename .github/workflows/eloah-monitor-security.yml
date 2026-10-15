@@ -9,6 +9,8 @@ on:
       - 'eloah-monitor-data.css'
       - 'eloah-monitor-audit.js'
       - 'eloah-monitor-audit.css'
+      - 'eloah-monitor-ops.js'
+      - 'eloah-monitor-ops.css'
       - '.github/workflows/eloah-monitor-security.yml'
   workflow_dispatch:
 permissions:
@@ -27,13 +29,14 @@ jobs:
           node --check eloah-monitor-control.js
           node --check eloah-monitor-data.js
           node --check eloah-monitor-audit.js
+          node --check eloah-monitor-ops.js
       - name: Verify founder data isolation and assets
         run: |
           python3 - <<'PY'
           import pathlib, re
           html=pathlib.Path('eloah-monitor.html').read_text()
           js=pathlib.Path('eloah-monitor-data.js').read_text()
-          required=['eloah-monitor-data.js','eloah-monitor-data.css','eloah-monitor-control.js','eloah-monitor-control.css','eloah-monitor-lab.html','eloah-monitor-audit.js','eloah-monitor-audit.css']
+          required=['eloah-monitor-data.js','eloah-monitor-data.css','eloah-monitor-control.js','eloah-monitor-control.css','eloah-monitor-lab.html','eloah-monitor-audit.js','eloah-monitor-audit.css','eloah-monitor-ops.js','eloah-monitor-ops.css']
           for path in required:
               assert pathlib.Path(path).is_file(), f'Missing file: {path}'
               assert path in html, f'Missing HTML reference: {path}'
@@ -41,6 +44,18 @@ jobs:
           assert 'data-real="osMissions"' in html
           assert 'data-real="crewMembers"' in html
           assert 'data-real="pgArticles"' in html
+          assert 'id="monitor-operations"' in html
+          assert 'id="monitor-command"' in html
+          assert 'eloah-monitor-ops.js' in html
+          assert 'eloah-monitor-ops.css' in html
+          ops=pathlib.Path('eloah-monitor-ops.js').read_text()
+          assert 'eloah-monitor-focus-v2' in ops
+          assert "localStorage.setItem" not in ops and ".from(" not in ops
+          assert "SERVICE_ROLE_KEY" not in ops
+          for element_id in ['ops-focus','ops-count','ops-signal','ops-check','ops-refresh','ops-command-open','monitor-command-results','monitor-command-input','monitor-command-close']:
+              assert f'id="{element_id}"' in html, f"Missing operations DOM element: {element_id}"
+          assert 'CONTROLE_HTTP_PUBLIC' in pathlib.Path('eloah-monitor-control.js').read_text()
+          assert 'DÉMONSTRATION DE SUPERVISION' not in pathlib.Path('eloah-monitor-control.js').read_text()
           audit=pathlib.Path('eloah-monitor-audit.js').read_text()
           assert 'id="audit-securite"' in html
           assert 'https://api.github.com' in html
