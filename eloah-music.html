@@ -1112,7 +1112,8 @@ function show22CutAudio(isEmergency){
  djCancelAnimation();cancelMixFade();
  audio.pause();djAudio.pause();djPreviewMode=false;
  $('dj2040fader').value='0';djAudio.volume=0;
- regieMicMute();
+ if(isEmergency)regieMicOff().catch(()=>regieMicMute());
+ else regieMicMute();
  if('speechSynthesis' in window)window.speechSynthesis.cancel();
  restoreMixVolume();
  djSync();show22Sync();
