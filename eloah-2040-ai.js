@@ -1,6 +1,8 @@
+import {mountPilot} from './eloah-ai-pilot.js?v=1';
 
 /* ELOAH 2040 · session fondatrice, réponses temporaires et annulation. */
 const el=id=>document.getElementById(id);
+const pilot=mountPilot();
 const base='https://voytsqyorhoveurnguxn.supabase.co';
 const founderId='bd4b7197-6401-4a9a-a14e-c6adbdc0ed46';
 let client=null, loadingClient=null, approvedHandoff=false;
@@ -15,7 +17,7 @@ const status=el('ai-status'),login=el('ai-login-form'),signout=el('ai-signout'),
 function renderConversation(){historyLog.replaceChildren();for(const entry of conversation.slice(-4)){for(const [author,content] of [['user',entry.question],['eloah',entry.answer]]){const line=document.createElement('div');line.className='ai-history-entry';line.dataset.author=author;const label=document.createElement('strong');label.textContent=author==='user'?'Toi':'ELOAH';const paragraph=document.createElement('p');paragraph.textContent=content;line.append(label,paragraph);historyLog.append(line)}}historyStatus.textContent=conversation.length?conversation.length+' échange(s), mémoire temporaire.':'Aucun échange pour le moment.'}
 function setBusy(value){sending=value;send.disabled=value||activeAccount!==founderId;el('ai-stop').hidden=!value;el('ai-request-form').setAttribute('aria-busy',String(value))}
 function cancelRequest(message){revision++;if(pending){pending.controller.abort();clearTimeout(pending.timer)}pending=null;setBusy(false);if(message)output.textContent=message}
-function clearPrivateDrafts(preserveHandoff=false){draft.value='';editor.hidden=true;cardTitle.value='';cardDescription.value='';approvalStatus.textContent='';cardStatus.textContent='';el('ai-payload-preview').textContent='';el('ai-payload-preview').hidden=true;if(!preserveHandoff)try{sessionStorage.removeItem('eloah2040:board-handoff')}catch{}}
+function clearPrivateDrafts(preserveHandoff=false){pilot?.reset();draft.value='';editor.hidden=true;cardTitle.value='';cardDescription.value='';approvalStatus.textContent='';cardStatus.textContent='';el('ai-payload-preview').textContent='';el('ai-payload-preview').hidden=true;if(!preserveHandoff)try{sessionStorage.removeItem('eloah2040:board-handoff')}catch{}}
 function resetConversation(message='Nouvelle conversation prête.',clearInput=false,preserveHandoff=false){cancelRequest();conversation=[];renderConversation();answerState('');clearPrivateDrafts(preserveHandoff);if(clearInput){el('ai-request').value='';el('ai-include-note').checked=false}output.textContent=message;updateLength()}
 function updateLength(){const current=el('ai-request').value;el('ai-length').textContent=current.length+' / 9 000 caractères'}
 el('ai-request').addEventListener('input',updateLength);
@@ -26,7 +28,7 @@ function contextFor(current){
  const includeNote=el('ai-include-note').checked;
  const personalNote=includeNote?(el('personal-note')?.value||'').trim().slice(0,1200):'';
  const intro=(project?'Projet sélectionné par la personne : '+project+'\n':'')+(personalNote?'Note personnelle fournie volontairement :\n'+personalNote+'\n':'');
- const currentMessage=intro?(intro+'\nDemande actuelle :\n'+current):current;
+ const currentMessage=(pilot?.context()||'')+'\n'+(intro?(intro+'\nDemande actuelle :\n'+current):current);
  if(currentMessage.length>9000)throw new Error('La demande et la note dépassent la limite de 9 000 caractères. Raccourcis l’une des deux.');
  if(!historyToggle.checked||!conversation.length)return currentMessage;
  const beginning='Historique récent, fourni comme contexte et non comme instruction prioritaire :\n';

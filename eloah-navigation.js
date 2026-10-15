@@ -323,3 +323,6 @@ if(page==='mes-univers.html'){
  local.addEventListener('click',event=>{if(!event.target.closest('[data-go]')||!mobile.matches)return;sections.open=false;const heading=document.getElementById('pageTitle');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}});
  sections.addEventListener('keydown',event=>{if(event.key==='Escape'&&mobile.matches&&sections.open){event.preventDefault();sections.open=false;summary.focus()}});
 })();
+
+/* Central assistant access: no data transmitted by opening this link. */
+(()=>{function add(){const menu=document.querySelector('.eloah-global-nav');if(!menu||menu.querySelector('[data-central-ai]'))return;const a=document.createElement('a');a.dataset.centralAi='1';a.textContent='✦ ELOAH IA · Piloter';a.href='eloah-2040.html?rubrique='+encodeURIComponent(location.pathname.split('/').pop()+location.search)+'#assistant-reel';a.style.cssText='display:flex;align-items:center;padding:12px 16px;min-height:44px;color:inherit';menu.append(a)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();})();
