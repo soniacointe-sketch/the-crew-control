@@ -22,6 +22,23 @@ export function saveAction(storage,entry,id,now){
  list.push({id,title,project,date,status:'À faire',kind:'Action',note:text(entry.note),updated:now,origin:'eloah-2040-reviewed',approvedAt:now});
  storage.setItem(key,JSON.stringify(list));return true;
 }
+
+export const memoryKey='eloah-agent-memory-v1';
+export function validateMemory(value){
+ if(typeof value!=='string'||!value.trim()||value.length>6000||value.includes('\u0000'))throw Error('Utilise un texte non vide de 6 000 caractères maximum.');
+ return value;
+}
+export function readMemory(storage){
+ const raw=storage.getItem(memoryKey);if(raw===null)return null;
+ const item=JSON.parse(raw);
+ if(!item||item.version!==1)throw Error('Sauvegarde incompatible : aucune donnée remplacée.');
+ return {text:validateMemory(item.text),savedAt:typeof item.savedAt==='string'?item.savedAt:''};
+}
+export function persistMemory(storage,value){
+ const valid=validateMemory(value);
+ storage.setItem(memoryKey,JSON.stringify({version:1,text:valid,savedAt:new Date().toISOString()}));
+}
+
 export function mountPilot(){
  const host=document.getElementById('assistant-reel');if(!host)return;
  const box=document.createElement('section');box.id='ai-pilot';box.className='approval-box';
@@ -30,15 +47,36 @@ export function mountPilot(){
  const $=id=>document.getElementById(id),select=$('pilot-route'),form=$('pilot-action');let shared='',draftId=crypto.randomUUID();
 
  const memoryBox=document.createElement('details');
- memoryBox.innerHTML='<summary>Mémoire de mes agents</summary><p>Importe un fichier texte ou Markdown (6 000 caractères maximum). Il reste en mémoire dans cet onglet, sans sauvegarde automatique. Relis son contenu avant de le joindre au moteur IA choisi. Ce fichier ne donne aucune autorisation aux agents.</p><label>Fichier de mémoire<input id="pilot-memory-file" type="file" accept=".md,.txt,text/plain,text/markdown"></label><pre id="pilot-memory-preview" style="white-space:pre-wrap;max-height:20rem;overflow:auto"></pre><label><input id="pilot-memory-share" type="checkbox"> Joindre cette mémoire à mes demandes IA</label><button id="pilot-memory-clear" type="button">Retirer la mémoire</button><p id="pilot-memory-status" role="status"></p>';
+ memoryBox.innerHTML='<summary>Mémoire de mes agents</summary><p>Importe un fichier texte ou Markdown (6 000 caractères maximum). Il reste dans cet onglet sauf si tu choisis de le conserver sur cet appareil. Relis son contenu avant de le joindre au moteur IA choisi. Ce fichier ne donne aucune autorisation aux agents.</p><label>Fichier de mémoire<input id="pilot-memory-file" type="file" accept=".md,.txt,text/plain,text/markdown"></label><pre id="pilot-memory-preview" style="white-space:pre-wrap;max-height:20rem;overflow:auto"></pre><label><input id="pilot-memory-share" type="checkbox"> Joindre cette mémoire à mes demandes IA</label><button id="pilot-memory-clear" type="button">Retirer la mémoire</button><p>La sauvegarde sur cet appareil est accessible aux personnes utilisant ce navigateur. Elle est distincte de ton compte et ne se synchronise pas.</p><label><input id="pilot-memory-consent" type="checkbox"> Je souhaite conserver cette mémoire sur cet appareil.</label><button id="pilot-memory-save" type="button">Conserver sur cet appareil</button><button id="pilot-memory-load" type="button">Reprendre la sauvegarde</button><button id="pilot-memory-export" type="button">Exporter la mémoire</button><label><input id="pilot-memory-delete-consent" type="checkbox"> Je confirme la suppression de la sauvegarde sur cet appareil.</label><button id="pilot-memory-delete" type="button">Supprimer la sauvegarde</button><p id="pilot-memory-status" role="status"></p>';
  box.append(memoryBox);
  let agentMemory='',memoryRevision=0;
- const clearMemory=()=>{memoryRevision++;agentMemory='';$('pilot-memory-file').value='';$('pilot-memory-share').checked=false;$('pilot-memory-preview').textContent='';$('pilot-memory-status').textContent='Mémoire retirée de cet onglet. Les réponses déjà reçues ne sont pas effacées.'};
+ const clearMemory=()=>{memoryRevision++;agentMemory='';$('pilot-memory-consent').checked=false;$('pilot-memory-delete-consent').checked=false;$('pilot-memory-file').value='';$('pilot-memory-share').checked=false;$('pilot-memory-preview').textContent='';$('pilot-memory-status').textContent='Mémoire retirée de cet onglet. Les réponses déjà reçues ne sont pas effacées.'};
  $('pilot-memory-clear').onclick=clearMemory;
+ const memoryStatus=message=>{$('pilot-memory-status').textContent=message};
+ $('pilot-memory-save').onclick=()=>{try{
+  if(!$('pilot-memory-consent').checked)throw Error('Coche le choix de conservation sur cet appareil.');
+  persistMemory(localStorage,agentMemory);$('pilot-memory-consent').checked=false;memoryStatus('Mémoire sauvegardée sur cet appareil. Le partage IA reste un choix séparé.');
+ }catch(e){memoryStatus('Sauvegarde impossible : '+e.message)}};
+ $('pilot-memory-load').onclick=()=>{try{
+  const saved=readMemory(localStorage);if(!saved){memoryStatus('Aucune sauvegarde sur cet appareil.');return}
+  clearMemory();agentMemory=saved.text;$('pilot-memory-preview').textContent=agentMemory;
+  memoryStatus('Sauvegarde reprise. Relis la mémoire puis coche pour la joindre à l’IA.');
+ }catch(e){memoryStatus('Lecture impossible : '+e.message)}};
+ $('pilot-memory-export').onclick=()=>{try{
+  const data=validateMemory(agentMemory),url=URL.createObjectURL(new Blob([data],{type:'text/markdown;charset=utf-8'}));
+  const a=document.createElement('a');a.href=url;a.download='ELOAH-memoire-agents.md';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  memoryStatus('Export de la mémoire préparé.');
+ }catch(e){memoryStatus(e.message)}};
+ $('pilot-memory-delete').onclick=()=>{try{
+  if(!$('pilot-memory-delete-consent').checked)throw Error('Confirme la suppression avec la case dédiée.');
+  localStorage.removeItem(memoryKey);clearMemory();$('pilot-memory-delete-consent').checked=false;
+  memoryStatus('Sauvegarde supprimée sur cet appareil et mémoire retirée de cet onglet. Les exports et réponses antérieures restent inchangés.');
+ }catch(e){memoryStatus('Suppression impossible : '+e.message)}};
+
  $('pilot-memory-file').onchange=async e=>{
   const file=e.target.files[0];clearMemory();const revision=memoryRevision;if(!file)return;
   try{if(file.size>24000)throw Error('Fichier trop volumineux.');const value=await file.text();if(revision!==memoryRevision)return;
-   if(!value.trim()||value.length>6000||value.includes('\u0000'))throw Error('Utilise un texte non vide de 6 000 caractères maximum.');
+   validateMemory(value);
    agentMemory=value;$('pilot-memory-preview').textContent=value;$('pilot-memory-status').textContent='Mémoire chargée : '+value.length+' caractères. Relis puis coche pour la joindre.';
   }catch(error){if(revision===memoryRevision)$('pilot-memory-status').textContent=error.message;}
  };
