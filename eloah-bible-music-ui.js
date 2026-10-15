@@ -26,6 +26,7 @@ function voices(){
 const engineOptions=()=>({mode:$("style").value,scale:$("scale").value,bpm:Number($("bpm").value),
  greekVerses:$("musicLanguage").value==="greek"&&greekDoc?Object.fromEntries(greekDoc.verses.map(v=>[v.number,v.text])):null,
  preferGreek:$("musicLanguage").value==="greek",
+ greekEdition:greekDoc?.provider||"Aucune édition grecque disponible",
  root:48,volume:.44,drums:$("drums").checked,pad:$("pad").checked,variation:.3,barsPerVerse:2});
 function stop(opts={}){
  epoch++;
@@ -102,7 +103,7 @@ function renderDoc(){
  $("sourceCredit").textContent=(doc.credit||"Source non précisée")+(doc.provider?" · "+doc.provider:"")+(greekDoc&&$("musicLanguage").value==="greek"?" · Musique : "+greekDoc.credit:"");
  $("alphaEngineStatus").textContent="ALPHA · "+musicScore.scripture.greekVerses+"/"+musicScore.scripture.verseCount+" versets en grec réellement analysés, "+musicScore.scripture.structureOnlyVerses+" en mode structure · "+musicScore.stats.notes+" notes composées sur 12 paires, 7 voyelles, 9|8|7, 8|8|8, 4|4|10|12.";
  $("languageStatus").textContent=$("musicLanguage").value==="greek"?
-   (greekDoc?"Notes calculées sur le grec transmis ; les 24 lettres, rangs et valeurs ALPHA agissent dans la partition. La voix lit le français.":"Grec indisponible : structure ALPHA 12/24/7 sans déchiffrage alphabétique du français."):
+   (greekDoc?(greekDoc.complete?"Notes calculées sur le grec transmis ; 24 lettres, 12 paires et rangs ALPHA dirigent la partition. La voix lit le français.":"DÉMONSTRATION PARTIELLE : seul un extrait grec est disponible. Les autres versets suivent la structure ALPHA sans leur attribuer de lettres grecques."):"Grec indisponible : structure ALPHA 12/24/7 sans déchiffrage alphabétique du français."):
    "Mode structure ALPHA : rythmes 9|8|7, Ogdoades 8|8|8 et douze paires, sans isopséphie inventée du français.";
  $("verses").innerHTML=doc.verses.map((v,i)=>
   '<button type="button" class="verse" data-index="'+i+'" aria-pressed="false" aria-label="Lire à partir du verset '+v.number+'"><strong>'+v.number+'</strong>'+esc(v.text)+'</button>'
