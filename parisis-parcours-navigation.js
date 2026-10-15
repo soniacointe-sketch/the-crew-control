@@ -51,6 +51,7 @@ var next=add(links,make("a","pe-reader-primary",""));
 if(i<c.steps.length-1){add(next,make("span","","ÉTAPE SUIVANTE →"));next.appendChild(document.createTextNode(c.steps[i+1].title));next.href=safe(c.steps[i+1].href)}
 else{add(next,make("span","","FIN DES ÉTAPES ACTUELLES →"));next.appendChild(document.createTextNode("Ouvrir les indices et pistes à vérifier"));next.href=safe(c.network)}
 var tools=add(bar,make("nav","pe-reader-tools"));tools.setAttribute("aria-label","Autres outils de ce dossier");
+var book=add(tools,make("a","","📖 Lire dans le Grand Livre ↗"));book.href="parisis-lecteur.html?cycle="+encodeURIComponent(c.id)+"&step="+(i+1);
 var full=add(tools,make("a","","Toutes les étapes de cette enquête ↗"));full.href=safe(c.trail);
 var home=add(tools,make("a","","Retour à l'accueil guidé ↗"));home.href="eloah-parisis.html#peHomeGuide";
 var net=add(tools,make("a","",c.id==="alpha"?"Explorer les autres jalons ALPHA ↗":"Correspondances et contre-tests ↗"));net.href=safe(c.network);
