@@ -8,6 +8,8 @@
 
 > **Conclusion principale : les 32 frênes sont réels, mais datent de 2015.** Le dossier possède une preuve contemporaine du nombre, de la date approximative de plantation, du donateur et de la fonction paysagère du jardin. Il n'a pas identifié de document affirmant que le concepteur voulait recréer le puits d'Urðr. Il existe néanmoins un passage **authentique** de la poésie nordique médiévale associant le Christ au puits d'Urðr, qu'il faut étudier séparément.
 
+**Complément technique documenté du 15 octobre 2026 :** [LOURDES-004 — 32 Fraxinus « Redwood », 3 640 m², équipe ALEP et édition universitaire sur le Christ au puits d'Urðr](foi-control.html?file=eloah-foi-lourdes-004-plan-paysager-christ-puits-urdr.md). Ce chapitre fournit les spécifications issues de la revue *Espace public & Paysage* (mai 2017) et une interprétation philologique documentée des vers d'Eilífr. Le plan de plantation expliquant le **nombre exact 32** reste à obtenir.
+
 ## I. Pièce A — Une source datée : 26 mars 2015
 
 L'article **« Des frênes à la grotte »**, *La Dépêche du Midi*, **26 mars 2015**, fournit les informations suivantes :
