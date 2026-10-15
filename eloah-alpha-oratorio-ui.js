@@ -25,7 +25,7 @@ function updateTrackSelection(highlight){
  $("movements").querySelectorAll(".track").forEach(el=>{
   const k=Number(el.dataset.index);
   el.setAttribute("aria-pressed",String(k===selected));
-  el.classList.toggle("current",Boolean(highlight&&k===highlight));
+  el.classList.toggle("current",highlight>=0&&k===highlight);
  });
 }
 function renderTracks(){
