@@ -47,3 +47,14 @@ q('eloahReadPrev').onclick=()=>start(at-1);q('eloahReadNext').onclick=()=>start(
 rate.onchange=()=>{if(enabled)start(at);};voice.onchange=()=>{if(enabled)start(at);};
 window.addEventListener('pagehide',stop);
 })();
+
+/* Power & Glam 2040 visual layer: appearance only. */
+(()=>{'use strict';
+ const apply=()=>{
+  if(location.pathname.split('/').pop()!=='power-glam-control.html'||document.getElementById('power-glam-2040-theme'))return;
+  document.body.classList.add('power-glam-2040');
+  const meta=document.querySelector('meta[name="theme-color"]');if(meta)meta.setAttribute('content','#160912');
+  const link=document.createElement('link');link.id='power-glam-2040-theme';link.rel='stylesheet';link.href='power-glam-2040.css?v=20261015';document.head.append(link);
+ };
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
+})();
