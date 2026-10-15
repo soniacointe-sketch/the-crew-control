@@ -97,3 +97,13 @@ Ces textes peuvent être comparés par motifs, **sans** supposer une origine uni
 ---
 
 **Gouvernance :** document préparé dans PARISIS ENGINE / HUMANITIES LAB, pour examen et décisions ultérieures de Sonia. Les fiches de l'interface ELOAH sont un index de travail et les données personnelles ajoutées dans le navigateur restent stockées localement : GitHub ne synchronise pas automatiquement ces ajouts privés.
+
+
+### 10. Continuations documentaires — 15 octobre 2026
+
+Le dossier maître ALPHA-001 reste conservé sans altération des sections précédentes. Deux enquêtes nouvelles prolongent la comparaison, avec leurs propres listes de sources et les niveaux de preuve :
+
+- [**ALPHA-010 — Les 24 lettres et le corps de la Vérité**](parisis-alpha-010-marcus-aletheia-24-lettres.md) : Irénée I,14–15 et I,20 ; Marcus, Alètheia, 12 paires, 24 lettres, 888 et 801.
+- [**ALPHA-011 — Sept voyelles, sept cieux et Apocalypse**](parisis-alpha-011-sept-voyelles-sept-cieux-apocalypse.md) : Irénée, textes bibliques, P.Vindob. G 328, traditions gréco-égyptiennes, chronologie comparée.
+
+Ces prolongements sont des enquêtes distinctes et non des preuves d'une doctrine secrète commune.
