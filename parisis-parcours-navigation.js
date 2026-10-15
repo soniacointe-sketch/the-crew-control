@@ -2,6 +2,9 @@
    Le repère de progression garde seulement le dernier chapitre ouvert, local à l'appareil. */
 (function(){
 "use strict";
+if(window.__peReaderChapterNavigation)return;window.__peReaderChapterNavigation=true;
+/* In the Grand Livre iframe, all navigation is controlled by the parent reader. */
+try{if(window.self!==window.top)return}catch(e){return}
 var currentFile=decodeURIComponent(location.pathname.split("/").pop()||"");
 if(!currentFile||!/^parisis-[a-z0-9-]+\.html$/i.test(currentFile))return;
 var data=null,bar=null;
