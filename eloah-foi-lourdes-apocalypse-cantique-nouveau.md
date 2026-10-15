@@ -8,6 +8,8 @@
 
 > **Méthode.** Séparer **texte biblique**, **récit des apparitions reconnu par l’Église**, **histoire documentaire**, **tradition légendaire** et **interprétation symbolique**. Les rapprochements n’établissent ni un secret caché, ni une prophétie de catastrophe imminente.
 
+**Vidéo analysée :** [VIDÉO-001 — Lourdes au cœur de l'Apocalypse !, restitution originale minutée et fact-check](foi-control.html?file=eloah-foi-video-lourdes-apocalypse-oleg-2026.md). Étude du cantique et des théories présentées, sans confusion entre faits établis et interprétations.
+
 ## 1 — Les apparitions de Lourdes et la conversion
 
 Selon le récit reconnu par l’Église catholique, Bernadette Soubirous **avait 14 ans**, et non 12, lors de la première apparition le **11 février 1858** à la grotte de Massabielle. Elle a rapporté **18 apparitions**, la dernière étant datée du **16 juillet 1858**. L’évêque les a reconnues le **18 janvier 1862**.
