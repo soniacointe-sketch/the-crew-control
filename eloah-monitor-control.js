@@ -68,13 +68,13 @@ function metrics(){const num=[...checks.values()].filter(x=>x==='ok').length;con
  $('#health-caption').textContent=lastCheck?'Dernier test HTTP : '+stamp(lastCheck):'Pas de test HTTP exécuté';
 }
 function cards(){
- const list=universes.filter(u=>(filter==='all'||(filter==='priority'&&stateOf(u)==='priority')||(filter==='active'&&stateOf(u)==='active')||(filter==='creation'&&['Création','Édition','Identité'].includes(u.type)))&&(!term||(u.name+' '+u.type+' '+u.desc).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''))));
+ const list=universes.filter(u=>(filter==='all'||(filter==='priority'&&stateOf(u)==='priority')||(filter==='active'&&stateOf(u)==='active')||(filter==='creation'&&['Création','Édition','Identité'].includes(u.type)))&&(!term||(u.name+' '+u.type+' '+u.desc).toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').includes(term.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')))).sort((a,b)=>({priority:0,active:1,watch:2}[stateOf(a)]-{priority:0,active:1,watch:2}[stateOf(b)]));
  $('#universe-grid').innerHTML=list.map(u=>{
  const state=checks.get(u.id)||'unknown';
  const text=state==='ok'?'Page joignable':state==='fail'?'Page non joignable':state==='checking'?'Vérification…':'Non vérifiée';
- return '<article class="universe"><div class="top"><span class="sign" aria-hidden="true">'+u.icon+'</span><span class="state" data-state="'+(state==='ok'?'ok':state==='fail'?'fail':'unknown')+'"><i class="dot '+(state==='ok'?'good':state==='fail'?'bad':'unknown')+'"></i>'+text+'</span></div><h3>'+esc(u.name)+'</h3><p>'+esc(u.desc)+'</p><div class="tools"><a href="'+u.url+'" aria-label="Ouvrir '+esc(u.name)+'">Ouvrir l’univers →</a>'+ (u.other?'<a href="'+u.other+'">'+esc(u.otherLabel)+' ↗</a>':'')+'<button type="button" class="flag" data-focus="'+u.id+'" aria-label="Changer le suivi de '+esc(u.name)+'" aria-pressed="'+(stateOf(u)==='priority')+'">'+pretty[stateOf(u)]+' ⟳</button></div></article>';
+ return '<article class="universe"><div class="top"><span class="sign" aria-hidden="true">'+u.icon+'</span><span class="state" data-state="'+(state==='ok'?'ok':state==='fail'?'fail':'unknown')+'"><i class="dot '+(state==='ok'?'good':state==='fail'?'bad':'unknown')+'"></i>'+text+'</span></div><h3>'+esc(u.name)+'</h3><p>'+esc(u.desc)+'</p><div class="tools"><a href="'+u.url+'" aria-label="Ouvrir '+esc(u.name)+'">Ouvrir l’univers →</a>'+ (u.other?'<a href="'+u.other+'">'+esc(u.otherLabel)+' ↗</a>':'')+'<button type="button" class="flag" data-focus="'+u.id+'" aria-label="Changer le suivi de '+esc(u.name)+'" title="Changer le suivi : À suivre → En cours → Prioritaire → À suivre">'+pretty[stateOf(u)]+' ⟳</button></div></article>';
  }).join('')||'<div class="empty">Aucun univers pour ce filtre.</div>';
- $('#universe-count').textContent=list.length+' univers affichés · les états de suivi sont manuels et conservés sur cet appareil.';
+ $('#universe-count').textContent=list.length+' univers affichés · les priorités sont triées en premier et conservées sur cet appareil.';
  metrics();
 }
 function renderAudit(){
@@ -116,7 +116,7 @@ async function readExternal(){try{
 }
 function exportReport(){
  if(!authorized)return;
- const lines=[['Type','Univers','Adresse relative','État de la page publique','Suivi manuel','Date du test'],...universes.map(u=>['DÉMONSTRATION DE SUPERVISION',u.name,u.url,checks.get(u.id)||'non vérifié',pretty[stateOf(u)],lastCheck?new Date(lastCheck).toISOString():''])];
+ const lines=[['Type','Univers','Adresse relative','État de la page publique','Suivi manuel','Date du test'],...universes.map(u=>['CONTROLE_HTTP_PUBLIC',u.name,u.url,checks.get(u.id)||'non vérifié',pretty[stateOf(u)],lastCheck?new Date(lastCheck).toISOString():''])];
  const quote=s=>{const v=String(s??'');return '"'+( /^[\s]*[=+\-@\t\r]/.test(v)?"'"+v:v).replace(/"/g,'""')+'"';};
  const str='\ufeff'+lines.map(row=>row.map(quote).join(';')).join('\r\n');
  const blob=new Blob([str],{type:'text/csv;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='eloah-monitor-etat-pages-publiques.csv';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),30000);event('Rapport non confidentiel exporté.');
