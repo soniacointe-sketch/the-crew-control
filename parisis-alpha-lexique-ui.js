@@ -34,7 +34,7 @@ section.innerHTML='<div class="al-tag">LECTURE SÉMANTIQUE · DICTIONNAIRE DE TR
 '<p class="al-small">Les valeurs numériques et les parties du corps ne sont pas des traductions. Ce lexique distingue les mots attestés, leur sens possible et les formes inconnues.</p>'+
 '<div id="alSelection" role="status" aria-live="polite">Sélectionne un mot grec.</div>'+
 '<div class="al-tag">FORMES RECONNUES DANS LE PASSAGE</div><div id="alTokens" class="al-tokens"></div>'+
-'<p class="al-muted">Lexique limité : la flexion grecque complète, les ambiguïtés et la syntaxe ne sont pas automatiquement résolues. Consulter les dictionnaires de référence avant de conclure.</p>';
+'<p class="al-muted">Lexique limité : la flexion grecque complète, les ambiguïtés et la syntaxe ne sont pas automatiquement résolues. Consulter les dictionnaires de référence avant de conclure.</p>'+'<button type="button" id="alExport" class="btn secondary" style="margin-top:7px">Exporter les gloses et calculs (JSON)</button>';
 details.insertAdjacentElement("afterend",section);
 const selected=document.getElementById("alSelection"),tokens=document.getElementById("alTokens");
 let activeIndex=0;
@@ -83,5 +83,20 @@ tokens.addEventListener("click",event=>{
 });
 const observer=new MutationObserver(()=>{render()});
 observer.observe(cloud,{childList:true});
+document.getElementById("alExport").addEventListener("click",function(){
+ const r=reader.analyzeText(input.value,{mode:document.getElementById("alphaMode")?.value||"greek"});
+ const annotations=lex.annotate(input.value);
+ const payload={engine:reader.version,lexicon:lex.version,exportedAt:new Date().toISOString(),
+   interpretation:"Gloses de travail sur formes exactes, PAS traduction automatique ni preuve d'une doctrine.",
+   sourceText:input.value,stats:r.stats,
+   words:annotations.map((entry,i)=>({index:i,original:entry.word,normalized:entry.normalized,recognized:entry.recognized,
+     possibleLemmas:entry.matches.map(m=>({lemma:m.lemma,gloss:m.gloss,category:m.category,reference:m.reference})),
+     rankTotal:r.words[i]?.alphabetRanksTotal??null,isopsephy:r.words[i]?.isopsephy??null,
+     bodyParts:r.words[i]?.bodyCounts||[]}))};
+ const blob=new Blob([JSON.stringify(payload,null,2)],{type:"application/json;charset=utf-8"});
+ const url=URL.createObjectURL(blob),anchor=document.createElement("a");
+ anchor.href=url;anchor.download="ALPHA-LEXIQUE-lecture.json";document.body.appendChild(anchor);anchor.click();anchor.remove();
+ setTimeout(()=>URL.revokeObjectURL(url),4000);
+});
 render();
 })();
