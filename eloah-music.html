@@ -188,6 +188,59 @@ body,.main,.body{font-size:var(--music-base);line-height:1.5}
 .track{grid-template-columns:35px minmax(0,1fr) repeat(5,auto);gap:7px}
 .track:has(.music2040-checkbox){grid-template-columns:20px 35px minmax(0,1fr) repeat(5,auto)}
 @media(max-width:750px){.track{grid-template-columns:26px minmax(0,1fr) repeat(5,minmax(22px,auto));gap:3px}.track:has(.music2040-checkbox){grid-template-columns:18px 26px minmax(0,1fr) repeat(5,minmax(22px,auto))}.track button[data-dj-load]{width:23px;min-height:24px;font-size:10px!important}}
+
+/* ELOAH MUSIC 2040 STAGE MODE V15 */
+.stage2040[hidden]{display:none!important}
+.stage2040{position:fixed;inset:0;z-index:99999;background:radial-gradient(circle at 50% -20%,#5c265c 0%,transparent 42%),#080510;color:#fdf5fb;font:13px Inter,system-ui,-apple-system,sans-serif;overflow:auto;overscroll-behavior:contain}
+body.stage2040-active{overflow:hidden!important}
+.stage2040-shell{max-width:1480px;min-height:100dvh;margin:0 auto;padding:clamp(10px,1.6vw,22px);padding-bottom:max(20px,env(safe-area-inset-bottom));display:flex;flex-direction:column;gap:clamp(10px,1.2vw,18px)}
+.stage2040-header{display:flex;align-items:center;justify-content:space-between;gap:12px;border-bottom:1px solid #6d4270;padding:3px 4px 12px}
+.stage2040-kicker{font-size:10px;font-weight:800;letter-spacing:.2em;color:#e4c99c}
+.stage2040-header h2{margin:4px 0 0;font-size:clamp(20px,2.5vw,35px);line-height:1.1;font-weight:800;letter-spacing:.02em;color:white}
+.stage2040-header-actions{display:flex;align-items:center;gap:10px}
+.stage2040-live{font-size:11px;font-weight:750;color:#f1c7e1;white-space:nowrap}
+.stage2040 button{color:#ffedf9;background:#48254d;border:1px solid #865983;border-radius:10px;min-height:42px;padding:10px 14px;font:700 12px Inter,system-ui,sans-serif;touch-action:manipulation}
+.stage2040 button:hover:not(:disabled){background:#714070}
+.stage2040 button:disabled{opacity:.36;cursor:not-allowed}
+.stage2040 button:focus-visible,.stage2040 select:focus-visible,.stage2040 input:focus-visible{outline:2px solid #f4ceec;outline-offset:3px}
+.stage2040-header button{background:#22142d;border-color:#70476c}
+.stage2040-decks{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(9px,1.5vw,20px);flex:1}
+.stage2040-deck{min-width:0;display:flex;flex-direction:column;align-items:center;gap:clamp(5px,.6vw,10px);padding:clamp(12px,1.4vw,20px);border:1px solid #68436b;border-radius:16px;background:linear-gradient(153deg,#24162c,#110b19);text-align:center}
+.stage2040-deck-b{background:linear-gradient(155deg,#361d3e,#140b1b)}
+.stage2040-deck-top{display:flex;width:100%;justify-content:space-between;gap:8px;color:#e7cfa4;font-size:11px;font-weight:800;letter-spacing:.13em;text-align:left}
+.stage2040-deckmode{font-size:10px;color:#dec1de}
+.stage2040-disc{width:clamp(96px,13vw,188px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;flex-shrink:0;background:repeating-radial-gradient(circle at 50% 50%,#22172c 0 9px,#4e2855 10px 11px,#190f23 12px 15px);border:5px solid #8f5b8a;box-shadow:0 0 25px #c13d9b40;position:relative}
+.stage2040-disc::before{content:"";position:absolute;inset:30%;border-radius:50%;background:#e1bf9a;box-shadow:inset 0 0 0 9px #4b2e4f}
+.stage2040-disc span{position:relative;z-index:1;color:#352238;font-size:18px;font-weight:900}
+.stage2040-disc.spinning{animation:stage2040spin 3s linear infinite}
+@keyframes stage2040spin{to{transform:rotate(360deg)}}
+@media(prefers-reduced-motion:reduce){.stage2040-disc.spinning{animation:none}}
+.stage2040-deck strong{font-size:clamp(14px,1.7vw,22px);line-height:1.2;max-width:100%;overflow-wrap:anywhere}
+.stage2040-deck p{font-size:12px!important;margin:0;color:#cdb5d0!important}
+.stage2040-seek{width:100%;margin-top:auto;display:flex;align-items:center;gap:10px}
+.stage2040-seek input{flex:1;min-width:0;accent-color:#e27dbd;height:22px;touch-action:pan-y}
+.stage2040-seek span{font-size:11px;white-space:nowrap;font-variant-numeric:tabular-nums;color:#e7cfa4}
+.stage2040-controls{display:flex;justify-content:center;gap:9px;flex-wrap:wrap;width:100%}
+.stage2040-controls button{min-width:55px}
+.stage2040-controls .stage2040-play{width:62px;min-height:52px;background:#e8c8a0;color:#241427;font-size:22px;border-color:#f1d7b5;border-radius:14px}
+.stage2040-selectlabel{width:100%;text-align:left;font-size:10px;font-weight:750;color:#e7cda5}
+.stage2040-deck select{width:100%;background:#1b1023;border:1px solid #8b5889;border-radius:9px;color:#fff1f7;min-height:40px;padding:8px;font-size:12px}
+.stage2040-bcontrols button{flex:1 1 28%;padding:10px 7px}
+.stage2040-mixer{border:1px solid #81517b;border-radius:14px;background:linear-gradient(120deg,#301736,#170d21);padding:clamp(12px,1.4vw,20px);display:flex;flex-direction:column;gap:9px}
+.stage2040-cross-labels{display:flex;align-items:center;justify-content:space-between;gap:9px;font-size:10px;letter-spacing:.12em;color:#e7cea7}
+.stage2040-cross-labels strong{font-size:11px;color:#f4d1ed}
+.stage2040-mixer>input{width:100%;height:24px;accent-color:#e77ac5;touch-action:pan-y}
+.stage2040-mixrow{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.stage2040-mixrow label{display:flex;gap:11px;align-items:center;color:#dfc7e0;font-size:11px;font-weight:700}
+.stage2040-mixrow input{flex:1;min-width:0;accent-color:#e77ac5}
+.stage2040-actions{display:flex;flex-wrap:wrap;gap:8px}
+.stage2040-actions button{flex:1;background:#512b53}
+.stage2040-actions button:first-child{background:#7c3a6c}
+#stage2040status{font-size:12px!important;margin:0!important;color:#e8d0ad!important}
+.stage2040-footer{display:flex;justify-content:space-between;gap:9px;color:#ae92b1;font-size:10px;letter-spacing:.07em}
+@media(max-width:750px){.stage2040-shell{gap:8px;padding:9px;padding-top:max(9px,env(safe-area-inset-top));padding-bottom:max(15px,env(safe-area-inset-bottom))}.stage2040-decks{grid-template-columns:1fr}.stage2040-deck{padding:11px;gap:6px}.stage2040-deck-top{font-size:10px}.stage2040-disc{width:95px;border-width:3px}.stage2040-deck strong{font-size:16px}.stage2040-controls button{min-height:42px}.stage2040-mixer{padding:11px}.stage2040-header h2{font-size:21px}.stage2040-live{display:none}.stage2040-mixrow{gap:7px}.stage2040-mixrow label{font-size:10px;flex-direction:column;align-items:stretch}.stage2040-footer{font-size:9px;flex-wrap:wrap}}
+@media(max-height:700px) and (min-width:751px){.stage2040-disc{width:min(10vw,120px)}.stage2040-deck{gap:5px}.stage2040-shell{gap:8px}.stage2040-deck p{font-size:11px!important}}
+@media(orientation:landscape) and (max-width:900px){.stage2040-decks{grid-template-columns:repeat(2,minmax(0,1fr))}.stage2040-disc{width:80px}.stage2040-deck{gap:4px}.stage2040-deck select{min-height:35px}.stage2040-actions button{padding:8px}}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
@@ -196,7 +249,7 @@ body,.main,.body{font-size:var(--music-base);line-height:1.5}
 <div class="music2040-head"><div><span class="music2040-kicker">ELOAH 2040 · COMMANDE MUSICALE</span><h2>Ton cockpit sonore</h2></div><span class="music2040-pill">✦ Mode personnel</span></div>
 <label class="music2040-search" for="music2040query"><span aria-hidden="true">⌕</span><input id="music2040query" type="search" placeholder="Trouver un titre ou un artiste…" autocomplete="off" aria-label="Rechercher dans ma bibliothèque"></label>
 <div class="music2040-stats" id="music2040stats" aria-live="polite"><span><strong id="music2040tracks">0</strong> titres</span><span><strong id="music2040lists">0</strong> playlists</span><span><strong id="music2040likes">0</strong> favoris</span></div>
-<div class="music2040-actions"><button type="button" data-music2040="library">♫ Ma bibliothèque</button><button type="button" data-music2040="favorites">♡ Mes favoris</button><button type="button" data-music2040="playlist">＋ Créer une playlist</button><button type="button" data-music2040="queue">☷ File d’attente</button><button type="button" data-music2040="cloud">☁ Mon cloud</button></div>
+<div class="music2040-actions"><button type="button" id="dj2040stageOpen" aria-haspopup="dialog">⛶ Mode DJ scène</button><button type="button" data-music2040="library">♫ Ma bibliothèque</button><button type="button" data-music2040="favorites">♡ Mes favoris</button><button type="button" data-music2040="playlist">＋ Créer une playlist</button><button type="button" data-music2040="queue">☷ File d’attente</button><button type="button" data-music2040="cloud">☁ Mon cloud</button></div>
 <details class="music2040-mix" id="music2040mix">
 <summary><span>◉ Mix Studio</span><span class="music2040-mixbadge">Tempo · Cue · Boucle · Fondus</span></summary>
 <div class="music2040-mixbody">
@@ -256,6 +309,45 @@ body,.main,.body{font-size:var(--music-base);line-height:1.5}
 <div class="rowtitle"><h2>Spotify dans ELOAH</h2></div><p class="muted">Colle un lien Spotify de titre, album, artiste, émission ou playlist pour l’ouvrir dans son lecteur officiel intégré. La lecture et la connexion dépendent de Spotify.</p><div id="embeds"></div></div></main></div>
 <footer class="player"><div class="playing"><div class="cover">♫</div><div style="min-width:0"><b id="nowName">Aucun titre sélectionné</b><small id="nowArtist">Ajoute tes fichiers audio pour écouter</small><small id="music2040context">Lecture : bibliothèque</small></div><button id="heart" aria-label="Favori" style="background:transparent;color:#caaa7d;font-size:23px">♡</button></div><div class="controls"><div><button id="shuffle" aria-label="Lecture aléatoire" title="Lecture aléatoire">⇄</button><button id="prev" aria-label="Précédent">⏮</button><button id="play" aria-label="Lecture">▶</button><button id="next" aria-label="Suivant">⏭</button><button id="repeat" aria-label="Répétition" title="Répétition désactivée">↻</button><button id="queueBtn" aria-label="File d’attente" title="File d’attente">☷</button></div><input class="progress" type="range" id="seek" min="0" max="100" value="0" aria-label="Progression"></div><div class="right"><span>🔊</span><input type="range" min="0" max="100" value="75" id="volume" aria-label="Volume"></div></footer>
 <input type="file" id="coverFile" accept="image/png,image/jpeg,image/webp" hidden><input type="file" id="files" accept="audio/*,.mp3,.wav,.ogg,.m4a,.flac" multiple hidden><audio id="audio"></audio>
+
+<!-- ELOAH Music 2040 · Stage overlay -->
+<section class="stage2040" id="dj2040stage" role="dialog" aria-modal="true" aria-labelledby="stage2040heading" hidden>
+ <div class="stage2040-shell">
+  <header class="stage2040-header">
+   <div><span class="stage2040-kicker">ELOAH 2040 · THE CREW · DJ MODE</span><h2 id="stage2040heading">DJ STAGE</h2></div>
+   <div class="stage2040-header-actions"><span class="stage2040-live" id="stage2040live">● PRÊT</span><button type="button" id="stage2040close" aria-label="Fermer le mode scène">✕ Quitter</button></div>
+  </header>
+  <div class="stage2040-decks">
+   <section class="stage2040-deck stage2040-deck-a" aria-label="Platine A, musique principale">
+    <div class="stage2040-deck-top"><span>01 / PLATINE A</span><span class="stage2040-deckmode">DIFFUSION</span></div>
+    <div class="stage2040-disc" id="stage2040discA" aria-hidden="true"><span>♫</span></div>
+    <strong id="stage2040titleA">Aucun titre sélectionné</strong><p id="stage2040artistA">Lecture principale</p>
+    <div class="stage2040-seek"><input id="stage2040seekA" type="range" min="0" max="100" value="0" aria-label="Avancer dans le titre A"><span id="stage2040timeA">0:00 / --:--</span></div>
+    <div class="stage2040-controls"><button type="button" id="stage2040prev" aria-label="Titre précédent">⏮</button><button type="button" id="stage2040play" class="stage2040-play" aria-label="Lire ou mettre en pause A">▶</button><button type="button" id="stage2040next" aria-label="Titre suivant">⏭</button></div>
+   </section>
+   <section class="stage2040-deck stage2040-deck-b" aria-label="Platine B, titre suivant">
+    <div class="stage2040-deck-top"><span>02 / PLATINE B</span><span class="stage2040-deckmode">PRÉPARATION</span></div>
+    <div class="stage2040-disc" id="stage2040discB" aria-hidden="true"><span>♫</span></div>
+    <strong id="stage2040titleB">Aucun titre chargé</strong><p id="stage2040artistB">Préécoute du prochain morceau</p>
+    <label class="stage2040-selectlabel" for="stage2040choose">Choisir un morceau</label>
+    <select id="stage2040choose"><option value="">Choisir dans ma bibliothèque…</option></select>
+    <div class="stage2040-seek"><input id="stage2040seekB" type="range" min="0" max="100" value="0" disabled aria-label="Avancer dans le titre B"><span id="stage2040timeB">0:00 / --:--</span></div>
+    <div class="stage2040-controls stage2040-bcontrols"><button type="button" id="stage2040loadB">↓ Charger B</button><button type="button" id="stage2040playB" disabled>▶ Préécouter</button><button type="button" id="stage2040cueB" disabled>↶ Début</button></div>
+   </section>
+  </div>
+  <section class="stage2040-mixer" aria-label="Mixage des deux platines">
+   <div class="stage2040-cross-labels"><span>A · PRINCIPAL</span><strong>FONDU CROISÉ</strong><span>B · SUIVANT</span></div>
+   <input id="stage2040cross" type="range" min="0" max="100" value="0" aria-label="Fondu croisé entre A et B">
+   <div class="stage2040-mixrow">
+    <label>Volume général <input id="stage2040master" type="range" min="0" max="100" value="75" aria-label="Volume général"></label>
+    <label>Niveau B <input id="stage2040gainB" type="range" min="0" max="100" value="65" aria-label="Niveau de la platine B"></label>
+   </div>
+   <div class="stage2040-actions"><button id="stage2040auto" type="button" disabled>↗ Transition 3 s</button><button id="stage2040take" type="button" disabled>→ B devient A</button><button id="stage2040reset" type="button">⟲ Réinitialiser le mix</button></div>
+   <p id="stage2040status" aria-live="polite" role="status">Charge un titre B pour préparer la transition.</p>
+  </section>
+  <footer class="stage2040-footer"><span>THE CREW · LIVE MUSIC CONTROL</span><span>Échap ou Quitter pour revenir à ELOAH Music</span></footer>
+ </div>
+</section>
 <dialog id="modal" class="dialog"><button class="close" id="closeModal">×</button><h2 id="modalTitle">Ajouter</h2><div id="modalBody"></div></dialog>
 <script>
 (()=>{'use strict';
@@ -371,13 +463,14 @@ let djTrackId=null,djLoading=0,djAnimating=0,djTransitioning=false,djPreviewMode
 const djMaster=()=>Math.max(0,Math.min(1,Number($('volume').value)/100));
 const djGain=()=>Math.max(0,Math.min(1,Number($('dj2040gain').value)/100));
 const djPercent=()=>Math.max(0,Math.min(1,Number($('dj2040fader').value)/100));
-function djMessage(message){$('dj2040message').textContent=message;}
+function djMessage(message){$('dj2040message').textContent=message;if(!stage2040Panel.hidden)$('stage2040status').textContent=message;}
 /* ELOAH MUSIC 2040 DJ CONTROL V14 */
 function djFormatTime(sec){
  if(!Number.isFinite(sec)||sec<0)return '--:--';
  const v=Math.floor(sec);return Math.floor(v/60)+':'+String(v%60).padStart(2,'0');
 }
 function djUpdateTimers(){
+ stage2040Sync();
  const ad=audio.duration,bd=djAudio.duration;
  $('dj2040progressA').value=Number.isFinite(ad)&&ad>0?Math.min(1,audio.currentTime/ad):0;
  $('dj2040timeA').textContent=djFormatTime(audio.currentTime)+' / '+djFormatTime(ad);
@@ -417,6 +510,7 @@ function djSetMasterLevels(){
  announceMusic();
 }
 function djSync(){
+ stage2040Sync();
  const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
  $('dj2040titleA').textContent=a?.title||'Aucun titre en lecture';
  $('dj2040subA').textContent=a?.artist||'Utilise ton lecteur habituel en bas de page.';
@@ -548,6 +642,100 @@ if(typeof djAudio.setSinkId==='function'&&navigator.mediaDevices?.selectAudioOut
   }catch(e){djMessage('Sortie séparée non disponible ou sélection annulée.');}
  };
 }
+
+
+/* ELOAH MUSIC 2040 STAGE MODE V15 */
+let stage2040Native=false,stage2040PreviousFocus=null,stage2040Index='';
+const stage2040Panel=$('dj2040stage');
+function stage2040Sync(){
+ if(stage2040Panel.hidden)return;
+ const a=tracks[current],b=tracks.find(t=>t.id===djTrackId);
+ $('stage2040titleA').textContent=a?.title||'Aucun titre sélectionné';
+ $('stage2040artistA').textContent=a?.artist||'Lecture principale';
+ $('stage2040titleB').textContent=b?.title||'Aucun titre chargé';
+ $('stage2040artistB').textContent=b?.artist||'Préécoute du prochain morceau';
+ $('stage2040discA').classList.toggle('spinning',!!a&&!audio.paused);
+ $('stage2040discB').classList.toggle('spinning',!!b&&!djAudio.paused);
+ $('stage2040live').textContent=a&&!audio.paused?'● EN DIRECT':'● PRÊT';
+ $('stage2040play').textContent=audio.paused?'▶':'⏸';
+ $('stage2040playB').textContent=djAudio.paused?'▶ Préécouter':'⏸ Pause B';
+ $('stage2040timeA').textContent=djFormatTime(audio.currentTime)+' / '+djFormatTime(audio.duration);
+ $('stage2040timeB').textContent=b?djFormatTime(djAudio.currentTime)+' / '+djFormatTime(djAudio.duration):'0:00 / --:--';
+ $('stage2040seekA').value=String(Number.isFinite(audio.duration)&&audio.duration>0?Math.round(100*audio.currentTime/audio.duration):0);
+ $('stage2040seekB').value=String(Number.isFinite(djAudio.duration)&&djAudio.duration>0?Math.round(100*djAudio.currentTime/djAudio.duration):0);
+ $('stage2040seekA').disabled=!a||!Number.isFinite(audio.duration)||audio.duration<=0;
+ $('stage2040seekB').disabled=!b||!Number.isFinite(djAudio.duration)||djAudio.duration<=0||djTransitioning;
+ $('stage2040playB').disabled=!b||djTransitioning;
+ $('stage2040cueB').disabled=!b||djTransitioning;
+ $('stage2040auto').disabled=!b||!a||djTransitioning;
+ $('stage2040take').disabled=!b||djTransitioning;
+ $('stage2040cross').value=$('dj2040fader').value;
+ $('stage2040master').value=$('volume').value;
+ $('stage2040gainB').value=$('dj2040gain').value;
+ $('stage2040status').textContent=$('dj2040message').textContent;
+ const ids=tracks.map(t=>t.id).join('\u0001');
+ if(stage2040Index!==ids){
+  stage2040Index=ids;
+  const select=$('stage2040choose'),chosen=select.value;
+  select.replaceChildren(new Option('Choisir dans ma bibliothèque…',''));
+  for(const t of tracks)select.add(new Option(t.title+' · '+t.artist,t.id));
+  select.value=tracks.some(t=>t.id===chosen)?chosen:'';
+ }
+}
+async function stage2040Open(){
+ stage2040PreviousFocus=document.activeElement;
+ stage2040Panel.hidden=false;document.body.classList.add('stage2040-active');
+ stage2040Sync();$('stage2040close').focus();
+ if(stage2040Panel.requestFullscreen){
+  try{await stage2040Panel.requestFullscreen();stage2040Native=document.fullscreenElement===stage2040Panel}
+  catch(e){stage2040Native=false}
+ }
+}
+function stage2040Close(){
+ stage2040Panel.hidden=true;document.body.classList.remove('stage2040-active');
+ $('stage2040discA').classList.remove('spinning');$('stage2040discB').classList.remove('spinning');
+ if(document.fullscreenElement===stage2040Panel)document.exitFullscreen().catch(()=>{});
+ stage2040Native=false;
+ if(stage2040PreviousFocus?.focus)stage2040PreviousFocus.focus();
+}
+$('dj2040stageOpen').onclick=stage2040Open;
+$('stage2040close').onclick=stage2040Close;
+document.addEventListener('fullscreenchange',()=>{
+ if(document.fullscreenElement===stage2040Panel){stage2040Native=true;return;}
+ if(stage2040Native&&!stage2040Panel.hidden)stage2040Close();
+});
+stage2040Panel.addEventListener('keydown',event=>{
+ if(event.key==='Escape'){event.preventDefault();stage2040Close();return}
+ if(event.key==='Tab'){
+  const nodes=[...stage2040Panel.querySelectorAll('button:not([disabled]),input:not([disabled]),select:not([disabled])')];
+  if(!nodes.length)return;
+  if(event.shiftKey&&document.activeElement===nodes[0]){event.preventDefault();nodes[nodes.length-1].focus()}
+  else if(!event.shiftKey&&document.activeElement===nodes[nodes.length-1]){event.preventDefault();nodes[0].focus()}
+ }
+});
+$('stage2040prev').onclick=()=>previousTrack();
+$('stage2040play').onclick=()=>$('play').click();
+$('stage2040next').onclick=()=>nextTrack();
+$('stage2040loadB').onclick=async()=>{
+ const id=$('stage2040choose').value;
+ if(!id){$('stage2040status').textContent='Choisis un titre pour la platine B.';return}
+ $('dj2040select').value=id;await djLoadB(id);stage2040Sync();
+};
+$('stage2040playB').onclick=()=>$('dj2040preview').click();
+$('stage2040cueB').onclick=()=>$('dj2040cue').click();
+$('stage2040auto').onclick=()=>$('dj2040auto').click();
+$('stage2040take').onclick=()=>$('dj2040take').click();
+$('stage2040reset').onclick=()=>$('dj2040reset').click();
+$('stage2040cross').oninput=e=>{$('dj2040fader').value=e.target.value;$('dj2040fader').dispatchEvent(new Event('input',{bubbles:true}));stage2040Sync()};
+$('stage2040master').oninput=e=>{$('volume').value=e.target.value;$('volume').dispatchEvent(new Event('input',{bubbles:true}));stage2040Sync()};
+$('stage2040gainB').oninput=e=>{$('dj2040gain').value=e.target.value;$('dj2040gain').dispatchEvent(new Event('input',{bubbles:true}));stage2040Sync()};
+$('stage2040seekA').oninput=e=>{if(Number.isFinite(audio.duration)&&audio.duration>0)audio.currentTime=audio.duration*Number(e.target.value)/100;stage2040Sync()};
+$('stage2040seekB').oninput=e=>{if(Number.isFinite(djAudio.duration)&&djAudio.duration>0&&!djTransitioning)djAudio.currentTime=djAudio.duration*Number(e.target.value)/100;stage2040Sync()};
+djAudio.addEventListener('timeupdate',stage2040Sync);
+audio.addEventListener('play',stage2040Sync);
+audio.addEventListener('pause',stage2040Sync);
+djAudio.addEventListener('play',stage2040Sync);
+djAudio.addEventListener('pause',stage2040Sync);
 
 let lastListen=null;try{lastListen=JSON.parse(localStorage.getItem('eloahMusicLastListen')||'null')}catch(e){}
 let lastPersist=0;
