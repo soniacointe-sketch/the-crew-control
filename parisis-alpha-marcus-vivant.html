@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#1d1824">
+<meta name="description" content="Expérience ALPHA-015 : appliquer les cinq opérations alphabétiques attribuées à Marcus — noms des lettres, corps d’Alètheia, sept voyelles et unité.">
+<title>ELOAH · ALPHA-015 · Faisons comme Marcus</title>
+<style>
+:root{color-scheme:dark;--bg:#19181f;--panel:#292430;--panel2:#342b3a;--wine:#432e43;--gold:#ebcb92;--ink:#fff5e7;--muted:#d6c6be;--edge:#75636a;--line:#6b5764}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.65 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:#f3d29d}button,input,select{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid #ffdfa6;outline-offset:3px}
+.wrap{max-width:1290px;margin:auto;padding:0 clamp(15px,3vw,42px)}
+.nav{border-bottom:1px solid #6b5661;background:#211e28}.nav .wrap{display:flex;justify-content:space-between;gap:15px;align-items:center;flex-wrap:wrap;padding-top:17px;padding-bottom:17px}.brand{text-decoration:none;color:white;letter-spacing:.12em;font:25px Georgia,serif}.brand em{font-style:normal;color:var(--gold)}.nav nav{display:flex;flex-wrap:wrap;gap:16px;font-size:12px}
+.hero{background:radial-gradient(ellipse at 78% 0%,#553650,transparent 50%),linear-gradient(125deg,#191820,#2c202e);border-bottom:1px solid #705d69;padding:clamp(35px,5vw,72px) 0}
+.kicker{font-weight:850;letter-spacing:.14em;font-size:10px;color:var(--gold);text-transform:uppercase}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(43px,5.7vw,74px);line-height:1.08;letter-spacing:-.035em;margin:14px 0 18px}h1 em{font-style:normal;color:var(--gold)}.hero p{max-width:790px;font:clamp(16px,1.7vw,21px)/1.65 Georgia,serif;color:#e5d5c7}
+.hero a{font-size:12px}
+.panel{background:var(--panel);border:1px solid #695963;padding:clamp(16px,2.6vw,29px)}main{padding-top:30px;padding-bottom:65px}
+.mv-top{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:16px}
+.mv-top h2,.mv-work h2{margin:0 0 9px;font:normal 31px Georgia,serif}.mv-top p{color:var(--muted);font-size:13px}
+label{display:block;font-size:12px;color:#e9cda9;font-weight:750}
+select,input[type=text]{display:block;width:100%;margin:5px 0 13px;background:#fff8ef;border:1px solid #ad9597;border-radius:3px;color:#221b24;padding:11px 12px;font-size:14px}
+.mv-settings{display:grid;grid-template-columns:1fr 1fr;gap:12px}.mv-settings>*{min-width:0}
+.mv-buttons{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}
+.mv-buttons button,.mv-inline button,.mv-vowels~button,.mv-work button{border:1px solid #c3a072;color:#ffe0ad;background:#4a354a;padding:9px 13px;font-weight:750;min-height:38px}
+.mv-buttons button:hover,.mv-work button:hover,.mv-inline button:hover{background:#6b4a67}
+.mv-buttons button.primary{background:var(--gold);color:#201a21}
+.mv-example{display:flex;flex-wrap:wrap;gap:7px;margin:9px 0}.mv-example button{border:1px solid #88717d;background:transparent;color:#edd0a8;padding:7px 9px;font-size:12px}
+.mv-verse{border-left:3px solid var(--gold);padding:11px 15px;background:#372f39;margin-top:13px}.mv-verse p{font:15px Georgia,serif;margin:5px 0}.mv-verse .greek{font:20px Georgia,serif;color:#fce8c9}
+.mv-note{color:#cbbabc;font-size:12px}
+.mv-aside{background:var(--panel2);border:1px solid #826978;padding:21px}
+.mv-aside h2{font:normal 26px Georgia,serif;margin:4px 0 15px}
+.mv-source a{display:block;color:#f2d4a4;font-size:12px;margin:9px 0}
+.mv-work{border-top:1px solid var(--line);margin-top:18px;padding-top:24px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:18px}
+.mv-step-nav{display:grid;align-content:start;gap:7px}.mv-step-nav button{padding:13px 9px;border:1px solid #7d6273;background:#28232e;color:#e1d2c5;font-size:11px;display:flex;gap:9px;align-items:center;text-align:left;min-height:48px}
+.mv-step-nav button span{font:20px Georgia,serif;color:var(--gold)}.mv-step-nav button.active{background:#52394f;border-color:#e8c789;color:#fff6e9}
+.mv-board{min-width:0;border:1px solid #776273;background:#282530;padding:clamp(16px,3vw,30px);min-height:395px}
+.mv-board h2{font-size:clamp(26px,3vw,37px);margin:7px 0 11px}.mv-board p{color:#e1d0c7}.mv-board .mv-small{color:#c6b5ab;font-size:12px}
+.mv-stage-source{font-size:11px;color:var(--gold);font-weight:800;letter-spacing:.08em}
+.mv-greek{font:clamp(32px,5vw,55px)/1.35 Georgia,serif!important;color:#ffdfaa!important;letter-spacing:.09em;margin:13px 0}
+.mv-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.mv-stats>div{border:1px solid #765b69;background:#3a3140;padding:12px}.mv-stats strong{font:30px Georgia,serif;color:#f5d49b;display:block}.mv-stats small{color:#d6bcb0;font-size:10px}
+.mv-feature{border-left:3px solid #d6b27c;background:#372e3b;padding:13px 17px;margin:15px 0;font-size:13px;color:#ffead5}
+.mv-inline{display:flex;gap:10px;align-items:end;flex-wrap:wrap}.mv-inline label{min-width:95px;max-width:150px}.mv-inline button{margin-bottom:13px}
+.mv-expansion>div{padding:9px 0;border-bottom:1px solid #66515d;overflow-wrap:anywhere}.mv-expansion span{font-size:11px;color:#dcb98d;margin-right:8px}.mv-expansion strong{color:#f5d49b;font-size:12px}.mv-expansion p{font-size:12px;word-break:break-word;margin:3px 0}
+.mv-pairs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:16px 0}.mv-pairs button{display:grid;text-align:left;gap:3px;padding:12px 11px;background:#302b35;border:1px solid #60535f;color:#e9d9cc}.mv-pairs button.mv-present{background:#51364d;border-color:#cdad7c}.mv-pairs button[aria-pressed=true]{outline:2px solid var(--gold)}.mv-pair-symbol{font:23px Georgia,serif;color:#fae0bb}.mv-pairs button strong{font-size:12px}.mv-pairs button small{font-size:10px}
+.mv-vowels{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:7px;margin:18px 0}.mv-vowels button{padding:14px 3px;background:#3b3140;border:1px solid #756477;color:#eedacb;display:grid;gap:4px;text-align:center}.mv-vowels button[aria-pressed=true]{background:#67475e;outline:2px solid var(--gold)}.mv-vowels strong{font:32px Georgia,serif;color:#ffe0ad}.mv-vowels small{font-size:10px}
+.mv-conclusions{display:grid;gap:9px}.mv-conclusions section{border:1px solid #776272;background:#332d3b;padding:12px}.mv-conclusions small{font-weight:800;color:#ebce9b;letter-spacing:.07em}
+.mv-progress{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:16px 0;color:#e8caa6;font-size:11px;font-weight:800}.mv-track{height:5px;background:#463747;overflow:hidden;flex:1;min-width:80px}.mv-track>div{height:100%;width:20%;background:var(--gold);transition:width .25s}
+.mv-footer{padding-top:14px;border-top:1px solid #66515d;color:#d6bfb3;font-size:12px}
+footer{border-top:1px solid #66515d;margin-top:30px;padding:25px 0 50px;color:#c5b4ad;font-size:12px}
+@media(max-width:980px){.mv-top{grid-template-columns:1fr}.mv-work{grid-template-columns:1fr}.mv-step-nav{grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.mv-step-nav button{display:grid;font-size:10px;justify-items:center;text-align:center}}
+@media(max-width:690px){.mv-pairs{grid-template-columns:repeat(2,1fr)}.mv-vowels{gap:3px}.mv-vowels strong{font-size:24px}.mv-vowels small{font-size:9px}.mv-stats{grid-template-columns:1fr 1fr}.mv-step-nav{display:grid;grid-template-columns:1fr 1fr}.mv-settings{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.mv-track>div{transition:none}html{scroll-behavior:auto}}
+</style>
+</head><body>
+<header class="nav"><div class="wrap"><a href="eloah-parisis.html" class="brand">ELOAH <em>· PARISIS</em></a><nav><a href="mes-univers.html">Mon accueil ELOAH</a><a href="parisis-alpha-lecteur.html">Lecteur ALPHA</a><a href="parisis-alpha-010-marcus-aletheia.html">Enquête ALPHA-010</a></nav></div></header>
+<section class="hero"><div class="wrap"><div class="kicker">ALPHA-015 · HUMANITIES LAB · EXPÉRIENCE DE RECONSTITUTION</div><h1>Faisons <em>comme Marcus.</em></h1><p>Une parole grecque. Un nom. Des lettres qui donnent naissance à d’autres lettres. Le corps d’Alètheia. Sept voix. Puis l’unité — sans fabriquer de preuve historique à partir d’un nombre.</p></div></section>
+<main id="marcus-live" class="wrap">
+<div class="mv-top">
+<section class="panel"><h2>Choisis la parole et le nom.</h2>
+<div class="mv-settings">
+<label for="mvVerse">Extrait des Évangiles<select id="mvVerse"></select></label>
+<label for="mvWord">Mot grec à soumettre au système<input type="text" id="mvWord" value="ἀλήθεια" maxlength="90" spellcheck="false"></label>
+</div>
+<div class="mv-example" aria-label="Exemples de noms à analyser"><button type="button" data-word-example="jesus">Ἰησοῦς</button><button type="button" data-word-example="truth">ἀλήθεια</button><button type="button" data-word-example="logos">λόγος</button><button type="button" data-word-example="omega">ΑΩ</button></div>
+<div class="mv-verse"><p id="mvVerseFrench"></p><p id="mvVerseGreek" class="greek"></p><a id="mvVerseSource" href="https://www.greekbible.com/john/14/6" target="_blank" rel="noopener noreferrer">Contrôler le passage grec ↗</a></div>
+<div class="mv-buttons"><button id="mvRun" class="primary" type="button">✦ GO · DÉPLOYER LE NOM</button><button id="mvFinish" type="button">Aller jusqu’à la réponse →</button><button id="mvExport" type="button">Exporter l’analyse JSON</button><button id="mvStop" type="button">Arrêter le son</button></div>
+<p id="mvStatus" class="mv-note" role="status" aria-live="polite">Prêt pour l’analyse.</p>
+</section>
+<aside class="mv-aside"><div class="kicker">LES DOCUMENTS DE DÉPART</div><h2>Une source, un contradicteur.</h2><p>Le système est connu principalement par Irénée de Lyon, qui le réfute. Nous ne possédons pas de rituel autographe de Marcus décrivant l’expérience à l’identique.</p><div class="mv-source"><a href="https://www.newadvent.org/fathers/0103114.htm" target="_blank" rel="noopener noreferrer">Irénée · Livre I, chapitre 14 ↗</a><a href="https://www.newadvent.org/fathers/0103115.htm" target="_blank" rel="noopener noreferrer">Irénée · Livre I, chapitre 15 ↗</a><a href="parisis-alpha-lecteur.html">Retrouver tous les calculs du lecteur ↗</a></div></aside>
+</div>
+<div class="mv-work">
+<nav id="mvStageList" class="mv-step-nav" aria-label="Les cinq opérations"><button disabled>Préparation de l’expérience…</button></nav>
+<section class="mv-board">
+<div class="mv-progress"><span id="mvProgress">ÉTAPE 1 / 5</span><div class="mv-track"><div id="mvProgressBar"></div></div></div>
+<div id="mvCurrent" aria-live="polite"></div>
+<div class="mv-buttons"><button type="button" id="mvPrev">← Précédent</button><button type="button" id="mvNext" class="primary">Étape suivante →</button></div>
+</section>
+</div>
+<p class="mv-footer"><strong>Repères de méthode :</strong> les opérations sur les graphies grecques sont calculables. Les noms des lettres après le premier niveau utilisent une normalisation actuelle ; la lecture vocale, une synthèse moderne. Ni le « nom de trente lettres » complet ni la « puissance » théologique du nom ne sont retrouvés par calcul.</p>
+</main>
+<footer><div class="wrap">ELOAH · PARISIS ENGINE · HUMANITIES LAB · Source : Irénée, <em>Contre les hérésies</em>, I,14–15. Cette expérience est une simulation pédagogique critique, pas une reconstitution sacramentelle ni la transcription d’un enseignement historique de Jésus.</div></footer>
+<script src="parisis-alpha-text-reader.js?v=20261015-r1" defer></script>
+<script src="parisis-alpha-marcus-methode.js?v=20261015-m14" defer></script>
+<script src="parisis-alpha-paroles.js?v=20261015-j1" defer></script>
+<script src="parisis-alpha-marcus-vivant.js?v=20261015-v1" defer></script>
+<script src="parisis-alpha-marcus-vivant-ui.js?v=20261015-v1" defer></script>
+</body></html>
