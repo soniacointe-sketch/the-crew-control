@@ -1,0 +1,20 @@
+/* ELOAH / Mon Espace : liste locale des notes reportées.
+ * Lisible sur mobile, sans modifier le style global des autres univers. */
+.eloah-deferred-shelf{margin:12px 0 26px;padding:19px 18px 13px;border-radius:12px;border:1px solid #d7c1cd;background:#fff8f4;color:#211b20;box-shadow:0 7px 22px #20122212}
+.eloah-deferred-head{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.eloah-deferred-kicker{margin:0 0 5px!important;color:#8b4866!important;letter-spacing:1.6px;text-transform:uppercase;font-size:10px;font-weight:700}
+.eloah-deferred-head h3{margin:0;font:normal 23px/1.25 Georgia,serif;color:#291622}
+.eloah-deferred-counter{padding:4px 9px;border-radius:999px;background:#f3e5eb;color:#713c55;border:1px solid #e0c8d6;font-size:10px;white-space:nowrap}
+.eloah-deferred-desc{margin:8px 0 14px!important;color:#62545d!important;font-size:12px;line-height:1.6}
+.eloah-deferred-results{display:grid;gap:8px}
+.eloah-deferred-item{display:flex;align-items:center;justify-content:space-between;gap:14px;background:#fffdf9;border:1px solid #e2d4d9;padding:12px 13px;border-radius:8px;min-width:0}
+.eloah-deferred-item strong{display:block;font-size:12px;color:#231920;overflow-wrap:anywhere}
+.eloah-deferred-item small{display:block;font-size:10px;color:#68545f;margin-top:4px}
+.eloah-deferred-open{border:1px solid #a46885!important;background:#672d49!important;color:#fff!important;border-radius:7px!important;min-height:36px;padding:7px 11px;font:600 11px system-ui;white-space:nowrap;cursor:pointer}
+.eloah-deferred-open:hover{background:#4c2036!important}
+.eloah-deferred-open:focus-visible{outline:3px solid #a46885;outline-offset:2px}
+.eloah-deferred-storage{color:#786770!important;font-size:10px;margin:12px 0 0!important}
+.eloah-deferred-empty{font-size:12px;color:#74616b;padding:12px}
+#list .eloah-deferred-target{outline:2px solid #a63d57;outline-offset:3px;border-radius:9px}
+@media(max-width:520px){.eloah-deferred-shelf{padding:14px}.eloah-deferred-head h3{font-size:21px}.eloah-deferred-item{align-items:stretch;flex-direction:column}.eloah-deferred-open{align-self:flex-start}}
+@media(prefers-reduced-motion:reduce){.eloah-deferred-item,.eloah-deferred-open{scroll-behavior:auto}}
