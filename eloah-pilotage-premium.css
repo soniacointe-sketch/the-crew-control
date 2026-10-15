@@ -1,0 +1,184 @@
+/* ELOAH Pilotage · Premium 2040 v1 — isolated to body.client-page.
+   Functional planning, project actions, forms and exports preserved.
+   No remote assets or data connections. */
+:root{color-scheme:dark}
+html{scroll-padding-top:84px}
+body.client-page{
+ --bg:#100b17;--panel:#25192e;--line:#60445e;--ink:#fff7f8;
+ --muted:#c9b6c7;--purple:#c27c9e;--tint:#41273f;
+ background:radial-gradient(ellipse 800px 600px at 84% 0,#64355488,transparent 68%),
+ radial-gradient(ellipse 800px 500px at 12% 31%,#421a3b55,transparent 70%),#100b17;
+ color:#fff7f8;font:14px/1.7 Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+ min-height:100vh;
+}
+body.client-page,body.client-page :is(button,input,select,textarea){color-scheme:dark}
+body.client-page .eloah-global-nav{position:relative;z-index:20;background:#1a1120!important;border-color:#684865!important;color:#fff0f7!important;box-shadow:0 4px 20px #0003}
+body.client-page .eloah-global-nav :is(a,summary,.eloah-wordmark){color:#eee0e8!important}
+body.client-page .eloah-global-nav :is(a,summary):hover{background:#503050!important;color:#fff!important}
+body.client-page .eloah-global-nav a[aria-current="page"]{background:#603752!important;color:#fff!important}
+body.client-page :is(h1,h2,h3,h4){color:#fff7f8}
+body.client-page p{color:#cbb7c8}
+body.client-page a{color:#f3d2ad}
+body.client-page a:hover{color:#fff1d5}
+body.client-page main#contenu{max-width:1510px;margin-inline:auto;padding:28px clamp(16px,3.4vw,54px) 72px;background:transparent;color:#fff7f8;box-shadow:none}
+body.client-page :is(button,.btn){border:1px solid #795777;background:#322139;color:#fff1f7;border-radius:9px;font-size:12px;min-height:42px;padding:10px 15px;font-weight:620;transition:background .18s,border-color .18s,transform .18s}
+body.client-page :is(button,.btn):hover{background:#4c2c4b;border-color:#bb83a4;color:#fff;transform:translateY(-1px)}
+body.client-page :is(button.primary,.primary){background:linear-gradient(115deg,#f9e0be,#d5a27b);border:1px solid #ecc59f;color:#241423;font-weight:750;box-shadow:0 10px 31px #a8676233}
+body.client-page :is(button.primary,.primary):hover{background:#ffead1;color:#241423}
+body.client-page :is(button,.btn):disabled{transform:none}
+body.client-page :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #f9d5ad;outline-offset:3px}
+body.client-page :is(input,select,textarea){background:#1b1426;border:1px solid #836782;color:#fff5f7;padding:10px 12px;border-radius:8px;max-width:100%;min-height:40px}
+body.client-page :is(input,select,textarea)::placeholder{color:#b8a0b4}
+body.client-page select option{background:#211629;color:#fff4f8}
+body.client-page input[type=file]{max-width:100%;width:100%;font-size:12px}
+body.client-page .eyebrow{color:#e8baab;letter-spacing:.27em;font-size:10px;font-weight:750}
+body.client-page .client-hero{background:radial-gradient(ellipse 650px 340px at 85% 1%,#713c665c,transparent 72%),
+ linear-gradient(125deg,#27162c,#170f22 67%,#251428);border:1px solid #90698799;
+ border-radius:19px;padding:clamp(21px,3vw,39px);position:relative;overflow:hidden;
+ box-shadow:0 24px 65px #0006,inset 0 1px #fff2;margin:0 0 24px}
+body.client-page .client-hero:before{content:"";position:absolute;pointer-events:none;z-index:0;width:620px;height:620px;border:1px solid #ba809154;border-radius:50%;top:-465px;right:-60px;box-shadow:0 0 0 100px #b0788620,0 0 0 200px #c28d9f09}
+body.client-page .client-hero>*{position:relative;z-index:1}
+body.client-page .hero-top{gap:14px}
+body.client-page .hero-top>a{color:#f1d7b8;font-size:12px;text-decoration:none;white-space:nowrap}
+body.client-page .hero-top>a:hover{text-decoration:underline}
+body.client-page .pilotage-hero-inner{display:grid;grid-template-columns:minmax(0,1fr) minmax(270px,.87fr);align-items:center;gap:clamp(24px,4vw,63px);padding:29px 0 10px}
+body.client-page .pilotage-hero-copy h1{font:400 clamp(39px,5vw,68px)/1.08 Georgia,"Times New Roman",serif;letter-spacing:-.047em;margin:0 0 16px;color:#fff5fa}
+body.client-page .pilotage-hero-copy h1 em{font-style:normal;background:linear-gradient(120deg,#fce7c8,#d6a084,#f1cfdb);-webkit-background-clip:text;background-clip:text;color:transparent}
+body.client-page .pilotage-hero-copy>p{font-size:14px;color:#e0cbd7;line-height:1.75;max-width:570px;margin:0 0 25px}
+body.client-page .pilotage-hero-copy .client-hero-actions{display:flex;gap:10px;flex-wrap:wrap;margin:0}
+body.client-page .pilotage-hero-copy .client-hero-actions>*{min-width:0}
+body.client-page .pilotage-hero-copy .client-hero-actions .btn{border-color:#a17e92;background:#2b1d32}
+body.client-page .pilotage-hero-copy .client-hero-actions .primary{background:linear-gradient(120deg,#fbe3c0,#d6a47c);color:#261321}
+body.client-page .pilotage-hero-proof{display:flex;gap:12px 21px;flex-wrap:wrap;padding:0;margin:22px 0 0;list-style:none;color:#d7bfcf;font-size:10px}
+body.client-page .pilotage-hero-proof li:before{content:"✓";border:1px solid #d5ae92;border-radius:50%;color:#edc49f;display:inline-grid;place-items:center;width:18px;height:18px;margin-right:7px}
+body.client-page .pilotage-panel{background:linear-gradient(155deg,#21192d,#16121f);border:1px solid #a475908c;border-radius:14px;padding:22px;box-shadow:0 20px 45px #08020f8c,0 0 0 5px #c17a8a12;transform:perspective(1150px) rotateY(-3deg)}
+body.client-page .pilotage-panel-top{display:flex;justify-content:space-between;align-items:center;gap:10px;padding-bottom:16px;border-bottom:1px solid #5d4059}
+body.client-page .pilotage-panel-title{color:#f5d7b3;font:400 22px Georgia,serif}
+body.client-page .pilotage-panel-top>span{font-size:10px;color:#a6d8c3;display:flex;gap:7px;align-items:center;white-space:nowrap}
+body.client-page .pilotage-panel-top>span:before{content:"";width:7px;height:7px;background:#8ccdb2;border-radius:50%;box-shadow:0 0 9px #76c6a9}
+body.client-page .pilotage-panel-lead{color:#cbb8c8;font-size:11px;margin:14px 0}
+body.client-page .pilotage-kpis{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+body.client-page .pilotage-kpi{background:linear-gradient(135deg,#3a2644,#281d36);border:1px solid #694b6d;border-radius:10px;padding:14px;min-width:0;min-height:111px}
+body.client-page .pilotage-kpi:nth-child(2){background:linear-gradient(135deg,#392538,#281d32)}
+body.client-page .pilotage-kpi:nth-child(3){background:linear-gradient(135deg,#32243e,#241c32)}
+body.client-page .pilotage-kpi:nth-child(4){background:linear-gradient(135deg,#33403a,#232b30)}
+body.client-page .pilotage-kpi-label{display:flex;align-items:center;gap:8px;color:#e0d0df;font-size:10px;font-weight:650}
+body.client-page .pilotage-kpi-icon{display:grid;place-items:center;background:#543455;border:1px solid #87567f;border-radius:7px;width:28px;height:28px;flex-shrink:0;color:#f3c4d5;font-size:17px}
+body.client-page .pilotage-kpi strong{display:block;font:400 31px/1.1 Georgia,serif;color:#fff6fa;margin:9px 0 4px}
+body.client-page .pilotage-kpi small{font-size:9px;color:#bdaac1}
+body.client-page .pilotage-panel-foot{padding-top:14px;color:#a995b4;font-size:10px}
+body.client-page .workspace-choices{margin:18px 0 16px;gap:13px}
+body.client-page .workspace-choice{background:linear-gradient(137deg,#33213a,#25182f);border:1px solid #714d70;border-radius:12px;min-height:144px;padding:20px;color:#fff2f7;box-shadow:0 11px 27px #0003}
+body.client-page .workspace-choice:hover{background:linear-gradient(137deg,#462849,#2d1a38);border-color:#e0ad9d;transform:translateY(-3px)}
+body.client-page .workspace-choice .choice-top{color:#f3cb9e;font-size:11px;margin-bottom:12px}
+body.client-page .workspace-choice strong{color:#fff3fa;font-size:26px}
+body.client-page .workspace-choice>span:last-child{color:#d3bcd0;font-size:12px}
+body.client-page .client-local-note{background:#2d2037;border:1px solid #654a63;border-left:3px solid #d4a37f;color:#d6c4d4;border-radius:8px;font-size:12px!important;line-height:1.75!important;padding:13px 16px;margin:16px 0 4px!important}
+body.client-page .workspace-section{border-top:1px solid #694563;padding:34px 0 20px}
+body.client-page .section-head{margin-bottom:17px;gap:12px}
+body.client-page .section-head h2{color:#fff2f8;font:400 clamp(26px,3vw,36px)/1.18 Georgia,serif;letter-spacing:-.025em;margin:0 0 8px}
+body.client-page .section-head p{font-size:13px;color:#cbb4c6;max-width:700px;margin:0}
+body.client-page .section-head>.primary{flex-shrink:0}
+body.client-page .client-next{gap:13px;margin:18px 0}
+body.client-page .client-next>.client-next-card{background:linear-gradient(145deg,#2e2038,#22172d);border:1px solid #70536d;border-radius:11px;padding:18px;color:#fef6fb}
+body.client-page .client-next-card strong{font-size:14px;color:#fff2f9}
+body.client-page .client-next-card small{color:#c3b1c4}
+body.client-page .project-tile{background:linear-gradient(135deg,#32213b,#25192f);border-color:#765173;color:#fff2f8;border-radius:12px;min-height:115px;box-shadow:0 12px 28px #0003}
+body.client-page .project-tile strong{color:#fff7f9;font-size:16px}
+body.client-page .project-tile span{color:#f1bead}
+body.client-page .project-tile:hover{border-color:#d6a27f;background:#422947}
+body.client-page .empty-project{background:linear-gradient(140deg,#2c1e35,#1f1728);border:1px solid #70526a;color:#fff3fa;border-radius:12px}
+body.client-page .empty-project strong{color:#fff5fa}
+body.client-page .empty-project p{color:#cebdcf}
+body.client-page .quiet-count{color:#c0aabf}
+body.client-page :is(.services article,.secondary-panel){background:linear-gradient(140deg,#281b32,#22162c);border:1px solid #6a4b67;border-radius:12px;box-shadow:0 8px 20px #0003}
+body.client-page .services article{gap:12px;padding:22px}
+body.client-page .services h3{color:#fff5f8;font:400 22px Georgia,serif}
+body.client-page .services p{color:#cdbbca;font-size:12px;line-height:1.7}
+body.client-page .service-links .btn{background:#38273f;border:1px solid #765573;color:#f5ddbd;font-size:11px}
+body.client-page .service-links .btn:hover{background:#52334c}
+body.client-page .service-note,.client-page .service-link-status{color:#c9b5c7}
+body.client-page .badge{background:#294439;color:#c3edd2;border:1px solid #608f76;border-radius:6px;font-size:10px}
+body.client-page .badge.pending{background:#4a3635;color:#f5cfac;border-color:#836b57}
+body.client-page .secondary-panel>summary{color:#faecf4;font-size:14px;min-height:55px;padding:16px 21px}
+body.client-page .secondary-panel>summary:hover{color:#f2d1ac;background:#352440;border-radius:12px}
+body.client-page .secondary-panel>summary small{color:#c6b2c6}
+body.client-page .secondary-content{color:#e5d5e0}
+body.client-page .secondary-content>p,.client-page .secondary-content small{color:#cbb7c9}
+body.client-page .secondary-content .services article{background:#261932}
+body.client-page .client-project-tools{background:#271b31;border:1px solid #664968;border-radius:11px;padding:18px;margin:13px 0 18px;color:#ecdae6}
+body.client-page .client-project-tools p{color:#c8b3c8;font-size:12px}
+body.client-page .client-project-tools select{max-width:100%;min-width:140px}
+body.client-page #ops-calendar{background:linear-gradient(140deg,#281a30,#1e1729);border:1px solid #73516f;border-radius:14px;box-shadow:0 13px 35px #0003;margin:18px 0;padding:24px}
+body.client-page #ops-calendar :is(h2,h3){color:#fff3f8}
+body.client-page #ops-calendar>.ops-head h2{font:400 25px Georgia,serif}
+body.client-page #ops-calendar .ops-muted{color:#ccb7c6}
+body.client-page #ops-calendar .ops-actions{border-color:#745873}
+body.client-page #ops-calendar label{color:#e4d1df;font-size:12px}
+body.client-page #ops-calendar .ops-scroll{border:1px solid #614963;border-radius:11px;overflow:auto}
+body.client-page #ops-calendar .ops-scroll table{width:100%;border-collapse:collapse}
+body.client-page #ops-calendar .ops-scroll thead th{background:#422942;color:#ffdfc2;border-bottom:1px solid #765371;font-size:11px}
+body.client-page #ops-calendar .ops-scroll tbody td{background:#271b31;color:#f0e4ee;border-color:#57445d;font-size:12px}
+body.client-page #ops-calendar .ops-scroll tbody tr:nth-child(even) td{background:#2f2137}
+body.client-page #ops-calendar .ops-scroll td:first-child button{color:#f6dbb9;font-weight:650}
+body.client-page #ops-calendar .ops-scroll td:first-child button:hover{color:#fff}
+body.client-page #ops-calendar .ops-day{background:#2f2039;border-color:#6b4d6a;border-radius:8px;color:#ecdfed}
+body.client-page #ops-calendar .ops-day.today{border-color:#e3bd97}
+body.client-page #ops-calendar .ops-day a{color:#f4d1b1}
+body.client-page #ops-calendar .ops-metrics>div{background:#382740;border-color:#725174}
+body.client-page #ops-calendar .ops-metrics strong{color:#f4d5af}
+body.client-page #ops-calendar .ops-empty{color:#d0bfd2}
+body.client-page #ops-calendar .ops-danger{color:#ff9caa}
+body.client-page .planning-more>summary{color:#e8d9e8}
+body.client-page #ops-calendar .ops-inline-check{color:#e5d3e3}
+body.client-page #compte-et-sauvegardes .ops-card,body.client-page #planning-copy{background:#271b32;border-color:#6d4a65;color:#fff4fa;border-radius:12px;padding:21px}
+body.client-page #compte-et-sauvegardes .ops-card h3{color:#ffebf2}
+body.client-page .storage-note{background:#241a2b;border:1px solid #71526d;border-left:3px solid #d7a981;border-radius:9px;color:#cdbbce;padding:12px 16px}
+body.client-page #ops-status{background:#422a40;color:#fff5f7;border:1px solid #a07192;box-shadow:0 8px 28px #0005;border-radius:9px}
+body.client-page :is(dialog#client-new-project,dialog#ops-dialog){background:#24172e;color:#fff5f8;border:1px solid #916b86;border-radius:15px;box-shadow:0 30px 90px #0009}
+body.client-page :is(dialog#client-new-project,dialog#ops-dialog) :is(h2,h3,p,label){color:#f6e9f2}
+body.client-page :is(dialog#client-new-project,dialog#ops-dialog)::backdrop{background:#080611b8;backdrop-filter:blur(4px)}
+body.client-page :is(dialog#client-new-project,dialog#ops-dialog) :is(input,select,textarea){background:#1b1426;color:#fff5f8;border-color:#775873}
+body.client-page .skip-link{background:#f6d1a7;color:#241323}
+body.client-page main#contenu> .client-page-end{margin-top:30px;border-top:1px solid #634667;padding:20px 0 4px;color:#bda9bf;font-size:11px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}
+body.client-page .client-page-end a{color:#f3d1ac}
+@media(min-width:1420px){body.client-page main#contenu{max-width:1580px}.client-page .pilotage-hero-inner{padding-top:38px;padding-bottom:19px}.client-page .pilotage-panel{padding:27px}}
+@media(max-width:1100px){
+ body.client-page .pilotage-hero-inner{grid-template-columns:1fr}
+ body.client-page .pilotage-panel{transform:none;max-width:730px}
+ body.client-page .workspace-choices{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:850px){
+ body.client-page .pilotage-hero-inner{gap:20px}
+ body.client-page .workspace-choice{padding:15px;min-height:130px}
+ body.client-page .workspace-choice strong{font-size:22px}
+ body.client-page .services{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:650px){
+ html{scroll-padding-top:65px}
+ body.client-page main#contenu{padding:16px 12px 44px}
+ body.client-page .client-hero{padding:19px 16px}
+ body.client-page .pilotage-hero-inner{padding:24px 0 7px}
+ body.client-page .pilotage-hero-copy h1{font-size:clamp(40px,10vw,58px)}
+ body.client-page .pilotage-hero-copy>p{font-size:13px}
+ body.client-page .pilotage-hero-copy .client-hero-actions>*{width:100%;flex:1 1 100%}
+ body.client-page .pilotage-panel{padding:14px;border-radius:12px}
+ body.client-page .pilotage-panel-title{font-size:18px}
+ body.client-page .pilotage-kpi{min-height:100px;padding:12px}
+ body.client-page .pilotage-kpi strong{font-size:26px}
+ body.client-page .workspace-choices{grid-template-columns:1fr;gap:9px}
+ body.client-page .workspace-choice{min-height:0;padding:15px;display:grid;grid-template-columns:35px 1fr}
+ body.client-page .workspace-choice strong{font-size:21px}
+ body.client-page .workspace-choice>span:last-child{grid-column:2}
+ body.client-page .client-next{grid-template-columns:1fr}
+ body.client-page .project-grid,.client-page .services,.client-page .secondary-content .services{grid-template-columns:1fr}
+ body.client-page #ops-calendar{padding:15px}
+ body.client-page #ops-calendar .ops-scroll td:first-child{min-width:165px}
+ body.client-page .section-head>.primary{width:100%}
+ body.client-page :is(input,select,textarea){font-size:16px}
+ body.client-page .client-project-tools{padding:13px}
+ body.client-page #ops-calendar:has(.ops-month){overflow-x:auto}
+ body.client-page .secondary-content{padding:0 15px 15px}
+}
+@media(prefers-reduced-motion:reduce){body.client-page :is(.btn,button,.workspace-choice){transition:none!important}body.client-page :is(.workspace-choice,button,.btn):hover{transform:none}}
+@media print{body.client-page{background:white;color:#222}body.client-page main#contenu{max-width:100%;background:white;color:#222}body.client-page .client-hero,body.client-page .pilotage-panel,body.client-page .workspace-choice,body.client-page :is(.services article,.secondary-panel,.ops-card){background:white;color:#222;border-color:#aaa;box-shadow:none}body.client-page :is(h1,h2,h3,strong,p){color:#222!important}body.client-page .pilotage-hero-copy h1 em{color:#222}body.client-page .pilotage-kpi{background:white;color:#222}body.client-page .pilotage-kpi strong{color:#222}body.client-page .hero-top>a{color:#222}}
