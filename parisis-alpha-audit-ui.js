@@ -56,6 +56,7 @@
     <div>
       <details open><summary>Résultats des contrôles (calculés)</summary><div class="aa-detail aa-table-wrap" id="aaChecks"></div></details>
       <details open><summary>Hypothèses croisées (sans faux liens)</summary><div class="aa-detail" id="aaHypotheses"></div></details>
+      <details open><summary>Connexions découvertes automatiquement entre toutes les sources</summary><div class="aa-detail" id="aaConnections"></div></details>
       <details><summary>Problèmes à instruire / sources manquantes</summary><div class="aa-detail" id="aaIssues"></div></details>
     </div>
     <div>
@@ -88,6 +89,7 @@
     byId("aaKpis").innerHTML=kpis.map(([num,desc])=>'<div class="aa-kpi"><strong>'+esc(num)+'</strong><small>'+esc(desc)+'</small></div>').join("");
     byId("aaChecks").innerHTML='<table><thead><tr><th>Opération</th><th>Résultat</th><th>Test</th></tr></thead><tbody>'+current.checks.map(c=>'<tr><td>'+esc(c.label)+'</td><td>'+esc(c.actual)+'</td><td>'+(c.ok?'✓':'ÉCHEC')+'</td></tr>').join("")+'</tbody></table>';
     byId("aaHypotheses").innerHTML='<ul>'+current.hypotheses.map(h=>'<li><strong>'+esc(h.id+' · '+h.name)+'</strong><div>'+esc(h.status)+' · <a href="'+esc(h.sourceURLs[0])+'" target="_blank" rel="noopener noreferrer">'+esc(h.sourceA)+'</a> / <a href="'+esc(h.sourceURLs[1])+'" target="_blank" rel="noopener noreferrer">'+esc(h.sourceB)+'</a> · points communs : '+esc(h.shared.join(", ")||"aucun")+'</div><small class="aa-warning">Objection : '+esc(h.objection)+'</small></li>').join("")+'</ul>';
+    byId("aaConnections").innerHTML=current.connections.length?'<ul>'+current.connections.map(x=>'<li><strong>'+esc(x.sourceA)+' ↔ '+esc(x.sourceB)+'</strong> · '+esc(x.distinctive.join(", "))+'<div class="aa-warning">Point commun documenté · origine commune non démontrée</div></li>').join("")+'</ul>':'Aucune convergence distinctive détectée.';
     byId("aaIssues").innerHTML=current.issues.length?'<ul>'+current.issues.map(x=>'<li>'+esc(x.type+' : '+x.text)+'</li>').join("")+'</ul>':"Aucune lacune détectée par ces règles limitées.";
     byId("aaFooter").textContent="Corpus éditorial daté du "+engine.corpus.asOf+" · Logiciel "+engine.version+" · Les "+n.checks+" contrôles valident seulement les données et opérations encodées, pas l'exactitude indépendante de tous les récits antiques. Aucun transfert de données privées.";
   }
