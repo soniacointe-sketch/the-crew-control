@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#211b27"><meta name="description" content="Lecteur d'inscriptions et de textes ALPHA : mots grecs, paires de lettres, parties du corps d'Alètheia, isopséphie, fréquence et lecture vocale.">
+<title>ALPHA · Lecteur des 24 lettres — ELOAH PARISIS ENGINE</title>
+<style>
+:root{color-scheme:dark;--bg:#18181f;--panel:#25232d;--alt:#302934;--line:#69545e;--gold:#ead09b;--ink:#fbf3e8;--muted:#cec0b9;--wine:#51354d}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.62 system-ui,-apple-system,Segoe UI,sans-serif}
+a{color:var(--gold);text-underline-offset:3px}button,input,select,textarea{font:inherit}
+button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}
+:focus-visible{outline:3px solid #eed399;outline-offset:3px}
+.wrap{max-width:1360px;margin:auto;padding:0 clamp(15px,3vw,42px)}
+.mast{background:#211e27;border-bottom:1px solid #705661}.mast .wrap{display:flex;gap:15px;flex-wrap:wrap;align-items:center;justify-content:space-between;padding-top:15px;padding-bottom:15px}
+.wordmark{text-decoration:none;letter-spacing:.16em;color:var(--ink);font:25px Georgia,serif}.wordmark span{color:var(--gold)}
+.mast nav{display:flex;align-items:center;gap:16px;flex-wrap:wrap;font-size:12px}
+.hero{background:radial-gradient(ellipse at 80% 25%,#61364f 0,transparent 47%),linear-gradient(100deg,#18191f,#31212f);border-bottom:1px solid #7d5e67;padding:clamp(32px,5vw,65px) 0}
+.kicker{letter-spacing:.15em;text-transform:uppercase;color:var(--gold);font-weight:800;font-size:10px}
+h1,h2,h3{font-family:Georgia,serif;font-weight:normal}h1{font-size:clamp(37px,5.1vw,66px);line-height:1.08;margin:12px 0;max-width:950px;letter-spacing:-.025em}h1 em{font-style:normal;color:var(--gold)}
+.hero p{color:#e2d0d0;font-size:15px;max-width:900px}
+.hero .links{display:flex;flex-wrap:wrap;gap:9px;margin-top:17px}.hero .links a{display:inline-flex;border:1px solid #b99a77;padding:8px 12px;font-size:12px;text-decoration:none}
+.layout{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:17px;padding-top:30px;padding-bottom:30px}
+.panel{background:var(--panel);border:1px solid #574a50;padding:clamp(16px,2.3vw,26px);min-width:0}
+.panel h2{font-size:27px;margin:0 0 10px}.panel h3{font-size:22px;margin:0 0 10px}.sub{color:var(--muted);font-size:12px;line-height:1.65}
+label{display:block;color:#f1dac0;font-size:12px;font-weight:700;letter-spacing:.01em}
+textarea,select,input[type="search"]{background:#fcf4e8;color:#282127;border:1px solid #bba6a8;border-radius:3px;width:100%;padding:12px;margin:7px 0 13px}
+textarea{min-height:185px;resize:vertical;font-size:15px;line-height:1.7}
+.actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn{background:#4b3649;color:#ffebcc;border:1px solid #ae886d;padding:9px 13px;border-radius:2px;min-height:39px;font-size:12px;font-weight:750}
+.btn:hover{background:#6c4865}.btn.primary{background:var(--gold);color:#251b22;border-color:var(--gold)}
+.btn.secondary{background:#292832}.btn.mini{min-height:30px;padding:5px 9px;font-size:11px}
+.notice{padding:10px 13px;background:#342b33;border-left:3px solid #e4bb84;color:#eddccd;font-size:12px;margin:14px 0}
+.stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:17px 0}
+.stat{border:1px solid #73575d;background:#302835;padding:12px;min-width:0}.stat strong{display:block;color:#f6d5a0;font:29px Georgia,serif}.stat small{color:#dac7be;font-size:11px}
+.example-buttons{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.section-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
+.section-head h2,.section-head h3{margin:0}
+.summary{font-size:13px;color:#e7d2c3}
+.wordcloud{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;max-height:310px;overflow:auto;margin:16px 0}
+.wordcloud button,.alphabet button{background:#312c37;border:1px solid #866a71;color:#fbeedc;padding:7px 11px;min-height:37px}
+.wordcloud button:hover,.wordcloud button[aria-pressed="true"],.alphabet button:hover,.alphabet button[aria-pressed="true"]{background:#74516a;border-color:#ebc68e}
+.wordcloud button.invalid{opacity:.7}
+.wordcloud button span{font-size:10px;color:#e8c28d;margin-left:6px}
+.scroll{overflow:auto}
+.details{min-height:155px;border-left:3px solid #d5ae7c;background:#2e2933;padding:16px;margin:10px 0}
+.greek-head{font:31px Georgia,serif;letter-spacing:.05em;color:#fce7c5}
+.greek-sub{color:#d5b9a5;font-size:12px;margin-top:3px}
+.chars{display:flex;gap:7px;flex-wrap:wrap;margin:14px 0}
+.char{background:#392e3d;border:1px solid #92727a;color:#fff0db;padding:7px 10px;min-width:54px;text-align:center}
+.char strong{display:block;font:25px Georgia,serif}
+.char small{display:block;font-size:10px;color:#e4be95}
+.parts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.part{border:1px solid #66565c;background:#2b2932;padding:9px 11px;display:grid;gap:4px;min-width:0}
+.part .line{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.part .name{font-weight:650;color:#fff0db;font-size:12px}
+.part .pair{color:#edd2aa;font:19px Georgia,serif}
+.part .track{height:5px;background:#51424d}.part .bar{height:5px;background:var(--gold);width:0}
+.part .meta{font-size:10px;color:#dcc6b8}
+.alphabet{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:6px;margin-top:13px}
+.alphabet button{min-width:0;padding:6px 0;font:23px Georgia,serif}
+.table{width:100%;border-collapse:collapse;text-align:left;font-size:12px}
+.table th,.table td{padding:9px 8px;border-bottom:1px solid #66575e;vertical-align:top}
+.table th{color:#f0d29e}.table td{color:#e4d2c7}
+.deep{margin:24px 0 50px}.deep .panel{margin-top:15px}
+.legend{color:#d3c3b5;font-size:12px;line-height:1.7}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+footer{border-top:1px solid #64515d;padding:23px 0 40px;color:#c9babb;font-size:12px}
+@media(max-width:1050px){.layout{grid-template-columns:1fr}.alphabet{grid-template-columns:repeat(8,minmax(0,1fr))}}
+@media(max-width:590px){.stats{grid-template-columns:repeat(2,1fr)}.parts{grid-template-columns:1fr}.alphabet{grid-template-columns:repeat(6,minmax(0,1fr))}h1{font-size:40px}.mast nav{gap:9px}.panel{padding:14px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style></head>
+<body>
+<header class="mast"><div class="wrap"><a class="wordmark" href="eloah-parisis.html">ELOAH <span>· PARISIS</span></a>
+<nav aria-label="Navigation des enquêtes"><a href="eloah-parisis.html">Centre de recherche</a><a href="parisis-alpha-laboratoire.html">Laboratoire ALPHA</a><a href="parisis-alpha-010-marcus-aletheia.html">ALPHA-010</a><a href="parisis-fil-enquetes.html#alpha">Fil des enquêtes</a></nav></div></header>
+<section class="hero"><div class="wrap"><div class="kicker">HUMANITIES LAB · ALPHA-010 · PROGRAMME DE LECTURE</div>
+<h1>Les mots deviennent une <em>carte de lettres.</em></h1>
+<p>Lis un mot, une phrase ou un texte grec. Pour chaque lettre, retrouve son rang de 1 à 24, sa lettre opposée et sa place dans les douze parties du corps d’Alètheia. Compare ensuite les fréquences et les valeurs numériques.</p>
+<div class="links"><a href="#lecture">Analyser un texte ↓</a><a href="#corps">Voir les douze parties ↓</a><a href="https://www.newadvent.org/fathers/0103114.htm" target="_blank" rel="noopener noreferrer">Irénée I,14 · Source antique ↗</a></div></div></section>
+<main class="wrap">
+<div class="layout" id="lecture">
+ <section class="panel">
+ <div class="section-head"><h2>01 · Saisir le passage</h2><span class="kicker">JUSQU'À 1 800 MOTS</span></div>
+ <label for="alphaInput">Texte à explorer</label>
+ <textarea id="alphaInput" spellcheck="false" maxlength="120000" aria-describedby="inputHelp">Ἰησοῦς · Ἀλήθεια · Α Ω Β Ψ
+
+ἐν ἀρχῇ ἦν ὁ λόγος.</textarea>
+ <p class="sub" id="inputHelp">Le texte reste dans ton navigateur. Les caractères non grecs sont repérés, mais ne sont pas artificiellement transformés en lettres grecques sans ton choix.</p>
+ <div class="actions">
+  <label for="alphaMode" style="flex:1;min-width:220px">Méthode de lecture
+   <select id="alphaMode">
+    <option value="greek">Grec : lettres réellement présentes</option>
+    <option value="latin-experiment">Latin : correspondance graphique expérimentale</option>
+   </select></label>
+  <label for="alphaFile" class="btn secondary" style="margin-top:15px;cursor:pointer">Importer TXT / MD / CSV <input id="alphaFile" class="sr-only" type="file" accept=".txt,.md,.csv,text/plain,text/markdown,text/csv"></label>
+ </div>
+ <div class="actions">
+  <button id="alphaAnalyze" class="btn primary" type="button">Analyser le passage</button>
+  <button id="alphaSpeak" class="btn" type="button">Écouter le texte <span aria-hidden="true">▶</span></button>
+  <button id="alphaStop" class="btn secondary" type="button">Arrêter la voix</button>
+  <button id="alphaClear" class="btn secondary" type="button">Effacer</button>
+ </div>
+ <div class="example-buttons" aria-label="Exemples à charger">
+  <button class="btn mini" type="button" data-example="jesus">Ἰησοῦς · 888</button>
+  <button class="btn mini" type="button" data-example="aletheia">Ἀλήθεια</button>
+  <button class="btn mini" type="button" data-example="body">Les 24 lettres</button>
+  <button class="btn mini" type="button" data-example="french">Texte français</button>
+ </div>
+ <div class="notice" id="alphaStatus" role="status" aria-live="polite">Choisis un exemple ou analyse le texte présent.</div>
+ <div class="stats" aria-live="polite">
+  <div class="stat"><strong id="stWords">—</strong><small>Mots découpés</small></div>
+  <div class="stat"><strong id="stGreek">—</strong><small>Lettres associées</small></div>
+  <div class="stat"><strong id="stUnique">—</strong><small>Formes distinctes</small></div>
+  <div class="stat"><strong id="stSum">—</strong><small>Somme isopséphique</small></div>
+ </div>
+ <div class="section-head"><h3>02 · Cliquer un mot</h3><span class="sub" id="wordLimit"></span></div>
+ <div class="wordcloud" id="alphaWords" aria-label="Mots analysés"></div>
+ <div class="details" id="alphaWordDetails" aria-live="polite"><p>Sélectionne un mot pour voir sa décomposition lettre par lettre.</p></div>
+ <div class="actions"><button class="btn" id="alphaSpeakWord" type="button">Écouter le mot choisi</button><button class="btn secondary" id="alphaCsv" type="button">Exporter CSV</button><button class="btn secondary" id="alphaJson" type="button">Exporter JSON</button></div>
+ </section>
+ <section class="panel" id="corps">
+ <div class="section-head"><h2>03 · Le corps d'Alètheia</h2><span class="kicker">24 LETTRES · 12 PAIRES</span></div>
+ <p class="sub">Rapprochement des extrémités : Α–Ω, Β–Ψ, …, Μ–Ν. Chaque paire totalise 25 en rangs alphabétiques. Les chiffres affichés ci-dessous comptent les occurrences du texte.</p>
+ <div id="alphaParts" class="parts"></div>
+ <h3 style="margin-top:25px">L’alphabet complet</h3>
+ <p class="sub">Clique n’importe quelle lettre pour connaître son partenaire et la partie corporelle correspondante.</p>
+ <div id="alphaAlphabet" class="alphabet" aria-label="24 lettres de l’alphabet grec"></div>
+ <div class="details" id="alphaLetterDetail" aria-live="polite"><p>Sélectionne une lettre de l’alphabet.</p></div>
+ </section>
+</div>
+<div class="deep">
+ <section class="panel">
+ <div class="section-head"><h2>04 · Profil du passage</h2><span class="sub" id="frequencySummary"></span></div>
+ <div class="layout" style="padding:5px 0 0">
+ <div class="scroll"><h3>Fréquences des mots</h3><table class="table"><thead><tr><th>Mot</th><th>Occ.</th><th>Isopséphie</th></tr></thead><tbody id="alphaFrequency"><tr><td colspan="3">Lance l'analyse.</td></tr></tbody></table></div>
+ <div class="scroll"><h3>Fréquences des lettres</h3><table class="table"><thead><tr><th>Lettre</th><th>Occurrences</th><th>Partie du corps</th></tr></thead><tbody id="alphaFrequencyLetters"><tr><td colspan="3">Lance l'analyse.</td></tr></tbody></table></div>
+ </div>
+ <div class="notice" id="alphaWarnings">Le lecteur étudie les lettres selon un témoignage polémique d’Irénée ; il ne traduit pas le sens des mots, et les résultats numériques ne prouvent pas un code intentionnel.</div>
+ </section>
+</div>
+</main>
+<footer><div class="wrap">ELOAH · PARISIS ENGINE · HUMANITIES LAB · Reconstitution analytique contemporaine à partir d’Irénée, <em>Contre les hérésies</em> I,14,3. La lecture vocale utilise la voix moderne installée sur l’appareil, non une restitution phonétique du IIe siècle. Aucun texte saisi n'est envoyé à un serveur par cet outil.</div></footer>
+<script src="parisis-alpha-text-reader.js?v=20261015-r1" defer></script>
+<script src="parisis-alpha-text-reader-ui.js?v=20261015-r1" defer></script>
+</body></html>
