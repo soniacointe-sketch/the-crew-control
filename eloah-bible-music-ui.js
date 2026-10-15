@@ -98,7 +98,10 @@ function renderDoc(){
  $("countNotes").textContent=musicScore.stats.notes;
  $("duration").textContent=asTime(musicScore.durationSeconds);
  $("copyright").textContent=(doc.credit||"Louis Segond 1910")+" · "+(doc.complete?"Chapitre complet":"Extraits / plage chargée")+". "+(doc.warning||"");
- $("sourceCredit").textContent=(doc.credit||"Source non précisée")+(doc.provider?" · "+doc.provider:"");
+ $("sourceCredit").textContent=(doc.credit||"Source non précisée")+(doc.provider?" · "+doc.provider:"")+(greekDoc&&$("musicLanguage").value==="greek"?" · Musique : "+greekDoc.credit:"");
+ $("languageStatus").textContent=$("musicLanguage").value==="greek"?
+   (greekDoc?"Notes calculées sur le grec du Textus Receptus, voix lue en français. Éditions distinctes.":"Grec indisponible : les notes sont créées à partir du français."):
+   "Le texte français est converti en musique selon la convention artistique de NUMERA.";
  $("verses").innerHTML=doc.verses.map((v,i)=>
   '<button type="button" class="verse" data-index="'+i+'" aria-pressed="false" aria-label="Lire à partir du verset '+v.number+'"><strong>'+v.number+'</strong>'+esc(v.text)+'</button>'
  ).join("");
