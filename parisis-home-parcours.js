@@ -31,8 +31,9 @@ var a=add(last,make("a","","Voir le premier parcours ↓"));a.href="#peJourneys"
 add(last,make("h3","",info.step.code+" · "+info.step.title));
 add(last,make("p","", "Dernier chapitre ouvert sur cet appareil. Ce repère ne signifie pas qu'il a été lu ou terminé."));
 var index=Math.min(info.index+1,info.cycle.steps.length-1),target=info.cycle.steps[index];
-var link=add(last,make("a","",index>info.index?"Continuer avec "+target.code+" →":"Rouvrir ce chapitre ↗"));link.href=safeHref(target.href);
-link.addEventListener("click",function(){track(info.cycle,index)});
+var finishedKnownSteps=info.index>=info.cycle.steps.length-1;
+var link=add(last,make("a","",finishedKnownSteps?"Explorer les pistes ouvertes →":"Continuer avec "+target.code+" →"));link.href=safeHref(finishedKnownSteps?info.cycle.network:target.href);
+if(!finishedKnownSteps)link.addEventListener("click",function(){track(info.cycle,index)});
 }
 function renderButtons(){
 buttons.replaceChildren();
@@ -64,12 +65,13 @@ next.replaceChildren();
 var progress=getLast(),same=progress&&progress.cycle.id===c.id;
 var targetIndex=same?Math.min(progress.index+1,c.steps.length-1):0;
 var target=c.steps[targetIndex];
-add(next,make("div","pe-kicker",same?"POURSUIVRE CETTE ENQUÊTE":"COMMENCER CETTE ENQUÊTE"));
+var lastKnown=same&&progress.index===c.steps.length-1;
+add(next,make("div","pe-kicker",lastKnown?"PISTES OUVERTES · À APPROFONDIR":same?"POURSUIVRE CETTE ENQUÊTE":"COMMENCER CETTE ENQUÊTE"));
 add(next,make("span","pe-step-code","ÉTAPE "+String(targetIndex+1).padStart(2,"0")+" / "+String(c.steps.length).padStart(2,"0")+" · "+target.code));
 add(next,make("h3","",target.title));
 add(next,make("p","",target.note));
 var actions=add(next,make("div","pe-next-actions"));
-var btn=add(actions,make("a","pe-start",same&&targetIndex>progress.index?"Ouvrir l'étape suivante →":"Ouvrir ce chapitre ↗"));btn.href=safeHref(target.href);btn.addEventListener("click",function(){track(c,targetIndex)});
+var btn=add(actions,make("a","pe-start",lastKnown?"Voir les questions encore ouvertes →":same&&targetIndex>progress.index?"Ouvrir l'étape suivante →":"Ouvrir ce chapitre ↗"));btn.href=safeHref(lastKnown?c.network:target.href);if(!lastKnown)btn.addEventListener("click",function(){track(c,targetIndex)});
 var full=add(actions,make("a","pe-secondary","Voir tout le fil de cette enquête →"));full.href=safeHref(c.trail);
 add(next,make("p","pe-method","À garder en tête : "+c.method));
 }
