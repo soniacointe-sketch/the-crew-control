@@ -51,6 +51,10 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 
 - [Lire l'enquête documentaire sur les 32 frênes, le Jardin d'Ombre, les archives et l'iconographie des Nornes](foi-control.html?file=eloah-foi-lourdes-003-32-frenes-archives-nornes.md) — reportage du 26 mars 2015, INCA Architectes, Fondation Giorgio Tesi, photos anciennes, source de l'Edda et illustrations des années 1780.
 
+## LOURDES-004 — Le plan paysager et le Christ au puits d'Urðr (15 octobre 2026)
+
+- [Étude du dossier technique de mai 2017 et des publications universitaires sur Eilífr, le Christ et le puits d'Urðr](foi-control.html?file=eloah-foi-lourdes-004-plan-paysager-christ-puits-urdr.md) — frênes « Redwood », 3 640 m², agence ALEP, interprétation philologique de la christianisation et modèle de demande d'archives.
+
 ## LOURDES-003 — Les 32 frênes et les archives (15 octobre 2026)
 
 - [Lire LOURDES-003 : origine des 32 frênes plantés en 2015, documents de chantier, photos anciennes et authentique mention du Christ dans l'Edda](foi-control.html?file=eloah-foi-lourdes-003-32-frenes-archives-edda.md) — pièces sourcées, dates, grille de fiabilité et pistes de vérification complémentaires.
