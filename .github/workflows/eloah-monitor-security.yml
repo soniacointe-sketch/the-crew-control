@@ -1,0 +1,77 @@
+name: ELOAH Monitor · sécurité et régression
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'eloah-monitor.html'
+      - 'eloah-monitor-data.js'
+      - 'eloah-monitor-control.js'
+      - 'eloah-monitor-data.css'
+      - '.github/workflows/eloah-monitor-security.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  static-and-unauthorized:
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify JavaScript syntax
+        run: |
+          node --check eloah-monitor-control.js
+          node --check eloah-monitor-data.js
+      - name: Verify founder data isolation and assets
+        run: |
+          python3 - <<'PY'
+          import pathlib, re
+          html=pathlib.Path('eloah-monitor.html').read_text()
+          js=pathlib.Path('eloah-monitor-data.js').read_text()
+          required=['eloah-monitor-data.js','eloah-monitor-data.css','eloah-monitor-control.js','eloah-monitor-control.css','eloah-monitor-lab.html']
+          for path in required:
+              assert pathlib.Path(path).is_file(), f'Missing file: {path}'
+              assert path in html, f'Missing HTML reference: {path}'
+          assert 'id="access"' in html and 'id="app" hidden' in html, 'Access gate missing'
+          assert 'data-real="osMissions"' in html
+          assert 'data-real="crewMembers"' in html
+          assert 'data-real="pgArticles"' in html
+          assert '.from(' not in js, 'Direct database access from public JS is forbidden'
+          assert 'SERVICE_ROLE_KEY' not in js, 'Service key name must not be referenced in public JS'
+          assert 'sessionStorage.setItem(' not in js and 'localStorage.setItem(' not in js, 'Never persist private metrics'
+          assert 'functions/v1/eloah-monitor-founder-metrics' in js
+          ids=set(re.findall(r"\$\('#([a-z0-9-]+)'\)", js))
+          missing={key for key in ids if f'id="{key}"' not in html}
+          assert not missing, f'Missing DOM identifiers: {missing}'
+          print('Monitor static checks passed; no customer records copied.')
+          PY
+      - name: Check unauthenticated requests never get metrics
+        shell: bash
+        env:
+          FN_URL: https://voytsqyorhoveurnguxn.supabase.co/functions/v1/eloah-monitor-founder-metrics
+          MONITOR_ORIGIN: https://soniacointe-sketch.github.io
+          PUBLIC_KEY: sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy
+        run: |
+          set -euo pipefail
+          for mode in missing fake; do
+            auth=()
+            if [[ "$mode" == "fake" ]]; then
+              auth=(-H "Authorization: Bearer this-is-not-a-valid-session-token-1234567")
+            fi
+            code=$(curl -sS --max-time 20 -o /tmp/eloah-monitor-body -w "%{http_code}" \
+              -H "Origin: $MONITOR_ORIGIN" -H "apikey: $PUBLIC_KEY" \
+              -H "Content-Type: application/json" "${auth[@]}" \
+              -X POST "$FN_URL" --data '{}')
+            echo "$mode -> HTTP $code"
+            if [[ "$code" != "401" && "$code" != "403" ]]; then
+              echo "FAIL: unexpected response to unauthorized call"
+              exit 1
+            fi
+            if grep -Eq '"measures"|"nextEvents"|"crewMembers"|"osMissions"' /tmp/eloah-monitor-body; then
+              echo "FAIL: real business metrics leaked in rejected request"
+              exit 1
+            fi
+          done
+          echo "Unauthorized requests rejected; no metrics exposed."
