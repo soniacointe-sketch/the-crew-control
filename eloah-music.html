@@ -108,6 +108,8 @@ body,.main,.body{font-size:var(--music-base);line-height:1.5}
 /* music2040-bulk-v7 */
 .music2040-bulk{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:12px 0;padding:11px;border:1px solid #684365;border-radius:11px;background:#20122a}.music2040-bulk span{font-size:12px;color:#e8d6e8;margin-right:auto}.music2040-bulk button{font:600 12px Inter,system-ui,sans-serif;background:#40254a;color:#ffeff9;border:1px solid #785377;border-radius:8px;padding:8px 11px}.music2040-bulk button:disabled{opacity:.45;cursor:not-allowed}.music2040-checkbox{width:17px;height:17px;accent-color:#d354ae;cursor:pointer}
 @media(max-width:750px){.music2040-bulk button{font-size:11px;padding:7px}.track:has(.music2040-checkbox){grid-template-columns:18px 26px minmax(0,1fr) repeat(3,auto)}}
+/* music2040-ambiance-v8 */
+.music2040-moodcheck{display:flex;align-items:center;gap:9px;margin:12px 0;color:#ead7ec;font-size:12px}.music2040-moodcheck input{accent-color:#d354ae}
 </style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script></head><body>
 <div class="app"><aside class="side"><div class="brand">ELOAH <b>♫</b></div><button class="nav active" data-view="home">⌂ &nbsp; Accueil</button><button class="nav" data-view="search">⌕ &nbsp; Rechercher</button><button class="nav" data-view="library">▤ &nbsp; Bibliothèque</button><button class="nav" data-view="favorites">♡ &nbsp; Favoris</button><div class="section-title">Mes playlists</div><div id="sidebarPlaylists"></div><button class="sidecreate" id="newSide">+ Créer une playlist</button></aside>
 <main class="main"><header class="header"><div class="top"><span class="eyebrow">ELOAH / MUSIC 2040</span><a href="mes-univers.html">↗ Mes univers</a></div><h1>Ton univers.<br>Ta fréquence.</h1><p>Le studio d’écoute personnel d’ELOAH, inspiré des grands lecteurs musicaux.</p><div class="hero-tools"><div class="hero-label">ELOAH MUSIC · TON ESPACE SONORE</div><div class="hero-caption">Ton espace sonore. Une nouvelle dimension.</div><button class="action" id="importBtn">+ Ajouter mes musiques</button><button class="action secondary" id="spotifyBtn">♫ Ajouter Spotify</button><button class="action secondary" id="cloudBtn">☁ Mon cloud musical</button><button class="action secondary" id="popoutBtn">↗ Détacher le lecteur</button><button class="action secondary" id="resumeBtn" hidden>▶ Reprendre ma dernière écoute</button><span id="cloudStatus" class="muted" aria-live="polite"></span></div></header>
@@ -120,7 +122,7 @@ body,.main,.body{font-size:var(--music-base);line-height:1.5}
 <p class="music2040-help">Tes titres restent dans ta bibliothèque actuelle. La recherche utilise ton moteur existant, sans transmettre tes requêtes à un service d’IA.</p>
 </section><div id="home"><section class="music2040-univers" aria-label="Accès à mes univers musicaux"><div class="rowtitle"><h2>Mes univers musicaux</h2><span class="muted">Accès direct à tes playlists</span></div><div class="music2040-univers-grid" id="music2040universe"></div></section><div class="rowtitle"><h2>Mes ambiances</h2><span class="muted">Des espaces à personnaliser</span></div><div class="cards" id="moods"></div><div class="rowtitle"><h2>Mes titres</h2><span class="muted" id="count"></span></div><div id="homeTracks"></div></div>
 <div id="search" class="hidden"><div class="rowtitle"><h2>Rechercher</h2></div><input id="query" class="search" placeholder="Rechercher un titre, artiste ou playlist…"><div id="results"></div></div>
-<div id="library" class="hidden"><div class="rowtitle"><h2>Ma bibliothèque</h2><button class="action" id="newPlaylist">+ Nouvelle playlist</button></div><div class="cards" id="playlistCards"></div><h2>Mes morceaux</h2><div class="music-filters"><button data-sort="all" class="action secondary">Tous</button><button data-sort="artist" class="action secondary">Artistes</button><button data-sort="album" class="action secondary">Albums</button><button data-sort="genre" class="action secondary">Genres</button></div><div class="music2040-bulk" id="music2040bulk"><span id="music2040selected">0 titre sélectionné</span><button type="button" id="music2040selectAll">Tout sélectionner</button><button type="button" id="music2040clear">Effacer</button><button type="button" id="music2040addBulk" disabled>＋ Ajouter à une playlist</button></div><div id="libraryTracks"></div></div>
+<div id="library" class="hidden"><div class="rowtitle"><h2>Ma bibliothèque</h2><button class="action" id="newPlaylist">+ Nouvelle playlist</button></div><div class="cards" id="playlistCards"></div><h2>Mes morceaux</h2><div class="music-filters"><button data-sort="all" class="action secondary">Tous</button><button data-sort="artist" class="action secondary">Artistes</button><button data-sort="album" class="action secondary">Albums</button><button data-sort="genre" class="action secondary">Genres</button></div><div class="music2040-bulk" id="music2040bulk"><button type="button" id="music2040ambiance">✦ Playlist par ambiance</button><span id="music2040selected">0 titre sélectionné</span><button type="button" id="music2040selectAll">Tout sélectionner</button><button type="button" id="music2040clear">Effacer</button><button type="button" id="music2040addBulk" disabled>＋ Ajouter à une playlist</button></div><div id="libraryTracks"></div></div>
 <div id="favorites" class="hidden"><h2>Mes favoris ♡</h2><div id="favoriteTracks"></div></div>
 <div id="playlist" class="hidden"><div class="rowtitle"><h2 id="playlistName"></h2><button class="action secondary" id="coverPlaylist">▧ Image</button><button class="action secondary" id="renamePlaylist">Renommer</button></div><div id="playlistTracks"></div></div>
 <div class="rowtitle"><h2>Spotify dans ELOAH</h2></div><p class="muted">Colle un lien Spotify de titre, album, artiste, émission ou playlist pour l’ouvrir dans son lecteur officiel intégré. La lecture et la connexion dépendent de Spotify.</p><div id="embeds"></div></div></main></div>
@@ -199,6 +201,36 @@ document.addEventListener('change',event=>{const el=event.target.closest('[data-
 $('music2040selectAll').onclick=()=>{tracks.forEach(t=>bulkSelected.add(t.id));render()};
 $('music2040clear').onclick=()=>{bulkSelected.clear();render()};
 $('music2040addBulk').onclick=()=>{const ids=[...bulkSelected].filter(id=>tracks.some(t=>t.id===id));if(!ids.length)return;modal('Ajouter plusieurs titres', '<p class="muted">'+ids.length+' morceau(x) sélectionné(s). Choisis une playlist :</p>'+playlists.map(p=>'<button class="nav" data-bulk-choose="'+safe(p.id)+'">'+safe(p.name)+'</button>').join(''));document.querySelectorAll('[data-bulk-choose]').forEach(btn=>btn.onclick=()=>{const p=playlists.find(x=>x.id===btn.dataset.bulkChoose);if(!p)return;let added=0;for(const id of ids){if(!p.ids.includes(id)){p.ids.push(id);added++}}save();bulkSelected.clear();$('modal').close();render();const message=$('cloudStatus');if(message)message.textContent=added+' titre(s) ajouté(s) à '+p.name+'.';});};
+/* music2040-ambiance-v8: local metadata-only suggestions */
+$('music2040ambiance').onclick=()=>{
+ const categories=[
+  {label:'Énergie & danse',words:['dance','danse','electro','électro','pop','latin','latino','reggaeton','fitness','workout','k-pop','kpop']},
+  {label:'Détente & douceur',words:['chill','relax','ambient','acoustic','acoustique','lofi','lo-fi','jazz','soul','classique']},
+  {label:'Émotion & amour',words:['love','amour','romance','romantique','ballade','r&b','rnb']},
+  {label:'Rock & puissance',words:['rock','metal','métal','punk','alternative','indie']}
+ ];
+ modal('Créer une playlist par ambiance',
+ '<p class="muted">Choisis une ambiance. ELOAH proposera uniquement les titres dont le genre enregistré correspond. Tu peux aussi partir de ta sélection actuelle.</p>'+
+ '<label for="music2040mood">Ambiance</label><select class="field" id="music2040mood">'+categories.map((x,i)=>'<option value="'+i+'">'+x.label+'</option>').join('')+'</select>'+
+ '<label for="music2040moodName">Nom de la playlist</label><input id="music2040moodName" maxlength="80" class="field" placeholder="Ma nouvelle ambiance">'+
+ '<label class="music2040-moodcheck"><input type="checkbox" id="music2040useSelection" '+(bulkSelected.size?'checked':'disabled')+'> Ajouter aussi les titres sélectionnés ('+bulkSelected.size+')</label>'+
+ '<p class="muted" id="music2040moodPreview"></p><button type="button" class="action" id="music2040createMood">Créer la playlist</button>'
+ );
+ const mood=$('music2040mood'),name=$('music2040moodName'),selected=$('music2040useSelection'),preview=$('music2040moodPreview');
+ const matches=()=>{const terms=categories[Number(mood.value)].words;return tracks.filter(t=>{const genre=String(field(t,'genre')||'').toLocaleLowerCase('fr');return terms.some(word=>genre.includes(word))})};
+ const update=()=>{preview.textContent=matches().length+' titre(s) reconnu(s) selon le genre renseigné. Les titres sans genre ne seront pas classés automatiquement.'};
+ mood.onchange=()=>{name.value=categories[Number(mood.value)].label;update()};
+ name.value=categories[0].label;update();
+ $('music2040createMood').onclick=()=>{
+  const title=name.value.trim();if(!title){name.focus();return}
+  const existing=playlists.find(p=>p.name.toLocaleLowerCase('fr')===title.toLocaleLowerCase('fr'));
+  if(existing){preview.textContent='Une playlist porte déjà ce nom. Choisis un autre nom.';return}
+  const ids=new Set(matches().map(t=>t.id));
+  if(selected.checked)for(const id of bulkSelected){if(tracks.some(t=>t.id===id))ids.add(id)}
+  const p={id:'p'+Date.now(),name:title,ids:[...ids]};playlists.push(p);save();bulkSelected.clear();$('modal').close();activePlaylist=p.id;view('playlist');
+ };
+};
+
 // Cloud musical prive : l'utilisateur initie explicitement les uploads.
 const cloud=window.supabase?.createClient('https://voytsqyorhoveurnguxn.supabase.co','sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy',{auth:{persistSession:true,autoRefreshToken:true}});
 let cloudUser=null,cloudTracks=new Set();
