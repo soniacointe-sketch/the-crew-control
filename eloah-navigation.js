@@ -259,3 +259,11 @@ if(page==='mes-univers.html'){
 
 /* ELOAH 11 · recherche commune, sans accès aux données privées. */
 (()=>{if(document.querySelector('script[data-eloah-platform]')||window.ELOAHPlatform)return;const script=document.createElement('script');script.src='eloah-platform.js?v=11.0';script.defer=true;script.dataset.eloahPlatform='1';document.head.append(script)})();
+
+/* SONIA OS palette 2026-10-15: appearance only, scoped to this page. */
+(()=>{'use strict';
+ if(location.pathname.split('/').pop()!=='sonia-os.html'||document.getElementById('sonia-os-palette-20261015'))return;
+ document.body.classList.add('sonia-os-colors');
+ const link=document.createElement('link');link.id='sonia-os-palette-20261015';link.rel='stylesheet';link.href='sonia-os-colors.css?v=20261015';
+ document.head.append(link);
+})();
