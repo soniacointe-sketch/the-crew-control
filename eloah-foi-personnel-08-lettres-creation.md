@@ -22,6 +22,10 @@ Bereshit Rabbah, Talmud Shabbat 104a, lectures des lettres.
 
 [Étudier Zachée et l'alphabet](foi-control.html?file=eloah-alpha-002-zachee-lettres.md)
 
+[ALPHA-010 — Les 24 lettres et le corps de la Vérité](foi-control.html?file=eloah-alpha-010-marcus-24-lettres.md)
+
+[ALPHA-011 — Sept voyelles, sept cieux et Apocalypse](foi-control.html?file=eloah-alpha-011-sept-voyelles-apocalypse.md)
+
 ---
 
 [← Chapitre 07](foi-control.html?file=eloah-foi-personnel-07-bible-textes.md) · [Chapitre 09 →](foi-control.html?file=eloah-foi-personnel-09-symboles-architecture.md)
