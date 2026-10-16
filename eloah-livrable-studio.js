@@ -9,16 +9,8 @@ const formats={
  carrousel:{label:'Carrousel',min:120,instructions:'Rédige 10 slides numérotées avec leur texte complet, une direction artistique, la légende et un appel à action. Les images non générées sont des intentions visuelles.'}
 };
 const wordCount=s=>(String(s||'').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu)||[]).length;
-const ambiguous=s=>{
- const t=s.trim();
- const words=t.match(/[\p{L}\p{N}]+/gu)||[];
- if(words.length!==1)return false;
- const w=words[0];
- if(/\d/.test(w))return true;
- if(w.length<4||w.length>32)return false;
- const normal=w.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
- return !/[aeiouy]/.test(normal)||/([bcdfghjklmnpqrstvwxz]{5,})/i.test(normal);
-};
+// Une seule règle de clarification pour le studio et le formulaire IA.
+const ambiguous=s=>window.EloahEvidence?.ambiguous?.(s) ?? false;
 const $=id=>document.getElementById(id);
 function init(){
  const ai=$('eloah-home-ai'),prompt=$('home-ai-prompt'),project=$('home-ai-project');
