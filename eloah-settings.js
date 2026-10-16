@@ -15,7 +15,7 @@ function renderSettings(){
  const suggestions={...settingsDefaults.suggestions,...s.suggestions};
  const mem=state.memory||{themes:[],decisions:[],questions:[]};const links=state.projectLinks||[],insights=state.projectInsights||[];
  const consolidated=state.threads.filter(t=>t.summary);
- $('panel').innerHTML='<div class="expert-head"><h2>Paramètres</h2><button id="settings-export">Exporter le projet</button></div><p class="muted">Réglages et mémoire conservés sur cet appareil. Les compteurs reflètent les données de cet espace.</p><div class="settings-grid">'+
+ $('panel').innerHTML='<div class="expert-head"><h2>Paramètres</h2><button id="settings-export">Exporter le JSON</button><button id="settings-export-full" type="button">Télécharger une sauvegarde complète (.zip)</button></div><p class="muted">Réglages et mémoire conservés sur cet appareil. Les compteurs reflètent les données de cet espace.</p><div class="settings-grid">'+
  settingsCard('Identité Projet','<form id="identity-form">'+settingsField('Nom du projet','setting-name',s.name,'text','required maxlength="120"')+'<label>Description<textarea id="setting-description" rows="3" maxlength="3000">'+esc(s.description)+'</textarea></label>'+settingsSelect('Type','setting-type',['Développement','Association','Création','Recherche','Éditorial','Autre'],s.type)+settingsField('Deadline','setting-deadline',s.deadline,'date')+settingsField('Tags (séparés par des virgules)','setting-tags',s.tags,'text','placeholder="IA, architecture, MVP…"')+'<button class="primary">Sauvegarder</button></form>')+
  settingsCard('Mémoire Persistante','<div class="settings-metrics"><div><strong>'+state.threads.length+'</strong>Conversations</div><div><strong>'+mem.themes.length+'</strong>Thèmes</div><div><strong>'+mem.decisions.length+'</strong>Décisions</div></div><h4>Profondeur mémoire</h4><p>'+included.length+'/'+state.threads.length+' conversations incluses · '+consolidated.filter(t=>!t.excluded).length+' synthèses</p><p>'+mem.questions.length+' questions ouvertes</p><h4>Meta Projets Memory</h4><p>'+links.length+' projets liés · '+insights.length+' insights</p><button data-tab="Meta Projets Memory">Lier des projets</button> <button id="memory-view">Voir le résumé complet</button><details><summary>Tenir la mémoire à jour</summary><form id="memory-form">'+['themes','decisions','questions'].map((v,i)=>'<label>'+['Thèmes','Décisions','Questions ouvertes'][i]+' (un par ligne)<textarea id="memory-'+v+'" rows="3">'+esc(mem[v].join('\n'))+'</textarea></label>').join('')+'<button>Enregistrer la mémoire</button></form></details><p class="notice">Mémoire locale tenue manuellement. Utilise « Préparer le contexte » dans le chat pour la transmettre à ChatGPT.</p>')+
  settingsCard('Sessions hors mémoire',excluded.length?excluded.map(t=>'<p>'+esc(t.title)+' <button data-restore-memory="'+esc(t.id)+'">Réactiver</button></p>').join(''):'<p>Aucune session hors mémoire dans ce projet. Le cadenas d’une conversation permet de l’exclure du contexte préparé. Réactivable à tout moment.</p>')+
@@ -29,6 +29,30 @@ function renderSettings(){
  settingsCard('Zone de danger','<p>'+(s.archived?'Ce projet est archivé localement.':'Archiver conserve les conversations, réglages et fichiers.')+'</p><button id="archive-project">'+(s.archived?'Réactiver ce projet':'Archiver ce projet')+'</button><hr><p>La suppression locale est irréversible. Elle efface les conversations, documents d’écriture, réglages et fichiers de ce projet sur cet appareil. Les bases partagées sont conservées et détachées.</p><form id="delete-project">'+settingsField('Tapez le nom du projet pour confirmer','delete-name','','text','required autocomplete="off"')+'<button class="settings-danger">Supprimer définitivement</button></form>')+'</div>';
  $('identity-form').onsubmit=e=>{e.preventDefault();const name=$('setting-name').value.trim();if(!name)return;Object.assign(s,{name,description:$('setting-description').value.trim(),type:$('setting-type').value,deadline:$('setting-deadline').value,tags:$('setting-tags').value.trim()});if(settingsSave()){$('project-title').textContent=name;document.title=name+' · ELOAH';notify('Identité du projet sauvegardée.')}};
  $('settings-export').onclick=()=>download(new Blob([JSON.stringify({project,...state},null,2)],{type:'application/json'}),'eloah-projet.json');
+ $('settings-export-full').onclick=async()=>{
+  const button=$('settings-export-full');
+  if(typeof JSZip==='undefined'){notify('La bibliothèque ZIP est indisponible. Réessaie quand la page est chargée.');return}
+  button.disabled=true;button.textContent='Préparation de la sauvegarde…';
+  try{
+   if(!db)throw Error('Les fichiers locaux ne sont pas accessibles. Sauvegarde annulée.');
+   const list=await new Promise((resolve,reject)=>{const request=db.transaction('files','readonly').objectStore('files').getAll();request.onsuccess=()=>resolve(request.result.filter(f=>f.project===project));request.onerror=()=>reject(request.error)});
+   const zip=new JSZip();
+   zip.file('projet.json',JSON.stringify({schema:1,project,exportedAt:new Date().toISOString(),state},null,2));
+   const manifest=[];
+   list.forEach((f,i)=>{
+    const safeName=String(f.name||'fichier').replace(/[\\/\\:*?"<>|\\x00-\\x1f]/g,'_').slice(0,120);
+    const archivePath='fichiers/'+String(i+1).padStart(4,'0')+'-'+safeName;
+    zip.file(archivePath,f.blob);
+    manifest.push({id:f.id,name:f.name,path:archivePath,date:f.date||null,folder:f.folder||'',type:f.blob?.type||'',size:f.blob?.size||0});
+   });
+   zip.file('fichiers-manifeste.json',JSON.stringify(manifest,null,2));
+   zip.file('LIRE-MOI.txt','Sauvegarde locale du projet '+project+'\\nCréée le '+new Date().toLocaleString('fr-FR')+'\\nLe fichier projet.json contient les conversations, notes et paramètres. Les documents sont dans fichiers/.\\nAucun transfert en ligne n’a eu lieu.\\n');
+   const blob=await zip.generateAsync({type:'blob',compression:'DEFLATE',compressionOptions:{level:4}});
+   download(blob,'eloah-sauvegarde-'+new Date().toISOString().slice(0,10)+'.zip');
+   notify('Sauvegarde complète téléchargée : '+list.length+' fichier(s).');
+  }catch(error){notify('Sauvegarde non créée : '+(error?.message||'erreur inconnue'))}
+  finally{button.disabled=false;button.textContent='Télécharger une sauvegarde complète (.zip)'}
+ };
  $('memory-form').onsubmit=e=>{e.preventDefault();state.memory=Object.fromEntries(['themes','decisions','questions'].map(k=>[k,$('memory-'+k).value.split('\n').map(v=>v.trim()).filter(Boolean)]));if(settingsSave()){renderSettings();notify('Mémoire enregistrée.')}};
  $('memory-view').onclick=()=>settingsDialog('Mémoire du projet','<pre class="settings-pre">'+esc(settingsSummary())+'</pre>');
  $('budget-form').onsubmit=e=>{e.preventDefault();s.budget={max:Number($('budget-max').value),alert:Number($('budget-alert').value),period:$('budget-period').value};if(settingsSave()){renderSettings();notify('Repères budgétaires enregistrés.')}};
