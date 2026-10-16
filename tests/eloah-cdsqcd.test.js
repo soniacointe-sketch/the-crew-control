@@ -23,6 +23,8 @@ assert.equal(api.ambiguous('RGPD'),false,'Known real-world acronym remains avail
 assert.equal(api.ambiguous('Nostradamus'),false,'Normal real topic remains available');
 assert.equal(api.ambiguous('Je souhaite imaginer cdsqcd'),false,'Creative description is not blocked');
 assert.equal(api.prepare('The Crew Orchies'),3);
+assert.equal(api.sources().length,0,'A pending request must not replace the last completed answer');
+api.commit();
 assert.deepEqual(Array.from(api.sources(),x=>x.id),['S1','S2','S3']);
 assert.match(api.context(),/\[S1\].*Atelier confirmé/);
 assert.match(api.context(),/non vérifiés|non prouvée|NON|non vérifiée/i);
@@ -32,6 +34,8 @@ assert.equal(withCitation.unknown.length,0);
 const invented=api.audit('L’entreprise est conforme ISO 27001 en 2026. [S9]');
 assert.deepEqual(Array.from(invented.unknown),['S9']);
 assert.ok(invented.warnings.some(w=>w.includes('absentes')));
+api.prepare('ELOAH');
+assert.equal(api.sources().length,3,'Unfinished request must preserve the last answer citations');
 const unsupported=api.audit('ELOAH a été certifiée ISO 27001 en 2026.');
 assert.ok(unsupported.uncited.length>=1);
 api.clear();
