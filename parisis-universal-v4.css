@@ -131,3 +131,29 @@ html:root body .panel-head :is(h2,p,span,strong,div){color:#F2EBDD!important}
 html:root body .network-scroller .graph-node circle{fill:#354B43}
 html:root body .network-scroller .graph-node.selected circle{fill:#743D45}
 html:root body :is(.notice,.callout,blockquote) :is(strong,b,span,p){color:#182321!important}
+
+/* PARISIS — contrast fix 20261016: dark containers must override light reading text rules. */
+html:root body :is(.statement,.dark,.dark-card,.dark-panel,.dark-box,.dark-frame,.panel-head,.network-scroller,.pe-v4-reading-footer-inner,.pe-universal-bar,.pe-masthead,.pe-cover,.pe-tail){
+ --ink:#fff;--text:#fff;--muted:#fff;color:#fff!important;
+}
+html:root body :is(.statement,.dark,.dark-card,.dark-panel,.dark-box,.dark-frame){
+ background:#182321!important;border-color:#B39359!important;
+}
+html:root body :is(.statement,.dark,.dark-card,.dark-panel,.dark-box,.dark-frame,.panel-head,.network-scroller,.pe-v4-reading-footer-inner,.pe-universal-bar,.pe-masthead,.pe-cover,.pe-tail) :is(p,div,h1,h2,h3,h4,h5,h6,span,strong,b,em,i,small,a,li,ul,ol,dl,dt,dd,label,summary,figcaption,cite,blockquote,code){
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+html:root body :is(.statement,.dark,.dark-card,.dark-panel,.dark-box,.dark-frame) a{
+ text-decoration:underline;text-underline-offset:3px;
+}
+html:root body :is(details,.tablewrap td,pre){
+ background:#182321!important;color:#fff!important;
+}
+html:root body :is(details,.tablewrap td,pre) :is(summary,p,div,span,h1,h2,h3,h4,strong,b,em,i,small,a,li,label,code){
+ color:#fff!important;-webkit-text-fill-color:#fff!important;
+}
+/* Tables have explicit readable pairs rather than inherited colours. */
+html:root body .tablewrap th{background:#354B43!important;color:#fff!important}
+html:root body .tablewrap th *{color:#fff!important;-webkit-text-fill-color:#fff!important}
+@media print{
+ html:root body :is(.statement,.dark,.dark-card,.dark-panel,.dark-box,.dark-frame,details,.tablewrap td,pre){background:#182321!important;color:#fff!important;print-color-adjust:exact}
+}
