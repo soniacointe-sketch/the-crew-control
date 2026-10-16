@@ -32,8 +32,8 @@
     const originalRole = side.getAttribute('role');
     const originalLabel = side.getAttribute('aria-label');
     if (!side.id) side.id = 'eloah-primary-navigation';
-    const css = document.createElement('link');
-    css.rel = 'stylesheet'; css.href = 'eloah-navigation-harmony.css?v=20261017-fixed'; document.head.append(css);
+    const css = document.querySelector('link[href^="eloah-navigation-harmony.css"]') || document.createElement('link');
+    css.rel = 'stylesheet'; css.href = 'eloah-navigation-harmony.css?v=20261017-stable'; document.head.append(css);
     if (global && side !== global) {
       const links = global.querySelector('.eloah-menu-links');
       if (links) {
@@ -138,6 +138,9 @@
     window.addEventListener('hashchange', updateCurrent); window.addEventListener('popstate', updateCurrent); updateCurrent();
   }
   // Existing universe scripts consolidate their menus first, including async platform loading.
-  if (document.readyState === 'complete') init();
+  const corePage = ['mes-univers.html','eloah-pilotage.html','eloah-2040.html'].includes(location.pathname.split('/').pop());
+  if (corePage && document.readyState !== 'loading') init();
+  else if (corePage) document.addEventListener('DOMContentLoaded', init, {once:true});
+  else if (document.readyState === 'complete') init();
   else window.addEventListener('load', init, {once:true});
 })();
