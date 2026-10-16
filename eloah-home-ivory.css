@@ -130,3 +130,17 @@ body#maison-eloah #contenu #services>.home-creative-links{margin:20px 0}
 body#maison-eloah #contenu #services>.home-creative-links summary{min-height:44px;cursor:pointer}
 @media(max-width:1000px){body#maison-eloah #contenu .home-organized-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:550px){body#maison-eloah #contenu .home-organized-links{grid-template-columns:1fr}body#maison-eloah #contenu .home-organized-section{margin-top:28px}}
+
+/* Home navigation: one selected destination and one mobile drawer. */
+html#eloah-ivory-home{scroll-behavior:auto!important}
+html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav a:not([aria-current="page"]){background:transparent!important;border-left-color:transparent!important;box-shadow:none!important}
+html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav .eloah-menu-links>a{min-height:48px!important;padding:12px 14px!important;font-size:14px!important;border-left:2px solid transparent!important}
+html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav .eloah-menu-links>a[aria-current="page"]{background:#ded8c9!important;border-left-color:#927847!important;font-weight:600}
+html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav .eloah-menu-links>a:hover{background:#e4dfd3!important}
+html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav .eloah-wordmark{box-shadow:none!important}
+@media(max-width:1000px){
+ html#eloah-ivory-home body#maison-eloah:not(.eloah-navigation-open) nav.eloah-global-nav.eloah-harmonized-side{display:none!important}
+ html#eloah-ivory-home body#maison-eloah.eloah-navigation-open nav.eloah-global-nav.eloah-harmonized-side{display:flex!important;flex-direction:column!important;align-items:stretch!important;gap:8px!important;height:100dvh!important;min-height:100dvh!important}
+ html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav.eloah-harmonized-side>.eloah-switch{display:none!important}
+ html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav.eloah-harmonized-side>.eloah-menu{width:100%;margin:0!important}
+}
