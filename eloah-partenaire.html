@@ -687,7 +687,7 @@ function updateLayout(){
  const heading=document.querySelector('main > header h1');
  const eyebrow=document.querySelector('main > header .eyebrow');
  const subtitle=document.getElementById('mailing-subtitle');
- const name=isMailing?'Mailing & Newsletter':isSubscription?'Mon abonnement':isAnalytics?'Analytics':'ELOAH Control';
+ const name=isMailing?'Mailing & Newsletter':isSubscription?'Mon abonnement':isAnalytics?'Analytics':document.body.classList.contains('studio-view')?'ELOAH Studio':'ELOAH Control';
  if(heading&&heading.textContent!==name)heading.textContent=name;
  if(eyebrow){const desired=isMailing||isSubscription||isAnalytics?'none':'';if(eyebrow.style.display!==desired)eyebrow.style.display=desired}
  if(subtitle&&subtitle.hidden===isMailing)subtitle.hidden=!isMailing;
