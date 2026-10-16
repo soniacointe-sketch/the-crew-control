@@ -218,6 +218,27 @@ function renderRuns(){
   const data=run.payload||{};
   content.textContent="À préparer · "+(data.task_open_count??"—")+" tâche(s) ouvertes, "+(data.mission_open_count??"—")+" mission(s) ouvertes, "+(data.appointment_upcoming_count??"—")+" rendez-vous dans les 7 jours, "+(data.indexed_mail_p1_count??"—")+" e-mails P1 indexés. Chiffres issus des registres, pas de lecture Gmail ou Google Agenda en direct.";
   article.append(title,desc,content);
+  const items=Array.isArray(data.items)?data.items.slice(0,3):[];
+  if(typeof data.headline==="string"){
+   const headline=document.createElement("p");headline.className="digest-headline";headline.textContent=data.headline;article.append(headline);
+  }
+  if(items.length){
+   const list=document.createElement("ol");list.className="digest-items";
+   for(const x of items){
+    if(!x||typeof x!=="object")continue;
+    const line=document.createElement("li");const title=document.createElement("strong");
+    title.textContent=String(x.title||"Élément à vérifier").slice(0,140);
+    const action=document.createElement("p");
+    action.textContent="Prochaine action : "+String(x.next_action||"Vérifier la source").slice(0,160);
+    const meta=document.createElement("small");meta.className="help";
+    meta.textContent="Agent Courrier · "+(x.due_date?"Échéance : "+x.due_date+" · ":"")+
+      (x.stale?"Index ancien : revérifier":"Index enregistré, non synchronisé en direct");
+    line.append(title,action,meta);list.append(line);
+   }
+   article.append(list);
+   const link=document.createElement("a");link.href="eloah-mail-agent.html";
+   link.className="digest-source-link";link.textContent="Vérifier dans Agent Courrier ↗";article.append(link);
+  }
   const row=document.createElement("div");row.className="row";
   const open=document.createElement("button");open.type="button";open.textContent="Préparer le brief";open.onclick=()=>{
     select(run.routine_key);$("use-internal-context").checked=true;prepare();
