@@ -13,6 +13,7 @@ on:
       - 'eloah-memoire-univers.js'
       - 'eloah-export-sources.js'
       - 'tests/eloah-cdsqcd.test.js'
+      - 'tests/eloah-cdsqcd-studio.test.js'
       - 'tests/eloah-accueil-static-check.py'
       - '.github/workflows/eloah-home-quality.yml'
   pull_request:
@@ -27,6 +28,7 @@ on:
       - 'eloah-memoire-univers.js'
       - 'eloah-export-sources.js'
       - 'tests/eloah-cdsqcd.test.js'
+      - 'tests/eloah-cdsqcd-studio.test.js'
       - 'tests/eloah-accueil-static-check.py'
       - '.github/workflows/eloah-home-quality.yml'
   workflow_dispatch:
@@ -53,3 +55,4 @@ jobs:
           node --check eloah-livrable-studio.js
           node --check eloah-cdsqcd-evidence.js
           node tests/eloah-cdsqcd.test.js
+          node tests/eloah-cdsqcd-studio.test.js
