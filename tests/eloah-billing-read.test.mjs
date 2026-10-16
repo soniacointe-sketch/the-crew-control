@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {readBilling} from '../supabase/functions/eloah-founder-crm/billing.mjs';
+const key='rk_live_fixture';
+const meta={eloah_user_id:'11111111-1111-1111-1111-111111111111',eloah_plan:'entree'};
+const invoice={id:'in_fixture',status:'paid',livemode:true,currency:'eur',amount_paid:1200,parent:{subscription_details:{metadata:meta}}};
+const stub=(pages,account='acct_1Kvj15ECEqtAYpIk')=>async url=>({ok:true,json:async()=>url.endsWith('/account')?{id:account}:pages.shift()});
+assert.equal((await readBilling(null,()=>{throw Error('must not call')})).state,'missing_key');
+assert.equal((await readBilling('sk_test_fixture')).state,'live_key_required');
+assert.equal((await readBilling(key,stub([],'wrong'))).state,'wrong_account');
+assert.equal((await readBilling(key,async()=>({ok:false,status:403}))).state,'permission_denied');
+const r=await readBilling(key,stub([{data:[invoice,{...invoice,livemode:false},{...invoice,parent:null,metadata:{project:'orchies'}},{...invoice,currency:'usd'}],has_more:true},{data:[{...invoice,amount_paid:800}],has_more:false}]));
+assert.equal(r.invoice_total_eur,20);assert.equal(r.invoice_count,2);assert.equal(r.state,'verified');
+const partial=await readBilling(key,stub(Array.from({length:5},()=>({data:[invoice],has_more:true}))));
+assert.equal(partial.invoice_total_eur,null);assert.equal(partial.state,'partial');
+assert.equal((await readBilling(key,stub([{data:[],has_more:false}]))).invoice_total_eur,0);
+console.log('Billing checks passed: scope, mode, pagination, permissions, incomplete and empty results.');
