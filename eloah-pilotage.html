@@ -115,13 +115,23 @@ html#eloah-inner-ivory body nav.eloah-global-nav>.eloah-menu{grid-column:2;grid-
 html#eloah-inner-ivory body nav.eloah-global-nav>.eloah-switch{grid-column:1;grid-row:2;min-width:0;white-space:normal!important}
 html#eloah-inner-ivory body nav.eloah-global-nav>[data-central-ai]{grid-column:2;grid-row:2;min-width:0;padding:8px!important;white-space:normal!important;font-size:12px}
 }
-</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"><link rel="stylesheet" href="eloah-inner-ivory.css?v=20261016-4"></head>
+</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"><link rel="stylesheet" href="eloah-inner-ivory.css?v=20261016-4">
+<style id="pilotage-clarte">
+html#eloah-inner-ivory #client-next{display:none!important}
+html#eloah-inner-ivory #pilotage-focus .focus-empty{padding:14px!important;min-height:0!important}
+html#eloah-inner-ivory #pilotage-focus .focus-empty p{margin:6px 0!important}
+html#eloah-inner-ivory #pilotage-focus .focus-empty button{display:none!important}
+html#eloah-inner-ivory #pilotage-focus :is(.focus-main,.focus-progress){min-height:0!important}
+html#eloah-inner-ivory .pilotage-anchors a{font-size:14px!important;color:#293d38!important;min-height:44px}
+html#eloah-inner-ivory #ops-calendar{min-height:0!important}
+html#eloah-inner-ivory .pilotage-anchors{overflow-x:auto;scrollbar-width:thin}
+</style></head>
 <body data-prune-lumiere class="client-page">
 
 <a class="skip-link" href="#contenu">Aller à mon espace</a>
 <main id="contenu">
 <header class="client-hero" aria-labelledby="pilotage-title">
-<div class="hero-top"><span class="eyebrow">ELOAH · ESPACE DE PILOTAGE</span><a href="mes-univers.html#maisons">← Mes univers ELOAH</a></div>
+<div class="hero-top"><span class="eyebrow">ELOAH · ESPACE DE PILOTAGE</span><a href="mes-univers.html#mes-univers-principaux">← Mes univers ELOAH</a></div>
 <div class="pilotage-hero-inner">
  <div class="pilotage-hero-copy"><figure class="ivory-photo"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85" alt="Carnet et matériel d’écriture sur un bureau" loading="lazy"><figcaption>Poser les idées, choisir la prochaine étape. · Photo : Unsplash</figcaption></figure>
   <p class="eyebrow">CLARTÉ · ORGANISATION · ACTION</p>
@@ -131,7 +141,7 @@ html#eloah-inner-ivory body nav.eloah-global-nav>[data-central-ai]{grid-column:2
    <button id="client-quick-add" type="button" class="primary">＋ Noter une action</button>
    <a class="btn" href="#mes-projets">Ouvrir mes projets →</a>
    <a class="btn" href="eloah-monitor.html">Supervision ↗</a>
-   <a class="btn" href="mes-univers.html#maisons">Ouvrir mes univers →</a>
+   <a class="btn" href="mes-univers.html#mes-univers-principaux">Ouvrir mes univers →</a>
   </div>
   <ul class="pilotage-hero-proof" aria-label="Ce que permet cet espace">
    <li>Priorités plus claires</li><li>Planning accessible</li><li>Projets au même endroit</li>
@@ -159,7 +169,7 @@ html#eloah-inner-ivory body nav.eloah-global-nav>[data-central-ai]{grid-column:2
 
 <nav class="pilotage-anchors" aria-label="Navigation rapide dans mon organisation">
   <a href="#pilotage-focus"><b aria-hidden="true">◈</b> Mes priorités</a>
-  <a href="#mon-organisation"><b aria-hidden="true">◷</b> Planning</a>
+  <a href="#ops-calendar"><b aria-hidden="true">◷</b> Planning</a>
   <a href="#mes-projets"><b aria-hidden="true">▱</b> Projets</a>
   <a href="#services"><b aria-hidden="true">✧</b> Mes outils</a>
   <a href="#mes-demarches">Démarches & comptes</a><a href="#compte-et-sauvegardes"><b aria-hidden="true">◇</b> Sauvegardes</a>
@@ -369,11 +379,23 @@ if(client)who().then(u=>{status(u?'Connectée au compte ELOAH.':'Connecte-toi po
 <script src="eloah-pilotage-organisation.js?v=20261014-client1"></script>
 <script src="eloah-pilotage-overview.js?v=1.0.0" defer></script>
 <script src="eloah-pilotage-focus.js?v=2.0.0" defer></script>
-<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script><script>(()=>{'use strict';const el=id=>document.getElementById(id),norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();function filterOrganismes(){let n=0,visibleDomains=0;const domain=el('demarches-domain').value,q=norm(el('demarches-search').value.trim());document.querySelectorAll('[data-directory-domain]').forEach(group=>{let count=0;group.querySelectorAll('[data-organisme]').forEach(card=>{const match=!(domain&&card.dataset.domaine!==domain)&&norm(card.dataset.organisme+' '+card.dataset.domaine).includes(q);card.hidden=!match;if(match){count++;n++}});group.hidden=count===0;group.querySelector('.domain-count').textContent=count+' accès';if(count)visibleDomains++;group.open=!!(q||domain)&&count>0;});el('demarches-empty').hidden=n>0;el('demarches-directory-count').textContent=visibleDomains+' domaines · '+n+' accès. Ouvre un domaine pour retrouver ses services.';}el('demarches-search').oninput=filterOrganismes;el('demarches-domain').onchange=filterOrganismes;filterOrganismes();document.querySelectorAll('[data-preparer]').forEach(b=>b.onclick=()=>{el('demarches-create').open=true;el('demarches-org').value=b.dataset.preparer;el('demarches-action').focus()});el('demarches-form').onsubmit=e=>{e.preventDefault();const org=el('demarches-org').value.trim(),action=el('demarches-action').value.trim();if(!org||!action)return;try{const key='eloah-planning-v1',items=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(items))throw Error('Planning illisible : aucune donnée remplacée.');items.push({id:'demarche-'+crypto.randomUUID(),title:org+' · '+action,project:'Mes démarches',date:el('demarches-date').value,status:'À faire',kind:'Démarche',note:'',archived:false});localStorage.setItem(key,JSON.stringify(items));window.ELOAHWorkspace?.renderCalendar?.();el('demarches-form').reset();el('demarches-result').textContent='Démarche enregistrée dans le planning de cet appareil.'}catch(err){el('demarches-result').textContent='Enregistrement impossible : '+err.message}}})();</script><script>(()=>{'use strict';
+<script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script><script>(()=>{'use strict';const el=id=>document.getElementById(id),norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();function filterOrganismes(){let n=0,visibleDomains=0;const domain=el('demarches-domain').value,q=norm(el('demarches-search').value.trim());document.querySelectorAll('[data-directory-domain]').forEach(group=>{let count=0;group.querySelectorAll('[data-organisme]').forEach(card=>{const match=!(domain&&card.dataset.domaine!==domain)&&norm(card.dataset.organisme+' '+card.dataset.domaine).includes(q);card.hidden=!match;if(match){count++;n++}});group.hidden=count===0;group.querySelector('.domain-count').textContent=count+' accès';if(count)visibleDomains++;group.open=!!(q||domain)&&count>0;});el('demarches-empty').hidden=n>0;el('demarches-directory-count').textContent=visibleDomains+' domaines · '+n+' accès. Ouvre un domaine pour retrouver ses services.';}el('demarches-search').oninput=filterOrganismes;el('demarches-domain').onchange=filterOrganismes;filterOrganismes();document.querySelectorAll('[data-preparer]').forEach(b=>b.onclick=()=>{el('demarches-create').open=true;el('demarches-org').value=b.dataset.preparer;el('demarches-action').focus()});el('demarches-form').onsubmit=e=>{e.preventDefault();const org=el('demarches-org').value.trim(),action=el('demarches-action').value.trim();if(!org||!action)return;try{const key='eloah-planning-v1',items=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(items))throw Error('Planning illisible : aucune donnée remplacée.');items.push({id:'demarche-'+crypto.randomUUID(),title:org+' · '+action,project:'Mes démarches',date:el('demarches-date').value,status:'À faire',kind:'Démarche',note:'',archived:false});localStorage.setItem(key,JSON.stringify(items));window.ELOAHWorkspace?.renderCalendar?.();el('demarches-form').reset();el('demarches-result').textContent='Démarche enregistrée dans le planning de cet appareil.'}catch(err){el('demarches-result').textContent='Enregistrement impossible : '+err.message}}})();</script><script>(()=>{'use strict';
 const host=document.getElementById('demarches-tracking'),filter=document.getElementById('demarches-state'),key='eloah-planning-v1';
 const create=(tag,text)=>{const e=document.createElement(tag);e.textContent=text;return e};
 const read=()=>{const a=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(a))throw Error('Format du planning invalide.');return a};
 function render(){host.replaceChildren();try{const all=read().filter(t=>t&&t.project==='Mes démarches'&&!t.archived),rows=all.filter(t=>filter.value==='all'||(filter.value==='done'?t.status==='Terminé':t.status!=='Terminé')).sort((a,b)=>(a.date||'9999').localeCompare(b.date||'9999'));document.getElementById('demarches-count').textContent=all.filter(t=>t.status!=='Terminé').length+' à suivre · '+all.filter(t=>t.status==='Terminé').length+' terminées';if(!rows.length){host.append(create('p','Aucune démarche dans cette sélection. Prépare une démarche depuis un organisme ou utilise le formulaire.'));return}for(const t of rows){const card=document.createElement('article');card.className='demarche-row';const copy=document.createElement('div');copy.append(create('strong',t.title));let date='Sans date';if(/^\d{4}-\d{2}-\d{2}$/.test(t.date||''))date=new Date(t.date+'T12:00:00').toLocaleDateString('fr-FR');copy.append(create('p',date+' · '+t.status));const actions=document.createElement('div');actions.className='service-links';const edit=create('button','Modifier');edit.type='button';edit.onclick=()=>{let select=document.getElementById('ops-project-filter');if(select){select.value='';select.dispatchEvent(new Event('change',{bubbles:true}))}select=document.getElementById('ops-view');if(select){select.value='Liste';select.dispatchEvent(new Event('change',{bubbles:true}))}const b=[...document.querySelectorAll('[data-task-edit]')].find(b=>b.dataset.taskEdit===t.id);if(b)b.click();else document.getElementById('demarches-tracking-status').textContent='Ouvre le planning pour retrouver cette démarche.'};const done=create('button',t.status==='Terminé'?'Rouvrir':'Terminer');done.type='button';done.onclick=()=>{try{const items=read();const item=items.find(x=>x.id===t.id);if(!item)throw Error('Démarche introuvable.');item.status=item.status==='Terminé'?'À faire':'Terminé';localStorage.setItem(key,JSON.stringify(items));window.ELOAHWorkspace?.renderCalendar?.();render();document.getElementById('demarches-tracking-status').textContent='Statut enregistré.'}catch(e){document.getElementById('demarches-tracking-status').textContent='Enregistrement impossible : '+e.message}};actions.append(edit,done);card.append(copy,actions);host.append(card)}}catch(e){host.append(create('p','Lecture impossible : '+e.message+' Aucune donnée remplacée.'))}}
 filter.onchange=render;new MutationObserver(render).observe(document.getElementById('ops-calendar'),{childList:true});window.addEventListener('storage',e=>{if(e.key===key||e.key===null)render()});render();
-})();</script></body>
+})();</script>
+<script>
+/* Libellés et destinations communs à l’accueil. */
+(()=>{const nav=document.querySelector('.eloah-global-nav');if(!nav)return;
+for(const a of nav.querySelectorAll('a')){
+const label=a.textContent.trim();
+if(label==='Mes univers')a.href='mes-univers.html#mes-univers-principaux';
+if(label==='Studio'){a.textContent='Studio de création';a.href='eloah-reel-studio.html'}
+if(label==='Documents')a.textContent='Mes documents';
+if(label==='Mon compte')a.href='eloah-espace-prive.html';
+}
+})();
+</script></body>
 </html>
