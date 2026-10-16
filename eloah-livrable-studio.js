@@ -101,6 +101,7 @@ function init(){
  function lastAnswer(){return [...log.querySelectorAll('.hai-message[data-author="eloah"]')].pop()?.querySelector('p')?.textContent?.trim()||''}
  function audit(text){
   const words=wordCount(text),caveats=[];
+  const evidence=window.EloahEvidence?.audit?.(text)||null;
   const min=formats[latest.format]?.min||100;
   if(words<min)caveats.push('Réponse courte ('+words+' mots) pour un '+(formats[latest.format]?.label||'livrable')+' : vérifier que le contenu est réellement développé.');
   if(latest.format==='carrousel'){
@@ -114,7 +115,8 @@ function init(){
   const a=window.EloahAutoSources?.status()||'';
   if(/^Références trouvées automatiquement/.test(a))origins.push('Créations recherchées automatiquement : '+a.replace(/^Références trouvées automatiquement\s*:\s*/,''));
   if(window.EloahValidatedMemory?.context(project.value))origins.push('Notes validées du projet');
-  return {words,caveats,origins};
+  if(evidence)caveats.push(...evidence.warnings);
+  return {words,caveats,origins,evidence};
  }
  function setup(){
   const guide=$('eloah-result-guide');if(!guide)return;
@@ -132,8 +134,19 @@ function init(){
    const lines=['CDSQCD — FICHE DE RELECTURE','Sujet : '+(latest.subject||'Demande libre'),'Univers : '+(project.value||'ELOAH'),'Longueur : '+r.words+' mots','Statut : brouillon à valider, faits NON vérifiés automatiquement.'];
    const p=document.createElement('p');p.textContent='Brouillon à relire · '+r.words+' mots. CDSQCD ne vérifie ni le contenu du web ni les faits : aucune certification automatique.';body.append(p);
    if(r.origins.length){const q=document.createElement('p');q.textContent='Contexte identifié : '+r.origins.join(' ; ')+'. Ces éléments ne prouvent pas les affirmations du texte.';body.append(q);lines.push('Contexte détecté : '+r.origins.join(' ; '))}
-   else{const q=document.createElement('p');q.textContent='Aucune source exploitable identifiée par ce contrôle. Toute affirmation factuelle reste à vérifier.';body.append(q);lines.push('Sources identifiées : aucune par le contrôle local.')}
+   else if(!r.evidence?.sources.length){const q=document.createElement('p');q.textContent='Aucune source exploitable identifiée. Toute affirmation factuelle reste à vérifier.';body.append(q);lines.push('Sources identifiées : aucune par le contrôle local.')}
    const list=document.createElement('ul');(r.caveats.length?r.caveats:['Aucune anomalie formelle détectée. Cela ne signifie pas que les faits sont vérifiés.']).forEach(c=>{const li=document.createElement('li');li.textContent=c;list.append(li);lines.push('- '+c)});body.append(list);
+   if(r.evidence){
+    const ev=r.evidence;
+    const p=document.createElement('p');p.textContent=ev.sources.length+' document(s) consulté(s) lors de cette demande, '+ev.cited.length+' cité(s) dans le texte. Mentionner [S1] n’établit PAS la vérité de l’affirmation.';body.append(p);
+    lines.push('Sources disponibles : '+ev.sources.length+' ; identifiants mentionnés : '+(ev.cited.join(', ')||'aucun'));
+    if(ev.sources.length){
+     const details=document.createElement('details'),summary=document.createElement('summary');summary.textContent='Voir les références effectivement utilisées';details.append(summary);
+     for(const src of ev.sources){const item=document.createElement('div');item.className='ef-source-item';const head=document.createElement('strong');head.textContent='['+src.id+'] '+src.title;const meta=document.createElement('small');meta.textContent=src.origin+' · '+src.universe;const excerpt=document.createElement('p');excerpt.textContent=src.excerpt;item.append(head,meta,excerpt);details.append(item);lines.push('['+src.id+'] '+src.title+' — '+src.origin+' — '+src.universe)}
+     body.append(details);
+    }
+    if(ev.uncited.length){const heading=document.createElement('p');heading.textContent='Passages potentiellement factuels à examiner :';body.append(heading);const flagged=document.createElement('ol');for(const line of ev.uncited){const li=document.createElement('li');li.textContent=line;flagged.append(li);lines.push('Passage à vérifier : '+line)}body.append(flagged)}
+   }
    lines.push('Avant diffusion : relire, vérifier les affirmations et les droits des images, puis approuver.');review=lines.join('\n');
   };
   new MutationObserver(render).observe(log,{childList:true,subtree:true});render();
@@ -142,6 +155,7 @@ function init(){
  setTimeout(setup,0);
  const css=document.createElement('style');
  css.textContent='#eloah-factory .ef-preflight{margin-top:12px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}#eloah-factory .ef-preflight p{flex-basis:100%;margin:4px 0 0}#eloah-factory .ef-preflight:empty{display:none}#eloah-factory #ef-intent{max-width:100%}#eloah-cdsqcd-review{margin-top:20px;padding-top:18px;border-top:1px solid #c8cfc6;color:inherit}#eloah-cdsqcd-review h4{font:600 17px/1.4 system-ui;margin:0 0 8px;color:inherit}#eloah-cdsqcd-review p,#eloah-cdsqcd-review li{font:13px/1.65 system-ui;color:inherit}#eloah-cdsqcd-review ul{padding-left:20px}#eloah-cdsqcd-review button{min-height:44px;padding:10px 14px;border:1px solid #9daea3;border-radius:8px;background:#fff;color:#293d38;cursor:pointer}#eloah-cdsqcd-review button:disabled{opacity:.5;cursor:default}';
+ css.textContent+='#eloah-cdsqcd-review summary{cursor:pointer;min-height:44px;padding:8px 0;font-weight:600}#eloah-cdsqcd-review .ef-source-item{padding:10px 0;border-bottom:1px solid #ddd}#eloah-cdsqcd-review .ef-source-item small{display:block;margin-top:3px;opacity:.78}#eloah-cdsqcd-review .ef-source-item p{white-space:pre-wrap;overflow-wrap:anywhere}';
  document.head.append(css);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
