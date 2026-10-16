@@ -1,4 +1,4 @@
-import {mountPilot} from './eloah-ai-pilot.js?v=memory-3';
+import {mountPilot} from './eloah-ai-pilot.js?v=missions-1';
 import {mountCloudMemory} from './eloah-cloud-memory.js?v=2';
 import {mountAgentNetwork} from './eloah-agent-network.js?v=2';
 import {mountMissionDesk} from './eloah-mission-desk.js?v=1';
