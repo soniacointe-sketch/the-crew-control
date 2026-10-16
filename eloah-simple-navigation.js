@@ -9,13 +9,7 @@ const advanced=document.createElement('details');advanced.id='eloah-advanced-too
 advanced.innerHTML='<summary>Outils avancés (facultatifs)</summary><div class="eloah-advanced-links"></div>';
 const custom=document.createElement('div');custom.id='eloah-simple-message';custom.setAttribute('role','status');
 function go(name){
- if(name==='__actions'){
-  const handler=window.ELOAHWorkspace;
-  if(handler&&typeof handler.openCalendar==='function'){handler.openCalendar();return}
-  const btn=document.querySelector('[data-ops-open],#ops-link');
-  if(btn){btn.click();return}
-  location.href='eloah-pilotage.html#mes-projets';return;
- }
+ if(name==='__actions'){showTab('Planning');update(name);return;}
  if(name==='__assistant'){
   showTab('Chat Projet');
   const field=document.getElementById('message-input');
