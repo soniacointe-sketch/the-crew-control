@@ -4,6 +4,7 @@ on:
     branches: [main]
     paths:
       - 'eloah-2040*'
+      - 'eloah-routines*'
       - 'eloah-platform.js'
       - 'eloah-navigation.js'
       - 'eloah-mobile-app.js'
@@ -12,6 +13,7 @@ on:
   pull_request:
     paths:
       - 'eloah-2040*'
+      - 'eloah-routines*'
       - 'eloah-platform.js'
       - 'eloah-navigation.js'
       - 'eloah-mobile-app.js'
