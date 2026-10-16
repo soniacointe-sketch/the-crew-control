@@ -165,11 +165,13 @@ export function mountKnowledgeVault({getClient,isFounder,founderId}){
    const base=()=>c.from('eloah_knowledge_entries').select('id,source_id,title,content,provenance,updated_at')
       .eq('owner_id',founderId).eq('universe',u);
    let {data,error}=await base().textSearch('search_vector',query,{type:'websearch',config:'french'}).limit(80);
-   if(error){
+   if(error||!data?.length){
      const term=String(q).split(/\s+/).find(x=>x.length>=4);
-     if(!term)throw Error(error.message||'Recherche impossible');
-     ({data,error}=await base().ilike('content','%'+term.slice(0,35)+'%').limit(80));
-     if(error)throw Error(error.message);
+     if(error&&!term)throw Error(error.message||'Recherche impossible');
+     if(term){
+       ({data,error}=await base().ilike('content','%'+term.replace(/[%,()*]/g,'').slice(0,35)+'%').limit(80));
+       if(error)throw Error(error.message);
+     }
    }
    return (data||[]).map(r=>({...r,score:rank(q,r)})).sort((a,b)=>b.score-a.score).slice(0,12);
  }
