@@ -6,6 +6,13 @@ on:
       - 'mes-univers.html'
       - 'eloah-accueil-pro.*'
       - 'eloah-accueil-ia.js'
+      - 'eloah-cdsqcd-evidence.js'
+      - 'eloah-livrable-studio.js'
+      - 'eloah-creation-sources.js'
+      - 'eloah-auto-sources.js'
+      - 'eloah-memoire-univers.js'
+      - 'eloah-export-sources.js'
+      - 'tests/eloah-cdsqcd.test.js'
       - 'tests/eloah-accueil-static-check.py'
       - '.github/workflows/eloah-home-quality.yml'
   pull_request:
@@ -13,6 +20,13 @@ on:
       - 'mes-univers.html'
       - 'eloah-accueil-pro.*'
       - 'eloah-accueil-ia.js'
+      - 'eloah-cdsqcd-evidence.js'
+      - 'eloah-livrable-studio.js'
+      - 'eloah-creation-sources.js'
+      - 'eloah-auto-sources.js'
+      - 'eloah-memoire-univers.js'
+      - 'eloah-export-sources.js'
+      - 'tests/eloah-cdsqcd.test.js'
       - 'tests/eloah-accueil-static-check.py'
       - '.github/workflows/eloah-home-quality.yml'
   workflow_dispatch:
@@ -34,3 +48,8 @@ jobs:
         run: python tests/eloah-accueil-static-check.py
       - name: Check home assistant syntax
         run: node --check eloah-accueil-ia.js
+      - name: Check CDSQCD provenance and source audit
+        run: |
+          node --check eloah-livrable-studio.js
+          node --check eloah-cdsqcd-evidence.js
+          node tests/eloah-cdsqcd.test.js
