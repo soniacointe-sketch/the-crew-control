@@ -13,7 +13,7 @@ button{font:inherit;border:0;cursor:pointer;border-radius:8px;min-height:44px;pa
 .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.stat{padding:18px;background:#f5f3ed;border:1px solid var(--line);border-radius:9px}.stat b{display:block;font-size:29px;color:var(--dark)}.muted{color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.filters{display:grid;grid-template-columns:2fr 1fr;gap:12px}.entry{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:flex-start}.entry input{width:18px;height:18px;margin-top:5px;flex-shrink:0}.entrymain{min-width:0;flex:1}.entrytitle{font-weight:750;color:#232c33;overflow-wrap:anywhere}.meta{font-size:12px;color:#53636d;margin-top:5px}.risk{color:#9a472c;font-weight:700}.universe{color:#354e60;font-weight:650}.clip{display:block;background:#f4f1ea;padding:10px;border-radius:7px;border-left:3px solid #c2a876;margin-top:7px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto;font-size:13px}
 details{margin-top:6px}summary{cursor:pointer;color:var(--dark);font-size:13px;font-weight:650}.notice{border-left:4px solid #997647;padding:12px 16px;background:#f5efe5;margin:14px 0}.err{color:#a62d2d}#status{min-height:25px}#list{max-height:540px;overflow:auto}#pager{margin-top:15px}footer{font-size:12px;color:var(--muted);margin-top:25px}
 @media(max-width:650px){main{padding:23px 13px 60px}.panel{padding:16px}.grid,.filters{grid-template-columns:1fr}.entry{font-size:14px}}
-</style></head><body>
+.reviewtext{width:100%;min-height:270px;resize:vertical;padding:15px;background:#fff;color:#202930;border:1px solid #9daeb4;border-radius:8px;font:14px/1.55 system-ui,Arial,sans-serif}.nextstep{margin-top:20px;padding:17px 18px;border:1px solid #8ea2a9;background:#eff5f5;border-radius:10px}.nextstep button{font-size:16px;padding:14px 19px}.smallnote{font-size:12px;color:var(--muted)}.review-grid{display:grid;grid-template-columns:1fr auto;gap:12px;align-items:end}.review-grid select{max-width:380px}@media(max-width:650px){.review-grid{grid-template-columns:1fr}}[hidden]{display:none!important}</style></head><body>
 <header><nav><strong>SONIA OS · MÉMOIRE HISTORIQUE</strong><a href="sonia-os.html">← Centre de pilotage</a></nav></header>
 <main>
 <div class="eyebrow">Module de préparation · données privées</div>
@@ -32,10 +32,11 @@ details{margin-top:6px}summary{cursor:pointer;color:var(--dark);font-size:13px;f
 <p class="muted">Catégorisation par mots-clés, non par IA. Une conversation peut concerner plusieurs univers : vérifie le classement avant l'export.</p>
 <div class="filters"><div><label for="search">Rechercher par titre</label><input id="search" type="search" placeholder="Nostradamus, ELOAH, ateliers…"></div><div><label for="filter">Filtrer par univers</label><select id="filter"><option value="all">Tous les univers</option></select></div></div>
 <div class="actions" style="margin:17px 0"><button class="secondary" id="select-safe" type="button">Sélectionner les dossiers non signalés</button><button class="secondary" id="unselect" type="button">Tout désélectionner</button></div>
-<div id="list" aria-label="Conversations importables"></div><div class="actions" id="pager"><button class="secondary" type="button" id="previous">← Précédent</button><span id="page-info" class="muted"></span><button class="secondary" type="button" id="next">Suivant →</button></div>
+<div id="list" aria-label="Conversations importables"></div><div class="actions" id="pager"><button class="secondary" type="button" id="previous">← Page précédente</button><span id="page-info" class="muted"></span><button class="secondary" type="button" id="next">Page suivante →</button></div><div class="nextstep"><p id="selection-help" role="status" aria-live="polite"><strong>Étape suivante :</strong> coche la case devant la conversation à intégrer, puis continue. Une conversation signalée privée n’est pas sélectionnée automatiquement.</p><button type="button" id="continue" disabled>Continuer vers la préparation de ma mémoire →</button></div>
 </section>
+<section class="panel" id="review-panel" hidden><div class="eyebrow">3. Préparer la mémoire de SONIA OS</div><h2>Relire, corriger et valider</h2><p id="review-count" class="muted"></p><div class="review-grid"><div><label for="memory-universe">Univers de destination</label><select id="memory-universe"></select></div><button type="button" class="secondary" id="build-memory">Actualiser le brouillon</button></div><label for="memory-content">Mémoire proposée (modifiable, maximum 6 000 caractères)</label><textarea id="memory-content" class="reviewtext" maxlength="6000" spellcheck="true" aria-describedby="memo-note"></textarea><p id="memo-note" class="smallnote">Cette synthèse n’est pas une mémoire validée automatiquement. Vérifie chaque affirmation, retire les informations sensibles et corrige le texte avant de le sauvegarder.</p><label style="display:flex;align-items:flex-start;gap:10px"><input type="checkbox" id="approve-memory" style="width:20px;height:20px;margin-top:3px">J’ai vérifié le texte et j’autorise sa préparation pour ma mémoire privée.</label><div class="actions"><button type="button" id="copy-memory" disabled>Copier la mémoire validée</button><button type="button" class="secondary" id="download-memory" disabled>Télécharger le brouillon validé (.txt)</button><a href="eloah-2040.html#eloah-cloud-memory" target="_blank" rel="noopener noreferrer">Ouvrir ma mémoire cloud ELOAH ↗</a></div><p id="memory-status" class="muted" role="status" aria-live="polite">Le texte reste sur ton appareil tant que tu ne le copies ni ne l’enregistres ailleurs. Pour sauvegarder : copie-le, ouvre ELOAH, sélectionne l’univers, colle le texte puis utilise « Sauvegarder dans mon cloud » avec ta session fondatrice.</p></section>
 <section class="panel" id="export-panel" hidden>
-<div class="eyebrow">3. Validation et sortie</div><h2>Préparer le paquet de connaissances</h2>
+<div class="eyebrow">4. Export complémentaire</div><h2>Conserver un paquet de sources à relire</h2>
 <p>Le fichier exporté conservera le titre, la date, l'univers proposé, les messages texte du fil principal et les identifiants de provenance. <strong>Ce n'est pas un résumé intelligent</strong> : c'est une sélection de sources à examiner avant de retenir les décisions et les faits.</p>
 <div class="actions"><button id="export-selected" type="button">Exporter les conversations sélectionnées</button><button class="secondary" id="export-index" type="button">Exporter l'index sans messages</button></div>
 <p class="muted" id="export-note">L'export reste sur ton appareil. Ne transfère pas de données sensibles dans un site ou un dépôt public.</p>
@@ -95,10 +96,11 @@ function describe(convo,index){
  const messages=rawMsgs.map(m=>({role:m.author?.role,at:m.create_time||null,text:partsToText(m.content)})).filter(m=>m.text);
  const title=String(convo.title||"Conversation sans titre").slice(0,250);
  const sample=(title+"\n"+messages.filter(m=>m.role==="user").slice(0,4).map(m=>m.text.slice(0,700)).join("\n")).slice(0,3200);
- const universe=(rules.find(([_,re])=>re.test(sample))||["Autres"])[0];
+ const suggested=convo.sonia_os_knowledge?.dossiers?.[0]?.univers;
+ const universe=(typeof suggested==="string"&&universes.includes(suggested)?suggested:(rules.find(([_,re])=>re.test(sample))||["Autres"])[0]);
  const risk=sensitive.test(sample) || messages.some(m=>sensitive.test(m.text.slice(0,550)));
- const id=String(convo.id||("index-"+index));
- return {id,title,date:convo.create_time||null,universe,risk,messages,selected:false,preview:messages.slice(0,2).map(m=>m.role+": "+m.text.slice(0,260)).join("\n").slice(0,600)};
+ const id=String(convo.id||convo.conversation_id||("index-"+index));
+ return {id,title,date:convo.create_time||null,universe,risk,messages,knowledge:convo.sonia_os_knowledge||null,isReconstructed:convo.metadata?.is_official_chatgpt_export===false,selected:false,preview:messages.slice(0,2).map(m=>m.role+": "+m.text.slice(0,260)).join("\n").slice(0,600)};
 }
 function displayDate(ts){if(!ts)return "Date inconnue";try{const d=typeof ts==="number"?new Date(ts*1000):new Date(ts);return Number.isFinite(d.valueOf())?d.toLocaleDateString("fr-FR"):"Date inconnue"}catch{return "Date inconnue"}}
 const node=(tag,txt,cls)=>{const n=document.createElement(tag);if(txt!=null)n.textContent=txt;if(cls)n.className=cls;return n};
@@ -113,20 +115,25 @@ function refresh(){
  if(!filtered.length)target.append(node("p","Aucun dossier trouvé.","muted"));
  for(const r of filtered.slice(page*perPage,(page+1)*perPage)){
    const line=node("div",null,"entry"),cb=node("input"),body=node("div",null,"entrymain");
-   cb.type="checkbox";cb.checked=r.selected;cb.setAttribute("aria-label","Sélectionner "+r.title);cb.onchange=()=>{r.selected=cb.checked;$("selected-count").textContent=records.filter(x=>x.selected).length.toLocaleString("fr-FR")};
+   cb.type="checkbox";cb.checked=r.selected;cb.setAttribute("aria-label","Sélectionner "+r.title);cb.onchange=()=>{r.selected=cb.checked;refresh()};
    body.append(node("div",r.title,"entrytitle"));
    const meta=node("div",null,"meta");
    meta.append(node("span",r.universe+" · ","universe"),node("span",displayDate(r.date)+" · "+r.messages.length+" messages"));
-   if(r.risk)meta.append(node("span"," · Contenu potentiellement privé","risk"));
+   if(r.risk)meta.append(node("span"," · À relire : contenu potentiellement privé","risk"));
+   if(r.isReconstructed)meta.append(node("span"," · Archive reconstituée, non export officiel","risk"));
    body.append(meta);
    const details=node("details");details.append(node("summary","Aperçu local du fil (2 premiers messages)"),node("pre",r.preview||"Pas de texte exploitable","clip"));body.append(details);
    line.append(cb,body);target.append(line);
  }
  $("previous").disabled=page===0;$("next").disabled=(page+1)*perPage>=filtered.length;
+ $("pager").hidden=filtered.length<=perPage;
+ const nb=records.filter(r=>r.selected).length;
+ $("continue").disabled=!nb;
+ $("selection-help").textContent=nb?nb+" conversation(s) sélectionnée(s). Clique sur « Continuer » pour préparer ta mémoire.":"Coche d’abord la case à gauche du dossier. Les boutons « Page précédente » et « Page suivante » ne servent qu’aux listes de plus de 30 conversations.";
  $("page-info").textContent=filtered.length?("Page "+(page+1)+" / "+Math.ceil(filtered.length/perPage)+" · "+filtered.length+" résultats"):"0 résultat";
 }
 $("archive").addEventListener("change",async()=>{
- records=[];filtered=[];page=0;$("results").hidden=true;$("export-panel").hidden=true;
+ records=[];filtered=[];page=0;$("results").hidden=true;$("export-panel").hidden=true;$("review-panel").hidden=true;
  const file=$("archive").files?.[0];if(!file)return;
  if(!/\.json$/i.test(file.name)){$("status").textContent="Sélectionne le fichier conversations.json extrait de l'archive ZIP." ;return;}
  $("status").textContent="Lecture et analyse sur cet appareil…";
@@ -138,7 +145,7 @@ $("archive").addEventListener("change",async()=>{
    const opt=$("filter");opt.replaceChildren();const all=node("option","Tous les univers");all.value="all";opt.append(all);
    universes.forEach(u=>{const item=node("option",u);item.value=u;opt.append(item)});
    $("results").hidden=false;$("export-panel").hidden=false;refresh();
-   $("status").textContent=records.length+" conversations analysées localement. Aucune synchronisation effectuée.";
+   $("status").textContent=records.length+" conversations analysées localement. "+(records.some(r=>r.isReconstructed)?"Attention : ce fichier comporte un historique reconstitué et non un export officiel complet. ":"")+"Coche le dossier à gauche, puis clique sur « Continuer ». Aucune synchronisation effectuée.";
  }catch(e){$("status").textContent="Échec de lecture : "+(e?.message||"fichier illisible");$("status").className="err";}
 });
 $("search").addEventListener("input",()=>{page=0;refresh()});
@@ -147,6 +154,78 @@ $("previous").onclick=()=>{page=Math.max(0,page-1);refresh()};
 $("next").onclick=()=>{page++;refresh()};
 $("unselect").onclick=()=>{records.forEach(r=>r.selected=false);refresh()};
 $("select-safe").onclick=()=>{records.forEach(r=>{if(!r.risk && r.universe!=="Autres")r.selected=true});refresh()};
+
+function preparedText(selection, universe){
+ const relevant=selection.filter(r=>r.universe===universe);
+ const lines=[
+  "SONIA OS — FICHE MÉMOIRE À VALIDER",
+  "Univers : "+universe,
+  "Origine : "+relevant.length+" conversation(s) sélectionnée(s) dans un fichier local.",
+  "Attention : archive à relire, ne pas présenter une reconstruction comme une transcription officielle.",
+  ""
+ ];
+ for(const item of relevant){
+   lines.push("CONVERSATION : "+item.title,"Référence : "+item.id);
+   const k=item.knowledge;
+   if(k&&Array.isArray(k.dossiers)&&k.dossiers.length){
+     for(const d of k.dossiers.filter(d=>d.univers===universe)){
+       lines.push("DOSSIER : "+(d.titre||"Sans titre"));
+       for(const [title,key] of [["Thèmes et constats à contrôler","themes"],["Méthodes retenues","regles_methodologiques_validees"],["Documents de référence","documents_historiques"]]){
+         const items=Array.isArray(d[key])?d[key]:[];
+         if(items.length)lines.push(title+" :",...items.map(x=>"- "+String(x)));
+       }
+     }
+     if(Array.isArray(k.chantiers)&&k.chantiers.length)lines.push("À poursuivre :",...k.chantiers.map(x=>"- "+String(x)));
+     if(k.limites)lines.push("Limites : "+k.limites);
+   }else{
+     lines.push("Index documentaire (aucune synthèse prévalidée dans le fichier) :");
+     lines.push("Titre : "+item.title,"Messages : "+item.messages.length);
+     lines.push("À dépouiller avant mémoire : décisions, documents réellement vérifiés, actions encore ouvertes.");
+   }
+   lines.push("");
+ }
+ let combined=lines.join("\n").trim();
+ if(combined.length>5900)combined=combined.slice(0,5780).trimEnd()+"\n[Texte tronqué pour la limite du cloud : conserver le fichier source séparément.]";
+ return combined;
+}
+function startReview(){
+ const checked=records.filter(r=>r.selected);
+ if(!checked.length){$("selection-help").textContent="Sélectionne un dossier avant de continuer.";return}
+ const choices=[...new Set(checked.map(r=>r.universe))];
+ const selector=$("memory-universe");selector.replaceChildren();
+ for(const c of choices){const opt=node("option",c);opt.value=c;selector.append(opt)}
+ $("review-panel").hidden=false;
+ $("export-panel").hidden=false;
+ renderDraft();
+ $("review-panel").scrollIntoView({behavior:"smooth",block:"start"});
+}
+function renderDraft(){
+ const checked=records.filter(r=>r.selected);
+ const universe=$("memory-universe").value;
+ const subset=checked.filter(r=>r.universe===universe);
+ $("review-count").textContent=subset.length+" conversation(s) de l’univers « "+universe+" » en cours de préparation. D’autres univers se choisissent dans le menu. La sauvegarde reste manuelle.";
+ $("memory-content").value=preparedText(checked,universe);
+ $("approve-memory").checked=false;setValidationState();
+ $("memory-status").textContent="Brouillon prêt à relire. Les affirmations héritées de l’archive reconstituée doivent être vérifiées.";
+}
+function setValidationState(){
+ const valid=$("approve-memory").checked&&$("memory-content").value.trim().length>0;
+ $("copy-memory").disabled=!valid;$("download-memory").disabled=!valid;
+}
+$("continue").onclick=startReview;
+$("build-memory").onclick=renderDraft;
+$("memory-universe").onchange=renderDraft;
+$("approve-memory").onchange=setValidationState;
+$("memory-content").oninput=()=>{$("approve-memory").checked=false;setValidationState()};
+$("copy-memory").onclick=async()=>{
+ try{await navigator.clipboard.writeText($("memory-content").value);$("memory-status").textContent="Mémoire copiée. Ouvre ELOAH 2040 → Mémoire cloud, sélectionne le même univers, colle le texte et enregistre avec ta session fondatrice."}
+ catch(_){$("memory-content").focus();$("memory-content").select();$("memory-status").textContent="Copie automatique refusée par le navigateur. Le texte est sélectionné : Ctrl+C puis colle-le dans ELOAH."}
+};
+$("download-memory").onclick=()=>{
+ const blob=new Blob([$("memory-content").value],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");
+ a.href=url;a.download="sonia-os-memoire-"+$("memory-universe").value.toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/[^a-z0-9]+/g,"-")+".txt";document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);
+ $("memory-status").textContent="Fichier de mémoire préparé et téléchargé localement. Aucune sauvegarde cloud automatique.";
+};
 function download(obj,filename){const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);}
 $("export-index").onclick=()=>{if(!records.length)return;download({schema:"sonia-os-chatgpt-index-v1",generated_at:new Date().toISOString(),note:"Index local sans contenu de messages",records:records.map(({id,title,date,universe,risk,messages,selected})=>({id,title,date,universe,review_required:risk,message_count:messages.length,selected}))},"sonia-os-index-conversations.json")};
 $("export-selected").onclick=()=>{
