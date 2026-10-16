@@ -10,6 +10,7 @@ const normalize=s=>String(s||'').toLocaleLowerCase('fr').normalize('NFD').replac
 const tokens=s=>[...new Set(normalize(s).split(/[^a-z0-9]+/).filter(w=>w.length>=4))].slice(0,30);
 window.EloahAutoSources={
  status:()=>lastStatus,
+ evidence:()=>selected.map(x=>({key:x.id,title:x.title,origin:'Création retrouvée non contrôlée',universe:x.universe,excerpt:x.content.slice(0,700)})),
  sources:()=>selected.map(x=>({id:x.id,title:x.title,universe:x.universe,origin:'ELOAH cloud',score:x.score})),
  context:()=>selected.map(x=>'Création sauvegardée : '+x.title+'\n'+x.content.slice(0,1050)).join('\n\n').slice(0,3500),
  async prepare(text,universe){
