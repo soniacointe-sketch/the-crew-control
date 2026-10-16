@@ -6,13 +6,13 @@ export function createFounderMemory({shadow,isVerified,onChange}) {
   let client=null,owner=null,cards=[],epoch=0,ready=false,loading=null,controller=null,saving=false;
   const root=document.createElement('section');root.className='founder-memory';root.id='founder-memory';
   root.innerHTML=`<style>
-.founder-memory{margin:16px 0;border:1px solid #a4846866;border-radius:12px;padding:14px;background:linear-gradient(130deg,#36202f,#190d1b);min-width:0}
-.founder-memory h3{font:22px/1.3 Georgia,serif;margin:0 0 8px;color:#efd5a9}.founder-memory .check{margin:10px 0 6px}.founder-memory p{font-size:11px;margin:6px 0;color:#d1bdc9;line-height:1.6}
-.founder-memory details>summary{padding:11px 0;min-height:44px;color:#efd5a9;cursor:pointer;font-size:12px}.memory-tools{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}
-.founder-memory input[type=search],.founder-memory input[type=text]{width:100%;min-width:0;background:#140b17;color:#f5e9e3;border:1px solid #947485;padding:10px;border-radius:9px;min-height:44px}
-.memory-cards{max-height:430px;overflow:auto;overscroll-behavior:contain}.memory-card{padding:8px 12px;margin:9px 0;border:1px solid #795b7066;border-radius:10px;background:#211021}
+.founder-memory{margin:16px 0;border:1px solid var(--line,#d3dcd5);border-radius:12px;padding:14px;background:var(--soft,#f4efe7);min-width:0}
+.founder-memory h3{font:22px/1.3 "Bodoni 72","Bodoni MT",Didot,Georgia,serif;margin:0 0 8px;color:var(--accent,#126c78)}.founder-memory .check{margin:10px 0 6px}.founder-memory p{font-size:11px;margin:6px 0;color:var(--muted,#47656a);line-height:1.6}
+.founder-memory details>summary{padding:11px 0;min-height:44px;color:var(--accent,#126c78);cursor:pointer;font-size:12px}.memory-tools{display:flex;gap:8px;flex-wrap:wrap;margin:9px 0}
+.founder-memory input[type=search],.founder-memory input[type=text]{width:100%;min-width:0;background:var(--field,#fffdf7);color:var(--ink,#082f36);border:1px solid #7a9c9f;padding:10px;border-radius:9px;min-height:44px}
+.memory-cards{max-height:430px;overflow:auto;overscroll-behavior:contain}.memory-card{padding:8px 12px;margin:9px 0;border:1px solid var(--line,#d3dcd5);border-radius:10px;background:var(--surface,#fffcf6)}
 .memory-card>summary{overflow-wrap:anywhere}.memory-card textarea{min-height:150px;margin-top:6px}.memory-card label{margin-top:10px}.memory-source{white-space:pre-wrap;overflow-wrap:anywhere}
-#founder-memory-selection{color:#efd5a9}.founder-memory [role=status]{overflow-wrap:anywhere}#founder-memory-status{margin-top:10px}
+#founder-memory-selection{color:var(--accent,#126c78)}.founder-memory [role=status]{overflow-wrap:anywhere}#founder-memory-status{margin-top:10px}
 @media(max-width:600px){.founder-memory{padding:12px}.founder-memory input[type=search],.founder-memory input[type=text],.founder-memory textarea{font-size:16px}.memory-card{padding:7px 9px}}
 </style>
 <h3>✦ Ma mémoire privée</h3>
