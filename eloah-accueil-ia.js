@@ -175,7 +175,9 @@
     const provider = $('provider').value;
     if (!['free','openai'].includes(provider)) { message('Choisis un moteur IA valide.'); return; }
     if(window.EloahEvidence?.ambiguous?.(text)) { message('Sujet isolé sans contexte fiable. Explique ce que signifie ce mot, ou demande explicitement de créer une idée fictive. Rien n’a été envoyé.'); return; }
-    if(window.EloahAutoSources){await window.EloahAutoSources.prepare(text,$('project').value);}
+    const subjectLine=text.match(/(?:^|\n)SUJET\s*:\s*([^\n]+)/i);
+    const sourceTopic=subjectLine?.[1]?.trim()||text;
+    if(window.EloahAutoSources){await window.EloahAutoSources.prepare(sourceTopic,$('project').value);}
     window.EloahEvidence?.prepare?.($('project').value);
     let payload;
     try { payload = contextFor(text); } catch (error) { message(error.message); return; }
