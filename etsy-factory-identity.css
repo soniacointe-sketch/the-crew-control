@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+html#etsy-identity{--bg:#f4efe7;--paper:#fffdf8;--line:#d5cabc;--ink:#30312c;--muted:#64675e;--accent:#9d4f35;--green:#40584c}
+html#etsy-identity body{background:var(--bg);color:var(--ink);font:17px/1.6 'Source Sans 3',sans-serif}
+html#etsy-identity :is(h1,h2,h3,.brand,.stat strong){font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.025em}
+html#etsy-identity h1{font-size:clamp(38px,4.5vw,60px);line-height:1.05}
+html#etsy-identity h1 span{color:#9d4f35!important}
+html#etsy-identity h2{font-size:32px}html#etsy-identity h3{font-size:26px}
+html#etsy-identity .layout>aside{background:#eae3d8;position:sticky;top:0;height:100vh;overflow:auto}
+html#etsy-identity .brand{font-size:32px}
+html#etsy-identity .brand small{font-family:'Source Sans 3',sans-serif;font-size:11px;color:#64675e}
+html#etsy-identity #nav button.active{background:#9d4f35;color:#fffdf8;border-radius:4px}
+html#etsy-identity #nav :is(button,a){font-size:15px;line-height:1.4}
+html#etsy-identity .intro{display:grid;grid-template-columns:1.2fr 1fr;gap:32px;align-items:center;padding:32px 0}
+html#etsy-identity .intro p{font-size:18px;color:#64675e}
+html#etsy-identity .eyebrow{color:#775442;font-size:11px;letter-spacing:.13em}
+html#etsy-identity .ef-photo{margin:0;background:#eae3d8;border:1px solid #d5cabc}
+html#etsy-identity .ef-photo img{width:100%;height:330px;display:block;object-fit:cover;filter:saturate(.55)}
+html#etsy-identity .ef-photo figcaption{padding:12px 16px;font-size:16px;color:#4f5148}
+html#etsy-identity .ef-photo span{display:block;font-size:11px;margin-top:4px;color:#64675e}
+html#etsy-identity :is(.panel,.product,.stat){border-radius:5px;box-shadow:0 4px 15px #382c1d03}
+html#etsy-identity .stat{border-top:2px solid #b6795f}
+html#etsy-identity .stat strong{font-size:38px;color:#87462f}
+html#etsy-identity :is(button,.btn){min-height:44px;border-radius:4px;font-family:'Source Sans 3',sans-serif}
+html#etsy-identity .primary{background:#9d4f35;border-color:#9d4f35;color:white}
+html#etsy-identity .primary:hover{background:#7c3e29}
+html#etsy-identity :is(input,textarea,select){background:#fffefa;border-color:#bcb5a7;font-size:16px}
+html#etsy-identity .notice{background:#ebe4d9;color:#5e574c;border-left-color:#9d4f35;font-size:13px}
+html#etsy-identity :is(.help,.task small,.stat span){font-size:14px}
+html#etsy-identity .pill{font-size:12px;color:#40584c;background:#edf0e8}
+html#etsy-identity .product .actions button{font-size:14px}
+html#etsy-identity .product h3{line-height:1.2}
+html#etsy-identity .controls input{min-width:min(220px,100%)}
+html#etsy-identity :is(a,button,input,textarea,select):focus-visible{outline:3px solid #9d4f35;outline-offset:3px}
+html#etsy-identity dialog{border-radius:6px;box-shadow:0 24px 80px #30261b33}
+@media(min-width:901px){html#etsy-identity body.eloah-screen{padding-left:0!important}html#etsy-identity body>.eloah-global-nav{display:none!important}}
+@media(max-width:1100px){html#etsy-identity .intro{grid-template-columns:1fr}html#etsy-identity .ef-photo img{height:200px}}
+@media(max-width:900px){html#etsy-identity .layout>aside{position:relative;height:auto}html#etsy-identity .brand{font-size:27px}html#etsy-identity .intro{gap:18px}}
+@media(max-width:600px){html#etsy-identity body{font-size:18px}html#etsy-identity h1{font-size:38px}html#etsy-identity h2{font-size:29px}html#etsy-identity .intro p{font-size:18px}html#etsy-identity .ef-photo img{height:160px}html#etsy-identity .task{flex-wrap:wrap}html#etsy-identity .top{flex-wrap:wrap}html#etsy-identity .panel{padding:18px}}
