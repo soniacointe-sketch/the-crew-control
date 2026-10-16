@@ -3,7 +3,7 @@ import {ROUTINES} from "./eloah-routines-catalogue.js?v=1";
 const $=id=>document.getElementById(id);
 const OWNER="bd4b7197-6401-4a9a-a14e-c6adbdc0ed46";
 const db=createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy",{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:false,storageKey:"eloah-founder-auth-v1"}});
-let founder=false,rev=0,selected="priority",sources={tasks:[],missions:[],appointments:[]},settings=new Map(),draft="",saving=false;
+let founder=false,rev=0,selected="priority",sources={tasks:[],missions:[],appointments:[]},settings=new Map(),draft="",saving=false,runs=[];
 const routine=()=>ROUTINES.find(x=>x.key===selected)||ROUTINES[1];
 const msg=(id,text)=>{$(id).textContent=text;};
 const defaultPrefs=()=>({frequency:"manual",hour:"",topics:""});
@@ -23,12 +23,12 @@ function select(key){
  $("manual-context").value="";$("use-internal-context").checked=false;
  const r=routine();$("routine-title").textContent=r.emoji+" "+r.title;$("routine-desc").textContent=r.description;
  $("travel-extra").hidden=key!=="departure";$("topics-field").hidden=key!=="news";
- const p=settings.get(key)||defaultPrefs();$("routine-frequency").value=p.frequency||"manual";$("routine-hour").value=p.hour||"";$("routine-topics").value=p.topics||"";
+ const p=settings.get(key)||defaultPrefs();$("routine-frequency").value=p.frequency||"manual";$("routine-hour").value=p.hour||"";$("routine-topics").value=p.topics||"";updateSchedulerUi();
  msg("save-status",founder?"Préférence chargée. Aucune exécution automatique programmée.":"Connecte-toi pour enregistrer une préférence.");
  msg("brief-status","Aucun message envoyé et aucune automatisation lancée.");renderList();
 }
 function forget(){
- rev++;founder=false;sources={tasks:[],missions:[],appointments:[]};settings.clear();
+ rev++;founder=false;sources={tasks:[],missions:[],appointments:[]};settings.clear();runs=[];renderRuns();
  $("task-count").textContent="—";$("meeting-count").textContent="—";$("save-preferences").disabled=true;$("use-internal-context").checked=false;
  $("source-status").textContent="Sources privées déchargées.";select(selected);
 }
@@ -51,20 +51,20 @@ async function refresh(){
    fetchRows("sonia_os_tasks","instruction,status,scheduled_for,completed_at",80),
    fetchRows("sonia_os_missions","title,status,completed_at",80),
    fetchRows("eloah_appointments","name,date,universe,state",80),
-   fetchRows("eloah_routine_settings","routine_key,preferences",10)
+   fetchRows("eloah_routine_settings","routine_key,preferences,enabled",10)
   ]);
   if(serial!==rev||!founder)return;
   sources.tasks=results[0].status==="fulfilled"?results[0].value:[];
   sources.missions=results[1].status==="fulfilled"?results[1].value:[];
   sources.appointments=results[2].status==="fulfilled"?results[2].value:[];
-  settings.clear();if(results[3].status==="fulfilled")results[3].value.forEach(x=>settings.set(x.routine_key,x.preferences||defaultPrefs()));
+  settings.clear();if(results[3].status==="fulfilled")results[3].value.forEach(x=>settings.set(x.routine_key,{...(x.preferences||defaultPrefs()),enabled:x.enabled===true}));
   $("source-status").replaceChildren();
   ["Tâches SONIA OS","Missions SONIA OS","Rendez-vous ELOAH","Préférences des routines"].forEach((name,i)=>showSource(name,results[i].status==="fulfilled"?results[i].value.length+" entrée(s)":"Lecture non disponible"));
   showSource("Gmail / Google Agenda","Contenu extérieur non lu");showSource("Actualités et trafic","Pas de données en direct");
   $("task-count").textContent=results[0].status==="fulfilled"?sources.tasks.length:"—";
   $("meeting-count").textContent=results[2].status==="fulfilled"?sources.appointments.length:"—";
   $("save-preferences").disabled=results[3].status!=="fulfilled";select(selected);
-  msg("auth-status",results.some(r=>r.status==="rejected")?"Session vérifiée, certaines sources indisponibles.":"Session fondatrice vérifiée, sources internes consultées en lecture seule.");
+  msg("auth-status",results.some(r=>r.status==="rejected")?"Session vérifiée, certaines sources indisponibles.":"Session fondatrice vérifiée, sources internes consultées en lecture seule.");await loadRuns();
  }catch{if(serial===rev){forget();msg("auth-status","Session non vérifiable. Aucune donnée privée affichée.");}}
  finally{$("refresh-data").disabled=false;}
 }
@@ -126,9 +126,9 @@ async function save(){
   const {data:auth,error:authError}=await db.auth.getUser();
   if(authError||auth?.user?.id!==OWNER)throw Error("Session expirée.");
   const value={frequency,hour,topics};
-  const {data,error}=await db.from("eloah_routine_settings").upsert({owner_id:OWNER,routine_key:id,preferences:value,updated_at:new Date().toISOString()},{onConflict:"owner_id,routine_key"}).select("routine_key").single();
+  const {data,error}=await db.from("eloah_routine_settings").upsert({owner_id:OWNER,routine_key:id,preferences:value,enabled:false,updated_at:new Date().toISOString()},{onConflict:"owner_id,routine_key"}).select("routine_key").single();
   if(error||!data)throw Error("Le serveur n'a pas confirmé la sauvegarde.");
-  settings.set(id,value);msg("save-status","Préférence cloud sauvegardée. Aucune routine déclenchée automatiquement.");
+  settings.set(id,{...value,enabled:false});updateSchedulerUi();msg("save-status","Préférence cloud sauvegardée. Ton rappel reste désactivé jusqu’au clic sur « Activer ».");
  }catch(e){msg("save-status","Échec : "+e.message)}
  finally{saving=false;$("save-preferences").disabled=!founder;}
 }
@@ -137,6 +137,93 @@ function toAI(){
  try{sessionStorage.setItem("eloah-routine-handoff-v1",JSON.stringify({created_at:Date.now(),text:draft.slice(0,4000),routine:selected}));location.href="eloah-2040.html#assistant-reel";}
  catch{msg("brief-status","Transfert indisponible : copie le brief et colle-le dans ELOAH IA.");}
 }
+
+function updateSchedulerUi(){
+ const p=settings.get(selected)||defaultPrefs();
+ const possible=["daily","weekly"].includes(p.frequency)&&/^([01]\d|2[0-3]):[0-5]\d$/.test(p.hour||"");
+ const saved=possible&&$("routine-frequency").value===p.frequency&&$("routine-hour").value===(p.hour||"")&&$("routine-topics").value===(p.topics||"");
+ $("activate-schedule").disabled=!founder||!saved||p.enabled===true||saving;
+ $("pause-schedule").disabled=!founder||p.enabled!==true||saving;
+ const label=p.frequency==="weekly"?"le lundi":"chaque jour";
+ msg("schedule-status",p.enabled?"Rappel ACTIF : "+label+" à "+p.hour+" (heure de Paris). Résultat dans ELOAH, sans push ni email.":
+   saved?"Prêt à activer : "+label+" à "+p.hour+" (heure de Paris).":
+   "Enregistre un rythme quotidien ou hebdomadaire avec une heure, puis active-le volontairement. Le mode « Avant rendez-vous » reste manuel.");
+}
+async function setSchedule(enabled){
+ if(!founder||saving)return;
+ const p=settings.get(selected);
+ if(!p||!["daily","weekly"].includes(p.frequency)||!/^([01]\d|2[0-3]):[0-5]\d$/.test(p.hour||"")){
+  msg("schedule-status","Enregistre d’abord une fréquence quotidienne ou hebdomadaire et une heure valide.");return;
+ }
+ if(enabled&&($("routine-frequency").value!==p.frequency||$("routine-hour").value!==p.hour||
+    $("routine-topics").value!==(p.topics||""))){
+   msg("schedule-status","Modifications non enregistrées. Enregistre tes préférences avant d’activer.");return;
+ }
+ saving=true;updateSchedulerUi();
+ try{
+  const {data:who,error:authError}=await db.auth.getUser();
+  if(authError||who?.user?.id!==OWNER)throw Error("Session fondatrice expirée.");
+  const {data,error}=await db.from("eloah_routine_settings").update({enabled,updated_at:new Date().toISOString()})
+    .eq("owner_id",OWNER).eq("routine_key",selected).select("enabled").single();
+  if(error||!data||data.enabled!==enabled)throw Error("Modification non confirmée côté serveur.");
+  settings.set(selected,{...p,enabled});updateSchedulerUi();
+  msg("schedule-status",enabled?"Rappel activé dans ELOAH. Tu retrouveras le résultat au prochain créneau programmé. Aucun push ni mail envoyé.":"Rappel mis en pause. Aucun nouveau résultat programmé.");
+ }catch(e){msg("schedule-status","Opération refusée : "+e.message)}
+ finally{saving=false;updateSchedulerUi();}
+}
+function renderRuns(){
+ const box=$("routine-inbox");box.replaceChildren();
+ $("unread-count").textContent=runs.filter(x=>!x.seen_at).length+" nouveau(x)";
+ if(!founder){$("run-status").textContent="Session fondatrice nécessaire.";return}
+ $("run-status").textContent=runs.length+" rappel(s) enregistré(s), depuis les registres internes.";
+ if(!runs.length){const p=document.createElement("p");p.className="help";p.textContent="Aucun rappel programmé produit pour le moment. Il faut activer un rythme et atteindre son créneau.";box.append(p);return}
+ for(const run of runs.slice(0,24)){
+  const article=document.createElement("article");article.className="panel";
+  article.style.margin="0";article.style.padding="14px";
+  const title=document.createElement("strong");title.style.display="block";const item=ROUTINES.find(x=>x.key===run.routine_key);
+  title.textContent=(item?.emoji||"✧")+" "+(item?.title||run.routine_key);
+  const desc=document.createElement("small");desc.className="help";desc.textContent="Rappel du "+new Date(run.scheduled_for).toLocaleString("fr-FR",{timeZone:"Europe/Paris"})+" · "+(run.seen_at?"Lu":"Non lu");
+  const content=document.createElement("p");content.className="help";
+  const data=run.payload||{};
+  content.textContent="À préparer · "+(data.task_open_count??"—")+" tâche(s) ouvertes, "+(data.mission_open_count??"—")+" mission(s) ouvertes, "+(data.appointment_upcoming_count??"—")+" rendez-vous dans les 7 jours, "+(data.indexed_mail_p1_count??"—")+" e-mails P1 indexés. Chiffres issus des registres, pas de lecture Gmail ou Google Agenda en direct.";
+  article.append(title,desc,content);
+  const row=document.createElement("div");row.className="row";
+  const open=document.createElement("button");open.type="button";open.textContent="Préparer le brief";open.onclick=()=>{
+    select(run.routine_key);$("use-internal-context").checked=true;prepare();
+    $("routine-workbench").scrollIntoView({behavior:"smooth",block:"start"});
+  };
+  row.append(open);
+  if(!run.seen_at){
+   const ack=document.createElement("button");ack.type="button";ack.className="secondary";ack.textContent="Marquer lu";
+   ack.onclick=async()=>{
+    ack.disabled=true;
+    try{
+     const {data,error}=await db.from("eloah_routine_runs").update({seen_at:new Date().toISOString()})
+      .eq("owner_id",OWNER).eq("id",run.id).is("seen_at",null).select("id,seen_at").maybeSingle();
+     if(error||!data)throw Error("Accusé de lecture non confirmé");
+     run.seen_at=data.seen_at;renderRuns();
+    }catch(e){ack.disabled=false;msg("run-status","Erreur de lecture : "+e.message)}
+   };row.append(ack);
+  }
+  article.append(row);box.append(article);
+ }
+}
+async function loadRuns(){
+ if(!founder){runs=[];renderRuns();return}
+ try{
+  const {data,error}=await db.from("eloah_routine_runs")
+   .select("id,routine_key,scheduled_for,payload,seen_at")
+   .eq("owner_id",OWNER).order("scheduled_for",{ascending:false}).limit(50);
+  if(error)throw Error("Boîte de rappels inaccessible.");
+  if(!founder)return;
+  runs=data||[];renderRuns();
+ }catch(e){runs=[];renderRuns();msg("run-status",e.message)}
+}
+$("activate-schedule").onclick=()=>setSchedule(true);
+$("pause-schedule").onclick=()=>setSchedule(false);
+$("reload-runs").onclick=()=>loadRuns();
+["routine-frequency","routine-hour","routine-topics"].forEach(id=>$(id).addEventListener("input",updateSchedulerUi));
+
 $("refresh-data").onclick=refresh;$("prepare-brief").onclick=prepare;$("save-preferences").onclick=save;
 $("copy-brief").onclick=()=>draft&&copy(draft);
 $("copy-skill").onclick=()=>copy("ELOAH · "+routine().title+"\n\n"+routine().prompt+"\n\nSources à vérifier ; aucune exécution externe sans validation.");
