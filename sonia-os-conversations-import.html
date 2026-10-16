@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#354e60"><title>SONIA OS · Import d'historique ChatGPT</title>
+<meta name="description" content="Préparation privée d'un import ChatGPT conversations.json vers SONIA OS. Lecture locale, tri par univers et validation humaine.">
+<style>
+:root{color-scheme:light;--bg:#eeece5;--surface:#fffdf8;--dark:#354e60;--ink:#27231e;--muted:#58656c;--line:#cdd2d0}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:var(--bg);font:15px/1.55 system-ui,Arial,sans-serif}
+header{border-bottom:1px solid var(--line);background:#fffdf8}nav{max-width:1100px;margin:auto;padding:18px 20px;display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap}nav strong{color:var(--dark);letter-spacing:.08em}a{color:var(--dark)}
+main{max-width:1100px;margin:auto;padding:32px 20px 80px}h1{font:normal clamp(33px,5vw,60px)/1.13 Georgia,serif;max-width:900px;margin:10px 0}h2{font:normal 30px/1.2 Georgia,serif}p{max-width:850px}.eyebrow{color:#58656c;font-size:11px;font-weight:800;letter-spacing:.15em;text-transform:uppercase}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:23px;margin-top:20px;box-shadow:0 5px 25px #242d3408}label{font-weight:650;display:block;margin:10px 0}
+input[type=file]{width:100%;padding:18px;border:2px dashed #9dabaf;background:#f9f7f0;border-radius:9px}input[type=search],select{width:100%;min-height:46px;padding:12px;background:white;color:#222;border:1px solid #aeb8ba;border-radius:8px;font:inherit}
+button{font:inherit;border:0;cursor:pointer;border-radius:8px;min-height:44px;padding:10px 16px;background:var(--dark);color:white;font-weight:750}button.secondary{background:#eeece5;color:var(--dark);border:1px solid var(--line)}button:disabled{opacity:.55;cursor:not-allowed}button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid var(--dark);outline-offset:2px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}.stat{padding:18px;background:#f5f3ed;border:1px solid var(--line);border-radius:9px}.stat b{display:block;font-size:29px;color:var(--dark)}.muted{color:var(--muted)}.actions{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.filters{display:grid;grid-template-columns:2fr 1fr;gap:12px}.entry{display:flex;gap:12px;padding:14px 0;border-top:1px solid var(--line);align-items:flex-start}.entry input{width:18px;height:18px;margin-top:5px;flex-shrink:0}.entrymain{min-width:0;flex:1}.entrytitle{font-weight:750;color:#232c33;overflow-wrap:anywhere}.meta{font-size:12px;color:#53636d;margin-top:5px}.risk{color:#9a472c;font-weight:700}.universe{color:#354e60;font-weight:650}.clip{display:block;background:#f4f1ea;padding:10px;border-radius:7px;border-left:3px solid #c2a876;margin-top:7px;white-space:pre-wrap;overflow-wrap:anywhere;max-height:220px;overflow:auto;font-size:13px}
+details{margin-top:6px}summary{cursor:pointer;color:var(--dark);font-size:13px;font-weight:650}.notice{border-left:4px solid #997647;padding:12px 16px;background:#f5efe5;margin:14px 0}.err{color:#a62d2d}#status{min-height:25px}#list{max-height:540px;overflow:auto}#pager{margin-top:15px}footer{font-size:12px;color:var(--muted);margin-top:25px}
+@media(max-width:650px){main{padding:23px 13px 60px}.panel{padding:16px}.grid,.filters{grid-template-columns:1fr}.entry{font-size:14px}}
+</style></head><body>
+<header><nav><strong>SONIA OS · MÉMOIRE HISTORIQUE</strong><a href="sonia-os.html">← Centre de pilotage</a></nav></header>
+<main>
+<div class="eyebrow">Module de préparation · données privées</div>
+<h1>Reconstituer la mémoire de nos conversations.</h1>
+<p>Charge ton fichier <strong>conversations.json</strong>. Le classement s'effectue <strong>dans ton navigateur</strong> : aucun historique n'est envoyé sur GitHub, vers Supabase, ni à un service d'IA par cette page. Tu peux examiner les conversations et créer un paquet d'import vérifiable, que nous pourrons ensuite analyser et intégrer dans une base privée.</p>
+<div class="notice"><strong>Important :</strong> cet outil prépare l'import, il ne remplit pas encore la mémoire cloud. Les données de famille, santé, démarches, finances, enfants, clients ou identifiants sont signalées automatiquement quand c'est possible, <strong>mais le filtrage peut se tromper</strong>. Aucune de ces conversations n'est sélectionnée par défaut.</div>
+<section class="panel" aria-label="Importer un fichier">
+<label for="archive">1. Sélectionner l'export ChatGPT (fichier JSON)</label>
+<input type="file" id="archive" accept=".json,application/json" aria-describedby="help">
+<p class="muted" id="help">Si tu as une archive ZIP, extrais d'abord <code>conversations.json</code> sur ton ordinateur. Ne dépose jamais ce fichier brut dans ton dépôt GitHub Pages.</p>
+<p id="status" role="status" aria-live="polite">Aucun fichier chargé.</p>
+</section>
+<section class="panel" id="results" hidden>
+<div class="eyebrow">2. Vérification de l'archive</div><h2>Inventaire provisoire</h2>
+<div class="grid"><div class="stat"><b id="total">0</b>conversations reconnues</div><div class="stat"><b id="selected-count">0</b>sélectionnées</div><div class="stat"><b id="sensitive-count">0</b>à relire en privé</div></div>
+<p class="muted">Catégorisation par mots-clés, non par IA. Une conversation peut concerner plusieurs univers : vérifie le classement avant l'export.</p>
+<div class="filters"><div><label for="search">Rechercher par titre</label><input id="search" type="search" placeholder="Nostradamus, ELOAH, ateliers…"></div><div><label for="filter">Filtrer par univers</label><select id="filter"><option value="all">Tous les univers</option></select></div></div>
+<div class="actions" style="margin:17px 0"><button class="secondary" id="select-safe" type="button">Sélectionner les dossiers non signalés</button><button class="secondary" id="unselect" type="button">Tout désélectionner</button></div>
+<div id="list" aria-label="Conversations importables"></div><div class="actions" id="pager"><button class="secondary" type="button" id="previous">← Précédent</button><span id="page-info" class="muted"></span><button class="secondary" type="button" id="next">Suivant →</button></div>
+</section>
+<section class="panel" id="export-panel" hidden>
+<div class="eyebrow">3. Validation et sortie</div><h2>Préparer le paquet de connaissances</h2>
+<p>Le fichier exporté conservera le titre, la date, l'univers proposé, les messages texte du fil principal et les identifiants de provenance. <strong>Ce n'est pas un résumé intelligent</strong> : c'est une sélection de sources à examiner avant de retenir les décisions et les faits.</p>
+<div class="actions"><button id="export-selected" type="button">Exporter les conversations sélectionnées</button><button class="secondary" id="export-index" type="button">Exporter l'index sans messages</button></div>
+<p class="muted" id="export-note">L'export reste sur ton appareil. Ne transfère pas de données sensibles dans un site ou un dépôt public.</p>
+</section>
+<footer>SONIA OS · Phase préparatoire, aucune écriture automatique. La mémoire cloud existante reste inchangée et la validation humaine est obligatoire avant toute synchronisation privée.</footer>
+</main>
+<script>
+(()=>{
+"use strict";
+const $=id=>document.getElementById(id);
+let records=[], filtered=[], page=0;
+const perPage=30, universes=["SONIA OS","ELOAH","Power & Glam","The Crew Orchies","PARISIS ENGINE","Sonia Velka","Le Lion Blanc","Foi & spiritualité","Autres"];
+const rules=[
+["PARISIS ENGINE",/nostradamus|parisis|manuscrit|ob[eé]lisque|sainte.?chapelle|qumran|glyph|epigraph|codex|symbole|archive historique/i],
+["The Crew Orchies",/the crew|orchies.*danse|ateliers? danse|pompons|flashmob|latino|helloasso|chor[eé]graphie|zumba/i],
+["Power & Glam",/power.{0,3}glam|love journal|etsy|beau[rt]e|attachement|revue amoureuse|love coach|p&g/i],
+["Le Lion Blanc",/lion blanc|le lion blanc/i],
+["SONIA OS",/sonia os|aaf|agents? |cortex|mission control|orchestrat|automatis|protocole/i],
+["ELOAH",/eloah|mes univers|cockpit|cloud memory|reel studio|musique/i],
+["Sonia Velka",/sonia velka|ma voix|identit[eé] publique|publication personnelle/i],
+["Foi & spiritualité",/foi personnelle|chapelet|j[eé]sus|marie madeleine|saint pierre|religion/i]
+];
+const sensitive=/enfant|mineur|scolaire|orthophon|m[eé]decin|maladie|sant[eé]|m[eé]dicament|violence|justice|proc[eè]s|tribunal|police|garde [aà] vue|caf|rsa|imp[oô]t|dette|compte bancaire|iban|mot de passe|password|token|cl[eé] api|secret|num[eé]ro de t[eé]l[eé]phone|adresse personnelle|vie priv[eé]e|patient|client|sexualit[eé]|garde d'enfant/i;
+const validRole=new Set(["user","assistant"]);
+const asText=x=>{
+  if(typeof x==="string")return x;
+  if(!x||typeof x!=="object")return "";
+  if(typeof x.text==="string")return x.text;
+  return "";
+};
+function partsToText(content){
+ if(!content||typeof content!=="object")return "";
+ const parts=Array.isArray(content.parts)?content.parts:[];
+ return parts.map(asText).filter(Boolean).join("\n").slice(0,300000);
+}
+function branch(convo){
+ const map=convo.mapping;
+ if(map && typeof map==="object"){
+   const candidates=Object.values(map).filter(x=>x?.message&&validRole.has(x.message.author?.role));
+   if(!candidates.length)return [];
+   let nodes=[];
+   const end=convo.current_node;
+   if(end && map[end]){
+      let n=end,seen=new Set();
+      while(n && map[n] && !seen.has(n)){seen.add(n);nodes.push(map[n]);n=map[n].parent}
+      nodes.reverse();
+   }else{
+      nodes=candidates.sort((a,b)=>(a.message?.create_time||0)-(b.message?.create_time||0));
+   }
+   return nodes.map(n=>n.message).filter(x=>x&&validRole.has(x.author?.role));
+ }
+ if(Array.isArray(convo.messages))return convo.messages.filter(x=>validRole.has(x.author?.role));
+ return [];
+}
+function describe(convo,index){
+ const rawMsgs=branch(convo);
+ const messages=rawMsgs.map(m=>({role:m.author?.role,at:m.create_time||null,text:partsToText(m.content)})).filter(m=>m.text);
+ const title=String(convo.title||"Conversation sans titre").slice(0,250);
+ const sample=(title+"\n"+messages.filter(m=>m.role==="user").slice(0,4).map(m=>m.text.slice(0,700)).join("\n")).slice(0,3200);
+ const universe=(rules.find(([_,re])=>re.test(sample))||["Autres"])[0];
+ const risk=sensitive.test(sample) || messages.some(m=>sensitive.test(m.text.slice(0,550)));
+ const id=String(convo.id||("index-"+index));
+ return {id,title,date:convo.create_time||null,universe,risk,messages,selected:false,preview:messages.slice(0,2).map(m=>m.role+": "+m.text.slice(0,260)).join("\n").slice(0,600)};
+}
+function displayDate(ts){if(!ts)return "Date inconnue";try{const d=typeof ts==="number"?new Date(ts*1000):new Date(ts);return Number.isFinite(d.valueOf())?d.toLocaleDateString("fr-FR"):"Date inconnue"}catch{return "Date inconnue"}}
+const node=(tag,txt,cls)=>{const n=document.createElement(tag);if(txt!=null)n.textContent=txt;if(cls)n.className=cls;return n};
+function refresh(){
+ const q=$("search").value.trim().toLocaleLowerCase("fr"),f=$("filter").value;
+ filtered=records.filter(r=>(f==="all"||r.universe===f)&&r.title.toLocaleLowerCase("fr").includes(q));
+ page=Math.min(page,Math.max(0,Math.ceil(filtered.length/perPage)-1));
+ $("total").textContent=records.length.toLocaleString("fr-FR");
+ $("selected-count").textContent=records.filter(r=>r.selected).length.toLocaleString("fr-FR");
+ $("sensitive-count").textContent=records.filter(r=>r.risk).length.toLocaleString("fr-FR");
+ const target=$("list");target.replaceChildren();
+ if(!filtered.length)target.append(node("p","Aucun dossier trouvé.","muted"));
+ for(const r of filtered.slice(page*perPage,(page+1)*perPage)){
+   const line=node("div",null,"entry"),cb=node("input"),body=node("div",null,"entrymain");
+   cb.type="checkbox";cb.checked=r.selected;cb.setAttribute("aria-label","Sélectionner "+r.title);cb.onchange=()=>{r.selected=cb.checked;$("selected-count").textContent=records.filter(x=>x.selected).length.toLocaleString("fr-FR")};
+   body.append(node("div",r.title,"entrytitle"));
+   const meta=node("div",null,"meta");
+   meta.append(node("span",r.universe+" · ","universe"),node("span",displayDate(r.date)+" · "+r.messages.length+" messages"));
+   if(r.risk)meta.append(node("span"," · Contenu potentiellement privé","risk"));
+   body.append(meta);
+   const details=node("details");details.append(node("summary","Aperçu local du fil (2 premiers messages)"),node("pre",r.preview||"Pas de texte exploitable","clip"));body.append(details);
+   line.append(cb,body);target.append(line);
+ }
+ $("previous").disabled=page===0;$("next").disabled=(page+1)*perPage>=filtered.length;
+ $("page-info").textContent=filtered.length?("Page "+(page+1)+" / "+Math.ceil(filtered.length/perPage)+" · "+filtered.length+" résultats"):"0 résultat";
+}
+$("archive").addEventListener("change",async()=>{
+ records=[];filtered=[];page=0;$("results").hidden=true;$("export-panel").hidden=true;
+ const file=$("archive").files?.[0];if(!file)return;
+ if(!/\.json$/i.test(file.name)){$("status").textContent="Sélectionne le fichier conversations.json extrait de l'archive ZIP." ;return;}
+ $("status").textContent="Lecture et analyse sur cet appareil…";
+ try{
+   const data=JSON.parse(await file.text());
+   const list=Array.isArray(data)?data:Array.isArray(data?.conversations)?data.conversations:null;
+   if(!list)throw new Error("Format non reconnu : fichier conversations.json attendu.");
+   records=list.map(describe);if(!records.length)throw new Error("Aucune conversation détectée.");
+   const opt=$("filter");opt.replaceChildren();const all=node("option","Tous les univers");all.value="all";opt.append(all);
+   universes.forEach(u=>{const item=node("option",u);item.value=u;opt.append(item)});
+   $("results").hidden=false;$("export-panel").hidden=false;refresh();
+   $("status").textContent=records.length+" conversations analysées localement. Aucune synchronisation effectuée.";
+ }catch(e){$("status").textContent="Échec de lecture : "+(e?.message||"fichier illisible");$("status").className="err";}
+});
+$("search").addEventListener("input",()=>{page=0;refresh()});
+$("filter").addEventListener("change",()=>{page=0;refresh()});
+$("previous").onclick=()=>{page=Math.max(0,page-1);refresh()};
+$("next").onclick=()=>{page++;refresh()};
+$("unselect").onclick=()=>{records.forEach(r=>r.selected=false);refresh()};
+$("select-safe").onclick=()=>{records.forEach(r=>{if(!r.risk && r.universe!=="Autres")r.selected=true});refresh()};
+function download(obj,filename){const blob=new Blob([JSON.stringify(obj,null,2)],{type:"application/json;charset=utf-8"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download=filename;document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),500);}
+$("export-index").onclick=()=>{if(!records.length)return;download({schema:"sonia-os-chatgpt-index-v1",generated_at:new Date().toISOString(),note:"Index local sans contenu de messages",records:records.map(({id,title,date,universe,risk,messages,selected})=>({id,title,date,universe,review_required:risk,message_count:messages.length,selected}))},"sonia-os-index-conversations.json")};
+$("export-selected").onclick=()=>{
+ const checked=records.filter(r=>r.selected);
+ if(!checked.length){$("export-note").textContent="Sélectionne au moins une conversation.";return;}
+ const risky=checked.some(r=>r.risk);
+ if(risky&&!confirm("Tu as sélectionné des conversations pouvant contenir des informations privées. Les inclure dans un fichier JSON sur cet appareil ?"))return;
+ const packed=checked.map(({id,title,date,universe,risk,messages})=>({source:"ChatGPT conversations.json",conversation_id:id,title,created_at:date,universe_propose:universe,review_required:risk,classification_method:"mots-clés, à valider",messages}));
+ download({schema:"sonia-os-conversation-review-v1",generated_at:new Date().toISOString(),status:"à contrôler avant stockage privé",conversations:packed},"sonia-os-conversations-a-valider.json");
+ $("export-note").textContent=checked.length+" conversations exportées vers un fichier local. Aucune donnée envoyée au cloud.";
+};
+})();
+</script></body></html>
