@@ -4,6 +4,7 @@
   const read = () => { try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch { return []; } };
   const save = data => localStorage.setItem(KEY,JSON.stringify(data));
   window.EloahValidatedMemory = {
+    evidence(universe){return read().filter(x=>x.validated&&x.universe===universe).slice(-5).map((x,i)=>({key:'note-'+i+'-'+x.title,title:x.title,origin:'Note validée par Sonia (non contrôlée)',universe:x.universe,excerpt:x.note.slice(0,650)}))},
     context(universe) {
       return read().filter(x => x.validated && x.universe === universe)
         .slice(-8).map(x => x.title + ' : ' + x.note.slice(0,300)).join('\n').slice(0,2300);
