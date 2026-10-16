@@ -1,0 +1,13 @@
+#eloah-creation-library{margin-top:22px;border-top:1px solid #8c647a;padding-top:20px;color:#f8e9e7}
+#eloah-creation-library .ecl-head{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+#eloah-creation-library h3{font:400 23px/1.3 Georgia,serif;color:#f7debf;margin:0}
+#eloah-creation-library p{color:#e8d2df!important}
+#eloah-creation-library button{min-height:44px;cursor:pointer}
+#eloah-creation-library .ecl-note{font-size:12px!important;margin:14px 0!important;max-width:760px}
+#eloah-creation-library #ecl-items{display:grid;gap:12px;margin:14px 0}
+#eloah-creation-library .ecl-item{padding:15px;border-radius:11px;border:1px solid #866579;background:#2c172c;display:grid;gap:6px}
+#eloah-creation-library .ecl-item strong{color:#fff1e5}#eloah-creation-library .ecl-item small{color:#e2cbd8}
+#eloah-creation-library .ecl-item p{overflow-wrap:anywhere;white-space:pre-wrap;max-height:100px;overflow:hidden}
+#eloah-creation-library .ecl-actions{display:flex;flex-wrap:wrap;gap:8px}
+#eloah-creation-library #ecl-status:not(:empty){padding:8px 0;color:#f5d6a8}
+@media(max-width:600px){#eloah-creation-library .ecl-head>*{width:100%}#eloah-creation-library .ecl-actions button{flex:1}}
