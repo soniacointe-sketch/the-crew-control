@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+html#elan-identity{--paper:#f3f0e7;--dark:#293d34;--burgundy:#855c47;--line:#cdd1c2;--soft:#fffdf7;--muted:#606a5e;scroll-padding-top:24px}
+html#elan-identity body{background:#f3f0e7;color:#293d34;font:18px/1.65 'Source Sans 3',sans-serif}
+html#elan-identity :is(h1,h2,h3,.serif,header .logo,.steps b){font-family:'Cormorant Garamond',serif;font-weight:500}
+html#elan-identity h1{font-size:clamp(44px,5.7vw,78px);letter-spacing:-.04em;line-height:1.04;margin:20px 0 24px}
+html#elan-identity h2{font-size:clamp(32px,3.5vw,47px);letter-spacing:-.025em}
+html#elan-identity h3{font-size:28px}
+html#elan-identity header .logo{font-size:28px;white-space:nowrap}
+html#elan-identity header .logo span{color:#855c47!important}
+html#elan-identity header nav{font-size:14px;gap:10px 18px}
+html#elan-identity header nav a{padding:5px 0}
+html#elan-identity .container{padding-left:clamp(20px,4vw,50px);padding-right:clamp(20px,4vw,50px)}
+html#elan-identity .hero{grid-template-columns:1.1fr .9fr;gap:40px;min-height:0;padding-block:48px}
+html#elan-identity .hero p{font-size:19px;color:#536052}
+html#elan-identity .hero .small{font-size:13px}
+html#elan-identity .elan-photo{margin:0;background:#e2e7da;border:1px solid #cdd1c2}
+html#elan-identity .elan-photo img{display:block;width:100%;height:420px;object-fit:cover;filter:saturate(.55)}
+html#elan-identity .elan-photo figcaption{padding:14px 18px;font-size:16px;color:#405541}
+html#elan-identity .elan-photo span{display:block;font-size:11px;margin-top:5px}
+html#elan-identity .eyebrow{color:#855c47;font-size:11px;letter-spacing:.14em}
+html#elan-identity :is(button,.btn){font:600 15px/1.4 'Source Sans 3',sans-serif;min-height:44px;border-radius:4px;border-color:#8f9f8e}
+html#elan-identity .primary,html#elan-identity .filters button[aria-pressed=true]{background:#344f3f;color:#fffdf7;border-color:#344f3f}
+html#elan-identity .primary:hover{background:#243c2e}
+html#elan-identity .dark{background:#293d34;color:#f4f0e6}
+html#elan-identity .dark .eyebrow{color:#cfb99e}
+html#elan-identity .dark p{color:#d8dfd3}
+html#elan-identity .steps b{color:#a9b9a0}
+html#elan-identity .steps p{font-size:16px}
+html#elan-identity :is(.card,.panel){border-radius:5px;border-color:#cdd1c2;box-shadow:0 4px 15px #293d3404}
+html#elan-identity .card{border-top:2px solid #9daa8b}
+html#elan-identity .card p{color:#536052}
+html#elan-identity .small,html#elan-identity .notice{color:#606a5e;font-size:14px}
+html#elan-identity .tag{font-size:12px;background:#e9eddf;color:#405541;max-width:100%;white-space:normal}
+html#elan-identity :is(input,textarea,select){font:17px/1.5 'Source Sans 3',sans-serif;background:#fffefa;border-color:#a7b29e;color:#293d34;border-radius:4px}
+html#elan-identity label{font-size:15px}
+html#elan-identity .quizOpt[aria-pressed=true]{background:#e2e9d9;border-color:#607c59}
+html#elan-identity dialog{background:#fffdf7;color:#293d34;border-radius:6px}
+html#elan-identity :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #916247;outline-offset:3px}
+html#elan-identity footer{font-size:13px;color:#606a5e}
+html#elan-identity section{scroll-margin-top:20px}
+@media(max-width:1000px){html#elan-identity .hero{grid-template-columns:1fr;gap:24px}html#elan-identity .elan-photo img{height:260px}}
+@media(max-width:550px){html#elan-identity .hero{padding-block:28px}html#elan-identity h1{font-size:44px}html#elan-identity .hero p{font-size:18px}html#elan-identity .elan-photo img{height:180px}html#elan-identity section{padding-block:34px}html#elan-identity .card,html#elan-identity .panel{padding:20px}html#elan-identity .actions>*{max-width:100%}html#elan-identity .two{gap:22px}}
+@media(prefers-reduced-motion:reduce){html#elan-identity{scroll-behavior:auto}}
