@@ -9,11 +9,11 @@ const advanced=document.createElement('details');advanced.id='eloah-advanced-too
 advanced.innerHTML='<summary>Outils avancés (facultatifs)</summary><div class="eloah-advanced-links"></div>';
 const custom=document.createElement('div');custom.id='eloah-simple-message';custom.setAttribute('role','status');
 function go(name){
- if(name==='__actions'){showTab('Planning');update(name);return;}
+ if(name==='__actions'){custom.textContent='Tes tâches et échéances du projet.';showTab('Planning');update(name);return;}
  if(name==='__assistant'){
   showTab('Chat Projet');
   const field=document.getElementById('message-input');
-  if(field){field.focus();custom.textContent='Écris ta demande ci-dessous. Une nouvelle fenêtre ChatGPT s’ouvrira lors de l’envoi : les réponses ne reviennent pas automatiquement ici.'}
+  if(field){field.focus();custom.textContent='Écris ta demande ci-dessous. ChatGPT s’ouvre dans une autre fenêtre, sans retour automatique de la réponse.'}update(name);
   return;
  }
  custom.textContent='';
@@ -24,9 +24,9 @@ function button(label,name,container){const el=document.createElement('button');
 labels.forEach(([label,target])=>button(label,target,area));
 const links=advanced.querySelector('.eloah-advanced-links');
 [['📚 Bases d’expertise','Bases d’Expertise'],['👥 Équipe','Équipe'],['💳 Facturation','Facturation'],['📊 Statistiques','Analytics']].forEach(([label,target])=>button(label,target,links));
-function update(name){document.querySelectorAll('[data-simple-target]').forEach(b=>b.classList.toggle('selected',b.dataset.simpleTarget===name))}
+function update(name){const chosen=name==='Planning'?'__actions':name;document.querySelectorAll('[data-simple-target]').forEach(b=>{const yes=b.dataset.simpleTarget===chosen;b.classList.toggle('selected',yes);b.setAttribute('aria-pressed',String(yes))})}
 const original=showTab;
-showTab=function(name){original(name);update(name);};
+showTab=function(name){original(name);if(name!=='Chat Projet'||!document.getElementById('eloah-simple-message').textContent)custom.textContent='';update(name);};
 nav.before(explain,area,advanced,custom);
 nav.setAttribute('aria-label','Navigation technique masquée');
 nav.hidden=true;
@@ -45,5 +45,5 @@ const style=document.createElement('style');style.textContent=`
 #eloah-check-button{display:none!important}
 @media(max-width:700px){#eloah-simple-nav{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:7px}#eloah-simple-nav button{padding:12px 8px;font-size:12px}#eloah-advanced-tools{margin:0 12px 8px}#eloah-simple-help{padding:12px 12px 0}}
 `;document.head.append(style);
-update('Chat Projet');
+update(typeof tab==='string'?tab:'Chat Projet');
 })();
