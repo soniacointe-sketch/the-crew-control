@@ -22,10 +22,14 @@ return ['Préciser le résultat attendu','Rassembler les ressources nécessaires
 function link(label,url){const a=el('a',label);a.href=url;return a}
 function safe(url){try{const u=new URL(url,location.href);return ['http:','https:'].includes(u.protocol)?u.href:null}catch{return null}}
 function status(text){dialog.querySelector('[role=status]').textContent=text}
+function savePendingNotes(){
+const notes=dialog?.querySelector('textarea');if(!notes||!currentId)return true;
+try{const task=get(currentId);if(!task)throw Error('Cette action n’est plus disponible. Tes notes restent affichées pour pouvoir les copier.');if(notes.value!==(task.workNotes||''))update(currentId,t=>{t.workNotes=notes.value});return true}catch(e){status('Sauvegarde impossible : '+e.message);return false}
+}
 function render(id){
 const task=get(id);if(!task)throw Error('Action introuvable sur cet appareil.');
 dialog.replaceChildren();
-const head=el('header'),title=el('h2',task.title),close=el('button','×');title.id='action-sheet-title';close.type='button';close.setAttribute('aria-label','Fermer la fiche');close.onclick=()=>dialog.close();head.append(title,close);
+const head=el('header'),title=el('h2',task.title),close=el('button','×');title.id='action-sheet-title';close.type='button';close.setAttribute('aria-label','Fermer la fiche');close.onclick=()=>{if(savePendingNotes())dialog.close()};head.append(title,close);
 const meta=el('p',[task.project||'Personnel',task.status||'À faire'].join(' · '));
 let date='Sans date';if(/^\d{4}-\d{2}-\d{2}$/.test(task.date||''))date=new Date(task.date+'T12:00:00').toLocaleDateString('fr-FR');
 const dateInfo=el('p',(task.dateType==='Date limite confirmée'?'Date limite confirmée : ':'Date de travail prévue : ')+date);
@@ -50,15 +54,15 @@ const notesLabel=el('label','Notes de travail'),notes=el('textarea');notes.rows=
 const save=el('button','Enregistrer mes notes');save.type='button';save.onclick=()=>{try{update(id,t=>{t.workNotes=notes.value});status('Notes enregistrées sur cet appareil.')}catch(e){status(e.message)}};
 const footer=el('footer'),edit=el('button','Modifier l’action'),done=el('button',task.status==='Terminé'?'Rouvrir l’action':'Marquer comme terminé');
 edit.type=done.type='button';
-edit.onclick=()=>{dialog.close();W.editAction(id)};
-done.onclick=()=>{if(notes.value!==(get(id)?.workNotes||'')){status('Enregistre tes notes avant de changer le statut.');return}try{update(id,t=>{t.status=t.status==='Terminé'?'À faire':'Terminé'});render(id);status('Statut enregistré dans le planning.')}catch(e){status(e.message)}};
+edit.onclick=()=>{if(!savePendingNotes())return;dialog.close();W.editAction(id)};
+done.onclick=()=>{if(!savePendingNotes())return;try{update(id,t=>{t.status=t.status==='Terminé'?'À faire':'Terminé'});render(id);status('Statut enregistré dans le planning.')}catch(e){status(e.message)}};
 footer.append(edit,done);
 const state=el('p');state.setAttribute('role','status');state.setAttribute('aria-live','polite');
 dialog.append(head,meta,dateInfo,help,briefTitle,brief,resources,checklist,notesLabel,save,footer,state);
 }
 W.openAction=id=>{
 try{
-if(!dialog){dialog=el('dialog');dialog.id='eloah-action-sheet';dialog.setAttribute('aria-labelledby','action-sheet-title');document.body.append(dialog);dialog.addEventListener('close',()=>opener?.focus());}
+if(!dialog){dialog=el('dialog');dialog.id='eloah-action-sheet';dialog.setAttribute('aria-labelledby','action-sheet-title');document.body.append(dialog);dialog.addEventListener('close',()=>opener?.focus());dialog.addEventListener('cancel',e=>{if(!savePendingNotes())e.preventDefault()});}
 opener=document.activeElement;currentId=id;render(id);if(!dialog.open)dialog.showModal();
 }catch(e){const state=document.getElementById('ops-status');if(state)state.textContent=e.message}
 };
