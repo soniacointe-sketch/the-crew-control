@@ -51,6 +51,7 @@ function init(){
    const photo=await picture(panel.querySelector('#eloah-cover-photo').files[0]);
    render(ctx,canvas,photo,title,document.getElementById('home-ai-project')?.value||'ELOAH');
    const blob=await new Promise(r=>canvas.toBlob(r,'image/png'));if(!blob)throw Error('Export impossible.');
+   window.EloahCoverAsset={blob,title,universe:document.getElementById('home-ai-project')?.value||'ELOAH'};
    const url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='eloah-couverture.png';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),3000);
    status.textContent='Couverture PNG produite sur cet appareil. Vérifie le cadrage et le titre.';
   }catch(e){status.textContent=e.message}
