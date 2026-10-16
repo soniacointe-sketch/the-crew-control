@@ -4,6 +4,7 @@
 const BASE='https://voytsqyorhoveurnguxn.supabase.co',KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy',FOUNDER='bd4b7197-6401-4a9a-a14e-c6adbdc0ed46';
 let references=[],chosen=new Set(),sdk=null;
 window.EloahCreationSources={
+ evidence(){return references.filter(x=>chosen.has(x.id)).slice(0,3).map(x=>({key:x.id,title:x.title,origin:'Création antérieure choisie (non vérifiée)',universe:x.universe,excerpt:x.content.slice(0,900)}))},
  context(){return references.filter(x=>chosen.has(x.id)).slice(0,3).map(x=>'Document de reference « '+x.title.slice(0,80)+' » :\n'+x.content.slice(0,1300)).join('\n\n').slice(0,4200)},
  clear(){chosen.clear();references=[];render()}
 };
