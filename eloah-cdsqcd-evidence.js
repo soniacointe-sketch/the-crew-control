@@ -3,6 +3,8 @@
 (()=>{
 'use strict';
 let register=[],activeRegister=[],prepared=false,projectAtSend='',activeProject='';
+const HEADER='CDSQCD — EXTRAITS TRANSMIS AVEC LA DEMANDE. Ces documents peuvent être incomplets, anciens ou erronés. Les identifiants [S1], [S2] désignent uniquement les extraits visibles ci-dessous, et non des preuves indépendantes. Cite un identifiant uniquement si son extrait contient explicitement l information utilisée. Toute autre affirmation factuelle reste à vérifier.';
+const MAX_CONTEXT=4400;
 const clean=v=>String(v??'').replace(/[\u0000-\u001f]+/g,' ').trim();
 const key=v=>clean(v).toLocaleLowerCase('fr');
 const clip=(text,n)=>clean(text).slice(0,n);
@@ -22,12 +24,16 @@ function prepare(universe){
  const recent=window.EloahAutoSources?.evidence?.()||[];
  const notes=window.EloahValidatedMemory?.evidence?.(universe)||[];
  const entries=[...selected,...recent,...notes],keys=new Set();
- register=[];
+ register=[];let consumed=HEADER.length;
  for(const e of entries){
-  const k=key(e.origin)+'|'+key(e.key||e.title);
+  const k=key(e.universe||universe)+'|'+key(e.key||e.title);
   if(keys.has(k)||!clean(e.excerpt))continue;
-  keys.add(k);
-  register.push({id:'S'+(register.length+1),title:clip(e.title,100),origin:clip(e.origin,90),excerpt:clip(e.excerpt,740),universe:clip(e.universe||universe,65)});
+  const info={id:'S'+(register.length+1),title:clip(e.title,100),origin:clip(e.origin,90),universe:clip(e.universe||universe,65)};
+  const prefix='\n\n['+info.id+'] '+info.title+' — '+info.origin+' ('+info.universe+')\nEXTRAIT : ';
+  const available=MAX_CONTEXT-consumed-prefix.length;
+  if(available<100)break;
+  const excerpt=clip(e.excerpt,Math.min(740,available));
+  register.push({...info,excerpt});keys.add(k);consumed+=prefix.length+excerpt.length;
   if(register.length>=8)break;
  }
  prepared=true;
@@ -36,8 +42,7 @@ function prepare(universe){
 function context(){
  if(!prepared)return '';
  if(!register.length)return 'CDSQCD — AUCUNE SOURCE documentaire consultable n’a été retrouvée. Ne crée aucune référence ou citation fictive. Les affirmations sur des faits externes restent à vérifier.';
- return 'CDSQCD — REGISTRE DE DOCUMENTS EFFECTIVEMENT CONSULTÉS POUR CETTE DEMANDE. Ils peuvent être incomplets, anciens, erronés ou déjà générés par IA. Les IDs [S1], [S2]... désignent uniquement ces extraits, PAS des certifications de vérité. Cite [S#] après une affirmation seulement si elle se trouve expressément dans l’extrait correspondant. Ne cite pas de référence absente. Toute autre affirmation factuelle reste « à vérifier ».\n'+
- register.map(s=>'['+s.id+'] '+s.title+' — '+s.origin+' ('+s.universe+')\nEXTRAIT : '+s.excerpt).join('\n\n').slice(0,4400);
+ return HEADER+register.map(s=>'\n\n['+s.id+'] '+s.title+' — '+s.origin+' ('+s.universe+')\nEXTRAIT : '+s.excerpt).join('');
 }
 function commit(){activeRegister=register.map(x=>({...x}));activeProject=projectAtSend;}
 function audit(answer){
