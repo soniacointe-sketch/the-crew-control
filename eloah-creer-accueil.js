@@ -30,7 +30,7 @@
       btn.type='button';btn.textContent=name;
       btn.addEventListener('click',()=>{
         div.querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===btn)));
-        if(project && [...project.options].some(o=>o.value===name))project.value=name;
+        if(project){if(![...project.options].some(o=>o.value===name)){const option=document.createElement('option');option.value=name;option.textContent=name;project.append(option)}project.value=name;}
         if(prompt){
           const current=prompt.value.trim();
           if(!current || opts.some(([,p])=>current.startsWith(p)))prompt.value=starter;
