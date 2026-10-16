@@ -258,7 +258,7 @@ if(page==='mes-univers.html'){
 })();
 
 /* ELOAH 11 · recherche commune, sans accès aux données privées. */
-(()=>{if(document.querySelector('script[data-eloah-platform]')||window.ELOAHPlatform)return;const script=document.createElement('script');script.src='eloah-platform.js?v=11.0';script.defer=true;script.dataset.eloahPlatform='1';document.head.append(script)})();
+(()=>{if(document.querySelector('script[data-eloah-platform]')||window.ELOAHPlatform)return;const script=document.createElement('script');script.src='eloah-platform.js?v=20261016-tools-light2';script.defer=true;script.dataset.eloahPlatform='1';document.head.append(script)})();
 
 /* SONIA OS palette 2026-10-15: appearance only, scoped to this page. */
 (()=>{'use strict';
