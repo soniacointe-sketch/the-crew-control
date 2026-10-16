@@ -47,7 +47,7 @@ function contextFor(current){
  return pieces.length?beginning+pieces.join('\n')+ending:currentMessage
 }
 el('ai-new-chat').addEventListener('click',()=>resetConversation());
-el('ai-provider').addEventListener('change',()=>resetConversation('Moteur changé. Nouvelle conversation prête : aucune réponse précédente ne sera envoyée à ce moteur.'));
+el('ai-provider').addEventListener('change',()=>{el('ai-history-toggle').checked=false;el('ai-payload-preview').hidden=true;historyStatus.textContent=conversation.length?'Moteur changé : échanges conservés sur cet écran. Coche « Continuer la conversation » si tu souhaites les transmettre au nouveau moteur.':'Moteur changé : pas de contexte précédent à transférer.';});
 el('ai-project').addEventListener('change',()=>{resetConversation('Projet changé : historique effacé pour ne pas mélanger les contextes.');cloudMemory.selectProject(el('ai-project').value);el('ai-payload-preview').hidden=true});
 el('ai-include-note').addEventListener('change',()=>{resetConversation('Préférence de partage de la note modifiée : historique effacé.');el('ai-payload-preview').hidden=true});
 el('ai-preview').addEventListener('click',()=>{try{const body=contextFor(el('ai-request').value.trim());el('ai-payload-preview').textContent=body||'Saisis une demande pour prévisualiser ce qui sera envoyé.';el('ai-payload-preview').hidden=false}catch(error){el('ai-payload-preview').textContent=error.message;el('ai-payload-preview').hidden=false}});
@@ -112,7 +112,7 @@ el('ai-request-form').addEventListener('submit',async event=>{
   if(pending?.ticket===ticket){clearTimeout(pending.timer);pending=null;setBusy(false)}
  }
 });
-el('ai-history-toggle').addEventListener('change',()=>resetConversation('Préférence de conversation modifiée : historique effacé.'));
+el('ai-history-toggle').addEventListener('change',()=>{el('ai-payload-preview').hidden=true;historyStatus.textContent=el('ai-history-toggle').checked?'Les derniers échanges seront inclus à ta prochaine demande, même après un changement de moteur.':'Les échanges restent visibles mais ne seront pas transmis.';});
 window.addEventListener('pagehide',()=>{authEpoch++;activeAccount=null;resetConversation('Conversation effacée après fermeture de l’espace.',true,approvedHandoff)});
 window.addEventListener('pageshow',event=>{if(event.persisted)void refresh()});
 window.addEventListener('offline',()=>{cancelRequest('Connexion de l’appareil interrompue. Réessaie une fois en ligne.');answerState('')});
