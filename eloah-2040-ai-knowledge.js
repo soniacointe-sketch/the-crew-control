@@ -1,6 +1,6 @@
 import {mountPilot} from './eloah-ai-pilot.js?v=routines-1';
 import {mountCloudMemory} from './eloah-cloud-memory.js?v=2';
-import {mountKnowledgeVault} from './eloah-knowledge-vault.js?v=20261017-1';
+import {mountKnowledgeVault} from './eloah-knowledge-vault-v2.js?v=20261017-full-1';
 import {mountAgentNetwork} from './eloah-agent-network.js?v=2';
 import {mountMissionDesk} from './eloah-mission-desk.js?v=2';
 
