@@ -26,7 +26,7 @@ export function mountAgentNetwork({getClient,isFounder,founderId}) {
   item.append(caption,strong);$('ean-kpis').append(item);
  }
  $('ean-refresh').addEventListener('click',async()=>{
-  const token=++generation;reset(); // effacer toute session précédente avant lecture
+  reset(); // effacer toute session précédente avant lecture
   const thisRun=++generation,button=$('ean-refresh');button.disabled=true;
   $('ean-status').textContent='Lecture des informations autorisées…';
   try{
@@ -36,10 +36,10 @@ export function mountAgentNetwork({getClient,isFounder,founderId}) {
    if(identityError||identity?.user?.id!==founderId||!isFounder())throw Error('Session fondatrice non vérifiée.');
    const own=table=>client.from(table);
    const [agents,missions,tasks,automations]=await Promise.all([
-    own('sonia_os_agents').select('id,name,status',{count:'exact'}).eq('owner_id',founderId).order('name').limit(100),
+    own('sonia_os_agents').select('id',{count:'exact',head:true}).eq('owner_id',founderId),
     own('sonia_os_missions').select('id,title,status,human_approval_required',{count:'exact'}).eq('owner_id',founderId).order('created_at',{ascending:false}).limit(8),
     own('sonia_os_tasks').select('id,status,approval_status',{count:'exact',head:true}).eq('owner_id',founderId),
-    own('sonia_os_automations').select('id,name,status',{count:'exact'}).eq('owner_id',founderId).limit(30)
+    own('sonia_os_automations').select('id',{count:'exact',head:true}).eq('owner_id',founderId)
    ]);
    if(thisRun!==generation||!isFounder())return;
    if([agents,missions,tasks,automations].some(x=>x.error))throw Error('Lecture de certaines tables SONIA OS refusée. Les chiffres ne seront pas présentés comme complets.');
