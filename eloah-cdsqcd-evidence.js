@@ -41,7 +41,7 @@ function prepare(universe){
 }
 function context(){
  if(!prepared)return '';
- if(!register.length)return ''; // Aucun extrait joint à CETTE demande : laisser passer les notes de projet si elles existent.
+ if(!register.length)return 'CDSQCD — AUCUNE SOURCE indexée par le registre pour cette demande. Des notes de projet peuvent être transmises séparément si elles existent, mais ne doivent pas être citées comme des preuves indépendantes. Ne crée aucune référence [S#] fictive et indique les faits à vérifier.';
  return HEADER+register.map(s=>'\n\n['+s.id+'] '+s.title+' — '+s.origin+' ('+s.universe+')\nEXTRAIT : '+s.excerpt).join('');
 }
 function commit(){activeRegister=register.map(x=>({...x}));activeProject=projectAtSend;}
@@ -61,7 +61,7 @@ function audit(answer){
  return {sources:register.map(x=>({...x})),cited,unknown,uncited:flags,warnings,universe:activeProject};
 }
 window.EloahEvidence={
- prepare,context,commit,audit,sources:()=>activeRegister.map(x=>({...x})),clear:()=>{register=[];activeRegister=[];prepared=false;projectAtSend='';activeProject='';},
+ prepare,context,commit,audit,hasSources:()=>prepared&&register.length>0,sources:()=>activeRegister.map(x=>({...x})),clear:()=>{register=[];activeRegister=[];prepared=false;projectAtSend='';activeProject='';},
  ambiguous:isAmbiguous
 };
 })();
