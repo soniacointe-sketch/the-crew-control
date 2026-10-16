@@ -35,7 +35,8 @@ routine_catalogue=(ROOT/'eloah-routines-catalogue.js').read_text()
 rp=Page();rp.feed(routine_html)
 assert len(rp.ids)==len(set(rp.ids)), 'Duplicate routine DOM IDs'
 assert 'id="save-preferences"' in routine_html
-assert not re.search(r'<button[^>]*id="save-preferences"[^>]*\\bdisabled\\b',routine_html), 'Preferences button must be clickable before login'
+save_button=next(tag for tag in re.findall(r'<button[^>]*>',routine_html) if 'id="save-preferences"' in tag)
+assert ' disabled' not in save_button.lower(), 'Preferences button must be clickable before login'
 for required in ('localSave(id,value)','localClear(id)','routine-login','save-preferences'):
  assert required in routine_code, 'Routine save fallback missing: '+required
 for f in ['eloah-routines.js','eloah-routines-catalogue.js']:
