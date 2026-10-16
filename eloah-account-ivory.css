@@ -75,3 +75,4 @@ html#eloah-calm body .vision .ivory-photo{order:2}
 html#eloah-calm body .vision-text{order:1}
 html#eloah-calm body .vision-tools{order:3}
 html#eloah-calm body .vision-badge{position:static;grid-column:1/-1;order:0;margin:12px 20px 0;justify-self:start}
+html#eloah-calm body :is(.ghostbtn,.actionbar a,.ai-actions a,.approval-buttons a){background:#fffcf7!important;color:#293d38!important}
