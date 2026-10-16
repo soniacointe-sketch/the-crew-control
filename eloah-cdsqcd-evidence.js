@@ -2,7 +2,7 @@
    Les notes et créations antérieures ne sont PAS des preuves indépendantes. */
 (()=>{
 'use strict';
-let register=[],prepared=false,projectAtSend='';
+let register=[],activeRegister=[],prepared=false,projectAtSend='',activeProject='';
 const clean=v=>String(v??'').replace(/[\u0000-\u001f]+/g,' ').trim();
 const key=v=>clean(v).toLocaleLowerCase('fr');
 const clip=(text,n)=>clean(text).slice(0,n);
@@ -39,7 +39,9 @@ function context(){
  return 'CDSQCD — REGISTRE DE DOCUMENTS EFFECTIVEMENT CONSULTÉS POUR CETTE DEMANDE. Ils peuvent être incomplets, anciens, erronés ou déjà générés par IA. Les IDs [S1], [S2]... désignent uniquement ces extraits, PAS des certifications de vérité. Cite [S#] après une affirmation seulement si elle se trouve expressément dans l’extrait correspondant. Ne cite pas de référence absente. Toute autre affirmation factuelle reste « à vérifier ».\n'+
  register.map(s=>'['+s.id+'] '+s.title+' — '+s.origin+' ('+s.universe+')\nEXTRAIT : '+s.excerpt).join('\n\n').slice(0,4400);
 }
+function commit(){activeRegister=register.map(x=>({...x}));activeProject=projectAtSend;}
 function audit(answer){
+ const register=activeRegister;
  const raw=String(answer||''),ids=new Set(register.map(x=>x.id)),referenced=citations(raw);
  const unknown=referenced.filter(id=>!ids.has(id));
  const cited=referenced.filter(id=>ids.has(id));
@@ -51,10 +53,10 @@ function audit(answer){
  if(!register.length&&referenced.length)warnings.push('Citations affichées sans aucune source consultée.');
  if(register.length&&!cited.length)warnings.push('Aucune source du registre citée dans cette réponse.');
  if(flags.length)warnings.push(flags.length+' passage(s) à portée factuelle repérés sans référence sur la même ligne. Vérification manuelle nécessaire.');
- return {sources:register.map(x=>({...x})),cited,unknown,uncited:flags,warnings,universe:projectAtSend};
+ return {sources:register.map(x=>({...x})),cited,unknown,uncited:flags,warnings,universe:activeProject};
 }
 window.EloahEvidence={
- prepare,context,audit,sources:()=>register.map(x=>({...x})),clear:()=>{register=[];prepared=false;projectAtSend='';},
+ prepare,context,commit,audit,sources:()=>activeRegister.map(x=>({...x})),clear:()=>{register=[];activeRegister=[];prepared=false;projectAtSend='';activeProject='';},
  ambiguous:isAmbiguous
 };
 })();
