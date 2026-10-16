@@ -1,12 +1,12 @@
 # ELOAH — Grand sommaire des recherches
 
-*Table d'orientation · 13 octobre 2026*
+*Table d'orientation · réorganisée le 16 octobre 2026*
 
 Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle n'affirme pas que tous les travaux anciens ont été retrouvés ni que chaque étude est achevée. Les collections et les archives restent intactes.
 
 [← Dossier personnel](foi-control.html?file=eloah-foi-dossier-personnel-complet.md)
 
-## Mon chemin spirituel (13)
+## Mon chemin spirituel · 12 chapitres et le dossier complet
 
 - [Dossier personnel](foi-control.html?file=eloah-foi-dossier-personnel-complet.md)
 - [01 · Ma foi et mes convictions](foi-control.html?file=eloah-foi-personnel-01-ma-foi.md)
