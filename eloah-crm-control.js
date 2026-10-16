@@ -7,7 +7,7 @@
   const stageNames = {nouveau:"Nouveau",a_contacter:"À contacter",en_cours:"En cours",suivi:"Suivi",clos:"Clos"};
   const planNames = {decouverte:"Découverte",entree:"Entrée",partenaire:"Partenaire"};
   const entitlementNames = {active:"Actif",inactive:"Inactif",past_due:"Paiement à vérifier",canceled:"Résilié"};
-  const state = {accounts:[],summary:null,page:1,hasMore:false,selected:null,busy:false};
+  const state = {accounts:[],summary:null,billing:null,page:1,hasMore:false,selected:null,busy:false};
   const el = id => document.getElementById(id);
   const make = (tag,text,className) => {
     const node=document.createElement(tag);
@@ -81,6 +81,7 @@
       const payload=await request("GET",null,1);
       state.accounts=payload.accounts||[];
       state.summary=payload.summary||null;
+      state.billing=payload.billing||null;
       state.page=1;
       state.hasMore=!!payload.has_more;
       el("updated-at").textContent="Actualisé le "+new Date().toLocaleString("fr-FR",{day:"2-digit",month:"short",hour:"2-digit",minute:"2-digit"});
@@ -108,14 +109,22 @@
     setMetric("metric-accounts",stats?state.accounts.length:null);
     setMetric("metric-workspaces",stats?.workspaces);
     setMetric("metric-active",stats?.active_entitlements);
-    el("metric-revenue").textContent="À relier";
+    const billing=state.billing;
+    el("metric-revenue").textContent=billing?.state==="verified" && Number.isFinite(billing.invoice_total_eur)?
+      new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(billing.invoice_total_eur):"—";
+    const billingLabels={missing_key:"Clé de lecture Stripe à configurer dans Supabase.",live_key_required:"Une clé Stripe de production est nécessaire pour ce tableau.",invalid_key:"Clé Stripe refusée : à remplacer dans Supabase.",permission_denied:"La clé Stripe ne permet pas cette lecture.",wrong_account:"La clé Stripe appartient à un autre compte.",stripe_unavailable:"Stripe indisponible : réessaie l’actualisation.",partial:"Lecture Stripe partielle : aucun total global affiché.",verified:"Lecture Stripe vérifiée. Factures ELOAH uniquement ; les autres univers sont exclus."};
+    el("billing-state").textContent=billing?(billingLabels[billing.state]||"État Stripe non vérifié.")+(billing.checked_at?" Vérifié le "+date(billing.checked_at)+".":""):"Actualise après connexion pour vérifier Stripe.";
+    if(el("billing-detail-state"))el("billing-detail-state").textContent=el("billing-state").textContent;
+    if(el("billing-detail-total"))el("billing-detail-total").textContent="Factures ELOAH payées : "+el("metric-revenue").textContent;
+    const help=el("billing-help");
+    if(help)help.textContent=billing?.state==="verified"?billing.invoice_count+" facture(s) ELOAH payée(s) en EUR · brut avant remboursements et frais. Lecture à l’actualisation, sans synchronisation par webhook.":"Montant affiché uniquement après une lecture Stripe complète et réussie.";
     el("accounts-disclaimer").textContent=stats?
       "Comptes hors fondatrice affichés, y compris tests. Aucun chiffre ne prouve à lui seul une vente.":
       "Connecte-toi pour afficher les informations réelles.";
     el("entitlement-help").textContent=stats?
       stats.paid_plan_entitlements+" droit(s) actif(s) sur les formules payantes enregistrées — ce ne sont pas des paiements Stripe vérifiés.":
       "Les abonnements apparaîtront après connexion.";
-    el("billing-state").textContent="Paiements ELOAH non reliés à Stripe";
+
   }
   function filteredAccounts(){
     const term=el("account-search").value.trim().toLocaleLowerCase("fr-FR");
