@@ -985,7 +985,12 @@ function renderResearchDirectory(i){
  for(const a of body.querySelectorAll("a[href]")){
  const url=new URL(a.href,location.href),file=url.searchParams.get("file");if(!file||seen.has(file))continue;seen.add(file);
  let group=file.includes("personnel")?"Chemin personnel":/collection|bibliotheque/.test(file)?"Bibliothèque & collections":/alpha-|jesus-enfant/.test(file)?"ALPHA · Lettres & manuscrits":/lourdes/.test(file)?"Lourdes · Enquêtes & vidéos":/michel-4q529/.test(file)?"Michel · Qumrân":/magdalena/.test(file)?"Marie-Madeleine":/parabole|foi-par-/.test(file)?"Paraboles de Jésus":/apo-019/.test(file)?"Jacques · APO-019":/reconstitution/.test(file)?"Études reconstituées":/foi-source-|visuels|galerie/.test(file)?"Sources & images":/registre-chantiers/.test(file)?"Inventaire à compléter":"Archives & traditions";
+ if(/reconstitution/.test(file))group="Études reconstituées";else if(/foi-source-|visuels|galerie/.test(file))group="Sources & images";
  let title=a.textContent.trim();
+ if(file.includes("michel-4q529-etude"))title="MICHEL-4Q529 · Étude critique et photographies institutionnelles";
+ if(file.includes("michel-4q529-collation"))title="MICHEL-4Q529/B · Collation des trois fragments";
+ if(file.includes("lourdes-002-"))title="LOURDES-002 · Textes du cantique, Nornes, pape et Champion";
+ if(file.includes("lourdes-004-"))title="LOURDES-004 · Plan paysager et Christ au puits d’Urðr";
  if(file==="eloah-alpha-008-toronto-transcription-critique.md")title="ALPHA-008 · Toronto — transcription critique";
  if(file==="eloah-alpha-008-ostracon-toronto.md")title="ALPHA-008 · Toronto — dossier de présentation";
  if(file.includes("lourdes-003-32-frenes-archives-nornes"))title="LOURDES-003 · Les 32 frênes — archives et iconographie des Nornes";
