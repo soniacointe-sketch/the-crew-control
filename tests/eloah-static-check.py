@@ -44,4 +44,7 @@ for f in ['eloah-routines.js','eloah-routines-catalogue.js']:
 for url in rp.urls:
  u=urlsplit(url)
  if not u.scheme and u.path:assert (ROOT/unquote(u.path)).is_file(), 'Missing routine dependency: '+url
+for required in ('digest-items','x.next_action','eloah-mail-agent.html','eq("priority","P1")'):
+ assert required in routine_code, 'Source-backed digest rendering missing: '+required
+assert 'digest-items' in routine_html, 'Digest CSS missing'
 print('Static release checks: OK')
