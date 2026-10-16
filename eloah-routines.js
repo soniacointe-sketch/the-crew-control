@@ -239,8 +239,11 @@ function renderRuns(){
     const action=document.createElement("p");
     action.textContent="Prochaine action : "+String(x.next_action||"Vérifier la source").slice(0,160);
     const meta=document.createElement("small");meta.className="help";
-    meta.textContent="Agent Courrier · "+(x.due_date?"Échéance : "+x.due_date+" · ":"")+
-      (x.stale?"Index ancien : revérifier":"Index enregistré, non synchronisé en direct");
+    const refreshed=x.source_at?new Date(x.source_at):null;
+    const freshness=refreshed&&Number.isFinite(refreshed.getTime())?refreshed.toLocaleDateString("fr-FR",{timeZone:"Europe/Paris"}):"date inconnue";
+    meta.textContent="Agent Courrier · index mis à jour le "+freshness+" · "+
+      (x.due_date?"Échéance indiquée : "+String(x.due_date).slice(0,10)+" · ":"")+
+      (x.stale?"ancien index : revérifier":"non synchronisé en direct");
     line.append(title,action,meta);list.append(line);
    }
    article.append(list);
