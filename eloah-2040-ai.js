@@ -1,5 +1,5 @@
 import {mountPilot} from './eloah-ai-pilot.js?v=memory-3';
-import {mountCloudMemory} from './eloah-cloud-memory.js?v=1';
+import {mountCloudMemory} from './eloah-cloud-memory.js?v=2';
 import {mountAgentNetwork} from './eloah-agent-network.js?v=1';
 
 /* ELOAH 2040 · session fondatrice, réponses temporaires et annulation. */
