@@ -37,8 +37,16 @@ function renderSettings(){
  document.querySelectorAll('[data-undo-summary]').forEach(b=>b.onclick=()=>{delete state.threads.find(t=>t.id===b.dataset.undoSummary).summary;settingsSave();renderSettings()});
  $('writing-open').onclick=renderWriting;
  $('archive-project').onclick=()=>{s.archived=!s.archived;settingsSave();renderSettings();refreshProjectBadge()};
- $('delete-project').onsubmit=async e=>{e.preventDefault();if($('delete-name').value!==settingsName()){notify('Le nom du projet ne correspond pas.');return}if(!confirm('Confirmer la suppression définitive des données locales de « '+settingsName()+' » ?'))return;
- try{if(!db)throw new Error();await new Promise((resolve,reject)=>{const tx=db.transaction('files','readwrite');files.forEach(f=>tx.objectStore('files').delete(f.id));tx.oncomplete=resolve;tx.onerror=reject;tx.onabort=reject});bases.forEach(b=>{if(b.attachments)delete b.attachments[project]});if(!saveBases())throw new Error();localStorage.removeItem(key);state={threads:[],notes:{},settings:{...settingsDefaults}};active=null;files=[];refreshProjectBadge();renderFiles();renderChat();showTab('Paramètres');notify('Données locales du projet supprimées.')}catch{notify('Suppression incomplète. Vérifie le stockage local avant de réessayer.')}};
+ $('delete-project').onsubmit=async e=>{
+ e.preventDefault();
+ if($('delete-name').value!==settingsName()){notify('Le nom du projet ne correspond pas.');return}
+ if(!confirm('Supprimer définitivement toutes les données locales du projet « '+settingsName()+' » ?'))return;
+ try{
+  if(!window.EloahProjectStore)throw new Error('Module de suppression indisponible');
+  await window.EloahProjectStore.remove(project);
+  location.href='mes-univers.html#mes-projets';
+ }catch(error){notify('Suppression interrompue : '+(error?.message||'stockage inaccessible'))}
+};
 }
 function settingsDialog(title,html){let d=$('settings-dialog');if(!d){d=document.createElement('dialog');d.id='settings-dialog';document.body.appendChild(d)}d.innerHTML='<div class="expert-head"><h2>'+esc(title)+'</h2><button id="settings-close" aria-label="Fermer">×</button></div>'+html;$('settings-close').onclick=()=>d.close();d.showModal();return d}
 function refreshProjectBadge(){$('project-title').textContent=settingsName()+(state.settings.archived?' · Archivé':'');document.title=settingsName()+' · ELOAH'}
