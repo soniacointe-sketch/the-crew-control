@@ -126,7 +126,10 @@
     function open() {
       if (!mobile.matches || opened) return;
       opened = true; savedOverflow = body.style.overflow; body.style.overflow = 'hidden';
-      expandSections(); body.classList.add('eloah-navigation-open'); button.setAttribute('aria-expanded','true');
+      expandSections();
+      // Les accès secondaires restent repliés : un seul menu lisible à l'ouverture.
+      side.querySelectorAll('.eloah-harmony-spaces, #sonia-os-other-spaces, .eloah-nav-analytics').forEach(group => { group.open = false; });
+      body.classList.add('eloah-navigation-open'); button.setAttribute('aria-expanded','true');
       side.setAttribute('role','dialog'); side.setAttribute('aria-modal','true'); side.setAttribute('aria-label','Menu de navigation');
       lockBackground(); closeButton.focus();
     }
