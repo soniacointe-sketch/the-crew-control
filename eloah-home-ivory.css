@@ -1,0 +1,80 @@
+/* ELOAH — Ivoire, encre & lumière. Scoped to the universe gateway. */
+html#eloah-ivory-home{color-scheme:light;--home-paper:#F4EFE7;--home-card:#FFFCF7;--home-ink:#242723;--home-muted:#64675F;--home-line:#D9D4C9;--home-prune:#293D38;--home-champagne:#D8C29A;--home-accent:#6D634D;--bg:#F4EFE7;--panel:#FFFCF7;--ink:#242723;--muted:#64675F;--line:#D9D4C9;--purple:#293D38}
+html#eloah-ivory-home body#maison-eloah{background:#F4EFE7!important;color:#242723!important;font:16px/1.65 Inter,system-ui,sans-serif!important;color-scheme:light}
+body#maison-eloah #contenu{background:transparent!important;max-width:1480px;padding:32px clamp(18px,3vw,48px) 56px!important}
+body#maison-eloah #contenu :is(h1,h2){font-family:'Bodoni Moda',Georgia,serif!important;font-weight:500!important;letter-spacing:-.035em;line-height:1.15;color:#242723!important}
+body#maison-eloah #contenu h1{font-size:clamp(36px,4.2vw,64px)!important;max-width:650px;margin:26px 0 20px}
+body#maison-eloah #contenu h2{font-size:clamp(28px,3vw,38px)!important}
+body#maison-eloah #contenu h3{font:600 17px/1.4 Inter,system-ui,sans-serif!important;color:#242723!important}
+body#maison-eloah :is(button,input,select,textarea,summary){font-family:Inter,system-ui,sans-serif}
+body#maison-eloah #contenu :is(p,.intro){color:#64675F;font-size:16px;line-height:1.75}
+body#maison-eloah #contenu :is(.eyebrow,.number){color:#746444!important;font:600 10px/1.5 Inter,sans-serif;letter-spacing:.14em}
+body#maison-eloah #contenu :is(a,button){text-underline-offset:4px}
+body#maison-eloah #contenu .home-hero{padding:0!important;border:0!important;border-radius:0;background:transparent!important;box-shadow:none!important}
+body#maison-eloah #contenu .eloah-welcome-film{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(260px,.8fr);border:1px solid #D9D4C9;background:#FFFCF7;overflow:hidden;border-radius:4px;margin-bottom:24px}
+.home-welcome-copy{padding:clamp(24px,3vw,44px);min-width:0}
+body#maison-eloah #contenu .topline{padding-bottom:14px;border-color:#D9D4C9;align-items:flex-start;gap:8px}
+body#maison-eloah #contenu .topline a{font-size:11px;color:#4B514A;min-height:24px}
+body#maison-eloah #contenu .intro{max-width:580px;font-size:17px!important;line-height:1.7}
+.home-welcome-photo{margin:0;position:relative;min-height:390px;background:#DADBD1;overflow:hidden}
+.home-welcome-photo img{display:block;position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:saturate(.7)}
+.home-welcome-photo figcaption{position:absolute;bottom:0;left:0;right:0;padding:20px 24px;background:linear-gradient(transparent,#17231DCC);color:#FFFDF6;font:italic 20px/1.5 'Bodoni Moda',Georgia,serif}
+body#maison-eloah #contenu :is(button,.btn){border:1px solid #C8C2B4!important;background:#FFFCF7!important;color:#293D38!important;border-radius:3px!important;box-shadow:none!important;min-height:44px;font-size:13px;line-height:1.4}
+body#maison-eloah #contenu :is(button,.btn):hover{background:#EAE5DA!important;border-color:#8E826A!important}
+body#maison-eloah #contenu :is(.primary,.hero-actions a[href*='eloah-2040']){background:#293D38!important;color:#FFFCF7!important;border-color:#293D38!important}
+body#maison-eloah #contenu .hero-actions{gap:9px;margin:24px 0 10px}
+.home-creative-links{margin-top:12px;font-size:12px;color:#62665E}
+.home-creative-links summary{cursor:pointer;min-height:44px;display:flex;align-items:center;gap:8px;list-style:none}
+.home-creative-links summary::before{content:'+';font-size:20px;color:#8D7751}.home-creative-links[open] summary::before{content:'−'}
+.home-creative-links>div{display:flex;flex-wrap:wrap;gap:8px;padding:8px 0}
+body#maison-eloah #contenu .home-creative-links .btn{font-size:11px;background:transparent!important}
+body#maison-eloah #contenu :is(.search-area,.search-results,.choice,.ec-cards a,.secondary,.project-link,.project-tile,.tool,.task,.empty-state,.home-status,.directory>a,.eloah-account-card,.eloah-sites-card,.eloah-dev-card){background:#FFFCF7!important;border:1px solid #D9D4C9!important;border-radius:4px!important;color:#242723!important;box-shadow:none!important}
+body#maison-eloah #contenu :is(.choice,.ec-cards a,.project-link,.directory>a):hover{background:#EEEAE0!important;border-color:#A99A7D!important}
+body#maison-eloah #contenu .search-area{margin:24px 0 36px;padding:20px}
+body#maison-eloah :is(input:not([type=range]):not([type=checkbox]),select,textarea){background:#FFFCF7!important;color:#242723!important;border:1px solid #BFBBAF!important;border-radius:3px!important;min-height:44px;font-size:16px}
+body#maison-eloah :is(input,textarea)::placeholder{color:#78796F!important;opacity:1}
+body#maison-eloah #contenu .search-results a:hover{background:#EEEAE0!important}
+.home-universe-heading{margin:32px 0 20px}.home-universe-heading h2{margin-top:8px!important}
+body#maison-eloah #contenu .eloah-six-univers{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin:0 0 30px}
+body#maison-eloah #contenu .eloah-universe-card{--house:#766E59;display:flex;flex-direction:column;align-items:stretch;text-align:left;gap:0;padding:0!important;border:1px solid #D9D4C9;border-bottom:3px solid var(--house);border-radius:3px;background:#FFFCF7!important;overflow:hidden;transition:transform .18s,border-color .18s}
+body#maison-eloah #contenu .eloah-universe-card:hover{transform:translateY(-3px);border-color:var(--house)}
+body#maison-eloah #contenu .eloah-universe-card strong{font:500 clamp(21px,2vw,27px)/1.2 'Bodoni Moda',Georgia,serif!important;color:#242723!important;margin:18px 20px 8px}
+body#maison-eloah #contenu .eloah-universe-card small{font:400 13px/1.6 Inter,sans-serif!important;color:#64675F!important;margin:0 20px 20px;max-width:none}
+body#maison-eloah #contenu .eloah-universe-portrait{display:block;width:100%;height:190px;border:0!important;outline:0!important;border-radius:0!important;box-shadow:none!important;background:#DDD8CA!important;position:relative}
+body#maison-eloah #contenu .eloah-universe-portrait img{filter:saturate(.8);object-position:center}
+body#maison-eloah #contenu .eloah-universe-card[href='power-glam-control.html']{--house:#D32027}
+body#maison-eloah #contenu .eloah-universe-card[href='index.html']{--house:#B29454}
+body#maison-eloah #contenu .eloah-universe-card[href='sonia-os.html']{--house:#3F5C72}
+body#maison-eloah #contenu .eloah-universe-card[href='eloah-parisis.html']{--house:#7C805C}
+body#maison-eloah #contenu .eloah-universe-card[href*='foi-control']{--house:#A58A55}
+body#maison-eloah #contenu .eloah-universe-card[href='sonia-velka-control.html']{--house:#9D3F38}
+body#maison-eloah #contenu .eloah-u-6{background:#262622!important;display:flex;flex-direction:column;justify-content:center;align-items:center;color:#E3D2AC}
+.eloah-u-6::before{display:none!important}.velka-monogram{font:500 62px/1 'Bodoni Moda',Georgia,serif;letter-spacing:-.06em}.velka-signature{font:11px/1.5 Inter,sans-serif;letter-spacing:.16em;text-transform:uppercase;margin-top:12px}
+body#maison-eloah #contenu .ec-brand{display:none}
+body#maison-eloah #contenu .eloah-center-layout{grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin:24px 0 32px;align-items:start}
+body#maison-eloah #contenu .ec-cards{grid-row:auto;gap:12px}
+body#maison-eloah #contenu .ec-cards strong{font:600 15px/1.4 Inter,sans-serif;color:#293D38}
+body#maison-eloah #contenu .ec-cards small{font:12px/1.6 Inter,sans-serif;color:#64675F}
+body#maison-eloah #contenu :is(.choice,.project-link,.directory,.secondary,.tool,.task) :is(strong,b,h2,h3,p,small,span,summary){color:#242723;-webkit-text-fill-color:currentColor}
+body#maison-eloah #contenu :is(.section-head,.secondary>summary,.footer){border-color:#D9D4C9}
+body#maison-eloah #contenu :is(.section-head>a,.secondary-body>a,.footer a,.tool>a){color:#293D38}
+body#maison-eloah #contenu :is(.help,.reassurance){font-size:12px;color:#64675F}
+body#maison-eloah #contenu .reassurance{background:#EAE6DC;border-color:#A58A55}
+body#maison-eloah #contenu .secondary>summary{font:500 23px/1.4 'Bodoni Moda',Georgia,serif}
+body#maison-eloah #contenu .directory strong{font:500 22px/1.3 'Bodoni Moda',Georgia,serif}
+body#maison-eloah [data-fallback]{background:#E5E0D4}.home-photo-note{width:100%;font-size:11px;color:#72756B;line-height:1.7}
+html#eloah-ivory-home body#maison-eloah :is(nav.eloah-global-nav,.eloah-menu-links,.fallback-nav){background:#ECE8DE!important;color:#293D38!important;border-color:#D9D4C9!important}
+html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav :is(a,summary,.eloah-wordmark){color:#293D38!important;background:transparent!important;font-family:Inter,sans-serif!important}
+html#eloah-ivory-home body#maison-eloah nav.eloah-global-nav :is(a[aria-current],a[href='mes-univers.html'],a:hover){background:#DED8C9!important;color:#24362E!important;border-color:#A58A55!important}
+html#eloah-ivory-home body#maison-eloah #eloah-tools-trigger{background:#FFFCF7!important;border-color:#C8C2B4!important;color:#293D38!important}
+html#eloah-ivory-home body#maison-eloah :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #927847!important;outline-offset:3px}
+body#maison-eloah dialog{background:#FFFCF7!important;color:#242723!important;border-color:#C8C2B4!important;border-radius:5px}body#maison-eloah dialog::backdrop{background:#18251FCC}
+body#maison-eloah #contenu #eloah-home-ai{background:#293D38!important;border-color:#293D38!important;color:#FFFCF7!important;border-radius:4px!important}
+body#maison-eloah #contenu #eloah-home-ai :is(h2,p,label,small,strong,span,a){color:#FFFCF7!important}
+body#maison-eloah #contenu #eloah-home-ai :is(input,textarea){color:#242723!important}
+body#maison-eloah #eloah-install,body#maison-eloah #eloah-music-dock{background:#252B25!important;border-color:#8E826A!important;color:#FFFCF7!important}
+body#maison-eloah #eloah-install button{background:#E3D2AC!important;color:#252B25!important;border-color:#E3D2AC!important}
+body#maison-eloah #eloah-music-dock :is(.music-dock-close,.music-dock-minimize){color:#FFFCF7!important}
+@media(max-width:1000px){body#maison-eloah #contenu .eloah-welcome-film{grid-template-columns:1fr}.home-welcome-photo{min-height:210px;max-height:250px}.home-welcome-photo img{position:relative;height:240px}.home-welcome-copy{padding:28px}body#maison-eloah #contenu .eloah-six-univers{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){body#maison-eloah #contenu{padding:18px 14px 40px!important}body#maison-eloah #contenu h1{font-size:38px!important;max-width:none;margin:18px 0}body#maison-eloah #contenu h2{font-size:29px!important}.home-welcome-copy{padding:22px}body#maison-eloah #contenu .intro{font-size:17px!important}.home-welcome-photo{min-height:180px}.home-welcome-photo img{height:180px}.home-welcome-photo figcaption{font-size:18px}body#maison-eloah #contenu .hero-actions{display:grid;grid-template-columns:1fr 1fr}body#maison-eloah #contenu .eloah-six-univers{gap:12px}body#maison-eloah #contenu .eloah-universe-portrait{height:130px}body#maison-eloah #contenu .eloah-universe-card strong{font-size:22px!important;margin:14px 12px 7px}body#maison-eloah #contenu .eloah-universe-card small{font-size:12px!important;margin:0 12px 15px}body#maison-eloah #contenu .eloah-center-layout{gap:12px}.velka-monogram{font-size:45px}.velka-signature{font-size:9px}body#maison-eloah #contenu .task{flex-wrap:wrap}body#maison-eloah #contenu .task>div{flex:1 1 100%}}
+@media(max-width:380px){body#maison-eloah #contenu .eloah-six-univers{grid-template-columns:1fr}.home-welcome-copy{padding:20px}body#maison-eloah #contenu .hero-actions{grid-template-columns:1fr}body#maison-eloah #contenu .eloah-universe-portrait{height:180px}}
