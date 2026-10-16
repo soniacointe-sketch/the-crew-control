@@ -1,0 +1,18 @@
+/* ELOAH • accessibilite transversale, sans modification de palettes */
+html{scroll-behavior:auto;scroll-padding-top:16px}
+body{overflow-wrap:break-word}
+body :is(main,.main,.content,.workspace){min-width:0}
+body :is(a,button,summary){touch-action:manipulation}
+body :is(a,button,summary):focus-visible{outline:2px solid currentColor;outline-offset:3px}
+body :is(input,textarea,select){box-sizing:border-box;max-width:100%}
+body :is(img,video,iframe){max-width:100%}
+body details>summary{cursor:pointer}
+body .eloah-global-nav a{overflow-wrap:anywhere}
+@media(max-width:700px){
+ body :is(a,button,summary){min-height:40px}
+ body .eloah-global-nav :is(a,button,summary){min-height:44px}
+ body :is(.grid,.cards,.tiles){min-width:0}
+ body :is(.grid,.cards,.tiles)>*{min-width:0}
+ body :is(table){max-width:100%}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}}
