@@ -30,6 +30,7 @@ function node(tag,cls,txt){
  const x=document.createElement(tag);if(cls)x.className=cls;if(txt!==undefined)x.textContent=txt;return x;
 }
 function editAction(id){
+ if(window.ELOAHWorkspace?.openAction){window.ELOAHWorkspace.openAction(id);return;}
  const calendar=$('ops-calendar');if(!calendar)return;
  let filter=$('ops-project-filter');
  if(filter&&filter.value){filter.value='';filter.dispatchEvent(new Event('change',{bubbles:true}));}
@@ -88,7 +89,7 @@ function render(){
                 node('span','focus-item-state',String(a.status||'À faire').slice(0,30)));
   content.append(title,bottom);
   const button=node('button','focus-open','Ouvrir →');button.type='button';
-  button.setAttribute('aria-label',"Modifier l'action "+a.title.slice(0,100));
+  button.setAttribute('aria-label',"Ouvrir la fiche de l’action "+a.title.slice(0,100));
   button.addEventListener('click',()=>editAction(a.id));
   card.append(mark,content,button);fragment.append(card);
  }
