@@ -30,7 +30,35 @@
 </style>
 <link rel="stylesheet" href="parisis-universal-v4.css?v=encre-pierre-final">
 <link rel="stylesheet" href="parisis-reseau-pro.css?v=20261015-v6">
-</head>
+<style id="network-readable">
+body .hero{padding:24px 0!important;min-height:0!important;gap:20px!important}
+body .hero h1{font-size:clamp(34px,4vw,54px)!important;margin:10px 0!important}
+body .hero p{font-size:17px!important;margin:10px 0!important}
+body .hero-context{display:none}
+body .proofline{margin-bottom:18px;padding:12px 16px}
+body .workspace{display:grid!important;grid-template-columns:minmax(0,1.45fr) minmax(350px,1fr)!important;align-items:start;gap:18px}
+body .details{display:block!important;padding:22px!important;position:sticky;top:20px;max-height:calc(100vh - 40px);overflow:auto}
+body .details-lead,body .details-relations{padding:0!important;border:0!important}
+body .details h2{font-size:28px!important}
+body .relation-grid{grid-template-columns:1fr!important}
+body .network-scroller{background:#182321!important}
+body .network-svg{min-width:1000px!important;width:100%!important}
+body .graph-node text{fill:#fff4df!important;font-size:12px!important}
+body .graph-node .node-sub{fill:#fff4df!important;font-size:13px!important}
+body .graph-node circle{fill:#354b43!important}
+body .graph-node.selected circle{fill:#715525!important;stroke:#f5d395!important}
+body .network-legend,body .scroll-hint{background:#243a32!important;color:#f4efe7!important;font-size:13px!important}
+.view-switch{display:flex;gap:10px;padding:14px 18px;background:#182321}
+.view-switch button{padding:10px 18px;border:1px solid #b39359;background:#354b43;color:#fff4df;border-radius:4px}
+.view-switch button[aria-pressed=true]{background:#e8cca0;color:#182321}
+.node-list{padding:16px;display:grid;gap:10px;background:#182321;max-height:620px;overflow:auto}
+.node-list-item{display:grid;gap:6px;text-align:left;padding:15px;background:#354b43;color:#fff4df;border:1px solid #789184;border-radius:4px}
+.node-list-item span{font-size:12px;color:#ecd3a3}.node-list-item strong{font-size:16px}
+.node-list-item[aria-pressed=true]{border:2px solid #e8cca0;background:#4c5f4e}
+body [hidden]{display:none!important}
+@media(max-width:1099px){body .workspace{grid-template-columns:1fr!important}body .details{position:static;max-height:none;overflow:visible}}
+@media(max-width:700px){body .hero{padding:20px 0!important}body .hero-stats{flex-wrap:wrap}body .details{padding:18px!important}.node-list{max-height:none}}
+</style></head>
 <body><div class="wrap">
 <header class="bar"><a class="wordmark" href="eloah-parisis.html" aria-label="Accueil PARISIS ENGINE">PARISIS <em>ENGINE</em></a><nav class="navlinks" aria-label="Navigation principale"><a href="eloah-parisis.html">Accueil</a><a href="parisis-reseau-indices.html" aria-current="page">Réseau des indices</a><a href="parisis-fil-enquetes.html">Enquêtes</a><a class="nav-book" href="parisis-lecteur.html">Grand Livre ↗</a></nav></header>
 <main>
@@ -38,7 +66,7 @@
 <div class="eyebrow">ELOAH / HUMANITIES LAB / INVESTIGATIONS</div>
 <h1>Le réseau <em>des indices.</em></h1>
 <p>Ce qui relie nos enquêtes : documents partagés, motifs, contradictions et questions encore ouvertes. Sélectionne une recherche pour suivre ses correspondances.</p>
-<div class="hero-stats" aria-label="Inventaire des enquêtes"><div class="stat"><span class="number" id="statNodes">—</span><span class="label">Enquêtes</span></div><div class="stat"><span class="number" id="statLinks">—</span><span class="label">Relations</span></div><div class="stat"><span class="number" id="statSeries">—</span><span class="label">Familles</span></div></div>
+<div class="hero-stats" aria-label="Inventaire des enquêtes"><div class="stat"><span class="number" id="statNodes">—</span><span class="label">Enquêtes présentes dans ce réseau</span></div><div class="stat"><span class="number" id="statLinks">—</span><span class="label">Relations</span></div><div class="stat"><span class="number" id="statSeries">—</span><span class="label">Familles</span></div></div>
 </div>
 <div class="hero-context"><strong>RECHERCHE DOCUMENTAIRE</strong><p>Le réseau montre des rapprochements documentés, et non des liens de cause à effet présumés. Chaque relation conserve une réserve et un test possible.</p></div></header>
 <p class="proofline"><strong>Principe de recherche.</strong> Une ressemblance ou une source commune ne démontre pas une intention historique. Confronte les pièces citées, les objections et les contre-tests avant de conclure.</p>
@@ -50,10 +78,10 @@
 </section>
 <p class="metrics" id="metrics" role="status" aria-live="polite">Chargement du registre…</p>
 <div class="workspace">
-<section class="box" aria-labelledby="map-heading"><header class="panel-head"><div><span class="panel-kicker">01 / EXPLORER LES CORRESPONDANCES</span><h2 id="map-heading">Atlas des enquêtes</h2></div><span>Sélectionne un point pour examiner les liens</span></header><div class="network-scroller"><svg class="network-svg" id="network" viewBox="0 0 1220 570" role="group" aria-label="Réseau interactif des enquêtes"></svg></div><div class="scroll-hint">↔ Sur téléphone, fais glisser la carte pour parcourir les familles.</div><div class="network-legend"><span class="legend-key" style="--kind:#e7bc72">Source commune</span><span class="legend-key" style="--kind:#d89cab">Motif</span><span class="legend-key" style="--kind:#f18d78">Tension</span><span class="legend-key" style="--kind:#abd6b4">Contre-test</span><span class="legend-key" style="--kind:#92a8bf">Méthode</span><span class="legend-key" style="--kind:#bca2da">Progression</span></div></section>
+<section class="box" aria-labelledby="map-heading"><header class="panel-head"><div><span class="panel-kicker">01 / EXPLORER LES CORRESPONDANCES</span><h2 id="map-heading">Atlas des enquêtes</h2></div><span>Sélectionne un point pour examiner les liens</span></header><div class="view-switch" role="group" aria-label="Mode d’affichage"><button type="button" id="showGraph" aria-pressed="true">Vue réseau</button><button type="button" id="showList" aria-pressed="false">Vue liste</button></div><div id="nodeList" class="node-list" hidden></div><div class="network-scroller"><svg class="network-svg" id="network" viewBox="0 0 1220 570" role="group" aria-label="Réseau interactif des enquêtes"></svg></div><div class="scroll-hint">↔ Sur téléphone, fais glisser la carte pour parcourir les familles.</div><div class="network-legend"><span class="legend-key" style="--kind:#e7bc72">Source commune</span><span class="legend-key" style="--kind:#d89cab">Motif</span><span class="legend-key" style="--kind:#f18d78">Tension</span><span class="legend-key" style="--kind:#abd6b4">Contre-test</span><span class="legend-key" style="--kind:#92a8bf">Méthode</span><span class="legend-key" style="--kind:#bca2da">Progression</span></div></section>
 <aside class="box details" id="details" aria-label="Enquête sélectionnée" aria-live="polite"><p>Chargement…</p></aside>
 </div>
-<details class="register-archive" id="registerArchive" aria-labelledby="registry-heading"><summary><div><span class="reg-kicker">02 / ARCHIVES DOCUMENTAIRES</span><h2 id="registry-heading">Registre complet des relations</h2><p>Ouvrir les sources citées, les objections et les prochains contrôles</p></div></summary><div class="register-archive-inner"><div class="registry" id="registry" aria-live="polite"></div></div></details>
+<details class="register-archive" id="registerArchive" aria-labelledby="registry-heading"><summary><div><span class="reg-kicker">03 / ARCHIVES DOCUMENTAIRES</span><h2 id="registry-heading">Registre complet des relations</h2><p>Ouvrir les sources citées, les objections et les prochains contrôles</p></div></summary><div class="register-archive-inner"><div class="registry" id="registry" aria-live="polite"></div></div></details>
 </main>
 <footer class="footer">PARISIS ENGINE · Chaque nouvelle relation doit conserver sa provenance, ses limites et son test possible.<p><a href="parisis-fil-enquetes.html">Lire les séquences ↗</a><a href="parisis-publications.html">Retrouver tous les dossiers ↗</a><a href="parisis-relations.json">Consulter le registre structuré (JSON) ↗</a></p></footer>
 </div>
@@ -75,7 +103,7 @@ function chapterHref(n){return /^[a-z0-9-]+\.html$/i.test(n.href)?n.href:"parisi
 function normalized(x){return String(x||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase()}
 function selectedLinks(){return state.data.links.filter(function(r){return r.from===state.selected||r.to===state.selected})}
 function showLink(r){var word=normalized(search.value.trim()),a=nById(r.from),b=nById(r.to);return(relationType.value==="all"||r.type===relationType.value)&&(series.value==="all"||a.series===series.value||b.series===series.value)&&(!word||normalized([a.title,b.title,a.code,b.code,r.label,r.why,r.evidence,r.caution,r.next].join(" ")).includes(word))}
-function choose(id,scroll){if(!nById(id))return;state.selected=id;try{var url=new URL(location.href);url.searchParams.set("d",id);history.replaceState(null,"",url.pathname+url.search+url.hash)}catch(e){}draw();if(scroll&&window.innerWidth<1000)detail.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
+function choose(id,scroll){if(!nById(id))return;state.selected=id;try{var url=new URL(location.href);url.searchParams.set("d",id);history.replaceState(null,"",url.pathname+url.search+url.hash)}catch(e){}draw();if(scroll&&window.innerWidth<1100)detail.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
 function graph(){
 root.replaceChildren();
 var defs=add(root,sEl("defs"));var mark=add(defs,sEl("marker",{id:"end-dot",markerWidth:6,markerHeight:6,refX:3,refY:3}));add(mark,sEl("circle",{cx:3,cy:3,r:2,fill:"#d0b889"}));
@@ -83,14 +111,15 @@ var headings=[["PAR ISIS",110],["ATLAS",355],["NESLE",590],["SYMBOLES",830],["NO
 headings.forEach(function(h){var tx=add(root,sEl("text",{x:h[1],y:31,"text-anchor":"middle",fill:familyColor[h[0]],"font-size":"15","font-family":"Georgia,serif"}));tx.textContent=h[0]});
 var visible=state.data.links.filter(showLink),neighbors=new Set([state.selected]);
 visible.forEach(function(r){if(r.from===state.selected)neighbors.add(r.to);if(r.to===state.selected)neighbors.add(r.from)});
-state.data.links.forEach(function(r){var p=coords[r.from],q=coords[r.to],matches=visible.indexOf(r)!==-1,attached=r.from===state.selected||r.to===state.selected;var line=add(root,sEl("line",{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:colors[r.type], "stroke-width":attached&&matches?3:1.45, "stroke-dasharray":r.type==="methode"?"7 5":r.type==="contretest"?"3 5":"none",opacity:matches?(attached?0.96:0.39):0.05,class:"edge"}));add(line,sEl("title")).textContent=state.data.types[r.type]+" : "+r.label});
+state.data.links.forEach(function(r){var p=coords[r.from],q=coords[r.to],matches=visible.indexOf(r)!==-1,attached=r.from===state.selected||r.to===state.selected;var line=add(root,sEl("line",{x1:p[0],y1:p[1],x2:q[0],y2:q[1],stroke:colors[r.type], "stroke-width":attached&&matches?3:1.45, "stroke-dasharray":r.type==="methode"?"7 5":r.type==="contretest"?"3 5":"none",opacity:matches?(attached?1:0.7):0,class:"edge"}));add(line,sEl("title")).textContent=state.data.types[r.type]+" : "+r.label});
 state.data.nodes.forEach(function(n){
 var p=coords[n.id],chosen=n.id===state.selected,inFamily=series.value==="all"||n.series===series.value,word=normalized(search.value.trim()),matches=!word||normalized(n.title+" "+n.summary+" "+n.code).includes(word)||visible.some(function(r){return r.from===n.id||r.to===n.id});
-var faded=!(inFamily&&matches)||(!neighbors.has(n.id)&&state.selected!=="");
+if(!(inFamily&&matches))return;
+var faded=false;
 var g=add(root,sEl("g",{class:"graph-node"+(chosen?" selected":""),tabindex:"0",role:"button","aria-pressed":chosen?"true":"false","aria-label":"Consulter "+n.title,opacity:chosen?1:faded?0.42:1}));
 add(g,sEl("circle",{cx:p[0],cy:p[1],r:31,stroke:familyColor[n.series]}));
 var code=add(g,sEl("text",{x:p[0],y:p[1]+4}));code.textContent=n.code.length>13?n.code.slice(0,13):n.code;
-var label=add(g,sEl("text",{x:p[0],y:p[1]+50,class:"node-sub"}));label.textContent=n.title.length>27?n.title.slice(0,25)+"…":n.title;
+var label=add(g,sEl("text",{x:p[0],y:p[1]+50,class:"node-sub"}));var words=n.title.split(" "),rows=[""];words.forEach(function(w){var i=rows.length-1;if((rows[i]+" "+w).trim().length>25)rows.push(w);else rows[i]=(rows[i]+" "+w).trim()});rows.forEach(function(row,i){var part=add(label,sEl("tspan",{x:p[0],dy:i?16:0}));part.textContent=row});
 add(g,sEl("title")).textContent=n.title;
 g.addEventListener("click",function(){choose(n.id,true)});
 g.addEventListener("keydown",function(e){if(e.key==="Enter"||e.key===" "){e.preventDefault();choose(n.id,true)}});
@@ -140,7 +169,18 @@ var buttons=add(card,el("div","r-links"));
 [a,b].forEach(function(n){var bt=add(buttons,el("button","",n.code+" · "+n.title));bt.type="button";bt.addEventListener("click",function(){choose(n.id,false);detail.scrollIntoView({block:"start",behavior:"smooth"})})});
 });
 }
-function draw(){if(!state.data)return;graph();detailView();registryView()}
+function listView(){
+var host=document.getElementById("nodeList");host.replaceChildren();
+var links=state.data.links.filter(showLink),term=normalized(search.value.trim());
+var nodes=state.data.nodes.filter(function(n){return(series.value==="all"||n.series===series.value)&&(!term||normalized(n.title+" "+n.summary+" "+n.code).includes(term)||links.some(function(r){return r.from===n.id||r.to===n.id}))&&(relationType.value==="all"||links.some(function(r){return r.from===n.id||r.to===n.id}))});
+nodes.forEach(function(n){var b=add(host,el("button","node-list-item"));b.type="button";b.setAttribute("aria-pressed",String(n.id===state.selected));add(b,el("span","",n.series+" · "+n.code));add(b,el("strong","",n.title));b.addEventListener("click",function(){choose(n.id,true)})});
+if(!nodes.length)add(host,el("p","","Aucune enquête ne correspond aux filtres."));
+}
+function draw(){if(!state.data)return;graph();listView();detailView();registryView()}
+function displayMode(list){document.getElementById("nodeList").hidden=!list;document.querySelector(".network-scroller").hidden=list;document.querySelector(".scroll-hint").hidden=list;document.querySelector(".network-legend").hidden=list;document.getElementById("showList").setAttribute("aria-pressed",String(list));document.getElementById("showGraph").setAttribute("aria-pressed",String(!list))}
+document.getElementById("showList").addEventListener("click",function(){displayMode(true)});
+document.getElementById("showGraph").addEventListener("click",function(){displayMode(false)});
+displayMode(window.matchMedia("(max-width:700px)").matches);
 [search,series,relationType].forEach(function(x){x.addEventListener(x===search?"input":"change",draw)});
 clear.addEventListener("click",function(){search.value="";series.value="all";relationType.value="all";choose("nesle16",false)});
 fetch("parisis-relations.json",{cache:"no-store"}).then(function(r){if(!r.ok)throw Error("HTTP "+r.status);return r.json()}).then(function(d){
