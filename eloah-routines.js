@@ -302,4 +302,5 @@ db.auth.onAuthStateChange(event=>{
 window.addEventListener("focus",()=>{if(!founder)void refresh();});
 document.addEventListener("visibilitychange",()=>{if(!document.hidden&&!founder)void refresh();});
 window.addEventListener("pagehide",()=>{rev++;sources={tasks:[],missions:[],appointments:[]};});
+window.__eloahRoutinesLoaded=true;
 select(new URLSearchParams(location.search).get("routine")||"priority");refresh();
