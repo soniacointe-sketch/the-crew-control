@@ -149,7 +149,19 @@ html#eloah-inner-ivory body.client-page .pilotage-hero-copy .ivory-photo{display
 html#eloah-inner-ivory body.client-page .pilotage-anchors a:hover{background:#ded8c9!important}
 html#eloah-inner-ivory body.client-page #ops-status{background:#293d38!important;color:#fffcf7!important;-webkit-text-fill-color:#fffcf7!important}
 </style><link rel="stylesheet" href="eloah-navigation-harmony.css?v=20261017-stable">
-</head>
+<style id="eloah-simple-layout">
+/* Présentation simplifiée : fonctions et données préservées */
+#eloah-simple-shortcuts{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0 28px}
+#eloah-simple-shortcuts a{background:#fffefa;border:1px solid #dedfd7;border-radius:12px;padding:10px 16px;color:#303530;text-decoration:none;font-weight:650}
+#eloah-simple-shortcuts a:hover,#eloah-simple-shortcuts a:focus-visible{border-color:#7762af;outline-offset:3px}
+.client-hero .workspace-choices,.workspace-choices,.pilotage-anchors{display:none!important}
+#services.eloah-simple-closed > :not(.section-head):not(.eloah-simple-toggle),
+#mes-demarches.eloah-simple-closed > :not(.section-head):not(.eloah-simple-toggle){display:none!important}
+.eloah-simple-toggle{font:inherit;background:#fffefa;color:#303530;border:1px solid #dedfd7;border-radius:12px;padding:10px 16px;cursor:pointer;font-weight:650}
+.eloah-simple-toggle:focus-visible{outline:2px solid #7762af;outline-offset:3px}
+#services>.section-head,#mes-demarches>.section-head{margin-bottom:12px}
+@media(max-width:640px){#eloah-simple-shortcuts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}#eloah-simple-shortcuts a{padding:10px 8px;text-align:center;font-size:13px}#services>.section-head,#mes-demarches>.section-head{display:block}}
+</style></head>
 <body data-prune-lumiere class="eloah-core-menu eloah-screen client-page" data-eloah-page="eloah-pilotage.html"><nav id="eloah-primary-navigation" class="eloah-global-nav" aria-label="Navigation commune ELOAH"><a class="eloah-wordmark" href="mes-univers.html">ELOAH · L’ESPACE DE SONIA</a><details class="eloah-menu" open><summary>Menu</summary><div class="eloah-menu-links"><a href="mes-univers.html">Accueil</a><a href="eloah-pilotage.html">Mon organisation</a><a href="mes-univers.html#mes-univers-principaux">Mes univers</a><a href="mes-univers.html#services">Mes studios</a><a href="eloah-2040.html#assistant-reel">Mon assistante</a><a href="mes-univers.html#reglages">Réglages</a></div></details></nav>
 
 <a class="skip-link" href="#contenu">Aller à mon espace</a>
@@ -421,6 +433,42 @@ if(label==='Studio'){a.textContent='Studio de création';a.href='eloah-reel-stud
 if(label==='Documents')a.textContent='Mes documents';
 if(label==='Mon compte')a.href='eloah-espace-prive.html';
 }
+})();
+</script><script id="eloah-simple-layout-js">
+(()=> {
+  const run=()=>{
+    if(document.getElementById('eloah-simple-shortcuts'))return;
+    const target=document.getElementById('pilotage-focus');
+    if(!target)return;
+    const nav=document.createElement('nav');
+    nav.id='eloah-simple-shortcuts';
+    nav.setAttribute('aria-label','Accès rapides de mon organisation');
+    [['Mes priorités','#pilotage-focus'],['Mon planning','#mon-organisation'],['Mes projets','#mes-projets'],['Mes outils','#services']].forEach(([label,url])=>{
+      const a=document.createElement('a');a.href=url;a.textContent=label;nav.append(a);
+    });
+    target.before(nav);
+    const sections=[['services','Voir tous mes outils','Réduire mes outils'],['mes-demarches','Voir mes démarches et comptes','Réduire mes démarches']];
+    for(const [id,closedLabel,openLabel] of sections){
+      const section=document.getElementById(id);if(!section)continue;
+      const btn=document.createElement('button');btn.type='button';btn.className='eloah-simple-toggle';btn.setAttribute('aria-controls',id);btn.textContent=closedLabel;
+      section.querySelector('.section-head')?.after(btn);
+      const setOpen=open=>{section.classList.toggle('eloah-simple-closed',!open);btn.setAttribute('aria-expanded',String(open));btn.textContent=open?openLabel:closedLabel;};
+      btn.addEventListener('click',()=>setOpen(section.classList.contains('eloah-simple-closed')));
+      setOpen(location.hash==='#'+id);
+      section.dataset.eloahSimpleReady='true';
+      section.eloahSetOpen=setOpen;
+    }
+    const showHash=()=>{
+      const hash=decodeURIComponent(location.hash.slice(1));
+      const target=document.getElementById(hash);
+      if(!target)return;
+      for(const id of ['services','mes-demarches']){const s=document.getElementById(id);if(s&&(s===target||s.contains(target)))s.eloahSetOpen?.(true);}
+    };
+    window.addEventListener('hashchange',showHash);
+    document.addEventListener('click',e=>{const a=e.target.closest?.('a[href^="#"]');if(a)setTimeout(showHash,0);});
+    showHash();
+  };
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',run);else run();
 })();
 </script></body>
 </html>
