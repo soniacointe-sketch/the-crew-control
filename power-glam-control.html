@@ -548,5 +548,5 @@ const prior=window.render;
 function renderPrompts(){prior();if(page!=='calendar')return;const top=$('#view .pagetop');top.insertAdjacentHTML('afterend','<div class="toolbar" id="calendarPromptsBar"><button id="downloadCalendarPrompts">Télécharger tous les prompts du calendrier ↗</button><span class="sub">Un prompt complet dans chaque fiche : ouvre un contenu pour le copier.</span></div>');$('#downloadCalendarPrompts').onclick=()=>{const items=state.contents.filter(c=>c.date).sort((a,b)=>a.date.localeCompare(b.date));const text=items.map(c=>make(c)).join('\n\n'+'='.repeat(70)+'\n\n');const blob=new Blob([text],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='power-glam-prompts-calendrier.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast(items.length+' prompts exportés')};}
 window.render=renderPrompts;window.removeEventListener('hashchange',prior);window.addEventListener('hashchange',renderPrompts);renderPrompts();
 })();
-</script><script src="eloah-navigation.js?v=20261013-sidebar1"></script></body></html>
+</script><script src="eloah-navigation.js?v=20261016-tools-light2"></script></body></html>
 
