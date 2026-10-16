@@ -68,3 +68,10 @@ html#eloah-calm body.account-page header strong{font-family:'Bodoni Moda',Georgi
 html#eloah-calm body .real-ai p{font-size:15px}
 html#eloah-calm body :is(.real-ai label,.field){font-size:14px}
 @media(max-width:760px){html#eloah-calm body .vision{grid-template-columns:1fr}html#eloah-calm body .vision h1{font-size:42px!important}html#eloah-calm body .vision .ivory-photo img{height:150px}html#eloah-calm body.account-page main{display:block;max-width:560px;margin:auto}html#eloah-calm body.account-page .account-photo{display:none}html#eloah-calm body.account-page h1{font-size:36px!important}html#eloah-calm body.account-page p{font-size:17px}}
+html#eloah-calm body :is(.message,.result,.quicklinks a,.studio-tiles a,.launcher-list a,.mobile-nav,.note){background:#ece8de!important;color:#293d38!important;border-color:#d9d4c9!important}
+html#eloah-calm body .stardust{display:none}
+html#eloah-calm body .vision h1{background:none!important;filter:none!important}
+html#eloah-calm body .vision .ivory-photo{order:2}
+html#eloah-calm body .vision-text{order:1}
+html#eloah-calm body .vision-tools{order:3}
+html#eloah-calm body .vision-badge{position:static;grid-column:1/-1;order:0;margin:12px 20px 0;justify-self:start}
