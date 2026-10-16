@@ -89,3 +89,6 @@ desktop.insertBefore(link,desktop.lastChild);
 var mobnav=mobile.querySelector(".pe-universal-links");if(mobnav)mobnav.insertBefore(link.cloneNode(true),mobnav.lastChild);
 }).catch(function(){/* The independent pages remain usable without the manifest. */});
 })();
+
+/* Shared mobile navigation, after each universe has prepared its own menu. */
+(()=>{if(window.self!==window.top||document.querySelector('script[data-eloah-harmony]'))return;const s=document.createElement('script');s.src='eloah-navigation-harmony.js?v=20261016-1';s.dataset.eloahHarmony='1';s.defer=true;document.head.append(s)})();
