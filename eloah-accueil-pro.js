@@ -14,15 +14,8 @@ function today(){const parts=new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/P
 function dateLabel(date){if(!date)return 'Date à choisir';const [y,m,d]=date.split('-');return date===today()?'Aujourd’hui':d+'/'+m+'/'+y+(date<today()?' · date passée':'')}
 function renderProjects(){
  const host=$('home-projects');host.replaceChildren();
- const shortcuts=[
-  {name:'ELOAH Boards',description:'Tous mes tableaux, cartes et projets.',url:'eloah-trello.html'},
-  {name:'ELOAH IA 2040',description:'Réfléchir, créer et préparer mes actions avec validation humaine.',url:'eloah-2040.html#assistant-reel'},
-  {name:'Foi & spiritualité',description:'Le dossier de Sonia : textes, prières et recherches.',url:'foi-control.html?file=eloah-foi-dossier-personnel-complet.md'},
-  {name:'PARISIS Engine',description:'Enquêtes sur Paris, cartes et sources.',url:'eloah-parisis.html'}
- ];
- for(const p of (projects.length ? [] : shortcuts.slice(0,2))){const a=element('a',undefined,'project-link');a.href=p.url;a.append(element('strong',p.name),element('span',p.description));host.append(a)}
  for(const p of projects.slice(0,6)){const a=element('a',undefined,'project-link');a.href=projectURL(p.id);a.append(element('strong',p.name),element('span','Reprendre mon projet →'));host.append(a)}
- host.hidden=false;$('home-project-empty').hidden=true;
+ host.hidden=!projects.length;$('home-project-empty').hidden=!!projects.length;
 }
 function renderActions(){const host=$('home-tasks');host.replaceChildren();host.hidden=!actions.length;$('home-tasks-empty').hidden=!!actions.length;for(const a of actions.slice(0,4)){const row=element('article',undefined,'task'),body=element('div'),link=element('a','Ouvrir →');body.append(element('strong',a.title),element('small',a.project+' · '+dateLabel(a.date)+' · '+a.status));link.href=a.old?'eloah-actions.html#pilotage':'eloah-pilotage.html?projet='+encodeURIComponent(a.project)+'#ops-calendar';link.setAttribute('aria-label','Ouvrir : '+a.title);row.append(body,link);host.append(row)}}
 const tools=[...document.querySelectorAll('[data-search-tool]')].map(a=>({title:a.closest('article').querySelector('h3').textContent,extra:a.dataset.searchTool,type:'Outil',url:a.getAttribute('href')}));
