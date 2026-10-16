@@ -3,7 +3,8 @@ import {ROUTINES} from "./eloah-routines-catalogue.js?v=1";
 const $=id=>document.getElementById(id);
 const OWNER="bd4b7197-6401-4a9a-a14e-c6adbdc0ed46";
 const db=createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy",{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:false,storageKey:"eloah-founder-auth-v1"}});
-let founder=false,rev=0,selected="priority",sources={tasks:[],missions:[],appointments:[],mail:[]},settings=new Map(),draft="",saving=false,runs=[];
+let founder=false,rev=0,selected="priority",sources={tasks:[],missions:[],appointments:[],mail:[]},settings=new Map(),draft="",saving=false,runs=[],googleEvents=[];
+const googleDb=createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy",{auth:{storageKey:"eloah-google-calendar-oauth-v1",persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,flowType:"pkce"}});
 const routine=()=>ROUTINES.find(x=>x.key===selected)||ROUTINES[1];
 const msg=(id,text)=>{$(id).textContent=text;};
 const defaultPrefs=()=>({frequency:"manual",hour:"",topics:""});
@@ -19,7 +20,7 @@ function renderList(){
 }
 function select(key){
  if(!ROUTINES.some(r=>r.key===key))return;
- selected=key;draft="";$("brief").textContent="Clique sur « Préparer le brief »."; $("copy-brief").disabled=true;$("open-ai").disabled=true;
+ selected=key;draft="";$("include-google").checked=false;$("brief").textContent="Clique sur « Préparer le brief »."; $("copy-brief").disabled=true;$("open-ai").disabled=true;
  $("manual-context").value="";$("use-internal-context").checked=false;
  const r=routine();$("routine-title").textContent=r.emoji+" "+r.title;$("routine-desc").textContent=r.description;
  $("travel-extra").hidden=key!=="departure";$("topics-field").hidden=key!=="news";
@@ -28,7 +29,7 @@ function select(key){
  msg("brief-status","Aucun message envoyé et aucune automatisation lancée.");renderList();
 }
 function forget(){
- rev++;founder=false;sources={tasks:[],missions:[],appointments:[],mail:[]};settings.clear();runs=[];renderRuns();
+ rev++;founder=false;sources={tasks:[],missions:[],appointments:[],mail:[]};settings.clear();runs=[];googleEvents=[];$("include-google").checked=false;msg("google-status","Aucun événement Google chargé.");renderRuns();
  $("task-count").textContent="—";$("meeting-count").textContent="—";$("save-preferences").disabled=true;$("use-internal-context").checked=false;
  $("source-status").textContent="Sources privées déchargées.";select(selected);
 }
@@ -115,6 +116,7 @@ function prepare(){
  if(r.key==="departure")parts.push(travel());
  parts.push($("use-internal-context").checked?"Sources internes ajoutées volontairement :\n"+internalData():"Sources internes non jointes : pas d'autorisation de partage.");
  if(["email","messages"].includes(r.key))parts.push("Aucun accès Gmail en temps réel dans ce module. Les courriers déjà indexés dans ELOAH ne sont inclus que si Sonia a coché le partage des sources internes.");
+ if($("include-google").checked&&googleEvents.length)parts.push("Événements Google Agenda joints volontairement, après lecture OAuth demandée par Sonia :\n"+googleEvents.slice(0,20).map(x=>String(x.title).slice(0,130)+" · "+String(x.start)).join("\n"));
  if(r.key==="news")parts.push("Aucune recherche web n'a été effectuée : vérifie les sources et dates.");
  parts.push("Réponse attendue : faits confirmés, informations manquantes, priorité, trois étapes et validations nécessaires.");
  draft=parts.join("\n\n").slice(0,7800);$("brief").textContent=draft;$("copy-brief").disabled=false;$("open-ai").disabled=false;
@@ -226,6 +228,40 @@ async function loadRuns(){
   runs=data||[];renderRuns();
  }catch(e){runs=[];renderRuns();msg("run-status",e.message)}
 }
+
+async function readGoogleAgenda(){
+ const button=$("read-google");button.disabled=true;
+ $("include-google").checked=false;googleEvents=[];
+ msg("google-status","Vérification de la connexion Google Agenda en lecture seule…");
+ try{
+  if(!founder)throw Error("Connecte-toi d’abord à ELOAH Fondatrice.");
+  const {data,error}=await googleDb.auth.getSession();
+  if(error||!data?.session?.provider_token)throw Error("Aucune autorisation Google Agenda active dans ce navigateur. Utilise « Gérer ma connexion Google Agenda ».");
+  const now=new Date(),end=new Date(now.getTime()+15*86400000);
+  const params=new URLSearchParams({timeMin:now.toISOString(),timeMax:end.toISOString(),singleEvents:"true",orderBy:"startTime",maxResults:"40"});
+  const response=await fetch("https://www.googleapis.com/calendar/v3/calendars/primary/events?"+params,{
+   headers:{Authorization:"Bearer "+data.session.provider_token},cache:"no-store",referrerPolicy:"no-referrer"
+  });
+  if(!response.ok)throw Error(response.status===401?"Autorisation Google expirée : reconnecte Google.":"Google Calendar a refusé la lecture (HTTP "+response.status+").");
+  const body=await response.json();
+  if(!founder)return;
+  googleEvents=(Array.isArray(body.items)?body.items:[])
+   .filter(x=>x&&x.status!=="cancelled")
+   .map(x=>({title:String(x.summary||"Événement sans titre").slice(0,160),start:String(x.start?.dateTime||x.start?.date||"").slice(0,35)}))
+   .filter(x=>x.start)
+   .slice(0,40);
+  msg("google-status",googleEvents.length+" événement(s) du calendrier principal réellement lus pour les 15 prochains jours. Ils restent dans cet onglet, sans être transmis à une IA.");
+ }catch(e){googleEvents=[];msg("google-status",e.message||"Lecture Google indisponible.");}
+ finally{button.disabled=false;}
+}
+$("read-google").onclick=readGoogleAgenda;
+$("include-google").onchange=()=>{
+ if($("include-google").checked&&!googleEvents.length){
+  $("include-google").checked=false;msg("google-status","Lis d’abord un agenda Google autorisé avant de le joindre au brief.");
+ }
+ if(draft){draft="";$("copy-brief").disabled=true;$("open-ai").disabled=true;msg("brief-status","Sources Google modifiées : prépare un nouveau brief.");}
+};
+
 $("activate-schedule").onclick=()=>setSchedule(true);
 $("pause-schedule").onclick=()=>setSchedule(false);
 $("reload-runs").onclick=()=>loadRuns();
