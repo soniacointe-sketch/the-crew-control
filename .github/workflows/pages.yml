@@ -25,6 +25,9 @@ jobs:
         uses: actions/upload-pages-artifact@v4
         with:
           path: .
+      # Pages artifact indexing can lag behind successful upload; avoid the 0-artifact race.
+      - name: Allow artifact metadata to propagate
+        run: sleep 20
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
