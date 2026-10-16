@@ -97,6 +97,7 @@ export function mountCloudMemory({getClient,isFounder,founderId}) {
   });
   $('ecm-import').addEventListener('click',()=>{
     if(busy)return;
+    if(loadedUniverse!==universe.value){notice('Charge d’abord cet univers, puis reprends ta mémoire locale pour éviter d’écraser une version cloud.');return}
     disableSharing();
     try{
       const raw=localStorage.getItem('eloah-agent-memory-v1');
@@ -104,7 +105,7 @@ export function mountCloudMemory({getClient,isFounder,founderId}) {
       const data=JSON.parse(raw);
       if(data?.version!==1||typeof data.text!=='string'||data.text.length>6000||!data.text.trim())throw new Error('Ancienne mémoire incompatible ou trop longue.');
       textarea.value=data.text;$('ecm-count').textContent=data.text.length+' / 6 000 caractères';
-      notice('Ancienne mémoire reprise comme brouillon. Choisis d’abord « Charger », puis réimporte et sauvegarde pour éviter d’écraser une version cloud.');
+      notice('Ancienne mémoire reprise comme brouillon. Relis et clique « Sauvegarder dans mon cloud » pour confirmer.');
     }catch(error){notice(error.message)}
   });
   $('ecm-save').addEventListener('click',async()=>{
