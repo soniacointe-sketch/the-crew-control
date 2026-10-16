@@ -7,6 +7,8 @@ on:
       - 'eloah-pilotage-premium.css'
       - 'eloah-pilotage-overview.js'
       - 'eloah-pilotage-focus.js'
+      - 'eloah-action-sheet.js'
+      - 'eloah-workspace.js'
       - 'eloah-pilotage-refine.css'
       - '.github/workflows/eloah-pilotage-quality.yml'
   workflow_dispatch:
@@ -25,6 +27,8 @@ jobs:
         run: |
           node --check eloah-pilotage-overview.js
           node --check eloah-pilotage-focus.js
+          node --check eloah-action-sheet.js
+          node --check eloah-workspace.js
       - name: Contrôler les fonctions existantes et la présentation premium
         shell: bash
         run: |
