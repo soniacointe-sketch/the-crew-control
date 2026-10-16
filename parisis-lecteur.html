@@ -262,8 +262,7 @@ if(raw.includes("parisis-alpha-aleph-lettres-creation.md"))index=0;
 if(raw.includes("parisis-alpha-011-sept-voyelles-sept-cieux-apocalypse.md"))index=2;
 if(index>=0){
 a.href="parisis-lecteur.html?cycle=alpha&step="+(index+1);
-a.removeAttribute("target");
-a.addEventListener("click",function(e){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();select("alpha",index,false);$("chapterTitle").scrollIntoView({block:"start"})});
+a.target="_blank";a.rel="noopener noreferrer";
 }else if(raw==="eloah-alpha-002-zachee-lettres.md"){
 a.href="foi-control.html?file=eloah-alpha-002-zachee-lettres.md";
 }
