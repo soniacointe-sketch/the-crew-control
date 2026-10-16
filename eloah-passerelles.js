@@ -75,12 +75,16 @@ $("import-save").onclick=async()=>{
  if(!chosen||!$("import-confirm").checked||!text||text.length>6000){status("Relis et confirme l'extrait.","import-status");return;}
  busy=true;updateSave();status("Contrôle de la mémoire cloud…","import-status");
  try{ensureOwner();const {data:auth,error:authError}=await client.auth.getUser();if(authError||auth?.user?.id!==FOUNDER)throw Error("Session expirée.");
- const {data:row,error:readError}=await client.from("eloah_agent_memory").select("content").eq("owner_id",FOUNDER).eq("universe",universe).maybeSingle();
+ const {data:row,error:readError}=await client.from("eloah_agent_memory").select("content,updated_at").eq("owner_id",FOUNDER).eq("universe",universe).maybeSingle();
  if(readError)throw Error("Impossible de consulter la mémoire existante. Aucun enregistrement.");
  const next=[row?.content?.trim(),text].filter(Boolean).join("\n\n---\n\n");
  if(next.length>6000)throw Error("La mémoire dépasserait 6 000 caractères. Réduis le texte ; aucune donnée effacée.");
- const {data:result,error}=await client.from("eloah_agent_memory").upsert({owner_id:FOUNDER,universe,content:next,updated_at:new Date().toISOString()},{onConflict:"owner_id,universe"}).select("universe").single();
- if(error||!result)throw Error("Le serveur n'a pas confirmé l'enregistrement.");
+ const stamp=new Date().toISOString();
+ const op=row?client.from("eloah_agent_memory").update({content:next,updated_at:stamp})
+   .eq("owner_id",FOUNDER).eq("universe",universe).eq("updated_at",row.updated_at).select("universe"):
+   client.from("eloah_agent_memory").insert({owner_id:FOUNDER,universe,content:next,updated_at:stamp}).select("universe");
+ const {data:result,error}=await op.maybeSingle();
+ if(error||!result)throw Error("Sauvegarde non effectuée : la mémoire a pu changer sur un autre appareil. Recharge avant de réessayer.");
  status("Extrait ajouté à la mémoire cloud « "+universe+" ». Aucun message envoyé à une IA.","import-status");
  $("import-confirm").checked=false;await refreshRegisters(revision);
  }catch(e){status(e.message,"import-status");}finally{busy=false;updateSave();}
