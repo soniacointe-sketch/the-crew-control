@@ -58,7 +58,7 @@ try{
   const [jsonDownload]=await Promise.all([
    page.waitForEvent('download',{timeout:10000}),page.locator('#eloah-package').click()
   ]);
-  assert.match(jsonDownload.suggestedFilename(),/eloah-dossier-et-sources\\.json/);
+  assert.match(jsonDownload.suggestedFilename(),/eloah-dossier-et-sources\.json/);
   const exported=JSON.parse(await readFile(await jsonDownload.path(),'utf8'));
   assert.ok(exported.deliverable.content.includes('brouillon strictement fictif'));
   assert.ok('citation_review' in exported,'Export must include CDSQCD source review');
