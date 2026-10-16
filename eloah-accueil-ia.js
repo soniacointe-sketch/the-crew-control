@@ -209,7 +209,7 @@
       if (!response.ok || result?.ok !== true || typeof result?.answer !== 'string' || !result.answer.trim()) {
         message(typeof result?.error === 'string' ? result.error.slice(0,500) : 'Le moteur IA est indisponible. Aucun texte n’a été publié.'); return;
       }
-      answer = result.answer.trim(); pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
+      answer = result.answer.trim(); window.EloahEvidence?.commit?.(); pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
       renderPair(text, answer); if (prompt.value === draftAtSend) prompt.value = ''; $('payload').hidden = true;
       message('Réponse à relire · ' + (provider === 'free' ? 'Groq' : 'OpenAI') + '. Tu peux poursuivre dans le champ de demande.');
     } catch (error) {
