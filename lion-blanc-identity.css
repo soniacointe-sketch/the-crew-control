@@ -1,0 +1,35 @@
+/* Le Lion Blanc — craie, encre bleue, laiton et papier. */
+html#lion-identity{color-scheme:light}
+html#lion-identity body{--accent:#273e50!important;--bg:#f5f3ed;--panel:#fffdf8;--text:#263946;--muted:#626b6b;--line:#d6d5cc;background:#f5f3ed!important;color:#263946!important;font:16px/1.7 'Source Sans 3',sans-serif}
+html#lion-identity body :is(h1,h2,h3,h4,.brand,.lb-tile strong,.lb-keyfacts strong){font-family:'Cormorant Garamond',Georgia,serif!important;color:#263946!important;font-weight:500;letter-spacing:-.015em}
+html#lion-identity body h1{font-size:clamp(36px,4vw,56px);line-height:1.1}
+html#lion-identity body :is(p,small,.lb-intro,.office-hint,.lbt-note){color:#626b6b!important;font-family:'Source Sans 3',sans-serif!important}
+html#lion-identity body :is(.eyebrow,.lb-kicker,.lb-num,.lb-action,.lbc-label){color:#816a3f!important}
+html#lion-identity body :is(.panel,dialog,.hero,#lb-office,#lb-tracker,#lb-cloud,.office-pane,.lb-keyfacts>div,.lb-projects article,.lbt-metric,.lbt-item,.lb-tile){background:#fffdf8!important;color:#263946!important;border-color:#d6d5cc!important;border-radius:4px!important;box-shadow:none!important}
+html#lion-identity body :is(button,.button){background:#fffdf8!important;color:#273e50!important;border:1px solid #b9c1c0!important;border-radius:4px!important;font-family:'Source Sans 3',sans-serif!important;min-height:44px}
+html#lion-identity body :is(button.primary,.button.primary,button[aria-pressed=true],.lb-projects button,#lbo-generate,#lbo-save,#lbt-add){background:#273e50!important;color:#fffdf8!important;border-color:#273e50!important}
+html#lion-identity body :is(input,textarea,select){font:16px/1.6 'Source Sans 3',sans-serif!important;background:#fffdf8!important;color:#263946!important;border-color:#b9c1c0!important;max-width:100%}
+html#lion-identity body :is(.lb-note,.notice,.lbc-alert,.lb-status){background:#eae7dc!important;color:#555a55!important;border-color:#ae986b!important}
+html#lion-identity body a{color:#273e50!important;text-underline-offset:4px}
+html#lion-identity body :is(aside,.eloah-global-nav){background:#e9e9e1!important;color:#263946!important;border-color:#d6d5cc!important}
+html#lion-identity body :is(aside,.eloah-global-nav) :is(a,summary,button){color:#273e50!important}
+html#lion-identity body :is(aside,.eloah-global-nav) :is(a[aria-current],button.active){background:#d8dfdb!important}
+html#lion-identity body :is(a,button,input,textarea,select,summary):focus-visible{outline:3px solid #9c8353!important;outline-offset:3px}
+html#lion-identity body .hero{padding:0;overflow:hidden;display:grid;grid-template-columns:1.15fr 1fr}
+html#lion-identity body .lb-hero-copy{padding:32px}
+html#lion-identity body .hero h2{font-size:clamp(32px,3.5vw,48px);line-height:1.12;max-width:620px}
+html#lion-identity body .lb-photo{margin:0;background:#eae7dc}
+html#lion-identity body .lb-photo img{width:100%;height:260px;object-fit:cover;display:block;filter:saturate(.55)}
+html#lion-identity body .lb-photo figcaption{font:12px/1.5 'Source Sans 3',sans-serif;color:#626b6b;padding:10px 14px}
+html#lion-identity body #lb-command .lb-tile{border-top:2px solid #a28b5d!important;padding:22px!important}
+html#lion-identity body #lb-command .lb-tile strong{font-size:26px;line-height:1.2}
+html#lion-identity body #lb-command .lb-tile small{font-size:15px;line-height:1.6}
+html#lion-identity body #lb-command .lb-keyfacts strong{font-size:26px}
+html#lion-identity body #lb-command .lb-keyfacts small{font-size:14px}
+html#lion-identity body #lb-command .lb-projects p{font-size:16px;min-height:0}
+html#lion-identity body .lb-section-links{display:flex;gap:9px;flex-wrap:wrap;margin:24px 0}
+html#lion-identity body .lb-section-links a{padding:10px 14px;border:1px solid #b9c1c0;background:#fffdf8;border-radius:4px;font-size:15px}
+html#lion-identity body .lb-office-photo{float:right;width:240px;margin:0 0 22px 24px}
+html#lion-identity body .lb-office-photo img{height:140px}
+html#lion-identity body .office-tools{clear:both}
+@media(max-width:700px){html#lion-identity body{font-size:18px}html#lion-identity body .hero{grid-template-columns:1fr}html#lion-identity body .lb-hero-copy{padding:22px}html#lion-identity body .lb-photo img{height:170px}html#lion-identity body .lb-office-photo{float:none;width:100%;margin:0 0 20px}html#lion-identity body :is(input,select,textarea){font-size:17px!important}html#lion-identity body .lb-section-links a{flex:1 1 40%;text-align:center}}
