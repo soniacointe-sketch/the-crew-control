@@ -91,6 +91,11 @@ function init(){
  const notice=document.createElement('p');notice.style.fontSize='12px';notice.style.margin='0 0 10px';
  notice.textContent='Désactivé par défaut. En cochant cette case, tu autorises l’envoi au moteur IA des extraits pertinents retrouvés dans la mémoire privée du projet choisi. Ces extraits ne sont pas des preuves historiques.';
  label.after(notice);
+ const importer=document.createElement('a');
+ importer.href='eloah-2040.html#eloah-knowledge-vault';
+ importer.textContent='Importer ou consulter mes conversations enregistrées ↗';
+ importer.style.display='inline-block';importer.style.margin='0 0 12px';
+ notice.after(importer);
  input.addEventListener('change',()=>{memorySelected=[];lastStatus=input.checked?'Mémoire autorisée pour la prochaine création dans le projet choisi.':'Mémoire privée désactivée pour les prochaines demandes.';p.textContent=lastStatus;});
  document.getElementById('home-ai-project')?.addEventListener('change',()=>{input.checked=false;memorySelected=[];p.textContent='Univers changé : mémoire désactivée. Tu peux la réactiver volontairement.';});
 }
