@@ -51,17 +51,26 @@ window.EloahAutoSources={
     if(!universe){memoryStatus=' Choisis un univers pour retrouver les conversations sans mélanger les projets.';}
     else {
      const selectedUniverse=universe==='The Crew'?'The Crew Orchies':universe;
-     const {data:entries,error:memoryError}=await db.from('eloah_knowledge_entries')
-       .select('id,title,content,universe,source_id').eq('owner_id',FOUNDER)
-       .eq('universe',selectedUniverse).order('updated_at',{ascending:false}).limit(100);
-     if(memoryError){memoryStatus=' Mémoire privée inaccessible : '+String(memoryError.message||memoryError).slice(0,100);}
-     else{
-      memorySelected=(allowMemory()?entries||[]:[]).filter(x=>typeof x.content==='string')
-        .map(x=>({...x,score:rank(words,x)})).filter(x=>x.score>=2)
-        .sort((a,b)=>b.score-a.score).slice(0,2);
-      memoryStatus=memorySelected.length
-       ?' Mémoire privée : '+memorySelected.length+' extrait(s) retrouvé(s) : '+memorySelected.map(x=>x.title).join(' ; ')
-       :' Aucun passage pertinent enregistré dans la mémoire privée de cet univers.';
+     const boilerplate=new Set(['parisis','engine','eloah','sonia','recherche','enquete','historique','documentaire','sources','document','projet','univers','dossier','question','presentation','officielle','retrouver','rediger','creer','creation','avec','pour','dans','selon','faire','analyse','methode','memoire']);
+     const topicWords=words.filter(w=>!boilerplate.has(w)).slice(0,8);
+     if(!topicWords.length){memoryStatus=' Précise un sujet historique ou un titre pour rechercher dans tes conversations.';}
+     else {
+      const baseQuery=()=>db.from('eloah_knowledge_entries')
+        .select('id,title,content,universe,source_id').eq('owner_id',FOUNDER).eq('universe',selectedUniverse);
+      let {data:entries,error:memoryError}=await baseQuery()
+        .textSearch('search_vector',topicWords.slice(0,5).join(' OR '),{type:'websearch',config:'french'}).limit(80);
+      if(memoryError||!entries?.length){
+       ({data:entries,error:memoryError}=await baseQuery().ilike('content','%'+topicWords[0]+'%').limit(80));
+      }
+      if(memoryError){memoryStatus=' Mémoire privée inaccessible : '+String(memoryError.message||memoryError).slice(0,100);}
+      else{
+       memorySelected=(allowMemory()?entries||[]:[]).filter(x=>typeof x.content==='string')
+         .map(x=>({...x,score:rank(topicWords,x)})).filter(x=>x.score>=2)
+         .sort((a,b)=>b.score-a.score).slice(0,2);
+       memoryStatus=memorySelected.length
+         ?' Mémoire privée : '+memorySelected.length+' extrait(s) retrouvé(s) : '+memorySelected.map(x=>x.title).join(' ; ')
+         :' Aucun passage pertinent enregistré dans la mémoire privée de cet univers.';
+      }
      }
     }
    }
