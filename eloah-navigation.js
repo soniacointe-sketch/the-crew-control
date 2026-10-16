@@ -4,7 +4,7 @@
 (()=>{'use strict';
 if(document.querySelector('.eloah-global-nav'))return;
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
-const routes=[["Accueil", "mes-univers.html"], ["Mes univers", "mes-univers.html#maisons"], ["Mon organisation", "eloah-pilotage.html"], ["Studio", "eloah-partenaire.html?rubrique=ELOAH%20Studio"], ["Documents", "eloah-bibliotheque.html?type=fichiers"], ["Supervision", "eloah-monitor.html"], ["Autres outils", "eloah-pilotage.html#services"], ["Mon compte", "eloah-fondatrice.html"]];
+const routes=[["Accueil", "mes-univers.html"], ["Mon organisation", "eloah-pilotage.html"], ["Mes univers", "mes-univers.html#mes-univers-principaux"], ["Mes studios", "mes-univers.html#services"], ["Mon assistante", "eloah-2040.html#assistant-reel"], ["Réglages", "mes-univers.html#reglages"]];
 const assistantRoute=["Assistant IA","eloah-projet.html?projet=ELOAH"];
 let universe=query.get('projet')||'';
 try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
@@ -15,7 +15,7 @@ if(page==='eloah-maia.html')universe='MAIA';
 const assistant=assistantRoute;assistant[1]='eloah-projet.html?projet='+encodeURIComponent(universe||'ELOAH');
 const nav=document.createElement('nav');nav.className='eloah-global-nav';nav.setAttribute('aria-label','Navigation commune ELOAH');
 function navLink(label,href,cls=''){const target=new URL(href,location.href);const current=target.pathname.split('/').pop()===page&&[...target.searchParams].every(([key,value])=>query.get(key)===value)&&target.hash===location.hash&&(!query.has('onglet')||target.searchParams.has('onglet'));return '<a class="'+cls+'" href="'+href+'"'+(current?' aria-current="page"':'')+'>'+label+'</a>'}
-nav.innerHTML=navLink('ELOAH · L’ESPACE DE SONIA','mes-univers.html','eloah-wordmark')+navLink('Changer d’univers','mes-univers.html#maisons','eloah-switch')+'<div class="eloah-nav-shortcuts">'+[['Mon Espace','eloah-partenaire.html?rubrique=Mon%20Espace'],['IA 2040','eloah-2040.html#assistant-reel'],['Mailing','eloah-partenaire.html?rubrique=Mailing'],['Documents','eloah-partenaire.html?rubrique=Documents']].map(r=>navLink(...r)).join('')+'</div><details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>r[0]!=='Accueil général').map(r=>{
+nav.innerHTML=navLink('ELOAH · L’ESPACE DE SONIA','mes-univers.html','eloah-wordmark')+navLink('Mes univers','mes-univers.html#mes-univers-principaux','eloah-switch')+'<details class="eloah-menu"><summary>Menu</summary><div class="eloah-menu-links">'+routes.filter(r=>r[0]!=='Accueil général').map(r=>{
  if(r[0]==='Analytics'){
   const links=[['Dashboard Personnel','dashboard'],['Métriques Projet','projets'],['Coûts & Performance','couts']];
   return '<details class="eloah-nav-analytics"><summary>Analytics <span aria-hidden="true">⌄</span></summary><div class="eloah-nav-analytics-entries">'+links.map(([label,id])=>navLink(label,'eloah-partenaire.html?rubrique=Analytics&vue='+id)).join('')+'</div></details>';
@@ -258,7 +258,7 @@ if(page==='mes-univers.html'){
 })();
 
 /* ELOAH 11 · recherche commune, sans accès aux données privées. */
-(()=>{if(document.querySelector('script[data-eloah-platform]')||window.ELOAHPlatform)return;const script=document.createElement('script');script.src='eloah-platform.js?v=20261016-tools-light2';script.defer=true;script.dataset.eloahPlatform='1';document.head.append(script)})();
+(()=>{if(document.querySelector('script[data-eloah-platform]')||window.ELOAHPlatform)return;const script=document.createElement('script');script.src='eloah-platform.js?v=20261017-six';script.defer=true;script.dataset.eloahPlatform='1';document.head.append(script)})();
 
 /* SONIA OS palette 2026-10-15: appearance only, scoped to this page. */
 (()=>{'use strict';
@@ -323,9 +323,6 @@ if(page==='mes-univers.html'){
  local.addEventListener('click',event=>{if(!event.target.closest('[data-go]')||!mobile.matches)return;sections.open=false;const heading=document.getElementById('pageTitle');if(heading){heading.setAttribute('tabindex','-1');heading.focus({preventScroll:true})}});
  sections.addEventListener('keydown',event=>{if(event.key==='Escape'&&mobile.matches&&sections.open){event.preventDefault();sections.open=false;summary.focus()}});
 })();
-
-/* Central assistant access: no data transmitted by opening this link. */
-(()=>{function add(){const menu=document.querySelector('.eloah-global-nav');if(!menu||menu.querySelector('[data-central-ai]'))return;const a=document.createElement('a');a.dataset.centralAi='1';a.textContent='✦ ELOAH IA · Piloter';a.href='eloah-2040.html?rubrique='+encodeURIComponent(location.pathname.split('/').pop()+location.search)+'#assistant-reel';a.style.cssText='display:flex;align-items:center;padding:12px 16px;min-height:44px;color:inherit';menu.append(a)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();})();
 
 /* Shared mobile navigation, after each universe has prepared its own menu. */
 (()=>{if(window.self!==window.top||document.querySelector('script[data-eloah-harmony]'))return;const s=document.createElement('script');s.src='eloah-navigation-harmony.js?v=20261016-1';s.dataset.eloahHarmony='1';s.defer=true;document.head.append(s)})();
