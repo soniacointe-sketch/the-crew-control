@@ -448,7 +448,7 @@ body.personal-faith-chapter .personal-faith-quote p{font:inherit!important;color
 .personal-reflection button{min-height:44px;padding:12px 18px;background:#263b4a;color:#fffdf9;border:0}
 @media(max-width:650px){body.personal-faith-chapter .rev-model-hero{padding:22px 18px!important}body.personal-faith-chapter .rev-model-cover img{height:160px!important}.personal-reflection{padding:18px}}
 @media print{.personal-reflection{display:none!important}}
-</style></head><body class="foi-universe">
+</style><style>body.personal-jesus-chapter .rev-model-cover img{object-fit:contain!important;background:#263b4a}body.personal-jesus-chapter .rev-model-thematic{display:none!important}</style></head><body class="foi-universe">
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
 <a href="foi-control.html?file=eloah-foi-dossier-personnel-complet.md" class="foi-personnel-return current">✦ Dossier personnel complet</a><a href="foi-control.html?vue=accueil" class="foi-personnel-return">⌂ Accueil des lectures</a>
@@ -994,22 +994,23 @@ function adaptAlphaEntry(i){
 }
 
 function renderPersonalFaithChapter(i){
- if(DOCS[i][1]!=="eloah-foi-personnel-01-ma-foi.md")return;
- document.body.classList.add("personal-faith-chapter");
+ const second=DOCS[i][1]==="eloah-foi-personnel-02-jesus-christ.md";if(!second&&DOCS[i][1]!=="eloah-foi-personnel-01-ma-foi.md")return;
+ document.body.classList.add("personal-faith-chapter");document.body.classList.toggle("personal-jesus-chapter",second);
  const root=article.querySelector(".rev-model"),hero=root.querySelector(".rev-model-hero"),body=root.querySelector("#rev-model-body");
- hero.querySelector(".rev-model-kicker").textContent="MON CHEMIN SPIRITUEL · CHAPITRE 1 SUR 12";
- hero.querySelector(".rev-model-intro").textContent="Un espace pour retrouver tes repères, poser tes questions et écrire ce que tu souhaites approfondir.";
+ hero.querySelector(".rev-model-kicker").textContent="MON CHEMIN SPIRITUEL · CHAPITRE "+(second?"2":"1")+" SUR 12";
+ hero.querySelector(".rev-model-intro").textContent=second?"Prendre le temps de réfléchir à Jésus-Christ, garder tes questions et retrouver les textes que tu souhaites étudier.":"Un espace pour retrouver tes repères, poser tes questions et écrire ce que tu souhaites approfondir.";
  root.querySelector(".rev-model-toc")?.remove();root.querySelector("#rev-model-sources")?.remove();root.querySelector(".rev-model-related")?.remove();
  const quote=body.querySelector("blockquote");if(quote){quote.classList.add("personal-faith-quote");hero.after(quote)}
  const nav=document.createElement("nav");nav.className="personal-chapter-nav";nav.setAttribute("aria-label","Navigation des chapitres personnels");
- for(const [href,title] of [["foi-control.html?file=eloah-foi-dossier-personnel-complet.md","← Les 12 chapitres"],["foi-control.html?file=eloah-foi-personnel-02-jesus-christ.md","Continuer : Jésus-Christ →"]]){const a=document.createElement("a");a.href=href;a.textContent=title;nav.append(a)}
+ const navigation=second?[["foi-control.html?file=eloah-foi-personnel-01-ma-foi.md","← Ma foi et mes convictions"],["foi-control.html?file=eloah-foi-dossier-personnel-complet.md","Les 12 chapitres"],["foi-control.html?file=eloah-foi-personnel-03-marie-chapelet.md","Marie et le chapelet →"]]:[["foi-control.html?file=eloah-foi-dossier-personnel-complet.md","← Les 12 chapitres"],["foi-control.html?file=eloah-foi-personnel-02-jesus-christ.md","Continuer : Jésus-Christ →"]];
+ for(const [href,title] of navigation){const a=document.createElement("a");a.href=href;a.textContent=title;nav.append(a)}
  body.after(nav);
  const reflection=document.createElement("section");reflection.className="personal-reflection";reflection.dataset.noaudio="1";
  const h=document.createElement("h2");h.textContent="Mes mots, aujourd’hui";
  const help=document.createElement("p");help.textContent="Écris librement. Ces réponses restent dans ce navigateur sur cet appareil ; elles ne sont pas publiées et ne sont pas synchronisées.";
  reflection.append(h,help);
- const key="eloah-foi-personnel-reflection-v1:01";let data={};try{data=JSON.parse(localStorage.getItem(key)||"{}")||{}}catch{}
- const fields=[];for(const [name,title] of [["support","Ce qui me porte"],["questions","Les questions que je garde ouvertes"],["deepen","Ce que je souhaite approfondir"]]){
+ const key="eloah-foi-personnel-reflection-v1:"+(second?"02":"01");let data={};try{data=JSON.parse(localStorage.getItem(key)||"{}")||{}}catch{}
+ const fields=[];for(const [name,title] of (second?[["support","Ce qui me touche"],["questions","Mes questions"],["deepen","Les paroles que je souhaite approfondir"]]:[["support","Ce qui me porte"],["questions","Les questions que je garde ouvertes"],["deepen","Ce que je souhaite approfondir"]])){
  const label=document.createElement("label");label.textContent=title;const textarea=document.createElement("textarea");textarea.rows=3;textarea.maxLength=12000;textarea.value=typeof data[name]==="string"?data[name]:"";label.append(textarea);reflection.append(label);fields.push({name,textarea})}
  const status=document.createElement("p");status.setAttribute("role","status");status.setAttribute("aria-live","polite");
  const save=document.createElement("button");save.type="button";save.textContent="Enregistrer ma réflexion";
@@ -1073,7 +1074,7 @@ function adaptCollectionsIndex(){
  headings();
 }
 async function getDoc(i){if(i===0)return "";if(cache.has(i))return cache.get(i);const res=await fetch(DOCS[i][1],{cache:"no-store"});if(!res.ok)throw Error("Erreur "+res.status);const md=await res.text();cache.set(i,md);return md;}
-async function openDoc(i,section="",restore=false){const request=++busy;current=i;document.body.classList.remove("collections-index","alpha-entry","research-directory","personal-faith-chapter");sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;const fullPersonalDossier=DOCS[i][1]==="eloah-foi-dossier-personnel-complet.md";document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel"&&!fullPersonalDossier);document.body.classList.toggle("eloah-revue",i===0||fullPersonalDossier);document.body.classList.toggle("eloah-article",i!==0&&!fullPersonalDossier);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){
+async function openDoc(i,section="",restore=false){const request=++busy;current=i;document.body.classList.remove("collections-index","alpha-entry","research-directory","personal-faith-chapter","personal-jesus-chapter");sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;const fullPersonalDossier=DOCS[i][1]==="eloah-foi-dossier-personnel-complet.md";document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel"&&!fullPersonalDossier);document.body.classList.toggle("eloah-revue",i===0||fullPersonalDossier);document.body.classList.toggle("eloah-article",i!==0&&!fullPersonalDossier);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){
  renderPersonalIndex();
  document.title="Foi & Spiritualité · ELOAH";
 }else if(fullPersonalDossier){
