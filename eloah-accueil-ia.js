@@ -66,7 +66,7 @@
     @media(max-width:650px){#contenu #eloah-home-ai{padding:16px 13px;margin:17px 0}body.eloah-home-pro #contenu #eloah-home-ai h2{font-size:24px}#contenu #eloah-home-ai .hai-selects{grid-template-columns:1fr}#contenu #eloah-home-ai select{font-size:16px}#contenu #eloah-home-ai .hai-suggestions{gap:5px}#contenu #eloah-home-ai .hai-suggestions button{padding:8px 10px}#contenu #eloah-home-ai .hai-heading>a{min-height:32px}#contenu #eloah-home-ai #home-ai-log{max-height:360px}}
   `;
   document.head.append(style);
-  anchor.after(host);
+  const daily=document.getElementById('acces-quotidiens'); if(daily) daily.before(host); else anchor.after(host);
   const $ = id => host.querySelector('#home-ai-' + id);
   const form = $('form'), prompt = $('prompt'), status = $('status'), log = $('log');
   const base = 'https://voytsqyorhoveurnguxn.supabase.co';
