@@ -1,0 +1,27 @@
+/* ELOAH — pages intérieures : navigation et lisibilité sans changer les univers. */
+/* Respect des palettes héritées : aucune couleur ou fond global imposé. */
+html{scroll-behavior:auto;scroll-padding-top:16px}
+body :is(.workspace-section,.client-page section,[id="services"],[id="mes-projets"],[id="mon-organisation"]){scroll-margin-top:18px}
+body :is(button,a,summary){touch-action:manipulation}
+body :is(button,a,summary):focus-visible{outline:2px solid currentColor;outline-offset:3px}
+body :is(.secondary-panel,details)>summary{cursor:pointer}
+body :is(.services,.ops-actions,.service-links){min-width:0}
+body :is(.services,.ops-actions,.service-links)>*{min-width:0;overflow-wrap:anywhere}
+body :is(.secondary-panel)>summary{min-height:44px}
+body .eloah-global-nav .eloah-menu-links a{min-height:44px;display:flex;align-items:center}
+@media(max-width:700px){
+ body :is(.client-page main,.workspace-section){min-width:0}
+ body .client-page main{padding-inline:clamp(12px,4vw,24px)!important}
+ body :is(.ops-actions,.service-links){gap:8px}
+ body :is(.ops-actions,.service-links)>a{max-width:100%;white-space:normal;text-align:center}
+ body :is(.section-head,.focus-heading){flex-wrap:wrap;gap:12px}
+ body :is(input,select,textarea){max-width:100%;box-sizing:border-box}
+}
+/* ELOAH Studio : garder ses modules, rendre leurs liens et textes utilisables. */
+html#eloah-prune-lumiere body .layout{min-width:0}
+html#eloah-prune-lumiere body main{min-width:0}
+html#eloah-prune-lumiere body #tabs button{min-height:44px;text-align:left;white-space:normal}
+@media(max-width:1000px){
+ html#eloah-prune-lumiere body .layout{grid-template-columns:minmax(0,1fr)!important}
+ html#eloah-prune-lumiere body main{padding-inline:clamp(12px,4vw,24px)!important}
+}
