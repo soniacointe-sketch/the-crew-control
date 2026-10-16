@@ -405,6 +405,15 @@ body.collections-index .collection-card{min-width:0!important;min-height:145px!i
 body.collections-index #prev:disabled,body.collections-index #next:disabled{display:none}
 body.eloah-article .rev-model-hero .rev-model-actions a[href="#faith-audio"]{color:#fff8ed!important;background:#263b4a!important;border:1px solid #d9bf8c!important}
 @media(max-width:650px){body.collections-index .rev-model-hero{padding:22px 18px!important}body.collections-index .collections-grid{grid-template-columns:1fr!important}}
+</style><style id="alpha-entry-layout">
+body.alpha-entry .rev-model-hero{min-height:0!important;padding:28px 32px!important;gap:28px!important}
+body.alpha-entry .rev-model-copy{padding:0!important}
+body.alpha-entry .rev-model-hero h1{font-size:clamp(28px,3vw,42px)!important;line-height:1.18!important}
+body.alpha-entry .rev-model-cover img{height:280px!important;min-height:0!important;object-fit:contain!important}
+body.alpha-entry .rev-model-hero .alpha-status{font:600 12px/1.6 system-ui!important;color:#f1d49b!important;letter-spacing:.06em}
+body.alpha-entry .rev-model-hero .alpha-image-note{font:13px/1.6 system-ui!important;color:#fff8ed!important}
+.alpha-next{padding:16px 22px;background:#eee6da;border-bottom:1px solid #dcd0c0}.alpha-next a{color:#263b4a;font-weight:650}
+@media(max-width:650px){body.alpha-entry .rev-model-hero{padding:22px 18px!important}body.alpha-entry .rev-model-cover img{height:190px!important}}
 </style></head><body class="foi-universe">
 <div class="shell"><aside class="side" id="sidebar"><div class="brand">ELOAH</div><div class="small">Foi & spiritualité</div><div class="side-doors" id="sideDoors" aria-label="Accès rapides à la bibliothèque"></div><nav id="tree"><button id="home" type="button">⌂ Accueil · Mes lectures</button><a href="eloah-foi-publications.html" style="display:block;margin:7px 0 12px;padding:10px;border:1px solid #c5ad84;border-radius:5px;font-size:13px;font-weight:750;text-decoration:none">▦ Toutes les publications ↗</a><details open><summary>Mon espace personnel</summary>
 <a href="eloah-foi-spiritualite.html#personal-chapter" class="foi-personnel-return">← Foi & spiritualité · accueil</a>
@@ -938,6 +947,18 @@ function renderCollectionsGrid(){
   });
   const h=article.querySelector("h1");if(h)h.after(grid);else article.prepend(grid);
 }
+function adaptAlphaEntry(i){
+ const isAlpha=/^eloah-alpha-\d+/.test(DOCS[i][1]);document.body.classList.toggle("alpha-entry",isAlpha);
+ if(!isAlpha)return;
+ const root=article.querySelector(".rev-model");
+ const related=root?.querySelector(".rev-model-related-grid");
+ if(related){related.replaceChildren();DOCS.filter(d=>/^eloah-alpha-\d+/.test(d[1])&&d[1]!==DOCS[i][1]).sort((a,b)=>a[1].localeCompare(b[1])).slice(0,3).forEach(d=>{const a=document.createElement("a");a.href="foi-control.html?file="+encodeURIComponent(d[1]);a.textContent=d[0];related.append(a)})}
+ if(DOCS[i][1]!=="eloah-alpha-001-jesus-enfant-lettres.md")return;
+ const copy=root.querySelector(".rev-model-copy"),badge=document.createElement("p");badge.className="alpha-status";badge.textContent="FICHE DE SYNTHÈSE RECONSTITUÉE · 13 OCTOBRE 2026";copy.querySelector("h1").after(badge);
+ const note=document.createElement("p");note.className="alpha-image-note";note.textContent="Image de contexte : la céramique illustre l’écriture grecque antique. Elle ne documente pas la scène de Jésus enfant.";copy.append(note);
+ const path=document.createElement("nav");path.className="alpha-next";path.setAttribute("aria-label","Suite de la recherche ALPHA");const a=document.createElement("a");a.href="foi-control.html?file=eloah-alpha-002-zachee-lettres.md";a.textContent="Étape suivante · ALPHA-002 — Jésus et Zachée →";path.append(a);root.querySelector(".rev-model-hero").after(path);
+}
+
 function adaptCollectionsIndex(){
  document.body.classList.add("collections-index");
  const root=article.querySelector(".rev-model");if(!root)return;
@@ -953,7 +974,7 @@ function adaptCollectionsIndex(){
  headings();
 }
 async function getDoc(i){if(i===0)return "";if(cache.has(i))return cache.get(i);const res=await fetch(DOCS[i][1],{cache:"no-store"});if(!res.ok)throw Error("Erreur "+res.status);const md=await res.text();cache.set(i,md);return md;}
-async function openDoc(i,section="",restore=false){const request=++busy;current=i;document.body.classList.remove("collections-index");sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;const fullPersonalDossier=DOCS[i][1]==="eloah-foi-dossier-personnel-complet.md";document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel"&&!fullPersonalDossier);document.body.classList.toggle("eloah-revue",i===0||fullPersonalDossier);document.body.classList.toggle("eloah-article",i!==0&&!fullPersonalDossier);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){
+async function openDoc(i,section="",restore=false){const request=++busy;current=i;document.body.classList.remove("collections-index","alpha-entry");sidebar.classList.remove("open");library.hidden=false;notesView.hidden=true;document.getElementById("ananke-archives").hidden=true;const fullPersonalDossier=DOCS[i][1]==="eloah-foi-dossier-personnel-complet.md";document.body.classList.toggle("personal-view",DOCS[i][2]==="Personnel"&&!fullPersonalDossier);document.body.classList.toggle("eloah-revue",i===0||fullPersonalDossier);document.body.classList.toggle("eloah-article",i!==0&&!fullPersonalDossier);document.querySelectorAll("#tree > details").forEach((d,j)=>{d.open=(DOCS[i][2]==="Personnel"&&j===0);});markActive();updateReadingNav();loading.hidden=false;loading.textContent="Chargement de "+DOCS[i][0]+"…";article.replaceChildren();try{const md=await getDoc(i);if(request!==busy)return;renderMarkdown(md);if(DOCS[i][2]==="CollectionIndex")renderCollectionsGrid();if(i===0){
  renderPersonalIndex();
  document.title="Foi & Spiritualité · ELOAH";
 }else if(fullPersonalDossier){
@@ -982,7 +1003,7 @@ async function openDoc(i,section="",restore=false){const request=++busy;current=
  headings();
  document.title="Mon dossier personnel · Foi & Spiritualité · ELOAH";
 }else{
- renderArticleFrame(i);if(DOCS[i][2]==="CollectionIndex")adaptCollectionsIndex();
+ renderArticleFrame(i);adaptAlphaEntry(i);if(DOCS[i][2]==="CollectionIndex")adaptCollectionsIndex();
 }loading.hidden=true;let target=section&&(section.startsWith("#")?article.querySelector("#"+CSS.escape(section.slice(1))):[...article.querySelectorAll("h1,h2,h3")].find(x=>x.textContent.toLowerCase().includes(section.toLowerCase())));if(!target&&restore&&location.hash){const anchor=decodeURIComponent(location.hash.slice(1));target=article.querySelector("#"+CSS.escape(anchor))||null}if(!target&&restore){const saved=JSON.parse(localStorage.getItem(POS)||"{}");if(saved.doc===i)target=document.getElementById(saved.heading)}if(target)target.scrollIntoView({block:"start"});else window.scrollTo({top:0,behavior:"instant"});history.replaceState({},"",location.pathname+(i===0?"?vue=accueil":"?file="+encodeURIComponent(DOCS[i][1]))+(target?"#"+target.id:""));localStorage.setItem(POS,JSON.stringify({doc:i,heading:target?.id||""}))}catch(e){loading.hidden=false;loading.textContent="Impossible de charger le document : "+e.message+". Ouvre le fichier source depuis GitHub."}}
 
 document.getElementById("mobileMenu").onclick=()=>sidebar.classList.toggle("open");
