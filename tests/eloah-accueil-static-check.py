@@ -39,7 +39,9 @@ for element in ('eloah-search-work', 'home-universe-reset', 'home-new-project', 
     assert element in page.ids, 'Missing interactive element: ' + element
 code = (ROOT / 'eloah-accueil-pro.js').read_text(encoding='utf-8')
 subprocess.run(['node', '--check'], input=code, text=True, check=True)
-assert 'localStorage.setItem' not in code, 'Home summaries are read-only'
+# Creating a new project is an explicit user-triggered write; other home summaries remain read-only.
+assert code.count('localStorage.setItem') == 1, 'Only explicit new-project creation may write local storage'
+assert 'localStorage.setItem(key,JSON.stringify({threads:[],notes:{},settings:{name}' in code, 'Unexpected storage write'
 assert 'localStorage.removeItem' not in code, 'Home summaries may not remove stored data'
 assert 'localStorage.clear' not in code
 assert 'supabase' not in code.lower(), 'Authentication remains in the existing account pages'
