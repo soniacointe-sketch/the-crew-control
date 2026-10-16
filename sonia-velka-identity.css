@@ -1,0 +1,35 @@
+/* Sonia Velka — papier, encre, rouge oxydé. */
+html#velka-identity{color-scheme:light}
+html#velka-identity body{--accent:#963f36!important;--bg:#f4efe7;--panel:#fffcf7;--text:#262522;--ink:#262522;--muted:#69635b;--line:#d8d0c4;--sv-cream:#f4efe7;--sv-wine:#963f36;background:#f4efe7!important;color:#262522!important;font:16px/1.65 Inter,sans-serif}
+html#velka-identity body :is(h1,h2,h3,.brand,.sv-house-welcome,.sv-house-card strong,.velka-hub-grid strong){font-family:'Bodoni Moda',Georgia,serif!important;color:#262522!important;font-weight:400;letter-spacing:-.025em}
+html#velka-identity body h1{font-size:clamp(34px,4vw,54px);line-height:1.12}
+html#velka-identity body :is(p,small,.velka-notice,.sv-house-lead,.sv300-summary){color:#69635b!important}
+html#velka-identity body :is(.eyebrow,.sv300-tag,#sv-house-crumb){color:#963f36!important;letter-spacing:.12em}
+html#velka-identity body .layout aside{background:#eae3d8!important;border-color:#d8d0c4!important}
+html#velka-identity body :is(#sv-house-nav a,aside a){color:#38352f!important;font-family:Inter,sans-serif!important}
+html#velka-identity body #sv-house-nav a[aria-current=page]{background:#ddd3c4!important;border-left:3px solid #963f36;border-radius:3px}
+html#velka-identity body :is(#sv-house-home,.velka-hub,#sv300,#sv-house-vision,#sv-house-studio,#sv-house-actions,.panel,dialog,#sv-chapter-reader,#sv-search-results){background:#fffcf7!important;color:#262522!important;border-color:#d8d0c4!important;border-radius:4px!important;box-shadow:none!important}
+html#velka-identity body :is(.sv-house-card,.sv300-card,.velka-hub-grid a,.velka-hub-grid article,.sv-studio-grid a,#sv-search-results a){background:#f7f3ec!important;color:#262522!important;border-color:#d8d0c4!important;border-radius:3px!important;box-shadow:none!important}
+html#velka-identity body :is(button,.button,#sv-house-toolbar a,#sv-chapter-menu button){background:#fffcf7!important;color:#963f36!important;border:1px solid #c9b9a9!important;border-radius:4px!important;min-height:44px;font-family:Inter,sans-serif!important}
+html#velka-identity body :is(button.primary,.button.primary,button[aria-current=true]){background:#963f36!important;color:#fffaf4!important;border-color:#963f36!important}
+html#velka-identity body :is(input,select,textarea){background:#fffcf7!important;color:#262522!important;border-color:#bfb5a7!important;font-family:Inter,sans-serif!important;font-size:16px!important}
+html#velka-identity body a{color:#963f36;text-underline-offset:4px}
+html#velka-identity body :is(a,button,input,select,textarea,summary):focus-visible{outline:3px solid #963f36!important;outline-offset:3px}
+html#velka-identity body #sv-house-home{padding:0;overflow:hidden}
+html#velka-identity body #sv-house-home>:not(.sv-editorial){margin-left:30px;margin-right:30px}
+html#velka-identity body #sv-house-home>.eyebrow{margin-top:28px}
+html#velka-identity body #sv-house-home .sv-house-welcome{font-size:clamp(36px,4.5vw,60px);max-width:720px;line-height:1.08}
+html#velka-identity body .sv-editorial{display:grid;grid-template-columns:1.4fr 1fr;margin:0;background:#252522}
+html#velka-identity body .sv-editorial img{width:100%;height:270px;display:block;object-fit:cover;filter:saturate(.55)}
+html#velka-identity body .sv-editorial figcaption{padding:28px;display:flex;flex-direction:column;justify-content:center;gap:16px;color:#f4efe7}
+html#velka-identity body .sv-editorial strong{font:italic 31px/1.2 'Bodoni Moda',Georgia,serif;color:#f4efe7}
+html#velka-identity body .sv-editorial small{font-size:11px;color:#c6beb2!important}
+html#velka-identity body #sv-house-home .sv-house-cards{gap:12px;margin-bottom:25px}
+html#velka-identity body #sv-house-home .sv-house-card{border-top:2px solid #963f36;padding:20px;min-height:150px}
+html#velka-identity body #sv-house-home .sv-house-card .symbol{font-size:20px;color:#963f36}
+html#velka-identity body #sv-house-home .sv-house-card strong{font-size:25px}
+html#velka-identity body #sv-house-home .sv-house-card small{font-size:14px}
+html#velka-identity body #sv-house-home>p:last-child{padding-bottom:24px}
+html#velka-identity body #sv-house-vision article :is(h3,small){color:#963f36!important}
+html#velka-identity body .notice{background:#eae3d8;color:#524b43;border-color:#c9b9a9}
+@media(max-width:700px){html#velka-identity body{font-size:17px}html#velka-identity body .sv-editorial{grid-template-columns:1fr}html#velka-identity body .sv-editorial img{height:170px}html#velka-identity body .sv-editorial figcaption{padding:20px}html#velka-identity body .sv-editorial strong{font-size:26px}html#velka-identity body #sv-house-home>:not(.sv-editorial){margin-left:18px;margin-right:18px}html#velka-identity body #sv-house-home .sv-house-cards{grid-template-columns:1fr}html#velka-identity body #sv-house-home .sv-house-card{min-height:0}html#velka-identity body #sv-house-home .sv-house-welcome{font-size:36px}html#velka-identity body main{min-width:0}}
