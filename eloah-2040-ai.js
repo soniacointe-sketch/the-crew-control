@@ -1,6 +1,7 @@
 import {mountPilot} from './eloah-ai-pilot.js?v=memory-3';
 import {mountCloudMemory} from './eloah-cloud-memory.js?v=2';
 import {mountAgentNetwork} from './eloah-agent-network.js?v=2';
+import {mountMissionDesk} from './eloah-mission-desk.js?v=1';
 
 /* ELOAH 2040 · session fondatrice, réponses temporaires et annulation. */
 const el=id=>document.getElementById(id);
@@ -12,6 +13,7 @@ const publicKey='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 
 const cloudMemory=mountCloudMemory({getClient:()=>client,isFounder:()=>activeAccount===founderId,founderId});
 const agentNetwork=mountAgentNetwork({getClient:()=>client,isFounder:()=>activeAccount===founderId,founderId});
+const missionDesk=mountMissionDesk({getClient:()=>client,isFounder:()=>activeAccount===founderId,founderId});
 
 let lastValidAnswer='';const copy=el('ai-copy'),download=el('ai-download'),reuse=el('ai-reuse');function answerState(value){lastValidAnswer=value||'';[copy,download,reuse].forEach(b=>b.disabled=!lastValidAnswer)}copy.addEventListener('click',async()=>{if(!lastValidAnswer)return;try{await navigator.clipboard.writeText(lastValidAnswer);copy.textContent='Copié ✓';setTimeout(()=>copy.textContent='Copier la réponse',1700)}catch(e){copy.textContent='Copie non disponible'}});download.addEventListener('click',()=>{if(!lastValidAnswer)return;const blob=new Blob([lastValidAnswer],{type:'text/plain;charset=utf-8'});const u=URL.createObjectURL(blob);const a=document.createElement('a');a.href=u;a.download='eloah-reponse-ia.txt';a.click();setTimeout(()=>URL.revokeObjectURL(u),1000)});reuse.addEventListener('click',()=>{if(!lastValidAnswer)return;el('ai-request').value=lastValidAnswer.slice(0,9000);updateLength();el('ai-request').focus()});
 
@@ -22,7 +24,7 @@ const status=el('ai-status'),login=el('ai-login-form'),signout=el('ai-signout'),
 function renderConversation(){historyLog.replaceChildren();for(const entry of conversation.slice(-4)){for(const [author,content] of [['user',entry.question],['eloah',entry.answer]]){const line=document.createElement('div');line.className='ai-history-entry';line.dataset.author=author;const label=document.createElement('strong');label.textContent=author==='user'?'Toi':'ELOAH';const paragraph=document.createElement('p');paragraph.textContent=content;line.append(label,paragraph);historyLog.append(line)}}historyStatus.textContent=conversation.length?conversation.length+' échange(s), mémoire temporaire.':'Aucun échange pour le moment.'}
 function setBusy(value){sending=value;send.disabled=value||activeAccount!==founderId;el('ai-stop').hidden=!value;el('ai-request-form').setAttribute('aria-busy',String(value))}
 function cancelRequest(message){revision++;if(pending){pending.controller.abort();clearTimeout(pending.timer)}pending=null;setBusy(false);if(message)output.textContent=message}
-function clearPrivateDrafts(preserveHandoff=false){pilot?.reset();cloudMemory?.reset();agentNetwork?.reset();draft.value='';editor.hidden=true;cardTitle.value='';cardDescription.value='';approvalStatus.textContent='';cardStatus.textContent='';el('ai-payload-preview').textContent='';el('ai-payload-preview').hidden=true;if(!preserveHandoff)try{sessionStorage.removeItem('eloah2040:board-handoff')}catch{}}
+function clearPrivateDrafts(preserveHandoff=false){pilot?.reset();cloudMemory?.reset();agentNetwork?.reset();missionDesk?.reset();draft.value='';editor.hidden=true;cardTitle.value='';cardDescription.value='';approvalStatus.textContent='';cardStatus.textContent='';el('ai-payload-preview').textContent='';el('ai-payload-preview').hidden=true;if(!preserveHandoff)try{sessionStorage.removeItem('eloah2040:board-handoff')}catch{}}
 function resetConversation(message='Nouvelle conversation prête.',clearInput=false,preserveHandoff=false){cancelRequest();conversation=[];renderConversation();answerState('');clearPrivateDrafts(preserveHandoff);if(clearInput){el('ai-request').value='';el('ai-include-note').checked=false}output.textContent=message;updateLength()}
 function updateLength(){const current=el('ai-request').value;el('ai-length').textContent=current.length+' / 9 000 caractères'}
 el('ai-request').addEventListener('input',updateLength);
