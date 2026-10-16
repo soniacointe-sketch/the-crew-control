@@ -115,3 +115,18 @@ body#maison-eloah #contenu .eloah-universe-card[href="lion-blanc-control.html"] 
 @media(max-width:1100px){body#maison-eloah #contenu .eloah-six-univers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){body#maison-eloah #contenu .eloah-six-univers{gap:12px}body#maison-eloah #contenu .eloah-universe-portrait{height:120px}body#maison-eloah #contenu .eloah-universe-card strong{font-size:21px!important;margin:12px 12px 7px}body#maison-eloah #contenu .eloah-universe-card small{margin:0 12px 14px}}
 @media(max-width:380px){body#maison-eloah #contenu .eloah-six-univers{grid-template-columns:1fr}body#maison-eloah #contenu .eloah-universe-card[href="lion-blanc-control.html"]{grid-column:auto}}
+
+/* Six stable destinations, scoped to the ELOAH home only. */
+body#maison-eloah #contenu .home-organized-section{margin:36px 0;padding-top:24px;border-top:1px solid #c8c2b4;scroll-margin-top:72px}
+body#maison-eloah #contenu .home-organized-links{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:20px 0}
+body#maison-eloah #contenu .home-organized-links a{position:relative;display:flex;flex-direction:column;gap:8px;min-height:96px;min-width:0;padding:20px 36px 20px 18px;background:#fffcf7;border:1px solid #c8c2b4;border-radius:5px;text-decoration:none;color:#293d38;overflow-wrap:anywhere}
+body#maison-eloah #contenu .home-organized-links strong{font:600 15px/1.5 Inter,sans-serif;color:#293d38}
+body#maison-eloah #contenu .home-organized-links small{font:13px/1.6 Inter,sans-serif;color:#52584e}
+body#maison-eloah #contenu .home-organized-links a>span{position:absolute;right:15px;top:20px}
+body#maison-eloah #contenu .home-organized-links a:hover{background:#eae6dc;border-color:#927847}
+body#maison-eloah #contenu .home-organized-section>h2{margin:0 0 12px}
+body#maison-eloah #contenu .home-organized-section>p{color:#52584e}
+body#maison-eloah #contenu #services>.home-creative-links{margin:20px 0}
+body#maison-eloah #contenu #services>.home-creative-links summary{min-height:44px;cursor:pointer}
+@media(max-width:1000px){body#maison-eloah #contenu .home-organized-links{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:550px){body#maison-eloah #contenu .home-organized-links{grid-template-columns:1fr}body#maison-eloah #contenu .home-organized-section{margin-top:28px}}

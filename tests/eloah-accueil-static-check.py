@@ -31,10 +31,10 @@ for url in page.urls:
         assert (ROOT / unquote(target.path)).is_file(), 'Missing file: ' + url
     if not target.path and target.fragment:
         assert unquote(target.fragment) in page.ids, 'Missing anchor: ' + url
-assert page.tags['mes-projets'] == 'details'
-assert page.tags['services'] == 'details'
+assert page.tags['mes-projets'] == 'section'
+assert page.tags['services'] == 'section'
 assert page.tags['maisons'] == 'details'
-assert page.photos == 60, 'The existing photo references must be preserved'
+assert page.photos == 59, 'Preserve illustrations; SONIA OS moved from universe cards to assistant tools'
 for element in ('eloah-search-work', 'home-universe-reset', 'home-new-project', 'home-tasks', 'home-directory'):
     assert element in page.ids, 'Missing interactive element: ' + element
 code = (ROOT / 'eloah-accueil-pro.js').read_text(encoding='utf-8')
@@ -43,4 +43,4 @@ assert 'localStorage.setItem' not in code, 'Home summaries are read-only'
 assert 'localStorage.removeItem' not in code, 'Home summaries may not remove stored data'
 assert 'localStorage.clear' not in code
 assert 'supabase' not in code.lower(), 'Authentication remains in the existing account pages'
-print('ELOAH home: IDs, local targets, disclosure panels, 60 images and JavaScript OK.')
+print('ELOAH home: IDs, local targets, sections, illustrated directories and JavaScript OK.')
