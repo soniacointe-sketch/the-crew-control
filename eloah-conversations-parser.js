@@ -100,6 +100,11 @@ export function conversationSegments(record,universe){
       if(boundary>offset+Math.floor(MAX_SEGMENT_CHARS*0.6))end=boundary+1;
     }
     if(end<=offset)end=Math.min(offset+MAX_SEGMENT_CHARS,corpus.length);
+    // Garder les paires UTF-16 intactes : un emoji ne doit pas être coupé en deux segments.
+    if(end<corpus.length&&end>offset){
+      const left=corpus.charCodeAt(end-1),right=corpus.charCodeAt(end);
+      if(left>=0xD800&&left<=0xDBFF&&right>=0xDC00&&right<=0xDFFF)end--;
+    }
     chunks.push(corpus.slice(offset,end));offset=end;
   }
   const total=chunks.length;
