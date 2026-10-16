@@ -106,6 +106,8 @@ function showLink(r){var word=normalized(search.value.trim()),a=nById(r.from),b=
 function choose(id,scroll){if(!nById(id))return;state.selected=id;try{var url=new URL(location.href);url.searchParams.set("d",id);history.replaceState(null,"",url.pathname+url.search+url.hash)}catch(e){}draw();if(scroll&&window.innerWidth<1100)detail.scrollIntoView({behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"})}
 function graph(){
 root.replaceChildren();
+var familyX={"PAR ISIS":110,"ATLAS":355,"NESLE":590,"SYMBOLES":830,"NOSTRADAMUS":1075};
+var scoped=series.value!=="all";root.setAttribute("viewBox",scoped?(familyX[series.value]-135)+" 0 270 570":"0 0 1220 570");root.style.setProperty("min-width",scoped?"270px":"1000px","important");root.style.setProperty("max-height",scoped?"620px":"none");
 var defs=add(root,sEl("defs"));var mark=add(defs,sEl("marker",{id:"end-dot",markerWidth:6,markerHeight:6,refX:3,refY:3}));add(mark,sEl("circle",{cx:3,cy:3,r:2,fill:"#d0b889"}));
 var headings=[["PAR ISIS",110],["ATLAS",355],["NESLE",590],["SYMBOLES",830],["NOSTRADAMUS",1075]];
 headings.forEach(function(h){var tx=add(root,sEl("text",{x:h[1],y:31,"text-anchor":"middle",fill:familyColor[h[0]],"font-size":"15","font-family":"Georgia,serif"}));tx.textContent=h[0]});
