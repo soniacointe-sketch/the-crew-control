@@ -8,9 +8,9 @@ async function tests(){
  return Promise.all([
  runCheck('💬 Conversations',()=>typeof newThread==='function'&&typeof renderChat==='function'&&typeof addMessage==='function'&&!!$('new-thread')&&!!$('compose')&&!!$('paste-response')&&probeStorage()),
  runCheck('📂 Fichiers',async()=>typeof addFiles==='function'&&typeof renderFiles==='function'&&!!$('upload')&&!!$('file-list')&&await probeFiles()),
- runCheck('💳 Facturation',()=>typeof showTab==='function'&&!!window.EloahWorkspace&&probeStorage()),
+ runCheck('💳 Facturation',()=>typeof showTab==='function'&&!!window.ELOAHWorkspace&&probeStorage()),
  runCheck('📚 Bases d’expertise',()=>typeof expertiseHome==='function'&&typeof saveBases==='function'&&probeStorage()),
- runCheck('👥 Équipe',()=>typeof showTab==='function'&&!!window.EloahWorkspace&&probeStorage()),
+ runCheck('👥 Équipe',()=>typeof showTab==='function'&&!!window.ELOAHWorkspace&&probeStorage()),
  runCheck('🧠 Mémoire',()=>typeof renderMemoryControls==='function'&&typeof settingsSave==='function'&&probeStorage()),
  runCheck('📊 Analytics',()=>typeof stats==='function'&&!!$('thread-count')&&!!$('file-count')),
  runCheck('⚙️ Paramètres',()=>typeof renderSettings==='function'&&!!window.EloahProjectStore&&typeof window.EloahProjectStore.remove==='function'&&typeof JSZip!=='undefined'&&probeStorage())
