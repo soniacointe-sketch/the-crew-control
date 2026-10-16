@@ -1,0 +1,222 @@
+/* ELOAH · Assistante claire. Uniquement l'accueil mes-univers.html.
+   Aucun JS, accès, stockage ni comportement de sauvegarde modifié. */
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai{
+  --ea-surface:#fffdfa;--ea-paper:#f5f2eb;--ea-ink:#242923;
+  --ea-muted:#596159;--ea-line:#d9d9d0;--ea-accent:#293d38;
+  background:var(--ea-surface)!important;color:var(--ea-ink)!important;
+  border:1px solid var(--ea-line)!important;border-radius:16px!important;
+  padding:clamp(18px,2.4vw,34px)!important;
+  box-shadow:0 10px 32px rgba(32,43,37,.06)!important;
+  min-width:0;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(h2,h3,h4){
+  color:var(--ea-ink)!important;-webkit-text-fill-color:currentColor!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai h2{
+  font-family:'Bodoni Moda',Georgia,serif!important;
+  font-size:clamp(29px,3vw,40px)!important;line-height:1.18!important;
+  margin:5px 0 12px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai h3{
+  font-family:'Bodoni Moda',Georgia,serif!important;
+  font-size:clamp(22px,2vw,27px)!important;line-height:1.25!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(p,small,.hai-privacy,.hai-intro,.eloah-create-truth){
+  color:var(--ea-muted)!important;-webkit-text-fill-color:currentColor!important;
+  font-size:14px!important;line-height:1.7!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-intro{
+  font-size:16px!important;max-width:790px!important;margin:12px 0 20px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-eyebrow{
+  color:#726448!important;font:700 11px/1.5 Inter,system-ui,sans-serif!important;
+  letter-spacing:.1em!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(label,summary,strong,span){
+  color:var(--ea-ink)!important;-webkit-text-fill-color:currentColor!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai label{
+  font-size:14px!important;line-height:1.5!important;font-weight:600!important;
+  margin-bottom:8px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai a{
+  color:var(--ea-accent)!important;-webkit-text-fill-color:currentColor!important;
+  font-size:14px!important;font-weight:600!important;text-decoration-color:#a3a994!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai a:hover{
+  color:#506d5e!important;text-decoration-thickness:2px;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai button{
+  color:var(--ea-accent)!important;-webkit-text-fill-color:currentColor!important;
+  background:#fffdfa!important;border:1px solid #bfc9bf!important;
+  border-radius:9px!important;padding:11px 15px!important;
+  min-height:44px!important;font:600 14px/1.45 Inter,system-ui,sans-serif!important;
+  box-shadow:none!important;text-shadow:none!important;
+  transition:background-color .15s ease,border-color .15s ease;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai button:hover:not(:disabled){
+  background:#eaf0e9!important;border-color:#708a79!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(#home-ai-send,#ecl-save,#ecc-save,#eloah-result-save-local,#eloah-result-save-cloud){
+  background:var(--ea-accent)!important;border-color:var(--ea-accent)!important;
+  color:#fffdf8!important;-webkit-text-fill-color:#fffdf8!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(#home-ai-send,#ecl-save,#ecc-save,#eloah-result-save-local,#eloah-result-save-cloud):hover:not(:disabled){
+  background:#405b50!important;border-color:#405b50!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(button,a,select,textarea,input,summary):focus-visible{
+  outline:3px solid #8b9e76!important;outline-offset:3px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(textarea,select,input:not([type=checkbox])){
+  display:block;background:#fff!important;color:var(--ea-ink)!important;
+  -webkit-text-fill-color:var(--ea-ink)!important;
+  border:1px solid #b8c1b8!important;border-radius:9px!important;
+  box-shadow:none!important;min-height:45px;padding:11px 13px!important;
+  font:400 16px/1.55 Inter,system-ui,sans-serif!important;
+  color-scheme:light;max-width:100%;min-width:0;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(textarea,input)::placeholder{
+  color:#6b736d!important;-webkit-text-fill-color:#6b736d!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai textarea{
+  width:100%!important;resize:vertical;min-height:100px;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai input[type=checkbox]{
+  accent-color:var(--ea-accent)!important;flex-shrink:0;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-heading{
+  gap:12px 20px!important;padding-bottom:2px;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-heading>a{
+  background:#f2f0e9!important;border:1px solid var(--ea-line)!important;
+  border-radius:8px;padding:10px 12px;min-height:44px;
+  text-decoration:none!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-suggestions{
+  gap:10px!important;margin:18px 0!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-suggestions button{
+  border-radius:30px!important;background:#f5f3ec!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-create-choices{
+  gap:11px!important;margin:16px 0 24px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-create-choices button{
+  background:#f7f5ef!important;border-color:#d7d9cf!important;
+  color:var(--ea-ink)!important;font-size:14px!important;text-align:left;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-create-choices button[aria-pressed=true]{
+  background:#e5ede4!important;border:2px solid var(--ea-accent)!important;
+  box-shadow:inset 4px 0 0 var(--ea-accent)!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-form-bottom{
+  padding:5px 0 12px!important;gap:12px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #home-ai-count{
+  color:#646e64!important;font-size:12px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(.hai-settings,.hai-session){
+  border-color:var(--ea-line)!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai details{
+  color:var(--ea-ink)!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai summary{
+  color:var(--ea-accent)!important;font:600 15px/1.55 Inter,system-ui,sans-serif!important;
+  padding:12px 0!important;min-height:44px;cursor:pointer;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #home-ai-session{
+  color:var(--ea-muted)!important;font-size:13px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(.hai-status,#ecl-status,#ecc-status,#em-status,#em-cloud-status,#ecs-status){
+  color:#31594a!important;font-size:13px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai pre{
+  background:#f2f2ec!important;color:var(--ea-ink)!important;
+  border:1px dashed #b5bcae!important;white-space:pre-wrap;overflow-wrap:anywhere;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-message,
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-message[data-author=user]{
+  background:#f7f8f4!important;border:1px solid var(--ea-line)!important;
+  color:var(--ea-ink)!important;border-radius:12px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-message[data-author=user]{
+  background:#e8efe8!important;border-color:#c6d3c6!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-message :is(strong,p){
+  color:var(--ea-ink)!important;-webkit-text-fill-color:currentColor!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .hai-privacy{
+  margin-top:18px!important;padding-top:14px;border-top:1px solid var(--ea-line);
+  font-size:12px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(#eloah-factory,#eloah-result-guide,#eloah-cloud-creations){
+  background:#f7f7f2!important;border:1px solid var(--ea-line)!important;
+  color:var(--ea-ink)!important;border-radius:12px!important;
+  box-shadow:none!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(#eloah-factory,#eloah-result-guide,#eloah-cloud-creations) :is(h3,p,small,strong){
+  color:var(--ea-ink)!important;-webkit-text-fill-color:currentColor!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-creation-library{
+  border-top:1px solid var(--ea-line)!important;color:var(--ea-ink)!important;
+  padding-top:24px;margin-top:28px;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-creation-library .ecl-item,
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-cloud-creations .ecc-card,
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #em-list article{
+  background:#fff!important;color:var(--ea-ink)!important;
+  border:1px solid var(--ea-line)!important;border-radius:10px!important;
+  padding:14px!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-creation-library :is(strong,small,p),
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-cloud-creations :is(strong,small,p){
+  color:var(--ea-ink)!important;-webkit-text-fill-color:currentColor!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(#eloah-creation-sources,#eloah-memory,#em-cloud){
+  color:var(--ea-ink)!important;
+  margin-top:22px;padding-top:18px;border-top:1px solid var(--ea-line);
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #em-list{
+  display:grid;gap:12px;margin:14px 0;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #em-list article button{
+  margin:6px 6px 0 0!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-cloud-creations button,
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-cloud-creations a{
+  background:#fffdfa!important;color:var(--ea-accent)!important;
+  border:1px solid #bfc9bf!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai #eloah-cloud-creations #ecc-save{
+  background:var(--ea-accent)!important;color:#fff!important;border-color:var(--ea-accent)!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai .eloah-create-truth{
+  margin-top:24px!important;color:var(--ea-muted)!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #eloah-workflow a{
+  background:#f7f7f2!important;border:1px solid #d9d9d0!important;
+  color:#293d38!important;border-radius:8px!important;
+}
+@media(max-width:700px){
+  html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai{
+    padding:18px 15px!important;border-radius:12px!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai h2{
+    font-size:30px!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(.hai-suggestions,.hai-form-bottom>div,.ecl-actions,.ecc-actions,.eloah-result-buttons){
+    gap:8px!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(.hai-selects,#eloah-create-choices){
+    grid-template-columns:1fr!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai :is(.hai-selects select,.hai-selects input,textarea){
+    width:100%!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html#eloah-ivory-home body#maison-eloah #contenu #eloah-home-ai button{
+    transition:none!important;
+  }
+}
