@@ -142,7 +142,7 @@ async function copy(value){
 async function save(){
  if(saving)return;
  const id=selected,frequency=$("routine-frequency").value,hour=$("routine-hour").value,topics=$("routine-topics").value.trim().slice(0,260);
- if(!["manual","daily","weekly","before_event"].includes(frequency)||hour&&!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(hour)){msg("save-status","Vérifie le rythme et l’heure : valeurs invalides.");return}
+ if(!["manual","daily","weekly","before_event"].includes(frequency)||hour&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(hour)){msg("save-status","Vérifie le rythme et l’heure : valeurs invalides.");return}
  const value={frequency,hour,topics};
  if(!founder){
   msg("save-status",localSave(id,value)?"Préférence enregistrée sur cet appareil ✓. Pour la synchroniser dans le cloud, connecte-toi à ELOAH Fondatrice puis clique à nouveau sur Enregistrer.":"Enregistrement impossible dans ce navigateur : connecte-toi à ELOAH Fondatrice.");
