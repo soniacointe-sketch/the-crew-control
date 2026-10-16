@@ -6,15 +6,22 @@
 
 ---
 
-![Chapelet — guide des objets religieux](https://images.openai.com/static-rsc-4/W9bhCnfoUz-uLXNvsKxWG3jzcV17QPXvLkfbXaZksmqjdB2RPvcW3J7Ko_pqSpNGEDbnlziUd9RMk3EUPnT4H7H-NlwSEUPyObRxNBxSCGWQAVXGwUyS0w2Zxmc6Jj-ctrXBLtxOYBYfs-fpIx6_S86E74MEJWDwj8X6Y-xxz18?purpose=inline)
+
+## Marie dans mon cheminement
+
+Cet espace accueille tes propres mots et tes questions. Tu peux les conserver dans « Mes mots, aujourd’hui », sur cet appareil.
+
+## Comprendre le chapelet
 
 Nous avons déjà abordé la signification du chapelet, la prière guidée et la méditation des épisodes de la vie du Christ avec Marie.
 
-Tu avais précisé ne pas posséder de chapelet physique. Nous avions donc prévu une pratique possible en comptant simplement les prières.
+Sans chapelet physique, le guide permet de suivre les prières à l’écran.
 
-Le chapitre contient la structure du Notre Père, du Je vous salue Marie, du Gloire au Père et les quatre séries de mystères : joyeux, lumineux, douloureux et glorieux.
+## Prier et méditer
 
-[Ouvrir le chapelet interactif](eloah-foi-spiritualite.html)
+Le chapelet interactif rassemble le Notre Père, le Je vous salue Marie, le Gloire au Père et les quatre séries de mystères : joyeux, lumineux, douloureux et glorieux. Il permet de choisir une série puis d’avancer prière par prière. Ces textes se trouvent dans le guide, accessible ci-dessous.
+
+[Commencer le chapelet guidé →](eloah-foi-spiritualite.html#chapelet)
 
 ---
 
