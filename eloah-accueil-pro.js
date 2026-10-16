@@ -23,26 +23,13 @@ function renderProjects(){
  }
  host.hidden=!projects.length;$('home-project-empty').hidden=!!projects.length;
 }
-function deleteProject(p){
- if(!confirm('Supprimer définitivement le dossier « '+p.name+' » et ses fichiers enregistrés sur cet appareil ? Cette action est irréversible.'))return;
- // Delete the browser project only; never touch similarly named official universes.
- try{localStorage.removeItem(prefix+p.id)}catch{alert('Impossible de supprimer ce projet : stockage inaccessible.');return}
- if(typeof indexedDB!=='undefined'){
-  try{
-   const request=indexedDB.open('eloah-project-files',1);
-   request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('files'))request.result.createObjectStore('files',{keyPath:'id'})};
-   request.onsuccess=()=>{
-    const db=request.result;
-    if(!db.objectStoreNames.contains('files')){db.close();return}
-    const tx=db.transaction('files','readwrite'),store=tx.objectStore('files'),cursor=store.openCursor();
-    cursor.onsuccess=()=>{const item=cursor.result;if(!item)return;if(item.value?.project===p.id)item.delete();item.continue()};
-    tx.oncomplete=()=>db.close();
-    tx.onerror=()=>{db.close();alert('Le dossier a été retiré, mais certains fichiers n’ont pas pu être effacés du navigateur.')};
-   };
-   request.onerror=()=>alert('Le dossier a été retiré, mais ses fichiers n’ont pas pu être vérifiés.');
-  }catch{alert('Le dossier a été retiré, mais ses fichiers n’ont pas pu être vérifiés.')}
- }
- refresh();
+async function deleteProject(p){
+ if(!confirm('Supprimer définitivement le dossier « '+p.name+' » et ses fichiers sur cet appareil ? Cette action est irréversible.'))return;
+ try{
+  if(!window.EloahProjectStore)throw new Error('Module de suppression non chargé. Recharge la page.');
+  await window.EloahProjectStore.remove(p.id);
+  refresh();
+ }catch(error){alert('Suppression interrompue : '+(error?.message||'stockage indisponible')+'. Le dossier reste visible si ses données existent encore.');refresh()}
 }
 function renderActions(){const host=$('home-tasks');host.replaceChildren();host.hidden=!actions.length;$('home-tasks-empty').hidden=!!actions.length;for(const a of actions.slice(0,4)){const row=element('article',undefined,'task'),body=element('div'),link=element('a','Ouvrir →');body.append(element('strong',a.title),element('small',a.project+' · '+dateLabel(a.date)+' · '+a.status));link.href=a.old?'eloah-actions.html#pilotage':'eloah-pilotage.html?projet='+encodeURIComponent(a.project)+'#ops-calendar';link.setAttribute('aria-label','Ouvrir : '+a.title);row.append(body,link);host.append(row)}}
 const tools=[...document.querySelectorAll('[data-search-tool]')].map(a=>({title:a.closest('article').querySelector('h3').textContent,extra:a.dataset.searchTool,type:'Outil',url:a.getAttribute('href')}));
