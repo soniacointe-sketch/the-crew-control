@@ -29,6 +29,38 @@
       return;
     }
     side.classList.add('eloah-harmonized-side');
+    // Explicit main-menu navigation always starts at the top of the destination.
+    if (core && global) {
+      const topKey = 'eloah-menu-top-destination';
+      const atTop = () => {
+        window.scrollTo({top:0, left:0, behavior:'instant'});
+        const heading = document.querySelector('main h1, h1');
+        if (heading) { heading.setAttribute('tabindex','-1'); heading.focus({preventScroll:true}); }
+      };
+      let startAtTop = false;
+      try {
+        startAtTop = sessionStorage.getItem(topKey) === location.href;
+        sessionStorage.removeItem(topKey);
+      } catch (_) {}
+      if (startAtTop) {
+        requestAnimationFrame(() => requestAnimationFrame(atTop));
+        if (document.readyState !== 'complete') window.addEventListener('load', () => requestAnimationFrame(atTop), {once:true});
+      }
+      global.addEventListener('click', event => {
+        const link = event.target.closest('.eloah-menu-links > a, .eloah-wordmark');
+        if (!link || event.button !== 0 || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey || link.target === '_blank') return;
+        const url = new URL(link.href, location.href);
+        if (url.origin !== location.origin) return;
+        if (url.pathname === location.pathname && url.search === location.search) {
+          event.preventDefault();
+          if (url.href !== location.href) history.pushState(null, '', url.href);
+          window.dispatchEvent(new PopStateEvent('popstate'));
+          requestAnimationFrame(atTop);
+        } else {
+          try { sessionStorage.setItem(topKey, url.href); } catch (_) {}
+        }
+      });
+    }
     const originalRole = side.getAttribute('role');
     const originalLabel = side.getAttribute('aria-label');
     if (!side.id) side.id = 'eloah-primary-navigation';
