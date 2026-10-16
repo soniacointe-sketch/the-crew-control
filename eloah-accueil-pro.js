@@ -14,8 +14,35 @@ function today(){const parts=new Intl.DateTimeFormat('fr-FR',{timeZone:'Europe/P
 function dateLabel(date){if(!date)return 'Date à choisir';const [y,m,d]=date.split('-');return date===today()?'Aujourd’hui':d+'/'+m+'/'+y+(date<today()?' · date passée':'')}
 function renderProjects(){
  const host=$('home-projects');host.replaceChildren();
- for(const p of projects.slice(0,6)){const a=element('a',undefined,'project-link');a.href=projectURL(p.id);a.append(element('strong',p.name),element('span','Reprendre mon projet →'));host.append(a)}
+ for(const p of projects.slice(0,6)){
+  const row=element('div',undefined,'home-project-row');
+  const a=element('a',undefined,'project-link');a.href=projectURL(p.id);a.append(element('strong','📁 '+p.name),element('span','Ouvrir mon dossier →'));
+  const del=element('button','Supprimer','home-project-delete');del.type='button';del.setAttribute('aria-label','Supprimer le projet '+p.name);
+  del.addEventListener('click',()=>deleteProject(p));
+  row.append(a,del);host.append(row);
+ }
  host.hidden=!projects.length;$('home-project-empty').hidden=!!projects.length;
+}
+function deleteProject(p){
+ if(!confirm('Supprimer définitivement le dossier « '+p.name+' » et ses fichiers enregistrés sur cet appareil ? Cette action est irréversible.'))return;
+ // Delete the browser project only; never touch similarly named official universes.
+ try{localStorage.removeItem(prefix+p.id)}catch{alert('Impossible de supprimer ce projet : stockage inaccessible.');return}
+ if(typeof indexedDB!=='undefined'){
+  try{
+   const request=indexedDB.open('eloah-project-files',1);
+   request.onupgradeneeded=()=>{if(!request.result.objectStoreNames.contains('files'))request.result.createObjectStore('files',{keyPath:'id'})};
+   request.onsuccess=()=>{
+    const db=request.result;
+    if(!db.objectStoreNames.contains('files')){db.close();return}
+    const tx=db.transaction('files','readwrite'),store=tx.objectStore('files'),cursor=store.openCursor();
+    cursor.onsuccess=()=>{const item=cursor.result;if(!item)return;if(item.value?.project===p.id)item.delete();item.continue()};
+    tx.oncomplete=()=>db.close();
+    tx.onerror=()=>{db.close();alert('Le dossier a été retiré, mais certains fichiers n’ont pas pu être effacés du navigateur.')};
+   };
+   request.onerror=()=>alert('Le dossier a été retiré, mais ses fichiers n’ont pas pu être vérifiés.');
+  }catch{alert('Le dossier a été retiré, mais ses fichiers n’ont pas pu être vérifiés.')}
+ }
+ refresh();
 }
 function renderActions(){const host=$('home-tasks');host.replaceChildren();host.hidden=!actions.length;$('home-tasks-empty').hidden=!!actions.length;for(const a of actions.slice(0,4)){const row=element('article',undefined,'task'),body=element('div'),link=element('a','Ouvrir →');body.append(element('strong',a.title),element('small',a.project+' · '+dateLabel(a.date)+' · '+a.status));link.href=a.old?'eloah-actions.html#pilotage':'eloah-pilotage.html?projet='+encodeURIComponent(a.project)+'#ops-calendar';link.setAttribute('aria-label','Ouvrir : '+a.title);row.append(body,link);host.append(row)}}
 const tools=[...document.querySelectorAll('[data-search-tool]')].map(a=>({title:a.closest('article').querySelector('h3').textContent,extra:a.dataset.searchTool,type:'Outil',url:a.getAttribute('href')}));
@@ -28,7 +55,15 @@ $('eloah-search-work').addEventListener('input',search);$('home-search-clear').a
 const dialog=$('home-new-project'),input=$('home-new-name');let opener=null;
 for(const button of document.querySelectorAll('[data-new-project]'))button.addEventListener('click',()=>{opener=button;if(typeof dialog.showModal!=='function'){location.href='eloah-pilotage.html#mes-projets';return}dialog.showModal();input.focus()});
 $('home-new-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>opener?.focus());input.addEventListener('input',()=>input.setCustomValidity(''));
-$('home-new-form').addEventListener('submit',e=>{e.preventDefault();const name=input.value.trim();if(!name||name.length>100){input.setCustomValidity('Donne un nom de 1 à 100 caractères à ton projet.');input.reportValidity();return}const p=projects.find(p=>norm(p.id)===norm(name)||norm(p.name)===norm(name));location.href=projectURL(p?.id||name)});
+$('home-new-form').addEventListener('submit',e=>{e.preventDefault();const name=input.value.trim();if(!name||name.length>100){input.setCustomValidity('Donne un nom de 1 à 100 caractères à ton projet.');input.reportValidity();return}const p=projects.find(p=>norm(p.id)===norm(name)||norm(p.name)===norm(name));
+ if(p){location.href=projectURL(p.id);return}
+ try{
+  const key=prefix+name;
+  if(localStorage.getItem(key)!==null){location.href=projectURL(name);return}
+  localStorage.setItem(key,JSON.stringify({threads:[],notes:{},settings:{name},updated:new Date().toISOString()}));
+  refresh();dialog.close();input.value='';
+  location.href=projectURL(name);
+ }catch(err){input.setCustomValidity('Impossible de créer le dossier sur cet appareil. Vérifie que le stockage du navigateur est autorisé.');input.reportValidity()}});
 function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}const aliases={'eloah-principaux-univers':'maisons','eloah-quick-nav':'services','eloah-home-daily':'mon-organisation','eloah-morning':'mon-organisation'};const target=$(aliases[id]||id);if(!target)return;for(let p=target;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;requestAnimationFrame(()=>{target.scrollIntoView({block:'start',behavior:'instant'});const focus=target.tagName==='DETAILS'?target.querySelector('summary'):(target.querySelector('h2')||target);if(focus&&focus.tagName!=='SUMMARY')focus.setAttribute('tabindex','-1');focus?.focus({preventScroll:true})})}
 window.addEventListener('hashchange',revealHash);document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.hash===location.hash)revealHash()});window.addEventListener('storage',e=>{if(!e.key||e.key.startsWith(prefix)||['eloah-planning-v1','eloah-action-tasks-v1'].includes(e.key)||e.key.startsWith('sonia-universe-v1-'))refresh()});window.addEventListener('focus',refresh);
 // Keep same-page destinations local, including versioned entry URLs.
