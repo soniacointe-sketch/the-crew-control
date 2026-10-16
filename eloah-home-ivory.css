@@ -78,3 +78,22 @@ body#maison-eloah #eloah-music-dock :is(.music-dock-close,.music-dock-minimize){
 @media(max-width:1000px){body#maison-eloah #contenu .eloah-welcome-film{grid-template-columns:1fr}.home-welcome-photo{min-height:210px;max-height:250px}.home-welcome-photo img{position:relative;height:240px}.home-welcome-copy{padding:28px}body#maison-eloah #contenu .eloah-six-univers{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){body#maison-eloah #contenu{padding:18px 14px 40px!important}body#maison-eloah #contenu h1{font-size:38px!important;max-width:none;margin:18px 0}body#maison-eloah #contenu h2{font-size:29px!important}.home-welcome-copy{padding:22px}body#maison-eloah #contenu .intro{font-size:17px!important}.home-welcome-photo{min-height:180px}.home-welcome-photo img{height:180px}.home-welcome-photo figcaption{font-size:18px}body#maison-eloah #contenu .hero-actions{display:grid;grid-template-columns:1fr 1fr}body#maison-eloah #contenu .eloah-six-univers{gap:12px}body#maison-eloah #contenu .eloah-universe-portrait{height:130px}body#maison-eloah #contenu .eloah-universe-card strong{font-size:22px!important;margin:14px 12px 7px}body#maison-eloah #contenu .eloah-universe-card small{font-size:12px!important;margin:0 12px 15px}body#maison-eloah #contenu .eloah-center-layout{gap:12px}.velka-monogram{font-size:45px}.velka-signature{font-size:9px}body#maison-eloah #contenu .task{flex-wrap:wrap}body#maison-eloah #contenu .task>div{flex:1 1 100%}}
 @media(max-width:380px){body#maison-eloah #contenu .eloah-six-univers{grid-template-columns:1fr}.home-welcome-copy{padding:20px}body#maison-eloah #contenu .hero-actions{grid-template-columns:1fr}body#maison-eloah #contenu .eloah-universe-portrait{height:180px}}
+
+/* Accueil : univers en premier, accès secondaires repliés. */
+html#eloah-ivory-home .eloah-welcome-film{grid-template-columns:minmax(0,1fr) 30%!important}
+html#eloah-ivory-home .home-welcome-copy{padding:26px 30px!important}
+html#eloah-ivory-home .home-welcome-copy h1{font-size:clamp(30px,3.4vw,48px)!important;line-height:1.08!important;margin:20px 0!important}
+html#eloah-ivory-home .home-welcome-copy .intro{font-size:16px!important;line-height:1.6!important}
+html#eloah-ivory-home .home-welcome-photo{min-height:260px!important}
+html#eloah-ivory-home .home-universe-heading{margin-top:26px!important}
+html#eloah-ivory-home .eloah-center-layout{grid-template-columns:1fr 1fr!important;gap:16px!important}
+html#eloah-ivory-home #eloah-home-ai{margin-top:20px!important}
+@media(max-width:700px){
+html#eloah-ivory-home .eloah-welcome-film{display:block!important}
+html#eloah-ivory-home .home-welcome-copy{padding:20px!important}
+html#eloah-ivory-home .home-welcome-copy h1{font-size:34px!important}
+html#eloah-ivory-home .home-welcome-photo{display:none!important}
+html#eloah-ivory-home .home-welcome-copy .topline{gap:8px;flex-wrap:wrap}
+html#eloah-ivory-home .home-welcome-copy .hero-actions{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
+html#eloah-ivory-home .eloah-center-layout{grid-template-columns:1fr!important}
+}
