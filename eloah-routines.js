@@ -3,7 +3,7 @@ import {ROUTINES} from "./eloah-routines-catalogue.js?v=1";
 const $=id=>document.getElementById(id);
 const OWNER="bd4b7197-6401-4a9a-a14e-c6adbdc0ed46";
 const db=createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy",{auth:{autoRefreshToken:true,persistSession:true,detectSessionInUrl:false,storageKey:"eloah-founder-auth-v1"}});
-let founder=false,rev=0,selected="priority",sources={tasks:[],missions:[],appointments:[]},settings=new Map(),draft="",saving=false,runs=[];
+let founder=false,rev=0,selected="priority",sources={tasks:[],missions:[],appointments:[],mail:[]},settings=new Map(),draft="",saving=false,runs=[];
 const routine=()=>ROUTINES.find(x=>x.key===selected)||ROUTINES[1];
 const msg=(id,text)=>{$(id).textContent=text;};
 const defaultPrefs=()=>({frequency:"manual",hour:"",topics:""});
@@ -28,7 +28,7 @@ function select(key){
  msg("brief-status","Aucun message envoyé et aucune automatisation lancée.");renderList();
 }
 function forget(){
- rev++;founder=false;sources={tasks:[],missions:[],appointments:[]};settings.clear();runs=[];renderRuns();
+ rev++;founder=false;sources={tasks:[],missions:[],appointments:[],mail:[]};settings.clear();runs=[];renderRuns();
  $("task-count").textContent="—";$("meeting-count").textContent="—";$("save-preferences").disabled=true;$("use-internal-context").checked=false;
  $("source-status").textContent="Sources privées déchargées.";select(selected);
 }
@@ -51,16 +51,18 @@ async function refresh(){
    fetchRows("sonia_os_tasks","instruction,status,scheduled_for,completed_at",80),
    fetchRows("sonia_os_missions","title,status,completed_at",80),
    fetchRows("eloah_appointments","name,date,universe,state",80),
-   fetchRows("eloah_routine_settings","routine_key,preferences,enabled",10)
+   fetchRows("eloah_routine_settings","routine_key,preferences,enabled",10),
+   fetchRows("eloah_mail_items","subject,priority,status,due_on,source_kind,updated_at,action",70)
   ]);
   if(serial!==rev||!founder)return;
   sources.tasks=results[0].status==="fulfilled"?results[0].value:[];
   sources.missions=results[1].status==="fulfilled"?results[1].value:[];
   sources.appointments=results[2].status==="fulfilled"?results[2].value:[];
   settings.clear();if(results[3].status==="fulfilled")results[3].value.forEach(x=>settings.set(x.routine_key,{...(x.preferences||defaultPrefs()),enabled:x.enabled===true}));
+  sources.mail=results[4].status==="fulfilled"?results[4].value:[];
   $("source-status").replaceChildren();
   ["Tâches SONIA OS","Missions SONIA OS","Rendez-vous ELOAH","Préférences des routines"].forEach((name,i)=>showSource(name,results[i].status==="fulfilled"?results[i].value.length+" entrée(s)":"Lecture non disponible"));
-  showSource("Gmail / Google Agenda","Contenu extérieur non lu");showSource("Actualités et trafic","Pas de données en direct");
+  showSource("Courriers déjà indexés dans ELOAH",results[4].status==="fulfilled"?sources.mail.length+" entrées · contenu non actualisé depuis Gmail":"Lecture indisponible");showSource("Google Agenda","OAuth séparé, événements non lus sur cette page");showSource("Actualités et trafic","Pas de données en direct");
   $("task-count").textContent=results[0].status==="fulfilled"?sources.tasks.length:"—";
   $("meeting-count").textContent=results[2].status==="fulfilled"?sources.appointments.length:"—";
   $("save-preferences").disabled=results[3].status!=="fulfilled";select(selected);
@@ -86,6 +88,11 @@ function internalData(){
   upcoming.slice(0,7).forEach(x=>result.push("Rendez-vous : "+String(x.name||"Sans titre").slice(0,100)+" ; "+dateFR(x.date)));
  }
  if(keys==="week")result.push("Tâches terminées ces 7 derniers jours : "+sources.tasks.filter(x=>x.status==="completed"&&x.completed_at&&Date.now()-new Date(x.completed_at).getTime()>=0&&Date.now()-new Date(x.completed_at).getTime()<7*86400000).length);
+ if(["email","messages","priority","week"].includes(keys)){
+  const index=sources.mail.filter(x=>x.priority==="P1"&&!["Terminé","Ignoré"].includes(String(x.status||"")));
+  result.push("Courriers indexés ELOAH : "+sources.mail.length+" entrées récupérées, "+index.length+" prioritaires P1 non clos. Données enregistrées, sans actualisation Gmail garantie.");
+  for(const x of index.slice(0,6))result.push("COURRIER INDEXÉ : "+String(x.subject||"Sans objet").slice(0,110)+" ; statut "+x.status+" ; action "+String(x.action||"À vérifier").slice(0,100)+" ; échéance "+String(x.due_on||"non confirmée"));
+ }
  return result.join("\n")||"Aucun contexte pertinent dans les registres consultés.";
 }
 function travel(){
@@ -107,7 +114,7 @@ function prepare(){
  if(r.key==="news"&&$("routine-topics").value.trim())parts.push("Sujets à vérifier : "+$("routine-topics").value.trim().slice(0,260));
  if(r.key==="departure")parts.push(travel());
  parts.push($("use-internal-context").checked?"Sources internes ajoutées volontairement :\n"+internalData():"Sources internes non jointes : pas d'autorisation de partage.");
- if(["email","messages"].includes(r.key))parts.push("Aucun contenu de Gmail n'a été lu.");
+ if(["email","messages"].includes(r.key))parts.push("Aucun accès Gmail en temps réel dans ce module. Les courriers déjà indexés dans ELOAH ne sont inclus que si Sonia a coché le partage des sources internes.");
  if(r.key==="news")parts.push("Aucune recherche web n'a été effectuée : vérifie les sources et dates.");
  parts.push("Réponse attendue : faits confirmés, informations manquantes, priorité, trois étapes et validations nécessaires.");
  draft=parts.join("\n\n").slice(0,7800);$("brief").textContent=draft;$("copy-brief").disabled=false;$("open-ai").disabled=false;
