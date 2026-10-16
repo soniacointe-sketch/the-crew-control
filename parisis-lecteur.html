@@ -252,6 +252,9 @@ if(!headings.length)headings=Array.from(doc.querySelectorAll("h1,h2,h3"));
 headings=headings.filter(function(h){return h.textContent.trim()&&h.getBoundingClientRect().width>0}).slice(0,45);
 if(!headings.length)throw Error("Aucun titre");
 if(currentCycle==="alpha"){
+var alphaStyle=doc.createElement("style");
+alphaStyle.textContent="html body.pe-extract main table{display:table!important;width:100%!important}html body.pe-extract main table :is(th,td){background:#fffdfa!important;color:#182321!important;-webkit-text-fill-color:currentColor!important;border-color:#bcae93!important;padding:12px!important}html body.pe-extract main table th{background:#e7dcc7!important}html body.pe-extract main table :is(th,td) *{color:#182321!important;-webkit-text-fill-color:currentColor!important}";
+doc.head.appendChild(alphaStyle);
 doc.querySelectorAll("article > p").forEach(function(p){if(p.textContent.startsWith("ELOAH · PARISIS ENGINE · HUMANITIES LAB"))p.hidden=true});
 doc.querySelectorAll("a[href]").forEach(function(a){
 var raw=a.getAttribute("href")||"",index=-1;
