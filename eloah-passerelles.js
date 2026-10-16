@@ -69,6 +69,18 @@ $("import-file").onchange=async e=>{
  $("import-controls").hidden=false;preview(0);status(conversations.length+" conversation(s) lue(s) localement. Rien n'a été envoyé.","import-summary");
  }catch(e){conversations=[];status("Import refusé : "+e.message,"import-summary");}
 };
+$("import-manual").onclick=()=>{
+ conversations=[{title:"Préférences et instructions (saisie manuelle)",messages:[]}];
+ chosen=conversations[0];$("import-file").value="";
+ const select=$("import-conversation");select.replaceChildren();
+ const opt=document.createElement("option");opt.value="0";opt.textContent="Préférences / assistant personnalisé — saisie manuelle";select.append(opt);
+ $("import-controls").hidden=false;
+ $("import-preview").value="Notes ou instructions que je souhaite conserver dans ma mémoire ELOAH :\n\n";
+ $("import-universe").value="Agents transversaux";
+ $("import-confirm").checked=false;
+ status("Saisie manuelle. Colle uniquement les préférences que tu as choisies, vérifie et enregistre explicitement.","import-summary");
+ status("Aucune donnée ChatGPT récupérée automatiquement.","import-status");updateSave();
+};
 $("import-clear").onclick=()=>{conversations=[];chosen=null;$("import-file").value="";$("import-preview").value="";$("import-controls").hidden=true;$("import-confirm").checked=false;status("Fichier retiré de l'écran.","import-summary");status("","import-status");updateSave();};
 $("import-save").onclick=async()=>{
  if(busy)return;const text=$("import-preview").value.trim(),universe=$("import-universe").value;
