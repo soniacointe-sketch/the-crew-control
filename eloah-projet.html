@@ -44,4 +44,36 @@ $('upload').onchange=e=>{addFiles(e.target.files);e.target.value=''};$('drop').o
   style.textContent='@media(max-width:740px){.project-head{flex-wrap:wrap}#velka-library-link{flex:1 0 100%;order:5;text-align:center;padding:12px!important}}';
   document.head.appendChild(style);
 })();
-</script><script>(function(){const head=document.querySelector('.project-head');if(!head||document.getElementById('eloah-proposals-link'))return;const a=document.createElement('a');a.id='eloah-proposals-link';a.className='btn';a.href='eloah-propositions.html';a.textContent='15 propositions à explorer ↗';a.style.cssText='border-color:#bcb0d8;color:#705ba4;font-weight:600;white-space:nowrap';head.appendChild(a);const style=document.createElement('style');style.textContent='@media(max-width:740px){.project-head{flex-wrap:wrap}#eloah-proposals-link{flex:1 0 100%;text-align:center;padding:12px!important}}';document.head.appendChild(style)})();</script><script>(function(){const head=document.querySelector(".project-head");if(!head||document.getElementById("eloah-actions-access"))return;const a=document.createElement("a");a.id="eloah-actions-access";a.href="eloah-actions.html";a.className="btn";a.textContent="Centre d’actions ↗";head.appendChild(a)})();</script><script src="eloah-pdf.js?v=6"></script></body></html>
+</script><script>(function(){const head=document.querySelector('.project-head');if(!head||document.getElementById('eloah-proposals-link'))return;const a=document.createElement('a');a.id='eloah-proposals-link';a.className='btn';a.href='eloah-propositions.html';a.textContent='15 propositions à explorer ↗';a.style.cssText='border-color:#bcb0d8;color:#705ba4;font-weight:600;white-space:nowrap';head.appendChild(a);const style=document.createElement('style');style.textContent='@media(max-width:740px){.project-head{flex-wrap:wrap}#eloah-proposals-link{flex:1 0 100%;text-align:center;padding:12px!important}}';document.head.appendChild(style)})();</script><script>(function(){const head=document.querySelector(".project-head");if(!head||document.getElementById("eloah-actions-access"))return;const a=document.createElement("a");a.id="eloah-actions-access";a.href="eloah-actions.html";a.className="btn";a.textContent="Centre d’actions ↗";head.appendChild(a)})();</script><script src="eloah-pdf.js?v=6"></script><script>
+(()=>{'use strict';
+if(new URLSearchParams(location.search).get('projet')!=='Foi & spiritualité')return;
+document.body.classList.add('faith-project');
+const style=document.createElement('style');style.textContent=`
+body.faith-project{--bg:#f4efe7;--panel:#fffdf9;--line:#dcd0c0;--ink:#30291f;--muted:#716557;--purple:#806038;--tint:#eee6da}
+body.faith-project.dark{--bg:#242723;--panel:#30352e;--line:#68634f;--ink:#fff8ed;--muted:#d4c7b5;--purple:#dac09a;--tint:#3d4439}
+.faith-project #eloah-proposals-link,.faith-project #eloah-actions-access,.faith-project [data-tab="Facturation"],.faith-project [data-tab="Équipe"],.faith-project [data-tab="Analytics"],.faith-project .tools .accent{display:none}
+.faith-access{display:flex;flex-wrap:wrap;gap:8px;padding:0 22px 18px;border-bottom:1px solid var(--line)}
+.faith-access a,.faith-access button{background:var(--panel);padding:9px 12px;border:1px solid var(--line);border-radius:5px;color:var(--ink);text-decoration:none;font:inherit}
+.faith-project .primary{background:#806038;color:#fff;border-color:#806038}
+.faith-project .welcome p{color:var(--muted)}
+`;document.head.append(style);
+const nav=document.createElement('nav');nav.className='faith-access';nav.setAttribute('aria-label','Accès Foi et spiritualité');
+for(const [label,url] of [['Études','eloah-apocryphes-atlas.html?etudes=1'],['Textes & publications','eloah-foi-publications.html'],['Sources & archives','foi-control.html?file=eloah-foi-archives-completes-index.md'],['Mon cheminement','eloah-foi-spiritualite.html#personal-chapter']]){
+const a=document.createElement('a');a.textContent=label;a.href=url;nav.append(a)}
+const carnet=document.createElement('button');carnet.type='button';carnet.textContent='Carnet personnel';carnet.onclick=()=>showTab('Meta Projets Memory');nav.append(carnet);
+const actions=document.createElement('button');actions.type='button';actions.textContent='Actions du projet';actions.onclick=()=>showTab('Planning');nav.append(actions);
+document.querySelector('.project-head').after(nav);
+const manage=document.getElementById('manage');manage.href='foi-control.html';manage.textContent='Ouvrir mon univers ↗';
+function adapt(){
+const welcome=document.querySelector('.welcome');if(welcome&&!welcome.dataset.faith){welcome.dataset.faith='1';welcome.querySelector('h2').textContent='Reprendre une étude, garder une question, avancer dans ta recherche.';
+welcome.querySelector('p').textContent='Rassemble ici tes échanges et documents. Les accès ci-dessus ouvrent tes études, tes textes et tes sources.';
+const buttons=welcome.querySelectorAll('[data-prompt]');
+const items=[['Étudier un texte →','Aide-moi à étudier un texte. Demande-moi le passage et la source, puis distingue ce que dit le texte, ses interprétations et mes questions.'],['Comparer des sources →','Aide-moi à comparer mes sources. Demande-moi les références et distingue les faits établis, les interprétations et les points à vérifier.'],['Écrire dans mon carnet →','Aide-moi à mettre en mots une réflexion personnelle sur ma foi et ma spiritualité, sans la confondre avec une preuve historique.'],['Préparer la prochaine étape →','Aide-moi à choisir une prochaine étape concrète pour mon étude en cours, à partir des éléments que je te fournirai.']];
+buttons.forEach((b,i)=>{if(items[i]){b.textContent=items[i][0];b.dataset.prompt=items[i][1]}})}
+const memory=document.querySelector('#tabs [data-tab="Meta Projets Memory"]');if(memory&&memory.textContent!=='Carnet personnel')memory.textContent='Carnet personnel';
+const chat=document.querySelector('#tabs [data-tab="Chat Projet"]');if(chat&&chat.textContent!=='Échanges')chat.textContent='Échanges';
+const title=document.querySelector('#panel>h2');if(title?.textContent==='Meta Projets Memory')title.textContent='Carnet personnel';
+}
+adapt();new MutationObserver(adapt).observe(document.querySelector('main'),{childList:true,subtree:true});
+})();
+</script></body></html>
