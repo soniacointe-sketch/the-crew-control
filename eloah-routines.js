@@ -8,6 +8,19 @@ const googleDb=createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publi
 const routine=()=>ROUTINES.find(x=>x.key===selected)||ROUTINES[1];
 const msg=(id,text)=>{$(id).textContent=text;};
 const defaultPrefs=()=>({frequency:"manual",hour:"",topics:""});
+const LOCAL_PREFS="eloah-routine-local-prefs-v1";
+function localRead(key){
+ try{
+  const all=JSON.parse(localStorage.getItem(LOCAL_PREFS)||"{}");
+  const p=all?.[key];return p&&typeof p==="object"?{frequency:p.frequency||"manual",hour:p.hour||"",topics:p.topics||""}:null;
+ }catch{return null}
+}
+function localSave(key,p){
+ try{const all=JSON.parse(localStorage.getItem(LOCAL_PREFS)||"{}");all[key]=p;localStorage.setItem(LOCAL_PREFS,JSON.stringify(all));return true}catch{return false}
+}
+function localClear(key){
+ try{const all=JSON.parse(localStorage.getItem(LOCAL_PREFS)||"{}");delete all[key];localStorage.setItem(LOCAL_PREFS,JSON.stringify(all))}catch{}
+}
 function renderList(){
  const root=$("routine-list");root.replaceChildren();
  ROUTINES.forEach(r=>{
@@ -24,13 +37,13 @@ function select(key){
  $("manual-context").value="";$("use-internal-context").checked=false;
  const r=routine();$("routine-title").textContent=r.emoji+" "+r.title;$("routine-desc").textContent=r.description;
  $("travel-extra").hidden=key!=="departure";$("topics-field").hidden=key!=="news";
- const p=settings.get(key)||defaultPrefs();$("routine-frequency").value=p.frequency||"manual";$("routine-hour").value=p.hour||"";$("routine-topics").value=p.topics||"";updateSchedulerUi();
- msg("save-status",founder?"Préférence chargée. Aucune exécution automatique programmée.":"Connecte-toi pour enregistrer une préférence.");
+ const local=localRead(key);const p=settings.get(key)||local||defaultPrefs();$("routine-frequency").value=p.frequency||"manual";$("routine-hour").value=p.hour||"";$("routine-topics").value=p.topics||"";updateSchedulerUi();
+ msg("save-status",founder?(settings.has(key)?"Préférence cloud chargée.":local?"Préférence locale retrouvée. Clique Enregistrer pour la synchroniser.":"Compte fondatrice connecté. Tu peux enregistrer."):(local?"Préférence locale retrouvée. Connecte-toi pour la synchroniser.":"Tu peux enregistrer sur cet appareil, puis synchroniser après connexion."));
  msg("brief-status","Aucun message envoyé et aucune automatisation lancée.");renderList();
 }
 function forget(){
  rev++;founder=false;sources={tasks:[],missions:[],appointments:[],mail:[]};settings.clear();runs=[];googleEvents=[];$("include-google").checked=false;msg("google-status","Aucun événement Google chargé.");renderRuns();
- $("task-count").textContent="—";$("meeting-count").textContent="—";$("save-preferences").disabled=true;$("use-internal-context").checked=false;
+ $("task-count").textContent="—";$("meeting-count").textContent="—";$("save-preferences").disabled=false;$("routine-login").hidden=false;$("use-internal-context").checked=false;
  $("source-status").textContent="Sources privées déchargées.";select(selected);
 }
 async function fetchRows(name,fields,limit=90){
@@ -66,8 +79,8 @@ async function refresh(){
   showSource("Courriers déjà indexés dans ELOAH",results[4].status==="fulfilled"?sources.mail.length+" entrées · contenu non actualisé depuis Gmail":"Lecture indisponible");showSource("Google Agenda","OAuth séparé, événements non lus sur cette page");showSource("Actualités et trafic","Pas de données en direct");
   $("task-count").textContent=results[0].status==="fulfilled"?sources.tasks.length:"—";
   $("meeting-count").textContent=results[2].status==="fulfilled"?sources.appointments.length:"—";
-  $("save-preferences").disabled=results[3].status!=="fulfilled";select(selected);
-  msg("auth-status",results.some(r=>r.status==="rejected")?"Session vérifiée, certaines sources indisponibles.":"Session fondatrice vérifiée, sources internes consultées en lecture seule.");await loadRuns();
+  $("save-preferences").disabled=false;$("routine-login").hidden=false;select(selected);
+  $("routine-login").hidden=true;msg("auth-status",results.some(r=>r.status==="rejected")?"Session fondatrice vérifiée ; certaines sources indisponibles. Tu peux toujours enregistrer.":"Session fondatrice vérifiée. Enregistrement disponible.");await loadRuns();
  }catch{if(serial===rev){forget();msg("auth-status","Session non vérifiable. Aucune donnée privée affichée.");}}
  finally{$("refresh-data").disabled=false;}
 }
@@ -127,19 +140,28 @@ async function copy(value){
  catch{msg("brief-status","Copie impossible. Sélectionne le texte directement dans l'aperçu.");}
 }
 async function save(){
- if(saving||!founder){msg("save-status","Session fondatrice requise pour sauvegarder.");return}
- const frequency=$("routine-frequency").value,hour=$("routine-hour").value,topics=$("routine-topics").value.trim().slice(0,260);
- if(!["manual","daily","weekly","before_event"].includes(frequency)||hour&&!/^([01]\d|2[0-3]):[0-5]\d$/.test(hour)){msg("save-status","Heure ou fréquence invalide.");return}
- saving=true;$("save-preferences").disabled=true;const id=selected;
+ if(saving)return;
+ const id=selected,frequency=$("routine-frequency").value,hour=$("routine-hour").value,topics=$("routine-topics").value.trim().slice(0,260);
+ if(!["manual","daily","weekly","before_event"].includes(frequency)||hour&&!/^([01]\\d|2[0-3]):[0-5]\\d$/.test(hour)){msg("save-status","Vérifie le rythme et l’heure : valeurs invalides.");return}
+ const value={frequency,hour,topics};
+ if(!founder){
+  msg("save-status",localSave(id,value)?"Préférence enregistrée sur cet appareil ✓. Pour la synchroniser dans le cloud, connecte-toi à ELOAH Fondatrice puis clique à nouveau sur Enregistrer.":"Enregistrement impossible dans ce navigateur : connecte-toi à ELOAH Fondatrice.");
+  return;
+ }
+ saving=true;$("save-preferences").disabled=true;
  try{
   const {data:auth,error:authError}=await db.auth.getUser();
-  if(authError||auth?.user?.id!==OWNER)throw Error("Session expirée.");
-  const value={frequency,hour,topics};
-  const {data,error}=await db.from("eloah_routine_settings").upsert({owner_id:OWNER,routine_key:id,preferences:value,enabled:false,updated_at:new Date().toISOString()},{onConflict:"owner_id,routine_key"}).select("routine_key").single();
-  if(error||!data)throw Error("Le serveur n'a pas confirmé la sauvegarde.");
-  settings.set(id,{...value,enabled:false});updateSchedulerUi();msg("save-status","Préférence cloud sauvegardée. Ton rappel reste désactivé jusqu’au clic sur « Activer ».");
- }catch(e){msg("save-status","Échec : "+e.message)}
- finally{saving=false;$("save-preferences").disabled=!founder;}
+  if(authError||auth?.user?.id!==OWNER)throw Error("Session fondatrice expirée");
+  const {data,error}=await db.from("eloah_routine_settings")
+   .upsert({owner_id:OWNER,routine_key:id,preferences:value,enabled:false,updated_at:new Date().toISOString()},{onConflict:"owner_id,routine_key"})
+   .select("routine_key,enabled").single();
+  if(error||!data)throw Error(error?.message||"Enregistrement non confirmé");
+  settings.set(id,{...value,enabled:false});localClear(id);updateSchedulerUi();
+  msg("save-status","Préférence enregistrée dans le cloud ELOAH ✓. Clique ensuite sur Activer ce rappel si tu veux le programmer.");
+ }catch(e){
+  const backed=localSave(id,value);
+  msg("save-status",(backed?"Préférence enregistrée sur cet appareil uniquement. ":"Aucune sauvegarde confirmée. ")+(e?.message||"Erreur de connexion")+". Reconnecte-toi à ELOAH puis réessaie.");
+ }finally{saving=false;$("save-preferences").disabled=false;updateSchedulerUi();}
 }
 function toAI(){
  if(!draft)return;
@@ -273,6 +295,11 @@ $("copy-skill").onclick=()=>copy("ELOAH · "+routine().title+"\n\n"+routine().pr
 $("open-ai").onclick=toAI;
 for(const id of ["manual-context","use-internal-context","travel-start","travel-minutes","travel-buffer","routine-topics"])
  $(id).addEventListener("input",()=>{if(!draft)return;draft="";$("copy-brief").disabled=true;$("open-ai").disabled=true;msg("brief-status","Contexte modifié : prépare un nouveau brief.");});
-db.auth.onAuthStateChange(event=>{if(event==="SIGNED_OUT"){forget();msg("auth-status","Déconnectée : données privées effacées.");}});
+db.auth.onAuthStateChange(event=>{
+ if(event==="SIGNED_OUT"){forget();msg("auth-status","Déconnectée : sauvegarde locale toujours possible.");}
+ else if(event==="SIGNED_IN")queueMicrotask(()=>{if(!founder)void refresh();});
+});
+window.addEventListener("focus",()=>{if(!founder)void refresh();});
+document.addEventListener("visibilitychange",()=>{if(!document.hidden&&!founder)void refresh();});
 window.addEventListener("pagehide",()=>{rev++;sources={tasks:[],missions:[],appointments:[]};});
 select(new URLSearchParams(location.search).get("routine")||"priority");refresh();
