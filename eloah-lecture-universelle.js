@@ -58,7 +58,7 @@ window.addEventListener('pagehide',stop);
   const cockpit=document.createElement('link');cockpit.id='power-glam-2040-cockpit-theme';cockpit.rel='stylesheet';cockpit.href='power-glam-2040-cockpit.css?v=20261015';document.head.append(cockpit);
   const polish=document.createElement('link');polish.rel='stylesheet';polish.href='power-glam-2040-workspace.css?v=20261015-2';document.head.append(polish);
   const controls=document.createElement('script');controls.src='power-glam-2040-workspace.js?v=20261015-2';controls.defer=true;document.head.append(controls);
-  const intelligence=document.createElement('script');intelligence.type='module';intelligence.src='power-glam-intelligence.js?v=2.0';document.head.append(intelligence);
+  const intelligence=document.createElement('script');intelligence.type='module';intelligence.src='power-glam-intelligence.js?v=20261016-maison';document.head.append(intelligence);
  };
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
 })();
