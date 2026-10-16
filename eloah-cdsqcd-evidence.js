@@ -41,7 +41,7 @@ function prepare(universe){
 }
 function context(){
  if(!prepared)return '';
- if(!register.length)return 'CDSQCD — AUCUNE SOURCE documentaire consultable n’a été retrouvée. Ne crée aucune référence ou citation fictive. Les affirmations sur des faits externes restent à vérifier.';
+ if(!register.length)return ''; // Aucun extrait joint à CETTE demande : laisser passer les notes de projet si elles existent.
  return HEADER+register.map(s=>'\n\n['+s.id+'] '+s.title+' — '+s.origin+' ('+s.universe+')\nEXTRAIT : '+s.excerpt).join('');
 }
 function commit(){activeRegister=register.map(x=>({...x}));activeProject=projectAtSend;}
