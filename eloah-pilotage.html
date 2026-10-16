@@ -172,7 +172,7 @@ html#eloah-inner-ivory body.client-page #ops-status{background:#293d38!important
  </div>
  <section class="pilotage-panel" aria-label="Aperçu réel du travail conservé sur cet appareil">
   <div class="pilotage-panel-top"><strong class="pilotage-panel-title">En un regard</strong><span>Vue personnelle</span></div>
-  <p class="pilotage-panel-lead">Les compteurs ci-dessous viennent de ce navigateur et ne représentent pas des données fictives ou synchronisées.</p>
+  <p class="pilotage-panel-lead">Travail enregistré sur cet appareil · sauvegarde en ligne manuelle.</p>
   <div class="pilotage-kpis">
    <div class="pilotage-kpi"><span class="pilotage-kpi-label"><span class="pilotage-kpi-icon" aria-hidden="true">◇</span> Projets</span><strong id="pilotage-count-projects">—</strong><small>Enregistrés ici</small></div>
    <div class="pilotage-kpi"><span class="pilotage-kpi-label"><span class="pilotage-kpi-icon" aria-hidden="true">▤</span> Actions ouvertes</span><strong id="pilotage-count-open">—</strong><small>Non terminées</small></div>
@@ -395,7 +395,7 @@ async function list(){if(!await who())throw Error('Connexion nécessaire');const
 async function restore(id){if(!await who())throw Error('Connexion nécessaire');const r=await client.from('eloah_project_backups').select('payload').eq('id',id).eq('project_key',cloudProject).single();if(r.error)throw r.error;const data=r.data.payload;if(data?.schema!==2||data?.type!=='planning'||!Array.isArray(data.actions)||data.actions.length>5000||data.actions.some(a=>!valid(a)))throw Error('Version incompatible');const existing=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(existing))throw Error('Planning local invalide');const ids=new Set(existing.map(x=>x.id));const additions=data.actions.filter(x=>!ids.has(x.id));if(!confirm('Ajouter '+additions.length+' actions absentes ? Les actions existantes seront conservées.'))return;localStorage.setItem(key,JSON.stringify([...existing,...additions]));window.ELOAHWorkspace?.renderCalendar?.();status(additions.length+' actions ajoutées depuis la sauvegarde en ligne.')}
 $('ops-cloud-refresh').onclick=()=>run(list);
 $('ops-cloud-logout').onclick=()=>run(async()=>{const r=await client.auth.signOut({scope:'local'});if(r.error)throw r.error;current=null;renderAuth();status('Déconnectée. Les données locales sont conservées.')});
-if(client)who().then(u=>{status(u?'Connectée au compte ELOAH.':'Connecte-toi pour consulter les versions.');if(u)list().catch(e=>status(e.message))}).catch(e=>status('Connexion à vérifier : '+e.message));else status('Le service de connexion n’a pas pu être chargé. Actualise la page pour réessayer.');
+if(client)who().then(u=>{status(u?'Connectée au compte ELOAH.':'Connecte-toi pour consulter les versions.');if(u)list().catch(e=>status(e.message))}).catch(e=>status(/session missing/i.test(e.message)?'Non connectée · aucune sauvegarde en ligne vérifiée.':('Connexion à vérifier : '+e.message)));else status('Le service de connexion n’a pas pu être chargé. Actualise la page pour réessayer.');
 })();
 </script>
 <script src="eloah-pilotage-client.js?v=20261014-client2"></script>
