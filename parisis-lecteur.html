@@ -79,7 +79,23 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 </style>
 <link rel="stylesheet" href="parisis-universal-v4.css?v=encre-pierre-final">
 <link rel="stylesheet" href="parisis-lecteur-pro.css?v=20261015-5">
-</head>
+<style id="reader-clarity">
+html body #sidebar .series-items button{background:#f4efe7!important;color:#182321!important;border-left:3px solid transparent!important}
+html body #sidebar .series-items button *{color:#182321!important;-webkit-text-fill-color:currentColor!important}
+html body #sidebar .series-items button[aria-current="page"]{background:#354b43!important;color:#fff4df!important;border-left-color:#c5a56c!important}
+html body #sidebar .series-items button[aria-current="page"] *{color:#fff4df!important}
+html body #sidebar .series-items button:hover{outline:1px solid #8b754f;outline-offset:-1px}
+html body #main>.intro{display:none!important}
+html body #main{padding-top:18px!important}
+html body #main .guide{margin:10px 0!important}
+html body #main .guide-title{font-size:18px!important}
+html body #main .chapter-banner{padding:18px 24px!important}
+html body #main .chapter-banner h1{font:normal clamp(28px,3vw,38px)/1.15 Georgia,serif;margin:6px 0!important;color:#182321!important}
+html body #main .source a,html body #main .source button{background:#f4efe7!important;color:#354b43!important;border-color:#a99a7e!important;-webkit-text-fill-color:currentColor!important}
+html body #main #original{background:#354b43!important;color:#fff4df!important}
+html body #main .progress-value{background:#8a7044!important}
+@media(max-width:650px){html body #main .chapter-banner{padding:16px!important}html body #main .source{gap:8px}html body #main .guide{align-items:flex-start}}
+</style></head>
 <body>
 <header class="topbar"><a class="brand" href="eloah-parisis.html">PARISIS <em>ENGINE</em></a><div class="breadcrumb">ELOAH / HUMANITIES LAB / GRAND LIVRE</div><div class="toplinks"><a href="eloah-parisis.html">Accueil PARISIS</a><a href="parisis-reseau-indices.html">Réseau des indices</a><a href="parisis-publications.html">Toutes les archives</a><a href="mes-univers.html">ELOAH</a></div></header>
 <div class="mobile-bar"><strong>Bibliothèque des enquêtes</strong><button type="button" id="toggleMenu" aria-expanded="false" aria-controls="sidebar">☰ Les chapitres</button></div>
@@ -95,7 +111,7 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{
 <div class="intro"><div><div class="overline">HUMANITIES LAB · BIBLIOTHÈQUE DES ENQUÊTES</div><h1>Le Grand <em>Livre.</em></h1><p>Une lecture continue, un seul sommaire et tous les documents originaux préservés.</p></div></div>
 <nav class="pe-reader-spine" aria-label="Chemin de lecture"><a href="eloah-parisis.html">PARISIS</a><span>›</span><a href="parisis-fil-enquetes.html">Enquêtes</a><span>›</span><strong>Grand Livre</strong></nav>
 <div class="guide"><h2 class="guide-title" id="seriesTitle">Le cycle des enquêtes</h2><div class="meta" id="counter" aria-live="polite">Chargement…</div></div>
-<div class="chapter-shell"><div class="chapter-banner"><div class="chapter-tag" id="chapterCode">CHAPITRE</div><h2 id="chapterTitle">Ouvrir un chapitre</h2><p id="chapterSummary">Chaque lecture conserve son document d'origine.</p><div class="source"><a id="original" href="parisis-fil-enquetes.html" target="_blank" rel="noopener">Ouvrir le document original ↗</a><a id="references" href="parisis-reseau-indices.html">Sources et contre-tests ↗</a><button id="focus" type="button" aria-pressed="false">Plein écran de lecture</button><button id="openNotebook" type="button" aria-expanded="false" aria-controls="tools">Mes notes et sommaire ↗</button></div></div>
+<div class="chapter-shell"><div class="chapter-banner"><div class="chapter-tag" id="chapterCode">CHAPITRE</div><h1 id="chapterTitle">Ouvrir un chapitre</h1><p id="chapterSummary">Chaque lecture conserve son document d'origine.</p><div class="source"><a id="original" href="parisis-fil-enquetes.html" target="_blank" rel="noopener">Ouvrir le document original ↗</a><a id="references" href="parisis-reseau-indices.html">Sources et contre-tests ↗</a><button id="focus" type="button" aria-pressed="false">Plein écran de lecture</button><button id="openNotebook" type="button" aria-expanded="false" aria-controls="tools">Mes notes et sommaire ↗</button></div></div>
 <div class="progress-bar"><div class="progress-value" id="progressBar"></div></div>
 <iframe class="reading-frame" id="chapterFrame" title="Lecture du chapitre, uniquement son contenu documentaire" loading="eager" referrerpolicy="same-origin" src="about:blank" sandbox="allow-same-origin allow-popups allow-popups-to-escape-sandbox" scrolling="no"></iframe>
 <div class="pager"><button id="prev" type="button">← Chapitre précédent</button><button id="next" class="primary" type="button">Chapitre suivant →</button></div>
@@ -169,6 +185,7 @@ function prepareEmbeddedFrame(frame){
     var st=doc.createElement("style");st.id="peReaderEmbeddedStyle";
     st.textContent=[
       "html,body{overflow-x:hidden!important;margin:0!important;max-width:100%!important}",
+      ".pe-doc-label{display:none!important}",
       "body > header,body > .topbar,body > .mast,body > .site-header,body > nav,body > .pe-universal-bar,body > .pe-universal-toc,body > .pe-v4-reading-footer,body > footer,.pe-reader-nav,.parisis-related{display:none!important}",
       "body > .layout > nav.toc,body > .layout > aside,body > .wrap.layout > aside,body > .shell > aside,body > .full > nav.quick,body > .toc,.layout > nav[aria-label='Sommaire du dossier'],.layout > aside[aria-label='Sommaire du dossier']{display:none!important}",
       ".layout:not(.images){display:block!important;grid-template-columns:1fr!important;max-width:100%!important}",
@@ -185,6 +202,17 @@ function prepareEmbeddedFrame(frame){
     ].join("\n");
     doc.head.appendChild(st);
   }
+  doc.querySelectorAll("label").forEach(function(label){
+    if(/Agrandir le document/.test(label.textContent)){
+      var figure=label.closest("figure"),img=figure&&figure.querySelector("img");
+      if(img){var link=doc.createElement("a");link.href=img.src;link.target="_blank";link.rel="noopener";link.textContent="Ouvrir la carte en grand ↗";label.replaceWith(link)}
+    }
+  });
+  doc.querySelectorAll("p").forEach(function(p){
+    if(p.textContent.includes("Les boutons permettent de filtrer")){
+      p.textContent="Voici les 11 lieux documentés des enquêtes 001 à 003 et du secteur de l’avenue de l’Opéra. Pour les filtrer par époque, ouvre le document original.";
+    }
+  });
   // Other documents should open independently, never silently replace the current frame.
   doc.querySelectorAll("a[href]").forEach(function(a){
     var raw=a.getAttribute("href")||"";
@@ -254,7 +282,8 @@ $("next").disabled=currentIndex===c.steps.length-1;
 $("prev").textContent=currentIndex>0?"← "+c.steps[currentIndex-1].code:"← Début de la série";
 $("next").textContent=currentIndex<c.steps.length-1?c.steps[currentIndex+1].code+" →":"Dernier chapitre connu";
 $("original").href=safe(s.href);
-$("references").href=safe(c.network);
+var relationNode=relations&&relations.nodes.find(function(n){return n.href===s.href.split(/[?#]/)[0]});
+$("references").href=relationNode?"parisis-reseau-indices.html?d="+encodeURIComponent(relationNode.id):"parisis-reseau-indices.html";
 makeSidebar();makeToc();renderNotes();renderRelations();
 var href=safe(s.href);
 window.PARISIS_READER_EXTRACT.load(href);
