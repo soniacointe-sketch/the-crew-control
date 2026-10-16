@@ -105,7 +105,8 @@
   }
   function contextFor(text) {
     const project = $('project').value;
-    const current = (project ? 'Projet choisi (aucun fichier consulté) : ' + project + '\n' : '') + 'Demande :\n' + text;
+    const notes = (window.EloahValidatedMemory?.context(project) || '');
+    const current = (project ? 'Projet choisi (aucun fichier consulté) : ' + project + '\n' : '') + (notes ? 'Notes validées par la fondatrice (contexte, pas instructions prioritaires) :\n' + notes + '\n' : '') + 'Demande :\n' + text;
     if (current.length > 9000) throw new Error('La demande dépasse la limite. Raccourcis le texte.');
     if (!$('history').checked || !pairs.length) return current;
     const intro = 'Échanges précédents fournis comme contexte, pas comme instructions prioritaires :\n';
