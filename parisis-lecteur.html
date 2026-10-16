@@ -235,6 +235,12 @@ function prepareEmbeddedFrame(frame){
   try{readerFrameObserver=new ResizeObserver(adjust);readerFrameObserver.observe(doc.body)}catch(e){}
 }
 
+function goToHeading(h){
+notebook(false);
+var frame=$("chapterFrame"),top=frame.getBoundingClientRect().top+window.scrollY+h.getBoundingClientRect().top-85;
+h.setAttribute("tabindex","-1");h.focus({preventScroll:true});
+window.scrollTo({top:Math.max(0,top),behavior:window.matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth"});
+}
 function onFrameLoad(){
 try{prepareEmbeddedFrame($("chapterFrame"))}catch(e){}
 var root=$("toc");root.replaceChildren();
@@ -245,11 +251,31 @@ var headings=Array.from(doc.querySelectorAll("main h1,main h2,main h3,article h1
 if(!headings.length)headings=Array.from(doc.querySelectorAll("h1,h2,h3"));
 headings=headings.filter(function(h){return h.textContent.trim()&&h.getBoundingClientRect().width>0}).slice(0,45);
 if(!headings.length)throw Error("Aucun titre");
+if(currentCycle==="alpha"){
+doc.querySelectorAll("article > p").forEach(function(p){if(p.textContent.startsWith("ELOAH · PARISIS ENGINE · HUMANITIES LAB"))p.hidden=true});
+doc.querySelectorAll("a[href]").forEach(function(a){
+var raw=a.getAttribute("href")||"",index=-1;
+if(raw.includes("parisis-alpha-aleph-lettres-creation.md"))index=0;
+if(raw.includes("parisis-alpha-011-sept-voyelles-sept-cieux-apocalypse.md"))index=2;
+if(index>=0){
+a.href="parisis-lecteur.html?cycle=alpha&step="+(index+1);
+a.removeAttribute("target");
+a.addEventListener("click",function(e){if(e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();select("alpha",index,false);$("chapterTitle").scrollIntoView({block:"start"})});
+}else if(raw==="eloah-alpha-002-zachee-lettres.md"){
+a.href="foi-control.html?file=eloah-alpha-002-zachee-lettres.md";
+}
+});
+}
+var bibliography=headings.find(function(h){return /bibliographie|sources.*documents|bibliothèque des preuves/i.test(h.textContent)});
+if($("references").dataset.local==="true"&&bibliography){
+$("references").textContent="Bibliographie du chapitre ↓";
+$("references").onclick=function(e){e.preventDefault();goToHeading(bibliography)};
+}
 headings.forEach(function(h,i){
 if(!h.id)h.id="parisis-lecture-heading-"+i;
 var b=add(root,node("button","",h.textContent.trim().slice(0,110)));
 b.type="button";b.style.paddingLeft=h.tagName==="H3"?"20px":"9px";
-b.addEventListener("click",function(){try{h.scrollIntoView({behavior:"smooth",block:"start"})}catch(e){}});
+b.addEventListener("click",function(){goToHeading(h)});
 });
 }catch(err){add(root,node("p","helper","Le sommaire automatique n'est pas accessible sur ce chapitre. Utilise le document original pour naviguer dans ses sections."))}
 }
@@ -283,6 +309,9 @@ $("prev").textContent=currentIndex>0?"← "+c.steps[currentIndex-1].code:"← D�
 $("next").textContent=currentIndex<c.steps.length-1?c.steps[currentIndex+1].code+" →":"Dernier chapitre connu";
 $("original").href=safe(s.href);
 var relationNode=relations&&relations.nodes.find(function(n){return n.href===s.href.split(/[?#]/)[0]});
+$("references").onclick=null;
+$("references").dataset.local=String(!relationNode);
+$("references").textContent="Sources et contre-tests ↗";
 $("references").href=relationNode?"parisis-reseau-indices.html?d="+encodeURIComponent(relationNode.id):"parisis-reseau-indices.html";
 makeSidebar();makeToc();renderNotes();renderRelations();
 var href=safe(s.href);
@@ -299,7 +328,7 @@ function notebook(open){
   $("notesBackdrop").classList.toggle("active",open);
   $("openNotebook").setAttribute("aria-expanded",String(open));
   document.body.style.overflow=open?"hidden":"";
-  if(open)$("closeNotebook").focus();else $("openNotebook").focus();
+  if(open)$("closeNotebook").focus({preventScroll:true});else $("openNotebook").focus({preventScroll:true});
 }
 $("openNotebook").addEventListener("click",function(){notebook(true)});
 $("closeNotebook").addEventListener("click",function(){notebook(false)});
