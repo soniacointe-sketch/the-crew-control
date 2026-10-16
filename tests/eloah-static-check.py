@@ -28,4 +28,19 @@ assert "storageKey:'eloah-founder-auth-v1'" in ai
 assert "scope:'local'" in ai
 assert 'ticket!==revision' in ai
 assert 'localStorage.clear(' not in ai
+# ELOAH routine preference-save regression: button works without preloaded auth.
+routine_html=(ROOT/'eloah-routines.html').read_text()
+routine_code=(ROOT/'eloah-routines.js').read_text()
+routine_catalogue=(ROOT/'eloah-routines-catalogue.js').read_text()
+rp=Page();rp.feed(routine_html)
+assert len(rp.ids)==len(set(rp.ids)), 'Duplicate routine DOM IDs'
+assert 'id="save-preferences"' in routine_html
+assert not re.search(r'<button[^>]*id="save-preferences"[^>]*\\bdisabled\\b',routine_html), 'Preferences button must be clickable before login'
+for required in ('localSave(id,value)','localClear(id)','routine-login','save-preferences'):
+ assert required in routine_code, 'Routine save fallback missing: '+required
+for f in ['eloah-routines.js','eloah-routines-catalogue.js']:
+ subprocess.run(['node','--input-type=module','--check'],input=(ROOT/f).read_text(),text=True,check=True)
+for url in rp.urls:
+ u=urlsplit(url)
+ if not u.scheme and u.path:assert (ROOT/unquote(u.path)).is_file(), 'Missing routine dependency: '+url
 print('Static release checks: OK')
