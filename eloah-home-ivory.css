@@ -97,3 +97,10 @@ html#eloah-ivory-home .home-welcome-copy .topline{gap:8px;flex-wrap:wrap}
 html#eloah-ivory-home .home-welcome-copy .hero-actions{display:flex!important;flex-wrap:wrap!important;gap:8px!important}
 html#eloah-ivory-home .eloah-center-layout{grid-template-columns:1fr!important}
 }
+
+body#maison-eloah #contenu .home-resume{padding:20px;margin:24px 0}
+body#maison-eloah #contenu .home-resume h2{font-size:28px!important;margin:0 0 12px}
+body#maison-eloah #contenu .home-resume .secondary-body{padding:0}
+body#maison-eloah #contenu .eloah-u-2{background:#111!important}
+body#maison-eloah #contenu .eloah-u-2 img{object-fit:contain!important;padding:14px;box-sizing:border-box;filter:none}
+body#maison-eloah #contenu .eloah-u-1 img{object-fit:cover;filter:none}
