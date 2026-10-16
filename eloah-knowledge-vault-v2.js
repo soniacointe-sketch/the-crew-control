@@ -18,7 +18,7 @@ export function mountKnowledgeVault({getClient,isFounder,founderId}){
  '<textarea id="kv-preview" rows="11" readonly aria-label="Aperçu complet de la partie sélectionnée"></textarea>'+
  '<div class="kv-actions"><button type="button" id="kv-prev">← Partie précédente</button><button type="button" id="kv-next">Partie suivante →</button></div>'+
  '<p class="kv-note" id="kv-part-note">Les parties successives reconstituent le texte complet. Les images, vidéos et audios non transcrits ne peuvent pas être lus comme du texte.</p></div>'+
- '<label class="kv-check"><input id="kv-sensitive" type="checkbox"> Si ce dossier comporte des données privées, j’ai retiré les éléments que je ne veux pas stocker.</label>'+
+ '<label class="kv-check"><input id="kv-sensitive" type="checkbox"> Je confirme avoir vérifié les informations personnelles et accepte de conserver ces passages dans mon compte privé. Pour retirer du contenu, modifie le JSON avant import.</label>'+
  '<label class="kv-check"><input id="kv-ok" type="checkbox"> J’ai vérifié les parties de ce dossier et j’autorise leur enregistrement dans ma base privée.</label>'+
  '<div class="kv-actions"><button type="button" id="kv-save" disabled>Enregistrer toutes les parties validées</button><button type="button" id="kv-list">Mes fiches enregistrées</button></div>'+
  '<p role="status" aria-live="polite" id="kv-progress"></p>'+
