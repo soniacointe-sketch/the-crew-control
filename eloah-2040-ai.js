@@ -24,7 +24,7 @@ const status=el('ai-status'),login=el('ai-login-form'),signout=el('ai-signout'),
 function renderConversation(){historyLog.replaceChildren();for(const entry of conversation.slice(-4)){for(const [author,content] of [['user',entry.question],['eloah',entry.answer]]){const line=document.createElement('div');line.className='ai-history-entry';line.dataset.author=author;const label=document.createElement('strong');label.textContent=author==='user'?'Toi':'ELOAH';const paragraph=document.createElement('p');paragraph.textContent=content;line.append(label,paragraph);historyLog.append(line)}}historyStatus.textContent=conversation.length?conversation.length+' échange(s), mémoire temporaire.':'Aucun échange pour le moment.'}
 function setBusy(value){sending=value;send.disabled=value||activeAccount!==founderId;el('ai-stop').hidden=!value;el('ai-request-form').setAttribute('aria-busy',String(value))}
 function cancelRequest(message){revision++;if(pending){pending.controller.abort();clearTimeout(pending.timer)}pending=null;setBusy(false);if(message)output.textContent=message}
-function clearPrivateDrafts(preserveHandoff=false){pilot?.reset();cloudMemory?.reset();agentNetwork?.reset();missionDesk?.reset();draft.value='';editor.hidden=true;cardTitle.value='';cardDescription.value='';approvalStatus.textContent='';cardStatus.textContent='';el('ai-payload-preview').textContent='';el('ai-payload-preview').hidden=true;if(!preserveHandoff)try{sessionStorage.removeItem('eloah2040:board-handoff')}catch{}}
+function clearPrivateDrafts(preserveHandoff=false){pilot?.reset();cloudMemory?.reset();agentNetwork?.reset();missionDesk?.reset();const routineLink=el('eloah-routines-link');if(routineLink)routineLink.textContent='Mes routines ↗';draft.value='';editor.hidden=true;cardTitle.value='';cardDescription.value='';approvalStatus.textContent='';cardStatus.textContent='';el('ai-payload-preview').textContent='';el('ai-payload-preview').hidden=true;if(!preserveHandoff)try{sessionStorage.removeItem('eloah2040:board-handoff')}catch{}}
 function resetConversation(message='Nouvelle conversation prête.',clearInput=false,preserveHandoff=false){cancelRequest();conversation=[];renderConversation();answerState('');clearPrivateDrafts(preserveHandoff);if(clearInput){el('ai-request').value='';el('ai-include-note').checked=false}output.textContent=message;updateLength()}
 function updateLength(){const current=el('ai-request').value;el('ai-length').textContent=current.length+' / 9 000 caractères'}
 el('ai-request').addEventListener('input',updateLength);
@@ -76,6 +76,13 @@ async function refresh(){
   activeAccount=nextId;login.hidden=true;el('ai-password').value='';
   if(error||nextId!==founderId){el('ai-founder-access').hidden=false;signout.hidden=!nextId;send.disabled=true;status.textContent=nextId?'Ce compte n’est pas le compte fondatrice. Les accès clients restent distincts.':'Connecte-toi à ELOAH Fondatrice, puis reviens ici.';return}
   el('ai-founder-access').hidden=true;signout.hidden=false;setBusy(sending);status.textContent='Session fondatrice vérifiée.';
+  const currentEpoch=authEpoch,account=activeAccount;
+  void client.from('eloah_routine_runs').select('id',{head:true,count:'exact'})
+   .eq('owner_id',founderId).is('seen_at',null).then(({count,error})=>{
+    if(error||currentEpoch!==authEpoch||activeAccount!==account)return;
+    const link=el('eloah-routines-link');if(link)link.textContent=count>0?'Mes routines · '+count+' nouveau(x) ↗':'Mes routines ↗';
+   }).catch(()=>{});
+
  }catch{if(ticket!==refreshRevision||epoch!==authEpoch)return;activeAccount=null;resetConversation('Connexion non vérifiable : contenu privé retiré de l’écran.',true);status.textContent='Connexion non disponible. Réessaie avec « Vérifier ma session ».';el('ai-founder-access').hidden=false;send.disabled=true}
 }
 el('ai-verify').addEventListener('click',async()=>{if(await ensureClient())await refresh()});
