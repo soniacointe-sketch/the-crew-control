@@ -72,8 +72,8 @@
       @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
     `);
 
-    // The tools dialog follows the active Power & Glam page, inside its shadow root.
-    if (location.pathname.split('/').pop() === 'power-glam-control.html') {
+    // Shared tools window: the light editorial palette also applies from alternate entry pages.
+    {
       style.textContent += `
         :host{color-scheme:light;color:#082f36}
         dialog{background:#fffcf6;color:#082f36;border:1px solid #dcc5b4;border-radius:10px;box-shadow:0 20px 60px #082f3626}
@@ -147,7 +147,7 @@
       menu.prepend(trigger);
     }
   }
-  window.ELOAHPlatform = Object.freeze({openTools, isToolsOpen:()=>!!dialog?.open, routes:Object.freeze(routes.slice()), version:'11.0'});
+  window.ELOAHPlatform = Object.freeze({openTools, isToolsOpen:()=>!!dialog?.open, routes:Object.freeze(routes.slice()), version:'11.1'});
   document.addEventListener('keydown', event => {
     if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === 'k') {
       if (document.querySelector('dialog[open]')) return;
