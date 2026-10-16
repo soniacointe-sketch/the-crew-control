@@ -10,7 +10,7 @@
 <link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="eloah-crm-control.css?v=20261014-1">
 <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.117.3/dist/umd/supabase.js"></script>
-<script defer src="eloah-crm-control.js?v=20261014-2"></script>
+<script defer src="eloah-crm-control.js?v=20261017-stripe-read"></script>
 </head>
 <body>
 <a class="skip" href="#main">Aller au tableau de bord</a>
@@ -47,7 +47,7 @@
     <div class="metric"><label>Comptes affichés</label><strong id="metric-accounts">—</strong><small>Hors fondatrice, tests compris</small></div>
     <div class="metric"><label>Espaces clients</label><strong id="metric-workspaces">—</strong><small>Enregistrés dans Supabase</small></div>
     <div class="metric"><label>Droits actifs</label><strong id="metric-active">—</strong><small>Ne prouvent pas un paiement</small></div>
-    <div class="metric featured"><label>Chiffre d’affaires ELOAH</label><strong id="metric-revenue">À relier</strong><small>Stripe non raccordé au suivi ELOAH</small></div>
+    <div class="metric featured"><label>Factures ELOAH payées · EUR</label><strong id="metric-revenue">—</strong><small id="billing-help">Lecture Stripe après connexion et actualisation.</small></div>
   </div>
   <div class="grid2">
     <section class="panel"><div class="panel-title"><div><h2>Derniers comptes</h2><p id="accounts-disclaimer">Chargement…</p></div><button class="button" type="button" data-go="accounts">Tous →</button></div><div id="recent-list" class="recent-list"></div></section>
@@ -79,7 +79,7 @@
 
 <section id="view-payments" hidden aria-labelledby="payments-title">
   <div class="view-header"><div><span class="eyebrow">03 · FACTURATION</span><h2 id="payments-title">Paiements Stripe</h2><p>Un tableau fiable ne confond jamais « compte créé » et « commande encaissée ».</p></div></div>
-  <div class="billing-panel"><strong>RACCORDEMENT EN ATTENTE</strong><h2>Les paiements ELOAH ne remontent pas encore ici.</h2><p>Le compte Stripe connecté n’est pas automatiquement lié aux utilisateurs ELOAH. Il faut un rapprochement sécurisé entre les abonnements Stripe, le compte Supabase et les droits ELOAH avant d’afficher les ventes.</p><div class="billing-actions"><a class="button primary" href="https://dashboard.stripe.com/" target="_blank" rel="noopener noreferrer">Ouvrir Stripe ↗</a><a class="button" href="eloah-inscription.html">Voir les offres ELOAH ↗</a></div></div>
+  <div class="billing-panel"><strong>LECTURE STRIPE · COMPTE FONDATRICE</strong><h2 id="billing-detail-total">Factures ELOAH : en attente de vérification.</h2><p id="billing-detail-state">Connecte-toi, puis utilise Actualiser en haut de la page.</p><p>Seules les factures payées en euros portant les identifiants ELOAH sont totalisées. Montants bruts avant remboursements et frais, sans les ventes des autres univers. Cette lecture ne déclenche aucun paiement et ne remplace pas le webhook nécessaire à la mise à jour automatique des abonnements.</p><div class="billing-actions"><a class="button primary" href="https://dashboard.stripe.com/" target="_blank" rel="noopener noreferrer">Ouvrir Stripe ↗</a><a class="button" href="eloah-inscription.html">Voir les offres ELOAH ↗</a></div></div>
   <div class="billing-dashes"><div><small>Paiements encaissés ELOAH</small><strong>—</strong></div><div><small>Chiffre d’affaires ELOAH</small><strong>—</strong></div><div><small>Revenus récurrents</small><strong>—</strong></div></div>
   <p class="section-note">Aucun montant n’est calculé à partir de données d’une autre activité. L’ouverture des paiements devra prévoir un Checkout sécurisé, des webhooks vérifiés et la correspondance des clients.</p>
 </section>
