@@ -1,0 +1,30 @@
+/* Layout/behaviour only. Universe backgrounds and palettes remain owned by each page. */
+.eloah-harmony-bar,.eloah-harmony-close,.eloah-harmony-backdrop{display:none!important}
+.eloah-harmony-redundant{display:none!important}
+body.eloah-harmony-native{padding-left:0!important}
+.eloah-harmonized-side{box-sizing:border-box}
+.eloah-harmonized-side :is(a,button,summary){min-height:44px;box-sizing:border-box;overflow-wrap:anywhere}
+.eloah-harmonized-side :is(a,button,summary):focus-visible{outline:2px solid currentColor;outline-offset:3px}
+.eloah-harmony-home{display:flex;align-items:center;padding:12px;text-decoration:none;color:inherit}
+.eloah-harmony-spaces{border:0;border-top:1px solid currentColor;padding:12px 0;margin:16px 0;background:transparent;color:inherit}
+.eloah-harmony-spaces>summary{padding:10px;cursor:pointer;font:600 13px/1.5 system-ui}
+.eloah-harmony-spaces .eloah-menu-links{position:static!important;width:100%!important;max-height:none!important;box-shadow:none!important;border:0!important;background:transparent!important;padding:0!important;color:inherit}
+.eloah-harmony-spaces .eloah-menu-links a{display:flex;align-items:center;color:inherit!important;font:13px/1.5 system-ui;text-decoration:none;padding:10px 12px;white-space:normal}
+@media(max-width:1000px){
+ body .eloah-harmony-bar{display:flex!important;position:relative;z-index:1100;align-items:center;justify-content:space-between;gap:12px;width:100%;min-height:56px;padding:6px 12px;box-sizing:border-box;background:var(--paper,var(--bg,#f4efe7));color:var(--ink,var(--text,#303530));border-bottom:1px solid var(--line,#c9c5bf)}
+ body .eloah-harmony-bar :is(a,button){display:flex;align-items:center;justify-content:center;min-height:44px;padding:10px 12px;margin:0;font:600 14px/1.4 system-ui;text-decoration:none;color:inherit;white-space:nowrap;border-radius:6px}
+ body .eloah-harmony-bar button{background:transparent;border:1px solid currentColor;cursor:pointer}
+ body .eloah-harmonized-side{display:none!important}
+ body.eloah-navigation-open .eloah-harmonized-side{display:block!important;position:fixed!important;inset:0 auto 0 0!important;top:0!important;left:0!important;transform:none!important;width:min(320px,calc(100vw - 24px))!important;max-width:calc(100vw - 24px)!important;height:100dvh!important;max-height:100dvh!important;overflow:auto!important;overscroll-behavior:contain;padding:16px!important;margin:0!important;z-index:1201!important;visibility:visible!important;opacity:1!important;border-radius:0!important;box-shadow:8px 0 32px #0006}
+ body.eloah-navigation-open .eloah-harmony-backdrop{display:block!important;position:fixed;inset:0;background:#0009;z-index:1200}
+ body .eloah-harmonized-side>.eloah-harmony-close{display:flex!important;align-items:center;justify-content:center;width:100%;min-height:44px;margin:0 0 16px;padding:10px;border:1px solid currentColor;background:transparent;color:inherit;font:600 14px/1.4 system-ui;cursor:pointer}
+ body .eloah-harmonized-side :is(nav,#nav,.eloah-local-content nav){display:grid!important;grid-template-columns:minmax(0,1fr)!important;overflow:visible!important;max-height:none!important;white-space:normal!important}
+ body .eloah-harmonized-side a{white-space:normal!important;max-width:100%;overflow-wrap:anywhere}
+ body .eloah-harmonized-side :is(.eloah-menu,.eloah-local-menu,#pg-menu-sections,#sonia-os-menu-sections,.pe-universal-mobile)>summary{display:none!important}
+ body .eloah-harmonized-side .eloah-menu-links{position:static!important;width:100%!important;max-height:none!important;box-shadow:none!important}
+ body .eloah-harmonized-side .eloah-nav-shortcuts,body .eloah-harmonized-side .pe-universal-desktop{display:none!important}
+ body .eloah-harmony-old-toggle{display:none!important}
+ body:has(>.eloah-harmony-bar) :is(.layout,.shell,.app):has(>.eloah-harmonized-side){grid-template-columns:minmax(0,1fr)!important}
+ body:has(>.eloah-harmonized-side)>main{margin-left:0!important;width:100%!important;box-sizing:border-box}
+ body:has(>.eloah-harmony-bar) :is(main,.main){min-width:0}
+}
