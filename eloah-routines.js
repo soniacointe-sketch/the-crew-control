@@ -51,6 +51,14 @@ async function fetchRows(name,fields,limit=90){
  const {data,error}=await db.from(name).select(fields).eq("owner_id",OWNER).limit(limit);
  if(error)throw Error("Lecture impossible : "+name);return data||[];
 }
+async function fetchPriorityMail(){
+ if(!founder)throw Error("Session fondatrice requise");
+ const {data,error}=await db.from("eloah_mail_items")
+  .select("subject,priority,status,due_on,due_confirmed,source_kind,updated_at,action")
+  .eq("owner_id",OWNER).eq("priority","P1").order("updated_at",{ascending:false}).limit(40);
+ if(error)throw Error("Index des courriers prioritaires inaccessible.");
+ return data||[];
+}
 function showSource(label,value){
  const root=$("source-status"),div=document.createElement("div");div.className="source";
  const a=document.createElement("span"),b=document.createElement("span");a.textContent=label;b.textContent=value;div.append(a,b);root.append(div);
@@ -66,7 +74,7 @@ async function refresh(){
    fetchRows("sonia_os_missions","title,status,completed_at",80),
    fetchRows("eloah_appointments","name,date,universe,state",80),
    fetchRows("eloah_routine_settings","routine_key,preferences,enabled",10),
-   fetchRows("eloah_mail_items","subject,priority,status,due_on,source_kind,updated_at,action",70)
+   fetchPriorityMail()
   ]);
   if(serial!==rev||!founder)return;
   sources.tasks=results[0].status==="fulfilled"?results[0].value:[];
@@ -104,7 +112,7 @@ function internalData(){
  if(keys==="week")result.push("Tâches terminées ces 7 derniers jours : "+sources.tasks.filter(x=>x.status==="completed"&&x.completed_at&&Date.now()-new Date(x.completed_at).getTime()>=0&&Date.now()-new Date(x.completed_at).getTime()<7*86400000).length);
  if(["email","messages","priority","week"].includes(keys)){
   const index=sources.mail.filter(x=>x.priority==="P1"&&!["Terminé","Ignoré"].includes(String(x.status||"")));
-  result.push("Courriers indexés ELOAH : "+sources.mail.length+" entrées récupérées, "+index.length+" prioritaires P1 non clos. Données enregistrées, sans actualisation Gmail garantie.");
+  result.push("Courriers P1 enregistrés dans ELOAH : "+sources.mail.length+" entrées récupérées, "+index.length+" prioritaires P1 non clos. Données enregistrées, sans actualisation Gmail garantie.");
   for(const x of index.slice(0,6))result.push("COURRIER INDEXÉ : "+String(x.subject||"Sans objet").slice(0,110)+" ; statut "+x.status+" ; action "+String(x.action||"À vérifier").slice(0,100)+" ; échéance "+String(x.due_on||"non confirmée"));
  }
  return result.join("\n")||"Aucun contexte pertinent dans les registres consultés.";
