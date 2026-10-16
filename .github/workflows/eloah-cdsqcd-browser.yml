@@ -1,0 +1,43 @@
+name: ELOAH CDSQCD browser smoke
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'mes-univers.html'
+      - 'eloah-accueil-ia.js'
+      - 'eloah-livrable-studio.js'
+      - 'eloah-cdsqcd-evidence.js'
+      - 'eloah-parcours-unique.js'
+      - 'eloah-assistante-claire.css'
+      - 'tests/eloah-cdsqcd.browser.test.mjs'
+      - '.github/workflows/eloah-cdsqcd-browser.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cdsqcd-browser-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install test browser
+        run: |
+          npm install --no-save --no-package-lock playwright@1.56.1
+          npx playwright install --with-deps chromium
+      - name: Serve public ELOAH site locally
+        run: |
+          python3 -m http.server 8765 --bind 127.0.0.1 > /tmp/eloah-smoke-http.log 2>&1 &
+          for i in 1 2 3 4 5; do
+            if curl --silent --fail http://127.0.0.1:8765/mes-univers.html > /dev/null; then exit 0; fi
+            sleep 1
+          done
+          cat /tmp/eloah-smoke-http.log
+          exit 1
+      - name: Test desktop and mobile studio actions
+        run: node tests/eloah-cdsqcd.browser.test.mjs
