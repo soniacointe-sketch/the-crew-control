@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+html#sonia-os-identity{--bg:#f3f1eb;--panel:#fffdf8;--line:#cdd2d0;--gold:#354e60;--muted:#58656c;--white:#27343b;background:#f3f1eb}
+html#sonia-os-identity body{background:#f3f1eb!important;color:#27343b!important;font-family:'Source Sans 3',sans-serif!important;font-size:17px;line-height:1.55}
+html#sonia-os-identity :is(h1,h2,h3,.brand,.kpi strong){font-family:Manrope,sans-serif!important;letter-spacing:-.035em;color:#354e60!important}
+html#sonia-os-identity .top h1{font-size:clamp(28px,3vw,42px);line-height:1.15;font-weight:600}
+html#sonia-os-identity :is(.side,.nav){background:#e7e9e5!important}
+html#sonia-os-identity .side{border-right:1px solid #cdd2d0}
+html#sonia-os-identity .nav button{color:#35454e!important;font-size:14px;line-height:1.35;padding:12px}
+html#sonia-os-identity .nav button.active{background:#354e60!important;color:#fffdf8!important;box-shadow:inset 3px 0 #bd8d70}
+html#sonia-os-identity :is(.panel,.kpi,dialog){background:#fffdf8!important;color:#27343b!important;border-color:#cdd2d0!important;box-shadow:0 5px 20px #27343b05;border-radius:10px}
+html#sonia-os-identity :is(.field,input,select,textarea){background:#fffefa!important;color:#27343b!important;border-color:#aab5b8!important}
+html#sonia-os-identity .btn{background:#354e60!important;color:#fffdf8!important;border:1px solid #354e60;min-height:44px}
+html#sonia-os-identity .btn.secondary{background:#f1eee7!important;color:#354e60!important;border-color:#c3cac8!important}
+html#sonia-os-identity .btn.danger{background:#8a4039!important;color:white!important}
+html#sonia-os-identity :is(a,.pill){color:#354e60}
+html#sonia-os-identity :is(.muted,.sub,.nav-group h3,th,.form label){color:#58656c!important}
+html#sonia-os-identity .notice{background:#e9eeec!important;color:#354e60!important;border-color:#a47659!important}
+html#sonia-os-identity .command-status{border-color:#a47659;background:#eeece5}
+html#sonia-os-identity .os-photo{margin:22px 0 18px;position:relative;border-radius:10px;overflow:hidden;background:#354e60}
+html#sonia-os-identity .os-photo img{display:block;width:100%;height:190px;object-fit:cover;object-position:center 48%;filter:saturate(.45)}
+html#sonia-os-identity .os-photo figcaption{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:12px 18px;color:#fffdf8;background:#354e60;font-size:16px}
+html#sonia-os-identity .os-photo a{font-size:12px;color:#e0e7e9;text-underline-offset:3px}
+html#sonia-os-identity #authScreen{background:linear-gradient(110deg,#f3f1ebed,#f3f1ebd9),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=1800&q=85') center/cover}
+html#sonia-os-identity #authScreen .panel{border-top:4px solid #a47659;padding:32px}
+html#sonia-os-identity :focus-visible{outline:3px solid #a47659;outline-offset:3px}
+html#sonia-os-identity dialog::backdrop{background:#23323b88}
+@media(max-width:900px){html#sonia-os-identity .side{position:relative;height:auto}html#sonia-os-identity .main{padding:20px 16px}html#sonia-os-identity .os-photo img{height:145px}}
+@media(max-width:550px){html#sonia-os-identity body{font-size:18px}html#sonia-os-identity .top h1{font-size:28px}html#sonia-os-identity .os-photo{margin:16px 0}html#sonia-os-identity .os-photo img{height:110px}html#sonia-os-identity .os-photo figcaption{font-size:14px}html#sonia-os-identity .panel{padding:16px}html#sonia-os-identity .command-toolbar{grid-template-columns:1fr}html#sonia-os-identity .command-toolbar .btn{font-size:15px}}
