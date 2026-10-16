@@ -1,0 +1,35 @@
+/* ELOAH — accueil simplifié. Aucun effacement de données ou d'outils. */
+html#eloah-ivory-home {scroll-behavior:auto;scroll-padding-top:16px}
+html#eloah-ivory-home body .fallback-nav{display:none!important}
+html#eloah-ivory-home body .home-welcome-photo{display:none!important}
+html#eloah-ivory-home body .eloah-welcome-film{display:block!important}
+html#eloah-ivory-home body .home-welcome-copy{max-width:850px!important;width:100%!important}
+html#eloah-ivory-home body .home-hero{padding-bottom:clamp(16px,3vw,32px)!important}
+html#eloah-ivory-home body .home-hero h1{font-size:clamp(2rem,4vw,3.2rem)!important;line-height:1.12}
+html#eloah-ivory-home body .home-organized-links{display:grid!important;grid-template-columns:repeat(auto-fit,minmax(min(100%,225px),1fr))!important;gap:12px!important}
+html#eloah-ivory-home body .home-organized-links>a{box-sizing:border-box;min-width:0;padding:18px!important;border-radius:14px!important;box-shadow:none!important;transition:transform .15s ease,border-color .15s ease}
+html#eloah-ivory-home body .home-organized-links>a:hover{transform:translateY(-2px)}
+html#eloah-ivory-home body .home-organized-links>a small{line-height:1.45}
+html#eloah-ivory-home body #acces-quotidiens{display:none!important} /* doublons des raccourcis Organisation */
+html#eloah-ivory-home body #outils-specialises:not([open]) > :not(summary),
+html#eloah-ivory-home body #maisons:not([open]) > :not(summary){display:none}
+html#eloah-ivory-home body :is(#maisons,#outils-specialises,#compte-et-sauvegardes,#acces-directs-reseaux,#premiers-pas,#gestion-et-developpement){margin-block:14px!important}
+html#eloah-ivory-home body :is(#maisons,#outils-specialises,#compte-et-sauvegardes,#acces-directs-reseaux,#premiers-pas,#gestion-et-developpement)>summary{cursor:pointer;min-height:48px;display:flex;align-items:center}
+html#eloah-ivory-home body :is(#maisons,#outils-specialises,#compte-et-sauvegardes,#acces-directs-reseaux,#premiers-pas,#gestion-et-developpement)>summary:focus-visible{outline:2px solid currentColor;outline-offset:3px}
+html#eloah-ivory-home body #mon-organisation>.home-organized-links{grid-template-columns:repeat(auto-fit,minmax(min(100%,205px),1fr))!important}
+html#eloah-ivory-home body #services .home-organized-links{grid-template-columns:repeat(auto-fit,minmax(min(100%,190px),1fr))!important}
+html#eloah-ivory-home body .home-organized-section{scroll-margin-top:18px}
+html#eloah-ivory-home body .home-organized-section>h2{margin-bottom:8px}
+html#eloah-ivory-home body .home-organized-section>p{max-width:680px}
+html#eloah-ivory-home body #home-projects,#home-tasks{min-width:0}
+html#eloah-ivory-home body a,html#eloah-ivory-home body button{touch-action:manipulation}
+@media(max-width:700px){
+ html#eloah-ivory-home body .hero-actions{display:flex;flex-wrap:wrap;gap:8px}
+ html#eloah-ivory-home body .hero-actions>*{min-height:44px;box-sizing:border-box}
+ html#eloah-ivory-home body .home-organized-links{grid-template-columns:minmax(0,1fr)!important}
+ html#eloah-ivory-home body #mon-organisation>.home-organized-links,
+ html#eloah-ivory-home body #services .home-organized-links{grid-template-columns:minmax(0,1fr)!important}
+ html#eloah-ivory-home body .home-organized-links>a{padding:14px 16px!important}
+ html#eloah-ivory-home body .home-organized-section{padding-inline:clamp(12px,4vw,20px)!important}
+}
+@media(prefers-reduced-motion:reduce){html#eloah-ivory-home body .home-organized-links>a{transition:none!important}}
