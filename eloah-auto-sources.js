@@ -56,7 +56,7 @@ window.EloahAutoSources={
        .eq('universe',selectedUniverse).order('updated_at',{ascending:false}).limit(100);
      if(memoryError){memoryStatus=' Mémoire privée inaccessible : '+String(memoryError.message||memoryError).slice(0,100);}
      else{
-      memorySelected=(entries||[]).filter(x=>typeof x.content==='string')
+      memorySelected=(allowMemory()?entries||[]:[]).filter(x=>typeof x.content==='string')
         .map(x=>({...x,score:rank(words,x)})).filter(x=>x.score>=2)
         .sort((a,b)=>b.score-a.score).slice(0,2);
       memoryStatus=memorySelected.length
