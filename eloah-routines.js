@@ -241,7 +241,15 @@ function renderRuns(){
   }
   const row=document.createElement("div");row.className="row";
   const open=document.createElement("button");open.type="button";open.textContent="Préparer le brief";open.onclick=()=>{
-    select(run.routine_key);$("use-internal-context").checked=true;prepare();
+    select(run.routine_key);
+    if(items.length){
+     const excerpt=items.map(x=>String(x.title||"À vérifier").slice(0,105)+
+       " · "+String(x.next_action||"Vérifier dans Agent Courrier").slice(0,120)).join("\n");
+     $("manual-context").value=("Extrait du rappel du "+
+       new Date(run.scheduled_for).toLocaleDateString("fr-FR",{timeZone:"Europe/Paris"})+
+       " (index à vérifier) :\n"+excerpt).slice(0,1800);
+    }
+    $("use-internal-context").checked=true;prepare();
     $("routine-workbench").scrollIntoView({behavior:"smooth",block:"start"});
   };
   row.append(open);
