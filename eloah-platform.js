@@ -3,30 +3,271 @@
   'use strict';
   if (window.ELOAHPlatform) return;
   const routes = [
-    ['Mon accueil', 'mes-univers.html', 'Organiser', 'univers projets accueil'],
-    ['Mon organisation', 'eloah-pilotage.html', 'Organiser', 'planning calendrier actions'],
-    ['ELOAH Boards', 'eloah-trello.html', 'Organiser', 'tableaux cartes taches'],
-    ['ELOAH Studio', 'eloah-partenaire.html?rubrique=ELOAH%20Studio', 'Créer', 'creation design'],
-    ['Reel Studio', 'eloah-reel-studio.html', 'Créer', 'video montage reels'],
-    ['Mes images', 'eloah-reel-mes-images.html', 'Créer', 'photos visuels'],
-    ['Studio d’articles', 'eloah-power-glam-article-studio.html', 'Créer', 'textes redaction blog'],
-    ['ELOAH Music', 'eloah-music.html', 'Créer', 'musique sons audio'],
-    ['Mes documents', 'eloah-bibliotheque.html?type=fichiers', 'Retrouver', 'bibliotheque fichiers'],
-    ['Bases d’expertise', 'eloah-bibliotheque.html?type=bases', 'Retrouver', 'sources savoir recherches'],
-    ['Formations', 'eloah-partenaire.html?rubrique=Formations', 'Retrouver', 'apprendre cours'],
-    ['Mes entretiens', 'eloah-partenaire.html?rubrique=Entretiens', 'Retrouver', 'rendez vous preparation'],
-    ['Mailing', 'eloah-partenaire.html?rubrique=Mailing', 'Créer', 'emails communication'],
-    ['Power & Glam', 'power-glam-control.html', 'Univers', 'maison editoriale'],
-    ['The Crew Orchies', 'eloah-the-crew.html', 'Univers', 'association danse'],
-    ['SONIA OS', 'sonia-os.html', 'Univers', 'agents pilotage'],
-    ['ELOAH Cortex', 'eloah-cortex.html', 'Univers', 'centre pilotage'],
-    ['IA 2040 · fondatrice', 'eloah-2040.html#assistant-reel', 'Comptes', 'assistant intelligence fondatrice'],
-    ['Accès fondatrice', 'eloah-fondatrice.html', 'Comptes', 'connexion sonia prive'],
-    ['Mon compte client', 'eloah-espace-prive.html', 'Comptes', 'connexion cliente abonnement'],
-    ['Offres ELOAH', 'eloah-offres.html', 'Aide', 'tarifs presentation'],
-    ['Installer ELOAH', 'eloah-installer.html', 'Aide', 'application telephone pwa'],
-    ['Diagnostic de l’application', 'eloah-diagnostic.html', 'Aide', 'aide fonctionnement connexion']
-  ].map(([label, href, group, keywords]) => Object.freeze({label, href, group, keywords}));
+  [
+    "Accueil ELOAH",
+    "mes-univers.html",
+    "Accueil",
+    "point depart accueil"
+  ],
+  [
+    "Mon organisation",
+    "eloah-pilotage.html",
+    "Mon organisation",
+    "planning agenda calendrier projets"
+  ],
+  [
+    "Mes tableaux · Boards",
+    "eloah-trello.html",
+    "Mon organisation",
+    "cartes taches"
+  ],
+  [
+    "Centre d’actions",
+    "eloah-actions.html",
+    "Mon organisation",
+    "taches echeances"
+  ],
+  [
+    "Notes et préparation",
+    "eloah-partenaire.html?rubrique=Mon%20Espace",
+    "Mon organisation",
+    "control partenaire idees"
+  ],
+  [
+    "Mes documents",
+    "eloah-bibliotheque.html?type=fichiers",
+    "Mon organisation",
+    "bibliotheque fichiers"
+  ],
+  [
+    "Bases d’expertise",
+    "eloah-bibliotheque.html?type=bases",
+    "Mon organisation",
+    "sources savoir"
+  ],
+  [
+    "Mes entretiens",
+    "eloah-entretiens-control.html",
+    "Mon organisation",
+    "rendez vous preparation"
+  ],
+  [
+    "Mes routines",
+    "eloah-routines.html",
+    "Mon organisation",
+    "habitudes"
+  ],
+  [
+    "Formations",
+    "eloah-partenaire.html?rubrique=Formations",
+    "Mon organisation",
+    "cours apprendre"
+  ],
+  [
+    "Power & Glam",
+    "power-glam-control.html",
+    "Mes univers",
+    "editorial amour beaute argent desir vie"
+  ],
+  [
+    "The Crew Orchies",
+    "index.html",
+    "Mes univers",
+    "association danse"
+  ],
+  [
+    "Sonia Velka",
+    "sonia-velka-control.html",
+    "Mes univers",
+    "personnel identite"
+  ],
+  [
+    "PARISIS ENGINE",
+    "eloah-parisis.html",
+    "Mes univers",
+    "recherche histoire"
+  ],
+  [
+    "Foi & spiritualité",
+    "foi-control.html",
+    "Mes univers",
+    "priere bible"
+  ],
+  [
+    "Le Lion Blanc",
+    "lion-blanc-control.html",
+    "Mes univers",
+    "association citoyenne"
+  ],
+  [
+    "Dark Energy",
+    "dark-energy-control.html",
+    "Mes univers",
+    "creation"
+  ],
+  [
+    "Etsy Factory",
+    "etsy-factory-control.html",
+    "Mes univers",
+    "produits templates"
+  ],
+  [
+    "Atelier Élan",
+    "atelier-elan.html",
+    "Mes univers",
+    "atelier"
+  ],
+  [
+    "Studio de création",
+    "eloah-partenaire.html?rubrique=ELOAH%20Studio",
+    "Mes studios",
+    "design"
+  ],
+  [
+    "Reel Studio",
+    "eloah-reel-studio.html",
+    "Mes studios",
+    "video montage"
+  ],
+  [
+    "Mes images",
+    "eloah-reel-mes-images.html",
+    "Mes studios",
+    "photos visuels"
+  ],
+  [
+    "Studio d’articles",
+    "eloah-power-glam-article-studio.html",
+    "Mes studios",
+    "textes blog"
+  ],
+  [
+    "ELOAH Music",
+    "eloah-music.html",
+    "Mes studios",
+    "musique sons audio dj mix"
+  ],
+  [
+    "SNAP · Stories",
+    "eloah-snap.html",
+    "Mes studios",
+    "stories photo"
+  ],
+  [
+    "NUMERA",
+    "eloah-numera.html",
+    "Mes studios",
+    "chiffres musique"
+  ],
+  [
+    "Mailing",
+    "eloah-partenaire.html?rubrique=Mailing",
+    "Mes studios",
+    "email newsletter"
+  ],
+  [
+    "WordPress",
+    "eloah-wordpress.html",
+    "Mes studios",
+    "publication site"
+  ],
+  [
+    "Mon assistante · ELOAH 2040",
+    "eloah-2040.html#assistant-reel",
+    "Mon assistante",
+    "ia intelligence fondatrice"
+  ],
+  [
+    "Mes missions · Cortex",
+    "eloah-cortex.html",
+    "Mon assistante",
+    "pilotage validation"
+  ],
+  [
+    "Mes agents · SONIA OS",
+    "sonia-os.html",
+    "Mon assistante",
+    "agents siege"
+  ],
+  [
+    "Ma mémoire · Passerelles",
+    "eloah-passerelles.html",
+    "Mon assistante",
+    "memoire conversations import chatgpt"
+  ],
+  [
+    "MAIA",
+    "eloah-maia.html",
+    "Mon assistante",
+    "assistance"
+  ],
+  [
+    "Agent Courrier",
+    "eloah-mail-agent.html",
+    "Mon assistante",
+    "courrier"
+  ],
+  [
+    "Connexions · Passerelles",
+    "eloah-passerelles.html",
+    "Réglages",
+    "applications modeles reglages"
+  ],
+  [
+    "Compte fondatrice",
+    "eloah-fondatrice.html",
+    "Réglages",
+    "connexion sonia prive"
+  ],
+  [
+    "Compte client",
+    "eloah-espace-prive.html",
+    "Réglages",
+    "connexion cliente"
+  ],
+  [
+    "Sauvegardes",
+    "eloah-sauvegardes.html",
+    "Réglages",
+    "recuperation fichiers"
+  ],
+  [
+    "Supervision · Monitor",
+    "eloah-monitor.html",
+    "Réglages",
+    "surveillance technique"
+  ],
+  [
+    "Gestion clients",
+    "eloah-gestion-clients.html",
+    "Réglages",
+    "abonnements accompagnement"
+  ],
+  [
+    "Mailing & Revenus",
+    "eloah-mailing-revenus.html",
+    "Réglages",
+    "stripe resend transactions"
+  ],
+  [
+    "Offres ELOAH",
+    "eloah-offres.html",
+    "Réglages",
+    "tarifs"
+  ],
+  [
+    "Installer ELOAH",
+    "eloah-installer.html",
+    "Réglages",
+    "telephone application pwa"
+  ],
+  [
+    "Diagnostic",
+    "eloah-diagnostic.html",
+    "Réglages",
+    "aide fonctionnement"
+  ]
+].map(([label, href, group, keywords]) => Object.freeze({label, href, group, keywords}));
   const normalize = value => String(value).normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLocaleLowerCase('fr-FR').trim();
   let host, dialog, search, list, count, previousFocus;
   function element(tag, text, attributes = {}) {
@@ -147,7 +388,7 @@
       menu.prepend(trigger);
     }
   }
-  window.ELOAHPlatform = Object.freeze({openTools, isToolsOpen:()=>!!dialog?.open, routes:Object.freeze(routes.slice()), version:'11.1'});
+  window.ELOAHPlatform = Object.freeze({openTools, isToolsOpen:()=>!!dialog?.open, routes:Object.freeze(routes.slice()), version:'12-six-rubriques'});
   document.addEventListener('keydown', event => {
     if ((event.ctrlKey || event.metaKey) && !event.altKey && event.key.toLowerCase() === 'k') {
       if (document.querySelector('dialog[open]')) return;
