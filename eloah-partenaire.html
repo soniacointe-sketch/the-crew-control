@@ -397,7 +397,7 @@ body:has(.eloah-home) button.primary{background:#242426!important;color:white!im
 @media(max-width:1000px){#tabs .eloah-analytics-side{width:100%}#tabs .eloah-analytics-side-links{min-width:215px;}}
 </style><link rel="stylesheet" href="eloah-theme-global.css?v=20261014-pg2"><link rel="stylesheet" href="eloah-notes-plus-tard.css?v=1">
 <link rel="stylesheet" href="eloah-prune-lumiere.css?v=20261016-2">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"><link rel="stylesheet" href="eloah-inner-ivory.css?v=20261016-4"></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header><figure class="ivory-photo studio-photo"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=85" alt="Bureau de création avec ordinateur et carnets" loading="lazy"><figcaption>Des idées à la création. · Photo : Unsplash</figcaption></figure>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"><link rel="stylesheet" href="eloah-inner-ivory.css?v=20261016-4"><link rel="stylesheet" href="eloah-mon-espace-identity.css?v=20261016-1"></head><body style="--accent:#a2b5e5"><div class="layout"><aside><div class="brand">ELOAH<small style="display:block;font:11px system-ui;letter-spacing:.1em;margin-top:8px">ESPACE PARTENAIRE</small></div><nav><a href="mes-univers.html">← Mes univers</a></nav><nav id="tabs" aria-label="Rubriques"></nav></aside><main><header><div><div class="eyebrow">Espace de pilotage · Sonia</div><h1>ELOAH Control</h1><p id="mailing-subtitle" hidden>Vos listes de contacts, vos campagnes, vos statistiques.</p></div><div><a class="button" href="mes-univers.html">Changer d’univers</a></div></header><figure class="ivory-photo studio-photo"><img src="https://images.unsplash.com/photo-1499750310107-5fef28a66643?auto=format&fit=crop&w=1200&q=85" alt="Bureau de création avec ordinateur et carnets" loading="lazy"><figcaption>Des idées à la création. · Photo : Unsplash</figcaption></figure>
 
 <section id="eloah-analytics-board" hidden aria-labelledby="eloah-analytics-heading">
   <div class="eloah-analytics-top">
@@ -687,7 +687,7 @@ function updateLayout(){
  const heading=document.querySelector('main > header h1');
  const eyebrow=document.querySelector('main > header .eyebrow');
  const subtitle=document.getElementById('mailing-subtitle');
- const name=isMailing?'Mailing & Newsletter':isSubscription?'Mon abonnement':isAnalytics?'Analytics':document.body.classList.contains('studio-view')?'ELOAH Studio':'ELOAH Control';
+ const name=isMailing?'Mailing & Newsletter':isSubscription?'Mon abonnement':isAnalytics?'Analytics':document.body.classList.contains('studio-view')?'ELOAH Studio':new URLSearchParams(location.search).get('rubrique')==='Mon Espace'?'Mon Espace':'ELOAH Control';
  if(heading&&heading.textContent!==name)heading.textContent=name;
  if(eyebrow){const desired=isMailing||isSubscription||isAnalytics?'none':'';if(eyebrow.style.display!==desired)eyebrow.style.display=desired}
  if(subtitle&&subtitle.hidden===isMailing)subtitle.hidden=!isMailing;
@@ -706,6 +706,8 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
 (()=>{'use strict';
 const params=new URLSearchParams(location.search);
 if(params.get('rubrique')!=='Mon Espace')return;
+document.body.classList.add('mon-espace-identity');
+const pageHeading=document.querySelector('main>header h1');if(pageHeading)pageHeading.textContent='Mon Espace';
 const main=document.querySelector('main'),hero=main?.querySelector('.hero');if(!main||!hero)return;
 const lowerHeading=hero.querySelector('h2'),lowerSubtitle=hero.querySelector('p');
 if(lowerHeading)lowerHeading.textContent='Mon Espace · Pilotage des projets et actions.';
@@ -751,7 +753,7 @@ const universeCards='<div class="eh-grid">'+univers.map(([title,desc,url],i)=>'<
 const section=document.createElement('div');section.className='eloah-home';section.setAttribute('aria-label','Accueil ELOAH');
 function draw(){
  const rows=localRecords(),projects=projectRecords(),recent=rows.filter(r=>r.state!=='Terminé').sort((a,b)=>String(b.updated||'').localeCompare(String(a.updated||''))).slice(0,4);
- let h='<div class="eh-welcome"><div><h2>Bonsoir, Sonia.</h2><p>Votre espace de pilotage · Mes univers, mes projets et mes prochaines actions.</p></div><button class="eh-btn dark" type="button" id="eh-add">+ Nouvelle action</button></div>';
+ let h='<div class="eh-welcome"><div><h2>Bienvenue, Sonia.</h2><p>Votre espace de pilotage · Mes univers, mes projets et mes prochaines actions.</p></div><button class="eh-btn dark" type="button" id="eh-add">+ Nouvelle action</button></div>';
  h+=group('Mes univers',universeCards,'mes-univers.html');
  h+=group('Studio de création','<div class="eh-grid"><article class="eh-card"><span class="eh-type">Vidéo · Création</span><h3>ELOAH Reel Studio Pro</h3><p>Importer une vidéo, sélectionner un extrait, ajouter des textes et des effets, prévisualiser et exporter.</p><a class="eh-btn dark" href="eloah-reel-studio.html">Ouvrir le Reel Studio →</a></article></div>','eloah-reel-studio.html');
  h+=group('Reprendre mon travail',recent.length?'<div class="eh-grid">'+recent.map(r=>'<article class="eh-card"><span class="eh-type">'+esc(r.module)+'</span><h3>'+esc(r.title)+'</h3><p>'+esc(r.state)+(r.date?' · '+esc(r.date):'')+'</p><button class="eh-btn" type="button" data-edit-eloah="'+esc(r.id)+'">Reprendre →</button></article>').join('')+'</div>':'<div class="eh-empty">Aucune activité récente à reprendre dans les notes locales de cet appareil.</div>','eloah-partenaire.html?rubrique=Mon%20Espace');
