@@ -232,10 +232,23 @@
   for (const button of host.querySelectorAll('[data-hai-prompt]')) button.addEventListener('click', () => {
     prompt.value = button.dataset.haiPrompt; $('payload').hidden = true; controls(); prompt.focus();
   });
-  $('preview').addEventListener('click', () => {
-    try { $('payload').textContent = prompt.value.trim() ? contextFor(prompt.value.trim()) : 'Saisis une demande pour voir le texte qui sera envoyé.'; }
-    catch (error) { $('payload').textContent = error.message; }
-    $('payload').hidden = false;
+  $('preview').addEventListener('click', async () => {
+    const text=prompt.value.trim(), selectedProject=$('project').value;
+    $('payload').hidden=false;
+    if(!text){$('payload').textContent='Saisis une demande pour voir le texte qui sera envoyé.';return;}
+    $('payload').textContent='Recherche des extraits disponibles pour afficher le contexte réel…';
+    try {
+      const subject=text.match(/(?:^|\n)SUJET\s*:\s*([^\n]+)/i);
+      await window.EloahAutoSources?.prepare?.(subject?.[1]?.trim()||text,selectedProject);
+      if(prompt.value.trim()!==text || $('project').value!==selectedProject){
+        $('payload').textContent='Demande ou univers modifié pendant la recherche. Relance l’aperçu.';
+        return;
+      }
+      window.EloahEvidence?.prepare?.(selectedProject);
+      $('payload').textContent=contextFor(text);
+    } catch(error) {
+      $('payload').textContent='Aperçu indisponible : '+String(error.message||error);
+    }
   });
   $('copy').addEventListener('click', async () => {
     if (!answer) return;
