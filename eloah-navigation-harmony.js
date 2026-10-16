@@ -11,6 +11,13 @@
     let side = document.querySelector('body > aside:has(nav), body > .layout > aside:has(nav), body > .shell > aside.side, body > .shell > aside.sidebar, body > .app > aside.side, #app > aside.side, #appShell > aside.side, body > .layout > aside.sidebar');
     if (side && getComputedStyle(side).display === 'none' && ['mes-univers.html','eloah-partenaire.html'].includes(page)) side = null;
     if (!side) side = document.querySelector('.pe-universal-bar') || global;
+    const core = ['mes-univers.html', 'eloah-pilotage.html', 'eloah-2040.html'].includes(page);
+    if (core && global) {
+      side = global;
+      body.classList.add('eloah-core-menu');
+      const old = page === 'eloah-2040.html' && document.querySelector('.shell > .sidebar');
+      if (old) old.hidden = true;
+    }
     if (!side) return;
     // An authenticated shell may still be hidden. Never surface its menu before sign-in.
     const ancestors = []; for (let node = side.parentElement; node && node !== body; node = node.parentElement) ancestors.push(node);
@@ -26,7 +33,7 @@
     const originalLabel = side.getAttribute('aria-label');
     if (!side.id) side.id = 'eloah-primary-navigation';
     const css = document.createElement('link');
-    css.rel = 'stylesheet'; css.href = 'eloah-navigation-harmony.css?v=20261016-1'; document.head.append(css);
+    css.rel = 'stylesheet'; css.href = 'eloah-navigation-harmony.css?v=20261017-fixed'; document.head.append(css);
     if (global && side !== global) {
       const links = global.querySelector('.eloah-menu-links');
       if (links) {
