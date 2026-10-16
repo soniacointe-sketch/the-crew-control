@@ -45,10 +45,18 @@ Comment les récits de l'enfance de Jésus associent-ils l'apprentissage des let
 [← Retour aux archives intégrales](foi-control.html?file=eloah-foi-archives-completes-index.md)
 
 
-## Nouvelles ramifications vérifiées — 15 octobre 2026
+## Prolongements de la recherche — 15 octobre 2026
 
 - [ALPHA-010 · Les 24 lettres et le corps de la Vérité : Marcus selon Irénée](foi-control.html?file=eloah-alpha-010-marcus-24-lettres.md)
 - [ALPHA-011 · Sept voyelles, sept cieux et Alpha-Oméga dans l'Apocalypse](foi-control.html?file=eloah-alpha-011-sept-voyelles-apocalypse.md)
 - [ALPHA-012 · Aleph, noms divins, Michel et manuscrits](parisis-alpha-012-noms-divins-michel.html)
 
 **Méthode :** la mention des marcosiens chez Irénée atteste un usage ancien des motifs alphabétiques, mais pas l'historicité de la scène rapportée sur Jésus enfant. [Voir la suite des dossiers dans PARISIS ENGINE](parisis-fil-enquetes.html#alpha).
+
+## Sources et passages à consulter
+
+- **Luc 2,41–52** — Jésus à douze ans au Temple. [Texte français, traduction liturgique AELF](https://www.aelf.org/bible/Lc/2). Ce passage sert de comparaison ; il ne décrit pas de leçon d’alphabet.
+- **Irénée, Contre les hérésies I,20,1** — motif de l’Alpha et du Bêta rapporté dans une polémique contre les marcosiens. [Traduction anglaise historique sur New Advent](https://www.newadvent.org/fathers/0103120.htm).
+- **Évangile de l’enfance selon Thomas, recension grecque S, chapitre 6, notamment 6,8–10** — scène scolaire et discours sur Alpha. [Traduction de Tony Burke](https://www.tonyburke.ca/infancy-gospel-of-thomas/infancy-gospel-of-thomas-greek-s/), fondée sur le Codex Sabaiticus 259. Édition : *De infantia Iesu euangelium Thomae graece*, CCSA 17, Brepols, 2010.
+
+**Portée du contrôle :** ces liens permettent de consulter les passages. Cette fiche ne constitue pas une collation des manuscrits originaux. Les traditions juives évoquées demandent encore un choix de textes, de témoins et de passages précis ; elles ne forment pas ici un corpus déjà vérifié.
