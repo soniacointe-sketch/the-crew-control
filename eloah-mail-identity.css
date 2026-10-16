@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap');
+html#courrier-identity{--bg:#f2f0e9;--panel:#fffdf8;--ink:#293943;--muted:#5b686b;--line:#cdd2cf;--gold:#42616e;--soft:#e7ece9;--green:#427060}
+html#courrier-identity body{background:var(--bg);color:var(--ink);font:17px/1.6 'Source Sans 3',sans-serif}
+html#courrier-identity :is(h1,h2,h3,.logo,.metric strong){font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.025em}
+html#courrier-identity h1{font-size:clamp(34px,4vw,54px);line-height:1.1}
+html#courrier-identity h1 em{color:#42616e}
+html#courrier-identity h2{font-size:32px}html#courrier-identity h3{font-size:26px}
+html#courrier-identity .sidebar{background:#e6eae5;border-color:#cdd2cf}
+html#courrier-identity :is(.sidetag,.navtitle,.eyebrow,.section-label){color:#526b72}
+html#courrier-identity #nav button{font-size:14px;line-height:1.4;border-radius:4px;color:#364b53}
+html#courrier-identity #nav button span{color:inherit}
+html#courrier-identity #nav button.active{background:#355663;color:#fffdf8}
+html#courrier-identity .back{background:#f4f2eb;border-radius:4px;color:#355663}
+html#courrier-identity .sidenote{color:#5b686b;font-size:12px}
+html#courrier-identity .top{margin-bottom:20px}
+html#courrier-identity :is(button,.outline,.primary){font-family:'Source Sans 3',sans-serif;border-radius:5px;min-height:44px;border-color:#bac7c6}
+html#courrier-identity .primary{background:#355663;border-color:#355663;color:#fffdf8}
+html#courrier-identity .primary:hover{background:#25434e}
+html#courrier-identity .courrier-photo{margin:0 0 24px;display:grid;grid-template-columns:1fr 1fr;background:#355663;border-radius:5px;overflow:hidden}
+html#courrier-identity .courrier-photo img{width:100%;height:145px;object-fit:cover;display:block;filter:saturate(.35)}
+html#courrier-identity .courrier-photo figcaption{padding:22px;align-self:center;color:#fffdf8;font:26px/1.2 'Cormorant Garamond',serif}
+html#courrier-identity .courrier-photo span{display:block;margin-top:12px;color:#dbe5e5;font:12px 'Source Sans 3',sans-serif}
+html#courrier-identity :is(.metric,.panel,.mailcard){background:#fffdf8;border-radius:6px;border-color:#cdd2cf;box-shadow:0 5px 16px #29394304}
+html#courrier-identity .metric{border-top:2px solid #8d9e98}
+html#courrier-identity .metric label{font-size:13px}
+html#courrier-identity .metric strong{font-size:36px;color:#355663}
+html#courrier-identity .safety{background:#e9eeea;border-color:#c9d4ce;border-left-color:#708c81;color:#4a5b59;border-radius:5px;font-size:13px}
+html#courrier-identity .safety strong{color:#314b4d}
+html#courrier-identity :is(input,textarea,select,.field){background:#fffefa;color:#293943;border-color:#aab9b8;font-family:'Source Sans 3',sans-serif;font-size:16px}
+html#courrier-identity .filters input{min-width:min(230px,100%)}
+html#courrier-identity .assistant p{font-size:14px}
+html#courrier-identity .agent-actions button{font-size:14px}
+html#courrier-identity .mailcard p{font-size:16px;color:#4d5d61}
+html#courrier-identity :is(.actions a,.actions button){font-size:14px}
+html#courrier-identity .small{font-size:14px}
+html#courrier-identity dialog{background:#fffdf8;color:#293943;border-color:#aab9b8;border-radius:6px}
+html#courrier-identity :is(button,a,input,textarea,select):focus-visible{outline:3px solid #9c7852;outline-offset:3px}
+@media(min-width:901px){html#courrier-identity body.eloah-screen{padding-left:0!important}html#courrier-identity body>.eloah-global-nav{display:none!important}}
+@media(max-width:1100px){html#courrier-identity .content{grid-template-columns:minmax(0,1fr)}html#courrier-identity .assistant{position:relative;top:auto}}
+@media(max-width:650px){html#courrier-identity body{font-size:18px}html#courrier-identity .courrier-photo{grid-template-columns:1fr}html#courrier-identity .courrier-photo img{height:100px}html#courrier-identity .courrier-photo figcaption{padding:15px;font-size:23px}html#courrier-identity .topactions{width:100%}html#courrier-identity .topactions>*{flex:1 1 auto}html#courrier-identity h2{font-size:29px}}
