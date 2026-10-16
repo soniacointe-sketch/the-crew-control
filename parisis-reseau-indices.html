@@ -31,7 +31,7 @@
 <link rel="stylesheet" href="parisis-universal-v4.css?v=encre-pierre-final">
 <link rel="stylesheet" href="parisis-reseau-pro.css?v=20261015-v6">
 <style id="network-readable">
-body .hero{padding:24px 0!important;min-height:0!important;gap:20px!important}
+body .hero{grid-template-columns:1fr!important;padding:24px 0!important;min-height:0!important;gap:20px!important}
 body .hero h1{font-size:clamp(34px,4vw,54px)!important;margin:10px 0!important}
 body .hero p{font-size:17px!important;margin:10px 0!important}
 body .hero-context{display:none}
@@ -107,7 +107,7 @@ function choose(id,scroll){if(!nById(id))return;state.selected=id;try{var url=ne
 function graph(){
 root.replaceChildren();
 var familyX={"PAR ISIS":110,"ATLAS":355,"NESLE":590,"SYMBOLES":830,"NOSTRADAMUS":1075};
-var scoped=series.value!=="all";root.setAttribute("viewBox",scoped?(familyX[series.value]-135)+" 0 270 570":"0 0 1220 570");root.style.setProperty("min-width",scoped?"270px":"1000px","important");root.style.setProperty("max-height",scoped?"620px":"none");
+var scoped=series.value!=="all";root.setAttribute("viewBox",scoped?(familyX[series.value]-135)+" 0 270 570":"0 0 1220 570");root.style.setProperty("min-width",scoped?"270px":"1000px","important");root.style.setProperty("max-height",scoped?"620px":"none");root.style.setProperty("aspect-ratio",scoped?"270 / 570":"1220 / 570");
 var defs=add(root,sEl("defs"));var mark=add(defs,sEl("marker",{id:"end-dot",markerWidth:6,markerHeight:6,refX:3,refY:3}));add(mark,sEl("circle",{cx:3,cy:3,r:2,fill:"#d0b889"}));
 var headings=[["PAR ISIS",110],["ATLAS",355],["NESLE",590],["SYMBOLES",830],["NOSTRADAMUS",1075]];
 headings.forEach(function(h){var tx=add(root,sEl("text",{x:h[1],y:31,"text-anchor":"middle",fill:familyColor[h[0]],"font-size":"15","font-family":"Georgia,serif"}));tx.textContent=h[0]});
