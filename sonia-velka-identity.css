@@ -33,3 +33,9 @@ html#velka-identity body #sv-house-home>p:last-child{padding-bottom:24px}
 html#velka-identity body #sv-house-vision article :is(h3,small){color:#963f36!important}
 html#velka-identity body .notice{background:#eae3d8;color:#524b43;border-color:#c9b9a9}
 @media(max-width:700px){html#velka-identity body{font-size:17px}html#velka-identity body .sv-editorial{grid-template-columns:1fr}html#velka-identity body .sv-editorial img{height:170px}html#velka-identity body .sv-editorial figcaption{padding:20px}html#velka-identity body .sv-editorial strong{font-size:26px}html#velka-identity body #sv-house-home>:not(.sv-editorial){margin-left:18px;margin-right:18px}html#velka-identity body #sv-house-home .sv-house-cards{grid-template-columns:1fr}html#velka-identity body #sv-house-home .sv-house-card{min-height:0}html#velka-identity body #sv-house-home .sv-house-welcome{font-size:36px}html#velka-identity body main{min-width:0}}
+/* Un seul menu : les pièces de Sonia, avec retour à Mes univers. */
+html#velka-identity body.eloah-screen{padding-left:0!important}
+html#velka-identity body>.eloah-global-nav{display:none!important}
+html#velka-identity body .layout{grid-template-columns:240px minmax(0,1fr)}
+html#velka-identity body .layout>aside{position:sticky;top:0;max-height:100dvh;overflow:auto}
+@media(max-width:800px){html#velka-identity body .layout{grid-template-columns:1fr}html#velka-identity body .layout>aside{position:relative;max-height:none}html#velka-identity body #sv-house-nav{grid-template-columns:repeat(3,minmax(0,1fr))}}
