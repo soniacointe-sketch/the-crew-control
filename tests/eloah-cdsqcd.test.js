@@ -47,4 +47,24 @@ mock.EloahValidatedMemory.evidence=()=>[];
 api.clear();assert.equal(api.prepare('ELOAH'),0);
 assert.match(api.context(),/AUCUNE SOURCE/);
 assert.ok(api.audit('Selon [S1], le projet est certifié.').unknown.includes('S1'));
+// Long source collections cannot create phantom references trimmed out of AI context.
+mock.EloahCreationSources.evidence=()=>Array.from({length:8},(_,i)=>({
+  key:'source-'+i,title:'Source documentée '+i,origin:'Dossier interne',
+  universe:'ELOAH',excerpt:'Texte documenté '.repeat(100)
+}));
+mock.EloahAutoSources.evidence=()=>[{
+  key:'source-1',title:'Doublon sélectionné',origin:'Création retrouvée',
+  universe:'ELOAH',excerpt:'Déjà fourni'
+}];
+api.clear();api.prepare('ELOAH');
+const textSent=api.context();
+assert.ok(textSent.length<=4400,'Full CDSQCD context must fit the actual AI payload cap');
+api.commit();
+const sources=api.sources();
+assert.ok(sources.length>0 && sources.length<=8);
+for(const src of sources){
+  assert.ok(textSent.includes('['+src.id+'] '+src.title),'Every registered source must be present in the AI context');
+  assert.ok(textSent.includes(src.excerpt),'Its excerpt must be fully present in the AI context');
+}
+assert.equal(new Set(Array.from(sources,x=>x.title)).size,sources.length,'Duplicate selected / automatic sources must collapse');
 console.log('CDSQCD v2: registry, ambiguity, citations, missing sources and reset OK.');
