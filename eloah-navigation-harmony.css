@@ -49,3 +49,6 @@ html:root body.eloah-core-menu{padding-left:0!important}
 html:root body:is(#maison-eloah,.eloah-core-menu) nav#eloah-primary-navigation{display:none!important}
 html:root body:is(#maison-eloah,.eloah-core-menu).eloah-navigation-open nav#eloah-primary-navigation{display:flex!important;flex-direction:column!important;align-items:stretch!important}
 }
+
+/* Async tool search must never push the six destinations down. */
+html:root body:is(#maison-eloah,.eloah-core-menu) nav#eloah-primary-navigation #eloah-tools-trigger{order:1!important;margin-top:18px!important}
