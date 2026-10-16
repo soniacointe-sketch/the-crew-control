@@ -35,7 +35,10 @@ function init(){
    if(action==='upload'){
     const items=local.filter(x=>x.universe===universe);
     if(!items.length)throw Error('Aucune note locale pour cet univers.');
-    if(!confirm('Remplacer la mémoire cloud de « '+universe+' » par les '+items.length+' notes locales ?'))return;
+    const existing=await sdk.from('eloah_agent_memory').select('content').eq('owner_id',user).eq('universe',universe).maybeSingle();
+    if(existing.error)throw existing.error;
+    if(existing.data){parse(existing.data.content,universe)}
+    if(!confirm((existing.data?'Remplacer':'Créer')+' la mémoire cloud de « '+universe+' » avec '+items.length+' notes locales ?'))return;
     const {error}=await sdk.from('eloah_agent_memory').upsert({owner_id:user,universe,content:wrap(universe,items),updated_at:new Date().toISOString()},{onConflict:'owner_id,universe'});
     if(error)throw error;status('Mémoire « '+universe+' » sauvegardée dans ton cloud.');
   }else{
