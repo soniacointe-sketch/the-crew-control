@@ -13,10 +13,11 @@ function init(){
    universe:document.getElementById('home-ai-project')?.value||'ELOAH',
    subject:document.getElementById('ef-subject')?.value||'',
    deliverable:{type:'text',content},
-   references:window.EloahAutoSources?.sources?.()||[],
+   references:window.EloahEvidence?.sources?.()||window.EloahAutoSources?.sources?.()||[],
+   citation_review:window.EloahEvidence?.audit?.(content)||null,
    visual_assets:[],
    status:{text_generated:true,images_generated:false,files_published:false},
-   note:'Texte à relire. Aucun visuel généré ni publication réalisée.'
+   note:'Texte à relire. Les sources sont des extraits internes, pas des preuves indépendamment vérifiées. Les références citées et les affirmations restent à contrôler. Aucun visuel généré ni publication réalisée.'
   };
   const url=URL.createObjectURL(new Blob([JSON.stringify(file,null,2)],{type:'application/json;charset=utf-8'}));
   const a=document.createElement('a');a.href=url;a.download='eloah-dossier-et-sources.json';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),2000);
