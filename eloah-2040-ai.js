@@ -116,4 +116,22 @@ el('ai-history-toggle').addEventListener('change',()=>{el('ai-payload-preview').
 window.addEventListener('pagehide',()=>{authEpoch++;activeAccount=null;resetConversation('Conversation effacée après fermeture de l’espace.',true,approvedHandoff)});
 window.addEventListener('pageshow',event=>{if(event.persisted)void refresh()});
 window.addEventListener('offline',()=>{cancelRequest('Connexion de l’appareil interrompue. Réessaie une fois en ligne.');answerState('')});
-updateLength();if(await ensureClient())await refresh();
+function receiveRoutineHandoff(){
+ try{
+  const raw=sessionStorage.getItem('eloah-routine-handoff-v1');
+  if(!raw)return;
+  sessionStorage.removeItem('eloah-routine-handoff-v1');
+  const item=JSON.parse(raw);
+  if(!item||typeof item.text!=='string'||!Number.isFinite(item.created_at)||Date.now()-item.created_at>600000||item.created_at>Date.now()+30000)return;
+  if(el('ai-request').value.trim())return;
+  el('ai-request').value=item.text.slice(0,4200);
+  el('ai-history-toggle').checked=false;
+  el('ai-project').value='ELOAH';
+  updateLength();
+  el('ai-payload-preview').hidden=true;
+  output.textContent='Routine ELOAH chargée comme brouillon. Relis la demande et clique sur Envoyer seulement si tu le souhaites.';
+ }catch{
+  if(el('ai-output'))el('ai-output').textContent='Import de routine indisponible : ouvre Mes routines pour recommencer.';
+ }
+}
+updateLength();receiveRoutineHandoff();if(await ensureClient())await refresh();
