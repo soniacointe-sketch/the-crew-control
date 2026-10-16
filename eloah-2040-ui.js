@@ -16,5 +16,5 @@ try{const d=JSON.parse(localStorage.getItem(displayKey)||'{}');if(d.focus===true
 $('#focus-toggle').addEventListener('click',saveDisplay);$('#motion-toggle').addEventListener('click',saveDisplay);
 function stopVoice(){if(recognizer)try{recognizer.abort()}catch{}updateVoice(false)}
 window.addEventListener('pagehide',stopVoice);document.addEventListener('visibilitychange',()=>{if(document.hidden)stopVoice()});
-for(const a of document.querySelectorAll('.workspace-sections a'))a.addEventListener('click',()=>{document.querySelector(a.getAttribute('href'))?.scrollIntoView({behavior:scrollBehavior(),block:'start'})});
+for(const a of document.querySelectorAll('.workspace-sections a'))a.addEventListener('click',()=>{const href=a.getAttribute('href')||'';if(!href.startsWith('#'))return;document.getElementById(href.slice(1))?.scrollIntoView({behavior:scrollBehavior(),block:'start'});});
 })();
