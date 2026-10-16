@@ -34,12 +34,12 @@
 <section id="export"><div class="num">07 / PORTABILITÉ</div><h2>Récupérer mes données</h2><p>Export privé de toutes les mémoires ELOAH sauvegardées dans ton compte fondatrice, au format JSON ou Markdown. Aucun compte tiers n'est contacté.</p><div class="row"><button id="export-json" type="button" disabled>Exporter mes mémoires JSON</button><button id="export-md" type="button" class="secondary" disabled>Exporter en Markdown</button></div><p id="export-status" class="help" role="status">Connexion requise.</p></section>
 </div>
 <section class="wide" id="chatgpt" aria-labelledby="import-title">
-<div class="num">06 / IMPORTATION CHATGPT</div><h2 id="import-title">Faire entrer mes anciennes conversations</h2><p>Tu peux sélectionner <strong>conversations.json</strong> depuis ton export ChatGPT. Le fichier reste sur ton appareil jusqu'à ce que tu sélectionnes explicitement un extrait puis demandes sa sauvegarde dans ELOAH.</p>
+<div class="num">06 / IMPORTATION CHATGPT</div><h2 id="import-title">Faire entrer mes anciennes conversations</h2><p>Tu peux sélectionner <strong>conversations.json</strong> depuis ton export ChatGPT, ou saisir manuellement les préférences et consignes de tes assistants personnalisés. Le fichier reste sur ton appareil jusqu'à ce que tu sélectionnes explicitement un extrait puis demandes sa sauvegarde dans ELOAH.</p>
 <p class="help">Dans l'archive ZIP téléchargée depuis ChatGPT, décompresse puis sélectionne conversations.json. N'importe quel échange peut contenir des informations privées : relis avant de conserver.</p>
-<div class="field"><label for="import-file">Fichier JSON (maximum 8 Mo)</label><input id="import-file" type="file" accept=".json,application/json"></div>
+<div class="field"><label for="import-file">Fichier JSON (maximum 8 Mo)</label><input id="import-file" type="file" accept=".json,application/json"></div><div class="row"><button id="import-manual" type="button" class="secondary">Saisir mes préférences ou instructions d’assistant</button></div>
 <p id="import-summary" class="muted" role="status">Aucun fichier sélectionné.</p>
 <div id="import-controls" hidden>
-<div class="field"><label for="import-conversation">Conversation à examiner</label><select id="import-conversation"></select></div>
+<div class="field"><label for="import-conversation">Élément à examiner</label><select id="import-conversation"></select></div>
 <div class="field"><label for="import-preview">Extrait à relire et modifier (maximum 6 000 caractères)</label><textarea id="import-preview" maxlength="6000" rows="9"></textarea></div>
 <div class="field"><label for="import-universe">Univers de destination</label><select id="import-universe"><option>ELOAH</option><option>SONIA OS</option><option>Power &amp; Glam</option><option>The Crew Orchies</option><option>PARISIS ENGINE</option><option>Sonia Velka</option><option>Le Lion Blanc</option><option>Foi &amp; spiritualité</option><option>Agents transversaux</option></select></div>
 <label class="check"><input id="import-confirm" type="checkbox"> Je confirme avoir relu cet extrait et accepte son enregistrement dans la mémoire cloud de cet univers. Si une mémoire existe déjà, je veux l'ajouter à la suite, sans supprimer le texte existant.</label>
@@ -49,5 +49,5 @@
 </section>
 <p class="footer">ELOAH · Centre de passerelles. Aucune promesse de 150 intégrations ou de 30 modèles connectés : seuls les services vérifiables dans ton environnement sont présentés comme référencés. Les actions sensibles restent soumises à validation humaine.</p>
 </main>
-<script type="module" src="eloah-passerelles.js?v=1"></script>
+<script type="module" src="eloah-passerelles.js?v=2"></script>
 </body></html>
