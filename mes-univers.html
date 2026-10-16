@@ -28,7 +28,13 @@ html#eloah-ivory-home body nav.eloah-global-nav>[data-central-ai]{grid-column:2;
 }
 </style><link rel="stylesheet" href="eloah-home-ivory.css?v=20261017-menu2"/>
 <link rel="stylesheet" href="eloah-navigation-harmony.css?v=20261017-stable">
-</head>
+<style>
+.home-project-row{display:flex;align-items:stretch;gap:10px;margin-bottom:10px}
+.home-project-row .project-link{flex:1;min-width:0}
+.home-project-delete{align-self:stretch;border:1px solid rgba(160,80,80,.32);border-radius:12px;background:transparent;color:inherit;font:inherit;font-size:.85rem;cursor:pointer;padding:10px 14px}
+.home-project-delete:hover,.home-project-delete:focus-visible{border-color:#b45353;background:rgba(180,70,70,.09)}
+@media(max-width:480px){.home-project-row{flex-wrap:wrap}.home-project-delete{margin-left:auto}}
+</style></head>
 <body id="maison-eloah" class="eloah-core-menu eloah-screen eloah-home-client eloah-home-pro" data-eloah-page="mes-univers.html"><nav id="eloah-primary-navigation" class="eloah-global-nav" aria-label="Navigation commune ELOAH"><a class="eloah-wordmark" href="mes-univers.html">ELOAH · L’ESPACE DE SONIA</a><details class="eloah-menu" open><summary>Menu</summary><div class="eloah-menu-links"><a href="mes-univers.html">Accueil</a><a href="eloah-pilotage.html">Mon organisation</a><a href="mes-univers.html#mes-univers-principaux">Mes univers</a><a href="mes-univers.html#services">Mes studios</a><a href="eloah-2040.html#assistant-reel">Mon assistante</a><a href="mes-univers.html#reglages">Réglages</a></div></details></nav>
 <a class="skip-link" href="#contenu">Aller à mon accueil</a>
 <nav aria-label="Accès principaux" class="fallback-nav"><a href="mes-univers.html">Accueil</a><a href="eloah-pilotage.html">Mon organisation</a><a href="mes-univers.html#mes-univers-principaux">Mes univers</a><a href="mes-univers.html#services">Mes studios</a><a href="eloah-2040.html#assistant-reel">Mon assistante</a><a href="mes-univers.html#reglages">Réglages</a></nav>
@@ -111,9 +117,9 @@ html#eloah-ivory-home body nav.eloah-global-nav>[data-central-ai]{grid-column:2;
 <a class="eloah-dev-card" href="https://github.com/soniacointe-sketch/the-crew-control" rel="noopener noreferrer" target="_blank"><span aria-hidden="true" class="eloah-dev-image" data-fallback="✧"><img alt="" decoding="async" height="200" loading="lazy" referrerpolicy="no-referrer" src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&amp;fit=crop&amp;w=900&amp;q=80" width="320"/></span><strong>Dépôt du site ↗</strong></a>
 </div></div></details></section><footer class="footer"><span>ELOAH · Des idées aux prochaines étapes.</span><a href="#premiers-pas">Mes premiers pas</a><a href="#compte-et-sauvegardes">Mon compte et mes sauvegardes</a><a aria-label="Installer ELOAH sur téléphone" href="eloah-installer.html" id="eloah-install-link">Installer ELOAH ↗</a><span class="home-photo-note">Photographies d’ambiance : Unsplash. Elles illustrent les activités et ne représentent pas Sonia ni les membres de The Crew.</span></footer>
 </main>
-<dialog aria-labelledby="home-new-title" id="home-new-project"><div class="row"><h2 id="home-new-title">Mon nouveau projet</h2><button aria-label="Fermer" id="home-new-close" type="button">×</button></div><form id="home-new-form"><label for="home-new-name">Comment s’appelle ton projet ?<input autocomplete="off" id="home-new-name" maxlength="100" placeholder="Ex. Préparer mon prochain atelier" required=""/></label><p>Tu pourras ensuite y garder tes conversations, tes documents et tes prochaines actions.</p><button class="primary" type="submit">Ouvrir mon projet →</button></form></dialog>
+<dialog aria-labelledby="home-new-title" id="home-new-project"><div class="row"><h2 id="home-new-title">Mon nouveau projet</h2><button aria-label="Fermer" id="home-new-close" type="button">×</button></div><form id="home-new-form"><label for="home-new-name">Comment s’appelle ton projet ?<input autocomplete="off" id="home-new-name" maxlength="100" placeholder="Ex. Préparer mon prochain atelier" required=""/></label><p>Ton dossier sera créé dans Mes projets sur cet appareil. Tu pourras le supprimer quand tu veux.</p><button class="primary" type="submit">Créer mon dossier →</button></form></dialog>
 <noscript><p class="reassurance">Active JavaScript pour afficher les projets de cet appareil et utiliser la recherche. Les liens vers les outils restent accessibles.</p></noscript>
 <script src="eloah-navigation.js?v=20261017-stable"></script>
 
-<script defer="" src="eloah-mobile-app.js?v=12.0"></script><script defer="" src="eloah-accueil-pro.js?v=20261017-menu2"></script><script defer="" src="eloah-accueil-ia.js?v=20261017-six"></script></body>
+<script defer="" src="eloah-mobile-app.js?v=12.0"></script><script defer="" src="eloah-accueil-pro.js?v=20261017-projectfolders"></script><script defer="" src="eloah-accueil-ia.js?v=20261017-six"></script></body>
 </html>
