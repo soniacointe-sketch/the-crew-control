@@ -141,6 +141,13 @@ html#eloah-inner-ivory body.client-page .focus-progress{background:#ded8c9!impor
 html#eloah-inner-ivory body.client-page .focus-progress>span{background:#293d38!important}
 html#eloah-inner-ivory body.client-page :is(.focus-aside-cta,.workspace-section,.focus-aside-cta a,.focus-empty){border-color:#d9d4c9!important}
 html#eloah-inner-ivory body.client-page .pilotage-anchors a b{color:#806d48!important}
+</style><style>
+html#eloah-inner-ivory body.client-page #pilotage-action-search{width:100%;margin:5px 0 12px}
+html#eloah-inner-ivory body.client-page .focus-filters{display:flex!important;flex-wrap:wrap}
+html#eloah-inner-ivory body.client-page #pilotage-focus-count{color:#51574e!important;font-size:12px}
+html#eloah-inner-ivory body.client-page .pilotage-hero-copy .ivory-photo{display:none}
+html#eloah-inner-ivory body.client-page .pilotage-anchors a:hover{background:#ded8c9!important}
+html#eloah-inner-ivory body.client-page #ops-status{background:#293d38!important;color:#fffcf7!important;-webkit-text-fill-color:#fffcf7!important}
 </style></head>
 <body data-prune-lumiere class="client-page">
 
@@ -194,17 +201,17 @@ html#eloah-inner-ivory body.client-page .pilotage-anchors a b{color:#806d48!impo
   <div class="focus-heading">
     <div>
       <p class="eyebrow">MON CENTRE D'ACTIONS · DONNÉES DE CET APPAREIL</p>
-      <h2 id="pilotage-focus-heading">À traiter <em>maintenant.</em></h2>
-      <p>Retrouve les prochaines actions sans ouvrir tout le planning. Aucune tâche de démonstration n'est ajoutée.</p>
+      <h2 id="pilotage-focus-heading">Mes <em>priorités.</em></h2>
+      <p>Choisis une action et reprends le fil.</p>
     </div>
     <button id="pilotage-focus-add" type="button">＋ Ajouter une action</button>
   </div>
   <div class="focus-layout">
     <section class="focus-main" aria-label="Mes actions en priorité">
       <div class="focus-bar"><h3>Ce qui compte</h3><span id="pilotage-focus-count" aria-live="polite">Lecture du planning…</span></div>
-      <div class="focus-filters" aria-label="Filtrer les actions locales">
+      <label for="pilotage-action-search">Rechercher une action</label><input id="pilotage-action-search" type="search" placeholder="Titre, projet, statut…" autocomplete="off"/><div class="focus-filters" aria-label="Filtrer les actions locales">
         <button type="button" data-focus-filter="priority" aria-pressed="true">À traiter</button>
-        <button type="button" data-focus-filter="week" aria-pressed="false">7 prochains jours</button>
+        <button type="button" data-focus-filter="today" aria-pressed="false">Aujourd’hui</button><button type="button" data-focus-filter="late" aria-pressed="false">En retard</button><button type="button" data-focus-filter="week" aria-pressed="false">À venir</button>
         <button type="button" data-focus-filter="unscheduled" aria-pressed="false">Sans date</button>
       </div>
       <div id="pilotage-focus-list" class="focus-list" aria-live="polite">
@@ -229,7 +236,7 @@ html#eloah-inner-ivory body.client-page .pilotage-anchors a b{color:#806d48!impo
   </div>
 </section>
 <section id="mon-organisation" class="workspace-section" aria-labelledby="organisation-heading">
-<div class="section-head"><div><h2 id="organisation-heading">Mes actions et mes dates</h2><p>Note ce que tu veux faire, donne une date si tu en as une, et retrouve tes prochaines étapes.</p></div></div>
+<div class="section-head"><div><h2 id="organisation-heading">Mes dates</h2><p>Note ce que tu veux faire, donne une date si tu en as une, et retrouve tes prochaines étapes.</p></div></div>
 <section class="client-next" id="client-next" aria-live="polite" aria-label="Mes prochaines actions"><p>Chargement de tes actions…</p></section>
 <section class="ops-card" id="ops-calendar" aria-label="Mon planning"><p>Chargement de ton planning…</p><noscript><p>Active JavaScript pour utiliser le planning.</p></noscript></section>
 <details id="ops-transfert" class="secondary-panel"><summary>Rassembler mes actions</summary><div class="secondary-content"><p>Ajoute à ce planning les actions déjà notées dans le Centre d’actions, sans perdre celles qui sont ici.</p><div class="ops-actions"><button type="button" id="ops-transfer-preview">Voir les actions à récupérer</button><button type="button" id="ops-transfer-go">Ajouter ces actions</button><a class="btn" href="eloah-actions.html">Ouvrir le Centre d’actions ↗</a></div><p id="ops-transfer-status" role="status" aria-live="polite"></p></div></details>
@@ -394,7 +401,7 @@ if(client)who().then(u=>{status(u?'Connectée au compte ELOAH.':'Connecte-toi po
 <script src="eloah-pilotage-client.js?v=20261014-client2"></script>
 <script src="eloah-pilotage-organisation.js?v=20261014-client1"></script>
 <script src="eloah-pilotage-overview.js?v=1.0.0" defer></script>
-<script src="eloah-pilotage-focus.js?v=2.0.0" defer></script>
+<script src="eloah-pilotage-focus.js?v=20261016-search" defer></script>
 <script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/',updateViaCache:'none'}).then(r=>r.update()).catch(()=>{}));</script><script>(()=>{'use strict';const el=id=>document.getElementById(id),norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();function filterOrganismes(){let n=0,visibleDomains=0;const domain=el('demarches-domain').value,q=norm(el('demarches-search').value.trim());document.querySelectorAll('[data-directory-domain]').forEach(group=>{let count=0;group.querySelectorAll('[data-organisme]').forEach(card=>{const match=!(domain&&card.dataset.domaine!==domain)&&norm(card.dataset.organisme+' '+card.dataset.domaine).includes(q);card.hidden=!match;if(match){count++;n++}});group.hidden=count===0;group.querySelector('.domain-count').textContent=count+' accès';if(count)visibleDomains++;group.open=!!(q||domain)&&count>0;});el('demarches-empty').hidden=n>0;el('demarches-directory-count').textContent=visibleDomains+' domaines · '+n+' accès. Ouvre un domaine pour retrouver ses services.';}el('demarches-search').oninput=filterOrganismes;el('demarches-domain').onchange=filterOrganismes;filterOrganismes();document.querySelectorAll('[data-preparer]').forEach(b=>b.onclick=()=>{el('demarches-create').open=true;el('demarches-org').value=b.dataset.preparer;el('demarches-action').focus()});el('demarches-form').onsubmit=e=>{e.preventDefault();const org=el('demarches-org').value.trim(),action=el('demarches-action').value.trim();if(!org||!action)return;try{const key='eloah-planning-v1',items=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(items))throw Error('Planning illisible : aucune donnée remplacée.');items.push({id:'demarche-'+crypto.randomUUID(),title:org+' · '+action,project:'Mes démarches',date:el('demarches-date').value,status:'À faire',kind:'Démarche',note:'',archived:false});localStorage.setItem(key,JSON.stringify(items));window.ELOAHWorkspace?.renderCalendar?.();el('demarches-form').reset();el('demarches-result').textContent='Démarche enregistrée dans le planning de cet appareil.'}catch(err){el('demarches-result').textContent='Enregistrement impossible : '+err.message}}})();</script><script>(()=>{'use strict';
 const host=document.getElementById('demarches-tracking'),filter=document.getElementById('demarches-state'),key='eloah-planning-v1';
 const create=(tag,text)=>{const e=document.createElement(tag);e.textContent=text;return e};
