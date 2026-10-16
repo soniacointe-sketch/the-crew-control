@@ -56,7 +56,10 @@ function render(){
  meta.textContent=all.length?(pct+' % terminées · aperçu local sans synchronisation'):'Aucune action enregistrée pour le moment.';
  const end=new Date(now+'T12:00:00Z');end.setUTCDate(end.getUTCDate()+7);
  const weekEnd=end.toISOString().slice(0,10);
- const list=active.filter(x=>{
+ const q=($('pilotage-action-search')?.value||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().trim();
+ const list=active.filter(x=>{if(q&&!q.split(/\s+/).every(w=>[x.title,x.project,x.status].join(' ').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().includes(w)))return false;
+  if(selected==='today')return goodDate(x.date)&&x.date===now;
+  if(selected==='late')return goodDate(x.date)&&x.date<now;
   if(selected==='week')return goodDate(x.date)&&x.date>=now&&x.date<=weekEnd;
   if(selected==='unscheduled')return !goodDate(x.date);
   return true;
@@ -92,8 +95,9 @@ function render(){
  host.append(fragment);
  if(list.length>6)host.append(node('p','focus-list-foot','6 actions sur '+list.length+' affichées. Voir le planning pour la liste complète.'));
 }
+$('pilotage-action-search')?.addEventListener('input',render);
 for(const b of tabs)b.addEventListener('click',()=>{
- if(!['priority','week','unscheduled'].includes(b.dataset.focusFilter))return;
+ if(!['priority','today','late','week','unscheduled'].includes(b.dataset.focusFilter))return;
  selected=b.dataset.focusFilter;
  for(const t of tabs)t.setAttribute('aria-pressed',String(t===b));
  render();
