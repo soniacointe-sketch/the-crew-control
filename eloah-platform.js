@@ -71,6 +71,27 @@
       @media(max-width:480px){dialog{padding:18px;border-radius:16px}h2{font-size:26px}nav{max-height:45dvh}}
       @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
     `);
+
+    // The tools dialog follows the active Power & Glam page, inside its shadow root.
+    if (location.pathname.split('/').pop() === 'power-glam-control.html') {
+      style.textContent += `
+        :host{color-scheme:light;color:#082f36}
+        dialog{background:#fffcf6;color:#082f36;border:1px solid #dcc5b4;border-radius:10px;box-shadow:0 20px 60px #082f3626}
+        dialog::backdrop{background:#082f3680;backdrop-filter:blur(4px)}
+        h2{font-family:"Bodoni 72","Bodoni MT",Didot,Georgia,serif;color:#082f36}
+        h3,label{color:#126c78}
+        p,.meta,footer{color:#47656a}
+        button{background:#bcedea;border-color:#8bbdbf;color:#082f36;border-radius:6px}
+        button:hover{background:#a9e0dd}
+        input{background:#fffdf7;border-color:#7a9c9f;color:#082f36;border-radius:6px}
+        input::placeholder{color:#56757b;opacity:1}
+        a{background:#f4efe7;border-color:#d3dcd5;color:#082f36;border-radius:6px}
+        a:hover,a:focus-visible{background:#bcedea;border-color:#8bbdbf;color:#082f36}
+        :is(a,button,input):focus-visible{outline-color:#126c78}
+        footer{border-color:#dcc5b4}
+        @media(max-width:480px){dialog{border-radius:10px}header{gap:10px}header>div{min-width:0}h2{overflow-wrap:anywhere}header>button{flex-shrink:0}}
+      `;
+    }
     dialog = element('dialog', null, {'aria-labelledby':'ep-title'});
     const header = element('header', null);
     const titleBlock = element('div', null);
