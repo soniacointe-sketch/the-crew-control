@@ -13,7 +13,7 @@
   const shadow = host.attachShadow({mode:'open'});
   // Static markup only: all messages and user text are inserted with textContent/value.
   shadow.innerHTML = `
-<link rel="stylesheet" href="power-glam-intelligence.css?v=1.0">
+<link rel="stylesheet" href="power-glam-intelligence.css?v=20261016-maison">
 <details class="shell" id="panel" open>
  <summary><span><small>✦ LA MAISON ÉDITORIALE · IA 2040</small><strong>Power & Glam Intelligence</strong><span class="subtitle">Une idée. Une conversation. Un contenu à toi.</span></span><span class="chevron" aria-hidden="true">⌄</span></summary>
  <div class="inside">
@@ -41,7 +41,7 @@
   let founderMemory=null,memoryLoading=null;
   async function ensureFounderMemory(){
     if(founderMemory)return founderMemory;if(memoryLoading)return memoryLoading;
-    memoryLoading=(async()=>{const {createFounderMemory}=await deadline(import('./power-glam-founder-memory.js?v=1.0'),15000);
+    memoryLoading=(async()=>{const {createFounderMemory}=await deadline(import('./power-glam-founder-memory.js?v=20261016-maison'),15000);
       founderMemory=createFounderMemory({shadow,isVerified:()=>verified&&identity===founderId,onChange:message=>reset(message)});return founderMemory;})();
     try{return await memoryLoading;}finally{memoryLoading=null;}
   }
