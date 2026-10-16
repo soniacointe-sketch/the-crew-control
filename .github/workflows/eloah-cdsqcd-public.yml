@@ -1,0 +1,50 @@
+name: ELOAH CDSQCD public deployment smoke
+on:
+  workflow_run:
+    workflows: ['Deploy The Crew Control']
+    types: [completed]
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: cdsqcd-public-smoke
+  cancel-in-progress: true
+jobs:
+  verify-public-site:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 6
+    steps:
+      - name: Check public HTML and CDN-delivered CDSQCD scripts
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import time
+          import urllib.request
+          from urllib.error import URLError
+          root='https://soniacointe-sketch.github.io/the-crew-control/'
+          files={
+            'mes-univers.html': ['eloah-cdsqcd-evidence.js', 'eloah-livrable-studio.js', 'eloah-accueil-ia.js'],
+            'eloah-cdsqcd-evidence.js': ['AUCUNE SOURCE', 'function audit', 'function commit'],
+            'eloah-livrable-studio.js': ['ef-prepare', 'CDSQCD', 'eloah-result-guide'],
+            'eloah-accueil-ia.js': ['EloahEvidence', 'home-ai-form']
+          }
+          last=[]
+          for attempt in range(1,10):
+            last=[]
+            for name,required in files.items():
+              try:
+                req=urllib.request.Request(root+name+'?cdsqcd-check='+str(attempt),headers={'User-Agent':'ELOAH-CDSQCD-smoke/1.0','Cache-Control':'no-cache'})
+                with urllib.request.urlopen(req,timeout=14) as resp:
+                  value=resp.read().decode('utf-8')
+                missing=[text for text in required if text not in value]
+                if missing:last.append(name+': missing '+', '.join(missing))
+                else:print('OK '+name+' ('+str(len(value))+' chars)')
+              except (URLError,TimeoutError,UnicodeDecodeError) as e:
+                last.append(name+': '+str(e))
+            if not last:break
+            print('Attempt '+str(attempt)+' did not pass: '+repr(last))
+            if attempt<9:time.sleep(6)
+          if last:raise SystemExit('Public deployment verification failed: '+repr(last))
+          print('Public ELOAH CDSQCD scripts verified over HTTPS.')
+          PY
