@@ -118,7 +118,7 @@ const desktopMenu=matchMedia('(min-width:1001px)');
 function syncSidebar(){menu.open=desktopMenu.matches}
 syncSidebar();desktopMenu.addEventListener('change',syncSidebar);
 menu.addEventListener('toggle',()=>{if(desktopMenu.matches&&!menu.open)menu.open=true});
-if(query.get('rubrique')==='Analytics')nav.querySelector('.eloah-nav-analytics').open=true;
+if(query.get('rubrique')==='Analytics'&&nav.querySelector('.eloah-nav-analytics'))nav.querySelector('.eloah-nav-analytics').open=true;
 const escape=s=>String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 function projects(){const out=[];try{for(const k of Object.keys(localStorage).filter(k=>k.startsWith('eloah-project-v1:'))){try{const s=JSON.parse(localStorage.getItem(k));if(Array.isArray(s?.threads))out.push({key:k.slice(17),name:s.settings?.name||k.slice(17),updated:s.updated,deadline:s.settings?.deadline,archived:s.settings?.archived})}catch{}}}catch{}return out.sort((a,b)=>(b.updated||'').localeCompare(a.updated||''))}
 if(page==='mes-univers.html'){
@@ -326,3 +326,6 @@ if(page==='mes-univers.html'){
 
 /* Central assistant access: no data transmitted by opening this link. */
 (()=>{function add(){const menu=document.querySelector('.eloah-global-nav');if(!menu||menu.querySelector('[data-central-ai]'))return;const a=document.createElement('a');a.dataset.centralAi='1';a.textContent='✦ ELOAH IA · Piloter';a.href='eloah-2040.html?rubrique='+encodeURIComponent(location.pathname.split('/').pop()+location.search)+'#assistant-reel';a.style.cssText='display:flex;align-items:center;padding:12px 16px;min-height:44px;color:inherit';menu.append(a)}if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',add);else add();})();
+
+/* Shared mobile navigation, after each universe has prepared its own menu. */
+(()=>{if(window.self!==window.top||document.querySelector('script[data-eloah-harmony]'))return;const s=document.createElement('script');s.src='eloah-navigation-harmony.js?v=20261016-1';s.dataset.eloahHarmony='1';s.defer=true;document.head.append(s)})();
