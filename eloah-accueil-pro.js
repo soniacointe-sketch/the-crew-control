@@ -29,8 +29,16 @@ const dialog=$('home-new-project'),input=$('home-new-name');let opener=null;
 for(const button of document.querySelectorAll('[data-new-project]'))button.addEventListener('click',()=>{opener=button;if(typeof dialog.showModal!=='function'){location.href='eloah-pilotage.html#mes-projets';return}dialog.showModal();input.focus()});
 $('home-new-close').addEventListener('click',()=>dialog.close());dialog.addEventListener('close',()=>opener?.focus());input.addEventListener('input',()=>input.setCustomValidity(''));
 $('home-new-form').addEventListener('submit',e=>{e.preventDefault();const name=input.value.trim();if(!name||name.length>100){input.setCustomValidity('Donne un nom de 1 à 100 caractères à ton projet.');input.reportValidity();return}const p=projects.find(p=>norm(p.id)===norm(name)||norm(p.name)===norm(name));location.href=projectURL(p?.id||name)});
-function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}const aliases={'eloah-principaux-univers':'maisons','eloah-quick-nav':'services','eloah-home-daily':'mon-organisation','eloah-morning':'mon-organisation'};const target=$(aliases[id]||id);if(!target)return;for(let p=target;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;requestAnimationFrame(()=>{target.scrollIntoView({block:'start',behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});const focus=target.tagName==='DETAILS'?target.querySelector('summary'):target;if(focus&&focus.tagName!=='SUMMARY')focus.setAttribute('tabindex','-1');focus?.focus({preventScroll:true})})}
+function revealHash(){let id;try{id=decodeURIComponent(location.hash.slice(1))}catch{return}const aliases={'eloah-principaux-univers':'maisons','eloah-quick-nav':'services','eloah-home-daily':'mon-organisation','eloah-morning':'mon-organisation'};const target=$(aliases[id]||id);if(!target)return;for(let p=target;p;p=p.parentElement)if(p.tagName==='DETAILS')p.open=true;requestAnimationFrame(()=>{target.scrollIntoView({block:'start',behavior:'instant'});const focus=target.tagName==='DETAILS'?target.querySelector('summary'):(target.querySelector('h2')||target);if(focus&&focus.tagName!=='SUMMARY')focus.setAttribute('tabindex','-1');focus?.focus({preventScroll:true})})}
 window.addEventListener('hashchange',revealHash);document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(a&&a.hash===location.hash)revealHash()});window.addEventListener('storage',e=>{if(!e.key||e.key.startsWith(prefix)||['eloah-planning-v1','eloah-action-tasks-v1'].includes(e.key)||e.key.startsWith('sonia-universe-v1-'))refresh()});window.addEventListener('focus',refresh);
+// Keep same-page destinations local, including versioned entry URLs.
+for(const a of document.querySelectorAll('.eloah-menu-links a')){
+ const u=new URL(a.href,location.href);
+ if(u.origin===location.origin&&u.pathname===location.pathname){
+  a.href=location.pathname+location.search+u.hash;
+  if(u.hash===location.hash)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');
+ }
+}
 // The shared navigation owns the six main destinations.
 $('home-universe-reset').addEventListener('click',()=>{$('home-universe-search').value='';$('home-universe-category').value='';filterDirectory();$('home-universe-search').focus()});
 $('eloah-search-work').addEventListener('keydown',event=>{if(event.key==='Escape'){event.preventDefault();$('eloah-search-work').value='';search()}if(event.key==='ArrowDown'){const first=$('home-search-list').querySelector('a');if(first){event.preventDefault();first.focus()}}});
