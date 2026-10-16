@@ -1,5 +1,5 @@
 <!doctype html>
-<html id="eloah-prune-lumiere" lang="fr">
+<html id="eloah-inner-ivory" lang="fr">
 <head><meta name="theme-color" content="#160d1d"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="ELOAH"><link rel="manifest" href="eloah.webmanifest"><link rel="icon" href="eloah-app-icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="eloah-app-icon.svg">
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Organise tes actions, retrouve ton planning et avance sur tes projets dans ELOAH.">
@@ -9,19 +9,7 @@
 .client-hero-actions{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:16px 0 18px}.client-hero-actions>*{min-width:175px}.client-page .workspace-choices{margin:19px 0 22px}.client-local-note{font-size:13px!important;line-height:1.6!important;border-left:3px solid #bbaed2;padding:9px 13px;margin:18px 0 26px!important;background:#f1eef7;border-radius:5px}.client-next{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:22px 0}.client-next>.client-next-card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:16px;min-width:0;display:flex;flex-direction:column;gap:7px;overflow-wrap:anywhere}.client-next-card strong{font-size:14px}.client-next-card small{color:var(--muted);font-size:12px}.client-next-card button{align-self:flex-start;min-height:40px;margin-top:auto;font-size:12px}.client-next-empty{grid-column:1/-1;border:1px dashed var(--line);background:var(--panel);border-radius:12px;padding:19px}.client-next-empty p{margin:5px 0!important;font-size:14px}.client-next-heading{grid-column:1/-1;font:400 21px/1.3 Georgia,serif;margin:0}.client-next-description{grid-column:1/-1;margin:0!important;font-size:13px!important}.client-project-tools{border:1px solid var(--line);background:var(--panel);border-radius:12px;padding:15px 18px;display:flex;align-items:center;gap:12px 22px;flex-wrap:wrap;margin:17px 0}.client-project-tools label{display:grid;gap:7px;flex:0 1 285px;font-size:13px;color:#596257}.client-project-tools select{font-size:14px;width:100%;min-width:0}.client-project-tools p{flex:1 1 240px;font-size:12px!important}.client-page a[data-project-link][data-unavailable="1"]{opacity:.85;border-style:dashed}.client-page #client-project-error:empty{display:none}.client-page #client-project-error:not(:empty){color:#a34249;font-size:13px}.client-page #client-core-tools{margin-bottom:8px}.client-page #client-more-tools{margin-top:14px}.client-page #client-more-tools>.secondary-content{padding-top:0}.client-page #client-more-tools .services{margin-bottom:0}@media(max-width:850px){.client-next{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.client-hero-actions>*{flex:1 1 100%}.client-next{grid-template-columns:1fr}.client-next-empty{grid-column:1}.client-project-tools{display:block;padding:14px}.client-project-tools label{display:grid;width:100%}.client-page #client-core-tools{grid-template-columns:1fr}.client-page #client-more-tools .services{grid-template-columns:1fr}}</style>
 <link rel="stylesheet" href="eloah-pilotage-premium.css?v=1.0.0">
 <link rel="stylesheet" href="eloah-pilotage-refine.css?v=2.0.0">
-<style id="pilotage-video-style">
-body.client-page{isolation:isolate}
-body.client-page #pilotage-ambient{position:fixed;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;pointer-events:none;opacity:.62}
-body.client-page::before{content:"";position:fixed;inset:0;z-index:-1;pointer-events:none;background:linear-gradient(110deg,#100819e8,#1d0929a8 65%,#210b28b8)}
-body.client-page .client-hero{background:linear-gradient(110deg,#26132bd9,#180d23a6)!important}
-body.client-page #mes-projets{position:relative;background:#1b1028a6;border:1px solid #8e6085;border-radius:18px;padding:26px;margin:28px 0}
-body.client-page #mes-projets .section-head p{color:#e1cddd}
-body.client-page #pilotage-film-toggle{font-size:11px;min-height:44px;background:#2e1838;color:#f9e5ef;border:1px solid #ae83a2}
-body.client-page .pilotage-film-controls{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
-body.client-page .pilotage-film-controls a{font-size:10px;color:#d9bdd0}
-@media(max-width:650px){body.client-page #mes-projets{padding:18px 14px}}
-@media print{#pilotage-ambient,.pilotage-film-controls,body.client-page::before{display:none!important}}
-</style><style>
+<style>
 body.client-page .client-hero{padding:22px;margin-bottom:16px}
 body.client-page .pilotage-hero-inner{padding:15px 0;gap:24px}
 body.client-page .pilotage-hero-copy h1{font-size:clamp(30px,3vw,44px)}
@@ -43,37 +31,6 @@ body.client-page .client-hero .pilotage-hero-proof,body.client-page .client-hero
 body.client-page #eloah-tools-trigger{color:#f3e3ef!important;background:#302039!important;border:1px solid #8b6684!important}
 body.client-page .client-hero-actions a,body.client-page .client-hero-actions button{min-height:44px}
 @media(max-width:650px){body.client-page .client-hero{padding:16px}body.client-page .pilotage-kpis{grid-template-columns:repeat(2,minmax(0,1fr))}body.client-page .pilotage-panel{padding:12px}body.client-page .client-hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}body.client-page .client-hero-actions>*{text-align:center;padding:10px 8px;font-size:12px}}
-</style><style id="eloah-unified-workspace-colors">
-/* Shared ELOAH workspace palette, scoped to these two pages. */
-body:is(.client-page,.eloah-home-pro){
---home-paper:#130c19;--home-card:#24162d;--home-ink:#fff4ed;--home-muted:#d5c3d4;--home-line:#6e506c;--home-prune:#38203e;--home-champagne:#ead4b4;--home-accent:#ead4b4;
---bg:#130c19;--panel:#24162d;--ink:#fff4ed;--muted:#d5c3d4;--line:#6e506c;--purple:#ead4b4;--tint:#38203e;
-background:#130c19!important;color:#fff4ed!important;color-scheme:dark}
-body:is(.client-page,.eloah-home-pro) main#contenu{background:transparent!important;color:#fff4ed!important}
-body:is(.client-page,.eloah-home-pro) #contenu :is(h1,h2,h3,h4){color:#fff4ed!important}
-body:is(.client-page,.eloah-home-pro) #contenu :is(p,small,.help,.desc){color:#d5c3d4!important}
-body:is(.client-page,.eloah-home-pro) #contenu :is(.eyebrow,.choice-top,.number){color:#ead4b4!important}
-body:is(.client-page,.eloah-home-pro) #contenu :is(.search-area,.search-results,.choice,.ec-cards a,.secondary,.project-link,.project-tile,.tool,.task,.empty-state,.reassurance,.home-status,.directory>a,.eloah-account-card,.eloah-sites-card,.eloah-dev-card,.focus-main,.focus-aside,.pilotage-panel,.pilotage-kpi,.client-next,#ops-calendar,.secondary-panel,.services article){background:#24162d!important;border-color:#6e506c!important;color:#fff4ed!important;box-shadow:0 8px 24px #00000020!important}
-body:is(.client-page,.eloah-home-pro) #contenu :is(.home-hero,.client-hero){background:linear-gradient(135deg,#2d1934,#190f23)!important;border-color:#6e506c!important}
-body:is(.client-page,.eloah-home-pro) #contenu :is(.secondary>summary,.section-head,.topline){border-color:#6e506c!important}
-body:is(.client-page,.eloah-home-pro) :is(input:not([type=range]):not([type=checkbox]),select,textarea){background:#180f20!important;color:#fff4ed!important;border-color:#8d6a87!important}
-body:is(.client-page,.eloah-home-pro) input::placeholder,body:is(.client-page,.eloah-home-pro) textarea::placeholder{color:#bfaabd!important;opacity:1}
-body:is(.client-page,.eloah-home-pro) #contenu :is(button,.btn){background:#38203e!important;color:#fff4ed!important;border:1px solid #8d6a87!important;border-radius:9px}
-body:is(.client-page,.eloah-home-pro) #contenu :is(button,.btn):hover{background:#4a2d50!important;border-color:#ead4b4!important}
-body:is(.client-page,.eloah-home-pro) #contenu :is(.primary,button[aria-pressed=true]){background:#ead4b4!important;color:#241329!important;border-color:#ead4b4!important}
-body:is(.client-page,.eloah-home-pro) #contenu a:not(.btn){text-decoration-color:#ad89a3}
-body:is(.client-page,.eloah-home-pro) #contenu :is(.directory strong,.eloah-universe-card strong,.ec-cards strong){color:#ead4b4!important}
-body:is(.client-page,.eloah-home-pro) #contenu .ec-cards small{color:#d5c3d4!important}
-body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav{background:#180e20!important;color:#fff4ed!important;border-right:1px solid #6e506c!important}
-body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav :is(a,summary){color:#f2e3ee!important}
-body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav .eloah-menu-links{background:#180e20!important}
-body:is(.client-page,.eloah-home-pro) nav.eloah-global-nav a[aria-current]{background:#38203e!important;color:#ead4b4!important;border-left:2px solid #ead4b4!important}
-body:is(.client-page,.eloah-home-pro) #eloah-tools-trigger{background:#24162d!important;color:#f2e3ee!important;border:1px solid #8d6a87!important}
-body:is(.client-page,.eloah-home-pro) dialog{background:#24162d!important;color:#fff4ed!important;border-color:#8d6a87!important}
-body:is(.client-page,.eloah-home-pro) :is(a,button,input,select,textarea,summary):focus-visible{outline:2px solid #ead4b4!important;outline-offset:4px}
-body:is(.client-page,.eloah-home-pro) #contenu .pilotage-anchors{background:#1d1227!important;border-color:#6e506c!important}
-body:is(.client-page,.eloah-home-pro) #contenu .client-local-note{background:#2d1d32!important;border-color:#a08291!important;color:#e4d0df!important}
-@media(prefers-reduced-motion:reduce){body:is(.client-page,.eloah-home-pro) *{transition:none!important}}
 </style><style id="demarches-responsive">#mes-demarches{scroll-margin-top:24px}#demarches-form{display:grid;grid-template-columns:1fr 2fr 1fr;align-items:end}#demarches-form label{display:grid;gap:6px;min-width:0}#demarches-form input{width:100%;min-width:0}#demarches-form button{grid-column:1/-1;justify-self:start}#demarches-directory article{overflow-wrap:anywhere}#demarches-search{width:min(100%,420px);margin:8px 0;display:block}@media(max-width:650px){#demarches-form{grid-template-columns:1fr}#demarches-form input{font-size:16px}#demarches-form button{width:100%}}</style><style>.demarche-row{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:16px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.demarche-row>div:first-child{min-width:0}.demarche-row p{font-size:13px}.demarche-row .service-links{flex-shrink:0}@media(max-width:650px){.demarche-row{align-items:stretch;flex-direction:column;gap:8px}.demarche-row .service-links{padding-top:0}}</style><style id="demarches-domain-layout">.demarches-domains{display:grid;grid-template-columns:1fr;gap:12px;margin:20px 0}.demarches-domains>.demarches-domain{margin:0;overflow:hidden}.demarches-domain>summary{display:flex;align-items:center;gap:14px;min-height:68px;list-style:none;padding:18px!important}.demarches-domain>summary::after{content:'＋';margin-left:4px;font-size:21px}.demarches-domain[open]>summary::after{content:'−'}.domain-number{color:#ead4b4;font-size:12px;letter-spacing:.1em}.domain-count{margin-left:auto;white-space:nowrap;font-size:12px;color:#d5c3d4}.demarches-domain .services{margin:0;padding:0 18px 18px;grid-template-columns:repeat(3,minmax(0,1fr))}.demarches-domain[hidden]{display:none!important}@media(max-width:850px){.demarches-domain .services{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:650px){.demarches-domain .services{grid-template-columns:1fr;padding:0 12px 12px}.demarches-domain>summary{gap:9px;padding:14px!important;font-size:14px}.domain-number{display:none}}</style><style id="eloah-pilotage-refinement">
 body.client-page #pilotage-ambient{opacity:.22!important}
 body.client-page .workspace-section{scroll-margin-top:110px!important}
@@ -119,54 +76,54 @@ body.client-page .section-head{gap:20px}
 body.client-page .workspace-section{scroll-margin-top:130px!important}
 }
 </style>
-<link rel="stylesheet" href="eloah-prune-lumiere.css?v=20261016-2">
+
 <style id="pilotage-readable-surfaces">
 /* Critical contrast pairs are delivered with the page, independent of cached CSS. */
-html#eloah-prune-lumiere body.client-page main#contenu{background:#F5EFE7!important;color:#302334!important}
-html#eloah-prune-lumiere body.client-page main#contenu :is(.workspace-section,.focus-main,.focus-aside,.client-next,.client-next-card,.client-next-empty,.empty-project,.services article,.secondary-panel,.storage-note,.client-project-tools,.focus-stat,.focus-empty){background:#FFFCF8!important;color:#302334!important;border-color:#D8C7CE!important}
-html#eloah-prune-lumiere body.client-page main#contenu :is(.workspace-section,.focus-main,.focus-aside,.client-next,.services,.secondary-panel,.storage-note) :is(h2,h3,p,small,strong,b,span,summary,label,.quiet-count){color:#302334!important;-webkit-text-fill-color:currentColor!important}
-html#eloah-prune-lumiere body.client-page main#contenu :is(.storage-note,.pilotage-film-controls,.section-head) a{color:#633D62!important;-webkit-text-fill-color:currentColor!important}
-html#eloah-prune-lumiere body.client-page main#contenu .client-hero{background:linear-gradient(125deg,#241329,#432A49)!important}
-html#eloah-prune-lumiere body.client-page main#contenu .client-hero :is(h1,h2,h3,p,span,small,strong,b,em,a,.eyebrow){color:#FFF4ED!important;-webkit-text-fill-color:currentColor!important}
-html#eloah-prune-lumiere body.client-page main#contenu .client-hero :is(.pilotage-panel,.pilotage-kpi){background:#432A49!important;border-color:#795B78!important}
-html#eloah-prune-lumiere body.client-page main#contenu .client-hero .client-local-note{background:#FFFCF8!important;color:#302334!important}
-html#eloah-prune-lumiere body.client-page main#contenu :is(.btn,button,.focus-open,.focus-aside-cta a){background:#432A49!important;color:#FFF8F1!important;-webkit-text-fill-color:#FFF8F1!important;border-color:#795B78!important}
-html#eloah-prune-lumiere body.client-page main#contenu :is(.btn,button,.focus-open,.focus-aside-cta a) :is(span,strong,b,small){color:#FFF8F1!important;-webkit-text-fill-color:#FFF8F1!important}
-html#eloah-prune-lumiere body.client-page main#contenu .client-hero .primary{background:#DFC6A5!important;color:#302334!important;-webkit-text-fill-color:#302334!important}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-projets{background:#FFFCF8!important;border-color:#D8C7CE!important}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches :is(.storage-note,.demarches-domain,.services article){background:#FFFCF8!important;color:#302334!important;border-color:#D8C7CE!important}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches :is(input,select){background:#FFFCF8!important;color:#302334!important;-webkit-text-fill-color:#302334!important;border-color:#A58B9B!important}
-html#eloah-prune-lumiere body.client-page main#contenu #demarches-directory summary::after{color:#633D62!important}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </style>
 <style id="demarches-platform-identity">
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches .platform-heading{display:flex;align-items:center;gap:12px;min-height:40px}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches .platform-logo{width:32px;height:32px;object-fit:contain;flex:none;border-radius:5px}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches :is(.service-links a,.service-links button){background:transparent!important;border:0!important;box-shadow:none!important;color:#633D62!important;-webkit-text-fill-color:#633D62!important;text-decoration:underline;text-underline-offset:4px;justify-content:flex-start;text-align:left;padding:8px 0!important;min-height:44px}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches :is(.service-links a,.service-links button):hover{background:transparent!important;color:#302334!important;-webkit-text-fill-color:#302334!important;text-decoration-thickness:2px}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches :is(.service-links a,.service-links button) *{color:inherit!important;-webkit-text-fill-color:currentColor!important}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches .platform-heading{display:flex;align-items:center;gap:12px;min-height:40px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches .platform-logo{width:32px;height:32px;object-fit:contain;flex:none;border-radius:5px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches :is(.service-links a,.service-links button){background:transparent!important;border:0!important;box-shadow:none!important;color:#293D38!important;-webkit-text-fill-color:#293D38!important;text-decoration:underline;text-underline-offset:4px;justify-content:flex-start;text-align:left;padding:8px 0!important;min-height:44px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches :is(.service-links a,.service-links button):hover{background:transparent!important;color:#242723!important;-webkit-text-fill-color:#242723!important;text-decoration-thickness:2px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches :is(.service-links a,.service-links button) *{color:inherit!important;-webkit-text-fill-color:currentColor!important}
 
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches .platform-access{display:inline-flex;align-items:center;gap:12px;min-height:44px;max-width:100%;color:inherit!important;text-decoration:none;border-radius:5px}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches .platform-access:hover{text-decoration:underline;text-underline-offset:4px}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches .platform-access span{overflow-wrap:anywhere}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches .platform-access:focus-visible{outline:3px solid #633D62!important;outline-offset:3px}
-html#eloah-prune-lumiere body.client-page main#contenu #mes-demarches .service-links :is(a,button):focus-visible{outline:3px solid #633D62!important;outline-offset:3px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches .platform-access{display:inline-flex;align-items:center;gap:12px;min-height:44px;max-width:100%;color:inherit!important;text-decoration:none;border-radius:5px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches .platform-access:hover{text-decoration:underline;text-underline-offset:4px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches .platform-access span{overflow-wrap:anywhere}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches .platform-access:focus-visible{outline:3px solid #293D38!important;outline-offset:3px}
+html#eloah-inner-ivory body.client-page main#contenu #mes-demarches .service-links :is(a,button):focus-visible{outline:3px solid #293D38!important;outline-offset:3px}
 </style><style id="eloah-entry-mobile-navigation">
 @media(max-width:700px){
-html#eloah-prune-lumiere body nav.eloah-global-nav{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;height:auto!important;min-height:52px;gap:4px 8px!important}
-html#eloah-prune-lumiere body nav.eloah-global-nav>.eloah-wordmark{grid-column:1;grid-row:1;min-width:0;white-space:normal!important;overflow-wrap:anywhere}
-html#eloah-prune-lumiere body nav.eloah-global-nav>.eloah-menu{grid-column:2;grid-row:1}
-html#eloah-prune-lumiere body nav.eloah-global-nav>.eloah-switch{grid-column:1;grid-row:2;min-width:0;white-space:normal!important}
-html#eloah-prune-lumiere body nav.eloah-global-nav>[data-central-ai]{grid-column:2;grid-row:2;min-width:0;padding:8px!important;white-space:normal!important;font-size:12px}
+html#eloah-inner-ivory body nav.eloah-global-nav{display:grid!important;grid-template-columns:minmax(0,1fr) auto!important;height:auto!important;min-height:52px;gap:4px 8px!important}
+html#eloah-inner-ivory body nav.eloah-global-nav>.eloah-wordmark{grid-column:1;grid-row:1;min-width:0;white-space:normal!important;overflow-wrap:anywhere}
+html#eloah-inner-ivory body nav.eloah-global-nav>.eloah-menu{grid-column:2;grid-row:1}
+html#eloah-inner-ivory body nav.eloah-global-nav>.eloah-switch{grid-column:1;grid-row:2;min-width:0;white-space:normal!important}
+html#eloah-inner-ivory body nav.eloah-global-nav>[data-central-ai]{grid-column:2;grid-row:2;min-width:0;padding:8px!important;white-space:normal!important;font-size:12px}
 }
-</style></head>
+</style><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,500;1,400&family=Inter:wght@400;500;600&display=swap"><link rel="stylesheet" href="eloah-inner-ivory.css?v=20261016-1"></head>
 <body data-prune-lumiere class="client-page">
-<video id="pilotage-ambient" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"></video>
+
 <a class="skip-link" href="#contenu">Aller à mon espace</a>
 <main id="contenu">
 <header class="client-hero" aria-labelledby="pilotage-title">
 <div class="hero-top"><span class="eyebrow">ELOAH · ESPACE DE PILOTAGE</span><a href="mes-univers.html#maisons">← Mes univers ELOAH</a></div>
 <div class="pilotage-hero-inner">
- <div class="pilotage-hero-copy">
+ <div class="pilotage-hero-copy"><figure class="ivory-photo"><img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=85" alt="Carnet et matériel d’écriture sur un bureau" loading="lazy"><figcaption>Poser les idées, choisir la prochaine étape. · Photo : Unsplash</figcaption></figure>
   <p class="eyebrow">CLARTÉ · ORGANISATION · ACTION</p>
   <h1 id="pilotage-title">Mon <em>organisation.</em></h1>
   <p>Tes priorités, ton planning et tes projets. Choisis une action et reprends le fil.</p>
@@ -253,7 +210,7 @@ html#eloah-prune-lumiere body nav.eloah-global-nav>[data-central-ai]{grid-column
 <p class="storage-note">Ton travail est conservé dans ce navigateur. <a href="#compte-et-sauvegardes">Conserve une sauvegarde</a> pour le retrouver sur un autre appareil.</p>
 </section>
 <section id="mes-projets" class="workspace-section" aria-labelledby="projects-heading">
-<div class="pilotage-film-controls"><button type="button" id="pilotage-film-toggle">▶ Animer le fond</button><a href="https://www.pexels.com/video/purple-abstract-background-7101912/" target="_blank" rel="noopener noreferrer">Vidéo · Eugene Vasilevich / Pexels</a></div>
+
 <div class="section-head"><div><h2 id="projects-heading">Mes projets</h2><p>Retrouve tes projets enregistrés dans ce navigateur.</p></div><button type="button" class="primary" data-new-project>+ Créer un projet</button></div>
 <p id="client-project-count" class="quiet-count"></p><div id="client-project-list" class="project-grid"></div>
 <div id="client-project-empty" class="empty-project"><div><strong>Ton premier projet commence ici.</strong><p>Un objectif personnel, un contenu à préparer, une activité à développer… Donne-lui un nom pour commencer.</p></div><button type="button" data-new-project>Commencer mon projet</button></div>
@@ -412,20 +369,7 @@ if(client)who().then(u=>{status(u?'Connectée au compte ELOAH.':'Connecte-toi po
 <script src="eloah-pilotage-organisation.js?v=20261014-client1"></script>
 <script src="eloah-pilotage-overview.js?v=1.0.0" defer></script>
 <script src="eloah-pilotage-focus.js?v=2.0.0" defer></script>
-<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script><script>
-(()=>{'use strict';
-const v=document.getElementById('pilotage-ambient'),b=document.getElementById('pilotage-film-toggle'),reduce=matchMedia('(prefers-reduced-motion: reduce)');
-let stopped=reduce.matches||Boolean(navigator.connection&&navigator.connection.saveData);
-const label=()=>{b.textContent=v.paused?'▶ Animer le fond':'Ⅱ Mettre le fond en pause';};
-function play(){if(!v.src)v.src=matchMedia('(max-width:650px)').matches?'https://videos.pexels.com/video-files/7101912/7101912-sd_640_360_25fps.mp4':'https://videos.pexels.com/video-files/7101912/7101912-sd_960_540_25fps.mp4';v.muted=true;v.play().catch(label);}
-b.addEventListener('click',()=>{stopped=!v.paused;if(stopped)v.pause();else play();});
-v.addEventListener('pause',label);v.addEventListener('play',label);
-v.addEventListener('error',()=>{b.textContent='Vidéo indisponible';b.disabled=true;});
-document.addEventListener('visibilitychange',()=>{if(document.hidden)v.pause();else if(!stopped)play();});
-reduce.addEventListener('change',()=>{if(reduce.matches){stopped=true;v.pause();}});
-label();if(!stopped)play();
-})();
-</script><script>(()=>{'use strict';const el=id=>document.getElementById(id),norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();function filterOrganismes(){let n=0,visibleDomains=0;const domain=el('demarches-domain').value,q=norm(el('demarches-search').value.trim());document.querySelectorAll('[data-directory-domain]').forEach(group=>{let count=0;group.querySelectorAll('[data-organisme]').forEach(card=>{const match=!(domain&&card.dataset.domaine!==domain)&&norm(card.dataset.organisme+' '+card.dataset.domaine).includes(q);card.hidden=!match;if(match){count++;n++}});group.hidden=count===0;group.querySelector('.domain-count').textContent=count+' accès';if(count)visibleDomains++;group.open=!!(q||domain)&&count>0;});el('demarches-empty').hidden=n>0;el('demarches-directory-count').textContent=visibleDomains+' domaines · '+n+' accès. Ouvre un domaine pour retrouver ses services.';}el('demarches-search').oninput=filterOrganismes;el('demarches-domain').onchange=filterOrganismes;filterOrganismes();document.querySelectorAll('[data-preparer]').forEach(b=>b.onclick=()=>{el('demarches-create').open=true;el('demarches-org').value=b.dataset.preparer;el('demarches-action').focus()});el('demarches-form').onsubmit=e=>{e.preventDefault();const org=el('demarches-org').value.trim(),action=el('demarches-action').value.trim();if(!org||!action)return;try{const key='eloah-planning-v1',items=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(items))throw Error('Planning illisible : aucune donnée remplacée.');items.push({id:'demarche-'+crypto.randomUUID(),title:org+' · '+action,project:'Mes démarches',date:el('demarches-date').value,status:'À faire',kind:'Démarche',note:'',archived:false});localStorage.setItem(key,JSON.stringify(items));window.ELOAHWorkspace?.renderCalendar?.();el('demarches-form').reset();el('demarches-result').textContent='Démarche enregistrée dans le planning de cet appareil.'}catch(err){el('demarches-result').textContent='Enregistrement impossible : '+err.message}}})();</script><script>(()=>{'use strict';
+<script src="eloah-music-dock.js" defer></script><script src="eloah-mobile-app.js" defer></script><script>if('serviceWorker' in navigator)window.addEventListener('load',()=>navigator.serviceWorker.register('eloah-sw.js',{scope:'/the-crew-control/'}).catch(()=>{}));</script><script>(()=>{'use strict';const el=id=>document.getElementById(id),norm=s=>s.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();function filterOrganismes(){let n=0,visibleDomains=0;const domain=el('demarches-domain').value,q=norm(el('demarches-search').value.trim());document.querySelectorAll('[data-directory-domain]').forEach(group=>{let count=0;group.querySelectorAll('[data-organisme]').forEach(card=>{const match=!(domain&&card.dataset.domaine!==domain)&&norm(card.dataset.organisme+' '+card.dataset.domaine).includes(q);card.hidden=!match;if(match){count++;n++}});group.hidden=count===0;group.querySelector('.domain-count').textContent=count+' accès';if(count)visibleDomains++;group.open=!!(q||domain)&&count>0;});el('demarches-empty').hidden=n>0;el('demarches-directory-count').textContent=visibleDomains+' domaines · '+n+' accès. Ouvre un domaine pour retrouver ses services.';}el('demarches-search').oninput=filterOrganismes;el('demarches-domain').onchange=filterOrganismes;filterOrganismes();document.querySelectorAll('[data-preparer]').forEach(b=>b.onclick=()=>{el('demarches-create').open=true;el('demarches-org').value=b.dataset.preparer;el('demarches-action').focus()});el('demarches-form').onsubmit=e=>{e.preventDefault();const org=el('demarches-org').value.trim(),action=el('demarches-action').value.trim();if(!org||!action)return;try{const key='eloah-planning-v1',items=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(items))throw Error('Planning illisible : aucune donnée remplacée.');items.push({id:'demarche-'+crypto.randomUUID(),title:org+' · '+action,project:'Mes démarches',date:el('demarches-date').value,status:'À faire',kind:'Démarche',note:'',archived:false});localStorage.setItem(key,JSON.stringify(items));window.ELOAHWorkspace?.renderCalendar?.();el('demarches-form').reset();el('demarches-result').textContent='Démarche enregistrée dans le planning de cet appareil.'}catch(err){el('demarches-result').textContent='Enregistrement impossible : '+err.message}}})();</script><script>(()=>{'use strict';
 const host=document.getElementById('demarches-tracking'),filter=document.getElementById('demarches-state'),key='eloah-planning-v1';
 const create=(tag,text)=>{const e=document.createElement(tag);e.textContent=text;return e};
 const read=()=>{const a=JSON.parse(localStorage.getItem(key)||'[]');if(!Array.isArray(a))throw Error('Format du planning invalide.');return a};
