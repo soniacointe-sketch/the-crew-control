@@ -13,7 +13,7 @@
     <form id="home-ai-form" aria-busy="false">
       <label for="home-ai-prompt">Ta demande</label><textarea id="home-ai-prompt" rows="3" maxlength="6000" required placeholder="Ex. aide-moi à préparer mon prochain atelier…" aria-describedby="home-ai-privacy home-ai-count"></textarea>
       <div class="hai-form-bottom"><span id="home-ai-count">0 / 6 000 caractères</span><div><button type="button" id="home-ai-stop" hidden>Interrompre</button><button type="submit" id="home-ai-send">Envoyer à ELOAH ↗</button></div></div>
-      <details class="hai-settings"><summary>Projet, moteur IA et confidentialité</summary><div class="hai-selects"><label for="home-ai-project">Projet<select id="home-ai-project"><option value="">Sans projet particulier</option><option>Power &amp; Glam</option><option>The Crew Orchies</option><option>ELOAH</option><option>SONIA OS</option></select></label><label for="home-ai-provider">Moteur<select id="home-ai-provider"><option value="free">Groq · selon quota disponible</option><option value="openai">OpenAI · compte API payant</option></select></label></div><label class="hai-check"><input id="home-ai-history" type="checkbox" checked> Joindre les derniers échanges de cette conversation</label><p>Le nom du projet ne donne pas accès à ses fichiers. Le moteur OpenAI peut entraîner des frais. Aucun changement automatique de moteur.</p><button id="home-ai-preview" type="button">Voir le texte qui sera envoyé</button><pre id="home-ai-payload" hidden></pre></details>
+      <details class="hai-settings"><summary>Projet, moteur IA et confidentialité</summary><div class="hai-selects"><label for="home-ai-project">Projet<select id="home-ai-project"><option value="">Sans projet particulier</option><option>Power &amp; Glam</option><option>The Crew Orchies</option><option>ELOAH</option><option>SONIA OS</option><option>PARISIS ENGINE</option><option>Sonia Velka</option><option>Le Lion Blanc</option></select></label><label for="home-ai-provider">Moteur<select id="home-ai-provider"><option value="free">Groq · selon quota disponible</option><option value="openai">OpenAI · compte API payant</option></select></label></div><label class="hai-check"><input id="home-ai-history" type="checkbox" checked> Joindre les derniers échanges de cette conversation</label><p>Le nom du projet ne donne pas accès à ses fichiers. Le moteur OpenAI peut entraîner des frais. Aucun changement automatique de moteur.</p><button id="home-ai-preview" type="button">Voir le texte qui sera envoyé</button><pre id="home-ai-payload" hidden></pre></details>
     </form>
     <div class="hai-session"><span id="home-ai-session" role="status">Utilise ta connexion ELOAH Fondatrice.</span><div><button type="button" id="home-ai-verify">Vérifier ma connexion</button><a id="home-ai-login" href="eloah-fondatrice.html" target="_blank" rel="noopener noreferrer">Connexion fondatrice ↗</a></div></div>
     <p id="home-ai-status" class="hai-status" role="status" aria-live="polite"></p>
@@ -213,7 +213,9 @@
         message(typeof result?.error === 'string' ? result.error.slice(0,500) : 'Le moteur IA est indisponible. Aucun texte n’a été publié.'); return;
       }
       answer = result.answer.trim(); window.EloahEvidence?.commit?.(); pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
-      renderPair(text, answer); if (prompt.value === draftAtSend) prompt.value = ''; $('payload').hidden = true;
+      renderPair(text, answer);
+      window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{question:text,answer,universe:$('project').value||'ELOAH'}}));
+      if (prompt.value === draftAtSend) prompt.value = ''; $('payload').hidden = true;
       message('Réponse à relire · ' + (provider === 'free' ? 'Groq' : 'OpenAI') + '. Tu peux poursuivre dans le champ de demande.');
     } catch (error) {
       if (ticket !== revision || asleep) return;
