@@ -5,8 +5,8 @@
 const BASE='https://voytsqyorhoveurnguxn.supabase.co';
 const KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const FOUNDER='bd4b7197-6401-4a9a-a14e-c6adbdc0ed46';
-let selected=[],memorySelected=[],lastStatus='Aucune recherche lancée.', searchEpoch=0;
-const clear=(text='Références précédentes effacées.')=>{searchEpoch++;selected=[];memorySelected=[];lastStatus=text;const node=document.getElementById('eloah-auto-sources-status');if(node)node.textContent=text;};
+let selected=[],memorySelected=[],editorialSelected={text:'',titles:[],count:0},lastStatus='Aucune recherche lancée.', searchEpoch=0;
+const clear=(text='Références précédentes effacées.')=>{searchEpoch++;selected=[];memorySelected=[];editorialSelected={text:'',titles:[],count:0};lastStatus=text;const node=document.getElementById('eloah-auto-sources-status');if(node)node.textContent=text;};
 const normalize=s=>String(s||'').toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const tokens=s=>[...new Set(normalize(s).split(/[^a-z0-9]+/).filter(w=>w.length>=4))].slice(0,30);
 const allowMemory=()=>document.getElementById('eloah-memory-optin')?.checked===true;
@@ -16,9 +16,10 @@ const rank=(words,x)=>{
 };
 window.EloahAutoSources={
  status:()=>lastStatus,
+ editorialContext:()=>editorialSelected.text,
  clear,
  finishRequest(){
-  selected=[];memorySelected=[];
+  selected=[];memorySelected=[];editorialSelected={text:'',titles:[],count:0};
   const check=document.getElementById('eloah-memory-optin');if(check)check.checked=false;
   lastStatus='Recherche terminée. Les références transmises pour cette réponse restent dans le dossier CDSQCD ; aucune mémoire privée n’est autorisée pour une nouvelle demande.';
   const status=document.getElementById('eloah-auto-sources-status');if(status)status.textContent=lastStatus;
@@ -37,7 +38,7 @@ window.EloahAutoSources={
 ].join('\n\n').slice(0,3500),
  async prepare(text,universe){
   const current=++searchEpoch;
-  selected=[];memorySelected=[];lastStatus='Recherche en cours.';
+  selected=[];memorySelected=[];editorialSelected={text:'',titles:[],count:0};lastStatus='Recherche en cours.';
   const note=document.getElementById('eloah-auto-sources-status');
   const isCurrent=()=>current===searchEpoch && (document.getElementById('home-ai-project')?.value||'')===(universe||'');
   const update=t=>{if(!isCurrent())return;lastStatus=t;if(note)note.textContent=t};
@@ -47,6 +48,14 @@ window.EloahAutoSources={
    const {data:user,error:authError}=await db.auth.getUser();
    if(!isCurrent())return;
    if(authError||user?.user?.id!==FOUNDER||user.user.is_anonymous){update('Références non consultées : connexion fondatrice requise.');return}
+   let editorialStatus='';
+   try {
+    const {retrieveExistingContext}=await import('./eloah-existing-context.js?v=20261017-v1');
+    const professional=await retrieveExistingContext({client:db,founderId:FOUNDER,universe,question:text});
+    if(!isCurrent())return;
+    editorialSelected=professional;
+    editorialStatus=professional.count?' Mémoire professionnelle : '+professional.count+' fiche(s) de '+universe+' retrouvée(s) automatiquement.':' Aucune fiche professionnelle pour cet univers.';
+   } catch(e) { if(!isCurrent())return;editorialStatus=' Mémoire professionnelle temporairement inaccessible.'; }
    const {data,error}=await db.from('eloah_creations').select('id,title,content,universe').eq('user_id',FOUNDER).order('updated_at',{ascending:false}).limit(100);
    if(!isCurrent())return;
    if(error)throw error;
@@ -88,7 +97,7 @@ window.EloahAutoSources={
      }
     }
    }
-   update((selected.length?'Références trouvées automatiquement : '+selected.map(x=>x.title).join(' ; '):'Aucune création précédente suffisamment pertinente trouvée.')+memoryStatus);
+   update((selected.length?'Références trouvées automatiquement : '+selected.map(x=>x.title).join(' ; '):'Aucune création précédente suffisamment pertinente trouvée.') +editorialStatus+memoryStatus);
   }catch(e){if(!isCurrent())return;selected=[];memorySelected=[];update('Recherche automatique indisponible : '+String(e.message||e).slice(0,160))}
  }
 };
