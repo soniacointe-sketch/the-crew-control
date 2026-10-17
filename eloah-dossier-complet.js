@@ -76,8 +76,8 @@ function init(){
  const log=document.getElementById('home-ai-log');
  if(!guide||!log||document.getElementById('eloah-final-package'))return;
  const button=document.createElement('button');
- button.type='button';button.id='eloah-final-package';button.textContent='Créer et télécharger mon dossier complet (ZIP)';
- guide.querySelector('.eloah-result-buttons')?.append(button);
+ button.type='button';button.id='eloah-final-package';button.textContent='Créer mon dossier complet · texte, visuels et sources (ZIP)';
+ guide.querySelector('.eloah-result-buttons')?.prepend(button);
  const status=document.createElement('p');status.id='eloah-final-package-status';status.setAttribute('role','status');status.setAttribute('aria-live','polite');
  const fallback=document.createElement('a');fallback.id='eloah-final-package-link';fallback.hidden=true;fallback.download='eloah-dossier-complet.zip';
  fallback.textContent='Téléchargement bloqué ? Ouvrir mon fichier ZIP ici';
@@ -142,7 +142,7 @@ function init(){
   }finally{working=false;update()}
  });
  const style=document.createElement('style');
- style.textContent='#eloah-final-package-link:not([hidden]){display:inline-flex;align-items:center;padding:11px 14px;margin:8px 0;border-radius:8px;border:1px solid #9aaa9f;background:#eef4ec;color:#213b30;font:600 14px/1.5 system-ui;overflow-wrap:anywhere}#eloah-final-package-status{overflow-wrap:anywhere}';
+ style.textContent='#eloah-result-guide .eloah-result-buttons #eloah-final-package{background:#293d38!important;color:#fff!important;border-color:#293d38!important;font-weight:700!important}#eloah-final-package-link:not([hidden]){display:inline-flex;align-items:center;padding:11px 14px;margin:8px 0;border-radius:8px;border:1px solid #9aaa9f;background:#eef4ec;color:#213b30;font:600 14px/1.5 system-ui;overflow-wrap:anywhere}#eloah-final-package-status{overflow-wrap:anywhere}';
  document.head.append(style);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
