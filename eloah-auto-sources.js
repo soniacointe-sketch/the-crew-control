@@ -17,6 +17,12 @@ const rank=(words,x)=>{
 window.EloahAutoSources={
  status:()=>lastStatus,
  clear,
+ finishRequest(){
+  selected=[];memorySelected=[];
+  const check=document.getElementById('eloah-memory-optin');if(check)check.checked=false;
+  lastStatus='Recherche terminée. Les références transmises pour cette réponse restent dans le dossier CDSQCD ; aucune mémoire privée n’est autorisée pour une nouvelle demande.';
+  const status=document.getElementById('eloah-auto-sources-status');if(status)status.textContent=lastStatus;
+ },
  evidence:()=>[
  ...selected.map(x=>({key:x.id,title:x.title,origin:'Création retrouvée non contrôlée',universe:x.universe,excerpt:x.content.slice(0,700)})),
  ...memorySelected.map(x=>({key:'memory-'+x.id,title:x.title,origin:'Conversation importée et approuvée, non vérifiée',universe:x.universe,excerpt:x.content.slice(0,700)}))
