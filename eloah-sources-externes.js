@@ -71,7 +71,7 @@ function showResults(){
   const title=document.createElement('strong');title.textContent=item.title;
   const desc=document.createElement('p');desc.textContent=item.origin+' · '+clip(item.preview,270);
   const actions=document.createElement('div');actions.className='ers-actions';
-  if(item.url&&validUrl(item.url,'wordpress.com')||item.url&&validUrl(item.url,'google.com')||item.url&&validUrl(item.url,'googleusercontent.com')){
+  if(item.url&&validUrl(item.url,'wordpress.com')||item.url&&validUrl(item.url,'google.com')||item.url&&validUrl(item.url,'googleusercontent.com')||item.url&&validUrl(item.url,'thecreworchies.blog')){
    const anchor=document.createElement('a');anchor.href=item.url;anchor.rel='noopener noreferrer';anchor.target='_blank';anchor.textContent='Voir la source ↗';actions.append(anchor);
   }
   const add=document.createElement('button');add.type='button';add.textContent=selected.some(x=>x.key===item.key)?'Ajoutée ✓':'Joindre à la création';
@@ -219,6 +219,19 @@ async function authorizeGoogle(){
   if(!data?.url)throw Error('Aucune adresse de connexion Google fournie.');
  }catch(e){notify('Autorisation non lancée : '+clip(e.message,200))}
 }
+async function verifyGoogle(){
+ notify('Vérification réelle des deux API Google, sans importer de données…');
+ try{
+  const t=await token();
+  const outcomes=await Promise.allSettled([
+   api('https://www.googleapis.com/drive/v3/files?pageSize=1&fields=files(id)',t),
+   api('https://gmail.googleapis.com/gmail/v1/users/me/profile',t)
+  ]);
+  const labels=['Drive','Gmail'];
+  const outcome=outcomes.map((r,i)=>labels[i]+' : '+(r.status==='fulfilled'?'lecture autorisée':'non autorisé ou non configuré'));
+  notify(outcome.join(' · ')+'. Aucune donnée importée par ce test.');
+ }catch(e){notify('Connexion Google non confirmée : '+clip(e.message,160))}
+}
 async function forgetGoogle(){
  providerToken=null;window.EloahConnectedSources.clear();
  try{if(googleClient)await googleClient.auth.signOut({scope:'local'});notify('Session Google de cet onglet fermée. Révoque aussi l’accès depuis ton compte Google si nécessaire.')}catch(e){notify('Déconnexion non confirmée : '+clip(e.message,140))}
@@ -230,7 +243,7 @@ function init(){
  '<p>Recherche des contenus réels et choisis ce qu’ELOAH peut utiliser. Aucun mail ou document Google n’est lu ni transmis automatiquement. Les sources sélectionnées ne constituent pas une preuve indépendante.</p>'+
  '<label for="ecs-remote-query">Sujet à rechercher</label><input id="ecs-remote-query" type="search" maxlength="140" placeholder="Ex. attachement, Nostradamus, atelier latino…">'+
  '<div class="ers-actions"><button type="button" data-ers-search="wordpress">Chercher sur mes WordPress publics</button><button type="button" id="ers-google-connect">Autoriser Google Drive + Gmail (lecture seule)</button></div>'+
- '<div class="ers-actions"><button type="button" data-ers-search="drive">Chercher dans Drive</button><button type="button" data-ers-search="gmail">Chercher dans Gmail</button><button type="button" id="ers-google-forget">Fermer la session Google</button></div>'+
+ '<div class="ers-actions"><button type="button" id="ers-google-verify">Vérifier Google</button><button type="button" data-ers-search="drive">Chercher dans Drive</button><button type="button" data-ers-search="gmail">Chercher dans Gmail</button><button type="button" id="ers-google-forget">Fermer la session Google</button></div>'+
  '<p class="ers-note">Google nécessite une connexion Fondatrice, une autorisation distincte et les API/scopes validés dans Google Cloud. L’accès Gmail demande des permissions restreintes. Les connexions ChatGPT ne sont pas transférées à ton site.</p>'+
  '<label class="ers-auto"><input type="checkbox" id="ers-wp-auto" checked> Chercher automatiquement jusqu’à deux articles publics pertinents de Power & Glam ou The Crew pour ma création. Aucun accès Google automatique.</label>'+
  '<p id="ecs-remote-status" role="status" aria-live="polite">WordPress public consultable sans connexion. Google : autorisation non vérifiée.</p>'+
@@ -238,6 +251,7 @@ function init(){
  const library=lookup('eloah-creation-sources');(library||form).before(section);
  for(const button of section.querySelectorAll('[data-ers-search]'))button.addEventListener('click',()=>runSearch(button.dataset.ersSearch));
  lookup('ers-google-connect').addEventListener('click',authorizeGoogle);
+ lookup('ers-google-verify').addEventListener('click',verifyGoogle);
  lookup('ers-google-forget').addEventListener('click',forgetGoogle);
  lookup('home-ai-project')?.addEventListener('change',()=>window.EloahConnectedSources.clear());
  window.addEventListener('storage',event=>{if(event.key==='eloah-founder-auth-v1'||event.key===null)window.EloahConnectedSources.clear()});
