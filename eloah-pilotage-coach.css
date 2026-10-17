@@ -107,3 +107,6 @@ html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #elo
     font-size:12px!important;min-height:62px!important;padding:10px!important
   }
 }
+
+/* Embedded operational tools */
+#coach-tool-workspace{margin-top:24px;border-top:1px solid #dedbd3;padding-top:20px;min-width:0}#coach-tool-workspace>.workspace-section,#coach-tool-workspace>details{margin:0;padding:16px 0;border:0;max-width:100%;min-width:0}#coach-tool-workspace .eloah-coach-folded{display:none!important}.coach-tool-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}.coach-tool-actions button{min-height:44px;padding:11px 16px;border:1px solid #c5bcd9;border-radius:9px;background:#f0eaf6;color:#3c304f}#eloah-coach-dashboard [data-coach-show][aria-pressed=true]{background:#e9e1f2;border-color:#7762af;color:#4f386f}#coach-tool-feedback:empty{display:none}#coach-tool-workspace .ops-table-wrap{overflow-x:auto}@media(max-width:600px){.coach-tool-actions{display:grid;grid-template-columns:1fr}#coach-tool-workspace>.workspace-section{padding:12px 0}#coach-tool-workspace .ops-actions{flex-wrap:wrap}}
