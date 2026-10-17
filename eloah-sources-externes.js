@@ -60,7 +60,7 @@ window.EloahConnectedSources={
    }
    showSelected();notify(selected.filter(x=>x.auto).length+' article(s) publics pertinents retenu(s) automatiquement. Sources non vérifiées.');
    return selected.filter(x=>x.auto).length;
-  }catch(e){if(epoch!==run)return 0;selected=selected.filter(x=>!x.auto);showSelected();notify('Recherche WordPress automatique indisponible : '+clip(e.message,120));return 0}
+  }catch(e){if(epoch!==run)return 0;selected=selected.filter(x=>!x.auto);showSelected();notify('Recherche WordPress automatique indisponible : '+clip(e.message,120));throw new Error('WordPress : '+clip(e.message,120))}
  },
  clearPrivateAfterAnswer(){
   // Le registre CDSQCD a déjà sauvegardé la provenance de la réponse terminée.
