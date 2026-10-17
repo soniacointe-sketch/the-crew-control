@@ -18,6 +18,7 @@ function init(){
  const box=document.createElement('section');
  box.id='eloah-factory';
  box.innerHTML='<h3>Mon atelier de création</h3><p>Une idée → un contrôle du contexte → un livrable → ta validation.</p>'
+ +'<label for="ef-universe">Dans quel univers ?</label><select id="ef-universe" aria-label="Univers de la création"></select>'
  +'<label for="ef-format">Je veux créer</label><select id="ef-format"></select>'
  +'<label for="ef-subject">Mon idée ou mon sujet</label><textarea id="ef-subject" rows="3" placeholder="Écris ce que tu veux obtenir…"></textarea>'
  +'<label for="ef-intent">C’est quoi pour toi ?</label><select id="ef-intent"><option value="auto">ELOAH analyse ma demande</option><option value="concept">Une idée nouvelle à inventer</option><option value="real">Un projet ou un sujet réel</option><option value="test">Un test du moteur</option></select>'
@@ -25,7 +26,15 @@ function init(){
  +'<div id="ef-preflight" class="ef-preflight" role="status" aria-live="polite"></div>'
  +'<p id="ef-status" role="status" aria-live="polite"></p>'
  +'<p class="ef-disclaimer">CDSQCD vérifie la cohérence de la demande et signale les limites du résultat. Il ne certifie pas les faits. Sources accessibles : notes validées et créations choisies ou retrouvées dans ELOAH, selon connexion. Aucune recherche externe automatique ici.</p>';
- const options=box.querySelector('#ef-format');
+ const options=box.querySelector('#ef-format'),universeChooser=box.querySelector('#ef-universe');
+ [...project.options].forEach(option=>{const o=document.createElement('option');o.value=option.value;o.textContent=option.textContent;universeChooser.append(o)});
+ universeChooser.value=project.value;
+ universeChooser.addEventListener('change',()=>{
+  if(project.value===universeChooser.value)return;
+  project.value=universeChooser.value;
+  project.dispatchEvent(new Event('change',{bubbles:true}));
+ });
+ project.addEventListener('change',()=>{universeChooser.value=project.value});
  Object.entries(formats).forEach(([value,item])=>{const o=document.createElement('option');o.value=value;o.textContent=item.label;options.append(o)});
  const choices=$('eloah-create-choices');if(choices)choices.after(box);else ai.querySelector('#home-ai-form')?.before(box);
  const subject=$('ef-subject'),intent=$('ef-intent'),status=$('ef-status'),preflight=$('ef-preflight');
