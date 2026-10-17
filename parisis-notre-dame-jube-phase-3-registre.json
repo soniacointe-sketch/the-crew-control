@@ -1,0 +1,84 @@
+{
+  "schema": "PARISIS-ND-004-III-v1",
+  "updated": "2026-10-17",
+  "theme": "Données 3D du jubé de Notre-Dame",
+  "status": "corpus de références — pas de raccord vérifié",
+  "source": "https://entrepot.recherche.data.gouv.fr/dataverse/ndame_GTNum_vestiges3D_jube",
+  "datasets": [
+    {
+      "ref": "RF 991",
+      "doi": "10.57745/ZXI1XN",
+      "source": "Collection ancienne · musée du Louvre",
+      "date": "27 mars 2026",
+      "access": "Notice indexée ; modèles non consultés",
+      "level": "documenté",
+      "uri": "https://doi.org/10.57745/ZXI1XN",
+      "mesh_analyzed": false
+    },
+    {
+      "ref": "RF 1002A",
+      "doi": "10.57745/L2LHB6",
+      "source": "Collection ancienne · référence RF",
+      "date": "27 mars 2026",
+      "access": "README, JSON et vignette publics ; résultats OBJ/PLY restreints (39,2 Mo)",
+      "level": "accès partiel",
+      "uri": "https://doi.org/10.57745/L2LHB6",
+      "mesh_analyzed": false
+    },
+    {
+      "ref": "779",
+      "doi": "10.57745/OLYTXR",
+      "source": "Fragment Inrap de la fouille",
+      "date": "27 mars 2026",
+      "access": "Archives sources et résultats restreintes (résultats 50,5 Mo)",
+      "level": "accès limité",
+      "uri": "https://doi.org/10.57745/OLYTXR",
+      "mesh_analyzed": false
+    },
+    {
+      "ref": "866",
+      "doi": "10.57745/GY2NV5",
+      "source": "Fragment Inrap",
+      "date": "27 mars 2026",
+      "access": "Notice et métadonnées trouvées ; accès du maillage non vérifié",
+      "level": "documenté",
+      "uri": "https://doi.org/10.57745/GY2NV5",
+      "mesh_analyzed": false
+    },
+    {
+      "ref": "902",
+      "doi": "10.57745/QP8UYJ",
+      "source": "Fragment Inrap",
+      "date": "27 mars 2026",
+      "access": "Notice, production 29 octobre 2024 ; accès des maillages à vérifier",
+      "level": "documenté",
+      "uri": "https://doi.org/10.57745/QP8UYJ",
+      "mesh_analyzed": false
+    },
+    {
+      "ref": "633",
+      "doi": "10.57745/VLR2QN",
+      "source": "Fragment Inrap",
+      "date": "8 avril 2026",
+      "access": "Notice présente dans le répertoire scientifique ; accès à vérifier",
+      "level": "documenté",
+      "uri": "https://doi.org/10.57745/VLR2QN",
+      "mesh_analyzed": false
+    },
+    {
+      "ref": "GDC2",
+      "doi": "10.57745/Z4OBOH",
+      "source": "Fragment Inrap / documentation technique",
+      "date": "27 mars 2026",
+      "access": "Notice publiée ; accès aux modèles à vérifier",
+      "level": "documenté",
+      "uri": "https://doi.org/10.57745/Z4OBOH",
+      "mesh_analyzed": false
+    }
+  ],
+  "limits": [
+    "Certains maillages PLY/OBJ sont restreints.",
+    "RF 991 : accès au maillage non vérifié.",
+    "Aucun raccord géométrique n'a été réalisé."
+  ]
+}
