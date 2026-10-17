@@ -20,10 +20,11 @@ const isAmbiguous=text=>{
 };
 function prepare(universe){
  projectAtSend=clean(universe)||'ELOAH';
+ const external=window.EloahConnectedSources?.evidence?.(universe)||[];
  const selected=window.EloahCreationSources?.evidence?.()||[];
  const recent=window.EloahAutoSources?.evidence?.()||[];
  const notes=window.EloahValidatedMemory?.evidence?.(universe)||[];
- const entries=[...selected,...recent,...notes],keys=new Set();
+ const entries=[...external,...selected,...recent,...notes],keys=new Set();
  register=[];let consumed=HEADER.length;
  for(const e of entries){
   const k=key(e.universe||universe)+'|'+key(e.key||e.title);
