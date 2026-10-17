@@ -107,26 +107,3 @@ html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #elo
     font-size:12px!important;min-height:62px!important;padding:10px!important
   }
 }
-
-/* Pilotage des six dossiers numérotés de l’ancien Mon Espace */
-body.client-page #eloah-numbered-pilotage .eloah-coach-intro{max-width:850px;margin:0 0 12px!important}
-body.client-page .eloah-numbered-summary{font:600 12px/1.5 system-ui,sans-serif;color:#556b5c;margin:12px 0 18px}
-body.client-page .eloah-numbered-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;align-items:stretch}
-body.client-page .eloah-numbered-card{display:flex;flex-direction:column;gap:8px;min-width:0;border:1px solid #e2ddd2;background:#faf8f3;border-radius:13px;padding:17px}
-body.client-page .eloah-numbered-top{display:flex;justify-content:space-between;gap:8px;align-items:center;min-width:0}
-body.client-page .eloah-numbered-index{display:inline-flex;align-items:center;justify-content:center;font:500 24px/1.1 Georgia,serif;color:#776b51;min-width:36px}
-body.client-page .eloah-numbered-state{font:600 11px/1.4 system-ui,sans-serif;background:#f0e7d8;color:#685437;padding:5px 10px;border-radius:999px;max-width:72%;overflow-wrap:anywhere;text-align:right}
-body.client-page .eloah-numbered-state[data-done=true]{background:#e1eee5;color:#335a43}
-body.client-page .eloah-numbered-heading{font:600 17px/1.4 system-ui,sans-serif!important;color:#29372e!important;letter-spacing:-.015em;margin:3px 0 0!important;overflow-wrap:anywhere}
-body.client-page .eloah-numbered-category{font:600 11px/1.4 system-ui,sans-serif!important;color:#7a775f!important;margin:0!important;text-transform:uppercase;letter-spacing:.05em}
-body.client-page .eloah-numbered-description{font:400 13px/1.55 system-ui,sans-serif!important;color:#526057!important;margin:5px 0 12px!important;flex:1;overflow-wrap:anywhere}
-body.client-page .eloah-numbered-actions{display:flex;gap:7px;flex-wrap:wrap;align-items:center}
-body.client-page #eloah-numbered-pilotage .eloah-numbered-actions :is(button,a.btn){font-size:12px!important;flex:1 1 145px;line-height:1.35;padding:10px!important;min-height:44px!important}
-body.client-page .eloah-numbered-foot{font:400 12px/1.55 system-ui,sans-serif!important;color:#68766a!important;margin:15px 0 0!important}
-body.client-page .eloah-numbered-message{font:600 12px/1.5 system-ui,sans-serif!important;color:#315b41!important;min-height:0;margin:9px 0 0!important}
-body.client-page .eloah-numbered-message:empty{display:none}
-body.client-page .eloah-numbered-message[data-error=true]{color:#9d3639!important}
-@media(max-width:730px){
- body.client-page .eloah-numbered-grid{grid-template-columns:1fr}
- body.client-page .eloah-numbered-card{padding:15px}
-}
