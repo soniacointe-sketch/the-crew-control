@@ -55,6 +55,14 @@ window.EloahConnectedSources={
    return selected.filter(x=>x.auto).length;
   }catch(e){if(epoch!==run)return 0;selected=selected.filter(x=>!x.auto);showSelected();notify('Recherche WordPress automatique indisponible : '+clip(e.message,120));return 0}
  },
+ clearPrivateAfterAnswer(){
+  // Le registre CDSQCD a déjà sauvegardé la provenance de la réponse terminée.
+  // Les extraits privés ne doivent pas être joints à une demande ultérieure par inadvertance.
+  selected=selected.filter(x=>!(x.key?.startsWith('mail:')||x.key?.startsWith('drive:')));
+  results=results.filter(x=>!(x.key?.startsWith('mail:')||x.key?.startsWith('drive:')));
+  epoch++;
+  showSelected();showResults();
+ },
  clear(){epoch++;selected=[];results=[];showResults();showSelected();notify('Univers ou compte changé : références externes retirées de la préparation.')}
 };
 function showSelected(){
