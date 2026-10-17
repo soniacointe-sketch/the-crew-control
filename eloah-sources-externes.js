@@ -11,7 +11,7 @@ const LIB='https://esm.sh/@supabase/supabase-js@2.116.0';
 const lookup=id=>document.getElementById(id);
 let selected=[],results=[],epoch=0,founderClient=null,googleClient=null,providerToken=null,loading=false;
 const html=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-const plain=s=>{const d=document.createElement('div');d.innerHTML=String(s??'').slice(0,12000);d.querySelectorAll('script,style,iframe,form,object').forEach(x=>x.remove());return (d.textContent||'').replace(/\s+/g,' ').trim()};
+const plain=s=>{const d=new DOMParser().parseFromString(String(s??'').slice(0,12000),'text/html');d.querySelectorAll('script,style,iframe,form,object,img,link').forEach(x=>x.remove());return (d.body?.textContent||'').replace(/\s+/g,' ').trim()};
 const clip=(s,n)=>String(s||'').slice(0,n);
 const current=()=>lookup('home-ai-project')?.value||'';
 function notify(message){const e=lookup('ecs-remote-status');if(e)e.textContent=message;}
@@ -52,9 +52,10 @@ function showResults(){
    if(current()!==item.universe){notify('Univers modifié. Refais une recherche.');return}
    if(selected.length>=5){notify('Maximum cinq sources externes par demande. Retire une référence pour en ajouter une autre.');return}
    add.disabled=true;add.textContent='Lecture de la source…';
+   const sourceEpoch=epoch;
    try{
     const full=await item.getContent();
-    if(current()!==item.universe)throw Error('Univers changé pendant la lecture');
+    if(sourceEpoch!==epoch||current()!==item.universe)throw Error('Recherche ou univers changé pendant la lecture');
     const text=clip(plain(full||item.preview),1250);
     if(text.length<15)throw Error('Aucun extrait utilisable');
     selected.push({key:item.key,title:item.title,origin:item.origin,url:item.url,universe:item.universe,excerpt:text});
