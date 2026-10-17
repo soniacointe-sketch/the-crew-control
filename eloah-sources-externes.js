@@ -26,6 +26,13 @@ const snapshot=()=>selected.map(x=>({...x}));
 window.EloahConnectedSources={
  evidence(universe){return selected.filter(x=>x.universe===universe).map(x=>({key:x.key,title:x.title,origin:x.origin,universe:x.universe,url:x.url||'',excerpt:x.excerpt}));},
  sources(){return snapshot().map(x=>({title:x.title,origin:x.origin,url:x.url||'',universe:x.universe}))},
+ abortAutoSearch(){
+  // Ignore les retours WordPress tardifs, mais conserve les sources choisies manuellement.
+  epoch++;
+  selected=selected.filter(item=>!item.auto);
+  showSelected();
+  notify('WordPress n’a pas répondu à temps : tes sources choisies restent disponibles.');
+ },
  async prepare(topic,universe){
   selected=selected.filter(x=>!x.auto);
   if(lookup('ers-wp-auto')?.checked!==true)return 0;
