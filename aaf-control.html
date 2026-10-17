@@ -43,5 +43,45 @@ $('#content').onclick=e=>{const b=e.target.closest('button');if(!b)return;if(b.d
 $('#editor').addEventListener('close',()=>$('#form button[type=submit]').hidden=false);
 $('#restoreFile').onchange=async e=>{const f=e.target.files[0];if(!f)return;try{if(f.size>10000000)throw Error('Fichier trop volumineux');const obj=JSON.parse(await f.text());if(obj.format!=='aaf-control-v1'||!Array.isArray(obj.legacy))throw Error('Format AAF attendu');validate(obj.data);if(!confirm('Remplacer le bureau actuel par cette sauvegarde ? Exporte d’abord tes données si nécessaire.'))return;const before=localStorage.getItem(OLD);try{localStorage.setItem(OLD,JSON.stringify(obj.legacy));if(!commit(obj.data,'Sauvegarde restaurée')){if(before===null)localStorage.removeItem(OLD);else localStorage.setItem(OLD,before);return}}catch(err){if(before===null)localStorage.removeItem(OLD);else localStorage.setItem(OLD,before);throw err}legacy=obj.legacy;render();$('#status').textContent='Sauvegarde restaurée.'}catch(err){$('#status').textContent='Restauration refusée : '+err.message}finally{e.target.value=''}};
 render();
+</script><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.116.0/dist/umd/supabase.js"></script>
+<script>
+// AAF drafting only: existing authenticated ELOAH engine, no external executor.
+(()=>{
+const panel=document.createElement('section');panel.className='card';panel.id='aaf-router';
+panel.innerHTML=`<h2>Donner une demande à ROUTER</h2><p>ROUTER propose un pilote et prépare ta mission. Tu peux ensuite choisir un agent pour rédiger le résultat.</p><p>Connexion ELOAH requise pour l’IA. Les réponses restent dans ce navigateur et dans tes sauvegardes AAF.</p><p><a href="eloah-projet.html" target="_blank" rel="noopener">Ouvrir ELOAH pour se connecter →</a></p><label>Ta demande<textarea id="router-request" maxlength="12000" rows="5" placeholder="Que veux-tu préparer ? Ajoute le contexte, les sources et le résultat attendu."></textarea></label><label>Agent pour la rédaction<select id="router-agent"></select></label><div class="actions"><button id="router-route" class="primary">1 · Orienter avec ROUTER</button><button id="router-write">2 · Rédiger avec l’agent choisi</button></div><p id="router-status" role="status" aria-live="polite"></p><pre id="router-answer" style="white-space:pre-wrap;overflow-wrap:anywhere"></pre><p class="muted">Analyse et rédaction A1 uniquement. Aucun site ni fichier distant n’est consulté ; les sources doivent être fournies. Les réponses IA sont à vérifier.</p>`;
+document.querySelector('.hero').after(panel);
+const select=$('#router-agent');
+function options(){const previous=select.value;select.innerHTML=data.agents.map(a=>`<option value="${esc(a.id)}">${esc(a.name)}</option>`).join('');if(data.agents.some(a=>a.id===previous))select.value=previous;}
+options();select.addEventListener('focus',options);
+let busy=false,client=null,lastRoute=null;
+function getClient(){if(!window.supabase)throw Error('Connexion IA indisponible : recharge la page.');return client||(client=window.supabase.createClient('https://voytsqyorhoveurnguxn.supabase.co','sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy',{auth:{storageKey:'eloah-cloud-auth-v1'}}));}
+async function run(route){
+ if(busy)return;const request=$('#router-request').value.trim(),status=$('#router-status');
+ if(!request){status.textContent='Écris ta demande pour commencer.';return;}
+ if(blocked){status.textContent='Répare ou exporte les données AAF avant de lancer une demande.';return;}
+ const agent=route?data.agents.find(a=>a.name==='ROUTER'):data.agents.find(a=>a.id===select.value);
+ if(!agent){status.textContent='Choisis un agent présent dans le registre.';return;}
+ busy=true;$('#router-route').disabled=$('#router-write').disabled=true;status.textContent='Vérification de la connexion…';
+ try{
+  const sb=getClient();const session=await sb.auth.getSession();if(session.error||!session.data.session)throw Error('Connecte-toi dans ELOAH, puis reviens ici. Ta demande reste affichée.');
+  const catalog=data.agents.map(a=>({id:a.id,name:a.name,role:a.role}));
+  const instruction=route?'Choisis un seul pilote dans le catalogue. Réponds en JSON strict avec agent_id (identifiant exact), agent_name, objectif, contexte, dependances, priorite, critere_reussite, sources, limites. Les valeurs sauf agent_id et agent_name peuvent être du texte ou des listes. Ne prétends pas avoir exécuté la mission.':'Produis maintenant le livrable complet demandé. Termine par Sources utilisées, Limites et Points à valider. Ne prétends pas consulter des sources non fournies.';
+  const context=JSON.stringify({instruction,agent:{name:agent.name,role:agent.role,consigne:agent.mission_prompt||''},catalogue:route?catalog:undefined,demande:request,orientation:!route&&lastRoute?.request===request?lastRoute.answer:undefined});
+  if(context.length>24000)throw Error('Demande trop longue avec le catalogue : raccourcis le contexte.');
+  status.textContent=route?'ROUTER prépare son orientation…':'L’agent prépare le livrable…';
+  const response=await sb.functions.invoke('eloah-assistant',{body:{project:'AAF Control · '+agent.name,context}});
+  if(response.error){let detail='';try{detail=(await response.error.context.json()).error||'';}catch{}throw Error(detail||'Le service IA n’a pas répondu. Réessaie plus tard.');}
+  const result=response.data;if(!result?.ok||typeof result.answer!=='string'||!result.answer.trim())throw Error(result?.error||'Aucune réponse exploitable reçue.');
+  const answer=result.answer.trim();$('#router-answer').textContent=answer;
+  if(route){lastRoute={request,answer};try{const parsed=JSON.parse(answer.replace(/^```(?:json)?\s*/,'').replace(/\s*```$/,''));if(data.agents.some(a=>a.id===parsed.agent_id))select.value=parsed.agent_id;}catch{}}
+  const next=clone();next.missions.unshift({id:uid(),title:(route?'Orientation · ':'Livrable · ')+request.slice(0,160),agent:agent.id,scope:request,limits:'A1 : analyse et rédaction uniquement. Aucun accès distant, envoi, publication ou engagement autorisé.',due:'',level:'A1',state:'Brouillon',revision:1,updated:new Date().toISOString(),aiResult:{answer,provenance:result.provenance||'Réponse IA ELOAH non validée',engine:'eloah-assistant',created:new Date().toISOString(),kind:route?'orientation':'livrable'}});
+  status.textContent=commit(next,'Réponse IA enregistrée · '+agent.name)?'Réponse enregistrée dans Mes missions. À vérifier avant utilisation.':'Réponse reçue mais non sauvegardée : copie le texte affiché avant de quitter.';
+ }catch(e){status.textContent=e.message;}finally{busy=false;$('#router-route').disabled=$('#router-write').disabled=false;}
+}
+$('#router-route').onclick=()=>run(true);$('#router-write').onclick=()=>run(false);
+const originalCard=missionCard;missionCard=function(m){let card=originalCard(m);if(m.aiResult&&typeof m.aiResult.answer==='string')card=card.replace('</article>',`<details><summary>Lire le résultat enregistré</summary><p class="muted">${esc(m.aiResult.provenance)} · ${esc(m.aiResult.created)}</p><pre style="white-space:pre-wrap;overflow-wrap:anywhere">${esc(m.aiResult.answer)}</pre></details></article>`);return card;};render();
+})();
+
 </script></body></html>
+
 
