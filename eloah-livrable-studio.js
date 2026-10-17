@@ -6,7 +6,7 @@ const formats={
  post:{label:'Publication complète',min:60,instructions:'Rédige un post final prêt à relire, une variante courte, une légende et un appel à action pertinent. Pas de faux témoignages ni d action annoncée comme accomplie.'},
  dossier:{label:'Dossier éditorial',min:300,instructions:'Rédige un dossier substantiel : titre, angle, introduction, développement entièrement rédigé, conclusion, références réellement présentes si disponibles, et vérifications restantes. Ne fournis pas seulement un sommaire ou des rubriques à remplir.'},
  atelier:{label:'Kit d’atelier',min:180,instructions:'Prépare un kit opérationnel : objectif, public, déroulé minuté, matériel, consignes et message prêt à transmettre. Ne fabrique ni lieu, ni date, ni inscrits, ni disponibilité.'},
- carrousel:{label:'Carrousel',min:120,instructions:'Rédige 10 slides numérotées avec leur texte complet, une direction artistique, la légende et un appel à action. Les images non générées sont des intentions visuelles.'}
+ carrousel:{label:'Carrousel',min:120,instructions:'Livrer exactement dix slides DISTINCTES. Format strict pour le studio graphique : SLIDE 01 puis TITRE: (3 à 100 caractères), TEXTE: (12 à 340 caractères), CTA: (facultatif, 100 caractères maximum) ; répéter jusqu’à SLIDE 10, puis LÉGENDE FINALE: (20 à 1800 caractères). Chaque ligne TEXTE doit être une vraie rédaction définitive, pas une consigne visuelle. Si une information factuelle manque, l’indiquer comme à vérifier. Les dix PNG seront réellement composés localement dans le navigateur après relecture ; n’affirme pas avoir créé des photographies IA.'}
 };
 const wordCount=s=>(String(s||'').match(/[\p{L}\p{N}]+(?:[’'-][\p{L}\p{N}]+)*/gu)||[]).length;
 // Une seule règle de clarification pour le studio et le formulaire IA.
@@ -63,9 +63,11 @@ function init(){
     +'5. DIFFUSER : prépare pour relecture. Ne prétends pas avoir enregistré, envoyé ou publié. N ajoute des références que si elles sont identifiables dans le contexte.\n'
     +'6. TERMINE par « Points à vérifier » si des faits, sources ou décisions manquent, ou « Nature du contenu : proposition créative » pour une idée fictive.\n';
   const creative=mode==='concept'?'STATUT DU SUJET : CONCEPT À INVENTER. Toute signification nouvelle, promesse, fonctionnalité ou mise en situation doit être explicitement marquée « proposition », jamais présentée comme un fait établi.\n':'';
+  const identity=window.EloahCarouselProduction?.identity?.(project.value||'ELOAH')||'Respecte la ligne éditoriale du projet fourni, et ne transforme aucune proposition en fait.';
+  const reality='\nPRIORITÉ AU RÉEL : utiliser les notes du projet et les documents réellement transmis dans le contexte de cette requête. La charte ci-dessous est une direction artistique, non une preuve du fonctionnement des services. Distingue présent disponible, projet à construire, hypothèse créative.\nIDENTITÉ ÉDITORIALE : '+identity+'\n';
   return 'MISSION DE PRODUCTION — '+format.label+'\nUNIVERS : '+(project.value||'ELOAH')+'\nSUJET : '+text
    +'\nINTENTION : '+(mode==='concept'?'imaginer une idée nouvelle':'travail sur un sujet réel, à vérifier')+'\n\n'+creative
-   +'LIVRABLE ATTENDU : '+format.instructions+'\n\n'+rules;
+   +'LIVRABLE ATTENDU : '+format.instructions+reality+'\n'+rules;
  }
  function launch(){
   const input=subject.value.trim(),mode=intent.value,format=formats[options.value];
