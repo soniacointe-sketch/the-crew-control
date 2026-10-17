@@ -13,6 +13,12 @@ let selected=[],results=[],epoch=0,founderClient=null,googleClient=null,provider
 const html=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const plain=s=>{const d=new DOMParser().parseFromString(String(s??'').slice(0,12000),'text/html');d.querySelectorAll('script,style,iframe,form,object,img,link').forEach(x=>x.remove());return (d.body?.textContent||'').replace(/\s+/g,' ').trim()};
 const clip=(s,n)=>String(s||'').slice(0,n);
+const STOP_WORDS=new Set(['avec','pour','dans','sans','comme','quand','quelle','quelles','quels','entre','faire','creer','creation','dossier','article','texte','sujet','autre','autres','nous','vous','elle','elles','celui','celle','comment','pourquoi','trouver','recherche','power','glam','the','crew','orchies','sonia','eloah']);
+function topicWords(topic){
+ return [...new Set(String(topic||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr').split(/[^\p{L}\p{N}]+/u)
+   .filter(w=>w.length>=4&&!STOP_WORDS.has(w)))].slice(0,8);
+}
+
 const current=()=>lookup('home-ai-project')?.value||'';
 function notify(message){const e=lookup('ecs-remote-status');if(e)e.textContent=message;}
 function validUrl(url,domain){try{const parsed=new URL(url);return parsed.protocol==='https:'&&(parsed.hostname===domain||parsed.hostname.endsWith('.'+domain))?parsed.href:''}catch{return ''}}
@@ -25,18 +31,19 @@ window.EloahConnectedSources={
   if(lookup('ers-wp-auto')?.checked!==true)return 0;
   const siteId=universe==='Power & Glam'?'pg':universe==='The Crew Orchies'?'crew':null;
   if(!siteId)return 0;
-  const words=String(topic||'').split(/\W+/).filter(x=>x.length>=5).slice(0,6);
+  const words=topicWords(topic);
   if(!words.length)return 0;
   const run=++epoch;
   try{
-   const params=new URLSearchParams({number:'12',search:words.slice(0,2).join(' '),fields:'ID,title,URL,excerpt,content,status'});
+   const params=new URLSearchParams({number:'12',search:words[0],fields:'ID,title,URL,excerpt,content,status'});
    const response=await fetch('https://public-api.wordpress.com/rest/v1.1/sites/'+encodeURIComponent(SITE[siteId])+'/posts/?'+params,{cache:'no-store',signal:AbortSignal.timeout(8000)});
    if(!response.ok)throw Error('HTTP '+response.status);
    const data=await response.json();
    if(epoch!==run||universe!==current())return 0;
    const ranked=(data.posts||[]).filter(p=>p.status==='publish').map(p=>{
     const title=plain(p.title||''),content=plain(p.content||p.excerpt||'');
-    const score=words.reduce((n,w)=>n+(title.toLowerCase().includes(w.toLowerCase())?4:0)+(content.toLowerCase().includes(w.toLowerCase())?1:0),0);
+    const norm=s=>String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLocaleLowerCase('fr');
+    const score=words.reduce((n,w)=>n+(norm(title).includes(w)?4:0)+(norm(content).includes(w)?1:0),0);
     return {p,title,content,score};
    }).filter(x=>x.score>=2&&x.content.length>=40).sort((a,b)=>b.score-a.score).slice(0,2);
    for(const x of ranked){
