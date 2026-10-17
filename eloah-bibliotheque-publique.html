@@ -2,68 +2,115 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Bibliothèque publique ELOAH : collections, chapitres et archives à lire directement sur place.">
-<title>ELOAH · Bibliothèque publique</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#f5f0e8">
+<meta name="description" content="ELOAH, bibliothèque de nos archives ChatGPT : collections, chapitres intégraux publiés, recherche et consultation privée de ses exports.">
+<title>ELOAH · Notre bibliothèque ChatGPT</title>
 <style>
-:root{--bg:#f5f0e8;--paper:#fffdf9;--ink:#30291f;--muted:#74695e;--line:#ded3c4;--gold:#876640;--soft:#eee6da}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}
-button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #977d56;outline-offset:3px}a{color:var(--gold)}
-.wrap{width:min(1110px,calc(100% - 36px));margin:0 auto}
-.topbar{border-bottom:1px solid var(--line);background:var(--paper)}.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:12px;min-height:66px}.brand{font:700 20px Georgia,serif;letter-spacing:.03em}.topbar a{font-size:13px;text-decoration:none;white-space:nowrap}
-.hero{padding:68px 0 30px;max-width:900px}.eyebrow{font-size:12px;font-weight:800;letter-spacing:.15em;text-transform:uppercase;color:var(--gold)}
-h1,h2,h3{font-family:Georgia,Times,serif;line-height:1.18}h1{font-size:clamp(44px,7vw,78px);margin:14px 0 20px;font-weight:500;letter-spacing:-.025em}.lead{font:clamp(18px,2.5vw,23px)/1.5 Georgia,serif;color:#594d40;max-width:790px;margin:0}
-.meta{margin:20px 0 0;color:var(--muted);font-size:13px}
-.tools{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin:24px 0 25px}.search{width:min(520px,100%);padding:15px 17px;background:var(--paper);border:1px solid #cfc1b0;border-radius:12px;color:var(--ink)}.muted{color:var(--muted)}.tools small{font-size:13px}
-.section-label{font:700 13px/1.4 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);margin:38px 0 14px}
-.shelves{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px}
-.shelf{border:1px solid var(--line);background:var(--paper);color:var(--ink);border-radius:14px;min-height:145px;text-align:left;padding:21px 22px;display:flex;flex-direction:column;gap:9px;transition:border-color .15s,background .15s}
-.shelf:hover{border-color:#9e855f}.shelf[aria-pressed=true]{border:2px solid var(--gold);background:#f9f4eb;padding:20px 21px}
-.shelf .symbol{font-size:25px;line-height:1.1}.shelf strong{font:24px/1.12 Georgia,serif}.shelf small{font-size:12px;color:var(--muted);margin-top:auto}.shelf.pending{opacity:.68}.shelf .state{font-size:11px;text-transform:uppercase;letter-spacing:.05em}
-.shelf-contents{margin:32px 0 65px;padding:32px clamp(20px,4vw,48px) 36px;background:var(--paper);border:1px solid var(--line);border-radius:18px;min-height:200px}
-.shelf-contents h2{font-size:clamp(30px,4vw,44px);margin:10px 0 8px;font-weight:500}.shelf-contents .intro{margin:0 0 24px;color:var(--muted)}
-.chapter-list{display:flex;flex-direction:column;gap:0}.chapter{border:0;border-top:1px solid var(--line);display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:18px;text-align:left;padding:19px 4px;background:transparent;color:inherit;width:100%}.chapter:hover{background:#f8f4ed}
-.chapter .idx{color:var(--gold);font:18px Georgia,serif}.chapter strong{font:22px/1.22 Georgia,serif;display:block}.chapter .desc{display:block;color:var(--muted);font-size:14px;margin-top:5px;line-height:1.45}.chapter .read{white-space:nowrap;font-size:13px;color:var(--gold);font-weight:700;padding-left:6px}
-.empty{padding:20px 0;color:var(--muted)}.external{display:inline-block;margin-top:12px;padding:11px 17px;border-radius:10px;background:var(--ink);color:var(--paper);text-decoration:none}
-.reader{scroll-margin-top:24px;background:var(--paper);border:1px solid var(--line);border-radius:18px;margin:0 0 55px;padding:clamp(18px,3vw,34px);box-shadow:0 14px 40px #3d312014}
-.reader[hidden],.shelf-contents[hidden],.search-results[hidden]{display:none}
-.reader-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;border-bottom:1px solid var(--line);padding-bottom:17px}
-.reader h2{font-size:clamp(26px,3vw,42px);margin:8px 0 5px;font-weight:500}
-.reader .close{border:1px solid var(--line);background:var(--soft);color:var(--ink);padding:9px 15px;border-radius:9px;font-size:14px}
-.reader-sub{font-size:13px;color:var(--muted);margin:0}.framebox{margin:18px -8px 8px}
-#chapterFrame{border:0;width:100%;display:block;min-height:650px;background:var(--paper)}
-.reader-bottom{margin-top:16px;padding-top:14px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}.reader-bottom a{margin-left:7px}
-.note{border-top:1px solid var(--line);padding:24px 0 60px;font-size:13px;color:var(--muted);line-height:1.7;max-width:870px}.note h2{font:22px Georgia,serif;color:var(--ink);margin:0 0 6px}.note p{margin:6px 0}
-.search-results{margin-top:32px}
-@media(max-width:850px){.shelves{grid-template-columns:repeat(2,minmax(0,1fr))}.hero{padding-top:42px}}
-@media(max-width:560px){.wrap{width:calc(100% - 28px)}.topbar .wrap{min-height:58px}.brand{font-size:17px}.hero{padding:35px 0 20px}.shelves{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.shelf{min-height:126px;padding:15px 14px}.shelf[aria-pressed=true]{padding:14px 13px}.shelf strong{font-size:19px}.shelf .symbol{font-size:22px}.shelf-contents{padding:22px 16px;margin:24px 0 35px}.chapter{grid-template-columns:24px 1fr;gap:10px;padding:16px 2px}.chapter strong{font-size:19px}.chapter .read{grid-column:2;padding-left:0}.reader{padding:16px;margin-bottom:35px}.framebox{margin:14px -10px}}
-@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.shelf{transition:none}}
+:root{--bg:#f5f0e8;--paper:#fffdf8;--side:#ede5d9;--ink:#342b22;--sub:#766b5f;--gold:#917044;--line:#dfd4c5;--soft:#f0e7db;--shadow:0 16px 45px #45321a0b}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}
+button,input{font:inherit}button{cursor:pointer}button:focus-visible,a:focus-visible,input:focus-visible{outline:3px solid #ac8756;outline-offset:3px}
+a{color:#795a33}button{color:inherit}
+.layout{display:grid;grid-template-columns:270px minmax(0,1fr) 245px;min-height:100dvh}
+.sidebar{position:sticky;top:0;align-self:start;height:100dvh;overflow:auto;background:var(--side);border-right:1px solid var(--line);padding:28px 16px 22px;scrollbar-width:thin}
+.brand{font:30px/1.1 Georgia,serif;letter-spacing:.13em;padding:4px 8px}.brand span{display:block;letter-spacing:0;font:13px/1.5 system-ui;color:var(--sub);margin-top:9px}
+.eyebrow{font-size:10px;letter-spacing:.16em;font-weight:800;text-transform:uppercase;color:var(--gold)}
+.side-label{margin:34px 9px 8px}.side-nav{display:grid;gap:5px}
+.side-nav button{display:flex;align-items:center;justify-content:space-between;width:100%;border:1px solid transparent;text-align:left;background:transparent;padding:11px 10px;border-radius:10px;font-size:13px;line-height:1.4}
+.side-nav button:hover{background:#fffaf2}.side-nav button.active{background:var(--paper);border-color:#d2bf9f;color:#624525;font-weight:750}
+.side-nav .count{font-size:11px;color:#937c61;background:#e9dfd1;border-radius:99px;padding:1px 7px;margin-left:8px;font-variant-numeric:tabular-nums}
+.side-card{margin:26px 5px 0;border-top:1px solid #d6c9b7;padding-top:18px;color:var(--sub);font-size:12px}.side-card strong{display:block;font:21px Georgia,serif;color:var(--ink);margin-bottom:6px}
+.workspace{min-width:0;padding:0 clamp(18px,3.5vw,58px) 85px}
+.top{position:sticky;top:0;background:#f5f0e8f2;backdrop-filter:blur(12px);z-index:7;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 0;border-bottom:1px solid var(--line)}
+.top-title{font-size:12px;letter-spacing:.06em;text-transform:uppercase;font-weight:750}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}.tab{background:transparent;border:1px solid transparent;padding:8px 11px;border-radius:9px;font-size:12px;font-weight:650}
+.tab.active{background:#fffaf2;border-color:#d6c4aa}.tab:hover{background:#efe5d6}
+.menu-btn{display:none;background:var(--paper);border:1px solid var(--line);border-radius:8px;padding:8px}
+.hero{padding:clamp(32px,6vw,72px) 0 28px;border-bottom:1px solid var(--line);position:relative}
+.hero .eyebrow{font-size:12px}.hero h1{font:normal clamp(46px,5.6vw,82px)/1.035 Georgia,'Times New Roman',serif;letter-spacing:-.048em;max-width:770px;margin:20px 0 18px}
+.hero h1 em{font-style:italic;color:var(--gold)}.hero .lede{font:clamp(16px,2vw,21px)/1.52 Georgia,serif;color:#685b4b;max-width:650px;margin:0}
+.stats{display:flex;flex-wrap:wrap;gap:9px;margin-top:26px}.stat{font-size:12px;border:1px solid var(--line);background:#fffaf2;border-radius:100px;padding:6px 11px}
+.catalog-header{display:flex;justify-content:space-between;align-items:end;gap:12px;margin:34px 0 12px}
+.catalog-header h2{font:normal clamp(27px,3.3vw,39px)/1.2 Georgia,serif;margin:0}.catalog-header p{color:var(--sub);font-size:12px;margin:0}
+.searchbar{display:flex;align-items:center;border:1px solid #d4c3ad;border-radius:12px;background:var(--paper);padding:0 14px;margin:16px 0 8px;box-shadow:0 4px 16px #382a1707}
+.searchbar span{font-size:20px;color:#937d62}.searchbar input{border:0;outline:0;background:transparent;width:100%;min-width:0;padding:14px 12px;color:var(--ink)}.searchbar input:focus-visible{outline:none}
+.search-help{font-size:11px;color:var(--sub);min-height:16px}
+.chapters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin-top:20px}
+.entry{border:1px solid var(--line);background:var(--paper);padding:20px;min-height:188px;text-align:left;display:flex;flex-direction:column;gap:13px;box-shadow:var(--shadow);border-radius:13px;transition:transform .16s,border-color .16s}
+.entry:hover{transform:translateY(-2px);border-color:#b89a70}.entry .topline{display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:11px;color:var(--gold)}
+.entry strong{display:block;font:normal clamp(21px,2.2vw,27px)/1.18 Georgia,serif}.entry p{font-size:12px;line-height:1.55;color:var(--sub);margin:0}
+.entry .foot{display:flex;justify-content:space-between;margin-top:auto;font-size:11px;letter-spacing:.04em;font-weight:750;color:#785b38}
+.empty{padding:32px;background:var(--paper);border:1px dashed var(--line);border-radius:12px;color:var(--sub);margin-top:20px}
+.reading{max-width:100%;padding:26px 0 50px}.reading[hidden],#gridView[hidden],#importView[hidden],#photosView[hidden],#privateReader[hidden]{display:none!important}
+.back{border:0;background:none;color:#73542c;font-weight:700;padding:8px 0;margin:0 0 18px}.reading-title{font:normal clamp(34px,4.2vw,58px)/1.11 Georgia,serif;letter-spacing:-.035em;margin:14px 0}.reading-sub{font-size:13px;color:var(--sub)}
+.reader-board{background:var(--paper);border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:22px}
+.reader-frame{width:100%;min-height:660px;border:0;display:block;background:#fffdf9}
+.notice{padding:15px 18px;border-top:1px solid var(--line);font-size:12px;color:var(--sub);background:#faf5ee}
+.toc{position:sticky;top:0;height:100dvh;align-self:start;overflow:auto;border-left:1px solid var(--line);padding:28px 16px}
+.toc h2{font:normal 23px Georgia,serif;margin:8px 0 17px}.toc button{display:block;border:0;border-bottom:1px solid #e7ded3;background:transparent;text-align:left;width:100%;padding:10px 0;font-size:12px;color:#6a5a46}.toc button:hover{color:#3c2916}
+.toc .indent{padding-left:11px}.toc .empty-toc{font-size:12px;color:var(--sub);line-height:1.7}
+.help{border-top:1px solid var(--line);padding-top:26px;margin-top:42px;font-size:12px;color:var(--sub)}
+.help strong{color:var(--ink)}.reader-text{white-space:pre-wrap;overflow-wrap:anywhere;font:14px/1.75 ui-monospace,Consolas,monospace;margin:0;padding:24px 24px 31px}
+.messages{display:grid;gap:14px;margin-top:25px}.message{border:1px solid var(--line);border-radius:12px;background:var(--paper);overflow:hidden}
+.message-head{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 16px;background:var(--soft);font-size:11px;color:#66523a;font-weight:750}.message pre{font:13px/1.7 ui-monospace,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;padding:17px;margin:0}
+.import-intro{margin-top:30px}.import-intro h2{font:normal clamp(33px,4vw,54px) Georgia,serif;margin:10px 0}
+.import-zone{padding:26px;border:1px dashed #aa8b61;border-radius:16px;background:var(--paper);margin:22px 0;text-align:center}.import-zone.dragging{background:#f1e3ca;border-color:#785324}
+.import-zone strong{display:block;font:25px Georgia,serif}.import-zone p{font-size:13px;color:var(--sub)}.import-zone input{max-width:100%;margin-top:13px;font-size:12px}
+.privacy{border-left:3px solid var(--gold);padding:12px 16px;background:#ede5d8;font-size:12px;color:#5f513f}
+.plain-btn{padding:10px 14px;border:1px solid #c8af8c;border-radius:9px;background:var(--paper);font-size:12px;font-weight:700}
+.photosFrame{width:100%;min-height:900px;border:1px solid var(--line);border-radius:14px;background:var(--paper)}
+.utility-row{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0}
+.tag{font-size:10px;letter-spacing:.07em;text-transform:uppercase;color:#8b6e48;border:1px solid #d6c7b2;border-radius:100px;padding:3px 8px}
+.page-bottom{font-size:12px;color:var(--sub);margin-top:65px;border-top:1px solid var(--line);padding-top:24px}.page-bottom a{margin-right:13px}
+.overlay{display:none}
+@media(max-width:1190px){.layout{grid-template-columns:235px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:800px){.layout{display:block}.sidebar{position:fixed;top:0;left:0;width:min(86vw,310px);height:100dvh;transform:translateX(-110%);z-index:20;transition:transform .2s;box-shadow:15px 0 40px #0002}.sidebar.open{transform:translateX(0)}.overlay.open{display:block;position:fixed;inset:0;background:#0005;z-index:19}.workspace{padding:0 18px 65px}.menu-btn{display:inline-block}.top-title{margin-right:auto}.hero h1{font-size:clamp(43px,9vw,67px)}.chapters{grid-template-columns:1fr 1fr}.entry{padding:17px;min-height:170px}}
+@media(max-width:570px){.top{gap:6px;flex-wrap:wrap}.top-title{font-size:11px}.tabs{width:100%;justify-content:space-between}.tab{padding:7px 9px}.hero{padding:34px 0 20px}.hero h1{font-size:45px}.hero .lede{font-size:17px}.catalog-header{align-items:flex-start;flex-direction:column}.chapters{grid-template-columns:1fr;gap:10px}.entry{min-height:150px}.reader-board{margin:14px -7px}.reading-title{font-size:37px}.reader-text{padding:18px;font-size:12px}.message pre{font-size:12px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.entry,.sidebar{transition:none}}
 </style>
 </head>
 <body>
-<header class="topbar"><div class="wrap"><div class="brand">ELOAH <span class="muted">/</span> Bibliothèque publique</div><a href="mes-univers.html">Retour à ELOAH ↗</a></div></header>
-<main class="wrap">
-<section class="hero">
-<div class="eyebrow">Collections · Éditions publiques</div>
-<h1>La bibliothèque ELOAH</h1>
-<p class="lead">Choisis un univers, ouvre un chapitre et lis-le ici, comme dans un livre. Les archives restent à leur place, sans te renvoyer d’un lien à un autre.</p>
-<p class="meta" id="libraryStats">Archives publiques classées par univers</p>
+<div class="overlay" id="overlay"></div>
+<div class="layout">
+<aside class="sidebar" id="sidebar" aria-label="Rayons de la bibliothèque">
+<div class="brand">ELOAH<span>Notre bibliothèque ChatGPT</span></div>
+<div class="eyebrow side-label" id="navTitle">LES UNIVERS</div><nav class="side-nav" id="universeNav" aria-label="Univers"></nav>
+<div class="side-card"><strong>Une bibliothèque,<br>pas un annuaire.</strong>Les chapitres s'ouvrent ici, dans un véritable espace de lecture. Les archives originales restent préservées.</div>
+</aside>
+<main class="workspace">
+<header class="top"><button id="menuButton" class="menu-btn" type="button" aria-label="Ouvrir les univers" aria-expanded="false">☰</button><div class="top-title">ELOAH / Archives ChatGPT</div>
+<nav class="tabs" aria-label="Espaces"><button type="button" class="tab active" data-tab="public">📚 Archives</button><button type="button" class="tab" data-tab="private">🔒 Mes conversations</button><button type="button" class="tab" data-tab="photos">📸 Photos</button></nav></header>
+<section id="gridView">
+<section class="hero"><div class="eyebrow">ARCHIVES · CONVERSATIONS · CRÉATIONS</div><h1>Nos idées ont<br>une <em>mémoire.</em></h1><p class="lede">Des conversations aux véritables dossiers. Choisis un univers, ouvre un chapitre et retrouve son contenu sans passer de lien en lien.</p>
+<div class="stats"><span class="stat" id="statChapters">Chapitres vérifiés</span><span class="stat" id="statCollections">Collections</span><span class="stat">Éditions publiques relues</span></div></section>
+<div class="catalog-header"><div><div class="eyebrow" id="categoryEyebrow">CATALOGUE PUBLIC</div><h2 id="categoryTitle">Tous les chapitres</h2></div><p id="countLabel">Archives publiées</p></div>
+<label class="searchbar" for="searchInput"><span aria-hidden="true">⌕</span><input type="search" id="searchInput" placeholder="Chercher une idée, un mot, un chapitre…" autocomplete="off"></label>
+<div class="search-help" id="searchHelp" aria-live="polite"></div>
+<section class="chapters" id="chapterGrid" aria-label="Chapitres"></section>
 </section>
-<div class="tools"><input class="search" id="librarySearch" type="search" placeholder="Rechercher un univers, un chapitre, un sujet…" aria-label="Rechercher dans la bibliothèque"><small class="muted">Recherche dans les titres et descriptions</small></div>
-<h2 class="section-label" id="collections">Les univers</h2>
-<div class="shelves" id="shelves" aria-label="Collections publiques"></div>
-<section class="shelf-contents" id="shelfContents" aria-live="polite"><h2>Les chapitres</h2></section>
-<section class="search-results shelf-contents" id="searchResults" hidden aria-live="polite"></section>
-<section class="reader" id="reader" hidden aria-label="Lecteur intégré">
-<div class="reader-head"><div><div class="eyebrow" id="readerCategory">Archive publique</div><h2 id="readerTitle"></h2><p class="reader-sub" id="readerDesc"></p></div><button class="close" type="button" id="closeReader">✕ Fermer la lecture</button></div>
-<div class="framebox"><iframe id="chapterFrame" title="Chapitre de la bibliothèque ELOAH" loading="eager"></iframe></div>
-<div class="reader-bottom">Version publiée dans ELOAH. <a id="sourceLink" href="#" target="_blank" rel="noopener">Ouvrir le chapitre seul ↗</a></div>
-</section>
-<footer class="note"><h2>À propos des archives publiques</h2><p>Les chapitres sont des éditions publiques des conversations et travaux accessibles. Les passages retirés pour protéger les données personnelles ou confidentielles sont signalés dans les dossiers concernés. Une archive partielle n’est pas présentée comme une transcription complète.</p><p>Les rayons en préparation n’affichent pas de faux chapitres. Les contenus existants ne sont pas supprimés par cette nouvelle présentation.</p></footer>
+<section class="reading" id="publicReader" hidden><button class="back" id="backPublic" type="button">← Revenir aux chapitres</button><div class="eyebrow" id="publicCrumb">ARCHIVE PUBLIQUE</div><h1 class="reading-title" id="publicTitle"></h1><p class="reading-sub" id="publicDesc"></p>
+<div class="reader-board"><iframe class="reader-frame" id="publicFrame" title="Lecture de l'archive" loading="eager"></iframe><div class="notice">Archive déjà publiée dans ELOAH. Les passages confidentiels sont traités dans les éditions d'origine. Une archive partielle reste signalée comme telle.</div></div></section>
+<section id="importView" hidden>
+<div class="import-intro"><div class="eyebrow">BIBLIOTHÈQUE PRIVÉE · LECTURE LOCALE</div><h2>Retrouve tes conversations<br>ChatGPT ici.</h2><p>Tu peux ouvrir un export ChatGPT sur cet appareil. Les conversations restent dans ton navigateur : aucune importation n'est envoyée au site ni publiée.</p></div>
+<div class="privacy"><strong>Privé par défaut.</strong> L'import ne met rien dans GitHub ni sur la bibliothèque publique. Les conversations ne sont pas sauvegardées entre tes visites. Vérifie les données personnelles avant toute publication séparée.</div>
+<div class="import-zone" id="dropZone"><strong>Dépose ton fichier JSON</strong><p>Exporte tes données ChatGPT puis choisis le fichier <code>conversations.json</code> (ou un JSON d'archives compatible).</p><input id="importFile" type="file" accept=".json,application/json" aria-label="Importer un export ChatGPT JSON"></div>
+<div id="importStatus" class="search-help" aria-live="polite"></div>
+<div id="privateCollection" hidden>
+<div class="catalog-header"><h2 id="privateCount">Mes conversations</h2><p>Importées sur cet appareil uniquement</p></div>
+<label class="searchbar" for="privateSearch"><span aria-hidden="true">⌕</span><input id="privateSearch" type="search" placeholder="Chercher un titre ou dans les messages…"></label>
+<section class="chapters" id="privateGrid"></section>
+</div></section>
+<section class="reading" id="privateReader" hidden><button class="back" id="backPrivate" type="button">← Mes conversations</button><div class="eyebrow" id="privateCrumb">ARCHIVE PRIVÉE</div><h1 class="reading-title" id="privateTitle"></h1><p class="reading-sub" id="privateDetails"></p>
+<div class="utility-row"><button type="button" class="plain-btn" id="exportTxt">↓ Télécharger ce texte intégral</button></div><div class="privacy" id="privateWarning">Contenu lu localement ; les médias non textuels peuvent nécessiter les pièces jointes de l'export.</div><div class="messages" id="messageList"></div></section>
+<section id="photosView" hidden><div class="import-intro"><div class="eyebrow">GALERIE · MÉDIAS</div><h2>La photothèque<br>des univers.</h2><p>Affiches, albums et images autorisées, regroupés dans le même espace.</p></div><iframe class="photosFrame" id="photosFrame" title="Photothèque ELOAH" loading="lazy"></iframe></section>
+<footer class="page-bottom">ELOAH · Bibliothèque des conversations et créations. Les archives publiques ne sont pas l'historique complet du compte ChatGPT. <span id="indexStatus"></span></footer>
 </main>
+<aside class="toc" id="toc"><div class="eyebrow">TABLE DES MATIÈRES</div><h2 id="tocHeading">Sommaire</h2><div id="tocLinks" class="empty-toc">Choisis un chapitre pour afficher son sommaire.</div>
+<div class="help"><strong>Mode lecture</strong><p>Les chapitres s'affichent ici. Pour une conversation privée, utilise « Mes conversations » et ton propre export JSON.</p></div></aside>
+</div>
 <script>
 (function(){
-'use strict';
+"use strict";
 var library=[
 {id:'thecrew',name:'The Crew Orchies',icon:'🖤',desc:'Danse, association, cours, spectacles, communication et projets.',chapters:[
 ['Tarifs, cours et vie associative','eloah-bibliotheque-the-crew.html','Tarifs, préinscriptions, planning et stand associatif.'],
@@ -101,77 +148,43 @@ var library=[
 {id:'velka',name:'Sonia Velka',icon:'★',desc:'Textes, identité et créations.',chapters:[],pending:true},
 {id:'lion',name:'Le Lion Blanc',icon:'♧',desc:'Projets et initiatives.',chapters:[],pending:true}
 ];
-var shelves=document.getElementById('shelves'), shelfContents=document.getElementById('shelfContents'), searchResults=document.getElementById('searchResults'), search=document.getElementById('librarySearch');
-var reader=document.getElementById('reader'), frame=document.getElementById('chapterFrame'), closeReader=document.getElementById('closeReader');
-var active='thecrew', current=null, obs=null;
-var all=library.reduce(function(n,c){return n+c.chapters.length},0);
-document.getElementById('libraryStats').textContent=all+' chapitres et dossiers publics déjà accessibles · '+library.length+' univers et espaces';
-function el(tag,cls,txt){var node=document.createElement(tag);if(cls)node.className=cls;if(txt!==undefined)node.textContent=txt;return node}
-function normal(s){return String(s).normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase()}
-function renderShelves(){
-shelves.textContent='';
-library.forEach(function(c){
-var b=el('button','shelf'+(c.pending?' pending':''));b.type='button';b.setAttribute('aria-pressed',String(active===c.id&&!search.value.trim()));b.append(el('span','symbol',c.icon),el('strong','',c.name));
-var stat=c.pending?'En préparation':c.chapters.length?(c.chapters.length+' chapitre'+(c.chapters.length>1?'s':'')):'Espace dédié';
-b.append(el('small','state',stat));b.addEventListener('click',function(){search.value='';active=c.id;renderShelves();renderContents(c,shelfContents);searchResults.hidden=true;shelfContents.hidden=false;document.getElementById('shelfContents').scrollIntoView({behavior:'smooth',block:'start'})});
-shelves.append(b)
-})
-}
-function renderEntries(target,entries){
-var list=el('div','chapter-list');
-entries.forEach(function(item,i){
-var c=item.collection, ch=item.chapter, b=el('button','chapter');b.type='button';
-b.append(el('span','idx',String(i+1).padStart(2,'0')));
-var middle=el('span','');middle.append(el('strong','',ch[0]),el('span','desc',ch[2]+(target===searchResults?' · '+c.name:'')));
-b.append(middle,el('span','read','Lire →'));
-b.addEventListener('click',function(){openChapter(c,ch)});
-list.append(b)
-});target.append(list)
-}
-function renderContents(c,target){
-target.textContent='';target.append(el('div','eyebrow','COLLECTION · '+c.name),el('h2','',c.icon+' '+c.name),el('p','intro',c.desc));
-if(c.chapters.length)renderEntries(target,c.chapters.map(function(ch){return {collection:c,chapter:ch}}));
-else if(c.external){var link=el('a','external',c.externalLabel+' ↗');link.href=c.external;target.append(el('p','empty','Cet espace possède sa propre présentation.'),link)}
-else target.append(el('p','empty','Ce rayon est préparé, mais aucun chapitre public n’y a encore été vérifié.'))
-}
-function searchAll(){
-var q=normal(search.value.trim());
-renderShelves();
-if(!q){searchResults.hidden=true;shelfContents.hidden=false;renderContents(library.find(function(c){return c.id===active}),shelfContents);return}
-shelfContents.hidden=true;searchResults.hidden=false;searchResults.textContent='';
-var matches=[];
-library.forEach(function(c){c.chapters.forEach(function(ch){if(normal(c.name+' '+c.desc+' '+ch[0]+' '+ch[2]).includes(q))matches.push({collection:c,chapter:ch})})});
-searchResults.append(el('div','eyebrow','RECHERCHE DANS LES ARCHIVES'),el('h2','',matches.length+' résultat'+(matches.length>1?'s':'')));
-if(matches.length)renderEntries(searchResults,matches);else searchResults.append(el('p','empty','Aucun chapitre publié ne correspond encore à cette recherche.'))
-}
-function resizeFrame(){
-try{var d=frame.contentDocument;if(!d)return;frame.style.height='1px';frame.style.height=Math.max(500,d.documentElement.scrollHeight,d.body.scrollHeight)+'px'}catch(e){frame.style.height='800px'}
-}
-function decorateFrame(){
-try{
-var d=frame.contentDocument;if(!d||!d.body)return;
-var st=d.createElement('style');st.textContent='body{background:#fffdf9!important;margin:0!important;color:#30291f!important} .shell{display:block!important;min-height:0!important} .side,.toc,.shell>aside,.toplink,article>.chapters{display:none!important} main{padding:8px 10px 28px!important;max-width:none!important} article,.reader{max-width:900px!important;margin:0 auto!important} pre,table{max-width:100%;overflow-x:auto} img,video{max-width:100%;height:auto} h1{font-size:clamp(30px,5vw,50px)!important}';
-d.head.append(st);
-if(obs)obs.disconnect();
-if(typeof ResizeObserver!=='undefined'){obs=new ResizeObserver(resizeFrame);obs.observe(d.body)}
-d.querySelectorAll('img,video').forEach(function(m){m.addEventListener('load',resizeFrame,{once:true});m.addEventListener('loadedmetadata',resizeFrame,{once:true})});
-resizeFrame();window.setTimeout(resizeFrame,300);window.setTimeout(resizeFrame,1200)
-}catch(e){frame.style.height='800px'}
-}
-function openChapter(c,ch){
-current=ch[1];reader.hidden=false;
-document.getElementById('readerCategory').textContent='ARCHIVE PUBLIQUE · '+c.name;
-document.getElementById('readerTitle').textContent=ch[0];
-document.getElementById('readerDesc').textContent=ch[2];
-document.getElementById('sourceLink').href=ch[1];
-frame.style.height='650px';
-if(frame.getAttribute('src')!==ch[1])frame.setAttribute('src',ch[1]);else decorateFrame();
-reader.scrollIntoView({behavior:'smooth',block:'start'});
-}
-frame.addEventListener('load',decorateFrame);
-closeReader.addEventListener('click',function(){reader.hidden=true;frame.removeAttribute('src');current=null;if(obs)obs.disconnect();document.getElementById('shelfContents').scrollIntoView({behavior:'smooth',block:'start'})});
-search.addEventListener('input',searchAll);
-renderShelves();renderContents(library[0],shelfContents)
+library.find(x=>x.id==="thecrew").chapters.push(["Genèse de The Crew","eloah-bibliotheque-the-crew-genese.html","Fondation et premières orientations du projet."]);
+const universes=library.filter(x=>x.id!=="photos");
+const chapterData=universes.flatMap(c=>c.chapters.map((ch,i)=>({id:c.id+"-"+i,title:ch[0],url:ch[1],desc:ch[2],universe:c.id,cat:c.name,icon:c.icon})));
+const el=id=>document.getElementById(id),norm=s=>String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+const state={mode:"public",category:"all",privateCategory:"all",publicChapter:null,privateRecords:[],privateRecord:null,privateText:"",cache:new Map(),indexDone:0};
+const actualUniverses=universes.filter(c=>c.chapters.length>0);
+el("statChapters").textContent=chapterData.length+" chapitres publiés";el("statCollections").textContent=actualUniverses.length+" collections alimentées";
+function node(tag,cls,value){const e=document.createElement(tag);if(cls)e.className=cls;if(value!==undefined)e.textContent=value;return e}
+function closeMenu(){el("sidebar").classList.remove("open");el("overlay").classList.remove("open");el("menuButton").setAttribute("aria-expanded","false")}
+el("menuButton").addEventListener("click",()=>{const b=!el("sidebar").classList.contains("open");el("sidebar").classList.toggle("open",b);el("overlay").classList.toggle("open",b);el("menuButton").setAttribute("aria-expanded",String(b))});el("overlay").addEventListener("click",closeMenu);
+function showMode(mode){state.mode=mode;closeMenu();document.querySelectorAll(".tab").forEach(b=>b.classList.toggle("active",b.dataset.tab===mode));el("gridView").hidden=mode!=="public";el("publicReader").hidden=true;el("importView").hidden=mode!=="private";el("privateReader").hidden=true;el("photosView").hidden=mode!=="photos";el("publicFrame").removeAttribute("src");if(mode==="photos"&&!el("photosFrame").getAttribute("src"))el("photosFrame").src="eloah-phototheque.html";renderNav();showToc([], "Sommaire");window.scrollTo({top:0,behavior:"instant"})}
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>showMode(b.dataset.tab)));
+function renderNav(){const nav=el("universeNav");nav.replaceChildren();el("navTitle").textContent=state.mode==="private"?"MES DOSSIERS":state.mode==="photos"?"PHOTOTHÈQUE":"LES UNIVERS";
+if(state.mode==="photos"){nav.append(node("p","empty-toc","Les albums sont regroupés par univers dans la galerie intégrée."));return}
+const list=state.mode==="private"?[{id:"all",name:"Toutes mes conversations",icon:"✦",count:state.privateRecords.length},...universes.map(c=>({id:c.id,name:c.name,icon:c.icon,count:state.privateRecords.filter(r=>r.universe===c.id).length}))]:[{id:"all",name:"Tous les chapitres",icon:"✦",count:chapterData.length},...universes.map(c=>({id:c.id,name:c.name,icon:c.icon,count:c.chapters.length}))];
+for(const c of list){const b=node("button");b.type="button";const active=(state.mode==="private"?state.privateCategory:state.category)===c.id;b.className=active?"active":"";b.setAttribute("aria-pressed",String(active));const label=node("span","",c.icon+" "+c.name),count=node("span","count",String(c.count));b.append(label,count);b.addEventListener("click",()=>{if(state.mode==="private"){state.privateCategory=c.id;el("privateReader").hidden=true;el("importView").hidden=false;renderPrivate()}else{state.category=c.id;el("publicReader").hidden=true;el("gridView").hidden=false;renderPublic()}renderNav();closeMenu();window.scrollTo({top:0,behavior:"smooth"})});nav.append(b)}}
+function showToc(items,heading){el("tocHeading").textContent=heading||"Sommaire";const box=el("tocLinks");box.replaceChildren();box.className=items.length?"":"empty-toc";if(!items.length){box.textContent="Le sommaire apparaîtra pendant la lecture.";return}items.slice(0,90).forEach(x=>{const b=node("button",x.level>=3?"indent":"",x.text);b.type="button";b.addEventListener("click",x.jump);box.append(b)})}
+function entryCard(r,privateMode){const b=node("button","entry");b.type="button";const t=node("div","topline");t.append(node("span","",r.icon+" "+r.cat),node("span","tag",privateMode?"PRIVÉ":"ARCHIVE"));const h=node("strong","",r.title),d=node("p","",r.desc||"Lire ce dossier"),f=node("div","foot");f.append(node("span","",privateMode?r.count+" messages":"Édition publiée"),node("span","","Lire →"));b.append(t,h,d,f);b.addEventListener("click",()=>privateMode?openPrivate(r):openPublic(r));return b}
+function renderPublic(){const c=universes.find(x=>x.id===state.category);el("categoryTitle").textContent=c?c.name:"Tous les chapitres";el("categoryEyebrow").textContent=c?"COLLECTION · "+c.name:"CATALOGUE PUBLIC";const q=norm(el("searchInput").value.trim());const filtered=chapterData.filter(r=>(state.category==="all"||r.universe===state.category)&&(!q||norm(r.title+" "+r.cat+" "+r.desc+" "+(state.cache.get(r.url)||"")).includes(q)));el("countLabel").textContent=filtered.length+" chapitre"+(filtered.length>1?"s":"");const grid=el("chapterGrid");grid.replaceChildren();if(filtered.length)filtered.forEach(r=>grid.append(entryCard(r,false)));else grid.append(node("div","empty",c&&!c.chapters.length?"Aucun chapitre public vérifié dans cet univers pour le moment.":"Aucun résultat dans les archives publiées."));el("searchHelp").textContent=q?"Recherche dans les titres, résumés et textes chargés. "+state.indexDone+"/"+chapterData.length+" chapitres indexés.":"Retrouve les archives classées sans ouvrir une autre page."}
+el("searchInput").addEventListener("input",renderPublic);
+function decorateFrame(frame){try{const d=frame.contentDocument;if(!d||!d.body)return;const s=d.createElement("style");s.textContent="html,body{background:#fffdf9!important;color:#342b22!important}body{margin:0!important} body>header,.topbar,.sidebar,.side,.toc,.site-nav,nav[aria-label=\\"Navigation\\"],.reader-footer{display:none!important}.shell{display:block!important} main{max-width:950px!important;width:auto!important;margin:auto!important;padding:20px 18px 40px!important} article,.reader{max-width:900px!important;margin:auto!important} img,video,svg{max-width:100%!important;height:auto}table,pre{max-width:100%;overflow:auto}";d.head.append(s);const headings=[...d.querySelectorAll("h1,h2,h3")].filter(h=>h.textContent.trim()).slice(0,90).map(h=>({text:h.textContent.trim().slice(0,100),level:Number(h.tagName[1]),jump:()=>{const rect=h.getBoundingClientRect(),fr=frame.getBoundingClientRect();window.scrollTo({top:window.scrollY+fr.top+rect.top-120,behavior:"smooth"})}}));showToc(headings,"Dans ce chapitre");const resize=()=>{if(!frame.isConnected)return;frame.style.height="20px";frame.style.height=Math.max(660,d.documentElement.scrollHeight,d.body.scrollHeight+40)+"px"};if(frame._observer)frame._observer.disconnect();if("ResizeObserver" in window){frame._observer=new ResizeObserver(resize);frame._observer.observe(d.body)}d.querySelectorAll("img,video").forEach(m=>{m.addEventListener("load",resize,{once:true});m.addEventListener("loadedmetadata",resize,{once:true})});resize();setTimeout(resize,350);setTimeout(resize,1350)}catch(err){frame.style.height="900px"}}
+const pFrame=el("publicFrame");pFrame.addEventListener("load",()=>decorateFrame(pFrame));
+function openPublic(r){state.publicChapter=r;el("gridView").hidden=true;el("publicReader").hidden=false;el("publicCrumb").textContent="ARCHIVE PUBLIQUE · "+r.cat;el("publicTitle").textContent=r.title;el("publicDesc").textContent=r.desc;pFrame.style.height="660px";showToc([],"Chargement…");pFrame.src=r.url;window.scrollTo({top:0,behavior:"instant"});try{history.replaceState(null,"","#chapitre="+encodeURIComponent(r.url))}catch(e){}}
+el("backPublic").addEventListener("click",()=>{el("gridView").hidden=false;el("publicReader").hidden=true;if(pFrame._observer)pFrame._observer.disconnect();pFrame.removeAttribute("src");showToc([],"Sommaire");try{history.replaceState(null,"",location.pathname)}catch(e){}});
+async function buildIndex(){for(let i=0;i<chapterData.length;i+=3){await Promise.all(chapterData.slice(i,i+3).map(async r=>{try{const resp=await fetch(r.url,{cache:"force-cache"});if(!resp.ok)return;const doc=new DOMParser().parseFromString(await resp.text(),"text/html");doc.querySelectorAll("script,style,nav,header,footer").forEach(x=>x.remove());const txt=(doc.querySelector("main")||doc.body).textContent||"";state.cache.set(r.url,norm(txt.slice(0,250000)))}catch(e){}finally{state.indexDone++}}));if(state.mode==="public"&&!el("gridView").hidden&&el("searchInput").value)renderPublic()}el("indexStatus").textContent=" · Recherche des textes indexée localement."}
+function fromContent(c){if(!c)return"[Message sans texte exploitable]";if(typeof c==="string")return c;const p=Array.isArray(c.parts)?c.parts:[c.text??c.content??c.result??c.transcript];return p.map(x=>{if(typeof x==="string")return x;if(x&&typeof x.text==="string")return x.text;if(x&&typeof x.content==="string")return x.content;if(x&&typeof x.transcript==="string")return x.transcript;return"[Élément non textuel dans l'export : consulter les fichiers originaux]"}).join("\n")}
+function parseMessages(c){let rows=[];if(c.mapping&&typeof c.mapping==="object"){const m=c.mapping;let ids=[];if(c.current_node&&m[c.current_node]){let n=c.current_node;const seen=new Set();while(n&&m[n]&&!seen.has(n)){seen.add(n);ids.push(n);n=m[n].parent}ids.reverse()}else{ids=Object.keys(m).sort((a,b)=>(m[a]?.message?.create_time||0)-(m[b]?.message?.create_time||0))}for(const id of ids){const msg=m[id]?.message;if(msg&&["user","assistant"].includes(msg.author?.role)){rows.push({role:msg.author.role,time:msg.create_time,text:fromContent(msg.content)})}}}else if(Array.isArray(c.messages)){rows=c.messages.filter(m=>["user","assistant"].includes(m.role||m.author?.role)).map(m=>({role:m.role||m.author?.role,time:m.create_time||m.at||null,text:fromContent(m.content||{parts:[m.text||""]})}))}return rows}
+function guessCategory(title,existing){const s=norm(title+" "+(existing||""));if(/the crew|orchies|danse|zumba|helloasso|capcut/.test(s))return"thecrew";if(/power.*glam|sosso|love coach/.test(s))return"power";if(/parisis|pyramide|alignement|nostradamus|thierry van/.test(s))return"parisis";if(/foi|jesus|marie|apocryph|bible|evangile|spiritual/.test(s))return"foi";if(/velka/.test(s))return"velka";if(/lion blanc/.test(s))return"lion";if(/smith|design social/.test(s))return"smith";if(/sonia os|agent|human voice|maia|aaf/.test(s))return"soniaos";return"eloah"}
+async function receiveFile(file){if(!file)return;el("importStatus").textContent="Lecture du fichier sur cet appareil…";try{if(file.size>250*1024*1024)throw Error("Fichier trop volumineux pour cette version (250 Mo maximum).");const input=JSON.parse(await file.text());const a=Array.isArray(input)?input:Array.isArray(input.conversations)?input.conversations:null;if(!a)throw Error("Format non reconnu : il faut une liste de conversations.");state.privateRecords=a.map((c,i)=>{const title=String(c.title||"Conversation sans titre"),path=Array.isArray(c.sonia_os_knowledge?.dossiers)?c.sonia_os_knowledge.dossiers.find(d=>d.univers)?.univers:"";const universe=guessCategory(title,path),messages=parseMessages(c);return{id:String(c.id||c.conversation_id||i),title,universe,cat:universes.find(x=>x.id===universe)?.name||"ELOAH",icon:universes.find(x=>x.id===universe)?.icon||"✨",desc:messages.length+" messages extraits du fil principal · export local",count:messages.length,messages,date:Number(c.update_time||c.create_time||0)}}).sort((a,b)=>b.date-a.date);state.privateCategory="all";el("privateCollection").hidden=false;el("importStatus").textContent=state.privateRecords.length+" conversations chargées uniquement dans cette session. Aucun envoi.";renderNav();renderPrivate()}catch(err){el("importStatus").textContent="Impossible de lire le fichier : "+err.message}}
+el("importFile").addEventListener("change",e=>receiveFile(e.target.files[0]));const drop=el("dropZone");drop.addEventListener("dragover",e=>{e.preventDefault();drop.classList.add("dragging")});drop.addEventListener("dragleave",()=>drop.classList.remove("dragging"));drop.addEventListener("drop",e=>{e.preventDefault();drop.classList.remove("dragging");receiveFile(e.dataTransfer.files[0])});
+function renderPrivate(){const q=norm(el("privateSearch").value.trim());const items=state.privateRecords.filter(r=>(state.privateCategory==="all"||r.universe===state.privateCategory)&&(!q||norm(r.title).includes(q)||r.messages.some(m=>norm(m.text).includes(q))));el("privateCount").textContent=items.length+" conversations";const grid=el("privateGrid");grid.replaceChildren();if(!items.length)grid.append(node("div","empty","Aucune conversation correspondante."));items.slice(0,180).forEach(r=>grid.append(entryCard(r,true)));if(items.length>180)grid.append(node("div","empty","180 conversations affichées sur "+items.length+". Affine ta recherche."))}
+el("privateSearch").addEventListener("input",renderPrivate);
+function openPrivate(r){state.privateRecord=r;el("importView").hidden=true;el("privateReader").hidden=false;el("privateCrumb").textContent="ARCHIVE LOCALE · "+r.cat;el("privateTitle").textContent=r.title;el("privateDetails").textContent=r.count+" messages du fil principal, conservés dans leur ordre · les médias ne sont pas inclus dans ce lecteur JSON";el("privateWarning").textContent="Cette transcription locale reprend le texte accessible dans le JSON. Les images, fichiers, branches alternatives et éléments non textuels demandent l'export d'origine.";const list=el("messageList");list.replaceChildren();const toc=[];r.messages.forEach((m,i)=>{const article=node("article","message"),head=node("div","message-head");head.append(node("span","",String(i+1).padStart(3,"0")+" · "+(m.role==="user"?"SONIA / UTILISATRICE":"CHATGPT / ASSISTANT")),node("span","",m.time?new Date(m.time*1000).toLocaleDateString("fr-FR"):""));const body=node("pre","",m.text);article.append(head,body);list.append(article);if(i<90)toc.push({text:"Message "+(i+1)+" · "+(m.role==="user"?"Sonia":"ChatGPT"),level:2,jump:()=>article.scrollIntoView({behavior:"smooth",block:"start"})})});state.privateText=r.messages.map((m,i)=>"[MESSAGE "+(i+1)+" / "+r.messages.length+" · "+(m.role==="user"?"UTILISATRICE":"ASSISTANT")+"]\n"+m.text).join("\n\n");showToc(toc,"Messages");window.scrollTo({top:0,behavior:"instant"})}
+el("backPrivate").addEventListener("click",()=>{el("privateReader").hidden=true;el("importView").hidden=false;showToc([],"Sommaire")});
+el("exportTxt").addEventListener("click",()=>{if(!state.privateRecord)return;const blob=new Blob([state.privateRecord.title+"\n\n"+state.privateText],{type:"text/plain;charset=utf-8"}),url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="conversation-chatgpt-"+state.privateRecord.id.replace(/[^\w-]/g,"").slice(0,35)+".txt";a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)});
+const photoframe=el("photosFrame");photoframe.addEventListener("load",()=>{try{const d=photoframe.contentDocument;if(!d)return;const st=d.createElement("style");st.textContent="main>a:first-child{display:none!important}body{background:#fffdf9!important}main{padding-top:18px!important}";d.head.append(st);const resize=()=>{photoframe.style.height="500px";photoframe.style.height=Math.max(900,d.documentElement.scrollHeight,d.body.scrollHeight)+"px"};if("ResizeObserver" in window){const obs=new ResizeObserver(resize);obs.observe(d.body)}resize()}catch(e){photoframe.style.height="1200px"}});
+renderNav();renderPublic();const hash=new URLSearchParams(location.hash.slice(1)).get("chapitre");if(hash){const found=chapterData.find(r=>r.url===hash);if(found)openPublic(found)}setTimeout(buildIndex,300);
 })();
 </script>
 </body>
