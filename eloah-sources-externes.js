@@ -209,12 +209,12 @@ async function runSearch(kind){
  finally{loading=false;toggle(false)}
 }
 function toggle(disabled){document.querySelectorAll('[data-ers-search]').forEach(b=>b.disabled=disabled);}
-async function authorizeGoogle(){
+async function authorizeGoogle(kind){
  try{
-  await founder();notify('Redirection vers Google pour autoriser Drive et Gmail en lecture seule…');
+  await founder();notify(kind==='gmail'?'Autorisation Gmail demandée séparément. Google peut exiger une validation de l’application.':'Autorisation Google Drive uniquement, en lecture seule…');
   const c=await google();
   const {data,error}=await c.auth.signInWithOAuth({provider:'google',options:{
-    scopes:'https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/gmail.readonly',
+    scopes:kind==='gmail'?'https://www.googleapis.com/auth/drive.readonly https://www.googleapis.com/auth/gmail.readonly':'https://www.googleapis.com/auth/drive.readonly',
     redirectTo:location.origin+location.pathname,
     queryParams:{access_type:'online',prompt:'consent select_account'}
   }});
@@ -245,15 +245,16 @@ function init(){
  section.innerHTML='<details><summary>Mes sources externes · WordPress, Drive et Gmail</summary>'+
  '<p>Recherche des contenus réels et choisis ce qu’ELOAH peut utiliser. Aucun mail ou document Google n’est lu ni transmis automatiquement. Les sources sélectionnées ne constituent pas une preuve indépendante.</p>'+
  '<label for="ecs-remote-query">Sujet à rechercher</label><input id="ecs-remote-query" type="search" maxlength="140" placeholder="Ex. attachement, Nostradamus, atelier latino…">'+
- '<div class="ers-actions"><button type="button" data-ers-search="wordpress">Chercher sur mes WordPress publics</button><button type="button" id="ers-google-connect">Autoriser Google Drive + Gmail (lecture seule)</button></div>'+
+ '<div class="ers-actions"><button type="button" data-ers-search="wordpress">Chercher sur mes WordPress publics</button><button type="button" id="ers-google-connect">Autoriser Drive (lecture seule)</button><button type="button" id="ers-gmail-connect">Autoriser Gmail (permission distincte)</button></div>'+
  '<div class="ers-actions"><button type="button" id="ers-google-verify">Vérifier Google</button><button type="button" data-ers-search="drive">Chercher dans Drive</button><button type="button" data-ers-search="gmail">Chercher dans Gmail</button><button type="button" id="ers-google-forget">Fermer la session Google</button></div>'+
- '<p class="ers-note">Google nécessite une connexion Fondatrice, une autorisation distincte et les API/scopes validés dans Google Cloud. L’accès Gmail demande des permissions restreintes. Les connexions ChatGPT ne sont pas transférées à ton site.</p>'+
+ '<p class="ers-note">Google nécessite une connexion Fondatrice, une autorisation distincte et les API/scopes configurés dans Google Cloud. L’accès Gmail est facultatif et sa permission est restreinte : elle peut nécessiter une vérification Google. Les connexions ChatGPT ne sont pas transférées à ton site.</p>'+
  '<label class="ers-auto"><input type="checkbox" id="ers-wp-auto" checked> Chercher automatiquement jusqu’à deux articles publics pertinents de Power & Glam ou The Crew pour ma création. Aucun accès Google automatique.</label>'+
  '<p id="ecs-remote-status" role="status" aria-live="polite">WordPress public consultable sans connexion. Google : autorisation non vérifiée.</p>'+
  '<h4>Résultats</h4><div id="ecs-remote-results"></div><h4>Sources choisies pour cette création</h4><div id="ecs-remote-selected"></div></details>';
  const library=lookup('eloah-creation-sources');(library||form).before(section);
  for(const button of section.querySelectorAll('[data-ers-search]'))button.addEventListener('click',()=>runSearch(button.dataset.ersSearch));
- lookup('ers-google-connect').addEventListener('click',authorizeGoogle);
+ lookup('ers-google-connect').addEventListener('click',()=>authorizeGoogle('drive'));
+ lookup('ers-gmail-connect').addEventListener('click',()=>authorizeGoogle('gmail'));
  lookup('ers-google-verify').addEventListener('click',verifyGoogle);
  lookup('ers-google-forget').addEventListener('click',forgetGoogle);
  lookup('home-ai-project')?.addEventListener('change',()=>window.EloahConnectedSources.clear());
