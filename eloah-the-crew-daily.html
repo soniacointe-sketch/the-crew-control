@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#17120b">
+<title>ELOAH · The Crew Daily</title>
+<meta name="description" content="Contrôle quotidien automatique The Crew Orchies dans ELOAH.">
+<style>
+:root{--bg:#f3efe6;--paper:#fffdf7;--ink:#211c14;--muted:#6d6455;--line:#d8cdb8;--gold:#b38a38;--gold2:#e6cb89;--black:#17120b;--red:#a43d32;--orange:#a86d24;--green:#35684a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit}.shell{max-width:1180px;margin:auto;padding:24px 20px 60px}.top{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.brand{display:flex;align-items:center;gap:12px}.mark{width:44px;height:44px;border-radius:12px;background:var(--black);color:var(--gold2);display:grid;place-items:center;font:700 17px Georgia,serif;border:1px solid #4d3d23}.brand strong{font:700 12px/1.2 system-ui;letter-spacing:.18em;text-transform:uppercase}.brand small{display:block;color:var(--muted);margin-top:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}.btn,button{min-height:42px;border:1px solid var(--line);background:var(--paper);color:var(--ink);padding:9px 14px;border-radius:9px;font:inherit;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:7px}.btn.primary,button.primary{background:var(--black);color:#fff5da;border-color:var(--black)}button:disabled{opacity:.55;cursor:wait}
+.hero{background:linear-gradient(135deg,#17120b,#2a2113);color:#fff6df;border:1px solid #4d3d23;border-radius:18px;padding:28px;margin-bottom:16px;position:relative;overflow:hidden}.hero:after{content:"";position:absolute;width:240px;height:240px;border-radius:50%;right:-70px;top:-100px;background:#d7b25c18;box-shadow:0 0 100px #e2bd6f33}.eyebrow{font-size:11px;letter-spacing:.17em;text-transform:uppercase;color:#d8be82}.hero h1{font:400 clamp(38px,6vw,72px)/.95 Georgia,serif;margin:11px 0 12px;letter-spacing:-.035em}.hero p{max-width:760px;color:#d7ccb6;margin:0}.hero-meta{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}.chip{font-size:12px;border:1px solid #7d6536;background:#2d2417;padding:7px 10px;border-radius:999px;color:#ead9aa}.chip.ok{border-color:#53775f;color:#c9e7d1}.chip.attention{border-color:#925249;color:#ffd6cf}
+.notice{border-left:4px solid var(--gold);background:#fff8e8;border-radius:10px;padding:13px 15px;margin:16px 0;color:#584d3c}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.metric{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:17px;min-width:0}.metric span{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}.metric strong{display:block;font:400 34px/1.05 Georgia,serif;margin:7px 0}.metric small{color:var(--muted)}
+.section{background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:22px;margin-top:14px}.head{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:14px}.head h2{font:400 28px/1.1 Georgia,serif;margin:0}.head p{margin:5px 0 0;color:var(--muted);font-size:13px}.status{font-size:12px;color:var(--muted)}
+.alerts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}.alert{border:1px solid var(--line);border-radius:12px;padding:14px;display:grid;grid-template-columns:40px 1fr;gap:11px;align-items:start}.alert .n{width:40px;height:40px;border-radius:10px;background:#f1e6cf;display:grid;place-items:center;font-weight:800;color:#6d4f19}.alert.high .n{background:#f3dfda;color:#8c352d}.alert h3{margin:0;font-size:14px}.alert p{margin:4px 0 0;color:var(--muted);font-size:12px}.empty{padding:18px;border:1px dashed #b7c4b7;background:#f3f8f2;border-radius:12px;color:var(--green)}
+.events{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.event{border:1px solid var(--line);border-radius:14px;padding:16px;background:#fffaf0}.event h3{margin:0;font:400 22px/1.15 Georgia,serif}.event .date{font-size:12px;color:var(--gold);font-weight:700;margin:7px 0}.event .nums{display:flex;gap:18px;margin:13px 0}.event .nums b{font-size:20px}.event .nums small{display:block;color:var(--muted);font-size:10px;text-transform:uppercase}.bar{height:7px;background:#e8dfce;border-radius:999px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,#8d6a2d,#d2b46c);width:0}
+.rows{display:grid;gap:0}.row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:14px;padding:13px 0;border-bottom:1px solid #e5dccb}.row:last-child{border-bottom:0}.row b{font-size:13px}.row p{margin:3px 0 0;color:var(--muted);font-size:12px}.tag{align-self:center;font-size:10px;text-transform:uppercase;border:1px solid var(--line);padding:5px 8px;border-radius:999px;color:var(--muted)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}.money{font:400 34px Georgia,serif}.finance-line{display:flex;justify-content:space-between;gap:18px;padding:10px 0;border-bottom:1px solid #e7decf}.finance-line:last-child{border:0}.finance-line span{color:var(--muted);font-size:12px}.finance-line b{white-space:nowrap}
+.login{max-width:460px;margin:70px auto;background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:26px}.login h1{font:400 35px Georgia,serif;margin:4px 0 10px}.login p{color:var(--muted)}.login label{display:grid;gap:6px;margin:12px 0;font-size:12px}.login input{width:100%;min-height:44px;border:1px solid var(--line);border-radius:9px;background:#fff;padding:10px 12px;font:inherit}.login button{width:100%;margin-top:8px}.login .error{color:var(--red);font-size:12px}
+[hidden]{display:none!important}
+@media(max-width:900px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}}
+@media(max-width:650px){.shell{padding:14px 12px 38px}.hero{padding:22px 18px}.grid,.alerts,.events{grid-template-columns:1fr}.metric{padding:14px}.section{padding:17px}.actions{width:100%}.actions>*{flex:1}.hero h1{font-size:44px}.row{grid-template-columns:1fr}.tag{justify-self:start}}
+</style>
+</head>
+<body>
+<div id="loginView" class="login" hidden>
+  <div class="eyebrow">ELOAH · ESPACE FONDATRICE</div>
+  <h1>The Crew Daily</h1>
+  <p>Connecte-toi avec ton accès ELOAH / The Crew pour voir le contrôle automatique.</p>
+  <form id="loginForm">
+    <label>E-mail<input id="email" type="email" autocomplete="email" required></label>
+    <label>Mot de passe<input id="password" type="password" autocomplete="current-password" required></label>
+    <button class="primary" type="submit">Se connecter</button>
+    <p id="loginMsg" class="error"></p>
+  </form>
+  <p><a href="mes-univers.html">← Revenir à ELOAH</a></p>
+</div>
+
+<div id="app" class="shell" hidden>
+  <header class="top">
+    <div class="brand"><div class="mark">TC</div><div><strong>ELOAH · THE CREW DAILY</strong><small>Association · contrôle automatique</small></div></div>
+    <div class="actions">
+      <a class="btn" href="mes-univers.html">← ELOAH</a>
+      <a class="btn" href="index.html">The Crew Control</a>
+      <button id="refreshBtn" class="primary" type="button">↻ Actualiser maintenant</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="eyebrow">SONIA OS · ASSOCIATION</div>
+    <h1>The Crew Daily.</h1>
+    <p>Paiements, documents, présences, relances, événements, contenus, finances et prochaines séances réunis dans un seul contrôle vivant.</p>
+    <div class="hero-meta">
+      <span id="statusChip" class="chip">Chargement…</span>
+      <span id="dateChip" class="chip">—</span>
+      <span class="chip ok">Auto · toutes les heures</span>
+      <span class="chip ok">Écran · toutes les 5 min</span>
+    </div>
+  </section>
+
+  <div id="systemNotice" class="notice">Lecture du dernier contrôle…</div>
+
+  <section class="grid" aria-label="Indicateurs principaux">
+    <article class="metric"><span>Signaux à traiter</span><strong id="mAttention">—</strong><small>Décisions, anomalies et actions</small></article>
+    <article class="metric"><span>Adhérents actifs</span><strong id="mMembers">—</strong><small id="mGroups">—</small></article>
+    <article class="metric"><span>Encaissé intégré</span><strong id="mCollected">—</strong><small>Cotisations intégrées au registre</small></article>
+    <article class="metric"><span>HelloAsso à rapprocher</span><strong id="mHello">—</strong><small id="mHelloCount">—</small></article>
+  </section>
+
+  <section class="section">
+    <div class="head"><div><h2>Ce qui demande ton attention</h2><p>La page reste silencieuse quand tout est à zéro.</p></div><span id="updatedAt" class="status">—</span></div>
+    <div id="alerts" class="alerts"></div>
+  </section>
+
+  <section class="section">
+    <div class="head"><div><h2>Ateliers & événements</h2><p>Remplissage calculé depuis les inscriptions enregistrées.</p></div></div>
+    <div id="events" class="events"></div>
+  </section>
+
+  <div class="two">
+    <section class="section">
+      <div class="head"><div><h2>Finances</h2><p>Registre The Crew + commandes HelloAsso à rapprocher.</p></div></div>
+      <div id="finance"></div>
+    </section>
+    <section class="section">
+      <div class="head"><div><h2>Suivi opérationnel</h2><p>Présences, documents, relances et contenus.</p></div></div>
+      <div id="ops"></div>
+    </section>
+  </div>
+
+  <section class="section">
+    <div class="head"><div><h2>Actions dues</h2><p>Les tâches ouvertes arrivées à échéance.</p></div></div>
+    <div id="tasks" class="rows"></div>
+  </section>
+
+  <section class="section">
+    <div class="head"><div><h2>Prochaines séances</h2><p>Planning enregistré dans SONIA OS Association.</p></div></div>
+    <div id="sessions" class="rows"></div>
+  </section>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const sb=supabase.createClient("https://voytsqyorhoveurnguxn.supabase.co","sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy");
+const $=id=>document.getElementById(id);
+const euro=n=>new Intl.NumberFormat("fr-FR",{style:"currency",currency:"EUR"}).format(Number(n||0));
+const fdate=d=>d?new Intl.DateTimeFormat("fr-FR",{dateStyle:"medium"}).format(new Date(d+"T12:00:00")):"—";
+const ftime=t=>String(t||"").slice(0,5);
+const esc=s=>String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
+
+async function loadLatest(){
+  $("systemNotice").textContent="Actualisation du contrôle…";
+  const {data,error}=await sb.rpc("crew_daily_latest");
+  if(error){$("systemNotice").textContent="Lecture impossible : "+error.message;return}
+  if(!data||!data.summary){$("systemNotice").textContent="Aucun contrôle disponible.";return}
+  render(data);
+}
+function alertItem(n,title,text,high=false){
+  if(!Number(n)) return "";
+  return '<article class="alert '+(high?'high':'')+'"><div class="n">'+esc(n)+'</div><div><h3>'+esc(title)+'</h3><p>'+esc(text)+'</p></div></article>';
+}
+function render(payload){
+  const s=payload.summary||{},a=s.attention||{},fin=s.finance||{},m=s.members||{},docs=s.documents||{},att=s.attendance||{},fol=s.followups||{},content=s.content||{};
+  $("statusChip").textContent=payload.status==="attention"?"● Attention nécessaire":"● Rien à signaler";
+  $("statusChip").className="chip "+(payload.status==="attention"?"attention":"ok");
+  $("dateChip").textContent=fdate(payload.run_date||s.date);
+  $("updatedAt").textContent="Mis à jour "+new Intl.DateTimeFormat("fr-FR",{dateStyle:"short",timeStyle:"short",timeZone:"Europe/Paris"}).format(new Date(payload.created_at||s.generated_at));
+  $("mAttention").textContent=a.total??0;
+  $("mMembers").textContent=m.active??0;
+  $("mGroups").textContent=(m.kids??0)+" KIDS · "+(m.ados_adultes??0)+" ADOS/ADULTES";
+  $("mCollected").textContent=euro(fin.collected);
+  $("mHello").textContent=euro(fin.helloasso_to_reconcile_amount);
+  $("mHelloCount").textContent=(fin.helloasso_to_reconcile_orders??0)+" commande(s) à rapprocher";
+
+  let alerts="";
+  alerts+=alertItem(a.helloasso_to_reconcile,"Paiements HelloAsso à rapprocher",euro(fin.helloasso_to_reconcile_amount)+" détectés dans des commandes encore non rapprochées.",true);
+  alerts+=alertItem(a.missing_attendance_sessions,"Feuilles de présence manquantes","Séances passées sans aucune saisie de présence.",true);
+  alerts+=alertItem(a.attendance_alerts,"Alertes d'absence","Absences répétées détectées par SONIA OS.",true);
+  alerts+=alertItem(a.prereg_followups,"Relances préinscriptions","Foyers encore en attente d'une relance ou d'une réponse.");
+  alerts+=alertItem(a.member_followups,"Relances adhérents","Relances membres préparées et encore ouvertes.");
+  alerts+=alertItem(a.document_tracking_empty,"Suivi documentaire vide","Des adhérents existent mais aucun document n'est enregistré.");
+  alerts+=alertItem(a.document_issues,"Documents à corriger","Pièces manquantes, demandées ou rejetées.");
+  alerts+=alertItem(a.event_actions,"Actions événementielles","Événements dont le remplissage ou l'échéance demande une action.");
+  alerts+=alertItem(a.content_drafts,"Contenus à préparer","Brouillons événementiels générés automatiquement.");
+  alerts+=alertItem(a.tasks,"Tâches arrivées à échéance","Actions ouvertes à traiter dans The Crew Control.");
+  $("alerts").innerHTML=alerts||'<div class="empty">✓ Aucun signal ne demande ton attention.</div>';
+
+  const ev=Array.isArray(s.events)?s.events:[];
+  $("events").innerHTML=ev.length?ev.map(e=>{
+    const cap=Number(e.capacity||0),reg=Number(e.registered||0),left=e.places_left==null?"—":e.places_left,pct=cap?Math.min(100,Math.round(reg/cap*100)):0;
+    return '<article class="event"><div class="date">'+esc(fdate(e.event_date))+' · '+esc(ftime(e.starts_at))+'–'+esc(ftime(e.ends_at))+'</div><h3>'+esc(e.title)+'</h3><div class="nums"><div><b>'+reg+'/'+cap+'</b><small>inscrits</small></div><div><b>'+esc(left)+'</b><small>places restantes</small></div><div><b>'+euro(e.collected)+'</b><small>encaissé</small></div></div><div class="bar"><i style="width:'+pct+'%"></i></div></article>'
+  }).join(""):'<div class="empty">Aucun événement ouvert à venir.</div>';
+
+  $("finance").innerHTML=
+    '<div class="finance-line"><span>Cotisations attendues</span><b>'+euro(fin.expected)+'</b></div>'+
+    '<div class="finance-line"><span>Encaissé intégré</span><b>'+euro(fin.collected)+'</b></div>'+
+    '<div class="finance-line"><span>Reste dans le registre</span><b>'+euro(fin.remaining)+'</b></div>'+
+    '<div class="finance-line"><span>HelloAsso à rapprocher</span><b>'+euro(fin.helloasso_to_reconcile_amount)+'</b></div>';
+
+  $("ops").innerHTML=
+    '<div class="finance-line"><span>Documents enregistrés</span><b>'+esc(docs.recorded??0)+'</b></div>'+
+    '<div class="finance-line"><span>Séances sans présence</span><b>'+esc(att.missing_sessions??0)+'</b></div>'+
+    '<div class="finance-line"><span>Absences marquées · 35 j</span><b>'+esc(att.absences_35d??0)+'</b></div>'+
+    '<div class="finance-line"><span>Relances préinscriptions</span><b>'+esc(fol.preregistrations??0)+'</b></div>'+
+    '<div class="finance-line"><span>Relances membres</span><b>'+esc(fol.members??0)+'</b></div>'+
+    '<div class="finance-line"><span>Brouillons de contenus</span><b>'+esc(content.drafts??0)+'</b></div>';
+
+  const tasks=Array.isArray(s.today_tasks)?s.today_tasks:[];
+  $("tasks").innerHTML=tasks.length?tasks.map(t=>'<div class="row"><div><b>'+esc(t.title)+'</b><p>'+esc(t.description||"")+'</p></div><span class="tag">'+esc(t.priority||"normal")+' · '+esc(t.due_date||"sans date")+'</span></div>').join(""):'<div class="empty">✓ Aucune tâche due.</div>';
+
+  const sessions=Array.isArray(s.next_sessions)?s.next_sessions:[];
+  $("sessions").innerHTML=sessions.length?sessions.map(x=>'<div class="row"><div><b>'+esc(x.title)+'</b><p>'+esc(fdate(x.session_date))+' · '+esc(ftime(x.starts_at))+'–'+esc(ftime(x.ends_at))+' · '+esc(x.group_name||"")+'</p></div><span class="tag">'+esc(x.status||"")+'</span></div>').join(""):'<div class="empty">Aucune prochaine séance enregistrée.</div>';
+
+  $("systemNotice").textContent=payload.status==="attention"
+    ?"SONIA OS a détecté au moins une action à traiter. Le Daily continuera à se mettre à jour automatiquement."
+    :"Tout est calme : aucun signal actif dans le dernier contrôle.";
+}
+async function activate(){
+  $("loginView").hidden=true;$("app").hidden=false;await loadLatest();
+}
+$("refreshBtn").onclick=async()=>{
+  const b=$("refreshBtn");b.disabled=true;b.textContent="Actualisation…";
+  const {error}=await sb.rpc("crew_daily_refresh");
+  if(error)$("systemNotice").textContent="Actualisation manuelle impossible : "+error.message;
+  else await loadLatest();
+  b.disabled=false;b.textContent="↻ Actualiser maintenant";
+};
+$("loginForm").onsubmit=async e=>{
+  e.preventDefault();$("loginMsg").textContent="Connexion…";
+  const {error}=await sb.auth.signInWithPassword({email:$("email").value,password:$("password").value});
+  if(error){$("loginMsg").textContent=error.message;return}
+  $("loginMsg").textContent="";await activate();
+};
+(async()=>{
+  const {data:{session}}=await sb.auth.getSession();
+  if(session) await activate(); else $("loginView").hidden=false;
+  setInterval(()=>{if(!$("app").hidden)loadLatest()},5*60*1000);
+})();
+</script>
+</body>
+</html>
