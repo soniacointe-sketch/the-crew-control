@@ -1074,4 +1074,21 @@ source.querySelectorAll('a').forEach(original=>{const a=document.createElement('
 menu.appendChild(list);panel.appendChild(menu);
 menu.addEventListener('keydown',e=>{if(e.key==='Escape'){menu.open=false;heading.focus()}});
 })();
+</script><script id="crew-view-deeplinks">
+(()=>{
+const requested=new URLSearchParams(location.search).get('crew-view');
+const allowed=['members','events','payments','whatsapp','tasks','decisions','preregistrations','trials','followups','facebook','communication','system'];
+if(!allowed.includes(requested))return;
+const shell=document.getElementById('appShell');if(!shell)return;
+let done=false;
+function openRequested(){
+if(done||getComputedStyle(shell).display==='none')return;
+const target=document.querySelector('.nav [data-view="'+requested+'"]');if(!target)return;
+done=true;observer.disconnect();target.click();
+const url=new URL(location.href);url.searchParams.delete('crew-view');history.replaceState(null,'',url.pathname+url.search+url.hash);
+}
+const observer=new MutationObserver(openRequested);
+observer.observe(shell,{attributes:true,attributeFilter:['style','hidden','class']});
+if(document.readyState==='complete')openRequested();else window.addEventListener('load',openRequested,{once:true});
+})();
 </script></body></html>
