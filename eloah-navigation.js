@@ -4,7 +4,7 @@
 (()=>{'use strict';
 if(document.querySelector('.eloah-global-nav[data-hydrated]'))return;
 const page=location.pathname.split('/').pop(),query=new URLSearchParams(location.search);
-const routes=[["Accueil", "mes-univers.html"], ["Mon organisation", "eloah-pilotage.html"], ["Mes univers", "mes-univers.html#mes-univers-principaux"], ["Mes studios", "mes-univers.html#services"], ["Mon assistante", "eloah-2040.html#assistant-reel"], ["Réglages", "mes-univers.html#reglages"]];
+const routes=[["Accueil", "mes-univers.html"], ["Mon organisation", "eloah-pilotage.html"], ["Mes univers", "mes-univers.html#mes-univers-principaux"], ["Mes studios", "mes-univers.html#services"], ["Mon assistante", "eloah-atelier.html"], ["Réglages", "mes-univers.html#reglages"]];
 const assistantRoute=["Assistant IA","eloah-projet.html?projet=ELOAH"];
 let universe=query.get('projet')||'';
 try{universe=universe||JSON.parse(document.getElementById('config')?.textContent||'{}').name||''}catch{}
@@ -325,4 +325,4 @@ if(page==='mes-univers.html'){
 })();
 
 /* Shared mobile navigation, after each universe has prepared its own menu. */
-(()=>{if(window.self!==window.top||document.querySelector('script[data-eloah-harmony]'))return;const s=document.createElement('script');s.src='eloah-navigation-harmony.js?v=20261017-stable';s.dataset.eloahHarmony='1';s.defer=true;document.head.append(s)})();
+(()=>{if(window.self!==window.top||document.querySelector('script[data-eloah-harmony]'))return;const s=document.createElement('script');s.src='eloah-navigation-harmony.js?v=20261017-atelier1';s.dataset.eloahHarmony='1';s.defer=true;document.head.append(s)})();
