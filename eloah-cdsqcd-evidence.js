@@ -29,8 +29,9 @@ function prepare(universe){
  for(const e of entries){
   const k=key(e.universe||universe)+'|'+key(e.key||e.title);
   if(keys.has(k)||!clean(e.excerpt))continue;
-  const info={id:'S'+(register.length+1),title:clip(e.title,100),origin:clip(e.origin,90),universe:clip(e.universe||universe,65)};
-  const prefix='\n\n['+info.id+'] '+info.title+' — '+info.origin+' ('+info.universe+')\nEXTRAIT : ';
+  const sourceUrl=typeof e.url==='string'&&/^https:\/\//i.test(e.url)&&e.url.length<=1200?e.url:'';
+  const info={id:'S'+(register.length+1),title:clip(e.title,100),origin:clip(e.origin,90),universe:clip(e.universe||universe,65),url:sourceUrl};
+  const prefix='\n\n['+info.id+'] '+info.title+' — '+info.origin+' ('+info.universe+')'+(info.url?'\nURL : '+info.url:'')+'\nEXTRAIT : ';
   const available=MAX_CONTEXT-consumed-prefix.length;
   if(available<100)break;
   const excerpt=clip(e.excerpt,Math.min(740,available));
@@ -43,7 +44,7 @@ function prepare(universe){
 function context(){
  if(!prepared)return '';
  if(!register.length)return 'CDSQCD — AUCUNE SOURCE indexée par le registre pour cette demande. Des notes de projet peuvent être transmises séparément si elles existent, mais ne doivent pas être citées comme des preuves indépendantes. Ne crée aucune référence [S#] fictive et indique les faits à vérifier.';
- return HEADER+register.map(s=>'\n\n['+s.id+'] '+s.title+' — '+s.origin+' ('+s.universe+')\nEXTRAIT : '+s.excerpt).join('');
+ return HEADER+register.map(s=>'\n\n['+s.id+'] '+s.title+' — '+s.origin+' ('+s.universe+')'+(s.url?'\nURL : '+s.url:'')+'\nEXTRAIT : '+s.excerpt).join('');
 }
 function commit(){activeRegister=register.map(x=>({...x}));activeProject=projectAtSend;}
 function audit(answer){
