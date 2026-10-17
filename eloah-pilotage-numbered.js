@@ -100,6 +100,22 @@ function render(){
     }catch(error){showMessage('Modification impossible : '+error.message,true);}
    });
    actions.append(edit,done);
+  }else if(task&&task.archived){
+   const restore=node('button','eloah-coach-primary','Réactiver le suivi');
+   restore.type='button';
+   restore.addEventListener('click',()=>{
+    try{
+     const current=read(TASK_KEY);
+     const existing=current.find(x=>x.id===task.id);
+     if(!existing)throw Error('Action archivée introuvable.');
+     const next=current.map(x=>x.id===task.id?{...x,archived:false,status:x.status==='Terminé'?'À faire':x.status||'À faire',updated:new Date().toISOString()}:x);
+     localStorage.setItem(TASK_KEY,JSON.stringify(next));
+     window.ELOAHWorkspace?.renderCalendar?.();
+     render();
+     showMessage('Dossier '+String(index+1).padStart(2,'0')+' réactivé dans le planning.');
+    }catch(error){showMessage('Réactivation impossible : '+error.message,true);}
+   });
+   actions.append(restore);
   }else{
    const add=node('button','eloah-coach-primary','Suivre dans mon planning');
    add.type='button';
