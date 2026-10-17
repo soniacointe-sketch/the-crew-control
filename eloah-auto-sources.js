@@ -5,7 +5,8 @@
 const BASE='https://voytsqyorhoveurnguxn.supabase.co';
 const KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const FOUNDER='bd4b7197-6401-4a9a-a14e-c6adbdc0ed46';
-let selected=[],memorySelected=[],lastStatus='Aucune recherche lancée.';
+let selected=[],memorySelected=[],lastStatus='Aucune recherche lancée.', searchEpoch=0;
+const clear=(text='Références précédentes effacées.')=>{searchEpoch++;selected=[];memorySelected=[];lastStatus=text;const node=document.getElementById('eloah-auto-sources-status');if(node)node.textContent=text;};
 const normalize=s=>String(s||'').toLocaleLowerCase('fr').normalize('NFD').replace(/[\u0300-\u036f]/g,'');
 const tokens=s=>[...new Set(normalize(s).split(/[^a-z0-9]+/).filter(w=>w.length>=4))].slice(0,30);
 const allowMemory=()=>document.getElementById('eloah-memory-optin')?.checked===true;
@@ -15,6 +16,7 @@ const rank=(words,x)=>{
 };
 window.EloahAutoSources={
  status:()=>lastStatus,
+ clear,
  evidence:()=>[
  ...selected.map(x=>({key:x.id,title:x.title,origin:'Création retrouvée non contrôlée',universe:x.universe,excerpt:x.content.slice(0,700)})),
  ...memorySelected.map(x=>({key:'memory-'+x.id,title:x.title,origin:'Conversation importée et approuvée, non vérifiée',universe:x.universe,excerpt:x.content.slice(0,700)}))
@@ -28,15 +30,19 @@ window.EloahAutoSources={
  ...memorySelected.map(x=>'Conversation importée et approuvée (non vérifiée) : '+x.title+'\n'+x.content.slice(0,900))
 ].join('\n\n').slice(0,3500),
  async prepare(text,universe){
+  const current=++searchEpoch;
   selected=[];memorySelected=[];lastStatus='Recherche en cours.';
   const note=document.getElementById('eloah-auto-sources-status');
-  const update=t=>{lastStatus=t;if(note)note.textContent=t};
+  const isCurrent=()=>current===searchEpoch && (document.getElementById('home-ai-project')?.value||'')===(universe||'');
+  const update=t=>{if(!isCurrent())return;lastStatus=t;if(note)note.textContent=t};
   try{
    const mod=await import('https://esm.sh/@supabase/supabase-js@2.116.0');
    const db=mod.createClient(BASE,KEY,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false,storageKey:'eloah-founder-auth-v1'}});
    const {data:user,error:authError}=await db.auth.getUser();
+   if(!isCurrent())return;
    if(authError||user?.user?.id!==FOUNDER||user.user.is_anonymous){update('Références non consultées : connexion fondatrice requise.');return}
    const {data,error}=await db.from('eloah_creations').select('id,title,content,universe').eq('user_id',FOUNDER).order('updated_at',{ascending:false}).limit(100);
+   if(!isCurrent())return;
    if(error)throw error;
    const words=tokens(text);
    const scored=(data||[]).filter(x=>!universe||universe==='ELOAH'||x.universe===universe)
@@ -59,9 +65,11 @@ window.EloahAutoSources={
         .select('id,title,content,universe,source_id').eq('owner_id',FOUNDER).eq('universe',selectedUniverse);
       let {data:entries,error:memoryError}=await baseQuery()
         .textSearch('search_vector',topicWords.slice(0,5).join(' OR '),{type:'websearch',config:'french'}).limit(80);
+      if(!isCurrent())return;
       if(memoryError||!entries?.length){
        ({data:entries,error:memoryError}=await baseQuery().ilike('content','%'+topicWords[0]+'%').limit(80));
       }
+      if(!isCurrent())return;
       if(memoryError){memoryStatus=' Mémoire privée inaccessible : '+String(memoryError.message||memoryError).slice(0,100);}
       else{
        memorySelected=(allowMemory()?entries||[]:[]).filter(x=>typeof x.content==='string')
@@ -75,7 +83,7 @@ window.EloahAutoSources={
     }
    }
    update((selected.length?'Références trouvées automatiquement : '+selected.map(x=>x.title).join(' ; '):'Aucune création précédente suffisamment pertinente trouvée.')+memoryStatus);
-  }catch(e){selected=[];update('Recherche automatique indisponible : '+String(e.message||e).slice(0,160))}
+  }catch(e){if(!isCurrent())return;selected=[];memorySelected=[];update('Recherche automatique indisponible : '+String(e.message||e).slice(0,160))}
  }
 };
 function init(){
@@ -96,8 +104,9 @@ function init(){
  importer.textContent='Importer ou consulter mes conversations enregistrées ↗';
  importer.style.display='inline-block';importer.style.margin='0 0 12px';
  notice.after(importer);
- input.addEventListener('change',()=>{memorySelected=[];lastStatus=input.checked?'Mémoire autorisée pour la prochaine création dans le projet choisi.':'Mémoire privée désactivée pour les prochaines demandes.';p.textContent=lastStatus;});
- document.getElementById('home-ai-project')?.addEventListener('change',()=>{input.checked=false;memorySelected=[];p.textContent='Univers changé : mémoire désactivée. Tu peux la réactiver volontairement.';});
+ input.addEventListener('change',()=>{if(!input.checked){memorySelected=[];searchEpoch++;}lastStatus=input.checked?'Mémoire autorisée pour la prochaine création dans le projet choisi.':'Mémoire privée désactivée pour les prochaines demandes.';p.textContent=lastStatus;});
+ document.getElementById('home-ai-project')?.addEventListener('change',()=>{input.checked=false;clear('Univers changé : références précédentes effacées et mémoire désactivée. Tu peux relancer ta création.');});
+ window.addEventListener('storage',event=>{if(event.key==='eloah-founder-auth-v1'||event.key===null){input.checked=false;clear('Connexion modifiée : références privées effacées.')}});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
 })();
