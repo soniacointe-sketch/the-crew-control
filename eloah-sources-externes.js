@@ -20,6 +20,34 @@ const snapshot=()=>selected.map(x=>({...x}));
 window.EloahConnectedSources={
  evidence(universe){return selected.filter(x=>x.universe===universe).map(x=>({key:x.key,title:x.title,origin:x.origin,universe:x.universe,excerpt:x.excerpt}));},
  sources(){return snapshot().map(x=>({title:x.title,origin:x.origin,url:x.url||'',universe:x.universe}))},
+ async prepare(topic,universe){
+  selected=selected.filter(x=>!x.auto);
+  if(lookup('ers-wp-auto')?.checked!==true)return 0;
+  const siteId=universe==='Power & Glam'?'pg':universe==='The Crew Orchies'?'crew':null;
+  if(!siteId)return 0;
+  const words=String(topic||'').split(/\W+/).filter(x=>x.length>=5).slice(0,6);
+  if(!words.length)return 0;
+  const run=++epoch;
+  try{
+   const params=new URLSearchParams({number:'12',search:words.slice(0,2).join(' '),fields:'ID,title,URL,excerpt,content,status'});
+   const response=await fetch('https://public-api.wordpress.com/rest/v1.1/sites/'+encodeURIComponent(SITE[siteId])+'/posts/?'+params,{cache:'no-store',signal:AbortSignal.timeout(8000)});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const data=await response.json();
+   if(epoch!==run||universe!==current())return 0;
+   const ranked=(data.posts||[]).filter(p=>p.status==='publish').map(p=>{
+    const title=plain(p.title||''),content=plain(p.content||p.excerpt||'');
+    const score=words.reduce((n,w)=>n+(title.toLowerCase().includes(w.toLowerCase())?4:0)+(content.toLowerCase().includes(w.toLowerCase())?1:0),0);
+    return {p,title,content,score};
+   }).filter(x=>x.score>=2&&x.content.length>=40).sort((a,b)=>b.score-a.score).slice(0,2);
+   for(const x of ranked){
+    const key='wp:'+siteId+':'+String(x.p.ID);
+    if(selected.some(v=>v.key===key)||selected.length>=5)continue;
+    selected.push({key,title:x.title,origin:'WordPress public · recherche automatique (non vérifié)',universe,excerpt:clip(x.content,1200),auto:true,url:validUrl(x.p.URL,'wordpress.com')||validUrl(x.p.URL,'thecreworchies.blog')||''});
+   }
+   showSelected();notify(selected.filter(x=>x.auto).length+' article(s) publics pertinents retenu(s) automatiquement. Sources non vérifiées.');
+   return selected.filter(x=>x.auto).length;
+  }catch(e){if(epoch!==run)return 0;selected=selected.filter(x=>!x.auto);showSelected();notify('Recherche WordPress automatique indisponible : '+clip(e.message,120));return 0}
+ },
  clear(){epoch++;selected=[];results=[];showResults();showSelected();notify('Univers ou compte changé : références externes retirées de la préparation.')}
 };
 function showSelected(){
@@ -204,6 +232,7 @@ function init(){
  '<div class="ers-actions"><button type="button" data-ers-search="wordpress">Chercher sur mes WordPress publics</button><button type="button" id="ers-google-connect">Autoriser Google Drive + Gmail (lecture seule)</button></div>'+
  '<div class="ers-actions"><button type="button" data-ers-search="drive">Chercher dans Drive</button><button type="button" data-ers-search="gmail">Chercher dans Gmail</button><button type="button" id="ers-google-forget">Fermer la session Google</button></div>'+
  '<p class="ers-note">Google nécessite une connexion Fondatrice, une autorisation distincte et les API/scopes validés dans Google Cloud. L’accès Gmail demande des permissions restreintes. Les connexions ChatGPT ne sont pas transférées à ton site.</p>'+
+ '<label class="ers-auto"><input type="checkbox" id="ers-wp-auto" checked> Chercher automatiquement jusqu’à deux articles publics pertinents de Power & Glam ou The Crew pour ma création. Aucun accès Google automatique.</label>'+
  '<p id="ecs-remote-status" role="status" aria-live="polite">WordPress public consultable sans connexion. Google : autorisation non vérifiée.</p>'+
  '<h4>Résultats</h4><div id="ecs-remote-results"></div><h4>Sources choisies pour cette création</h4><div id="ecs-remote-selected"></div></details>';
  const library=lookup('eloah-creation-sources');(library||form).before(section);
@@ -215,7 +244,7 @@ function init(){
  window.addEventListener('pagehide',()=>{epoch++;selected=[];results=[];providerToken=null});
  showResults();showSelected();
  const style=document.createElement('style');
- style.textContent='#eloah-connected-sources{margin:15px 0;background:#fffdf9;color:#262b29;border:1px solid #d7d7ce;border-radius:13px;padding:14px 17px}#eloah-connected-sources summary{min-height:44px;cursor:pointer;font:600 16px/1.5 system-ui;color:#293d38}#eloah-connected-sources p{font:13px/1.55 system-ui;color:#4d5650}#eloah-connected-sources label{display:block;font:600 13px system-ui;margin:14px 0 6px}#eloah-connected-sources input{box-sizing:border-box;width:100%;padding:12px;background:#fff;color:#1b2520;border:1px solid #aab6ac;border-radius:8px;font:16px system-ui}#eloah-connected-sources h4{font:600 16px system-ui;margin:20px 0 8px}.ers-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.ers-actions button,.ers-actions a,#eloah-connected-sources .ers-selected button{display:inline-flex;align-items:center;min-height:44px;padding:10px 12px;background:#293d38;border:1px solid #293d38;border-radius:8px;color:#fff;font:600 12px system-ui;cursor:pointer;text-decoration:none}#eloah-connected-sources button:disabled{opacity:.6;cursor:default}.ers-result{margin:8px 0;padding:13px;border:1px solid #dce1d9;border-radius:9px;background:#fff}.ers-result strong{font:600 15px system-ui}.ers-result p{overflow-wrap:anywhere}.ers-selected{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:7px 0;padding:9px;background:#f1f2ef;border-radius:8px;overflow-wrap:anywhere}#eloah-connected-sources :focus-visible{outline:3px solid #b58e62;outline-offset:2px}@media(max-width:600px){.ers-actions{display:grid}.ers-actions button,.ers-actions a{justify-content:center}.ers-selected{align-items:flex-start;flex-direction:column}}';
+ style.textContent='#eloah-connected-sources{margin:15px 0;background:#fffdf9;color:#262b29;border:1px solid #d7d7ce;border-radius:13px;padding:14px 17px}#eloah-connected-sources summary{min-height:44px;cursor:pointer;font:600 16px/1.5 system-ui;color:#293d38}#eloah-connected-sources p{font:13px/1.55 system-ui;color:#4d5650}#eloah-connected-sources label{display:block;font:600 13px system-ui;margin:14px 0 6px}#eloah-connected-sources input{box-sizing:border-box;width:100%;padding:12px;background:#fff;color:#1b2520;border:1px solid #aab6ac;border-radius:8px;font:16px system-ui}#eloah-connected-sources h4{font:600 16px system-ui;margin:20px 0 8px}.ers-actions{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0}.ers-actions button,.ers-actions a,#eloah-connected-sources .ers-selected button{display:inline-flex;align-items:center;min-height:44px;padding:10px 12px;background:#293d38;border:1px solid #293d38;border-radius:8px;color:#fff;font:600 12px system-ui;cursor:pointer;text-decoration:none}#eloah-connected-sources button:disabled{opacity:.6;cursor:default}.ers-result{margin:8px 0;padding:13px;border:1px solid #dce1d9;border-radius:9px;background:#fff}.ers-result strong{font:600 15px system-ui}.ers-result p{overflow-wrap:anywhere}.ers-selected{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:7px 0;padding:9px;background:#f1f2ef;border-radius:8px;overflow-wrap:anywhere}#eloah-connected-sources .ers-auto{display:flex;align-items:flex-start;gap:10px;background:#f0f4ed;padding:12px;border-radius:8px;color:#283e32}#eloah-connected-sources .ers-auto input{width:18px;height:18px;flex:0 0 18px;margin-top:2px}#eloah-connected-sources :focus-visible{outline:3px solid #b58e62;outline-offset:2px}@media(max-width:600px){.ers-actions{display:grid}.ers-actions button,.ers-actions a{justify-content:center}.ers-selected{align-items:flex-start;flex-direction:column}}';
  document.head.append(style);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
