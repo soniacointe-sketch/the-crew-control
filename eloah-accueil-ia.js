@@ -194,6 +194,8 @@
       if(window.EloahAutoSources?.prepare) {
         try{
           await bounded(window.EloahAutoSources.prepare(sourceTopic,projectAtStart),9000,'Délai de bibliothèque dépassé');
+          const state=window.EloahAutoSources?.status?.()||'';
+          if(/Recherche automatique indisponible|Mémoire privée inaccessible/.test(state))sourceWarnings.push(state.slice(0,170));
         }catch(error){
           // Important : une promesse trop lente continue parfois en arrière-plan.
           // L'invalidation interne empêche d'ajouter sa réponse à une autre demande.
