@@ -1,0 +1,123 @@
+/* ELOAH — accueil : rubriques repliables, Mes univers toujours visible.
+   Les details natifs fonctionnent au clavier, au toucher et sans JavaScript. */
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion{
+  box-sizing:border-box!important;
+  display:block;
+  min-width:0;
+  margin:16px 0!important;
+  padding:0!important;
+  background:#fffcf7!important;
+  color:#242723!important;
+  border:1px solid #d9d4c9!important;
+  border-radius:11px!important;
+  overflow:hidden;
+  box-shadow:none!important;
+  scroll-margin-top:74px;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary{
+  position:relative;
+  box-sizing:border-box;
+  display:flex!important;
+  align-items:center;
+  width:100%;
+  min-height:78px;
+  padding:20px 66px 20px 25px!important;
+  margin:0!important;
+  cursor:pointer;
+  list-style:none;
+  background:#fffcf7!important;
+  border:0!important;
+  border-radius:11px;
+  color:#242723!important;
+  -webkit-text-fill-color:currentColor!important;
+  touch-action:manipulation;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary::-webkit-details-marker{
+  display:none;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary::marker{
+  content:'';
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary::after{
+  content:'+';
+  position:absolute;
+  right:23px;
+  top:50%;
+  transform:translateY(-50%);
+  color:#686555!important;
+  font:400 30px/1 Inter,system-ui,sans-serif!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion[open] > summary.home-accordion-summary{
+  border-radius:11px 11px 0 0;
+  border-bottom:1px solid #ddd7cd!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion[open] > summary.home-accordion-summary::after{
+  content:'−';
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary h2{
+  font:500 clamp(25px,2.6vw,34px)/1.2 'Bodoni Moda',Georgia,serif!important;
+  letter-spacing:-.025em;
+  color:#242723!important;
+  -webkit-text-fill-color:currentColor!important;
+  margin:0!important;
+  max-width:100%;
+  overflow-wrap:break-word;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion:not([open]) > .home-accordion-body{
+  display:none!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > .home-accordion-body{
+  box-sizing:border-box;
+  padding:16px clamp(14px,2.5vw,25px) 23px!important;
+  min-width:0;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > .home-accordion-body > p:first-child{
+  margin:0 0 15px!important;
+  color:#555d55!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > .home-accordion-body .home-organized-links{
+  margin:10px 0 16px;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > .home-accordion-body > details.home-accordion{
+  margin:14px 0!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary:hover{
+  background:#f8f5ef!important;
+}
+html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary:focus-visible{
+  outline:3px solid #927847!important;
+  outline-offset:-4px;
+}
+/* Répertoire des univers : section traditionnelle, sans repli ni bouton +. */
+html#eloah-ivory-home body#maison-eloah #contenu #mes-univers-principaux{
+  margin:28px 0 24px;
+}
+html#eloah-ivory-home body#maison-eloah #contenu #mes-univers-principaux > h2{
+  margin-top:0;
+}
+@media(max-width:700px){
+  html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion{
+    margin:12px 0!important;
+    border-radius:10px!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary{
+    min-height:76px;
+    padding:21px 58px 21px 17px!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary h2{
+    font-size:clamp(23px,6.6vw,29px)!important;
+    line-height:1.28!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary.home-accordion-summary::after{
+    right:18px;
+    font-size:27px!important;
+  }
+  html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > .home-accordion-body{
+    padding:15px 15px 20px!important;
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  html#eloah-ivory-home body#maison-eloah #contenu details.home-accordion > summary{
+    scroll-behavior:auto!important;
+  }
+}
