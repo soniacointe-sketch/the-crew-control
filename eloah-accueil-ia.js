@@ -89,7 +89,7 @@
     if (text) message(text);
   }
   function reset(text = 'Nouvelle conversation prête.', clearInput = false) {
-    cancel(); pairs = []; answer = ''; window.EloahEvidence?.clear?.(); window.EloahConnectedSources?.clear?.(); window.EloahAutoSources?.clear?.('Conversation réinitialisée : références privées retirées.'); log.replaceChildren();
+    cancel(); pairs = []; answer = ''; window.EloahEvidence?.clear?.(); window.EloahConnectedSources?.clear?.(); window.EloahAutoSources?.finishRequest?.(); log.replaceChildren();
     $('payload').textContent = ''; $('payload').hidden = true;
     if (clearInput) prompt.value = '';
     controls(); message(text);
