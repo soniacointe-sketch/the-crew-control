@@ -41,7 +41,7 @@ function parse(answer){
  const headings=[...value.matchAll(/^\s*(?:#{1,4}\s*)?(?:slide|diapositive)\s*0?([1-9]|10)\s*(?:[.:—–-]\s*(.*))?$/gim)];
  const slides=Array.from({length:10},(_,i)=>({number:i+1,title:'',body:'',cta:''}));
  function pick(txt,key){
-  const hit=txt.match(new RegExp('^\\s*(?:[-*]\\s*)?(?:\\*\\*)?'+key+'(?:\\*\\*)?\\s*[:：]\\s*(.+)$','im'));
+  const hit=txt.match(new RegExp('^\\s*(?:[-*]\\s*)?(?:\\*\\*)?(?:'+key+')(?:\\*\\*)?\\s*[:：]\\s*(.+)$','im'));
   return clean(hit?.[1]||'').replace(/\*\*/g,'');
  }
  headings.forEach((m,k)=>{
