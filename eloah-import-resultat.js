@@ -54,10 +54,10 @@ function init(){
   panel.open=false;
   // Si le contenu est un carrousel structuré, activer le vrai compositeur de 10 PNG.
   // L'événement réutilise le parcours existant ; l'origine reste explicitement une importation.
-  const carousel=/(?:^|\\n)\\s*SLIDE\\s*0?1\\b/i.test(value);
+  const carousel=/(?:^|\n)\s*SLIDE\s*0?1\b/i.test(value);
   if(carousel){
    window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{
-    question:'MISSION DE PRODUCTION — Carrousel\\nSUJET : Contenu importé manuellement',
+    question:'MISSION DE PRODUCTION — Carrousel\nSUJET : Contenu importé manuellement',
     answer:value,
     universe:document.getElementById('home-ai-project')?.value||'ELOAH',
     origin:'import'
