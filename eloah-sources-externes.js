@@ -131,6 +131,23 @@ async function api(url,access){
  }
  return await response.json();
 }
+async function verifyWordPress(){
+ const status=lookup('ers-wordpress-diagnostic');
+ if(status)status.textContent='Test en cours sur les trois sites WordPress publics…';
+ const ids=['pg','crew','exp'];
+ const results=await Promise.all(ids.map(async id=>{
+  try{
+   const url='https://public-api.wordpress.com/rest/v1.1/sites/'+encodeURIComponent(SITE[id])+'/posts/?'+new URLSearchParams({number:'1',fields:'ID,title,status'}).toString();
+   const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(9000)});
+   if(!response.ok)throw Error('HTTP '+response.status);
+   const body=await response.json();
+   if(!Array.isArray(body.posts))throw Error('Format de réponse non reconnu');
+   return {id,ok:true,found:body.posts.some(p=>p.status==='publish')};
+  }catch(error){return {id,ok:false,error:String(error.message||error).slice(0,65)}}
+ }));
+ const labels={pg:'Power & Glam',crew:'The Crew',exp:'P&G Expérience'};
+ if(status)status.textContent='Vérification WordPress · '+results.map(x=>labels[x.id]+': '+(x.ok?(x.found?'lecture OK':'accessible, aucun article récent'):'échec de lecture ('+x.error+')')).join(' · ')+'.';
+}
 async function searchWP(query,universe,run){
  const ids=['pg','crew','exp'];
  let reached=0;
@@ -252,14 +269,15 @@ function init(){
  section.innerHTML='<details><summary>Mes sources externes · WordPress, Drive et Gmail</summary>'+
  '<p>Recherche des contenus réels et choisis ce qu’ELOAH peut utiliser. Aucun mail ou document Google n’est lu ni transmis automatiquement. Les sources sélectionnées ne constituent pas une preuve indépendante.</p>'+
  '<label for="ecs-remote-query">Sujet à rechercher</label><input id="ecs-remote-query" type="search" maxlength="140" placeholder="Ex. attachement, Nostradamus, atelier latino…">'+
- '<div class="ers-actions"><button type="button" data-ers-search="wordpress">Chercher sur mes WordPress publics</button><button type="button" id="ers-google-connect">Autoriser Drive (lecture seule)</button><button type="button" id="ers-gmail-connect">Autoriser Gmail (+ Drive)</button></div>'+
+ '<div class="ers-actions"><button type="button" id="ers-wordpress-check">Vérifier mes sites WordPress</button><button type="button" data-ers-search="wordpress">Chercher sur mes WordPress publics</button><button type="button" id="ers-google-connect">Autoriser Drive (lecture seule)</button><button type="button" id="ers-gmail-connect">Autoriser Gmail (+ Drive)</button></div>'+
  '<div class="ers-actions"><button type="button" id="ers-google-verify">Vérifier Google</button><button type="button" data-ers-search="drive">Chercher dans Drive</button><button type="button" data-ers-search="gmail">Chercher dans Gmail</button><button type="button" id="ers-google-forget">Fermer la session Google</button></div>'+
  '<p class="ers-note">Google nécessite une connexion Fondatrice, une autorisation distincte et les API/scopes configurés dans Google Cloud. L’accès Gmail est facultatif et sa permission est restreinte : elle peut nécessiter une vérification Google. Les connexions ChatGPT ne sont pas transférées à ton site.</p>'+
  '<label class="ers-auto"><input type="checkbox" id="ers-wp-auto" checked> Chercher automatiquement jusqu’à deux articles publics pertinents de Power & Glam ou The Crew pour ma création. Aucun accès Google automatique.</label>'+
- '<p id="ecs-remote-status" role="status" aria-live="polite">WordPress public consultable sans connexion. Google : autorisation non vérifiée.</p>'+
+ '<p id="ers-wordpress-diagnostic" role="status" aria-live="polite">WordPress : lecture depuis ce navigateur non encore vérifiée.</p>'+'<p id="ecs-remote-status" role="status" aria-live="polite">WordPress public consultable sans connexion. Google : autorisation non vérifiée.</p>'+
  '<h4>Résultats</h4><div id="ecs-remote-results"></div><h4>Sources choisies pour cette création</h4><div id="ecs-remote-selected"></div></details>';
  const library=lookup('eloah-creation-sources');(library||form).before(section);
  for(const button of section.querySelectorAll('[data-ers-search]'))button.addEventListener('click',()=>runSearch(button.dataset.ersSearch));
+ lookup('ers-wordpress-check').addEventListener('click',verifyWordPress);
  lookup('ers-google-connect').addEventListener('click',()=>authorizeGoogle('drive'));
  lookup('ers-gmail-connect').addEventListener('click',()=>authorizeGoogle('gmail'));
  lookup('ers-google-verify').addEventListener('click',verifyGoogle);
