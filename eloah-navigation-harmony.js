@@ -11,7 +11,7 @@
     let side = document.querySelector('body > aside:has(nav), body > .layout > aside:has(nav), body > .shell > aside.side, body > .shell > aside.sidebar, body > .app > aside.side, #app > aside.side, #appShell > aside.side, body > .layout > aside.sidebar');
     if (side && getComputedStyle(side).display === 'none' && ['mes-univers.html','eloah-partenaire.html'].includes(page)) side = null;
     if (!side) side = document.querySelector('.pe-universal-bar') || global;
-    const core = ['mes-univers.html', 'eloah-pilotage.html', 'eloah-2040.html'].includes(page);
+    const core = ['mes-univers.html', 'eloah-pilotage.html', 'eloah-2040.html', 'eloah-atelier.html'].includes(page);
     if (core && global) {
       side = global;
       body.classList.add('eloah-core-menu');
