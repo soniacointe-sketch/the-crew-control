@@ -193,6 +193,9 @@
       if(window.EloahAutoSources) {
         await bounded(window.EloahAutoSources.prepare(sourceTopic,projectAtStart),12000,'Recherche de sources trop longue.');
       }
+      if(window.EloahConnectedSources?.prepare){
+        await bounded(window.EloahConnectedSources.prepare(sourceTopic,projectAtStart),10000,'Recherche WordPress trop longue.');
+      }
       if(startRevision!==revision || asleep || $('project').value!==projectAtStart || prompt.value!==draftAtSend){
         message('Demande modifiée : aucun envoi effectué. Relance la création si nécessaire.');return;
       }
