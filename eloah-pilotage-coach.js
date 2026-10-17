@@ -111,7 +111,7 @@ function refresh(){
  $('eloah-saved-count').textContent=tasks.length+' ouverte'+(tasks.length>1?'s':'');
  if(!tasks.length){const msg=document.createElement('p');msg.className='eloah-coach-empty';msg.textContent='Aucune action ouverte enregistrée ici. Tu peux en ajouter une juste en dessous.';target.append(msg);return;}
  tasks.sort((a,b)=>{const dates=(a.date||'9999').localeCompare(b.date||'9999');const levels={'Urgente':0,'Normale':1,'Plus tard':2};return (levels[a.priority]??1)-(levels[b.priority]??1)||dates;});
- for(const task of tasks.slice(0,4)){
+ for(const task of tasks){
    const item=document.createElement('div');item.className='eloah-coach-task';
    const copy=document.createElement('div');
    const title=document.createElement('strong');title.textContent=task.title;
@@ -124,7 +124,7 @@ function refresh(){
    done.addEventListener('click',()=>{try{const list=loadTasks();const existing=list.find(t=>t.id===task.id);if(!existing)throw Error('Action introuvable.');const next=list.map(t=>t.id===task.id?{...t,status:'Terminé',updated:new Date().toISOString()}:t);localStorage.setItem(taskKey,JSON.stringify(next));window.ELOAHWorkspace?.renderCalendar?.();refresh();}catch(error){inform('Impossible de terminer : '+error.message,true);}});
    actions.append(edit,done);item.append(copy,actions);target.append(item);
  }
- if(tasks.length>4){const more=document.createElement('button');more.type='button';more.textContent='Voir les '+tasks.length+' actions →';more.addEventListener('click',()=>show('pilotage-focus'));target.append(more);}
+
 }
 form.addEventListener('submit',event=>{
  event.preventDefault();
