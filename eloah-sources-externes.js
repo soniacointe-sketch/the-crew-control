@@ -18,7 +18,7 @@ function notify(message){const e=lookup('ecs-remote-status');if(e)e.textContent=
 function validUrl(url,domain){try{const parsed=new URL(url);return parsed.protocol==='https:'&&(parsed.hostname===domain||parsed.hostname.endsWith('.'+domain))?parsed.href:''}catch{return ''}}
 const snapshot=()=>selected.map(x=>({...x}));
 window.EloahConnectedSources={
- evidence(universe){return selected.filter(x=>x.universe===universe).map(x=>({key:x.key,title:x.title,origin:x.origin,universe:x.universe,excerpt:x.excerpt}));},
+ evidence(universe){return selected.filter(x=>x.universe===universe).map(x=>({key:x.key,title:x.title,origin:x.origin,universe:x.universe,url:x.url||'',excerpt:x.excerpt}));},
  sources(){return snapshot().map(x=>({title:x.title,origin:x.origin,url:x.url||'',universe:x.universe}))},
  async prepare(topic,universe){
   selected=selected.filter(x=>!x.auto);
