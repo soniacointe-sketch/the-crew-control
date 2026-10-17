@@ -52,7 +52,20 @@ function init(){
   announcement.textContent='Contenu actif : texte importé manuellement. Sources non vérifiées. Aucun envoi ni publication.';
   guide.insertBefore(announcement,guide.querySelector('.eloah-result-buttons'));
   panel.open=false;
-  guide.scrollIntoView({block:'start',behavior:'smooth'});
+  // Si le contenu est un carrousel structuré, activer le vrai compositeur de 10 PNG.
+  // L'événement réutilise le parcours existant ; l'origine reste explicitement une importation.
+  const carousel=/(?:^|\\n)\\s*SLIDE\\s*0?1\\b/i.test(value);
+  if(carousel){
+   window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{
+    question:'MISSION DE PRODUCTION — Carrousel\\nSUJET : Contenu importé manuellement',
+    answer:value,
+    universe:document.getElementById('home-ai-project')?.value||'ELOAH',
+    origin:'import'
+   }}));
+   status.textContent+=' Si les 10 slides sont reconnues, le compositeur PNG apparaît sous le dossier.';
+  }else{
+   guide.scrollIntoView({block:'start',behavior:'smooth'});
+  }
  });
  const style=document.createElement('style');
  style.textContent=
