@@ -199,6 +199,7 @@
       window.EloahEvidence?.prepare?.(projectAtStart);
       payload=contextFor(text);
     } catch(error) {
+      window.EloahAutoSources?.clear?.('Recherche de sources interrompue : aucune référence retenue.');
       message('Préparation interrompue : '+String(error?.message||error).slice(0,160)+'. Aucun envoi effectué.');return;
     } finally { preparing=false;controls(); }
     const body = JSON.stringify({context:payload, project:projectAtStart || 'Accueil ELOAH', provider, length_mode:lengthMode});
