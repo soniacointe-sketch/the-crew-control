@@ -1,0 +1,7 @@
+identifiant;nom;latitude_WGS84;longitude_WGS84;X_Lambert93_m;Y_Lambert93_m;role;source
+trocadero;Place du Trocadéro-et-du-11-Novembre;48.863038;2.287108;647699.62;6862792.26;point central de place;https://fr.wikipedia.org/wiki/Place_du_Trocad%C3%A9ro-et-du-11-Novembre
+temple;Temple de la Sibylle;48.88107;2.38308;654755.99;6864738.0;centre du bâtiment OSM (arrondi à 5 décimales);https://mapcarta.com/fr/W63224946
+opera_centre;Palais Garnier — centre du bâtiment;48.87203;2.33173;650981.63;6863763.47;centre d’emprise OSM;https://mapcarta.com/fr/25251450
+opera_localisation;Palais Garnier — point usuel;48.87194;2.33167;650977.15;6863753.5;localisation encyclopédique;https://www.wikiland.org/fr/Palais_Garnier
+opera_pointdevue;Palais Garnier — point de vue;48.87143;2.33197;650998.67;6863696.6;point touristique OSM, pas centre du bâtiment;https://mapcarta.com/fr/N3462104314
+place_opera;Place de l’Opéra — point central;48.87056;2.33222;651016.19;6863599.71;centre de la place;https://fr.wikipedia.org/wiki/Place_de_l%27Op%C3%A9ra
