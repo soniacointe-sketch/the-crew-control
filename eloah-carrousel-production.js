@@ -211,5 +211,22 @@ function init(){
  document.head.append(css);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
-window.EloahCarouselProduction={parse,issue,theme:universe=>THEMES[universe]||THEMES.ELOAH,identity:universe=>LAYOUT_RULES[universe]||LAYOUT_RULES.ELOAH};
+// Service graphique partagé avec l'export complet : 10 PNG réels, sans téléchargement implicite.
+async function makePNGSet(text,universe,opts={}){
+ const parsed=parse(text),errors=issue(parsed);
+ if(parsed.detected!==10)errors.unshift('Le texte ne contient pas dix slides distinctes reconnues.');
+ if(errors.length)return {ok:false,issues:errors,detected:parsed.detected,images:[]};
+ if(typeof document==='undefined')return {ok:false,issues:['Le rendu nécessite un navigateur.'],detected:10,images:[]};
+ const theme=THEMES[universe]||THEMES.ELOAH;
+ const images=[];
+ for(let i=0;i<10;i++){
+  const canvas=document.createElement('canvas');
+  draw(canvas,parsed.slides[i],i,theme,null,opts.concept===true);
+  const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/png'));
+  if(!blob||!blob.size)throw Error('Le visuel '+(i+1)+' n’a pas pu être créé.');
+  images.push({name:'slide-'+String(i+1).padStart(2,'0')+'.png',bytes:new Uint8Array(await blob.arrayBuffer()),type:'graphisme-typographique'});
+ }
+ return {ok:true,issues:[],detected:10,images,caption:parsed.caption};
+}
+window.EloahCarouselProduction={parse,issue,makePNGSet,theme:universe=>THEMES[universe]||THEMES.ELOAH,identity:universe=>LAYOUT_RULES[universe]||LAYOUT_RULES.ELOAH};
 })();
