@@ -73,3 +73,37 @@ body.client-page .pilotage-panel.eloah-coach-metrics .pilotage-panel-title{color
  body.client-page .eloah-coach-priority{padding:15px}
  body.client-page .pilotage-panel.eloah-coach-metrics{padding:14px!important}
 }
+
+/* Priorité de style : l'ancien thème ivoire utilisait trois sélecteurs d'identifiant
+   et !important sur tous les boutons, ce qui neutralisait le bouton vert du cockpit. */
+html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard :is(button,.btn){
+  background:#fffdfa!important;color:#283c35!important;-webkit-text-fill-color:#283c35!important;
+  border:1px solid #d5d0c4!important;border-radius:9px!important;
+  box-shadow:none!important;text-shadow:none!important;font-size:13px!important;
+  min-height:44px!important;transform:none!important
+}
+html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard :is(button,.btn):hover{
+  background:#f0ece4!important;border-color:#80978a!important
+}
+html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard :is(.eloah-coach-primary,.eloah-coach-save){
+  background:#29453b!important;color:#fffdfa!important;-webkit-text-fill-color:#fffdfa!important;
+  border-color:#29453b!important
+}
+html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard :is(.eloah-coach-primary,.eloah-coach-save):hover{
+  background:#3b6354!important;color:#fffdfa!important;-webkit-text-fill-color:#fffdfa!important
+}
+html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard :is(select,input[type=date],textarea){
+  background:#fffdfa!important;color:#283c35!important;-webkit-text-fill-color:#283c35!important;
+  border:1px solid #cfcac1!important;border-radius:9px!important;min-height:44px
+}
+html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard .eloah-coach-h2{
+  color:#283c35!important;-webkit-text-fill-color:#283c35!important
+}
+html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard .eloah-coach-command{
+  background:#f8f5ef!important;justify-content:flex-start!important;text-align:left!important
+}
+@media(max-width:600px){
+  html#eloah-inner-ivory#eloah-inner-ivory#eloah-inner-ivory body.client-page #eloah-coach-dashboard .eloah-coach-command{
+    font-size:12px!important;min-height:62px!important;padding:10px!important
+  }
+}
