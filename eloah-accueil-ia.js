@@ -188,28 +188,40 @@
     const sourceTopic=subjectLine?.[1]?.trim()||text;
     const lengthMode=/^MISSION DE PRODUCTION\s*[—-]\s*(?:Dossier éditorial|Carrousel)/im.test(text)?'long':'normal';
     let payload;
+    const sourceWarnings=[];
     preparing=true;controls();message('ELOAH retrouve les références de ce projet…');
     try {
-      if(window.EloahAutoSources) {
-        await bounded(window.EloahAutoSources.prepare(sourceTopic,projectAtStart),12000,'Recherche de sources trop longue.');
+      if(window.EloahAutoSources?.prepare) {
+        try{
+          await bounded(window.EloahAutoSources.prepare(sourceTopic,projectAtStart),9000,'Délai de bibliothèque dépassé');
+        }catch(error){
+          // Important : une promesse trop lente continue parfois en arrière-plan.
+          // L'invalidation interne empêche d'ajouter sa réponse à une autre demande.
+          window.EloahAutoSources?.clear?.('Bibliothèque indisponible pour cette création.');
+          sourceWarnings.push('Bibliothèque ELOAH indisponible : '+String(error?.message||error).slice(0,85));
+        }
       }
       if(window.EloahConnectedSources?.prepare){
-        await bounded(window.EloahConnectedSources.prepare(sourceTopic,projectAtStart),10000,'Recherche WordPress trop longue.');
+        try{
+          await bounded(window.EloahConnectedSources.prepare(sourceTopic,projectAtStart),8000,'Délai WordPress dépassé');
+        }catch(error){
+          window.EloahConnectedSources?.abortAutoSearch?.();
+          sourceWarnings.push('Recherche WordPress indisponible : '+String(error?.message||error).slice(0,85));
+        }
       }
       if(startRevision!==revision || asleep || $('project').value!==projectAtStart || prompt.value!==draftAtSend){
         message('Demande modifiée : aucun envoi effectué. Relance la création si nécessaire.');return;
       }
       window.EloahEvidence?.prepare?.(projectAtStart);
       payload=contextFor(text);
-    } catch(error) {
-      window.EloahAutoSources?.clear?.('Recherche de sources interrompue : aucune référence retenue.');
-      message('Préparation interrompue : '+String(error?.message||error).slice(0,160)+'. Aucun envoi effectué.');return;
-    } finally { preparing=false;controls(); }
+    }catch(error){
+      message('Préparation impossible : '+String(error?.message||error).slice(0,160)+'. Aucun envoi effectué.');return;
+    }finally{preparing=false;controls();}
     const body = JSON.stringify({context:payload, project:projectAtStart || 'Accueil ELOAH', provider, length_mode:lengthMode});
     if (new TextEncoder().encode(body).length > 29000) { message('Le texte est trop volumineux. Raccourcis-le.'); return; }
     const ticket = ++revision;
     const controller = new AbortController(); request = {controller, timer:null, ticket};
-    busy = true; answer = ''; controls(); message('Vérification de la connexion…');
+    busy = true; answer = ''; controls(); message(sourceWarnings.length?'Sources partielles · '+sourceWarnings.join(' ; ')+'. Vérification de ta connexion…':'Vérification de la connexion…');
     try {
       const authorized = await verify();
       if (ticket !== revision || asleep) return;
@@ -240,10 +252,13 @@
       window.EloahAutoSources?.finishRequest?.();
       pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
       renderPair(text, answer);
-      if(log.lastElementChild?.dataset.author==='eloah')log.lastElementChild.dataset.eloahComplete=String(result.complete!==false);
+      if(log.lastElementChild?.dataset.author==='eloah'){
+        log.lastElementChild.dataset.eloahComplete=String(result.complete!==false);
+        log.lastElementChild.dataset.eloahSourceWarnings=JSON.stringify(sourceWarnings);
+      }
       window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{question:text,answer,universe:projectAtStart||'ELOAH',complete:result.complete!==false}}));
       if (prompt.value === draftAtSend) prompt.value = ''; $('payload').hidden = true;
-      message((result.complete===false?'Réponse probablement tronquée : elle est incomplète. Vérifie le contenu avant tout export.':'Réponse à relire')+' · '+(provider==='free'?'Groq':'OpenAI')+'.');
+      message((result.complete===false?'Réponse probablement tronquée : elle est incomplète. Vérifie le contenu avant tout export.':'Réponse à relire')+' · '+(provider==='free'?'Groq':'OpenAI')+'.'+(sourceWarnings.length?' Recherche partielle : '+sourceWarnings.join(' ; ')+'.':''));
     } catch (error) {
       if (ticket !== revision || asleep) return;
       message(error?.name === 'AbortError' ? 'Délai dépassé. Le serveur peut avoir traité la demande ; aucune nouvelle réponse n’est affichée.' : 'Connexion interrompue. Réessaie ; aucun contenu n’est publié automatiquement.');
