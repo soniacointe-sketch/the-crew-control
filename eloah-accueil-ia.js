@@ -89,7 +89,7 @@
     if (text) message(text);
   }
   function reset(text = 'Nouvelle conversation prête.', clearInput = false) {
-    cancel(); pairs = []; answer = ''; window.EloahEvidence?.clear?.(); log.replaceChildren();
+    cancel(); pairs = []; answer = ''; window.EloahEvidence?.clear?.(); window.EloahConnectedSources?.clear?.(); window.EloahAutoSources?.clear?.('Conversation réinitialisée : références privées retirées.'); log.replaceChildren();
     $('payload').textContent = ''; $('payload').hidden = true;
     if (clearInput) prompt.value = '';
     controls(); message(text);
@@ -235,7 +235,10 @@
       if (!response.ok || result?.ok !== true || typeof result?.answer !== 'string' || !result.answer.trim()) {
         message(typeof result?.error === 'string' ? result.error.slice(0,500) : 'Le moteur IA est indisponible. Aucun texte n’a été publié.'); return;
       }
-      answer = result.answer.trim(); window.EloahEvidence?.commit?.(); pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
+      answer = result.answer.trim(); window.EloahEvidence?.commit?.();
+      window.EloahConnectedSources?.clearPrivateAfterAnswer?.();
+      window.EloahAutoSources?.finishRequest?.();
+      pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
       renderPair(text, answer);
       if(log.lastElementChild?.dataset.author==='eloah')log.lastElementChild.dataset.eloahComplete=String(result.complete!==false);
       window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{question:text,answer,universe:projectAtStart||'ELOAH',complete:result.complete!==false}}));
