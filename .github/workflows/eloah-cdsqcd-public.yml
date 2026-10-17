@@ -24,10 +24,11 @@ jobs:
           from urllib.error import URLError
           root='https://soniacointe-sketch.github.io/the-crew-control/'
           files={
-            'mes-univers.html': ['eloah-cdsqcd-evidence.js', 'eloah-livrable-studio.js', 'eloah-accueil-ia.js'],
+            'mes-univers.html': ['eloah-cdsqcd-evidence.js', 'eloah-livrable-studio.js', 'eloah-accueil-ia.js', 'eloah-carrousel-production.js'],
             'eloah-cdsqcd-evidence.js': ['AUCUNE SOURCE', 'function audit', 'function commit'],
             'eloah-livrable-studio.js': ['ef-prepare', 'CDSQCD', 'eloah-result-guide'],
-            'eloah-accueil-ia.js': ['EloahEvidence', 'home-ai-form']
+            'eloah-accueil-ia.js': ['EloahEvidence', 'home-ai-form', 'eloah:answer'],
+            'eloah-carrousel-production.js': ['eloah-carousel-production', 'Composer mes 10 PNG', 'eloah-carrousel-10-visuels.zip', 'application/zip']
           }
           last=[]
           for attempt in range(1,10):
