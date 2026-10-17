@@ -28,9 +28,9 @@ function zip(files){
  const parts=[],central=[];let offset=0,size=0;
  for(const f of files){
   const name=encoder.encode(f.name),data=f.bytes,sum=crc32(data);
-  const local=Uint8Array.from([...u32(0x04034b50),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u16(0),...u32(sum),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0)]);
+  const local=Uint8Array.from([...u32(0x04034b50),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u32(sum),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0)]);
   parts.push(local,name,data);
-  const entry=Uint8Array.from([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u16(0),...u32(sum),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset)]);
+  const entry=Uint8Array.from([...u32(0x02014b50),...u16(20),...u16(20),...u16(0x800),...u16(0),...u16(0),...u16(0),...u32(sum),...u32(data.length),...u32(data.length),...u16(name.length),...u16(0),...u16(0),...u16(0),...u16(0),...u32(0),...u32(offset)]);
   central.push(entry,name);offset+=local.length+name.length+data.length;size+=entry.length+name.length;
  }
  return new Blob([...parts,...central,Uint8Array.from([...u32(0x06054b50),...u16(0),...u16(0),...u16(files.length),...u16(files.length),...u32(size),...u32(offset),...u16(0)])],{type:'application/zip'});
