@@ -126,12 +126,15 @@ async function api(url,access){
 }
 async function searchWP(query,universe,run){
  const ids=['pg','crew','exp'];
+ let reached=0;
+ const errors=[];
  const all=await Promise.all(ids.map(async id=>{
   const url='https://public-api.wordpress.com/rest/v1.1/sites/'+encodeURIComponent(SITE[id])+'/posts/?'+new URLSearchParams({number:'15',search:query,fields:'ID,title,URL,excerpt,content,date,status'}).toString();
   try{
    const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(12000)});
    if(!response.ok)throw Error('WordPress '+response.status);
    const data=await response.json();
+   reached++;
    return (Array.isArray(data.posts)?data.posts:[]).filter(post=>post.status==='publish').slice(0,6).map(post=>{
     const label={pg:'Power & Glam',crew:'The Crew Orchies',exp:'P&G Expérience'}[id];
     const url=validUrl(post.URL,'wordpress.com')||validUrl(post.URL,'thecreworchies.blog')||'';
@@ -139,11 +142,11 @@ async function searchWP(query,universe,run){
     return {key:'wp:'+id+':'+String(post.ID),title:plain(post.title||'Article sans titre'),origin:'WordPress public · '+label,url,preview:clip(excerpt,250),universe,
       getContent:async()=>plain(post.content||post.excerpt||'')};
    });
-  }catch{return []}
+  }catch(err){errors.push(id);return []}
  }));
  if(run!==epoch||current()!==universe)return;
  results=all.flat().slice(0,16);showResults();
- notify(results.length+' article(s) publics retrouvés dans les sites WordPress. Sélectionne seulement ceux utiles.');
+ notify(reached===0?'Échec de lecture des trois sites WordPress : aucun résultat confirmé.':results.length+' article(s) publics retrouvés · '+reached+'/3 site(s) consulté(s).'+(errors.length?' Recherche partielle.':'')+' Sélectionne seulement les références utiles.');
 }
 async function searchDrive(query,universe,run){
  const access=await token();
