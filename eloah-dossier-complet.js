@@ -97,8 +97,13 @@ function init(){
    const subject=document.getElementById('ef-subject')?.value?.trim()||'';
    const origin=article.dataset.eloahImport==='true'?'import':'moteur IA';
    const evidence=origin==='import'?null:window.EloahEvidence?.audit?.(result)||null;
+   let sourceWarnings=[];
+   try{
+    const parsed=JSON.parse(article.dataset.eloahSourceWarnings||'[]');
+    if(Array.isArray(parsed))sourceWarnings=parsed.filter(x=>typeof x==='string').slice(0,5).map(x=>x.slice(0,210));
+   }catch{sourceWarnings=['Métadonnées de recherche non lisibles.']}
    const sources=(evidence?.sources||[]).map(s=>({id:s.id,title:s.title,origin:s.origin,universe:s.universe,url:s.url||'',excerpt:s.excerpt}));
-   const check={sources_available:sources.length,source_ids_cited:evidence?.cited||[],source_ids_unknown:evidence?.unknown||[],uncited_statements:evidence?.uncited||[],warnings:evidence?.warnings||[],independent_fact_check:false};
+   const check={sources_available:sources.length,source_ids_cited:evidence?.cited||[],source_ids_unknown:evidence?.unknown||[],uncited_statements:evidence?.uncited||[],warnings:[...(evidence?.warnings||[]),...sourceWarnings],source_search_warnings:sourceWarnings,independent_fact_check:false};
    const files=[txt('01-CONTENU.md',result)];
    const photos=[...document.getElementById('eloah-media-input')?.files||[]].slice(0,3);
    const photoNames=[],accepted=['image/jpeg','image/png','image/webp'];
@@ -122,11 +127,11 @@ function init(){
     }else visualNotes=['Carrousel non complet : '+(parsed.detected||0)+'/10 slides détectées. Visuels non créés.',...(visual.issue(parsed)||[]).slice(0,4)];
    }
    if(job!==generation){status.textContent='Le contenu a changé pendant la préparation. Relance l’export.';return}
-   const manifest={version:2,created_at:new Date().toISOString(),universe,subject:titleOf(result,subject),origin,generated_images:slideNames.length,cover_generated:true,images_kind:'Composition graphique locale, sans photographie IA',provided_photos:photoNames.length,sources_count:sources.length,source_validation:'Non vérifiées indépendamment',visual_notes:visualNotes,source_claims_automatically_verified:false,complete:article.dataset.eloahComplete!=='false',published:false,remote_files_created:false};
+   const manifest={version:2,created_at:new Date().toISOString(),universe,subject:titleOf(result,subject),origin,generated_images:slideNames.length,cover_generated:true,images_kind:'Composition graphique locale, sans photographie IA',provided_photos:photoNames.length,sources_count:sources.length,source_validation:'Non vérifiées indépendamment',source_search_warnings:sourceWarnings,visual_notes:visualNotes,source_claims_automatically_verified:false,complete:article.dataset.eloahComplete!=='false',published:false,remote_files_created:false};
    files.push(txt('02-SOURCES.json',JSON.stringify({nature:'Extraits internes ou externes effectivement transmis, non vérifiés indépendamment',references:sources},null,2)));
    files.push(txt('03-CONTROLE.json',JSON.stringify(check,null,2)));
    files.push(txt('04-MANIFEST.json',JSON.stringify(manifest,null,2)));
-   files.push(txt('LIRE-MOI.txt','ELOAH — DOSSIER PORTABLE\n\nindex.html : édition lisible et imprimable au format PDF depuis le navigateur.\n01-CONTENU.md : texte intégral.\n02-SOURCES.json : extraits consultés s’ils existent (PAS des preuves indépendantes).\n03-CONTROLE.json : points à examiner.\n04-MANIFEST.json : traçabilité des fichiers et des limites.\nimages/couverture.png : visuel graphique créé localement.\nimages/slide-01.png à slide-10.png : si 10 slides correctement rédigées.\nimages/photo-* : photos fournies manuellement, si présentes.\n\nAucune recherche externe, publication, création de photo IA ou certification factuelle implicite.\nLes exports PDF passent par Imprimer > Enregistrer en PDF dans index.html.'));
+   files.push(txt('LIRE-MOI.txt','ELOAH — DOSSIER PORTABLE\n\nindex.html : édition lisible et imprimable au format PDF depuis le navigateur.\n01-CONTENU.md : texte intégral.\n02-SOURCES.json : extraits consultés s’ils existent (PAS des preuves indépendantes).\n03-CONTROLE.json : points à examiner.\n04-MANIFEST.json : traçabilité des fichiers et des limites.\nimages/couverture.png : visuel graphique créé localement.\nimages/slide-01.png à slide-10.png : si 10 slides correctement rédigées.\nimages/photo-* : photos fournies manuellement, si présentes.\n\nRecherche limitée aux sources effectivement accessibles ou sélectionnées ; les éventuels échecs sont signalés dans 03-CONTROLE.json. Aucune publication, photographie IA ni certification factuelle.\nLes exports PDF passent par Imprimer > Enregistrer en PDF dans index.html.'));
    files.push(txt('index.html',makeHtml(result,universe,subject,sources,manifest,photoNames,slideNames)));
    if(files.reduce((sum,f)=>sum+f.bytes.length,0)>55*1024*1024)throw Error('Dossier supérieur à 55 Mo. Réduis les photos importées.');
    const blob=archive(files);
