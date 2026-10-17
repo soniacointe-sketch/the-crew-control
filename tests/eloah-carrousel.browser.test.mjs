@@ -2,7 +2,6 @@
 import assert from 'node:assert/strict';
 import {chromium} from 'playwright';
 import {execFileSync} from 'node:child_process';
-import {readFile} from 'node:fs/promises';
 const browser=await chromium.launch({headless:true,args:['--no-sandbox']});
 try{
  const page=await browser.newPage({viewport:{width:390,height:844},acceptDownloads:true,serviceWorkers:'block'});
@@ -23,7 +22,7 @@ try{
  await page.locator('#ecp-compose').waitFor({state:'visible'});
  assert.equal(await page.locator('[data-slide]').count(),10);
  await page.locator('#ecp-compose').click();
- await page.waitForFunction(()=>!document.getElementById('ecp-download').disabled,{timeout:90000});
+ await page.waitForFunction(()=>!document.getElementById('ecp-download').disabled,null,{timeout:90000});
  assert.equal(await page.locator('.ecp-previews figure').count(),10);
  const [download]=await Promise.all([
   page.waitForEvent('download',{timeout:30000}),
