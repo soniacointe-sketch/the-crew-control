@@ -1,0 +1,143 @@
+{
+  "id": "ND-004-IV",
+  "date": "2026-10-17",
+  "title": "La chaudière de l'Enfer — fragments 363 et 765",
+  "status": "recherche documentaire, maillages non analysés",
+  "discoveries": [
+    {
+      "kind": "dataset",
+      "fragment": "363",
+      "doi": "10.57745/ZBTQBR",
+      "evidence": "index Dataverse MAP-CNRS"
+    },
+    {
+      "kind": "dataset",
+      "fragment": "765",
+      "doi": "10.57745/UZ5PMI",
+      "evidence": "index Dataverse MAP-CNRS"
+    }
+  ],
+  "pieces": [
+    {
+      "id": "Inrap 363",
+      "description": "Fragment de la chaudière de l'Enfer",
+      "source": "Dossier Cluny, n° 363 / 765",
+      "doi": "10.57745/ZBTQBR",
+      "status": "Attribution publiée ; maillage non analysé",
+      "geometry_compared": false
+    },
+    {
+      "id": "Inrap 765",
+      "description": "Autre fragment attribué à la même chaudière",
+      "source": "Dossier Cluny, n° 363 / 765",
+      "doi": "10.57745/UZ5PMI",
+      "status": "Attribution publiée ; position de raccord non testée",
+      "geometry_compared": false
+    },
+    {
+      "id": "Louvre RF 991",
+      "description": "Adam et Ève et la chaudière de l'Enfer, titre historique",
+      "source": "Louvre, datation vers 1230 ; 82 × 52 × 46 cm",
+      "doi": "10.57745/ZXI1XN",
+      "status": "Provenance établie ; interprétation d'assemblage discutée",
+      "geometry_compared": false
+    },
+    {
+      "id": "Notre-Dame lapidaire n° 3",
+      "description": "Saint Jean-Baptiste de la Descente aux limbes",
+      "source": "Dossier de Cluny, dépôt lapidaire n° 3",
+      "doi": null,
+      "status": "Témoin iconographique à rapprocher ; aucun raccord déclaré",
+      "geometry_compared": false
+    },
+    {
+      "id": "Manuscrit BM 1415",
+      "description": "Saintes Femmes / chaudron / Descente / Noli me tangere",
+      "source": "Collection particulière, Hong Kong, cité par Cluny",
+      "doi": null,
+      "status": "Comparaison d'images, non preuve de filiation ni objet du jubé",
+      "geometry_compared": false
+    }
+  ],
+  "sources": [
+    {
+      "id": "S01",
+      "name": "Musée de Cluny / Inrap · Dossier Faire parler les pierres",
+      "description": "Inventaire primaire des œuvres exposées : chaudière 363/765, RF 991 et saint Jean-Baptiste, n° 3",
+      "url": "https://www.musee-moyenage.fr/media/documents-pdf/dossiers-de-presse/dp-faire-parler-les-pierres.pdf"
+    },
+    {
+      "id": "S02",
+      "name": "Louvre · RF 991",
+      "description": "Notice d'inventaire avec provenance, datation, dimensions, historique et photographie",
+      "url": "https://collections.louvre.fr/ark:/53355/cl010093376"
+    },
+    {
+      "id": "S03",
+      "name": "MAP-CNRS · Inrap 363",
+      "description": "Numérisation photogrammétrique indexée, DOI 10.57745/ZBTQBR",
+      "url": "https://doi.org/10.57745/ZBTQBR"
+    },
+    {
+      "id": "S04",
+      "name": "MAP-CNRS · Inrap 765",
+      "description": "Numérisation photogrammétrique indexée, DOI 10.57745/UZ5PMI",
+      "url": "https://doi.org/10.57745/UZ5PMI"
+    },
+    {
+      "id": "S05",
+      "name": "MAP-CNRS · RF 991",
+      "description": "Enregistrement numérique de la sculpture ancienne, DOI 10.57745/ZXI1XN",
+      "url": "https://doi.org/10.57745/ZXI1XN"
+    },
+    {
+      "id": "S06",
+      "name": "Ministère de la Culture / DRAC Île-de-France",
+      "description": "Fouille 2022, polychromie, protocole conservatoire et projet de restitution",
+      "url": "https://www.culture.gouv.fr/regions/drac-ile-de-france/actualites/actualite-a-la-une/notre-dame-de-paris-des-decouvertes-archeologiques-majeures"
+    },
+    {
+      "id": "S07",
+      "name": "INHA · Le jubé, étude interdisciplinaire",
+      "description": "Mise au point sur les approches de la construction, de la polychromie et de la démolition",
+      "url": "https://www.inha.fr/agenda/le-jube-medieval-de-notre-dame-de-paris-une-etude-interdisciplinaire/"
+    },
+    {
+      "id": "S08",
+      "name": "Collège de France · Séminaire du 17 décembre 2024",
+      "description": "Archéologie, géologie, peinture, analyses des matériaux, carbone 14 sur la céruse",
+      "url": "https://www.college-de-france.fr/fr/agenda/seminaire/notre-dame-de-paris-la-cathedrale-des-savoirs-entre-materialite-et-interdisciplinarite/les-fragments-du-jube-medieval-de-notre-dame-recemment-mis-au-jour-et-les-nouvelles-connaissances"
+    },
+    {
+      "id": "S09",
+      "name": "BnF · Fonds Robert de Cotte 1852",
+      "description": "Plan ancien du chœur, localisation de la clôture liturgique",
+      "url": "https://catalogue.bnf.fr/ark:/12148/cb40272038f"
+    },
+    {
+      "id": "S10",
+      "name": "INRAP · Le jubé de Notre-Dame, nouvelles découvertes",
+      "description": "Présentation des résultats, 25 mars 2025 (site pouvant bloquer l'accès automatique)",
+      "url": "https://www.inrap.fr/le-jube-de-notre-dame-de-paris-nouvelles-decouvertes-19947"
+    },
+    {
+      "id": "S11",
+      "name": "Le Monde · L'exposition Cluny et la relecture de RF 991",
+      "description": "Compte rendu de l'interprétation nouvelle, 6 février 2025",
+      "url": "https://www.lemonde.fr/sciences/article/2025/02/06/faire-parler-les-pierres-sculptures-medievales-de-notre-dame-un-saisissant-voyage-dans-les-fragments-du-sacre-au-musee-de-cluny_6533920_1650684.html"
+    }
+  ],
+  "conclusions": [
+    "363 et 765 sont publiés dans le dossier Cluny comme chaudière de l'Enfer.",
+    "363 et 765 ont chacun un DOI de photogrammétrie.",
+    "La provenance du Louvre RF 991 est attestée ; la lecture du groupe a été discutée après 2022.",
+    "Aucun raccord géométrique n'est validé par PARISIS."
+  ],
+  "open_questions": [
+    "Accès réel aux PLY OBJ de 363 765 et RF 991",
+    "Compatibilité métrique des faces et fractures",
+    "Place du dépôt lapidaire Notre-Dame n° 3",
+    "Séparation exacte des scènes théologiques"
+  ],
+  "assumptions": "Aucune mesure ou reconstruction inventée"
+}
