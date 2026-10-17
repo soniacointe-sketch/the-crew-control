@@ -1,8 +1,26 @@
 {
   "version": 1,
-  "updated": "2026-10-15",
+  "updated": "2026-10-17",
   "description": "Séquences de lecture et navigation — non chronologie causale",
   "cycles": [
+    {
+      "id": "notre-dame",
+      "kicker": "NOUVELLE ENQUÊTE",
+      "title": "Notre-Dame de Paris : les sculptures enterrées",
+      "short": "NOTRE-DAME",
+      "description": "Fouilles de 2022, archives de 1699, vestiges du jubé gothique et questions ouvertes : enquête historique illustrée.",
+      "method": "Une pierre réemployée n'atteste pas une intention secrète : chaque hypothèse est confrontée aux documents.",
+      "steps": [
+        {
+          "code": "ND-004",
+          "title": "Les sculptures que l'on avait enterrées",
+          "href": "parisis-notre-dame-jube-enquete-004.html",
+          "note": "Lire dix parties, photographies de fouille, inventaire, chronologie, sources et hypothèses."
+        }
+      ],
+      "network": "parisis-notre-dame-jube-enquete-004.html#questions",
+      "trail": "parisis-fil-enquetes.html#notre-dame"
+    },
     {
       "id": "alpha",
       "kicker": "DERNIÈRE SÉRIE",
