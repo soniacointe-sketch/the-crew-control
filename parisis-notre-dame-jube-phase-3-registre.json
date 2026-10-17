@@ -2,7 +2,7 @@
   "schema": "PARISIS-ND-004-III-v1",
   "updated": "2026-10-17",
   "theme": "Données 3D du jubé de Notre-Dame",
-  "status": "corpus de références — pas de raccord vérifié",
+  "status": "corpus initial complété par la phase IV — maillages non examinés",
   "source": "https://entrepot.recherche.data.gouv.fr/dataverse/ndame_GTNum_vestiges3D_jube",
   "datasets": [
     {
@@ -74,11 +74,32 @@
       "level": "documenté",
       "uri": "https://doi.org/10.57745/Z4OBOH",
       "mesh_analyzed": false
+    },
+    {
+      "ref": "363",
+      "doi": "10.57745/ZBTQBR",
+      "source": "Fragment Inrap, chaudière de l'Enfer (dossier Cluny)",
+      "date": "Publication référencée 2026 ; jour exact à confirmer",
+      "access": "Notice référencée par recherche ; droits du maillage non vérifiés",
+      "level": "notice retrouvée, maillage non analysé",
+      "uri": "https://doi.org/10.57745/ZBTQBR",
+      "mesh_analyzed": false
+    },
+    {
+      "ref": "765",
+      "doi": "10.57745/UZ5PMI",
+      "source": "Fragment Inrap, chaudière de l'Enfer (dossier Cluny)",
+      "date": "Publication référencée 2026 ; jour exact à confirmer",
+      "access": "Notice référencée par recherche ; droits du maillage non vérifiés",
+      "level": "notice retrouvée, maillage non analysé",
+      "uri": "https://doi.org/10.57745/UZ5PMI",
+      "mesh_analyzed": false
     }
   ],
   "limits": [
     "Certains maillages PLY/OBJ sont restreints.",
     "RF 991 : accès au maillage non vérifié.",
-    "Aucun raccord géométrique n'a été réalisé."
+    "Aucun raccord géométrique n'a été réalisé.",
+    "Phase IV : deux DOI supplémentaires identifiés (363 et 765), sans raccord démontré."
   ]
 }
