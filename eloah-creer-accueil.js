@@ -54,10 +54,13 @@
       const a=document.createElement('a');a.href='#eloah-home-ai';a.className='primary eloah-create-first';a.textContent='✦ Créer avec ELOAH';
       oldActions.prepend(a);
     }
-    const headline=hero.querySelector('h1');
-    if(headline)headline.textContent='Tes idées prennent forme ici.';
-    const tagline=hero.querySelector('.intro');
-    if(tagline)tagline.textContent='Un univers, une demande, une création. Ton organisation et tes outils restent accessibles plus bas.';
+    // Le titre du nouvel atelier doit rester celui de sa page dédiée.
+    if (!location.pathname.endsWith('/eloah-atelier.html')) {
+      const headline=hero.querySelector('h1');
+      if(headline)headline.textContent='Tes idées prennent forme ici.';
+      const tagline=hero.querySelector('.intro');
+      if(tagline)tagline.textContent='Un univers, une demande, une création. Ton organisation et tes outils restent accessibles plus bas.';
+    }
     if(location.hash==='#creer')assistant.scrollIntoView({block:'start'});
   }
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init);else init();
