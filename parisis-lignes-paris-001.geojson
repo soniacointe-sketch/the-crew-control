@@ -1,0 +1,124 @@
+{
+  "type": "FeatureCollection",
+  "name": "PARISIS ENGINE — Test 001",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.287108,
+          48.863038
+        ]
+      },
+      "properties": {
+        "id": "trocadero",
+        "name": "Place du Trocadéro-et-du-11-Novembre",
+        "role": "point central de place",
+        "source": "https://fr.wikipedia.org/wiki/Place_du_Trocad%C3%A9ro-et-du-11-Novembre"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.38308,
+          48.88107
+        ]
+      },
+      "properties": {
+        "id": "temple",
+        "name": "Temple de la Sibylle",
+        "role": "centre du bâtiment OSM (arrondi à 5 décimales)",
+        "source": "https://mapcarta.com/fr/W63224946"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.33173,
+          48.87203
+        ]
+      },
+      "properties": {
+        "id": "opera_centre",
+        "name": "Palais Garnier — centre du bâtiment",
+        "role": "centre d’emprise OSM",
+        "source": "https://mapcarta.com/fr/25251450"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.33167,
+          48.87194
+        ]
+      },
+      "properties": {
+        "id": "opera_localisation",
+        "name": "Palais Garnier — point usuel",
+        "role": "localisation encyclopédique",
+        "source": "https://www.wikiland.org/fr/Palais_Garnier"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.33197,
+          48.87143
+        ]
+      },
+      "properties": {
+        "id": "opera_pointdevue",
+        "name": "Palais Garnier — point de vue",
+        "role": "point touristique OSM, pas centre du bâtiment",
+        "source": "https://mapcarta.com/fr/N3462104314"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          2.33222,
+          48.87056
+        ]
+      },
+      "properties": {
+        "id": "place_opera",
+        "name": "Place de l’Opéra — point central",
+        "role": "centre de la place",
+        "source": "https://fr.wikipedia.org/wiki/Place_de_l%27Op%C3%A9ra"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            2.287108,
+            48.863038
+          ],
+          [
+            2.38308,
+            48.88107
+          ]
+        ]
+      },
+      "properties": {
+        "id": "ligne-exploratoire",
+        "name": "Segment Place du Trocadéro → Temple de la Sibylle",
+        "status": "test géométrique exploratoire — non historique",
+        "dist_m": 7319.7
+      }
+    }
+  ]
+}
