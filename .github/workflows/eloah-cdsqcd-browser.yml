@@ -6,6 +6,8 @@ on:
       - 'mes-univers.html'
       - 'eloah-accueil-ia.js'
       - 'eloah-livrable-studio.js'
+      - 'eloah-carrousel-production.js'
+      - 'tests/eloah-carrousel.browser.test.mjs'
       - 'eloah-cdsqcd-evidence.js'
       - 'eloah-parcours-unique.js'
       - 'eloah-assistante-claire.css'
@@ -41,3 +43,5 @@ jobs:
           exit 1
       - name: Test desktop and mobile studio actions
         run: node tests/eloah-cdsqcd.browser.test.mjs
+      - name: Compose ten real carousel PNG and verify ZIP
+        run: node tests/eloah-carrousel.browser.test.mjs
