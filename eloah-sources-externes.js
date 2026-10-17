@@ -6,7 +6,7 @@
 const BASE='https://voytsqyorhoveurnguxn.supabase.co';
 const KEY='sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
 const FOUNDER='bd4b7197-6401-4a9a-a14e-c6adbdc0ed46';
-const SITE={pg:'powerglam1.wordpress.com',crew:'thecreworchies.blog',exp:'pgexperience4.wordpress.com'};
+const SITE={pg:'257263122',crew:'257252103',exp:'257624305'}; // IDs réels des 3 sites WordPress de la fondatrice.
 const LIB='https://esm.sh/@supabase/supabase-js@2.116.0';
 const lookup=id=>document.getElementById(id);
 let selected=[],results=[],epoch=0,founderClient=null,googleClient=null,providerToken=null,loading=false;
