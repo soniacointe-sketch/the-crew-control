@@ -141,20 +141,43 @@ async function api(url,access){
 }
 async function verifyWordPress(){
  const status=lookup('ers-wordpress-diagnostic');
- if(status)status.textContent='Test en cours sur les trois sites WordPress publics…';
- const ids=['pg','crew','exp'];
- const results=await Promise.all(ids.map(async id=>{
-  try{
-   const url='https://public-api.wordpress.com/rest/v1.1/sites/'+encodeURIComponent(SITE[id])+'/posts/?'+new URLSearchParams({number:'1',fields:'ID,title,status'}).toString();
-   const response=await fetch(url,{cache:'no-store',signal:AbortSignal.timeout(9000)});
-   if(!response.ok)throw Error('HTTP '+response.status);
-   const body=await response.json();
-   if(!Array.isArray(body.posts))throw Error('Format de réponse non reconnu');
-   return {id,ok:true,found:body.posts.some(p=>p.status==='publish')};
-  }catch(error){return {id,ok:false,error:String(error.message||error).slice(0,65)}}
- }));
- const labels={pg:'Power & Glam',crew:'The Crew',exp:'P&G Expérience'};
- if(status)status.textContent='Vérification WordPress · '+results.map(x=>labels[x.id]+': '+(x.ok?(x.found?'lecture OK':'accessible, aucun article récent'):'échec de lecture ('+x.error+')')).join(' · ')+'.';
+ const button=lookup('ers-wordpress-check');
+ if(button)button.disabled=true;
+ if(status)status.textContent='Diagnostic des trois sites publics et des modules de création…';
+ try{
+  const ids=['pg','crew','exp'],labels={pg:'Power & Glam',crew:'The Crew Orchies',exp:'P&G Expérience'};
+  const checks=await Promise.all(ids.map(async id=>{
+   try{
+    const qs=new URLSearchParams({number:'1',fields:'ID,title,status'});
+    const response=await fetch('https://public-api.wordpress.com/rest/v1.1/sites/'+encodeURIComponent(SITE[id])+'/posts/?'+qs,{cache:'no-store',signal:AbortSignal.timeout(9000)});
+    if(!response.ok)throw Error('HTTP '+response.status);
+    const body=await response.json();
+    if(!Array.isArray(body.posts))throw Error('Réponse inattendue');
+    return {name:labels[id],ok:true,articles:body.posts.filter(x=>x.status==='publish').length};
+   }catch(error){return{name:labels[id],ok:false,reason:clip(error?.message||'indisponible',75)}}
+  }));
+  const modules=[
+   {name:'Recherche de sources',loaded:typeof window.EloahConnectedSources?.evidence==='function'},
+   {name:'Registre de références',loaded:typeof window.EloahEvidence?.audit==='function'},
+   {name:'Création de 10 PNG',loaded:typeof window.EloahCarouselProduction?.makePNGSet==='function'},
+   {name:'Export du dossier',loaded:Boolean(lookup('eloah-final-package'))}
+  ];
+  // Vérifie seulement le CHARGEMENT des composants. Un essai complet reste nécessaire.
+  if(status){
+   status.replaceChildren();
+   const heading=document.createElement('strong');heading.textContent='Diagnostic local · '+new Date().toLocaleString('fr-FR');
+   const list=document.createElement('ul');
+   for(const check of checks){
+    const line=document.createElement('li');line.textContent=check.name+' : '+(check.ok?'API publique accessible':'lecture impossible ('+check.reason+')');list.append(line);
+   }
+   for(const module of modules){
+    const line=document.createElement('li');line.textContent=module.name+' : '+(module.loaded?'module chargé':'module absent ou indisponible');list.append(line);
+   }
+   const foot=document.createElement('p');
+   foot.textContent='Ce diagnostic ne valide ni la connexion Google, ni les permissions fondatrice, ni la génération IA. Il ne lit pas de documents privés.';
+   status.append(heading,list,foot);
+  }
+ }finally{if(button)button.disabled=false}
 }
 async function searchWP(query,universe,run){
  const ids=['pg','crew','exp'];
