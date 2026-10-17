@@ -73,14 +73,14 @@
   const founderId = 'bd4b7197-6401-4a9a-a14e-c6adbdc0ed46';
   const publicKey = 'sb_publishable_WrZkFoX6rrC3CLjasrn1VQ_lB4pr6gy';
   let client = null, clientLoad = null, verifiedId = null, authEpoch = 0, verifySerial = 0;
-  let revision = 0, request = null, pairs = [], answer = '', busy = false, asleep = false;
+  let revision = 0, request = null, pairs = [], answer = '', busy = false, preparing = false, asleep = false;
   function message(text) { status.textContent = text; }
   function controls() {
-    $('send').disabled = busy; $('stop').hidden = !busy;
+    $('send').disabled = busy || preparing; $('stop').hidden = !busy;
     $('copy').disabled = !answer; $('download').disabled = !answer;
     $('actions').hidden = !pairs.length && !answer;
     $('count').textContent = prompt.value.length + ' / 6 000 caractères';
-    form.setAttribute('aria-busy', String(busy));
+    form.setAttribute('aria-busy', String(busy || preparing));
   }
   function cancel(text = '') {
     revision++;
@@ -178,17 +178,30 @@
   form.addEventListener('submit', async event => {
     event.preventDefault();
     const draftAtSend = prompt.value, text = draftAtSend.trim();
-    if (busy || asleep || !text || text.length > 6000) return;
+    if (busy || preparing || asleep || !text || text.length > 6000) return;
     const provider = $('provider').value;
     if (!['free','openai'].includes(provider)) { message('Choisis un moteur IA valide.'); return; }
     if(window.EloahEvidence?.ambiguous?.(text)) { message('Sujet isolé sans contexte fiable. Explique ce que signifie ce mot, ou demande explicitement de créer une idée fictive. Rien n’a été envoyé.'); return; }
+    const projectAtStart = $('project').value;
+    const startRevision = revision;
     const subjectLine=text.match(/(?:^|\n)SUJET\s*:\s*([^\n]+)/i);
     const sourceTopic=subjectLine?.[1]?.trim()||text;
-    if(window.EloahAutoSources){await window.EloahAutoSources.prepare(sourceTopic,$('project').value);}
-    window.EloahEvidence?.prepare?.($('project').value);
+    const lengthMode=/^MISSION DE PRODUCTION\s*[—-]\s*(?:Dossier éditorial|Carrousel)/im.test(text)?'long':'normal';
     let payload;
-    try { payload = contextFor(text); } catch (error) { message(error.message); return; }
-    const body = JSON.stringify({context:payload, project:$('project').value || 'Accueil ELOAH', provider});
+    preparing=true;controls();message('ELOAH retrouve les références de ce projet…');
+    try {
+      if(window.EloahAutoSources) {
+        await bounded(window.EloahAutoSources.prepare(sourceTopic,projectAtStart),12000,'Recherche de sources trop longue.');
+      }
+      if(startRevision!==revision || asleep || $('project').value!==projectAtStart || prompt.value!==draftAtSend){
+        message('Demande modifiée : aucun envoi effectué. Relance la création si nécessaire.');return;
+      }
+      window.EloahEvidence?.prepare?.(projectAtStart);
+      payload=contextFor(text);
+    } catch(error) {
+      message('Préparation interrompue : '+String(error?.message||error).slice(0,160)+'. Aucun envoi effectué.');return;
+    } finally { preparing=false;controls(); }
+    const body = JSON.stringify({context:payload, project:projectAtStart || 'Accueil ELOAH', provider, length_mode:lengthMode});
     if (new TextEncoder().encode(body).length > 29000) { message('Le texte est trop volumineux. Raccourcis-le.'); return; }
     const ticket = ++revision;
     const controller = new AbortController(); request = {controller, timer:null, ticket};
@@ -203,7 +216,7 @@
       if (error || !session?.access_token || session.user?.id !== founderId) {
         verifiedId = null; reset('Session expirée. Reconnecte-toi.',true); $('login').hidden = false; return;
       }
-      message('ELOAH prépare sa réponse…');
+      message(lengthMode==='long'?'ELOAH rédige ton livrable détaillé…':'ELOAH prépare sa réponse…');
       request.timer = setTimeout(() => controller.abort(), 55000);
       const response = await fetch(base + '/functions/v1/eloah-2040-founder-ai', {
         method:'POST', credentials:'omit', cache:'no-store',
@@ -220,9 +233,9 @@
       }
       answer = result.answer.trim(); window.EloahEvidence?.commit?.(); pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
       renderPair(text, answer);
-      window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{question:text,answer,universe:$('project').value||'ELOAH'}}));
+      window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{question:text,answer,universe:projectAtStart||'ELOAH',complete:result.complete!==false}}));
       if (prompt.value === draftAtSend) prompt.value = ''; $('payload').hidden = true;
-      message('Réponse à relire · ' + (provider === 'free' ? 'Groq' : 'OpenAI') + '. Tu peux poursuivre dans le champ de demande.');
+      message((result.complete===false?'Réponse probablement tronquée : elle est incomplète. Vérifie le contenu avant tout export.':'Réponse à relire')+' · '+(provider==='free'?'Groq':'OpenAI')+'.');
     } catch (error) {
       if (ticket !== revision || asleep) return;
       message(error?.name === 'AbortError' ? 'Délai dépassé. Le serveur peut avoir traité la demande ; aucune nouvelle réponse n’est affichée.' : 'Connexion interrompue. Réessaie ; aucun contenu n’est publié automatiquement.');
