@@ -234,6 +234,7 @@
       }
       answer = result.answer.trim(); window.EloahEvidence?.commit?.(); pairs.push({question:text,answer}); if (pairs.length > 4) pairs.shift();
       renderPair(text, answer);
+      if(log.lastElementChild?.dataset.author==='eloah')log.lastElementChild.dataset.eloahComplete=String(result.complete!==false);
       window.dispatchEvent(new CustomEvent('eloah:answer',{detail:{question:text,answer,universe:projectAtStart||'ELOAH',complete:result.complete!==false}}));
       if (prompt.value === draftAtSend) prompt.value = ''; $('payload').hidden = true;
       message((result.complete===false?'Réponse probablement tronquée : elle est incomplète. Vérifie le contenu avant tout export.':'Réponse à relire')+' · '+(provider==='free'?'Groq':'OpenAI')+'.');
