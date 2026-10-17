@@ -1,0 +1,75 @@
+/* ELOAH · Mon organisation : interface légère, compatible avec le planning historique. */
+body.client-page{
+  --bg:#f4f0e9;--panel:#fffdfa;--ink:#283c35;--muted:#64716a;--line:#ded8cc;--tint:#f7f4ee;
+  color-scheme:light!important;
+  background:#f4f0e9!important;color:#283c35!important;
+}
+body.client-page main#contenu{max-width:1080px;background:transparent!important;color:#283c35!important;padding:20px clamp(14px,3vw,30px) 100px}
+body.client-page .client-hero{background:#fffdfa!important;color:#283c35!important;border:1px solid #ded8cc!important;box-shadow:none!important;border-radius:16px;padding:24px!important;margin:0 0 15px!important}
+body.client-page .client-hero::before,body.client-page .client-hero::after{display:none!important}
+body.client-page .pilotage-hero-inner{display:block!important;min-height:0!important;padding:10px 0 0!important}
+body.client-page .pilotage-hero-copy{max-width:none!important;width:auto!important}
+body.client-page .pilotage-hero-copy h1,body.client-page .pilotage-hero-copy h1 em{color:#252d28!important;font-family:Georgia,serif;font-weight:400;font-style:normal;font-size:clamp(36px,5.4vw,52px)!important;line-height:1.12;letter-spacing:-.035em}
+body.client-page .pilotage-hero-copy>p:not(.eyebrow){color:#616b65!important;font-size:16px!important;line-height:1.6!important;max-width:720px}
+body.client-page .pilotage-hero-copy .eyebrow{color:#84704b!important}
+body.client-page .client-hero .ivory-photo,body.client-page .client-hero-actions,body.client-page .pilotage-hero-proof{display:none!important}
+body.client-page .hero-top{color:#796842!important}
+body.client-page .hero-top>a{color:#283c35!important}
+body.client-page #eloah-simple-shortcuts,body.client-page .pilotage-anchors{display:none!important}
+body.client-page .eloah-coach-folded{display:none!important}
+body.client-page #eloah-coach-dashboard{display:grid;gap:18px;margin:0 0 20px;scroll-margin-top:80px}
+body.client-page .eloah-coach-card{background:#fffdfa!important;color:#283c35!important;border:1px solid #ded8cc!important;box-shadow:none!important;border-radius:16px;padding:24px;min-width:0}
+body.client-page .eloah-coach-head{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+body.client-page .eloah-coach-kicker{font:700 11px/1.45 system-ui,sans-serif!important;letter-spacing:.15em;color:#84704b!important;text-transform:uppercase;margin:0!important}
+body.client-page .eloah-coach-date{font-size:12px;color:#68736c}
+body.client-page .eloah-coach-h2{font:400 clamp(23px,3vw,30px)/1.15 Georgia,serif!important;color:#29352f!important;letter-spacing:-.01em;margin:0 0 8px!important}
+body.client-page .eloah-coach-intro{font-size:13px!important;color:#69716b!important;margin:0 0 17px!important;line-height:1.6}
+body.client-page .eloah-coach-priorities{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+body.client-page .eloah-coach-priority{background:#f8f5ef;border:1px solid #e7e0d4;border-radius:13px;padding:19px;display:flex;flex-direction:column;gap:9px;min-width:0}
+body.client-page .eloah-coach-priority .eloah-coach-head{margin:0;gap:7px}
+body.client-page .eloah-coach-priority .eloah-coach-name{font-weight:700;font-size:14px;line-height:1.4;color:#2c4239}
+body.client-page .eloah-coach-flag{font:600 11px/1.3 system-ui,sans-serif;background:#efe8d8;border-radius:999px;padding:5px 10px;color:#79613d;white-space:nowrap}
+body.client-page .eloah-coach-priority p{font-size:13px!important;color:#515f56!important;line-height:1.58;margin:0!important;flex:1}
+body.client-page #eloah-coach-dashboard :is(button,.btn){min-height:44px;border-radius:9px;border:1px solid #d5d0c4;background:#fffdfa;color:#283c35;font-size:13px;font-weight:650;padding:10px 13px;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;text-align:center;box-shadow:none;white-space:normal;transform:none}
+body.client-page #eloah-coach-dashboard :is(button,.btn):hover{background:#efece3;border-color:#829489;color:#233e32}
+body.client-page #eloah-coach-dashboard :is(.eloah-coach-primary,.eloah-coach-save){color:#fff!important;background:#29453b!important;border-color:#29453b!important}
+body.client-page #eloah-coach-dashboard :is(.eloah-coach-primary,.eloah-coach-save):hover{background:#3b6354!important}
+body.client-page #eloah-coach-dashboard :is(button,input,select,textarea):focus-visible{outline:3px solid #8bb9a5;outline-offset:2px}
+body.client-page .eloah-coach-form{display:grid;gap:14px}
+body.client-page .eloah-coach-label{font:650 13px/1.5 system-ui,sans-serif;color:#33493e;display:grid;gap:7px}
+body.client-page #eloah-coach-dashboard :is(input[type=text],input[type=date],select,textarea){width:100%;min-width:0;max-width:100%;font:15px/1.5 system-ui,sans-serif;border:1px solid #cfcac1;border-radius:9px;background:#fffdfa!important;color:#273e34!important;padding:12px}
+body.client-page .eloah-coach-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+body.client-page #eloah-coach-dashboard fieldset{margin:0;border:0;padding:0;min-width:0}
+body.client-page #eloah-coach-dashboard legend{font:650 13px/1.5 system-ui,sans-serif;color:#33493e;padding:0 0 6px}
+body.client-page .eloah-coach-radios{display:flex;gap:15px;flex-wrap:wrap}
+body.client-page .eloah-coach-radios label{display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-size:13px;color:#34473e}
+body.client-page .eloah-coach-radios input{accent-color:#29453b;width:17px;height:17px}
+body.client-page .eloah-coach-status{min-height:20px;font-size:13px;color:#315e45}
+body.client-page .eloah-coach-status[data-error=true]{color:#ac3941}
+body.client-page .eloah-coach-commands{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+body.client-page #eloah-coach-dashboard .eloah-coach-command{justify-content:flex-start;text-align:left;font-size:14px;gap:8px;background:#f8f5ef}
+body.client-page .eloah-coach-footnav{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px}
+body.client-page .eloah-coach-footnav button{font-weight:500!important}
+body.client-page .eloah-coach-saved{display:grid;gap:8px}
+body.client-page .eloah-coach-task{display:flex;gap:10px;align-items:center;justify-content:space-between;padding:11px 0;border-bottom:1px solid #e4dfd6}
+body.client-page .eloah-coach-task>div{min-width:0;flex:1}
+body.client-page .eloah-coach-task strong{display:block;overflow-wrap:anywhere;font-size:13px;line-height:1.4;color:#33493e}
+body.client-page .eloah-coach-task small{color:#73776f;font-size:11px}
+body.client-page .eloah-coach-task-actions{display:flex;gap:5px}
+body.client-page #eloah-coach-dashboard .eloah-coach-task-actions button{min-height:36px;padding:6px 10px;font-size:11px}
+body.client-page #eloah-coach-dashboard .eloah-coach-empty{font-size:13px;color:#64716a;margin:0}
+body.client-page .pilotage-panel.eloah-coach-metrics{margin:4px 0 22px!important;max-width:none!important;position:static!important}
+body.client-page .pilotage-panel.eloah-coach-metrics .pilotage-panel-title{color:#283c35!important}
+@media(max-width:790px){body.client-page .eloah-coach-priorities{grid-template-columns:1fr}}
+@media(max-width:600px){
+ body.client-page main#contenu{padding:13px 12px 95px}
+ body.client-page .client-hero{padding:17px!important;border-radius:13px}
+ body.client-page .eloah-coach-card{padding:17px;border-radius:13px}
+ body.client-page .eloah-coach-fields{grid-template-columns:1fr}
+ body.client-page .eloah-coach-commands{grid-template-columns:1fr 1fr;gap:8px}
+ body.client-page #eloah-coach-dashboard .eloah-coach-command{font-size:12px;padding:10px;min-height:62px;align-items:flex-start;justify-content:center}
+ body.client-page .eloah-coach-task{align-items:flex-start;flex-wrap:wrap}
+ body.client-page .eloah-coach-task-actions{margin-left:auto}
+ body.client-page .eloah-coach-priority{padding:15px}
+ body.client-page .pilotage-panel.eloah-coach-metrics{padding:14px!important}
+}
