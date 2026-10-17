@@ -50,19 +50,19 @@ main.innerHTML=`
 <p class="eloah-coach-status" id="eloah-coach-status" role="status" aria-live="polite"></p>
 </form></section>
 <section class="eloah-coach-card" aria-labelledby="eloah-quick-title">
-<h2 class="eloah-coach-h2" id="eloah-quick-title">Mes commandes rapides</h2>
-<p class="eloah-coach-intro">Ouvre uniquement la partie dont tu as besoin.</p>
+<h2 class="eloah-coach-h2" id="eloah-quick-title">Mes outils de travail</h2>
+<p class="eloah-coach-intro">Travaille ici sur tes projets, tes dates, tes priorités et tes sauvegardes.</p>
 <div class="eloah-coach-commands">
 <button class="eloah-coach-command" type="button" data-coach-show="mes-projets">▣ &nbsp; Mes projets →</button>
 <button class="eloah-coach-command" type="button" data-coach-show="mon-organisation">▦ &nbsp; Mon planning →</button>
-<a class="btn eloah-coach-command" href="eloah-monitor.html">◎ &nbsp; Supervision →</a>
+<button class="eloah-coach-command" type="button" data-coach-show="coach-supervision">◎ &nbsp; Supervision →</button>
 <button class="eloah-coach-command" type="button" data-coach-show="pilotage-focus">☑ &nbsp; Mes priorités →</button>
 </div>
 <nav class="eloah-coach-footnav" aria-label="Mes autres accès">
 <button type="button" data-coach-show="services">Mes outils</button>
 <button type="button" data-coach-show="mes-demarches">Démarches et comptes</button>
 <button type="button" data-coach-show="compte-et-sauvegardes">Sauvegardes</button>
-</nav></section>`;
+</nav><div class="coach-tool-actions"><button type="button" data-coach-action="project">＋ Créer un projet</button><button type="button" data-coach-action="plan">＋ Planifier une action</button><button type="button" data-coach-action="backup">Télécharger mes données</button></div><p id="coach-tool-feedback" role="status"></p><div id="coach-tool-workspace" aria-label="Outil ouvert"></div></section>`;
 hero.after(main);
 $('eloah-coach-date').textContent=pretty;
 $('eloah-crew-summary').textContent=eventUpcoming?'Dance Party Latino · 17 octobre, 18h30–20h30. Préparer la séance et vérifier les inscriptions.':'Préparer les prochains ateliers, leurs inscriptions et les messages aux participants.';
@@ -70,14 +70,45 @@ const panel=hero.querySelector('.pilotage-panel');
 if(panel){panel.classList.add('eloah-coach-metrics');main.after(panel);}
 const toFold=['pilotage-focus','mon-organisation','mes-projets','services','mes-demarches','compte-et-sauvegardes'];
 for(const id of toFold){const node=$(id);if(node)node.classList.add('eloah-coach-folded');}
+const toolHost=$('coach-tool-workspace');
+const supervision=document.createElement('section');supervision.id='coach-supervision';supervision.className='workspace-section eloah-coach-folded';supervision.innerHTML='<h2>Supervision de cet appareil</h2><p>État calculé à partir des données enregistrées dans ce navigateur.</p><div id="coach-supervision-state"></div><p>Ce contrôle ne vérifie pas les services externes et ne synchronise pas les données.</p><button type="button" id="coach-supervision-refresh">Actualiser le contrôle</button> <a class="btn" href="eloah-monitor.html">Ouvrir la supervision complète →</a>';
+toolHost.append(supervision);
+for(const id of toFold){const node=$(id);if(node)toolHost.append(node);}
+const toolIds=[...toFold,'coach-supervision'];
+function inspectLocal(){
+ const result=$('coach-supervision-state');result.replaceChildren();
+ try{
+ const tasks=loadTasks();const projects=window.ELOAHWorkspace?.projects?.()||[];
+ const rows=[['Actions ouvertes',tasks.filter(t=>t&&!t.archived&&t.status!=='Terminé').length],['Actions terminées',tasks.filter(t=>t&&!t.archived&&t.status==='Terminé').length],['Projets locaux',projects.filter(p=>!p.state?.settings?.archived).length],['Lecture du planning','Disponible']];
+ for(const [label,value]of rows){const p=document.createElement('p'),b=document.createElement('strong');b.textContent=label+' : ';p.append(b,document.createTextNode(String(value)));result.append(p);}
+ }catch(error){result.textContent='Lecture impossible : '+error.message;}
+}
+$('coach-supervision-refresh').onclick=inspectLocal;
 const show=(id)=>{
  const node=$(id);if(!node)return;
+ if(toolIds.includes(id)){
+ for(const otherId of toolIds){const other=$(otherId);if(other)other.classList.toggle('eloah-coach-folded',otherId!==id);}
+ document.querySelectorAll('[data-coach-show]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.coachShow===id)));
+ if(id==='coach-supervision')inspectLocal();
+ }
  node.classList.remove('eloah-coach-folded');
  if(typeof node.eloahSetOpen==='function')node.eloahSetOpen(true);
  if(node.tagName==='DETAILS')node.open=true;
  requestAnimationFrame(()=>node.scrollIntoView({block:'start',behavior:'smooth'}));
 };
 document.querySelectorAll('[data-coach-show]').forEach(b=>b.addEventListener('click',()=>show(b.dataset.coachShow)));
+document.querySelectorAll('[data-coach-action]').forEach(button=>button.addEventListener('click',()=>{
+ const feedback=$('coach-tool-feedback');feedback.textContent='';
+ const action=button.dataset.coachAction;
+ if(action==='project'){
+  const dialog=$('client-new-project');if(dialog&&typeof dialog.showModal==='function'){dialog.showModal();$('client-project-name').focus();}else feedback.textContent='Le formulaire de projet est indisponible. Recharge la page.';
+ }else if(action==='plan'){
+  show('mon-organisation');const add=$('ops-add-task');if(add)add.click();else feedback.textContent='Le planning est encore en cours de chargement.';
+ }else if(action==='backup'){
+  const exportButton=$('ops-local-export');if(exportButton){show('compte-et-sauvegardes');$('ops-local-backup').open=true;exportButton.click();}else feedback.textContent='L’export est indisponible. Ouvre les sauvegardes.';
+ }
+}));
+
 function followHash(){
  const id=decodeURIComponent(location.hash.slice(1));
  if(!id)return;
@@ -86,6 +117,7 @@ function followHash(){
 }
 window.addEventListener('hashchange',followHash);
 followHash();
+if(!location.hash){$('mes-projets').classList.remove('eloah-coach-folded');document.querySelector('[data-coach-show="mes-projets"]')?.setAttribute('aria-pressed','true');}
 const status=$('eloah-coach-status'),form=$('eloah-coach-form');
 function inform(message,error=false){status.textContent=message;status.dataset.error=String(error);}
 document.querySelectorAll('[data-coach-suggest]').forEach(b=>b.addEventListener('click',()=>{
