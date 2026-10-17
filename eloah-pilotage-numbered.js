@@ -124,7 +124,7 @@ function render(){
      const current=read(TASK_KEY);
      if(taskFor(item,current)){render();showMessage('Ce dossier figure déjà dans le planning.');return;}
      const created={
-      id:crypto.randomUUID(),title:item.title,project:item.project,date:historical?.date||'',
+      id:crypto.randomUUID(),title:item.title,project:item.project,date:/^\d{4}-\d{2}-\d{2}$/.test(historical?.date||'')?historical.date:'',
       status:historical?.state&&['À faire','En cours','À valider','Terminé'].includes(historical.state)?historical.state:'À faire',
       kind:'Action',note:brief,priority:'Normale',archived:false,sourcePlanId:item.id,
       updated:new Date().toISOString()
@@ -140,7 +140,7 @@ function render(){
   card.append(top,heading,category,description,actions);
   grid.append(card);
  }
- summary.textContent=items.length+' dossiers numérotés · '+counts.tracked+' suivis dans le planning · '+counts.done+' terminés d’après les états locaux';
+ summary.textContent=items.length+' dossiers numérotés · '+counts.tracked+(counts.tracked===1?' suivi':' suivis')+' dans le planning · '+counts.done+(counts.done===1?' terminé':' terminés')+' d’après les états locaux';
 }
 function showMessage(text,error=false){message.textContent=text;message.dataset.error=String(error);}
 window.addEventListener('storage',e=>{
