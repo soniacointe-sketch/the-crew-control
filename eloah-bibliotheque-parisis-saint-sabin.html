@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Archive publique ELOAH · PARISIS ENGINE · Saint-Sabin, pétroglyphe et hypothèse de calendrier lunaire.">
+<title>ELOAH · PARISIS ENGINE · Saint-Sabin</title>
+<style>
+:root{--bg:#f4efe7;--paper:#fffdf9;--side:#eee6da;--line:#dcd0c0;--ink:#30291f;--sub:#716557;--gold:#95744a;--green:#253b35;--rose:#743d45}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.75 system-ui,-apple-system,sans-serif}
+a{color:#78562b}h1,h2,h3,h4{font-family:Georgia,serif;line-height:1.25}.shell{display:grid;grid-template-columns:275px minmax(0,1fr) 225px;min-height:100vh}
+.side{background:var(--side);border-right:1px solid var(--line);padding:24px 16px;position:sticky;top:0;height:100vh;overflow:auto}
+.side .brand{font:27px Georgia,serif;margin:4px 0 3px}.eyebrow{color:var(--gold);font-size:11px;letter-spacing:.14em;font-weight:800;text-transform:uppercase}
+.side p{font-size:12px;color:var(--sub)}.side nav{margin-top:18px}.side nav a,.toc a{display:block;padding:9px 5px;text-decoration:none;border-bottom:1px solid var(--line);font-size:12px}
+.side .back{display:block;margin-top:18px;padding:10px 11px;border:1px solid #cfbea5;background:#fffaf2;border-radius:8px;text-decoration:none;font-weight:700;font-size:12px}
+main{min-width:0;padding:30px clamp(18px,4vw,58px) 80px}.reader{max-width:940px;margin:auto}
+.hero{background:var(--green);color:#fff9ee;padding:clamp(28px,5vw,62px);border:1px solid #6c7565;margin-bottom:28px}.hero h1{font-size:clamp(38px,5.2vw,68px);margin:14px 0 16px}
+.hero p{font:19px/1.55 Georgia,serif;color:#e7ded0;max-width:780px}.hero .eyebrow{color:#d9bd85}
+.notice{background:#fffaf2;border-left:4px solid var(--gold);padding:16px 19px;margin:22px 0;border-radius:8px}.notice strong{font-weight:800}
+.search{position:sticky;top:0;z-index:3;background:#f4efe7f2;backdrop-filter:blur(10px);padding:12px 0;border-bottom:1px solid var(--line);margin-bottom:20px}
+.search input{width:100%;padding:12px 14px;border:1px solid #cabba6;border-radius:10px;background:white;font:inherit}
+.chapter{scroll-margin-top:80px}.chapter>h2{font-size:31px;margin:52px 0 18px;border-top:1px solid #cdbfae;padding-top:23px}
+.message{background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:22px clamp(17px,3vw,30px);margin:14px 0;box-shadow:0 4px 18px #3d2d1908;scroll-margin-top:78px}
+.message.user{border-left:5px solid var(--rose)}.message.assistant{border-left:5px solid var(--green)}.message-meta{display:flex;justify-content:space-between;gap:10px;align-items:center;color:#876b48;font-size:11px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;border-bottom:1px solid #e5dacb;padding-bottom:10px;margin-bottom:16px}.message-meta a{font-size:10px;text-decoration:none}
+.message-rendered h1{font-size:34px}.message-rendered h2{font-size:29px;margin-top:35px}.message-rendered h3{font-size:23px;margin-top:28px}.message-rendered h4{font-size:19px}.message-rendered p{margin:12px 0}.message-rendered blockquote{background:#f4ece0;border-left:3px solid var(--gold);padding:9px 17px;margin:18px 0}.message-rendered ul,.message-rendered ol{padding-left:24px}.message-rendered code{background:#eee7dd;padding:2px 5px;border-radius:4px}.message-rendered hr{border:0;border-top:1px solid #d7c9b7;margin:28px 0}.message-rendered a{overflow-wrap:anywhere}
+.raw{margin-top:19px;border-top:1px dashed #d2c3b0;padding-top:12px}.raw summary{cursor:pointer;color:#765a36;font-weight:750;font-size:12px}.raw pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f0e8;padding:14px;border-radius:8px;font:12px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;max-height:560px;overflow:auto}
+.attachments{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px;margin:20px 0}.archive-image{margin:0;background:#f7f2e9;border:1px solid #ddcfbd;border-radius:10px;overflow:hidden}.archive-image img{display:block;width:100%;height:auto;max-height:520px;object-fit:contain;background:#fff}.archive-image figcaption{font-size:11px;line-height:1.5;padding:10px 12px;color:#675b4e}.image-withheld{padding:17px;background:#f4ece0;border:1px solid #d6c5ad;border-radius:10px;font-size:12px}
+.toc{position:sticky;top:0;height:100vh;padding:27px 14px;border-left:1px solid var(--line);overflow:auto}.toc .eyebrow{margin-bottom:9px}
+.footer-note{margin-top:45px;padding:20px;border-top:2px solid var(--gold);font-size:12px;color:#6e6254}
+.hidden-by-search{display:none!important}
+@media(max-width:1080px){.shell{grid-template-columns:235px minmax(0,1fr)}.toc{display:none}}
+@media(max-width:720px){.shell{display:block}.side{position:relative;height:auto}.side nav{display:flex;gap:10px;overflow:auto;padding-bottom:6px}.side nav a{white-space:nowrap;border:1px solid #d2c0a9;border-radius:7px;padding:8px 10px;background:#fffaf2}main{padding:18px 12px 55px}.hero{padding:28px 20px}.attachments{grid-template-columns:1fr}.message{padding:17px 14px}.chapter>h2{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<aside class="side">
+<div class="eyebrow">ELOAH · BIBLIOTHÈQUE PUBLIQUE</div>
+<div class="brand">🔎 PARISIS ENGINE</div>
+<p>Archive intégrale · Agent des mystères · Saint‑Sabin.</p>
+<a class="back" href="eloah-bibliotheque-parisis.html">← Collection PARISIS ENGINE</a>
+<nav><a href="#01-ouverture">01 · Ouverture</a><a href="#02-premiere-analyse">02 · Première analyse</a><a href="#03-transmission">03 · Transmission</a><a href="#04-test-du-calendrier-lunaire">04 · Test du calendrier lunaire</a><a href="#05-transmission">05 · Transmission</a><a href="#06-coligny-et-environnement-de-recherche">06 · Coligny et environnement de recherche</a><a href="#07-transmission">07 · Transmission</a><a href="#08-relecture-de-la-pierre-brute">08 · Relecture de la pierre brute</a><a href="#09-transmission">09 · Transmission</a><a href="#10-archeologie-du-site-et-datation">10 · Archéologie du site et datation</a><a href="#11-transmission">11 · Transmission</a><a href="#12-le-support-autel">12 · Le support « autel »</a><a href="#13-transmission">13 · Transmission</a><a href="#14-le-texte-de-lhypothese">14 · Le texte de l’hypothèse</a><a href="#15-commande-darchivage-prive">15 · Commande d’archivage privé</a><a href="#16-commande-de-publication-publique">16 · Commande de publication publique</a></nav>
+</aside>
+<main>
+<div class="reader">
+<header class="hero">
+<div class="eyebrow">DOSSIER PUBLIC · ARCHIVE DE CONVERSATION</div>
+<h1>Saint‑Sabin : pétroglyphe, Lune et calendrier gaulois</h1>
+<p>Conversation d’enquête sur la gravure de Saint‑Sabin, son interprétation comme calendrier lunaire, le calendrier de Coligny, la datation du site et les limites documentaires.</p>
+</header>
+<div class="notice"><strong>Édition publique fidèle.</strong> Les messages utilisateur et assistant accessibles dans cette conversation sont conservés dans leur ordre et leur texte d’origine. Les opérations internes des outils ne sont pas publiées. Une capture d’e-mail contenant une adresse personnelle a été volontairement écartée ; une image publique du même motif la remplace. Le dernier message accessible s’arrête sur « La bibliothèque doit » et est reproduit ainsi, sans le compléter.</div>
+<div class="search"><input id="archiveSearch" type="search" placeholder="Rechercher dans cette conversation…" aria-label="Rechercher dans la conversation"></div><div id="archiveContent" aria-live="polite"><p class="loading">Chargement de l’archive…</p></div>
+<div class="footer-note">Classement : 🔎 PARISIS ENGINE · Publication publique ELOAH. Les sources et liens présents dans les réponses sont reproduits tels qu’ils apparaissaient dans la conversation ; leur présence dans l’archive ne vaut pas validation définitive de leur contenu.</div>
+</div>
+</main>
+<aside class="toc"><div class="eyebrow">SOMMAIRE</div><a href="#01-ouverture">01 · Ouverture</a><a href="#02-premiere-analyse">02 · Première analyse</a><a href="#03-transmission">03 · Transmission</a><a href="#04-test-du-calendrier-lunaire">04 · Test du calendrier lunaire</a><a href="#05-transmission">05 · Transmission</a><a href="#06-coligny-et-environnement-de-recherche">06 · Coligny et environnement de recherche</a><a href="#07-transmission">07 · Transmission</a><a href="#08-relecture-de-la-pierre-brute">08 · Relecture de la pierre brute</a><a href="#09-transmission">09 · Transmission</a><a href="#10-archeologie-du-site-et-datation">10 · Archéologie du site et datation</a><a href="#11-transmission">11 · Transmission</a><a href="#12-le-support-autel">12 · Le support « autel »</a><a href="#13-transmission">13 · Transmission</a><a href="#14-le-texte-de-lhypothese">14 · Le texte de l’hypothèse</a><a href="#15-commande-darchivage-prive">15 · Commande d’archivage privé</a><a href="#16-commande-de-publication-publique">16 · Commande de publication publique</a></aside>
+</div>
+<script>
+const fragmentFiles=["eloah-bibliotheque-parisis-saint-sabin-01.html", "eloah-bibliotheque-parisis-saint-sabin-02.html", "eloah-bibliotheque-parisis-saint-sabin-03.html", "eloah-bibliotheque-parisis-saint-sabin-04.html"];
+const zone=document.getElementById('archiveContent');
+const q=document.getElementById('archiveSearch');
+function applySearch(){
+  const s=q.value.trim().toLocaleLowerCase('fr');
+  document.querySelectorAll('.message').forEach(el=>{
+    el.classList.toggle('hidden-by-search',s && !el.innerText.toLocaleLowerCase('fr').includes(s));
+  });
+  document.querySelectorAll('.chapter').forEach(ch=>{
+    const any=[...ch.querySelectorAll('.message')].some(m=>!m.classList.contains('hidden-by-search'));
+    ch.classList.toggle('hidden-by-search',s && !any);
+  });
+}
+q.addEventListener('input',applySearch);
+Promise.all(fragmentFiles.map(f=>fetch(f,{cache:'no-store'}).then(r=>{if(!r.ok)throw new Error(f);return r.text()})))
+.then(parts=>{zone.innerHTML=parts.join('');applySearch();if(location.hash)requestAnimationFrame(()=>document.querySelector(location.hash)?.scrollIntoView())})
+.catch(()=>{zone.innerHTML='<p class="notice"><strong>Archive indisponible.</strong> Un fragment n’a pas pu être chargé.</p>'});
+</script>
+</body>
+</html>
