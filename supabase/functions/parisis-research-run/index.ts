@@ -16,7 +16,7 @@ function cors(req) {
 }
 function json(req,data,status=200){return new Response(JSON.stringify(data),{status,headers:cors(req)});}
 function plain(s,max=2000){return String(s||"").replace(/<[^>]+>/g," ").replace(/&nbsp;|&#160;/gi," ").replace(/&amp;/gi,"&").replace(/\s+/g," ").trim().slice(0,max);}
-function norm(s){return String(s||"").normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLocaleLowerCase("fr");}
+function norm(s){return String(s||"").normalize("NFD").replace(/\p{M}/gu,"").toLocaleLowerCase("fr");}
 function words(s){return norm(s).match(/\p{L}+/gu)||[];}
 function unique(items){const seen=new Set();return items.filter(x=>{if(!x.url||seen.has(x.url))return false;seen.add(x.url);return true;});}
 function source(id,kind,title,url,excerpt,inspection,location="",date=""){return {id,kind,title,url,excerpt:plain(excerpt,2400),inspection,location,date};}
