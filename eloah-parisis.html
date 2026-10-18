@@ -225,6 +225,25 @@ body#parisis-identity .parisis-editorial-separator .eyebrow{
 color:#69512b!important;opacity:1!important;
 }
 </style><link rel="stylesheet" href="parisis-theme-master.css?v=20261017-1">
+<style id="parisis-scanner-sens-home">
+.pe-sens-feature{background:#172923;color:#fff9f0;border:1px solid #b39359;padding:clamp(20px,3vw,36px);margin:21px 0 31px}
+.pe-sens-feature *{box-sizing:border-box}
+.pe-sens-feature .pe-sens-eyebrow{font:800 11px/1.5 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:#ebc88c}
+.pe-sens-feature h2{font:normal clamp(31px,4.2vw,53px)/1.13 Georgia,serif;color:#fff5df;margin:9px 0}
+.pe-sens-feature h2 em{color:#f0cd90}
+.pe-sens-feature .pe-sens-lead{font:clamp(17px,2vw,23px)/1.4 Georgia,serif;color:#f0cf99;margin:2px 0 12px}
+.pe-sens-feature .pe-sens-intro{color:#fbf6ed;font:15px/1.75 system-ui,sans-serif;max-width:900px}
+.pe-sens-feature .pe-sens-intro strong{color:#f0cf99}
+.pe-sens-steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:21px 0}
+.pe-sens-step{border:1px solid #52685b;background:#ffffff09;padding:18px;min-width:0}
+.pe-sens-step span{display:block;font-size:11px;letter-spacing:.12em;color:#e0bf88}
+.pe-sens-step h3{color:#fff5e8;font:normal 24px Georgia,serif;margin:8px 0}
+.pe-sens-step p{color:#efe3cd;font:13px/1.6 system-ui,sans-serif;margin:0}
+.pe-sens-cta{display:inline-flex;align-items:center;justify-content:center;background:#f0cf99;border:1px solid #f0cf99;color:#19251d!important;-webkit-text-fill-color:#19251d!important;font:bold 14px system-ui,sans-serif;text-decoration:none;padding:13px 20px}
+.pe-sens-note{font:12px/1.6 system-ui,sans-serif;color:#eadbc3;margin:13px 0 0}
+@media(max-width:800px){.pe-sens-steps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:490px){.pe-sens-steps{grid-template-columns:1fr}.pe-sens-cta{width:100%}.pe-sens-feature{margin:15px 0 25px}}
+</style>
 </head>
 <body id="parisis-identity" class="parisis-theme-master parisis-theme-hub">
 <div class="shell">
@@ -240,7 +259,7 @@ color:#69512b!important;opacity:1!important;
 <a class="pe-primary-book" href="parisis-lecteur.html">Grand Livre ↗</a>
 <a href="parisis-reseau-indices.html">Réseau des indices</a>
 <a href="#libraryTitle">Bibliothèque</a>
-<a href="#research-workspace">Atelier</a><a href="mes-univers.html">← ELOAH</a>
+<a href="#research-workspace">Atelier</a><a href="parisis-scanner-sens.html">Scanner le sens ↗</a><a href="mes-univers.html">← ELOAH</a>
 </nav>
 <details class="pe-menu-group pe-tools-menu"><summary>Outils</summary>
 <nav id="nav" aria-label="Modules de PARISIS ENGINE"></nav>
@@ -284,9 +303,23 @@ color:#69512b!important;opacity:1!important;
 <p class="sub">Chaque indice ouvre une enquête. Chaque enquête appelle de nouvelles sources.</p>
 <p class="parisis-hero-note">Un espace de lecture, d'archives et de contre-enquêtes pour suivre tes recherches sans perdre leur histoire.</p></div>
 <span id="parisisActionsAnchor" hidden></span>
-<div class="top-actions"><a class="button-light pe-grand-book" href="#peHomeGuide">Reprendre mon enquête ↓</a><a class="button-light" href="parisis-fil-enquetes.html">Explorer les enquêtes ↗</a></div>
+<div class="top-actions"><a class="button-light pe-grand-book" href="#peHomeGuide">Reprendre mon enquête ↓</a><a class="button-light" href="parisis-fil-enquetes.html">Explorer les enquêtes ↗</a><a class="button-light" href="parisis-scanner-sens.html">Scanner le sens ↗</a></div>
 <figure class="parisis-hero-art"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Plan_de_Turgot_detail.jpg/960px-Plan_de_Turgot_detail.jpg" alt="Détail du plan de Paris dit plan de Turgot, Louis Bretez, 1739" width="1100" height="980" loading="eager"><figcaption>PARIS · PLAN DE TURGOT, 1739 · <a href="https://commons.wikimedia.org/wiki/File:Plan%20de%20Turgot%20detail.jpg" target="_blank" rel="noopener noreferrer">Wikimedia Commons, source ↗</a></figcaption></figure>
 </header>
+<section class="pe-sens-feature" id="parisis-scanner-le-sens" aria-labelledby="parisis-sens-heading">
+<div class="pe-sens-eyebrow">PARISIS ENGINE / HUMANITIES LAB · NOUVEAU CHANTIER</div>
+<h2 id="parisis-sens-heading">Scanner <em>le sens.</em></h2>
+<p class="pe-sens-lead">Lire ce qui n’a pas été lu.</p>
+<p class="pe-sens-intro">Ce site ouvre un chantier : relire les textes fondateurs avec les outils de l’ingénieur et le regard de l’anthropologue. Racines, structures, mesures. Ce qui en sort change <strong>le regard sur</strong> le monde.</p>
+<div class="pe-sens-steps">
+<div class="pe-sens-step"><span>01 / LECTURE</span><h3>Scanner</h3><p>Racines, concepts, récurrences.</p></div>
+<div class="pe-sens-step"><span>02 / INTERPRÉTATION</span><h3>Modéliser</h3><p>Anthropologie du changement.</p></div>
+<div class="pe-sens-step"><span>03 / CONTRÔLE</span><h3>Mesurer</h3><p>Indices, corpus, graphes.</p></div>
+<div class="pe-sens-step"><span>04 / TERRAIN</span><h3>Appliquer</h3><p>Ingénierie territoriale.</p></div>
+</div>
+<a class="pe-sens-cta" href="parisis-scanner-sens.html">Ouvrir Scanner le sens · atelier de recherche ↗</a>
+<p class="pe-sens-note">Analyse locale de corpus, modèles à documenter et dossiers exportables. Aucun résultat n’est présenté comme une preuve automatique.</p>
+</section>
 <section class="pe-home-guide" id="peHomeGuide" aria-labelledby="peHomeHeading">
 <div class="pe-guide-header">
 <div class="pe-guide-intro"><div class="pe-kicker">PARISIS ENGINE · TON FIL DE RECHERCHE</div>
