@@ -153,9 +153,14 @@ Deno.serve(async req=>{
  const cutoff=new Date(Date.now()-3600000).toISOString();
  const {count, error:rateError}=await db.from(TABLE).select("id",{count:"exact",head:true}).gte("created_at",cutoff);
  if(!rateError&&(count||0)>=12)return json(req,{error:"Limite de 12 enquêtes par heure atteinte. Réessaie plus tard."},429);
+ const stop=new Set("pour dans avec alors comme sont mais cette celui cela elle elles nous vous leur lequel quelles quelle quoi comment entre depuis signifie pourquoi sans leur cette".split(" "));
+ const frenchTokens=question.split(/[^\p{L}]+/u).filter(w=>w.length>3&&!stop.has(norm(w))).slice(0,6);
+ const queryFR=frenchTokens.join(" ")||question;
+ const arabic=(corpus+" "+question).match(/[\u0600-\u06ff]{3,}/g)||[];
+ const queryAR=arabic.slice(0,5).join(" ")||question;
  const requests=[
- {catalogue:"Wikisource FR",request:mediawiki("fr.wikisource.org",question,4)},
- {catalogue:"Wikisource AR",request:mediawiki("ar.wikisource.org",question,4)},
+ {catalogue:"Wikisource FR",request:mediawiki("fr.wikisource.org",queryFR,4)},
+ {catalogue:"Wikisource AR",request:mediawiki("ar.wikisource.org",queryAR,4)},
  {catalogue:"Crossref",request:crossref(question)},
  {catalogue:"Coran",request:quranVerse(reference)}
  ];
