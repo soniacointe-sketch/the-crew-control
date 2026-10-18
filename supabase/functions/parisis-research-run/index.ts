@@ -3,7 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.116.0";
 
 const FOUNDER = "bd4b7197-6401-4a9a-a14e-c6adbdc0ed46";
 const SUPABASE = Deno.env.get("SUPABASE_URL") || "https://voytsqyorhoveurnguxn.supabase.co";
-const KEY = Deno.env.get("SUPABASE_ANON_KEY") || Deno.env.get("SUPABASE_PUBLISHABLE_KEY") || "";
+const KEY = Deno.env.get("SUPABASE_ANON_KEY") || Deno.env.get("SUPABASE_PUBLISHABLE_KEY") || (()=>{try{return JSON.parse(Deno.env.get("SUPABASE_PUBLISHABLE_KEYS")||"{}").default||"";}catch{return "";}})();
 const TABLE = "parisis_research_dossiers";
 const ORIGINS = new Set(["https://soniacointe-sketch.github.io","https://eloah-sonia-os.soniacointe.chatgpt.site"]);
 const MAX_SOURCES = 15;
@@ -67,7 +67,7 @@ async function quranVerse(ref){
  out.push(source("baghawi-"+ref,"commentaire","Al-Baghawî · commentaire de "+ref,"https://quran.ksu.edu.sa/tafseer/baghawy/sura"+chapter+"-aya"+verse+".html","","lien_a_verifier","Commentaire ciblé, non lu automatiquement"));
  return out;
 }
-function qimi(sourceText,sources,question){
+function qimi(sourceText,sources,question,providedByUser){
  const ws=words(sourceText),segments=sourceText.split(/[.!?؟。]+|\n{2,}/).map(x=>x.trim()).filter(Boolean);
  const freq=new Map();for(const w of ws){if(w.length>=3)freq.set(w,(freq.get(w)||0)+1);}
  const top=[...freq].filter(x=>x[1]>1).sort((a,b)=>b[1]-a[1]).slice(0,9).map(x=>({forme:x[0],nombre:x[1],ratio:ws.length?Number((x[1]/ws.length).toFixed(4)):null}));
@@ -79,7 +79,7 @@ function qimi(sourceText,sources,question){
   structure:{segments:segments.length,note:"Segmentation heuristique : ponctuation, pas analyse littéraire."},
   forme:{mots:ws.length,formes_distinctes:new Set(ws).size,repetitions:top},
   rythme:{repetitions_de_formes:top.length,note:"Rythme réduit aux reprises lexicales observées ; prosodie non calculée."},
-  trace_semantique:sourceText?{extrait:plain(sourceText,260),source_id:refSource?.id||null,statut:refSource?"source extraite à vérifier": "texte fourni, sans vérification indépendante"}:null,
+  trace_semantique:sourceText?{extrait:plain(sourceText,260),source_id:providedByUser?null:refSource?.id||null,statut:providedByUser?"texte saisi : édition externe non vérifiée":refSource?"source extraite à vérifier":"texte sans vérification indépendante"}:null,
   diagnostic:sourceText?"Comptages descriptifs ; ne jamais en déduire à eux seuls une filiation ou une intention.":"Analyse QIMI limitée : ajouter un texte et une édition contrôlable.",
   validation_scientifique:false
  };
@@ -145,6 +145,7 @@ Deno.serve(async req=>{
  if(authError||!user||user.is_anonymous)return json(req,{error:"Session invalide"},401);
  if(user.id!==FOUNDER)return json(req,{error:"Réservé à la fondatrice"},403);
  let body;try{body=await req.json();}catch{return json(req,{error:"JSON non valide"},400);}
+ if(body?.mode==="health")return json(req,{ok:true,authenticated:true,groq_configured:!!Deno.env.get("GROQ_API_KEY"),archives:"privees",methode:"QIMI-7"});
  const question=String(body?.question||"").trim().slice(0,700);
  const corpus=String(body?.corpus||"").trim().slice(0,12000);
  const reference=String(body?.reference||"").trim().slice(0,160);
@@ -162,7 +163,7 @@ Deno.serve(async req=>{
  outcomes.forEach((r,i)=>{if(r.status==="fulfilled"){log.push({catalogue:requests[i].catalogue,ok:true,n:r.value.length});found.push(...r.value);}
  else{log.push({catalogue:requests[i].catalogue,ok:false,motif:String(r.reason?.name||"réseau")});}});
  const sources=unique(found).slice(0,MAX_SOURCES),sample=corpus||sources.find(s=>s.inspection==="passage_consulte"||s.inspection==="extrait_brut_consulte")?.excerpt||"";
- const qimiResult=qimi(sample,sources,question);
+ const qimiResult=qimi(sample,sources,question,!!corpus);
  const ai=await groq(question,sources,qimiResult);
  const analysis=ai.result||fallback(question,sources,qimiResult,log);
  const status=ai.result?"analyse_ia":sources.length?"documentaire":"incomplet";
