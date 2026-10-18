@@ -113,7 +113,7 @@ var ids=["dossier","source","corpus","concepts","racines","contexte","acteurs","
 var storageKey="parisis-scanner-sens-v1", lastAnalysis=null;
 var el=function(id){return document.getElementById(id);};
 var stop=new Set(("le la les de des du un une et ou a à au aux en dans sur sous par pour que qui qu ce ces cette cet est sont était être ont avec sans il elle ils elles nous vous je tu ne pas plus se ses son sa leurs leur notre votre mais comme tout tous toute très entre même donc dont dès lui y d l s n c j").split(" "));
-function norm(str){return (str||"").toLocaleLowerCase("fr").normalize("NFD").replace(/[\u0300-\u036f]/g,"").replace(/œ/g,"oe").replace(/æ/g,"ae");}
+function norm(str){return (str||"").toLocaleLowerCase("fr").normalize("NFD").replace(/\p{M}/gu,"").replace(/œ/g,"oe").replace(/æ/g,"ae");}
 function tokens(s){return norm(s).match(/\p{L}+/gu)||[];}
 function terms(s){return [...new Set((s||"").split(/[,;\n]+/).map(function(x){return norm(x.trim());}).filter(Boolean))].slice(0,20);}
 function segments(text){return (text||"").split(/(?:[.!?。؟]+[\s\n]+|\n{2,})/u).map(function(x){return norm(x.trim());}).filter(Boolean);}
