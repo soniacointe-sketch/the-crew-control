@@ -12,6 +12,25 @@
 @media(max-width:920px){.steps{grid-template-columns:repeat(2,minmax(0,1fr))}.work-grid{grid-template-columns:1fr}.topbar-inner{align-items:flex-start;flex-direction:column;gap:10px}}
 @media(max-width:600px){.wrap,.topbar-inner{width:calc(100% - 28px)}.steps{grid-template-columns:1fr}.row-two,.results-grid,.metric-grid{grid-template-columns:1fr}.topnav{gap:5px}.topnav a{font-size:12px;padding:7px}.hero{padding-top:39px}.panel{padding:18px}.work{margin-top:27px}.actions>*{flex:1 1 auto}}
 @media print{.topbar,.actions,.hero-actions,.footer,.steps a{display:none!important}.hero{background:white;color:black;padding:10px 0}.hero h1,.hero .tagline,.hero .intro{color:black}.panel{break-inside:avoid}}
+
+/* QIMI-7 · grille méthodologique, dans l'identité PARISIS */
+.qimi-focus{margin:30px 0 18px;border:1px solid #af8e5c;border-left:5px solid #af8e5c;background:#182c25;color:#fff5e6;padding:clamp(24px,3vw,39px)}
+.qimi-focus .eyebrow{color:#ebc992}
+.qimi-focus h2{color:#fff7e8;margin:8px 0 3px;font-size:clamp(35px,5vw,58px)}
+.qimi-focus h2 em{font-style:normal;color:#f1cc8d}
+.qimi-focus .subtitle{color:#ebc98f;font:clamp(19px,2.5vw,28px)/1.35 Georgia,serif;margin:6px 0 23px}
+.qimi-focus p{color:#f3ebdd;max-width:960px;font-size:15px}
+.qimi-principles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:25px 0}
+.qimi-principles article{background:#ffffff0d;border:1px solid #647366;padding:17px;min-width:0}
+.qimi-principles strong{display:block;color:#edce9a;font:22px Georgia,serif;margin-bottom:7px}
+.qimi-principles span{color:#f4ece1;font-size:13px;line-height:1.6}
+.qimi-focus .qimi-count{color:#f3d29b;font-weight:650}
+.qimi-focus .qimi-source-note{font-size:12px;color:#d2c8b5}
+.qimi-link{display:inline-block;margin-top:12px;padding:11px 18px;background:#f0d29c;border:1px solid #d6b981;color:#222d24;text-decoration:none;font-weight:750;font-size:13px}
+.qimi-status{border-left:3px solid #aa8350;background:#f1e3cc;color:#2b3329;padding:11px 13px;font-size:13px;margin:15px 0}
+.qimi-trace-check{margin-top:11px;color:#544a3a;font-size:12px}
+.qimi-focus a:focus-visible,.qimi-link:focus-visible{outline:3px solid #f0d29c;outline-offset:4px}
+@media(max-width:640px){.qimi-principles{grid-template-columns:1fr}.qimi-focus{margin:16px 0}.qimi-principles article{padding:14px}}
 </style>
 </head>
 <body>
@@ -24,6 +43,22 @@
 <article class="step"><div class="n">03 / CONTRÔLE</div><h2>Mesurer</h2><p>Indices, corpus, graphes.</p><a href="#mesurer">Voir les mesures ↓</a></article>
 <article class="step"><div class="n">04 / TERRAIN</div><h2>Appliquer</h2><p>Ingénierie territoriale.</p><a href="#appliquer">Créer une fiche terrain ↓</a></article>
 </section>
+<section class="qimi-focus" id="qimi-7" aria-labelledby="qimi-title">
+<div class="eyebrow">Focus : Méthode</div>
+<h2 id="qimi-title"><em>QIMI-7</em></h2>
+<p class="subtitle">Le noyau d’intelligence du sens</p>
+<p>Scan du sens appliqué aux langues, aux corpus, aux territoires et aux systèmes d’échange.</p>
+<div class="qimi-principles" aria-label="Articulation méthodologique">
+<article><strong>Structure</strong><span>Identifier l’architecture des éléments, leurs niveaux, leurs articulations et leurs dépendances.</span></article>
+<article><strong>Forme</strong><span>Observer les formes linguistiques, les variations et les choix d’expression en contexte.</span></article>
+<article><strong>Rythme</strong><span>Décrire les reprises, les alternances, les séquences et les ruptures observables.</span></article>
+</div>
+<p>Articulation <strong>structure / forme / rythme</strong> pour éviter les lectures plates ou purement décoratives.</p>
+<p>Les quantités, ratios et facteurs ne valent qu’adossés à une <strong>trace sémantique active et vérifiable</strong>.</p>
+<p class="qimi-count">Méthodologie déployée sur 120+ pages dans l’écosystème QIMI-7 / ITRIIA.</p>
+<p class="qimi-source-note">Volume indiqué dans la présentation de la méthode. Les 120+ pages ne sont pas encore reliées à cet atelier : elles ne sont ni importées ni vérifiées automatiquement.</p>
+<a class="qimi-link" href="#qimi-grille">Remplir la grille QIMI-7 ↓</a>
+</section>
 <section class="work" id="atelier" aria-labelledby="atelier-titre"><header class="section-title"><div class="eyebrow">ATELIER / DOSSIER DE TRAVAIL</div><h2 id="atelier-titre">De la lecture à l’action.</h2><p>Charge un passage et formule ta question. Les décomptes sont calculés dans ton navigateur ; les interprétations anthropologiques et les décisions de terrain restent sous ton contrôle.</p></header>
 <div class="work-grid">
 <div>
@@ -31,6 +66,24 @@
 <section class="panel" id="mesurer" aria-labelledby="mesurer-title"><div class="eyebrow">03 / MESURER</div><h2 id="mesurer-title">Indices, corpus, graphes</h2><div class="metric-grid" aria-label="Mesures quantitatives"><div class="metric"><strong id="nMots">0</strong><span>Mots du corpus</span></div><div class="metric"><strong id="nDistincts">0</strong><span>Formes distinctes</span></div><div class="metric"><strong id="nSegments">0</strong><span>Segments étudiés</span></div></div><div class="results-grid"><div class="mini-panel"><h3>Récurrences lexicales</h3><div id="frequences"><p class="empty">Lance une analyse.</p></div></div><div class="mini-panel"><h3>Concepts & familles</h3><div id="conceptResults"><p class="empty">Ajoute les concepts à suivre.</p></div></div></div><div class="mini-panel" style="margin-top:14px"><h3>Graphe de cooccurrence</h3><p class="hint">Deux concepts sont liés lorsqu’ils apparaissent dans un même segment (phrase ou paragraphe selon la ponctuation). Une cooccurrence ne prouve pas une relation de sens ou une filiation.</p><svg id="graphe" class="graph" viewBox="0 0 480 280" role="img" aria-label="Graphe des concepts du texte"><text x="22" y="45">Le graphe apparaîtra après l’analyse.</text></svg><p class="hint" id="graphCaption">Les éléments représentés seront ceux que tu auras choisis.</p></div></section>
 </div>
 <div>
+<section class="panel" id="qimi-grille" aria-labelledby="qimi-grille-title">
+<div class="eyebrow">FOCUS : MÉTHODE / QIMI-7</div><h2 id="qimi-grille-title">Structure · Forme · Rythme</h2>
+<p class="hint">Associe les mesures du scanner à ce qui est effectivement observable dans la source. Les textes saisis restent des propositions tant qu’ils ne sont pas recoupés.</p>
+<label class="field" for="qimiStructure">Structure — organisation des éléments</label>
+<textarea id="qimiStructure" rows="2" placeholder="Organisation, niveaux, séquences, relations : où les observes-tu ?"></textarea>
+<label class="field" for="qimiForme">Forme — expression et variantes</label>
+<textarea id="qimiForme" rows="2" placeholder="Choix de mots, figures, traductions et variations : quelles formes précises ?"></textarea>
+<label class="field" for="qimiRythme">Rythme — répétitions et ruptures</label>
+<textarea id="qimiRythme" rows="2" placeholder="Reprises, silences, alternances, changements de fréquence : quelle trace ?"></textarea>
+<label class="field" for="qimiTrace">Trace sémantique active et vérifiable</label>
+<textarea id="qimiTrace" rows="3" placeholder="Citation courte, passage ou observation exacte, avec lien à l’idée testée."></textarea>
+<label class="field" for="qimiReference">Référence précise / piste de vérification</label>
+<input id="qimiReference" type="text" maxlength="600" placeholder="Édition, cote, folio, page, ligne, référence locale ou URL">
+<div id="qimiStatus" class="qimi-status" role="status" aria-live="polite">Mesures descriptives : aucune trace documentée dans la grille.</div>
+<div class="actions"><button id="qimiSynthese" type="button">Construire la fiche QIMI-7</button></div>
+<div id="qimiResult" class="model-result" aria-live="polite">La fiche rassemble tes observations ; elle ne valide pas automatiquement leur origine ni leur interprétation.</div>
+<p class="qimi-trace-check">Contrôle : présence d’une trace et d’une référence ≠ vérification indépendante de leur exactitude.</p>
+</section>
 <section class="panel" id="modeliser" aria-labelledby="modeliser-title"><div class="eyebrow">02 / MODÉLISER</div><h2 id="modeliser-title">Anthropologie du changement</h2><p class="hint">Un modèle explicite, révisable et séparé des mesures. Renseigne les acteurs, les pratiques et les transformations observées ou supposées.</p><label class="field" for="contexte">Situation initiale / contexte</label><textarea id="contexte" rows="2" placeholder="Quel contexte social, historique ou institutionnel ?"></textarea><label class="field" for="acteurs">Acteurs, groupes et institutions</label><textarea id="acteurs" rows="2" placeholder="Qui porte ou subit le changement ?"></textarea><label class="field" for="rupture">Tension, rupture ou déplacement de sens</label><textarea id="rupture" rows="2" placeholder="Que se transforme-t-il ?"></textarea><label class="field" for="pratiques">Pratiques, normes et transmissions</label><textarea id="pratiques" rows="2" placeholder="Quels usages changent, persistent ou résistent ?"></textarea><label class="field" for="objections">Objections / autres interprétations</label><textarea id="objections" rows="2" placeholder="Quels contre-exemples pourraient invalider la lecture ?"></textarea><div class="actions"><button id="synthese" type="button">Construire la synthèse</button></div><div id="modelResult" class="model-result" aria-live="polite">La synthèse structurera uniquement les éléments renseignés. Elle ne formulera aucune conclusion automatique sur l’histoire.</div></section>
 <section class="panel" id="appliquer" aria-labelledby="appliquer-title"><div class="eyebrow">04 / APPLIQUER</div><h2 id="appliquer-title">Ingénierie territoriale</h2><p class="hint">Passer d’une hypothèse d’analyse à un projet local testable. La fiche ne constitue pas une validation de faisabilité ni de politique publique.</p><label class="field" for="territoire">Territoire / population concernés</label><input id="territoire" type="text" maxlength="230" placeholder="Lieu, échelle, groupe"><label class="field" for="besoin">Constat documenté / besoin</label><textarea id="besoin" rows="2" placeholder="Quelles données locales ou observations fondent l’action ?"></textarea><label class="field" for="action">Action envisagée</label><textarea id="action" rows="2" placeholder="Quel dispositif concret ?"></textarea><label class="field" for="indicateur">Indicateur de suivi</label><input id="indicateur" type="text" maxlength="280" placeholder="Ex. : évolution mesurable avant / après"><label class="field" for="conditions">Partenaires, moyens et risques</label><textarea id="conditions" rows="2" placeholder="Qui, avec quoi, sous quelles conditions ?"></textarea><div class="actions"><button id="fiche" type="button">Préparer la fiche terrain</button></div><div id="fieldResult" class="model-result" aria-live="polite">Renseigne les champs pour construire une fiche de projet vérifiable.</div></section>
 <section class="panel dark" aria-labelledby="conserver-title"><div class="eyebrow" style="color:#ebc990">ARCHIVER / EXPORTER</div><h2 id="conserver-title" style="color:#fff4e8">Conserver l’enquête</h2><p>Le dossier est sauvegardé localement dans ce navigateur, sans envoi automatique à ELOAH, GitHub ou à un service externe. Exporte-le pour le conserver ailleurs.</p><div class="actions"><button id="exportJson" type="button">Exporter JSON</button><button id="exportMd" type="button">Exporter Markdown</button><button id="importBtn" class="plain" type="button">Importer un JSON</button><input type="file" accept=".json,application/json" id="importJson" class="sr-only" aria-label="Importer un dossier JSON"></div><div class="save-flag" id="saveStatus" role="status" aria-live="polite">Sauvegarde sur cet appareil uniquement.</div></section>
@@ -40,7 +93,7 @@
 <script>
 (function(){
 "use strict";
-var ids=["dossier","source","corpus","concepts","racines","contexte","acteurs","rupture","pratiques","objections","territoire","besoin","action","indicateur","conditions"];
+var ids=["dossier","source","corpus","concepts","racines","contexte","acteurs","rupture","pratiques","objections","territoire","besoin","action","indicateur","conditions","qimiStructure","qimiForme","qimiRythme","qimiTrace","qimiReference"];
 var storageKey="parisis-scanner-sens-v1", lastAnalysis=null;
 var el=function(id){return document.getElementById(id);};
 var stop=new Set(("le la les de des du un une et ou a à au aux en dans sur sous par pour que qui qu ce ces cette cet est sont était être ont avec sans il elle ils elles nous vous je tu ne pas plus se ses son sa leurs leur notre votre mais comme tout tous toute très entre même donc dont dès lui y d l s n c j").split(" "));
@@ -51,8 +104,20 @@ function segments(text){return (text||"").split(/(?:[.!?。؟]+[\s\n]+|\n{2,})/u
 function occurrences(txt,term){if(!term)return 0;var words=tokens(txt);var t=tokens(term);if(!t.length)return 0;var n=0;for(var i=0;i<=words.length-t.length;i++){if(t.every(function(w,k){return w===words[i+k];}))n++;}return n;}
 function getData(){var fields={};ids.forEach(function(id){fields[id]=el(id).value;});return {version:1,application:"PARISIS ENGINE / Scanner le sens",date:new Date().toISOString(),fields:fields};}
 function setData(fields){ids.forEach(function(id){el(id).value=typeof fields[id]==="string"?fields[id].slice(0,200000):"";});}
+
+function qimiState(){var hasTrace=!!el("qimiTrace").value.trim(),hasReference=!!el("qimiReference").value.trim(),status=el("qimiStatus");
+if(hasTrace&&hasReference){status.textContent="Trace et référence renseignées : vérification critique à effectuer sur la source. Les mesures ne constituent pas une preuve en elles-mêmes.";}
+else if(hasTrace){status.textContent="Trace déclarée, mais référence absente : complète l’édition, le passage, la cote ou le lien pour permettre le contrôle.";}
+else if(hasReference){status.textContent="Référence saisie, mais trace sémantique non formulée : les quantités demeurent descriptives.";}
+else{status.textContent="Mesures descriptives : aucune trace documentée dans la grille.";}
+return hasTrace&&hasReference;
+}
+function qimiSummary(){var fields=[["Structure","qimiStructure"],["Forme","qimiForme"],["Rythme","qimiRythme"],["Trace sémantique","qimiTrace"],["Référence vérifiable","qimiReference"]];
+var result="QIMI-7 · FICHE MÉTHODOLOGIQUE\n\n"+fields.map(function(x){return x[0]+" : "+(el(x[1]).value.trim()||"À documenter");}).join("\n\n");
+result+="\n\nÉtat : "+(qimiState()?"trace et référence renseignées ; contrôle externe encore requis.":"preuve sémantique incomplète ; mesures descriptives uniquement.");
+el("qimiResult").textContent=result;save();return result;}
 function save(){try{localStorage.setItem(storageKey,JSON.stringify(getData()));el("saveStatus").textContent="Dossier sauvegardé sur cet appareil."; }catch(e){el("saveStatus").textContent="Stockage local indisponible : pense à exporter ton dossier.";}}
-var saveTimer;ids.forEach(function(id){el(id).addEventListener("input",function(){lastAnalysis=null;el("status").textContent="Texte modifié : relance l’analyse pour mettre à jour les mesures.";clearTimeout(saveTimer);saveTimer=setTimeout(save,250);});});
+var saveTimer;ids.forEach(function(id){el(id).addEventListener("input",function(){lastAnalysis=null;el("status").textContent="Texte modifié : relance l’analyse pour mettre à jour les mesures.";qimiState();clearTimeout(saveTimer);saveTimer=setTimeout(save,250);});});
 function node(tag,text,parent){var n=document.createElement(tag);if(text!==undefined)n.textContent=text;parent.appendChild(n);return n;}
 function empty(id){el(id).replaceChildren();}
 function countMap(words){var map=new Map;words.forEach(function(w){if(w.length>2&&!stop.has(w))map.set(w,(map.get(w)||0)+1);});return [...map].sort(function(a,b){return b[1]-a[1]||a[0].localeCompare(b[0]);});}
@@ -73,21 +138,22 @@ concepts.forEach(function(c){var li=node("li",undefined,list);node("span",c,li);
 racines.forEach(function(r){var samples=[...new Set(words.filter(function(w){return w.startsWith(r);} ))];var li=node("li",undefined,list);node("span","↳ "+r+"… ("+samples.slice(0,5).join(", ")+(samples.length>5?"…":"")+")",li);node("strong",String(words.filter(function(w){return w.startsWith(r);}).length),li);});
 if(!concepts.length&&!racines.length)node("p","Indique des concepts ou familles lexicales pour les suivre.",el("conceptResults")).className="empty";
 graph(concepts,parts);lastAnalysis={mots:words.length,formes:unique.size,segments:parts.length,frequences:entries.slice(0,25),concepts:concepts.map(function(c){return {terme:c,occurrences:occurrences(content,c)};}),familles:racines.map(function(r){return {prefixe:r,occurrences:words.filter(function(w){return w.startsWith(r);}).length};})};
-el("status").textContent="Analyse locale terminée · comptages reproductibles sur le texte saisi, sans inférence historique automatisée.";save();
+el("status").textContent="Analyse locale terminée · comptages descriptifs reproductibles, sans inférence historique automatique. Trace QIMI-7 à contrôler.";qimiState();save();
 }
 function summary(){var fields=[["Situation initiale", "contexte"],["Acteurs et groupes","acteurs"],["Tension ou rupture","rupture"],["Pratiques et transmissions","pratiques"],["Objections et alternatives","objections"]];var t="MODÈLE DE CHANGEMENT · HYPOTHÈSE DE TRAVAIL\n\n"+fields.map(function(x){return x[0]+" : "+(el(x[1]).value.trim()||"À documenter");}).join("\n\n")+"\n\nVérification : relier chaque proposition à des passages datés, des sources et des contre-exemples.";el("modelResult").textContent=t;save();return t;}
 function fieldSheet(){var fields=[["Territoire et population","territoire"],["Constat à documenter","besoin"],["Action proposée","action"],["Indicateur de suivi","indicateur"],["Partenaires, ressources, risques","conditions"]];var t="FICHE D’APPLICATION TERRITORIALE · PROPOSITION\n\n"+fields.map(function(x){return x[0]+" : "+(el(x[1]).value.trim()||"À préciser");}).join("\n\n")+"\n\nProchaine étape : diagnostic local, concertation des parties prenantes, faisabilité et évaluation.";el("fieldResult").textContent=t;save();return t;}
-function markdown(){var d=getData(),f=d.fields;var lines=["# "+(f.dossier.trim()||"PARISIS ENGINE · Scanner le sens"),"","## Source","",f.source||"Source non renseignée","","## Texte étudié","",f.corpus||"Aucun texte renseigné","","## Méthode","", "Scanner : "+(f.concepts||"Concepts non renseignés"),"Familles graphiques : "+(f.racines||"Familles non renseignées"),"","## Mesures du corpus",""];if(lastAnalysis){lines.push("Mots : "+lastAnalysis.mots+" · Formes distinctes : "+lastAnalysis.formes+" · Segments : "+lastAnalysis.segments);lastAnalysis.concepts.forEach(function(c){lines.push("- "+c.terme+" : "+c.occurrences+" occurrence(s)");});lines.push("Fréquences : "+lastAnalysis.frequences.map(function(x){return x.join(" (")+")";}).join(", "));}else{lines.push("Mesures non recalculées dans cette session. Lancer Analyser le texte.");}lines.push("","## Modéliser","",summary(),"","## Appliquer","",fieldSheet(),"","## Précautions","", "Les comptages sont automatiques ; les propositions d'interprétation et d'application demandent une vérification documentaire et une décision humaine.");return lines.join("\n");}
+function markdown(){var d=getData(),f=d.fields;var lines=["# "+(f.dossier.trim()||"PARISIS ENGINE · Scanner le sens"),"","## Source","",f.source||"Source non renseignée","","## Texte étudié","",f.corpus||"Aucun texte renseigné","","## Méthode","", "Scanner : "+(f.concepts||"Concepts non renseignés"),"Familles graphiques : "+(f.racines||"Familles non renseignées"),"","## Mesures du corpus",""];if(lastAnalysis){lines.push("Mots : "+lastAnalysis.mots+" · Formes distinctes : "+lastAnalysis.formes+" · Segments : "+lastAnalysis.segments);lastAnalysis.concepts.forEach(function(c){lines.push("- "+c.terme+" : "+c.occurrences+" occurrence(s)");});lines.push("Fréquences : "+lastAnalysis.frequences.map(function(x){return x.join(" (")+")";}).join(", "));}else{lines.push("Mesures non recalculées dans cette session. Lancer Analyser le texte.");}lines.push("","## QIMI-7 · méthode","",qimiSummary(),"","## Modéliser","",summary(),"","## Appliquer","",fieldSheet(),"","## Précautions","", "Les comptages sont automatiques ; les propositions d'interprétation et d'application demandent une vérification documentaire et une décision humaine.");return lines.join("\n");}
 function download(text,name,type){var a=document.createElement("a"),url=URL.createObjectURL(new Blob([text],{type:type}));a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);}
 function fileName(ext){var s=norm(el("dossier").value).replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,45)||"scanner-le-sens";return "parisis-"+s+"."+ext;}
+el("qimiSynthese").addEventListener("click",qimiSummary);
 el("analyse").addEventListener("click",analyse);el("synthese").addEventListener("click",summary);el("fiche").addEventListener("click",fieldSheet);
 el("demo").addEventListener("click",function(){el("dossier").value="Démonstration · Ville et transmission";el("source").value="Texte fictif original, créé pour démontrer le fonctionnement — aucune source historique";el("corpus").value="Dans la ville, les habitants se transmettent des récits sur les portes et les chemins. La ville change, mais les récits demeurent. Certains gardent la mémoire des chemins anciens ; d’autres ouvrent de nouveaux passages. Le changement de la ville transforme les pratiques, sans effacer toutes les traditions.";el("concepts").value="ville, récits, chemins, changement, pratiques";el("racines").value="chang, trans, chemin";save();analyse();});
 el("vider").addEventListener("click",function(){el("corpus").value="";el("concepts").value="";el("racines").value="";lastAnalysis=null;["nMots","nDistincts","nSegments"].forEach(function(id){el(id).textContent="0";});empty("frequences");empty("conceptResults");node("p","Ajoute un corpus et relance l’analyse.",el("frequences")).className="empty";graph([],[]);el("status").textContent="Corpus vidé. Le reste du dossier est conservé.";save();});
 el("exportJson").addEventListener("click",function(){download(JSON.stringify(getData(),null,2),fileName("json"),"application/json;charset=utf-8");});
 el("exportMd").addEventListener("click",function(){download(markdown(),fileName("md"),"text/markdown;charset=utf-8");});
 el("importBtn").addEventListener("click",function(){el("importJson").click();});
-el("importJson").addEventListener("change",function(){var file=this.files&&this.files[0];if(!file)return;if(file.size>1500000){el("saveStatus").textContent="Fichier trop volumineux (maximum 1,5 Mo).";this.value="";return;}var reader=new FileReader;reader.onload=function(){try{var d=JSON.parse(String(reader.result));if(d.version!==1||d.application!=="PARISIS ENGINE / Scanner le sens"||!d.fields||typeof d.fields!=="object")throw Error("Format incompatible");setData(d.fields);lastAnalysis=null;analyse();summary();fieldSheet();el("saveStatus").textContent="Dossier importé sur cet appareil."; }catch(e){el("saveStatus").textContent="Import impossible : "+e.message;}};reader.readAsText(file);this.value="";});
-try{var raw=localStorage.getItem(storageKey);if(raw){var d=JSON.parse(raw);if(d&&d.version===1&&d.fields){setData(d.fields);el("saveStatus").textContent="Brouillon local restauré.";if(el("corpus").value.trim())analyse();}}}catch(e){el("saveStatus").textContent="Stockage local indisponible ; l’export reste accessible.";}
+el("importJson").addEventListener("change",function(){var file=this.files&&this.files[0];if(!file)return;if(file.size>1500000){el("saveStatus").textContent="Fichier trop volumineux (maximum 1,5 Mo).";this.value="";return;}var reader=new FileReader;reader.onload=function(){try{var d=JSON.parse(String(reader.result));if(d.version!==1||d.application!=="PARISIS ENGINE / Scanner le sens"||!d.fields||typeof d.fields!=="object")throw Error("Format incompatible");setData(d.fields);lastAnalysis=null;analyse();qimiSummary();summary();fieldSheet();el("saveStatus").textContent="Dossier importé sur cet appareil."; }catch(e){el("saveStatus").textContent="Import impossible : "+e.message;}};reader.readAsText(file);this.value="";});
+try{var raw=localStorage.getItem(storageKey);if(raw){var d=JSON.parse(raw);if(d&&d.version===1&&d.fields){setData(d.fields);el("saveStatus").textContent="Brouillon local restauré.";if(el("corpus").value.trim())analyse();qimiState();}}}catch(e){el("saveStatus").textContent="Stockage local indisponible ; l’export reste accessible.";}
 })();
 </script>
 </body></html>
