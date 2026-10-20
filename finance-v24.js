@@ -47,7 +47,7 @@ async function pull(){
    for(const k of ["entries","bank","budget","grants"])state[k]=x[k]||[];
    state.settings=x.settings||null;
  }else errors.push("Saisies financières : "+settled[0].reason.message);
- if(settled[1].status==="fulfilled")state.payments=Array.isArray(settled[1].value)?settled[1].value:[];
+ if(settled[1].status==="fulfilled"){const audit=settled[1].value;state.payments=Array.isArray(audit)?audit:(Array.isArray(audit?.rows)?audit.rows:[]);}
  else errors.push("HelloAsso : "+settled[1].reason.message);
  if(settled[2].status==="fulfilled")state.members=Array.isArray(settled[2].value)?settled[2].value:[];
  else errors.push("Cotisations : "+settled[2].reason.message);
