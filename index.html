@@ -247,6 +247,7 @@ async function privateDetail(v){
  const r=await fetch(DETAIL+"?view="+encodeURIComponent(v),{cache:"no-store",headers:{"Authorization":"Bearer "+session.access_token}});
  const d=await r.json();
  if(!r.ok) throw new Error(d.error||"Erreur");
+ if(v==="payments_audit"&&!Array.isArray(d))return Array.isArray(d.rows)?d.rows:[];
  return d;
 }
 function fdate(v){if(!v)return "—";const d=new Date(String(v).length===10?String(v)+"T12:00:00Z":v);return Number.isNaN(d.getTime())?txt(v):d.toLocaleDateString("fr-FR")}
