@@ -675,6 +675,7 @@ const workshops=[
 {title:'DANCE PARTY LATINO',date:'17 octobre 2026',hours:'18h30–20h30',audience:'Ados & adultes',price:'8 €',image:'https://thecreworchies.blog/wp-content/uploads/2026/10/Soiree-latino-noire-et-doree1.png',url:'https://www.helloasso.com/associations/the-crew-orchies/evenements/dance-party-latino-the-crew-orchies'},
 {title:'FLASHBACK PARTY · ANNÉES 80',date:'24 octobre 2026',hours:'18h30–20h30',audience:'Dès 12 ans',price:'8 €',image:'https://thecreworchies.blog/wp-content/uploads/2026/10/Soiree-Flashback-Annees-80-en-Or-et-Noir1.png',url:'https://www.helloasso.com/associations/the-crew-orchies/evenements/flashback-party-annees-80-the-crew-orchies'}];
 function openWorkshops(){
+if(window.crewControlHub){window.crewControlHub.open("events");return;}
 drawer.style.display='block';title.textContent='ATELIERS & ÉVÉNEMENTS';
 body.innerHTML='<p class="muted">Les mêmes affiches que sur ton site The Crew Orchies. Les réservations restent gérées par HelloAsso.</p><div class="crew-workshops">'+
 workshops.map(w=>'<article class="crew-workshop"><img src="'+w.image+'" alt="Affiche '+w.title+'" loading="lazy"><div class="workshop-content"><h3>'+w.title+'</h3><p class="workshop-meta">'+w.date+' · '+w.hours+'<br>'+w.audience+' · '+w.price+'</p><a href="'+w.url+'" target="_blank" rel="noopener noreferrer">Billetterie HelloAsso ↗</a></div></article>').join('')+
