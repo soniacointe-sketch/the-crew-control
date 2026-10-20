@@ -338,11 +338,14 @@ function sectionFor(tab,f){
 function render(){
  const root=pane();if(!root)return;
  const f=facts(),tab=state.active;
+ const unlinked=state.payments.filter(x=>String(x.id||"").startsWith("helloasso-membership-csv-")&&x.status==="paid");
+ const unlinkedAmount=unlinked.reduce((sum,x)=>sum+toNum(x.amount),0);
  const tabName=TABS.find(x=>x[0]===tab)?.[1]||(tab==="bank"?"Mouvements bancaires":"Accueil");
  root.innerHTML='<div class="c24-top"><div><div class="c24-overline">THE CREW · GESTION ASSOCIATIVE</div><h2>Argent · '+E(tabName)+'</h2><p>Suivi financier '+E(ss().season)+' — saisie directe, contrôle des documents et calculs automatiques</p></div>'+
  '<div class="c24-form-actions"><button class="c24-secondary" data-csv type="button">↓ Export CSV</button><button data-reload type="button">↻ Actualiser</button></div></div>'+
  '<nav class="c24-nav" aria-label="Rubriques financières" role="tablist">'+TABS.map(([k,label])=>'<button type="button" role="tab" data-tab="'+k+'" aria-selected="'+String(k===tab)+'">'+E(label)+'</button>').join("")+'</nav>'+
  (state.errors.length?'<div class="c24-notice" role="alert">Certains services sont indisponibles : '+state.errors.map(E).join(" · ")+'</div>':"")+
+ (unlinked.length?'<div class="c24-notice"><strong>Export HelloAsso enregistré :</strong> '+unlinked.length+' commande(s), soit '+money(unlinkedAmount)+' documentés et inclus dans les recettes, restent à rattacher à un dossier adhérent. Une tâche de vérification figure dans « À faire ». Aucun foyer n’a été créé automatiquement.</div>':"")+
  '<div class="c24-content">'+sectionFor(tab,f)+'</div>'+
  '<p class="c24-footer">Les écritures manuelles sont sauvegardées sur Supabase et restent modifiables ou archivables. L’import HelloAsso est conservé en lecture seule. Les soldes et alertes affichés représentent les informations actuellement présentes, non une certification bancaire.</p>';
 }
