@@ -183,11 +183,34 @@ Deno.serve(async (req: Request) => {
         kind:"adhesion",provider:"helloasso",external_ref:String(x.payment_id),
         amount:Number(x.amount)||0,status:"paid",paid_at:x.paid_at,verified:true,
         member_name:[x.first_name,x.last_name].filter(Boolean).join(" "),
-        guardian_name:null,payer_name:null,plan:x.tariff||"Adhésion",season:"2026-2027",
+        guardian_name:null,payer_name:x.payer_name||null,plan:x.tariff||"Adhésion",season:"2026-2027",
         order_ref:String(x.order_id),payout_status:"a_verifier",cashout_provider:x.cashout_state||null,
         cashout_manual:null,bank_received_at:null,bank_reference:null,
         notes:"Cotisation documentée par export HelloAsso et commande source. Dossier adhérent à rattacher ; réception bancaire non vérifiée.",
         receipt_url:x.receipt_url||null
+      });
+    }
+
+
+    // Financial confirmations preserve the payer and missing order IDs without inventing tickets.
+    const {data:confirmedPayments,error:confirmationError}=await admin.from("crew_helloasso_events")
+      .select("helloasso_id,payload").eq("event_type","FinancialConfirmation").limit(500);
+    if(confirmationError)return new Response(JSON.stringify({error:"Impossible de lire les paiements documentés"}),{status:500,headers:H});
+    for(const confirmed of confirmedPayments||[]){
+      const x=confirmed.payload?.data||{};
+      if(x.status!=="paid"||!x.payment_id||!(Number(x.amount)>0))continue;
+      if(rows.some((p:any)=>p.provider==="helloasso"&&
+        (String(p.external_ref)===String(x.payment_id)||(x.order_id&&String(p.order_ref)===String(x.order_id)))))continue;
+      rows.push({
+        id:"helloasso-financial-confirmation-"+confirmed.helloasso_id,
+        kind:"evenement",provider:"helloasso",external_ref:String(x.payment_id),
+        amount:Number(x.amount),status:"paid",paid_at:x.paid_at,verified:true,
+        member_name:x.campaign||"Billetterie",payer_name:x.payer_name||null,guardian_name:null,
+        plan:Number(x.quantity||0)+" billet(s)",season:null,order_ref:x.order_id||null,
+        payout_status:"a_verifier",cashout_provider:null,cashout_manual:null,
+        bank_received_at:null,bank_reference:null,
+        notes:"Paiement documenté par le tableau HelloAsso transmis. Réception bancaire non vérifiée. Les billets nominatifs restent dans leur suivi dédié.",
+        receipt_url:null
       });
     }
 
