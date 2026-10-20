@@ -8,7 +8,27 @@ launch.onclick=function(){panel.hidden=!panel.hidden;host.toggleAttribute("data-
 root.querySelector(".close").onclick=close;
 root.addEventListener("keydown",function(e){if(e.key==="Escape"&&!panel.hidden){close();}});
 function add(text,cls){host.setAttribute("data-conversation","");var div=document.createElement("div");div.className="message "+(cls||"");div.textContent=text;log.appendChild(div);while(log.children.length>16)log.firstChild.remove();scroll.scrollTop=scroll.scrollHeight;return div;}
-function answers(items){items.forEach(function(f){if(!f||!facts.some(function(x){return x.id===f.id;}))return;var verified=facts.find(function(x){return x.id===f.id;}),div=add(verified.text),p=document.createElement("p"),a=document.createElement("a");a.textContent=verified.label+" →";a.href=verified.url;p.appendChild(a);div.appendChild(p);});scroll.scrollTop=scroll.scrollHeight;}
+
+function offerTrial(){
+ var box=add("Pour qui souhaites-tu réserver un essai ?");
+ var choices=document.createElement("div");choices.className="quick";box.appendChild(choices);
+ [["KIDS","Enfant · 4–11 ans"],["ADOS_ADULTES","Ado ou adulte · dès 12 ans"]].forEach(function(item){
+ var button=document.createElement("button");button.type="button";button.textContent=item[1];choices.appendChild(button);
+ button.onclick=async function(){
+  choices.querySelectorAll("button").forEach(function(b){b.disabled=true;});var result=document.createElement("div");result.setAttribute("role","status");result.textContent="Recherche des prochaines séances…";box.appendChild(result);
+  try{var r=await fetch("https://voytsqyorhoveurnguxn.supabase.co/functions/v1/crew-public-registration?resource=trial-slots",{credentials:"omit",cache:"no-store",signal:AbortSignal.timeout(10000)});var data=await r.json();if(!r.ok||!data.ok||!Array.isArray(data.slots))throw Error();
+   var slots=data.slots.filter(function(s){return s.group_code===item[0]&&/^\d{4}-\d{2}-\d{2}$/.test(s.session_date);});result.textContent=slots.length?"Choisis une séance, puis confirme tes informations dans le formulaire sécurisé.":"Aucun créneau disponible actuellement pour ce groupe. Contacte Sonia pour trouver une solution.";
+   slots.forEach(function(s){var a=document.createElement("a");a.style.cssText="display:block;padding:10px 12px;margin-top:8px;border:1px solid #a68d59;border-radius:9px;color:#f3dcaa;text-decoration:none";a.textContent=new Intl.DateTimeFormat("fr-FR",{weekday:"long",day:"numeric",month:"long"}).format(new Date(s.session_date+"T12:00:00"))+" · "+s.starts_at.slice(0,5).replace(":"," h ")+"–"+s.ends_at.slice(0,5).replace(":"," h ")+" →";
+    var u=new URL("/inscription/",location.origin);u.searchParams.set("crew_trial","1");u.searchParams.set("crew_date",s.session_date);u.searchParams.set("crew_group",item[0]);u.searchParams.set("crew_source","assistant_"+s.session_date.replace(/-/g,""));a.href=u.toString();result.appendChild(a);
+   });
+   var note=document.createElement("small");note.style.cssText="display:block;margin-top:10px;line-height:1.5";note.textContent="Premier essai gratuit · 20 personnes maximum, adhérents compris. La place est revérifiée à l’envoi du formulaire ; elle n’est pas bloquée à cette étape.";result.appendChild(note);
+  }catch(e){result.textContent="Les disponibilités sont momentanément indisponibles. Contacte Sonia pour choisir une séance.";}
+  scroll.scrollTop=scroll.scrollHeight;
+ };
+ });scroll.scrollTop=scroll.scrollHeight;
+}
+
+function answers(items){items.forEach(function(f){if(!f||!facts.some(function(x){return x.id===f.id;}))return;var verified=facts.find(function(x){return x.id===f.id;}),div=add(verified.text),p=document.createElement("p"),a=document.createElement("a");a.textContent=verified.label+" →";a.href=verified.url;p.appendChild(a);div.appendChild(p);});if(items.some(function(f){return f&&f.id==="essai";}))offerTrial();scroll.scrollTop=scroll.scrollHeight;}
 root.querySelectorAll("[data-topic]").forEach(function(button){button.onclick=function(){var f=facts.find(function(x){return x.id===button.dataset.topic;});add(button.textContent,"question");answers([f]);status.textContent="";};});
 root.querySelector("#clear").onclick=function(){log.textContent="";host.removeAttribute("data-conversation");input.value="";status.textContent="Conversation effacée de cette page.";};
 form.onsubmit=async function(e){
