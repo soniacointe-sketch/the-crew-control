@@ -18,7 +18,7 @@ function designHtml(d){
  const impact=d.brand==='The Crew Orchies'&&d.layout==='impact';
  const buttonColor=impact?'#e50914':c.accent,buttonText=impact?'#ffffff':c.contrast;
  const hero=safeUrl(d.hero),portrait=safeUrl(d.portrait),button=safeUrl(d.link),site=c.website;
- const paragraphs=String(d.body||'').split(/\n\s*\n/).filter(Boolean).map(s=>'<p style="margin-top:0;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:'+c.fg+'">'+escapeHtml(s).replace(/\n/g,'<br>')+'</p>').join('');
+ const paragraphs=String(d.body||'').split(/\n\s*\n/).filter(Boolean).map(s=>'<p style="margin-top:0;margin-bottom:18px;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.7;color:'+c.fg+'">'+escapeHtml(s).replace(/\[([^\]\n]+)\]\((https:\/\/[^\s)]+)\)/g,(_match,label,url)=>'<a href="'+url+'" target="_blank" rel="noopener noreferrer" style="color:'+c.accent+';font-weight:700;text-decoration:underline">'+label+'</a>').replace(/\n/g,'<br>')+'</p>').join('');
  const crown=d.brand==='The Crew Orchies'?'<img src="https://soniacointe-sketch.github.io/the-crew-control/studio-images/crew-logo-crown.webp" alt="The Crew Orchies" width="78" height="78" border="0" style="display:block;width:78px;height:78px;margin-left:auto;margin-right:auto;margin-bottom:18px">':'';
  const header='<tr><td align="center" style="padding-top:30px;padding-bottom:22px;padding-left:20px;padding-right:20px">'+crown+'<p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-weight:700;font-size:11px;line-height:1.5;letter-spacing:2px;color:'+c.accent+'">'+tag+'</p><h2 style="font-family:Georgia,Times New Roman,serif;font-size:31px;line-height:1.25;font-weight:400;color:'+c.fg+';margin-top:12px;margin-bottom:0">'+name+'</h2></td></tr>';
  const visual=hero?'<tr><td><img src="'+escapeHtml(hero)+'" alt="'+subject+'" width="600" height="auto" border="0" style="display:block;width:100%;height:auto;max-width:600px"></td></tr>':'<tr><td bgcolor="'+c.accent+'" style="background-color:'+c.accent+';padding-top:48px;padding-bottom:48px;padding-left:25px;padding-right:25px;text-align:center"><p style="font-family:Georgia,Times New Roman,serif;font-size:30px;line-height:1.3;color:'+c.contrast+';margin:0">'+subject+'</p></td></tr>';
@@ -74,6 +74,13 @@ function openImpact(id,scroll){
  const entry=impactSource.find(x=>x.id===id);if(!entry)return false;
  let saved={};try{const prev=JSON.parse(localStorage.getItem('eloah-rich-impact-'+id)||'null');if(prev&&typeof prev==='object'&&!Array.isArray(prev))saved=prev}catch{}
  const model={...entry,...saved,brand:'The Crew Orchies'};
+ if(id==='crew-monthly-template'){
+  if(!model.facebook)model.facebook=entry.facebook;
+  const oldTrial='[Demander un essai gratuit →](https://thecreworchies.blog/)';
+  if(!model.body.includes('Suivez-nous sur Facebook')&&model.body.includes(oldTrial)){
+   model.body=model.body.replace(oldTrial,'[Demander un essai gratuit →](https://thecreworchies.blog/inscription/)\n\n[Suivez-nous sur Facebook]('+entry.facebook+')');
+  }
+ }
  activeImpactId=id;currentBrand='The Crew Orchies';field('brand').value='The Crew Orchies';
  for(const k of keys)field(k).value=model[k]??'';
  render();
