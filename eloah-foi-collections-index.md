@@ -11,6 +11,10 @@ Explore les apocryphes, les sources juives anciennes, les manuscrits bibliques e
 
 Ce registre différencie les **textes originaux effectivement récupérés** des anciens dossiers dont seul le titre ou la synthèse existe encore. Les photos de manuscrits non récupérées ne sont pas considérées comme sauvegardées.
 
+## Enquête 001 — Codex de Berlin · P. Berol. 8502
+
+**[Lire l'étude illustrée du Codex de Berlin : Marie, Jean, Sophia et Pierre](foi-control.html?file=eloah-foi-enquete-001-codex-berlin-p-8502.md)** — Dossier original d'environ 8 800 mots, 35 chapitres, trois véritables photographies du manuscrit, comparaison des quatre textes, témoins grecs et coptes, sources vérifiables.
+
 ## Nouveaux volumes — Paraboles et révélation
 
 - **[PAR-046 — Pourquoi Jésus parle-t-il en paraboles ?](foi-control.html?file=eloah-foi-par-046-pourquoi-jesus-paraboles.md)** : Marc, Matthieu, Luc, Isaïe et le vocabulaire grec de la révélation.
