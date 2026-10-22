@@ -6,6 +6,11 @@ Cette page rassemble les **dossiers déjà référencés dans le lecteur**. Elle
 
 [← Dossier personnel](foi-control.html?file=eloah-foi-dossier-personnel-complet.md)
 
+## ENQUÊTE 001 — Le Codex de Berlin, P. Berol. 8502
+
+[**Ouvrir le dossier illustré intégral : Marie, Jean, Sophia et Pierre**](foi-control.html?file=eloah-foi-enquete-001-codex-berlin-p-8502.md). Étude matérielle, critique textuelle, variantes, transmission, chronologie, hypothèses et iconographie patrimoniale sourcée.
+
+
 ## Mon chemin spirituel · 12 chapitres et le dossier complet
 
 - [Dossier personnel](foi-control.html?file=eloah-foi-dossier-personnel-complet.md)
