@@ -33,6 +33,8 @@ function selectPhoto(img){
  return rules.find(([re,key])=>photos[key]&&re.test(context))?.[1]||'livre';
 }
 function dress(img){
+ // Ne jamais remplacer par une photo de contexte une reproduction authentique du manuscrit conservé à Berlin.
+ if(/Papyrus_Berlin_8502/i.test(img.getAttribute('src')||''))return;
  if(img.dataset.foiPhoto)return;
  img.closest('.foi-path')?.querySelector('.foi-path-credit')?.remove();
  const key=selectPhoto(img),m=photos[key];
