@@ -1,0 +1,50 @@
+{
+  "phase": 25,
+  "question": "Quels repères et quelles méthodes pour situer l’ouverture du puits chez Petrie ?",
+  "source": {
+    "item": "cu31924012038927",
+    "work_edition": 1883,
+    "reproduction": 1986,
+    "pages": [
+      "xv",
+      29,
+      74
+    ],
+    "pdf_pages": [
+      38,
+      68,
+      113
+    ],
+    "facsimile_verified": true
+  },
+  "unit": "Imperial British inches, introduction section 3, p. xv",
+  "origin": "mur nord de la galerie",
+  "published_centres": [
+    {
+      "method": "horizontalement au sol",
+      "inches": 35.4
+    },
+    {
+      "method": "près du haut",
+      "inches": 35.25
+    },
+    {
+      "method": "distance sur pente réduite",
+      "inches": 35.37
+    }
+  ],
+  "calculation": {
+    "type": "écart des centres publiés",
+    "expression": "35.40 - 35.25",
+    "inches": 0.15,
+    "not_statistical_uncertainty": true
+  },
+  "interpretation_attributed_to_petrie": "sortie pour ouvriers",
+  "limits": [
+    "pas de position antique originelle garantie",
+    "pas de géoréférencement",
+    "relevé de Smyth non consulté",
+    "aucun recalcul des centres à partir des limites"
+  ],
+  "modern_points_added": 0
+}

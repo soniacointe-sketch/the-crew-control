@@ -1,0 +1,61 @@
+{
+  "updated_at": "2026-10-31",
+  "continuity_rule": "/data/research-focus-rule.json",
+  "investigations": [
+    {
+      "id": "egypte-napoleon",
+      "title": "Égypte · Pyramides · Napoléon",
+      "original_question": "Que pouvons-nous établir sur la rencontre de Bonaparte avec les pyramides, et que révèlent les monuments eux-mêmes de l’ordre conçu par leurs bâtisseurs ?",
+      "question_source": "egypte-pyramides-napoleon.html, ouverture du 30 octobre 2026, bloc Question directrice.",
+      "entry": "/egypte-pyramides-napoleon.html",
+      "synthesis": "/egypte-pyramides-napoleon-bilan.html",
+      "page_glob": "egypte-pyramides-napoleon*.html",
+      "technical_appendices": {
+        "phases": [
+          23,
+          32
+        ],
+        "status": "Conservées, pistes ouvertes ; progression du fil principal suspendue pour ces sous-questions."
+      },
+      "next_main_question": "Quels documents contemporains du règne de Khéops renseignent l’organisation du chantier, et que disent-ils réellement de sa finalité ?",
+      "completed_main_steps": [
+        {
+          "phase": 33,
+          "question": "Que dit exactement Bourrienne de la présence de Bonaparte devant ou dans la Grande Pyramide, et sur quoi repose son témoignage ?",
+          "result": "Imprimé de 1829, tome II, pages 299–301 contrôlé ; témoignage rétrospectif et scène religieuse contestée identifiés."
+        },
+        {
+          "phase": 34,
+          "question": "Quel texte antérieur à 1829 raconte l’entretien religieux que Bourrienne conteste, et comment le distinguer des récits de nuit solitaire ?",
+          "result": "Version comparable dans la transcription de l’édition Panckoucke de 1821 ; note d’authenticité discutée et renvoi au Moniteur de 1798 ; divergence 1er/12 août conservée."
+        },
+        {
+          "phase": 35,
+          "question": "Que contient le numéro LXVII du Moniteur du 27 novembre 1798, et comment sa scène et sa date se comparent-elles à la version de 1821 et à Bourrienne ?",
+          "result": "Journal de 1798 no 67, en-tête p. 271 et dialogue p. 272–273 contrôlés en fac-similé ; 25 thermidor, arrivée matinale collective, sortie avec la suite ; pas de signature visible. Authenticité de la scène non établie."
+        },
+        {
+          "phase": 36,
+          "question": "Quelle est la plus ancienne attestation datée, dans le corpus vérifiable, d’une nuit solitaire de Bonaparte dans Khéops, et quelle source invoque-t-elle ?",
+          "result": "Recherche partielle : deux reprises datées distinguées selon la durée ; renvoi bibliographique antérieur repéré mais non contrôlé. Première attestation non établie."
+        },
+        {
+          "phase": 37,
+          "question": "Existe-t-il un imprimé antérieur aux reprises contemporaines attribuant à Napoléon un secret de la pyramide ?",
+          "result": "Brochure Evans de 1895 contrôlée ; p.12–13 : affirmation du chevalier X non identifié ; p.12–15 : pas de nuit solitaire racontée. Lecture initiatique de l’architecture citée p.11, source à contrôler."
+        },
+        {
+          "phase": 38,
+          "question": "Comment The Perfect Way, cité par Evans, justifie-t-il la lecture initiatique des passages et chambres, et cite-t-il une source antique pour Khéops ?",
+          "result": "The Perfect Way 1882, p.238–244 et fig.8 contrôlés en fac-similé : lecture spirituelle du plan et rite affirmé, mais pas de document contemporain de Khéops identifié. Note Manéthon/Hérodote réinterprétée allégoriquement ; contrôle limité d’Hérodote II.124/128 en traduction."
+        }
+      ],
+      "unresolved_main_questions": [
+        {
+          "question": "Le passage attribué à Peter Tompkins (1971, p. 55) raconte-t-il une nuit complète, et quelle référence fournit-il pour cette scène ?",
+          "status": "Accès au passage de Tompkins non obtenu ; ne pas annoncer le livre comme consulté."
+        }
+      ]
+    }
+  ]
+}

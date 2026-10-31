@@ -1,0 +1,50 @@
+{
+  "phase": 22,
+  "question": "Quelles limites correspondent aux deux cotes inférieures de la coupe ?",
+  "image": {
+    "institution": "NYPL",
+    "id": "1268182",
+    "original_size": [
+      4352,
+      6203
+    ],
+    "plate": "Antiquités V, 14",
+    "figure": 3,
+    "crop": [
+      450,
+      2600,
+      2550,
+      2870
+    ]
+  },
+  "legend": {
+    "volume": 10,
+    "edition": 1826,
+    "page": 467,
+    "pdf_page": 485,
+    "apparent_author": "Jomard",
+    "encastrements_authors": [
+      "Le Père",
+      "Coutelle"
+    ]
+  },
+  "readings_m": {
+    "axis_to_visible_core": 113.66,
+    "axis_to_socket_outer_edge": 116.374
+  },
+  "calculations": {
+    "visible_doubled_m": 227.32,
+    "socket_doubled_m": 232.748,
+    "half_difference_m": 2.714,
+    "coutelle_full_reported_m": 232.747,
+    "discrepancy_m": 0.001
+  },
+  "inference": "L’écart de 1 mm est compatible avec un arrondi de la demi-base ; préparation de la gravure non démontrée",
+  "limits": [
+    "aucune mesure sur pixels",
+    "précision actuelle non certifiée",
+    "comparaison avec distance approximative de 2,75 m non résolue",
+    "aucune coordonnée nouvelle"
+  ],
+  "modern_points_added": 0
+}

@@ -1,0 +1,42 @@
+{
+  "phase": 17,
+  "letter": {
+    "date": "1798-07-28",
+    "printed_witness": "Panckoucke, 1819, Égypte I, p. 422",
+    "water": "Eau de citerne jugée mauvaise ; réserve presque épuisée",
+    "other_water_distance": "une lieue",
+    "origin": null,
+    "destination": null,
+    "direction": null
+  },
+  "plan": {
+    "source": "NYPL 1268174, Antiquités V, planche 6",
+    "labels": [
+      "Puits",
+      "Puits"
+    ],
+    "crop_original_pixels": [
+      3500,
+      1650,
+      4050,
+      2200
+    ],
+    "function": "non établie",
+    "link_to_letter": "non démontré"
+  },
+  "geographic_points_added": 0,
+  "distance_geometry": null,
+  "document_markers": [
+    {
+      "label": "Puits · inscription 1",
+      "x": 3772,
+      "y": 1969
+    },
+    {
+      "label": "Puits · inscription 2",
+      "x": 3803,
+      "y": 2100
+    }
+  ],
+  "document_marker_reference": "NYPL 1268174, pixels depuis le coin supérieur gauche du fichier original 5923 × 4400 ; aucun géoréférencement"
+}

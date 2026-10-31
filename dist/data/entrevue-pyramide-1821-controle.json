@@ -1,0 +1,26 @@
+{
+  "phase": 34,
+  "investigation": "egypte-napoleon",
+  "original_question": "Que pouvons-nous établir sur la rencontre de Bonaparte avec les pyramides, et que révèlent les monuments eux-mêmes de l’ordre conçu par leurs bâtisseurs ?",
+  "source": {
+    "edition_year": 1821,
+    "title": "Œuvres de Napoléon Bonaparte",
+    "volume": 2,
+    "editor": "C. L. F. Panckoucke",
+    "consulted": "https://www.gutenberg.org/cache/epub/12782/pg12782-images.html",
+    "mode": "Transcription numérique",
+    "new_facsimile_checked": false
+  },
+  "reported_scene_date": "25 thermidor an VI / 12 août 1798",
+  "publication_reference_in_note": {
+    "periodical": "Moniteur",
+    "issue": "LXVII",
+    "date": "7 frimaire an VII / 27 novembre 1798",
+    "original_issue_checked": false
+  },
+  "authenticity": "Discutée, selon la note éditoriale 5 ; scène non authentifiée ici.",
+  "comparison": "Bourrienne p.301 donne le 1er août pour le récit qu’il réfute ; identité exacte des versions non établie.",
+  "author_attribution_established": false,
+  "next_main_question": "Que contient le numéro LXVII du Moniteur du 27 novembre 1798, et comment sa scène et sa date se comparent-elles à la version de 1821 et à Bourrienne ?",
+  "modern_points_added": 0
+}

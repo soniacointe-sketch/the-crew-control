@@ -1,1 +1,0 @@
-location.replace("eloah-partenaire.html"+location.search.replace("ITRIIA%20Studio","ELOAH%20Studio"));

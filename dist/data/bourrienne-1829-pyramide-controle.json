@@ -1,0 +1,35 @@
+{
+  "phase": 33,
+  "investigation": "egypte-napoleon",
+  "original_question": "Que pouvons-nous établir sur la rencontre de Bonaparte avec les pyramides, et que révèlent les monuments eux-mêmes de l’ordre conçu par leurs bâtisseurs ?",
+  "contribution": "Contrôler le témoignage imprimé de Bourrienne sur la visite, en distinguant l’entretien religieux et la nuit solitaire.",
+  "source": {
+    "item": "memoiresbourr02bour",
+    "volume": 2,
+    "publisher": "Ladvocat",
+    "place": "Paris",
+    "year": 1829,
+    "title_pdf_page": 7,
+    "printed_pages": [
+      299,
+      300,
+      301
+    ],
+    "pdf_pages": [
+      307,
+      308,
+      309
+    ],
+    "facsimiles_verified": true
+  },
+  "statement_attributed": "Bonaparte ne serait pas entré ; d’autres personnes auraient visité l’une des pyramides pendant qu’il attendait devant.",
+  "refuted_scene": "Entretien avec mufti, ulémas et imams dans une pyramide.",
+  "limits": [
+    "Témoignage rétrospectif, pas journal contemporain",
+    "Établissement éditorial et manuscrit non contrôlés",
+    "Lettre à Kléber consultée seulement dans les mémoires",
+    "Pas de première attestation de la nuit solitaire identifiée"
+  ],
+  "next_main_question": "Quel texte antérieur à 1829 raconte l’entretien religieux que Bourrienne conteste, et comment le distinguer des récits de nuit solitaire ?",
+  "modern_points_added": 0
+}

@@ -1,0 +1,51 @@
+{
+  "phase": 27,
+  "source": {
+    "item": "lifeworkgreatpy1smyt",
+    "edition": 1867,
+    "volume": 1,
+    "title_pdf_page": 9,
+    "warning_pdf_page": 23,
+    "plate_v_pdf_page": 125,
+    "plate_vi_pdf_page": 214,
+    "facsimiles_verified": true
+  },
+  "orientations": [
+    {
+      "view": "V, coupe supérieure",
+      "looking": "nord",
+      "left": "ouest",
+      "right": "est"
+    },
+    {
+      "view": "VI, plan supérieur",
+      "left": "sud",
+      "right": "nord",
+      "top": "ouest",
+      "bottom": "est"
+    },
+    {
+      "view": "VI, coupe médiane",
+      "looking": "ouest",
+      "left": "sud",
+      "right": "nord"
+    },
+    {
+      "view": "VI, coupe inférieure",
+      "looking": "est",
+      "left": "nord",
+      "right": "sud"
+    }
+  ],
+  "author_warning": "Ne pas prendre de mesures de la pyramide sur les dessins ; utiliser les entrées numériques du volume II pour l’exactitude.",
+  "confirmed": "Relation entre ouverture de galerie, passage occidental et puits descendant ; directions des vues.",
+  "unresolved": "Attribution précise des valeurs 35.3 et 34.3 ; date et acteurs de la rupture.",
+  "pixel_measurements_taken": false,
+  "modern_points_added": 0,
+  "next_question": "Description des ouvertures de banquettes a à e de la planche VI.",
+  "follow_up": {
+    "phase": 28,
+    "distinction": "Les lettres a–e désignent des cavités latérales, distinctes des trous des banquettes.",
+    "question_wording_corrected": true
+  }
+}

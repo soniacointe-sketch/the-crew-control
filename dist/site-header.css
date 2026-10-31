@@ -1,0 +1,37 @@
+/* Shared homepage header. Loaded last on every page to isolate legacy styles. */
+#parisis-site-header,#parisis-site-header *{all:revert!important;box-sizing:border-box!important;color:#262b2c!important;-webkit-text-fill-color:currentColor!important;font-family:Georgia,'Times New Roman',serif!important;line-height:1.6!important;letter-spacing:normal!important;text-transform:none!important;text-shadow:none!important;animation:none!important;transition:none!important}
+#parisis-site-header{display:block!important;position:relative!important;inset:auto!important;float:none!important;transform:none!important;width:100%!important;max-width:1440px!important;min-width:0!important;margin:0 auto!important;padding:22px 5% 0!important;background:#fff!important;border:0!important;box-shadow:none!important;font:16px/1.6 Georgia,serif!important;text-align:left!important;z-index:10!important}
+#parisis-site-header::before,#parisis-site-header::after,#parisis-site-header *::before,#parisis-site-header *::after{content:none!important}
+#parisis-site-header a{cursor:pointer!important;text-decoration:none!important;overflow-wrap:normal!important}
+#parisis-site-header .review-masthead{display:grid!important;grid-template-columns:70px minmax(0,1fr) 70px!important;align-items:center!important;padding:0 0 26px!important;gap:0!important}
+#parisis-site-header .review-title{display:block!important;text-align:center!important;font-size:clamp(30px,4.2vw,62px)!important;line-height:1.15!important;letter-spacing:-2px!important;font-weight:400!important}
+#parisis-site-header .review-title em{font-size:inherit!important;line-height:inherit!important;letter-spacing:inherit!important;font-style:italic!important;font-weight:400!important}
+#parisis-site-header .review-the{font-size:23px!important;font-style:italic!important;line-height:normal!important;display:inline-block!important;max-width:120px!important;letter-spacing:-1px!important;vertical-align:middle!important;margin-right:12px!important}
+#parisis-site-header .review-search{display:block!important;font-size:48px!important;line-height:1!important;min-height:48px!important}
+#parisis-site-header .review-home{display:block!important;font-size:11px!important;text-align:right!important;line-height:normal!important}
+#parisis-site-header nav{display:flex!important;position:static!important;justify-content:center!important;align-items:center!important;flex-wrap:wrap!important;gap:32px!important;border-top:1px solid #d7dcdd!important;border-bottom:1px solid #d7dcdd!important;padding:12px 0!important;margin:0!important;width:100%!important;background:#fff!important}
+#parisis-site-header nav a{display:block!important;font-size:18px!important;padding:4px 0!important}
+#parisis-site-header nav a:hover{text-decoration:underline!important}
+#parisis-site-header a:focus-visible{outline:3px solid #31718a!important;outline-offset:4px!important}
+@media(max-width:1050px){#parisis-site-header nav{gap:22px!important}#parisis-site-header .review-title{font-size:42px!important}#parisis-site-header .review-the{font-size:18px!important;max-width:90px!important}}
+@media(max-width:720px){#parisis-site-header{padding:18px 18px 0!important}#parisis-site-header .review-masthead{grid-template-columns:32px minmax(0,1fr) 40px!important;padding-bottom:20px!important;gap:5px!important}#parisis-site-header .review-title{font-size:clamp(20px,5.1vw,29px)!important;letter-spacing:-1px!important}#parisis-site-header .review-the{display:block!important;font-size:15px!important;max-width:none!important;margin:0 0 4px!important}#parisis-site-header .review-search{font-size:32px!important}#parisis-site-header .review-home{font-size:9px!important}#parisis-site-header nav{gap:5px 18px!important;padding:10px 0!important}#parisis-site-header nav a{font-size:14px!important;min-height:44px!important;display:flex!important;align-items:center!important}}
+
+/* Retired injected cover: the shared header and article heading replace it. */
+body:has(#parisis-site-header) .pe-masthead,body:has(#parisis-site-header) .pe-cover{display:none!important}
+
+/* Consistent readable action labels throughout articles and tools. */
+html body :is(button,a.btn,a.button,a.action,a.button-light,a.buttonlink,a.review-button,a.pe-home-reader-button,a.pe-primary-book):not(#parisis-site-header a):not(.leaflet-control button){background:#315e70!important;color:#fff!important;-webkit-text-fill-color:#fff!important;border-color:#315e70!important;text-shadow:none!important}
+html body :is(button,a.btn,a.button,a.action,a.button-light,a.buttonlink,a.review-button,a.pe-home-reader-button,a.pe-primary-book):not(#parisis-site-header a):not(.leaflet-control button) *{color:#fff!important;-webkit-text-fill-color:#fff!important}
+html body :is(button,a.btn,a.button,a.action,a.button-light,a.buttonlink,a.review-button):not(#parisis-site-header a):not(.leaflet-control button):hover{background:#234858!important;color:#fff!important}
+html body :is(button,a.btn,a.button,a.action,a.button-light,a.buttonlink,a.review-button):focus-visible{outline:3px solid #315e70!important;outline-offset:3px!important}
+
+/* Architecture éditoriale : pierre et or vieilli. */
+#parisis-site-header{background:#f2efe8!important;border-bottom:1px solid #d3cbbf!important;max-width:none!important}#parisis-site-header nav{background:#f2efe8!important}#parisis-site-header a:hover{color:#80643c!important}#parisis-site-header a:focus-visible{outline:3px solid #977740!important;outline-offset:4px!important}#parisis-site-header nav a{min-height:44px!important;display:inline-flex!important;align-items:center!important}
+
+
+
+/* A single reading route, distinct from contextual research links. */
+.pe-route{display:block;background:#f2efe8;color:#26343a;border:1px solid #d3cbbf;border-left:3px solid #977740;padding:18px 22px;margin:24px 0;font:15px/1.6 Georgia,serif;clear:both}.pe-route p{margin:0 0 12px}.pe-route div{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px}.pe-route a{color:#315e70;text-decoration:underline;display:inline-block;min-height:44px;padding:10px 0}.pe-route strong{font-size:20px}.pe-route span{color:#59626a} .pe-route a:focus-visible{outline:3px solid #977740;outline-offset:3px}@media(max-width:600px){.pe-route{padding:14px}.pe-route div{flex-direction:column;align-items:flex-start}}
+
+/* Reading controls span the article grid without shifting its columns. */
+main > .pe-route{grid-column:1 / -1;min-width:0;width:100%}

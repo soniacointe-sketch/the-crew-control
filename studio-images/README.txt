@@ -1,1 +1,0 @@
-CREW DIGITAL STUDIO : copier les 10 fichiers .webp dans le dossier studio-images du dépôt soniacointe-sketch/the-crew-control. Le fichier CSS est fourni pour référence. Les images sont des créations illustratives et ne doivent pas être présentées comme des photos réelles d'adhérents.

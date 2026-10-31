@@ -1,0 +1,17 @@
+{
+  "consultation": "2026-10-31",
+  "source_url": "https://egymonuments.gov.eg/monuments/the-hanging-church/",
+  "source_element": "Carte Location, position WGS84, datum décodé",
+  "source_value": "30.005595,31.229759",
+  "latitude": 30.005595,
+  "longitude": 31.229759,
+  "statut": "Repère du site actuel uniquement ; pas de calage appliqué",
+  "candidat_ancien": {
+    "source": "Jomard, édition Panckoucke 1829, tome XVIII, partie II, p. 503",
+    "rubrique": "Qasr el-Chama",
+    "numero": 5,
+    "nom": "Sekket el-Mo’allaqah",
+    "nature": "Voie nommée dans la légende ; non assimilée à un centre du bâtiment",
+    "decision": "Non retenu comme troisième point de contrôle matériel à ce stade"
+  }
+}

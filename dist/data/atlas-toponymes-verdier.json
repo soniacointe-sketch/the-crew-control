@@ -1,0 +1,27 @@
+{
+  "phase": 15,
+  "source": "NYPL, images 1534489 et 1534490",
+  "dimensions": [
+    7230,
+    5428
+  ],
+  "reference_system": "Pixels depuis le coin supérieur gauche ; aucun géoréférencement",
+  "markers": [
+    {
+      "sheet": 24,
+      "label": "Menchât Bakârî",
+      "x": 868,
+      "y": 4120,
+      "letter_candidate": "Bekari"
+    },
+    {
+      "sheet": 25,
+      "label": "Kerdâçéh",
+      "x": 6332,
+      "y": 4023,
+      "letter_candidate": "Kardacé"
+    }
+  ],
+  "status": "Inscriptions vérifiées sur les images ; correspondances avec la lettre proposées ; aucune redoute identifiée",
+  "coordinates": null
+}

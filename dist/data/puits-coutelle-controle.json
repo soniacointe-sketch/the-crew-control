@@ -1,0 +1,57 @@
+{
+  "phase": 23,
+  "question": "Que permet de dire le récit d’exploration sur la précision de la coupe ?",
+  "keywords": [
+    "Coutelle",
+    "puits intérieur",
+    "boussole",
+    "obliquité"
+  ],
+  "witnesses": [
+    {
+      "item": "DescriptiondelEIFranA",
+      "edition": 1818,
+      "pages": [
+        44,
+        45,
+        46
+      ],
+      "pdf_pages": [
+        56,
+        57,
+        58
+      ]
+    },
+    {
+      "item": "descriptiondelg10pancgoog",
+      "edition": 1826,
+      "page": 468,
+      "pdf_page": 486,
+      "statement": "L’obliquité du puits n’a pas été mesurée avec précision."
+    }
+  ],
+  "sequence": [
+    "première descente avec Alibert avant les recherches organisées",
+    "extrémité du câble avant le fond accessible",
+    "descente poursuivie, prélèvement et comparaison de cailloux",
+    "déblaiement ultérieur par seaux",
+    "suspension pour rappel de l’escorte"
+  ],
+  "interpretations_attributed": [
+    "provenance des matériaux de l’excavation latérale"
+  ],
+  "limits": [
+    "date précise des deux étapes non fixée",
+    "carnet non consulté",
+    "azimut non établi",
+    "aucune inclinaison calculée sur image",
+    "pas d’identité avec citerne de Verdier"
+  ],
+  "image_crop_original_pixels": [
+    2700,
+    2000,
+    3200,
+    3450
+  ],
+  "modern_points_added": 0
+}

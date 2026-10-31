@@ -1,0 +1,46 @@
+{
+  "phase": 30,
+  "source": {
+    "item": "cu31924012038927",
+    "work_year": 1883,
+    "reproduction_year": 1986,
+    "section": 173,
+    "printed_pages": [
+      215,
+      216
+    ],
+    "pdf_pages": [
+      254,
+      255
+    ],
+    "facsimiles_verified": true
+  },
+  "reported_traces": [
+    "Trous pour poutres de pierre à travers le passage",
+    "Fragments de pierre et de mortier adhérents au sol à cet endroit"
+  ],
+  "attributed_reconstruction": "Sol continu au-dessus de l’accès horizontal pour laisser glisser les blocs de fermeture depuis la galerie.",
+  "dimensions_in_british_inches": {
+    "plug_cross_section": [
+      47.3,
+      41.6
+    ],
+    "horizontal_passage_cross_section": [
+      46.2,
+      40.6
+    ],
+    "plug_combined_length_estimated": 203,
+    "alternative_length_author_considers_probable": 206,
+    "horizontal_floor_length": 176,
+    "north_wall_to_vertical_cut": 199.4
+  },
+  "correspondence_with_smyth_a_to_e": "Pertinente à rechercher mais non démontrée emplacement par emplacement.",
+  "material_explicit_in_text": "stone, pierre ; pas de poutres en bois dans ce passage.",
+  "limits": [
+    "Témoignage publié et non inspection actuelle",
+    "Pas de documentation individuelle des fragments dans ces deux pages",
+    "Séquence reconstruite, pas datation directe",
+    "Aucun calcul de résistance effectué"
+  ],
+  "modern_points_added": 0
+}

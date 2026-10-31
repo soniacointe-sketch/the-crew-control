@@ -1,0 +1,171 @@
+{
+  "version": "2026-10-31-v4",
+  "title": "Du personnage à la carte : protocole PARISIS ENGINE",
+  "authority": "Instruction de Sonia du 20 octobre 2026",
+  "attribution": "Approche inspirée des recherches de Thierry Van de Leur. La formalisation en dix modules et les calculs PARISIS ENGINE ne lui sont pas attribués.",
+  "source": "https://www.baglis.tv/esprit/esoterisme/2591-le-parisis-code.html",
+  "modules": [
+    {
+      "id": "CLEFS",
+      "title": "Choisir le point de départ",
+      "rule": "Partir d’un personnage ou d’une clef explicite. Définir la question et au moins trois mots-clés avant les recherches de correspondances. Conserver la question de départ sans la remplacer par une question secondaire ; indiquer le lien de chaque phase avec cette question et appliquer continuity_rule.",
+      "output": "Question, clef, mots-clés et critères de sélection."
+    },
+    {
+      "id": "ALIGN",
+      "title": "Relier et prolonger",
+      "rule": "Relier rues, monuments et lieux associés par des sources. Choisir les ancrages avant de mesurer, tracer les axes et déclarer la longueur des prolongements. Un axe entre deux points est une construction, pas un alignement remarquable.",
+      "output": "Points, segments, prolongements et écarts d’un troisième point."
+    },
+    {
+      "id": "TOPONYM",
+      "title": "Lire les noms dans le temps",
+      "rule": "Vérifier graphies, changements de noms, dédicaces et actes de dénomination. Distinguer homonymie, traduction et lien biographique documenté.",
+      "output": "Nom, variantes, date et document source."
+    },
+    {
+      "id": "BIOGRAPH",
+      "title": "Établir les étapes du parcours",
+      "rule": "Étudier naissance, vie, travail, mort et commémorations quand ces données sont attestées. Pour un personnage légendaire, suivre les versions du récit sans fabriquer un état civil.",
+      "output": "Chronologie sourcée, lieux et statut de chaque lien."
+    },
+    {
+      "id": "SYMBOL",
+      "title": "Comparer les motifs",
+      "rule": "Décrire le symbole, son support, ses variantes et son contexte. Séparer ressemblance visuelle, sens documenté et filiation démontrée.",
+      "output": "Description, contexte, source et hypothèse comparative."
+    },
+    {
+      "id": "CHRONOS",
+      "title": "Vérifier les dates",
+      "rule": "Distinguer date racontée, rédaction, copie, construction et dénomination. Chercher les anachronismes avant de conclure à une relation historique.",
+      "output": "Frise, fourchettes et incompatibilités."
+    },
+    {
+      "id": "GEOMETRY",
+      "title": "Mesurer avec les limites",
+      "rule": "Calculer distances, angles, azimuts et écarts dans un référentiel nommé. Distinguer nord de grille et nord vrai, précision affichée et exactitude. Tester les ancrages et la tolérance.",
+      "output": "Coordonnées, méthode, valeurs, unités et incertitudes."
+    },
+    {
+      "id": "SOLAR",
+      "title": "Tester une orientation solaire",
+      "rule": "Ne calculer qu’avec un axe architectural documenté, une latitude, une époque et un horizon définis. Distinguer calendrier, réfraction et origine de l’azimut. Sinon consigner les entrées manquantes.",
+      "output": "Calcul reproductible ou statut non calculé justifié."
+    },
+    {
+      "id": "HISTORIA",
+      "title": "Revenir aux documents",
+      "rule": "Croiser plans anciens, archives, actes, manuscrits et biographies. Préserver référence, date et ce qui a réellement été consulté. Un catalogue n’équivaut pas à la lecture intégrale du document.",
+      "output": "Corpus, passages, références et limites d’accès."
+    },
+    {
+      "id": "AUDIT",
+      "title": "Chercher ce qui contredit",
+      "rule": "Tester contre-exemples, autres points, tolérances et chronologies. Séparer propos sourcés de Thierry, interprétations PARISIS ENGINE et conclusions vérifiées. Conserver résultats négatifs et modules non applicables.",
+      "output": "Résultats, objections, hypothèses et prochaines vérifications."
+    }
+  ],
+  "complementary_methods": [
+    {
+      "id": "comparaison-versions",
+      "title": "Comparaison des versions",
+      "modules": [
+        "HISTORIA",
+        "BIOGRAPH"
+      ],
+      "rule": "Délimiter le corpus et identifier chaque édition, langue et traduction. Comparer scène par scène noms, objets, créatures, actions et explications. Conserver les absences et divergences ; ne pas reconstruire une version composite sans témoin.",
+      "output": "Tableau : témoin, passage, vocabulaire, variante, conséquence interprétative et limite de traduction."
+    },
+    {
+      "id": "analyse-iconographique",
+      "title": "Analyse iconographique",
+      "modules": [
+        "SYMBOL",
+        "HISTORIA"
+      ],
+      "rule": "Relever provenance, cote, folio, datation et passage voisin. Décrire ce qui est visible avant de proposer un sens ; comparer les conventions du corpus. Identifier les ajouts de l’illustrateur et distinguer document ancien, photographie et illustration de création.",
+      "output": "Fiche image : référence, description, contexte, comparaison, interprétation et droits."
+    },
+    {
+      "id": "controle-chronologique",
+      "title": "Contrôle chronologique",
+      "modules": [
+        "CHRONOS"
+      ],
+      "rule": "Séparer date des événements racontés, composition, copie conservée, traduction et réception. Documenter les fourchettes et ajouts. Avant de parler de prédiction, vérifier l’antériorité de la formulation identifiable.",
+      "output": "Frise des cinq temporalités, sources, incertitudes et anachronismes."
+    },
+    {
+      "id": "tests-geographiques-solaires",
+      "title": "Tests géographiques et solaires",
+      "modules": [
+        "ALIGN",
+        "GEOMETRY",
+        "SOLAR"
+      ],
+      "rule": "Définir la prédiction testée avant le calcul : points, axe, orientation, date ou éclairage. Fixer ancrages, référentiel et tolérance ; comparer des points de contrôle. Pour le Soleil, documenter latitude, époque et horizon. Conserver résultats négatifs et données manquantes ; une compatibilité ne démontre pas une intention.",
+      "output": "Fiche reproductible : hypothèse, entrées, calcul, écarts, sensibilité, résultat et portée."
+    },
+    {
+      "id": "audit-quatre-questions",
+      "title": "Audit en quatre questions",
+      "modules": [
+        "AUDIT"
+      ],
+      "rule": "1. Quel document avons-nous consulté ? 2. Que raconte exactement cette version ? 3. Quelle explication donne-t-elle explicitement ? 4. Qu’ajoutons-nous dans notre commentaire ? Séparer faits textuels, traces matérielles, hypothèses et lectures personnelles.",
+      "output": "Grille de quatre réponses avec références précises, objections et prochaine vérification."
+    },
+    {
+      "id": "pierre-a-pierre",
+      "title": "Pierre à pierre — du mot au document, du document à la preuve",
+      "added_at": "2026-10-27",
+      "modules": [
+        "CLEFS",
+        "HISTORIA",
+        "TOPONYM",
+        "CHRONOS",
+        "AUDIT"
+      ],
+      "rule": "Prendre une phrase précisément référencée, séparer chaque mot et examiner ce qu’il dit dans sa langue et son contexte. Identifier le témoin et l’édition ; distinguer lettres lisibles, lacunes, restitutions éditoriales, transcription et traduction. Vérifier la grammaire et les sens possibles sans choisir un sens à partir d’une ressemblance sonore. Revenir au support matériel, comparer les versions et distinguer ce que la source atteste, ce que nous calculons ou interprétons et ce qui reste à vérifier. Achever chaque étape par une conclusion limitée et une prochaine vérification précise.",
+      "output": "Fiche : question ; référence du témoin, passage et édition ; citation courte ; relevé mot à mot (forme, fonction, sens possibles, justification, incertitude) ; traduction argumentée ; support matériel ; variantes ; faits attestés ; hypothèses ; objections ; prochaine vérification.",
+      "attribution": "Formalisation PARISIS ENGINE à la demande de Sonia Cointe, 27 octobre 2026 ; non attribuée à Thierry Van de Leur."
+    }
+  ],
+  "complementary_methods_source": "Méthodes dégagées du chapitre Merlin : Retrouver une scène avant de chercher une clef ; ajout demandé par Sonia le 20 octobre 2026.",
+  "updated_at": "2026-10-31",
+  "construction_order_axis": {
+    "title": "Ordre des bâtisseurs — axe de recherche des Noms sacrés de Paris",
+    "requested_by": "Sonia Cointe",
+    "date": "2026-10-30",
+    "question": "Les formes, les parcours et les noms ont-ils été conçus ensemble pour exprimer un ordre ?",
+    "hypothesis": "L’expression architectes de l’univers désigne une hypothèse sur une conception commune de l’ordre du monde, pas une identité de concepteur établie.",
+    "procedure": [
+      "Identifier document, auteur, date, état et usage.",
+      "Relever centre, axes, répétitions et limites ; distinguer rite, édifice, domaine et ville.",
+      "Formuler une prédiction avant de chercher les coïncidences ; conserver contre-exemples et éléments non conformes.",
+      "Comparer à même échelle lorsque mesures, unités et orientation sont fiables.",
+      "Chercher documents de projet, transmission et transformations avant de conclure à une intention commune."
+    ],
+    "anomalies": [
+      "Écart à une règle explicitement formulée.",
+      "Différence chronologique ou fonctionnelle.",
+      "Limite ou déformation du document."
+    ],
+    "attribution": "Formalisation PARISIS ENGINE à la demande de Sonia ; méthode Durand utilisée comme outil de lecture, sans attribution cosmologique."
+  },
+  "continuity_rule": {
+    "date": "2026-10-31",
+    "authority": "Instruction explicite de Sonia : garder toujours, dans toutes les enquêtes, la question de départ.",
+    "scope": "Toutes les enquêtes PARISIS ENGINE, actuelles et futures.",
+    "requirements": [
+      "Conserver la formulation de départ dans le registre de chaque enquête ; ne la modifier que sur instruction explicite de Sonia, avec historique.",
+      "Afficher la question de départ et le rôle de chaque étape dans les pages de recherche.",
+      "Avant une recherche, expliciter le lien de la sous-question avec la question de départ.",
+      "Conclure chaque étape par son apport, ses limites et une prochaine vérification directement reliée au fil central.",
+      "Classer les développements secondaires en annexes ; ne pas laisser leur dernière question remplacer le sujet initial.",
+      "Faire une synthèse quand un détour prend trop de place ; revenir à une question centrale non résolue.",
+      "Un nouveau sujet doit être identifié comme tel ; ne pas ouvrir silencieusement une autre enquête."
+    ]
+  }
+}

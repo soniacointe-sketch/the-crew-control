@@ -1,0 +1,21 @@
+{
+  "source_url": "https://egymonuments.gov.eg/en/monuments/rawda-island-nilometer/",
+  "consultation": "2026-10-31",
+  "source_element": "Carte Location, position WGS84, datum décodé depuis la configuration de la page officielle",
+  "source_value": "30.007012,31.224981",
+  "latitude": 30.007012,
+  "longitude": 31.224981,
+  "statut": "Repère de site publié ; aucune certification du centre de la colonne",
+  "plan_ancien": {
+    "document": "Description de l’Égypte, État moderne I, planche 16, Rumsey 10404.455",
+    "image_web_dimensions": [
+      6000,
+      4140
+    ],
+    "repere_image_xy": [
+      3930,
+      1890
+    ],
+    "statut": "Annotation visuelle sur El Meqyâs / Nilomètre ; image non géoréférencée"
+  }
+}
