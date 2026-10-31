@@ -1,0 +1,102 @@
+{
+  "schema": "eloah.agent-tools.v1",
+  "status": "catalog_only_no_execution",
+  "principle": "Un outil catalogue n'est pas une permission d'exécuter.",
+  "levels": {
+    "A0": "lecture et analyse",
+    "A1": "brouillon interne",
+    "A2": "mutation externe après approbation explicite et contrôle des accès",
+    "A3": "opération sensible soumise à procédure séparée"
+  },
+  "tools": [
+    {
+      "id": "pilotage",
+      "label": "Pilotage",
+      "route": "eloah-pilotage.html",
+      "scope": "organisation",
+      "max_level": "A1"
+    },
+    {
+      "id": "missions",
+      "label": "Missions",
+      "route": "eloah-2040.html#eloah-mission-desk",
+      "scope": "missions",
+      "max_level": "A1"
+    },
+    {
+      "id": "workspace",
+      "label": "Workspace",
+      "route": "eloah-projet.html",
+      "scope": "travail",
+      "max_level": "A1"
+    },
+    {
+      "id": "documents",
+      "label": "Documents",
+      "route": "eloah-bibliotheque.html?type=fichiers",
+      "scope": "documents",
+      "max_level": "A0",
+      "requires_explicit_document_selection": true
+    },
+    {
+      "id": "mail",
+      "label": "Agent Courrier",
+      "route": "eloah-mail-agent.html",
+      "scope": "email",
+      "max_level": "A1",
+      "no_send": true
+    },
+    {
+      "id": "memory",
+      "label": "Mémoire validée",
+      "route": "eloah-memoire.html",
+      "scope": "memory",
+      "max_level": "A0",
+      "requires_explicit_scope": true
+    },
+    {
+      "id": "sonar",
+      "label": "Sonar et veille",
+      "route": "eloah-monitor.html",
+      "scope": "monitoring",
+      "max_level": "A0"
+    },
+    {
+      "id": "studio",
+      "label": "Studio",
+      "route": "eloah-partenaire.html?rubrique=ELOAH%20Studio",
+      "scope": "creation",
+      "max_level": "A1"
+    },
+    {
+      "id": "coffre",
+      "label": "Coffre intelligent",
+      "route": "eloah-bibliotheque.html",
+      "scope": "vault",
+      "max_level": "A0",
+      "default_access": "deny",
+      "requires_explicit_document_selection": true
+    },
+    {
+      "id": "intendants",
+      "label": "Intendants",
+      "route": "eloah-2040.html#eloah-mission-desk",
+      "scope": "delegation",
+      "max_level": "A1"
+    }
+  ],
+  "required_checks": [
+    "founder_identity",
+    "workspace_scope",
+    "explicit_tool_allowlist",
+    "resource_ownership",
+    "source_traceability",
+    "dry_run_first",
+    "approval_before_external_write"
+  ],
+  "integration": {
+    "current": "Declarative manifest for integration into the separate ELOAH SONIA OS space.",
+    "not_yet_connected": "eloah-sonia-os.soniacointe.chatgpt.site",
+    "notes": "Do not represent links as operational agent actions. Use server-side tool adapters and per-action approval before execution."
+  }
+}
