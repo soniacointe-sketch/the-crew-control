@@ -67,3 +67,8 @@ html#courrier-identity :is(.mailcard,.panel,.cloud-banner){overflow-wrap:anywher
 @media(max-width:1000px){html#courrier-identity .sidebar{padding:18px 14px}html#courrier-identity .back{display:block;width:fit-content;margin-top:14px}html#courrier-identity #nav{margin-top:16px}}
 @media(max-width:650px){html#courrier-identity .courrier-photo{grid-template-columns:1fr}html#courrier-identity .courrier-photo img{height:110px}html#courrier-identity .courrier-photo figcaption{padding:18px;font-size:20px}html#courrier-identity .topactions{width:100%}html#courrier-identity .topactions>*{flex:1 1 auto}html#courrier-identity .cloud-banner .topactions{display:grid;grid-template-columns:1fr}html#courrier-identity .cloud-banner .topactions>*{width:100%}}
 @media print{html#courrier-identity{--bg:#fff;--panel:#fff;--ink:#172b24;--muted:#3f554c;--line:#a7b8b1;--gold:#075c4b;--soft:#edf3ef;color-scheme:light}html#courrier-identity .sidebar{display:none}html#courrier-identity .layout{display:block}}
+
+html#courrier-identity .eloah-global-nav{background:var(--panel)!important;color:var(--ink)!important;border-color:var(--line)!important;font-family:'DM Sans',system-ui,sans-serif}
+html#courrier-identity .eloah-global-nav :is(a,summary){color:var(--ink)!important}
+html#courrier-identity .eloah-global-nav :is(.eloah-menu-links,summary){background:var(--panel)!important;border-color:var(--line)!important}
+html#courrier-identity .eloah-global-nav :is(a:hover,a[aria-current],details[open]>summary){background:var(--soft)!important;color:var(--gold)!important}
