@@ -1,0 +1,62 @@
+{
+  "phase": 26,
+  "question": "Quels objets Smyth distingue-t-il entre galerie et puits descendant ?",
+  "keywords": [
+    "Smyth",
+    "banquette occidentale",
+    "passage horizontal",
+    "bouche du puits"
+  ],
+  "source": {
+    "item": "lifeworkgreatpy2smyt",
+    "edition": 1867,
+    "campaign": 1865,
+    "volume": 2,
+    "pages": [
+      69,
+      70,
+      71,
+      72
+    ],
+    "pdf_pages": [
+      125,
+      126,
+      127,
+      128
+    ],
+    "unit_pdf_page": 23,
+    "facsimile_verified": true
+  },
+  "measurements_in_british_inches": [
+    {
+      "page": 71,
+      "object": "début du trou au sol",
+      "origin": "mur nord de la galerie",
+      "direction": "horizontalement près du sol",
+      "value": 19.3
+    },
+    {
+      "page": 71,
+      "object": "centre du puits",
+      "origin": "mur nord de la galerie",
+      "direction": "horizontalement",
+      "value": 35.3
+    },
+    {
+      "page": 72,
+      "object": "parallèle du centre de la bouche du puits",
+      "origin": "mur nord de la galerie",
+      "direction": "horizontalement au sol",
+      "value": 34.3
+    }
+  ],
+  "unresolved": "différence 35.3 / 34.3, repères à confronter aux planches",
+  "hypothesis_attributed": "fermeture par la banquette puis rupture par des hommes remontant depuis le bas",
+  "next_source": "volume I, planches V et VI",
+  "modern_points_added": 0,
+  "follow_up": {
+    "phase": 27,
+    "plates_consulted": true,
+    "difference_resolved": false
+  }
+}

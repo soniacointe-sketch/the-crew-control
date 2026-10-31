@@ -1,0 +1,36 @@
+{
+  "consultation": "2026-10-31",
+  "mosquee_amr": {
+    "source_url": "https://egymonuments.gov.eg/en/monuments/the-mosque-of-amr-ibn-al-as/",
+    "source_element": "Carte Location, position WGS84, datum décodé",
+    "source_value": "30.010243,31.233024",
+    "latitude": 30.010243,
+    "longitude": 31.233024,
+    "statut": "Repère de site, centre du bâtiment non certifié"
+  },
+  "image_ancienne": {
+    "document": "Planche 16, Rumsey 10404.455",
+    "dimensions_pixels": [
+      6000,
+      4140
+    ],
+    "nilometre_xy": [
+      3930,
+      1890
+    ],
+    "amr_xy": [
+      3605,
+      915
+    ],
+    "statut": "Sélections visuelles approximatives, aucun point de maçonnerie commun certifié"
+  },
+  "calcul": {
+    "auteur": "PARISIS ENGINE",
+    "modele": "Distance orthodromique sur sphère, rayon 6371000 m ; azimut initial depuis le nord",
+    "distance_metres": 853.7302229073589,
+    "azimut_initial_degres": 65.11132039094413,
+    "distance_image_pixels": 1027.7402395547233,
+    "rapport_metres_par_pixel": 0.8306867728340036,
+    "statut": "Comparaison exploratoire entre repères ; aucune précision géodésique garantie, aucune localisation de la porte validée"
+  }
+}

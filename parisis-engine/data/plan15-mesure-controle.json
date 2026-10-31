@@ -1,0 +1,60 @@
+{
+  "phase": 20,
+  "question": "Comment le texte et le dessin documentent-ils la mesure de la base ?",
+  "keywords": [
+    "angle nord-est",
+    "Coutelle",
+    "règles",
+    "niveau",
+    "plomb"
+  ],
+  "image": {
+    "institution": "NYPL",
+    "id": "1268183",
+    "issued_notice": 1822,
+    "original_size": [
+      6203,
+      4352
+    ],
+    "plate": "Antiquités V, 15",
+    "figures_used": [
+      1,
+      2
+    ],
+    "source_url": "https://digitalcollections.nypl.org/items/510d47e0-20ab-a3d9-e040-e00a18064a99",
+    "detail_crop_original_pixels": [
+      550,
+      300,
+      2420,
+      3700
+    ],
+    "added_annotations": false
+  },
+  "text": {
+    "author": "Coutelle",
+    "edition": 1818,
+    "pages": [
+      46,
+      47
+    ],
+    "pdf_pages": [
+      58,
+      59
+    ],
+    "reported_length_m": 232.747,
+    "status": "résultat historique rapporté, exactitude actuelle non certifiée"
+  },
+  "procedure": [
+    "jalons",
+    "deux règles égales graduées",
+    "niveau d’eau",
+    "plomb"
+  ],
+  "limits": [
+    "lettres de la planche non entièrement collationnées",
+    "carnet non consulté",
+    "aucun rattachement GPS",
+    "aucune mesure sur pixels"
+  ],
+  "modern_points_added": 0
+}

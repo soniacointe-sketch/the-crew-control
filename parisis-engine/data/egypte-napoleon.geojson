@@ -1,0 +1,137 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Khéops · repère Getty",
+        "source": "https://www.getty.edu/vow/TGNFullDisplay?english=Y&subjectid=7536588",
+        "precision": "Repère de localisation du monument ; ne pas utiliser comme centre géodésique précis.",
+        "dossier": "egypte-pyramides-napoleon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1344,
+          29.979
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Champ des pyramides · repère UNESCO",
+        "source": "https://whc.unesco.org/fr/list/86/cartes/",
+        "precision": "Point de référence de la composante 86-002 ; ce n’est pas le centre d’une pyramide.",
+        "dossier": "egypte-pyramides-napoleon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.13041,
+          29.976039999999998
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Memphis · repère UNESCO",
+        "source": "https://whc.unesco.org/fr/list/86/cartes/",
+        "precision": "Point de référence de la composante 86-001 ; contexte de la nécropole.",
+        "dossier": "egypte-pyramides-napoleon"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.261055555555554,
+          29.855500000000003
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Nilomètre de Roudah · repère ministériel",
+        "source": "https://egymonuments.gov.eg/en/monuments/rawda-island-nilometer/",
+        "precision": "Repère WGS84 de la carte du ministère égyptien. Position du site ; centre de la colonne et précision géodésique non certifiés.",
+        "dossier": "egypte-pyramides-napoleon-phase-07"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.224981,
+          30.007012
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mosquée d’Amr · repère ministériel",
+        "source": "https://egymonuments.gov.eg/en/monuments/the-mosque-of-amr-ibn-al-as/",
+        "precision": "Repère WGS84 du site publié par le ministère. Bâtiment remanié et reconstruit ; correspondance des murs anciens non certifiée.",
+        "dossier": "egypte-pyramides-napoleon-phase-08"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.233024,
+          30.010243
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Église suspendue · repère ministériel",
+        "source": "https://egymonuments.gov.eg/monuments/the-hanging-church/",
+        "precision": "Repère WGS84 du site actuel. Ne pas assimiler à la voie Sekket el-Mo’allaqah de la légende ancienne ; contrôle géométrique non validé.",
+        "dossier": "egypte-pyramides-napoleon-phase-09"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.229759,
+          30.005595
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Kirdâsa · candidat pour Kardacé",
+        "source": "https://www.getty.edu/vow/TGNFullDisplay?english=Y&subjectid=1095558",
+        "precision": "Coordonnées de la localité publiées dans le Getty TGN. Rapprochement proposé avec Kerdâçéh de l’atlas et le nom de la lettre de Verdier ; continuité historique non démontrée. Aucun emplacement de redoute ou de citerne déduit.",
+        "dossier": "egypte-pyramides-napoleon-phase-15",
+        "status": "candidat",
+        "historical_label": "Kerdâçéh"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1111,
+          30.031
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Minshāt al Bakkārī · candidat pour Bekari",
+        "source": "https://www.getty.edu/vow/TGNFullDisplay?english=Y&subjectid=1095607",
+        "precision": "Coordonnées de la localité publiées dans le Getty TGN. Rapprochement proposé avec Menchât Bakârî de l’atlas et le nom de la lettre de Verdier ; continuité historique non démontrée. Aucun emplacement de redoute ou de citerne déduit.",
+        "dossier": "egypte-pyramides-napoleon-phase-15",
+        "status": "candidat",
+        "historical_label": "Menchât Bakârî"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          31.1398,
+          30.019
+        ]
+      }
+    }
+  ]
+}

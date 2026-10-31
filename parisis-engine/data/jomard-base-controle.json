@@ -1,0 +1,47 @@
+{
+  "phase": 19,
+  "question": "Quels repères et quelle année pour les fouilles de mesure de Le Père et Coutelle ?",
+  "keywords": [
+    "Coutelle",
+    "Jomard",
+    "pluviôse",
+    "encastrements"
+  ],
+  "witnesses": [
+    {
+      "author": "Coutelle",
+      "edition": 1829,
+      "volume": 9,
+      "page": 263,
+      "pdf_page": 277,
+      "date_conflict": [
+        "18 pluviôse an VII",
+        "8 février 1801"
+      ],
+      "identity": "bub_gb_iXEOhrJzenIC"
+    },
+    {
+      "author": "Jomard",
+      "edition": 1822,
+      "volume": 7,
+      "pages": [
+        30,
+        31
+      ],
+      "pdf_pages": [
+        44,
+        45
+      ],
+      "date_printed": "pluviôse an IX (janvier 1801)",
+      "identity": "descriptiondelg09pancgoog",
+      "observation": "Deux encastrements aux angles nord, distingués des arêtes visibles ; note sur mètre définitif et provisoire"
+    }
+  ],
+  "conclusion": {
+    "year": "1801 soutenu pour les fouilles de mesure",
+    "exact_installation_day": "non résolu",
+    "verdier_link": "non établi",
+    "ancient_intention": "non établie"
+  },
+  "modern_points_added": 0
+}

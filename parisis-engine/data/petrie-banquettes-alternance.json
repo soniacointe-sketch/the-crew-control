@@ -1,0 +1,29 @@
+{
+  "phase": 29,
+  "source": {
+    "item": "cu31924012038927",
+    "work_year": 1883,
+    "reproduction_year": 1986,
+    "printed_page": 72,
+    "pdf_page": 111,
+    "plate": "IX",
+    "plate_pdf_page": 293,
+    "facsimiles_verified": true
+  },
+  "object": "Trous des banquettes, blocs insérés au-dessus et rainures ; pas les cavités latérales a–e.",
+  "measurements_british_inches": {
+    "long_holes": {
+      "mean": 23.32,
+      "average_variation": 0.73
+    },
+    "short_holes": {
+      "mean": 20.51,
+      "average_variation": 0.4
+    }
+  },
+  "alternation": "Affirmée par Petrie sur les deux côtés ; classement individuel non reconstitué.",
+  "metric_proposal": "Petrie rapproche la longueur horizontale des longs et la longueur sur pente des courts, les rapportant à une coudée. Contrôle numérique indépendant non effectué.",
+  "function": "Petrie juge ces éléments encore inexpliqués dans ce passage de 1883.",
+  "modern_points_added": 0,
+  "next_question": "Argument matériel publié pour un sol porté par les cavités latérales a–e."
+}

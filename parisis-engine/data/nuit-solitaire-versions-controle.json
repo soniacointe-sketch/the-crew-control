@@ -1,0 +1,37 @@
+{
+  "phase": 36,
+  "consulted_at": "2026-10-31",
+  "original_question": "Que pouvons-nous établir sur la rencontre de Bonaparte avec les pyramides, et que révèlent les monuments eux-mêmes de l’ordre conçu par leurs bâtisseurs ?",
+  "status": "Recherche partielle, origine de la nuit solitaire non établie",
+  "consulted_sources": [
+    {
+      "url": "https://publishing.cdlib.org/ucpressebooks/public/book/the-persistence-of-memory-organism-myth-text.html",
+      "type": "Texte numérique de l’éditeur",
+      "passage": "Chapitre 2, p.20, note 1",
+      "result": "Solitude, durée nocturne non précisée ; renvoi bibliographique à contrôler"
+    },
+    {
+      "url": "https://www.smithsonianmag.com/travel/inside-the-great-pyramid-75164298/",
+      "type": "Article original daté",
+      "result": "Version nocturne explicitement présentée comme apocryphe"
+    },
+    {
+      "url": "https://www.napoleon.org/histoire-des-2-empires/articles/les-tribulations-dune-lettre-les-adieux-de-napoleon-au-comte-de-las-cases-sainte-helene-11-decembre-1816/",
+      "type": "Étude et transcription documentaire",
+      "result": "Départ de Las Cases en décembre 1816 ; autographe non consulté"
+    }
+  ],
+  "unconsulted_reference": {
+    "author": "Peter Tompkins",
+    "year": 1971,
+    "page": 55,
+    "status": "Référence relevée chez Kuberski ; imprimé et notes non lus"
+  },
+  "limits": [
+    "Recherche non exhaustive",
+    "Aucune première attestation absolue",
+    "Aucune filiation établie",
+    "Aucune expérience secrète authentifiée"
+  ],
+  "next_question": "Le passage attribué à Peter Tompkins (1971, p. 55) raconte-t-il une nuit complète, et quelle référence fournit-il pour cette scène ?"
+}

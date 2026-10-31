@@ -1,0 +1,58 @@
+{
+  "consulted_at": "2026-10-31",
+  "investigation": "egypte-napoleon",
+  "phase": 35,
+  "source": {
+    "title": "Gazette nationale ou le Moniteur universel",
+    "issue": 67,
+    "date_republican": "7 frimaire an VII",
+    "date_gregorian": "1798-11-27",
+    "pages": [
+      271,
+      272,
+      273
+    ],
+    "dialogue_pages": [
+      272,
+      273
+    ],
+    "archive_id": "gazettenationale17981panc",
+    "pdf_page_indices_zero_based": [
+      604,
+      605,
+      606
+    ],
+    "consultation": "Images du journal contrôlées visuellement, OCR utilisé pour repérage uniquement"
+  },
+  "reprint_separate_witness": {
+    "year": 1863,
+    "publisher": "Henri Plon",
+    "volume": 29,
+    "pages": [
+      500,
+      501,
+      502
+    ],
+    "archive_id": "rimpressiondel29pariuoft"
+  },
+  "observed": {
+    "narrative_date": "25 thermidor an VI",
+    "arrival": "9 heures du matin avec la suite",
+    "interlocutors": [
+      "Suleiman",
+      "Ibrahim",
+      "Muhamed"
+    ],
+    "ending": "Sortie avec la suite, retour au Caire",
+    "visible_author_signature": false,
+    "night_reference": "Voyage céleste de Mahomet, pas séjour nocturne de Bonaparte"
+  },
+  "comparison": "Éléments narratifs comparés à la transcription de 1821, pas collation exhaustive de chaque mot. Divergence avec le 1er août indiqué par Bourrienne conservée.",
+  "limits": [
+    "Authenticité de la scène non établie",
+    "Auteur non attribué",
+    "Aucune filiation vers la nuit solitaire démontrée",
+    "Aucun nouveau point géographique"
+  ],
+  "next_question": "Quelle est la plus ancienne attestation datée, dans le corpus vérifiable, d’une nuit solitaire de Bonaparte dans Khéops, et quelle source invoque-t-elle ?"
+}

@@ -1,0 +1,24 @@
+{
+  "phase": 32,
+  "source": {
+    "author": "Noel F. Wheeler",
+    "work_year": 1935,
+    "consulted": "https://www.towers-online.co.uk/pages/antiqity.htm",
+    "type": "Reproduction textuelle d’extrait",
+    "pages_claimed_by_host": "175–182",
+    "permission_claimed_by_host": true,
+    "full_original_checked": false,
+    "original_pdf_fetch_status": 503
+  },
+  "attributed_claims": [
+    "Aucune trace de la dalle elle-même connue de l’auteur",
+    "Extraction de la pierre de banquette depuis la galerie, avec un levier, selon sa lecture des cassures"
+  ],
+  "comparison": "Scénario de Smyth : rupture par des hommes remontant depuis le puits ; pas de décision entre les deux lectures.",
+  "limits": [
+    "Pas de contrôle mot à mot contre le fac-similé original",
+    "Pas d’inspection actuelle des traces",
+    "Pas de date ni d’identité des exécutants déduites"
+  ],
+  "modern_points_added": 0
+}

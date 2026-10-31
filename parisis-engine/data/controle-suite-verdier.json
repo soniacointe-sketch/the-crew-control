@@ -1,0 +1,25 @@
+{
+  "consultation": "2026-10-31",
+  "scope": "Recherche ciblée par occurrences dans le texte numérisé suivant la lettre de Verdier, Égypte I, 1819 ; contrôle visuel du candidat Vial p. 448–450 ; non exhaustive",
+  "candidate": {
+    "sender": "Vial",
+    "recipient": "Bonaparte",
+    "date": "23 thermidor an VI (10 août 1798)",
+    "printed_heading_place": "Damiette",
+    "printed_digue_name": "Taraounié sur le Delta",
+    "pages": [
+      448,
+      449,
+      450
+    ],
+    "pdf_pages": [
+      460,
+      461,
+      462
+    ],
+    "source": "https://archive.org/details/correspondancein05napouoft"
+  },
+  "decision": "Écarté comme preuve pour le chantier de Verdier aux Pyramides : auteur, secteur et état de proposition distincts",
+  "completion_of_verdier_redoubt": "non établie",
+  "coordinates_added": false
+}

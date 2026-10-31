@@ -1,0 +1,21 @@
+{
+  "phase": 18,
+  "source": "Coutelle, Description de l’Égypte, Antiquités, Mémoires II, Imprimerie royale, 1818",
+  "pages": [
+    40,
+    47,
+    48
+  ],
+  "observations": {
+    "west_shaft": "Puits situé dans un monument à l’ouest de la Grande Pyramide, conduisant à un caveau avec sarcophage",
+    "east_labels": "Deux inscriptions Puits de la planche 6, identité non établie avec le puits décrit",
+    "guard": "Coutelle mentionne cent hommes de garde, sans lien explicite avec la redoute de Verdier"
+  },
+  "printed_date_conflict": {
+    "page": 40,
+    "republican": "18 pluviôse an 7",
+    "bracketed": "8 février 1801",
+    "status": "discordance non résolue"
+  },
+  "modern_points_added": 0
+}

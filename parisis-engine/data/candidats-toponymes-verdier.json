@@ -1,0 +1,30 @@
+{
+  "phase": 14,
+  "source": "Description de l’Égypte, 2e édition, XVIII, 3e partie, 1830",
+  "status": "Rapprochements proposés, non validés sur les cartes",
+  "candidates": [
+    {
+      "letter": "Kardacé",
+      "index_atlas": "Kerdâçéh",
+      "page": 143,
+      "sheet": 25,
+      "square": 8,
+      "position": "g",
+      "coordinates": null
+    },
+    {
+      "letter": "Bekari",
+      "index_atlas": "Menchât Bakârî",
+      "page": 142,
+      "sheet": 24,
+      "square": 1,
+      "position": "g",
+      "coordinates": null
+    }
+  ],
+  "limits": [
+    "Aucun emplacement de la redoute établi",
+    "Images des feuilles 24 et 25 non examinées dans cette phase",
+    "el-Menchyé non fusionné avec Menchât Bakârî"
+  ]
+}

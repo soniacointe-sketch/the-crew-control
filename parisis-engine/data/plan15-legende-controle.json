@@ -1,0 +1,37 @@
+{
+  "phase": 21,
+  "question": "À quels objets renvoient les lettres de la planche 15 ?",
+  "source": {
+    "item": "descriptiondelg10pancgoog",
+    "volume": 10,
+    "edition": 1826,
+    "page": 469,
+    "pdf_page": 487
+  },
+  "figures": {
+    "1": {
+      "a": "partie du noyau actuel",
+      "b": "emplacement dégagé de la pierre d’angle",
+      "c": "rocher sur lequel la base était assise"
+    },
+    "2": {
+      "a": "noyau",
+      "b": "assise taillée dans le roc, en deux parties",
+      "c": "profil de l’encastrement de la pierre angulaire"
+    }
+  },
+  "depth": {
+    "m": 0.207,
+    "mm": 207,
+    "cm": 20.7,
+    "comparison": "Coutelle 1818 p. 46, même valeur",
+    "independence": "non établie"
+  },
+  "limits": [
+    "aucune coordonnée GPS",
+    "pas de mesure sur pixels",
+    "fonction de logement attribuée aux auteurs",
+    "aucune intention rituelle établie"
+  ],
+  "modern_points_added": 0
+}

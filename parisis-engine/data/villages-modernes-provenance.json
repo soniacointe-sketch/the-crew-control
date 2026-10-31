@@ -1,0 +1,24 @@
+{
+  "consultation": "2026-10-31",
+  "source": "Getty TGN, coordonnées décimales publiées",
+  "places": [
+    {
+      "name": "Kirdâsa · candidat pour Kardacé",
+      "latitude": 30.031,
+      "longitude": 31.1111,
+      "getty_id": "1095558",
+      "historical_label": "Kerdâçéh"
+    },
+    {
+      "name": "Minshāt al Bakkārī · candidat pour Bekari",
+      "latitude": 30.019,
+      "longitude": 31.1398,
+      "getty_id": "1095607",
+      "historical_label": "Menchât Bakârî"
+    }
+  ],
+  "status": "Localités de référence ; rapprochements historiques proposés",
+  "excluded_from_modern_map": [
+    "Deux inscriptions Puits de la planche 6 : positions actuelles non établies"
+  ]
+}

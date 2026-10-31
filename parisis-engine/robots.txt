@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://soniacointe-sketch.github.io/the-crew-control/parisis-engine/sitemap.xml

@@ -1,0 +1,76 @@
+{
+  "phase": 38,
+  "consulted_at": "2026-10-31",
+  "primary_source": {
+    "title": "The Perfect Way; or, The Finding of Christ",
+    "attributed_authors": [
+      "Anna Kingsford",
+      "Edward Maitland"
+    ],
+    "year_on_title": 1882,
+    "authors_on_consulted_title": false,
+    "source_pdf": "https://iapsop.com/ssoc/1882__kingsford___the_perfect_way.pdf",
+    "pdf_pages": 380,
+    "printed_pages_consulted": [
+      238,
+      239,
+      240,
+      241,
+      242,
+      243,
+      244
+    ],
+    "pdf_indices_zero_based": [
+      264,
+      265,
+      266,
+      267,
+      268,
+      269,
+      270
+    ],
+    "figure8_pdf_index": 377
+  },
+  "observed_claims": [
+    {
+      "pages": [
+        239,
+        240
+      ],
+      "claim": "Élévation du monument et sommet interprétés en termes chrétiens"
+    },
+    {
+      "pages": [
+        240,
+        241,
+        243
+      ],
+      "claim": "Passages et chambres interprétés comme étapes spirituelles"
+    },
+    {
+      "pages": [
+        242
+      ],
+      "claim": "Initiation dans un sarcophage, prêtresse d’Isis, seconde naissance"
+    },
+    {
+      "pages": [
+        240
+      ],
+      "claim": "Note nommant Manéthon et Hérodote, sans référence précise ; réinterprétation allégorique"
+    }
+  ],
+  "control": {
+    "Herodotus": "II.124 et II.128 consultés en traduction Godley, pas de protocole initiatique décrit dans ces deux passages",
+    "Manetho": "Non contrôlé",
+    "Smyth": "Source moderne invoquée, pas nouvelle validation des mesures ou orientations",
+    "Evans": "Correspondance textuelle établie, exemplaire utilisé non identifié"
+  },
+  "limits": [
+    "Intention des bâtisseurs non démontrée",
+    "Pratique du rite dans Khéops non établie",
+    "Aucune initiation de Bonaparte prouvée",
+    "Tompkins et origine de la nuit toujours ouverts"
+  ],
+  "next_question": "Quels documents contemporains du règne de Khéops renseignent l’organisation du chantier, et que disent-ils réellement de sa finalité ?"
+}

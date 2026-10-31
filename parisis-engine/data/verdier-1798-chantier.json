@@ -1,0 +1,46 @@
+{
+  "source": {
+    "title": "Correspondance inédite, officielle et confidentielle de Napoléon Bonaparte, Égypte, tome premier",
+    "publisher": "C. L. F. Panckoucke, Paris",
+    "year": 1819,
+    "pages": [
+      421,
+      422
+    ],
+    "pdf_pages": [
+      433,
+      434
+    ],
+    "url": "https://archive.org/details/correspondancein05napouoft",
+    "consultation": "2026-10-31",
+    "status": "page de titre et fac-similés vérifiés visuellement ; manuscrit non consulté"
+  },
+  "letter": {
+    "sender": "Verdier",
+    "recipient": "général Bonaparte",
+    "printed_place": "Com-el-as-far",
+    "printed_date": "10 thermidor an 6 (28 juillet 1798)"
+  },
+  "reported_facts": [
+    "deux jours de recherche d’un emplacement",
+    "choix d’un reste de vieille digue près des Pyramides",
+    "largeur de la digue : environ douze toises ; ne pas attribuer au fort",
+    "hauteur jugée suffisante contre l’inondation",
+    "travaux déclarés commencés",
+    "prévision de réception des canons : pas avant le 18 ou le 20 thermidor ; non vérifiée"
+  ],
+  "place_names": [
+    "Com-el-as-far",
+    "Kardacé",
+    "el-Menchyé",
+    "Bekari",
+    "El-Bothoun"
+  ],
+  "variant": {
+    "letter_1819": "El-Bothoun",
+    "thibaudeau_transcription": "El-Khyam",
+    "resolution": "non établie"
+  },
+  "geographical_coordinates": null,
+  "completion_verified": false
+}

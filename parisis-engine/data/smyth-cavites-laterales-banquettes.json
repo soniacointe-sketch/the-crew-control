@@ -1,0 +1,70 @@
+{
+  "phase": 28,
+  "source": {
+    "item": "lifeworkgreatpy2smyt",
+    "year": 1867,
+    "volume": 2,
+    "printed_pages": [
+      72,
+      73,
+      75,
+      78,
+      79,
+      80,
+      81
+    ],
+    "pdf_pages": [
+      128,
+      129,
+      131,
+      136,
+      137,
+      138,
+      139
+    ],
+    "facsimiles_verified": true
+  },
+  "side_holes": {
+    "labels": [
+      "a",
+      "b",
+      "c",
+      "d",
+      "e"
+    ],
+    "count_per_side_in_these_tables": 5,
+    "horizontal_depth_british_inches": {
+      "east": [
+        15.5,
+        9.5,
+        22.0,
+        21.7,
+        10.4
+      ],
+      "west": [
+        10.5,
+        23.0,
+        11.0,
+        10.0,
+        19.0
+      ]
+    },
+    "condition_attributed_to_author": "Traces de pic, taille irrégulière et dommages ou agrandissements."
+  },
+  "ramp_holes": {
+    "author_count_per_side": 28,
+    "includes": "Un emplacement sur la grande marche au sud, par côté.",
+    "condition": "Bords brisés ; au nord-ouest la première ligne du tableau indique les vestiges de la banquette et des valeurs incertaines.",
+    "repeatability": "Mesures prises une fois sauf quelques contrôles, selon p.79.",
+    "documented_reuse": {
+      "date": "21–22 février 1865",
+      "page": 75,
+      "use": "Ancre en bois et corde pour retenir la règle de mesure.",
+      "proves_original_function": false
+    }
+  },
+  "distinction": "Les cavités latérales a–e ne sont pas les trous des banquettes.",
+  "correction_to_phase_27": "Formulation de la question finale corrigée et reliée à la phase 28.",
+  "modern_points_added": 0,
+  "next_question": "Confronter les séries aux descriptions de Petrie."
+}

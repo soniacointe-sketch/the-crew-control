@@ -1,0 +1,14 @@
+{
+  "date": "2026-10-31",
+  "authority": "Instruction explicite de Sonia : garder toujours, dans toutes les enquêtes, la question de départ.",
+  "scope": "Toutes les enquêtes PARISIS ENGINE, actuelles et futures.",
+  "requirements": [
+    "Conserver la formulation de départ dans le registre de chaque enquête ; ne la modifier que sur instruction explicite de Sonia, avec historique.",
+    "Afficher la question de départ et le rôle de chaque étape dans les pages de recherche.",
+    "Avant une recherche, expliciter le lien de la sous-question avec la question de départ.",
+    "Conclure chaque étape par son apport, ses limites et une prochaine vérification directement reliée au fil central.",
+    "Classer les développements secondaires en annexes ; ne pas laisser leur dernière question remplacer le sujet initial.",
+    "Faire une synthèse quand un détour prend trop de place ; revenir à une question centrale non résolue.",
+    "Un nouveau sujet doit être identifié comme tel ; ne pas ouvrir silencieusement une autre enquête."
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "phase": 24,
+  "question": "Quels arguments appuient la chronologie relative proposée par Coutelle ?",
+  "keywords": [
+    "puits intérieur",
+    "fissure",
+    "gravier",
+    "Coutelle",
+    "Petrie"
+  ],
+  "witnesses": [
+    {
+      "author": "Coutelle",
+      "edition": 1818,
+      "page": 46,
+      "pdf_page": 58,
+      "consulted": "texte et fac-similé",
+      "hypothesis": "creusement avant achèvement de la pyramide",
+      "argument": [
+        "évacuation de la pierre",
+        "passages étroits",
+        "renouvellement de l’air"
+      ]
+    },
+    {
+      "author": "Petrie",
+      "work": "The Pyramids and Temples of Gizeh",
+      "edition": 1883,
+      "page": 29,
+      "scan": 68,
+      "consulted": "transcription The Petrie Project seulement",
+      "scan_item": "cu31924012038927",
+      "scan_reproduction": 1986,
+      "observation_reported": "fissure remplie de gravier traversée par le puits, revêtement de petites pierres taillées",
+      "facsimile_verified": false
+    }
+  ],
+  "working_hypothesis": "examiner les relations entre roche, creusement, remplissage et maçonnerie",
+  "limits": [
+    "pas de confirmation de la chronologie de Coutelle",
+    "pas d’identité démontrée de chaque matériau entre les deux récits",
+    "aucune fonction hydraulique déduite",
+    "fac-similé Petrie restant à contrôler"
+  ],
+  "modern_points_added": 0,
+  "followup_phase25": {
+    "facsimile_verified": true,
+    "pages": [
+      29,
+      74
+    ],
+    "note": "Contrôle ultérieur ; limite initiale conservée comme état de consultation de la phase 24"
+  }
+}

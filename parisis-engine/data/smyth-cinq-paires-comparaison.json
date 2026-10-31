@@ -1,0 +1,129 @@
+{
+  "phase": 31,
+  "source": {
+    "item": "lifeworkgreatpy2smyt",
+    "volume": 2,
+    "year": 1867,
+    "pages": [
+      72,
+      73
+    ],
+    "pdf_pages": [
+      128,
+      129
+    ]
+  },
+  "units": "British inches",
+  "status": "Calculs de comparaison, pas relevé nouveau ni restitution validée.",
+  "formulas": {
+    "intersection": "[max(east_north,west_north), min(east_south,west_south)]",
+    "overlap": "min(east_south,west_south) - max(east_north,west_north)",
+    "vertical_difference": "west_lower_edge - east_lower_edge"
+  },
+  "lower_edge_datum": "Horizontal plane of North wall base, tel que publié par Smyth.",
+  "pairs": [
+    {
+      "pair": "a",
+      "east_interval_along_ramp": [
+        72.5,
+        80.7
+      ],
+      "west_interval_along_ramp": [
+        72.5,
+        81
+      ],
+      "east_lower_edge_above_north_wall_base_plane": 24,
+      "west_lower_edge_above_north_wall_base_plane": 24,
+      "intersection": [
+        72.5,
+        80.7
+      ],
+      "overlap": 8.2,
+      "west_minus_east_lower_edge": 0
+    },
+    {
+      "pair": "b",
+      "east_interval_along_ramp": [
+        115.7,
+        132.5
+      ],
+      "west_interval_along_ramp": [
+        116.3,
+        132.3
+      ],
+      "east_lower_edge_above_north_wall_base_plane": 37.8,
+      "west_lower_edge_above_north_wall_base_plane": 38,
+      "intersection": [
+        116.3,
+        132.3
+      ],
+      "overlap": 16.0,
+      "west_minus_east_lower_edge": 0.2
+    },
+    {
+      "pair": "c",
+      "east_interval_along_ramp": [
+        148.7,
+        157.7
+      ],
+      "west_interval_along_ramp": [
+        147.3,
+        155.8
+      ],
+      "east_lower_edge_above_north_wall_base_plane": 53.2,
+      "west_lower_edge_above_north_wall_base_plane": 51.5,
+      "intersection": [
+        148.7,
+        155.8
+      ],
+      "overlap": 7.1,
+      "west_minus_east_lower_edge": -1.7
+    },
+    {
+      "pair": "d",
+      "east_interval_along_ramp": [
+        172.7,
+        182.4
+      ],
+      "west_interval_along_ramp": [
+        171.8,
+        181.3
+      ],
+      "east_lower_edge_above_north_wall_base_plane": 63.8,
+      "west_lower_edge_above_north_wall_base_plane": 64,
+      "intersection": [
+        172.7,
+        181.3
+      ],
+      "overlap": 8.6,
+      "west_minus_east_lower_edge": 0.2
+    },
+    {
+      "pair": "e",
+      "east_interval_along_ramp": [
+        197.4,
+        207.1
+      ],
+      "west_interval_along_ramp": [
+        196.6,
+        206.6
+      ],
+      "east_lower_edge_above_north_wall_base_plane": 74.8,
+      "west_lower_edge_above_north_wall_base_plane": 75.4,
+      "intersection": [
+        197.4,
+        206.6
+      ],
+      "overlap": 9.2,
+      "west_minus_east_lower_edge": 0.6
+    }
+  ],
+  "limits": [
+    "Références publiées comparées sans reconstruction de leurs erreurs",
+    "Recouvrement longitudinal uniquement, pas contrôle tridimensionnel",
+    "Pas de tolérance mécanique ni calcul de charge",
+    "Vestiges signalés par Petrie non documentés indépendamment ici"
+  ],
+  "wheeler_full_text_checked": false,
+  "modern_points_added": 0
+}

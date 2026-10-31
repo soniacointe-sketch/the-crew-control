@@ -1,0 +1,26 @@
+(() => {
+  const el = document.getElementById('historic-map');
+  if (!el || !window.L) return;
+  const bounds = [[0, 0], [4140, 6000]];
+  const map = L.map(el, {crs: L.CRS.Simple, minZoom: -4, maxZoom: 2, scrollWheelZoom: false});
+  L.imageOverlay('/the-crew-control/parisis-engine/assets/egypte/gizeh-planche16-plan-complet.jpg', bounds, {alt:'Planche 16 : Roudah, Vieux-Caire et Gizeh'}).addTo(map);
+  const gate = [4140 - 3015, 4300];
+  const marker = L.circleMarker(gate, {radius:10,color:'#7e301e',weight:3,fillColor:'#d47c49',fillOpacity:.45}).addTo(map);
+  marker.bindPopup('<strong>Porte des Pyramides · n° 2</strong><p>Nom lu sur la planche 16 et dans son explication. Repère sur le document ancien ; coordonnées actuelles non établies.</p><a href="/the-crew-control/parisis-engine/egypte-pyramides-napoleon-phase-06.html">Lire la phase 06 →</a>', {maxWidth: Math.min(280, Math.max(140, el.clientWidth - 70))});
+  const status = document.getElementById('historic-status');
+  const fit = () => {map.fitBounds(bounds); map.closePopup();status.textContent='Plan entier · trois repères documentaires, sans calage géographique.';};
+  const focus = () => {map.setView(gate, 0, {animate:false});marker.openPopup();status.textContent='Porte des Pyramides · numéro 2 sur la planche 16. Position sur le plan ancien uniquement.';};
+  document.getElementById('historic-fit').addEventListener('click',fit);
+  document.getElementById('historic-gate').addEventListener('click',focus);
+  const nilometer = [4140 - 1890, 3930];
+  const nilMarker = L.circleMarker(nilometer,{radius:10,color:'#1b5865',weight:3,fillColor:'#7fc1c4',fillOpacity:.5}).addTo(map);
+  nilMarker.bindPopup('<strong>Nilomètre de Roudah · El Meqyâs</strong><p>Nom lu sur la planche 16. Un repère moderne du site est ajouté à la carte principale ; le plan ancien n’est pas géoréférencé.</p><a href="/the-crew-control/parisis-engine/egypte-pyramides-napoleon-phase-07.html">Lire la phase 07 →</a>',{maxWidth:Math.min(280,Math.max(140,el.clientWidth-70))});
+  document.getElementById('historic-nilometer').addEventListener('click',()=>{map.setView(nilometer,0,{animate:false});nilMarker.openPopup();status.textContent='Nilomètre de Roudah · repère lu sur la planche 16 ; aucune transformation du plan ancien appliquée.';});
+  const amr=[4140-915,3605];
+  const amrMarker=L.circleMarker(amr,{radius:10,color:'#69547f',weight:3,fillColor:'#ae98c7',fillOpacity:.5}).addTo(map);
+  amrMarker.bindPopup('<strong>Gâma’ A’mrou · n° 11</strong><p>Nom et numéro lus sur le plan et dans Jomard, p. 504. Repère visuel approximatif ; maçonneries actuelles remaniées.</p><a href="/the-crew-control/parisis-engine/egypte-pyramides-napoleon-phase-08.html">Lire la phase 08 →</a>',{maxWidth:Math.min(280,Math.max(140,el.clientWidth-70))});
+  document.getElementById('historic-amr').addEventListener('click',()=>{map.setView(amr,0,{animate:false});amrMarker.openPopup();status.textContent='Mosquée d’Amr · numéro 11 sur le plan ancien ; repère visuel de comparaison.';});
+  const baseline=L.polyline([nilometer,amr],{color:'#69547f',weight:3,dashArray:'7 7'});
+  document.getElementById('historic-baseline').addEventListener('click',e=>{const on=map.hasLayer(baseline);if(on){map.removeLayer(baseline);}else{baseline.addTo(map);map.closePopup();map.fitBounds(baseline.getBounds(),{padding:[45,45]});}e.currentTarget.setAttribute('aria-pressed',String(!on));status.textContent=on?'Segment de comparaison masqué.':'Segment ajouté pour comparer deux repères sur l’image. Ce tracé ne provient pas de la gravure et ne géoréférence pas le plan.';});
+  fit();
+})();

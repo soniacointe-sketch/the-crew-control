@@ -1,0 +1,23 @@
+{
+  "phase": 16,
+  "images": [
+    {
+      "nypl": "1534485",
+      "document": "Atlas, feuille 20",
+      "observation": "Pyramides près de l’angle nord-est ; raccordement 25/24/20/21"
+    },
+    {
+      "nypl": "1534486",
+      "document": "Atlas, feuille 21",
+      "observation": "Contexte de vallée à gauche de la feuille"
+    },
+    {
+      "nypl": "1268174",
+      "document": "Antiquités V, planche 6",
+      "observation": "Inscription Limite des Terres cultivées au bord oriental"
+    }
+  ],
+  "conclusion": "Aucune identification de la digue ou de la redoute de Verdier",
+  "new_geographic_points": 0,
+  "new_document_markers": 0
+}
