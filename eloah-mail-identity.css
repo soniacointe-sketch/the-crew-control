@@ -1,40 +1,69 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Source+Sans+3:wght@400;500;600;700&display=swap');
-html#courrier-identity{--bg:#f2f0e9;--panel:#fffdf8;--ink:#293943;--muted:#5b686b;--line:#cdd2cf;--gold:#42616e;--soft:#e7ece9;--green:#427060}
-html#courrier-identity body{background:var(--bg);color:var(--ink);font:17px/1.6 'Source Sans 3',sans-serif}
-html#courrier-identity :is(h1,h2,h3,.logo,.metric strong){font-family:'Cormorant Garamond',serif;font-weight:500;letter-spacing:-.025em}
-html#courrier-identity h1{font-size:clamp(34px,4vw,54px);line-height:1.1}
-html#courrier-identity h1 em{color:#42616e}
-html#courrier-identity h2{font-size:32px}html#courrier-identity h3{font-size:26px}
-html#courrier-identity .sidebar{background:#e6eae5;border-color:#cdd2cf}
-html#courrier-identity :is(.sidetag,.navtitle,.eyebrow,.section-label){color:#526b72}
-html#courrier-identity #nav button{font-size:14px;line-height:1.4;border-radius:4px;color:#364b53}
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap');
+/* Agent Courrier · identité commune avec Mon espace ELOAH. */
+html#courrier-identity{--bg:#0b171e;--panel:#10232c;--ink:#eef8f7;--muted:#bed2d3;--line:#456676;--gold:#58ecc3;--red:#ffadb3;--soft:#203b48;--green:#58ecc3;color-scheme:dark}
+html#courrier-identity body{background:var(--bg);color:var(--ink);font:15px/1.6 'DM Sans',system-ui,sans-serif}
+html#courrier-identity :is(h1,h2,h3,h4,.logo,.metric strong,.triage-stats strong,.pdf-stats strong,.v3-stats strong){font-family:'DM Sans',system-ui,sans-serif;font-weight:600;color:var(--ink);letter-spacing:-.025em}
+html#courrier-identity h1{font-size:clamp(30px,4vw,44px);line-height:1.2;margin:12px 0}
+html#courrier-identity h1 em{font-style:normal;color:var(--ink)}
+html#courrier-identity h2{font-size:24px;line-height:1.35}
+html#courrier-identity h3{font-size:21px;line-height:1.4}
+html#courrier-identity .logo{display:inline-block;font-size:27px;letter-spacing:6px;font-weight:700}
+html#courrier-identity a{color:var(--gold);text-underline-offset:4px}
+html#courrier-identity .sidebar{background:var(--panel);border-color:var(--line);padding:28px 16px}
+html#courrier-identity :is(.sidetag,.navtitle,.eyebrow,.section-label){color:var(--gold)}
+html#courrier-identity .sidetag{line-height:1.7}
+html#courrier-identity #nav{gap:5px}
+html#courrier-identity #nav button{font:14px/1.5 'DM Sans',system-ui,sans-serif;border-radius:8px;color:var(--muted);padding:12px;min-height:44px}
 html#courrier-identity #nav button span{color:inherit}
-html#courrier-identity #nav button.active{background:#355663;color:#fffdf8}
-html#courrier-identity .back{background:#f4f2eb;border-radius:4px;color:#355663}
-html#courrier-identity .sidenote{color:#5b686b;font-size:12px}
-html#courrier-identity .top{margin-bottom:20px}
-html#courrier-identity :is(button,.outline,.primary){font-family:'Source Sans 3',sans-serif;border-radius:5px;min-height:44px;border-color:#bac7c6}
-html#courrier-identity .primary{background:#355663;border-color:#355663;color:#fffdf8}
-html#courrier-identity .primary:hover{background:#25434e}
-html#courrier-identity .courrier-photo{margin:0 0 24px;display:grid;grid-template-columns:1fr 1fr;background:#355663;border-radius:5px;overflow:hidden}
-html#courrier-identity .courrier-photo img{width:100%;height:145px;object-fit:cover;display:block;filter:saturate(.35)}
-html#courrier-identity .courrier-photo figcaption{padding:22px;align-self:center;color:#fffdf8;font:26px/1.2 'Cormorant Garamond',serif}
-html#courrier-identity .courrier-photo span{display:block;margin-top:12px;color:#dbe5e5;font:12px 'Source Sans 3',sans-serif}
-html#courrier-identity :is(.metric,.panel,.mailcard){background:#fffdf8;border-radius:6px;border-color:#cdd2cf;box-shadow:0 5px 16px #29394304}
-html#courrier-identity .metric{border-top:2px solid #8d9e98}
-html#courrier-identity .metric label{font-size:13px}
-html#courrier-identity .metric strong{font-size:36px;color:#355663}
-html#courrier-identity .safety{background:#e9eeea;border-color:#c9d4ce;border-left-color:#708c81;color:#4a5b59;border-radius:5px;font-size:13px}
-html#courrier-identity .safety strong{color:#314b4d}
-html#courrier-identity :is(input,textarea,select,.field){background:#fffefa;color:#293943;border-color:#aab9b8;font-family:'Source Sans 3',sans-serif;font-size:16px}
+html#courrier-identity #nav button.active{background:var(--soft);color:var(--gold);font-weight:700;box-shadow:inset 3px 0 var(--gold)}
+html#courrier-identity #nav button:hover{background:var(--soft);color:var(--ink)}
+html#courrier-identity .back{background:#182f39;border-radius:8px;color:var(--ink);border-color:var(--line);padding:12px}
+html#courrier-identity :is(.sidenote,.subtitle,.hint,.small,footer){color:var(--muted)}
+html#courrier-identity .sidenote{font-size:12px}
+html#courrier-identity .top{margin-bottom:24px;padding-bottom:22px;border-bottom:1px solid var(--line)}
+html#courrier-identity :is(button,.outline,.primary){font-family:'DM Sans',system-ui,sans-serif;border-radius:8px;min-height:44px;background:#182f39;color:var(--ink);border:1px solid var(--line)}
+html#courrier-identity :is(button,.outline):hover{border-color:var(--gold)}
+html#courrier-identity .primary{background:#007b61;border-color:#007b61;color:#fff}
+html#courrier-identity .primary:hover{background:#006b54;border-color:var(--gold)}
+html#courrier-identity button:disabled{opacity:.55;cursor:not-allowed}
+html#courrier-identity .courrier-photo{margin:0 0 24px;display:grid;grid-template-columns:1fr 1fr;background:var(--soft);border:1px solid var(--line);border-radius:12px;overflow:hidden}
+html#courrier-identity .courrier-photo img{width:100%;height:145px;object-fit:cover;display:block;filter:saturate(.65)}
+html#courrier-identity .courrier-photo figcaption{padding:24px;align-self:center;color:var(--ink);font:500 22px/1.4 'DM Sans',system-ui,sans-serif}
+html#courrier-identity .courrier-photo span{display:block;margin-top:12px;color:var(--muted);font:12px/1.6 'DM Sans',system-ui,sans-serif}
+html#courrier-identity :is(.metric,.panel,.mailcard,.cloud-banner,.v3-stats>div,.triage-stats>div,.pdf-stats>div){background:var(--panel);border-radius:12px;border:1px solid var(--line);box-shadow:none}
+html#courrier-identity .metric{border-top:2px solid var(--gold)}
+html#courrier-identity .metric label{font-size:13px;color:var(--muted)}
+html#courrier-identity .metric strong{font-size:34px;color:var(--ink)}
+html#courrier-identity :is(.triage-stats span,.pdf-stats small,.v3-stats span){color:var(--muted)}
+html#courrier-identity :is(.safety,.freshness,.deadline-source,.workdoc-helper,.recordnote,.v3-related,.pdf-check){background:var(--soft);border-color:var(--line);color:var(--muted);border-radius:8px}
+html#courrier-identity :is(.safety,.workdoc-helper){border-left-color:var(--gold)}
+html#courrier-identity :is(.safety strong,.deadline-source strong){color:var(--ink)}
+html#courrier-identity :is(.cloud-banner p,.mailcard p,.assistant p,.tasks li,.pdf-example p,dialog label,.work-fields label,.v3-dialog form>label,.v3-formgrid label,.pdf-config>label:first-child){color:var(--muted)}
+html#courrier-identity .cloud-banner[data-ready="yes"]{background:#123b32;border-color:#58ecc3}
+html#courrier-identity :is(input,textarea,select,.field){background:var(--bg);color:var(--ink);border:1px solid var(--line);border-radius:8px;font-family:'DM Sans',system-ui,sans-serif;font-size:16px;accent-color:var(--gold)}
+html#courrier-identity :is(input,textarea)::placeholder{color:#9eb8bd;opacity:1}
 html#courrier-identity .filters input{min-width:min(230px,100%)}
+html#courrier-identity .filters select{max-width:100%}
 html#courrier-identity .assistant p{font-size:14px}
 html#courrier-identity .agent-actions button{font-size:14px}
-html#courrier-identity .mailcard p{font-size:16px;color:#4d5d61}
-html#courrier-identity :is(.actions a,.actions button){font-size:14px}
-html#courrier-identity .small{font-size:14px}
-html#courrier-identity dialog{background:#fffdf8;color:#293943;border-color:#aab9b8;border-radius:6px}
-html#courrier-identity :is(button,a,input,textarea,select):focus-visible{outline:3px solid #9c7852;outline-offset:3px}
+html#courrier-identity .mailcard p{font-size:15px}
+html#courrier-identity :is(.actions a,.actions button,.small){font-size:13px}
+html#courrier-identity .pill{background:var(--soft);color:var(--muted);border-color:var(--line)}
+html#courrier-identity .pill.p1{background:#472a32;color:#ffd5d8;border-color:#b96f7d}
+html#courrier-identity .pill.p2{background:#40351e;color:#ffe3a2;border-color:#9b8856}
+html#courrier-identity :is(.pill.p3,.pill.done){background:#123b32;color:#a7f5d6;border-color:#4d947d}
+html#courrier-identity .empty{background:var(--panel);color:var(--muted);border-color:var(--line)}
+html#courrier-identity :is(.work-table th,.work-table tbody tr:hover){background:var(--soft);color:var(--ink)}
+html#courrier-identity :is(.table-scroll,dialog){background:var(--panel);color:var(--ink);border-color:var(--line);border-radius:12px}
+html#courrier-identity :is(.work-table th,.work-table td,.urgent-row,.v3-line,.pdf-example){border-color:var(--line)}
+html#courrier-identity :is(.work-table button,details.panel summary,details.panel summary::marker,.tasks li::before){color:var(--gold)}
+html#courrier-identity .v3-case{border-left-color:var(--gold)}
+html#courrier-identity dialog::backdrop{background:#0009;backdrop-filter:blur(4px)}
+html#courrier-identity :is(button,a,input,textarea,select,summary):focus-visible{outline:3px solid var(--gold);outline-offset:3px}
+html#courrier-identity .work-fields #workText{font-family:'DM Sans',system-ui,sans-serif}
+html#courrier-identity :is(.mailcard,.panel,.cloud-banner){overflow-wrap:anywhere}
 @media(min-width:901px){html#courrier-identity body.eloah-screen{padding-left:0!important}html#courrier-identity body>.eloah-global-nav{display:none!important}}
 @media(max-width:1100px){html#courrier-identity .content{grid-template-columns:minmax(0,1fr)}html#courrier-identity .assistant{position:relative;top:auto}}
-@media(max-width:650px){html#courrier-identity body{font-size:18px}html#courrier-identity .courrier-photo{grid-template-columns:1fr}html#courrier-identity .courrier-photo img{height:100px}html#courrier-identity .courrier-photo figcaption{padding:15px;font-size:23px}html#courrier-identity .topactions{width:100%}html#courrier-identity .topactions>*{flex:1 1 auto}html#courrier-identity h2{font-size:29px}}
+@media(max-width:1000px){html#courrier-identity .sidebar{padding:18px 14px}html#courrier-identity .back{display:block;width:fit-content;margin-top:14px}html#courrier-identity #nav{margin-top:16px}}
+@media(max-width:650px){html#courrier-identity .courrier-photo{grid-template-columns:1fr}html#courrier-identity .courrier-photo img{height:110px}html#courrier-identity .courrier-photo figcaption{padding:18px;font-size:20px}html#courrier-identity .topactions{width:100%}html#courrier-identity .topactions>*{flex:1 1 auto}html#courrier-identity .cloud-banner .topactions{display:grid;grid-template-columns:1fr}html#courrier-identity .cloud-banner .topactions>*{width:100%}}
+@media print{html#courrier-identity{--bg:#fff;--panel:#fff;--ink:#172b24;--muted:#3f554c;--line:#a7b8b1;--gold:#075c4b;--soft:#edf3ef;color-scheme:light}html#courrier-identity .sidebar{display:none}html#courrier-identity .layout{display:block}}
